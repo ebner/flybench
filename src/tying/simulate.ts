@@ -57,6 +57,8 @@ export interface WrapsPiece extends PieceBase {
   post?: { x: number; y0: number; y1: number; radius: number };
   /** Trimmed hackle: only the fibres at the sides are left, or those on top and at the sides. */
   keep?: "sides" | "top";
+  /** Where a wing case or back was pulled over these wraps, pressing down the fibres on top. */
+  covered?: [number, number];
 }
 
 /** A bunch of fibres or hair sticking out from its tie-in point (tag, tail, wing, beard, butts, spun hair). */
@@ -281,8 +283,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
       return { ...base, strandRadius: 0.08, count: 320, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "fibres":
       return {
-        // Wound fibres lie side by side as a flat band, about one fibre width each.
-        ...base, strandRadius: 0.012 * Math.min(m.count ?? 8, 10), count: m.count ?? 8, band: true,
+        // Wound fibres lie side by side as a flat band, about one fibre width each, with a short fringe of flue.
+        ...base, strandRadius: 0.012 * Math.min(m.count ?? 8, 10), count: m.count ?? 8, band: true, fibreLength: 0.06,
         tieInThickness: 0.015, layerThickness: (c) => 0.04 * Math.min(c, 1.5),
       };
     case "biot":
@@ -606,6 +608,9 @@ export function simulate(recipe: Recipe): Build {
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : 65),
         });
         profile = profile.withLayer(from, to, thickness * 0.8);
+        for (const w of wound.values()) {
+          if (w.fibreLength && w.path === "travel" && Math.min(w.x0, w.x1) < to && Math.max(w.x0, w.x1) > from) w.covered = [from, to];
+        }
         freeEnds.delete(step.material);
         ends = restingEnds();
         const wraps = inPlace(threadX!, 5, [0.6, 1]);

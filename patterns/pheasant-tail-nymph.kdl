@@ -1,0 +1,64 @@
+// Pheasant Tail Nymph: Frank Sawyer's original, tied with copper wire and pheasant tail only.
+
+id pheasant-tail-nymph
+name "Pheasant Tail Nymph"
+aliases "PTN" "Sawyer's Pheasant Tail" "Sawyer Nymph"
+type nymph
+imitates mayfly
+difficulty beginner
+species trout grayling
+season march april may june july august september october
+origin originator="Frank Sawyer" year=1958 region="River Avon, Wiltshire, England"
+description "Four pheasant tail fibres and fine copper wire, with no thread: a short tail, a slim body, a wire thorax hump and a double wing case."
+history """
+    Frank Sawyer kept the upper Avon at Netheravon for more than fifty years. Watching olive
+    nymphs swim with their legs held tight to the body, he left off hackle legs altogether and
+    used fine copper wire, taken from electrical coils, for both weight and thread. The fly was
+    published in Nymphs and the Trout in 1958; when he first tied it is less certain, with
+    accounts ranging from the 1930s to the 1950s. He tied it by hand, without a vise.
+    """
+fishing """
+    Made for sight-fishing to trout in clear chalk streams: cast well upstream of a seen fish,
+    let the nymph sink to its level, and lift the rod gently as it arrives so the nymph rises
+    like a hatching one. Sawyer called this the induced take. It also fishes well dead-drift
+    near the bottom, or slowly retrieved just under the surface on lakes.
+    """
+sources {
+    "Wikipedia: Pheasant Tail Nymph" url="https://en.wikipedia.org/wiki/Pheasant_Tail_Nymph"
+    "Sporting Road: Frank Sawyer's Pheasant Tail" url="https://sportingroad.com/2019/02/12/frank-sawyers-pheasant-tail/"
+    "Fly Fishing the Sierra: Pheasant Tail Nymph" url="https://flyfishingthesierra.com/pheasant-tail-nymph/"
+    "Fly Anglers Online: Frank Sawyer PT nymph (Hans Weilenmann)" url="https://www.flyanglersonline.com/t/frank-sawyer-pt-nymph/15310"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://flyfishingthesierra.com/images/ptn/ptn11.jpg" page="https://flyfishingthesierra.com/pheasant-tail-nymph/" license="All rights reserved; reference only" note="Side view, wire-only original"
+    "https://sportingroad.com/wp-content/uploads/2019/04/IMG_9504-1024x768.jpeg" page="https://sportingroad.com/2019/02/12/frank-sawyers-pheasant-tail/" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+// Assumption: a 1X-long nymph hook, drawn as a standard wet hook; Sawyer used old Redditch sizes 00 to 1.
+hook wet-standard size=16
+// Assumption: there is no thread. The fine copper wire does its job and is shown as copper thread.
+thread copper size="8/0"
+
+materials {
+    hump copper-wire mm=0.1 label="Fine red copper wire"
+    fibres pheasant-tail count=4 label="Cock pheasant centre tail fibres"
+    case pheasant-tail count=4 label="Pheasant tail fibres (the butts, folded over)"
+}
+
+steps {
+    weight hump from=0.5 to=0.85 note="Three or four overlapping layers just in front of the middle of the shank."
+    attach-thread at=0.9 note="The same wire: wind it back over the shank to the bend."
+    wrap-thread to=0.0
+    // Sources disagree, from a quarter of the body to Sawyer's own longer tails on film; this follows the reference photos.
+    tie-in fibres length=0.9 spread=25 note="Tips first, with two turns of wire; snug but not cutting the fibres."
+    // Assumption: Sawyer folds the same butts back and forward over the thorax for the wing
+    // case; drawn as a second bunch tied in behind the thorax before the body is wound.
+    wrap-thread to=0.52
+    tie-in case note="Lying back over the tail for now."
+    wrap-thread to=0.9 note="In Sawyer's method the wire is twisted round the fibres and wound with them."
+    wind fibres to=0.9 turns=12 note="Touching turns over the abdomen and thorax."
+    tie-off fibres
+    pull-over case to=0.9 note="Over the thorax, then back and forward again: a double, darker wing case."
+    whip-finish note="A few turns of wire behind the eye; break off the excess."
+}

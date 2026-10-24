@@ -33,7 +33,7 @@ export const NAMED_COLORS = {
   elk: "#b39466",
   "hares-ear": "#7a6450",
   mallard: "#6e6558",
-  "pheasant-tail": "#8a4a22",
+  "pheasant-tail": "#74381a",
   partridge: "#8a7558",
   snipe: "#6f6a64",
   lead: "#6b6e72",
@@ -56,6 +56,7 @@ export const NAMED_COLORS = {
   muskrat: "#5b5650",
   clear: "#d8dde0",
   "blue-black": "#1d2230",
+  blue: "#1f5fa8",
 } as const;
 
 export type NamedColor = keyof typeof NAMED_COLORS;

@@ -114,7 +114,8 @@ export const MATERIALS = {
 
   // Feathers
   "mallard-breast": { name: "hen mallard breast feather", archetype: "feather", defaultColor: "mallard", shape: "breast" },
-  "teal-flank": { name: "teal flank feather", archetype: "feather", defaultColor: "teal", shape: "breast" },
+  // Teal is tied folded, so it stands on edge over the body like a quill slip.
+  "teal-flank": { name: "teal flank feather", archetype: "feather", defaultColor: "teal", shape: "slip" },
   "hackle-tips": { name: "hackle tips", archetype: "feather", shape: "tip" },
   "duck-quill": { name: "duck quill slips", archetype: "feather", defaultColor: "grey", shape: "slip" },
   "starling-quill": { name: "starling quill slips", archetype: "feather", defaultColor: "dun", shape: "slip" },

@@ -122,6 +122,7 @@ const WOUND_FIBRES = {
   dubbing: { perTurn: 260, radius: 0.005, tip: 0.3 },
   chenille: { perTurn: 240, radius: 0.006, tip: 0.6 },
   cdc: { perTurn: 160, radius: 0.003, tip: 0.3 },
+  fibres: { perTurn: 90, radius: 0.003, tip: 0.4 },
 } as const;
 
 function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
@@ -156,6 +157,12 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       sweep = (piece.sweep ?? 0.8) + (rand() - 0.5) * 0.5;
       length = piece.fibreLength! * (0.2 + 0.8 * Math.pow(u, 1.5)) * (0.7 + 0.5 * rand());
       shade = 0.85 + 0.3 * rand();
+    } else if (look === "fibres") {
+      // Wound pheasant tail and the like: a short fringe of flue, leaning back.
+      spin = around + (rand() - 0.5) * 2.2;
+      sweep = 0.7 + (rand() - 0.5) * 0.8;
+      length = piece.fibreLength! * (0.4 + 0.8 * rand());
+      shade = 0.6 + 0.3 * rand();
     } else if (look === "chenille") {
       spin = around + (rand() - 0.5) * 3;
       sweep = (rand() - 0.5) * 1.6;
@@ -174,6 +181,8 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     // trimmed underneath keeps everything that doesn't point down.
     if (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) continue;
     if (piece.keep === "top" && Math.sin(spin) < -0.35) continue;
+    // Under a wing case the fibres on top are pressed flat out of sight.
+    if (piece.covered && px > piece.covered[0] && px < piece.covered[1] && Math.sin(spin) > 0.2) continue;
     let dir: THREE.Vector3;
     if (onPost) {
       // Parachute: barbs stand out flat round the post, drooping a little.
@@ -252,7 +261,9 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   let perSegment: number;
   if (band) {
     const halfWidth = Math.min(piece.strandRadius * band, Math.max(piece.strandRadius, pitch * 0.55));
-    ({ geometry: tube, perSegment } = bandGeometry(piece, space, halfWidth, piece.strandRadius * 0.6, tubular));
+    // Wound fibres are one fibre thick however many lie side by side.
+    const halfThickness = piece.look === "fibres" ? 0.014 : piece.strandRadius * 0.6;
+    ({ geometry: tube, perSegment } = bandGeometry(piece, space, halfWidth, halfThickness, tubular));
   } else {
     const tubeRadius =
       piece.look === "dubbing" || piece.look === "chenille"
@@ -433,7 +444,8 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
   const L = piece.length;
   const outline = FEATHER_OUTLINE[piece.shape];
   const fold = FEATHER_FOLD[piece.shape];
-  const segS = 32;
+  // Enough rows along the feather that the bars don't alias into a checkerboard.
+  const segS = piece.barring > 0 ? 128 : 32;
   const segT = 16;
   const positions: number[] = [];
   const colors: number[] = [];
@@ -447,7 +459,10 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
       const phi = t * fold;
       // Local -Y points up once placed: the spine is the top, the sides hang down.
       positions.push(s * L, r - r * Math.cos(phi), r * Math.sin(phi));
-      const bars = 1 - piece.barring * 0.4 * (0.5 + 0.5 * Math.sin(2 * Math.PI * (s * 14 + Math.abs(t) * 2.2)));
+      // Strongly barred feathers (teal, grizzly) have crisp dark bars; mallard is softly vermiculated.
+      const wave = 0.5 + 0.5 * Math.sin(2 * Math.PI * (s * 14 + Math.abs(t) * 0.9));
+      const crisp = THREE.MathUtils.smoothstep(wave, 0.35, 0.65);
+      const bars = 1 - 0.85 * piece.barring ** 2 * (wave + (crisp - wave) * piece.barring);
       const shade = bars * (0.8 + 0.2 * s);
       colors.push(shade, shade, shade);
     }

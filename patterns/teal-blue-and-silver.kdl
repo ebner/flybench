@@ -1,0 +1,62 @@
+// Teal Blue & Silver: the Scottish sea-trout and loch fly from the Teal series.
+
+id teal-blue-and-silver
+name "Teal Blue & Silver"
+aliases "Teal, Blue and Silver" "Teal & Silver"
+type wet
+imitates baitfish attractor
+difficulty intermediate
+species sea-trout trout
+season june july august september october
+origin region="Scotland"
+description "A golden pheasant tippet tail, a flat silver body with a wire rib, a blue hackle throat and a barred teal flank wing."
+history """
+    One of the Teal series of Scottish loch and sea-trout flies, which share the barred teal
+    wing and vary the body and hackle. No originator or date is recorded. Tom Stewart called it
+    a simplified Silver Doctor; R. C. Bridgett counted a "Teal & Silver" among the ten most
+    popular Scottish sea-trout flies in 1929.
+    """
+fishing """
+    Fished across and down at night or in coloured water for sea trout, often on the tail of a
+    two- or three-fly cast. On lochs it is pulled through the wave from a drifting boat, best
+    when brown trout turn to fry in late summer. In estuaries it suggests sprats and fry.
+    """
+sources {
+    "Fly Anglers Online: Europe part 2, quoting Tom Stewart (archived)" url="https://web.archive.org/web/2020/https://www.flyanglersonline.com/features/worldwide/europe/part2.php"
+    "Fish4Flies: Teal Blue and Silver" url="https://www.fish4flies.com/Wet/Winged/Teal-Blue-and-Silver"
+    "GlobalFlyFisher: Teal Blue and Silver (Ivar's Fly Workshop)" url="https://globalflyfisher.com/node/71347"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/1422-1422.jpg" page="https://www.fish4flies.com/Wet/Winged/Teal-Blue-and-Silver" license="All rights reserved; reference only" flip=#true note="Side view, folded teal wing"
+    "https://www.fish4flies.com/img/flies/Large/2895-Teal_Blue_and_Silver.jpg" page="https://www.fish4flies.com/Sea-Trout/Singles/Teal-Blue-and-Silver" license="All rights reserved; reference only" flip=#true note="Side view, sea-trout single"
+}
+
+hook wet-standard size=10
+thread black size="8/0"
+
+materials {
+    tail golden-pheasant-tippet count=6
+    rib silver-wire
+    body flat-tinsel color=silver
+    throat hackle-fibres color=blue count=24 label="Kingfisher-blue hackle fibres"
+    wing teal-flank
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Assumption: the tail runs about half the shank past the bend, read from the photos.
+    tie-in tail length=1.2 angle=6 note="Five or six fibres, so the black bars show at the tips."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.88
+    wind body to=0.88 turns=14 note="Touching turns, untapered."
+    tie-off body
+    wind rib to=0.88 turns=5 note="Open turns, protecting the tinsel."
+    tie-off rib
+    // Stewart: fairly long, to mask the hook point.
+    tie-in throat length=1.1 angle=30 spread=45 side=under
+    tie-in wing length=2.2 angle=16 width=0.6 note="A section of teal flank folded lengthwise, so the barring shows on both sides; start wider than you think."
+    whip-finish note="Varnish the head black."
+}

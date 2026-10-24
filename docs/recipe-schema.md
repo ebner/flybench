@@ -131,6 +131,7 @@ Thread sizes: `3/0`, `6/0`, `8/0`, `10/0`, `12/0`, `14/0`.
 | `dry-standard`       | standard shank, fine wire, down eye          | TMC 100               |
 | `wet-standard`       | standard shank, heavy wire, down eye         | TMC 3769              |
 | `nymph-2xl`          | 2x long shank                               | TMC 5262              |
+| `dry-3xl-curved`     | 3x long, gently curved shank (25°)          | TMC 200R              |
 | `streamer-4xl`       | 4x long shank                               | TMC 9395              |
 | `emerger-curved`     | curved shank (45°)                          | Partridge 15BN        |
 | `scud-curved`        | strongly curved shank (75°)                 | TMC 2457              |
@@ -146,7 +147,7 @@ Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `brown`, `r
 `red-game`, `ginger`, `tan`, `grizzly`, `olive`, `grey`, `dun`, `yellow`, `green`, `gold`, `silver`,
 `copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
 `lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
-`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`. Barred colours
+`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`. Barred colours
 (`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars.
 Or a quoted hex value: `"#c8102e"`.
 
@@ -219,7 +220,7 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 | `pull-over`     | `pull-over <material> to=<pos>`                   | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. |
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess. |
-| `trim`          | `trim <material> [leave=<gapes>]`                 | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side). |
+| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` flattens it top and bottom, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath. |
 | `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. |
 
 ### Tying rules (semantic validation)

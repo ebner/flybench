@@ -1,0 +1,73 @@
+// Pheasant Tail Nymph, American version: Al Troth's weighted peacock-thorax tie with legs.
+
+id pheasant-tail-nymph-american
+name "Pheasant Tail Nymph"
+variant-of pheasant-tail-nymph
+variant "American (Troth)"
+aliases "American Pheasant Tail" "Pheasant Tail Peacock Thorax"
+type nymph
+imitates mayfly
+difficulty beginner
+species trout grayling
+season january february march april may june july august september october november december
+origin originator="Al Troth" region="Montana, USA"
+description "Pheasant tail tail and abdomen with a counter-wound copper rib, a weighted peacock herl thorax, a pheasant tail wing case and legs."
+history """
+    Al Troth, the Montana tier behind the Elk Hair Caddis, wanted Sawyer's nymph bulkier and
+    with prominent legs. He added lead under the thorax, a copper wire rib, a peacock herl
+    thorax and legs made from the wing-case tips. Dave Hughes lists it as the Pheasant Tail
+    Peacock Thorax; in the United States it is simply the Pheasant Tail. The gold bead
+    (Theo Bakelaar, 1988) and the flashback (Andre Puyans) came later.
+    """
+fishing """
+    A staple searching nymph: dead-drift under an indicator, as the dropper below a dry fly or
+    tight-lined through riffles and runs. On lakes, fish it slowly just under the surface during
+    Callibaetis hatches. It is good all year and especially in winter and in Baetis season.
+    """
+sources {
+    "Orvis: How to tie the Pheasant Tail Nymph" url="https://news.orvis.com/fly-fishing/video-how-to-tie-the-pheasant-tail-nymph"
+    "Rogue Fly Fishers: Pheasant Tail Nymph" url="https://rogueflyfishers.org/?p=45"
+    "Sexyloops: Pheasant Tail Nymph (Ben Spinks)" url="https://www.sexyloops.com/flytying/ptn.shtml"
+    "Fly Fishing the Sierra: Pheasant Tail Nymph" url="https://flyfishingthesierra.com/pheasant-tail-nymph/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/0/0a/American_Pheasant_Tail_Nymph_02.jpg" page="https://commons.wikimedia.org/wiki/File:American_Pheasant_Tail_Nymph_02.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view"
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/ptnvar1.jpg" page="https://flyfishingthesierra.com/pheasant-tail-nymph/" license="All rights reserved; reference only" note="Side view, no bead"
+    "https://perfectflystore.com/wp-content/uploads/2021/03/pheasant_tail_nymph.jpg" page="https://perfectflystore.com/product/pheasant-tail-nymph/" license="All rights reserved; reference only" flip=#true note="Side view, legs visible"
+}
+
+hook nymph-2xl size=14
+thread red-brown size="8/0"
+
+materials {
+    weight lead-free-wire
+    tail pheasant-tail count=4
+    rib copper-wire
+    case pheasant-tail count=6 label="Pheasant tail fibres (wing case and legs)"
+    thorax peacock-herl strands=3
+    legs pheasant-tail count=6 label="Pheasant tail fibre tips (legs)"
+}
+
+steps {
+    weight weight from=0.62 to=0.88 note="Under the thorax only."
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Sources range from half the body to a shank length; about one gape past the bend.
+    tie-in tail length=1.0 note="Tips aligned, on top; keep the butts for the abdomen."
+    tie-in rib
+    wrap-thread to=0.62
+    wind tail to=0.62 turns=8 note="The butts as a flat ribbon over the rear two thirds."
+    tie-off tail
+    wind rib to=0.62 turns=5 note="Counter-wound, in open turns."
+    tie-off rib
+    tie-in case note="On top at the front of the abdomen, tips forward."
+    tie-in thorax
+    wrap-thread to=0.88
+    wind thorax to=0.88 turns=5 note="Twist the herls lightly and wind in touching turns."
+    tie-off thorax
+    pull-over case to=0.88
+    // Assumption: the legs, split three a side in most ties, are drawn as Spinks's alternative: tips pulled back under the shank.
+    tie-in legs length=0.75 angle=30 side=under note="About as long as the thorax."
+    whip-finish
+}
