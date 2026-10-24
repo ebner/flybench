@@ -1,7 +1,7 @@
 // Flybench service worker: makes the site work offline once visited.
 // Same-origin GET requests are answered from the cache when possible and refreshed
 // from the network in the background (stale-while-revalidate).
-const CACHE = "flybench-v1";
+const CACHE = "flybench-v2";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
@@ -22,12 +22,13 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
   event.respondWith(
     caches.open(CACHE).then(async (cache) => {
-      // Pages are all the same app shell; key them on the shell so any page works offline.
-      const key = request.mode === "navigate" ? "./" : request;
-      const cached = await cache.match(key);
+      // Every page is the same app; a page not visited before falls back to the front page's
+      // HTML when offline, and the app shows the right page for the address.
+      const navigation = request.mode === "navigate";
+      const cached = (await cache.match(request, { ignoreSearch: navigation })) ?? (navigation ? await cache.match("./") : undefined);
       const network = fetch(request)
         .then((response) => {
-          if (response.ok) cache.put(key, response.clone());
+          if (response.ok) cache.put(request, response.clone());
           return response;
         })
         .catch(() => cached ?? Response.error());

@@ -8,7 +8,7 @@ import { ridesPointUp } from "../tying/hook";
 import { simulate, stepAt } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
 import { match, materialColor } from "../catalog/inventory";
-import { href, replaceHash } from "./router";
+import { href, replaceUrl } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
 import { usePlayer } from "./usePlayer";
@@ -117,7 +117,7 @@ function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initia
   }, []);
   // Keep the URL on the current step, so it can be shared.
   useEffect(() => {
-    replaceHash(href.fly(recipe.id, current > 0 ? current + 1 : undefined));
+    replaceUrl(href.fly(recipe.id, current > 0 ? current + 1 : undefined));
   }, [recipe.id, current]);
 
   const playStep = (i: number) => {

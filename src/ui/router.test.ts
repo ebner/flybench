@@ -1,21 +1,40 @@
 import { describe, expect, it } from "vitest";
-import { href, parseRoute } from "./router";
+import { href, legacyRoute, parseRoute, routeHref } from "./router";
+
+const rel = (url: string) => url.replace(/^\//, "");
 
 describe("routes", () => {
   it("parse every page", () => {
     expect(parseRoute("")).toEqual({ page: "gallery", query: "" });
-    expect(parseRoute("#/?type=dry")).toEqual({ page: "gallery", query: "type=dry" });
-    expect(parseRoute("#/fly/red-tag")).toEqual({ page: "fly", id: "red-tag" });
-    expect(parseRoute("#/fly/red-tag/4")).toEqual({ page: "fly", id: "red-tag", step: 4 });
-    expect(parseRoute("#/red-tag")).toEqual({ page: "fly", id: "red-tag" });
-    expect(parseRoute("#/techniques")).toEqual({ page: "techniques" });
-    expect(parseRoute("#/technique/palmering")).toEqual({ page: "technique", id: "palmering" });
-    expect(parseRoute("#/learn")).toEqual({ page: "learn" });
-    expect(parseRoute("#/a/b/c")).toEqual({ page: "not-found", path: "a/b/c" });
+    expect(parseRoute("?type=dry")).toEqual({ page: "gallery", query: "type=dry" });
+    expect(parseRoute("fly/red-tag/")).toEqual({ page: "fly", id: "red-tag" });
+    expect(parseRoute("fly/red-tag/?step=4")).toEqual({ page: "fly", id: "red-tag", step: 4 });
+    expect(parseRoute("fly/red-tag/4")).toEqual({ page: "fly", id: "red-tag", step: 4 });
+    expect(parseRoute("techniques/")).toEqual({ page: "techniques" });
+    expect(parseRoute("technique/palmering/")).toEqual({ page: "technique", id: "palmering" });
+    expect(parseRoute("learn")).toEqual({ page: "learn" });
+    expect(parseRoute("about/")).toEqual({ page: "about" });
+    expect(parseRoute("a/b/c")).toEqual({ page: "not-found", path: "a/b/c" });
+    expect(parseRoute("red-tag")).toEqual({ page: "not-found", path: "red-tag" });
   });
 
   it("round-trip links", () => {
-    expect(parseRoute(href.fly("elk-hair-caddis", 7))).toEqual({ page: "fly", id: "elk-hair-caddis", step: 7 });
-    expect(parseRoute(href.technique("wing-case"))).toEqual({ page: "technique", id: "wing-case" });
+    expect(parseRoute(rel(href.fly("elk-hair-caddis", 7)))).toEqual({ page: "fly", id: "elk-hair-caddis", step: 7 });
+    expect(parseRoute(rel(href.technique("wing-case")))).toEqual({ page: "technique", id: "wing-case" });
+    expect(parseRoute(rel(href.gallery("type=dry")))).toEqual({ page: "gallery", query: "type=dry" });
+    for (const page of ["techniques", "learn", "about", "box", "materials"] as const) {
+      expect(parseRoute(rel(routeHref({ page })))).toEqual({ page });
+    }
+  });
+
+  it("understand old hash links", () => {
+    expect(legacyRoute("")).toBeNull();
+    expect(legacyRoute("#content")).toBeNull();
+    expect(legacyRoute("#/")).toEqual({ page: "gallery", query: "" });
+    expect(legacyRoute("#/?type=dry")).toEqual({ page: "gallery", query: "type=dry" });
+    expect(legacyRoute("#/fly/red-tag/4")).toEqual({ page: "fly", id: "red-tag", step: 4 });
+    expect(legacyRoute("#/red-tag")).toEqual({ page: "fly", id: "red-tag" });
+    expect(legacyRoute("#/techniques")).toEqual({ page: "techniques" });
+    expect(routeHref(legacyRoute("#/fly/red-tag/4")!)).toBe("/fly/red-tag/?step=4");
   });
 });

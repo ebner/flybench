@@ -199,7 +199,11 @@ select {
 }
 
 .intro {
-  max-width: 40rem;
+  display: grid;
+  grid-template-columns: minmax(0, 40rem) minmax(0, 24rem);
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem 3rem;
 }
 
 .intro h1 {
@@ -211,6 +215,81 @@ select {
   color: var(--ink-soft);
   font-size: var(--step-1);
   line-height: 1.5;
+}
+
+.intro .intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+  font-size: var(--step-0);
+}
+
+.primary-link {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.primary-link:hover {
+  filter: brightness(1.12);
+}
+
+/* The fly of the day turns on its stand; a still picture for those who prefer less motion. */
+.fly-of-the-day {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.fly-of-the-day-image {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  filter: drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+}
+
+.fly-of-the-day-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.intro .fly-of-the-day p {
+  margin: 0.25rem 0 0;
+  text-align: center;
+  font-size: var(--step-0);
+}
+
+.fly-of-the-day:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fly-of-the-day .plate-spin {
+    visibility: visible;
+    background-image: var(--spin);
+    animation: turn 6s steps(var(--frames)) infinite;
+  }
+
+  .fly-of-the-day .plate-spin + img {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 48rem) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fly-of-the-day {
+    max-width: 22rem;
+  }
 }
 
 .finder {
@@ -1187,4 +1266,33 @@ select {
   .theme-toggle {
     white-space: nowrap;
   }
+}
+
+/* Footer */
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 1.5rem var(--gutter) 2.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.about h2 {
+  margin-top: 2rem;
 }

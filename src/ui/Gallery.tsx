@@ -8,7 +8,7 @@ import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/sc
 import { colorWord, coverage, type Need } from "../catalog/inventory";
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
-import { href, replaceHash } from "./router";
+import { href, replaceUrl } from "./router";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -28,7 +28,7 @@ export function Gallery({ query }: { query: string }) {
 
   const setFilters = (f: Filters) => {
     setFiltersState(f);
-    replaceHash(href.gallery(filtersToQuery(f)));
+    replaceUrl(href.gallery(filtersToQuery(f)));
   };
   const toggle = <K extends keyof Filters>(key: K, value: Filters[K]) =>
     setFilters({ ...filters, [key]: filters[key] === value ? undefined : value });
@@ -45,17 +45,22 @@ export function Gallery({ query }: { query: string }) {
   return (
     <main className="gallery">
       <section className="intro">
-        <h1>Fly patterns to tie, step by step, in 3D</h1>
-        <p>
-          Every pattern can be turned, paused and replayed one step at a time.
-          {beginner && (
-            <>
-              {" "}
-              New to tying? Follow the <a href={href.learn()}>learning path</a>, starting with the{" "}
-              <a href={href.fly(beginner.recipe.id)}>{beginner.recipe.name}</a>.
-            </>
-          )}
-        </p>
+        <div className="intro-text">
+          <h1>Fly patterns to tie, step by step, in 3D</h1>
+          <p>
+            Every pattern can be turned, paused and replayed one step at a time, with its materials, its history and how to
+            fish it.
+          </p>
+          <p className="intro-actions">
+            {beginner && (
+              <a className="primary-link" href={href.fly(beginner.recipe.id)}>
+                New to tying? Start with the {beginner.recipe.name}
+              </a>
+            )}
+            <a href={href.learn()}>Follow the learning path</a>
+          </p>
+        </div>
+        {renders && <FlyOfTheDay renders={renders} />}
       </section>
 
       <section className="finder" aria-label="Find a pattern">
@@ -250,6 +255,28 @@ function MoreFilters({
         </div>
       </fieldset>
     </div>
+  );
+}
+
+/** A different pattern every day, turning on its stand. */
+function FlyOfTheDay({ renders }: { renders: Record<string, RenderInfo> }) {
+  const rendered = CATALOG.filter((e) => renders[e.recipe.id]);
+  const day = Math.floor(Date.now() / 86_400_000);
+  const entry = rendered[day % Math.max(1, rendered.length)];
+  if (!entry) return null;
+  const r = entry.recipe;
+  const info = renders[r.id]!;
+  const urls = renderUrls(r.id, info);
+  return (
+    <a className="fly-of-the-day" href={href.fly(r.id)}>
+      <div className="fly-of-the-day-image" style={{ "--spin": `url("${urls.spin}")`, "--frames": info.frames } as CSSProperties}>
+        <div className="plate-spin" aria-hidden="true" />
+        <img src={urls.card} alt="" width={600} height={400} />
+      </div>
+      <p>
+        Fly of the day: <strong>{r.name}</strong>
+      </p>
+    </a>
   );
 }
 
