@@ -13,16 +13,21 @@ history """
     Not one pattern but a family: imitations of the freshwater shrimps (Gammarus and other
     amphipods) that trout and grayling eat all year. This is the plain dubbed, shellbacked
     and ribbed scud; Oliver Edwards' Deep Diving Shrimp and Nick Thomas' Shwimp are
-    well-known relatives. Orange and pink versions are fished for sea trout on Danish coasts.
+    well-known relatives. Orange and pink versions are fished for sea trout on Scandinavian
+    coasts.
     """
 fishing """
-    Dead drift it near the bottom on a nymph rig in rivers, often as the point fly for
-    grayling and trout. On lakes, fish it slowly round weedbeds and margins. Weight decides
-    the depth: none for shallow weedy water, a bead or lead for fast, deep runs.
+    Fish it near the bottom: the naturals live among weed, gravel and stones, though trout
+    take imitations almost anywhere in lakes and streams, especially on overcast days. Nick
+    Thomas fishes his weighted Shwimp on a dropper for winter grayling on big rivers, and
+    on its own in plunge pools on small streams. Weight decides the depth: the Simple Scud
+    has none, the Deep Diving Shrimp has lead-free foil, the Shwimp a tungsten bead.
     """
 sources {
-    "Orvis: Simple Scud" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymphs/simple-scud"
-    "GlobalFlyFisher: OE Deep Diving Shrimp" url="https://globalflyfisher.com/patterns-tie-better/oedds"
+    "Orvis: Simple Scud" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/662-simple-scud"
+    "GlobalFlyFisher: OE Deep Diving Shrimp (Kasper Mühlbach)" url="https://globalflyfisher.com/patterns-tie-better/oedds"
+    "GlobalFlyFisher: Shwimp (Nick Thomas)" url="https://globalflyfisher.com/shwimp"
+    "Ahrex: Gammarus, small but important (Michael Jensen)" url="https://ahrexhooks.com/2017/11/23/gammarus-small-but-important/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

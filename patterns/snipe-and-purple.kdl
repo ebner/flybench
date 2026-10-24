@@ -13,23 +13,28 @@ description "A short body of purple silk and one or two turns of a dark grey sni
 history """
     A Yorkshire and Lancashire Dales spider. Pritt gave it as the "Dark Snipe" in Yorkshire
     Trout Flies (1885), a killer "on very cold days in the early part of the season, and a
-    favourite on the Ribble"; Edmonds and Lee (1916) are the first to call it Snipe and
-    Purple.
+    favourite on the Ribble". The earliest source found that calls it Snipe and Purple is
+    Edmonds and Lee's Brook and River Trouting (1916), as "Dark Snipe or Snipe and Purple",
+    hackled with a dark marginal covert from a snipe's wing.
     """
 fishing """
-    An early and late season spider for cold days, suggesting the iron blue and other dark
-    olives. Fish it just under the surface, across and down or upstream, often on a team of
-    spiders.
+    An early and late season spider for cold days, usually taken for the iron blue; in
+    smaller sizes it also passes for midges and other small dark flies. Fish it just under
+    the surface, across and down or upstream, often on a team with the Partridge & Orange
+    and Waterhen Bloa.
     """
 sources {
-    "T. E. Pritt: Yorkshire Trout Flies (1885)" url="https://archive.org/details/yorkshiretroutfl00prit"
-    "Sexyloops: North Country spiders (Ben Spinks)" url="https://www.sexyloops.com/flytying/ncspiders/ncspiders2.shtml"
+    "T. E. Pritt: Yorkshire Trout Flies (1885)" url="https://archive.org/details/yorkshiretroutfl00pritrich"
+    "Edmonds & Lee, Brook and River Trouting (1916)" url="https://archive.org/details/brookrivertrouti00edmorich"
+    "Sexyloops: North Country Spiders part 2 (Ben Spinks)" url="https://www.sexyloops.com/flytying/northcountrywets2.shtml"
+    "Hawker-Overend: Spider flies, how to fish these old classics (Andrew Overend)" url="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/"
+    "Yorkshire Dales Fly Fishing: North Country Spiders" url="https://www.yorkshire-dales-flyfishing.com/north_country_spiders.htm"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
-    "https://www.sexyloops.com/flytying/ncspiders/snipe%20and%20purple.jpg" page="https://www.sexyloops.com/flytying/ncspiders/ncspiders2.shtml" author="Ben Spinks" license="All rights reserved; reference only" note="Side view"
-    "https://hawker-overend.com/wp-content/uploads/2020/12/Snipe-Purple-Spider-450w.jpg" page="https://hawker-overend.com/north-country-spiders/" license="All rights reserved; reference only" note="Side view"
-    "https://www.fish4flies.com/img/flies/Large/1513-1513.jpg" page="https://www.fish4flies.com/Wet/Spiders/Snipe-Purple" license="All rights reserved; reference only" flip=#true note="Side view"
+    "https://www.sexyloops.com/flytying/ncspiders/snipe%20and%20purple.jpg" page="https://www.sexyloops.com/flytying/northcountrywets2.shtml" author="Ben Spinks" license="All rights reserved; reference only" note="Side view"
+    "https://hawker-overend.com/wp-content/uploads/2020/12/Snipe-Purple-Spider-450w.jpg" page="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/" license="All rights reserved; reference only" note="Side view"
+    "https://www.fish4flies.com/img/flies/Large/1513-1513.jpg" page="https://www.fish4flies.com/Wet/Spider-and-Drowning-Daddies/Snipe-and-Purple" license="All rights reserved; reference only" flip=#true note="Side view"
 }
 
 hook wet-standard size=16

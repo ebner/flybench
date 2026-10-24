@@ -11,24 +11,30 @@ season june july august september
 origin originator="John Goddard and Cliff Henry" region="England"
 description "A body of spun and clipped deer hair trimmed to a sedge's tent-shaped wing, and a brown hackle at the front."
 history """
-    Developed by John Goddard and Cliff Henry for English stillwater sedge fishing, and
-    published in Goddard's Trout Flies of Still-Water (1969). G&H are their initials; in the
-    United States it became the Goddard Caddis. The original had a belly of green seal's fur,
-    a rusty dun hackle and the stripped hackle stems as antennae.
+    Developed by John Goddard and Cliff Henry in England; G&H are their initials. The Feather
+    Bender takes the original dressing from a 1977 reprint of Goddard's Trout Flies of
+    Still-Water (1969): a belly of dark green seal's fur, two rusty dun hackles and their
+    stripped stems as antennae. Hans Weilenmann gives the belly as olive. Today it is
+    mostly tied with a hard-packed hair body and no belly, and is better known as the Goddard
+    Caddis; posters on Fly Anglers Online, Weilenmann among them, credit that name to the
+    American tyer Andre Puyans.
     """
 fishing """
-    Packed deer hair floats like cork. On lakes, cast it to rising fish at dusk and strip it
-    back to leave a V-wake like an egg-laying sedge; on rivers, fish it in broken water or
-    use it to carry a dropper. Less good for very selective fish on flat water.
+    Packed deer hair floats like a cork, even in rough water, so the fly can be twitched,
+    skated or waked across the surface, which often brings a take. It is easy to see late in
+    the evening during a hatch; Global FlyFisher finds it too clumsy for very selective trout.
     """
 sources {
-    "The Feather Bender: G&H Sedge" url="https://thefeatherbender.com/2014/01/24/fly-tying-course-tying-the-goddard-caddis-g-h-sedge/"
-    "Orvis: Goddard Caddis" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/goddard-caddis"
-    "GlobalFlyFisher: Goddard Caddis" url="https://globalflyfisher.com/patterns/goddard-caddis"
+    "The Feather Bender: Fly Tying Course #19, The G & H Sedge (Barry Ord Clarke)" url="https://thefeatherbender.com/2013/08/23/fly-tying-course-19-the-g-h-sedge/"
+    "Orvis Learning Center: Goddard Caddis (video)" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/731-goddard-caddis"
+    "Global FlyFisher: Goddard Caddis" url="https://globalflyfisher.com/video/goddard-caddis-4"
+    "Fly Anglers Online: Goddard Caddis SBS (Scott P., with comments by Hans Weilenmann)" url="https://www.flyanglersonline.com/t/goddard-caddis-sbs/50306"
+    "Fly Anglers Online: Thin Goddard Caddis (forum thread)" url="https://www.flyanglersonline.com/t/thin-goddard-caddis/54085"
+    "Medlar Press: John Goddard" url="https://medlarpress.com/Authors/john-goddard.html"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
-    "https://i0.wp.com/thefeatherbender.com/wp-content/uploads/2014/01/Goddard-Caddis-G-H-Sedge.jpg?resize=1300%2C768&ssl=1" page="https://thefeatherbender.com/2014/01/24/fly-tying-course-tying-the-goddard-caddis-g-h-sedge/" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://i0.wp.com/thefeatherbender.com/wp-content/uploads/2014/01/Goddard-Caddis-G-H-Sedge.jpg?resize=1300%2C768&ssl=1" page="https://thefeatherbender.com/2013/08/23/fly-tying-course-19-the-g-h-sedge/" license="All rights reserved; reference only" note="Side view in the vise"
     "https://www.fish4flies.com/img/flies/Large/1497-1497%202.jpg" page="https://www.fish4flies.com/Dry/Sedge/Deer-Hair-Sedge" license="All rights reserved; reference only" flip=#true note="Side view"
 }
 

@@ -11,26 +11,32 @@ season may june july august
 origin region="Wales"
 description "A flat gold tag, a plump body of bronze peacock herl ribbed with gold wire, and a red-and-black coch-y-bonddu hackle."
 history """
-    A traditional Welsh fly imitating a small beetle, the garden chafer or "bracken clock".
-    It was known in the 1700s as the Shorn Fly and is described in Bowlker's Art of Angling
-    (1792); by the mid-1800s it was called by its Welsh name, which means roughly "red with
-    a black trunk", after the hackle. Claims that it goes back to 1613 are unverified.
+    A traditional Welsh fly imitating a small beetle, which Mary Orvis Marbury says is
+    sometimes called the bracken clock; Rusty Dunn names it as the garden chafer. Charles
+    Bowlker's Art of Angling (1792 edition) has it as the Shorn Fly: a red cock's hackle
+    "with a black list up the middle" and a peacock herl body. The 1854 edition adds that it
+    is much used in Wales and better known there as Coch-a-bonddu, "red with a black body",
+    after the hackle. Fred Klein traces peacock soft hackles back to Dennys's Secrets of
+    Angling (1613); that is unverified.
     """
 fishing """
-    Dry, along wooded or bracken banks in summer and on windy days, dead drift or twitched.
-    On Welsh and Scottish lochs it is a top dropper. Tied wet with a soft hackle, swing it
-    from a riffle into the pool. "Wet or dry, and at any time of the season, it is always a
-    good pattern to try on a strange river."
+    Bowlker's 1854 edition has it at its best in June but useful all season, and says many
+    anglers always have one on as a dropper. Fish it dry in summer, when beetles are blown
+    onto the water on windy days; tied wet with a soft hen hackle it is an all-purpose
+    subsurface fly. Courtney Williams, as quoted by Dunn: "Wet or dry, and at any time of the
+    season, it is always a good pattern to try on a strange river."
     """
 sources {
-    "SWTU: Coch-y-Bonddu (Rusty Dunn)" url="https://www.swtu.org/2020/03/04/coch-y-bonddu/"
-    "Midcurrent: Coch-y-Bonddu (Fred Klein)" url="https://midcurrent.com/flies/coch-y-bonddu/"
+    "Bowlker: The Art of Angling (1792)" url="https://archive.org/details/bim_eighteenth-century_the-art-of-angling-or-_bowlker-charles_1792"
+    "Bowlker's Art of Angling, new edition (1854)" url="https://archive.org/details/bowlkersartofang00bowlrich"
+    "SWTU: Coch-y-Bonddu (Rusty Dunn)" url="https://www.swtu.org/2020/03/05/coch-y-bonddu/"
+    "Midcurrent: A Fly Fishing Chronicle: The Coch-y-Bonddu (Fred Klein)" url="https://midcurrent.com/flies/a-fly-fishing-chronicle-the-coch-y-bonddu/"
     "Fish4Flies: Coch-y-Bondhu" url="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://www.fish4flies.com/img/flies/Large/800-800.jpg" page="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu" license="All rights reserved; reference only" flip=#true note="Side view, dry, gold tag"
-    "https://www.swtu.org/wp-content/uploads/2020/03/coch-y-bonddu.jpg" page="https://www.swtu.org/2020/03/04/coch-y-bonddu/" license="All rights reserved; reference only" note="Side view, wet version"
+    "https://www.swtu.org/wp-content/uploads/2020/03/coch-y-bonddu.jpg" page="https://www.swtu.org/2020/03/05/coch-y-bonddu/" license="All rights reserved; reference only" note="Side view, wet version"
 }
 
 // Assumption: a down-eye dry hook; the traditional British choice is an up-eye Captain Hamilton.

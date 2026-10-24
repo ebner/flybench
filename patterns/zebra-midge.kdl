@@ -10,23 +10,29 @@ season january february march april may june july august september october novem
 origin originator="Ted Welling" region="Lees Ferry, Arizona, USA"
 description "A slim tapered black thread body with a silver wire rib, behind a silver bead, on a short curved hook."
 history """
-    Created by Ted Welling, a guide at Lees Ferry on the Colorado River below Glen Canyon
-    Dam, and a staple on tailwaters ever since. Some trace it to the Ice Cream Cone or the
-    TDC chironomid patterns; its date is not documented.
+    Created by Ted Welling, a guide at Lees Ferry on the Colorado River in Arizona, a
+    tailwater full of midges at the head of the Grand Canyon. Ralph Scherder dates it to
+    about 1996 and sees it as a variation of Kelly Davidson's Ice Cream Cone, a 1992
+    chironomid for British Columbia lakes; other sources give no date or ancestor.
     """
 fishing """
-    Imitates a midge pupa. Fish it under an indicator or as a dropper below a dry, near the
-    bottom on tailwaters and spring creeks, all year. Red, olive and brown bodies are popular
-    colour variants.
+    Imitates a midge pupa that sinks quickly; McFly Angler argues the silver bead makes it
+    an emerger. Fish it under an indicator, below a dry fly, or as a dropper behind a larger
+    fly such as a San Juan Worm or egg: fish often come to the big fly and eat the small
+    one. It works all year, best from autumn to early spring, on tailwaters, freestones and
+    lakes. Red and olive bodies are popular colour variants.
     """
 sources {
-    "Orvis: Zebra Midge (Phil Monahan)" url="https://www.orvis.com/news/fly-tying/video-how-to-tie-a-zebra-midge/"
-    "Into Fly Fishing: How to tie a Zebra Midge" url="https://intoflyfishing.com/how-to-tie-a-zebra-midge/"
+    "Orvis News: Tying the Zebra Midge (Phil Monahan, video by Tim Flagler)" url="https://news.orvis.com/fly-fishing/Tying-the-Zebra-Midge"
+    "Into Fly Fishing: How to tie the Zebra Midge (Pierre Joubert)" url="https://intoflyfishing.com/how-to-tie-the-zebra-midge/"
+    "Dark Skies Fly Fishing: Small but mighty, fishing the Zebra Midge (Ralph Scherder)" url="https://darkskiesflyfishing.com/post/small-but-mighty-fishing-the-zebra-midge/"
+    "gbflycasters.org: Zebra Midge" url="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.htm"
+    "GlobalFlyFisher: Zebra Midge and variations (McFly Angler)" url="https://globalflyfisher.com/video/zebra-midge-and-variations"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://flyfishsd.com/cdn/shop/articles/zebra-midge-fly-pattern.jpg?v=1686269752" page="https://flyfishsd.com/blogs/blog/zebra-midge-fly-tying-video" license="All rights reserved; reference only" note="Side view in the vise"
-    "https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.jpg" page="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/" license="All rights reserved; reference only" note="Side view, glass bead variant"
+    "https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.jpg" page="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.htm" license="All rights reserved; reference only" note="Side view, glass bead variant"
 }
 
 hook scud-curved size=18

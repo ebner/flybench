@@ -12,23 +12,31 @@ origin originator="Hans van Klinken" year=1984 region="Glomma, Norway"
 description "A slim tan abdomen round the curve of the hook, a peacock herl thorax, a white post and a long parachute hackle."
 history """
     Hans van Klinken, a Dutch army instructor, first fished it on 27 June 1984 on the Glomma
-    in Norway, as the "LT Caddis" of his light-tan series; Hans de Groot and Ton Lindhout
-    named it the Klinkhåmer Special. It grew from Kenneth Boström's Rackelhanen, with a
-    parachute hackle so it would land upright and a herl thorax added soon after.
+    in Norway. He called it the LT Caddis, one fly of an LT series he developed in Scandinavia;
+    Hans de Groot and Ton Lindhout, his colleagues on a magazine's editorial staff, renamed it
+    the Klinkhåmer Special. It grew from Kenneth Boström's Rackelhanen: van Klinken's copies
+    sometimes landed wing-flat, so he wound a hackle round the wing, as he had seen in a book
+    by Eric Leiser, and a few months later added the herl thorax. He points out that others
+    had the same idea: Tomas Olsen in Sweden a year earlier, Roy Richardson in the United
+    States in 1986, and Mike Monroe, whose Paratilt was published in 1979.
     """
 fishing """
-    The abdomen hangs below the surface like a hatching insect while the parachute holds it
-    up: a deadly emerger for grayling and trout during caddis and mayfly hatches, and a good
-    searching fly in fast water. Fish it dead drift.
+    The abdomen hangs below the surface like a hatching insect while the parachute holds the
+    fly up; van Klinken says it suggests all kinds of emerging mayflies and caddis. He
+    designed it for grayling, which tend to push high-floating flies aside as they take, and
+    finds it hooks them well. It stays upright in riffles and strong currents, and the white
+    post shows the takes of fish that sip it down without a ring. Treat the post and hackle
+    with floatant but not the body, which has to break through the film.
     """
 sources {
-    "Fly Fisherman: The Klinkhåmer Special at 40 (Hans van Klinken)" url="https://www.flyfisherman.com/editorial/klinkhamer-special-fly-pattern/533061"
-    "Tom Sutcliffe: The Klinkhåmer Special" url="https://www.tomsutcliffe.co.za/newsletters/the-klinkhamer-special/"
+    "Fly Fisherman: The Klinkhåmer Special at 40: Still One of the Best (Hans van Klinken)" url="https://www.flyfisherman.com/editorial/40-years-klinkhamer-special/490681"
+    "Tom Sutcliffe: Hans van Klinken on his Klinkhåmer Special (Hans van Klinken)" url="https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html"
+    "Rackelhanen Flyfishing Magazine: How to use our Klinkhåmer Special correctly (Hans van Klinken, archived)" url="https://web.archive.org/web/20071211113302/http://www.rackelhanen.se/eng/10342.htm"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/4/4b/Klinkhammer_Special_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Klinkhammer_Special_Dry_Fly.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, replica of the original"
-    "https://www.tomsutcliffe.co.za/newsletters/The_Klinkhamer_special_3.jpg" page="https://www.tomsutcliffe.co.za/newsletters/the-klinkhamer-special/" license="All rights reserved; reference only" note="Side view, tan body"
+    "https://www.tomsutcliffe.co.za/newsletters/The_Klinkhamer_special_3.jpg" page="https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html" license="All rights reserved; reference only" note="Side view, tan body"
 }
 
 hook emerger-curved size=12
@@ -36,8 +44,8 @@ thread grey size="8/0"
 
 materials {
     post poly-yarn
-    // Van Klinken calls for a long hackle ("about 2× the gape"); his own photos show fibres
-    // about 1.3× the gape from the post, which is used here.
+    // Van Klinken calls for a long hackle ("twice the length of the hook gap or more"); his
+    // own photos show fibres about 1.3× the gape from the post, which is used here.
     hackle cock-hackle color=blue-dun fibre=1.3
     abdomen dry-fly-dubbing color=tan label="Light tan poly dubbing"
     thorax peacock-herl strands=3

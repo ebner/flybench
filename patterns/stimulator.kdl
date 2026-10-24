@@ -10,26 +10,31 @@ season may june july august september october
 origin originator="Randall Kaufmann" region="Oregon, USA"
 description "An elk hair tail and wing, a yellow abdomen with a palmered brown hackle and wire rib, and an orange thorax with a grizzly hackle."
 history """
-    Randall Kaufmann refined and named the Stimulator around 1980–82 from a Deschutes River
-    fly sold as "Hank's Special"; it first appeared in his Streamborn catalogue in 1982 and
-    on the cover of his book Tying Dry Flies (1991). Jim Slattery of New Jersey tells a
-    different story, of a "Fluttering Stonefly" he sent to Kaufmann in the late 1970s.
-    Either way, it descends from the Sofa Pillow and the Trude flies.
+    Randall Kaufmann's own account: in 1980 his friend Rick Verheghe did well on the
+    Deschutes with a fly labelled "Hank's Special" from a bin at the Oasis Café in Maupin.
+    Kaufmann refined it, David Lambroughton suggested the name in 1981, and it first
+    appeared in the Kaufmann Streamborn catalogue in 1982; he says no one else was
+    involved. Jim Slattery of New Jersey tells a different story (in Rusty Dunn's SWTU
+    article): Kaufmann phoned him about his "Fluttering Stonefly" of the late 1970s,
+    slimmed the wing, shortened the front hackle and took the name Slattery suggested.
+    Kaufmann published it in Tying Dry Flies (1991), with the fly on the cover. He also
+    says the style was not new: he mixed the Improved Sofa Pillow and the Royal Trude.
     """
 fishing """
-    A searching fly for riffles, pocket water and banks, dead drifted or twitched like an
-    egg-laying stonefly or caddis. It floats well enough to carry a nymph in a dry-dropper
-    rig. Large sizes match salmonflies and golden stones, or pass as hoppers.
+    A high-floating searching fly, easy to see even in broken pocket water, and often the
+    dry in a dry-dropper rig. It imitates stoneflies of all sizes; sizes 12 to 16 also do
+    for caddis, and the largest pass for grasshoppers.
     """
 sources {
-    "Wikipedia: Stimulator" url="https://en.wikipedia.org/wiki/Stimulator_(fly)"
-    "Fly Fisherman: Stimulator (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-stimulator/151976"
-    "SWTU: The Stimulator and Jim Slattery" url="https://www.swtu.org/2023/03/06/stimulator/"
+    "Umpqua: The Story of the Stimulator (Randall Kaufmann)" url="https://www.umpqua.com/stories/the-story-of-the-stimulator/"
+    "SWTU: Jim Slattery's Original Stimulator (Rusty Dunn)" url="https://www.swtu.org/2023/03/07/jim-slatterys-original-stimulator/"
+    "Fly Fisherman: A Classic American Fly: The Stimulator (Tom Rosenbauer)" url="https://www.flyfisherman.com/editorial/classic-american-fly-stimulator/455993"
+    "Fly Fisherman: How to tie the Stimulator Fly (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-stimulator-fly/151967"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/8/84/Yellow_Stimulator.jpg" page="https://commons.wikimedia.org/wiki/File:Yellow_Stimulator.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view"
-    "https://files.osgnetworks.tv/16/files/2013/08/Stimulator-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-stimulator/151976" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://files.osgnetworks.tv/16/files/2013/08/Stimulator-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-stimulator-fly/151967" license="All rights reserved; reference only" note="Side view in the vise"
     "https://upload.wikimedia.org/wikipedia/commons/7/77/Crystal_Stimulator_Lime_Green.jpg" page="https://commons.wikimedia.org/wiki/File:Crystal_Stimulator_Lime_Green.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view, Crystal variant"
 }
 
@@ -38,6 +43,7 @@ thread orange size="6/0"
 
 materials {
     tail elk-hair
+    // Rosenbauer's dressings give fine gold wire; Craven ties copper.
     rib gold-wire
     abdomen dry-fly-dubbing color=yellow
     hackle-body cock-hackle color=brown fibre=1.0

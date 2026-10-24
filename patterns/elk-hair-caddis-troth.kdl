@@ -1,4 +1,5 @@
-// Elk Hair Caddis as Al Troth tied it: copper wire rib and untrimmed butts.
+// Elk Hair Caddis after Al Troth's 1978 article: copper wire rib and untrimmed butts
+// (sources disagree on both; see history).
 
 id elk-hair-caddis-troth
 name "Elk Hair Caddis"
@@ -10,15 +11,22 @@ difficulty intermediate
 species trout grayling
 season may june july august september
 origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
-description "The Elk Hair Caddis close to Troth's own tie: a copper wire rib, and the hair butts left long instead of trimmed into a neat head."
+description "The Elk Hair Caddis after Troth's 1978 article: a copper wire rib, and the hair butts left long instead of trimmed into a neat head."
 history """
-    In his 1978 Fly Tyer article Troth described the body with fine copper wire, dubbing and
-    a rooster hackle. His own flies did not have the short, square-cut head that later
-    tyers gave the pattern.
+    Troth described the fly in Fly Tyer in 1978 (the Fall issue; some give November). The
+    Golden Fly Shop's account of the article has a body of fine copper wire, dubbing and
+    rooster hackle, which this variant follows; Fly Tyer's own reprint of his dressing, the
+    Federation of Fly Fishers' 1998 Fly of the Month and the Fly Fishers International
+    (FFI) skills award version give fine gold wire instead. Fly Tyer notes that the article
+    does not mention the clipped-hair head, which other tyers added. The FFI version, meant
+    to be as close to Troth's original as possible, still clips the butts, but at an angle
+    in line with the wing rather than square.
     """
 sources {
-    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-blog/famous-fly-history-elk-hair-caddis"
-    "Fly Tyer: 16 favorite caddisflies" url="https://www.flytyer.com/?p=11429"
+    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-shop-blog/famous-fly-history-elk-hair-caddis"
+    "Fly Tyer: Elk-Hair Caddis" url="https://www.flytyer.com/elk-hair-caddis/"
+    "Federation of Fly Fishers: Fly of the Month, Al Troth's Elk Hair Caddis (Jim Abbs)" url="https://www.flyfishersinternational.org/LinkClick.aspx?fileticket=oxRpfYt7i4I%3D&tabid=237&portalid=0&mid=1006"
+    "Rocky River Trout Unlimited: Troth Elk Hair Caddis FFI" url="http://www.rockyrivertu.org/troth-elk-hair-caddis-ffi.html"
 }
 
 hook dry-standard size=14
@@ -27,6 +35,7 @@ thread tan size="8/0"
 materials {
     rib    copper-wire
     body   dry-fly-dubbing color=tan
+    // Assumption: fibres as in the parent pattern; the FFI says Troth liked them 1½ × the gape.
     hackle cock-hackle color=brown fibre=0.8
     wing   elk-hair color=bleached
 }

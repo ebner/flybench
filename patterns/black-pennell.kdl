@@ -10,23 +10,28 @@ season april may june july august september
 origin originator="Henry Cholmondeley-Pennell" region="England; a Scottish and Irish loch fly"
 description "A tail of golden pheasant tippet, a slim black floss body ribbed with silver, and a long, sparse black hackle."
 history """
-    Credited to Henry Cholmondeley-Pennell, the Victorian angling writer, who recommended
-    lightly dressed "hackle" flies with thin silk bodies and long, sparse hackles. His own
-    colours were brown, yellow and green; the black version is attributed to him later, and
-    no date is documented.
+    Credited to Henry Cholmondeley-Pennell (1837-1913), the Victorian angling writer. Smedley
+    (Fly Patterns and Their Origins) says Pennell recommended "hackle" flies with a hard,
+    thin silk body and a very sparse hackle a little longer than usual, in brown, yellow and
+    green. The black version is credited to him by later writers, among them John Gray of
+    Kilsyth, who says only that it was devised in the nineteenth century. Some early
+    dressings had a wing, of crow among other materials; most modern ones leave it out.
     """
 fishing """
-    A loch fly, fished on a team of wets from a drifting boat or as a bob fly, for trout and
-    sea trout; it also passes for a hatching midge. Bushier versions with seal's fur bodies
-    are used in Ireland.
+    A loch fly for trout and sea trout, popular in the Highlands, and commonly fished as the
+    bob fly on a team of wets; it is especially good early in the season when black midges
+    are hatching. Bushy versions, such as the Irish Black Pennell, are used for dapping, and
+    it is tied large on doubles for sea trout and salmon.
     """
 sources {
-    "GlobalFlyFisher: Black Pennell" url="https://globalflyfisher.com/node/42302"
-    "Fish4Flies: Black Pennell" url="https://www.fish4flies.com/Wet/Traditional/Black-Pennell"
+    "Fly Anglers Online: The Black Pennell, Just Old Flies #212 (James Birkholm, archived)" url="https://web.archive.org/web/20170924070205/http://flyanglersonline.com/features/oldflies/part212.php"
+    "GlobalFlyFisher: Hutch's Pennell (Martin Joergensen)" url="https://globalflyfisher.com/node/42302"
+    "Fish4Flies: Black Pennell" url="https://www.fish4flies.com/Wet/Hackled/Black-Pennell"
+    "Graham's Fly Tying Page: How to construct a basic fly" url="https://www.oocities.org/grayjule/flytyingseq.html"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
-    "https://www.fish4flies.com/img/flies/Large/850-850.jpg" page="https://www.fish4flies.com/Wet/Traditional/Black-Pennell" license="All rights reserved; reference only" flip=#true note="Side view, standard form"
+    "https://www.fish4flies.com/img/flies/Large/850-850.jpg" page="https://www.fish4flies.com/Wet/Hackled/Black-Pennell" license="All rights reserved; reference only" flip=#true note="Side view, standard form"
     "https://globalflyfisher.com/sites/default/files/article_pictures/black-pennell-sparse.jpg" page="https://globalflyfisher.com/node/42302" author="Martin Joergensen" license="All rights reserved; reference only" flip=#true note="Side view, sparse"
 }
 

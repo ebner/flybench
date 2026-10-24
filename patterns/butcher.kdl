@@ -8,26 +8,31 @@ imitates baitfish attractor
 difficulty advanced
 species trout sea-trout
 season april may june july august september
-origin originator="Jewhurst and Moon" year=1838 region="Tunbridge Wells, England"
+origin originator="Jewhurst and Moon" year=1838 region="Kent, England"
 description "A red tail, a flat silver tinsel body with a wire rib, a black hackle throat and paired blue-black mallard wing slips."
 history """
-    First called Moon's Fly, after a Mr Moon of Tunbridge Wells, a butcher, whose favourite it
-    was; it is said to have been devised with a Mr Jewhurst and renamed around 1838. The
-    colours as blood, blade and apron are a popular story, nothing more.
+    First called Moon's Fly. Smedley (Fly Patterns and Their Origins) says it came from John
+    Jewhurst of Tunbridge, Kent, and that William Blacker renamed it about 1838 after the
+    trade of Mr Moon, a butcher whose favourite fly it was. Other accounts make Moon and
+    Jewhurst joint inventors, place them in Tunbridge Wells, or give 1836. The colours as
+    blood, blade and apron are a popular story; Timo Kontio calls it a theory.
     """
 fishing """
-    A flashy wet fly for lake trout and sea trout, fished on a team of wets on a steady
-    retrieve; it suggests a small fish as much as any insect. Larger sizes and doubles are
-    used for sea trout.
+    A winged wet fly for rivers and still waters. Its close relative the Bloody Butcher is
+    fished in the middle or on the point of a team of wets on rivers, lochs and lakes, and in
+    larger sizes, even tied as a streamer, for sea trout.
     """
 sources {
+    "Fly Anglers Online: Butcher, Just Old Flies (Deanna Birkholm, archived)" url="https://web.archive.org/web/20181229112130/http://flyanglersonline.com/features/oldflies/part276.php"
     "Fly Tying Archive: Butcher (Timo Kontio)" url="https://flytyingarchive.com/butcher/"
-    "Fish4Flies: Butcher" url="https://www.fish4flies.com/Wet/Traditional/Butcher"
+    "GlobalFlyFisher: Bloody Butcher" url="https://globalflyfisher.com/video/bloody-butcher"
+    "Fish4Flies: Butcher" url="https://www.fish4flies.com/Wet/Winged/Butcher"
+    "Project Gutenberg: How to Tie Flies (E. C. Gregg, 1940)" url="https://www.gutenberg.org/ebooks/30292"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://flytyingarchive.com/wp-content/uploads/2015/01/tumblr_ni9q4nhq2J1qg8e5ko2_1280.jpg" page="https://flytyingarchive.com/butcher/" author="Timo Kontio" license="All rights reserved; reference only" note="Side view in the vise"
-    "https://www.fish4flies.com/img/flies/Large/865-865%20Butcher.jpg" page="https://www.fish4flies.com/Wet/Traditional/Butcher" license="All rights reserved; reference only" flip=#true note="Side view"
+    "https://www.fish4flies.com/img/flies/Large/865-865%20Butcher.jpg" page="https://www.fish4flies.com/Wet/Winged/Butcher" license="All rights reserved; reference only" flip=#true note="Side view"
 }
 
 hook wet-standard size=12
