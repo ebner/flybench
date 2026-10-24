@@ -175,7 +175,7 @@ how it is drawn and which extra properties it takes:
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
 | hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane` | |
-| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs` | `count` |
+| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair` | `count` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | |
 | cdc        | `cdc` | (can be wound: barbs lengthen from tip to butt) |
@@ -183,7 +183,7 @@ how it is drawn and which extra properties it takes:
 | feather    | `mallard-breast`, `teal-flank` (breast), `hackle-tips`, `saddle-feathers` (tip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
 | foam       | `foam` | |
 | bead       | `brass-bead`, `tungsten-bead` | `mm` (required) |
-| eyes       | `dumbbell-eyes`, `bead-chain-eyes` | `mm` (required) |
+| eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
 
 The archetype decides how a material behaves and is drawn:
 

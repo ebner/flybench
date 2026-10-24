@@ -1,0 +1,67 @@
+// Magnus: the grey, grizzly-palmered Danish coastal sea-trout fly with bead-chain eyes and a red head.
+
+id magnus
+name "Magnus"
+type saltwater
+imitates crustacean baitfish attractor
+difficulty beginner
+species sea-trout
+season january february march april may june july august september october november december
+origin originator="Magnus Ting Mortensen" year=1973 region="Funen, Denmark"
+description "Splayed grizzly hackle-tip tail, a sparse grey hare's fur body with an oval silver rib, a palmered grizzly hackle and a longer grizzly front hackle, behind bead-chain eyes and a red head."
+history """
+    Tied in the spring of 1973 by Magnus Ting Mortensen on Funen from what he had at hand: hare
+    he had hunted and grizzly hackle from a friend's Plymouth Rock chickens. Palmered wet flies
+    like the Chillimps were the inspiration. A local shop made it a staple, and it became the
+    model for countless Danish coastal flies; the Grey Fred is the best known of its lookalikes.
+    """
+fishing """
+    Fished from the shore on the Danish and Baltic coasts on a floating or intermediate line,
+    stripped in short, irregular pulls over mixed bottom and along the eelgrass. The bead-chain
+    eyes give it weight and a jigging motion. A searching fly for sea trout all year, and a
+    standard in cold water.
+    """
+sources {
+    "GlobalFlyFisher: Magnus (Martin Joergensen)" url="https://globalflyfisher.com/patterns/magnus"
+    "GlobalFlyFisher: Magnus Classic" url="https://globalflyfisher.com/patterns/magnus-classic"
+    "GlobalFlyFisher: The Magnus and Fred clan" url="https://globalflyfisher.com/patterns/magnus-and-fred-clan"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/magnus.jpg" page="https://globalflyfisher.com/patterns/magnus" license="All rights reserved; reference only" note="Side view, tied by Ken Bonde Larsen"
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/9_39.jpg" page="https://globalflyfisher.com/patterns/magnus" license="All rights reserved; reference only" note="In the vise, body done"
+}
+
+// Assumption: a straight down-eye long-shank hook; sources give #2–10.
+hook nymph-2xl size=6
+thread red size="6/0"
+
+materials {
+    // Assumption: small bead chain left silver, as in the reference photo; the original had them varnished red with the head.
+    eyes bead-chain-eyes mm=3
+    tail hackle-tips color=grizzly label="Grizzly hackle tips"
+    rib oval-tinsel color=silver
+    body hares-ear-dubbing color="#8a8478" label="Grey hare's fur"
+    palmer cock-hackle color=grizzly fibre=1.2 sweep=40
+    front cock-hackle color=grizzly fibre=1.6 sweep=45 label="Grizzly cock hackle, longer"
+}
+
+steps {
+    attach-thread at=0.9
+    tie-in eyes note="On top, one eye width behind the eye; the originator ties them underneath."
+    wrap-thread to=0.0
+    // GFF: plus or minus half the hook length.
+    tie-in tail length=1.5 angle=8 spread=25 width=0.3 note="Two small neck feathers, curving away from each other."
+    tie-in rib
+    dub body to=0.82 note="Sparse; stop one eye width behind the eyes."
+    tie-in palmer note="By the butt, at the front."
+    wind palmer to=0.04 turns=6 note="Backward, in open turns, to the bend."
+    wind rib to=0.82 turns=6 note="Forward the opposite way, through the hackle, locking its tip."
+    tie-off rib
+    trim palmer note="The hackle tip at the bend."
+    tie-in front
+    wrap-thread to=0.87
+    wind front to=0.87 turns=3 note="A wet-fly collar behind the eyes."
+    tie-off front
+    whip-finish note="Varnish the head red (the original had the eyes varnished too); tease out the fur."
+}

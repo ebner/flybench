@@ -102,6 +102,7 @@ export const MATERIALS = {
   "golden-pheasant-tippet": { name: "golden pheasant tippet", archetype: "fibres", defaultColor: "tippet" },
   "golden-pheasant-crest": { name: "golden pheasant crest", archetype: "fibres", defaultColor: "crest" },
   "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear" },
+  "synthetic-hair": { name: "synthetic hair", archetype: "fibres" },
 
   // Biots
   "goose-biot": { name: "goose biot", archetype: "biot" },
@@ -131,6 +132,7 @@ export const MATERIALS = {
   "tungsten-bead": { name: "tungsten bead", archetype: "bead", defaultColor: "gold" },
   "dumbbell-eyes": { name: "dumbbell eyes", archetype: "eyes", defaultColor: "lead" },
   "bead-chain-eyes": { name: "bead chain eyes", archetype: "eyes", defaultColor: "silver" },
+  "mono-eyes": { name: "burnt mono eyes", archetype: "eyes", defaultColor: "black" },
 } satisfies Record<string, CatalogMaterial>;
 
 export type MaterialKind = keyof typeof MATERIALS;

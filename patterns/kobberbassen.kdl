@@ -1,0 +1,55 @@
+// Kobberbassen: the Danish copper gammarus for the coast, little more than copper dubbing on a hook.
+
+id kobberbassen
+name "Kobberbassen"
+aliases "Copper Bully" "Kobberlusen" "Copper Louse"
+type saltwater
+imitates crustacean
+difficulty beginner
+species sea-trout trout
+season january february march april may june july august september october november december
+origin originator="Frank Jensen" year=1996 region="Denmark"
+description "A short Krystal Flash tail and a shaggy, teased-out copper dubbing body with a copper wire rib, on a short curved hook."
+history """
+    Conceived by Frank Jensen in 1996 and soon merged with Morten Kristiansen's somewhat more
+    complex Kobberlusen, the Copper Louse; the two names are now used for much the same fly.
+    It is a gammarus imitation stripped to the essentials: as GlobalFlyFisher puts it, all you
+    really need is copper dubbing of some kind.
+    """
+fishing """
+    Fished in clear, shallow coastal water, often as a small dropper ahead of a bigger point fly,
+    with short pulls and stops or a slow hand-twist to mimic drifting and darting gammarids. In
+    fresh water it passes for scuds and cress bugs.
+    """
+sources {
+    "GlobalFlyFisher: Copper Bully" url="https://globalflyfisher.com/patterns/copper-bully"
+    "GlobalFlyFisher: Kobberbassen (Ahrex video)" url="https://globalflyfisher.com/video/kobberbassen"
+    "Sexyloops: Another ugly fly (Rickard Gustafsson)" url="https://www.sexyloops.com/index.php/ps/another-ugly-fly"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://rifflinghitch.com/wp-content/uploads/2019/04/TF2028-Kobberbassen-8-1.jpeg" page="https://rifflinghitch.com/product/kobberbassen-8/" license="All rights reserved; reference only" note="Side view, wide-gape hook"
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/translucent.jpg" page="https://globalflyfisher.com/patterns/copper-bully" license="All rights reserved; reference only" note="Side view, teased out"
+}
+
+// Assumption: a short, wide-gape curved hook like the Kamasan B980 GFF recommends.
+hook emerger-curved size=10
+thread orange size="6/0"
+
+materials {
+    tail krystal-flash color=copper count=6
+    rib copper-wire
+    body dubbing color="#9a5a3a" label="Copper Lite Brite or Angel Hair"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Assumption: just a hint beyond the bend, read from the photos.
+    tie-in tail length=0.4 note="A few strands, trimmed short."
+    tie-in rib
+    dub body to=0.88 note="A loose noodle, fuller in the middle and front like a scud's back."
+    wind rib to=0.88 turns=5 note="Open turns; tease the dubbing out underneath first."
+    tie-off rib
+    whip-finish note="Tease again so the fibres stream back and down."
+}

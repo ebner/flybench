@@ -1,0 +1,60 @@
+// Zulu: the black palmered loch fly with a red tail.
+
+id zulu
+name "Zulu"
+aliases "Black Zulu"
+type wet
+imitates attractor
+difficulty beginner
+species trout sea-trout char
+season april may june july august september
+origin region="Scotland, by 1882"
+description "A short red wool tail, a black seal's fur body ribbed with fine oval silver, and a black cock hackle palmered from tail to head."
+history """
+    Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders
+    with red tips, commonly called Zulus" in a Scottish loch-fishing outfit, and by 1892 it was in
+    the dictionaries: "made like a palmer, black hackle, black body, ribbed silver tinsel, with red
+    wool tag for tail". The name is usually linked with the Zulu War of 1879, but no source makes
+    the connection, and the stories of it being banned for catching too much are just stories.
+    """
+fishing """
+    The classic bob fly: the top dropper of a three-fly team, tripped along the waves from a
+    drifting boat on dull, windy days. It takes brown trout, sea trout and char on lochs and
+    reservoirs; for sea trout it is dressed small with a long hackle.
+    """
+sources {
+    "Black Palmer, Scotch Loch-Fishing (1882)" url="https://archive.org/details/scotchloch-fishi00senirich"
+    "Richard Niven, The British Angler's Lexicon (1892)" url="https://archive.org/details/britishanglersle00niverich"
+    "Fish4Flies: Black Zulu" url="https://www.fish4flies.com/Wet/Hackled/Black-Zulu"
+    "GlobalFlyFisher: Blue Zulu (Davie McPhail)" url="https://globalflyfisher.com/video/blue-zulu"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.trout-salmon-fishing.com/Zulu.jpg" page="https://www.trout-salmon-fishing.com/trout-flies.htm" license="All rights reserved; reference only" note="Side view"
+    "https://www.fish4flies.com/img/flies/Original/854-854.jpg" page="https://www.fish4flies.com/Wet/Hackled/Black-Zulu" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    tail wool color=red
+    rib oval-tinsel color=silver label="Fine oval silver tinsel"
+    hackle cock-hackle color=black fibre=1.3 sweep=40
+    body seals-fur color=black
+}
+
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Assumption: about a third to half the shank past the bend, as in modern photos.
+    tie-in tail length=0.9 spread=55 note="A short tuft, on top."
+    tie-in rib
+    tie-in hackle note="Shiny side forward."
+    dub body to=0.86 note="Slightly tapered; pick it out a little."
+    wind hackle to=0.86 turns=6 note="Open turns, tail to head."
+    tie-off hackle
+    wind rib to=0.86 turns=5 note="Counter-wound through the hackle, crossing the stem."
+    tie-off rib
+    whip-finish
+}

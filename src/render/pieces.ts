@@ -140,10 +140,12 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     // Angle round whatever is being wound on, recovered from the point.
     const around = onPost ? Math.atan2(px - piece.post!.x, pz) : Math.atan2(py, pz);
     if (look === "hackle") {
-      // Barbs stand out with the hackle's sweep; soft hackles lean well back.
-      spin = around + (rand() - 0.5) * 0.5;
-      sweep = (piece.sweep ?? 0.12) + (rand() - 0.5) * 0.25;
-      length = piece.fibreLength! * (0.8 + 0.25 * rand());
+      // Barbs stand out with the hackle's sweep; soft hackles lean well back. A palmered
+      // hackle is less orderly than a collar: its barbs are pushed every which way.
+      const palmered = piece.path === "travel" && Math.abs(piece.x1 - piece.x0) > 0.3;
+      spin = around + (rand() - 0.5) * (palmered ? 1 : 0.5);
+      sweep = (piece.sweep ?? 0.12) + (rand() - 0.5) * (palmered ? 0.6 : 0.25);
+      length = piece.fibreLength! * (palmered ? 0.65 + 0.45 * rand() : 0.8 + 0.25 * rand());
       shade = piece.barred ? (rand() < 0.5 ? 0.35 : 1.05) : 0.85 + 0.3 * rand();
     } else if (look === "herl") {
       // Flue sticks out every which way, filling the gaps between turns.

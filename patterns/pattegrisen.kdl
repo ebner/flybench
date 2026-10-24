@@ -1,0 +1,76 @@
+// Pattegrisen: Claus Eriksen's pink Danish coastal shrimp, tied with the shrimp's head at the bend.
+
+id pattegrisen
+name "Pattegrisen"
+aliases "Pink Pig" "Pattegris"
+type saltwater
+imitates crustacean
+difficulty intermediate
+species sea-trout
+season january february march april may june july august september october november december
+origin originator="Claus Eriksen" year=2006 region="Funen, Denmark"
+description "A reversed shrimp in shell pink: hackle-stem and synthetic-hair feelers, a Spey hackle collar and black eyes at the bend, a tapered SLF body with a palmered Spey hackle, and an Antron shellback segmented by a mono rib."
+history """
+    Claus Eriksen's pink take on Morten Øland's grey Spey Shrimp, made on Funen in 2005 or 2006
+    with a few materials swapped; its circle celebrated its tenth birthday in 2016. Underwater
+    footage of sea trout following it, in two Danish DVDs, made it famous. The long, thin
+    Whiting Spey hackles are what make it work. Eriksen ties it in every colour, but pink, he
+    says, beats the rest.
+    """
+fishing """
+    Fished from the shore on Danish coasts all year, often on the point with a small grey gammarus
+    as a dropper. Strip it slowly with pauses so the long hackles can work. Eriksen fishes it
+    under all conditions, even in bright sun and flat calm, and in big sizes in midsummer.
+    """
+sources {
+    "GlobalFlyFisher: Pink Pig, Pattegrisen (Kasper Mühlbach)" url="https://globalflyfisher.com/patterns/pink-pig-pattegrisen"
+    "Ahrex: Pattegrisen, a fairytale and a birthday (Michael Jensen)" url="https://ahrexhooks.com/2016/11/11/pattegrisen-a-fairytale-and-a-birthday/"
+    "GlobalFlyFisher: Pattegrisen (Ahrex video)" url="https://globalflyfisher.com/video/pattegrisen"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/dsc_7119.jpg" page="https://globalflyfisher.com/patterns/pink-pig-pattegrisen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise, trimmed"
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/dsc_7116.jpg" page="https://globalflyfisher.com/patterns/pink-pig-pattegrisen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+// Assumption: a straight saltwater hook like the Partridge CS54 in the GFF recipe.
+// Assumption: colours read from the GFF photos: a coral body and back, pale pink Spey hackles.
+hook saltwater-straight size=6
+thread pink size="8/0"
+
+materials {
+    weight lead-free-wire label="Lead-free wire (originally tungsten foil under the shank)"
+    feelers hackle-fibres color=white count=2 label="White hackle stems"
+    mouth saddle-hackle color="#e3bcb6" fibre=1.6 sweep=60 label="Shrimp-pink Spey hackle"
+    antennae synthetic-hair color="#f2a39a" count=14 label="Shrimp-pink Ultra Hair"
+    eyes mono-eyes mm=2
+    rib monofilament
+    body dubbing color="#e0645a" label="Shell-pink SLF"
+    legs saddle-hackle color="#e3bcb6" fibre=2.0 sweep=55 label="Shrimp-pink Spey hackle"
+    back poly-yarn color="#e87a6a" label="Shrimp-pink Antron yarn"
+}
+
+steps {
+    weight weight from=0.25 to=0.75
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in feelers length=2.2 angle=10 spread=30 note="Pointing away from each other."
+    tie-in mouth note="The mouth parts."
+    wrap-thread to=0.05
+    wind mouth to=0.05 turns=3 note="A collar round the feelers."
+    tie-off mouth
+    // GFF: fairly long; in the photos about one and a half to two hook lengths.
+    tie-in antennae length=2.8 angle=5 spread=15
+    tie-in eyes note="Curving slightly away from each other."
+    tie-in rib
+    // Assumption: the shellback is tied in here and pulled forward; Eriksen ties it in at the eye and takes it back to the bend.
+    tie-in back
+    tie-in legs
+    dub body to=0.86 note="Tapered: thickest at the bend, slimmer toward the eye."
+    wind legs to=0.86 turns=6 note="Fibres down and back."
+    tie-off legs
+    pull-over back to=0.86 note="Over the top, stretched."
+    wind rib to=0.86 turns=8 note="Over the shellback, the turns closer together toward the eye."
+    tie-off rib
+    whip-finish note="Brush out the underside, trim, and varnish the head and a little of the back."
+}
