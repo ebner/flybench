@@ -852,3 +852,157 @@ select {
     display: none;
   }
 }
+
+/* Reading pages: techniques and the learning path */
+
+.reading {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.5rem var(--gutter) 4rem;
+}
+
+.reading h1 {
+  font-size: clamp(var(--step-3), 5vw, var(--step-4));
+  margin-top: 0.5rem;
+}
+
+.reading h2 {
+  margin: 2.25rem 0 0.6rem;
+  font-size: var(--step-2);
+  font-style: italic;
+}
+
+.reading p,
+.reading li {
+  line-height: 1.65;
+}
+
+.lede {
+  font-size: var(--step-1);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.technique-list {
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.technique-list li {
+  display: grid;
+  grid-template-columns: minmax(10rem, 16rem) 1fr;
+  gap: 0.25rem 1.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.technique-list a {
+  font-family: var(--display);
+  font-size: var(--step-1);
+  text-decoration: none;
+}
+
+.technique-list span {
+  color: var(--ink-soft);
+}
+
+.clip {
+  margin: 1.75rem 0 0;
+}
+
+.clip-stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+}
+
+.clip-stage .viewer {
+  position: absolute;
+  inset: 0;
+}
+
+.clip figcaption {
+  margin-top: 0.4rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.uses {
+  columns: 2 14rem;
+  padding-left: 1.1rem;
+}
+
+.path {
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: stage;
+}
+
+.path li {
+  counter-increment: stage;
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.path-plate {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  background: var(--paper-raised);
+}
+
+/* The stage number sits on the plate, like a plate number in a field guide. */
+.path-plate::before {
+  content: counter(stage);
+  position: absolute;
+  left: 0.5rem;
+  top: 0.25rem;
+  font-family: var(--display);
+  font-size: var(--step-1);
+  color: var(--ink-faint);
+}
+
+.path-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.path h2 {
+  margin: 0;
+  font-style: normal;
+}
+
+.path h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.path-facts {
+  margin: 0.1rem 0 0.4rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.how-to {
+  display: block;
+  margin: -0.2rem 0 0.4rem 3.1rem;
+  font-size: var(--step--1);
+  font-style: italic;
+}
+
+@media (max-width: 40rem) {
+  .technique-list li,
+  .path li {
+    grid-template-columns: 1fr;
+  }
+
+  .path-plate {
+    max-width: 16rem;
+  }
+}

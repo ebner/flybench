@@ -9,6 +9,11 @@ The front page is the gallery: search by name, insect or material, and filter by
 insect, difficulty, fish, season and materials. Filtered galleries and pattern steps
 have their own links (`#/?imitates=caddis`, `#/fly/elk-hair-caddis/7`).
 
+Techniques (`#/techniques`) explain each thing a fly is made of, with a looping 3D
+example taken from a real pattern; every step of every pattern links to its technique.
+The learning path (`#/learn`) orders the catalog so each fly adds only a few new
+techniques.
+
 Product decisions and the milestone plan: [docs/product-plan.md](docs/product-plan.md).
 
 ## Run

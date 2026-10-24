@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { PATTERN_ERRORS } from "../patterns";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
+import { Learn } from "./Learn";
+import { TechniquePage, TechniquesIndex } from "./Techniques";
 import { PatternPage } from "./PatternPage";
 import { href, useRoute } from "./router";
 import { useTheme } from "./theme";
@@ -13,7 +15,7 @@ export function App() {
   useEffect(() => {
     if (route.page === "gallery") document.title = "Flybench";
     window.scrollTo(0, 0);
-  }, [route.page, route.page === "fly" ? route.id : null]);
+  }, [route.page, route.page === "fly" || route.page === "technique" ? route.id : null]);
 
   return (
     <>
@@ -33,10 +35,13 @@ export function App() {
       <button className="skip-link" onClick={() => document.getElementById("content")?.focus()}>
         Skip to content
       </button>
-      <Header theme={choice} onTheme={setChoice} />
+      <Header theme={choice} onTheme={setChoice} page={route.page} />
       <div id="content" tabIndex={-1}>
         {route.page === "gallery" && <Gallery query={route.query} />}
         {route.page === "fly" && <PatternPage id={route.id} step={route.step} theme={theme} />}
+        {route.page === "techniques" && <TechniquesIndex />}
+        {route.page === "technique" && <TechniquePage id={route.id} theme={theme} />}
+        {route.page === "learn" && <Learn />}
         {route.page === "not-found" && (
           <main className="not-found">
             <h1>There is nothing at this address</h1>

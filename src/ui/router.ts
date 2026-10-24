@@ -5,11 +5,16 @@ import { useEffect, useState } from "react";
  *   #/                  the gallery (filters in the query: #/?type=dry&q=elk)
  *   #/fly/<id>          a pattern
  *   #/fly/<id>/<step>   a pattern at a step (1-based)
+ *   #/techniques        the techniques index; #/technique/<id> one technique
+ *   #/learn             the learning path
  * Old links of the form #/<id> are understood as #/fly/<id>.
  */
 export type Route =
   | { page: "gallery"; query: string }
   | { page: "fly"; id: string; step?: number }
+  | { page: "techniques" }
+  | { page: "technique"; id: string }
+  | { page: "learn" }
   | { page: "not-found"; path: string };
 
 export function parseRoute(hash: string): Route {
@@ -21,6 +26,9 @@ export function parseRoute(hash: string): Route {
     const step = Number(parts[2]);
     return { page: "fly", id: parts[1], ...(Number.isInteger(step) && step > 0 ? { step } : {}) };
   }
+  if (parts[0] === "techniques" && parts.length === 1) return { page: "techniques" };
+  if (parts[0] === "technique" && parts[1]) return { page: "technique", id: parts[1] };
+  if (parts[0] === "learn" && parts.length === 1) return { page: "learn" };
   if (parts.length === 1) return { page: "fly", id: parts[0]! };
   return { page: "not-found", path };
 }
@@ -28,6 +36,9 @@ export function parseRoute(hash: string): Route {
 export const href = {
   gallery: (query = "") => (query ? `#/?${query}` : "#/"),
   fly: (id: string, step?: number) => `#/fly/${encodeURIComponent(id)}${step ? `/${step}` : ""}`,
+  techniques: () => "#/techniques",
+  technique: (id: string) => `#/technique/${encodeURIComponent(id)}`,
+  learn: () => "#/learn",
 };
 
 export function useRoute(): Route {

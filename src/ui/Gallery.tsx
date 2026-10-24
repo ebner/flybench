@@ -1,5 +1,6 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import { DIFFICULTY_LABELS, factsLine, IMITATES_LABELS, originLine, SPECIES_LABELS, TYPE_LABELS } from "../catalog/describe";
+import { learningPath } from "../catalog/techniques";
 import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } from "../catalog/search";
 import { CATALOG, SEARCH } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
@@ -24,7 +25,11 @@ export function Gallery({ query }: { query: string }) {
 
   const typeCounts = SEARCH.facetCounts("type", FLY_TYPES, filters);
   const usedTypes = FLY_TYPES.filter((t) => CATALOG.some((e) => e.recipe.type === t));
-  const beginner = CATALOG.find((e) => e.recipe.difficulty === "beginner");
+  // The first fly on the learning path.
+  const beginner = useMemo(() => {
+    const first = learningPath(CATALOG.map((e) => e.recipe))[0];
+    return first ? CATALOG.find((e) => e.recipe.id === first.recipe.id) : undefined;
+  }, []);
   const filtered = Object.values(filters).some((v) => (Array.isArray(v) ? v.length : v));
 
   return (
@@ -36,7 +41,8 @@ export function Gallery({ query }: { query: string }) {
           {beginner && (
             <>
               {" "}
-              New to tying? Start with the <a href={href.fly(beginner.recipe.id)}>{beginner.recipe.name}</a>.
+              New to tying? Follow the <a href={href.learn()}>learning path</a>, starting with the{" "}
+              <a href={href.fly(beginner.recipe.id)}>{beginner.recipe.name}</a>.
             </>
           )}
         </p>

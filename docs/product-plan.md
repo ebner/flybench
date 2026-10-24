@@ -71,7 +71,8 @@ hook size switch, deep links to steps.
    Engine: curved and long hooks (8 hook models), beads, weighting, tinsel, chenille,
    soft hackles, biots, marabou, CDC, flash, feather pairs, beards, eyes, wing cases,
    parachute posts, spun and trimmed hair.
-5. Techniques library and learning path.
+5. ✅ Techniques library and learning path. Techniques are recognised from recipe steps
+   (src/catalog/techniques.ts); the path is computed so each fly adds a few new techniques.
 6. Fly box, materials inventory, bench mode, PWA.
 7. Authoring studio.
 

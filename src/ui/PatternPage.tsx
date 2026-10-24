@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
+import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
 import type { Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
 import { simulate, stepAt } from "../tying/simulate";
+import { Paragraphs } from "./Paragraphs";
 import { href, replaceHash } from "./router";
 import type { Theme } from "./theme";
 import { usePlayer } from "./usePlayer";
@@ -22,17 +24,6 @@ export function PatternPage({ id, step, theme }: { id: string; step?: number; th
     );
   }
   return <PatternView key={id} recipe={pattern.recipe} initialStep={step} theme={theme} />;
-}
-
-/** Multi-line recipe text: blank lines separate paragraphs, single line breaks are just wrapping. */
-function Paragraphs({ text }: { text: string }) {
-  return (
-    <>
-      {text.split(/\n\s*\n/).map((p, i) => (
-        <p key={i}>{p.replace(/\s*\n\s*/g, " ")}</p>
-      ))}
-    </>
-  );
 }
 
 const Icon = {
@@ -266,6 +257,14 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
                 <strong>{s.title}</strong>
                 <span>{s.text}</span>
               </button>
+              {(() => {
+                const t = technique(stepTechnique(original, s.index) ?? "");
+                return t ? (
+                  <a className="how-to" href={href.technique(t.id)}>
+                    How to: {t.name.toLowerCase()}
+                  </a>
+                ) : null;
+              })()}
             </li>
           ))}
         </ol>
