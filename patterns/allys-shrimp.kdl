@@ -1,0 +1,90 @@
+// Ally's Shrimp: Alastair Gowans' Scottish shrimp fly in orange, red and black.
+
+id allys-shrimp
+name "Ally's Shrimp"
+aliases "Allys Shrimp" "Ally Shrimp"
+type salmon
+imitates crustacean attractor
+difficulty intermediate
+species salmon sea-trout
+season march april may june july august september october
+origin originator="Alastair Gowans" year=1979 region="Scotland"
+description "A long hot-orange bucktail tail, a red and black floss body ribbed with oval silver, grey squirrel above and below, a golden pheasant tippet overwing and a long orange collar hackle."
+history """
+    Alastair "Ally" Gowans got the idea from the big, translucent orange-pink prawns in a
+    lobster trawler's catch off the Scottish west coast. He dates it to 1979; other accounts say
+    the early 1980s. It was first published in Trout and Salmon in 1988, and readers of three
+    British magazines later voted it Salmon Fly of the Millennium. The tippet's black bars
+    suggest the shrimp's eyes.
+    """
+fishing """
+    Gowans fishes it mostly on a conventional swing, down and across, and finds depth matters
+    less than one would think: it has worked from just under the surface to the bottom. Orange is
+    the all-season colour; red and purple versions are favoured in autumn. Doubles and tubes are
+    as common as singles.
+    """
+sources {
+    "Let's Fly Fish: Ally's Shrimp (Alastair Gowans)" url="https://letsflyfish.com/allyshrimp.htm"
+    "Fly Fisherman: Ally's Shrimp" url="https://www.flyfisherman.com/editorial/allys-shrimp-atlantic-salmon-fly/497485"
+    "Trout and Salmon: How to tie the Ally's Shrimp" url="https://troutandsalmon.com/fly-tying/how-to-tie-the-ally8217s-shrimp-salmon-fly/"
+    "Gwent Angling Society: Ally's Shrimp" url="https://gwentanglingsociety.co.uk/2013/01/05/allys-shrimp-salmon-fly/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://thefeatherbender.com/wp-content/uploads/2022/11/Allys-Shrimp-salmon-fly-rotated.jpeg" page="https://thefeatherbender.com/allys-shrimp-salmon-fly/" license="All rights reserved; reference only" note="Single hook in the vise"
+    "https://www.fish4flies.com/img/flies/Large/3244-3244.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Ken-Sawada-Doubles/Allys-Shrimp" license="All rights reserved; reference only" flip=#true note="Double, full tail length"
+}
+
+hook salmon-up-eye size=8
+thread red size="8/0"
+
+materials {
+    tag oval-tinsel color=silver label="Fine oval silver tinsel"
+    tail bucktail color="#f2581a" label="Hot orange bucktail"
+    tail-flash krystal-flash count=4
+    rib oval-tinsel color=silver
+    rear silk-floss color=red
+    front silk-floss color=black
+    beard squirrel-tail color=grey label="Natural grey squirrel tail"
+    underwing squirrel-tail color=grey label="Natural grey squirrel tail"
+    overwing golden-pheasant-tippet count=24
+    collar cock-hackle color="#f2581a" fibre=2.2 sweep=75 label="Hot orange cock hackle, long and soft"
+}
+
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="To a point above the hook point."
+    // The tag is in most modern dressings, though not in Gowans' own list.
+    tie-in tag
+    wrap-thread to=0.06
+    wind tag to=0.06 turns=4
+    tie-off tag
+    // Trout and Salmon: about twice the shank; Gwent: no longer than two and a half.
+    tie-in tail length=5.2 angle=3 spread=12 note="A long, thin bunch, locked with a few fibres folded back; bind the butts along the shank."
+    trim tail
+    tie-in tail-flash length=5.0 angle=4 spread=10 note="Optional."
+    tie-in rib
+    tie-in rear
+    wrap-thread to=0.45
+    wind rear to=0.45 turns=8 note="Half the body: back to the tail and forward again."
+    tie-off rear
+    tie-in front
+    wrap-thread to=0.82
+    wind front to=0.82 turns=8
+    tie-off front
+    wind rib to=0.82 turns=6 note="Six evenly spaced turns."
+    tie-off rib
+    tie-in beard length=1.6 angle=25 side=under note="A slim bunch, with the hook turned over."
+    trim beard
+    // Gwent: the underwing no longer than the hook.
+    tie-in underwing length=2.6 angle=6 spread=20 note="Low over the body."
+    trim underwing
+    // Gwent: the black-barred tips should not reach past the bend.
+    tie-in overwing length=1.5 angle=5 spread=15 note="Tippet fibres, or a whole tippet feather tied flat."
+    tie-in collar
+    wrap-thread to=0.9
+    // Gwent: fibres reach from the eye to the bend.
+    wind collar to=0.9 turns=3 note="Touching turns, stroking the fibres back each time."
+    tie-off collar
+    whip-finish note="A small tapered head, varnished red."
+}

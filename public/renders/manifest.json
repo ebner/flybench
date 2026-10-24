@@ -5,6 +5,12 @@
     "width": 300,
     "height": 200
   },
+  "allys-shrimp": {
+    "hash": "db880214fcc997e3",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
   "black-ant": {
     "hash": "ab78fac19811c8ed",
     "frames": 24,
@@ -289,6 +295,12 @@
   },
   "ullsocken": {
     "hash": "f46022f4b46db9a1",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "willie-gunn": {
+    "hash": "350fcda2d5041669",
     "frames": 24,
     "width": 300,
     "height": 200
