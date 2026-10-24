@@ -23,6 +23,7 @@ npm run dev        # Vite dev server
 npm test           # Vitest: recipe parsing/validation, simulation
 npm run typecheck
 npm run build      # typecheck + production build into dist/
+npm run render:catalog  # gallery images into public/renders/ (commit them)
 npm run render     # finished flies to .cache/renders/ via headless Chromium
 npm run refcheck   # proportion contact sheets against reference photos
 ```
@@ -41,7 +42,9 @@ src/recipe/     kdl.ts (KDL → plain object + source locations), schema.ts (Zod
 src/tying/      hook.ts (hook models, sizes), simulate.ts (recipe → timeline of geometry
                 pieces as plain data), describe.ts (instruction text, materials list)
 src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends
-src/ui/         React shell
+src/catalog/    search and catalog wording (no React; tested in Node)
+src/ui/         React UI (hash routing, theme, gallery, pattern page)
+public/renders/ generated gallery images, committed; regenerate after recipe/renderer changes
 ```
 
 - `src/recipe` and `src/tying` must not import three.js or React; they are unit-tested in Node.
@@ -78,4 +81,6 @@ src/ui/         React shell
 - Keep `README.md` and `docs/recipe-schema.md` up to date with every change.
 - Add tests where they earn their keep, especially for parsing and validating recipes.
 - Match the surrounding code style; keep comments sparse and about *why*.
+- Design: see the header of src/ui/styles.css (herbarium light theme, cyanotype dark theme,
+  IM Fell English + Spectral). No all-caps labels, no middle-dot meta strings.
 - Commit only when asked.

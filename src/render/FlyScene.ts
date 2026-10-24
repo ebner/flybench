@@ -30,7 +30,8 @@ export const VIEW_NAMES = Object.keys(VIEWS) as ViewName[];
 export interface FlySceneOptions {
   /** Vertical field of view in degrees. A narrow one gives a nearly distortion-free view for measuring. */
   fov?: number;
-  background?: string;
+  /** Background colour; null for a transparent canvas. */
+  background?: string | null;
 }
 
 /** Direction the thread (or a material end) leaves the shank when the wrap is at `angle`. */
@@ -63,6 +64,13 @@ export class FlyScene {
   /** Once the user orbits or zooms, resizing no longer re-frames the fly. */
   private userMoved = false;
   private view: ViewName = "default";
+  /** Degrees the view is turned around the vertical axis (turntables). */
+  private orbit = 0;
+  /**
+   * "box" frames the fly as tightly as the view allows; "sphere" frames its bounding
+   * sphere, so the size stays the same from every angle (turntables).
+   */
+  private fit: "box" | "sphere" = "box";
   private grid: THREE.Group | null = null;
 
   constructor(
@@ -70,7 +78,7 @@ export class FlyScene {
     options: FlySceneOptions = {},
   ) {
     this.camera = new THREE.PerspectiveCamera(options.fov ?? 32, 1, 0.05, 500);
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: options.background === null });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     container.appendChild(this.renderer.domElement);
@@ -78,7 +86,7 @@ export class FlyScene {
     const pmrem = new THREE.PMREMGenerator(this.renderer);
     this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     pmrem.dispose();
-    this.scene.background = new THREE.Color(options.background ?? "#e8e5de");
+    this.setBackground(options.background === undefined ? "#e8e5de" : options.background);
 
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
     key.position.set(2, 4, 5);
@@ -129,10 +137,21 @@ export class FlyScene {
     if (this.grid) this.setGrid(true);
   }
 
-  /** Switches to a named view, framing the finished fly. */
-  setView(view: ViewName) {
+  setBackground(color: string | null) {
+    this.scene.background = color === null ? null : new THREE.Color(color);
+  }
+
+  /** Switches to a named view, turned `orbit` degrees around the vertical axis, framing the finished fly. */
+  setView(view: ViewName, orbit = 0, fit: "box" | "sphere" = "box") {
     this.view = view;
+    this.orbit = orbit;
+    this.fit = fit;
     this.resetCamera();
+  }
+
+  /** Draws a frame right away, for screenshots between animation frames. */
+  renderNow() {
+    this.renderer.render(this.scene, this.camera);
   }
 
   /**
@@ -181,33 +200,46 @@ export class FlyScene {
     return box;
   }
 
-  /** Frames the finished fly from slightly above and in front, with a small margin. */
+  /** Frames the finished fly from the current view, with a small margin. */
   resetCamera() {
     if (!this.build || this.finished.isEmpty()) return;
     this.userMoved = false;
     // With the measuring grid on, leave room for its labels.
     const framed = this.finished.clone().expandByScalar(this.grid ? 0.45 : 0);
     const target = framed.getCenter(new THREE.Vector3());
-    const view = VIEWS[this.view];
+    const view = this.viewDirection(this.orbit);
+    // "sphere": the distance that fits the fly from every turntable angle, so its size
+    // stays the same while it turns.
+    const distance =
+      this.fit === "sphere"
+        ? Math.max(...Array.from({ length: 36 }, (_, i) => this.fitDistance(framed, target, this.viewDirection(i * 10))))
+        : this.fitDistance(framed, target, view);
+    this.controls.target.copy(target);
+    this.camera.position.copy(target).addScaledVector(view, distance * 1.08);
+    this.controls.update();
+  }
+
+  private viewDirection(orbit: number): THREE.Vector3 {
+    return VIEWS[this.view].clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(orbit));
+  }
+
+  /** The camera distance along `view` at which every corner of `box` is inside the view frustum. */
+  private fitDistance(box: THREE.Box3, target: THREE.Vector3, view: THREE.Vector3): number {
     const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), view).normalize();
     const up = new THREE.Vector3().crossVectors(view, right);
     const tanV = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
     const tanH = tanV * this.camera.aspect;
-    // The camera distance at which every corner of the box is inside the view frustum.
     let distance = 0;
-    const { min, max } = framed;
-    for (const x of [min.x, max.x]) {
-      for (const y of [min.y, max.y]) {
-        for (const z of [min.z, max.z]) {
+    for (const x of [box.min.x, box.max.x]) {
+      for (const y of [box.min.y, box.max.y]) {
+        for (const z of [box.min.z, box.max.z]) {
           const c = new THREE.Vector3(x, y, z).sub(target);
           const depth = c.dot(view);
           distance = Math.max(distance, Math.abs(c.dot(right)) / tanH + depth, Math.abs(c.dot(up)) / tanV + depth);
         }
       }
     }
-    this.controls.target.copy(target);
-    this.camera.position.copy(target).addScaledVector(view, distance * 1.08);
-    this.controls.update();
+    return distance;
   }
 
   setTime(t: number) {

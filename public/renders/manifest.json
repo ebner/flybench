@@ -1,0 +1,32 @@
+{
+  "elk-hair-caddis": {
+    "hash": "538c1eeef47cdf6c",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "elk-hair-caddis-troth": {
+    "hash": "ecada070c944202e",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "europea-12": {
+    "hash": "38b56017ab62f24e",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "europea-12-tailed": {
+    "hash": "c06999c580bf2bfd",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "red-tag": {
+    "hash": "c89d753fffdbe12a",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  }
+}

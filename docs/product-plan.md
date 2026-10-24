@@ -63,9 +63,10 @@ hook size switch, deep links to steps.
 2. ✅ Schema: catalog metadata, materials catalog, dubbing, ribbing, palmered hackle, hair and
    feather wings, variants. Patterns: Elk Hair Caddis (+ Troth variant), Europea 12
    (+ tailed variant).
-3. a. Render pipeline (headless renders of finished flies, also for gallery thumbnails)
+3. ✅ a. Render pipeline (headless renders of finished flies, also for gallery thumbnails)
       and the reference check (contact sheets against reference photos).
-   b. Field-journal design system, gallery front page, search.
+   ✅ b. Field-journal design system, gallery front page, search. App name: Flybench
+      (flybench.app).
 4. Pattern page and viewer features (auto camera, callouts, hook size, deep links).
 5. Techniques library and learning path.
 6. Fly box, materials inventory, bench mode, PWA.

@@ -1,5 +1,5 @@
 {
-  "name": "fly-tying",
+  "name": "flybench",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,10 +10,14 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "render": "tsx scripts/render.ts",
-    "refcheck": "tsx scripts/refcheck.ts"
+    "refcheck": "tsx scripts/refcheck.ts",
+    "render:catalog": "tsx scripts/render-catalog.ts"
   },
   "dependencies": {
     "@bgotink/kdl": "^0.4.1",
+    "@fontsource/im-fell-english": "^5.3.0",
+    "@fontsource/spectral": "^5.3.0",
+    "minisearch": "^7.2.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "three": "^0.186.1",

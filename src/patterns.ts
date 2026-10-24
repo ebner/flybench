@@ -1,3 +1,4 @@
+import { CatalogSearch, catalogEntries } from "./catalog/search";
 import { validateCatalog } from "./recipe/catalog";
 import { formatError } from "./recipe/errors";
 import { loadRecipe } from "./recipe/load";
@@ -38,3 +39,6 @@ export function variantFamily(recipe: Recipe): Pattern[] {
     (a, b) => Number(a.recipe.variantOf !== undefined) - Number(b.recipe.variantOf !== undefined),
   );
 }
+
+export const CATALOG = catalogEntries(PATTERNS.map((p) => p.recipe));
+export const SEARCH = new CatalogSearch(CATALOG);
