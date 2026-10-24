@@ -1,0 +1,358 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { stepAt, wrapAt, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
+import { buildHook } from "./hook";
+import { BobbinView, LooseEndView } from "./loose";
+import { Surfaces } from "./materials";
+import { aroundShank, pieceView, type PieceView } from "./pieces";
+
+const REST_DIRECTIONS = {
+  "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
+  "back-up": new THREE.Vector3(-0.9, 0.8, 0.2).normalize(),
+  out: new THREE.Vector3(0.25, -1, 0.35).normalize(),
+};
+
+/** Camera directions (from the fly towards the camera) for the named views. */
+const VIEWS = {
+  /** Slightly from above and in front: the interactive default. */
+  default: new THREE.Vector3(0.12, 0.12, 1).normalize(),
+  /** Straight from the side, eye to the right: the view for measuring proportions. */
+  side: new THREE.Vector3(0, 0, 1),
+  top: new THREE.Vector3(0, 1, 0.02).normalize(),
+  front: new THREE.Vector3(1, 0.05, 0).normalize(),
+  "three-quarter": new THREE.Vector3(0.55, 0.35, 1).normalize(),
+};
+
+export type ViewName = keyof typeof VIEWS;
+export const VIEW_NAMES = Object.keys(VIEWS) as ViewName[];
+
+export interface FlySceneOptions {
+  /** Vertical field of view in degrees. A narrow one gives a nearly distortion-free view for measuring. */
+  fov?: number;
+  background?: string;
+}
+
+/** Direction the thread (or a material end) leaves the shank when the wrap is at `angle`. */
+function leaveDirection(angle: number, target = new THREE.Vector3()) {
+  return target.set(0, -Math.cos(angle), Math.sin(angle));
+}
+
+/**
+ * Owns the three.js scene for one fly. The scene is a pure function of time:
+ * `setTime(t)` shows exactly what the timeline says for t, so scrubbing and
+ * replaying need no extra state.
+ */
+export class FlyScene {
+  private renderer: THREE.WebGLRenderer;
+  private scene = new THREE.Scene();
+  private camera: THREE.PerspectiveCamera;
+  private controls: OrbitControls;
+  private surfaces = new Surfaces();
+  private fly = new THREE.Group();
+  private hook: THREE.Group | null = null;
+  private stepViews: { piece: PieceView; window: [number, number]; until?: number }[][] = [];
+  private wraps = new Map<number, WrapsPiece>();
+  private bobbin: BobbinView | null = null;
+  private looseEnds = new Map<string, LooseEndView>();
+  private build: Build | null = null;
+  private resizeObserver: ResizeObserver;
+  private frame = 0;
+  /** Bounds of the finished fly, which the default view frames. */
+  private finished = new THREE.Box3();
+  /** Once the user orbits or zooms, resizing no longer re-frames the fly. */
+  private userMoved = false;
+  private view: ViewName = "default";
+  private grid: THREE.Group | null = null;
+
+  constructor(
+    private container: HTMLElement,
+    options: FlySceneOptions = {},
+  ) {
+    this.camera = new THREE.PerspectiveCamera(options.fov ?? 32, 1, 0.05, 500);
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    container.appendChild(this.renderer.domElement);
+
+    const pmrem = new THREE.PMREMGenerator(this.renderer);
+    this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+    this.scene.background = new THREE.Color(options.background ?? "#e8e5de");
+
+    const key = new THREE.DirectionalLight(0xffffff, 1.6);
+    key.position.set(2, 4, 5);
+    this.scene.add(key, new THREE.HemisphereLight(0xffffff, 0x8a8070, 0.6));
+    this.scene.add(this.fly);
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.minDistance = 0.8;
+    // Allow at least the distance a narrow field of view needs to frame the fly.
+    this.controls.maxDistance = 14 * Math.max(1, 32 / (options.fov ?? 32));
+    this.controls.addEventListener("start", () => (this.userMoved = true));
+
+    this.resizeObserver = new ResizeObserver(() => this.resize());
+    this.resizeObserver.observe(container);
+    this.resize();
+
+    const loop = () => {
+      this.frame = requestAnimationFrame(loop);
+      this.controls.update();
+      this.renderer.render(this.scene, this.camera);
+    };
+    loop();
+  }
+
+  setBuild(build: Build) {
+    this.clearFly();
+    this.build = build;
+    this.hook = buildHook(build.hook);
+    this.fly.add(this.hook);
+
+    for (const step of build.steps) {
+      this.stepViews.push(
+        step.pieces.map((p) => {
+          if (p.type === "wraps") this.wraps.set(p.id, p);
+          const piece = pieceView(p, this.surfaces);
+          this.fly.add(piece.object);
+          return { piece, window: p.window, until: p.until };
+        }),
+      );
+    }
+    this.bobbin = new BobbinView(build.threadRadius, build.threadColor, this.surfaces);
+    this.fly.add(this.bobbin.object);
+    this.setTime(build.duration);
+    this.finished = this.visibleBounds();
+    this.resetCamera();
+    this.setTime(0);
+    if (this.grid) this.setGrid(true);
+  }
+
+  /** Switches to a named view, framing the finished fly. */
+  setView(view: ViewName) {
+    this.view = view;
+    this.resetCamera();
+  }
+
+  /**
+   * A measuring grid in the plane of the hook: thin lines every quarter gape, strong lines
+   * every gape, labelled in gapes. x = 0 is the start of the bend, y = 0 the shank.
+   */
+  setGrid(on: boolean) {
+    if (this.grid) {
+      this.grid.traverse((o) => {
+        if (o instanceof THREE.LineSegments || o instanceof THREE.Sprite) {
+          o.geometry.dispose();
+          const m = o.material as THREE.Material & { map?: THREE.Texture | null };
+          m.map?.dispose();
+          m.dispose();
+        }
+      });
+      this.scene.remove(this.grid);
+      this.grid = null;
+    }
+    if (!on) return;
+    this.grid = measuringGrid(this.finished.isEmpty() ? new THREE.Box3(new THREE.Vector3(-1, -1, 0), new THREE.Vector3(3, 1, 0)) : this.finished);
+    this.scene.add(this.grid);
+    this.resetCamera();
+  }
+
+  /** World-space bounds of the visible fly, without the bobbin and loose ends. */
+  private visibleBounds(): THREE.Box3 {
+    const box = new THREE.Box3();
+    const part = new THREE.Box3();
+    this.fly.updateMatrixWorld(true);
+    const skip = new Set<THREE.Object3D>([this.bobbin!.object, ...[...this.looseEnds.values()].map((v) => v.object)]);
+    const visit = (o: THREE.Object3D) => {
+      if (!o.visible || skip.has(o)) return;
+      if (o instanceof THREE.InstancedMesh) {
+        if (o.count > 0) {
+          o.computeBoundingBox();
+          box.union(part.copy(o.boundingBox!).applyMatrix4(o.matrixWorld));
+        }
+      } else if (o instanceof THREE.Mesh) {
+        o.geometry.computeBoundingBox();
+        box.union(part.copy(o.geometry.boundingBox!).applyMatrix4(o.matrixWorld));
+      }
+      o.children.forEach(visit);
+    };
+    visit(this.fly);
+    return box;
+  }
+
+  /** Frames the finished fly from slightly above and in front, with a small margin. */
+  resetCamera() {
+    if (!this.build || this.finished.isEmpty()) return;
+    this.userMoved = false;
+    // With the measuring grid on, leave room for its labels.
+    const framed = this.finished.clone().expandByScalar(this.grid ? 0.45 : 0);
+    const target = framed.getCenter(new THREE.Vector3());
+    const view = VIEWS[this.view];
+    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), view).normalize();
+    const up = new THREE.Vector3().crossVectors(view, right);
+    const tanV = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
+    const tanH = tanV * this.camera.aspect;
+    // The camera distance at which every corner of the box is inside the view frustum.
+    let distance = 0;
+    const { min, max } = framed;
+    for (const x of [min.x, max.x]) {
+      for (const y of [min.y, max.y]) {
+        for (const z of [min.z, max.z]) {
+          const c = new THREE.Vector3(x, y, z).sub(target);
+          const depth = c.dot(view);
+          distance = Math.max(distance, Math.abs(c.dot(right)) / tanH + depth, Math.abs(c.dot(up)) / tanV + depth);
+        }
+      }
+    }
+    this.controls.target.copy(target);
+    this.camera.position.copy(target).addScaledVector(view, distance * 1.08);
+    this.controls.update();
+  }
+
+  setTime(t: number) {
+    const build = this.build;
+    if (!build) return;
+    build.steps.forEach((step, i) => {
+      const p = clamp01((t - step.start) / step.duration);
+      for (const { piece, window, until } of this.stepViews[i]!) {
+        const gone = until !== undefined && t >= until;
+        piece.setProgress(gone ? 0 : clamp01((p - window[0]) / (window[1] - window[0])));
+      }
+    });
+
+    const current = build.steps[stepAt(build, t)]!;
+    const p = clamp01((t - current.start) / current.duration);
+    this.poseThread(current.thread, p);
+    this.poseLooseEnds(current.freeEnds, p);
+  }
+
+  /** Progress of a wraps piece given the step progress, and whether it exists. */
+  private followed(id: number, p: number) {
+    const piece = this.wraps.get(id)!;
+    const [a, b] = piece.window;
+    const u = clamp01((p - a) / (b - a));
+    return { piece, u, at: wrapAt(piece, u) };
+  }
+
+  private poseThread(pose: Build["steps"][number]["thread"], p: number) {
+    if (!this.bobbin) return;
+    if (!pose || (pose.kind === "follow" && pose.cut && p >= 0.97)) {
+      this.bobbin.setPose(null);
+      return;
+    }
+    if (pose.kind === "rest") {
+      this.bobbin.setPose(aroundShank(pose.x, pose.radius, 0), leaveDirection(0));
+      return;
+    }
+    const { at } = this.followed(pose.piece, p);
+    this.bobbin.setPose(aroundShank(at.x, at.radius, at.angle), leaveDirection(at.angle));
+  }
+
+  private poseLooseEnds(ends: FreeEndPose[], p: number) {
+    const shown = new Set<string>();
+    for (const end of ends) {
+      if (end.kind === "rest" && end.hideAfter !== undefined && p >= end.hideAfter) continue;
+      const key = `${end.material}:${end.length}`;
+      let view = this.looseEnds.get(key);
+      if (!view) {
+        view = new LooseEndView(end, this.surfaces);
+        this.looseEnds.set(key, view);
+        this.fly.add(view.object);
+      }
+      shown.add(key);
+      if (end.kind === "rest") {
+        const dir = REST_DIRECTIONS[end.direction];
+        const base = new THREE.Vector3(end.x, dir.y * end.radius, dir.z * end.radius);
+        view.setPose(base, dir, 1);
+      } else {
+        const { at, u } = this.followed(end.piece, p);
+        view.setPose(aroundShank(at.x, at.radius, at.angle), leaveDirection(at.angle), 1 - 0.6 * u);
+      }
+    }
+    for (const [key, view] of this.looseEnds) view.object.visible = shown.has(key);
+  }
+
+  private clearFly() {
+    for (const views of this.stepViews) for (const { piece } of views) piece.dispose();
+    for (const view of this.looseEnds.values()) view.dispose();
+    this.bobbin?.dispose();
+    this.hook?.traverse((o) => {
+      if (o instanceof THREE.Mesh) o.geometry.dispose();
+    });
+    this.hook = null;
+    this.fly.clear();
+    this.stepViews = [];
+    this.wraps.clear();
+    this.looseEnds.clear();
+    this.bobbin = null;
+  }
+
+  private resize() {
+    const { clientWidth: w, clientHeight: h } = this.container;
+    if (w === 0 || h === 0) return;
+    this.renderer.setSize(w, h);
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
+    if (!this.userMoved) this.resetCamera();
+  }
+
+  dispose() {
+    cancelAnimationFrame(this.frame);
+    this.resizeObserver.disconnect();
+    this.clearFly();
+    this.surfaces.dispose();
+    this.setGrid(false);
+    this.controls.dispose();
+    this.renderer.dispose();
+    this.renderer.domElement.remove();
+  }
+}
+
+function measuringGrid(bounds: THREE.Box3): THREE.Group {
+  const group = new THREE.Group();
+  const x0 = Math.floor(bounds.min.x * 4) / 4 - 0.25;
+  const x1 = Math.ceil(bounds.max.x * 4) / 4 + 0.25;
+  const y0 = Math.floor(bounds.min.y * 4) / 4 - 0.25;
+  const y1 = Math.ceil(bounds.max.y * 4) / 4 + 0.25;
+  const minor: number[] = [];
+  const major: number[] = [];
+  const isMajor = (v: number) => Math.abs(v - Math.round(v)) < 1e-6;
+  for (let x = x0; x <= x1 + 1e-6; x += 0.25) (isMajor(x) ? major : minor).push(x, y0, 0, x, y1, 0);
+  for (let y = y0; y <= y1 + 1e-6; y += 0.25) (isMajor(y) ? major : minor).push(x0, y, 0, x1, y, 0);
+  const lines = (points: number[], color: string, opacity: number) => {
+    const g = new THREE.BufferGeometry().setAttribute("position", new THREE.Float32BufferAttribute(points, 3));
+    const m = new THREE.LineBasicMaterial({ color, transparent: true, opacity, depthTest: false, depthWrite: false });
+    const l = new THREE.LineSegments(g, m);
+    // Drawn first and without depth, so the fly always covers it.
+    l.renderOrder = -1;
+    return l;
+  };
+  group.add(lines(minor, "#5a6a7a", 0.25), lines(major, "#2a4a6a", 0.6));
+
+  const label = (text: string, x: number, y: number) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 64;
+    const ctx = canvas.getContext("2d")!;
+    ctx.font = "bold 40px sans-serif";
+    ctx.fillStyle = "#2a4a6a";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, 64, 32);
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), depthTest: false, depthWrite: false }),
+    );
+    sprite.scale.set(0.3, 0.15, 1);
+    sprite.position.set(x, y, 0);
+    sprite.renderOrder = -1;
+    group.add(sprite);
+  };
+  for (let x = Math.ceil(x0); x <= x1; x++) label(String(x), x, y0 - 0.12);
+  for (let y = Math.ceil(y0); y <= y1; y++) label(String(y), x0 - 0.18, y);
+  return group;
+}
+
+function clamp01(v: number) {
+  return Math.max(0, Math.min(1, v));
+}

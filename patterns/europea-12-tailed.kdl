@@ -1,0 +1,44 @@
+// Europea 12 with a pheasant tail tail, as in the Ahrex dressing.
+
+id europea-12-tailed
+name "Europea 12"
+variant-of europea-12
+variant "With tail"
+type dry
+imitates caddis
+difficulty intermediate
+species trout grayling
+season may june july august september
+origin originator="André Ragot" region="France"
+description "The Europea 12 with a short tail of pheasant tail fibres."
+sources {
+    "Ahrex: Europea 12" url="https://ahrexhooks.com/2019/09/16/europea-12/"
+}
+
+hook dry-standard size=12
+thread yellow size="8/0"
+
+materials {
+    tail   pheasant-tail count=6
+    rib    rib-thread color=yellow size="8/0"
+    body   hares-ear-dubbing
+    wing   mallard-breast
+    hackle cock-hackle color=red-game fibre=1.25
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Assumption: a short tail, about the gape long.
+    tie-in tail length=0.9
+    tie-in rib
+    dub body to=0.7
+    wind rib to=0.7 turns=5
+    tie-off rib
+    tie-in wing length=2.1 width=1.0 angle=5 note="Tie the feather in by the stem, flat over the body, convex side up."
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.88 turns=5
+    tie-off hackle
+    whip-finish
+}

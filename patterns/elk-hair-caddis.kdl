@@ -1,0 +1,60 @@
+// Elk Hair Caddis: Al Troth's searching caddis, in today's standard dressing.
+
+id elk-hair-caddis
+name "Elk Hair Caddis"
+aliases "EHC"
+type dry
+imitates caddis
+difficulty intermediate
+species trout grayling
+season may june july august september
+origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
+description "A buoyant searching caddis: a slim dubbed body, a palmered hackle held down by a gold wire rib, and a flared elk hair wing."
+history """
+    Al Troth tied the first Elk Hair Caddis in 1957 and fished it on Loyalsock Creek in
+    Pennsylvania, before moving to Montana. Bleached elk hair kept the wing visible on the
+    water. The neatly trimmed head that most tyers now give it was added by others; see
+    the Troth variant for his own way.
+    """
+fishing """
+    A searching pattern for any water where caddis hatch. Fish it on a dead drift, then
+    twitch or skate it to imitate egg-laying females. The hair wing and palmered hackle
+    float it high in broken water, and it makes a good indicator for a small dropper.
+    """
+sources {
+    "Wikipedia: Elk Hair Caddis" url="https://en.wikipedia.org/wiki/Elk_Hair_Caddis"
+    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-blog/famous-fly-history-elk-hair-caddis"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/0/06/Elk_Hair_Caddis2.jpg" page="https://commons.wikimedia.org/wiki/File:Elk_Hair_Caddis2.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
+}
+
+hook dry-standard size=14
+thread tan size="8/0"
+
+materials {
+    rib    gold-wire
+    body   dry-fly-dubbing color=tan
+    // Assumption: brown, and undersized for palmering (fibres 0.8× gape).
+    // Wikipedia's standard dressing gives ginger.
+    hackle cock-hackle color=brown fibre=0.8
+    wing   elk-hair color=bleached
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in rib
+    dub body to=0.75 note="Keep the body slim, with a slight taper towards the front."
+    tie-in hackle note="Tie it in by the butt, shiny side forward."
+    wind hackle to=0.05 turns=5 note="Hold the tip with hackle pliers at the bend."
+    wind rib to=0.75 turns=5 note="Wiggle the wire as you go so no fibres are trapped."
+    tie-off rib
+    trim hackle
+    // Assumption: from reference photos, the wing rises about 27°, fans out round the
+    // sides of the body, and the tips reach just past the end of the bend.
+    tie-in wing length=2.3 angle=27 spread=75 note="Clean the underfur out and stack the hair so the tips are even."
+    trim wing leave=0.25 note="Cut straight across, parallel to the eye."
+    whip-finish note="Whip finish behind the trimmed butts."
+}

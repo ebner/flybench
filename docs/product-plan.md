@@ -1,0 +1,72 @@
+# Product plan
+
+Decisions from the planning interview (2026-10-24). Update this file when they change.
+
+## Goal
+
+A large, browsable catalog of fly patterns, each with an animated 3D tying sequence,
+written steps and a materials list. Fully static site: all execution in the browser,
+personal data in browser storage (no accounts, no sync).
+
+## Audience and language
+
+- Beginners and experienced tyers, with **layered detail**: concise by default,
+  expandable explanations (technique lessons) for beginners.
+- English only for now; keep UI strings in one place so translation stays possible.
+
+## Catalog
+
+- **Taxonomy**: one main `type` (dry, wet, nymph, emerger, midge, streamer, terrestrial,
+  salmon, saltwater) plus facets: imitates (mayfly, caddis, stonefly, chironomid,
+  baitfish, attractor, …), target species, difficulty, season.
+- **Search**: instant fuzzy search by name and aliases; by material (one or several);
+  "tie with what I have" from the materials inventory (including "one material
+  missing"); by hatch / season.
+- **Pattern page**: 3D viewer, steps, materials, history & origin, fishing notes,
+  variants (linked recipes, viewable in 3D), sources.
+- **Techniques**: a library of short 3D technique lessons linked from steps, plus a
+  learning path (techniques → flies that use them, easy to hard).
+
+## Personal features (browser storage)
+
+- Favorites / my fly box.
+- Materials inventory, which drives "tie with what I have".
+- Bench mode: large controls, auto-pause per step, screen kept awake, tap to advance,
+  offline once installed (PWA).
+
+## Design
+
+- Visual direction: **field journal**: warm paper tones, serif display type, flies
+  presented like specimens on naturalist plates.
+- Front page: **the gallery with search** (search box and filter chips on top, fly grid
+  below, a small featured fly / start-learning link that doesn't push the grid down).
+- Gallery cards: images pre-rendered from recipes at build time; a short pre-rendered
+  turntable plays on hover or tap.
+- Light and dark themes, following the system, with a toggle.
+
+## Viewer
+
+Auto camera that follows the action (free orbit still possible), material callouts,
+hook size switch, deep links to steps.
+
+## Content and tooling
+
+- Recipes are drafted by the agent in batches from published dressings, with sources
+  cited and assumptions flagged; the user reviews.
+- A local-only authoring studio (dev server page): KDL editor, inline errors, live 3D
+  preview, saves to `patterns/`. Not shipped to the public site.
+- Hosting: decided later; the build stays a plain static `dist/`.
+
+## Milestones
+
+1. ✅ Red Tag end to end (viewer, playback, KDL recipes, validation).
+2. ✅ Schema: catalog metadata, materials catalog, dubbing, ribbing, palmered hackle, hair and
+   feather wings, variants. Patterns: Elk Hair Caddis (+ Troth variant), Europea 12
+   (+ tailed variant).
+3. a. Render pipeline (headless renders of finished flies, also for gallery thumbnails)
+      and the reference check (contact sheets against reference photos).
+   b. Field-journal design system, gallery front page, search.
+4. Pattern page and viewer features (auto camera, callouts, hook size, deep links).
+5. Techniques library and learning path.
+6. Fly box, materials inventory, bench mode, PWA.
+7. Authoring studio.

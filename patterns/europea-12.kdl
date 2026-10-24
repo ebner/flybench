@@ -1,0 +1,60 @@
+// Europea 12: a French sedge, popular all over Europe and especially in Scandinavia.
+
+id europea-12
+name "Europea 12"
+aliases "Europa 12"
+type dry
+imitates caddis
+difficulty intermediate
+species trout grayling
+season may june july august september
+origin originator="André Ragot" region="France"
+description "A hare's ear body ribbed with yellow thread, a hen mallard breast feather lying over it as a wing, and a brown hackle in front."
+history """
+    Attributed to the French tyer André Ragot; the attribution is passed on through the
+    Danish author Preben Torp Jacobsen. Dressings vary in the details: the body material,
+    whether there is a tail, and whether the wing is one feather or two.
+    """
+fishing """
+    A general sedge and emerger imitation that also passes for a mayfly. Fish it dead
+    drift on streams and still water, for trout and grayling.
+    """
+sources {
+    "GlobalFlyFisher: Europea 12" url="https://globalflyfisher.com/node/69429"
+    "Ahrex: Europea 12" url="https://ahrexhooks.com/2019/09/16/europea-12/"
+    "Guideline: Europea 12" url="https://guidelineflyfish.com/en/europea-12-12"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://ahrexhooks.com/wp-content/uploads/2019/09/E12_1_blog.jpg" page="https://ahrexhooks.com/2019/09/16/europea-12/" license="All rights reserved; reference only" flip=#true note="Side view, slightly from above"
+    "https://ahrexhooks.com/wp-content/uploads/2019/09/E12_2_blog.jpg" page="https://ahrexhooks.com/2019/09/16/europea-12/" license="All rights reserved; reference only" note="Side view"
+}
+
+hook dry-standard size=12
+thread yellow size="8/0"
+
+materials {
+    rib    rib-thread color=yellow size="8/0"
+    body   hares-ear-dubbing
+    wing   mallard-breast
+    // Assumption: one modern genetic hackle is enough; the original used two.
+    // Red game (orange-brown) as in the reference photos; some dressings say brown.
+    hackle cock-hackle color=red-game fibre=1.25
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in rib
+    dub body to=0.7
+    wind rib to=0.7 turns=5
+    tie-off rib
+    // Assumption: from reference photos, a feather about the gape wide whose tips reach
+    // well past the bend, lying nearly level over the body.
+    tie-in wing length=2.1 width=1.0 angle=5 note="Tie the feather in by the stem, flat over the body, convex side up."
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.88 turns=5
+    tie-off hackle
+    whip-finish
+}

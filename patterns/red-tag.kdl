@@ -1,0 +1,59 @@
+// Red Tag: a classic 19th-century English grayling and trout fly.
+// Positions are fractions of the shank (0 = start of the bend, 1 = behind the eye).
+// Lengths are multiples of the hook gape.
+
+id red-tag
+name "Red Tag"
+aliases "Worcestershire Gem" "Worcester Gem"
+type dry
+imitates attractor
+difficulty beginner
+species trout grayling
+// Assumption: fished through the season, best known as an autumn grayling fly.
+season april may june july august september october november
+origin originator="Martyn Flynn" region="Worcestershire, England"
+description "Peacock herl body with a short red wool tag and a brown cock hackle. Fished dry or wet for grayling and trout."
+history """
+    Usually credited to Martyn Flynn of Worcestershire in the 1850s, who tied it as a dry
+    fly for grayling and called it the Worcestershire Gem. It travelled to Australia and
+    New Zealand, where it became a standard brown trout fly, particularly in Tasmania.
+    The date and originator are repeated widely but rest on secondary accounts.
+    """
+fishing """
+    A general attractor rather than an imitation of a particular insect. Fish it dry on
+    a dead drift, or let it sink and swing it as a wet fly. A classic for grayling in
+    autumn, when the red tag seems to provoke them.
+    """
+sources {
+    "Wikipedia: Red Tag (artificial fly)" url="https://en.wikipedia.org/wiki/Red_Tag_(artificial_fly)"
+    "FlyLife: A modernized 170 year old trout fly" url="https://flylifemagazine.com/a-modernized-170-year-old-trout-fly-is-still-simple-and-deadly-red-tag/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/6/6e/Red_Tag_Trout_Fly_Dry.jpg" page="https://commons.wikimedia.org/wiki/File:Red_Tag_Trout_Fly_Dry.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Seen from slightly above; a generous tag"
+}
+
+hook dry-standard size=14
+thread black size="8/0"
+
+materials {
+    tag    wool color=red
+    body   peacock-herl strands=3
+    hackle cock-hackle color=red-brown fibre=1.5 label="Red game cock hackle"
+}
+
+steps {
+    attach-thread at=0.85 note="Leave room behind the eye for the hackle and a small head."
+    wrap-thread to=0.0 note="Touching turns give a smooth base for the body."
+    // Assumption: a fluffy tag about the gape long; the reference photo shows about 1.2×.
+    tie-in tag length=1.0 spread=55
+    tie-in body note="Tie the herl in by the tips."
+    wrap-thread to=0.78
+    wind body to=0.78 turns=10 note="Touching turns, so the flue stands out and the body looks full."
+    tie-off body
+    tie-in hackle note="Shiny side facing forward, stripped stem tied along the shank."
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=4 note="Each turn in front of the last."
+    tie-off hackle
+    whip-finish
+}

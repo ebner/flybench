@@ -1,0 +1,47 @@
+// Elk Hair Caddis as Al Troth tied it: copper wire rib and untrimmed butts.
+
+id elk-hair-caddis-troth
+name "Elk Hair Caddis"
+variant-of elk-hair-caddis
+variant "Troth original"
+type dry
+imitates caddis
+difficulty intermediate
+species trout grayling
+season may june july august september
+origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
+description "The Elk Hair Caddis close to Troth's own tie: a copper wire rib, and the hair butts left long instead of trimmed into a neat head."
+history """
+    In his 1978 Fly Tyer article Troth described the body with fine copper wire, dubbing and
+    a rooster hackle. His own flies did not have the short, square-cut head that later
+    tyers gave the pattern.
+    """
+sources {
+    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-blog/famous-fly-history-elk-hair-caddis"
+    "Fly Tyer: 16 favorite caddisflies" url="https://www.flytyer.com/?p=11429"
+}
+
+hook dry-standard size=14
+thread tan size="8/0"
+
+materials {
+    rib    copper-wire
+    body   dry-fly-dubbing color=tan
+    hackle cock-hackle color=brown fibre=0.8
+    wing   elk-hair color=bleached
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in rib
+    dub body to=0.75
+    tie-in hackle
+    wind hackle to=0.05 turns=5
+    wind rib to=0.75 turns=5
+    tie-off rib
+    trim hackle
+    tie-in wing length=2.3 angle=27 spread=75
+    // Assumption: "untrimmed" butts; they are left as they are.
+    whip-finish note="Whip finish behind the hair; the butts stay long."
+}
