@@ -55,6 +55,7 @@ export const NAMED_COLORS = {
   coch: "#5a2614",
   muskrat: "#5b5650",
   clear: "#d8dde0",
+  "blue-black": "#1d2230",
 } as const;
 
 export type NamedColor = keyof typeof NAMED_COLORS;

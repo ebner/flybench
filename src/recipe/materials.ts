@@ -59,8 +59,9 @@ export const MATERIALS = {
   "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7 },
   "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35 },
   "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 40 },
-  "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 50 },
-  "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 50 },
+  // Soft game-bird hackles sweep well back over the body (reference photos of spiders).
+  "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 65 },
+  "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65 },
 
   // Dubbing
   "hares-ear-dubbing": { name: "hare's ear dubbing", archetype: "dubbing", defaultColor: "hares-ear" },

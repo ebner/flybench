@@ -1,0 +1,60 @@
+// Black Pennell: the loch-style wet fly: tippet tail, black body, silver rib, long sparse black hackle.
+
+id black-pennell
+name "Black Pennell"
+type wet
+imitates chironomid attractor
+difficulty beginner
+species trout sea-trout
+season april may june july august september
+origin originator="Henry Cholmondeley-Pennell" region="England; a Scottish and Irish loch fly"
+description "A tail of golden pheasant tippet, a slim black floss body ribbed with silver, and a long, sparse black hackle."
+history """
+    Credited to Henry Cholmondeley-Pennell, the Victorian angling writer, who recommended
+    lightly dressed "hackle" flies with thin silk bodies and long, sparse hackles. His own
+    colours were brown, yellow and green; the black version is attributed to him later, and
+    no date is documented.
+    """
+fishing """
+    A loch fly, fished on a team of wets from a drifting boat or as a bob fly, for trout and
+    sea trout; it also passes for a hatching midge. Bushier versions with seal's fur bodies
+    are used in Ireland.
+    """
+sources {
+    "GlobalFlyFisher: Black Pennell" url="https://globalflyfisher.com/node/42302"
+    "Fish4Flies: Black Pennell" url="https://www.fish4flies.com/Wet/Traditional/Black-Pennell"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/850-850.jpg" page="https://www.fish4flies.com/Wet/Traditional/Black-Pennell" license="All rights reserved; reference only" flip=#true note="Side view, standard form"
+    "https://globalflyfisher.com/sites/default/files/article_pictures/black-pennell-sparse.jpg" page="https://globalflyfisher.com/node/42302" author="Martin Joergensen" license="All rights reserved; reference only" flip=#true note="Side view, sparse"
+}
+
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    tail golden-pheasant-tippet count=10
+    rib silver-wire
+    body silk-floss color=black
+    hackle hen-hackle color=black fibre=1.4 label="Long black cock or hen hackle"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Assumption: about two thirds of the shank, as in the reference photos.
+    tie-in tail length=1.5 note="About six fibres, so the black bars show."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.88
+    wind body to=0.88 turns=10 note="Slim and even, to just behind the eye."
+    tie-off body
+    wind rib to=0.88 turns=5
+    tie-off rib
+    tie-in hackle
+    wrap-thread to=0.93
+    wind hackle to=0.93 turns=3 note="Sparse: the long, sparse hackle is the Pennell signature."
+    tie-off hackle
+    whip-finish
+}

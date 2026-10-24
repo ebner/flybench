@@ -146,7 +146,7 @@ Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `brown`, `r
 `red-game`, `ginger`, `tan`, `grizzly`, `olive`, `grey`, `dun`, `yellow`, `green`, `gold`, `silver`,
 `copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
 `lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
-`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`. Barred colours
+`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`. Barred colours
 (`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars.
 Or a quoted hex value: `"#c8102e"`.
 

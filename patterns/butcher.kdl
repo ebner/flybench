@@ -1,0 +1,60 @@
+// Butcher: a classic English winged wet fly: red tail, silver body, black throat, blue-black wing.
+
+id butcher
+name "Butcher"
+aliases "Moon's Fly"
+type wet
+imitates baitfish attractor
+difficulty advanced
+species trout sea-trout
+season april may june july august september
+origin originator="Jewhurst and Moon" year=1838 region="Tunbridge Wells, England"
+description "A red tail, a flat silver tinsel body with a wire rib, a black hackle throat and paired blue-black mallard wing slips."
+history """
+    First called Moon's Fly, after a Mr Moon of Tunbridge Wells, a butcher, whose favourite it
+    was; it is said to have been devised with a Mr Jewhurst and renamed around 1838. The
+    colours as blood, blade and apron are a popular story, nothing more.
+    """
+fishing """
+    A flashy wet fly for lake trout and sea trout, fished on a team of wets on a steady
+    retrieve; it suggests a small fish as much as any insect. Larger sizes and doubles are
+    used for sea trout.
+    """
+sources {
+    "Fly Tying Archive: Butcher (Timo Kontio)" url="https://flytyingarchive.com/butcher/"
+    "Fish4Flies: Butcher" url="https://www.fish4flies.com/Wet/Traditional/Butcher"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://flytyingarchive.com/wp-content/uploads/2015/01/tumblr_ni9q4nhq2J1qg8e5ko2_1280.jpg" page="https://flytyingarchive.com/butcher/" author="Timo Kontio" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://www.fish4flies.com/img/flies/Large/865-865%20Butcher.jpg" page="https://www.fish4flies.com/Wet/Traditional/Butcher" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    tail duck-quill color=red label="Red-dyed duck quill slip"
+    rib silver-wire
+    body flat-tinsel color=silver
+    throat hackle-fibres color=black count=12 label="Black hen hackle fibres"
+    wing duck-quill color=blue-black label="Blue-black mallard secondary slips"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Assumption: a tail about half the shank, as in the reference photos.
+    tie-in tail length=1.1 angle=8 width=0.18 note="A narrow slip, on top at the bend."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.88
+    wind body to=0.88 turns=14 note="Touching turns, smooth and untapered."
+    tie-off body
+    wind rib to=0.88 turns=5
+    tie-off rib
+    tie-in throat length=0.9 angle=35 side=under note="Reaching about to the hook point."
+    // Gregg (1940): wing tips even with the bend or a little beyond.
+    tie-in wing length=2.0 angle=10 spread=12 width=0.45 note="Matching left and right slips, concave sides together, set on top with a pinch-and-loop."
+    whip-finish note="A smooth, tapered black head."
+}

@@ -1,0 +1,58 @@
+// Partridge & Orange: the classic North Country spider: orange silk body, partridge hackle.
+
+id partridge-and-orange
+name "Partridge & Orange"
+aliases "Orange Partridge" "Partridge and Orange"
+type wet
+imitates mayfly caddis
+difficulty beginner
+species trout grayling
+season april may june july august september
+origin region="North of England"
+description "A short, slim body of orange silk, optionally ribbed with gold wire, and one or two turns of mottled brown partridge."
+history """
+    A North Country spider from the Yorkshire Dales. The earliest dressing found is Pritt's
+    "Orange Partridge" in Yorkshire Trout Flies (1885); the style is said to go back to
+    Joseph Wells (1842) and further, but that is not documented. Sylvester Nemes' The
+    Soft-Hackled Fly (1975) made it known in America.
+    """
+fishing """
+    Fished across and down, or upstream on a short line, just under the surface: the soft
+    partridge fibres move with the slightest current and suggest a hatching nymph or pupa.
+    Often fished as a team of two or three spiders.
+    """
+sources {
+    "T. E. Pritt: Yorkshire Trout Flies (1885)" url="https://archive.org/details/yorkshiretroutfl00prit"
+    "Sexyloops: North Country spiders (Ben Spinks)" url="https://www.sexyloops.com/flytying/ncspiders/ncspiders2.shtml"
+    "Wikipedia: Partridge and Orange" url="https://en.wikipedia.org/wiki/Partridge_and_Orange"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/2/2c/PartridgeandOrange.jpg" page="https://commons.wikimedia.org/wiki/File:PartridgeandOrange.jpg" author="Mike Cline" license="Public domain" note="Side view, gold wire rib"
+    "https://hawker-overend.com/wp-content/uploads/2020/12/Partridge-and-Orange-spider-flies-450w.jpg" page="https://hawker-overend.com/north-country-spiders/" license="All rights reserved; reference only" note="Side view"
+    "https://www.sexyloops.com/flytying/ncspiders/partridge%20and%20orange.jpg" page="https://www.sexyloops.com/flytying/ncspiders/ncspiders2.shtml" author="Ben Spinks" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+hook wet-standard size=14
+thread orange size="8/0"
+
+materials {
+    rib gold-wire
+    // Sources: barbs from the back of the eye to just past the bend.
+    hackle partridge-hackle fibre=1.8 label="Brown partridge (back or neck feather)"
+}
+
+steps {
+    attach-thread at=0.88
+    // Edmonds & Lee: keep the body short, ending above the hook point.
+    wrap-thread to=0.35 note="Touching turns, to above the hook point."
+    tie-in rib note="Optional; the classic dressing has none."
+    wrap-thread to=0.86 note="A slim, single-layer silk body; don't build a taper."
+    wind rib to=0.86 turns=4
+    tie-off rib
+    tie-in hackle note="By the tip, just behind the eye, fluff stripped and barbs stroked out."
+    wrap-thread to=0.93
+    wind hackle to=0.93 turns=2 note="One or two turns, stroking the barbs back after each."
+    tie-off hackle
+    whip-finish note="A small orange head."
+}
