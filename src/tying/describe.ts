@@ -1,4 +1,4 @@
-import { HOOK_MODELS } from "./hook";
+import { hookModel, trebleSize } from "./hook";
 import { MATERIALS } from "../recipe/materials";
 import type { Material, Recipe, Step } from "../recipe/schema";
 
@@ -27,9 +27,13 @@ export interface MaterialsListEntry {
 }
 
 export function materialsList(recipe: Recipe): MaterialsListEntry[] {
-  const hook = HOOK_MODELS[recipe.hook.model];
+  const hook = hookModel(recipe.hook);
+  const treble = trebleSize(recipe.hook);
   return [
-    { id: "hook", role: "Hook", name: hook.label, detail: `size ${recipe.hook.size}` },
+    treble === null
+      ? { id: "hook", role: "Hook", name: hook.label, detail: `size ${recipe.hook.size}` }
+      : { id: "hook", role: hook.tube?.kind === "waddington" ? "Shank" : "Tube", name: hook.label },
+    ...(treble === null ? [] : [{ id: "treble", role: "Hook", name: "Treble hook", detail: `size ${treble}` }]),
     { id: "thread", role: "Thread", name: capitalize(`${colorName(recipe.thread.color)} thread`.trim()), detail: recipe.thread.size },
     ...recipe.materials.map((m) => ({
       id: m.id,

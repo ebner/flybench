@@ -73,6 +73,8 @@ export function eyeBase(hook: HookModel): ShankPoint {
 /** The bend and point, from the start of the bend: the part a double or treble repeats. */
 export function bendPath(hook: HookModel, step = 0.02): Vec2[] {
   const points: Vec2[] = [];
+  // A tube or Waddington has no bend of its own: the treble behind it is drawn separately.
+  if (hook.tube) return points;
   // The bend: a half circle continuing the shank's curve, so the gape (inside of
   // shank to inside of point) is one unit.
   const start = shankAt(hook, 0);

@@ -1,6 +1,6 @@
 import { findPattern } from "./patterns";
 import { FlyScene, VIEW_NAMES, type ViewName } from "./render/FlyScene";
-import { HOOK_MODELS } from "./tying/hook";
+import { hookModel } from "./tying/hook";
 import { simulate } from "./tying/simulate";
 
 /**
@@ -40,7 +40,7 @@ if (!pattern || !VIEW_NAMES.includes(view)) {
   const build = simulate(pattern.recipe);
   scene.setBuild(build);
   // Jig flies are usually photographed point up, the way they swim; other flies as tied.
-  if (params.get("pose") === "pictured" && HOOK_MODELS[pattern.recipe.hook.model].jig) scene.setTurnedOver(true);
+  if (params.get("pose") === "pictured" && hookModel(pattern.recipe.hook).jig) scene.setTurnedOver(true);
   scene.setView(view, 0, fit);
   scene.setGrid(params.get("grid") === "1");
   scene.setTime(build.duration);

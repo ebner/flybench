@@ -84,6 +84,11 @@ export const HOOK_MODEL_IDS = [
   "dry-standard", "dry-3xl-curved", "wet-standard", "nymph-2xl", "streamer-4xl",
   "emerger-curved", "scud-curved", "salmon-up-eye", "salmon-double", "salmon-treble", "jig", "saltwater-straight",
 ] as const;
+/** Tubes and Waddington shanks: dressed like a hook shank, with a treble hook behind. */
+export const TUBE_MODEL_IDS = ["tube-plastic", "tube-aluminium", "tube-copper", "tube-brass", "tube-needle", "waddington"] as const;
+export type HookModelId = (typeof HOOK_MODEL_IDS)[number];
+export type TubeModelId = (typeof TUBE_MODEL_IDS)[number];
+export const isTube = (model: string): model is TubeModelId => (TUBE_MODEL_IDS as readonly string[]).includes(model);
 export const THREAD_SIZES = ["3/0", "6/0", "8/0", "10/0", "12/0", "14/0"] as const;
 
 export const FLY_TYPES = [
@@ -99,15 +104,32 @@ export const MONTHS = [
   "july", "august", "september", "october", "november", "december",
 ] as const;
 
-const Hook = z.strictObject({
-  model: z.enum(HOOK_MODEL_IDS),
-  size: z
-    .number()
-    .int()
-    .min(2)
-    .max(24)
-    .refine((n) => n % 2 === 0, "hook sizes are even numbers"),
-});
+const HookSize = z
+  .number()
+  .int()
+  .min(2)
+  .max(24)
+  .refine((n) => n % 2 === 0, "hook sizes are even numbers");
+
+const Hook = z
+  .strictObject({
+    model: z.enum([...HOOK_MODEL_IDS, ...TUBE_MODEL_IDS]),
+    /** Hooks: the hook size. */
+    size: HookSize.optional(),
+    /** Tubes and Waddingtons: length in mm. */
+    length: z.number().min(8).max(90).optional(),
+    /** Tubes and Waddingtons: size of the treble hook behind (default 12). */
+    treble: HookSize.optional(),
+  })
+  .superRefine((h, ctx) => {
+    if (isTube(h.model)) {
+      if (h.length === undefined) ctx.addIssue({ code: "custom", path: ["length"], message: "tubes and Waddingtons are sized by length in mm, e.g. length=25" });
+      if (h.size !== undefined) ctx.addIssue({ code: "custom", path: ["size"], message: "tubes and Waddingtons take a length, not a hook size" });
+    } else {
+      if (h.size === undefined) ctx.addIssue({ code: "custom", path: ["size"], message: "a hook needs a size, e.g. size=12" });
+      if (h.length !== undefined || h.treble !== undefined) ctx.addIssue({ code: "custom", path: ["length"], message: "length and treble only apply to tubes and Waddingtons" });
+    }
+  });
 
 const Thread = z.strictObject({
   color: Color,
@@ -182,8 +204,8 @@ const Step = z.discriminatedUnion("op", [
     length: GapeLength.optional(),
     /** Degrees above the shank for material that sticks out (0 = straight back). */
     angle: z.number().min(0).max(90).optional(),
-    /** Bunches (tags, tails, hair wings): how far round the body they fan out, in degrees to each side of the top. */
-    spread: z.number().min(0).max(120).optional(),
+    /** Bunches (tags, tails, hair wings): how far round the body they fan out, in degrees to each side of the top; 180 is all round (tube wings). */
+    spread: z.number().min(0).max(180).optional(),
     /** Feather wings: width of the feather, in gapes. */
     width: GapeLength.optional(),
     /**

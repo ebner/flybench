@@ -1,4 +1,4 @@
-import type { Recipe } from "../recipe/schema";
+import { isTube, type HookModelId, type Recipe, type TubeModelId } from "../recipe/schema";
 
 /**
  * Hook geometry in gape units (world unit = 1 gape). See shank.ts for how the shank
@@ -21,13 +21,19 @@ export interface HookModel {
   points?: 2 | 3;
   /** Jig hooks: the eye sits on a section bent up from the end of the shank. */
   jig?: { length: number; angle: number };
+  /**
+   * Tubes and Waddingtons: the dressing goes on a tube or wire shank, and a treble hook sits
+   * behind it, in a silicone sleeve or through the Waddington's rear loop. `trebleScale` is the
+   * treble's gape in this model's units.
+   */
+  tube?: { kind: "tube" | "waddington"; color: string; trebleScale: number };
   /** Typical model, for the materials list. */
   example: string;
 }
 
 // Assumption: proportions in gapes estimated from common hook models (named in
 // `example`): shank length, wire thickness, curvature and eye angle.
-export const HOOK_MODELS: Record<Recipe["hook"]["model"], HookModel> = {
+export const HOOK_MODELS: Record<HookModelId, HookModel> = {
   "dry-standard": {
     label: "Dry fly hook, standard shank",
     shankLength: 2.0, shankCurve: 0, wireRadius: 0.045, eyeRadius: 0.17, eyeAngle: 30, pointLength: 0.75,
@@ -103,9 +109,55 @@ const THREAD_DIAMETER_MM: Record<Recipe["thread"]["size"], number> = {
   "3/0": 0.2, "6/0": 0.13, "8/0": 0.1, "10/0": 0.08, "12/0": 0.065, "14/0": 0.055,
 };
 
+/**
+ * Tubes have no gape, so their unit is four times their outer diameter, about the gape of a
+ * hook of the same size. A Waddington's twisted shank is taken as 2 mm wide.
+ */
+// Assumption: typical outer diameters in mm, liner included for plastic tubes.
+const TUBES: Record<TubeModelId, { label: string; diameter: number; color: string; kind: "tube" | "waddington" }> = {
+  "tube-plastic": { label: "Plastic tube", diameter: 3, color: "#2a2a2a", kind: "tube" },
+  "tube-aluminium": { label: "Aluminium tube", diameter: 3.5, color: "#c9ccd1", kind: "tube" },
+  "tube-copper": { label: "Copper tube", diameter: 3.5, color: "#b87333", kind: "tube" },
+  "tube-brass": { label: "Brass tube", diameter: 3.5, color: "#c9a23a", kind: "tube" },
+  "tube-needle": { label: "Needle tube", diameter: 1.8, color: "#c9ccd1", kind: "tube" },
+  waddington: { label: "Waddington shank", diameter: 2, color: "#3a2e22", kind: "waddington" },
+};
+
+const DEFAULT_TREBLE = 12;
+
+/** Millimetres in one unit (one gape) of the recipe's hook or tube. */
+export function unitMm(hook: Recipe["hook"]): number {
+  return isTube(hook.model) ? 4 * TUBES[hook.model].diameter : gapeMm(hook.size ?? 12);
+}
+
+/** The geometry the fly is tied on: a hook model, or a tube or Waddington built to its length. */
+export function hookModel(hook: Recipe["hook"]): HookModel {
+  if (!isTube(hook.model)) return HOOK_MODELS[hook.model];
+  const tube = TUBES[hook.model];
+  const unit = unitMm(hook);
+  const length = hook.length ?? 25;
+  return {
+    label: `${tube.label}, ${length} mm`,
+    shankLength: length / unit,
+    shankCurve: 0,
+    // The outer radius, in units of four diameters, is always an eighth.
+    wireRadius: tube.diameter / 2 / unit,
+    eyeRadius: tube.kind === "waddington" ? 0.17 : 0,
+    eyeAngle: tube.kind === "waddington" ? -30 : 0,
+    pointLength: 0,
+    tube: { kind: tube.kind, color: tube.color, trebleScale: gapeMm(hook.treble ?? DEFAULT_TREBLE) / unit },
+    example: tube.kind === "waddington" ? "Waddington shank" : "Pro Tube, Eumer, Frödin",
+  };
+}
+
+/** The treble that goes behind a tube or Waddington, for the materials list. */
+export function trebleSize(hook: Recipe["hook"]): number | null {
+  return isTube(hook.model) ? (hook.treble ?? DEFAULT_TREBLE) : null;
+}
+
 /** Whether the fly swims hook point up (dumbbell-eyed flies, jig hooks). */
 export function ridesPointUp(recipe: Recipe): boolean {
-  return (recipe.rides ?? (HOOK_MODELS[recipe.hook.model].jig ? "point-up" : "point-down")) === "point-up";
+  return (recipe.rides ?? (hookModel(recipe.hook).jig ? "point-up" : "point-down")) === "point-up";
 }
 
 export function gapeMm(size: number): number {
@@ -114,5 +166,5 @@ export function gapeMm(size: number): number {
 
 /** Diameter in gapes of thread of the given size (default: the tying thread) on the recipe's hook. */
 export function threadDiameter(recipe: Recipe, size: Recipe["thread"]["size"] = recipe.thread.size): number {
-  return THREAD_DIAMETER_MM[size] / gapeMm(recipe.hook.size);
+  return THREAD_DIAMETER_MM[size] / unitMm(recipe.hook);
 }

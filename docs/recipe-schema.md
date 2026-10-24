@@ -122,7 +122,7 @@ A variant is a complete recipe of its own with `variant-of` pointing at the main
 
 | Node     | Form                                  |
 |----------|---------------------------------------|
-| `hook`   | `hook <model> size=<even 2–24>`       |
+| `hook`   | `hook <model> size=<even 2–24>`, or for tubes and Waddingtons `hook <model> length=<mm> [treble=<size>]` |
 | `thread` | `thread <colour> size=<"3/0"…"14/0">` |
 
 Thread sizes: `3/0`, `6/0`, `8/0`, `10/0`, `12/0`, `14/0`.
@@ -144,6 +144,23 @@ Thread sizes: `3/0`, `6/0`, `8/0`, `10/0`, `12/0`, `14/0`.
 
 Positions on curved shanks are measured along the curve, so a recipe reads the same on
 any hook. A double or treble is dressed on its shank exactly like a single hook.
+
+Tubes and Waddington shanks are dressed like a shank too, with a treble hook behind them
+(`treble`, default size 12) in a silicone sleeve or through the Waddington's rear loop.
+They are sized by `length` in mm. A tube has no gape, so its unit is four times its outer
+diameter, about the gape of a hook of similar size; a Waddington's twisted shank counts as
+2 mm wide.
+
+| Tube model       | Outer diameter (assumed) |
+|------------------|--------------------------|
+| `tube-plastic`   | 3 mm (with liner)        |
+| `tube-aluminium` | 3.5 mm                   |
+| `tube-copper`    | 3.5 mm                   |
+| `tube-brass`     | 3.5 mm                   |
+| `tube-needle`    | 1.8 mm                   |
+| `waddington`     | 2 mm (twisted wire)      |
+
+A wing tied all round a tube takes `spread=180`.
 
 Flies with dumbbell eyes and flies on jig hooks swim hook point up. Jig hooks imply it; for
 other flies say so with `rides point-up` (the default is `point-down`). The steps are always

@@ -20,7 +20,7 @@ import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
 import type { Recipe } from "../src/recipe/schema";
 import { materialName } from "../src/tying/describe";
-import { HOOK_MODELS } from "../src/tying/hook";
+import { hookModel } from "../src/tying/hook";
 import { patternIds, Renderer } from "./lib/renderer";
 
 // Wikimedia throttles anonymous agents; identify the tool and where it comes from.
@@ -54,7 +54,7 @@ export function proportions(recipe: Recipe): string[] {
     const m = recipe.materials.find((m) => m.id === id);
     return m ? materialName(m) : id;
   };
-  const lines = [`${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}`, `hook ${recipe.hook.model} #${recipe.hook.size}`, ""];
+  const lines = [`${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}`, `hook ${recipe.hook.model} ${recipe.hook.size !== undefined ? `#${recipe.hook.size}` : `${recipe.hook.length} mm`}`, ""];
   let thread = 0;
   for (const step of recipe.steps) {
     if (step.op === "attach-thread") thread = step.at;
@@ -77,11 +77,11 @@ export function proportions(recipe: Recipe): string[] {
     }
   }
   for (const m of recipe.materials) if (m.fibre) lines.push(`${materialName(m)}: fibres ${m.fibre} gapes`);
-  const hook = HOOK_MODELS[recipe.hook.model];
+  const hook = hookModel(recipe.hook);
   lines.push(
     "",
     "Grid in gapes; x = 0 is the start of the bend.",
-    `Shank: ${hook.shankLength} gapes along the shank${hook.shankCurve ? `, curved ${hook.shankCurve}°` : ""} (${recipe.hook.model}).`,
+    `Shank: ${+hook.shankLength.toFixed(2)} gapes along the shank${hook.shankCurve ? `, curved ${hook.shankCurve}°` : ""} (${recipe.hook.model}).`,
   );
   return lines;
 }

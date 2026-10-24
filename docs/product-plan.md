@@ -81,8 +81,6 @@ hook size switch, deep links to steps.
 
 Catalog: established patterns of every type, each with sources, reference photos and a
 refcheck pass. Scandinavian additions chosen from a survey of flugor.se (see
-.cache/research/flugor-se-survey.md when present). Not yet supported, by patterns they would
-unlock: double hooks and trebles (most Scandinavian salmon flies are sold on doubles),
-tube flies and Waddingtons, cone heads, jig hooks, rubber legs, legs tied in crosswise
-(moose hair, as on Craven's foam beetle), and extended bodies such as the chenille larva
-of the Peeping Caddis.
+.cache/research/flugor-se-survey.md when present). Supported since the engine round after milestone 7: doubles and trebles, tubes and
+Waddingtons, cone heads, jig hooks (and point-up flies generally), rubber legs, legs tied
+across the shank, and extended bodies.

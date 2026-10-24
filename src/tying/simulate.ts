@@ -1,7 +1,7 @@
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import { resolveColor, type Material, type Recipe, type Step } from "../recipe/schema";
 import { stepText, stepTitle, type StepContext } from "./describe";
-import { gapeMm, HOOK_MODELS, threadDiameter, type HookModel } from "./hook";
+import { hookModel, threadDiameter, unitMm, type HookModel } from "./hook";
 import { Profile } from "./profile";
 import { bendEndX } from "./shank";
 
@@ -275,7 +275,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
   const color = resolveColor(colorName);
   const barring = BARRED[colorName] ?? 0;
   const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring };
-  const mm = (v: number) => v / gapeMm(recipe.hook.size);
+  const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
       return { ...base, strandRadius: 0.05, count: 160, tieInThickness: 0.025, layerThickness: (c) => 0.1 * Math.min(c, 1.5) };
@@ -380,7 +380,7 @@ const BUTTS = { length: 0.55, angle: deg(35) };
 const FEATHER_WIDTH = { breast: 0.5, tip: 0.28, slip: 0.32 };
 
 export function simulate(recipe: Recipe): Build {
-  const hook = HOOK_MODELS[recipe.hook.model];
+  const hook = hookModel(recipe.hook);
   const L = hook.shankLength;
   const td = threadDiameter(recipe);
   const threadRadius = td / 2;

@@ -65,7 +65,9 @@ function hookSizes(size: number): number[] {
 function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initialStep?: number }) {
   // The hook size can be changed to see the same fly at another size: proportions stay,
   // thread bulk changes as it would at the vise.
-  const [size, setSize] = useState(original.hook.size);
+  // Tubes are sized by length, so only hooks offer other sizes.
+  const tiedSize = original.hook.size;
+  const [size, setSize] = useState(tiedSize);
   const recipe = useMemo(() => (size === original.hook.size ? original : { ...original, hook: { ...original.hook, size } }), [original, size]);
   const build = useMemo(() => simulate(recipe), [recipe]);
   const [follow, setFollowState] = useState(readFollow);
@@ -256,14 +258,14 @@ function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initia
               <dt>{m.role}</dt>
               <dd>
                 {m.name}
-                {m.id === "hook" ? (
+                {m.id === "hook" && tiedSize !== undefined ? (
                   <label className="detail hook-size">
                     , size{" "}
                     <select value={size} onChange={(e) => setSize(Number(e.target.value))} aria-label="Hook size">
-                      {hookSizes(original.hook.size).map((s) => (
+                      {hookSizes(tiedSize).map((s) => (
                         <option key={s} value={s}>
                           {s}
-                          {s === original.hook.size ? " (as tied)" : ""}
+                          {s === tiedSize ? " (as tied)" : ""}
                         </option>
                       ))}
                     </select>
