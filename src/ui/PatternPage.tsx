@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
 import { findPattern, variantFamily } from "../patterns";
 import type { Recipe } from "../recipe/schema";
-import { materialsList } from "../tying/describe";
+import { materialName, materialsList } from "../tying/describe";
 import { simulate, stepAt } from "../tying/simulate";
 import { href, replaceHash } from "./router";
 import type { Theme } from "./theme";
@@ -51,13 +51,53 @@ function TransportIcon({ name }: { name: keyof typeof Icon }) {
   );
 }
 
-function PatternView({ recipe, initialStep, theme }: { recipe: Recipe; initialStep?: number; theme: Theme }) {
+const FOLLOW_KEY = "flybench.follow";
+
+function readFollow(): boolean {
+  try {
+    return localStorage.getItem(FOLLOW_KEY) !== "off";
+  } catch {
+    return true;
+  }
+}
+
+/** Even hook sizes around the size the pattern is tied on. */
+function hookSizes(size: number): number[] {
+  const sizes: number[] = [];
+  for (let s = Math.max(2, size - 8); s <= Math.min(24, size + 8); s += 2) sizes.push(s);
+  return sizes;
+}
+
+function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe; initialStep?: number; theme: Theme }) {
+  // The hook size can be changed to see the same fly at another size: proportions stay,
+  // thread bulk changes as it would at the vise.
+  const [size, setSize] = useState(original.hook.size);
+  const recipe = useMemo(() => (size === original.hook.size ? original : { ...original, hook: { ...original.hook, size } }), [original, size]);
   const build = useMemo(() => simulate(recipe), [recipe]);
+  const [follow, setFollowState] = useState(readFollow);
+  const setFollow = (on: boolean) => {
+    setFollowState(on);
+    try {
+      localStorage.setItem(FOLLOW_KEY, on ? "on" : "off");
+    } catch {
+      // Storage unavailable: the choice lasts for this visit.
+    }
+  };
+  const [flash, setFlash] = useState<string | null>(null);
   const [stopAt, setStopAt] = useState<number | null>(null);
   const player = usePlayer(build.duration, stopAt);
   const current = stepAt(build, player.time);
   const step = build.steps[current]!;
   const family = variantFamily(recipe);
+  const recipeStep = recipe.steps[current]!;
+  const inUse = "material" in recipeStep ? recipeStep.material : "thread";
+  const inUseMaterial = recipe.materials.find((m) => m.id === inUse);
+  const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : "Thread";
+  const showInDressing = () => {
+    setFlash(inUse);
+    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: "center", behavior: "smooth" });
+    setTimeout(() => setFlash(null), 1600);
+  };
 
   useEffect(() => {
     document.title = `${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}, Flybench`;
@@ -109,7 +149,15 @@ function PatternView({ recipe, initialStep, theme }: { recipe: Recipe; initialSt
   return (
     <div className="pattern">
       <section className="stage" aria-label="3D tying sequence">
-        <Viewer build={build} time={player.time} theme={theme} />
+        <Viewer
+          build={build}
+          time={player.time}
+          theme={theme}
+          follow={follow}
+          onFollowChange={setFollow}
+          callout={callout}
+          onCalloutClick={showInDressing}
+        />
         <div className="now" aria-live="polite">
           <p className="now-index">
             Step {current + 1} of {build.steps.length}
@@ -182,11 +230,29 @@ function PatternView({ recipe, initialStep, theme }: { recipe: Recipe; initialSt
         <h3>Dressing</h3>
         <dl className="dressing">
           {materialsList(recipe).map((m) => (
-            <div key={m.role}>
+            <div
+              key={m.id}
+              id={`dressing-${m.id}`}
+              className={[m.id === inUse ? "in-use" : "", m.id === flash ? "flash" : ""].join(" ").trim() || undefined}
+            >
               <dt>{m.role}</dt>
               <dd>
                 {m.name}
-                {m.detail && <span className="detail">, {m.detail}</span>}
+                {m.id === "hook" ? (
+                  <label className="detail hook-size">
+                    , size{" "}
+                    <select value={size} onChange={(e) => setSize(Number(e.target.value))} aria-label="Hook size">
+                      {hookSizes(original.hook.size).map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                          {s === original.hook.size ? " (as tied)" : ""}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ) : (
+                  m.detail && <span className="detail">, {m.detail}</span>
+                )}
               </dd>
             </div>
           ))}

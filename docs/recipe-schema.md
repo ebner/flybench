@@ -124,14 +124,30 @@ A variant is a complete recipe of its own with `variant-of` pointing at the main
 | `hook`   | `hook <model> size=<even 2–24>`       |
 | `thread` | `thread <colour> size=<"3/0"…"14/0">` |
 
-Hook models: `dry-standard`.
 Thread sizes: `3/0`, `6/0`, `8/0`, `10/0`, `12/0`, `14/0`.
+
+| Hook model           | Shape                                       | Like                  |
+|----------------------|---------------------------------------------|-----------------------|
+| `dry-standard`       | standard shank, fine wire, down eye          | TMC 100               |
+| `wet-standard`       | standard shank, heavy wire, down eye         | TMC 3769              |
+| `nymph-2xl`          | 2x long shank                               | TMC 5262              |
+| `streamer-4xl`       | 4x long shank                               | TMC 9395              |
+| `emerger-curved`     | curved shank (45°)                          | Partridge 15BN        |
+| `scud-curved`        | strongly curved shank (75°)                 | TMC 2457              |
+| `salmon-up-eye`      | long, heavy, up eye                         | Partridge Bartleet    |
+| `saltwater-straight` | heavy, straight eye                         | Gamakatsu SC15        |
+
+Positions on curved shanks are measured along the curve, so a recipe reads the same on
+any hook.
 
 ## Colours
 
 Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `brown`, `red-brown`,
 `red-game`, `ginger`, `tan`, `grizzly`, `olive`, `grey`, `dun`, `yellow`, `green`, `gold`, `silver`,
-`copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`.
+`copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
+`lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
+`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`. Barred colours
+(`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars.
 Or a quoted hex value: `"#c8102e"`.
 
 ## Materials
@@ -144,27 +160,43 @@ for search and the inventory.
 All materials accept `color` and `label="…"`, which overrides the generated display name.
 `color` is required unless the catalog gives a default.
 
-| Kind                | Archetype | Default colour  | Extra properties |
-|---------------------|-----------|-----------------|------------------|
-| `wool`              | yarn      | –               |                  |
-| `peacock-herl`      | herl      | (natural)       | `strands` (1–6, default 3) |
-| `cock-hackle`       | hackle    | –               | `fibre`: fibre length in gapes (required) |
-| `hares-ear-dubbing` | dubbing   | `hares-ear`     |                  |
-| `dry-fly-dubbing`   | dubbing   | –               |                  |
-| `gold-wire`         | wire      | `gold`          |                  |
-| `copper-wire`       | wire      | `copper`        |                  |
-| `silver-wire`       | wire      | `silver`        |                  |
-| `rib-thread`        | floss     | –               | `size` (thread size; default the tying thread's) |
-| `elk-hair`          | hair      | `elk`           |                  |
-| `pheasant-tail`     | fibres    | `pheasant-tail` | `count` (default 6) |
-| `mallard-breast`    | feather   | `mallard`       |                  |
+The catalog lives in `src/recipe/materials.ts`; each entry names its archetype, which decides
+how it is drawn and which extra properties it takes:
+
+| Archetype  | Kinds | Extra properties |
+|------------|-------|------------------|
+| yarn       | `wool`, `poly-yarn` | |
+| herl       | `peacock-herl` | `strands` (1–6, default 3) |
+| hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind) |
+| dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur` | |
+| wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | |
+| floss      | `rib-thread`, `silk-floss` | `size` (thread size) |
+| tinsel     | `flat-tinsel`, `oval-tinsel` | |
+| chenille   | `chenille` | |
+| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane` | |
+| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs` | `count` |
+| biot       | `goose-biot` | `count` (default 2) |
+| marabou    | `marabou` | |
+| cdc        | `cdc` | |
+| flash      | `krystal-flash`, `flashabou` | `count` |
+| feather    | `mallard-breast`, `teal-flank` (breast), `hackle-tips`, `saddle-feathers` (tip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
+| foam       | `foam` | |
+| bead       | `brass-bead`, `tungsten-bead` | `mm` (required) |
+| eyes       | `dumbbell-eyes`, `bead-chain-eyes` | `mm` (required) |
 
 The archetype decides how a material behaves and is drawn:
 
 - **dubbing** is spun onto the thread with `dub`, never tied in.
-- **hair** is tied in as a clump with `length`; its butts stick forward until trimmed.
-- **feather** wings are tied in with `length` and lie over the body like a roof.
-- Everything else can be tied in with `length` (tags, tails), or without it and then wound.
+- **beads** go on with `slide-bead` before the thread; **eyes** are tied in without a length.
+- **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Hair
+  can also be spun (`spin`) and trimmed into a head.
+- **hair, feather, biot, marabou, cdc, flash** stick out from where they are tied in, so
+  they need a `length`.
+- **feather** wings: breast feathers lie over the body like a roof; hackle tips and quill
+  slips stand on edge. With `spread`, they are a pair turned out to either side (an
+  upright divided wing at `angle=90`, or slips along the sides of a wet fly).
+- Windable materials (yarn, herl, hackle, wire, floss, tinsel, chenille, fibres) can be
+  tied in without a length and then wound, or pulled over (`pull-over`).
 
 ## Steps
 
@@ -176,18 +208,24 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 
 | Step            | Form                                              | Meaning |
 |-----------------|---------------------------------------------------|---------|
+| `slide-bead`    | `slide-bead <bead>`                               | Before the thread: slide a bead up to the eye. Wraps then stop behind it. |
+| `weight`        | `weight <wire> from=<pos> to=<pos>`               | Wrap weighting wire in touching turns (before or after the thread). |
 | `attach-thread` | `attach-thread at=<pos>`                          | Start the thread at `at`. |
 | `wrap-thread`   | `wrap-thread to=<pos> [turns=<n>]`                | Move the thread to `to`. Without `turns` it lays touching turns; with `turns` it makes that many open turns. |
-| `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank. `spread`: how far round the body a tag, tail or hair wing fans out, in degrees either side of the top (defaults: yarn 35, fibres 15, hair 60). `width`: width of a feather wing (default half its length). Without `length`, a loose end hangs until the material is wound. |
+| `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>] [side=top\|under]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank; at 60° or more it stands upright (a wing post). `spread`: how far round the body a bunch fans out, in degrees either side of the top; for feathers, makes a pair. `width`: feather width (default by shape). `side=under`: under the shank (beards, throats, under-wings, eyes). Without `length`, a loose end hangs until the material is wound or pulled over. |
 | `dub`           | `dub <material> to=<pos> [turns=<n>]`             | Spin dubbing onto the thread and wrap it to `to`; the thread ends there. |
 | `wind`          | `wind <material> to=<pos> turns=<n>`              | Wind the material from its tie-in point to `to`. Forward: it ends at the thread. Rearward (palmering): it ends away from the thread and must be secured (see below). |
+| `wind` (parachute) | `wind <hackle> around=<post> turns=<n>`        | Wind a hackle horizontally round the base of an upright post; tie it off next. |
+| `pull-over`     | `pull-over <material> to=<pos>`                   | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. |
+| `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess. |
-| `trim`          | `trim <material> [leave=<gapes>]`                 | Cut off what sticks out: the tip of a palmered material, or the butts of a hair clump (`leave` = length of head left standing; default flush). |
+| `trim`          | `trim <material> [leave=<gapes>]`                 | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side). |
 | `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. |
 
 ### Tying rules (semantic validation)
 
-- `attach-thread` comes first and occurs once.
+- Beads go on before the thread; nothing else but weighting may come before `attach-thread`,
+  which occurs once.
 - A material is tied in once and wound at most once. Dubbing is only used with `dub`.
 - Hair and feather wings need a `length`. `angle` needs a `length`. `spread` only applies
   to tags, tails and hair wings tied in with a length; `width` only to feather wings.
@@ -205,5 +243,8 @@ bend"). When proportions are taken from reference photos, say so in a comment.
   another material forward from at or behind its tip, and its tip must be trimmed before
   the whip finish.
 - `trim` needs something to trim; `leave` only applies to hair butts.
+- A parachute hackle needs a post tied in upright (`angle` of 60° or more).
+- `pull-over` needs the material tied in and unused, and the thread at `to`.
+- Only hair is spun, only wire weights, only beads are slid on.
 - `whip-finish` is the last step, and every recipe ends with one.
 - Materials have unique ids, and steps refer only to defined materials.

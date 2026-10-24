@@ -67,7 +67,15 @@ hook size switch, deep links to steps.
       and the reference check (contact sheets against reference photos).
    ✅ b. Field-journal design system, gallery front page, search. App name: Flybench
       (flybench.app).
-4. Pattern page and viewer features (auto camera, callouts, hook size, deep links).
+4. ✅ Pattern page and viewer features (auto camera, callouts, hook size, deep links).
+   Engine: curved and long hooks (8 hook models), beads, weighting, tinsel, chenille,
+   soft hackles, biots, marabou, CDC, flash, feather pairs, beards, eyes, wing cases,
+   parachute posts, spun and trimmed hair.
 5. Techniques library and learning path.
 6. Fly box, materials inventory, bench mode, PWA.
 7. Authoring studio.
+
+Catalog: established patterns of every type, each with sources, reference photos and a
+refcheck pass. Scandinavian additions chosen from a survey of flugor.se (see
+.cache/research/flugor-se-survey.md when present). Not yet supported, by patterns they would
+unlock: double hooks, tube flies, cone heads, rubber legs.

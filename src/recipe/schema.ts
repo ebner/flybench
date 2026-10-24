@@ -34,6 +34,25 @@ export const NAMED_COLORS = {
   "hares-ear": "#7a6450",
   mallard: "#6e6558",
   "pheasant-tail": "#8a4a22",
+  partridge: "#8a7558",
+  snipe: "#6f6a64",
+  lead: "#6b6e72",
+  deer: "#8c6f52",
+  squirrel: "#7e6e5e",
+  moose: "#2b2622",
+  tippet: "#e08a2a",
+  crest: "#e8b923",
+  pearl: "#e6e2ea",
+  teal: "#cfcac0",
+  turkey: "#8a6a48",
+  badger: "#d9cdb4",
+  "blue-dun": "#6e7480",
+  purple: "#4b2a6b",
+  orange: "#e0731f",
+  pink: "#e88aa6",
+  claret: "#6a1c2e",
+  chartreuse: "#b5d52a",
+  coch: "#5a2614",
 } as const;
 
 export type NamedColor = keyof typeof NAMED_COLORS;
@@ -55,7 +74,10 @@ const GapeLength = z.number().positive().max(5);
 
 const Note = z.string().min(1).optional();
 
-export const HOOK_MODELS = ["dry-standard"] as const;
+export const HOOK_MODEL_IDS = [
+  "dry-standard", "wet-standard", "nymph-2xl", "streamer-4xl",
+  "emerger-curved", "scud-curved", "salmon-up-eye", "saltwater-straight",
+] as const;
 export const THREAD_SIZES = ["3/0", "6/0", "8/0", "10/0", "12/0", "14/0"] as const;
 
 export const FLY_TYPES = [
@@ -72,7 +94,7 @@ export const MONTHS = [
 ] as const;
 
 const Hook = z.strictObject({
-  model: z.enum(HOOK_MODELS),
+  model: z.enum(HOOK_MODEL_IDS),
   size: z
     .number()
     .int()
@@ -98,19 +120,26 @@ const Material = z
     fibre: GapeLength.optional(),
     /** floss: thread size. */
     size: z.enum(THREAD_SIZES).optional(),
-    /** fibres: number of fibres in the bunch. */
+    /** fibres, biots, flash: number of fibres or strands in the bunch. */
     count: z.number().int().min(1).max(60).optional(),
+    /** hackle: how far the fibres lean back when wound, in degrees (overrides the catalog). */
+    sweep: z.number().min(0).max(80).optional(),
+    /** beads and eyes: diameter in millimetres, as they are sold. */
+    mm: z.number().min(1).max(12).optional(),
   })
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];
     const allowed = ARCHETYPE_PROPS[cat.archetype];
-    for (const prop of ["strands", "fibre", "size", "count"] as const) {
+    for (const prop of ["strands", "fibre", "size", "count", "sweep", "mm"] as const) {
       if (m[prop] !== undefined && !allowed.includes(prop)) {
         ctx.addIssue({ code: "custom", path: [prop], message: `"${prop}" does not apply to ${cat.name}` });
       }
     }
     if (cat.archetype === "hackle" && m.fibre === undefined) {
       ctx.addIssue({ code: "custom", path: ["fibre"], message: "a hackle needs its fibre length (in gapes)" });
+    }
+    if ((cat.archetype === "bead" || cat.archetype === "eyes") && m.mm === undefined) {
+      ctx.addIssue({ code: "custom", path: ["mm"], message: `${cat.name} need a size in millimetres (mm=…)` });
     }
     if (m.color === undefined && !("defaultColor" in cat)) {
       ctx.addIssue({ code: "custom", path: ["color"], message: `${cat.name} needs a colour` });
@@ -119,7 +148,19 @@ const Material = z
 
 const MaterialRef = Id;
 
+const Side = z.enum(["top", "under"]);
+
 const Step = z.discriminatedUnion("op", [
+  /** Before the thread: slide a bead round the bend up to the eye. */
+  z.strictObject({ op: z.literal("slide-bead"), material: MaterialRef, note: Note }),
+  /** Wrap weighting wire on the shank, in touching turns. Allowed before the thread. */
+  z.strictObject({
+    op: z.literal("weight"),
+    material: MaterialRef,
+    from: Position,
+    to: Position,
+    note: Note,
+  }),
   z.strictObject({ op: z.literal("attach-thread"), at: Position, note: Note }),
   z.strictObject({
     op: z.literal("wrap-thread"),
@@ -139,13 +180,29 @@ const Step = z.discriminatedUnion("op", [
     spread: z.number().min(0).max(120).optional(),
     /** Feather wings: width of the feather, in gapes. */
     width: GapeLength.optional(),
+    /** On top of the shank (default) or underneath it (beards, throats, under-wings). */
+    side: Side.optional(),
     note: Note,
   }),
   z.strictObject({
     op: z.literal("wind"),
     material: MaterialRef,
-    to: Position,
+    /** Along the shank: where the winding ends. Not used when winding around a post. */
+    to: Position.optional(),
+    /** Parachute: wind horizontally around this upright post instead of the shank. */
+    around: MaterialRef.optional(),
     turns: z.number().int().positive(),
+    note: Note,
+  }),
+  /** Fold a material tied in at the rear forward over the top of the body and tie it down at the thread. */
+  z.strictObject({ op: z.literal("pull-over"), material: MaterialRef, to: Position, note: Note }),
+  /** Spin hair round the shank in clumps from the thread forward to `to`; the thread ends there. */
+  z.strictObject({
+    op: z.literal("spin"),
+    material: MaterialRef,
+    to: Position,
+    /** Leave the tips of the first clump trailing back as a collar this long (gapes), as on a Muddler. */
+    collar: GapeLength.optional(),
     note: Note,
   }),
   z.strictObject({

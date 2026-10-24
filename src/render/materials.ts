@@ -54,7 +54,25 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
     case "stem":
       return new THREE.MeshStandardMaterial({ color, roughness: 0.5 });
     case "wire":
+    case "tinsel":
+    case "bead":
     case "metal":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.25, metalness: 0.9 });
+      return new THREE.MeshStandardMaterial({ color, roughness: 0.22, metalness: 0.95, ...fibres });
+    case "eyes":
+      // Painted or plated: shiny but not mirror-like.
+      return new THREE.MeshStandardMaterial({ color, roughness: 0.3, metalness: 0.6 });
+    case "chenille":
+      return new THREE.MeshStandardMaterial({ color, roughness: 1, ...fibres });
+    case "biot":
+      return new THREE.MeshStandardMaterial({ color, roughness: 0.45, ...fibres });
+    case "marabou":
+    case "cdc":
+      return new THREE.MeshStandardMaterial({ color, roughness: 1, transparent: true, opacity: 0.85, ...fibres });
+    case "flash":
+      return new THREE.MeshPhysicalMaterial({
+        color, roughness: 0.15, metalness: 0.7, iridescence: 0.8, iridescenceIOR: 1.5, ...fibres,
+      });
+    case "foam":
+      return new THREE.MeshStandardMaterial({ color, roughness: 0.75 });
   }
 }

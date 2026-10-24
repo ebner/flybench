@@ -1,32 +1,68 @@
 import type { Recipe } from "../recipe/schema";
 
 /**
- * Hook geometry in gape units (world unit = 1 gape). The shank runs along +X
- * from x = 0 (start of the bend) to x = shankLength (where the eye starts);
- * the bend hangs below it in the XY plane.
+ * Hook geometry in gape units (world unit = 1 gape). See shank.ts for how the shank
+ * (straight or curved) and the bend are laid out.
  */
 export interface HookModel {
   label: string;
+  /** Length of the shank along its curve, from the start of the bend to the eye. */
   shankLength: number;
+  /** Total curvature of the shank in degrees; 0 for a straight shank. */
+  shankCurve: number;
   wireRadius: number;
   /** Outer radius of the eye ring. */
   eyeRadius: number;
-  /** Down-eye angle in degrees. */
+  /** Eye angle in degrees: positive turns down, negative turns up, 0 is straight. */
   eyeAngle: number;
   /** Length of the point section after the bend. */
   pointLength: number;
+  /** Typical model, for the materials list. */
+  example: string;
 }
 
-// Assumption: a standard dry-fly hook (TMC 100 style) has a shank about twice
-// the gape, wire about 0.09 gape, and a 30° down eye.
+// Assumption: proportions in gapes estimated from common hook models (named in
+// `example`): shank length, wire thickness, curvature and eye angle.
 export const HOOK_MODELS: Record<Recipe["hook"]["model"], HookModel> = {
   "dry-standard": {
     label: "Dry fly hook, standard shank",
-    shankLength: 2.0,
-    wireRadius: 0.045,
-    eyeRadius: 0.17,
-    eyeAngle: 30,
-    pointLength: 0.75,
+    shankLength: 2.0, shankCurve: 0, wireRadius: 0.045, eyeRadius: 0.17, eyeAngle: 30, pointLength: 0.75,
+    example: "TMC 100",
+  },
+  "wet-standard": {
+    label: "Wet fly hook, standard shank, heavy wire",
+    shankLength: 2.1, shankCurve: 0, wireRadius: 0.06, eyeRadius: 0.18, eyeAngle: 30, pointLength: 0.8,
+    example: "TMC 3769",
+  },
+  "nymph-2xl": {
+    label: "Nymph hook, 2x long",
+    shankLength: 2.8, shankCurve: 0, wireRadius: 0.055, eyeRadius: 0.18, eyeAngle: 30, pointLength: 0.8,
+    example: "TMC 5262",
+  },
+  "streamer-4xl": {
+    label: "Streamer hook, 4x long",
+    shankLength: 4.0, shankCurve: 0, wireRadius: 0.065, eyeRadius: 0.2, eyeAngle: 20, pointLength: 0.85,
+    example: "TMC 9395",
+  },
+  "emerger-curved": {
+    label: "Curved emerger hook",
+    shankLength: 2.3, shankCurve: 45, wireRadius: 0.045, eyeRadius: 0.17, eyeAngle: 20, pointLength: 0.75,
+    example: "Partridge 15BN Klinkhamer",
+  },
+  "scud-curved": {
+    label: "Curved scud and pupa hook",
+    shankLength: 1.9, shankCurve: 75, wireRadius: 0.055, eyeRadius: 0.17, eyeAngle: 15, pointLength: 0.75,
+    example: "TMC 2457",
+  },
+  "salmon-up-eye": {
+    label: "Salmon hook, up eye",
+    shankLength: 2.7, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.9,
+    example: "Partridge Bartleet",
+  },
+  "saltwater-straight": {
+    label: "Saltwater hook, straight eye",
+    shankLength: 2.4, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.21, eyeAngle: 0, pointLength: 0.9,
+    example: "Gamakatsu SC15",
   },
 };
 
@@ -41,12 +77,6 @@ const GAPE_MM: Record<number, number> = {
 const THREAD_DIAMETER_MM: Record<Recipe["thread"]["size"], number> = {
   "3/0": 0.2, "6/0": 0.13, "8/0": 0.1, "10/0": 0.08, "12/0": 0.065, "14/0": 0.055,
 };
-
-/** x of the rearmost point of the bend (outside of the wire), in gapes. */
-export function bendEndX(hook: HookModel): number {
-  const R = (1 + 2 * hook.wireRadius) / 2;
-  return -(R + hook.wireRadius);
-}
 
 export function gapeMm(size: number): number {
   return GAPE_MM[size] ?? 4.5;

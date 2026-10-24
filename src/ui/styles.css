@@ -464,16 +464,66 @@ select {
   touch-action: none;
 }
 
-.viewer-reset {
+.viewer-tools {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.viewer-tools button {
   padding: 0.2rem 0.7rem;
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: var(--paper-raised);
   font-size: var(--step--1);
   cursor: pointer;
+}
+
+.viewer-tools button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* The label beside the material in use: a short leader line up and to the right of it. */
+.callout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: auto;
+  cursor: pointer;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink);
+  will-change: transform;
+}
+
+.callout span {
+  position: absolute;
+  left: 2.2rem;
+  bottom: 1.6rem;
+  white-space: nowrap;
+  padding: 0 0.35rem;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+}
+
+.callout::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.4rem;
+  border-top: 1px solid var(--ink-soft);
+  transform-origin: 0 0;
+  transform: rotate(-36deg);
+}
+
+.callout[hidden] {
+  display: none;
 }
 
 .now {
@@ -644,6 +694,34 @@ select {
 
 .dressing dd {
   margin: 0;
+}
+
+.dressing div.in-use dt {
+  color: var(--accent);
+}
+
+.dressing div.in-use dd {
+  font-weight: 600;
+}
+
+.dressing div.flash {
+  animation: flash 1.6s ease-out;
+}
+
+@keyframes flash {
+  from {
+    background: var(--accent-wash);
+  }
+}
+
+.hook-size select {
+  border: 0;
+  border-bottom: 1px dotted var(--ink-soft);
+  background: none;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
 }
 
 .detail {

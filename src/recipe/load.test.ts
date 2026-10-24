@@ -166,7 +166,7 @@ describe("schema validation", () => {
   });
 
   it("rejects unknown operations", () => {
-    expect(errorsOf(load(VALID_STEPS.replace("tie-off herl", "spin herl")))[0]).toMatch(/steps\.5\.op/);
+    expect(errorsOf(load(VALID_STEPS.replace("tie-off herl", "lasso herl")))[0]).toMatch(/steps\.5\.op/);
   });
 
   it("rejects unknown properties", () => {
@@ -219,7 +219,7 @@ describe("semantic validation", () => {
     ["palmered hackle must be secured", PALMER_STEPS.replace("wind rib to=0.75 turns=5", "wrap-thread to=0.76"), /must be secured by winding another material forward/],
     ["palmered tip must be trimmed", PALMER_STEPS.replace("trim hackle", ""), /tip of "hackle" is still hanging/],
     ["nothing to trim", VALID_STEPS.replace("tie-off herl", "tie-off herl\n trim herl"), /nothing of "herl" to trim/],
-    ["hair wings need a length", PALMER_STEPS.replace("length=1.7 angle=15", ""), /hair wing needs a length/],
+    ["hair wings need a length", PALMER_STEPS.replace("length=1.7 angle=15", ""), /elk hair sticks out from where it is tied in, so it needs a length/],
     ["angle needs a length", VALID_STEPS.replace("tie-in herl", "tie-in herl angle=20"), /angle only applies/],
     ["leave is for hair", PALMER_STEPS.replace("trim hackle", "trim hackle leave=0.1"), /leave only applies to hair butts/],
     ["spread is for bunches", VALID_STEPS.replace("tie-in herl", "tie-in herl spread=40"), /spread only applies/],
@@ -279,4 +279,72 @@ describe("materials catalog", () => {
       if ("defaultColor" in m && !m.defaultColor.startsWith("#")) expect(NAMED_COLORS).toHaveProperty(m.defaultColor);
     }
   });
+});
+
+describe("beads, weight, posts, wing cases, spun hair and eyes", () => {
+  const header = `
+id test
+name "Test"
+type nymph
+difficulty beginner
+hook nymph-2xl size=12
+thread black size="8/0"
+materials {
+    bead tungsten-bead mm=3.3
+    lead lead-free-wire
+    post poly-yarn
+    hackle cock-hackle color=grizzly fibre=1.0
+    case pheasant-tail count=8
+    fur hares-ear-dubbing
+    head deer-hair
+    eyes dumbbell-eyes mm=4
+    tail marabou color=black
+    wire gold-wire
+}
+`;
+  const steps = `
+    slide-bead bead
+    weight lead from=0.4 to=0.8
+    attach-thread at=0.7
+    tie-in post length=0.8 angle=90
+    tie-in eyes side=under
+    wrap-thread to=0.0
+    tie-in tail length=1.2
+    tie-in case
+    dub fur to=0.6
+    tie-in hackle
+    wrap-thread to=0.7
+    wind hackle around=post turns=4
+    tie-off hackle
+    pull-over case to=0.7
+    spin head to=0.85 collar=0.8
+    trim head leave=0.3
+    whip-finish
+`;
+  const run = (s: string) => load(s, header);
+
+  it("accepts all of them in a sensible order", () => {
+    expect(recipeOf(run(steps)).steps).toHaveLength(17);
+  });
+
+  const cases: [string, string, RegExp][] = [
+    ["bead after the thread", steps.replace("slide-bead bead\n", "").replace("attach-thread at=0.7", "attach-thread at=0.7\n slide-bead bead"), /slide the bead on before attaching the thread/],
+    ["beads are not tied in", steps.replace("slide-bead bead", "attach-thread at=0.7\n tie-in bead").replace("weight lead from=0.4 to=0.8\n    attach-thread at=0.7", ""), /beads go on with "slide-bead"/],
+    ["weight with wire only", steps.replace("weight lead", "weight fur"), /weighting is done with wire/],
+    ["weight runs forward", steps.replace("from=0.4 to=0.8", "from=0.8 to=0.4"), /must run forward/],
+    ["wind needs to or around", steps.replace("wind hackle around=post turns=4", "wind hackle turns=4"), /either `to`.*or `around`/],
+    ["posts stand upright", steps.replace("tie-in post length=0.8 angle=90", "tie-in post length=0.8 angle=20"), /must be tied in upright/],
+    ["pull over after tying in", steps.replace("tie-in case\n", ""), /must be tied in \(and not yet used\)/],
+    ["pull over up to the thread", steps.replace("pull-over case to=0.7", "pull-over case to=0.9"), /tie the material down there/],
+    ["spin only hair", steps.replace("spin head", "spin fur"), /only hair can be spun/],
+    ["eyes take no length", steps.replace("tie-in eyes side=under", "tie-in eyes length=1"), /eyes do not take a length/],
+    ["marabou needs a length", steps.replace("tie-in tail length=1.2", "tie-in tail"), /marabou sticks out .* needs a length/],
+    ["beads need a size", steps, /need a size in millimetres/],
+  ];
+  for (const [name, s, pattern] of cases) {
+    it(name, () => {
+      const h = name === "beads need a size" ? header.replace("tungsten-bead mm=3.3", "tungsten-bead") : header;
+      expect(errorsOf(load(s, h)).join("\n")).toMatch(pattern);
+    });
+  }
 });

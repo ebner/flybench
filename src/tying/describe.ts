@@ -19,6 +19,8 @@ export function materialName(m: Material): string {
 }
 
 export interface MaterialsListEntry {
+  /** The recipe's material id, or "hook" / "thread". */
+  id: string;
   role: string;
   name: string;
   detail?: string;
@@ -27,9 +29,10 @@ export interface MaterialsListEntry {
 export function materialsList(recipe: Recipe): MaterialsListEntry[] {
   const hook = HOOK_MODELS[recipe.hook.model];
   return [
-    { role: "Hook", name: hook.label, detail: `size ${recipe.hook.size}` },
-    { role: "Thread", name: capitalize(`${colorName(recipe.thread.color)} thread`.trim()), detail: recipe.thread.size },
+    { id: "hook", role: "Hook", name: hook.label, detail: `size ${recipe.hook.size}` },
+    { id: "thread", role: "Thread", name: capitalize(`${colorName(recipe.thread.color)} thread`.trim()), detail: recipe.thread.size },
     ...recipe.materials.map((m) => ({
+      id: m.id,
       role: capitalize(m.id.replace(/-/g, " ")),
       name: materialName(m),
       detail:
@@ -81,6 +84,8 @@ export interface StepContext {
   through?: string;
   /** trim: trimming the tip of a palmered material rather than hair butts. */
   tip?: boolean;
+  /** trim: shaping a spun-hair head rather than trimming butts. */
+  spun?: boolean;
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
@@ -95,6 +100,12 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
   };
   let text: string;
   switch (step.op) {
+    case "slide-bead":
+      text = `Slide the ${mat(step.material)} round the bend and up to the eye, small hole first.`;
+      break;
+    case "weight":
+      text = `Wrap the ${mat(step.material)} in touching turns from ${positionText(step.from)} to ${positionText(step.to)}.`;
+      break;
     case "attach-thread":
       text = `Attach the thread at ${positionText(step.at)} with a few turns and trim the tag end.`;
       break;
@@ -109,10 +120,18 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       const what =
         archetype === "herl" && m?.strands
           ? `${m.strands} strands of peacock herl`
-          : archetype === "hair"
-            ? `a clump of ${mat(step.material)}`
+          : archetype === "hair" || archetype === "marabou" || archetype === "cdc"
+            ? `a bunch of ${mat(step.material)}`
             : `the ${mat(step.material)}`;
-      if (step.length) {
+      const under = step.side === "under";
+      if (archetype === "eyes") {
+        text = `Tie the ${mat(step.material)} ${under ? "under" : "on top of"} the shank with figure-of-eight turns.`;
+      } else if (step.length && (step.angle ?? 0) >= 60) {
+        const pair = (step.spread ?? 0) > 0 ? " Divide them into a V with figure-of-eight turns." : "";
+        text = `Tie in ${what} upright, ${gapeText(step.length)} tall, with turns in front to stand it up.${pair}`;
+      } else if (step.length && under) {
+        text = `Tie in ${what} under the shank as a beard, reaching ${gapeText(step.length)} back.`;
+      } else if (step.length) {
         const angle = step.angle ? `, angled about ${step.angle}° up from the shank` : "";
         const reach = ctx.tipX !== undefined && ctx.bendEnd !== undefined ? reachText(ctx.tipX, ctx.bendEnd) : null;
         const wing = archetype === "hair" || archetype === "feather";
@@ -127,14 +146,24 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       }
       break;
     }
-    case "wind":
-      if (ctx.rear) {
-        text = `Palmer the ${mat(step.material)} back to ${positionText(step.to)} in ${step.turns} open turns.`;
+    case "wind": {
+      const to = step.to ?? 0;
+      if (step.around) {
+        text = `Wind the ${mat(step.material)} round the base of the ${mat(step.around)} in ${step.turns} turns, each one under the last.`;
+      } else if (ctx.rear) {
+        text = `Palmer the ${mat(step.material)} back to ${positionText(to)} in ${step.turns} open turns.`;
       } else if (ctx.through) {
-        text = `Wind the ${mat(step.material)} forward to ${positionText(step.to)} in ${step.turns} turns through the ${mat(ctx.through)}. The first turn traps its tip.`;
+        text = `Wind the ${mat(step.material)} forward to ${positionText(to)} in ${step.turns} turns through the ${mat(ctx.through)}. The first turn traps its tip.`;
       } else {
-        text = `Wind the ${mat(step.material)} forward to ${positionText(step.to)} in ${step.turns} turns.`;
+        text = `Wind the ${mat(step.material)} forward to ${positionText(to)} in ${step.turns} turns.`;
       }
+      break;
+    }
+    case "pull-over":
+      text = `Pull the ${mat(step.material)} forward over the top of the body and tie it down at ${positionText(step.to)}. Trim the excess.`;
+      break;
+    case "spin":
+      text = `Spin clumps of ${mat(step.material)} round the shank, packing each one back against the last, up to ${positionText(step.to)}.`;
       break;
     case "dub":
       text = `Twist a thin noodle of ${mat(step.material)} onto the thread and wrap it forward to ${positionText(step.to)}.`;
@@ -143,7 +172,9 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       text = `Tie off the ${mat(step.material)} with a few thread turns and trim the excess.`;
       break;
     case "trim":
-      text = ctx.tip
+      text = ctx.spun
+        ? `Trim the spun ${mat(step.material)} to shape, leaving a head about ${gapeText(step.leave ?? 0.4)} thick on each side.`
+        : ctx.tip
         ? `Trim the tip of the ${mat(step.material)} close to the body.`
         : step.leave
           ? `Trim the butts of the ${mat(step.material)}, leaving a short head ${step.leave}× the gape long.`
@@ -157,6 +188,10 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
 }
 
 const OP_TITLES: Record<Step["op"], string> = {
+  "slide-bead": "Slide on bead",
+  weight: "Add weight",
+  "pull-over": "Pull over",
+  spin: "Spin",
   "attach-thread": "Attach thread",
   "wrap-thread": "Wrap thread",
   "tie-in": "Tie in",

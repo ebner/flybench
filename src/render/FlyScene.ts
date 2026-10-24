@@ -1,16 +1,19 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { stepAt, wrapAt, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
+import { stepAt, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
 import { buildHook } from "./hook";
 import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
-import { aroundShank, pieceView, type PieceView } from "./pieces";
+import { pieceView, type PieceView } from "./pieces";
+import { ShankSpace } from "./space";
 
 const REST_DIRECTIONS = {
   "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
   "back-up": new THREE.Vector3(-0.9, 0.8, 0.2).normalize(),
   out: new THREE.Vector3(0.25, -1, 0.35).normalize(),
+  /** Lying back over the bend, waiting to be pulled over the body. */
+  "back-flat": new THREE.Vector3(-1, 0.18, 0).normalize(),
 };
 
 /** Camera directions (from the fly towards the camera) for the named views. */
@@ -57,6 +60,7 @@ export class FlyScene {
   private bobbin: BobbinView | null = null;
   private looseEnds = new Map<string, LooseEndView>();
   private build: Build | null = null;
+  private space: ShankSpace | null = null;
   private resizeObserver: ResizeObserver;
   private frame = 0;
   /** Bounds of the finished fly, which the default view frames. */
@@ -72,6 +76,20 @@ export class FlyScene {
    */
   private fit: "box" | "sphere" = "box";
   private grid: THREE.Group | null = null;
+
+  /** Follow the action: the camera eases towards whatever the current step works on. */
+  private follow = false;
+  /** Bounds of what each step adds, for following the action. */
+  private stepBounds: THREE.Box3[] = [];
+  private currentStep = 0;
+  private atEnd = false;
+  /** World point the current step works at (thread contact, material being wound), for callouts. */
+  private anchor = new THREE.Vector3();
+  private lastFrame = 0;
+  /** Called when the user takes over the camera, which stops following. */
+  onFollowChange?: (follow: boolean) => void;
+  /** Called every frame with the screen position (CSS pixels) of the current step's anchor. */
+  onAnchor?: (point: { x: number; y: number } | null) => void;
 
   constructor(
     private container: HTMLElement,
@@ -98,23 +116,34 @@ export class FlyScene {
     this.controls.minDistance = 0.8;
     // Allow at least the distance a narrow field of view needs to frame the fly.
     this.controls.maxDistance = 14 * Math.max(1, 32 / (options.fov ?? 32));
-    this.controls.addEventListener("start", () => (this.userMoved = true));
+    this.controls.addEventListener("start", () => {
+      this.userMoved = true;
+      if (this.follow) {
+        this.follow = false;
+        this.onFollowChange?.(false);
+      }
+    });
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(container);
     this.resize();
 
-    const loop = () => {
+    const loop = (now: number) => {
       this.frame = requestAnimationFrame(loop);
+      const dt = Math.min(0.1, (now - (this.lastFrame || now)) / 1000);
+      this.lastFrame = now;
+      if (this.follow) this.followAction(dt);
       this.controls.update();
       this.renderer.render(this.scene, this.camera);
+      this.reportAnchor();
     };
-    loop();
+    this.frame = requestAnimationFrame(loop);
   }
 
   setBuild(build: Build) {
     this.clearFly();
     this.build = build;
+    this.space = new ShankSpace(build.hook);
     this.hook = buildHook(build.hook);
     this.fly.add(this.hook);
 
@@ -122,7 +151,7 @@ export class FlyScene {
       this.stepViews.push(
         step.pieces.map((p) => {
           if (p.type === "wraps") this.wraps.set(p.id, p);
-          const piece = pieceView(p, this.surfaces);
+          const piece = pieceView(p, this.surfaces, this.space!);
           this.fly.add(piece.object);
           return { piece, window: p.window, until: p.until };
         }),
@@ -130,6 +159,11 @@ export class FlyScene {
     }
     this.bobbin = new BobbinView(build.threadRadius, build.threadColor, this.surfaces);
     this.fly.add(this.bobbin.object);
+    this.stepBounds = build.steps.map((step, i) => {
+      this.setTime(step.start + step.duration);
+      const box = this.visibleBounds(this.stepViews[i]!.map((v) => v.piece.object));
+      return box.isEmpty() ? new THREE.Box3() : box;
+    });
     this.setTime(build.duration);
     this.finished = this.visibleBounds();
     this.resetCamera();
@@ -177,8 +211,55 @@ export class FlyScene {
     this.resetCamera();
   }
 
-  /** World-space bounds of the visible fly, without the bobbin and loose ends. */
-  private visibleBounds(): THREE.Box3 {
+  /** Follow the action (true) or leave the camera where the user puts it (false). */
+  setFollow(on: boolean) {
+    this.follow = on;
+    if (on) this.userMoved = false;
+  }
+
+  /** Where the camera should look while following: the current step's work, or the whole fly at the end. */
+  private actionBox(): THREE.Box3 {
+    if (this.atEnd) return this.finished;
+    let box = this.stepBounds[this.currentStep];
+    for (let i = this.currentStep; (!box || box.isEmpty()) && i > 0; i--) box = this.stepBounds[i - 1];
+    if (!box || box.isEmpty()) return this.finished;
+    // Not closer than about a gape and a half around the action, with the anchor in view.
+    const framed = box.clone().expandByPoint(this.anchor);
+    const center = framed.getCenter(new THREE.Vector3());
+    const size = framed.getSize(new THREE.Vector3()).max(new THREE.Vector3(1.6, 1.2, 1.2));
+    return new THREE.Box3().setFromCenterAndSize(center, size);
+  }
+
+  private followAction(dt: number) {
+    const box = this.actionBox();
+    const target = box.getCenter(new THREE.Vector3());
+    const offset = this.camera.position.clone().sub(this.controls.target);
+    const direction = offset.clone().normalize();
+    const distance = this.fitDistance(box, target, direction) * 1.15;
+    // Ease towards the action rather than jumping.
+    const k = 1 - Math.exp(-dt * 2.5);
+    this.controls.target.lerp(target, k);
+    const d = offset.length() + (distance - offset.length()) * k;
+    this.camera.position.copy(this.controls.target).addScaledVector(direction, d);
+  }
+
+  private reportAnchor() {
+    if (!this.onAnchor) return;
+    if (!this.build || this.atEnd) {
+      this.onAnchor(null);
+      return;
+    }
+    const p = this.anchor.clone().project(this.camera);
+    if (p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) {
+      this.onAnchor(null);
+      return;
+    }
+    const { clientWidth: w, clientHeight: h } = this.container;
+    this.onAnchor({ x: ((p.x + 1) / 2) * w, y: ((1 - p.y) / 2) * h });
+  }
+
+  /** World-space bounds of the visible fly (or of `only` these objects), without the bobbin and loose ends. */
+  private visibleBounds(only?: THREE.Object3D[]): THREE.Box3 {
     const box = new THREE.Box3();
     const part = new THREE.Box3();
     this.fly.updateMatrixWorld(true);
@@ -196,7 +277,8 @@ export class FlyScene {
       }
       o.children.forEach(visit);
     };
-    visit(this.fly);
+    if (only) only.forEach(visit);
+    else visit(this.fly);
     return box;
   }
 
@@ -253,18 +335,37 @@ export class FlyScene {
       }
     });
 
-    const current = build.steps[stepAt(build, t)]!;
+    this.currentStep = stepAt(build, t);
+    this.atEnd = t >= build.duration;
+    const current = build.steps[this.currentStep]!;
     const p = clamp01((t - current.start) / current.duration);
     this.poseThread(current.thread, p);
     this.poseLooseEnds(current.freeEnds, p);
+    this.anchor.copy(this.anchorFor(current, p));
   }
 
-  /** Progress of a wraps piece given the step progress, and whether it exists. */
+  /** The point a step works at: the material being wound, else the thread, else what the step adds. */
+  private anchorFor(step: Build["steps"][number], p: number): THREE.Vector3 {
+    const following = step.freeEnds.find((e) => e.kind === "follow");
+    if (following && following.kind === "follow") return this.followed(following.piece, p).point;
+    const box = this.stepBounds[step.index];
+    if (step.pieces.some((piece) => piece.type !== "wraps" || piece.material !== "thread") && box && !box.isEmpty()) {
+      return box.getCenter(new THREE.Vector3());
+    }
+    if (step.thread?.kind === "follow") return this.followed(step.thread.piece, p).point;
+    if (step.thread?.kind === "rest") return this.space!.around(step.thread.x, step.thread.radius, 0);
+    return this.finished.getCenter(new THREE.Vector3());
+  }
+
+  /** Where thread or material leaves a wraps piece at step progress p, in world space. */
   private followed(id: number, p: number) {
     const piece = this.wraps.get(id)!;
     const [a, b] = piece.window;
     const u = clamp01((p - a) / (b - a));
-    return { piece, u, at: wrapAt(piece, u) };
+    const w = wrapPoint(piece, u);
+    const point = this.space!.point(new THREE.Vector3(...w.point));
+    const leave = this.space!.direction(w.x, new THREE.Vector3(...w.leave).normalize());
+    return { u, point, leave };
   }
 
   private poseThread(pose: Build["steps"][number]["thread"], p: number) {
@@ -274,11 +375,11 @@ export class FlyScene {
       return;
     }
     if (pose.kind === "rest") {
-      this.bobbin.setPose(aroundShank(pose.x, pose.radius, 0), leaveDirection(0));
+      this.bobbin.setPose(this.space!.around(pose.x, pose.radius, 0), this.space!.direction(pose.x, leaveDirection(0)));
       return;
     }
-    const { at } = this.followed(pose.piece, p);
-    this.bobbin.setPose(aroundShank(at.x, at.radius, at.angle), leaveDirection(at.angle));
+    const { point, leave } = this.followed(pose.piece, p);
+    this.bobbin.setPose(point, leave);
   }
 
   private poseLooseEnds(ends: FreeEndPose[], p: number) {
@@ -294,12 +395,12 @@ export class FlyScene {
       }
       shown.add(key);
       if (end.kind === "rest") {
-        const dir = REST_DIRECTIONS[end.direction];
-        const base = new THREE.Vector3(end.x, dir.y * end.radius, dir.z * end.radius);
-        view.setPose(base, dir, 1);
+        const local = REST_DIRECTIONS[end.direction];
+        const base = this.space!.point(new THREE.Vector3(end.x, local.y * end.radius, local.z * end.radius));
+        view.setPose(base, this.space!.direction(end.x, local.clone()), 1);
       } else {
-        const { at, u } = this.followed(end.piece, p);
-        view.setPose(aroundShank(at.x, at.radius, at.angle), leaveDirection(at.angle), 1 - 0.6 * u);
+        const { point, leave, u } = this.followed(end.piece, p);
+        view.setPose(point, leave, 1 - 0.6 * u);
       }
     }
     for (const [key, view] of this.looseEnds) view.object.visible = shown.has(key);
