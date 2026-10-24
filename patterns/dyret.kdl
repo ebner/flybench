@@ -12,23 +12,27 @@ origin originator="Gunnar Bingen" year=1991 region="Rena, Norway"
 description "A clump of deer hair bound along the shank, its tips a tuft behind and its butts a square stub in front, with a dubbed body and a long palmered hackle trimmed underneath."
 history """
     Gunnar Bingen, who lives by the Rena, designed it around 1991 (his design sheet is dated
-    that year) as a mix of the Superpuppan and the Devil Bug: the Superpuppan lacked something
-    in some situations, and the Devil Bug was fragile. Meant as a caddis emerger, it turned out
-    to be an all-round dry. "Extremely ugly but highly efficient."
+    that year) as a mix of the Superpuppan and the Devil Bug: in his words the Superpuppan
+    "lacked" something in some situations, and the Devil Bug was efficient but fragile. Meant
+    as a caddis emerger, it has proved useful far more widely. Torben Meldgaard captioned his
+    photo of it "extremely ugly but highly efficient".
     """
 fishing """
-    Fished in the film, dead drift, when caddis are about along the banks and in the runs,
-    especially in late evening when big trout come in. The deer-hair body and trimmed
-    underside make it sit low; the long hackle keeps it up in broken water. A killer for
-    northern grayling.
+    Bingen's own favourite is dry-fly fishing in the late evening, when big trout come close
+    to the bank to pick off caddis. Many tyers, Bingen among them, clip the hackle underneath;
+    Thomas Züllich leaves it full. Popular with trout and grayling anglers across Scandinavia,
+    and Markus Hoffman calls his version a killer for northern grayling.
     """
 sources {
-    "Sexyloops: Dyret (Thomas Züllich)" url="https://www.sexyloops.com/flies/dyret"
-    "GlobalFlyFisher: Dyret, the Animal (video)" url="https://globalflyfisher.com/video/dyret"
+    "Sexyloops: Fly Tying School part 27, Dyret (Thomas Züllich)" url="https://www.sexyloops.com/index.php/ps/sexyloops-fly-tying-school-part-27-dyret"
+    "GlobalFlyFisher: Dyret (video, Hans Weilenmann)" url="https://globalflyfisher.com/video/dyret"
+    "GlobalFlyFisher: Dyret, the Animal (video, Markus Hoffman)" url="https://globalflyfisher.com/video/dyret-the-animal"
+    "GlobalFlyFisher: Dyret, the Beast (video)" url="https://globalflyfisher.com/video/dyret-the-beast"
+    "GlobalFlyFisher: Dyret (photo, Torben Meldgaard)" url="https://globalflyfisher.com/picture/dyret"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
-    "https://www.sexyloops.com/upload/images/tz/dyret/192ecde3c27bd81f4fefda80944fed1f.jpg" page="https://www.sexyloops.com/flies/dyret" license="All rights reserved; reference only" note="Side view, before the hackle is clipped"
+    "https://www.sexyloops.com/upload/images/tz/dyret/192ecde3c27bd81f4fefda80944fed1f.jpg" page="https://www.sexyloops.com/index.php/ps/sexyloops-fly-tying-school-part-27-dyret" license="All rights reserved; reference only" note="Side view, before the hackle is clipped"
     "https://img.youtube.com/vi/ucDmVgpugMs/maxresdefault.jpg" page="https://globalflyfisher.com/video/dyret" author="Hans Weilenmann" license="All rights reserved; reference only" note="Side view, clipped underneath"
     "https://globalflyfisher.com/sites/default/files/article_pictures/4_5.jpg" page="https://globalflyfisher.com/picture/dyret" author="Torben Meldgaard" license="All rights reserved; reference only" note="Side view in the vise"
 }

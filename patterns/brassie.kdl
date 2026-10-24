@@ -10,19 +10,23 @@ season january february march april may june july august september october novem
 origin region="South Platte River, Colorado, USA, 1960s"
 description "A body of copper wire in touching turns and a small peacock herl head."
 history """
-    From the South Platte in Colorado in the 1960s, credited to Gene Lynch of Colorado
-    Springs, with Ken Chandler and Tug Davenport, though accounts differ. Lynch had wrapped
-    spare hooks with copper wire as weight; a bare one caught fish. It is named after the
-    brass-coated copper wire of the originals, which had heads of black heat-shrink tubing.
+    From the South Platte in Colorado in the 1960s. Rusty Dunn credits Gene Lynch of
+    Colorado Springs, with Ken Chandler and Tug Davenport refining it: Lynch had wrapped bare
+    hooks with copper wire as underbodies for weighted nymphs, and when he fished one as a
+    weight ahead of a nymph, the fish took the bare wire hook instead. Pierre Joubert says
+    only that an electronics hobbyist created it. It is named after the brass-plated copper
+    wire of the originals, which had heads of black heat-shrink tubing.
     """
 fishing """
-    A heavy, slim midge larva or pupa that sinks quickly. Fish it near the bottom on
-    tailwaters and spring creeks, alone or below a heavier fly, all year. Red and green
-    wire are popular variants, and many tie it with a bead.
+    A heavy, slim fly that sinks quickly, suggesting midge and caddis larvae. In rivers,
+    fish it deep in a nymph rig or below a dry fly; on lakes it can be fished like a
+    buzzer, behind other flies with a figure-of-eight retrieve. Natural, red and green
+    wire are the most popular, and many tie it with a bead.
     """
 sources {
-    "SWTU: South Platte Brassie (Rusty Dunn)" url="https://swtu.org/?p=1501"
-    "Orvis: Brassie" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymphs/688-brassie"
+    "SWTU: South Platte Brassie (Rusty Dunn)" url="https://www.swtu.org/2018/10/02/south-platt-brassie/"
+    "Orvis: Brassie" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/688-brassie"
+    "Into Fly Fishing: How to tie a Brassie fly (Pierre Joubert)" url="https://intoflyfishing.com/how-to-tie-a-brassie/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

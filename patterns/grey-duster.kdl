@@ -11,20 +11,23 @@ season may june july august september
 origin region="Wales or England"
 description "A carrot-shaped body of blue-grey rabbit underfur and a badger cock hackle, without tail or wings."
 history """
-    An old British pattern of unknown origin. It is said to go back at least a hundred
-    years to Welsh anglers on the upper Dee, or to have begun as an English stillwater
-    midge; neither claim is documented. Courtney Williams rated it as good as any mayfly
-    imitation.
+    An old British pattern of unknown origin. Scott Sadil traces it to anglers on the upper
+    Dee in Wales, a century or more ago; Fish4Flies gives England and says it began as a
+    stillwater midge. Neither gives a source. Courtney Williams rated it "as good as, if not
+    better than, any other mayfly imitation", and Stan Headley says some anglers
+    fish nothing but Dusters to any mayfly hatch (both as quoted by Sadil).
     """
 fishing """
-    Dead drift on rivers or static on lochs. Without a tail the rear end breaks the surface,
-    so it sits in the film like an emerger. Good in mayfly time, during Caenis falls, and as a
-    grey searching fly for grayling. It is hard to see: watch for any rise near it.
+    For rivers and stillwaters. Without a tail the rear end breaks the surface and the fly
+    hangs in the film; Bob Wyatt reads it as an emerger rather than a dun. A general mayfly
+    imitation, tied small for Caenis, the angler's curse; Preben Torp Jacobsen found a
+    parachute version took Caenis feeders that refused everything else. It is hard to see
+    once it settles: watch for any rise near it.
     """
 sources {
-    "California Fly Fisher: Grey Duster (Scott Sadil)" url="https://calflyfisher.com/at-the-vise-grey-duster/"
+    "California Fly Fisher: At the Vise, Grey Duster (Scott Sadil)" url="https://calflyfisher.com/tips-and-techniques/at-the-vise-grey-duster/"
     "Fish4Flies: Grey Duster" url="https://www.fish4flies.com/Dry/Hackled/Grey-Duster"
-    "GlobalFlyFisher: Parachute Grey Duster (Preben Torp Jacobsen)" url="https://globalflyfisher.com/patterns/grey-duster"
+    "GlobalFlyFisher: Grey Duster, parachute (Preben Torp Jacobsen)" url="https://globalflyfisher.com/patterns/grey-duster"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

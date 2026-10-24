@@ -10,22 +10,26 @@ season june july august
 origin originator="Lennart Bergqvist" region="Sweden"
 description "A brown dubbed body under a dense deer hair wing; the butts of the same clump are spun round the shank and trimmed to a head."
 history """
-    Created by Lennart Bergqvist, who also tied the Superpuppan, to imitate the great red
-    sedge, Phryganea grandis, one of the largest Scandinavian caddis. He built on a deer-hair
-    head fly by Poul Jorgensen, adding the body and tying it bigger. No date is documented.
+    Created by Lennart Bergqvist, who also tied the Superpuppan, to imitate Phryganea
+    grandis, the great red sedge: up to five centimetres long, one of the largest caddis
+    there are, and found in Scandinavia. According to GlobalFlyFisher the style began with
+    Poul Jorgensen, whose smaller fly had only a deer-hair head; Bergqvist added the body
+    and tied it bigger. No date is documented.
     """
 fishing """
-    A fast-water sedge: the dense deer hair keeps it high even in rapids. Fish it dead drift,
-    or skate and skitter it across the current like an egg-laying or running sedge,
-    especially at dusk during summer hatches of the big Phryganea sedges.
+    A fast-water sedge: the deer-hair wing and head keep it high even in rapids. It was
+    designed to skate, and skates well; Peter Butler skates it during the October caddis
+    hatch and otherwise fishes it dead drift. A summer fly for trout when the big Phryganea
+    sedges hatch.
     """
 sources {
-    "GlobalFlyFisher: Streaking Caddis (video)" url="https://globalflyfisher.com/video/streaking-caddis-0"
-    "Guideline: Streaking Caddis" url="https://www.adh-fishing.com/guideline-streaking-caddis"
+    "GlobalFlyFisher: Streaking Caddis (video, Ahrex Hooks with Håkan Karsnäser)" url="https://globalflyfisher.com/video/streaking-caddis-0"
+    "ADH Fishing: Guideline Dry Fly, Streaking Caddis" url="https://www.adh-fishing.com/guideline-dry-fly-streaking-caddis"
+    "California Fly Fisher: At the Vise, Spun Heads (Peter Butler)" url="https://calflyfisher.com/tips-and-techniques/at-the-vise-spun-heads/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
-    "https://www.adh-fishing.com/media/26/bd/b3/1724045794/guideline-streaking-caddis.jpg?ts=1744155614" page="https://www.adh-fishing.com/guideline-streaking-caddis" license="All rights reserved; reference only" note="Side view"
+    "https://www.adh-fishing.com/media/26/bd/b3/1724045794/guideline-streaking-caddis.jpg?ts=1744155614" page="https://www.adh-fishing.com/guideline-dry-fly-streaking-caddis" license="All rights reserved; reference only" note="Side view"
     "https://img.youtube.com/vi/Zni7K_gob8I/maxresdefault.jpg" page="https://globalflyfisher.com/video/streaking-caddis-0" license="All rights reserved; reference only" note="Side view, video thumbnail"
 }
 

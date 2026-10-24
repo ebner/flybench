@@ -1,4 +1,4 @@
-// Montana Nymph: the black and yellow stonefly nymph, a stillwater favourite in the UK and Scandinavia.
+// Montana Nymph: the black and yellow stonefly nymph, also popular on stillwaters.
 
 id montana-nymph
 name "Montana Nymph"
@@ -11,21 +11,25 @@ season january february march april may june july august september october novem
 origin region="USA"
 description "A black tail and chenille body, a yellow chenille thorax with a black hackle wound through it, and a black chenille wing case."
 history """
-    An old American pattern meant to imitate large stonefly nymphs. It is often said to have
-    been first tied by Lew Oatman of New York, but no primary source confirms it, and it may
-    have reached Britain in the 1950s. Today it is better known as a stillwater fly in the UK
-    and Scandinavia than in the US.
+    An old American pattern meant to imitate large stonefly nymphs. Ahrex, Peter Driver and
+    JustGone.Fishing say it was first tied by Lew Oatman of New York, but none gives a date
+    or a primary source. The dressing has changed over time and is tied in many colours;
+    black and yellow is the classic. It has since become a popular stillwater fly for
+    rainbow trout, and in Scandinavia it is fished in lakes as a damsel and dragonfly nymph.
     """
 fishing """
-    In rivers, fish it deep on a dead drift as a stonefly nymph, or swing it into slower
-    water. On lakes, use a sinking or intermediate line and a slow retrieve along the
-    margins: in Scandinavia it is a favourite damsel and dragonfly imitation, especially late
-    in the evening.
+    In rivers, dead drift it as a stonefly nymph, or cast it across heavy water on the point
+    and let the current swing it down into calmer water. On lakes, fish it on a sinking line
+    with a very slow retrieve, or on an intermediate line along the shore. It is also a
+    searching pattern, and Guideline rates it for late evening and night fishing.
     """
 sources {
     "Fly Anglers Online: Beginners' fly tying, part 13 (Al Campbell)" url="https://web.archive.org/web/20151128010940/http://www.flyanglersonline.com/flytying/beginners/part13.php"
     "Guideline: Montana Stone" url="https://www.guidelineflyfish.com/en/montana-stone-6"
-    "GlobalFlyFisher: Montana" url="https://globalflyfisher.com/node/68406"
+    "GlobalFlyFisher: Montana Nymph (Ahrex, tied by Håkan Karsnäser)" url="https://globalflyfisher.com/video/montana-nymph-2"
+    "GlobalFlyFisher: Montana Nymph (Michael Jensen)" url="https://globalflyfisher.com/video/montana-nymph-1"
+    "Piscari-Fly: Montana nymphs and streamer (Peter Driver)" url="http://peterdriver.blogspot.com/2014/01/montana-nymphs-streamer.html"
+    "JustGone.Fishing: Tying Montana Nymph (Hans)" url="https://justgone.fishing/2022/05/18/tying-montana-nymph/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

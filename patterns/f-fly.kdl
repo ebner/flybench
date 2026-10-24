@@ -11,25 +11,29 @@ season may june july august september
 origin originator="Marjan Fratnik" year=1980 region="Soča, Slovenia"
 description "A body of tying thread and a wing of natural dun CDC, cut to length."
 history """
-    Designed by Marjan Fratnik of the Soča valley as a caddis imitation: in 1980 according to
-    Hans Weilenmann, or from a CDC fly Swiss tyer Jules Rindlisbacher gave him in 1983
-    according to his obituary. The original had no body material at all, just silk thread,
-    and its wing was cut to length so the cut end would dry quickly.
+    Designed by Marjan Fratnik, born in 1919 at Most na Soči in Slovenia's Soča valley, as a
+    caddis imitation: in 1980 according to Hans Weilenmann, or from a CDC fly the Swiss tyer
+    Jules Rindlisbacher gave him in 1983 according to his obituary in Forelle & Äsche. The
+    original had no body material at all, just silk thread. Tomaž Modic, who knew Fratnik,
+    explains that the wing was cut to length because the cut end is stiff, so the fly dries
+    quickly in the cast and rides high.
     """
 fishing """
-    Sits low and very naturally in the film, as caddis and small mayflies and as a general
-    searching fly. Fish it dead drift; after a fish, dry the CDC with amadou or a powder
-    rather than paste floatant.
+    The body sits in the film and only the wing rides on top, so it reads as an emerger;
+    fish it during midge, caddis or mayfly hatches, or as a general pattern. After a fish,
+    dry the CDC with amadou and a few false casts: Weilenmann warns that paste or liquid
+    floatant collapses the feather, and finds that drying powders last only a fish.
     """
 sources {
-    "GlobalFlyFisher: Tying with CDC (Hans Weilenmann)" url="https://globalflyfisher.com/patterns/f-fly"
-    "Forelle & Äsche: Marjan Fratnik obituary" url="https://www.forelleundaesche.com/2012/09/marjan-fratnik/"
-    "Midcurrent: F-Fly (Tim Flagler)" url="https://midcurrent.com/flies/f-fly/"
+    "Global FlyFisher: Tying with CDC (Hans Weilenmann)" url="https://globalflyfisher.com/tie-better/tying-cdc"
+    "Forelle & Äsche: Marjan Fratnik, Mr. F-Fly, im Alter von 93 verstorben (Tankred Rinder)" url="https://www.forelleundaesche.com/marjan-fratnik-mr-f-fly-ist-verstorben/"
+    "Troutnut: Marjan Fratnik and the History of the F-fly (Tomaž Modic)" url="https://www.troutnut.com/article/49/fratnik-f-fly"
+    "MidCurrent: How to Tie the F-Fly (video)" url="https://midcurrent.com/videos/how-to-tie-the-f-fly/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/f_fly.jpg" page="https://globalflyfisher.com/picture/the-f-fly" license="All rights reserved; reference only" note="Side view in the vise, thread body"
-    "https://www.forelleundaesche.com/wp-content/uploads/2012/09/Fliegenbinden-F-Fly-4.jpg" page="https://www.forelleundaesche.com/2012/09/marjan-fratnik/" license="All rights reserved; reference only" note="Side view, yellow dubbed body"
+    "https://www.forelleundaesche.com/wp-content/uploads/2012/09/Fliegenbinden-F-Fly-4.jpg" page="https://www.forelleundaesche.com/marjan-fratnik-mr-f-fly-ist-verstorben/" license="All rights reserved; reference only" note="Side view, yellow dubbed body"
     "https://www.czechnymph.com/data/web/gallery/tying/f-fly/f-fly-12.jpg" page="https://www.czechnymph.com/en/fly-fishing-picture-gallery/fly-tying/32-fly-tying-f-fly" license="All rights reserved; reference only" note="Side view in the vise"
 }
 
@@ -44,7 +48,8 @@ steps {
     attach-thread at=0.9
     wrap-thread to=0.0
     wrap-thread to=0.88 note="A thin, even thread body: the original has no other body material."
-    // Sources: the wing tips reach the back edge of the bend.
+    // MidCurrent's video: the wing reaches the back edge of the bend. Fratnik cut it to the
+    // length and angle he wanted (Weilenmann).
     tie-in wing length=2.35 angle=20 spread=45 note="Stacked with tips and curves matched; pinch-wrapped on top just behind the eye."
     whip-finish note="Trim the butts short, then cut the wing to length."
 }

@@ -10,23 +10,27 @@ season january february march april may june july august september october novem
 origin originator="George Griffith" region="Michigan, USA"
 description "A peacock herl body with an undersized grizzly hackle palmered over it; no tail, no wing."
 history """
-    Usually credited to George Griffith of the Au Sable River in Michigan, a founder of
-    Trout Unlimited, though nothing documents it: some credit a Walt Shaw with the fly and
-    Griffith with making it known, and it may go back to the 1930s.
+    Usually credited to George Griffith (1901–1998) of the Au Sable River in Michigan, at
+    whose home Trout Unlimited was founded in 1959. Its origin is not well documented:
+    Sexyloops reports that some credit a Walt Shaw with the fly and Griffith with making it
+    known, and that it seems to go back at least to the 1930s.
     """
 fishing """
-    Imitates a cluster of midges, or a single adult in the smallest sizes. Fish it dead drift
-    to sipping trout and grayling on flat water, on fine tippet. Trimmed flush underneath, it
-    sits in the film.
+    Imitates a cluster of mating midges, or a single adult in the smallest sizes. A fly for
+    gentle, sipping rises on smooth water. Trimmed flush underneath, it sits lower in the
+    film, like a stillborn or cripple, and a small midge pupa can trail an inch or two
+    behind it. It is also fished behind a larger, more visible dry.
     """
 sources {
-    "Fly Fisherman: Griffith's Gnat (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151996"
-    "SWTU: Griffith's Gnat" url="https://www.swtu.org/?p=3444"
-    "Rogue Fly Fishers: Griffith's Gnat" url="https://rogueflyfishers.org/griffiths-gnat/"
+    "Fly Fisherman: How to Tie Griffith's Gnat Fly (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151930"
+    "Charlie's Fly Box: Griffith's Gnat (Charlie Craven)" url="https://charliesflybox.com/blogs/step-by-step-tutorials/griffith-s-gnat"
+    "SWTU: Griffith's Gnat (Rusty Dunn)" url="https://www.swtu.org/2023/01/02/griffiths-gnat/"
+    "Rogue Fly Fishers: Griffith's Gnat (Dan Kellogg)" url="https://rogueflyfishers.org/griffiths-gnat/"
+    "Sexyloops: Griffith's Gnat" url="https://www.sexyloops.com/index.php/ps/griffiths-gnat"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
-    "https://files.osgnetworks.tv/16/files/2013/08/Griffiths-Gnat-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151996" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://files.osgnetworks.tv/16/files/2013/08/Griffiths-Gnat-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151930" license="All rights reserved; reference only" note="Side view in the vise"
     "https://www.swtu.org/wp-content/uploads/2023/01/Griffiths-Gnat2-975.jpg" page="https://www.swtu.org/?p=3444" license="All rights reserved; reference only" note="Side view, large, dense palmer"
     "https://www.fish4flies.com/img/flies/Large/1586-1586.jpg" page="https://www.fish4flies.com/Dry/Hackled/Griffiths-Gnat" license="All rights reserved; reference only" flip=#true note="Side view"
 }
@@ -35,7 +39,8 @@ hook dry-standard size=18
 thread black size="8/0"
 
 materials {
-    // Assumption: undersized, about the gape, as in the reference photos.
+    // Assumption: undersized, about the gape, as in the reference photos. Rogue Fly Fishers:
+    // barbs the length of the gape; Craven: one to one and a half gapes.
     hackle cock-hackle color=grizzly fibre=0.9 label="Grizzly cock (saddle) hackle"
     body peacock-herl strands=2
 }

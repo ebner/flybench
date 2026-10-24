@@ -12,27 +12,29 @@ origin originator="Kenneth Boström" year=1967 region="Vänneån, Sweden"
 description "A shaggy body of chopped poly yarn, fuller at the rear, a double poly-yarn wing folded over the back, and a dubbed front body."
 history """
     Kenneth Boström tied it in 1967 during a caddis hatch on the Vänneån in southern Sweden,
-    where the fish took only caddis hatching just under the surface. A friend, said to be
-    Lennart Bergqvist, named it after the rackelhane, the hybrid of a black grouse and a
-    capercaillie, because it looked like a bastard. Boström kept it secret for years
-    because he thought it ugly.
+    where the fish took only caddis hatching just under the surface. He thought it ugly and
+    was slow to show it to his friends. One of them named it after the rackelhane, the hybrid
+    of a black grouse and a capercaillie, because it looked like a "bastard". Boström does not
+    name the friend; Lars Chr. Bentsen (Ahrex), who heard the story from Boström, says it was
+    Lennart Bergqvist, and that Boström had called it Boström's Sedge.
     """
 fishing """
     Always treat it with floatant. Boström's four ways: short, nervous strips for egg-laying
     caddis; without wings as a swimming pupa; pulled under and let go so it pops up like a
-    hatching caddis, trailing bubbles from the air in its wing; or dead drift as a spent
-    caddis. A visible fast-water grayling fly.
+    hatching caddis; or dead drift as a spent caddis. Pulled under, it trails bubbles from
+    the air in its wing. Kasper Mühlbach uses it for grayling in fast water, where it stays
+    visible even in the light summer nights.
     """
 sources {
     "Rackelhanen (Kenneth Boström)" url="https://www.rackelhane.se/eng/10019.htm"
-    "GlobalFlyFisher: Rackelhanen" url="https://globalflyfisher.com/patterns/rackelhanen"
-    "Ahrex: The Rackelhanen" url="https://ahrexhooks.com/?p=7329"
+    "GlobalFlyFisher: Rackelhanen (Kasper Mühlbach)" url="https://globalflyfisher.com/patterns/rackelhanen"
+    "Ahrex: The Rackelhanen (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2020/07/18/the-rackelhanen/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://www.rackelhane.se/images/rack6a.jpg" page="https://www.rackelhane.se/eng/10019.htm" author="Kenneth Boström" license="All rights reserved; reference only" note="The originator's fly, side view"
     "https://globalflyfisher.com/sites/default/files/imported_pictures/IMG_3548.jpg" page="https://globalflyfisher.com/patterns/rackelhanen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view, light ginger"
-    "https://ahrexhooks.com/wp-content/uploads/2020/07/Rackelhanen_Dark.jpg" page="https://ahrexhooks.com/?p=7329" author="Lars Chr. Bentsen" license="All rights reserved; reference only" flip=#true note="Side view, dark"
+    "https://ahrexhooks.com/wp-content/uploads/2020/07/Rackelhanen_Dark.jpg" page="https://ahrexhooks.com/2020/07/18/the-rackelhanen/" author="Lars Chr. Bentsen" license="All rights reserved; reference only" flip=#true note="Side view, dark"
 }
 
 hook dry-standard size=12

@@ -57,8 +57,11 @@ Write it to `.cache/research/<id>.md` with this layout, so the next session can 
    - Eye left/right, side view or not, anything odd about the fly.
 ```
 
-Download checks: confirm each photo URL actually returns an image. upload.wikimedia.org
-throttles bare user agents; send one with a contact URL.
+Cite only pages you have actually opened and read, never a URL that merely looks right:
+an audit before publishing found invented URLs, and claims attributed to them that no
+source supported. Sites that block scripts (403, 429) can be read through WebFetch or a
+web.archive.org snapshot. Confirm each photo URL returns an image and appears on its
+`page`. upload.wikimedia.org throttles bare user agents; send one with a contact URL.
 
 ## 3. Choose the dressing
 
