@@ -5,7 +5,9 @@ import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } fro
 import { CATALOG, SEARCH } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/schema";
+import { colorWord, coverage, type Need } from "../catalog/inventory";
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
+import { INVENTORY_KEY, useStoredSet } from "./storage";
 import { href, replaceHash } from "./router";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -14,7 +16,15 @@ export function Gallery({ query }: { query: string }) {
   const [filters, setFiltersState] = useState<Filters>(() => filtersFromQuery(query));
   const [moreOpen, setMoreOpen] = useState(() => hasMoreFilters(filtersFromQuery(query)));
   const renders = useRenders();
-  const results = useMemo(() => SEARCH.search(filters), [filters]);
+  const owned = useStoredSet(INVENTORY_KEY);
+  const found = useMemo(() => SEARCH.search(filters), [filters]);
+  const results = filters.have ? found.filter((e) => coverage(e.recipe, owned.values).missing.length === 0) : found;
+  const oneShort = filters.have
+    ? found.flatMap((e) => {
+        const c = coverage(e.recipe, owned.values);
+        return c.missing.length === 1 ? [{ entry: e, missing: c.missing[0]! }] : [];
+      })
+    : [];
 
   const setFilters = (f: Filters) => {
     setFiltersState(f);
@@ -81,6 +91,22 @@ export function Gallery({ query }: { query: string }) {
           ))}
         </div>
 
+        <div className="chips">
+          <button
+            className={filters.have ? "on" : ""}
+            aria-pressed={Boolean(filters.have)}
+            onClick={() => setFilters({ ...filters, have: filters.have ? undefined : "1" })}
+            title={owned.values.size === 0 ? "Tick your materials first, on the Materials page" : undefined}
+          >
+            Tie with what I have
+          </button>
+          {filters.have && owned.values.size === 0 && (
+            <span className="hint">
+              Nothing ticked yet: <a href={href.materials()}>tell Flybench what you have</a>.
+            </span>
+          )}
+        </div>
+
         <button className="more-toggle" aria-expanded={moreOpen} onClick={() => setMoreOpen(!moreOpen)}>
           {moreOpen ? "Fewer filters" : "More filters"}
         </button>
@@ -98,7 +124,11 @@ export function Gallery({ query }: { query: string }) {
         )}
       </div>
 
-      {results.length === 0 ? (
+      {results.length === 0 && filters.have ? (
+        <div className="empty-results">
+          <p>Nothing here can be tied with your materials yet{oneShort.length > 0 ? ", but some are one material away" : ""}.</p>
+        </div>
+      ) : results.length === 0 ? (
         <div className="empty-results">
           <p>No pattern matches all of these filters.</p>
           <button className="link-button" onClick={() => setFilters({ q: filters.q })}>
@@ -111,6 +141,17 @@ export function Gallery({ query }: { query: string }) {
             <Plate key={e.recipe.id} entry={e} render={renders?.[e.recipe.id]} />
           ))}
         </ul>
+      )}
+
+      {oneShort.length > 0 && (
+        <section className="one-short">
+          <h2>One material short</h2>
+          <ul className="plates">
+            {oneShort.map(({ entry, missing }) => (
+              <Plate key={entry.recipe.id} entry={entry} render={renders?.[entry.recipe.id]} missing={missing} />
+            ))}
+          </ul>
+        </section>
       )}
     </main>
   );
@@ -212,7 +253,7 @@ function MoreFilters({
   );
 }
 
-function Plate({ entry, render }: { entry: CatalogEntry; render?: RenderInfo }) {
+export function Plate({ entry, render, missing }: { entry: CatalogEntry; render?: RenderInfo; missing?: Need }) {
   const r = entry.recipe;
   const urls = render ? renderUrls(r.id, render) : null;
   const origin = originLine(r);
@@ -243,6 +284,12 @@ function Plate({ entry, render }: { entry: CatalogEntry; render?: RenderInfo }) 
             </span>
           )}
         </p>
+        {missing && (
+          <p className="plate-missing-material">
+            Needs {colorWord(missing.color, missing.kind) === "natural" ? "" : `${colorWord(missing.color, missing.kind)} `}
+            {MATERIALS[missing.kind].name}
+          </p>
+        )}
       </a>
     </li>
   );

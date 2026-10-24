@@ -18,9 +18,11 @@ export interface Filters {
   month?: Recipe["season"][number];
   /** Every one of these must be used. */
   materials?: MaterialKind[];
+  /** Only what can be tied with the user's materials (applied by the UI, which knows the inventory). */
+  have?: "1";
 }
 
-export const FILTER_KEYS = ["q", "type", "imitates", "difficulty", "species", "month", "materials"] as const;
+export const FILTER_KEYS = ["q", "type", "imitates", "difficulty", "species", "month", "materials", "have"] as const;
 
 export interface CatalogEntry {
   recipe: Recipe;

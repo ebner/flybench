@@ -6,7 +6,10 @@ import type { Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
 import { simulate, stepAt } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
+import { match, materialColor } from "../catalog/inventory";
 import { href, replaceHash } from "./router";
+import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
+import { useWakeLock } from "./wakeLock";
 import type { Theme } from "./theme";
 import { usePlayer } from "./usePlayer";
 import { Viewer } from "./Viewer";
@@ -75,6 +78,17 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
     }
   };
   const [flash, setFlash] = useState<string | null>(null);
+  // Vise mode: big controls for following along at the vise; the screen stays on.
+  const [vise, setVise] = useState(false);
+  useWakeLock(vise);
+  const box = useStoredSet(FLY_BOX_KEY);
+  const owned = useStoredSet(INVENTORY_KEY);
+  const mainId = original.variantOf ?? original.id;
+  const ownership = (id: string) => {
+    const m = recipe.materials.find((m) => m.id === id);
+    if (!m || owned.values.size === 0) return null;
+    return match({ kind: m.kind, color: materialColor(m) }, owned.values);
+  };
   const [stopAt, setStopAt] = useState<number | null>(null);
   const player = usePlayer(build.duration, stopAt);
   const current = stepAt(build, player.time);
@@ -118,7 +132,9 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
     const onKey = (e: KeyboardEvent) => {
       const t = e.target;
       if ((t instanceof HTMLInputElement && t.type !== "range") || t instanceof HTMLSelectElement || t instanceof HTMLTextAreaElement) return;
-      if (e.key === " ") {
+      if (e.key === "Escape" && vise) {
+        setVise(false);
+      } else if (e.key === " ") {
         e.preventDefault();
         if (player.playing) player.pause();
         else playAll();
@@ -138,7 +154,7 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
   const origin = [recipe.origin?.originator, recipe.origin?.region, recipe.origin?.year].filter(Boolean).join(", ");
 
   return (
-    <div className="pattern">
+    <div className={vise ? "pattern vise" : "pattern"}>
       <section className="stage" aria-label="3D tying sequence">
         <Viewer
           build={build}
@@ -149,12 +165,17 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
           callout={callout}
           onCalloutClick={showInDressing}
         />
-        <div className="now" aria-live="polite">
+        <div
+          className="now"
+          aria-live="polite"
+          onClick={vise ? () => playStep(player.time >= step.start + step.duration - 0.05 ? current + 1 : current) : undefined}
+        >
           <p className="now-index">
             Step {current + 1} of {build.steps.length}
           </p>
           <h2>{step.title}</h2>
           <p className="now-text">{step.text}</p>
+          {vise && <p className="vise-hint">Tap here to play the next step. Esc or “Leave vise mode” to go back.</p>}
         </div>
         <div className="transport">
           <button onClick={() => playStep(current - 1)} disabled={current === 0} aria-label="Previous step">
@@ -189,6 +210,9 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
               ))}
             </div>
           </div>
+          <button className="vise-toggle" aria-pressed={vise} onClick={() => setVise(!vise)}>
+            {vise ? "Leave vise mode" : "Vise mode"}
+          </button>
           <select value={player.speed} onChange={(e) => player.setSpeed(Number(e.target.value))} aria-label="Speed">
             <option value={0.5}>Half speed</option>
             <option value={1}>Normal speed</option>
@@ -217,6 +241,9 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
         </p>
         {recipe.description && <p className="description">{recipe.description}</p>}
         {origin && <p className="origin">First tied by {origin}.</p>}
+        <button className="box-toggle" aria-pressed={box.has(mainId)} onClick={() => box.toggle(mainId)}>
+          {box.has(mainId) ? "In your fly box" : "Add to fly box"}
+        </button>
 
         <h3>Dressing</h3>
         <dl className="dressing">
@@ -244,6 +271,16 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
                 ) : (
                   m.detail && <span className="detail">, {m.detail}</span>
                 )}
+                {(() => {
+                  const o = ownership(m.id);
+                  return o === "have" ? (
+                    <span className="owned">You have this</span>
+                  ) : o === "substitute" ? (
+                    <span className="owned substitute">You have it in another colour</span>
+                  ) : o === "missing" ? (
+                    <span className="owned missing">Not in your materials</span>
+                  ) : null;
+                })()}
               </dd>
             </div>
           ))}

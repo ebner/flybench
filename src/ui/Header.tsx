@@ -21,6 +21,12 @@ export function Header({ theme, onTheme, page }: { theme: ThemeChoice; onTheme: 
         <a href={href.learn()} aria-current={current(["learn"])}>
           Learn
         </a>
+        <a href={href.box()} aria-current={current(["box"])}>
+          Fly box
+        </a>
+        <a href={href.materials()} aria-current={current(["materials"])}>
+          Materials
+        </a>
       </nav>
       <button className="theme-toggle" onClick={() => onTheme(THEME_NEXT[theme])} title="Switch between system, light and dark">
         {THEME_LABEL[theme]}

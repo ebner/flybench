@@ -1006,3 +1006,159 @@ select {
     max-width: 16rem;
   }
 }
+
+/* Fly box, materials, "tie with what I have" */
+
+.box-toggle {
+  margin-top: 1rem;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.box-toggle[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.owned {
+  display: block;
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.owned.missing {
+  color: var(--ink-faint);
+}
+
+.hint {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.one-short {
+  margin-top: 3.5rem;
+}
+
+.one-short h2 {
+  margin-bottom: 1.25rem;
+  font-size: var(--step-3);
+  font-style: italic;
+}
+
+.plate-missing-material {
+  margin: 0.2rem 0 0;
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+
+.summary {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--paper-raised);
+}
+
+.inventory {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inventory li {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 0.5rem 1rem;
+  align-items: start;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.inventory .chips {
+  margin-top: 0;
+}
+
+.inventory-name {
+  padding-top: 0.2rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  vertical-align: -0.05rem;
+}
+
+/* Vise mode: one big column for following along at the bench */
+
+.transport .vise-toggle {
+  width: auto;
+  padding: 0 0.8rem;
+  font-size: 0.95rem;
+}
+
+.vise-hint {
+  margin: 0.4rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+
+.pattern.vise {
+  display: block;
+}
+
+.pattern.vise .notes {
+  display: none;
+}
+
+.pattern.vise .stage {
+  height: calc(100dvh - var(--header));
+  border-right: 0;
+}
+
+.pattern.vise .now {
+  cursor: pointer;
+  padding-top: 1.1rem;
+}
+
+.pattern.vise .now h2 {
+  font-size: var(--step-3);
+}
+
+.pattern.vise .now-text {
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.pattern.vise .transport button {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.pattern.vise .transport .vise-toggle {
+  width: auto;
+}
+
+@media (max-width: 52rem) {
+  .inventory li {
+    grid-template-columns: 1fr;
+  }
+
+  /* Five sections don't fit beside the wordmark on a phone: let them scroll sideways. */
+  .site-header nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 1rem;
+    white-space: nowrap;
+  }
+
+  .theme-toggle {
+    white-space: nowrap;
+  }
+}

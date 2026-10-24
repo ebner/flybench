@@ -3,6 +3,7 @@ import { PATTERN_ERRORS } from "../patterns";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
+import { FlyBox, Materials } from "./Personal";
 import { TechniquePage, TechniquesIndex } from "./Techniques";
 import { PatternPage } from "./PatternPage";
 import { href, useRoute } from "./router";
@@ -42,6 +43,8 @@ export function App() {
         {route.page === "techniques" && <TechniquesIndex />}
         {route.page === "technique" && <TechniquePage id={route.id} theme={theme} />}
         {route.page === "learn" && <Learn />}
+        {route.page === "box" && <FlyBox />}
+        {route.page === "materials" && <Materials />}
         {route.page === "not-found" && (
           <main className="not-found">
             <h1>There is nothing at this address</h1>

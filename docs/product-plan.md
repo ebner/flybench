@@ -73,7 +73,8 @@ hook size switch, deep links to steps.
    parachute posts, spun and trimmed hair.
 5. ✅ Techniques library and learning path. Techniques are recognised from recipe steps
    (src/catalog/techniques.ts); the path is computed so each fly adds a few new techniques.
-6. Fly box, materials inventory, bench mode, PWA.
+6. ✅ Fly box, materials inventory ("tie with what I have", "one material short"), vise mode
+   (big controls, tap to advance, screen kept awake), installable offline PWA.
 7. Authoring studio.
 
 Catalog: established patterns of every type, each with sources, reference photos and a

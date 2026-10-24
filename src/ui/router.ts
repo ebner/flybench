@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
  *   #/fly/<id>/<step>   a pattern at a step (1-based)
  *   #/techniques        the techniques index; #/technique/<id> one technique
  *   #/learn             the learning path
+ *   #/box               the user's fly box; #/materials their materials inventory
  * Old links of the form #/<id> are understood as #/fly/<id>.
  */
 export type Route =
@@ -15,6 +16,8 @@ export type Route =
   | { page: "techniques" }
   | { page: "technique"; id: string }
   | { page: "learn" }
+  | { page: "box" }
+  | { page: "materials" }
   | { page: "not-found"; path: string };
 
 export function parseRoute(hash: string): Route {
@@ -29,6 +32,8 @@ export function parseRoute(hash: string): Route {
   if (parts[0] === "techniques" && parts.length === 1) return { page: "techniques" };
   if (parts[0] === "technique" && parts[1]) return { page: "technique", id: parts[1] };
   if (parts[0] === "learn" && parts.length === 1) return { page: "learn" };
+  if (parts[0] === "box" && parts.length === 1) return { page: "box" };
+  if (parts[0] === "materials" && parts.length === 1) return { page: "materials" };
   if (parts.length === 1) return { page: "fly", id: parts[0]! };
   return { page: "not-found", path };
 }
@@ -39,6 +44,8 @@ export const href = {
   techniques: () => "#/techniques",
   technique: (id: string) => `#/technique/${encodeURIComponent(id)}`,
   learn: () => "#/learn",
+  box: () => "#/box",
+  materials: () => "#/materials",
 };
 
 export function useRoute(): Route {
