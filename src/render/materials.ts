@@ -66,6 +66,8 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
     case "biot":
       return new THREE.MeshStandardMaterial({ color, roughness: 0.45, ...fibres });
     case "marabou":
+      // A plume shades itself: even white marabou reads grey-white, never paper-white.
+      return new THREE.MeshStandardMaterial({ color: new THREE.Color(color).multiplyScalar(0.78), roughness: 1, ...fibres });
     case "cdc":
       return new THREE.MeshStandardMaterial({ color, roughness: 1, ...fibres });
     case "flash":

@@ -1,0 +1,63 @@
+// Cat's Whisker: David Train's white marabou and lime chenille stillwater lure with bead-chain eyes.
+
+id cats-whisker
+name "Cat's Whisker"
+aliases "Cats Whisker"
+type streamer
+imitates baitfish attractor
+difficulty beginner
+species trout
+season january february march april may june july august september october november december
+origin originator="David Train" region="England, mid-1980s"
+description "A white marabou tail and wing, a fluorescent lime chenille body with a silver wire rib, and silver bead-chain eyes behind the eye."
+history """
+    David Train's first version had no eyes, and the marabou wing kept looping round the hook,
+    so he tied in four white whiskers his cat had shed to stiffen it. Bead-chain eyes later made
+    the whiskers unnecessary, but the name stuck. Train sent flies to Bob Church, who won
+    competitions with them, and it became one of the standard lures on English reservoirs.
+    """
+fishing """
+    A sinking stillwater lure on floating, intermediate or fast-sinking lines, retrieved in long,
+    erratic pulls with pauses. On the pause the eyes make it dip head first; on the pull the
+    marabou breathes. It is especially good in autumn when trout are chasing fry.
+    """
+sources {
+    "English Fly Fishing Shop: Cat's Whisker, white and pink" url="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandpink.htm"
+    "Troutflies.co.uk: Cat's Whisker" url="https://www.troutflies.co.uk/blog/useful-tying-patterns/cats-whisker/"
+    "Funky Fly Tying: Cat's Whisker" url="https://funkyflytying.com/?p=62048"
+    "GlobalFlyFisher: Cat's Whisker" url="https://globalflyfisher.com/video/cats-whisker"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandgreen.jpg" page="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandgreen.htm" author="Craig Moore" license="Free reuse with a link back" note="Side view, lying flat"
+    "https://www.fish4flies.com/img/flies/Large/2447-2447.jpg" page="https://www.fish4flies.com/Lures/Beaded-Specials/Cats-Whisker" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+// Assumption: a 2X long lure hook; sources range from standard to 3X long.
+hook nymph-2xl size=10
+thread black size="8/0"
+
+materials {
+    eyes bead-chain-eyes mm=3
+    tail marabou color=white
+    rib silver-wire
+    body chenille color=chartreuse label="Fluorescent lime chenille"
+    wing marabou color=white
+}
+
+steps {
+    attach-thread at=0.92
+    tie-in eyes note="On top, just behind the eye, with figure-of-eight turns."
+    wrap-thread to=0.0
+    // Observed in photos: the tail runs about a shank length past the bend.
+    tie-in tail length=2.6 spread=20 note="A large pinch; tear it to length, never cut it."
+    tie-in rib
+    tie-in body note="Above the wire."
+    wrap-thread to=0.86
+    wind body to=0.86 turns=12 note="Touching turns, stopping short of the eyes."
+    tie-off body
+    wind rib to=0.86 turns=5 note="Counter-wound."
+    tie-off rib
+    tie-in wing length=5.0 angle=10 spread=20 note="A second large pinch, reaching about the tail tip."
+    whip-finish note="A small head in front of the eyes, varnished."
+}

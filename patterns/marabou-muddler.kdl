@@ -32,14 +32,13 @@ references {
     "https://flyfishingthesierra.com/wp-content/uploads/2023/12/maramudvar3.jpg" page="https://flyfishingthesierra.com/marabou-muddler/" license="All rights reserved; reference only" note="White with a cone head"
 }
 
-// Assumption: white drawn a shade darker, so the wing shows against the paper.
 hook streamer-4xl size=6
 thread white size="3/0"
 
 materials {
     tail hackle-fibres color=red count=16 label="Red hackle fibres"
     body flat-tinsel color=silver
-    wing marabou color="#e4e0d6" label="White marabou"
+    wing marabou color=white
     topping peacock-herl strands=6
     head deer-hair
 }
@@ -54,7 +53,7 @@ steps {
     wind body to=0.72 turns=18 note="Touching turns."
     tie-off body
     // SWTU: about one and a half hook lengths; Sierra: ending level with the tail.
-    tie-in wing length=4.4 angle=6 spread=35 note="Tied full: one or two plumes, stripped from the quill."
+    tie-in wing length=4.4 angle=6 spread=20 note="Tied full: one or two plumes, stripped from the quill."
     tie-in topping length=4.0 angle=9 spread=5 note="About six strands over the wing."
     spin head to=0.97 collar=1.6 note="Tips back to about the hook point, then butts-only clumps packed tight."
     whip-finish

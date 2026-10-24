@@ -1,0 +1,65 @@
+// Mickey Finn: the yellow-red-yellow bucktail streamer over a silver body.
+
+id mickey-finn
+name "Mickey Finn"
+aliases "Red and Yellow Bucktail" "Assassin"
+type streamer
+imitates baitfish attractor
+difficulty beginner
+species trout bass pike sea-trout
+season january february march april may june july august september october november december
+origin region="Eastern North America, by 1932"
+description "A flat silver tinsel body with an oval silver rib, and a three-layer bucktail wing: yellow, a sparse red, and yellow again on top."
+history """
+    Its maker is unknown. It probably began as the Red and Yellow Bucktail, perhaps one of a
+    series sold by William Mills & Son of New York. In spring 1932 John Alden Knight was given one
+    by Junior Vanderhoff near Greenwich, Connecticut; they called it the Assassin. Gregory Clark
+    of the Toronto Star renamed it after the knockout drink, and Knight's 1937 magazine article
+    made it one of the best-known streamers in America.
+    """
+fishing """
+    Stripped or swung as a bright minnow, especially for brook trout early in the season and in
+    high or coloured water. Big ones on salmon hooks were trolled behind canoes in Canada; it is
+    also a popular sea-trout fly in Denmark.
+    """
+sources {
+    "Wikipedia: Mickey Finn (fly)" url="https://en.wikipedia.org/wiki/Mickey_Finn_(fly)"
+    "American Museum of Fly Fishing: A personal natural history of the Mickey Finn" url="https://amff.org/personal-natural-history-mickey-finn/"
+    "MidCurrent: Mickey Finn (Tim Flagler)" url="https://midcurrent.com/?p=37998"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/d/dd/MickeyFinnStreamer.jpg" page="https://commons.wikimedia.org/wiki/File:MickeyFinnStreamer.jpg" author="Mike Cline" license="Public domain" note="Side view in the vise"
+    "https://upload.wikimedia.org/wikipedia/commons/9/97/Mickey_Finn_streamer.jpg" page="https://commons.wikimedia.org/wiki/File:Mickey_Finn_streamer.jpg" author="DeliciousDunder" license="CC0" note="Side view, with a non-standard orange throat"
+}
+
+hook streamer-4xl size=6
+thread black size="6/0"
+
+materials {
+    rib oval-tinsel color=silver
+    body flat-tinsel color=silver
+    lower bucktail color=yellow label="Yellow bucktail, a small bunch"
+    middle bucktail color=red label="Red bucktail, sparse"
+    upper bucktail color=yellow label="Yellow bucktail, a larger bunch"
+}
+
+steps {
+    attach-thread at=0.9 note="One eye length behind the eye."
+    wrap-thread to=0.0 note="Binding the rib along the underside for a level underbody."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.9
+    wind body to=0.9 turns=22 note="Touching turns, back to the bend and forward again."
+    tie-off body
+    wind rib to=0.9 turns=5 note="Evenly spaced, at about 45° to the shank."
+    tie-off rib
+    // Assumption: Flagler has the tips at the back of the bend; photos show them longer, so somewhat past it.
+    tie-in lower length=4.3 angle=3 spread=12 note="Cleaned and stacked, on top of the shank."
+    trim lower note="Butts cut at a shallow angle, so the head tapers."
+    tie-in middle length=4.3 angle=6 spread=10 note="Tips level with the yellow."
+    trim middle
+    tie-in upper length=4.3 angle=9 spread=15
+    trim upper
+    whip-finish note="A small, tapered head, varnished."
+}

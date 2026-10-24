@@ -313,7 +313,7 @@ const BUNDLE = {
   // A biot is a stiff, broad barb: wide at the base, tapering to a point.
   biot: { radius: 0.028, tip: 0.85, tipShade: 0.85, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0 },
   // Marabou is a dense, soft plume: many fine fibres, tapering out.
-  marabou: { radius: 0.008, tip: 0.2, tipShade: 0.85, spread: 0.3, flare: 0.06, sideFlare: 0.25, lengthJitter: 0.45 },
+  marabou: { radius: 0.016, tip: 0.3, tipShade: 0.6, spread: 0.14, flare: 0.04, sideFlare: 0.15, lengthJitter: 0.45 },
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
   cdc: { radius: 0.003, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2 },
@@ -409,18 +409,24 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       radius: radialHair && piece.cut ? spec.radius * 1.6 : spec.radius, shade: 0.85 + 0.3 * rand(),
     });
   }
-  if (piece.look === "cdc") {
-    // Barbules: short, fine fibres all along each barb, which give CDC its fluff.
+  if (piece.look === "cdc" || piece.look === "marabou") {
+    // Barbules: short, fine fibres all along each barb, which give CDC and marabou their fluff.
     const barbs = list.slice();
+    const perBarb = piece.look === "cdc" ? 6 : 4;
     for (const f of barbs) {
-      for (let k = 0; k < 6; k++) {
+      for (let k = 0; k < perBarb; k++) {
         const t = 0.2 + 0.8 * rand();
         const base = f.base.clone().addScaledVector(f.dir, f.length * t);
         const dir = f.dir
           .clone()
           .add(new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5).multiplyScalar(1.6))
           .normalize();
-        list.push({ u: f.u, base, dir, length: 0.05 + 0.06 * rand(), radius: 0.0018, shade: f.shade });
+        // Marabou's barbules are long and soft enough to fill the plume out into a cloud.
+        const fluff = piece.look === "marabou";
+        list.push({
+          u: f.u, base, dir, length: fluff ? 0.1 + 0.2 * rand() : 0.05 + 0.06 * rand(),
+          radius: fluff ? 0.004 : 0.0018, shade: f.shade,
+        });
       }
     }
   }

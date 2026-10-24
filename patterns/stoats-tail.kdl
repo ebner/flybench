@@ -1,0 +1,69 @@
+// Stoat's Tail: the black hairwing salmon fly.
+
+id stoats-tail
+name "Stoat's Tail"
+aliases "Stoats Tail" "Black Stoat"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon sea-trout
+season may june july august september
+origin region="Scotland"
+description "An oval silver tag, a golden pheasant crest tail, a black floss body ribbed with oval silver, a black throat hackle and a low black hair wing."
+history """
+    Nobody has documented who tied it first. The wing was originally the black tip of a stoat's
+    tail; black squirrel is the usual material now. It belongs with the Hairy Mary and the Munro
+    Killer among the plain hairwings that took over salmon fishing in the second half of the
+    twentieth century. Hugh Falkus called it one of the best flies we have.
+    """
+fishing """
+    The classic summer fly: on a floating line in low, clear water, swung across and down on small
+    doubles or trebles. It is good at dusk and in low light, and for grilse and sea trout. Larger
+    tubes and doubles cover higher, colder water.
+    """
+sources {
+    "Trout & Salmon Fishing: Stoat's Tail (John Gray)" url="https://trout-salmon-fishing.com/stoats-tail.htm"
+    "GlobalFlyFisher: Stoat's Tail long wing" url="https://globalflyfisher.com/video/stoats-tail-long-wing"
+    "Fish4Flies: Stoat's Tail" url="https://www.fish4flies.com/Salmon-Atlantic/Big-Mouth-Doubles/Stoats-Tail"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://trout-salmon-fishing.com/stoats-tail.jpg" page="https://trout-salmon-fishing.com/stoats-tail.htm" author="John Gray" license="All rights reserved; reference only" note="Side view, single up-eye hook"
+    "https://live.staticflickr.com/4084/4969440099_d1b754e2b5_b.jpg" page="https://www.flickr.com/photos/52179700@N00/4969440099" author="andrewb823" license="CC BY-NC 2.0" flip=#true note="Side view, on a double"
+}
+
+// Assumption: a single up-eye salmon hook; it is as often tied on doubles, trebles and tubes.
+hook salmon-up-eye size=8
+thread black size="8/0"
+
+materials {
+    tag oval-tinsel color=silver label="Fine oval silver tinsel"
+    tail golden-pheasant-crest count=10
+    rib oval-tinsel color=silver
+    body silk-floss color=black
+    throat hackle-fibres color=black count=24 label="Black cock hackle fibres"
+    wing squirrel-tail color=black label="Stoat's tail or black squirrel"
+}
+
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0
+    tie-in tag
+    wrap-thread to=0.06
+    wind tag to=0.06 turns=4 note="A few close turns at the start of the bend."
+    tie-off tag
+    // A general salmon-fly guide: about one and a half gapes, curving up.
+    tie-in tail length=1.5 angle=14 spread=8
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.84
+    wind body to=0.84 turns=12 note="Back to the tail and forward again: a smooth double layer, slightly tapered."
+    tie-off body
+    wind rib to=0.84 turns=5 note="Evenly spaced open turns."
+    tie-off rib
+    tie-in throat length=1.0 angle=30 side=under note="A little shorter than the wing; reaching about the hook point."
+    // Gray's photos: the wing reaches about the tip of the tail.
+    tie-in wing length=3.7 angle=8 spread=20 note="A small, cleaned bunch, low over the body."
+    trim wing note="Butts cut at a taper for a small head."
+    whip-finish note="Two or three coats of black varnish."
+}
