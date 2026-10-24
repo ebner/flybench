@@ -453,7 +453,8 @@ export function simulate(recipe: Recipe): Build {
         const turns = step.turns ?? Math.max(2, Math.round(Math.abs(to - from) / (l.strandRadius * 1.3)));
         const piece = materialWraps(step.material, l, from, to, turns);
         const coverage = (turns * 2 * l.strandRadius) / Math.max(Math.abs(to - from), 0.01);
-        profile = profile.withLayer(from, to, l.layerThickness(coverage));
+        // Each pass thins out at its ends, so passes built on each other round off into a ball.
+        profile = profile.withLayer(from, to, l.layerThickness(coverage), Math.min(0.2, Math.abs(to - from) * 0.25), true);
         pieces.push(piece);
         // The dubbing is on the thread, so the bobbin follows it.
         thread = { kind: "follow", piece: piece.id };

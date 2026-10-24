@@ -30,14 +30,17 @@ export class Profile {
     return max;
   }
 
-  /** Returns a new profile with a layer of `thickness` over [a, b], tapering over `taper` at both ends. */
-  withLayer(a: number, b: number, thickness: number, taper = 0.03): Profile {
+  /**
+   * Returns a new profile with a layer of `thickness` over [a, b], tapering over `taper` at both
+   * ends: just outside the range, or, with `within`, inside it (a dubbed noodle thins at its ends).
+   */
+  withLayer(a: number, b: number, thickness: number, taper = 0.03, within = false): Profile {
     const lo = Math.min(a, b);
     const hi = Math.max(a, b);
     const r = new Float32Array(this.r);
     for (let i = 0; i < Profile.BINS; i++) {
       const x = this.x0 + ((this.x1 - this.x0) * i) / (Profile.BINS - 1);
-      const inside = Math.min(x - lo, hi - x);
+      const inside = Math.min(x - lo, hi - x) - (within ? taper : 0);
       if (inside <= -taper) continue;
       const w = inside >= 0 ? 1 : 1 + inside / taper;
       r[i] = r[i]! + thickness * w * w * (3 - 2 * w);

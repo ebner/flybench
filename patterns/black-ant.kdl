@@ -1,0 +1,63 @@
+// Black Ant: the dubbed two-segment fur ant with a few turns of hackle at the waist.
+
+id black-ant
+name "Black Ant"
+aliases "Fur Ant" "Black Fur Ant"
+type terrestrial
+imitates terrestrial
+difficulty beginner
+species trout grayling panfish
+season may june july august september
+origin region="England, then the United States"
+description "Two balls of black dubbing, the rear one larger, with a thin waist and a sparse black hackle trimmed top and bottom."
+history """
+    A generic pattern with no single inventor. Charles Cotton described an artificial ant in 1676;
+    Michael Theakston gave it the two bulbs and thin waist of the natural in 1853. Early ants were
+    usually winged. Vincent Marinaro, who called the ant his favourite terrestrial, brought ants
+    and other terrestrials into the mainstream in 1950.
+    """
+fishing """
+    Dead-drift it in or just under the film along grassy banks and tree-lined runs in summer, on a
+    long, fine tippet. Ants work when nothing is hatching and are deadly during flying-ant falls.
+    If fish refuse it, trim the hackle shorter or go down a size.
+    """
+sources {
+    "Orvis: Fur Ant (Matt Grobert)" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/837-fur_ant"
+    "SWTU: Cinnamon Fur Ant" url="https://www.swtu.org/2021/07/26/cinnamon-fur-ant/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Black_fur_ant.jpg" page="https://commons.wikimedia.org/wiki/File:Black_fur_ant.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
+}
+
+hook dry-standard size=16
+thread black size="8/0"
+
+materials {
+    abdomen dry-fly-dubbing color=black
+    hackle cock-hackle color=black fibre=0.9
+    head dry-fly-dubbing color=black label="Black dry fly dubbing (head)"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Assumption: segment lengths read from photos; sources only say the rear is larger.
+    dub abdomen to=0.42 note="A thin noodle."
+    wrap-thread to=0.08
+    dub abdomen to=0.38 note="Back and forward again, each pass shorter: a round ball, fattest in the middle."
+    wrap-thread to=0.14
+    dub abdomen to=0.32
+    wrap-thread to=0.55 note="Over bare shank: a thin waist."
+    tie-in hackle note="Stripped stem, shiny side forward."
+    wrap-thread to=0.6
+    wind hackle to=0.6 turns=3 note="Short and sparse."
+    tie-off hackle
+    dub head to=0.84 note="A slightly smaller ball."
+    wrap-thread to=0.68
+    dub head to=0.82
+    wrap-thread to=0.72
+    dub head to=0.8
+    whip-finish note="Behind the eye."
+    trim hackle keep=sides note="Optional: cut the fibres top and bottom so it sits low in the film."
+}
