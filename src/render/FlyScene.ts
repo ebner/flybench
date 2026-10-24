@@ -390,7 +390,8 @@ export class FlyScene {
 
   private poseThread(pose: Build["steps"][number]["thread"], p: number) {
     if (!this.bobbin) return;
-    if (!pose || (pose.kind === "follow" && pose.cut && p >= 0.97)) {
+    // Turned over, the fly is shown as it swims, not at the vise: no bobbin hanging upwards.
+    if (!pose || this.fly.rotation.x !== 0 || (pose.kind === "follow" && pose.cut && p >= 0.97)) {
       this.bobbin.setPose(null);
       return;
     }
