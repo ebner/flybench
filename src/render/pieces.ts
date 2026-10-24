@@ -626,7 +626,10 @@ function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace)
 
 /** A bead slides round the bend and up the shank to the eye. */
 function beadView(piece: BeadPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
-  const geometry = new THREE.SphereGeometry(piece.radius, 28, 20);
+  // A cone head points its narrow end at the eye: a cylinder along +y turned onto +x.
+  const geometry = piece.cone
+    ? new THREE.CylinderGeometry(piece.radius * 0.45, piece.radius, piece.cone, 32, 1).rotateZ(-Math.PI / 2)
+    : new THREE.SphereGeometry(piece.radius, 28, 20);
   const mesh = new THREE.Mesh(geometry, surfaces.get("bead", piece.color));
   const start = -0.3;
   return {
@@ -635,6 +638,7 @@ function beadView(piece: BeadPiece, surfaces: Surfaces, space: ShankSpace): Piec
       mesh.visible = u > 0;
       const x = start + (piece.x - start) * Math.min(1, u * 1.1);
       mesh.position.copy(space.point(new THREE.Vector3(x, 0, 0)));
+      mesh.quaternion.copy(space.rotation(x));
     },
     dispose() {
       geometry.dispose();

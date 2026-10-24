@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { HOOK_MODELS } from "./hook";
-import { bendEndX, hookPath, shankAt } from "./shank";
+import type { Recipe } from "../recipe/schema";
+import { HOOK_MODELS, ridesPointUp } from "./hook";
+import { bendEndX, bendPath, eyeBase, hookPath, shankAt, shankPath } from "./shank";
 
 describe("shank geometry", () => {
   const straight = HOOK_MODELS["dry-standard"];
@@ -46,5 +47,31 @@ describe("shank geometry", () => {
     // Wire centre to wire centre is gape + one wire diameter.
     expect(-lowest).toBeCloseTo(1 + 2 * straight.wireRadius, 2);
     expect(bendEndX(straight)).toBeCloseTo(-(0.5 + 2 * straight.wireRadius), 2);
+  });
+});
+
+describe("hook variations", () => {
+  it("puts a jig hook's eye on a section bent up from the shank", () => {
+    const jig = HOOK_MODELS.jig;
+    const eye = eyeBase(jig);
+    expect(eye.p.x).toBeCloseTo(jig.shankLength + jig.jig!.length * Math.cos(Math.PI / 3));
+    expect(eye.p.y).toBeCloseTo(jig.jig!.length * Math.sin(Math.PI / 3));
+    expect(eyeBase(HOOK_MODELS["dry-standard"]).p).toEqual({ x: 2, y: 0 });
+  });
+
+  it("splits the drawn hook into the shank and the bend a double repeats", () => {
+    const double = HOOK_MODELS["salmon-double"];
+    expect(hookPath(double)).toEqual([...shankPath(double), ...bendPath(double)]);
+  });
+});
+
+describe("ridesPointUp", () => {
+  const recipe = (model: string, rides?: "point-up" | "point-down") =>
+    ({ hook: { model, size: 12 }, rides }) as unknown as Recipe;
+  it("follows the recipe, and jig hooks ride point up unless it says otherwise", () => {
+    expect(ridesPointUp(recipe("wet-standard"))).toBe(false);
+    expect(ridesPointUp(recipe("saltwater-straight", "point-up"))).toBe(true);
+    expect(ridesPointUp(recipe("jig"))).toBe(true);
+    expect(ridesPointUp(recipe("jig", "point-down"))).toBe(false);
   });
 });

@@ -42,6 +42,7 @@ const TOP_LEVEL: Record<string, Shape> = {
   fishing: { kind: "scalar" },
   sources: { kind: "list", nameKey: "title", arg: null },
   references: { kind: "list", nameKey: "image", arg: null },
+  rides: { kind: "scalar" },
   hook: { kind: "record", arg: "model" },
   thread: { kind: "record", arg: "color" },
   materials: { kind: "list", nameKey: "id", arg: "kind" },

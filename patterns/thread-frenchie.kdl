@@ -1,0 +1,60 @@
+// Thread Frenchie: Lance Egan's slim jig nymph: a thread body ribbed with wire behind a hot-spot collar.
+
+id thread-frenchie
+name "Thread Frenchie"
+aliases "Frenchie" "Egan's Thread Frenchie"
+type nymph
+imitates mayfly attractor
+difficulty beginner
+species trout grayling
+season january february march april may june july august september october november december
+origin originator="Lance Egan" region="USA"
+description "A slotted tungsten bead on a jig hook, a sparse Coq de León tail, a slim thread body ribbed with fine wire, and a collar of pink Ice Dub behind the bead."
+history """
+    The Frenchie is a stripped-down Pheasant Tail, popularised by French competition anglers on
+    jig hooks with a bright hot spot behind the bead; who tied the first is not recorded. Lance
+    Egan's thread-bodied version swaps the pheasant tail for a thin, fast-sinking thread body,
+    and the Coq de León tail outlasts pheasant tail. It is a batch fly, tied in many colours.
+    """
+fishing """
+    Dense and slim, it sinks fast: fish it on a Euro-nymph rig, as the dropper under a dry, or
+    below an indicator on lakes. On a jig hook it rides point up and snags less on the bottom.
+    Smaller sizes go on the dropper, bigger ones on the point.
+    """
+sources {
+    "Flylords: How to tie the Thread Frenchie (Lance Egan)" url="https://flylordsmag.com/how-to-tie-the-thread-frenchie/"
+    "MidCurrent: How to tie Egan's Purple Thread Frenchie" url="https://midcurrent.com/v2/how-to-tie-egans-purple-thread-frenchie/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://flylordsmag.com/wp-content/uploads/2024/09/How-to-tie-the-Thread-Frenchie-with-Umpqua-Signature-tyer-Lance-Egan.jpeg" page="https://flylordsmag.com/how-to-tie-the-thread-frenchie/" license="All rights reserved; reference only" note="Lead photo"
+    "https://midcurrent.com/wp-content/uploads/2026/05/purple-frenchie.jpg" page="https://midcurrent.com/v2/how-to-tie-egans-purple-thread-frenchie/" license="All rights reserved; reference only" note="Purple version"
+}
+
+hook jig size=16
+thread olive size="8/0"
+
+materials {
+    // Flylords: a 2.3 mm (3/32") slotted tungsten bead on a #16.
+    bead tungsten-bead mm=2.3
+    tail coq-de-leon count=8 label="Coq de León fibres, dark pardo"
+    rib copper-wire mm=0.2 label="Fine copper-brown wire"
+    hotspot dubbing color="#f2668b" label="UV pink Ice Dub"
+}
+
+steps {
+    slide-bead bead note="Slot towards the point."
+    attach-thread at=0.95 note="Just behind the bead."
+    wrap-thread to=0.0
+    // Assumption: a tail about a shank long, from the photos; the sources give no length.
+    tie-in tail length=1.3 spread=15 note="A sparse pinch, tips evened; bind the butts forward to the bead so there is no bump."
+    tie-in rib note="Bound down the back of the shank."
+    wrap-thread to=0.88
+    wrap-thread to=0.2
+    wrap-thread to=0.88 note="A slim, slightly tapered thread body."
+    wind rib to=0.88 turns=4 note="About four turns under tension; helicopter the wire off."
+    tie-off rib
+    // Egan whip-finishes the body thread and starts fire-orange thread for the collar; drawn here with the one thread.
+    dub hotspot to=1.0 note="A small pinch, dubbed tight, a few turns against the bead."
+    whip-finish note="So a band of the hot-spot thread shows at the bead."
+}

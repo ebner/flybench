@@ -76,6 +76,8 @@ export class FlyScene {
    */
   private fit: "box" | "sphere" = "box";
   private grid: THREE.Group | null = null;
+  /** The time last shown, so re-measuring can come back to it. */
+  private time = 0;
 
   /** Follow the action: the camera eases towards whatever the current step works on. */
   private follow = false;
@@ -161,6 +163,22 @@ export class FlyScene {
     }
     this.bobbin = new BobbinView(build.threadRadius, build.threadColor, this.surfaces);
     this.fly.add(this.bobbin.object);
+    this.time = 0;
+    this.measure();
+    if (this.grid) this.setGrid(true);
+  }
+
+  /** Shows the fly upside down, turned about the shank, the way a point-up fly swims. */
+  setTurnedOver(on: boolean) {
+    this.fly.rotation.x = on ? Math.PI : 0;
+    this.fly.updateMatrixWorld(true);
+    if (this.build) this.measure();
+  }
+
+  /** Bounds of each step and of the finished fly, for framing; then back to the current time. */
+  private measure() {
+    const build = this.build!;
+    const time = this.time;
     this.stepBounds = build.steps.map((step, i) => {
       this.setTime(step.start + step.duration);
       const box = this.visibleBounds(this.stepViews[i]!.map((v) => v.piece.object));
@@ -169,8 +187,7 @@ export class FlyScene {
     this.setTime(build.duration);
     this.finished = this.visibleBounds();
     this.resetCamera();
-    this.setTime(0);
-    if (this.grid) this.setGrid(true);
+    this.setTime(time);
   }
 
   setBackground(color: string | null) {
@@ -329,6 +346,7 @@ export class FlyScene {
   setTime(t: number) {
     const build = this.build;
     if (!build) return;
+    this.time = t;
     build.steps.forEach((step, i) => {
       const p = clamp01((t - step.start) / step.duration);
       for (const { piece, window, until } of this.stepViews[i]!) {

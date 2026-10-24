@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FlyScene } from "../render/FlyScene";
 import type { Build } from "../tying/simulate";
 
@@ -11,9 +11,12 @@ export interface ViewerProps {
   /** Label for what the current step works with, shown next to it in 3D. */
   callout: string | null;
   onCalloutClick?: () => void;
+  /** The fly swims hook point up: offer to turn it over from the way it is tied. */
+  pointUp?: boolean;
 }
 
-export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick }: ViewerProps) {
+export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false }: ViewerProps) {
+  const [turned, setTurned] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
   const scene = useRef<FlyScene | null>(null);
@@ -47,6 +50,10 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
   }, [follow]);
 
   useEffect(() => {
+    scene.current?.setTurnedOver(pointUp && turned);
+  }, [build, pointUp, turned]);
+
+  useEffect(() => {
     scene.current?.setTime(time);
   }, [build, time]);
 
@@ -75,6 +82,11 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
         >
           Whole fly
         </button>
+        {pointUp && (
+          <button aria-pressed={turned} onClick={() => setTurned(!turned)} title="Tied hook point down, it swims point up">
+            As it swims
+          </button>
+        )}
       </div>
     </div>
   );

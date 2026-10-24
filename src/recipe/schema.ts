@@ -57,6 +57,7 @@ export const NAMED_COLORS = {
   clear: "#d8dde0",
   "blue-black": "#1d2230",
   blue: "#1f5fa8",
+  pardo: "#8c7660",
 } as const;
 
 export type NamedColor = keyof typeof NAMED_COLORS;
@@ -81,7 +82,7 @@ const Note = z.string().min(1).optional();
 
 export const HOOK_MODEL_IDS = [
   "dry-standard", "dry-3xl-curved", "wet-standard", "nymph-2xl", "streamer-4xl",
-  "emerger-curved", "scud-curved", "salmon-up-eye", "saltwater-straight",
+  "emerger-curved", "scud-curved", "salmon-up-eye", "salmon-double", "salmon-treble", "jig", "saltwater-straight",
 ] as const;
 export const THREAD_SIZES = ["3/0", "6/0", "8/0", "10/0", "12/0", "14/0"] as const;
 
@@ -286,6 +287,8 @@ export const RecipeSchema = z.strictObject({
   fishing: z.string().min(1).optional(),
   sources: z.array(Source).default([]),
   references: z.array(Reference).default([]),
+  /** Which way up the fly swims; jig hooks ride point up unless the recipe says otherwise. */
+  rides: z.enum(["point-down", "point-up"]).optional(),
   hook: Hook,
   thread: Thread,
   materials: z.array(Material).default([]),

@@ -48,9 +48,31 @@ export function shankAt(hook: HookModel, u: number): ShankPoint {
  * bend and out to the point: a list of points for drawing the hook.
  */
 export function hookPath(hook: HookModel, step = 0.02): Vec2[] {
+  return [...shankPath(hook, step), ...bendPath(hook, step)];
+}
+
+/** The shank's centre line from the eye end back to the start of the bend. */
+export function shankPath(hook: HookModel, step = 0.02): Vec2[] {
   const points: Vec2[] = [];
-  const L = hook.shankLength;
-  for (let u = L; u > 0; u -= step) points.push(shankAt(hook, u).p);
+  for (let u = hook.shankLength; u > 0; u -= step) points.push(shankAt(hook, u).p);
+  return points;
+}
+
+/**
+ * Where the eye attaches and which way it points: the end of the shank, or on a jig hook
+ * the end of the section bent up from it.
+ */
+export function eyeBase(hook: HookModel): ShankPoint {
+  const end = shankAt(hook, hook.shankLength);
+  if (!hook.jig) return end;
+  const a = Math.atan2(end.t.y, end.t.x) + (hook.jig.angle * Math.PI) / 180;
+  const t = { x: Math.cos(a), y: Math.sin(a) };
+  return { p: { x: end.p.x + t.x * hook.jig.length, y: end.p.y + t.y * hook.jig.length }, t };
+}
+
+/** The bend and point, from the start of the bend: the part a double or treble repeats. */
+export function bendPath(hook: HookModel, step = 0.02): Vec2[] {
+  const points: Vec2[] = [];
   // The bend: a half circle continuing the shank's curve, so the gape (inside of
   // shank to inside of point) is one unit.
   const start = shankAt(hook, 0);

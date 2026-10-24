@@ -1,0 +1,73 @@
+// Woolly Bugger with a cone head, for depth and a jigging action.
+
+id woolly-bugger-conehead
+name "Woolly Bugger"
+variant-of woolly-bugger
+variant "Cone head"
+type streamer
+imitates baitfish attractor
+difficulty beginner
+species trout bass panfish sea-trout
+season january february march april may june july august september october november december
+origin originator="Russell Blessing" year=1967 region="Pennsylvania, USA"
+description "A cone head, a marabou tail, an olive chenille body, a black saddle hackle palmered along it and a copper wire rib."
+history """
+    Russ Blessing tied the first Woolly Bugger in 1967, trying to imitate a hellgrammite
+    for smallmouth bass. He took the marabou tail from Mark Sosin's Blossom fly and meant
+    to trim the hackle, then left it as it was after seeing the fly move in the water.
+    Barry Beck's 1984 article in Fly Fisherman made it known everywhere.
+
+    It descends from the Woolly Worm and the old British palmer flies.
+    """
+fishing """
+    Dead drift it like a nymph, swing it like a wet fly, or strip it like a streamer: the
+    marabou breathes even when the fly is barely moving. In lakes, fish it on a sinking line
+    with a slow retrieve. Weighted versions bounce along the bottom for crayfish and sculpin.
+    """
+sources {
+    "Wikipedia: Woolly Bugger" url="https://en.wikipedia.org/wiki/Woolly_Bugger"
+    "Fly Fisherman: Imitative Woolly Buggers" url="https://www.flyfisherman.com/editorial/imitative-woolly-buggers/514688"
+    "Fly Fisherman: Fly tying the Woolly Bugger (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-the-wooly-bugger/151947"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/a/a9/Black_Woolly_Bugger.jpg" page="https://commons.wikimedia.org/wiki/File:Black_Woolly_Bugger.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, flash in the tail"
+    "https://upload.wikimedia.org/wikipedia/commons/8/81/Black_Woolly_Bugger_by_James_Stripes.jpg" page="https://commons.wikimedia.org/wiki/File:Black_Woolly_Bugger_by_James_Stripes.jpg" author="James Stripes" license="CC BY 2.5" note="Side view on a grid, bead head"
+    "https://upload.wikimedia.org/wikipedia/commons/1/15/BlackandBrownBeadheadWoollyBugger.jpg" page="https://commons.wikimedia.org/wiki/File:BlackandBrownBeadheadWoollyBugger.jpg" author="Mike Cline" license="Public domain" note="Side view, bead head"
+}
+
+hook streamer-4xl size=8
+thread black size="6/0"
+
+materials {
+    // Assumption: a 4.8 mm (3/16") cone on a #8 4X-long hook.
+    cone brass-cone mm=4.8
+    weight lead-free-wire
+    tail marabou color=black
+    flash krystal-flash count=4
+    rib copper-wire
+    body chenille color=olive
+    // Assumption: hackle fibres about the gape, a little short of the body's depth.
+    hackle saddle-hackle color=black fibre=1.0
+}
+
+steps {
+    slide-bead cone note="Small hole first, then push it up against the eye."
+    weight weight from=0.55 to=1.0 note="A few turns pushed up into the back of the cone."
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Sources: the tail reaches about one shank length past the bend.
+    tie-in tail length=3.5 note="Bind the butts along the top of the shank for an even underbody."
+    tie-in flash length=3.3 note="Two strands on each side."
+    tie-in rib
+    tie-in body note="Strip a little fluff to expose the core where it is tied in."
+    wrap-thread to=0.9
+    wind body to=0.9 turns=17 note="Touching turns, ending one eye-length behind the eye."
+    tie-off body
+    tie-in hackle note="By the butt, the inside of the feather facing back."
+    wind hackle to=0.05 turns=8 note="Even open turns back to the bend."
+    wind rib to=0.9 turns=7 note="Wiggle the wire so it traps no fibres."
+    tie-off rib
+    trim hackle
+    whip-finish note="A small, smooth head."
+}

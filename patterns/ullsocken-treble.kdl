@@ -1,0 +1,79 @@
+// Ullsocken on a long-shank treble, the commonest single-shank form today.
+
+id ullsocken-treble
+name "Ullsocken"
+variant-of ullsocken
+variant "On a treble"
+aliases "Ullsock" "Woolly Sock" "Uldsok"
+type salmon
+imitates crustacean attractor
+difficulty beginner
+species salmon sea-trout
+season may june july august september
+origin region="River Mörrum, Sweden"
+description "A red wool butt, two black wool body segments and three stiff brown cock hackles: at the rear, in the middle and at the front."
+history """
+    A Mörrum fly in the manner of the multi-hackled Irish shrimp flies, simplified to red, black
+    and brown. Its origins are unclear: Fiskeshopen in Mörrum credit Alf Jansson in the 1960s,
+    while others date it to the 1950s; by the early 1980s it was one of the two flies that
+    dominated the river. Today it is tied mostly on doubles, trebles and small tubes.
+    """
+fishing """
+    Swung across and down like any salmon wet fly, deep on a sinking head in Danish rivers and in
+    the dark water of the Mörrum. The stiff hackles push water and keep the fly alive in the
+    current.
+    """
+sources {
+    "Sexyloops: Foam and socks (Viking Lars)" url="https://www.sexyloops.com/index.php/ps/foam-and-socks"
+    "GlobalFlyFisher: Woolly Sock (Ullsocken)" url="https://globalflyfisher.com/video/woolly-sock-ullsocken"
+    "GlobalFlyFisher: Mörrum, the best flies (review)" url="https://globalflyfisher.com/review/morrum-best-flies"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/ullsocken-pages.jpg" page="https://globalflyfisher.com/review/morrum-best-flies" author="Peter Lyngby" license="All rights reserved; reference only" note="Book pages; treble version at top left"
+    "https://img.youtube.com/vi/sECLVuOVDJs/maxresdefault.jpg" page="https://globalflyfisher.com/video/woolly-sock-ullsocken" license="All rights reserved; reference only" flip=#true note="Treble version, side view"
+}
+
+// Assumption: the original-style dressing (Viking Lars), without a tail, on a long-shank treble.
+hook salmon-treble size=8
+thread black size="6/0"
+
+materials {
+    butt wool color=red
+    rear cock-hackle color=brown fibre=1.4 sweep=45 label="Stiff brown cock hackle"
+    body-rear wool color=black
+    middle cock-hackle color=brown fibre=1.6 sweep=45 label="Stiff brown cock hackle"
+    body-front wool color=black
+    front cock-hackle color=brown fibre=1.9 sweep=45 label="Stiff brown cock hackle, the longest"
+}
+
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    tie-in butt
+    wrap-thread to=0.1
+    wind butt to=0.1 turns=4 note="A short red butt."
+    tie-off butt
+    tie-in rear
+    wrap-thread to=0.15
+    wind rear to=0.15 turns=3 note="As full as possible."
+    tie-off rear
+    tie-in body-rear
+    wrap-thread to=0.5
+    wind body-rear to=0.5 turns=7
+    tie-off body-rear
+    tie-in middle
+    wrap-thread to=0.55
+    wind middle to=0.55 turns=3
+    tie-off middle
+    tie-in body-front
+    wrap-thread to=0.84
+    wind body-front to=0.84 turns=6
+    tie-off body-front
+    tie-in front
+    wrap-thread to=0.9
+    // Assumption: hackles grow longer toward the front, as in the photos; no source gives sizes.
+    wind front to=0.9 turns=3
+    tie-off front
+    whip-finish note="A small black head."
+}

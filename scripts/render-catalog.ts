@@ -68,7 +68,7 @@ if (todo.length === 0) {
       Array.from({ length: Math.min(CONCURRENCY, queue.length) }, async () => {
         for (let job = queue.shift(); job; job = queue.shift()) {
           const frames = await renderer.turntable(
-            { pattern: job.id, view: "default", transparent: true, fov: 20, ...FRAME },
+            { pattern: job.id, view: "default", transparent: true, fov: 20, pose: "pictured", ...FRAME },
             FRAMES,
           );
           await mkdir(`${OUT}/${job.id}`, { recursive: true });

@@ -17,6 +17,10 @@ export interface HookModel {
   eyeAngle: number;
   /** Length of the point section after the bend. */
   pointLength: number;
+  /** Bends and points on the one shank: 2 for a double, 3 for a treble. Default 1. */
+  points?: 2 | 3;
+  /** Jig hooks: the eye sits on a section bent up from the end of the shank. */
+  jig?: { length: number; angle: number };
   /** Typical model, for the materials list. */
   example: string;
 }
@@ -64,6 +68,22 @@ export const HOOK_MODELS: Record<Recipe["hook"]["model"], HookModel> = {
     shankLength: 2.7, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.9,
     example: "Partridge Bartleet",
   },
+  "salmon-double": {
+    label: "Salmon double, up eye",
+    shankLength: 2.6, shankCurve: 0, wireRadius: 0.065, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.85, points: 2,
+    example: "Partridge Q / Ahrex HR428",
+  },
+  "salmon-treble": {
+    label: "Long-shank treble, up eye",
+    shankLength: 2.6, shankCurve: 0, wireRadius: 0.06, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.8, points: 3,
+    example: "Esmond Drury / Ahrex HR490",
+  },
+  jig: {
+    label: "Jig hook, 60° bent eye",
+    shankLength: 1.9, shankCurve: 0, wireRadius: 0.05, eyeRadius: 0.17, eyeAngle: 0, pointLength: 0.8,
+    jig: { length: 0.35, angle: 60 },
+    example: "Hanak 450 / Fulling Mill Jig Force",
+  },
   "saltwater-straight": {
     label: "Saltwater hook, straight eye",
     shankLength: 2.4, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.21, eyeAngle: 0, pointLength: 0.9,
@@ -82,6 +102,11 @@ const GAPE_MM: Record<number, number> = {
 const THREAD_DIAMETER_MM: Record<Recipe["thread"]["size"], number> = {
   "3/0": 0.2, "6/0": 0.13, "8/0": 0.1, "10/0": 0.08, "12/0": 0.065, "14/0": 0.055,
 };
+
+/** Whether the fly swims hook point up (dumbbell-eyed flies, jig hooks). */
+export function ridesPointUp(recipe: Recipe): boolean {
+  return (recipe.rides ?? (HOOK_MODELS[recipe.hook.model].jig ? "point-up" : "point-down")) === "point-up";
+}
 
 export function gapeMm(size: number): number {
   return GAPE_MM[size] ?? 4.5;

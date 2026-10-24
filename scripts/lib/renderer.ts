@@ -13,6 +13,8 @@ export interface RenderOptions {
   transparent?: boolean;
   fov?: number;
   fit?: "box" | "sphere";
+  /** "pictured": as flies are usually photographed (jig flies point up). Default: as tied. */
+  pose?: "tied" | "pictured";
   width?: number;
   height?: number;
 }
@@ -58,6 +60,7 @@ export class Renderer {
       transparent: options.transparent ? "1" : "0",
       fov: String(options.fov ?? 8),
       fit: options.fit ?? "box",
+      pose: options.pose ?? "tied",
     });
     await page.goto(`${this.base}render.html?${query}`);
     await page.waitForFunction(() => document.body.dataset.ready || document.body.dataset.error, null, { timeout: 60_000 });

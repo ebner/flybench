@@ -106,6 +106,8 @@ export interface BeadPiece extends PieceBase {
   /** Where the bead's centre ends up, against the eye. */
   x: number;
   radius: number;
+  /** A cone head: its length along the shank (radius is at its wide back end). */
+  cone?: number;
 }
 
 export interface EyesPiece extends PieceBase {
@@ -348,7 +350,8 @@ export function simulate(recipe: Recipe): Build {
   const pitch = td * 1.3;
   const threadColor = resolveColor(recipe.thread.color);
 
-  let profile = Profile.bare(-0.3, L + 0.2, hook.wireRadius);
+  // A double's shank is two wires side by side, so the dressing sits on a wider base.
+  let profile = Profile.bare(-0.3, L + 0.2, hook.points === 2 ? hook.wireRadius * 1.8 : hook.wireRadius);
   let threadX: number | null = null;
   let nextId = 0;
   let time = 0;
@@ -421,9 +424,12 @@ export function simulate(recipe: Recipe): Build {
     switch (step.op) {
       case "slide-bead": {
         const l = looks.get(step.material)!;
-        const x = L - l.strandRadius * 0.9;
-        pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius });
-        frontLimit = Math.min(frontLimit, x - l.strandRadius * 0.95);
+        // Assumption: a cone head is a little longer than it is wide, narrowing to under half its width.
+        const cone = (MATERIALS[kinds.get(step.material)!.kind] as { cone?: boolean }).cone ? l.strandRadius * 2.3 : undefined;
+        const half = cone ? cone / 2 : l.strandRadius * 0.95;
+        const x = L - (cone ? cone * 0.45 : l.strandRadius * 0.9);
+        pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius, cone });
+        frontLimit = Math.min(frontLimit, x - half);
         span = Math.min(span, frontLimit / 0.97);
         duration = DURATION.bead;
         break;

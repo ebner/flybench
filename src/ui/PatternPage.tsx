@@ -4,6 +4,7 @@ import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
 import type { Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
+import { ridesPointUp } from "../tying/hook";
 import { simulate, stepAt } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
 import { match, materialColor } from "../catalog/inventory";
@@ -162,6 +163,7 @@ function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initia
           onFollowChange={setFollow}
           callout={callout}
           onCalloutClick={showInDressing}
+          pointUp={ridesPointUp(recipe)}
         />
         <div
           className="now"

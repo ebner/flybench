@@ -20,7 +20,7 @@
  *   flash     Krystal Flash, Flashabou
  *   feather   whole feathers or slips as wings (shape: breast, tip, slip)
  *   foam      closed-cell foam (backs, wing cases)
- *   bead      beads slid onto the hook
+ *   bead      beads and cone heads slid onto the hook
  *   eyes      dumbbell and bead-chain eyes
  */
 
@@ -45,6 +45,8 @@ export interface CatalogMaterial {
   oval?: boolean;
   /** Strips pulled over the body (foam, scud back): thickness in gapes. */
   thickness?: number;
+  /** Beads: a cone head, wide at the back and narrow towards the eye. */
+  cone?: boolean;
 }
 
 export const MATERIALS = {
@@ -103,6 +105,7 @@ export const MATERIALS = {
   "golden-pheasant-crest": { name: "golden pheasant crest", archetype: "fibres", defaultColor: "crest" },
   "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear" },
   "synthetic-hair": { name: "synthetic hair", archetype: "fibres" },
+  "coq-de-leon": { name: "Coq de León fibres", archetype: "fibres", defaultColor: "pardo" },
 
   // Biots
   "goose-biot": { name: "goose biot", archetype: "biot" },
@@ -130,6 +133,8 @@ export const MATERIALS = {
   // Beads and eyes
   "brass-bead": { name: "brass bead", archetype: "bead", defaultColor: "gold" },
   "tungsten-bead": { name: "tungsten bead", archetype: "bead", defaultColor: "gold" },
+  "brass-cone": { name: "brass cone head", archetype: "bead", defaultColor: "gold", cone: true },
+  "tungsten-cone": { name: "tungsten cone head", archetype: "bead", defaultColor: "gold", cone: true },
   "dumbbell-eyes": { name: "dumbbell eyes", archetype: "eyes", defaultColor: "lead" },
   "bead-chain-eyes": { name: "bead chain eyes", archetype: "eyes", defaultColor: "silver" },
   "mono-eyes": { name: "burnt mono eyes", archetype: "eyes", defaultColor: "black" },

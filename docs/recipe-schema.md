@@ -90,6 +90,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 | `season`      | month names, `january` … `december`              | no       |
 | `origin`      | `origin originator="…" year=1957 region="…"` (all optional) | no |
 | `description` | one or two sentences for the catalog              | no       |
+| `rides`       | `point-down` (default) or `point-up`               | no       |
 | `history`     | multi-line text                                   | no       |
 | `fishing`     | multi-line text: how and when to fish it          | no       |
 | `sources`     | block of `"Title" url="…"` lines (url optional)   | no       |
@@ -136,10 +137,18 @@ Thread sizes: `3/0`, `6/0`, `8/0`, `10/0`, `12/0`, `14/0`.
 | `emerger-curved`     | curved shank (45°)                          | Partridge 15BN        |
 | `scud-curved`        | strongly curved shank (75°)                 | TMC 2457              |
 | `salmon-up-eye`      | long, heavy, up eye                         | Partridge Bartleet    |
+| `salmon-double`      | double: two bends on one up-eyed shank      | Partridge Q, Ahrex HR428 |
+| `salmon-treble`      | long-shank treble, up eye                   | Esmond Drury, Ahrex HR490 |
+| `jig`                | short shank, eye section bent up 60°        | Hanak 450, Fulling Mill Jig Force |
 | `saltwater-straight` | heavy, straight eye                         | Gamakatsu SC15        |
 
 Positions on curved shanks are measured along the curve, so a recipe reads the same on
-any hook.
+any hook. A double or treble is dressed on its shank exactly like a single hook.
+
+Flies with dumbbell eyes and flies on jig hooks swim hook point up. Jig hooks imply it; for
+other flies say so with `rides point-up` (the default is `point-down`). The steps are always
+shown as tied, point down; the viewer offers to turn a point-up fly over, and the gallery
+pictures jig flies point up, as they are usually photographed.
 
 ## Colours
 
@@ -147,7 +156,7 @@ Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `brown`, `r
 `red-game`, `ginger`, `tan`, `grizzly`, `olive`, `grey`, `dun`, `yellow`, `green`, `gold`, `silver`,
 `copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
 `lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
-`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`. Barred colours
+`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`, `pardo`. Barred colours
 (`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars.
 Or a quoted hex value: `"#c8102e"`.
 
@@ -175,14 +184,14 @@ how it is drawn and which extra properties it takes:
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
 | hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane` | |
-| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair` | `count` |
+| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `coq-de-leon` | `count` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | |
 | cdc        | `cdc` | (can be wound: barbs lengthen from tip to butt) |
 | flash      | `krystal-flash`, `flashabou` | `count` |
 | feather    | `mallard-breast`, `teal-flank` (breast), `hackle-tips`, `saddle-feathers` (tip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
 | foam       | `foam` | |
-| bead       | `brass-bead`, `tungsten-bead` | `mm` (required) |
+| bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
 
 The archetype decides how a material behaves and is drawn:
