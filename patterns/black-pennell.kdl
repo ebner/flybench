@@ -39,7 +39,8 @@ hook wet-standard size=12
 thread black size="8/0"
 
 materials {
-    tail golden-pheasant-tippet count=10
+    // Graham's Fly Tying Page: about six tippet fibres.
+    tail golden-pheasant-tippet count=6
     rib silver-wire
     body silk-floss color=black
     hackle hen-hackle color=black fibre=1.4 label="Long black cock or hen hackle"
