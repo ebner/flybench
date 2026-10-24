@@ -67,7 +67,7 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
       return new THREE.MeshStandardMaterial({ color, roughness: 0.45, ...fibres });
     case "marabou":
     case "cdc":
-      return new THREE.MeshStandardMaterial({ color, roughness: 1, transparent: true, opacity: 0.85, ...fibres });
+      return new THREE.MeshStandardMaterial({ color, roughness: 1, ...fibres });
     case "flash":
       return new THREE.MeshPhysicalMaterial({
         color, roughness: 0.15, metalness: 0.7, iridescence: 0.8, iridescenceIOR: 1.5, ...fibres,

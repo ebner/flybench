@@ -1,0 +1,68 @@
+// Stimulator: Randall Kaufmann's high-floating stonefly and caddis dry, yellow version.
+
+id stimulator
+name "Stimulator"
+type dry
+imitates stonefly caddis attractor
+difficulty intermediate
+species trout grayling
+season may june july august september october
+origin originator="Randall Kaufmann" region="Oregon, USA"
+description "An elk hair tail and wing, a yellow abdomen with a palmered brown hackle and wire rib, and an orange thorax with a grizzly hackle."
+history """
+    Randall Kaufmann refined and named the Stimulator around 1980–82 from a Deschutes River
+    fly sold as "Hank's Special"; it first appeared in his Streamborn catalogue in 1982 and
+    on the cover of his book Tying Dry Flies (1991). Jim Slattery of New Jersey tells a
+    different story, of a "Fluttering Stonefly" he sent to Kaufmann in the late 1970s.
+    Either way, it descends from the Sofa Pillow and the Trude flies.
+    """
+fishing """
+    A searching fly for riffles, pocket water and banks, dead drifted or twitched like an
+    egg-laying stonefly or caddis. It floats well enough to carry a nymph in a dry-dropper
+    rig. Large sizes match salmonflies and golden stones, or pass as hoppers.
+    """
+sources {
+    "Wikipedia: Stimulator" url="https://en.wikipedia.org/wiki/Stimulator_(fly)"
+    "Fly Fisherman: Stimulator (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-stimulator/151976"
+    "SWTU: The Stimulator and Jim Slattery" url="https://www.swtu.org/2023/03/06/stimulator/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/8/84/Yellow_Stimulator.jpg" page="https://commons.wikimedia.org/wiki/File:Yellow_Stimulator.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view"
+    "https://files.osgnetworks.tv/16/files/2013/08/Stimulator-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-stimulator/151976" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://upload.wikimedia.org/wikipedia/commons/7/77/Crystal_Stimulator_Lime_Green.jpg" page="https://commons.wikimedia.org/wiki/File:Crystal_Stimulator_Lime_Green.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view, Crystal variant"
+}
+
+hook dry-3xl-curved size=10
+thread orange size="6/0"
+
+materials {
+    tail elk-hair
+    rib gold-wire
+    abdomen dry-fly-dubbing color=yellow
+    hackle-body cock-hackle color=brown fibre=1.0
+    wing elk-hair
+    hackle-thorax cock-hackle color=grizzly fibre=1.15
+    thorax dry-fly-dubbing color=orange label="Fire orange dubbing"
+}
+
+steps {
+    attach-thread at=0.7
+    wrap-thread to=0.0
+    tie-in tail length=1.0 spread=45 note="A short, flared bunch, about a gape long."
+    tie-in rib
+    dub abdomen to=0.62 note="Thin, with a slight taper."
+    tie-in hackle-body
+    wind hackle-body to=0.05 turns=6
+    wind rib to=0.62 turns=6 note="Through the hackle, the other way, to protect it."
+    tie-off rib
+    trim hackle-body
+    // Sources: the wing reaches from the front of the abdomen to the middle of the tail.
+    tie-in wing length=2.4 angle=14 spread=85 note="About twice as much hair as the tail, flaring over the top half of the shank."
+    trim wing
+    tie-in hackle-thorax
+    dub thorax to=0.92 note="Thin, to just short of the eye."
+    wind hackle-thorax to=0.92 turns=4
+    tie-off hackle-thorax
+    whip-finish
+}

@@ -1,0 +1,67 @@
+// Czech Nymph: a slim, heavy caddis-larva nymph with a shellback, as tied by Charlie's Fly Box.
+
+id czech-nymph
+name "Czech Nymph"
+type nymph
+imitates caddis crustacean
+difficulty intermediate
+species trout grayling
+season january february march april may june july august september october november december
+origin region="Poland and Czechoslovakia, 1980s"
+description "A heavily weighted body on a curved hook: olive dubbed abdomen, dark thorax, a tan shellback and two ribs."
+history """
+    Less a single pattern than a style. Czech competitors learned short-line nymphing from
+    the Poles at a competition in 1984 and placed second behind Poland at the 1985 world
+    championship; Slavoj Svoboda won the individual title in 1986. The flies imitated
+    free-living caddis larvae such as Hydropsyche and Rhyacophila.
+
+    Early Czech nymphs had bodies of washing-up sponge and backs of mackintosh; they grew
+    slimmer as materials improved. Some credit the method to the Pole Władysław Trzebunia.
+    """
+fishing """
+    Fished dead drift on the bottom in moderate to fast runs, classically as a team of two
+    or three on a short line led downstream by the rod tip, without an indicator. The slim,
+    heavy profile sinks fast. It works for trout and grayling all year, especially in cold
+    or high water.
+    """
+sources {
+    "GlobalFlyFisher: Czech nymphs (Bob Petti)" url="https://globalflyfisher.com/node/14107"
+    "Charlie's Fly Box: Czech nymph" url="https://charliesflybox.com/blogs/step-by-step-tutorials/czech-nymph"
+    "GlobalFlyFisher: Czech nymphing (Pavel Adamovsky)" url="https://globalflyfisher.com/fish-better-tie-better/czech-nymphing"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.1000flies.com/media/image/product/9691/lg/dark-natural-czech-nymph.jpg" page="https://www.1000flies.com/Dark-Natural-Czech-Nymph_2" license="All rights reserved; reference only" note="Side view, classic silhouette"
+    "https://cdn.shopify.com/s/files/1/0569/0877/5562/files/DSC07348.jpg?v=1644438362" page="https://charliesflybox.com/blogs/step-by-step-tutorials/czech-nymph" license="All rights reserved; reference only" flip=#true note="Side view"
+    "https://www.1000flies.com/media/image/product/9696/lg/natural-czech-nymph.jpg" page="https://www.1000flies.com/Natural-Czech-Nymph_1" license="All rights reserved; reference only" note="Side view"
+}
+
+hook scud-curved size=10
+// Assumption: dark thread in place of white thread blackened at the head.
+thread black size="8/0"
+
+materials {
+    weight lead-free-wire
+    back scud-back color=tan
+    under-rib copper-wire
+    over-rib monofilament
+    abdomen dubbing color=olive
+    thorax dubbing color=black label="Black peacock Ice Dub"
+}
+
+steps {
+    weight weight from=0.25 to=0.75 note="About 15 turns centred on the hook."
+    attach-thread at=0.85 note="Wrap over the lead so it tapers smoothly at both ends."
+    wrap-thread to=0.0
+    tie-in back note="On top, stretched, wrapped back deep into the bend."
+    tie-in under-rib
+    tie-in over-rib note="On the far side, so it makes almost a full turn before crossing the back."
+    dub abdomen to=0.65 note="Sparse and even: the lead already gives the taper."
+    dub thorax to=0.9
+    wind under-rib to=0.9 turns=7 note="Open, even turns."
+    tie-off under-rib
+    pull-over back to=0.9 note="Centred over the top, stretched slightly."
+    wind over-rib to=0.9 turns=7 note="Between the copper turns, pulling up on the near side so the back stays put."
+    tie-off over-rib
+    whip-finish note="Pick out the thorax dubbing with a bodkin for legs."
+}

@@ -52,7 +52,7 @@ describe("catalog search", () => {
   });
 
   it("counts what each facet value would leave", () => {
-    const counts = search.facetCounts("imitates", ["caddis", "attractor"], { q: "elk hair caddis" });
+    const counts = search.facetCounts("imitates", ["caddis", "attractor"], { q: "EHC" });
     expect(counts.get("caddis")).toBe(1);
     expect(counts.get("attractor")).toBe(0);
   });

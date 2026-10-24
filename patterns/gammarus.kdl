@@ -1,0 +1,55 @@
+// Gammarus: a freshwater shrimp (scud), after the Orvis Simple Scud.
+
+id gammarus
+name "Gammarus"
+aliases "Scud" "Freshwater shrimp" "Simple Scud"
+type nymph
+imitates crustacean
+difficulty beginner
+species trout grayling sea-trout
+season january february march april may june july august september october november december
+description "A plump olive dubbed body on a curved hook, a tan shellback and a gold wire rib, with the dubbing brushed out underneath for legs."
+history """
+    Not one pattern but a family: imitations of the freshwater shrimps (Gammarus and other
+    amphipods) that trout and grayling eat all year. This is the plain dubbed, shellbacked
+    and ribbed scud; Oliver Edwards' Deep Diving Shrimp and Nick Thomas' Shwimp are
+    well-known relatives. Orange and pink versions are fished for sea trout on Danish coasts.
+    """
+fishing """
+    Dead drift it near the bottom on a nymph rig in rivers, often as the point fly for
+    grayling and trout. On lakes, fish it slowly round weedbeds and margins. Weight decides
+    the depth: none for shallow weedy water, a bead or lead for fast, deep runs.
+    """
+sources {
+    "Orvis: Simple Scud" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymphs/simple-scud"
+    "GlobalFlyFisher: OE Deep Diving Shrimp" url="https://globalflyfisher.com/patterns-tie-better/oedds"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.1000flies.com/media/image/product/23137/lg/classic-gammarus-fluo-orange.jpg.webp" page="https://www.1000flies.com/Classic-Gammarus-Fluo-Orange_3" license="All rights reserved; reference only" note="Side view: tail, rib, shell, legs"
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/IMG_2890.jpg" page="https://globalflyfisher.com/patterns-tie-better/oedds" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+hook scud-curved size=12
+thread olive size="8/0"
+
+materials {
+    antennae hackle-fibres color=olive count=6 label="Olive fibres (antennae)"
+    rib gold-wire
+    back scud-back color=tan
+    body dubbing color=olive label="Smoky olive scud dubbing"
+}
+
+steps {
+    attach-thread at=0.67
+    wrap-thread to=0.0
+    // Assumption: antennae about a third of the shank, as in the reference photos.
+    tie-in antennae length=0.6 note="A thin wisp, trimmed short."
+    tie-in rib
+    tie-in back note="Wrapped back into the bend, centred on top."
+    dub body to=0.92 note="A plump body tapering at both ends, stopping short of the eye."
+    pull-over back to=0.92
+    wind rib to=0.92 turns=8 note="Open turns over shell and body; firmer pressure gives deeper segments."
+    tie-off rib
+    whip-finish note="Brush out the dubbing underneath for legs about a gape long."
+}

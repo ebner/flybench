@@ -53,6 +53,8 @@ export const NAMED_COLORS = {
   claret: "#6a1c2e",
   chartreuse: "#b5d52a",
   coch: "#5a2614",
+  muskrat: "#5b5650",
+  clear: "#d8dde0",
 } as const;
 
 export type NamedColor = keyof typeof NAMED_COLORS;
@@ -75,7 +77,7 @@ const GapeLength = z.number().positive().max(5);
 const Note = z.string().min(1).optional();
 
 export const HOOK_MODEL_IDS = [
-  "dry-standard", "wet-standard", "nymph-2xl", "streamer-4xl",
+  "dry-standard", "dry-3xl-curved", "wet-standard", "nymph-2xl", "streamer-4xl",
   "emerger-curved", "scud-curved", "salmon-up-eye", "saltwater-straight",
 ] as const;
 export const THREAD_SIZES = ["3/0", "6/0", "8/0", "10/0", "12/0", "14/0"] as const;
@@ -219,6 +221,8 @@ const Step = z.discriminatedUnion("op", [
     material: MaterialRef,
     /** Length left standing, in gapes (hair butts). Default: flush. */
     leave: z.number().min(0).max(2).optional(),
+    /** Spun hair: a round head (Muddler) or a wedge, flat underneath and rising towards the rear (G&H Sedge). */
+    shape: z.enum(["round", "wedge"]).optional(),
     note: Note,
   }),
   z.strictObject({

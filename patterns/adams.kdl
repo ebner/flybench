@@ -1,0 +1,68 @@
+// Adams: the classic all-round dry fly, in its modern Catskill dressing.
+
+id adams
+name "Adams"
+type dry
+imitates mayfly caddis
+difficulty intermediate
+species trout grayling
+season april may june july august september
+origin originator="Leonard Halladay" year=1922 region="Michigan, USA"
+description "Mixed brown and grizzly tail, a grey dubbed body, upright grizzly hackle-tip wings and a collar of brown and grizzly hackle."
+history """
+    Leonard Halladay, a Michigan innkeeper and tyer, created the Adams in 1922 and named it
+    after his friend Charles F. Adams, an Ohio attorney, who first fished it near Traverse
+    City. Accounts differ on the details, and the original seems to have had a golden
+    pheasant tippet tail and spent wings.
+
+    The upright-winged, hackle-fibre-tailed dressing tied today settled in the 1930s.
+    """
+fishing """
+    A searching dry for riffles, runs and flats when nothing in particular is hatching: grey
+    suggests many mayflies and caddis. Fish it dead drift upstream or up and across, in
+    sizes 12 to 16, or 18 to 22 for small olives and midges.
+    """
+sources {
+    "Wikipedia: Adams (dry fly)" url="https://en.wikipedia.org/wiki/Adams_(dry_fly)"
+    "SWTU: The Adams (Rusty Dunn)" url="https://www.swtu.org/2023/12/04/adams/"
+    "Orvis: Classic dry fly with hackle tip wings" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/852-classic_dry_fly_with_hackle_tip_wings"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/b/b6/Standard_Adams_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Standard_Adams_Dry_Fly.jpg" author="Freyfisher" license="CC BY-SA 2.0" note="Side view"
+    "https://upload.wikimedia.org/wikipedia/commons/5/5b/AdamsDryFly.jpg" page="https://commons.wikimedia.org/wiki/File:AdamsDryFly.jpg" author="Mike Cline" license="Public domain" note="Side view in the vise"
+    "https://www.swtu.org/wp-content/uploads/2023/12/Adams2-975.jpg" page="https://www.swtu.org/2023/12/04/adams/" author="Rusty Dunn" license="All rights reserved; reference only" note="Side view, wide wings"
+}
+
+hook dry-standard size=14
+thread black size="8/0"
+
+materials {
+    wings hackle-tips color=grizzly label="Grizzly hen hackle tips"
+    tail-brown hackle-fibres color=brown count=8 label="Brown cock hackle fibres"
+    tail-grizzly hackle-fibres color=grizzly count=8 label="Grizzly cock hackle fibres"
+    body dry-fly-dubbing color=muskrat label="Adams grey dubbing (muskrat)"
+    hackle-brown cock-hackle color=brown fibre=1.5
+    hackle-grizzly cock-hackle color=grizzly fibre=1.5
+}
+
+steps {
+    attach-thread at=0.9 note="Leave one eye-length bare behind the eye."
+    wrap-thread to=0.75
+    // Assumption: wings a little taller than the hackle, about 1.8 gapes.
+    tie-in wings length=1.8 angle=90 spread=22 note="Tie the tips in pointing over the eye, then stand them up with turns in front."
+    wrap-thread to=0.0
+    // Sources give a tail one shank long (2× the gape); the reference photos show a little
+    // less, about 1.7× the gape, which is used here.
+    tie-in tail-brown length=1.7 note="The tail is about as long as the shank."
+    tie-in tail-grizzly length=1.7
+    dub body to=0.7 note="Thin and slightly tapered, stopping just behind the wings."
+    tie-in hackle-brown
+    tie-in hackle-grizzly
+    wrap-thread to=0.92
+    wind hackle-brown to=0.9 turns=4 note="Two turns behind the wings, two in front."
+    tie-off hackle-brown
+    wind hackle-grizzly to=0.9 turns=4 note="Wind it through the brown without trapping its barbs."
+    tie-off hackle-grizzly
+    whip-finish
+}

@@ -20,9 +20,11 @@ import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
 import type { Recipe } from "../src/recipe/schema";
 import { materialName } from "../src/tying/describe";
+import { HOOK_MODELS } from "../src/tying/hook";
 import { patternIds, Renderer } from "./lib/renderer";
 
-const USER_AGENT = "fly-tying-refcheck/0.1 (authoring tool; reference images are not redistributed)";
+// Wikimedia throttles anonymous agents; identify the tool and where it comes from.
+const USER_AGENT = "flybench-refcheck/0.1 (https://flybench.app; authoring tool, images not redistributed)";
 const PHOTO_HEIGHT = 460;
 const RENDER_WIDTH = 1050;
 const PANEL_WIDTH = 640;
@@ -66,10 +68,21 @@ export function proportions(recipe: Recipe): string[] {
       lines.push(`${name(step.material)}: ${step.length} gapes from x=${(thread * 2).toFixed(2)}${extra.length ? `, ${extra.join(", ")}` : ""}`);
     }
     if (step.op === "dub") lines.push(`${name(step.material)}: body to ${step.to} of the shank`);
-    if (step.op === "wind") lines.push(`${name(step.material)}: wound to ${step.to} of the shank, ${step.turns} turns`);
+    if (step.op === "wind") {
+      lines.push(
+        step.around
+          ? `${name(step.material)}: ${step.turns} turns round the ${name(step.around).toLowerCase()}`
+          : `${name(step.material)}: wound to ${step.to} of the shank, ${step.turns} turns`,
+      );
+    }
   }
   for (const m of recipe.materials) if (m.fibre) lines.push(`${materialName(m)}: fibres ${m.fibre} gapes`);
-  lines.push("", "Grid in gapes; x = 0 is the start of the bend.", "Shank: x = 0 to 2 (dry-standard).");
+  const hook = HOOK_MODELS[recipe.hook.model];
+  lines.push(
+    "",
+    "Grid in gapes; x = 0 is the start of the bend.",
+    `Shank: ${hook.shankLength} gapes along the shank${hook.shankCurve ? `, curved ${hook.shankCurve}°` : ""} (${recipe.hook.model}).`,
+  );
   return lines;
 }
 

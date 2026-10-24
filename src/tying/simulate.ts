@@ -51,6 +51,8 @@ export interface WrapsPiece extends PieceBase {
   sweep?: number;
   /** Fibres alternate light and dark (grizzly, partridge). */
   barred?: boolean;
+  /** Lies flat as a band when wound (silk floss, flat tinsel, wound fibres) rather than as a round strand. */
+  band?: boolean;
   /** Post wraps: the post's x, the heights (above the shank axis) the wraps run between, and its radius. */
   post?: { x: number; y0: number; y1: number; radius: number };
 }
@@ -73,6 +75,8 @@ export interface BundlePiece extends PieceBase {
   count: number;
   /** Trimmed: cut square, all the same length. */
   cut?: boolean;
+  /** Trimmed spun hair: a round head, or a wedge flat underneath and deepest at the rear. */
+  trimShape?: "round" | "wedge";
 }
 
 /** A whole feather or a quill slip as a wing; a pair when `pair` > 0. */
@@ -212,6 +216,7 @@ interface MaterialLook {
   barred?: boolean;
   /** 0 = plain, 1 = strongly barred. */
   barring: number;
+  band?: boolean;
 }
 
 const deg = (d: number) => (d * Math.PI) / 180;
@@ -254,30 +259,32 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
       return { ...base, strandRadius: r, tieInThickness: r * 1.4, layerThickness: (c) => 2 * r * Math.min(c, 1) * 0.9 };
     }
     case "floss": {
-      const r = threadDiameter(recipe, m.size ?? recipe.thread.size) * 0.6;
-      return { ...base, strandRadius: r, tieInThickness: r, layerThickness: (c) => r * 1.2 * Math.min(c, 1.5) };
+      // Assumption: 5X monofilament is about 0.15 mm.
+      const r = m.kind === "monofilament" ? mm(0.15) / 2 : threadDiameter(recipe, m.size ?? recipe.thread.size) * 0.6;
+      return { ...base, strandRadius: r, band: m.kind === "silk-floss", tieInThickness: r, layerThickness: (c) => r * 1.2 * Math.min(c, 1.5) };
     }
     case "tinsel": {
       const r = cat.oval ? 0.02 : 0.024;
-      return { ...base, strandRadius: r, tieInThickness: 0.012, layerThickness: (c) => 0.02 * Math.min(c, 1) };
+      return { ...base, strandRadius: r, band: !cat.oval, tieInThickness: 0.012, layerThickness: (c) => 0.02 * Math.min(c, 1) };
     }
     case "chenille":
       return {
-        ...base, strandRadius: 0.065, fibreLength: 0.05,
-        tieInThickness: 0.04, layerThickness: (c) => 0.13 * Math.min(c, 1.3),
+        // Assumption: medium chenille makes a body about half the gape thick.
+        ...base, strandRadius: 0.12, fibreLength: 0.08,
+        tieInThickness: 0.05, layerThickness: (c) => 0.22 * Math.min(c, 1.2),
       };
     case "hair":
       return { ...base, strandRadius: 0.08, count: 260, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "fibres":
       return {
         // Wound fibres lie side by side as a flat band, about one fibre width each.
-        ...base, strandRadius: 0.012 * Math.min(m.count ?? 8, 10), count: m.count ?? 8,
+        ...base, strandRadius: 0.012 * Math.min(m.count ?? 8, 10), count: m.count ?? 8, band: true,
         tieInThickness: 0.015, layerThickness: (c) => 0.04 * Math.min(c, 1.5),
       };
     case "biot":
       return { ...base, strandRadius: 0.012, count: m.count ?? 2, tieInThickness: 0.012, layerThickness: () => 0.02 };
     case "marabou":
-      return { ...base, strandRadius: 0.07, count: 160, tieInThickness: 0.03, layerThickness: () => 0.03 };
+      return { ...base, strandRadius: 0.08, count: 320, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "cdc":
       return { ...base, strandRadius: 0.05, count: 90, tieInThickness: 0.02, layerThickness: () => 0.02 };
     case "flash":
@@ -376,7 +383,7 @@ export function simulate(recipe: Recipe): Build {
   const materialWraps = (id: string, l: MaterialLook, x0: number, x1: number, turns: number): WrapsPiece => ({
     type: "wraps", id: nextId++, material: id, look: l.look, color: l.color, window: [0, 1],
     path: "travel", x0, x1, width: 0, turns, strandRadius: l.strandRadius, base: profile,
-    fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred,
+    fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band,
   });
 
   recipe.steps.forEach((step, index) => {
@@ -477,7 +484,8 @@ export function simulate(recipe: Recipe): Build {
         const side: Side = step.side ?? "top";
         const angle = deg(step.angle ?? (l.look === "yarn" ? 5 : 3));
         const upright = step.angle !== undefined && step.angle >= 60;
-        const spread = deg(step.spread ?? (upright ? 10 : (DEFAULT_SPREAD[l.look] ?? 30)));
+        // Upright posts are a gathered tuft, a little wider than a wing laid back.
+        const spread = deg(step.spread ?? (upright ? 22 : (DEFAULT_SPREAD[l.look] ?? 30)));
         if (step.length && !upright) {
           ctx.tipX = x - step.length * Math.cos(angle);
           ctx.bendEnd = bendEndX(hook);
@@ -579,7 +587,8 @@ export function simulate(recipe: Recipe): Build {
         const from = tiedAt.get(step.material)!;
         const to = Math.min(step.to * L, frontLimit);
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
-        const thickness = l.look === "foam" ? 0.09 : 0.035;
+        const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
+        const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
         pieces.push({
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : 65),
@@ -623,7 +632,10 @@ export function simulate(recipe: Recipe): Build {
           butts.delete(step.material);
           b.until = cutAt;
           // Assumption: a trimmed head is about 0.4 gape from the shank unless the recipe says otherwise.
-          pieces.push({ ...b, id: nextId++, length: step.leave ?? 0.4, angle: deg(10), count: b.count * 2, cut: true, window: [0.5, 0.5001], until: undefined });
+          pieces.push({
+            ...b, id: nextId++, length: step.leave ?? 0.4, angle: deg(10), count: b.count * 2, cut: true,
+            trimShape: step.shape ?? "round", window: [0.5, 0.5001], until: undefined,
+          });
         } else {
           const b = butts.get(step.material)!;
           butts.delete(step.material);

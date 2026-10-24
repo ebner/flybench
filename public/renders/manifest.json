@@ -1,30 +1,78 @@
 {
+  "adams": {
+    "hash": "ef751efcdf5241dd",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "czech-nymph": {
+    "hash": "7f0629efe152e6b0",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
   "elk-hair-caddis": {
-    "hash": "73d6fdc7fc6c024b",
+    "hash": "9c0b45443f2e8833",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "elk-hair-caddis-troth": {
-    "hash": "c481c79a87015896",
+    "hash": "7f25d65a210b7654",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "europea-12": {
-    "hash": "ec2e6ebcaae11899",
+    "hash": "a8c72fd0190ab4fb",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "europea-12-tailed": {
-    "hash": "8f0d2e8fa7575b97",
+    "hash": "2a659926a632a11b",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "gammarus": {
+    "hash": "608c2797a3108ff3",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "goddard-caddis": {
+    "hash": "18421f81967de395",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "montana-nymph": {
+    "hash": "6d4e281756c87ec3",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "parachute-adams": {
+    "hash": "a4bcc5dfe46dc629",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "red-tag": {
-    "hash": "278fc83585bf0831",
+    "hash": "9321eebc434af02f",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "stimulator": {
+    "hash": "f23582ac5b577c21",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "woolly-bugger": {
+    "hash": "faae9e3b1e1b197e",
     "frames": 24,
     "width": 300,
     "height": 200

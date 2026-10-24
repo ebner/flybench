@@ -159,7 +159,8 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       sweep = (rand() - 0.5) * 2.2;
       const guard = rand() < 0.08;
       length = piece.fibreLength! * (guard ? 1.6 + rand() : 0.4 + 0.7 * rand());
-      shade = guard ? 0.45 : 0.7 + 0.6 * rand();
+      // Mottled, but never lighter than the dubbing's own colour.
+      shade = guard ? 0.45 : 0.6 + 0.4 * rand();
     }
     let dir: THREE.Vector3;
     if (onPost) {
@@ -181,6 +182,9 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
  * The value is the widest the band can spread, as a multiple of the strand radius.
  */
 const BANDS: Partial<Record<WrapsPiece["look"], number>> = { thread: 1.4, floss: 3, tinsel: 2.6, fibres: 2.6 };
+
+/** Thread always lies flat; other materials say so (silk floss, flat tinsel, wound fibres). */
+const isBand = (piece: WrapsPiece) => piece.look === "thread" || piece.band === true;
 
 /**
  * A flat band following a wraps piece: an elliptical section, wide along the shank and
@@ -229,7 +233,7 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   // The dubbing and chenille cores sit inside their fuzz. Bands spread as wide as the
   // spacing of the turns allows, so touching turns close into a smooth layer.
   const pitch = piece.path === "travel" ? Math.abs(piece.x1 - piece.x0) / piece.turns : 0;
-  const band = piece.path !== "post" && !(piece.look === "tinsel" && piece.strandRadius < 0.022) ? BANDS[piece.look] : undefined;
+  const band = piece.path !== "post" && isBand(piece) ? BANDS[piece.look] : undefined;
   let tube: THREE.BufferGeometry;
   let perSegment: number;
   if (band) {
@@ -274,7 +278,8 @@ const BUNDLE = {
   fibres: { radius: 0.005, tip: 0.3, tipShade: 0.8, spread: 0.18, flare: 0, sideFlare: 0.2, lengthJitter: 0.1 },
   hair: { radius: 0.0095, tip: 0.35, tipShade: 0.5, spread: 0.08, flare: 0.08, sideFlare: 0.55, lengthJitter: 0.08 },
   biot: { radius: 0.011, tip: 0.15, tipShade: 0.8, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0 },
-  marabou: { radius: 0.0035, tip: 0.15, tipShade: 0.9, spread: 0.45, flare: 0.12, sideFlare: 0.35, lengthJitter: 0.35 },
+  // Marabou is a dense, soft plume: many fine fibres, tapering out.
+  marabou: { radius: 0.005, tip: 0.2, tipShade: 0.9, spread: 0.3, flare: 0.06, sideFlare: 0.25, lengthJitter: 0.45 },
   cdc: { radius: 0.004, tip: 0.2, tipShade: 0.9, spread: 0.4, flare: 0.15, sideFlare: 0.4, lengthJitter: 0.3 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2 },
 } as const;
@@ -291,7 +296,21 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
     .addScaledVector(Y_AXIS, Math.sin(piece.angle) * flip);
   const list: Fibre[] = [];
   const evenlySpaced = piece.look === "biot";
+  // An upright post roots in a small disc on top of the shank and fans out at the top.
+  const upright = piece.direction === "back" && piece.angle >= Math.PI / 3;
   for (let i = 0; i < piece.count; i++) {
+    if (upright) {
+      const a = rand() * 2 * Math.PI;
+      const d = Math.sqrt(rand()) * piece.bundleRadius * 0.7;
+      const base = new THREE.Vector3(piece.x + d * Math.cos(a), piece.radius * flip, d * Math.sin(a));
+      const fan = 0.08 + spec.sideFlare * 0.45 * rand();
+      const dir = along
+        .clone()
+        .add(new THREE.Vector3(Math.cos(a) * fan, 0, Math.sin(a) * fan))
+        .normalize();
+      list.push({ u: rand(), base, dir, length: piece.length * (1 - spec.lengthJitter / 2 + spec.lengthJitter * rand()), radius: spec.radius, shade: 0.85 + 0.3 * rand() });
+      continue;
+    }
     // Bases spread over the top (or bottom), up to `spread` either side; spun hair all round.
     const theta = radialHair
       ? rand() * 2 * Math.PI
@@ -322,10 +341,21 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         .normalize();
     }
     const jitter = piece.cut ? 0 : spec.lengthJitter;
-    // A trimmed head of spun hair is shaped like a bullet: fullest at the back, tapering to the eye.
-    const shape = radialHair && piece.cut && piece.span ? 1 - 0.55 * Math.pow((x - piece.x) / piece.span, 1.5) : 1;
+    let length = piece.length * (1 - jitter / 2 + jitter * rand());
+    if (radialHair && piece.cut && piece.span) {
+      const f = (x - piece.x) / piece.span;
+      if (piece.trimShape === "wedge") {
+        // Deepest at the back, low at the front, and cut flat underneath close to the hook.
+        length *= 0.3 + 0.7 * (1 - f);
+        if (dir.y < -0.05) length = Math.min(length, 0.1 / -dir.y);
+        if (Math.abs(dir.z) > 0.6) length *= 0.75;
+      } else {
+        // A round head, shaped like a bullet: fullest at the back, tapering to the eye.
+        length *= 1 - 0.55 * Math.pow(f, 1.5);
+      }
+    }
     list.push({
-      u: rand(), base, dir, length: piece.length * shape * (1 - jitter / 2 + jitter * rand()),
+      u: rand(), base, dir, length,
       radius: spec.radius, shade: 0.85 + 0.3 * rand(),
     });
   }

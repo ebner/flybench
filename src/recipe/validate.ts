@@ -215,6 +215,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.leave !== undefined && archetype !== "hair") {
           err("leave only applies to hair butts and spun hair", [...path, "leave"]);
         }
+        if (step.shape !== undefined && !recipe.steps.slice(0, i).some((s) => s.op === "spin" && s.material === step.material)) {
+          err("shape only applies to trimming spun hair", [...path, "shape"]);
+        }
         break;
       }
       case "whip-finish":

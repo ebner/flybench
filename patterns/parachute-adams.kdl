@@ -1,0 +1,63 @@
+// Parachute Adams: the Adams with a white post and a parachute hackle.
+
+id parachute-adams
+name "Parachute Adams"
+type dry
+imitates mayfly
+difficulty intermediate
+species trout grayling
+season april may june july august september
+origin region="North America"
+description "Mixed brown and grizzly tail, Adams grey body, a white calf-hair post and a parachute hackle of brown and grizzly."
+history """
+    The Adams (Leonard Halladay, Michigan, 1922) tied with a parachute hackle round a wing
+    post. Parachute dry flies became popular in the 1950s and the Parachute Adams followed;
+    no single originator is documented.
+    """
+fishing """
+    An everyday searching dry that lands upright and sits low in the film like a dun or a
+    cripple, with a post you can see in broken water. Fish it dead drift, or as the
+    indicator fly in a dry-dropper rig. Sizes 16 to 20 cover olives and midges.
+    """
+sources {
+    "Fly Fisherman: Parachute Adams" url="https://www.flyfisherman.com/editorial/parachute-adams/152452"
+    "Fly Fisherman: Tweaking the Adams fly (Charlie Craven)" url="https://www.flyfisherman.com/editorial/tweaking-the-adams-fly/152123"
+    "Wikipedia: Adams (dry fly)" url="https://en.wikipedia.org/wiki/Adams_(dry_fly)"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Parachute_Adams_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Parachute_Adams_Dry_Fly.jpg" author="Freyfisher" license="CC BY-SA 2.0" note="Side view in the vise"
+    "https://files.osgnetworks.tv/16/files/2012/03/Parachute-Adams.jpg" page="https://www.flyfisherman.com/editorial/parachute-adams/152452" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+hook dry-standard size=14
+thread grey size="8/0"
+
+materials {
+    tail-grizzly hackle-fibres color=grizzly count=6 label="Grizzly cock hackle fibres"
+    tail-brown hackle-fibres color=brown count=6 label="Brown cock hackle fibres"
+    post calf-tail
+    hackle-brown cock-hackle color=brown fibre=1.5
+    hackle-grizzly cock-hackle color=grizzly fibre=1.5
+    body dry-fly-dubbing color=muskrat label="Adams grey dubbing"
+}
+
+steps {
+    attach-thread at=0.8
+    wrap-thread to=0.0
+    tie-in tail-grizzly length=2.0 note="The tail is one shank long."
+    tie-in tail-brown length=2.0
+    wrap-thread to=0.8
+    // Sources say the post is trimmed to about the shank length; the reference photos show
+    // it nearer 1.2× the gape above the shank, which is used here.
+    tie-in post length=1.2 angle=90 note="Stack the hair, tie it in tips forward, stand it up and make a few turns round its base."
+    tie-in hackle-brown note="Stems stripped and bound up the side of the post."
+    tie-in hackle-grizzly
+    wrap-thread to=0.02
+    dub body to=0.78 note="Up to the post, with a slight taper."
+    wind hackle-brown around=post turns=3 note="Start at the top and wind down, each turn under the last."
+    tie-off hackle-brown
+    wind hackle-grizzly around=post turns=3
+    tie-off hackle-grizzly
+    whip-finish note="Whip finish behind the eye, under the hackle."
+}

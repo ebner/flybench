@@ -43,6 +43,8 @@ export interface CatalogMaterial {
   shape?: FeatherShape;
   /** Tinsel: oval tinsel is round in section, flat tinsel is a ribbon. */
   oval?: boolean;
+  /** Strips pulled over the body (foam, scud back): thickness in gapes. */
+  thickness?: number;
 }
 
 export const MATERIALS = {
@@ -56,7 +58,7 @@ export const MATERIALS = {
   // Hackles
   "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7 },
   "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35 },
-  "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 25 },
+  "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 40 },
   "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 50 },
   "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 50 },
 
@@ -65,6 +67,7 @@ export const MATERIALS = {
   "dry-fly-dubbing": { name: "dry fly dubbing", archetype: "dubbing" },
   "rabbit-dubbing": { name: "rabbit dubbing", archetype: "dubbing" },
   "seals-fur": { name: "seal's fur", archetype: "dubbing" },
+  dubbing: { name: "dubbing", archetype: "dubbing" },
 
   // Wire
   "gold-wire": { name: "gold wire", archetype: "wire", defaultColor: "gold" },
@@ -75,6 +78,7 @@ export const MATERIALS = {
   // Thread and floss
   "rib-thread": { name: "thread", archetype: "floss" },
   "silk-floss": { name: "silk floss", archetype: "floss" },
+  monofilament: { name: "monofilament", archetype: "floss", defaultColor: "clear" },
 
   // Tinsel
   "flat-tinsel": { name: "flat tinsel", archetype: "tinsel", defaultColor: "silver" },
@@ -117,7 +121,8 @@ export const MATERIALS = {
   "saddle-feathers": { name: "saddle hackle feathers", archetype: "feather", shape: "tip" },
 
   // Foam
-  foam: { name: "foam", archetype: "foam", defaultColor: "black" },
+  foam: { name: "foam", archetype: "foam", defaultColor: "black", thickness: 0.09 },
+  "scud-back": { name: "scud back", archetype: "foam", thickness: 0.03 },
 
   // Beads and eyes
   "brass-bead": { name: "brass bead", archetype: "bead", defaultColor: "gold" },

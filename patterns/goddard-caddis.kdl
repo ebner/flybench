@@ -1,0 +1,54 @@
+// Goddard Caddis: the G&H Sedge of John Goddard and Cliff Henry, in its modern dressing.
+
+id goddard-caddis
+name "Goddard Caddis"
+aliases "G&H Sedge" "Goddard Sedge"
+type dry
+imitates caddis
+difficulty advanced
+species trout grayling
+season june july august september
+origin originator="John Goddard and Cliff Henry" region="England"
+description "A body of spun and clipped deer hair trimmed to a sedge's tent-shaped wing, and a brown hackle at the front."
+history """
+    Developed by John Goddard and Cliff Henry for English stillwater sedge fishing, and
+    published in Goddard's Trout Flies of Still-Water (1969). G&H are their initials; in the
+    United States it became the Goddard Caddis. The original had a belly of green seal's fur,
+    a rusty dun hackle and the stripped hackle stems as antennae.
+    """
+fishing """
+    Packed deer hair floats like cork. On lakes, cast it to rising fish at dusk and strip it
+    back to leave a V-wake like an egg-laying sedge; on rivers, fish it in broken water or
+    use it to carry a dropper. Less good for very selective fish on flat water.
+    """
+sources {
+    "The Feather Bender: G&H Sedge" url="https://thefeatherbender.com/2014/01/24/fly-tying-course-tying-the-goddard-caddis-g-h-sedge/"
+    "Orvis: Goddard Caddis" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/goddard-caddis"
+    "GlobalFlyFisher: Goddard Caddis" url="https://globalflyfisher.com/patterns/goddard-caddis"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://i0.wp.com/thefeatherbender.com/wp-content/uploads/2014/01/Goddard-Caddis-G-H-Sedge.jpg?resize=1300%2C768&ssl=1" page="https://thefeatherbender.com/2014/01/24/fly-tying-course-tying-the-goddard-caddis-g-h-sedge/" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://www.fish4flies.com/img/flies/Large/1497-1497%202.jpg" page="https://www.fish4flies.com/Dry/Sedge/Deer-Hair-Sedge" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+hook dry-standard size=12
+thread brown size="8/0"
+
+materials {
+    body deer-hair
+    hackle cock-hackle color=brown fibre=1.0
+}
+
+steps {
+    attach-thread at=0.6
+    wrap-thread to=0.0
+    // Assumption: the first bunch's tips left trailing past the bend, about a third of the shank.
+    spin body to=0.72 collar=0.7 note="Comb out the underfur; pack each bunch back hard against the last."
+    trim body leave=0.6 shape=wedge note="Flat underneath at the depth of the eye, the top rising towards the rear, the sides flaring back."
+    tie-in hackle note="Slightly undersized."
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=5 note="A couple of turns back into the hair, then forward."
+    tie-off hackle
+    whip-finish
+}

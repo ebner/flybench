@@ -39,6 +39,11 @@ export const HOOK_MODELS: Record<Recipe["hook"]["model"], HookModel> = {
     shankLength: 2.8, shankCurve: 0, wireRadius: 0.055, eyeRadius: 0.18, eyeAngle: 30, pointLength: 0.8,
     example: "TMC 5262",
   },
+  "dry-3xl-curved": {
+    label: "Dry fly hook, 3x long, curved",
+    shankLength: 3.0, shankCurve: 25, wireRadius: 0.05, eyeRadius: 0.18, eyeAngle: 0, pointLength: 0.8,
+    example: "TMC 200R",
+  },
   "streamer-4xl": {
     label: "Streamer hook, 4x long",
     shankLength: 4.0, shankCurve: 0, wireRadius: 0.065, eyeRadius: 0.2, eyeAngle: 20, pointLength: 0.85,

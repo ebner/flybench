@@ -1,0 +1,67 @@
+// Montana Nymph: the black and yellow stonefly nymph, a stillwater favourite in the UK and Scandinavia.
+
+id montana-nymph
+name "Montana Nymph"
+aliases "Montana Stone" "Montana"
+type nymph
+imitates stonefly damselfly
+difficulty beginner
+species trout bass
+season january february march april may june july august september october november december
+origin region="USA"
+description "A black tail and chenille body, a yellow chenille thorax with a black hackle wound through it, and a black chenille wing case."
+history """
+    An old American pattern meant to imitate large stonefly nymphs. It is often said to have
+    been first tied by Lew Oatman of New York, but no primary source confirms it, and it may
+    have reached Britain in the 1950s. Today it is better known as a stillwater fly in the UK
+    and Scandinavia than in the US.
+    """
+fishing """
+    In rivers, fish it deep on a dead drift as a stonefly nymph, or swing it into slower
+    water. On lakes, use a sinking or intermediate line and a slow retrieve along the
+    margins: in Scandinavia it is a favourite damsel and dragonfly imitation, especially late
+    in the evening.
+    """
+sources {
+    "Fly Anglers Online: Beginners' fly tying, part 13 (Al Campbell)" url="https://web.archive.org/web/20151128010940/http://www.flyanglersonline.com/flytying/beginners/part13.php"
+    "Guideline: Montana Stone" url="https://www.guidelineflyfish.com/en/montana-stone-6"
+    "GlobalFlyFisher: Montana" url="https://globalflyfisher.com/node/68406"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://guideline-products-production.imgix.net/images/773_ed65a19707-103099-full.jpg?q=70&fit=clip&w=1920&fm=jpg&auto=compress,format" page="https://www.guidelineflyfish.com/en/montana-stone-6" license="All rights reserved; reference only" note="Side view"
+    "https://cdn11.bigcommerce.com/s-5020eou/images/stencil/1280x1280/products/1604/9325/015_768_side__92456.1615821021.png?c=2" page="https://riverbum.com/montana-nymph/" license="All rights reserved; reference only" flip=#true note="Side view, slightly from above"
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfEuRiK522CpulUK8PMe1hUkUdSmjk1qwIVUlWmCjL2uGGL8g73jIc6bDp3t8lBuv123uO0VO45tO7jQuO8-nBsdF6Oj6Y2tPXe31q-wONFlj4uV_6HRhUwQD_Q43IiRUXQs-rrYc2wFNd/s1600/montana+3+001.jpg" author="Peter Driver" license="All rights reserved; reference only" note="Side view in the vise, sunburst thorax"
+}
+
+hook nymph-2xl size=10
+thread black size="6/0"
+
+materials {
+    tail hackle-fibres color=black count=12 label="Black hackle fibres"
+    body chenille color=black
+    case chenille color=black label="Black chenille (wing case)"
+    hackle hen-hackle color=black fibre=0.9
+    thorax chenille color=yellow
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Sources give a tail half to two thirds of the shank.
+    tie-in tail length=1.5
+    tie-in body
+    wrap-thread to=0.55
+    wind body to=0.55 turns=7 note="A little more than half the shank."
+    tie-off body
+    tie-in case note="On top, lying back over the body."
+    tie-in hackle note="Soft hackle, curved side down, tight against the body."
+    tie-in thorax
+    wrap-thread to=0.88
+    wind thorax to=0.88 turns=4
+    tie-off thorax
+    wind hackle to=0.88 turns=3 note="Open turns through the thorax, fibres sloping back."
+    tie-off hackle
+    pull-over case to=0.88 note="Over the top of the thorax, pushing the hackle down to the sides."
+    whip-finish
+}

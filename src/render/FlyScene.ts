@@ -103,6 +103,8 @@ export class FlyScene {
 
     const pmrem = new THREE.PMREMGenerator(this.renderer);
     this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    // Assumption: toned down so material colours read close to their swatches.
+    this.scene.environmentIntensity = 0.75;
     pmrem.dispose();
     this.setBackground(options.background === undefined ? "#e8e5de" : options.background);
 
