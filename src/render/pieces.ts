@@ -121,6 +121,7 @@ const WOUND_FIBRES = {
   herl: { perTurn: 320, radius: 0.006, tip: 0.25 },
   dubbing: { perTurn: 260, radius: 0.005, tip: 0.3 },
   chenille: { perTurn: 240, radius: 0.006, tip: 0.6 },
+  cdc: { perTurn: 160, radius: 0.003, tip: 0.3 },
 } as const;
 
 function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
@@ -149,6 +150,12 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       sweep = (rand() - 0.5) * 1.8;
       length = piece.fibreLength! * (0.5 + 0.6 * rand());
       shade = 1;
+    } else if (look === "cdc") {
+      // Barbs grow from short (the tip, wound first) to long near the butt, sweeping back.
+      spin = around + (rand() - 0.5) * 1.2;
+      sweep = (piece.sweep ?? 0.8) + (rand() - 0.5) * 0.5;
+      length = piece.fibreLength! * (0.2 + 0.8 * Math.pow(u, 1.5)) * (0.7 + 0.5 * rand());
+      shade = 0.85 + 0.3 * rand();
     } else if (look === "chenille") {
       spin = around + (rand() - 0.5) * 3;
       sweep = (rand() - 0.5) * 1.6;
@@ -234,7 +241,9 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   const segmentsPerTurn = piece.look === "thread" ? 20 : 28;
   const tubular = Math.max(8, Math.min(4000, Math.round(piece.turns * segmentsPerTurn)));
   const radial = piece.look === "thread" ? 5 : 8;
-  const tubeLook = piece.look === "hackle" ? "stem" : piece.look;
+  // Hackles and wound CDC show only their stem; the barbs make the bulk.
+  const stemOnly = piece.look === "hackle" || piece.look === "cdc";
+  const tubeLook = stemOnly ? "stem" : piece.look;
   // The dubbing and chenille cores sit inside their fuzz. Bands spread as wide as the
   // spacing of the turns allows, so touching turns close into a smooth layer.
   const pitch = piece.path === "travel" ? Math.abs(piece.x1 - piece.x0) / piece.turns : 0;
@@ -245,7 +254,12 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
     const halfWidth = Math.min(piece.strandRadius * band, Math.max(piece.strandRadius, pitch * 0.55));
     ({ geometry: tube, perSegment } = bandGeometry(piece, space, halfWidth, piece.strandRadius * 0.6, tubular));
   } else {
-    const tubeRadius = piece.look === "dubbing" || piece.look === "chenille" ? piece.strandRadius * 0.9 : piece.strandRadius;
+    const tubeRadius =
+      piece.look === "dubbing" || piece.look === "chenille"
+        ? piece.strandRadius * 0.9
+        : piece.look === "cdc"
+          ? 0.012
+          : piece.strandRadius;
     tube = new THREE.TubeGeometry(new WrapsCurve(piece, space), tubular, tubeRadius, radial, false);
     perSegment = radial * 6;
   }
@@ -285,7 +299,8 @@ const BUNDLE = {
   biot: { radius: 0.011, tip: 0.15, tipShade: 0.8, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0 },
   // Marabou is a dense, soft plume: many fine fibres, tapering out.
   marabou: { radius: 0.005, tip: 0.2, tipShade: 0.9, spread: 0.3, flare: 0.06, sideFlare: 0.25, lengthJitter: 0.45 },
-  cdc: { radius: 0.004, tip: 0.2, tipShade: 0.9, spread: 0.4, flare: 0.15, sideFlare: 0.4, lengthJitter: 0.3 },
+  // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
+  cdc: { radius: 0.003, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2 },
 } as const;
 
@@ -370,6 +385,21 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       // Clipped hair shows its thick cut ends.
       radius: radialHair && piece.cut ? spec.radius * 1.6 : spec.radius, shade: 0.85 + 0.3 * rand(),
     });
+  }
+  if (piece.look === "cdc") {
+    // Barbules: short, fine fibres all along each barb, which give CDC its fluff.
+    const barbs = list.slice();
+    for (const f of barbs) {
+      for (let k = 0; k < 6; k++) {
+        const t = 0.2 + 0.8 * rand();
+        const base = f.base.clone().addScaledVector(f.dir, f.length * t);
+        const dir = f.dir
+          .clone()
+          .add(new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5).multiplyScalar(1.6))
+          .normalize();
+        list.push({ u: f.u, base, dir, length: 0.05 + 0.06 * rand(), radius: 0.0018, shade: f.shade });
+      }
+    }
   }
   // Hair butts are the pale base of the hair; tips darken towards the end.
   const tipShade = forward || piece.cut ? 1 : spec.tipShade;

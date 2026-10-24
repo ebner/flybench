@@ -1,0 +1,52 @@
+// Zebra Midge: Ted Welling's bead-head midge pupa from Lees Ferry: a thread body ribbed with silver wire.
+
+id zebra-midge
+name "Zebra Midge"
+type midge
+imitates chironomid
+difficulty beginner
+species trout
+season january february march april may june july august september october november december
+origin originator="Ted Welling" region="Lees Ferry, Arizona, USA"
+description "A slim tapered black thread body with a silver wire rib, behind a silver bead, on a short curved hook."
+history """
+    Created by Ted Welling, a guide at Lees Ferry on the Colorado River below Glen Canyon
+    Dam, and a staple on tailwaters ever since. Some trace it to the Ice Cream Cone or the
+    TDC chironomid patterns; its date is not documented.
+    """
+fishing """
+    Imitates a midge pupa. Fish it under an indicator or as a dropper below a dry, near the
+    bottom on tailwaters and spring creeks, all year. Red, olive and brown bodies are popular
+    colour variants.
+    """
+sources {
+    "Orvis: Zebra Midge (Phil Monahan)" url="https://www.orvis.com/news/fly-tying/video-how-to-tie-a-zebra-midge/"
+    "Into Fly Fishing: How to tie a Zebra Midge" url="https://intoflyfishing.com/how-to-tie-a-zebra-midge/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://flyfishsd.com/cdn/shop/articles/zebra-midge-fly-pattern.jpg?v=1686269752" page="https://flyfishsd.com/blogs/blog/zebra-midge-fly-tying-video" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.jpg" page="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/" license="All rights reserved; reference only" note="Side view, glass bead variant"
+}
+
+hook scud-curved size=18
+thread black size="8/0"
+
+materials {
+    // Assumption: a 1.5 mm (1/16") bead on a #18.
+    bead brass-bead color=silver mm=1.5
+    rib silver-wire
+}
+
+steps {
+    slide-bead bead note="Small hole first, up against the eye."
+    attach-thread at=0.9 note="Right behind the bead, with a small dam so it can't slide back."
+    wrap-thread to=0.0 note="Partway down the bend."
+    tie-in rib note="On the near side."
+    wrap-thread to=0.9
+    wrap-thread to=0.35
+    wrap-thread to=0.9 note="Build a slim taper: thinnest at the rear, thickest behind the bead."
+    wind rib to=0.9 turns=6 note="Evenly spaced open turns."
+    tie-off rib
+    whip-finish note="Behind the bead."
+}

@@ -258,8 +258,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
         tieInThickness: 0, layerThickness: (c) => 0.075 * Math.min(c, 1.5),
       };
     case "wire": {
-      // Assumption: fine rib wire about 0.1 mm, weighting wire about 0.4 mm.
-      const r = m.kind === "lead-free-wire" ? mm(0.38) / 2 : 0.011;
+      // Assumption: fine rib wire about 0.1 mm, weighting wire about 0.4 mm, unless given.
+      const r = m.mm !== undefined ? mm(m.mm) / 2 : m.kind === "lead-free-wire" ? mm(0.38) / 2 : 0.011;
       return { ...base, strandRadius: r, tieInThickness: r * 1.4, layerThickness: (c) => 2 * r * Math.min(c, 1) * 0.9 };
     }
     case "floss": {
@@ -290,7 +290,11 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "marabou":
       return { ...base, strandRadius: 0.08, count: 320, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "cdc":
-      return { ...base, strandRadius: 0.05, count: 90, tieInThickness: 0.02, layerThickness: () => 0.02 };
+      // Wound, a CDC feather's barbs are short near the tip and long near the butt.
+      return {
+        ...base, strandRadius: 0.06, count: 260, fibreLength: 0.6, sweep: deg(45),
+        tieInThickness: 0.02, layerThickness: () => 0.05,
+      };
     case "flash":
       return { ...base, strandRadius: 0.04, count: m.count ?? 8, tieInThickness: 0.01, layerThickness: () => 0.01 };
     case "feather":

@@ -1,0 +1,54 @@
+// Griffith's Gnat: a peacock herl body with a palmered grizzly hackle; the classic midge cluster dry.
+
+id griffiths-gnat
+name "Griffith's Gnat"
+type midge
+imitates chironomid
+difficulty beginner
+species trout grayling
+season january february march april may june july august september october november december
+origin originator="George Griffith" region="Michigan, USA"
+description "A peacock herl body with an undersized grizzly hackle palmered over it; no tail, no wing."
+history """
+    Usually credited to George Griffith of the Au Sable River in Michigan, a founder of
+    Trout Unlimited, though nothing documents it: some credit a Walt Shaw with the fly and
+    Griffith with making it known, and it may go back to the 1930s.
+    """
+fishing """
+    Imitates a cluster of midges, or a single adult in the smallest sizes. Fish it dead drift
+    to sipping trout and grayling on flat water, on fine tippet. Trimmed flush underneath, it
+    sits in the film.
+    """
+sources {
+    "Fly Fisherman: Griffith's Gnat (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151996"
+    "SWTU: Griffith's Gnat" url="https://www.swtu.org/?p=3444"
+    "Rogue Fly Fishers: Griffith's Gnat" url="https://rogueflyfishers.org/griffiths-gnat/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://files.osgnetworks.tv/16/files/2013/08/Griffiths-Gnat-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151996" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://www.swtu.org/wp-content/uploads/2023/01/Griffiths-Gnat2-975.jpg" page="https://www.swtu.org/?p=3444" license="All rights reserved; reference only" note="Side view, large, dense palmer"
+    "https://www.fish4flies.com/img/flies/Large/1586-1586.jpg" page="https://www.fish4flies.com/Dry/Hackled/Griffiths-Gnat" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+hook dry-standard size=18
+thread black size="8/0"
+
+materials {
+    // Assumption: undersized, about the gape, as in the reference photos.
+    hackle cock-hackle color=grizzly fibre=0.9 label="Grizzly cock (saddle) hackle"
+    body peacock-herl strands=2
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    tie-in hackle note="By the butt, at the bend; deliberately undersized."
+    tie-in body note="Fine herls from near the eye of the quill."
+    wrap-thread to=0.9
+    wind body to=0.88 turns=8 note="Touching turns; twisting the herl round the thread makes it tougher."
+    tie-off body
+    wind hackle to=0.88 turns=5 note="Five evenly spaced turns."
+    tie-off hackle
+    whip-finish
+}

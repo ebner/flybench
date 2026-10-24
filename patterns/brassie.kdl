@@ -1,0 +1,54 @@
+// Brassie: a copper wire body and a peacock herl head; a 1960s South Platte classic.
+
+id brassie
+name "Brassie"
+type midge
+imitates chironomid
+difficulty beginner
+species trout
+season january february march april may june july august september october november december
+origin region="South Platte River, Colorado, USA, 1960s"
+description "A body of copper wire in touching turns and a small peacock herl head."
+history """
+    From the South Platte in Colorado in the 1960s, credited to Gene Lynch of Colorado
+    Springs, with Ken Chandler and Tug Davenport, though accounts differ. Lynch had wrapped
+    spare hooks with copper wire as weight; a bare one caught fish. It is named after the
+    brass-coated copper wire of the originals, which had heads of black heat-shrink tubing.
+    """
+fishing """
+    A heavy, slim midge larva or pupa that sinks quickly. Fish it near the bottom on
+    tailwaters and spring creeks, alone or below a heavier fly, all year. Red and green
+    wire are popular variants, and many tie it with a bead.
+    """
+sources {
+    "SWTU: South Platte Brassie (Rusty Dunn)" url="https://swtu.org/?p=1501"
+    "Orvis: Brassie" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymphs/688-brassie"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.swtu.org/wp-content/uploads/2018/10/South-Platte-Brassie2-975.jpg" page="https://swtu.org/?p=1501" license="All rights reserved; reference only" note="Side view, classic unbeaded"
+    "https://intoflyfishing.com/wp-content/uploads/2020/06/How-To-Tie-A-Brassie-Fly-Featured-Image.jpg" page="https://intoflyfishing.com/?p=3214" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+hook wet-standard size=18
+thread black size="8/0"
+
+materials {
+    // Assumption: "Brassie" size wire, about 0.28 mm.
+    body copper-wire mm=0.28
+    head peacock-herl strands=1
+}
+
+steps {
+    attach-thread at=0.85 note="Leave room for the head."
+    wrap-thread to=0.0 note="Binding the wire along the near side, for a smooth underbody."
+    tie-in body
+    wrap-thread to=0.75
+    wind body to=0.75 turns=18 note="Tight, touching turns, by hand; nudge them together."
+    tie-off body note="Break the wire off by flexing it."
+    tie-in head
+    wrap-thread to=0.92
+    wind head to=0.92 turns=3 note="A short, fat herl head."
+    tie-off head
+    whip-finish
+}

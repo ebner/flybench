@@ -144,7 +144,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   herl: ["strands"],
   hackle: ["fibre", "sweep"],
   dubbing: [],
-  wire: [],
+  wire: ["mm"],
   floss: ["size"],
   tinsel: [],
   chenille: [],
@@ -161,4 +161,4 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
 };
 
 /** Materials that are wound or applied to the shank rather than sticking out. */
-export const WINDABLE: readonly Archetype[] = ["yarn", "herl", "hackle", "wire", "floss", "tinsel", "chenille", "fibres"];
+export const WINDABLE: readonly Archetype[] = ["yarn", "herl", "hackle", "wire", "floss", "tinsel", "chenille", "fibres", "cdc"];

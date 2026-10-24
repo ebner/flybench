@@ -6,7 +6,7 @@ import type { Recipe } from "./schema";
 export const POSITION_TOLERANCE = 0.02;
 
 /** Materials that only make sense sticking out from where they are tied in. */
-const NEEDS_LENGTH: readonly Archetype[] = ["hair", "feather", "biot", "marabou", "cdc", "flash"];
+const NEEDS_LENGTH: readonly Archetype[] = ["hair", "feather", "biot", "marabou", "flash"];
 
 /**
  * Checks that the step sequence is something a tyer could actually do.

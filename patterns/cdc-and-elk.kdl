@@ -1,0 +1,56 @@
+// CDC & Elk: Hans Weilenmann's caddis: one CDC feather wound as body and hackle, under a deer hair wing.
+
+id cdc-and-elk
+name "CDC & Elk"
+aliases "CDC and Elk"
+type dry
+imitates caddis
+difficulty intermediate
+species trout grayling
+season may june july august september
+origin originator="Hans Weilenmann" year=1992 region="Netherlands"
+description "A single CDC feather wound from the tip to make body and soft hackle, and a fine deer hair wing whose square-cut butts form the head."
+history """
+    Hans Weilenmann developed it in 1992 as a reworking of Al Troth's Elk Hair Caddis, inspired
+    by a trip to Montana ten years earlier: the dubbed body and palmered hackle are replaced by
+    one whole CDC feather. Despite the name, he ties the wing with fine-tipped deer hair; elk is
+    a common substitute.
+    """
+fishing """
+    Rides low in the film like a hatching or egg-laying caddis, and works as a general
+    searching dry. Fish it dead drift or with a twitch; tie it sparse for flat water and
+    heavier for rough water.
+    """
+sources {
+    "GlobalFlyFisher: CDC & Elk (Hans Weilenmann)" url="https://globalflyfisher.com/node/13606"
+    "Charlie's Fly Box: CDC & Elk" url="https://charliesflybox.com/blogs/step-by-step-tutorials/cdc-elk"
+    "Rogue Fly Fishers: CDC & Elk" url="https://rogueflyfishers.org/?p=494"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/article_pictures/hw-cdcelk.jpg" page="https://globalflyfisher.com/node/13606" author="Hans Weilenmann" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://cdn.shopify.com/s/files/1/0569/0877/5562/files/DSCN8917.jpg?v=1644427774" page="https://charliesflybox.com/blogs/step-by-step-tutorials/cdc-elk" license="All rights reserved; reference only" flip=#true note="Side view in the vise"
+    "https://rogueflyfishers.org/wp-content/uploads/2026/03/cdcelk.jpg" page="https://rogueflyfishers.org/?p=494" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+hook dry-standard size=14
+thread brown size="8/0"
+
+materials {
+    // Assumption: the longest barbs drawn at 0.6 gape; Weilenmann picks a feather with barbs up to 2× the shank.
+    body cdc label="Natural dun CDC feather (one, wound)"
+    wing deer-hair label="Fine-tipped deer hair"
+}
+
+steps {
+    attach-thread at=0.5
+    wrap-thread to=0.0
+    tie-in body note="By its tip, the tip barbs stroked together."
+    wrap-thread to=0.78 note="Then one turn back."
+    wind body to=0.78 turns=7 note="Touching turns, stroking the barbs back after each; the rear turns make the body, the front ones a soft collar."
+    tie-off body
+    // Sources: wing tips to the outside of the bend.
+    tie-in wing length=2.15 angle=12 spread=70 note="Stacked; butts trimmed square first so they end just behind the eye."
+    trim wing leave=0.15 note="Short flared stubs make the head."
+    whip-finish note="In front of the butts, under the stubs."
+}

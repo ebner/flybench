@@ -169,7 +169,7 @@ how it is drawn and which extra properties it takes:
 | herl       | `peacock-herl` | `strands` (1–6, default 3) |
 | hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind) |
 | dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur` | |
-| wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | |
+| wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
 | floss      | `rib-thread`, `silk-floss` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
@@ -177,7 +177,7 @@ how it is drawn and which extra properties it takes:
 | fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs` | `count` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | |
-| cdc        | `cdc` | |
+| cdc        | `cdc` | (can be wound: barbs lengthen from tip to butt) |
 | flash      | `krystal-flash`, `flashabou` | `count` |
 | feather    | `mallard-breast`, `teal-flank` (breast), `hackle-tips`, `saddle-feathers` (tip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
 | foam       | `foam` | |

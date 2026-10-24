@@ -23,7 +23,7 @@ export const NAMED_COLORS = {
   grizzly: "#9a9a96",
   olive: "#6b6b2a",
   grey: "#8a8a8a",
-  dun: "#7d7a72",
+  dun: "#6a655c",
   yellow: "#e8c21c",
   green: "#2f7d32",
   gold: "#d4a537",
@@ -126,8 +126,8 @@ const Material = z
     count: z.number().int().min(1).max(60).optional(),
     /** hackle: how far the fibres lean back when wound, in degrees (overrides the catalog). */
     sweep: z.number().min(0).max(80).optional(),
-    /** beads and eyes: diameter in millimetres, as they are sold. */
-    mm: z.number().min(1).max(12).optional(),
+    /** beads, eyes and wire: diameter in millimetres, as they are sold. */
+    mm: z.number().min(0.05).max(12).optional(),
   })
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];

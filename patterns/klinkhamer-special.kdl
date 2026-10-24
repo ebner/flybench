@@ -1,0 +1,61 @@
+// Klinkhåmer Special: Hans van Klinken's parachute emerger, hanging in the film on a curved hook.
+
+id klinkhamer-special
+name "Klinkhåmer Special"
+aliases "Klinkhammer" "Klinki" "LT Caddis"
+type emerger
+imitates caddis mayfly
+difficulty intermediate
+species trout grayling
+season may june july august september
+origin originator="Hans van Klinken" year=1984 region="Glomma, Norway"
+description "A slim tan abdomen round the curve of the hook, a peacock herl thorax, a white post and a long parachute hackle."
+history """
+    Hans van Klinken, a Dutch army instructor, first fished it on 27 June 1984 on the Glomma
+    in Norway, as the "LT Caddis" of his light-tan series; Hans de Groot and Ton Lindhout
+    named it the Klinkhåmer Special. It grew from Kenneth Boström's Rackelhanen, with a
+    parachute hackle so it would land upright and a herl thorax added soon after.
+    """
+fishing """
+    The abdomen hangs below the surface like a hatching insect while the parachute holds it
+    up: a deadly emerger for grayling and trout during caddis and mayfly hatches, and a good
+    searching fly in fast water. Fish it dead drift.
+    """
+sources {
+    "Fly Fisherman: The Klinkhåmer Special at 40 (Hans van Klinken)" url="https://www.flyfisherman.com/editorial/klinkhamer-special-fly-pattern/533061"
+    "Tom Sutcliffe: The Klinkhåmer Special" url="https://www.tomsutcliffe.co.za/newsletters/the-klinkhamer-special/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/4/4b/Klinkhammer_Special_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Klinkhammer_Special_Dry_Fly.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, replica of the original"
+    "https://www.tomsutcliffe.co.za/newsletters/The_Klinkhamer_special_3.jpg" page="https://www.tomsutcliffe.co.za/newsletters/the-klinkhamer-special/" license="All rights reserved; reference only" note="Side view, tan body"
+}
+
+hook emerger-curved size=12
+thread grey size="8/0"
+
+materials {
+    post poly-yarn
+    // Van Klinken calls for a long hackle ("about 2× the gape"); his own photos show fibres
+    // about 1.3× the gape from the post, which is used here.
+    hackle cock-hackle color=blue-dun fibre=1.3
+    abdomen dry-fly-dubbing color=tan label="Light tan poly dubbing"
+    thorax peacock-herl strands=3
+}
+
+steps {
+    attach-thread at=0.8 note="Spiral the thread over the whole shank and well round the bend first."
+    wrap-thread to=0.75
+    // Van Klinken: the post at least a shank long, trimmed to taste afterwards.
+    tie-in post length=1.0 angle=90 note="Angle-cut so the underbody stays slim; stand it up with posting turns."
+    tie-in hackle note="Stem posted up the yarn."
+    wrap-thread to=0.0
+    dub abdomen to=0.72 note="Slim and tapered, from as far round the bend as possible to the post."
+    tie-in thorax note="Three herls by their tips, right behind the post."
+    wrap-thread to=0.92
+    wind thorax to=0.9 turns=4 note="A robust thorax, in front of and round the base of the post."
+    tie-off thorax
+    wind hackle around=post turns=6 note="From the top of the post downwards; it is hard to over-hackle."
+    tie-off hackle
+    whip-finish
+}
