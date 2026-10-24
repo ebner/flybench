@@ -5,7 +5,9 @@ import {
   type BundlePiece,
   type CoverPiece,
   type EyesPiece,
+  type ExtensionPiece,
   type FeatherPiece,
+  type LegsPiece,
   type Piece,
   type WrapsPiece,
 } from "../tying/simulate";
@@ -384,6 +386,8 @@ const BUNDLE = {
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
   cdc: { radius: 0.003, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45, curve: 0.3, droop: 0.3 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2, curve: 0.08, droop: 0 },
+  // Rubber legs as tails and antennae: thick, soft strands that splay and sag.
+  legs: { radius: 0.014, tip: 0.85, tipShade: 1, spread: 0.1, flare: 0.15, sideFlare: 0.8, lengthJitter: 0.1, curve: 0.2, droop: 0.3 },
 } as const;
 
 function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
@@ -770,5 +774,136 @@ export function pieceView(piece: Piece, surfaces: Surfaces, space: ShankSpace): 
       return eyesView(piece, surfaces, space);
     case "cover":
       return coverView(piece, surfaces, space);
+    case "extension":
+      return extensionView(piece, surfaces, space);
+    case "legs":
+      return legsView(piece, surfaces, space);
   }
+}
+
+/**
+ * An extended body: a solid rope sticking out from the tie-in, drooping a little, rounded
+ * off at the end, with a differently coloured tip if it has one and chenille's pile on it.
+ */
+function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  const flip = piece.side === "under" ? -1 : 1;
+  const segL = 48;
+  const segR = 16;
+  const L = piece.length;
+  const R = piece.thickness;
+  // Centre line in shank-local coordinates: back (and up by angle) from the tie-in, sagging slightly.
+  const towards = piece.forward ? 1 : -1;
+  const centre = (t: number) =>
+    new THREE.Vector3(
+      piece.x + towards * L * t * Math.cos(piece.angle),
+      // It is bound along the shank, so its centre sits just above the hook wire.
+      flip * (piece.radius * 0.4 + R * 0.55 + L * t * Math.sin(piece.angle) - 0.06 * L * t * t),
+      0,
+    );
+  // Full thickness, rounding off over the last part; the very start tucks under the wraps.
+  const radiusAt = (t: number) => R * Math.min(1, 0.6 + t * 8) * (t < 0.85 ? 1 : Math.sqrt(Math.max(0, 1 - ((t - 0.85) / 0.15) ** 2)) * 0.9 + 0.1);
+  const body = new THREE.Color(piece.color);
+  const tip = piece.tip ? new THREE.Color(piece.tip) : body;
+  const positions: number[] = [];
+  const colors: number[] = [];
+  const index: number[] = [];
+  const v = new THREE.Vector3();
+  for (let i = 0; i <= segL; i++) {
+    const t = i / segL;
+    const c = centre(t);
+    const ahead = centre(Math.min(1, t + 0.01)).sub(centre(Math.max(0, t - 0.01))).normalize();
+    const normal = new THREE.Vector3(0, 0, 1);
+    const binormal = new THREE.Vector3().crossVectors(ahead, normal).normalize();
+    const r = radiusAt(t);
+    const mix = piece.tip ? THREE.MathUtils.smoothstep(t, 0.82, 0.9) : 0;
+    const color = body.clone().lerp(tip, mix);
+    for (let j = 0; j <= segR; j++) {
+      const a = (j / segR) * Math.PI * 2;
+      v.copy(c).addScaledVector(binormal, r * Math.cos(a)).addScaledVector(normal, r * Math.sin(a));
+      space.point(v);
+      positions.push(v.x, v.y, v.z);
+      colors.push(color.r, color.g, color.b);
+    }
+  }
+  for (let i = 0; i < segL; i++) {
+    for (let j = 0; j < segR; j++) {
+      const a = i * (segR + 1) + j;
+      const b = a + segR + 1;
+      index.push(a, b, a + 1, b, b + 1, a + 1);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+  geometry.setIndex(index);
+  geometry.computeVertexNormals();
+  const material = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: piece.look === "foam" ? 0.75 : 0.95 });
+  const group = new THREE.Group();
+  group.add(new THREE.Mesh(geometry, material));
+
+  let fuzz: ReturnType<typeof fibreMesh> | null = null;
+  if (piece.fuzz) {
+    const rand = mulberry32(piece.id * 4111 + 9);
+    const list: Fibre[] = [];
+    const n = Math.round(L * 900);
+    for (let k = 0; k < n; k++) {
+      const t = 0.03 + 0.8 * rand();
+      const a = rand() * Math.PI * 2;
+      const c = centre(t);
+      const out = new THREE.Vector3(0, Math.cos(a), Math.sin(a));
+      const base = c.clone().addScaledVector(out, radiusAt(t) * 0.9);
+      const dir = out.clone().add(new THREE.Vector3(towards * 0.6, 0, 0)).add(new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5)).normalize();
+      list.push({ u: rand(), base, dir, length: piece.fuzz * (0.5 + 0.6 * rand()), radius: 0.005, shade: 0.85 + 0.25 * rand() });
+    }
+    fuzz = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, piece.color, true), 0.6);
+    group.add(fuzz.object);
+  }
+  return {
+    object: group,
+    setProgress(u) {
+      group.visible = u > 0;
+      fuzz?.setProgress(u);
+    },
+    dispose() {
+      geometry.dispose();
+      material.dispose();
+      fuzz?.dispose();
+    },
+  };
+}
+
+/** Legs tied across the shank: each strand sticks out on both sides, leaning back and sagging. */
+function legsView(piece: LegsPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  const list: Fibre[] = [];
+  const rand = mulberry32(piece.id * 7177 + 5);
+  for (let i = 0; i < piece.count; i++) {
+    // Strands a little apart along the shank, as when they are wrapped on one by one.
+    const x = piece.x + (i - (piece.count - 1) / 2) * 0.09;
+    for (const side of [-1, 1]) {
+      const dir = new THREE.Vector3(-Math.sin(piece.sweep), -0.2, side * Math.cos(piece.sweep)).normalize();
+      list.push({
+        u: (i + rand()) / piece.count,
+        base: new THREE.Vector3(x, piece.radius * 0.2, side * piece.radius * 0.8),
+        dir,
+        length: piece.length * (0.92 + 0.12 * rand()),
+        radius: piece.strandRadius,
+        shade: 0.9 + 0.15 * rand(),
+        // Soft strands sag under their own weight.
+        bend: 0.18 + 0.1 * rand(),
+        bendDir: perpendicular(dir, new THREE.Vector3(0, -1, 0), rand),
+      });
+    }
+  }
+  const look = piece.look === "legs" ? "legs" : piece.look;
+  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(look, piece.color, true), piece.look === "legs" ? 0.85 : 0.3);
+  return {
+    object: fibres.object,
+    setProgress(u) {
+      fibres.object.visible = u > 0;
+      fibres.setProgress(u);
+    },
+    dispose() {
+      fibres.dispose();
+    },
+  };
 }

@@ -85,5 +85,8 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
       });
     case "foam":
       return new THREE.MeshStandardMaterial({ color, roughness: 0.75 });
+    case "legs":
+      // Rubber and silicone: a soft sheen.
+      return new THREE.MeshStandardMaterial({ color, roughness: 0.45, ...fibres });
   }
 }

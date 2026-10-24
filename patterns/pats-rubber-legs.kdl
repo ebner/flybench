@@ -1,0 +1,67 @@
+// Pat's Rubber Legs: Pat Bennett's guide stonefly nymph of variegated chenille and rubber legs.
+
+id pats-rubber-legs
+name "Pat's Rubber Legs"
+aliases "Pat's Rubberlegs" "Rubber Legs"
+type nymph
+imitates stonefly
+difficulty beginner
+species trout
+season january february march april may june july august september october november december
+origin originator="Pat Bennett" region="Island Park, Idaho, USA"
+description "A weighted body of black and coffee variegated chenille with rubber-leg tails and antennae and three pairs of rubber legs."
+history """
+    Tied by Pat Bennett, a guide at Hyde Outfitters in Island Park, Idaho, from big rubber-legged
+    stonefly patterns like the Girdle Bug; one account calls him a Utah tyer. The date isn't
+    recorded. Black and coffee with barred legs has become the standard; Rocky Mountain guides
+    fish it all year.
+    """
+fishing """
+    A guide's searching nymph: deep and dead-drift, under an indicator or as the heavy point fly
+    of a nymph rig, wherever big stoneflies live. The legs keep moving even on a dead drift.
+"""
+sources {
+    "Orvis: Pat's Rubber Legs (Tim Flagler)" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/892-pats_rubber_legs"
+    "FlyLife: Pat's Rubber Legs" url="https://flylifemagazine.com/?p=56843"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://flylifemagazine.com/wp-content/uploads/2019/07/rubberlegs.jpg" page="https://flylifemagazine.com/?p=56843" license="All rights reserved; reference only" note="Video screenshot"
+}
+
+// Assumption: a 2X-long hook stands in for the 3X-long nymph hook in the sources.
+hook nymph-2xl size=8
+thread black size="6/0"
+
+materials {
+    weight lead-free-wire
+    antennae silicone-legs color=black count=2 label="Black Spanflex (antennae)"
+    tails silicone-legs color=black count=2 label="Black Spanflex (tails)"
+    body chenille color="#3a2a20" label="Black and coffee variegated chenille, medium"
+    legs-rear silicone-legs color=black count=1 label="Black Spanflex (legs)"
+    legs-middle silicone-legs color=black count=1 label="Black Spanflex (legs)"
+    legs-front silicone-legs color=black count=1 label="Black Spanflex (legs)"
+}
+
+steps {
+    // Orvis: about fifteen turns, just in front of the middle of the shank.
+    weight weight from=0.4 to=0.75
+    attach-thread at=0.92
+    // Orvis ties one doubled strand in behind the eye and binds it back, so it makes both antennae and tails.
+    tie-in antennae length=1.3 forward=#true angle=15 note="Splayed; trim to about the tail length."
+    wrap-thread to=0.0
+    // Orvis: tails about half the shank.
+    tie-in tails length=1.4 spread=35 note="They splay naturally."
+    tie-in body
+    // Orvis: legs about a shank long, by preference; three pairs, evenly spaced.
+    wrap-thread to=0.3
+    tie-in legs-rear length=1.8 angle=15 side=across note="A turn of the strand round shank and finger, locked with resin; snip the loop."
+    wrap-thread to=0.5
+    tie-in legs-middle length=1.8 angle=5 side=across
+    wrap-thread to=0.7
+    tie-in legs-front length=1.8 side=across
+    wrap-thread to=0.9
+    wind body to=0.9 turns=11 note="Forward between the legs."
+    tie-off body
+    whip-finish
+}

@@ -154,7 +154,7 @@ const Material = z
 
 const MaterialRef = Id;
 
-const Side = z.enum(["top", "under"]);
+const Side = z.enum(["top", "under", "across"]);
 
 const Step = z.discriminatedUnion("op", [
   /** Before the thread: slide a bead round the bend up to the eye. */
@@ -186,8 +186,17 @@ const Step = z.discriminatedUnion("op", [
     spread: z.number().min(0).max(120).optional(),
     /** Feather wings: width of the feather, in gapes. */
     width: GapeLength.optional(),
-    /** On top of the shank (default) or underneath it (beards, throats, under-wings). */
+    /**
+     * On top of the shank (default), underneath it (beards, throats, under-wings), or across it,
+     * tied at the middle so the ends stick out on both sides (legs).
+     */
     side: Side.optional(),
+    /** Points forward over the eye instead of back (antennae, feelers). */
+    forward: z.boolean().optional(),
+    /** Chenille, yarn or foam that sticks out as one solid piece: an extended body or larva. */
+    extended: z.boolean().optional(),
+    /** Extended bodies: the colour of the very end (a larva's head burnt black). */
+    tip: Color.optional(),
     note: Note,
   }),
   z.strictObject({

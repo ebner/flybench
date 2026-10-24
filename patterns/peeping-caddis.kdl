@@ -1,0 +1,64 @@
+// Peeping Caddis: a weighted cased-caddis nymph with the larva peeping out of the back of its case.
+
+id peeping-caddis
+name "Peeping Caddis"
+aliases "Peeking Caddis"
+type nymph
+imitates caddis
+difficulty intermediate
+species grayling trout
+season january february march april may june july august september october november december
+origin region="Europe"
+description "A burnt-tipped chartreuse chenille larva peeping out behind a bushy hare's ear case, with a partridge collar where they meet and a tungsten bead at the eye, on a jig hook."
+history """
+    A cased caddis larva with its head and legs out of the case. The pattern has been around a
+    long time and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's
+    Peeping Caddis has the larva at the front, as it is in nature; the version most tied today,
+    on a jig hook with a tungsten bead, has the larva sticking out at the back and the weight at
+    the eye, as in Hans van Klinken's split-shot LeadHead.
+    """
+fishing """
+    A heavy anchor fly for short-line and Euro nymphing, bounced along the bottom of runs and
+    pockets, and a standby for winter grayling and early-season high water. On a jig hook it
+    rides point up and snags less.
+    """
+sources {
+    "ExpediTom: Peeping Caddis (Tom O'Connor)" url="https://expeditom.com/peeping-caddis/"
+    "Fulling Mill: OE Peeping Caddis" url="https://www.fullingmill.co.uk/Products-UK/Tactical-River-Nymphs-UK/OE-Peeping-Caddis-Debris-S10-UK"
+    "Fly Anglers Online: The Peeking Caddis (Ralph D'Andrea)" url="https://www.flyanglersonline.com/t/the-peeking-caddis-fly-of-the-week-137/2469"
+    "Sexyloops: LeadHead (Viking Lars)" url="https://mail.sexyloops.com/index.php/ps/leadhead"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://expeditom.com/wp-content/uploads/2020/05/ExpediTom-Fly-Tying-Peeping-Caddis-001.jpg" page="https://expeditom.com/peeping-caddis/" author="Tom O'Connor" license="All rights reserved; reference only" note="Jig version, three-quarter side view"
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihvZs32EnuBJvbL711gOVMt0jksMAcVHxNNv1FGaaatftKRMJ1vdPoHWSNWr5dIZCOc683BnL3KVb41T41yzpdA7YCl6hTRS8bJAl6GNgdKsieYAVj2rJp6-kUjkSFghCa_ri6tApW8B4/s1600/Peeping+Caddis+500.JPG" page="http://graylingonfly.blogspot.com/2011/03/peeping-caddis-sbs.html" author="Jindra Lacko" license="All rights reserved; reference only" note="Side view"
+}
+
+hook jig size=12
+thread black size="8/0"
+
+materials {
+    // ExpediTom: a 3 to 4.5 mm bead on #10 to #16.
+    bead tungsten-bead color=black mm=3.5
+    larva chenille color=chartreuse label="Fluorescent chartreuse chenille"
+    legs partridge-hackle fibre=0.55 sweep=75
+    rib copper-wire
+    case hares-ear-dubbing label="Hare's mask dubbing with plenty of guard hair"
+}
+
+steps {
+    slide-bead bead
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Assumption: the larva sticks out about a quarter to a third of the shank, read from the photos.
+    tie-in larva length=0.75 extended=#true tip=black note="Burn the end black with a lighter first; tie it in on top with the burnt end pointing back."
+    tie-in legs note="A small partridge feather, stripped to about ten fibres a side, tied in by the tip."
+    wrap-thread to=0.06
+    wind legs to=0.06 turns=1 note="One or two turns as a collar, stroked back over the larva."
+    tie-off legs
+    tie-in rib
+    dub case to=0.98 note="Bushy, and an even cylinder rather than tapered: it is a case."
+    wind rib to=0.98 turns=5
+    tie-off rib
+    whip-finish note="Behind the bead; brush the case to pull out the guard hairs."
+}

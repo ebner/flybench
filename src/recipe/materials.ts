@@ -22,11 +22,12 @@
  *   foam      closed-cell foam (backs, wing cases)
  *   bead      beads and cone heads slid onto the hook
  *   eyes      dumbbell and bead-chain eyes
+ *   legs      rubber and silicone legs (tied across the shank, or as tails and antennae)
  */
 
 export const ARCHETYPES = [
   "yarn", "herl", "hackle", "dubbing", "wire", "floss", "tinsel", "chenille", "hair",
-  "fibres", "biot", "marabou", "cdc", "flash", "feather", "foam", "bead", "eyes",
+  "fibres", "biot", "marabou", "cdc", "flash", "feather", "foam", "bead", "eyes", "legs",
 ] as const;
 export type Archetype = (typeof ARCHETYPES)[number];
 
@@ -138,6 +139,10 @@ export const MATERIALS = {
   "dumbbell-eyes": { name: "dumbbell eyes", archetype: "eyes", defaultColor: "lead" },
   "bead-chain-eyes": { name: "bead chain eyes", archetype: "eyes", defaultColor: "silver" },
   "mono-eyes": { name: "burnt mono eyes", archetype: "eyes", defaultColor: "black" },
+
+  // Legs
+  "rubber-legs": { name: "round rubber legs", archetype: "legs" },
+  "silicone-legs": { name: "silicone legs", archetype: "legs" },
 } satisfies Record<string, CatalogMaterial>;
 
 export type MaterialKind = keyof typeof MATERIALS;
@@ -157,7 +162,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   floss: ["size"],
   tinsel: [],
   chenille: [],
-  hair: [],
+  hair: ["count"],
   fibres: ["count"],
   biot: ["count"],
   marabou: [],
@@ -167,6 +172,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   foam: [],
   bead: ["mm"],
   eyes: ["mm"],
+  legs: ["count"],
 };
 
 /** Materials that are wound or applied to the shank rather than sticking out. */

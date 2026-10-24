@@ -130,6 +130,14 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       const under = step.side === "under";
       if (archetype === "eyes") {
         text = `Tie the ${mat(step.material)} ${under ? "under" : "on top of"} the shank with figure-of-eight turns.`;
+      } else if (step.length && step.extended) {
+        const tip = step.tip ? ` Colour the end ${colorName(step.tip) || "darker"}${step.tip === "black" ? " (singe it with a lighter)" : ""}.` : "";
+        text = `Tie in the ${mat(step.material)} so it sticks out ${gapeText(step.length)} behind as one piece.${tip}`;
+      } else if (step.length && step.side === "across") {
+        const strands = m?.count ?? 2;
+        text = `Tie ${strands === 1 ? "a strand" : `${strands} strands`} of ${mat(step.material)} across the shank by the middle with figure-of-eight turns, so ${gapeText(step.length)} sticks out on each side as legs.`;
+      } else if (step.length && step.forward) {
+        text = `Tie in the ${mat(step.material)} pointing forward over the eye, ${gapeText(step.length)} long.`;
       } else if (step.length && (step.angle ?? 0) >= 60) {
         const pair = (step.spread ?? 0) > 0 ? " Divide them into a V with figure-of-eight turns." : "";
         text = `Tie in ${what} upright, ${gapeText(step.length)} tall, with turns in front to stand it up.${pair}`;

@@ -8,7 +8,7 @@ difficulty beginner
 species trout panfish bass
 season june july august september
 origin region="United States"
-description "A black foam shell folded over a peacock herl body, black legs at the sides and a small orange sighter on top."
+description "A black foam shell folded over a peacock herl body, moose hair legs at the sides and a small orange sighter on top."
 history """
     No one is credited with it. It is the foam descendant of the folded deer-hair Crowe Beetle,
     developed and popularised by John Crowe of Johnstown, Pennsylvania. A Crowe Beetle could be
@@ -36,8 +36,7 @@ thread black size="6/0"
 materials {
     back foam color=black label="Black foam strip, as wide as the gape"
     body peacock-herl strands=4
-    // Assumption: legs from a black hackle trimmed top and bottom (the Fly Fishers Paradise way), in place of Craven's moose hairs.
-    legs cock-hackle color=black fibre=1.1
+    legs moose-mane count=3 label="Moose hair (legs)"
     sighter poly-yarn color=orange label="Orange foam or yarn sighter"
 }
 
@@ -47,18 +46,15 @@ steps {
     tie-in back note="Bound down on top to just past the bend, the long end trailing."
     tie-in body
     wrap-thread to=0.5
-    tie-in legs
+    // Craven: legs slightly longer than the gape.
+    tie-in legs length=1.1 angle=20 side=across note="Six moose hairs crosswise, three a side."
     wrap-thread to=0.84
     wind body to=0.84 turns=9 note="Touching turns, past the legs to just behind the eye."
     tie-off body
-    wind legs to=0.84 turns=3 note="A few open turns through the front of the body."
-    tie-off legs
     wrap-thread to=0.88
     pull-over back to=0.88 note="Fold it over the body and lock it down with a few tight turns."
     // Craven: a short stub over the eye as the head.
     trim back leave=0.3
     tie-in sighter length=0.35 angle=25 note="A narrow strip on top at the joint, trimmed short."
-    whip-finish note="At the joint."
-    // Craven: legs slightly longer than the gape, out to the sides.
-    trim legs keep=sides note="Cut the fibres top and bottom, leaving legs at the sides."
+    whip-finish note="At the joint; pull the legs down and trim them."
 }

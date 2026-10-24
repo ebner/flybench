@@ -193,6 +193,7 @@ how it is drawn and which extra properties it takes:
 | foam       | `foam` | |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
+| legs       | `rubber-legs`, `silicone-legs` | `count` (strands) |
 
 The archetype decides how a material behaves and is drawn:
 
@@ -200,7 +201,13 @@ The archetype decides how a material behaves and is drawn:
 - **beads** go on with `slide-bead` before the thread; **eyes** are tied in without a length.
 - **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Hair
   can also be spun (`spin`) and trimmed into a head.
-- **hair, feather, biot, marabou, flash** stick out from where they are tied in, so
+- **legs** (and strands of hair, fibres, biots or flash) can be tied **across** the shank
+  with `side=across`: each strand is bound at its middle and sticks out `length` on both
+  sides, leaning back by `angle`. `count` is the number of strands, so the legs per side.
+- **chenille, yarn, foam** tied in with a `length` and `extended=#true` stick out as one
+  solid piece (an extended body or a caddis larva) instead of a tuft; `tip=<colour>` colours
+  its end (a larva's burnt head).
+- **hair, feather, biot, marabou, flash, legs** stick out from where they are tied in, so
   they need a `length`. The exception is a feather slip that is later pulled over as a
   wing case (turkey on a Hare's Ear).
 - **feather** wings: breast feathers lie over the body like a roof; hackle tips and quill
@@ -223,7 +230,7 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 | `weight`        | `weight <wire> from=<pos> to=<pos>`               | Wrap weighting wire in touching turns (before or after the thread). |
 | `attach-thread` | `attach-thread at=<pos>`                          | Start the thread at `at`. |
 | `wrap-thread`   | `wrap-thread to=<pos> [turns=<n>]`                | Move the thread to `to`. Without `turns` it lays touching turns; with `turns` it makes that many open turns. |
-| `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>] [side=top\|under]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank; at 60° or more it stands upright (a wing post). `spread`: how far round the body a bunch fans out, in degrees either side of the top; for feathers, makes a pair. `width`: feather width (default by shape). `side=under`: under the shank (beards, throats, under-wings, eyes). Without `length`, a loose end hangs until the material is wound or pulled over. |
+| `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>] [side=top\|under\|across] [forward=#true] [extended=#true] [tip=<colour>]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank; at 60° or more it stands upright (a wing post). `forward=#true` points it forward over the eye instead (antennae, feelers, a front-peeping larva). `side=across` ties strands across the shank as legs; `extended=#true` makes chenille, yarn or foam one solid piece (see above). `spread`: how far round the body a bunch fans out, in degrees either side of the top; for feathers, makes a pair. `width`: feather width (default by shape). `side=under`: under the shank (beards, throats, under-wings, eyes). Without `length`, a loose end hangs until the material is wound or pulled over. |
 | `dub`           | `dub <material> to=<pos> [turns=<n>]`             | Spin dubbing onto the thread and wrap it to `to`; the thread ends there. |
 | `wind`          | `wind <material> to=<pos> turns=<n>`              | Wind the material from its tie-in point to `to`. Forward: it ends at the thread. Rearward (palmering): it ends away from the thread and must be secured (see below). |
 | `wind` (parachute) | `wind <hackle> around=<post> turns=<n>`        | Wind a hackle horizontally round the base of an upright post; tie it off next. |

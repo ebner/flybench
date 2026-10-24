@@ -137,7 +137,39 @@ export interface CoverPiece extends PieceBase {
   stub: number;
 }
 
-export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece;
+/** Chenille, yarn or foam sticking out from the tie-in as one solid piece: an extended body or larva. */
+export interface ExtensionPiece extends PieceBase {
+  type: "extension";
+  x: number;
+  radius: number;
+  length: number;
+  angle: number;
+  side: "top" | "under";
+  /** Radius of the extension itself. */
+  thickness: number;
+  /** Colour of the very end, if different (a larva's burnt head). */
+  tip?: string;
+  /** Chenille: length of the pile standing out from it. */
+  fuzz?: number;
+  /** Lies forward towards the eye instead of sticking out behind. */
+  forward?: boolean;
+}
+
+/** Strands tied across the shank at their middles, sticking out on both sides: legs. */
+export interface LegsPiece extends PieceBase {
+  type: "legs";
+  x: number;
+  radius: number;
+  /** Length of each leg, from the body out. */
+  length: number;
+  /** Radians the legs lean back from straight out. */
+  sweep: number;
+  /** Legs on each side; they are spaced a little apart along the shank. */
+  count: number;
+  strandRadius: number;
+}
+
+export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece;
 
 export type ThreadPose =
   | { kind: "rest"; x: number; radius: number }
@@ -312,6 +344,12 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "bead":
     case "eyes":
       return { ...base, strandRadius: mm(m.mm ?? 3) / 2, tieInThickness: 0, layerThickness: () => 0 };
+    case "legs":
+      // Assumption: round rubber legs about 0.6 mm thick, silicone legs about 0.45 mm.
+      return {
+        ...base, strandRadius: mm(m.kind === "silicone-legs" ? 0.45 : 0.6) / 2, count: m.count ?? 2,
+        tieInThickness: 0.02, layerThickness: () => 0.02,
+      };
   }
 }
 
@@ -516,17 +554,35 @@ export function simulate(recipe: Recipe): Build {
         const l = looks.get(step.material)!;
         tiedAt.set(step.material, x);
         const radius = profile.radiusAt(x);
-        const side: Side = step.side ?? "top";
+        const side: Side = step.side === "under" ? "under" : "top";
         const angle = deg(step.angle ?? (l.look === "yarn" ? 5 : 3));
         const upright = step.angle !== undefined && step.angle >= 60;
+        const across = step.side === "across";
         // Upright posts are a gathered tuft; an upright wing with a spread is divided in two.
         const spread = deg(upright ? 22 : (step.spread ?? DEFAULT_SPREAD[l.look] ?? 30));
         const pair = upright && step.spread !== undefined ? deg(step.spread) : undefined;
-        if (step.length && !upright) {
+        if (step.length && !upright && !across && !step.forward) {
           ctx.tipX = x - step.length * Math.cos(angle);
           ctx.bendEnd = bendEndX(hook);
         }
-        if (l.look === "eyes") {
+        if (step.extended && step.length) {
+          const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
+          // Assumption: chenille keeps its own thickness; yarn is twisted into a rope; foam is a cut cylinder.
+          const thickness = l.look === "chenille" ? l.strandRadius * 0.85 : l.look === "foam" ? Math.max(0.08, cat.thickness ?? 0.09) : 0.11;
+          pieces.push({
+            type: "extension", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.35],
+            x, radius, length: step.length, angle, side, thickness,
+            tip: step.tip === undefined ? undefined : resolveColor(step.tip), fuzz: l.look === "chenille" ? l.fibreLength : undefined,
+            forward: step.forward,
+          });
+        } else if (across && step.length) {
+          pieces.push({
+            type: "legs", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.35],
+            // Each strand tied across makes one leg on each side.
+            x, radius, length: step.length, sweep: deg(step.angle ?? 0), count: kinds.get(step.material)!.count ?? 2,
+            strandRadius: l.look === "legs" ? l.strandRadius : 0.012,
+          });
+        } else if (l.look === "eyes") {
           const kind = kinds.get(step.material)!.kind;
           pieces.push({
             type: "eyes", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.3],
@@ -543,7 +599,7 @@ export function simulate(recipe: Recipe): Build {
         } else if (step.length) {
           pieces.push({
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
-            window: [0, 0.35], x, radius, length: step.length, angle, direction: "back", side, spread,
+            window: [0, 0.35], x, radius, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             bundleRadius: l.strandRadius, count: l.count, pair,
           });
           if (upright) {

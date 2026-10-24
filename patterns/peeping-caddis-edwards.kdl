@@ -1,0 +1,52 @@
+// Peeping Caddis as Oliver Edwards and Graydon Bell tie it: the larva at the front, as in nature.
+
+id peeping-caddis-edwards
+name "Peeping Caddis"
+variant-of peeping-caddis
+variant "Edwards, larva at the front"
+type nymph
+imitates caddis
+difficulty intermediate
+species grayling trout
+season january february march april may june july august september october november december
+origin originator="Oliver Edwards and Graydon Bell" region="England"
+description "A lead-weighted hare's mask case over the rear two thirds of a long-shank hook, with a white larva lying forward to a dark head at the eye and its legs underneath."
+history """
+    Oliver Edwards' realistic cased caddis, with Graydon Bell: the grub comes out of the front of
+    the case, where a real larva's head and legs are, and the hare's mask case is built over a
+    flat lead underbody.
+    """
+fishing """
+    Fished deep and slow, dead-drift along the bottom, for grayling and trout; heavy enough to be
+    the point fly of a team.
+    """
+sources {
+    "Fish4Flies: Peeping Caddis (Edwards and Bell)" url="https://www.fish4flies.com/Nymphs/Caddis-and-Larva-and-Pupa/Peeping-Caddis"
+    "Fly Anglers Online: Cased caddis fly pattern (Edwards' dressing)" url="https://www.flyanglersonline.com/t/cased-caddis-fly-pattern/2945"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/T4085Peeping%20Caddis.jpg" page="https://www.fish4flies.com/Nymphs/Caddis-and-Larva-and-Pupa/Peeping-Caddis" author="Graydon Bell" license="All rights reserved; reference only" note="Side view, larva at the front"
+}
+
+hook nymph-2xl size=10
+thread black size="8/0"
+
+materials {
+    weight lead-free-wire label="Lead-free wire (Edwards uses flat lead)"
+    case hares-ear-dubbing label="Hare's mask dubbing brush"
+    legs pheasant-tail count=8 label="Golden pheasant centre tail fibres (legs)"
+    larva wool color=cream label="White or glow yarn (larva)"
+}
+
+steps {
+    weight weight from=0.1 to=0.65 note="Flattened, under the case."
+    attach-thread at=0.7
+    wrap-thread to=0.0
+    dub case to=0.66 note="Thick and rough over the rear two thirds."
+    tie-in legs length=0.6 angle=30 side=under note="Under the shank, sloping back."
+    // Assumption: the larva covers the front third and ends at the eye.
+    tie-in larva length=0.85 extended=#true forward=#true tip=brown note="The top of the head tinted dark with a marker."
+    wrap-thread to=0.95
+    whip-finish note="A small black head at the eye."
+}

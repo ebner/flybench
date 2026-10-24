@@ -6,7 +6,13 @@ import type { Recipe } from "./schema";
 export const POSITION_TOLERANCE = 0.02;
 
 /** Materials that only make sense sticking out from where they are tied in. */
-const NEEDS_LENGTH: readonly Archetype[] = ["hair", "feather", "biot", "marabou", "flash"];
+const NEEDS_LENGTH: readonly Archetype[] = ["hair", "feather", "biot", "marabou", "flash", "legs"];
+
+/** Strands that can be tied across the shank as legs. */
+const ACROSS: readonly Archetype[] = ["legs", "hair", "fibres", "biot", "flash"];
+
+/** Materials that can stick out as one solid piece. */
+const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
 
 /**
  * Checks that the step sequence is something a tyer could actually do.
@@ -135,12 +141,22 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.side !== undefined && step.length === undefined && archetype !== "eyes") {
           err("side only applies to tails, beards, wings and eyes", [...path, "side"]);
         }
+        if (step.side === "across" && !ACROSS.includes(archetype!)) {
+          err("only legs and strands of hair, fibres, biots or flash can be tied across the shank", [...path, "side"]);
+        }
+        if (step.forward && step.length === undefined) err("forward only applies to material tied in with a length", [...path, "forward"]);
+        if (step.forward && (step.angle ?? 0) >= 60) err("a material pointing forward can't also stand upright", [...path, "angle"]);
+        if (step.extended && (!EXTENDABLE.includes(archetype!) || step.length === undefined)) {
+          err("only chenille, yarn or foam tied in with a length can be extended", [...path, "extended"]);
+        }
+        if (step.tip !== undefined && !step.extended) err("tip only applies to extended bodies", [...path, "tip"]);
         if (materials.has(step.material)) err(`"${step.material}" is already tied in`, [...path, "material"]);
         else {
           materials.set(step.material, {
-            state: archetype === "eyes" ? "done" : "tied-in",
+            // Eyes, extended bodies and legs across the shank are finished once tied in.
+            state: archetype === "eyes" || step.extended || step.side === "across" ? "done" : "tied-in",
             at: thread,
-            butts: archetype === "hair",
+            butts: archetype === "hair" && step.side !== "across",
             post: step.length !== undefined && (step.angle ?? 0) >= 60,
           });
         }
