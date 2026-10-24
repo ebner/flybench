@@ -28,6 +28,7 @@ Requires Node 22 or later.
 ```sh
 npm install
 npm run dev        # http://localhost:5173
+npm run studio     # the authoring studio (dev server only), /studio.html
 npm test           # recipe parsing/validation and simulation tests
 npm run build      # type-check and production build into dist/
 npm run render:catalog  # gallery images into public/renders/ (commit them)
@@ -43,7 +44,13 @@ falls back to software rendering (much slower) when there isn't.
 
 ## Adding a pattern
 
-Write a new `patterns/<id>.kdl` and it gets picked up automatically. Materials come
+The easiest way is the authoring studio (`npm run studio`): pick a pattern or start a new
+one, edit its KDL with problems listed as you type (click one to jump to its line), and
+watch the fly in 3D on a gape grid, step by step. Save writes to `patterns/`. The studio
+exists only on the dev server, which only accepts its requests from this machine; the
+built site doesn't include it.
+
+Or write a new `patterns/<id>.kdl` by hand and it gets picked up automatically. Materials come
 from the catalog in `src/recipe/materials.ts`; add new ones there. The test suite
 loads every pattern file, so `npm test` reports recipe errors with line numbers.
 Problems in pattern files also show in a banner in the dev server. Then run
@@ -69,9 +76,11 @@ src/tying/         hook models and the tying simulation: recipe → timeline of
 src/render/        three.js scene built from the timeline
 src/catalog/       catalog search and wording (plain logic, tested in Node)
 src/ui/            React UI: gallery, pattern page, viewer, theme, routing
+src/studio/        the authoring studio (studio.html, dev server only)
 public/renders/    rendered gallery images (generated, committed)
 render.html        dev-only page that scripts/ drive to render a finished fly
-scripts/           authoring tools: render, render-catalog, refcheck
+scripts/           authoring tools: render, render-catalog, refcheck, and the
+                   dev-server plugin that lets the studio read and save patterns
 ```
 
 The scene is a pure function of time: `FlyScene.setTime(t)` shows exactly what

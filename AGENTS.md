@@ -20,6 +20,7 @@ Product decisions and the milestone plan are in [docs/product-plan.md](docs/prod
 ```sh
 npm install
 npm run dev        # Vite dev server
+npm run studio     # authoring studio on the dev server (/studio.html)
 npm test           # Vitest: recipe parsing/validation, simulation
 npm run typecheck
 npm run build      # typecheck + production build into dist/

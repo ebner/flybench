@@ -75,9 +75,14 @@ hook size switch, deep links to steps.
    (src/catalog/techniques.ts); the path is computed so each fly adds a few new techniques.
 6. ✅ Fly box, materials inventory ("tie with what I have", "one material short"), vise mode
    (big controls, tap to advance, screen kept awake), installable offline PWA.
-7. Authoring studio.
+7. ✅ Authoring studio (`npm run studio`): KDL editor with problems as you type, live 3D
+   preview with a gape grid and step list, new patterns from a template, saves to
+   `patterns/` through a dev-server-only endpoint.
 
 Catalog: established patterns of every type, each with sources, reference photos and a
 refcheck pass. Scandinavian additions chosen from a survey of flugor.se (see
 .cache/research/flugor-se-survey.md when present). Not yet supported, by patterns they would
-unlock: double hooks, tube flies, cone heads, rubber legs.
+unlock: double hooks and trebles (most Scandinavian salmon flies are sold on doubles),
+tube flies and Waddingtons, cone heads, jig hooks, rubber legs, legs tied in crosswise
+(moose hair, as on Craven's foam beetle), and extended bodies such as the chenille larva
+of the Peeping Caddis.

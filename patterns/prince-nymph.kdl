@@ -67,7 +67,7 @@ steps {
     wrap-thread to=0.9
     wind hackle to=0.9 turns=3 note="Sweep the fibres back and down."
     tie-off hackle
-    trim hackle keep=under note="Clip the fibres on top to seat the horns."
+    trim hackle keep=under
     // Assumption: the horns reach about the end of the body; their length isn't sourced.
     tie-in horns length=1.5 angle=18 spread=30 note="Crossed on top, in a V, curving down over the body."
     whip-finish note="Behind the bead."

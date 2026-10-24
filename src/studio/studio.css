@@ -1,0 +1,347 @@
+/*
+ * The authoring studio: a working tool, so denser than the site, on the same paper and ink.
+ * Editor on the left, the fly on the right; the page itself does not scroll.
+ */
+
+.studio {
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "DejaVu Sans Mono", Menlo, monospace;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  font-size: var(--step--1);
+}
+
+.studio button,
+.studio select,
+.studio input:not([type="checkbox"]):not([type="range"]) {
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  cursor: pointer;
+}
+
+.studio button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.studio button.primary:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.studio button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.studio-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.5rem var(--gutter);
+  border-bottom: 1px solid var(--rule);
+}
+
+.studio-bar h1 {
+  margin: 0 0.5rem 0 0;
+  font-family: var(--display);
+  font-size: var(--step-1);
+  font-weight: 400;
+}
+
+.studio-bar h1 span {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.studio-status {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.studio-site {
+  margin-left: auto;
+  color: var(--accent);
+}
+
+.studio-new {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.studio-new label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.studio-new input {
+  width: 12rem;
+  cursor: text;
+  font-family: var(--mono);
+}
+
+.studio-new input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.studio-new-problem {
+  color: var(--danger);
+}
+
+.studio-panes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 0;
+}
+
+/* Editor */
+
+.studio-editor {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 0;
+  border-right: 1px solid var(--rule);
+}
+
+.studio-code {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  min-height: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.studio-gutter {
+  overflow: hidden;
+  padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+  user-select: none;
+}
+
+.studio-gutter .has-error {
+  color: var(--danger);
+  font-weight: 700;
+  box-shadow: inset -2px 0 var(--danger);
+}
+
+.studio textarea {
+  min-height: 0;
+  padding: 0.75rem;
+  border: 0;
+  resize: none;
+  background: var(--paper-raised);
+  font: inherit;
+  line-height: inherit;
+  color: var(--ink);
+  white-space: pre;
+  tab-size: 4;
+}
+
+.studio textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.studio-problems {
+  max-height: 30vh;
+  overflow: auto;
+  padding: 0.5rem 0.75rem 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.studio-problems h2 {
+  margin: 0 0 0.25rem;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.studio-problems ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.studio-problems li button,
+.studio-problems li span {
+  display: block;
+  width: 100%;
+  padding: 0.15rem 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.studio-problems li button:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.studio-ok {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* Preview */
+
+.studio-preview {
+  display: grid;
+  grid-template-rows: minmax(16rem, 1fr) auto minmax(0, 0.6fr) auto;
+  min-height: 0;
+}
+
+.studio-preview-empty {
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+}
+
+.studio-stage {
+  position: relative;
+  min-height: 0;
+}
+
+.studio-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.studio-stale {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.75rem;
+  margin: 0;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper-raised);
+  color: var(--danger);
+}
+
+.studio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.studio-views {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.studio-check {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.studio-scrub {
+  flex: 1 1 10rem;
+  accent-color: var(--accent);
+}
+
+.studio-steps {
+  overflow: auto;
+  margin: 0;
+  padding: 0.25rem 0.75rem;
+  border-top: 1px solid var(--rule);
+  list-style: none;
+  counter-reset: step;
+}
+
+.studio-steps li {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  padding: 0.1rem 0.25rem;
+  border-radius: 3px;
+  counter-increment: step;
+}
+
+.studio-steps li::before {
+  content: counter(step);
+  text-align: right;
+  padding-right: 0.5rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+
+.studio-steps li[aria-current="step"] {
+  background: var(--accent-wash);
+}
+
+.studio-steps button {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--ink);
+}
+
+.studio-steps strong {
+  font-weight: 600;
+}
+
+.studio-refs {
+  padding: 0.5rem 0.75rem 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.studio-refs h2 {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 600;
+}
+
+.studio-refs ul {
+  margin: 0.25rem 0;
+  padding-left: 1.2rem;
+}
+
+.studio-refs p {
+  margin: 0.25rem 0 0;
+  color: var(--ink-soft);
+}
+
+.studio-refs code {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+/* On a narrow window the panes stack and the page scrolls. */
+@media (max-width: 60rem) {
+  .studio {
+    height: auto;
+  }
+
+  .studio-panes {
+    grid-template-columns: 1fr;
+  }
+
+  .studio-code {
+    height: 60vh;
+  }
+
+  .studio-preview {
+    grid-template-rows: 22rem auto auto auto;
+  }
+
+  .studio-editor {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+}
