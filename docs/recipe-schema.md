@@ -175,7 +175,8 @@ Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `brown`, `r
 `copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
 `lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
 `blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`, `pardo`. Barred colours
-(`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars.
+(`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars, also across
+each fibre of a tail or beard; `tippet` fibres get their black bar and black tip.
 Or a quoted hex value: `"#c8102e"`.
 
 ## Materials
@@ -196,7 +197,7 @@ how it is drawn and which extra properties it takes:
 | yarn       | `wool`, `poly-yarn` | |
 | herl       | `peacock-herl` | `strands` (1–6, default 3) |
 | hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind) |
-| dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur` | |
+| dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur` | `shaggy` (0–1: how rough, from fine and tight to picked out with long guard hairs; default from the kind) |
 | wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
 | floss      | `rib-thread`, `silk-floss` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |

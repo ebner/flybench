@@ -46,6 +46,10 @@ export interface CatalogMaterial {
   oval?: boolean;
   /** Strips pulled over the body (foam, scud back): thickness in gapes. */
   thickness?: number;
+  /** Fibres: how many times broader each one is than a hackle fibre (tippet barbs are broad and flat). */
+  fibreWidth?: number;
+  /** Dubbing: how rough it is, from 0 (fine, tight) to 1 (long, spiky guard hairs). Default 0.4. */
+  shaggy?: number;
   /** Beads: a cone head, wide at the back and narrow towards the eye. */
   cone?: boolean;
 }
@@ -67,10 +71,12 @@ export const MATERIALS = {
   "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65 },
 
   // Dubbing
-  "hares-ear-dubbing": { name: "hare's ear dubbing", archetype: "dubbing", defaultColor: "hares-ear" },
-  "dry-fly-dubbing": { name: "dry fly dubbing", archetype: "dubbing" },
-  "rabbit-dubbing": { name: "rabbit dubbing", archetype: "dubbing" },
-  "seals-fur": { name: "seal's fur", archetype: "dubbing" },
+  // Assumption: hare's mask and seal's fur are the roughest common dubbings, rabbit in between
+  // and dry-fly dubbing fine and tight. A picked-out thorax says so with `shaggy` in the recipe.
+  "hares-ear-dubbing": { name: "hare's ear dubbing", archetype: "dubbing", defaultColor: "hares-ear", shaggy: 0.6 },
+  "dry-fly-dubbing": { name: "dry fly dubbing", archetype: "dubbing", shaggy: 0.15 },
+  "rabbit-dubbing": { name: "rabbit dubbing", archetype: "dubbing", shaggy: 0.5 },
+  "seals-fur": { name: "seal's fur", archetype: "dubbing", shaggy: 0.6 },
   dubbing: { name: "dubbing", archetype: "dubbing" },
 
   // Wire
@@ -95,14 +101,16 @@ export const MATERIALS = {
   "elk-hair": { name: "elk hair", archetype: "hair", defaultColor: "elk" },
   "deer-hair": { name: "deer hair", archetype: "hair", defaultColor: "deer" },
   "calf-tail": { name: "calf tail", archetype: "hair", defaultColor: "white" },
-  bucktail: { name: "bucktail", archetype: "hair" },
+  // Assumption: bucktail is coarse, about one and a half times as thick as elk or deer hair.
+  bucktail: { name: "bucktail", archetype: "hair", fibreWidth: 1.5 },
   "squirrel-tail": { name: "squirrel tail", archetype: "hair", defaultColor: "squirrel" },
   "moose-mane": { name: "moose mane", archetype: "hair", defaultColor: "moose" },
 
   // Fibres
   "pheasant-tail": { name: "pheasant tail fibres", archetype: "fibres", defaultColor: "pheasant-tail" },
   "hackle-fibres": { name: "hackle fibres", archetype: "fibres" },
-  "golden-pheasant-tippet": { name: "golden pheasant tippet", archetype: "fibres", defaultColor: "tippet" },
+  // Assumption: tippet barbs are about two and a half times as broad as hackle fibres.
+  "golden-pheasant-tippet": { name: "golden pheasant tippet", archetype: "fibres", defaultColor: "tippet", fibreWidth: 2.5 },
   "golden-pheasant-crest": { name: "golden pheasant crest", archetype: "fibres", defaultColor: "crest" },
   "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear" },
   "synthetic-hair": { name: "synthetic hair", archetype: "fibres" },
@@ -157,7 +165,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   yarn: [],
   herl: ["strands"],
   hackle: ["fibre", "sweep"],
-  dubbing: [],
+  dubbing: ["shaggy"],
   wire: ["mm"],
   floss: ["size"],
   tinsel: [],

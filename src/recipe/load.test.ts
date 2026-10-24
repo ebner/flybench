@@ -201,6 +201,9 @@ describe("schema validation", () => {
     expect(errors("wool color=red", "wool color=red strands=2")).toMatch(/"strands" does not apply to wool/);
     expect(errors("fibre=1.0", "")).toMatch(/needs its fibre length/);
     expect(errors("tag wool color=red", "tag wool")).toMatch(/wool needs a colour/);
+    expect(load(VALID_STEPS, HEADER.replace("fur hares-ear-dubbing", "fur hares-ear-dubbing shaggy=1")).ok).toBe(true);
+    expect(errors("fur hares-ear-dubbing", "fur hares-ear-dubbing shaggy=2")).toMatch(/shaggy/);
+    expect(errors("wool color=red", "wool color=red shaggy=0.5")).toMatch(/"shaggy" does not apply to wool/);
   });
 });
 
