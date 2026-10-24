@@ -45,7 +45,7 @@ materials {
     rib gold-wire
     abdomen hares-ear-dubbing
     case turkey-quill label="Mottled turkey tail slip"
-    thorax hares-ear-dubbing color="#5a4838" label="Hare's mask dubbing with plenty of guard hair"
+    thorax hares-ear-dubbing color="#5a4838" shaggy=1 label="Hare's mask dubbing with plenty of guard hair"
 }
 
 steps {

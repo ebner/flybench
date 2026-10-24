@@ -152,13 +152,15 @@ const Material = z
     count: z.number().int().min(1).max(60).optional(),
     /** hackle: how far the fibres lean back when wound, in degrees (overrides the catalog). */
     sweep: z.number().min(0).max(80).optional(),
+    /** dubbing: how rough, from 0 (fine and tight) to 1 (picked out, long guard hairs); overrides the catalog. */
+    shaggy: z.number().min(0).max(1).optional(),
     /** beads, eyes and wire: diameter in millimetres, as they are sold. */
     mm: z.number().min(0.05).max(12).optional(),
   })
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];
     const allowed = ARCHETYPE_PROPS[cat.archetype];
-    for (const prop of ["strands", "fibre", "size", "count", "sweep", "mm"] as const) {
+    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "mm"] as const) {
       if (m[prop] !== undefined && !allowed.includes(prop)) {
         ctx.addIssue({ code: "custom", path: [prop], message: `"${prop}" does not apply to ${cat.name}` });
       }

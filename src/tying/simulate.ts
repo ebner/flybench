@@ -51,14 +51,17 @@ export interface WrapsPiece extends PieceBase {
   sweep?: number;
   /** Fibres alternate light and dark (grizzly, partridge). */
   barred?: boolean;
+  /** Dubbing: how rough, 0 (fine) to 1 (long guard hairs). */
+  shaggy?: number;
   /** Lies flat as a band when wound (silk floss, flat tinsel, wound fibres) rather than as a round strand. */
   band?: boolean;
   /** Post wraps: the post's x, the heights (above the shank axis) the wraps run between, and its radius. */
   post?: { x: number; y0: number; y1: number; radius: number };
   /** Trimmed hackle: only the fibres at the sides are left, those on top and at the sides, or those underneath and at the sides. */
   keep?: "sides" | "top" | "under";
-  /** Where a wing case or back was pulled over these wraps, pressing down the fibres on top. */
-  covered?: [number, number];
+  /** Where a wing case or back was pulled over these wraps, pressing down the fibres on top,
+   *  and how far round each side of the top it reaches (radians). */
+  covered?: [number, number, number];
 }
 
 /** A bunch of fibres or hair sticking out from its tie-in point (tag, tail, wing, beard, butts, spun hair). */
@@ -83,7 +86,14 @@ export interface BundlePiece extends PieceBase {
   trimShape?: "round" | "wedge";
   /** Upright and divided: two tufts turned out to either side by this many radians. */
   pair?: number;
+  /** Bands along each fibre (tippet bars, barred fibres). */
+  marks?: FibreMarks;
+  /** Fibres broader than usual, as a multiple of the usual width. */
+  fibreWidth?: number;
 }
+
+/** Bands along a fibre, as fractions of its length from base to tip, drawn at `shade` of its colour. */
+export type FibreMarks = { from: number; to: number; shade: number }[];
 
 /** A whole feather or a quill slip as a wing; a pair when `pair` > 0. */
 export interface FeatherPiece extends PieceBase {
@@ -135,6 +145,8 @@ export interface CoverPiece extends PieceBase {
   dents: number[];
   /** Length left standing in front of the tie-down when the excess is trimmed (a foam head). */
   stub: number;
+  /** 0 = plain, 1 = strongly barred or mottled (turkey). */
+  barring: number;
 }
 
 /** Chenille, yarn or foam sticking out from the tie-in as one solid piece: an extended body or larva. */
@@ -261,6 +273,9 @@ interface MaterialLook {
   /** 0 = plain, 1 = strongly barred. */
   barring: number;
   band?: boolean;
+  marks?: FibreMarks;
+  fibreWidth?: number;
+  shaggy?: number;
 }
 
 const deg = (d: number) => (d * Math.PI) / 180;
@@ -268,13 +283,30 @@ const deg = (d: number) => (d * Math.PI) / 180;
 /** Colours whose feathers and hackles are barred or mottled. */
 const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6 };
 
+// Assumption: a golden pheasant tippet fibre is orange with a black bar about three quarters
+// of the way out and a black tip.
+const TIPPET_MARKS: FibreMarks = [
+  { from: 0.7, to: 0.8, shade: 0.08 },
+  { from: 0.9, to: 1, shade: 0.08 },
+];
+
+/** Dark bars across a barred fibre, more of them and darker the stronger the barring. */
+function barMarks(barring: number): FibreMarks {
+  const bars = 5;
+  return Array.from({ length: bars }, (_, i) => {
+    const from = 0.12 + (0.88 * i) / bars;
+    return { from, to: from + 0.42 / bars, shade: 1 - 0.75 * barring };
+  });
+}
+
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   const barring = BARRED[colorName] ?? 0;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring };
+  const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, shaggy: m.shaggy ?? cat.shaggy };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
@@ -449,7 +481,7 @@ export function simulate(recipe: Recipe): Build {
   const materialWraps = (id: string, l: MaterialLook, x0: number, x1: number, turns: number): WrapsPiece => ({
     type: "wraps", id: nextId++, material: id, look: l.look, color: l.color, window: [0, 1],
     path: "travel", x0, x1, width: 0, turns, strandRadius: l.strandRadius, base: profile,
-    fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band,
+    fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band, shaggy: l.shaggy,
   });
 
   recipe.steps.forEach((step, index) => {
@@ -600,7 +632,9 @@ export function simulate(recipe: Recipe): Build {
           pieces.push({
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
             window: [0, 0.35], x, radius, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
-            bundleRadius: l.strandRadius, count: l.count, pair,
+            // A long hair wing is a bigger clump: it stays dense as it fans out.
+            bundleRadius: l.strandRadius, count: l.look === "hair" ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
+            pair, marks: l.marks, fibreWidth: l.fibreWidth,
           });
           if (upright) {
             posts.set(step.material, { x, baseY: radius, height: step.length, radius: l.strandRadius * 0.45 });
@@ -694,14 +728,14 @@ export function simulate(recipe: Recipe): Build {
         const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
-          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : 65),
-          dents: [], stub: 0,
+          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          dents: [], stub: 0, barring: l.barring,
         };
         pieces.push(cover);
         covers.set(step.material, cover);
         profile = profile.withLayer(from, to, thickness * 0.8);
         for (const w of wound.values()) {
-          if (w.fibreLength && w.path === "travel" && Math.min(w.x0, w.x1) < to && Math.max(w.x0, w.x1) > from) w.covered = [from, to];
+          if (w.fibreLength && w.path === "travel" && Math.min(w.x0, w.x1) < to && Math.max(w.x0, w.x1) > from) w.covered = [from, to, cover.halfAngle];
         }
         freeEnds.delete(step.material);
         ends = restingEnds();
