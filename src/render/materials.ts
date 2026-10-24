@@ -22,6 +22,17 @@ export class Surfaces {
   }
 }
 
+/**
+ * Feathers, fur and hair are never paper-white: a mass of fibres shades itself. Capping their
+ * lightness keeps white wings, tails and posts visible against the light plates.
+ */
+function natural(color: string): THREE.Color {
+  const c = new THREE.Color(color);
+  const hsl = { h: 0, s: 0, l: 0 };
+  c.getHSL(hsl);
+  return hsl.l > 0.74 ? c.setHSL(hsl.h, hsl.s, 0.74) : c;
+}
+
 function create(look: Look | "stem" | "metal", color: string, vertexColors: boolean): THREE.Material {
   const fibres = { vertexColors };
   switch (look) {
@@ -29,7 +40,7 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
     case "floss":
       return new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0.05 });
     case "yarn":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.95, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.95, ...fibres });
     case "herl":
       // Peacock herl: dark bronze-green with a strong iridescent sheen.
       return new THREE.MeshPhysicalMaterial({
@@ -42,15 +53,15 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
         ...fibres,
       });
     case "hackle":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.55, side: THREE.DoubleSide, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.55, side: THREE.DoubleSide, ...fibres });
     case "dubbing":
-      return new THREE.MeshStandardMaterial({ color, roughness: 1, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 1, ...fibres });
     case "hair":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.7, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.7, ...fibres });
     case "fibres":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.6, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.6, ...fibres });
     case "feather":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.8, side: THREE.DoubleSide, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.8, side: THREE.DoubleSide, ...fibres });
     case "stem":
       return new THREE.MeshStandardMaterial({ color, roughness: 0.5 });
     case "wire":
@@ -62,14 +73,12 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
       // Painted or plated: shiny but not mirror-like.
       return new THREE.MeshStandardMaterial({ color, roughness: 0.3, metalness: 0.6 });
     case "chenille":
-      return new THREE.MeshStandardMaterial({ color, roughness: 1, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 1, ...fibres });
     case "biot":
-      return new THREE.MeshStandardMaterial({ color, roughness: 0.45, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.45, ...fibres });
     case "marabou":
-      // A plume shades itself: even white marabou reads grey-white, never paper-white.
-      return new THREE.MeshStandardMaterial({ color: new THREE.Color(color).multiplyScalar(0.78), roughness: 1, ...fibres });
     case "cdc":
-      return new THREE.MeshStandardMaterial({ color, roughness: 1, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 1, ...fibres });
     case "flash":
       return new THREE.MeshPhysicalMaterial({
         color, roughness: 0.15, metalness: 0.7, iridescence: 0.8, iridescenceIOR: 1.5, ...fibres,

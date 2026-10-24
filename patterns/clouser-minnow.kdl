@@ -1,0 +1,60 @@
+// Clouser Minnow: Bob Clouser's sparse bucktail baitfish with dumbbell eyes; it rides hook point up.
+
+id clouser-minnow
+name "Clouser Minnow"
+aliases "Clouser Deep Minnow" "Clouser"
+type saltwater
+imitates baitfish
+difficulty beginner
+species bass striped-bass bonefish trout pike
+season january february march april may june july august september october november december
+origin originator="Bob Clouser" year=1987 region="Susquehanna River, Pennsylvania, USA"
+description "Painted dumbbell eyes a third of the way back, a sparse white bucktail belly over them, pearl flash, and a chartreuse bucktail back on the hook-point side."
+history """
+    Bob Clouser, a fly-shop owner and guide, made it in 1987 for smallmouth bass on the
+    Susquehanna. Lefty Kreh named it in a 1989 Fly Fisherman article and later claimed more than
+    eighty species on it; in 1994 he called it the most important underwater fly of the previous
+    twenty years. The first ones were white and brown with gold flash, or white and grey with
+    silver.
+    """
+fishing """
+    Strip it in short, sharp pulls with pauses: the heavy eyes make it dive and jig on every
+    pause, and because it rides point up it rarely snags. Fish it over rocky runs for river
+    smallmouth, blind in the surf and around jetties, or sight-cast on the flats, with eyes as
+    heavy as the depth needs.
+    """
+sources {
+    "Wikipedia: Clouser Deep Minnow" url="https://en.wikipedia.org/wiki/Clouser_Deep_Minnow"
+    "Bill Carnazzo: notes from Bob Clouser's 2007 demonstration" url="https://gbflycasters.org/fly_tying/patterns/Clouser%20Minnow/Clouser_Minnow_tips.htm"
+    "GlobalFlyFisher: Clouser Deep Minnow" url="https://globalflyfisher.com/patterns/clouser-deep-minnow"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/8/87/Traditional_Chartreuse_Clouser_Deep_Minnow.jpg" page="https://commons.wikimedia.org/wiki/File:Traditional_Chartreuse_Clouser_Deep_Minnow.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, tying orientation"
+    "https://upload.wikimedia.org/wikipedia/commons/5/58/Saltwater_Clouser_deep_minnow_variation_01.jpg" page="https://commons.wikimedia.org/wiki/File:Saltwater_Clouser_deep_minnow_variation_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, tan and white"
+}
+
+// Shown as tied, point down: the belly is on top here and the back underneath. It swims the other way up.
+hook saltwater-straight size=2
+thread chartreuse size="6/0"
+
+materials {
+    eyes dumbbell-eyes color=red mm=4 label="Lead dumbbell eyes, painted red"
+    belly bucktail color=white
+    flash krystal-flash count=14
+    back bucktail color=chartreuse
+}
+
+steps {
+    // Carnazzo, after Clouser: eyes about a third of the shank behind the hook eye.
+    attach-thread at=0.67
+    tie-in eyes note="On top, with crossing turns; post under them and glue."
+    wrap-thread to=0.88 note="Between the hook eye and the dumbbell."
+    // Carnazzo: about two and a half times the hook length; GlobalFlyFisher: at least twice.
+    tie-in belly length=6.0 angle=1 spread=10 note="Sparse: no thicker than a large toothpick. Pull it back between the eyes and bind it lightly behind them."
+    trim belly
+    tie-in flash length=6.3 angle=1 spread=20 side=under note="Turn the hook over; fold the strands round the thread, a little longer than the belly."
+    tie-in back length=6.0 angle=1 spread=12 side=under note="Slightly more hair than the belly, the same length."
+    trim back note="At an angle, to taper the head."
+    whip-finish note="A small, smooth head, coated with epoxy or resin."
+}

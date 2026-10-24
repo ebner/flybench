@@ -369,6 +369,12 @@ select {
   object-fit: contain;
 }
 
+/* A pinned specimen casts a faint shadow on its plate, which also outlines white flies. */
+.plate-image img,
+.plate-spin {
+  filter: drop-shadow(0 0.15rem 0.2rem rgb(40 30 20 / 0.3));
+}
+
 .plate-spin {
   position: absolute;
   top: 0;

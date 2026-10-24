@@ -86,7 +86,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 | `type`        | one of `dry wet nymph emerger midge streamer terrestrial salmon saltwater` | yes |
 | `imitates`    | any of `mayfly caddis stonefly chironomid damselfly terrestrial baitfish crustacean attractor` | no |
 | `difficulty`  | `beginner`, `intermediate` or `advanced`          | yes      |
-| `species`     | any of `trout grayling sea-trout salmon char bass panfish pike` | no |
+| `species`     | any of `trout grayling sea-trout salmon char bass panfish pike striped-bass bonefish` | no |
 | `season`      | month names, `january` … `december`              | no       |
 | `origin`      | `origin originator="…" year=1957 region="…"` (all optional) | no |
 | `description` | one or two sentences for the catalog              | no       |

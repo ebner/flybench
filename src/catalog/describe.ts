@@ -47,6 +47,8 @@ export const SPECIES_LABELS: Record<Recipe["species"][number], string> = {
   bass: "Bass",
   panfish: "Panfish",
   pike: "Pike",
+  "striped-bass": "Striped bass",
+  bonefish: "Bonefish",
 };
 
 export const DIFFICULTY_LABELS: Record<Recipe["difficulty"], string> = {

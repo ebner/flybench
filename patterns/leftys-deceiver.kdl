@@ -1,0 +1,64 @@
+// Lefty's Deceiver: Lefty Kreh's all-white saddle-hackle and bucktail baitfish, as first tied.
+
+id leftys-deceiver
+name "Lefty's Deceiver"
+aliases "Deceiver"
+type saltwater
+imitates baitfish
+difficulty intermediate
+species striped-bass bass pike
+season january february march april may june july august september october november december
+origin originator="Lefty Kreh" region="Chesapeake Bay, Maryland, USA, late 1950s"
+description "A long tail of white saddle hackles with silver flash at the bend, a silver tinsel body, and a white bucktail collar round the front reaching just past the bend."
+history """
+    Lefty Kreh, then a Maryland outdoor writer fishing for striped bass on Chesapeake Bay, was
+    tired of streamers whose saddle hackles fouled round the bend. Tying the hackles in at the
+    bend and the bucktail at the head gave a fly that never fouls, casts well in wind, looks like a
+    fish and can be tied at any length. The original was all white, for smelt. It is a design as
+    much as a pattern, and it was on a US postage stamp in 1991.
+    """
+fishing """
+    Cast on an intermediate or sinking line and stripped like a fleeing baitfish, with pauses to
+    let the hackles and bucktail breathe. Fish it around rips, jetties, flats and bait schools for
+    striped bass, bluefish, snook, tarpon and pike.
+    """
+sources {
+    "Wikipedia: Lefty's Deceiver" url="https://en.wikipedia.org/wiki/Lefty%27s_Deceiver"
+    "FlyLife: Lefty's Deceiver" url="https://flylifemagazine.com/?p=25063"
+    "Orvis: Lefty's Deceiver video" url="https://howtoflyfish.orvis.com/fly-tying-videos/salt-bass-streamer-flies/647-leftys-deceiver"
+    "The Fisherman: Tying a Deceiver (Bill Smith)" url="https://www.thefisherman.com/article/tying-a-deceiver/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/4/42/Lefty%27s_Deceiver_01.jpg" page="https://commons.wikimedia.org/wiki/File:Lefty%27s_Deceiver_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Chartreuse over white, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/1/1d/Lefty%27s_Deceiver_03.jpg" page="https://commons.wikimedia.org/wiki/File:Lefty%27s_Deceiver_03.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Red over white, side view"
+}
+
+hook saltwater-straight size=2
+thread white size="3/0"
+
+materials {
+    tail saddle-feathers color=white label="White saddle hackles, four to six"
+    tail-flash krystal-flash color=silver count=8
+    body flat-tinsel color=silver
+    lower bucktail color=white label="White bucktail, sides and underneath"
+    upper bucktail color=white label="White bucktail, on top"
+}
+
+steps {
+    attach-thread at=0.8
+    wrap-thread to=0.0 note="Build a small bump at the bend to hold the tail."
+    // Orvis: about three shank lengths; The Fisherman: at least two.
+    tie-in tail length=6.5 angle=3 spread=8 width=0.7 note="Matched hackles, fluff stripped, two or three each side."
+    tie-in tail-flash length=6.6 angle=4 spread=25 note="Three or four strands each side."
+    tie-in body
+    wrap-thread to=0.78
+    wind body to=0.78 turns=14
+    tie-off body
+    // Wikipedia: the collar reaches just beyond the bend on the original.
+    tie-in lower length=2.8 angle=4 spread=70 side=under note="A clump each side or one underneath, spread round the lower half."
+    trim lower
+    tie-in upper length=3.0 angle=4 spread=60 note="Slightly larger and slightly longer, on top."
+    trim upper note="Butts cut at an angle for a tapered head."
+    whip-finish note="A tapered head, cemented; add eyes if you like."
+}

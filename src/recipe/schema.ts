@@ -74,7 +74,8 @@ const Id = z
 const Position = z.number().min(0).max(1);
 
 /** Multiple of the hook gape. */
-const GapeLength = z.number().positive().max(5);
+// Long saltwater wings and Deceiver tails run to two or three shank lengths.
+const GapeLength = z.number().positive().max(10);
 
 const Note = z.string().min(1).optional();
 
@@ -90,7 +91,7 @@ export const FLY_TYPES = [
 export const IMITATES = [
   "mayfly", "caddis", "stonefly", "chironomid", "damselfly", "terrestrial", "baitfish", "crustacean", "attractor",
 ] as const;
-export const SPECIES = ["trout", "grayling", "sea-trout", "salmon", "char", "bass", "panfish", "pike"] as const;
+export const SPECIES = ["trout", "grayling", "sea-trout", "salmon", "char", "bass", "panfish", "pike", "striped-bass", "bonefish"] as const;
 export const DIFFICULTIES = ["beginner", "intermediate", "advanced"] as const;
 export const MONTHS = [
   "january", "february", "march", "april", "may", "june",

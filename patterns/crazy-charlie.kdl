@@ -1,0 +1,67 @@
+// Crazy Charlie: the bead-chain-eyed bonefish fly from Andros; it rides hook point up.
+
+id crazy-charlie
+name "Crazy Charlie"
+aliases "Nasty Charlie"
+type saltwater
+imitates baitfish crustacean
+difficulty beginner
+species bonefish
+season january february march april may june july august september october november december
+origin originator="Bob Nauheim" year=1977 region="Andros Island, Bahamas"
+description "Bead-chain eyes near the eye, a pearl body under clear ribbing, and a white calf tail wing with a little pearl flash on the hook-point side."
+history """
+    Usually credited to Bob Nauheim, who tied the first ones in 1977 on a trip with the Andros
+    guide Charlie Smith and gave them bead-chain eyes to suggest glass minnows. Smith said "dat
+    fly is nasty mon", so they were Nasty Charlies until Orvis's Leigh Perkins asked for a
+    politer name. Smith's family remember it differently: in their account he made the first ones
+    himself, with beads from military tags and a chicken-feather body. It was the first bonefish
+    fly to ride point up on bead-chain eyes.
+    """
+fishing """
+    Sight-cast to tailing or cruising bonefish on shallow flats, leading the fish. Let it sink to
+    the bottom, then strip it in short, erratic pulls so it puffs the sand like a fleeing shrimp.
+    It rides point up and slides over turtle grass and coral; choose the eyes for the depth.
+    """
+sources {
+    "Wikipedia: Crazy Charlie" url="https://en.wikipedia.org/wiki/Crazy_Charlie"
+    "FlyLife: Tie the Crazy Charlie (Skip Clement)" url="https://flylifemagazine.com/fly-tying-tie-the-crazy-charlie-a-fly-with-a-long-history/"
+    "Charlie's Fly Box: Crazy Charlie" url="https://charliesflybox.com/blogs/step-by-step-tutorials/crazy-charlie"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/1/15/Crazy_Charlie_White.jpg" page="https://commons.wikimedia.org/wiki/File:Crazy_Charlie_White.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, tying orientation"
+    "https://upload.wikimedia.org/wikipedia/commons/5/51/Crazy_Charlie_Bonefish_fly_variation_01.jpg" page="https://commons.wikimedia.org/wiki/File:Crazy_Charlie_Bonefish_fly_variation_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, chartreuse"
+}
+
+// Shown as tied, point down: the wing is underneath here. It swims the other way up.
+hook saltwater-straight size=6
+thread white size="6/0"
+
+materials {
+    eyes bead-chain-eyes mm=3.5
+    rib monofilament label="Clear V-Rib or D-Rib"
+    body flat-tinsel color=pearl label="Pearl Krystal Flash or flat pearl tinsel"
+    flash krystal-flash count=4
+    wing calf-tail color=white
+}
+
+steps {
+    // Charlie's Fly Box: a couple of eye lengths behind the hook eye.
+    attach-thread at=0.8
+    tie-in eyes note="On top, with figure-of-eight turns."
+    wrap-thread to=0.0
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.78
+    wind body to=0.78 turns=14 note="A slight taper; figure-of-eight it round the eyes."
+    tie-off body
+    wind rib to=0.78 turns=14 note="Touching turns over the flash, for a segmented, translucent body."
+    tie-off rib
+    wrap-thread to=0.9 note="In front of the eyes; turn the hook over."
+    tie-in flash length=2.7 angle=4 spread=15 side=under note="Two strands folded over: four ends."
+    // Charlie's Fly Box: tips just past the bend.
+    tie-in wing length=2.6 angle=6 spread=20 side=under note="An unstacked clump of calf tail."
+    trim wing
+    whip-finish note="A small head between the wing and the eye, coated."
+}
