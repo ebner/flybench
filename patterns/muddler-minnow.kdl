@@ -1,0 +1,64 @@
+// Muddler Minnow: Don Gapen's sculpin streamer with turkey tail and wings and a spun, clipped deer-hair head.
+
+id muddler-minnow
+name "Muddler Minnow"
+aliases "Muddler"
+type streamer
+imitates baitfish terrestrial
+difficulty intermediate
+species trout salmon sea-trout bass char
+season january february march april may june july august september october november december
+origin originator="Don Gapen" year=1937 region="Nipigon River, Ontario, Canada"
+description "Turkey quill tail, a flat gold tinsel body, a squirrel tail underwing under matched turkey slips, and a spun deer-hair collar and clipped head."
+history """
+    Don Gapen of Anoka, Minnesota, tied it at his family's lodge on the Nipigon River in 1936 or
+    1937 to imitate the sculpins the big brook trout fed on, after watching Ojibwe guides catch
+    them for bait. His head and collar were one sparse, ragged clump of deer hair. The dense,
+    neatly clipped head most tyers make today came from Dan Bailey of Livingston, Montana, around
+    1950, and Joe Brooks made the fly famous in Field & Stream.
+    """
+fishing """
+    Deep, it is a sculpin: dead-drift it or strip it in short bursts near the bottom on a sinking
+    line. Greased, the deer-hair head makes it wake on the surface, or drift like a hopper in
+    summer. For salmon it is swung or skated. Let it hang and wobble in the current before
+    recasting; that is often when it is taken.
+    """
+sources {
+    "Wikipedia: Muddler Minnow" url="https://en.wikipedia.org/wiki/Muddler_Minnow"
+    "Fly Fisherman: Muddler Minnow (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-muddler-minnow/151927"
+    "Fly Tying Archive: Muddler Minnow" url="https://flytyingarchive.com/?p=79"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/8/82/Original_Don_Gapen_Muddler_Minnow.jpg" page="https://commons.wikimedia.org/wiki/File:Original_Don_Gapen_Muddler_Minnow.jpg" author="Martin Joergensen" license="CC BY-SA 3.0" note="Original-style sparse head, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/a/aa/Muddler_minnow_fly.JPG" page="https://commons.wikimedia.org/wiki/File:Muddler_minnow_fly.JPG" author="Waldemarpaetz" license="CC BY-SA 4.0" note="Modern clipped head, side view"
+}
+
+hook streamer-4xl size=6
+// Assumption: a strong thread, as most tyers use for spinning hair.
+thread brown size="3/0"
+
+materials {
+    tail turkey-quill label="Mottled turkey quill slips"
+    body flat-tinsel color=gold
+    underwing squirrel-tail color=grey label="Grey squirrel tail"
+    wing turkey-quill label="Mottled turkey quill slips"
+    head deer-hair
+}
+
+steps {
+    attach-thread at=0.75 note="A quarter of the shank behind the eye: the front is kept bare for the hair."
+    wrap-thread to=0.0
+    // Craven: about a third of the shank.
+    tie-in tail length=1.3 angle=6 width=0.35 note="Matched slips, concave sides together, on top with a pinch wrap."
+    tie-in body
+    wrap-thread to=0.75
+    wind body to=0.75 turns=18 note="Touching turns."
+    tie-off body
+    tie-in underwing length=4.0 angle=8 spread=25 note="A sparse, cleaned bunch, about a shank long."
+    tie-in wing length=4.3 angle=5 spread=16 width=0.75 note="One slip each side, concave in, the tips reaching the end of the tail."
+    // Craven: collar tips reach about mid-wing.
+    spin head to=0.97 collar=1.9 note="A large stacked clump, tips back, then butts-only clumps packed hard in front."
+    whip-finish
+    trim head leave=0.8 shape=round note="Clip the butts to a cone tapering to the eye; leave the tips as a collar."
+}

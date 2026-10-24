@@ -1,0 +1,62 @@
+// Marabou Muddler: Dan Bailey's white marabou-winged Muddler.
+
+id marabou-muddler
+name "Marabou Muddler"
+type streamer
+imitates baitfish
+difficulty intermediate
+species trout bass salmon
+season january february march april may june july august september october november december
+origin originator="Dan Bailey" region="Livingston, Montana, USA, 1940s or 1950s"
+description "A red hackle-fibre tail, a silver tinsel body, a full white marabou wing topped with peacock herl, and a spun deer-hair collar and clipped head."
+history """
+    Dan Bailey, the Livingston fly shop owner who gave the Muddler its dense clipped head, swapped
+    the turkey wing for marabou to imitate river minnows. Its date is uncertain: the 1940s
+    according to one account, the 1950s according to others. White was Bailey's favourite; black,
+    olive, yellow and brown followed.
+    """
+fishing """
+    Fished across and down or stripped, in rivers and lakes. On a floating line the deer-hair head
+    holds it up so it suspends or wakes; weighted, on a sinking line, it bobs on the retrieve. The
+    marabou never stops moving.
+    """
+sources {
+    "SWTU: Marabou Muddler" url="https://www.swtu.org/2020/02/05/marabu-muddler/"
+    "Fly Fishing the Sierra: Marabou Muddler" url="https://flyfishingthesierra.com/marabou-muddler/"
+    "FlyLife: Black Marabou Muddler" url="https://flylifemagazine.com/?p=24446"
+    "MidCurrent: Muddlers made easy" url="https://midcurrent.com/flies/muddlers-made-easy/"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.swtu.org/wp-content/uploads/2020/02/Marabou-Muddler3-975.jpg" page="https://www.swtu.org/2020/02/05/marabu-muddler/" license="All rights reserved; reference only" note="Side view in the vise, classic white"
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/maramudvar3.jpg" page="https://flyfishingthesierra.com/marabou-muddler/" license="All rights reserved; reference only" note="White with a cone head"
+}
+
+// Assumption: white drawn a shade darker, so the wing shows against the paper.
+hook streamer-4xl size=6
+thread white size="3/0"
+
+materials {
+    tail hackle-fibres color=red count=16 label="Red hackle fibres"
+    body flat-tinsel color=silver
+    wing marabou color="#e4e0d6" label="White marabou"
+    topping peacock-herl strands=6
+    head deer-hair
+}
+
+steps {
+    attach-thread at=0.72 note="Leave the front quarter bare for the hair."
+    wrap-thread to=0.0
+    // Assumption: a third to half the shank, read from the photos; no source gives it.
+    tie-in tail length=1.6 spread=20
+    tie-in body
+    wrap-thread to=0.72
+    wind body to=0.72 turns=18 note="Touching turns."
+    tie-off body
+    // SWTU: about one and a half hook lengths; Sierra: ending level with the tail.
+    tie-in wing length=4.4 angle=6 spread=35 note="Tied full: one or two plumes, stripped from the quill."
+    tie-in topping length=4.0 angle=9 spread=5 note="About six strands over the wing."
+    spin head to=0.97 collar=1.6 note="Tips back to about the hook point, then butts-only clumps packed tight."
+    whip-finish
+    trim head leave=0.75 shape=round note="A cone, wide at the back; flat underneath to keep the gape clear. Leave the collar."
+}

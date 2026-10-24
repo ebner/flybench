@@ -313,7 +313,7 @@ const BUNDLE = {
   // A biot is a stiff, broad barb: wide at the base, tapering to a point.
   biot: { radius: 0.028, tip: 0.85, tipShade: 0.85, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0 },
   // Marabou is a dense, soft plume: many fine fibres, tapering out.
-  marabou: { radius: 0.005, tip: 0.2, tipShade: 0.9, spread: 0.3, flare: 0.06, sideFlare: 0.25, lengthJitter: 0.45 },
+  marabou: { radius: 0.008, tip: 0.2, tipShade: 0.85, spread: 0.3, flare: 0.06, sideFlare: 0.25, lengthJitter: 0.45 },
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
   cdc: { radius: 0.003, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2 },
@@ -370,6 +370,14 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         .clone()
         .multiplyScalar(Math.cos(piece.angle))
         .addScaledVector(X_AXIS, -Math.sin(piece.angle) * (0.6 + 0.8 * rand()))
+        .normalize();
+    } else if (piece.spread > Math.PI / 2) {
+      // A bunch spun most of the way round (a muddler collar) flares away from the body
+      // on every side, not just upwards.
+      dir = new THREE.Vector3(forward ? 1 : -1, 0, 0)
+        .multiplyScalar(Math.cos(piece.angle))
+        .addScaledVector(outward, Math.sin(piece.angle) * (0.7 + 0.6 * rand()))
+        .add(new THREE.Vector3(0, (rand() - 0.5) * spec.spread, (rand() - 0.5) * spec.spread))
         .normalize();
     } else {
       // Fibres splay away from the body a little, and fibres at the sides of the bunch

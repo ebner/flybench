@@ -290,7 +290,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "biot":
       return { ...base, strandRadius: 0.012, count: m.count ?? 2, tieInThickness: 0.012, layerThickness: () => 0.02 };
     case "marabou":
-      return { ...base, strandRadius: 0.08, count: 320, tieInThickness: 0.03, layerThickness: () => 0.03 };
+      return { ...base, strandRadius: 0.08, count: 560, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "cdc":
       // Wound, a CDC feather's barbs are short near the tip and long near the butt.
       return {
@@ -478,8 +478,9 @@ export function simulate(recipe: Recipe): Build {
         if (step.collar) {
           pieces.push({
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.3],
-            x: from, radius, length: step.collar, angle: deg(18), direction: "back", side: "top",
-            spread: deg(110), bundleRadius: l.strandRadius, count: 140,
+            // The first clump spins all the way round, so its tips flare back on every side.
+            x: from, radius, length: step.collar, angle: deg(22), direction: "back", side: "top",
+            spread: deg(170), bundleRadius: l.strandRadius, count: 240,
           });
         }
         profile = profile.withLayer(from, to, 0.08);
