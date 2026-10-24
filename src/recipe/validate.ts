@@ -117,7 +117,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           err(`beads go on with "slide-bead" before the thread`, [...path, "material"]);
           break;
         }
-        if (NEEDS_LENGTH.includes(archetype!) && step.length === undefined) {
+        // A feather slip pulled over as a wing case lies on the body instead of sticking out.
+        const pulledOver = recipe.steps.slice(i + 1).some((s) => s.op === "pull-over" && s.material === step.material);
+        if (NEEDS_LENGTH.includes(archetype!) && step.length === undefined && !(archetype === "feather" && pulledOver)) {
           err(`${MATERIALS[recipe.materials.find((m) => m.id === step.material)!.kind].name} sticks out from where it is tied in, so it needs a length`, [...path, "material"]);
         }
         if (archetype === "eyes" && step.length !== undefined) err("eyes do not take a length", [...path, "length"]);

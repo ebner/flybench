@@ -191,8 +191,9 @@ The archetype decides how a material behaves and is drawn:
 - **beads** go on with `slide-bead` before the thread; **eyes** are tied in without a length.
 - **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Hair
   can also be spun (`spin`) and trimmed into a head.
-- **hair, feather, biot, marabou, cdc, flash** stick out from where they are tied in, so
-  they need a `length`.
+- **hair, feather, biot, marabou, flash** stick out from where they are tied in, so
+  they need a `length`. The exception is a feather slip that is later pulled over as a
+  wing case (turkey on a Hare's Ear).
 - **feather** wings: breast feathers lie over the body like a roof; hackle tips and quill
   slips stand on edge. With `spread`, they are a pair turned out to either side (an
   upright divided wing at `angle=90`, or slips along the sides of a wet fly).
@@ -220,7 +221,7 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 | `pull-over`     | `pull-over <material> to=<pos>`                   | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. |
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess. |
-| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` flattens it top and bottom, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath. |
+| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` flattens it top and bottom, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
 | `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. |
 
 ### Tying rules (semantic validation)

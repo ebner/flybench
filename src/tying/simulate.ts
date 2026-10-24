@@ -55,8 +55,8 @@ export interface WrapsPiece extends PieceBase {
   band?: boolean;
   /** Post wraps: the post's x, the heights (above the shank axis) the wraps run between, and its radius. */
   post?: { x: number; y0: number; y1: number; radius: number };
-  /** Trimmed hackle: only the fibres at the sides are left, or those on top and at the sides. */
-  keep?: "sides" | "top";
+  /** Trimmed hackle: only the fibres at the sides are left, those on top and at the sides, or those underneath and at the sides. */
+  keep?: "sides" | "top" | "under";
   /** Where a wing case or back was pulled over these wraps, pressing down the fibres on top. */
   covered?: [number, number];
 }

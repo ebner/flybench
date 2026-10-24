@@ -1,0 +1,67 @@
+// Gold-Ribbed Hare's Ear Nymph: the American nymph form with a turkey wing case and a picked-out thorax.
+
+id gold-ribbed-hares-ear-nymph
+name "Gold-Ribbed Hare's Ear"
+aliases "GRHE" "Hare's Ear Nymph" "Hares Ear"
+type nymph
+imitates mayfly caddis crustacean
+difficulty beginner
+species trout grayling panfish
+season january february march april may june july august september october november december
+origin region="England, then the United States"
+description "A hare's mask guard-hair tail, a tapered hare's ear abdomen ribbed with gold wire, a mottled turkey wing case and a rough, picked-out thorax."
+history """
+    Hare's ear fur was in flies by Cotton's time, and a Hare's Ear wet fly appears in Samuel
+    Taylor's book of 1800; Halford listed a dry Gold-Ribbed Hare's Ear in 1886, and Skues fished
+    the wet one as a nymph. The nymph as tied today, with a tail, a wing case and a picked-out
+    thorax, grew up in America from the 1930s on; Jim Quick listed it as a nymph in 1957. Nobody
+    is recorded as its inventor. By 1986 Randall Kaufmann called it the most popular nymph in the
+    world.
+    """
+fishing """
+    The archetypal searching nymph. Dead-drift it near the bottom under an indicator, tight-line
+    it through riffles and runs, swing it, or retrieve it slowly on stillwater. The shaggy fur
+    suggests legs and gills, so it passes for mayfly nymphs, caddis, scuds and small stoneflies
+    all year round.
+    """
+sources {
+    "Fly Fisherman: Tying the Hare's Ear (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-the-hares-ear/152083"
+    "Minnesota DNR MinnAqua: Hare's Ear Nymph" url="https://files.dnr.state.mn.us/recreation/fishing/fin/tie_hares_ear.pdf"
+    "Fly Anglers Online: Hare's Ear Patterns (Tom Travis)" url="https://www.flyanglersonline.com/t/hares-ear-faol-archive/8348"
+    "Wikipedia: Hare's Ear" url="https://en.wikipedia.org/wiki/Hare%27s_Ear"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://files.osgnetworks.tv/16/files/2013/08/Hares-Ear-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-the-hares-ear/152083" author="Charlie Craven" license="All rights reserved; reference only" note="Side view, classic unweighted"
+    "https://upload.wikimedia.org/wikipedia/commons/0/0e/MoscaOrejaDeLiebre.jpg" page="https://commons.wikimedia.org/wiki/File:MoscaOrejaDeLiebre.jpg" author="Drcooling" license="CC BY-SA 3.0" flip=#true note="Side view, small bead"
+}
+
+hook nymph-2xl size=12
+thread black size="6/0"
+
+materials {
+    weight lead-free-wire
+    tail hares-mask-guard-hairs count=24
+    rib gold-wire
+    abdomen hares-ear-dubbing
+    case turkey-quill label="Mottled turkey tail slip"
+    thorax hares-ear-dubbing color="#5a4838" label="Hare's mask dubbing with plenty of guard hair"
+}
+
+steps {
+    weight weight from=0.62 to=0.88 note="Optional: a few turns under the thorax."
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Craven: about half a shank long; the reference photos show it a little shorter.
+    tie-in tail length=1.0 spread=20 note="A small bunch on top; bind the butts along the shank."
+    tie-in rib
+    dub abdomen to=0.64 note="A thin noodle, tapering thicker toward the front, over the rear two thirds."
+    wind rib to=0.64 turns=7 note="Open turns, the opposite way to the dubbing."
+    tie-off rib
+    tie-in case note="A slip about as wide as the gape, shiny side up, tip back over the abdomen."
+    dub thorax to=0.88 note="Rougher fur, with more guard hair; leave an eye length for the head."
+    wrap-thread to=0.66
+    dub thorax to=0.88 note="A second layer makes the thorax clearly fatter than the abdomen."
+    pull-over case to=0.88 note="Four or five firm turns behind the eye."
+    whip-finish note="Pick out the thorax fur at the sides and underneath for legs."
+}

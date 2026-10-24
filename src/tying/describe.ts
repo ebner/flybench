@@ -177,7 +177,9 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       text = ctx.keep
         ? step.keep === "top"
           ? `Cut away the fibres of the ${mat(step.material)} underneath, so the fly sits low in the film.`
-          : `Cut away the fibres of the ${mat(step.material)} on top and underneath, leaving two flat rows sticking out at the sides.`
+          : step.keep === "under"
+            ? `Clip the fibres of the ${mat(step.material)} on top close to the body, leaving a flat seat for the wing.`
+            : `Cut away the fibres of the ${mat(step.material)} on top and underneath, leaving two flat rows sticking out at the sides.`
         : ctx.spun
         ? `Trim the spun ${mat(step.material)} to shape, leaving a head about ${gapeText(step.leave ?? 0.4)} thick on each side.`
         : ctx.tip

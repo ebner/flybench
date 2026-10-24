@@ -1,0 +1,74 @@
+// Prince Nymph: the bead-head version that has become the standard, with brown biot tail and white biot horns.
+
+id prince-nymph
+name "Prince Nymph"
+aliases "Bead Head Prince" "Brown Forked Tail Nymph"
+type nymph
+imitates stonefly caddis attractor
+difficulty intermediate
+species trout grayling
+season january february march april may june july august september october november december
+origin originator="Doug Prince" region="California, USA, 1940s"
+description "A forked brown biot tail, a peacock herl body ribbed with gold, a brown hen collar and two white biot horns, behind a gold bead."
+history """
+    Doug Prince, who started tying in 1943, called it the Brown Forked Tail Nymph. When Buz
+    Buszek put it in his mail-order catalogue in a hurry he couldn't remember the name, and
+    listed it as the Prince Nymph. Prince's own dressing, published in 1966, had no bead.
+    Ken McCoy traces it further back to the Brown Forked Tail of Don and Dick Olson of Bemidji,
+    Minnesota, in the 1930s, with an ostrich herl body and upturned white wings; Prince gave it
+    peacock and turned the wings down.
+    """
+fishing """
+    A searching attractor nymph. Dead-drift it near the bottom under an indicator or on a tight
+    line, often as the heavy point fly with a smaller nymph above, or as a dropper under a big
+    dry. Stripped back, it fishes like a wet fly or a small streamer.
+    """
+sources {
+    "Fly Fishers International: Doug Prince, Buszek Award 1981 (Dennis Bitton)" url="https://flyfishersinternational.org/Portals/0/FlyTyingGroup/FTGDocuments/Buszek/1981_DougPrince.pdf"
+    "Wikipedia: Prince Nymph" url="https://en.wikipedia.org/wiki/Prince_Nymph"
+    "Fly Fisherman: Beadhead Prince Nymph (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-beadhead-prince-nymph/151924"
+    "Orvis: Prince Nymph video" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/666-prince-nymph"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/b/b2/Bead_Head_Prince_Nymph.jpg" page="https://commons.wikimedia.org/wiki/File:Bead_Head_Prince_Nymph.jpg" author="G. Moore" license="CC BY-SA 4.0" flip=#true note="Side view, bead head"
+    "https://www.johnkreft.com/wp-content/uploads/2017/01/Prince-Nymph.jpg" page="https://www.johnkreft.com/stonefly-fly-patterns/prince-nymph/" author="John Kreft" license="All rights reserved; reference only" note="Side view, gold bead"
+}
+
+hook nymph-2xl size=12
+thread black size="8/0"
+
+materials {
+    // Assumption: a 3.3 mm (7/64") bead on a #12.
+    bead brass-bead mm=3.3
+    weight lead-free-wire
+    tail goose-biot color=brown count=2 label="Brown goose biots"
+    rib gold-wire
+    body peacock-herl strands=4
+    hackle hen-hackle color=brown fibre=0.9
+    horns goose-biot color=white count=2 label="White goose biots"
+}
+
+steps {
+    slide-bead bead
+    weight weight from=0.5 to=0.85 note="Ten or twelve turns, pushed up into the bead."
+    attach-thread at=0.85 note="Build a dam behind the wire and cover it."
+    wrap-thread to=0.0
+    // Sources range from half a shank (Prince) to a full shank (Orvis).
+    tie-in tail length=1.3 spread=35 note="One biot each side, concave sides out, so they fork apart."
+    tie-in rib note="On the near side."
+    tie-in body note="By the tips."
+    wrap-thread to=0.86
+    wind body to=0.86 turns=9 note="Twist the herls into a rope; slightly fatter toward the front."
+    tie-off body
+    wind rib to=0.86 turns=5 note="Counter-wound, to protect the herl."
+    tie-off rib
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.9 turns=3 note="Sweep the fibres back and down."
+    tie-off hackle
+    trim hackle keep=under note="Clip the fibres on top to seat the horns."
+    // Assumption: the horns reach about the end of the body; their length isn't sourced.
+    tie-in horns length=1.5 angle=18 spread=30 note="Crossed on top, in a V, curving down over the body."
+    whip-finish note="Behind the bead."
+}

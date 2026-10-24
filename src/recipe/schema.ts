@@ -232,7 +232,7 @@ const Step = z.discriminatedUnion("op", [
      * A wound hackle: "sides" cuts away the fibres on top and underneath (Superpuppan);
      * "top" cuts away only those underneath, so the fly sits low (Dyret).
      */
-    keep: z.enum(["sides", "top"]).optional(),
+    keep: z.enum(["sides", "top", "under"]).optional(),
     note: Note,
   }),
   z.strictObject({

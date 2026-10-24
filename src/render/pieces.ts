@@ -181,6 +181,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     // trimmed underneath keeps everything that doesn't point down.
     if (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) continue;
     if (piece.keep === "top" && Math.sin(spin) < -0.35) continue;
+    if (piece.keep === "under" && Math.sin(spin) > 0.35) continue;
     // Under a wing case the fibres on top are pressed flat out of sight.
     if (piece.covered && px > piece.covered[0] && px < piece.covered[1] && Math.sin(spin) > 0.2) continue;
     let dir: THREE.Vector3;
@@ -307,7 +308,8 @@ const BUNDLE = {
   yarn: { radius: 0.011, tip: 0.7, tipShade: 1, spread: 0.3, flare: 0.1, sideFlare: 0.3, lengthJitter: 0.25 },
   fibres: { radius: 0.005, tip: 0.3, tipShade: 0.8, spread: 0.18, flare: 0, sideFlare: 0.2, lengthJitter: 0.1 },
   hair: { radius: 0.0095, tip: 0.35, tipShade: 0.5, spread: 0.08, flare: 0.08, sideFlare: 0.55, lengthJitter: 0.08 },
-  biot: { radius: 0.011, tip: 0.15, tipShade: 0.8, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0 },
+  // A biot is a stiff, broad barb: wide at the base, tapering to a point.
+  biot: { radius: 0.028, tip: 0.85, tipShade: 0.85, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0 },
   // Marabou is a dense, soft plume: many fine fibres, tapering out.
   marabou: { radius: 0.005, tip: 0.2, tipShade: 0.9, spread: 0.3, flare: 0.06, sideFlare: 0.25, lengthJitter: 0.45 },
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
