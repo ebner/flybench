@@ -1,8 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- App icon: a hook drawn in Prussian-blue ink on herbarium paper. -->
+  <!-- App icon: the Flybench dry fly in Prussian-blue ink on herbarium paper. -->
   <rect width="512" height="512" fill="#e9e7dd"/>
-  <g fill="none" stroke="#233e66" stroke-linecap="round">
-    <path d="M400 150H190C110 150 96 214 96 262s34 110 104 110 102-44 102-80" stroke-width="30"/>
-    <circle cx="414" cy="150" r="26" stroke-width="22"/>
+  <svg x="40.96" y="40.96" width="430.08" height="430.08" viewBox="3 5.5 58 58" color="#233e66">
+  <defs>
+    <mask id="far-wing"><rect x="0" y="0" width="64" height="64" fill="white"/><path d="M45.3 31C45.8 23.4 48.8 16.4 53.8 12C54.3 19.6 50.3 26.6 45.3 31Z" fill="black"/></mask>
+    <mask id="rib"><rect x="0" y="0" width="64" height="64" fill="white"/><path d="M27 31.9L28.6 36.7M31.5 30.9L33 37.3M36 30.5L37.3 37.6" stroke="black" stroke-width="0.7" stroke-linecap="round"/></mask>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M51.5 34H22C12.5 34 9.5 41 9.5 47.3S13.5 58.5 21 58.5 31.5 54.5 31.5 48.5" stroke-width="2.3"/>
+    <circle cx="55" cy="34" r="3.1" stroke-width="2"/>
+    <path d="M22 33.2L6.5 27.6M22 33.5L5.5 31M22 33.8L7 34.6" stroke-width="1.15"/>
+    <path d="M42.79 33.44L34.99 30.91M42.94 33.10L35.84 29.00M43.16 32.80L37.07 27.31M43.44 32.54L38.62 25.91M43.77 32.36L40.43 24.86M44.13 32.24L42.42 24.22M44.50 32.20L44.50 24.00M44.87 32.24L46.58 24.22M45.23 32.36L48.57 24.86M45.56 32.54L50.38 25.91M45.84 32.80L51.93 27.31M46.06 33.10L53.16 29.00M46.21 33.44L54.01 30.91M46.09 34.85L51.56 37.76M45.84 35.20L50.45 39.35M45.51 35.49L48.97 40.63M45.12 35.69L47.24 41.52M44.69 35.79L45.34 41.96M44.25 35.78L43.39 41.92M43.83 35.67L41.50 41.42M43.44 35.46L39.80 40.47M43.12 35.16L38.37 39.14" stroke-width="1.05" mask="url(#far-wing)"/>
+    <path d="M45.3 31C45.8 23.4 48.8 16.4 53.8 12C54.3 19.6 50.3 26.6 45.3 31Z" stroke-width="1.2"/>
   </g>
+  <g fill="currentColor">
+    <path d="M21 34.5C27 30.4 34.5 29.8 41.5 30.6L41.5 37.4C34.5 38.2 27 38.4 21 34.5Z" mask="url(#rib)"/>
+    <path d="M43.6 31C38.4 25 37.8 15.6 41.3 9C46.3 14.8 46.8 24 43.6 31Z"/>
+  </g>
+  </svg>
 </svg>

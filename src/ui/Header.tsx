@@ -9,6 +9,7 @@ export function Header({ theme, onTheme, page }: { theme: ThemeChoice; onTheme: 
   return (
     <header className="site-header">
       <a className="wordmark" href={href.gallery()}>
+        <span className="logo" aria-hidden="true" />
         Flybench
       </a>
       <nav aria-label="Main">

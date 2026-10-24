@@ -147,11 +147,23 @@ select {
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   font-family: var(--display);
   font-size: var(--step-2);
   color: var(--ink);
   text-decoration: none;
   letter-spacing: 0.01em;
+}
+
+/* The logo as a mask, so it takes the theme's ink rather than its own colours. */
+.wordmark .logo {
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--accent);
+  mask: url("/logo.svg") center / contain no-repeat;
 }
 
 .site-header nav {
