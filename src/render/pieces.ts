@@ -134,6 +134,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     const at = wrapPoint(piece, u);
     const [px, py, pz] = at.point;
     let spin: number, sweep: number, length: number, shade: number;
+
     // Angle round whatever is being wound on, recovered from the point.
     const around = onPost ? Math.atan2(px - piece.post!.x, pz) : Math.atan2(py, pz);
     if (look === "hackle") {
@@ -162,6 +163,10 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       // Mottled, but never lighter than the dubbing's own colour.
       shade = guard ? 0.45 : 0.6 + 0.4 * rand();
     }
+    // A hackle trimmed top and bottom keeps only the fibres pointing out to the sides; one
+    // trimmed underneath keeps everything that doesn't point down.
+    if (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) continue;
+    if (piece.keep === "top" && Math.sin(spin) < -0.35) continue;
     let dir: THREE.Vector3;
     if (onPost) {
       // Parachute: barbs stand out flat round the post, drooping a little.
@@ -351,12 +356,13 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         if (Math.abs(dir.z) > 0.6) length *= 0.75;
       } else {
         // A round head, shaped like a bullet: fullest at the back, tapering to the eye.
-        length *= 1 - 0.55 * Math.pow(f, 1.5);
+        length *= 1 - 0.75 * Math.pow(f, 1.2);
       }
     }
     list.push({
       u: rand(), base, dir, length,
-      radius: spec.radius, shade: 0.85 + 0.3 * rand(),
+      // Clipped hair shows its thick cut ends.
+      radius: radialHair && piece.cut ? spec.radius * 1.6 : spec.radius, shade: 0.85 + 0.3 * rand(),
     });
   }
   // Hair butts are the pale base of the hair; tips darken towards the end.

@@ -55,6 +55,8 @@ export interface WrapsPiece extends PieceBase {
   band?: boolean;
   /** Post wraps: the post's x, the heights (above the shank axis) the wraps run between, and its radius. */
   post?: { x: number; y0: number; y1: number; radius: number };
+  /** Trimmed hackle: only the fibres at the sides are left, or those on top and at the sides. */
+  keep?: "sides" | "top";
 }
 
 /** A bunch of fibres or hair sticking out from its tie-in point (tag, tail, wing, beard, butts, spun hair). */
@@ -234,7 +236,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
   const mm = (v: number) => v / gapeMm(recipe.hook.size);
   switch (cat.archetype) {
     case "yarn":
-      return { ...base, strandRadius: 0.05, tieInThickness: 0.025, layerThickness: (c) => 0.1 * Math.min(c, 1.5) };
+      return { ...base, strandRadius: 0.05, count: 160, tieInThickness: 0.025, layerThickness: (c) => 0.1 * Math.min(c, 1.5) };
     case "herl": {
       const r = 0.018 * Math.sqrt(m.strands ?? 3);
       return {
@@ -274,7 +276,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
         tieInThickness: 0.05, layerThickness: (c) => 0.22 * Math.min(c, 1.2),
       };
     case "hair":
-      return { ...base, strandRadius: 0.08, count: 260, tieInThickness: 0.03, layerThickness: () => 0.03 };
+      return { ...base, strandRadius: 0.08, count: 320, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "fibres":
       return {
         // Wound fibres lie side by side as a flat band, about one fibre width each.
@@ -345,6 +347,8 @@ export function simulate(recipe: Recipe): Build {
   /** Untrimmed hair butts and spun hair, by material. */
   const butts = new Map<string, BundlePiece>();
   const spun = new Set<string>();
+  /** Wound pieces by material, so a hackle can be trimmed after winding. */
+  const wound = new Map<string, WrapsPiece>();
   /** Upright posts, for parachute hackles. */
   const posts = new Map<string, { x: number; baseY: number; height: number; radius: number }>();
   /** A palmered material whose tip the next forward wind secures. */
@@ -573,6 +577,7 @@ export function simulate(recipe: Recipe): Build {
           }
         }
         pieces.push(piece);
+        wound.set(step.material, piece);
         if (piece.fibreLength && piece.path === "travel") {
           // Squashed flat under a cover, fluff still adds some height.
           fluffy.push({ x0: piece.x0, x1: piece.x1, height: Math.min(0.1, piece.fibreLength * 0.4) });
@@ -619,7 +624,13 @@ export function simulate(recipe: Recipe): Build {
       case "trim": {
         duration = DURATION.trim;
         const cutAt = time + duration * 0.5;
-        if (palmeredTips.has(step.material)) {
+        if (step.keep) {
+          // The same hackle, with only its side fibres left.
+          const w = wound.get(step.material)!;
+          w.until = cutAt;
+          pieces.push({ ...w, id: nextId++, keep: step.keep, window: [0.5, 0.5001], until: undefined });
+          ctx.keep = true;
+        } else if (palmeredTips.has(step.material)) {
           ctx.tip = true;
           palmeredTips.delete(step.material);
           const end = freeEnds.get(step.material);
@@ -633,14 +644,22 @@ export function simulate(recipe: Recipe): Build {
           b.until = cutAt;
           // Assumption: a trimmed head is about 0.4 gape from the shank unless the recipe says otherwise.
           pieces.push({
-            ...b, id: nextId++, length: step.leave ?? 0.4, angle: deg(10), count: b.count * 2, cut: true,
+            ...b, id: nextId++, length: step.leave ?? 0.4, angle: deg(10), count: b.count * 4, cut: true,
             trimShape: step.shape ?? "round", window: [0.5, 0.5001], until: undefined,
           });
         } else {
           const b = butts.get(step.material)!;
           butts.delete(step.material);
           b.until = cutAt;
-          if (step.leave) {
+          if (step.shape) {
+            // Butts spun round the shank by the tight turns, then trimmed into a head.
+            ctx.spun = true;
+            const span = Math.max(0.1, frontLimit - b.x);
+            pieces.push({
+              ...b, id: nextId++, direction: "radial", span, spread: Math.PI, length: step.leave ?? 0.4, angle: deg(10),
+              count: Math.round(1800 * span), cut: true, trimShape: step.shape, window: [0.5, 0.5001], until: undefined,
+            });
+          } else if (step.leave) {
             pieces.push({ ...b, id: nextId++, length: step.leave, cut: true, window: [0.5, 0.5001], until: undefined });
           }
         }

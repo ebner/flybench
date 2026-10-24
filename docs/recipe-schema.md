@@ -246,5 +246,5 @@ bend"). When proportions are taken from reference photos, say so in a comment.
 - A parachute hackle needs a post tied in upright (`angle` of 60° or more).
 - `pull-over` needs the material tied in and unused, and the thread at `to`.
 - Only hair is spun, only wire weights, only beads are slid on.
-- `whip-finish` is the last step, and every recipe ends with one.
+- `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), and every recipe has one.
 - Materials have unique ids, and steps refer only to defined materials.

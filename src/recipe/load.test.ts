@@ -212,7 +212,7 @@ describe("semantic validation", () => {
     ["wind nowhere", VALID_STEPS.replace("to=0.7 turns=8", "to=0.0 turns=8"), /wind it forward or back from there/],
     ["wind past the thread", VALID_STEPS.replace("to=0.7 turns=8", "to=0.9 turns=8"), /the thread is at 0.7/],
     ["tie off straight after winding", VALID_STEPS.replace("tie-off herl", "wrap-thread to=0.8\n tie-off herl"), /must be tied off before anything else/],
-    ["whip finish last", VALID_STEPS + "\n wrap-thread to=0.5", /nothing can follow the whip finish/],
+    ["whip finish last", VALID_STEPS + "\n wrap-thread to=0.5", /nothing but trimming can follow the whip finish/],
     ["whip finish required", VALID_STEPS.replace("whip-finish", ""), /must end with a whip finish/],
     ["dubbing is not tied in", VALID_STEPS.replace("tie-in herl", "tie-in fur"), /dubbing is applied to the thread/],
     ["only dubbing is dubbed", PALMER_STEPS.replace("dub fur", "dub herl"), /only dubbing can be dubbed/],

@@ -1,0 +1,49 @@
+// Streaking Caddis: Lennart Bergqvist's big-sedge dry: one clump of deer hair makes the wing and the head.
+
+id streaking-caddis
+name "Streaking Caddis"
+type dry
+imitates caddis
+difficulty intermediate
+species trout grayling
+season june july august
+origin originator="Lennart Bergqvist" region="Sweden"
+description "A brown dubbed body under a dense deer hair wing; the butts of the same clump are spun round the shank and trimmed to a head."
+history """
+    Created by Lennart Bergqvist, who also tied the Superpuppan, to imitate the great red
+    sedge, Phryganea grandis, one of the largest Scandinavian caddis. He built on a deer-hair
+    head fly by Poul Jorgensen, adding the body and tying it bigger. No date is documented.
+    """
+fishing """
+    A fast-water sedge: the dense deer hair keeps it high even in rapids. Fish it dead drift,
+    or skate and skitter it across the current like an egg-laying or running sedge,
+    especially at dusk during summer hatches of the big Phryganea sedges.
+    """
+sources {
+    "GlobalFlyFisher: Streaking Caddis (video)" url="https://globalflyfisher.com/video/streaking-caddis-0"
+    "Guideline: Streaking Caddis" url="https://www.adh-fishing.com/guideline-streaking-caddis"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.adh-fishing.com/media/26/bd/b3/1724045794/guideline-streaking-caddis.jpg?ts=1744155614" page="https://www.adh-fishing.com/guideline-streaking-caddis" license="All rights reserved; reference only" note="Side view"
+    "https://img.youtube.com/vi/Zni7K_gob8I/maxresdefault.jpg" page="https://globalflyfisher.com/video/streaking-caddis-0" license="All rights reserved; reference only" note="Side view, video thumbnail"
+}
+
+hook dry-standard size=10
+// GSP thread, strong enough to spin the hair.
+thread black size="6/0"
+
+materials {
+    body dry-fly-dubbing color=brown
+    wing deer-hair
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    dub body to=0.67 note="Slim, leaving the front third bare: hair only spins on a bare shank."
+    // Assumption: wing tips about a third of a shank past the bend, from the photos.
+    tie-in wing length=2.0 angle=22 spread=110 note="A bigger bunch than for a wing alone, tips stacked and pointing back. Tight turns forward through the butts make them flare and spin."
+    whip-finish note="Push the hair back and whip finish at the eye."
+    trim wing leave=0.42 shape=round note="Trim the butts to a dense, rounded head, smallest at the eye; clear the gape underneath."
+}

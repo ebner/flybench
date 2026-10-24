@@ -37,7 +37,7 @@ export const NAMED_COLORS = {
   partridge: "#8a7558",
   snipe: "#6f6a64",
   lead: "#6b6e72",
-  deer: "#8c6f52",
+  deer: "#6e5a48",
   squirrel: "#7e6e5e",
   moose: "#2b2622",
   tippet: "#e08a2a",
@@ -221,8 +221,16 @@ const Step = z.discriminatedUnion("op", [
     material: MaterialRef,
     /** Length left standing, in gapes (hair butts). Default: flush. */
     leave: z.number().min(0).max(2).optional(),
-    /** Spun hair: a round head (Muddler) or a wedge, flat underneath and rising towards the rear (G&H Sedge). */
+    /**
+     * Spun hair or hair butts: trim into a round head (Muddler) or a wedge, flat underneath
+     * and rising towards the rear (G&H Sedge). Butts trimmed to a shape are spun round the shank.
+     */
     shape: z.enum(["round", "wedge"]).optional(),
+    /**
+     * A wound hackle: "sides" cuts away the fibres on top and underneath (Superpuppan);
+     * "top" cuts away only those underneath, so the fly sits low (Dyret).
+     */
+    keep: z.enum(["sides", "top"]).optional(),
     note: Note,
   }),
   z.strictObject({

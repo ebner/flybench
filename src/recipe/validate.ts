@@ -39,8 +39,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
 
   recipe.steps.forEach((step, i) => {
     const path = ["steps", i];
-    if (finished) {
-      err("nothing can follow the whip finish", path);
+    // Trimming after the whip finish is common (heads, hackles); nothing else is.
+    if (finished && step.op !== "trim") {
+      err("nothing but trimming can follow the whip finish", path);
       return;
     }
     if ("material" in step && !archetypes.has(step.material)) {
@@ -205,6 +206,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       }
       case "trim": {
         const m = materials.get(step.material);
+        if (step.keep !== undefined) {
+          if (archetype !== "hackle" || m?.state !== "done") err("keep only applies to a hackle that has been wound and tied off", [...path, "keep"]);
+          break;
+        }
         if (m?.state === "secured") {
           m.state = "done";
         } else if (m?.butts) {
@@ -215,8 +220,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.leave !== undefined && archetype !== "hair") {
           err("leave only applies to hair butts and spun hair", [...path, "leave"]);
         }
-        if (step.shape !== undefined && !recipe.steps.slice(0, i).some((s) => s.op === "spin" && s.material === step.material)) {
-          err("shape only applies to trimming spun hair", [...path, "shape"]);
+        if (step.shape !== undefined && archetype !== "hair") {
+          err("shape only applies to trimming spun hair or hair butts", [...path, "shape"]);
         }
         break;
       }

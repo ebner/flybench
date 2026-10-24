@@ -1,0 +1,57 @@
+// Dyret ("the beast"): Gunnar Bingen's Norwegian caddis, part Superpuppan and part Devil Bug.
+
+id dyret
+name "Dyret"
+aliases "The Beast" "The Animal"
+type emerger
+imitates caddis
+difficulty beginner
+species trout grayling
+season june july august september
+origin originator="Gunnar Bingen" year=1991 region="Rena, Norway"
+description "A clump of deer hair bound along the shank, its tips a tuft behind and its butts a square stub in front, with a dubbed body and a long palmered hackle trimmed underneath."
+history """
+    Gunnar Bingen, who lives by the Rena, designed it around 1991 (his design sheet is dated
+    that year) as a mix of the Superpuppan and the Devil Bug: the Superpuppan lacked something
+    in some situations, and the Devil Bug was fragile. Meant as a caddis emerger, it turned out
+    to be an all-round dry. "Extremely ugly but highly efficient."
+    """
+fishing """
+    Fished in the film, dead drift, when caddis are about along the banks and in the runs,
+    especially in late evening when big trout come in. The deer-hair body and trimmed
+    underside make it sit low; the long hackle keeps it up in broken water. A killer for
+    northern grayling.
+    """
+sources {
+    "Sexyloops: Dyret (Thomas Züllich)" url="https://www.sexyloops.com/flies/dyret"
+    "GlobalFlyFisher: Dyret, the Animal (video)" url="https://globalflyfisher.com/video/dyret"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.sexyloops.com/upload/images/tz/dyret/192ecde3c27bd81f4fefda80944fed1f.jpg" page="https://www.sexyloops.com/flies/dyret" license="All rights reserved; reference only" note="Side view, before the hackle is clipped"
+    "https://img.youtube.com/vi/ucDmVgpugMs/maxresdefault.jpg" page="https://globalflyfisher.com/video/dyret" author="Hans Weilenmann" license="All rights reserved; reference only" note="Side view, clipped underneath"
+    "https://globalflyfisher.com/sites/default/files/article_pictures/4_5.jpg" page="https://globalflyfisher.com/picture/dyret" author="Torben Meldgaard" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+hook dry-standard size=12
+thread brown size="8/0"
+
+materials {
+    hair deer-hair
+    hackle cock-hackle color=brown fibre=1.8
+    body dry-fly-dubbing color=olive
+}
+
+steps {
+    attach-thread at=0.9
+    // From the photos: tips about 0.6 of the shank behind the bend.
+    tie-in hair length=3.0 angle=2 spread=35 note="A small stacked clump on top, tips back, bound down along the whole shank as an underbody."
+    wrap-thread to=0.0
+    tie-in hackle note="By the stripped stem, at the bend."
+    dub body to=0.9 note="Over the bound-down hair, to just behind the eye."
+    wind hackle to=0.9 turns=6 note="Open turns, a long hackle."
+    tie-off hackle
+    whip-finish note="Behind the deer-hair butts."
+    trim hair leave=0.2 note="Straight across, leaving a short square stub in front of the eye."
+    trim hackle keep=top
+}

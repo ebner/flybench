@@ -86,6 +86,8 @@ export interface StepContext {
   tip?: boolean;
   /** trim: shaping a spun-hair head rather than trimming butts. */
   spun?: boolean;
+  /** trim: cutting a wound hackle away top and bottom. */
+  keep?: boolean;
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
@@ -172,7 +174,11 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       text = `Tie off the ${mat(step.material)} with a few thread turns and trim the excess.`;
       break;
     case "trim":
-      text = ctx.spun
+      text = ctx.keep
+        ? step.keep === "top"
+          ? `Cut away the fibres of the ${mat(step.material)} underneath, so the fly sits low in the film.`
+          : `Cut away the fibres of the ${mat(step.material)} on top and underneath, leaving two flat rows sticking out at the sides.`
+        : ctx.spun
         ? `Trim the spun ${mat(step.material)} to shape, leaving a head about ${gapeText(step.leave ?? 0.4)} thick on each side.`
         : ctx.tip
         ? `Trim the tip of the ${mat(step.material)} close to the body.`

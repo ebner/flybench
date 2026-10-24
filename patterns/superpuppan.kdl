@@ -1,0 +1,56 @@
+// Superpuppan: Lennart Bergqvist's floating caddis pupa, with its hackle trimmed to two rows of "oars".
+
+id superpuppan
+name "Superpuppan"
+aliases "Super Pupa" "Floating Caddis Pupa" "Superpubban"
+type emerger
+imitates caddis
+difficulty beginner
+species trout grayling
+season june july august september
+origin originator="Lennart Bergqvist" region="Sweden (developed on the Rena, Norway)"
+description "A sparse yellow body and short brown thorax with a dun hackle palmered over them, trimmed top and bottom so only the side fibres remain."
+history """
+    Lennart Bergqvist began developing it in 1977 on the Norwegian river Rena, studying
+    hatching caddis with Kenneth Boström, Jan Sekander and Preben Torp Jacobsen. Early
+    versions had wing buds and legs; by the early 1980s it had reached its simple form.
+    Bergqvist called it the Floating Caddis Pupa; his friend Bengt Öste named it Superpuppan.
+    """
+fishing """
+    Imitates a caddis pupa swimming in the surface towards the bank to hatch. Fish it dead
+    drift first; then twitch it, or swing it so it ploughs towards the bank. The two rows of
+    fibres keep it high and make a wake. A searching fly for grayling, which rise to it from
+    deep water, and a must on the Rena and Glomma in July and August.
+    """
+sources {
+    "GlobalFlyFisher: Super Pupa (Martin Joergensen)" url="https://globalflyfisher.com/patterns/super-pupa"
+    "Fly Tying Archive: Superpuppan (Timo Kontio)" url="https://www.flytyingarchive.com/superpuppan"
+    "Guideline: Superpuppan" url="https://www.guidelineflyfish.com/no/superpuppan-cream-brown-14"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/original_two-super-pupae.jpg" page="https://globalflyfisher.com/patterns/super-pupa" author="Martin Joergensen" license="All rights reserved; reference only" note="Side and three-quarter view"
+    "https://guideline-products-production.imgix.net/images/641_de6737d1f9-dsc_4957-full.jpg?q=70&fit=clip&w=1920&fm=jpg&auto=compress,format" page="https://www.guidelineflyfish.com/no/superpuppan-cream-brown-14" license="All rights reserved; reference only" note="Side view, cream and brown"
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/original_24_2.jpg" page="https://globalflyfisher.com/patterns/super-pupa" author="Martin Joergensen" license="All rights reserved; reference only" note="Top view, eye up"
+}
+
+hook dry-standard size=12
+thread black size="8/0"
+
+materials {
+    hackle cock-hackle color=blue-dun fibre=1.5 label="Dark dun cock hackle"
+    abdomen dry-fly-dubbing color=yellow label="Golden yellow dry fly dubbing"
+    thorax dry-fly-dubbing color=brown
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    tie-in hackle note="One size too large, by the stripped stem, pointing back."
+    dub abdomen to=0.7 note="Sparse and slim."
+    dub thorax to=0.92 note="Short and dark."
+    wind hackle to=0.92 turns=5 note="Four or five open turns over the whole body."
+    tie-off hackle
+    whip-finish note="A very small head."
+    trim hackle keep=sides note="The two rows of fibres make it float, and wake when it is pulled."
+}

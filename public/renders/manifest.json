@@ -1,78 +1,102 @@
 {
   "adams": {
-    "hash": "ef751efcdf5241dd",
+    "hash": "94cffb7fcbd41496",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "czech-nymph": {
-    "hash": "7f0629efe152e6b0",
+    "hash": "a5f32fb6f7565b3c",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "dyret": {
+    "hash": "8d0f411be57e5957",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "elk-hair-caddis": {
-    "hash": "9c0b45443f2e8833",
+    "hash": "adff22c5b8c98f72",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "elk-hair-caddis-troth": {
-    "hash": "7f25d65a210b7654",
+    "hash": "52d1ba96fc12fafe",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "europea-12": {
-    "hash": "a8c72fd0190ab4fb",
+    "hash": "1714e42fa983ec29",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "europea-12-tailed": {
-    "hash": "2a659926a632a11b",
+    "hash": "e95549eee82e869c",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "gammarus": {
-    "hash": "608c2797a3108ff3",
+    "hash": "e66ff35d96505884",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "goddard-caddis": {
-    "hash": "18421f81967de395",
+    "hash": "94fdcf5a52700937",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "montana-nymph": {
-    "hash": "6d4e281756c87ec3",
+    "hash": "36b1cbfa1c611930",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "parachute-adams": {
-    "hash": "a4bcc5dfe46dc629",
+    "hash": "25c7eee428f250c0",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "rackelhanen": {
+    "hash": "6f6b03e4f8e7e537",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "red-tag": {
-    "hash": "9321eebc434af02f",
+    "hash": "26541ebd7fd59842",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "stimulator": {
-    "hash": "f23582ac5b577c21",
+    "hash": "ca0d28218fe5cf2b",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "streaking-caddis": {
+    "hash": "0969e522bcc1a6dc",
+    "frames": 24,
+    "width": 300,
+    "height": 200
+  },
+  "superpuppan": {
+    "hash": "e2facd438c43dc47",
     "frames": 24,
     "width": 300,
     "height": 200
   },
   "woolly-bugger": {
-    "hash": "faae9e3b1e1b197e",
+    "hash": "7812409f10b45a72",
     "frames": 24,
     "width": 300,
     "height": 200
