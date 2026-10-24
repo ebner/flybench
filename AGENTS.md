@@ -14,6 +14,7 @@ simulation in a general way rather than special-casing the pattern.
 The app is fully static: no backend, everything runs in the browser.
 
 Product decisions and the milestone plan are in [docs/product-plan.md](docs/product-plan.md).
+How to research and write a pattern: [docs/authoring-patterns.md](docs/authoring-patterns.md).
 
 ## Commands
 
@@ -36,7 +37,8 @@ Run `npm test` and `npm run typecheck` before reporting work as done. Every file
 
 ```
 patterns/       recipes (KDL v2)
-docs/           recipe-schema.md: the recipe format reference
+docs/           recipe-schema.md: the recipe format reference; authoring-patterns.md: how to
+                research, write and check a pattern
 src/recipe/     kdl.ts (KDL → plain object + source locations), schema.ts (Zod),
                 materials.ts (materials catalog), validate.ts (tying-sense rules),
                 load.ts (all three, errors with line numbers), catalog.ts (cross-recipe rules)

@@ -56,7 +56,8 @@ loads every pattern file, so `npm test` reports recipe errors with line numbers.
 Problems in pattern files also show in a banner in the dev server. Then run
 `npm run render:catalog` and commit the images it writes to `public/renders/`; it only
 re-renders patterns whose recipe or rendering code changed. The format is
-described in [docs/recipe-schema.md](docs/recipe-schema.md).
+described in [docs/recipe-schema.md](docs/recipe-schema.md), and the authoring procedure
+(research, proportions, checks) in [docs/authoring-patterns.md](docs/authoring-patterns.md).
 
 To check proportions, list photos of the finished fly under `references` in the recipe
 and run `npm run refcheck -- <id>`. It writes `.cache/refcheck/<id>.png`: the fly from
