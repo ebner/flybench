@@ -101,8 +101,9 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 ### References
 
 Photos of the finished fly, used only to check proportions while authoring
-(`npm run refcheck`). They are downloaded to a local cache and never committed or
-published, so copyrighted photos are fine to list.
+(`npm run refcheck`). They are downloaded to a local cache and never committed, and the
+production build strips the `references` block (`src/recipe/publish.ts`), so copyrighted
+photos are fine to list.
 
 ```kdl
 references {
