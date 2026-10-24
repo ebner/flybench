@@ -4,6 +4,8 @@ id butcher
 name "Butcher"
 aliases "Moon's Fly"
 type wet
+// Only retail copy calls it a fish imitation: Dennett "a small pin-finned fish or a beetle",
+// Fish4Flies "small baitfish" (of the Bloody Butcher). Dennett also calls it an attractor.
 imitates baitfish attractor
 difficulty advanced
 species trout sea-trout
@@ -20,13 +22,16 @@ history """
 fishing """
     A winged wet fly for rivers and still waters. Its close relative the Bloody Butcher is
     fished in the middle or on the point of a team of wets on rivers, lochs and lakes, and in
-    larger sizes, even tied as a streamer, for sea trout.
+    larger sizes, even tied as a streamer, for sea trout. Fly sellers describe its silver body
+    and dark wing as suggesting a small fish.
     """
 sources {
     "Fly Anglers Online: Butcher, Just Old Flies (Deanna Birkholm, archived)" url="https://web.archive.org/web/20181229112130/http://flyanglersonline.com/features/oldflies/part276.php"
     "Fly Tying Archive: Butcher (Timo Kontio)" url="https://flytyingarchive.com/butcher/"
     "GlobalFlyFisher: Bloody Butcher" url="https://globalflyfisher.com/video/bloody-butcher"
     "Fish4Flies: Butcher" url="https://www.fish4flies.com/Wet/Winged/Butcher"
+    "Fish4Flies: Bloody Butcher" url="https://www.fish4flies.com/Wet/Winged/Bloody-Butcher"
+    "Dennett Outdoors: Dragon wet fly selection pack 1" url="https://denod-dennettoutdoors.dc02.gob2b.com/Catalogue/Flies/Trout-Flies/Dragon-Fly-Selection-Packs/Dragon-Fly-Packs-Wet-Fly-1-FZGDR079"
     "Project Gutenberg: How to Tie Flies (E. C. Gregg, 1940)" url="https://www.gutenberg.org/ebooks/30292"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.

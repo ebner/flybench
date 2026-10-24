@@ -22,12 +22,14 @@ fishing """
     hangs in the film; Bob Wyatt reads it as an emerger rather than a dun. A general mayfly
     imitation, tied small for Caenis, the angler's curse; Preben Torp Jacobsen found a
     parachute version took Caenis feeders that refused everything else. It is hard to see
-    once it settles: watch for any rise near it.
+    once it settles: watch for any rise near it. Andrew Overend fishes it as a searching dry
+    for trout and grayling, above all on the Welsh Dee.
     """
 sources {
     "California Fly Fisher: At the Vise, Grey Duster (Scott Sadil)" url="https://calflyfisher.com/tips-and-techniques/at-the-vise-grey-duster/"
     "Fish4Flies: Grey Duster" url="https://www.fish4flies.com/Dry/Hackled/Grey-Duster"
     "GlobalFlyFisher: Grey Duster, parachute (Preben Torp Jacobsen)" url="https://globalflyfisher.com/patterns/grey-duster"
+    "Hawker-Overend: Grey Duster fly, how to tie 2 productive patterns (Andrew Overend)" url="https://hawker-overend.com/how-to-tie-grey-duster-fly-patterns/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
