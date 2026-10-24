@@ -1,0 +1,54 @@
+// Grey Duster: a plain British hackled dry: blue-grey rabbit body and a badger hackle.
+
+id grey-duster
+name "Grey Duster"
+aliases "Grey Dusty" "Duster"
+type dry
+imitates mayfly attractor
+difficulty beginner
+species trout grayling
+season may june july august september
+origin region="Wales or England"
+description "A carrot-shaped body of blue-grey rabbit underfur and a badger cock hackle, without tail or wings."
+history """
+    An old British pattern of unknown origin. It is said to go back at least a hundred
+    years to Welsh anglers on the upper Dee, or to have begun as an English stillwater
+    midge; neither claim is documented. Courtney Williams rated it as good as any mayfly
+    imitation.
+    """
+fishing """
+    Dead drift on rivers or static on lochs. Without a tail the rear end breaks the surface,
+    so it sits in the film like an emerger. Good in mayfly time, during Caenis falls, and as a
+    grey searching fly for grayling. It is hard to see: watch for any rise near it.
+    """
+sources {
+    "California Fly Fisher: Grey Duster (Scott Sadil)" url="https://calflyfisher.com/at-the-vise-grey-duster/"
+    "Fish4Flies: Grey Duster" url="https://www.fish4flies.com/Dry/Hackled/Grey-Duster"
+    "GlobalFlyFisher: Parachute Grey Duster (Preben Torp Jacobsen)" url="https://globalflyfisher.com/patterns/grey-duster"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.turrall.com/cdn/shop/files/DH14-14_016d3049-d253-4017-8faa-5aca39db5e25.jpg?v=1777536396" page="https://www.turrall.com/products/grey-duster" license="All rights reserved; reference only" note="Side view; has a tail, which is not traditional"
+    "https://www.fish4flies.com/img/flies/Large/875-875.jpg" page="https://www.fish4flies.com/Dry/Hackled/Grey-Duster" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+// Assumption: a down-eye dry hook; the traditional British choice is an up-eye Captain Hamilton.
+hook dry-standard size=14
+thread brown size="8/0"
+
+materials {
+    body rabbit-dubbing color=blue-dun label="Blue-grey rabbit underfur"
+    // Assumption: fibres about 1.6× the gape; no source gives a length.
+    hackle cock-hackle color=badger fibre=1.6 label="Badger cock hackle"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    dub body to=0.78 note="Carrot-shaped: thin at the rear, fatter forward, a little further forward than on a winged fly."
+    tie-in hackle note="Webby base stripped, underside facing you."
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=5
+    tie-off hackle
+    whip-finish note="A small, neat head."
+}

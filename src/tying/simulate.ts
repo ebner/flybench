@@ -79,6 +79,8 @@ export interface BundlePiece extends PieceBase {
   cut?: boolean;
   /** Trimmed spun hair: a round head, or a wedge flat underneath and deepest at the rear. */
   trimShape?: "round" | "wedge";
+  /** Upright and divided: two tufts turned out to either side by this many radians. */
+  pair?: number;
 }
 
 /** A whole feather or a quill slip as a wing; a pair when `pair` > 0. */
@@ -488,8 +490,9 @@ export function simulate(recipe: Recipe): Build {
         const side: Side = step.side ?? "top";
         const angle = deg(step.angle ?? (l.look === "yarn" ? 5 : 3));
         const upright = step.angle !== undefined && step.angle >= 60;
-        // Upright posts are a gathered tuft, a little wider than a wing laid back.
-        const spread = deg(step.spread ?? (upright ? 22 : (DEFAULT_SPREAD[l.look] ?? 30)));
+        // Upright posts are a gathered tuft; an upright wing with a spread is divided in two.
+        const spread = deg(upright ? 22 : (step.spread ?? DEFAULT_SPREAD[l.look] ?? 30));
+        const pair = upright && step.spread !== undefined ? deg(step.spread) : undefined;
         if (step.length && !upright) {
           ctx.tipX = x - step.length * Math.cos(angle);
           ctx.bendEnd = bendEndX(hook);
@@ -512,7 +515,7 @@ export function simulate(recipe: Recipe): Build {
           pieces.push({
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
             window: [0, 0.35], x, radius, length: step.length, angle, direction: "back", side, spread,
-            bundleRadius: l.strandRadius, count: l.count,
+            bundleRadius: l.strandRadius, count: l.count, pair,
           });
           if (upright) {
             posts.set(step.material, { x, baseY: radius, height: step.length, radius: l.strandRadius * 0.45 });

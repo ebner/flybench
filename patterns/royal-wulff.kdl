@@ -1,0 +1,73 @@
+// Royal Wulff: the hair-winged Royal Coachman, a high-floating attractor.
+
+id royal-wulff
+name "Royal Wulff"
+type dry
+imitates attractor
+difficulty intermediate
+species trout grayling salmon
+season may june july august september
+origin originator="Lee Wulff" year=1930 region="New York, USA"
+description "A moose hair tail, a body of peacock herl with a red floss band, divided white calf-hair wings and a heavy brown hackle."
+history """
+    Lee Wulff designed his hair-winged dries in the winter of 1929–30 for the Ausable and
+    other New York rivers; one of them, the Bucktail Coachman, became the Royal Wulff when Dan
+    Bailey persuaded him to rename them, and Bailey popularised them in the West from 1938.
+    Around 1930 Rube Cross also tied a nearly identical hair-winged Royal Coachman for
+    L. Q. Quackenbush, the "Quack Coachman"; the two seem to have been independent.
+    """
+fishing """
+    A high-floating, very visible attractor for pocket water, riffles and broken freestone
+    rivers, when no hatch dominates. Fish it dead drift with the odd twitch, or as the
+    indicator in a dry-dropper rig. Large sizes are used for Atlantic salmon.
+    """
+sources {
+    "Wikipedia: Royal Wulff" url="https://en.wikipedia.org/wiki/Royal_Wulff"
+    "SWTU: Royal Wulff" url="https://www.swtu.org/2022/12/07/royal-wulff/"
+    "Fly Fisherman: Royal Wulff (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-royal-wulff/152082"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/8/8f/RoyalWulffDryFly.jpg" page="https://commons.wikimedia.org/wiki/File:RoyalWulffDryFly.jpg" author="Mike Cline" license="Public domain" note="Side view in the vise"
+    "https://files.osgnetworks.tv/16/files/2013/08/Royal-Wulff-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-royal-wulff/152082" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://upload.wikimedia.org/wikipedia/commons/8/8f/Royal_Wulff_Dry_Fly_01.jpg" page="https://commons.wikimedia.org/wiki/File:Royal_Wulff_Dry_Fly_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view in the vise"
+}
+
+hook dry-standard size=12
+thread black size="8/0"
+
+materials {
+    wings calf-tail
+    tail moose-mane label="Moose body hair"
+    butt peacock-herl strands=3
+    band silk-floss color=red
+    front peacock-herl strands=3
+    hackle cock-hackle color=brown fibre=1.5 label="Coachman brown cock hackle"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.75
+    // Sources: wings and tail one shank long.
+    tie-in wings length=1.9 angle=90 spread=20 note="Stacked, tied in tips forward, stood up and divided with figure-of-eight turns."
+    wrap-thread to=0.0
+    // Sources say one shank long; the reference photos show about 1.5× the gape, used here.
+    tie-in tail length=1.5
+    tie-in butt
+    wrap-thread to=0.25
+    wind butt to=0.25 turns=4 note="The rear third of the body."
+    tie-off butt
+    tie-in band
+    wrap-thread to=0.48
+    wind band to=0.48 turns=6 note="A smooth red middle band."
+    tie-off band
+    tie-in front
+    wrap-thread to=0.7
+    wind front to=0.7 turns=4 note="Up to just behind the wings."
+    tie-off front
+    tie-in hackle
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=7 note="Three or four turns behind the wings and three or four in front."
+    tie-off hackle
+    whip-finish
+}

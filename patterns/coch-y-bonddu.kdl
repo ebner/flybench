@@ -1,0 +1,66 @@
+// Coch-y-Bonddu: an old Welsh beetle imitation: gold tag, peacock herl body, coch-y-bonddu hackle.
+
+id coch-y-bonddu
+name "Coch-y-Bonddu"
+aliases "Coch-y-Bondhu" "Shorn Fly" "Marlow Buzz" "Bracken Clock"
+type dry
+imitates terrestrial
+difficulty beginner
+species trout grayling sea-trout
+season may june july august
+origin region="Wales"
+description "A flat gold tag, a plump body of bronze peacock herl ribbed with gold wire, and a red-and-black coch-y-bonddu hackle."
+history """
+    A traditional Welsh fly imitating a small beetle, the garden chafer or "bracken clock".
+    It was known in the 1700s as the Shorn Fly and is described in Bowlker's Art of Angling
+    (1792); by the mid-1800s it was called by its Welsh name, which means roughly "red with
+    a black trunk", after the hackle. Claims that it goes back to 1613 are unverified.
+    """
+fishing """
+    Dry, along wooded or bracken banks in summer and on windy days, dead drift or twitched.
+    On Welsh and Scottish lochs it is a top dropper. Tied wet with a soft hackle, swing it
+    from a riffle into the pool. "Wet or dry, and at any time of the season, it is always a
+    good pattern to try on a strange river."
+    """
+sources {
+    "SWTU: Coch-y-Bonddu (Rusty Dunn)" url="https://www.swtu.org/2020/03/04/coch-y-bonddu/"
+    "Midcurrent: Coch-y-Bonddu (Fred Klein)" url="https://midcurrent.com/flies/coch-y-bonddu/"
+    "Fish4Flies: Coch-y-Bondhu" url="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu"
+}
+// Photos for checking proportions while authoring (npm run refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/800-800.jpg" page="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu" license="All rights reserved; reference only" flip=#true note="Side view, dry, gold tag"
+    "https://www.swtu.org/wp-content/uploads/2020/03/coch-y-bonddu.jpg" page="https://www.swtu.org/2020/03/04/coch-y-bonddu/" license="All rights reserved; reference only" note="Side view, wet version"
+}
+
+// Assumption: a down-eye dry hook; the traditional British choice is an up-eye Captain Hamilton.
+hook dry-standard size=12
+thread black size="8/0"
+
+materials {
+    tag flat-tinsel color=gold
+    rib gold-wire
+    body peacock-herl strands=4 label="Bronze peacock herl"
+    hackle cock-hackle color=coch fibre=1.5 label="Coch-y-bonddu (or furnace) cock hackle"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    tie-in tag
+    wrap-thread to=0.08
+    wind tag to=0.06 turns=3 note="Three or four touching turns at the start of the bend."
+    tie-off tag
+    tie-in rib
+    tie-in body note="Twist the herls into a rope for strength."
+    wrap-thread to=0.72
+    wind body to=0.72 turns=9 note="Touching turns, a plump acorn-shaped body."
+    tie-off body
+    wind rib to=0.72 turns=5 note="Counter-wound through the herl."
+    tie-off rib
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.88 turns=4
+    tie-off hackle
+    whip-finish
+}

@@ -313,6 +313,12 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         .clone()
         .add(new THREE.Vector3(Math.cos(a) * fan, 0, Math.sin(a) * fan))
         .normalize();
+      if (piece.pair) {
+        // Divided wings: half the hair leans out to each side.
+        const side = i % 2 === 0 ? 1 : -1;
+        dir.applyAxisAngle(X_AXIS, side * piece.pair);
+        base.z += side * piece.bundleRadius * 0.25;
+      }
       list.push({ u: rand(), base, dir, length: piece.length * (1 - spec.lengthJitter / 2 + spec.lengthJitter * rand()), radius: spec.radius, shade: 0.85 + 0.3 * rand() });
       continue;
     }
