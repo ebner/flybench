@@ -24,7 +24,7 @@ import { hookModel } from "../src/tying/hook";
 import { patternIds, Renderer } from "./lib/renderer";
 
 // Wikimedia throttles anonymous agents; identify the tool and where it comes from.
-const USER_AGENT = "flybench-refcheck/0.1 (https://flybench.app; authoring tool, images not redistributed)";
+const USER_AGENT = "flybench-refcheck/0.1 (https://github.com/ebner/flybench; authoring tool, images not redistributed)";
 const PHOTO_HEIGHT = 460;
 const RENDER_WIDTH = 1050;
 const PANEL_WIDTH = 640;

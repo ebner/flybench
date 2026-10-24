@@ -1,3 +1,5 @@
+<img src="public/logo.svg" width="96" alt="The Flybench logo: a dry fly on its hook">
+
 # Flybench
 
 Animated, step-by-step 3D fly tying instructions. Each fly is a recipe written in
@@ -34,6 +36,7 @@ npm run build      # type-check and production build into dist/
 npm run render:catalog  # gallery images into public/renders/ (commit them)
 npm run render     # render finished flies to .cache/renders/ (headless Chromium)
 npm run refcheck   # contact sheets: render on a gape grid next to reference photos
+npm run icons      # app icon PNGs from public/icons/*.svg
 ```
 
 Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan.
@@ -63,7 +66,8 @@ To check proportions, list photos of the finished fly under `references` in the 
 and run `npm run refcheck -- <id>`. It writes `.cache/refcheck/<id>.png`: the fly from
 the side on a grid in gape units, the recipe's proportions, and the photos. Read the
 ratios off the photos relative to the hook gape and adjust the recipe. The photos stay
-in `.cache/` and are never committed.
+in `.cache/` and are never committed, and the build leaves the `references` blocks out
+of the published site.
 
 ## Layout
 
@@ -79,10 +83,19 @@ src/catalog/       catalog search and wording (plain logic, tested in Node)
 src/ui/            React UI: gallery, pattern page, viewer, theme, routing
 src/studio/        the authoring studio (studio.html, dev server only)
 public/renders/    rendered gallery images (generated, committed)
+public/logo.svg    the logo (also the header mark); favicon.svg is a simplified version
+                   for small sizes, and public/icons/*.svg the app icons (npm run icons)
 render.html        dev-only page that scripts/ drive to render a finished fly
-scripts/           authoring tools: render, render-catalog, refcheck, and the
-                   dev-server plugin that lets the studio read and save patterns
+scripts/           authoring tools: render, render-catalog, refcheck, the
+                   dev-server plugin that lets the studio read and save patterns,
+                   and the build plugin that leaves reference photos out
 ```
 
 The scene is a pure function of time: `FlyScene.setTime(t)` shows exactly what
 the timeline says for `t`, so scrubbing and replaying need no extra state.
+
+## Licence
+
+The code is MIT ([LICENSE](LICENSE)). The pattern texts, renders, logo and docs are
+CC BY 4.0 ([LICENSE-CONTENT.md](LICENSE-CONTENT.md)). Reference photos, cited sources
+and the fonts belong to their owners and aren't covered by either.

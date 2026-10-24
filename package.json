@@ -1,6 +1,7 @@
 {
   "name": "flybench",
   "private": true,
+  "license": "MIT",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
@@ -12,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "render": "tsx scripts/render.ts",
     "refcheck": "tsx scripts/refcheck.ts",
-    "render:catalog": "tsx scripts/render-catalog.ts"
+    "render:catalog": "tsx scripts/render-catalog.ts",
+    "icons": "tsx scripts/icons.ts"
   },
   "dependencies": {
     "@bgotink/kdl": "^0.4.1",
