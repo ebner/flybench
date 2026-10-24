@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "studio": "vite --open /studio.html",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

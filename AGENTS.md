@@ -46,8 +46,10 @@ src/recipe/     kdl.ts (KDL → plain object + source locations), schema.ts (Zod
 src/tying/      hook.ts (hook models, sizes), simulate.ts (recipe → timeline of geometry
                 pieces as plain data), describe.ts (instruction text, materials list)
 src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends
-src/catalog/    search and catalog wording (no React; tested in Node)
-src/ui/         React UI (hash routing, theme, gallery, pattern page)
+src/catalog/    search and catalog wording, pages.ts (every page's title, description and
+                static HTML for the build; no React; tested in Node)
+src/ui/         React UI (path routing under the base, theme, gallery, pattern page, about)
+scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
 public/renders/ generated gallery images, committed; regenerate after recipe/renderer changes
 ```
 

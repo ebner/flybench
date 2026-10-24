@@ -55,7 +55,9 @@ hook size switch, deep links to steps.
   cited and assumptions flagged; the user reviews.
 - A local-only authoring studio (dev server page): KDL editor, inline errors, live 3D
   preview, saves to `patterns/`. Not shipped to the public site.
-- Hosting: decided later; the build stays a plain static `dist/`.
+- Hosting: GitHub Pages, deployed by a workflow on every push to main. Every page has a real
+  address and its own prerendered HTML file (title, description, preview picture, text), so
+  pages can be shared and found by search engines; the build stays a plain static `dist/`.
 
 ## Milestones
 

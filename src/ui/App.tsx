@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+import { SITE_TITLE } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
+import { About, REPO_URL } from "./About";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
@@ -14,7 +16,7 @@ export function App() {
   const { choice, setChoice } = useTheme();
 
   useEffect(() => {
-    if (route.page === "gallery") document.title = "Flybench";
+    if (route.page === "gallery") document.title = SITE_TITLE;
     window.scrollTo(0, 0);
   }, [route.page, route.page === "fly" || route.page === "technique" ? route.id : null]);
 
@@ -32,7 +34,7 @@ export function App() {
           </ul>
         </details>
       )}
-      {/* Not an #anchor link: the hash is the route. */}
+      {/* Moves focus too, which following an #anchor doesn't do everywhere. */}
       <button className="skip-link" onClick={() => document.getElementById("content")?.focus()}>
         Skip to content
       </button>
@@ -45,6 +47,7 @@ export function App() {
         {route.page === "learn" && <Learn />}
         {route.page === "box" && <FlyBox />}
         {route.page === "materials" && <Materials />}
+        {route.page === "about" && <About />}
         {route.page === "not-found" && (
           <main className="not-found">
             <h1>There is nothing at this address</h1>
@@ -54,6 +57,16 @@ export function App() {
           </main>
         )}
       </div>
+      <footer className="site-footer">
+        <nav aria-label="About this site">
+          <a href={href.about()}>About Flybench</a>
+          <a href={REPO_URL}>Source on GitHub</a>
+          <a href={`${REPO_URL}/issues`}>Report a mistake</a>
+        </nav>
+        <p>
+          Patterns and pictures <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
+        </p>
+      </footer>
     </>
   );
 }
