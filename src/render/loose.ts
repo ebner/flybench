@@ -62,6 +62,7 @@ export class BobbinView {
 export class LooseEndView {
   readonly object = new THREE.Group();
   private geometries: THREE.BufferGeometry[] = [];
+  private disposers: (() => void)[] = [];
 
   constructor(end: FreeEndPose, surfaces: Surfaces) {
     const len = end.length;
@@ -90,9 +91,9 @@ export class LooseEndView {
           radius: hackle ? 0.0045 : 0.0035,
         });
       }
-      const mesh = fibreMesh(fibres, surfaces.get(end.look, hackle ? end.color : "#26341a", true)).mesh;
-      this.geometries.push(mesh.geometry);
-      this.object.add(mesh);
+      const mesh = fibreMesh(fibres, surfaces.get(end.look, hackle ? end.color : "#26341a", true));
+      this.disposers.push(() => mesh.dispose());
+      this.object.add(mesh.object);
     }
   }
 
@@ -104,5 +105,6 @@ export class LooseEndView {
 
   dispose() {
     for (const g of this.geometries) g.dispose();
+    for (const d of this.disposers) d();
   }
 }

@@ -55,7 +55,8 @@ public/renders/ generated gallery images, committed; regenerate after recipe/ren
 
 ## Recipe conventions
 
-- Positions are fractions of the shank: `0` = start of the bend, `1` = just behind the eye.
+- Positions are fractions of the shank: `0` = start of the bend, `1` = just behind the eye
+  (or the bead, when there is one).
 - Lengths are multiples of the hook gape. World units in the renderer are gapes.
 - The thread position is tying state; only `attach-thread`, `wrap-thread` and `dub` move it.
   Tie-ins, tie-offs and whip finishes happen at the thread.

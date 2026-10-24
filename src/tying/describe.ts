@@ -88,6 +88,8 @@ export interface StepContext {
   spun?: boolean;
   /** trim: cutting a wound hackle away top and bottom. */
   keep?: boolean;
+  /** trim: cutting the excess of a strip pulled over the body (a foam back). */
+  cover?: boolean;
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
@@ -184,6 +186,10 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
         ? `Trim the spun ${mat(step.material)} to shape, leaving a head about ${gapeText(step.leave ?? 0.4)} thick on each side.`
         : ctx.tip
         ? `Trim the tip of the ${mat(step.material)} close to the body.`
+        : ctx.cover
+        ? step.leave
+          ? `Trim the excess ${mat(step.material)}, leaving a stub ${gapeText(step.leave)} long over the eye as the head.`
+          : `Trim the excess ${mat(step.material)} flush with the tie-down.`
         : step.leave
           ? `Trim the butts of the ${mat(step.material)}, leaving a short head ${step.leave}× the gape long.`
           : `Trim the butts of the ${mat(step.material)} flush.`;

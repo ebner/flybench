@@ -18,7 +18,7 @@ Validation happens in four layers, and errors report the line they came from:
 
 | Quantity  | Unit                                                              |
 |-----------|-------------------------------------------------------------------|
-| Positions | Fraction of the shank: `0` = start of the bend, `1` = just behind the eye |
+| Positions | Fraction of the shank: `0` = start of the bend, `1` = just behind the eye (or just behind the bead, on a beaded fly) |
 | Lengths   | Multiples of the hook gape                                        |
 | Angles    | Degrees                                                           |
 

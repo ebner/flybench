@@ -4,7 +4,7 @@ import { loadRecipe } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
 import { FlyScene, type ViewName } from "../render/FlyScene";
 import { simulate, stepAt, type Build } from "../tying/simulate";
-import { useTheme, VIEWER_BACKGROUND, type Theme } from "../ui/theme";
+import { useTheme } from "../ui/theme";
 import { usePlayer } from "../ui/usePlayer";
 import { listPatterns, readPattern, savePattern } from "./api";
 import { checkDraft, isPatternFile, newPatternText } from "./draft";
@@ -14,7 +14,8 @@ import { checkDraft, isPatternFile, newPatternText } from "./draft";
  * the fly it describes in 3D. Only on the dev server; saving writes to patterns/.
  */
 export function Studio() {
-  const { theme } = useTheme();
+  // Applies the light or dark theme to the page.
+  useTheme();
   const [saved, setSaved] = useState<Map<string, string>>(new Map());
   const [file, setFile] = useState<string | null>(null);
   const [text, setText] = useState("");
@@ -145,7 +146,7 @@ export function Studio() {
       </header>
       <div className="studio-panes">
         <Editor text={text} onChange={setText} errors={check.errors} onSave={save} />
-        <PreviewPane build={build} recipe={shown} theme={theme} stale={!check.recipe && shown !== null} />
+        <PreviewPane build={build} recipe={shown} stale={!check.recipe && shown !== null} />
       </div>
     </div>
   );
@@ -270,7 +271,7 @@ const STUDIO_VIEWS: { view: ViewName; label: string }[] = [
   { view: "front", label: "Front" },
 ];
 
-function PreviewPane({ build, recipe, theme, stale }: { build: Build | null; recipe: Recipe | null; theme: Theme; stale: boolean }) {
+function PreviewPane({ build, recipe, stale }: { build: Build | null; recipe: Recipe | null; stale: boolean }) {
   const duration = build?.duration ?? 0;
   const player = usePlayer(duration, null);
   const [view, setView] = useState<ViewName>("side");
@@ -293,7 +294,7 @@ function PreviewPane({ build, recipe, theme, stale }: { build: Build | null; rec
   return (
     <section className="studio-preview" aria-label="Preview">
       <div className="studio-stage">
-        <Preview build={build} time={player.time} theme={theme} view={view} grid={grid} />
+        <Preview build={build} time={player.time} view={view} grid={grid} />
         {stale && <p className="studio-stale">Showing the last version without problems</p>}
       </div>
       <div className="studio-controls">
@@ -373,24 +374,18 @@ function StepList({ build, current, onPick }: { build: Build; current: number; o
 }
 
 /** The 3D fly, with the camera fixed to a view and an optional measuring grid in gapes. */
-function Preview({ build, time, theme, view, grid }: { build: Build; time: number; theme: Theme; view: ViewName; grid: boolean }) {
+function Preview({ build, time, view, grid }: { build: Build; time: number; view: ViewName; grid: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const scene = useRef<FlyScene | null>(null);
 
   useEffect(() => {
-    const s = new FlyScene(container.current!, { background: VIEWER_BACKGROUND[theme], fov: 12 });
+    const s = new FlyScene(container.current!, { background: null, fov: 12 });
     scene.current = s;
     return () => {
       s.dispose();
       scene.current = null;
     };
-    // The theme is applied below; the scene is created once.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    scene.current?.setBackground(VIEWER_BACKGROUND[theme]);
-  }, [theme]);
 
   useEffect(() => {
     const s = scene.current!;

@@ -129,6 +129,10 @@ export interface CoverPiece extends PieceBase {
   lift: number;
   /** Radians each side of the top that the cover reaches round the body. */
   halfAngle: number;
+  /** Where turns of a rib wound over it press it in, segmenting it (shank-local x). */
+  dents: number[];
+  /** Length left standing in front of the tie-down when the excess is trimmed (a foam head). */
+  stub: number;
 }
 
 export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece;
@@ -177,8 +181,8 @@ export function wrapAt(p: WrapsPiece, u: number): { x: number; radius: number; a
     return { x, radius: p.base.radiusAt(x) + p.strandRadius, angle };
   }
   const x = p.x0 + p.width * Math.sin(Math.PI * u);
-  // Turns going back pile on top of the ones going out.
-  return { x, radius: p.base.radiusAt(x) + p.strandRadius * (1 + 1.2 * u), angle };
+  // Turns going back lie over the ones going out, mostly in between them.
+  return { x, radius: p.base.radiusAt(x) + p.strandRadius * (1 + 0.6 * u), angle };
 }
 
 export type V3 = [number, number, number];
@@ -357,6 +361,7 @@ export function simulate(recipe: Recipe): Build {
   const spun = new Set<string>();
   /** Wound pieces by material, so a hackle can be trimmed after winding. */
   const wound = new Map<string, WrapsPiece>();
+  const covers = new Map<string, CoverPiece>();
   /** Upright posts, for parachute hackles. */
   const posts = new Map<string, { x: number; baseY: number; height: number; radius: number }>();
   /** A palmered material whose tip the next forward wind secures. */
@@ -364,6 +369,8 @@ export function simulate(recipe: Recipe): Build {
   const palmeredTips = new Set<string>();
   /** The rear edge of a bead at the eye: wraps stop short of it. */
   let frontLimit = 0.97 * L;
+  /** Positions run from the bend to just behind the eye, or to the back of a bead when there is one. */
+  let span = L;
   const steps: SimStep[] = [];
 
   /** Fluffy material (herl, dubbing, hackle) wound between a and b so far, which a cover squashes. */
@@ -381,10 +388,16 @@ export function simulate(recipe: Recipe): Build {
     type: "wraps", id: nextId++, material: "thread", look: "thread", color: threadColor, window,
     path, x0, x1, width: path === "in-place" ? x1 - x0 : 0, turns, strandRadius: threadRadius, base: profile,
   });
-  /** Turns that bind something down: out and back again, touching each way. */
+  /**
+   * Turns that bind something down: out and back again, touching each way. Where the eye or a
+   * bead leaves no room in front, they spread back over the body instead of piling up in a ring.
+   */
   const inPlace = (x: number, turns: number, window?: [number, number], maxX = frontLimit) => {
-    const piece = threadWraps("in-place", x, Math.max(x + pitch, Math.min(maxX, x + (turns * pitch) / 2)), turns, window);
-    profile = profile.withLayer(x, piece.x1, td * 0.8);
+    const span = Math.max(pitch, (turns * pitch) / 2);
+    const x1 = Math.max(x + pitch * 0.5, Math.min(maxX, x + span));
+    const x0 = Math.min(x, x1 - span);
+    const piece = threadWraps("in-place", x0, x1, turns, window);
+    profile = profile.withLayer(x0, x1, td * 0.6, 0.05);
     return piece;
   };
   const restingEnds = () => [...freeEnds.values()];
@@ -411,21 +424,23 @@ export function simulate(recipe: Recipe): Build {
         const x = L - l.strandRadius * 0.9;
         pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius });
         frontLimit = Math.min(frontLimit, x - l.strandRadius * 0.95);
+        span = Math.min(span, frontLimit / 0.97);
         duration = DURATION.bead;
         break;
       }
       case "weight": {
         const l = looks.get(step.material)!;
-        const from = step.from * L;
-        const to = Math.min(step.to * L, frontLimit);
+        const from = step.from * span;
+        const to = Math.min(step.to * span, frontLimit);
         const turns = Math.max(2, Math.round((to - from) / (l.strandRadius * 2.05)));
         pieces.push(materialWraps(step.material, l, from, to, turns));
-        profile = profile.withLayer(from, to, l.layerThickness(1), 0.06);
+        // Tyers taper the ends of the weighting with thread so the body runs smoothly over it.
+        profile = profile.withLayer(from, to, l.layerThickness(1), 0.16);
         duration = Math.max(1.5, turns * DURATION.perWeightTurn);
         break;
       }
       case "attach-thread": {
-        threadX = Math.min(step.at * L, frontLimit);
+        threadX = Math.min(step.at * span, frontLimit);
         const piece = inPlace(threadX, 6);
         pieces.push(piece);
         thread = { kind: "follow", piece: piece.id };
@@ -434,7 +449,7 @@ export function simulate(recipe: Recipe): Build {
       }
       case "wrap-thread": {
         const from = threadX!;
-        const to = Math.min(step.to * L, frontLimit);
+        const to = Math.min(step.to * span, frontLimit);
         const turns = step.turns ?? Math.max(1, Math.round(Math.abs(to - from) / pitch));
         const piece = threadWraps("travel", from, to, turns);
         const coverage = (turns * pitch) / Math.max(Math.abs(to - from), pitch);
@@ -448,7 +463,7 @@ export function simulate(recipe: Recipe): Build {
       case "dub": {
         const l = looks.get(step.material)!;
         const from = threadX!;
-        const to = Math.min(step.to * L, frontLimit);
+        const to = Math.min(step.to * span, frontLimit);
         // Dubbing squashes as it is wrapped, so neighbouring turns overlap.
         const turns = step.turns ?? Math.max(2, Math.round(Math.abs(to - from) / (l.strandRadius * 1.3)));
         const piece = materialWraps(step.material, l, from, to, turns);
@@ -465,7 +480,7 @@ export function simulate(recipe: Recipe): Build {
       case "spin": {
         const l = looks.get(step.material)!;
         const from = threadX!;
-        const to = Math.min(step.to * L, frontLimit);
+        const to = Math.min(step.to * span, frontLimit);
         const radius = profile.radiusAt(from);
         // Assumption: spun deer hair stands out about 0.7 gape before it is trimmed.
         const head: BundlePiece = {
@@ -546,7 +561,8 @@ export function simulate(recipe: Recipe): Build {
           freeEnds.set(step.material, end);
           ends = restingEnds();
         }
-        if (l.look !== "eyes") profile = profile.withLayer(x, x + 5 * pitch, l.tieInThickness);
+        // The bound-down end tapers out along the shank rather than making a ridge.
+        if (l.look !== "eyes") profile = profile.withLayer(x - 2 * pitch, x + 8 * pitch, l.tieInThickness * 0.6, 0.06);
         const wraps = inPlace(x, l.look === "hair" || l.look === "eyes" ? 8 : 5, [0.3, 1]);
         pieces.push(wraps);
         thread = { kind: "follow", piece: wraps.id };
@@ -568,7 +584,7 @@ export function simulate(recipe: Recipe): Build {
             post: { x: post.x, y0: y1 + stack, y1, radius: post.radius },
           };
         } else {
-          const to = Math.min(step.to! * L, frontLimit);
+          const to = Math.min(step.to! * span, frontLimit);
           ctx.rear = to < from;
           if (!ctx.rear && palmered) {
             ctx.through = palmered;
@@ -589,6 +605,15 @@ export function simulate(recipe: Recipe): Build {
         }
         pieces.push(piece);
         wound.set(step.material, piece);
+        if (piece.path === "travel") {
+          // Each turn over the top of a wing case or back presses it in.
+          for (const c of covers.values()) {
+            for (let k = 0; k < step.turns; k++) {
+              const x = piece.x0 + ((piece.x1 - piece.x0) * (k + 0.25)) / step.turns;
+              if (x > c.x0 + 0.02 && x < c.x1 - 0.02) c.dents.push(x);
+            }
+          }
+        }
         if (piece.fibreLength && piece.path === "travel") {
           // Squashed flat under a cover, fluff still adds some height.
           fluffy.push({ x0: piece.x0, x1: piece.x1, height: Math.min(0.1, piece.fibreLength * 0.4) });
@@ -601,14 +626,17 @@ export function simulate(recipe: Recipe): Build {
       case "pull-over": {
         const l = looks.get(step.material)!;
         const from = tiedAt.get(step.material)!;
-        const to = Math.min(step.to * L, frontLimit);
+        const to = Math.min(step.to * span, frontLimit);
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
         const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
-        pieces.push({
+        const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : 65),
-        });
+          dents: [], stub: 0,
+        };
+        pieces.push(cover);
+        covers.set(step.material, cover);
         profile = profile.withLayer(from, to, thickness * 0.8);
         for (const w of wound.values()) {
           if (w.fibreLength && w.path === "travel" && Math.min(w.x0, w.x1) < to && Math.max(w.x0, w.x1) > from) w.covered = [from, to];
@@ -628,7 +656,7 @@ export function simulate(recipe: Recipe): Build {
           ...restingEnds(),
           { ...freeEnd(step.material, l), length: 0.6, kind: "rest", x, radius: profile.radiusAt(x), direction: "out", hideAfter: 0.7 },
         ];
-        profile = profile.withLayer(x, x + 5 * pitch, l.tieInThickness);
+        profile = profile.withLayer(x - 2 * pitch, x + 8 * pitch, l.tieInThickness * 0.6, 0.06);
         const wraps = inPlace(x, 5);
         pieces.push(wraps);
         thread = { kind: "follow", piece: wraps.id };
@@ -644,6 +672,10 @@ export function simulate(recipe: Recipe): Build {
           w.until = cutAt;
           pieces.push({ ...w, id: nextId++, keep: step.keep, window: [0.5, 0.5001], until: undefined });
           ctx.keep = true;
+        } else if (covers.has(step.material)) {
+          // The excess of a foam back, cut flush or left as a stub over the eye.
+          ctx.cover = true;
+          covers.get(step.material)!.stub = step.leave ?? 0;
         } else if (palmeredTips.has(step.material)) {
           ctx.tip = true;
           palmeredTips.delete(step.material);

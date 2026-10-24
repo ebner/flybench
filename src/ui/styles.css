@@ -15,6 +15,7 @@
   --accent-ink: #f2f0e8;
   --accent-wash: #dbe0e4;
   --danger: #8a2a1a;
+  --specimen-shadow: rgb(40 30 20 / 0.3);
 
   --display: "IM Fell English", "Iowan Old Style", Georgia, serif;
   --text: "Spectral", Georgia, serif;
@@ -50,6 +51,7 @@
   --accent-ink: #102a4c;
   --accent-wash: #22477a;
   --danger: #ffb4a4;
+  --specimen-shadow: rgb(0 8 20 / 0.45);
   color-scheme: dark;
 }
 
@@ -372,7 +374,7 @@ select {
 /* A pinned specimen casts a faint shadow on its plate, which also outlines white flies. */
 .plate-image img,
 .plate-spin {
-  filter: drop-shadow(0 0.15rem 0.2rem rgb(40 30 20 / 0.3));
+  filter: drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
 }
 
 .plate-spin {
@@ -468,6 +470,12 @@ select {
   position: absolute;
   inset: 0;
   touch-action: none;
+}
+
+/* The fly casts a faint shadow on the paper behind it, as on the gallery plates. */
+.viewer-canvas canvas,
+.studio-canvas canvas {
+  filter: drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
 }
 
 .viewer-tools {

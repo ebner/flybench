@@ -1,12 +1,10 @@
 import { useEffect, useRef } from "react";
 import { FlyScene } from "../render/FlyScene";
 import type { Build } from "../tying/simulate";
-import { VIEWER_BACKGROUND, type Theme } from "./theme";
 
 export interface ViewerProps {
   build: Build;
   time: number;
-  theme: Theme;
   /** Camera follows the current step. */
   follow: boolean;
   onFollowChange: (follow: boolean) => void;
@@ -15,7 +13,7 @@ export interface ViewerProps {
   onCalloutClick?: () => void;
 }
 
-export function Viewer({ build, time, theme, follow, onFollowChange, callout, onCalloutClick }: ViewerProps) {
+export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick }: ViewerProps) {
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
   const scene = useRef<FlyScene | null>(null);
@@ -23,7 +21,8 @@ export function Viewer({ build, time, theme, follow, onFollowChange, callout, on
   followChange.current = onFollowChange;
 
   useEffect(() => {
-    const s = new FlyScene(container.current!, { background: VIEWER_BACKGROUND[theme] });
+    // A transparent canvas over the page's paper, so the fly can cast a soft CSS shadow on it.
+    const s = new FlyScene(container.current!, { background: null });
     s.onFollowChange = (on) => followChange.current(on);
     // Positioned directly each frame, without re-rendering React.
     s.onAnchor = (point) => {
@@ -37,13 +36,7 @@ export function Viewer({ build, time, theme, follow, onFollowChange, callout, on
       s.dispose();
       scene.current = null;
     };
-    // The theme is applied below; the scene is created once.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    scene.current?.setBackground(VIEWER_BACKGROUND[theme]);
-  }, [theme]);
 
   useEffect(() => {
     scene.current?.setBuild(build);

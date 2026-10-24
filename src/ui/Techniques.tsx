@@ -4,7 +4,6 @@ import { PATTERNS } from "../patterns";
 import { Clip } from "./Clip";
 import { Paragraphs } from "./Paragraphs";
 import { href } from "./router";
-import type { Theme } from "./theme";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
 
@@ -35,7 +34,7 @@ export function TechniquesIndex() {
   );
 }
 
-export function TechniquePage({ id, theme }: { id: string; theme: Theme }) {
+export function TechniquePage({ id }: { id: string }) {
   const t = technique(id);
   useEffect(() => {
     if (t) document.title = `${t.name}, Flybench`;
@@ -59,7 +58,7 @@ export function TechniquePage({ id, theme }: { id: string; theme: Theme }) {
       </a>
       <h1>{t.name}</h1>
       <p className="lede">{t.summary}</p>
-      {example && <Clip key={`${example.recipe.id}:${example.step}`} recipe={example.recipe} step={example.step} theme={theme} />}
+      {example && <Clip key={`${example.recipe.id}:${example.step}`} recipe={example.recipe} step={example.step} />}
       <h2>How to do it</h2>
       <Paragraphs text={t.how} />
       <h2>Common mistakes</h2>

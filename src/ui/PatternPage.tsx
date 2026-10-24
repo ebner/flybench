@@ -10,11 +10,10 @@ import { match, materialColor } from "../catalog/inventory";
 import { href, replaceHash } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
-import type { Theme } from "./theme";
 import { usePlayer } from "./usePlayer";
 import { Viewer } from "./Viewer";
 
-export function PatternPage({ id, step, theme }: { id: string; step?: number; theme: Theme }) {
+export function PatternPage({ id, step }: { id: string; step?: number }) {
   const pattern = findPattern(id);
   if (!pattern) {
     return (
@@ -26,7 +25,7 @@ export function PatternPage({ id, step, theme }: { id: string; step?: number; th
       </main>
     );
   }
-  return <PatternView key={id} recipe={pattern.recipe} initialStep={step} theme={theme} />;
+  return <PatternView key={id} recipe={pattern.recipe} initialStep={step} />;
 }
 
 const Icon = {
@@ -62,7 +61,7 @@ function hookSizes(size: number): number[] {
   return sizes;
 }
 
-function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe; initialStep?: number; theme: Theme }) {
+function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initialStep?: number }) {
   // The hook size can be changed to see the same fly at another size: proportions stay,
   // thread bulk changes as it would at the vise.
   const [size, setSize] = useState(original.hook.size);
@@ -159,7 +158,6 @@ function PatternView({ recipe: original, initialStep, theme }: { recipe: Recipe;
         <Viewer
           build={build}
           time={player.time}
-          theme={theme}
           follow={follow}
           onFollowChange={setFollow}
           callout={callout}

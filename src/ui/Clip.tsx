@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Recipe } from "../recipe/schema";
 import { simulate } from "../tying/simulate";
-import type { Theme } from "./theme";
 import { Viewer } from "./Viewer";
 
 /**
  * One step of a pattern, played on a loop with the camera following the action:
  * the 3D example on a technique page.
  */
-export function Clip({ recipe, step, theme }: { recipe: Recipe; step: number; theme: Theme }) {
+export function Clip({ recipe, step }: { recipe: Recipe; step: number }) {
   const build = useMemo(() => simulate(recipe), [recipe]);
   const s = build.steps[step]!;
   const [time, setTime] = useState(s.start);
@@ -34,7 +33,7 @@ export function Clip({ recipe, step, theme }: { recipe: Recipe; step: number; th
   return (
     <figure className="clip">
       <div className="clip-stage">
-        <Viewer build={build} time={time} theme={theme} follow={follow} onFollowChange={setFollow} callout={null} />
+        <Viewer build={build} time={time} follow={follow} onFollowChange={setFollow} callout={null} />
       </div>
       <figcaption>
         <button className="link-button" onClick={() => setPlaying(!playing)}>

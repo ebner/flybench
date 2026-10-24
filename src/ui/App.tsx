@@ -11,7 +11,7 @@ import { useTheme } from "./theme";
 
 export function App() {
   const route = useRoute();
-  const { choice, theme, setChoice } = useTheme();
+  const { choice, setChoice } = useTheme();
 
   useEffect(() => {
     if (route.page === "gallery") document.title = "Flybench";
@@ -39,9 +39,9 @@ export function App() {
       <Header theme={choice} onTheme={setChoice} page={route.page} />
       <div id="content" tabIndex={-1}>
         {route.page === "gallery" && <Gallery query={route.query} />}
-        {route.page === "fly" && <PatternPage id={route.id} step={route.step} theme={theme} />}
+        {route.page === "fly" && <PatternPage id={route.id} step={route.step} />}
         {route.page === "techniques" && <TechniquesIndex />}
-        {route.page === "technique" && <TechniquePage id={route.id} theme={theme} />}
+        {route.page === "technique" && <TechniquePage id={route.id} />}
         {route.page === "learn" && <Learn />}
         {route.page === "box" && <FlyBox />}
         {route.page === "materials" && <Materials />}

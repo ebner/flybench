@@ -54,7 +54,9 @@ steps {
     wind legs to=0.84 turns=3 note="A few open turns through the front of the body."
     tie-off legs
     wrap-thread to=0.88
-    pull-over back to=0.88 note="Fold it over the body and lock it down with a few tight turns; leave a short stub over the eye as the head."
+    pull-over back to=0.88 note="Fold it over the body and lock it down with a few tight turns."
+    // Craven: a short stub over the eye as the head.
+    trim back leave=0.3
     tie-in sighter length=0.35 angle=25 note="A narrow strip on top at the joint, trimmed short."
     whip-finish note="At the joint."
     // Craven: legs slightly longer than the gape, out to the sides.

@@ -197,7 +197,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           err(`the thread is at ${thread}; move it to ${step.to} or beyond to tie the material down there`, [...path, "to"]);
         }
         m.state = "done";
-        m.butts = false;
+        // Foam is cut after it is tied down, flush or leaving a head; other strips are trimmed at once.
+        m.butts = archetype === "foam";
         break;
       }
       case "tie-off": {
@@ -219,8 +220,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         } else {
           err(`there is nothing of "${step.material}" to trim`, [...path, "material"]);
         }
-        if (step.leave !== undefined && archetype !== "hair") {
-          err("leave only applies to hair butts and spun hair", [...path, "leave"]);
+        if (step.leave !== undefined && archetype !== "hair" && archetype !== "foam") {
+          err("leave only applies to hair butts, spun hair and foam backs", [...path, "leave"]);
         }
         if (step.shape !== undefined && archetype !== "hair") {
           err("shape only applies to trimming spun hair or hair butts", [...path, "shape"]);

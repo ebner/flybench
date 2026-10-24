@@ -5,9 +5,6 @@ export type Theme = "light" | "dark";
 
 const KEY = "flybench.theme";
 
-/** Viewer backgrounds, matching the page: herbarium paper, and cyanotype blue. */
-export const VIEWER_BACKGROUND: Record<Theme, string> = { light: "#e9e7dd", dark: "#102a4c" };
-
 function readChoice(): ThemeChoice {
   try {
     const v = localStorage.getItem(KEY);
