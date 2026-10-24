@@ -28,6 +28,7 @@ npm run build      # typecheck + production build into dist/
 npm run render:catalog  # gallery images into public/renders/ (commit them)
 npm run render     # finished flies to .cache/renders/ via headless Chromium
 npm run refcheck   # proportion contact sheets against reference photos
+npm run icons      # app icon PNGs from public/icons/*.svg (after logo changes)
 ```
 
 Run `npm test` and `npm run typecheck` before reporting work as done. Every file in
