@@ -32,11 +32,24 @@ export function About() {
         <a href={`${REPO_URL}/issues`}>report it on GitHub</a>.
       </p>
 
-      <h2>Your fly box stays with you</h2>
+      <h2>Privacy</h2>
       <p>
-        There are no accounts and no tracking. Your <a href={href.box()}>fly box</a> and{" "}
-        <a href={href.materials()}>materials</a> are kept in your browser and never leave it. Pages you have visited also
-        work offline.
+        Flybench has no accounts, sets no cookies and does not track you: there are no analytics, no adverts and nothing
+        is loaded from other sites. What you keep in Flybench stays in your browser and never leaves your device: your{" "}
+        <a href={href.box()}>fly box</a>, your <a href={href.materials()}>materials</a>, and the settings you choose (the
+        theme, and whether the camera follows each step). Your browser also keeps a copy of the site so that pages you
+        have visited work offline. Clearing this site's data in your browser removes all of it.
+      </p>
+      <p>
+        The site is hosted on GitHub Pages. GitHub logs the IP address of every visit for security; see{" "}
+        <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection">
+          GitHub Pages data collection
+        </a>{" "}
+        and{" "}
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
+          GitHub's privacy statement
+        </a>
+        .
       </p>
 
       <h2>Adding a pattern</h2>
