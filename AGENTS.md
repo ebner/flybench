@@ -76,6 +76,28 @@ public/renders/ generated gallery images, committed; regenerate after recipe/ren
   and thickness, head), and report or fix discrepancies. Several references beat one:
   dressings vary between tyers. Never commit the photos.
 
+## Privacy
+
+The site needs no cookie banner or consent today, and the About page's Privacy section
+(`src/ui/About.tsx`, summarised in `src/catalog/pages.ts`) says why. That rests on this
+state of the app; keep it true, or re-evaluate:
+
+- No cookies, accounts, analytics, adverts or tracking.
+- Nothing loaded from other hosts at runtime: fonts, scripts, images and data are all
+  served by the site itself. Links out to sources are fine; loading from them is not.
+- Browser storage (`localStorage`) holds only what the visitor asks for: the theme, the
+  camera-follow setting, the fly box and the materials inventory (keys `flybench.*`). The
+  service worker caches the site's own files for offline use.
+- No data leaves the browser; the only server is GitHub Pages, which logs IP addresses.
+
+Stop and ask before adding anything that changes this: analytics (even cookieless),
+embedded videos or maps, fonts or scripts from a CDN, error reporting, forms, comments,
+sync or accounts, any request to another host, or storage that isn't a visitor's own
+choice. Any of these can require consent under the EU ePrivacy rules and GDPR (the
+project is run from Sweden), and the About page's Privacy section has to be updated with it.
+New `flybench.*` storage keys for features the visitor uses are fine, but list them in
+the Privacy section.
+
 ## Working agreements
 
 - Work in small increments that can be run and looked at, and stop at each milestone for
