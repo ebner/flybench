@@ -12,21 +12,28 @@ origin region="Scotland, by 1882"
 description "A short red wool tail, a black seal's fur body ribbed with fine oval silver, and a black cock hackle palmered from tail to head."
 history """
     Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders
-    with red tips, commonly called Zulus" in a Scottish loch-fishing outfit, and by 1892 it was in
-    the dictionaries: "made like a palmer, black hackle, black body, ribbed silver tinsel, with red
-    wool tag for tail". The name is usually linked with the Zulu War of 1879, but no source makes
-    the connection, and the stories of it being banned for catching too much are just stories.
+    with red tips, commonly called Zulus" among the flies for a fortnight on remote Scottish
+    lochs, and in 1892 Niven's lexicon described it as "made like a palmer, black hackle, black
+    body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking
+    Lars reports it, gives it a silver tag and hen hackles. Two modern sources say it was once
+    banned, from competitions or in some waters, for catching too well; neither gives details.
     """
 fishing """
-    The classic bob fly: the top dropper of a three-fly team, tripped along the waves from a
-    drifting boat on dull, windy days. It takes brown trout, sea trout and char on lochs and
-    reservoirs; for sea trout it is dressed small with a long hackle.
+    A loch fly, at its best on the bob: the top dropper of a team of three or four, worked
+    through the wave tops from a drifting boat. Dark, windy days suit it. It takes brown trout
+    and sea trout all over Britain and Ireland, and brown trout and Arctic char in Iceland. A
+    letter to the Fishing Gazette in 1893 recommended it for Donegal sea trout "dressed small,
+    but with long hackle and with plenty of tinsel".
     """
 sources {
-    "Black Palmer, Scotch Loch-Fishing (1882)" url="https://archive.org/details/scotchloch-fishi00senirich"
-    "Richard Niven, The British Angler's Lexicon (1892)" url="https://archive.org/details/britishanglersle00niverich"
-    "Fish4Flies: Black Zulu" url="https://www.fish4flies.com/Wet/Hackled/Black-Zulu"
+    "Internet Archive: Scotch Loch-Fishing (Black Palmer, 1882)" url="https://archive.org/details/scotchloch-fishi00senirich"
+    "Internet Archive: The British Angler's Lexicon (Richard Niven, 1892)" url="https://archive.org/details/britishanglersle00niverich"
+    "Sexyloops: (Black) Zulu (Viking Lars)" url="https://www.sexyloops.com/index.php/ps/black-zulu"
+    "Trout & Salmon Fishing: Trout Flies, Traditional Scottish Flies" url="https://www.trout-salmon-fishing.com/trout-flies.htm"
+    "Sexyloops: Zulu (fly fishing glossary, Ben Spinks)" url="https://www.sexyloops.com/glossary/zulu.shtml"
     "GlobalFlyFisher: Blue Zulu (Davie McPhail)" url="https://globalflyfisher.com/video/blue-zulu"
+    "GlobalFlyFisher: Black Zulu (Ivar's Fly Workshop)" url="https://globalflyfisher.com/video/black-zulu-0"
+    "Internet Archive: The Fishing Gazette, vol. 26 (1893)" url="https://archive.org/details/fishinggazettede26unse"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

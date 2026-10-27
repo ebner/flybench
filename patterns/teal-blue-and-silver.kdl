@@ -12,19 +12,23 @@ origin region="Scotland"
 description "A golden pheasant tippet tail, a flat silver body with a wire rib, a blue hackle throat and a barred teal flank wing."
 history """
     One of the Teal series of Scottish loch and sea-trout flies, which share the barred teal
-    wing and vary the body and hackle. No originator or date is recorded. Tom Stewart called it
-    a simplified Silver Doctor; R. C. Bridgett counted a "Teal & Silver" among the ten most
-    popular Scottish sea-trout flies in 1929.
+    wing and vary the body and hackle. No originator or date is recorded. Tom Stewart saw it as
+    a pared-down Silver Doctor. R. C. Bridgett's 1929 ranking of the ten most
+    popular Scottish sea-trout flies includes a "Teal & Silver", which may or may not have had
+    the blue hackle.
     """
 fishing """
-    Fished across and down at night or in coloured water for sea trout, often on the tail of a
-    two- or three-fly cast. On lochs it is pulled through the wave from a drifting boat, best
-    when brown trout turn to fry in late summer. In estuaries it suggests sprats and fry.
+    Above all a sea-trout fly. Stewart rated it highly for sea trout, and for salmon in
+    brackish water, where it passes for fry or sprats; small sizes take brown trout at night in
+    high summer. On lochs and rivers it shows up well in coloured water, and it does best in
+    September and October, when trout are chasing fry.
     """
 sources {
-    "Fly Anglers Online: Europe part 2, quoting Tom Stewart (archived)" url="https://web.archive.org/web/2020/https://www.flyanglersonline.com/features/worldwide/europe/part2.php"
+    "Fly Anglers Online: Teal Blue Variant, quoting Tom Stewart (Alan the Highlander, archived)" url="https://web.archive.org/web/20180122082705/http://flyanglersonline.com/features/worldwide/europe/part2.php"
     "Fish4Flies: Teal Blue and Silver" url="https://www.fish4flies.com/Wet/Winged/Teal-Blue-and-Silver"
+    "Fish4Flies: Teal Blue and Silver, sea-trout single" url="https://www.fish4flies.com/Sea-Trout/Singles/Teal-Blue-and-Silver"
     "GlobalFlyFisher: Teal Blue and Silver (Ivar's Fly Workshop)" url="https://globalflyfisher.com/node/71347"
+    "Sea Trout Nights: Flies and Fly Tying" url="https://seatrout-fishing.com/sea-trout-nights/flies-and-fly-tying/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

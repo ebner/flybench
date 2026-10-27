@@ -6,24 +6,28 @@ aliases "Frenchie" "Egan's Thread Frenchie"
 type nymph
 imitates mayfly attractor
 difficulty beginner
-species trout grayling
+species trout
 season january february march april may june july august september october november december
 origin originator="Lance Egan" region="USA"
 description "A slotted tungsten bead on a jig hook, a sparse Coq de León tail, a slim thread body ribbed with fine wire, and a collar of pink Ice Dub behind the bead."
 history """
-    The Frenchie is a stripped-down Pheasant Tail, popularised by French competition anglers on
-    jig hooks with a bright hot spot behind the bead; who tied the first is not recorded. Lance
-    Egan's thread-bodied version swaps the pheasant tail for a thin, fast-sinking thread body,
-    and the Coq de León tail outlasts pheasant tail. It is a batch fly, tied in many colours.
+    The Frenchie is a pared-down Pheasant Tail Nymph, without wing case or legs and with a bright
+    hot spot behind the bead. Richard Anderson traces it to a French angler who won a world
+    championship with such a fly; who tied the first is not recorded. By Lance Egan's account,
+    the early Frenchie had red thread, a pheasant tail tail and body, a copper wire rib and a hot
+    spot thorax. His later Frenchie takes a tail of Coq de León, which is stronger, and the
+    Thread Frenchie, one of his staple nymphs, also trades the pheasant tail body for slim thread.
+    It is a fly for tying in batches, in many colours.
     """
 fishing """
-    Dense and slim, it sinks fast: fish it on a Euro-nymph rig, as the dropper under a dry, or
-    below an indicator on lakes. On a jig hook it rides point up and snags less on the bottom.
-    Smaller sizes go on the dropper, bigger ones on the point.
+    Slim and dense, it gets down fast. Fish it on the point or the dropper of a two-nymph rig, on
+    a Euro-nymph rig, under a hopper in summer, or below an indicator on lakes. The bead turns a
+    jig hook point up.
     """
 sources {
-    "Flylords: How to tie the Thread Frenchie (Lance Egan)" url="https://flylordsmag.com/how-to-tie-the-thread-frenchie/"
+    "Flylords: How to Tie: The Thread Frenchie (Greg Stohrer; tied by Lance Egan)" url="https://flylordsmag.com/how-to-tie-the-thread-frenchie/"
     "MidCurrent: How to tie Egan's Purple Thread Frenchie" url="https://midcurrent.com/v2/how-to-tie-egans-purple-thread-frenchie/"
+    "California Fly Fisher: The Frenchie (Richard Anderson)" url="https://calflyfisher.com/tips-and-techniques/the-frenchie/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -54,7 +58,8 @@ steps {
     wrap-thread to=0.88 note="A slim, slightly tapered thread body."
     wind rib to=0.88 turns=4 note="About four turns under tension; helicopter the wire off."
     tie-off rib
-    // Egan whip-finishes the body thread and starts fire-orange thread for the collar; drawn here with the one thread.
+    // In the MidCurrent video Egan whip-finishes the body thread and starts fire-orange thread for the collar;
+    // drawn here with the one thread.
     dub hotspot to=1.0 note="A small pinch, dubbed tight, a few turns against the bead."
     whip-finish note="So a band of the hot-spot thread shows at the bead."
 }

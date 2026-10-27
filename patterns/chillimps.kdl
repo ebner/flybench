@@ -4,35 +4,39 @@ id chillimps
 name "Chillimps"
 aliases "Chilimps"
 type salmon
-imitates crustacean attractor
+imitates crustacean
 difficulty beginner
 species salmon sea-trout
 season april may june july august september
 origin originator="Rolf Vilhelmsson" year=1942 region="River Mörrum, Sweden"
 description "Orange hackle-tip tail, a slim orange body ribbed with oval gold, an orange palmer hackle and a slightly longer orange front hackle."
 history """
-    Tied by Rolf Vilhelmsson at the Valhalla inn by the Mörrum in the early 1940s, with Olle
-    Törnblom and Sven Hallman looking on; Törnblom later improved it. He wanted a strong colour
-    for the clear but tea-stained river. The name is said to be whisky-blurred English for the
-    colour of a shrimp, made worse by a barely legible last letter in the fishing journal.
-    By 1969, when ABU sold an Optic version with bead eyes, it was already a Mörrum legend.
+    Tied by Rolf Vilhelmsson (Ahrex and Michael Jensen spell it Vilhelmson) at the Valhalla inn
+    by the Mörrum: in 1942 according to Ahrex, in the early 1940s according to a reader's account
+    on GlobalFlyFisher. That account has Olle
+    Törnblom and Sven Hallman there to see it, and Törnblom refining it later; Michael Jensen names
+    all three as its makers. Vilhelmsson chose a strong colour because the river, clear as it is,
+    is always tinged brown. The name stories are anecdote: one says it was meant to name the colour
+    of a shrimp and came out as pidgin English after a whisky or two, with the spelling fixed by a
+    hard-to-read last letter in the fishing journal. ABU brought out a version with Optic eyes
+    in 1969, by which time the plain fly was famous on the Mörrum.
     """
 fishing """
-    Swung across and down like any salmon wet fly, on a floating or intermediate line. The
-    palmered orange hackle gives plenty of life. Small versions on fine wet hooks are a Danish
-    coastal fly for sea trout and garfish in the cold months. Often tied on doubles.
+    A salmon and sea-trout fly, fished like any wet fly for salmon. Ahrex also ties it on doubles.
+    In small sizes on wet-fly hooks it is a Danish coastal fly for garfish (Martin Joergensen), and
+    Ahrex suggests the same dressing on a saltwater hook for the cold season in the sea.
     """
 sources {
     "Ahrex: Chillimps (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2021/11/26/chillimps/"
-    "GlobalFlyFisher: Chillimps" url="https://globalflyfisher.com/patterns/chillimps"
-    "GlobalFlyFisher: Abu Optic Chillimps" url="https://globalflyfisher.com/video/abu-optic-chillimps"
+    "GlobalFlyFisher: Chillimps (Martin Joergensen, with a reader's note on its origin)" url="https://globalflyfisher.com/patterns/chillimps"
+    "GlobalFlyFisher: ABU Optic Chillimps (Michael Jensen)" url="https://globalflyfisher.com/video/abu-optic-chillimps"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
     "https://ahrexhooks.com/wp-content/uploads/2021/11/Chillimps_1-1024x682.jpg" page="https://ahrexhooks.com/2021/11/26/chillimps/" author="Lars Chr. Bentsen" license="All rights reserved; reference only" note="Side view on a single salmon hook"
 }
 
-// Assumption: tied here on a single up-eye salmon hook; doubles are as common.
+// Assumption: a single up-eye salmon hook, as Ahrex ties it; it can also go on a double.
 // Assumption: "orange" here is the deep red-orange of the Ahrex photo.
 hook salmon-up-eye size=6
 thread "#c8401a" size="6/0"

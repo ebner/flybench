@@ -6,25 +6,28 @@ aliases "Copper Bully" "Kobberlusen" "Copper Louse"
 type saltwater
 imitates crustacean
 difficulty beginner
-species sea-trout trout
+species sea-trout
 season january february march april may june july august september october november december
 origin originator="Frank Jensen" year=1996 region="Denmark"
-description "A short Krystal Flash tail and a shaggy, teased-out copper dubbing body with a copper wire rib, on a short curved hook."
+description "A short Krystal Flash tail and a shaggy, teased-out copper dubbing body with a copper wire rib, on a short-shank, wide-gape hook."
 history """
-    Conceived by Frank Jensen in 1996 and soon merged with Morten Kristiansen's somewhat more
-    complex Kobberlusen, the Copper Louse; the two names are now used for much the same fly.
-    It is a gammarus imitation stripped to the essentials: as GlobalFlyFisher puts it, all you
-    really need is copper dubbing of some kind.
+    Frank Jensen's fly from 1996. GlobalFlyFisher sees it as two strains run together: Jensen's
+    Kobberbassen and Morten Kristiansen's Kobberlusen, the Copper Louse, which began as a
+    somewhat more complex fly. Both share the copper dubbed body, and the names now cover much
+    the same fly. Tyers add tails, shellbacks, legs and ribs, but in GlobalFlyFisher's words
+    "essentially all you need is copper dubbing of some kind".
     """
 fishing """
-    Fished in clear, shallow coastal water, often as a small dropper ahead of a bigger point fly,
-    with short pulls and stops or a slow hand-twist to mimic drifting and darting gammarids. In
-    fresh water it passes for scuds and cress bugs.
+    A sea-trout fly for clear, shallow coastal water where gammarids are about, often fished as
+    a small dropper ahead of a bigger point fly. Retrieve it in short pulls with stops, or with
+    a steady hand-twist, to copy the darting and gliding of the naturals. Tied small it also
+    serves in fresh water as a scud or cress bug.
     """
 sources {
-    "GlobalFlyFisher: Copper Bully" url="https://globalflyfisher.com/patterns/copper-bully"
-    "GlobalFlyFisher: Kobberbassen (Ahrex video)" url="https://globalflyfisher.com/video/kobberbassen"
+    "GlobalFlyFisher: The Copper Bully (Martin Joergensen, Ken Bonde Larsen)" url="https://globalflyfisher.com/patterns/copper-bully"
+    "GlobalFlyFisher: Kobberbassen (Ahrex video, Jesper Lindquist Andersen)" url="https://globalflyfisher.com/video/kobberbassen"
     "Sexyloops: Another ugly fly (Rickard Gustafsson)" url="https://www.sexyloops.com/index.php/ps/another-ugly-fly"
+    "Fishmadman: Kobberbassen #8" url="https://rifflinghitch.com/product/kobberbassen-8/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

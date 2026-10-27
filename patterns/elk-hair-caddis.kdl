@@ -11,19 +11,21 @@ season may june july august september
 origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
 description "A buoyant searching caddis: a slim dubbed body, a palmered hackle held down by a gold wire rib, and a flared elk hair wing."
 history """
-    Al Troth tied the first Elk Hair Caddis in 1957 and fished it on Loyalsock Creek in
-    Pennsylvania, before moving to Montana. Bleached elk hair kept the wing visible on the
-    water. The neatly trimmed head that most tyers now give it was added by others; see
-    the Troth variant for his own way.
+    Al Troth tied the first Elk Hair Caddis in 1957 for the green caddis on his home streams
+    in Pennsylvania, and first fished it on Loyalsock Creek; he moved to Montana in 1973. He
+    set out to make a wet fly, but it floated so well that he fished it dry. He used bleached
+    elk hair so that the wing would be easier to see. The neatly trimmed head that most
+    tyers now give it was added by others; see the Troth variant for his own way.
     """
 fishing """
-    A searching pattern for any water where caddis hatch. Fish it on a dead drift, then
-    twitch or skate it to imitate egg-laying females. The hair wing and palmered hackle
-    float it high in broken water, and it makes a good indicator for a small dropper.
+    A searching pattern for any water where caddis hatch, riffles and runs included: the hair
+    wing and palmered hackle float it high. It is mostly fished on a dead drift; skating it,
+    or pulling it through the film like a caddis hatching, works too.
     """
 sources {
     "Wikipedia: Elk Hair Caddis" url="https://en.wikipedia.org/wiki/Elk_Hair_Caddis"
-    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-blog/famous-fly-history-elk-hair-caddis"
+    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-shop-blog/famous-fly-history-elk-hair-caddis"
+    "Rocky River Trout Unlimited: Troth Elk Hair Caddis FFI (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/troth-elk-hair-caddis-ffi.html"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -36,8 +38,8 @@ thread tan size="8/0"
 materials {
     rib    gold-wire
     body   dry-fly-dubbing color=tan
-    // Assumption: brown, and undersized for palmering (fibres 0.8× gape).
-    // Wikipedia's standard dressing gives ginger.
+    // Brown as in the FFI dressing (Rocky River TU); Wikipedia's standard dressing gives ginger.
+    // Assumption: undersized for palmering (fibres 0.8× gape).
     hackle cock-hackle color=brown fibre=0.8
     wing   elk-hair color=bleached
 }

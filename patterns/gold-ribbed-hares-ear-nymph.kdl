@@ -11,24 +11,26 @@ season january february march april may june july august september october novem
 origin region="England, then the United States"
 description "A hare's mask guard-hair tail, a tapered hare's ear abdomen ribbed with gold wire, a mottled turkey wing case and a rough, picked-out thorax."
 history """
-    Hare's ear fur was in flies by Cotton's time, and a Hare's Ear wet fly appears in Samuel
-    Taylor's book of 1800; Halford listed a dry Gold-Ribbed Hare's Ear in 1886, and Skues fished
-    the wet one as a nymph. The nymph as tied today, with a tail, a wing case and a picked-out
-    thorax, grew up in America from the 1930s on; Jim Quick listed it as a nymph in 1957. Nobody
-    is recorded as its inventor. By 1986 Randall Kaufmann called it the most popular nymph in the
-    world.
+    Hare's ear fur was in flies by Cotton's time, and Samuel Taylor gave a fly called the Hare's
+    Ear in 1800; Halford listed a dry Gold-Ribbed Hare's Ear in 1886, and Skues fished the wet
+    one as a nymph. As late as 1935 Preston Jennings was using a trimmed wet fly as a nymph; Jim
+    Quick, in 1957, is the first author Tom Travis found listing the Hare's Ear as a nymph
+    pattern. Nobody is recorded as the inventor of the nymph as tied today, with a tail, a wing
+    case and a picked-out thorax. By 1986 Randall Kaufmann called it the most popular nymph in
+    the world.
     """
 fishing """
-    The archetypal searching nymph. Dead-drift it near the bottom under an indicator, tight-line
-    it through riffles and runs, swing it, or retrieve it slowly on stillwater. The shaggy fur
-    suggests legs and gills, so it passes for mayfly nymphs, caddis, scuds and small stoneflies
-    all year round.
+    A searching nymph that suggests many things and copies none. In streams, get it down near
+    the bottom, adding shot and an indicator when the water calls for it; on stillwater, bring
+    it back slowly. Once wet, the rough fur looks like kicking legs, and it passes for mayfly
+    nymphs, caddis larvae and scuds and, tied big, for stoneflies.
     """
 sources {
     "Fly Fisherman: Tying the Hare's Ear (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-the-hares-ear/152083"
-    "Minnesota DNR MinnAqua: Hare's Ear Nymph" url="https://files.dnr.state.mn.us/recreation/fishing/fin/tie_hares_ear.pdf"
-    "Fly Anglers Online: Hare's Ear Patterns (Tom Travis)" url="https://www.flyanglersonline.com/t/hares-ear-faol-archive/8348"
+    "Minnesota DNR MinnAqua: Fly Tying 101 #2, Gold Ribbed Hare's Ear (Roland Sigurdson)" url="https://files.dnr.state.mn.us/recreation/fishing/fin/tie_hares_ear.pdf"
+    "Fly Anglers Online: Hare's Ear Patterns, Part One (Tom Travis)" url="https://www.flyanglersonline.com/t/hares-ear-faol-archive/8348"
     "Wikipedia: Hare's Ear" url="https://en.wikipedia.org/wiki/Hare%27s_Ear"
+    "Fish4Flies: Gold Ribbed Hare's Ear" url="https://www.fish4flies.com/Nymphs/Hares-Ear-and-Pheasant-Tail/Gold-Ribbed-Hares-Ear"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

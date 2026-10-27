@@ -13,21 +13,24 @@ origin originator="Bob Nauheim" year=1977 region="Andros Island, Bahamas"
 description "Bead-chain eyes near the eye, a pearl body under clear ribbing, and a white calf tail wing with a little pearl flash on the hook-point side."
 history """
     Usually credited to Bob Nauheim, who tied the first ones in 1977 on a trip with the Andros
-    guide Charlie Smith and gave them bead-chain eyes to suggest glass minnows. Smith said "dat
-    fly is nasty mon", so they were Nasty Charlies until Orvis's Leigh Perkins asked for a
-    politer name. Smith's family remember it differently: in their account he made the first ones
-    himself, with beads from military tags and a chicken-feather body. It was the first bonefish
-    fly to ride point up on bead-chain eyes.
+    guide Charlie Smith and gave them bead-chain eyes to suggest glass minnows. Smith is said to
+    have called it "nasty", so they were first Nasty Charlies; when Leigh Perkins of Orvis put it
+    in the Orvis catalogue he disliked the name, and it was changed with Smith's permission.
+    Other accounts, among them that of Smith's son Prescott, say Charlie Smith made the first
+    ones himself, with beads from military tags and a chicken-feather body. It was the first
+    bonefish fly with bead-chain eyes, whose weight turns it point up.
     """
 fishing """
-    Sight-cast to tailing or cruising bonefish on shallow flats, leading the fish. Let it sink to
-    the bottom, then strip it in short, erratic pulls so it puffs the sand like a fleeing shrimp.
-    It rides point up and slides over turtle grass and coral; choose the eyes for the depth.
+    Cast a rod length or two ahead of a bonefish and let the fly sink to the bottom. When the
+    fish comes close, give it one or two short strips, so it moves away like a small fish or a
+    shrimp escaping. Riding point up, it seldom catches the bottom. Choose bead chain, or heavier
+    dumbbell eyes, for the depth.
     """
 sources {
     "Wikipedia: Crazy Charlie" url="https://en.wikipedia.org/wiki/Crazy_Charlie"
-    "FlyLife: Tie the Crazy Charlie (Skip Clement)" url="https://flylifemagazine.com/fly-tying-tie-the-crazy-charlie-a-fly-with-a-long-history/"
+    "FlyLife: The Crazy Charlie, a fly with a long history (Skip Clement and Don Reed)" url="https://flylifemagazine.com/fly-tying-tie-the-crazy-charlie-a-fly-with-a-long-history/"
     "Charlie's Fly Box: Crazy Charlie" url="https://charliesflybox.com/blogs/step-by-step-tutorials/crazy-charlie"
+    "Into Fly Fishing: How to tie a Crazy Charlie (Pierre Joubert)" url="https://intoflyfishing.com/how-to-tie-a-crazy-charlie/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

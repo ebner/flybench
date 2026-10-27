@@ -5,26 +5,26 @@ name "Marabou Muddler"
 type streamer
 imitates baitfish
 difficulty intermediate
-species trout bass salmon
+species trout bass
 season january february march april may june july august september october november december
-origin originator="Dan Bailey" region="Livingston, Montana, USA, 1940s or 1950s"
+origin originator="Dan Bailey" region="Livingston, Montana, USA, 1940s"
 description "A red hackle-fibre tail, a silver tinsel body, a full white marabou wing topped with peacock herl, and a spun deer-hair collar and clipped head."
 history """
-    Dan Bailey, the Livingston fly shop owner who gave the Muddler its dense clipped head, swapped
-    the turkey wing for marabou to imitate river minnows. Its date is uncertain: the 1940s
-    according to one account, the 1950s according to others. White was Bailey's favourite; black,
-    olive, yellow and brown followed.
+    Dan Bailey, the Livingston fly-shop owner credited with the Muddler's dense clipped head,
+    swapped its turkey wing for marabou to imitate river minnows. Wikipedia's article on Bailey
+    dates it to the 1940s; the other sources give no date. Bailey preferred white; brown,
+    yellow and black are also popular in the West.
     """
 fishing """
-    Fished across and down or stripped, in rivers and lakes. On a floating line the deer-hair head
-    holds it up so it suspends or wakes; weighted, on a sinking line, it bobs on the retrieve. The
-    marabou never stops moving.
+    Tied light, the deer-hair head keeps it near the top: it suspends, and stripped it wakes on
+    the surface. Weighted and fished on a sinking line, it bobs up and down on the retrieve.
     """
 sources {
-    "SWTU: Marabou Muddler" url="https://www.swtu.org/2020/02/05/marabu-muddler/"
+    "SWTU: Marabou Muddler (Rusty Dunn)" url="https://www.swtu.org/2020/02/05/marabu-muddler/"
+    "Wikipedia: Dan Bailey (conservationist)" url="https://en.wikipedia.org/wiki/Dan_Bailey_(conservationist)"
     "Fly Fishing the Sierra: Marabou Muddler" url="https://flyfishingthesierra.com/marabou-muddler/"
-    "FlyLife: Black Marabou Muddler" url="https://flylifemagazine.com/?p=24446"
-    "MidCurrent: Muddlers made easy" url="https://midcurrent.com/flies/muddlers-made-easy/"
+    "FlyLife: Fluff befitting a tarpon or snook (Steve Kantner)" url="https://flylifemagazine.com/?p=24446"
+    "MidCurrent: Muddlers made easy (John Likakis)" url="https://midcurrent.com/flies/muddlers-made-easy/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

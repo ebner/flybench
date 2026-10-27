@@ -11,18 +11,17 @@ season january february march april may june july august september october novem
 origin originator="Pat Bennett" region="Island Park, Idaho, USA"
 description "A weighted body of black and coffee variegated chenille with rubber-leg tails and antennae and three pairs of rubber legs."
 history """
-    Tied by Pat Bennett, a guide at Hyde Outfitters in Island Park, Idaho, from big rubber-legged
-    stonefly patterns like the Girdle Bug; one account calls him a Utah tyer. The date isn't
-    recorded. Black and coffee with barred legs has become the standard; Rocky Mountain guides
-    fish it all year.
+    Tied by Pat Bennett, a guide at Hyde Outfitters in Island Park, Idaho, after big rubber-legged
+    stonefly patterns such as the Girdle Bug. The date isn't recorded. Black and coffee chenille
+    is a favourite of guides across the Rockies, who fish it all year.
     """
 fishing """
-    A guide's searching nymph: deep and dead-drift, under an indicator or as the heavy point fly
-    of a nymph rig, wherever big stoneflies live. The legs keep moving even on a dead drift.
-"""
+    A guide's searching nymph, for anywhere big stoneflies live: empty nymph shucks on the rocks
+    are a good sign. Fish it deep and bump it along the bottom and into pools.
+    """
 sources {
-    "Orvis: Pat's Rubber Legs (Tim Flagler)" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/892-pats_rubber_legs"
-    "FlyLife: Pat's Rubber Legs" url="https://flylifemagazine.com/?p=56843"
+    "Orvis Learning Center: Pat's Rubber Legs" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/892-pats_rubber_legs"
+    "FlyLife: No fly tyer should ever fear rubber legs again (Skip Clement)" url="https://flylifemagazine.com/no-fly-tyer-should-ever-fear-rubber-legs-again/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

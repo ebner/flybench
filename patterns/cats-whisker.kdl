@@ -4,28 +4,35 @@ id cats-whisker
 name "Cat's Whisker"
 aliases "Cats Whisker"
 type streamer
-imitates baitfish attractor
+imitates baitfish
 difficulty beginner
 species trout
 season january february march april may june july august september october november december
-origin originator="David Train" region="England, mid-1980s"
+origin originator="David Train" region="England, 1980s"
 description "A white marabou tail and wing, a fluorescent lime chenille body with a silver wire rib, and silver bead-chain eyes behind the eye."
 history """
-    David Train's first version had no eyes, and the marabou wing kept looping round the hook,
-    so he tied in four white whiskers his cat had shed to stiffen it. Bead-chain eyes later made
-    the whiskers unnecessary, but the name stuck. Train sent flies to Bob Church, who won
-    competitions with them, and it became one of the standard lures on English reservoirs.
+    David Train's lure from the 1980s; Funky Fly Tying says the early 1980s, the GlobalFlyFisher
+    video about 1985. The first version had no eyes, and to keep the marabou from fouling round
+    the hook Train tied in four white whiskers his cat had shed. Adding bead-chain eyes, to make
+    it sink and swim level, did away with the whiskers, but not the name. Train sent some to
+    Bob Church, who won competitions with them, and it became one of the best known British
+    stillwater lures.
     """
 fishing """
-    A sinking stillwater lure on floating, intermediate or fast-sinking lines, retrieved in long,
-    erratic pulls with pauses. On the pause the eyes make it dip head first; on the pull the
-    marabou breathes. It is especially good in autumn when trout are chasing fry.
+    A weighted stillwater lure, fished on whatever line puts it at the trout's depth, from
+    floating to fast-sinking. Strip it in long, uneven pulls and break the rhythm now and then
+    with a pause and a few quick, short jerks. When it stops, the eyes tip its head down; when
+    it moves, it darts up again like a fleeing fry, and the marabou keeps moving throughout.
+    It fishes all year. The English Fly Fishing Shop rates it highest in autumn, when trout
+    feed on the year's fry; Funky Fly Tying prefers it in cold water, from late October to
+    April.
     """
 sources {
-    "English Fly Fishing Shop: Cat's Whisker, white and pink" url="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandpink.htm"
-    "Troutflies.co.uk: Cat's Whisker" url="https://www.troutflies.co.uk/blog/useful-tying-patterns/cats-whisker/"
-    "Funky Fly Tying: Cat's Whisker" url="https://funkyflytying.com/?p=62048"
-    "GlobalFlyFisher: Cat's Whisker" url="https://globalflyfisher.com/video/cats-whisker"
+    "English Fly Fishing Shop: White and Orange Cats Whisker Streamer (Craig Moore)" url="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandpink.htm"
+    "English Fly Fishing Shop: The White and Green Cat's Whisker (Craig Moore)" url="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandgreen.htm"
+    "Troutflies UK Blog: Cats Whisker (Wendy)" url="https://www.troutflies.co.uk/blog/useful-tying-patterns/cats-whisker/"
+    "Funky Fly Tying: The Cat's Whisker, step by step" url="https://funkyflytying.com/?p=62048"
+    "GlobalFlyFisher: Cat's Whisker (video, Ívar's Fly Workshop)" url="https://globalflyfisher.com/video/cats-whisker"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

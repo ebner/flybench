@@ -1,34 +1,40 @@
-// Willie Gunn on a brass tube, the commonest form for big spring rivers.
+// Willie Gunn on a brass tube, a heavy fly for cold, high spring water.
 
 id willie-gunn-tube
 name "Willie Gunn"
 variant-of willie-gunn
 variant "Brass tube"
 type salmon
-imitates attractor
 difficulty beginner
 species salmon sea-trout
 season february march april may june july august september
 origin region="Brora, Sutherland, Scotland"
 description "An oval gold tag and rib over a black floss body, a short orange throat, and a long wing of yellow, orange and black bucktail."
 history """
-    Named after Willie Gunn, keeper and gillie on the Sutherland estates at Brora, and tied to Rob
-    Wilson's tackle shop there. Who designed it is disputed: the usual story credits Flight
-    Lieutenant "Dusty" Miller, who tied for Wilson, in the 1940s; another says Gunn's nephew Jim
-    MacKenzie tied the first ones in March 1968. The colours are those of the Thunder & Lightning.
-    The original was a Waddington, and tubes are still the commonest form; the gold-bodied version
-    now outsells the black.
+    Named after Willie Gunn, who worked for the Sutherland Estates as keeper and gillie, and
+    linked in every account to Rob Wilson's tackle shop in Brora. Who designed it is disputed. The
+    best-known story, told on GlobalFlyFisher and by John Gray, credits Flight Lieutenant "Dusty" Miller, who tied
+    flies for Wilson; Gray dates it to the 1940s. Ross Macdonald gives the account of Gunn's nephew,
+    Jim MacKenzie, who says he tied the first ones, with a blended wing, in March 1968. Gray
+    describes the colours as those of the Thunder & Lightning. Fish4Flies says the first were tied
+    on Waddington shanks, while Macdonald's telling of the Miller story speaks of tubes. Macdonald
+    also thinks the gold-bodied version may now be more popular than the black.
     """
 fishing """
-    A standard Scottish spring fly: big tubes and Waddingtons on sinking lines in cold, high water,
-    smaller doubles and singles later in the season as the water drops and warms, swung across and
-    down. More black in the wing suits dark, peaty rivers; more yellow and orange suits clear water.
+    To Ross Macdonald it stands for spring fishing in Scotland, and it is tied in every size from
+    small summer flies to the biggest tubes. Big Waddingtons and heavy tubes are for the cold, high
+    water of early spring, fished deep; small, lightly dressed singles and doubles for low summer
+    water. Swing it across and down. Changing the share of each colour suits it to dark or clear
+    rivers.
     """
 sources {
-    "GlobalFlyFisher: Streamers365, Willie Gunn (Dan Despres)" url="https://globalflyfisher.com/node/67405"
-    "Trout & Salmon Fishing: Willie Gunn tube fly (John Gray)" url="https://trout-salmon-fishing.com/willie-gunn-tube-fly.htm"
-    "Fly Fish 50: A fly to try, the Willie Gunn (Ross Macdonald)" url="https://flyfish50.com/a-fly-to-try-this-month-willie-gunn/"
+    "GlobalFlyFisher: Streamers365 #22-2013, Willie Gunn (Dan Despres)" url="https://globalflyfisher.com/node/67405"
+    "Trout & Salmon Fishing: The Willie Gunn tube fly (John Gray)" url="https://trout-salmon-fishing.com/willie-gunn-tube-fly.htm"
+    "Fly Fish 50: The Willie Gunn salmon fly (Ross Macdonald)" url="https://flyfish50.com/a-fly-to-try-this-month-willie-gunn/"
     "Fish4Flies: Willie Gunn double" url="http://www.fish4flies.com/Salmon-Atlantic/Doubles/Willie-Gunn"
+    "Fish4Flies: Willie Gunn tube" url="https://www.fish4flies.com/Salmon-Atlantic/Tubes/Bottle-Brass/Willie-Gunn-Tube"
+    "Fish4Flies: Willie Gunn Waddington" url="https://www.fish4flies.com/Salmon-Atlantic/Waddingtons/Willie-Gunn-Waddington"
+    "Guide Fly Fishing: Caledonia Willie Gunn Nordic Single" url="https://guideflyfishing.co.uk/product/caledonia-willie-gunn-nordic-single"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -36,7 +42,7 @@ references {
     "https://www.fish4flies.com/img/flies/Large/2626-2626.jpg" page="http://www.fish4flies.com/Salmon-Atlantic/Doubles/Willie-Gunn" license="All rights reserved; reference only" flip=#true note="Classic black body, on a double"
 }
 
-// Fly Fish 50: on a 1.5" tube the dressing is about 3" long. Assumption: a black floss body on the brass tube.
+// Ross Macdonald: on a 1.5" tube the dressing is about 3" long. Fish4Flies ties the wing all round the tube. Assumption: a black floss body on the brass tube.
 hook tube-brass length=38 treble=10
 thread black size="8/0"
 
@@ -63,7 +69,8 @@ steps {
     tie-off body
     wind rib to=0.84 turns=5
     tie-off rib
-    // Rob Wilson's layered wing (Headley): yellow, then orange, then black; the original was blended. Dressed long.
+    // Layered, which Macdonald says (after Stan Headley) was Rob Wilson's way; the original was blended.
+    // Yellow under orange under black (GlobalFlyFisher, John Gray). Dressed long (Macdonald).
     tie-in yellow length=5.4 angle=4 spread=180 note="All round the tube, equal parts of each colour."
     trim yellow
     tie-in orange length=5.4 angle=6 spread=180
