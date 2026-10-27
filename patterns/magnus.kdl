@@ -59,7 +59,7 @@ steps {
     dub body to=0.82 note="Sparse; stop one eye width behind the eyes."
     tie-in palmer note="By the butt, at the front."
     wind palmer to=0.04 turns=6 note="Backward, in open turns, to the bend."
-    wind rib to=0.82 turns=6 counter=#true note="Through the hackle, locking its tip."
+    wind rib to=0.82 turns=6 counter=#true
     tie-off rib
     trim palmer note="The hackle tip at the bend."
     tie-in front

@@ -196,7 +196,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       if (step.around) {
         text = `Wind the ${mat(step.material)} round the base of the ${mat(step.around)} in ${step.turns} turns, each one under the last.`;
       } else if (ctx.rear) {
-        text = `Palmer the ${mat(step.material)} back to ${at(to)} in ${step.turns} open turns.`;
+        text = `Palmer the ${mat(step.material)} back to ${at(to)} in ${step.turns} open turns${counter}.`;
       } else if (ctx.through) {
         text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns${counter} through the ${mat(ctx.through)}. The first turn traps its tip.`;
       } else {

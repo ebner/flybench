@@ -192,6 +192,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         }
         if ((step.to === undefined) === (step.around === undefined)) {
           err("give either `to` (along the shank) or `around` (a parachute post)", path);
+          break;
         }
         if (step.counter && step.around !== undefined) {
           err("counter applies to winding along the shank, not round a post", [...path, "counter"]);
