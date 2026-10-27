@@ -86,6 +86,22 @@ for (const page of pages) {
   await writeFile(`${DIST}/${page.path}index.html`, html);
 }
 
+// The final word on reference photos: none of their addresses may be in the built bundle,
+// whatever form a block took or whatever happens to the build plugin that strips them.
+const photos = (
+  await Promise.all(
+    (await readdir("patterns")).filter((f) => f.endsWith(".kdl")).map(async (f) => {
+      const raw = loadRecipe(await readFile(`patterns/${f}`, "utf8"));
+      return raw.ok ? raw.recipe.references.map((r) => r.image) : [];
+    }),
+  )
+).flat();
+for (const f of (await readdir(`${DIST}/assets`)).filter((f) => f.endsWith(".js"))) {
+  const js = await readFile(`${DIST}/assets/${f}`, "utf8");
+  const shipped = photos.find((url) => js.includes(url));
+  if (shipped) throw new Error(`dist/assets/${f} contains a reference photo address: ${shipped}`);
+}
+
 // The service worker caches the app's own files on install, so the site works offline
 // after the first visit; the cache is named after this build's files.
 const assets = (await readdir(`${DIST}/assets`)).sort();

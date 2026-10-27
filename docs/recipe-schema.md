@@ -267,13 +267,6 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 - Hair and feather wings need a `length`. `angle` needs a `length`. `spread` only applies
   to material tied in with a length (tags, tails, wings; for feathers it makes a pair);
   `width` only to feather wings.
-
-### Proportions
-
-Proportions are data in the recipe, never constants in the renderer, so they can be
-corrected per pattern. The generated text states them the way a tyer measures: in
-fractions of the gape, and for wings by where the tips end ("just past the end of the
-bend"). When proportions are taken from reference photos, say so in a comment.
 - `wind … to` must differ from the tie-in point. A forward wind may go no further than
   the thread.
 - A forward-wound material is tied off in the very next step.
@@ -287,3 +280,11 @@ bend"). When proportions are taken from reference photos, say so in a comment.
 - Only hair is spun, only wire weights, only beads are slid on.
 - `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), and every recipe has one.
 - Materials have unique ids, and steps refer only to defined materials.
+
+### Proportions
+
+Proportions are data in the recipe, never constants in the renderer, so they can be
+corrected per pattern. The generated text states them the way a tyer measures: in
+fractions of the gape, and for wings by where the tips end ("just past the end of the
+bend"); on tubes and Waddingtons, which have no gape, in millimetres. When proportions
+are taken from reference photos, say so in a comment.

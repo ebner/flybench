@@ -742,11 +742,13 @@ export function simulate(recipe: Recipe): Build {
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
         const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
+        const trimmedLater = recipe.steps.slice(index + 1).some((s) => s.op === "trim" && s.material === step.material);
+        ctx.trimmedLater = trimmedLater;
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
           // A strip trimmed later sticks out over the eye until then.
-          dents: [], stub: recipe.steps.slice(index + 1).some((s) => s.op === "trim" && s.material === step.material) ? UNTRIMMED : 0,
+          dents: [], stub: trimmedLater ? UNTRIMMED : 0,
           barring: l.barring,
         };
         pieces.push(cover);
