@@ -13,9 +13,12 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE).then(async (cache) => {
-      await cache.addAll(SHELL);
+      // Straight from the network: the browser's HTTP cache may still hold the previous
+      // deployment's front page and manifest for a few minutes.
+      const fresh = (url) => new Request(url, { cache: "reload" });
+      await cache.addAll(SHELL.map(fresh));
       // One font failing to load must not cost the rest of the offline copy.
-      await Promise.all(FONTS.map((font) => cache.add(font).catch(() => {})));
+      await Promise.all(FONTS.map((font) => cache.add(fresh(font)).catch(() => {})));
     }),
   );
 });

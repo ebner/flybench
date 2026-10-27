@@ -263,6 +263,8 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       if (a === "eyes") return "eyes";
       if (step.length === undefined) return "tie-in";
       if (step.side === "under") return "beard";
+      // Legs tied across the shank and extended bodies are tied in like any material.
+      if (step.side === "across" || step.extended) return "tie-in";
       if ((step.angle ?? 0) >= 60) return "wing-post";
       if (a === "hair") return "hair-wing";
       if (a === "feather") return "feather-wing";
@@ -289,7 +291,6 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
   }
 }
 
-/** Where the thread was when the material was tied in (shank fraction), or null. */
 /** Where the thread is when step `index` begins. */
 function threadAt(recipe: Recipe, index: number): number {
   let thread = 0;
@@ -300,6 +301,7 @@ function threadAt(recipe: Recipe, index: number): number {
   return thread;
 }
 
+/** Where the thread was when the material was tied in (shank fraction), or null. */
 function tieInPosition(recipe: Recipe, before: number, material: string): number | null {
   let thread: number | null = null;
   for (let i = 0; i < before; i++) {
@@ -311,31 +313,42 @@ function tieInPosition(recipe: Recipe, before: number, material: string): number
   return null;
 }
 
-/**
- * Whether a winding goes over an earlier body (dubbing or another wound material), as a rib
- * does, rather than beside it, as the two halves of a body or a band of floss do.
- */
-function woundOverBody(recipe: Recipe, index: number): boolean {
-  const step = recipe.steps[index];
-  if (step?.op !== "wind" || step.to === undefined) return false;
-  const from = tieInPosition(recipe, index, step.material);
-  if (from === null) return false;
-  const [a, b] = [Math.min(from, step.to), Math.max(from, step.to)];
+/** The stretch of shank each wound or dubbed step covers, by step index. */
+function bodySpans(recipe: Recipe): Map<number, [number, number]> {
+  const spans = new Map<number, [number, number]>();
   let thread = 0;
-  for (let i = 0; i < index; i++) {
-    const s = recipe.steps[i]!;
-    let range: [number, number] | null = null;
-    if (s.op === "dub") range = [Math.min(thread, s.to), Math.max(thread, s.to)];
-    if (s.op === "wind" && s.to !== undefined && s.material !== step.material) {
+  recipe.steps.forEach((s, i) => {
+    if (s.op === "dub") spans.set(i, [Math.min(thread, s.to), Math.max(thread, s.to)]);
+    if (s.op === "wind" && s.to !== undefined) {
       const start = tieInPosition(recipe, i, s.material);
-      if (start !== null) range = [Math.min(start, s.to), Math.max(start, s.to)];
+      if (start !== null) spans.set(i, [Math.min(start, s.to), Math.max(start, s.to)]);
     }
     if (s.op === "attach-thread") thread = s.at;
     if (s.op === "wrap-thread" || s.op === "dub" || s.op === "spin") thread = s.to;
-    // Over most of its own length.
-    if (range && Math.min(b, range[1]) - Math.max(a, range[0]) >= 0.5 * (b - a)) return true;
-  }
-  return false;
+  });
+  return spans;
+}
+
+const overlap = (a: [number, number], b: [number, number]) => Math.min(a[1], b[1]) - Math.max(a[0], b[0]);
+
+/**
+ * Whether a winding is a rib: open turns over an earlier body (dubbing or another wound
+ * material), or over a body of thread alone (no other material on that stretch at all,
+ * as on a Greenwell's Glory). Bodies beside each other, and dense wire or tinsel bodies,
+ * are not ribs.
+ */
+function woundOverBody(recipe: Recipe, index: number): boolean {
+  const spans = bodySpans(recipe);
+  const own = spans.get(index);
+  const step = recipe.steps[index];
+  if (!own || step?.op !== "wind") return false;
+  const length = own[1] - own[0];
+  const others = [...spans].filter(([i]) => (recipe.steps[i] as { material?: string }).material !== step.material);
+  // Over most of an earlier body.
+  if (others.some(([i, span]) => i < index && overlap(own, span) >= 0.5 * length)) return true;
+  // Over a thread body: long, in open turns, and nothing else ever wound or dubbed there.
+  const open = step.turns / Math.max(length, 0.01) < 12;
+  return length >= 0.3 && open && others.every(([, span]) => overlap(own, span) <= 0);
 }
 
 /** The techniques a pattern uses, in the order they first appear. */

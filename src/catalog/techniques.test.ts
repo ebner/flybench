@@ -49,6 +49,12 @@ describe("techniques", () => {
     expect(at("adams", "tie-in", "tail-brown")).toBe("tail");
     expect(at("allys-shrimp", "wind", "front")).toBe("wound-body");
     expect(at("gold-ribbed-hares-ear-nymph", "wind", "rib")).toBe("ribbing");
+    // A rib over a body of thread alone, and a dense wire body that is no rib.
+    expect(at("greenwells-glory", "wind", "rib")).toBe("ribbing");
+    expect(at("brassie", "wind", "body")).toBe("wound-body");
+    // Legs tied across and extended bodies are neither tails nor wings.
+    expect(at("foam-beetle", "tie-in", "legs")).toBe("tie-in");
+    expect(at("peeping-caddis", "tie-in", "larva")).toBe("tie-in");
   });
 
   it("file a trim under what is being trimmed", () => {
