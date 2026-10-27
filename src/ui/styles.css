@@ -700,6 +700,19 @@ select {
   accent-color: var(--accent);
 }
 
+/* A phone can't fit the buttons and a usable timeline on one row: the timeline gets its own. */
+@media (max-width: 40rem) {
+  .transport {
+    flex-wrap: wrap;
+  }
+
+  .scrub {
+    order: -1;
+    flex-basis: 100%;
+    margin: 0 0 0.5rem;
+  }
+}
+
 .ticks {
   position: absolute;
   left: 8px;
