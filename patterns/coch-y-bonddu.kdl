@@ -33,7 +33,7 @@ sources {
     "Midcurrent: A Fly Fishing Chronicle: The Coch-y-Bonddu (Fred Klein)" url="https://midcurrent.com/flies/a-fly-fishing-chronicle-the-coch-y-bonddu/"
     "Fish4Flies: Coch-y-Bondhu" url="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.fish4flies.com/img/flies/Large/800-800.jpg" page="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu" license="All rights reserved; reference only" flip=#true note="Side view, dry, gold tag"
     "https://www.swtu.org/wp-content/uploads/2020/03/coch-y-bonddu.jpg" page="https://www.swtu.org/2020/03/05/coch-y-bonddu/" license="All rights reserved; reference only" note="Side view, wet version"

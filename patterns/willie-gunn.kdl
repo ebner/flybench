@@ -34,7 +34,7 @@ sources {
     "Fish4Flies: Willie Gunn Waddington" url="https://www.fish4flies.com/Salmon-Atlantic/Waddingtons/Willie-Gunn-Waddington"
     "Guide Fly Fishing: Caledonia Willie Gunn Nordic Single" url="https://guideflyfishing.co.uk/product/caledonia-willie-gunn-nordic-single"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/streamers/2013/03/22_willie_gunn_dd.jpg" page="https://globalflyfisher.com/node/67405" author="Daniel Despres" license="All rights reserved; reference only" note="Single hooks, gold and silver versions"
     "https://www.fish4flies.com/img/flies/Large/2626-2626.jpg" page="http://www.fish4flies.com/Salmon-Atlantic/Doubles/Willie-Gunn" license="All rights reserved; reference only" flip=#true note="Classic black body, on a double"

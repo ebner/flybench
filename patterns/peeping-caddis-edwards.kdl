@@ -25,7 +25,7 @@ sources {
     "Fly Anglers Online: Cased Caddis (Mike Murgida, after Oliver Edwards)" url="https://www.flyanglersonline.com/t/cased-caddis-fly-pattern/2945"
     "Fulling Mill: OE Peeping Caddis" url="https://www.fullingmill.co.uk/Products-UK/Tactical-River-Nymphs-UK/OE-Peeping-Caddis-Debris-S10-UK"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.fish4flies.com/img/flies/Large/T4085Peeping%20Caddis.jpg" page="https://www.fish4flies.com/Nymphs/Caddis-and-Larva-and-Pupa/Peeping-Caddis" author="Graydon Bell" license="All rights reserved; reference only" note="Side view, larva at the front"
 }

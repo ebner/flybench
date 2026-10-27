@@ -31,7 +31,7 @@ sources {
     "Piscari-Fly: Montana nymphs and streamer (Peter Driver)" url="http://peterdriver.blogspot.com/2014/01/montana-nymphs-streamer.html"
     "JustGone.Fishing: Tying Montana Nymph (Hans)" url="https://justgone.fishing/2022/05/18/tying-montana-nymph/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://guideline-products-production.imgix.net/images/773_ed65a19707-103099-full.jpg?q=70&fit=clip&w=1920&fm=jpg&auto=compress,format" page="https://www.guidelineflyfish.com/en/montana-stone-6" license="All rights reserved; reference only" note="Side view"
     "https://cdn11.bigcommerce.com/s-5020eou/images/stencil/1280x1280/products/1604/9325/015_768_side__92456.1615821021.png?c=2" page="https://riverbum.com/montana-nymph/" license="All rights reserved; reference only" flip=#true note="Side view, slightly from above"

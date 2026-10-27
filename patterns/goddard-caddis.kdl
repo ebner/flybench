@@ -33,7 +33,7 @@ sources {
     "Fly Anglers Online: Thin Goddard Caddis (forum thread)" url="https://www.flyanglersonline.com/t/thin-goddard-caddis/54085"
     "Medlar Press: John Goddard" url="https://medlarpress.com/Authors/john-goddard.html"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://i0.wp.com/thefeatherbender.com/wp-content/uploads/2014/01/Goddard-Caddis-G-H-Sedge.jpg?resize=1300%2C768&ssl=1" page="https://thefeatherbender.com/2013/08/23/fly-tying-course-19-the-g-h-sedge/" license="All rights reserved; reference only" note="Side view in the vise"
     "https://www.fish4flies.com/img/flies/Large/1497-1497%202.jpg" page="https://www.fish4flies.com/Dry/Sedge/Deer-Hair-Sedge" license="All rights reserved; reference only" flip=#true note="Side view"

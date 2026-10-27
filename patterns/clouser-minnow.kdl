@@ -31,7 +31,7 @@ sources {
     "FlyLife: Flies without borders, the Clouser (Skip Clement)" url="https://flylifemagazine.com/flies-without-borders-clousers-bucktail-krystal-flash-lead-eyes-perched-atop/"
     "MidCurrent: How to tie the Clouser Minnow" url="https://midcurrent.com/v2/how-to-tie-the-clouser-minnow-a-versatile-saltwater-fly-for-any-species/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/8/87/Traditional_Chartreuse_Clouser_Deep_Minnow.jpg" page="https://commons.wikimedia.org/wiki/File:Traditional_Chartreuse_Clouser_Deep_Minnow.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, tying orientation"
     "https://upload.wikimedia.org/wikipedia/commons/5/58/Saltwater_Clouser_deep_minnow_variation_01.jpg" page="https://commons.wikimedia.org/wiki/File:Saltwater_Clouser_deep_minnow_variation_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, tan and white"

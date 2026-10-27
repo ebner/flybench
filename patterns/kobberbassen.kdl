@@ -29,7 +29,7 @@ sources {
     "Sexyloops: Another ugly fly (Rickard Gustafsson)" url="https://www.sexyloops.com/index.php/ps/another-ugly-fly"
     "Fishmadman: Kobberbassen #8" url="https://rifflinghitch.com/product/kobberbassen-8/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://rifflinghitch.com/wp-content/uploads/2019/04/TF2028-Kobberbassen-8-1.jpeg" page="https://rifflinghitch.com/product/kobberbassen-8/" license="All rights reserved; reference only" note="Side view, wide-gape hook"
     "https://globalflyfisher.com/sites/default/files/imported_pictures/translucent.jpg" page="https://globalflyfisher.com/patterns/copper-bully" license="All rights reserved; reference only" note="Side view, teased out"

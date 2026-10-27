@@ -28,7 +28,7 @@ sources {
     "Fly Anglers Online: The Peeking Caddis (Ralph D'Andrea)" url="https://www.flyanglersonline.com/t/the-peeking-caddis-fly-of-the-week-137/2469"
     "Sexyloops: LeadHead (Viking Lars)" url="https://mail.sexyloops.com/index.php/ps/leadhead"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://expeditom.com/wp-content/uploads/2020/05/ExpediTom-Fly-Tying-Peeping-Caddis-001.jpg" page="https://expeditom.com/peeping-caddis/" author="Tom O'Connor" license="All rights reserved; reference only" note="Jig version, three-quarter side view"
     "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihvZs32EnuBJvbL711gOVMt0jksMAcVHxNNv1FGaaatftKRMJ1vdPoHWSNWr5dIZCOc683BnL3KVb41T41yzpdA7YCl6hTRS8bJAl6GNgdKsieYAVj2rJp6-kUjkSFghCa_ri6tApW8B4/s1600/Peeping+Caddis+500.JPG" page="http://graylingonfly.blogspot.com/2011/03/peeping-caddis-sbs.html" author="Jindra Lacko" license="All rights reserved; reference only" note="Side view"

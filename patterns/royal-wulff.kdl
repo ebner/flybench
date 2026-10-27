@@ -34,7 +34,7 @@ sources {
     "Wikipedia: Wulff series of dry flies" url="https://en.wikipedia.org/wiki/Wulff_series_of_dry_flies"
     "Wikipedia: Artificial fly (attractor patterns)" url="https://en.wikipedia.org/wiki/Artificial_fly"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/8/8f/RoyalWulffDryFly.jpg" page="https://commons.wikimedia.org/wiki/File:RoyalWulffDryFly.jpg" author="Mike Cline" license="Public domain" note="Side view in the vise"
     "https://files.osgnetworks.tv/16/files/2013/08/Royal-Wulff-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-royal-wulff/152082" license="All rights reserved; reference only" note="Side view in the vise"

@@ -39,7 +39,7 @@ sources {
     "Gwent Angling Society: Ally's Shrimp" url="https://gwentanglingsociety.co.uk/2013/01/05/allys-shrimp-salmon-fly/"
     "Fieldsports Channel: Ally Gowans ties his Ally Shrimp" url="https://www.fieldsportschannel.tv/?p=6993"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://thefeatherbender.com/wp-content/uploads/2022/11/Allys-Shrimp-salmon-fly-rotated.jpeg" page="https://thefeatherbender.com/allys-shrimp-salmon-fly/" license="All rights reserved; reference only" note="Single hook in the vise"
     "https://www.fish4flies.com/img/flies/Large/3244-3244.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Ken-Sawada-Doubles/Allys-Shrimp" license="All rights reserved; reference only" flip=#true note="Double, full tail length"

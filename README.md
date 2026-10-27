@@ -26,18 +26,19 @@ Product decisions and the milestone plan: [docs/product-plan.md](docs/product-pl
 
 ## Run
 
-Requires Node 22 or later.
+Requires Node 24 or later (`.nvmrc`) and pnpm, in the version `package.json` names under
+`packageManager`: `corepack enable` sets it up, or install pnpm and it switches itself.
 
 ```sh
-npm install
-npm run dev        # http://localhost:5173
-npm run studio     # the authoring studio (dev server only), /studio.html
-npm test           # recipe parsing/validation and simulation tests
-npm run build      # type-check, production build and one HTML file per page into dist/
-npm run render:catalog  # gallery images into public/renders/ (commit them)
-npm run render     # render finished flies to .cache/renders/ (headless Chromium)
-npm run refcheck   # contact sheets: render on a gape grid next to reference photos
-npm run icons      # app icon PNGs from public/icons/*.svg
+pnpm install
+pnpm dev           # http://localhost:5173
+pnpm studio        # the authoring studio (dev server only), /studio.html
+pnpm test          # recipe parsing/validation and simulation tests
+pnpm build         # type-check, production build and one HTML file per page into dist/
+pnpm render:catalog  # gallery images into public/renders/ (commit them)
+pnpm render        # render finished flies to .cache/renders/ (headless Chromium)
+pnpm refcheck      # contact sheets: render on a gape grid next to reference photos
+pnpm icons         # app icon PNGs from public/icons/*.svg
 ```
 
 Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan.
@@ -48,7 +49,7 @@ falls back to software rendering (much slower) when there isn't.
 
 ## Adding a pattern
 
-The easiest way is the authoring studio (`npm run studio`): pick a pattern or start a new
+The easiest way is the authoring studio (`pnpm studio`): pick a pattern or start a new
 one, edit its KDL with problems listed as you type (click one to jump to its line), and
 watch the fly in 3D on a gape grid, step by step. Save writes to `patterns/`. The studio
 exists only on the dev server, which only accepts its requests from this machine; the
@@ -56,15 +57,15 @@ built site doesn't include it.
 
 Or write a new `patterns/<id>.kdl` by hand and it gets picked up automatically. Materials come
 from the catalog in `src/recipe/materials.ts`; add new ones there. The test suite
-loads every pattern file, so `npm test` reports recipe errors with line numbers.
+loads every pattern file, so `pnpm test` reports recipe errors with line numbers.
 Problems in pattern files also show in a banner in the dev server. Then run
-`npm run render:catalog` and commit the images it writes to `public/renders/`; it only
+`pnpm render:catalog` and commit the images it writes to `public/renders/`; it only
 re-renders patterns whose recipe or rendering code changed. The format is
 described in [docs/recipe-schema.md](docs/recipe-schema.md), and the authoring procedure
 (research, proportions, checks) in [docs/authoring-patterns.md](docs/authoring-patterns.md).
 
 To check proportions, list photos of the finished fly under `references` in the recipe
-and run `npm run refcheck -- <id>`. It writes `.cache/refcheck/<id>.png`: the fly from
+and run `pnpm refcheck <id>`. It writes `.cache/refcheck/<id>.png`: the fly from
 the side on a grid in gape units, the recipe's proportions, and the photos. Read the
 ratios off the photos relative to the hook gape and adjust the recipe. The photos stay
 in `.cache/` and are never committed, and the build leaves the `references` blocks out
@@ -86,7 +87,7 @@ src/ui/            React UI: gallery, pattern page, viewer, theme, routing
 src/studio/        the authoring studio (studio.html, dev server only)
 public/renders/    rendered gallery images (generated, committed)
 public/logo.svg    the logo (also the header mark); favicon.svg is a simplified version
-                   for small sizes, and public/icons/*.svg the app icons (npm run icons)
+                   for small sizes, and public/icons/*.svg the app icons (pnpm icons)
 render.html        dev-only page that scripts/ drive to render a finished fly
 scripts/           authoring tools: render, render-catalog, refcheck, the
                    dev-server plugin that lets the studio read and save patterns,
@@ -110,7 +111,7 @@ The site is published at <https://flybench.ebner.se> on GitHub Pages by
   under the account's Settings > Pages adds a TXT record and protects the subdomain from takeover.
 
 With a custom domain no CNAME file is needed in the repository; the workflow takes the
-address from Pages. `npm run build` takes two settings from the environment, which the
+address from Pages. `pnpm build` takes two settings from the environment, which the
 workflow fills in:
 
 - `BASE_PATH`: where the site lives on its host, `/flybench/` for the project site or `/`

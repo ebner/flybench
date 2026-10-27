@@ -23,7 +23,7 @@ sources {
     "Orvis Learning Center: Pat's Rubber Legs" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/892-pats_rubber_legs"
     "FlyLife: No fly tyer should ever fear rubber legs again (Skip Clement)" url="https://flylifemagazine.com/no-fly-tyer-should-ever-fear-rubber-legs-again/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://flylifemagazine.com/wp-content/uploads/2019/07/rubberlegs.jpg" page="https://flylifemagazine.com/?p=56843" license="All rights reserved; reference only" note="Video screenshot"
 }

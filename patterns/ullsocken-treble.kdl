@@ -31,7 +31,7 @@ sources {
     "GlobalFlyFisher: Ullsocken Tube (Ahrex video, tied by Stefan Enevoldsen)" url="https://globalflyfisher.com/video/ullsocken-tube"
     "GlobalFlyFisher: The Mörrum Fly (Kasper Mühlbach)" url="https://globalflyfisher.com/node/53445"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/ullsocken-pages.jpg" page="https://globalflyfisher.com/review/morrum-best-flies" author="Peter Lyngby" license="All rights reserved; reference only" note="Book pages; treble version at top left"
     "https://img.youtube.com/vi/sECLVuOVDJs/maxresdefault.jpg" page="https://globalflyfisher.com/video/woolly-sock-ullsocken" license="All rights reserved; reference only" flip=#true note="Treble version, side view"

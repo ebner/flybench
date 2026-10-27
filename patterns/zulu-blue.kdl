@@ -36,7 +36,7 @@ sources {
     "Fly Anglers Online: World Wide, Europe part 1 (Alan the Highlander)" url="https://www.flyanglersonline.com/t/world-wide-europe-part-1/11304"
     "Fish4Flies: Blue Zulu" url="https://www.fish4flies.com/Wet/Hackled/Blue-Zulu"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.fish4flies.com/img/flies/Original/855-IMG_20190513_110640.jpg" page="https://www.fish4flies.com/Wet/Hackled/Blue-Zulu" license="All rights reserved; reference only" note="Side view"
 }

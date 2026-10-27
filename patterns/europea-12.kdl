@@ -30,7 +30,7 @@ sources {
     "Ahrex: Europea 12 (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2019/09/16/europea-12/"
     "Guideline: Europea 12" url="https://guidelineflyfish.com/en/europea-12-12"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://ahrexhooks.com/wp-content/uploads/2019/09/E12_1_blog.jpg" page="https://ahrexhooks.com/2019/09/16/europea-12/" license="All rights reserved; reference only" flip=#true note="Side view, slightly from above"
     "https://ahrexhooks.com/wp-content/uploads/2019/09/E12_2_blog.jpg" page="https://ahrexhooks.com/2019/09/16/europea-12/" license="All rights reserved; reference only" note="Side view"

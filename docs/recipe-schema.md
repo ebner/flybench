@@ -12,7 +12,7 @@ Validation happens in four layers, and errors report the line they came from:
 3. **Tying sense**: `src/recipe/validate.ts`, e.g. a material must be tied in before it is wound
 4. **Catalog**: `src/recipe/catalog.ts`: unique ids, file names, variants
 
-`npm test` loads every pattern file and runs all four.
+`pnpm test` loads every pattern file and runs all four.
 
 ## Units
 
@@ -101,7 +101,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 ### References
 
 Photos of the finished fly, used only to check proportions while authoring
-(`npm run refcheck`). They are downloaded to a local cache and never committed, and the
+(`pnpm refcheck`). They are downloaded to a local cache and never committed, and the
 production build strips the `references` block (`src/recipe/publish.ts`), so copyrighted
 photos are fine to list.
 

@@ -33,7 +33,7 @@ sources {
     "Tom Sutcliffe: Hans van Klinken on his Klinkhåmer Special (Hans van Klinken)" url="https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html"
     "Rackelhanen Flyfishing Magazine: How to use our Klinkhåmer Special correctly (Hans van Klinken, archived)" url="https://web.archive.org/web/20071211113302/http://www.rackelhanen.se/eng/10342.htm"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/4/4b/Klinkhammer_Special_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Klinkhammer_Special_Dry_Fly.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, replica of the original"
     "https://www.tomsutcliffe.co.za/newsletters/The_Klinkhamer_special_3.jpg" page="https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html" license="All rights reserved; reference only" note="Side view, tan body"

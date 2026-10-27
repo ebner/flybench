@@ -28,7 +28,7 @@ sources {
     "Orvis: Brassie" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/688-brassie"
     "Into Fly Fishing: How to tie a Brassie fly (Pierre Joubert)" url="https://intoflyfishing.com/how-to-tie-a-brassie/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.swtu.org/wp-content/uploads/2018/10/South-Platte-Brassie2-975.jpg" page="https://swtu.org/?p=1501" license="All rights reserved; reference only" note="Side view, classic unbeaded"
     "https://intoflyfishing.com/wp-content/uploads/2020/06/How-To-Tie-A-Brassie-Fly-Featured-Image.jpg" page="https://intoflyfishing.com/?p=3214" license="All rights reserved; reference only" note="Side view in the vise"

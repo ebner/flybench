@@ -27,7 +27,7 @@ sources {
     "Fly Tying Archive: Superpupa (Timo Kontio)" url="https://flytyingarchive.com/superpupa-caddis-dry-fly-lennart-bergqvist/"
     "Guideline: Superpuppan cream/brown" url="https://www.guidelineflyfish.com/no/superpuppan-creambrown-14"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/original_two-super-pupae.jpg" page="https://globalflyfisher.com/patterns/super-pupa" author="Martin Joergensen" license="All rights reserved; reference only" note="Side and three-quarter view"
     "https://guideline-products-production.imgix.net/images/641_de6737d1f9-dsc_4957-full.jpg?q=70&fit=clip&w=1920&fm=jpg&auto=compress,format" page="https://www.guidelineflyfish.com/no/superpuppan-creambrown-14" license="All rights reserved; reference only" note="Side view, cream and brown"

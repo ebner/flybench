@@ -30,7 +30,7 @@ sources {
     "Ahrex: Pattegrisen, a fairytale and a birthday (Michael Jensen)" url="https://ahrexhooks.com/2016/11/11/pattegrisen-a-fairytale-and-a-birthday/"
     "GlobalFlyFisher: Pattegrisen (Ahrex video, Jesper Lindquist Andersen)" url="https://globalflyfisher.com/video/pattegrisen"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/dsc_7119.jpg" page="https://globalflyfisher.com/patterns/pink-pig-pattegrisen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise, trimmed"
     "https://globalflyfisher.com/sites/default/files/imported_pictures/dsc_7116.jpg" page="https://globalflyfisher.com/patterns/pink-pig-pattegrisen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise"

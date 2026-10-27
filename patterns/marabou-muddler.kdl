@@ -26,7 +26,7 @@ sources {
     "FlyLife: Fluff befitting a tarpon or snook (Steve Kantner)" url="https://flylifemagazine.com/?p=24446"
     "MidCurrent: Muddlers made easy (John Likakis)" url="https://midcurrent.com/flies/muddlers-made-easy/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.swtu.org/wp-content/uploads/2020/02/Marabou-Muddler3-975.jpg" page="https://www.swtu.org/2020/02/05/marabu-muddler/" license="All rights reserved; reference only" note="Side view in the vise, classic white"
     "https://flyfishingthesierra.com/wp-content/uploads/2023/12/maramudvar3.jpg" page="https://flyfishingthesierra.com/marabou-muddler/" license="All rights reserved; reference only" note="White with a cone head"

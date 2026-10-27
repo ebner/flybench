@@ -30,7 +30,7 @@ sources {
     "Charlie's Fly Box: CDC & Elk" url="https://charliesflybox.com/blogs/step-by-step-tutorials/cdc-elk"
     "Rogue Fly Fishers: CDC & Elk (Dan Kellogg)" url="https://rogueflyfishers.org/?p=494"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/article_pictures/hw-cdcelk.jpg" page="https://globalflyfisher.com/node/13606" author="Hans Weilenmann" license="All rights reserved; reference only" note="Side view in the vise"
     "https://cdn.shopify.com/s/files/1/0569/0877/5562/files/DSCN8917.jpg?v=1644427774" page="https://charliesflybox.com/blogs/step-by-step-tutorials/cdc-elk" license="All rights reserved; reference only" flip=#true note="Side view in the vise"

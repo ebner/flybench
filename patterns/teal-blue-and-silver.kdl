@@ -30,7 +30,7 @@ sources {
     "GlobalFlyFisher: Teal Blue and Silver (Ivar's Fly Workshop)" url="https://globalflyfisher.com/node/71347"
     "Sea Trout Nights: Flies and Fly Tying" url="https://seatrout-fishing.com/sea-trout-nights/flies-and-fly-tying/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.fish4flies.com/img/flies/Large/1422-1422.jpg" page="https://www.fish4flies.com/Wet/Winged/Teal-Blue-and-Silver" license="All rights reserved; reference only" flip=#true note="Side view, folded teal wing"
     "https://www.fish4flies.com/img/flies/Large/2895-Teal_Blue_and_Silver.jpg" page="https://www.fish4flies.com/Sea-Trout/Singles/Teal-Blue-and-Silver" license="All rights reserved; reference only" flip=#true note="Side view, sea-trout single"

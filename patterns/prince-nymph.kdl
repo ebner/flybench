@@ -33,7 +33,7 @@ sources {
     "Orvis News: Tying the Prince Nymph (Eric Rickstad)" url="https://news.orvis.com/fly-fishing/Tying-the-Prince-Nymph"
     "Trout Unlimited: Spring Fly Showdown: The Prince Nymph vs. the RS2 (Chris Hunt)" url="https://www.tu.org/magazine/community/spring-fly-showdown-the-prince-nymph-vs-the-rs2/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/b/b2/Bead_Head_Prince_Nymph.jpg" page="https://commons.wikimedia.org/wiki/File:Bead_Head_Prince_Nymph.jpg" author="G. Moore" license="CC BY-SA 4.0" flip=#true note="Side view, bead head"
     "https://www.johnkreft.com/wp-content/uploads/2017/01/Prince-Nymph.jpg" page="https://www.johnkreft.com/stonefly-fly-patterns/prince-nymph/" author="John Kreft" license="All rights reserved; reference only" note="Side view, gold bead"

@@ -29,7 +29,7 @@ sources {
     "Fish4Flies: Stoat's Tail" url="https://www.fish4flies.com/Salmon-Atlantic/Big-Mouth-Doubles/Stoats-Tail"
     "Sea Trout Nights: Flies and Fly Tying" url="https://seatrout-fishing.com/sea-trout-nights/flies-and-fly-tying/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://trout-salmon-fishing.com/stoats-tail.jpg" page="https://trout-salmon-fishing.com/stoats-tail.htm" author="John Gray" license="All rights reserved; reference only" note="Side view, single up-eye hook"
     "https://live.staticflickr.com/4084/4969440099_d1b754e2b5_b.jpg" page="https://www.flickr.com/photos/52179700@N00/4969440099" author="andrewb823" license="CC BY-NC 2.0" flip=#true note="Side view, on a double"

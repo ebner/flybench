@@ -31,7 +31,7 @@ sources {
     "GlobalFlyFisher: Dyret, the Beast (video)" url="https://globalflyfisher.com/video/dyret-the-beast"
     "GlobalFlyFisher: Dyret (photo, Torben Meldgaard)" url="https://globalflyfisher.com/picture/dyret"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.sexyloops.com/upload/images/tz/dyret/192ecde3c27bd81f4fefda80944fed1f.jpg" page="https://www.sexyloops.com/index.php/ps/sexyloops-fly-tying-school-part-27-dyret" license="All rights reserved; reference only" note="Side view, before the hackle is clipped"
     "https://img.youtube.com/vi/ucDmVgpugMs/maxresdefault.jpg" page="https://globalflyfisher.com/video/dyret" author="Hans Weilenmann" license="All rights reserved; reference only" note="Side view, clipped underneath"

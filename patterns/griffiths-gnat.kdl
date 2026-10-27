@@ -28,7 +28,7 @@ sources {
     "Rogue Fly Fishers: Griffith's Gnat (Dan Kellogg)" url="https://rogueflyfishers.org/griffiths-gnat/"
     "Sexyloops: Griffith's Gnat" url="https://www.sexyloops.com/index.php/ps/griffiths-gnat"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://files.osgnetworks.tv/16/files/2013/08/Griffiths-Gnat-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-griffiths-gnat/151930" license="All rights reserved; reference only" note="Side view in the vise"
     "https://www.swtu.org/wp-content/uploads/2023/01/Griffiths-Gnat2-975.jpg" page="https://www.swtu.org/?p=3444" license="All rights reserved; reference only" note="Side view, large, dense palmer"

@@ -1,9 +1,9 @@
 /**
  * Renders finished flies to PNG.
  *
- *   npm run render                         all patterns, side view
- *   npm run render -- red-tag --view top   one pattern, another view
- *   npm run render -- --grid               with the measuring grid (gape units)
+ *   pnpm render                     all patterns, side view
+ *   pnpm render red-tag --view top  one pattern, another view
+ *   pnpm render --grid              with the measuring grid (gape units)
  *
  * Output: .cache/renders/<id>/<view>[-grid].png
  */

@@ -3,9 +3,9 @@
  *   card.webp   the finished fly on a transparent ground
  *   spin.webp   a turntable: FRAMES views in one row, played on hover
  *
- *   npm run render:catalog            only patterns whose recipe or renderer changed
- *   npm run render:catalog -- --force  everything
- *   npm run render:catalog -- red-tag  just these
+ *   pnpm render:catalog           only patterns whose recipe or renderer changed
+ *   pnpm render:catalog --force   everything
+ *   pnpm render:catalog red-tag   just these
  *
  * Whether a pattern is up to date is decided by a hash of its recipe and of the code
  * that produces the images, kept in public/renders/manifest.json.

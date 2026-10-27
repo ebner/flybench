@@ -29,7 +29,7 @@ sources {
     "GlobalFlyFisher: Magnus Classic (Martin Joergensen)" url="https://globalflyfisher.com/patterns/magnus-classic"
     "GlobalFlyFisher: The Magnus and Fred Clan (Martin Joergensen)" url="https://globalflyfisher.com/patterns/magnus-and-fred-clan"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/magnus.jpg" page="https://globalflyfisher.com/patterns/magnus" license="All rights reserved; reference only" note="Side view, tied by Ken Bonde Larsen"
     "https://globalflyfisher.com/sites/default/files/imported_pictures/9_39.jpg" page="https://globalflyfisher.com/patterns/magnus" license="All rights reserved; reference only" note="In the vise, body done"

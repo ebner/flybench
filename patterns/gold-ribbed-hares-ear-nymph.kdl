@@ -32,7 +32,7 @@ sources {
     "Wikipedia: Hare's Ear" url="https://en.wikipedia.org/wiki/Hare%27s_Ear"
     "Fish4Flies: Gold Ribbed Hare's Ear" url="https://www.fish4flies.com/Nymphs/Hares-Ear-and-Pheasant-Tail/Gold-Ribbed-Hares-Ear"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://files.osgnetworks.tv/16/files/2013/08/Hares-Ear-Beauty.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-the-hares-ear/152083" author="Charlie Craven" license="All rights reserved; reference only" note="Side view, classic unweighted"
     "https://upload.wikimedia.org/wikipedia/commons/0/0e/MoscaOrejaDeLiebre.jpg" page="https://commons.wikimedia.org/wiki/File:MoscaOrejaDeLiebre.jpg" author="Drcooling" license="CC BY-SA 3.0" flip=#true note="Side view, small bead"

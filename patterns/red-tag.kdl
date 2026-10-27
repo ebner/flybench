@@ -30,7 +30,7 @@ sources {
     "GlobalFlyFisher: Red Tag (Martin Joergensen)" url="https://globalflyfisher.com/patterns/red-tag"
     "Let's Fly Fish: Grayling fly fishing (Alastair Gowans)" url="https://letsflyfish.com/graylingpage.htm"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/6/6e/Red_Tag_Trout_Fly_Dry.jpg" page="https://commons.wikimedia.org/wiki/File:Red_Tag_Trout_Fly_Dry.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Seen from slightly above; a generous tag"
 }

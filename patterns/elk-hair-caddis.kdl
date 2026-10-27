@@ -27,7 +27,7 @@ sources {
     "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-shop-blog/famous-fly-history-elk-hair-caddis"
     "Rocky River Trout Unlimited: Troth Elk Hair Caddis FFI (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/troth-elk-hair-caddis-ffi.html"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/0/06/Elk_Hair_Caddis2.jpg" page="https://commons.wikimedia.org/wiki/File:Elk_Hair_Caddis2.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
 }

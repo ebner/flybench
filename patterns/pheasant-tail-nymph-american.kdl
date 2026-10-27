@@ -32,7 +32,7 @@ sources {
     "Fly Fishing the Sierra: Pheasant Tail Nymph" url="https://flyfishingthesierra.com/pheasant-tail-nymph/"
     "Wikipedia: Pheasant Tail Nymph" url="https://en.wikipedia.org/wiki/Pheasant_Tail_Nymph"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/0/0a/American_Pheasant_Tail_Nymph_02.jpg" page="https://commons.wikimedia.org/wiki/File:American_Pheasant_Tail_Nymph_02.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view"
     "https://flyfishingthesierra.com/wp-content/uploads/2023/12/ptnvar1.jpg" page="https://flyfishingthesierra.com/pheasant-tail-nymph/" license="All rights reserved; reference only" note="Side view, no bead"

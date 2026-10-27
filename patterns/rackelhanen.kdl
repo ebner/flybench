@@ -30,7 +30,7 @@ sources {
     "GlobalFlyFisher: Rackelhanen (Kasper Mühlbach)" url="https://globalflyfisher.com/patterns/rackelhanen"
     "Ahrex: The Rackelhanen (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2020/07/18/the-rackelhanen/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.rackelhane.se/images/rack6a.jpg" page="https://www.rackelhane.se/eng/10019.htm" author="Kenneth Boström" license="All rights reserved; reference only" note="The originator's fly, side view"
     "https://globalflyfisher.com/sites/default/files/imported_pictures/IMG_3548.jpg" page="https://globalflyfisher.com/patterns/rackelhanen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view, light ginger"

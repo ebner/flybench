@@ -31,7 +31,7 @@ sources {
     "Texas Saltwater Fishing: Fly of the month, Lefty's Deceiver (Casey Smartt)" url="https://www.texassaltwaterfishingmagazine.com/fishing/by-type/fly-fishing/fly-month-lefty-deceiver"
     "Outdoor Canada: How to fly fish like a bassmaster (Scott Gardner)" url="https://www.outdoorcanada.ca/how-to-fly-fish-like-a-bassmaster-all-summer-long/3/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/4/42/Lefty%27s_Deceiver_01.jpg" page="https://commons.wikimedia.org/wiki/File:Lefty%27s_Deceiver_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Chartreuse over white, side view"
     "https://upload.wikimedia.org/wikipedia/commons/1/1d/Lefty%27s_Deceiver_03.jpg" page="https://commons.wikimedia.org/wiki/File:Lefty%27s_Deceiver_03.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Red over white, side view"

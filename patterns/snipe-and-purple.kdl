@@ -30,7 +30,7 @@ sources {
     "Hawker-Overend: Spider flies, how to fish these old classics (Andrew Overend)" url="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/"
     "Yorkshire Dales Fly Fishing: North Country Spiders" url="https://www.yorkshire-dales-flyfishing.com/north_country_spiders.htm"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.sexyloops.com/flytying/ncspiders/snipe%20and%20purple.jpg" page="https://www.sexyloops.com/flytying/northcountrywets2.shtml" author="Ben Spinks" license="All rights reserved; reference only" note="Side view"
     "https://hawker-overend.com/wp-content/uploads/2020/12/Snipe-Purple-Spider-450w.jpg" page="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/" license="All rights reserved; reference only" note="Side view"

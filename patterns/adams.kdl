@@ -30,7 +30,7 @@ sources {
     "MidCurrent: The History of the Adams (Marshall Cutchin)" url="https://midcurrent.com/?p=32703"
     "Orvis: Classic dry fly with hackle tip wings (Matt Grobert)" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/852-classic_dry_fly_with_hackle_tip_wings"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/b/b6/Standard_Adams_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Standard_Adams_Dry_Fly.jpg" author="Freyfisher" license="CC BY-SA 2.0" note="Side view"
     "https://upload.wikimedia.org/wikipedia/commons/5/5b/AdamsDryFly.jpg" page="https://commons.wikimedia.org/wiki/File:AdamsDryFly.jpg" author="Mike Cline" license="Public domain" note="Side view in the vise"

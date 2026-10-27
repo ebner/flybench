@@ -31,7 +31,7 @@ sources {
     "MidCurrent: Muddlers made easy (John Likakis)" url="https://midcurrent.com/flies/muddlers-made-easy/"
     "GlobalFlyFisher: Baltic flies for night fishing (Martin Joergensen)" url="https://globalflyfisher.com/patterns/baltic-flies-night-fishing"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/8/82/Original_Don_Gapen_Muddler_Minnow.jpg" page="https://commons.wikimedia.org/wiki/File:Original_Don_Gapen_Muddler_Minnow.jpg" author="Martin Joergensen" license="CC BY-SA 3.0" note="Original-style sparse head, side view"
     "https://upload.wikimedia.org/wikipedia/commons/a/aa/Muddler_minnow_fly.JPG" page="https://commons.wikimedia.org/wiki/File:Muddler_minnow_fly.JPG" author="Waldemarpaetz" license="CC BY-SA 4.0" note="Modern clipped head, side view"
