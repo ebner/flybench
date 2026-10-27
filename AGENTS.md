@@ -19,19 +19,19 @@ How to research and write a pattern: [docs/authoring-patterns.md](docs/authoring
 ## Commands
 
 ```sh
-npm install
-npm run dev        # Vite dev server
-npm run studio     # authoring studio on the dev server (/studio.html)
-npm test           # Vitest: recipe parsing/validation, simulation
-npm run typecheck
-npm run build      # typecheck + production build into dist/
-npm run render:catalog  # gallery images into public/renders/ (commit them)
-npm run render     # finished flies to .cache/renders/ via headless Chromium
-npm run refcheck   # proportion contact sheets against reference photos
-npm run icons      # app icon PNGs from public/icons/*.svg (after logo changes)
+pnpm install
+pnpm dev           # Vite dev server
+pnpm studio        # authoring studio on the dev server (/studio.html)
+pnpm test          # Vitest: recipe parsing/validation, simulation
+pnpm typecheck
+pnpm build         # typecheck + production build into dist/
+pnpm render:catalog  # gallery images into public/renders/ (commit them)
+pnpm render        # finished flies to .cache/renders/ via headless Chromium
+pnpm refcheck      # proportion contact sheets against reference photos
+pnpm icons         # app icon PNGs from public/icons/*.svg (after logo changes)
 ```
 
-Run `npm test` and `npm run typecheck` before reporting work as done. Every file in
+Run `pnpm test` and `pnpm typecheck` before reporting work as done. Every file in
 `patterns/` is loaded by the test suite, so a broken recipe fails the tests.
 
 ## Architecture
@@ -71,7 +71,7 @@ public/renders/ generated gallery images, committed; regenerate after recipe/ren
 - Variants are complete recipes with `variant-of` + `variant`.
 - Cite sources for every pattern; where sources disagree, say so in the recipe.
 - When authoring or changing a pattern, add `references` (photos of the finished fly) and
-  run `npm run refcheck -- <id>`. Read `.cache/refcheck/<id>.png`, compare ratios in gape
+  run `pnpm refcheck <id>`. Read `.cache/refcheck/<id>.png`, compare ratios in gape
   units (tail/tag length, wing length, angle and spread, hackle fibre length, body extent
   and thickness, head), and report or fix discrepancies. Several references beat one:
   dressings vary between tyers. Never commit the photos.

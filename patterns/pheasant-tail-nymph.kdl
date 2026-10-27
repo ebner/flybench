@@ -33,7 +33,7 @@ sources {
     "Fly Fishing the Sierra: Pheasant Tail Nymph" url="https://flyfishingthesierra.com/pheasant-tail-nymph/"
     "Fly Anglers Online: Frank Sawyer PT nymph, tying steps (Hans Weilenmann)" url="https://www.flyanglersonline.com/t/frank-sawyer-pt-nymph/15310"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://flyfishingthesierra.com/images/ptn/ptn11.jpg" page="https://flyfishingthesierra.com/pheasant-tail-nymph/" license="All rights reserved; reference only" note="Side view, wire-only original"
     "https://sportingroad.com/wp-content/uploads/2019/04/IMG_9504-1024x768.jpeg" page="https://sportingroad.com/2019/02/12/frank-sawyers-pheasant-tail/" license="All rights reserved; reference only" note="Side view in the vise"

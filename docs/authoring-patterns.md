@@ -146,7 +146,7 @@ update recipe-schema.md (see AGENTS.md).
 
 1. Add `references`: two or more side views from different tyers, `flip=#true` for photos
    with the eye on the left, a `note` on what each shows. Photos are never committed.
-2. Run `npm run refcheck -- <id>` and read `.cache/refcheck/<id>.png`.
+2. Run `pnpm refcheck <id>` and read `.cache/refcheck/<id>.png`.
 3. Using the gape as the ruler in each photo, compare:
    - tail or tag length, and how high it is cocked;
    - wing length, angle and spread (and whether the tips end where the sources say);
@@ -160,13 +160,13 @@ update recipe-schema.md (see AGENTS.md).
    look wrong (a wing too dense, a body too smooth). Report that rather than tuning the
    renderer for one fly.
 
-The studio (`npm run studio`) is handy for this loop: it shows the fly on the gape grid
+The studio (`pnpm studio`) is handy for this loop: it shows the fly on the gape grid
 step by step as you edit.
 
 ## 6. Finish
 
-- `npm test` and `npm run typecheck` pass.
-- `npm run render:catalog`, look at the new image in `public/renders/`, and commit it with
+- `pnpm test` and `pnpm typecheck` pass.
+- `pnpm render:catalog`, look at the new image in `public/renders/`, and commit it with
   the recipe.
 - If you changed the schema, catalog or engine: update recipe-schema.md and README.md.
 - Report back: what you followed, where sources disagree, the `// Assumption:` list, and

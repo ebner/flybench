@@ -48,7 +48,7 @@ fishing """
 sources {
     "Title of the source" url="https://example.com/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
 }
 

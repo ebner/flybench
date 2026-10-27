@@ -1,6 +1,6 @@
 /**
  * Renders the app icons (PNG, for the web app manifest and iOS) from their SVG sources
- * in public/icons/. Run after changing the logo:  npm run icons
+ * in public/icons/. Run after changing the logo:  pnpm icons
  */
 import sharp from "sharp";
 

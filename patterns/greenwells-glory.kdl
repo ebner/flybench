@@ -35,7 +35,7 @@ sources {
     "Let's Fly Fish: Grayling fly fishing (Alastair Gowans)" url="https://letsflyfish.com/graylingpage.htm"
     "Sexyloops: Greenwell's Glory (fly fishing glossary)" url="https://www.sexyloops.com/glossary/greenwell.shtml"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://i0.wp.com/www.swtu.org/wp-content/uploads/2018/02/Greenwells-Glory-975px.jpg" page="https://www.swtu.org/2018/02/08/greenwells-glory-tweed-style/" author="Rusty Dunn" license="All rights reserved; reference only" note="Side view in the vise, Tweed style"
     "https://web.archive.org/web/20170924073921im_/http://flyanglersonline.com/features/oldflies/greenwells.jpg" page="https://web.archive.org/web/2020/https://www.flyanglersonline.com/features/oldflies/part106.php" license="All rights reserved; reference only" note="Side view, low dark wing"

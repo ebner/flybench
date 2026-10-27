@@ -29,7 +29,7 @@ sources {
     "MidCurrent: How to tie Egan's Purple Thread Frenchie" url="https://midcurrent.com/v2/how-to-tie-egans-purple-thread-frenchie/"
     "California Fly Fisher: The Frenchie (Richard Anderson)" url="https://calflyfisher.com/tips-and-techniques/the-frenchie/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://flylordsmag.com/wp-content/uploads/2024/09/How-to-tie-the-Thread-Frenchie-with-Umpqua-Signature-tyer-Lance-Egan.jpeg" page="https://flylordsmag.com/how-to-tie-the-thread-frenchie/" license="All rights reserved; reference only" note="Lead photo"
     "https://midcurrent.com/wp-content/uploads/2026/05/purple-frenchie.jpg" page="https://midcurrent.com/v2/how-to-tie-egans-purple-thread-frenchie/" license="All rights reserved; reference only" note="Purple version"

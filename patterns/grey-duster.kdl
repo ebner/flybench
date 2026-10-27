@@ -31,7 +31,7 @@ sources {
     "GlobalFlyFisher: Grey Duster, parachute (Preben Torp Jacobsen)" url="https://globalflyfisher.com/patterns/grey-duster"
     "Hawker-Overend: Grey Duster fly, how to tie 2 productive patterns (Andrew Overend)" url="https://hawker-overend.com/how-to-tie-grey-duster-fly-patterns/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.turrall.com/cdn/shop/files/DH14-14_016d3049-d253-4017-8faa-5aca39db5e25.jpg?v=1777536396" page="https://www.turrall.com/products/grey-duster" license="All rights reserved; reference only" note="Side view; has a tail, which is not traditional"
     "https://www.fish4flies.com/img/flies/Large/875-875.jpg" page="https://www.fish4flies.com/Dry/Hackled/Grey-Duster" license="All rights reserved; reference only" flip=#true note="Side view"

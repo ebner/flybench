@@ -29,7 +29,7 @@ sources {
     "Fish4Flies: Black Pennell" url="https://www.fish4flies.com/Wet/Hackled/Black-Pennell"
     "Graham's Fly Tying Page: How to construct a basic fly" url="https://www.oocities.org/grayjule/flytyingseq.html"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.fish4flies.com/img/flies/Large/850-850.jpg" page="https://www.fish4flies.com/Wet/Hackled/Black-Pennell" license="All rights reserved; reference only" flip=#true note="Side view, standard form"
     "https://globalflyfisher.com/sites/default/files/article_pictures/black-pennell-sparse.jpg" page="https://globalflyfisher.com/node/42302" author="Martin Joergensen" license="All rights reserved; reference only" flip=#true note="Side view, sparse"

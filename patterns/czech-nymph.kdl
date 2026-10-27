@@ -31,7 +31,7 @@ sources {
     "GlobalFlyFisher: Czech nymphing (Pavel Adamovsky)" url="https://globalflyfisher.com/fish-better-tie-better/czech-nymphing"
     "FlyLife: Vladi's nymphing has been reborn to illegitimate fathers (Skip Clement)" url="https://flylifemagazine.com/vladis-nymphing-has-been-reborn-to-new-fathers-of-new-nationalities/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.1000flies.com/media/image/product/9691/lg/dark-natural-czech-nymph.jpg" page="https://www.1000flies.com/Dark-Natural-Czech-Nymph_2" license="All rights reserved; reference only" note="Side view, classic silhouette"
     "https://cdn.shopify.com/s/files/1/0569/0877/5562/files/DSC07348.jpg?v=1644438362" page="https://charliesflybox.com/blogs/step-by-step-tutorials/czech-nymph" license="All rights reserved; reference only" flip=#true note="Side view"

@@ -25,7 +25,7 @@ sources {
     "Wikipedia: Adams (dry fly)" url="https://en.wikipedia.org/wiki/Adams_(dry_fly)"
     "SWTU: The Adams (Rusty Dunn)" url="https://www.swtu.org/2023/12/04/adams/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/5/56/Parachute_Adams_Dry_Fly.jpg" page="https://commons.wikimedia.org/wiki/File:Parachute_Adams_Dry_Fly.jpg" author="Freyfisher" license="CC BY-SA 2.0" note="Side view in the vise"
     "https://files.osgnetworks.tv/16/files/2012/03/Parachute-Adams.jpg" page="https://www.flyfisherman.com/editorial/parachute-adams/152452" license="All rights reserved; reference only" note="Side view in the vise"

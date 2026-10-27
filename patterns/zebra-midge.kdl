@@ -29,7 +29,7 @@ sources {
     "gbflycasters.org: Zebra Midge" url="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.htm"
     "GlobalFlyFisher: Zebra Midge and variations (McFly Angler)" url="https://globalflyfisher.com/video/zebra-midge-and-variations"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://flyfishsd.com/cdn/shop/articles/zebra-midge-fly-pattern.jpg?v=1686269752" page="https://flyfishsd.com/blogs/blog/zebra-midge-fly-tying-video" license="All rights reserved; reference only" note="Side view in the vise"
     "https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.jpg" page="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.htm" license="All rights reserved; reference only" note="Side view, glass bead variant"

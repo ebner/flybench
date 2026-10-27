@@ -27,7 +27,7 @@ sources {
     "SWTU: Cinnamon Fur Ant (Rusty Dunn)" url="https://www.swtu.org/2021/07/26/cinnamon-fur-ant/"
     "Panfish On The Fly: Terrestrial patterns for panfish" url="https://www.panfishonthefly.com/blog/2020/3/30/terrestrial-patterns-for-panfish"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/c/c3/Black_fur_ant.jpg" page="https://commons.wikimedia.org/wiki/File:Black_fur_ant.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
 }

@@ -19,8 +19,8 @@ The essentials, in case you're tempted to skip ahead:
 - Tie the dressing most tyers tie today; record disagreements between sources, and mark
   your own judgement with `// Assumption:` comments.
 - Base the proportions on sources and reference photos, not on guesses. Run
-  `npm run refcheck -- <id>` and read `.cache/refcheck/<id>.png` before reporting done.
+  `pnpm refcheck <id>` and read `.cache/refcheck/<id>.png` before reporting done.
 - Need a technique the schema can't express? Extend the engine in a general way; don't
   fake it.
-- Finish with `npm test`, `npm run typecheck` and `npm run render:catalog`. Report the
+- Finish with `pnpm test`, `pnpm typecheck` and `pnpm render:catalog`. Report the
   assumptions and any proportions you left off-reference.

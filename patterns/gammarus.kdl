@@ -30,7 +30,7 @@ sources {
     "GlobalFlyFisher: Shwimp (Nick Thomas)" url="https://globalflyfisher.com/shwimp"
     "Ahrex: Gammarus, small but important (Michael Jensen)" url="https://ahrexhooks.com/2017/11/23/gammarus-small-but-important/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.1000flies.com/media/image/product/23137/lg/classic-gammarus-fluo-orange.jpg.webp" page="https://www.1000flies.com/Classic-Gammarus-Fluo-Orange_3" license="All rights reserved; reference only" note="Side view: tail, rib, shell, legs"
     "https://globalflyfisher.com/sites/default/files/imported_pictures/IMG_2890.jpg" page="https://globalflyfisher.com/patterns-tie-better/oedds" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise"

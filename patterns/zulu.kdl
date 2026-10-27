@@ -35,7 +35,7 @@ sources {
     "GlobalFlyFisher: Black Zulu (Ivar's Fly Workshop)" url="https://globalflyfisher.com/video/black-zulu-0"
     "Internet Archive: The Fishing Gazette, vol. 26 (1893)" url="https://archive.org/details/fishinggazettede26unse"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.trout-salmon-fishing.com/Zulu.jpg" page="https://www.trout-salmon-fishing.com/trout-flies.htm" license="All rights reserved; reference only" note="Side view"
     "https://www.fish4flies.com/img/flies/Original/854-854.jpg" page="https://www.fish4flies.com/Wet/Hackled/Black-Zulu" license="All rights reserved; reference only" flip=#true note="Side view"

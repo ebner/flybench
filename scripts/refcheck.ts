@@ -4,8 +4,8 @@
  * proportions, and the photos from the recipe's `references` block, mirrored where
  * needed so the eye points right.
  *
- *   npm run refcheck -- elk-hair-caddis [more ids…]
- *   npm run refcheck                       all patterns with references
+ *   pnpm refcheck elk-hair-caddis [more ids…]
+ *   pnpm refcheck                    all patterns with references
  *
  * Output: .cache/refcheck/<id>.png. Photos are cached in .cache/references/ and are
  * never committed or published; most are copyrighted.

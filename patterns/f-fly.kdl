@@ -30,7 +30,7 @@ sources {
     "Troutnut: Marjan Fratnik and the History of the F-fly (Tomaž Modic)" url="https://www.troutnut.com/article/49/fratnik-f-fly"
     "MidCurrent: How to Tie the F-Fly (video)" url="https://midcurrent.com/videos/how-to-tie-the-f-fly/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/f_fly.jpg" page="https://globalflyfisher.com/picture/the-f-fly" license="All rights reserved; reference only" note="Side view in the vise, thread body"
     "https://www.forelleundaesche.com/wp-content/uploads/2012/09/Fliegenbinden-F-Fly-4.jpg" page="https://www.forelleundaesche.com/marjan-fratnik-mr-f-fly-ist-verstorben/" license="All rights reserved; reference only" note="Side view, yellow dubbed body"

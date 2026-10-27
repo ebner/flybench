@@ -30,7 +30,7 @@ sources {
     "Hawker-Overend: Spider flies, how to fish these old classics (Andrew Overend)" url="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/"
     "Wikipedia: Partridge and Orange" url="https://en.wikipedia.org/wiki/Partridge_and_Orange"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/2/2c/PartridgeandOrange.jpg" page="https://commons.wikimedia.org/wiki/File:PartridgeandOrange.jpg" author="Mike Cline" license="Public domain" note="Side view, gold wire rib"
     "https://hawker-overend.com/wp-content/uploads/2020/12/Partridge-and-Orange-spider-flies-450w.jpg" page="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/" license="All rights reserved; reference only" note="Side view"

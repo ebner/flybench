@@ -33,7 +33,7 @@ sources {
     "GlobalFlyFisher: Chillimps (Martin Joergensen, with a reader's note on its origin)" url="https://globalflyfisher.com/patterns/chillimps"
     "GlobalFlyFisher: ABU Optic Chillimps (Michael Jensen)" url="https://globalflyfisher.com/video/abu-optic-chillimps"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://ahrexhooks.com/wp-content/uploads/2021/11/Chillimps_1-1024x682.jpg" page="https://ahrexhooks.com/2021/11/26/chillimps/" author="Lars Chr. Bentsen" license="All rights reserved; reference only" note="Side view on a single salmon hook"
 }

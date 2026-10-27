@@ -31,7 +31,7 @@ sources {
     "MidCurrent: How to tie a Mickey Finn (Tim Flagler)" url="https://midcurrent.com/?p=37998"
     "Ahrex Hooks: Streamers, bucktails and Mickey Finn, part II (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2020/01/24/streamers-bucktails-and-mickey-finn-part-ii/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/d/dd/MickeyFinnStreamer.jpg" page="https://commons.wikimedia.org/wiki/File:MickeyFinnStreamer.jpg" author="Mike Cline" license="Public domain" note="Side view in the vise"
     "https://upload.wikimedia.org/wikipedia/commons/9/97/Mickey_Finn_streamer.jpg" page="https://commons.wikimedia.org/wiki/File:Mickey_Finn_streamer.jpg" author="DeliciousDunder" license="CC0" note="Side view, with a non-standard orange throat"

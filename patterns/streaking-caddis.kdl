@@ -28,7 +28,7 @@ sources {
     "ADH Fishing: Guideline Dry Fly, Streaking Caddis" url="https://www.adh-fishing.com/guideline-dry-fly-streaking-caddis"
     "California Fly Fisher: At the Vise, Spun Heads (Peter Butler)" url="https://calflyfisher.com/tips-and-techniques/at-the-vise-spun-heads/"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://www.adh-fishing.com/media/26/bd/b3/1724045794/guideline-streaking-caddis.jpg?ts=1744155614" page="https://www.adh-fishing.com/guideline-dry-fly-streaking-caddis" license="All rights reserved; reference only" note="Side view"
     "https://img.youtube.com/vi/Zni7K_gob8I/maxresdefault.jpg" page="https://globalflyfisher.com/video/streaking-caddis-0" license="All rights reserved; reference only" note="Side view, video thumbnail"

@@ -34,7 +34,7 @@ sources {
     "Dennett Outdoors: Dragon wet fly selection pack 1" url="https://denod-dennettoutdoors.dc02.gob2b.com/Catalogue/Flies/Trout-Flies/Dragon-Fly-Selection-Packs/Dragon-Fly-Packs-Wet-Fly-1-FZGDR079"
     "Project Gutenberg: How to Tie Flies (E. C. Gregg, 1940)" url="https://www.gutenberg.org/ebooks/30292"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://flytyingarchive.com/wp-content/uploads/2015/01/tumblr_ni9q4nhq2J1qg8e5ko2_1280.jpg" page="https://flytyingarchive.com/butcher/" author="Timo Kontio" license="All rights reserved; reference only" note="Side view in the vise"
     "https://www.fish4flies.com/img/flies/Large/865-865%20Butcher.jpg" page="https://www.fish4flies.com/Wet/Winged/Butcher" license="All rights reserved; reference only" flip=#true note="Side view"

@@ -27,7 +27,7 @@ sources {
     "Gink & Gasoline: Sudden impact, fishing a better beetle (George Daniel)" url="https://www.ginkandgasoline.com/fly-fishing-tips-technique/sudden-impact-fishing-a-better-beetle/"
     "Panfish On The Fly: Terrestrial patterns for panfish" url="https://www.panfishonthefly.com/blog/2020/3/30/terrestrial-patterns-for-panfish"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "https://upload.wikimedia.org/wikipedia/commons/6/66/Black_Foam_Beetle.jpg" page="https://commons.wikimedia.org/wiki/File:Black_Foam_Beetle.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view, with an orange sighter"
     "https://upload.wikimedia.org/wikipedia/commons/7/77/Foam_beetle.jpg" page="https://commons.wikimedia.org/wiki/File:Foam_beetle.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view"

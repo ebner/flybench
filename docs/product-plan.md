@@ -77,7 +77,7 @@ hook size switch, deep links to steps.
    (src/catalog/techniques.ts); the path is computed so each fly adds a few new techniques.
 6. ✅ Fly box, materials inventory ("tie with what I have", "one material short"), vise mode
    (big controls, tap to advance, screen kept awake), installable offline PWA.
-7. ✅ Authoring studio (`npm run studio`): KDL editor with problems as you type, live 3D
+7. ✅ Authoring studio (`pnpm studio`): KDL editor with problems as you type, live 3D
    preview with a gape grid and step list, new patterns from a template, saves to
    `patterns/` through a dev-server-only endpoint.
 

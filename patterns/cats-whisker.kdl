@@ -34,7 +34,7 @@ sources {
     "Funky Fly Tying: The Cat's Whisker, step by step" url="https://funkyflytying.com/?p=62048"
     "GlobalFlyFisher: Cat's Whisker (video, Ívar's Fly Workshop)" url="https://globalflyfisher.com/video/cats-whisker"
 }
-// Photos for checking proportions while authoring (npm run refcheck); never published.
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
     "http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandgreen.jpg" page="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandgreen.htm" author="Craig Moore" license="Free reuse with a link back" note="Side view, lying flat"
     "https://www.fish4flies.com/img/flies/Large/2447-2447.jpg" page="https://www.fish4flies.com/Lures/Beaded-Specials/Cats-Whisker" license="All rights reserved; reference only" flip=#true note="Side view"
