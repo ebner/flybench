@@ -31,6 +31,10 @@ describe("catalog search", () => {
     expect(ids({ q: "worcester" })).not.toContain("elk-hair-caddis");
   });
 
+  it("finds a family by a variant's name or alias", () => {
+    expect(ids({ q: "American Pheasant Tail" })).toContain("pheasant-tail-nymph");
+  });
+
   it("finds by material, including variants' materials", () => {
     expect(ids({ q: "peacock" })).toContain("red-tag");
     expect(ids({ q: "peacock" })).not.toContain("elk-hair-caddis");

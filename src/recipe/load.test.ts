@@ -213,6 +213,31 @@ describe("schema validation", () => {
   });
 });
 
+describe("trimming a hackle with keep", () => {
+  const head = `id t
+name "T"
+type dry
+difficulty beginner
+hook dry-standard size=14
+thread black size="8/0"
+materials {
+    hackle cock-hackle color=brown fibre=1.0
+}
+`;
+  const run = (steps: string) => loadRecipe(`${head}steps {\n${steps}\n}\n`);
+  const wound = "    attach-thread at=0.6\n    tie-in hackle\n    wrap-thread to=0.9\n    wind hackle to=0.9 turns=4\n    tie-off hackle\n";
+
+  it("needs a hackle that was wound, not pulled over", () => {
+    expect(run(`${wound}    trim hackle keep=top\n    whip-finish`).ok).toBe(true);
+    const pulled = "    attach-thread at=0.8\n    wrap-thread to=0.2\n    tie-in hackle\n    wrap-thread to=0.8\n    pull-over hackle to=0.8\n";
+    expect(errorsOf(run(`${pulled}    trim hackle keep=top\n    whip-finish`)).join("\n")).toMatch(/keep only applies to a hackle that has been wound/);
+  });
+
+  it("allows it once", () => {
+    expect(errorsOf(run(`${wound}    trim hackle keep=top\n    trim hackle keep=sides\n    whip-finish`)).join("\n")).toMatch(/already been trimmed with keep/);
+  });
+});
+
 describe("semantic validation", () => {
   const cases: [string, string, RegExp][] = [
     ["thread first", VALID_STEPS.replace("attach-thread at=0.8", "wrap-thread to=0.9"), /thread must be attached first/],

@@ -781,7 +781,9 @@ export function simulate(recipe: Recipe): Build {
           // The same hackle, with only its side fibres left.
           const w = wound.get(step.material)!;
           w.until = cutAt;
-          pieces.push({ ...w, id: nextId++, seed: w.seed ?? w.id, keep: step.keep, window: [0.5, 0.5001], until: undefined });
+          const kept: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, keep: step.keep, window: [0.5, 0.5001], until: undefined };
+          pieces.push(kept);
+          wound.set(step.material, kept);
           ctx.keep = true;
         } else if (covers.has(step.material)) {
           // The excess of a foam back, cut flush or left as a stub over the eye: the trimmed

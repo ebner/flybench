@@ -37,7 +37,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   });
 
   type State = "tied-in" | "wound" | "wound-rear" | "secured" | "done";
-  const materials = new Map<string, { state: State; at: number; butts: boolean; post?: boolean }>();
+  // `wound`: wound round the hook or a post (not pulled over); `kept`: already trimmed with keep.
+  const materials = new Map<string, { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean }>();
   let thread: number | null = null;
   let finished = false;
   /** A material that the next step has to tie off or secure. */
@@ -192,6 +193,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           if (archetype !== "hackle") err("only hackle is wound around a post", [...path, "material"]);
           else if (!post?.post) err(`"${step.around}" must be a bunch tied in upright (angle 60° or more) to be a post`, [...path, "around"]);
           m.state = "wound";
+          m.wound = true;
           pending = { material: step.material, rear: false };
           break;
         }
@@ -205,6 +207,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           err(`the thread is at ${thread}; move it to ${to} or beyond before winding there`, [...path, "to"]);
         }
         m.state = rear ? "wound-rear" : "wound";
+        m.wound = true;
         m.at = to;
         pending = { material: step.material, rear };
         break;
@@ -233,7 +236,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       case "trim": {
         const m = materials.get(step.material);
         if (step.keep !== undefined) {
-          if (archetype !== "hackle" || m?.state !== "done") err("keep only applies to a hackle that has been wound and tied off", [...path, "keep"]);
+          if (archetype !== "hackle" || m?.state !== "done" || !m.wound) err("keep only applies to a hackle that has been wound and tied off", [...path, "keep"]);
+          else if (m.kept) err(`"${step.material}" has already been trimmed with keep`, [...path, "keep"]);
+          else m.kept = true;
           break;
         }
         if (m?.state === "secured") {
