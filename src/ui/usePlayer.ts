@@ -8,7 +8,8 @@ export interface Player {
   /** Jump to t and play from there. */
   playFrom(t: number): void;
   pause(): void;
-  seek(t: number): void;
+  /** Jump to t; `duration` is the timeline's length when it is changing in the same render. */
+  seek(t: number, duration?: number): void;
   setSpeed(s: number): void;
 }
 
@@ -49,7 +50,7 @@ export function usePlayer(duration: number, stopAt: number | null): Player {
     setPlaying(true);
   }, []);
   const pause = useCallback(() => setPlaying(false), []);
-  const seek = useCallback((t: number) => setTime(Math.max(0, Math.min(state.current.duration, t))), []);
+  const seek = useCallback((t: number, duration = state.current.duration) => setTime(Math.max(0, Math.min(duration, t))), []);
 
   return { time, playing, speed, play, playFrom, pause, seek, setSpeed };
 }
