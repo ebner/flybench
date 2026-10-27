@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { DIFFICULTY_LABELS, factsLine, IMITATES_LABELS, originLine, SPECIES_LABELS, TYPE_LABELS } from "../catalog/describe";
 import { learningPath } from "../catalog/techniques";
 import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } from "../catalog/search";
@@ -23,8 +23,14 @@ export function Gallery({ query }: { query: string }) {
   const renders = useRenders();
   const owned = useStoredSet(INVENTORY_KEY);
   const found = useMemo(() => SEARCH.search(filters), [filters]);
-  // A family counts as tieable, or one material short, by its member closest to tieable.
-  const family = (e: CatalogEntry) => bestCoverage([e.recipe, ...e.variants], owned.values);
+  // A family counts as tieable, or one material short, by its member closest to tieable,
+  // among the versions that have any materials asked for (search matched on one of those).
+  const family = (e: CatalogEntry) => {
+    const all = [e.recipe, ...e.variants];
+    const wanted = filters.materials ?? [];
+    const versions = wanted.length ? all.filter((v) => wanted.every((k) => v.materials.some((m) => m.kind === k))) : all;
+    return bestCoverage(versions.length ? versions : all, owned.values);
+  };
   const results = filters.have ? found.filter((e) => missingKinds(family(e)) === 0) : found;
   const oneShort = filters.have
     ? found.flatMap((e) => {
@@ -266,6 +272,25 @@ function MoreFilters({
   );
 }
 
+/**
+ * The turntable sprite, loaded on demand. The card image gives way to it only once it has
+ * arrived, so a card whose sprite can't load (offline, say) keeps showing its fly.
+ */
+function useSpin(url: string | undefined): [ready: boolean, load: () => void] {
+  const [ready, setReady] = useState<string | null>(null);
+  const requested = useRef<string | null>(null);
+  const load = useCallback(() => {
+    if (!url || requested.current === url) return;
+    requested.current = url;
+    const img = new Image();
+    img.onload = () => setReady(url);
+    // Try again on the next hover.
+    img.onerror = () => (requested.current = null);
+    img.src = url;
+  }, [url]);
+  return [ready === url, load];
+}
+
 /** A different pattern every day, turning on its stand. */
 function FlyOfTheDay({ renders }: { renders: Record<string, RenderInfo> }) {
   const rendered = CATALOG.filter((e) => renders[e.recipe.id]);
@@ -275,14 +300,22 @@ function FlyOfTheDay({ renders }: { renders: Record<string, RenderInfo> }) {
   const r = entry.recipe;
   const info = renders[r.id]!;
   const urls = renderUrls(r.id, info);
+  return <FeaturedFly id={r.id} name={r.name} info={info} urls={urls} />;
+}
+
+function FeaturedFly({ id, name, info, urls }: { id: string; name: string; info: RenderInfo; urls: ReturnType<typeof renderUrls> }) {
+  const [ready, load] = useSpin(urls.spin);
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: no-preference)").matches) load();
+  }, [load]);
   return (
-    <a className="fly-of-the-day" href={href.fly(r.id)}>
-      <div className="fly-of-the-day-image" style={{ "--spin": `url("${urls.spin}")`, "--frames": info.frames } as CSSProperties}>
+    <a className="fly-of-the-day" href={href.fly(id)}>
+      <div className={ready ? "fly-of-the-day-image spin-ready" : "fly-of-the-day-image"} style={{ "--spin": `url("${urls.spin}")`, "--frames": info.frames } as CSSProperties}>
         <div className="plate-spin" aria-hidden="true" />
         <img src={urls.card} alt="" width={600} height={400} />
       </div>
       <p>
-        Fly of the day: <strong>{r.name}</strong>
+        Fly of the day: <strong>{name}</strong>
       </p>
     </a>
   );
@@ -296,10 +329,11 @@ export function Plate({ entry, render, missing, open }: { entry: CatalogEntry; r
   const style = urls
     ? ({ "--spin": `url("${urls.spin}")`, "--frames": render!.frames } as CSSProperties)
     : undefined;
+  const [ready, load] = useSpin(urls?.spin);
   return (
     <li className="plate">
-      <a href={href.fly(open ?? r.id)}>
-        <div className="plate-image" style={style}>
+      <a href={href.fly(open ?? r.id)} onPointerEnter={load} onFocus={load}>
+        <div className={ready ? "plate-image spin-ready" : "plate-image"} style={style}>
           {urls ? (
             <>
               <div className="plate-spin" aria-hidden="true" />

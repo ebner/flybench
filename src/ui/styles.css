@@ -271,13 +271,13 @@ select {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .fly-of-the-day .plate-spin {
+  .fly-of-the-day .spin-ready .plate-spin {
     visibility: visible;
     background-image: var(--spin);
     animation: turn 6s steps(var(--frames)) infinite;
   }
 
-  .fly-of-the-day .plate-spin + img {
+  .fly-of-the-day .spin-ready .plate-spin + img {
     visibility: hidden;
   }
 }
@@ -478,17 +478,17 @@ select {
   visibility: hidden;
 }
 
-/* The one moving thing: the fly turns on its plate while pointed at. */
+/* The one moving thing: the fly turns on its plate while pointed at, once its turntable has loaded. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .plate a:hover .plate-spin,
-  .plate a:focus-visible .plate-spin {
+  .plate a:hover .spin-ready .plate-spin,
+  .plate a:focus-visible .spin-ready .plate-spin {
     visibility: visible;
     background-image: var(--spin);
     animation: turn 3.2s steps(var(--frames)) infinite;
   }
 
-  .plate a:hover .plate-spin + img,
-  .plate a:focus-visible .plate-spin + img {
+  .plate a:hover .spin-ready .plate-spin + img,
+  .plate a:focus-visible .spin-ready .plate-spin + img {
     visibility: hidden;
   }
 }

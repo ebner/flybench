@@ -5,7 +5,7 @@ import { findPattern, variantFamily } from "../patterns";
 import type { Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
 import { ridesPointUp } from "../tying/hook";
-import { simulate, stepAt, stepEnd } from "../tying/simulate";
+import { simulate, stepAt, stepEnd, stepProgress } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
 import { match, materialColor } from "../catalog/inventory";
 import { href, replaceUrl } from "./router";
@@ -69,7 +69,8 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   // Tubes are sized by length, so only hooks offer other sizes.
   const tiedSize = original.hook.size;
   const [size, setSize] = useState(tiedSize);
-  const recipe = useMemo(() => (size === original.hook.size ? original : { ...original, hook: { ...original.hook, size } }), [original, size]);
+  const sized = (s: typeof size) => (s === original.hook.size ? original : { ...original, hook: { ...original.hook, size: s } });
+  const recipe = useMemo(() => sized(size), [original, size]);
   const build = useMemo(() => simulate(recipe), [recipe]);
   const [follow, setFollowState] = useState(readFollow);
   const setFollow = (on: boolean) => {
@@ -96,6 +97,24 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   const player = usePlayer(build.duration, stopAt);
   const current = stepAt(build, player.time);
   const step = build.steps[current]!;
+
+  // Another hook size changes how long the steps take: keep the same point of the same step,
+  // and a replayed step's stop, rather than the same number of seconds. Time and size change
+  // in one render, so the address never shows a step in between.
+  const changeSize = (s: number) => {
+    const next = simulate(sized(s));
+    const same = (i: number) => next.steps[Math.min(i, next.steps.length - 1)]!;
+    const progress = stepProgress(step, player.time);
+    const t =
+      player.time >= build.duration - 0.001
+        ? next.duration
+        : progress >= 1
+          ? stepEnd(same(current))
+          : same(current).start + progress * same(current).duration;
+    setSize(s);
+    player.seek(t, next.duration);
+    if (stopAt !== null) setStopAt(stepEnd(same(stepAt(build, stopAt))));
+  };
   const family = variantFamily(recipe);
   const recipeStep = recipe.steps[current]!;
   const inUse = "material" in recipeStep ? recipeStep.material : "thread";
@@ -286,7 +305,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
                 {m.id === "hook" && tiedSize !== undefined ? (
                   <label className="detail hook-size">
                     , size{" "}
-                    <select value={size} onChange={(e) => setSize(Number(e.target.value))} aria-label="Hook size">
+                    <select value={size} onChange={(e) => changeSize(Number(e.target.value))} aria-label="Hook size">
                       {hookSizes(tiedSize).map((s) => (
                         <option key={s} value={s}>
                           {s}
