@@ -63,7 +63,7 @@ public/renders/ generated gallery images, committed; regenerate after recipe/ren
 - Positions are fractions of the shank: `0` = start of the bend, `1` = just behind the eye
   (or the bead, when there is one).
 - Lengths are multiples of the hook gape. World units in the renderer are gapes.
-- The thread position is tying state; only `attach-thread`, `wrap-thread` and `dub` move it.
+- The thread position is tying state; only `attach-thread`, `wrap-thread`, `dub` and `spin` move it.
   Tie-ins, tie-offs and whip finishes happen at the thread.
 - Validation errors must carry a source location (line and column).
 - Materials are referenced by catalog kind (`src/recipe/materials.ts`); add a catalog entry

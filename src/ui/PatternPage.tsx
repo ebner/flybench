@@ -5,7 +5,7 @@ import { findPattern, variantFamily } from "../patterns";
 import type { Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
 import { ridesPointUp } from "../tying/hook";
-import { simulate, stepAt } from "../tying/simulate";
+import { simulate, stepAt, stepEnd } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
 import { match, materialColor } from "../catalog/inventory";
 import { href, replaceUrl } from "./router";
@@ -122,7 +122,7 @@ function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initia
 
   const playStep = (i: number) => {
     const s = build.steps[Math.max(0, Math.min(build.steps.length - 1, i))]!;
-    setStopAt(s.start + s.duration);
+    setStopAt(stepEnd(s));
     player.playFrom(s.start);
   };
   const playAll = () => {
@@ -134,6 +134,8 @@ function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initia
     const onKey = (e: KeyboardEvent) => {
       const t = e.target;
       if ((t instanceof HTMLInputElement && t.type !== "range") || t instanceof HTMLSelectElement || t instanceof HTMLTextAreaElement) return;
+      // Space on a focused button or link presses it.
+      if (e.key === " " && t instanceof Element && t.closest("button, a, summary")) return;
       if (e.key === "Escape" && vise) {
         setVise(false);
       } else if (e.key === " ") {

@@ -283,17 +283,20 @@ const Origin = z.strictObject({
   region: z.string().min(1).optional(),
 });
 
+/** Web links only: a recipe's links end up on the published pages. */
+const WebUrl = z.url({ protocol: /^https?$/ });
+
 const Source = z.strictObject({
   title: z.string().min(1),
-  url: z.url().optional(),
+  url: WebUrl.optional(),
 });
 
 /** A photo of the finished fly, used to check proportions while authoring. Never published. */
 const Reference = z.strictObject({
   /** Direct link to the image file. */
-  image: z.url(),
+  image: WebUrl,
   /** The page the image is shown on, for attribution. */
-  page: z.url().optional(),
+  page: WebUrl.optional(),
   author: z.string().min(1).optional(),
   license: z.string().min(1).optional(),
   /** Mirror the photo so the eye points right, as in our renders. */

@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { DIFFICULTY_LABELS, factsLine, IMITATES_LABELS, originLine, SPECIES_LABELS, TYPE_LABELS } from "../catalog/describe";
 import { learningPath } from "../catalog/techniques";
 import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } from "../catalog/search";
@@ -15,6 +15,11 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 export function Gallery({ query }: { query: string }) {
   const [filters, setFiltersState] = useState<Filters>(() => filtersFromQuery(query));
   const [moreOpen, setMoreOpen] = useState(() => hasMoreFilters(filtersFromQuery(query)));
+  // A link to all patterns, or Back and Forward, changes the address: show its filters.
+  useEffect(() => {
+    if (filtersToQuery(filters) !== query) setFiltersState(filtersFromQuery(query));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
   const renders = useRenders();
   const owned = useStoredSet(INVENTORY_KEY);
   const found = useMemo(() => SEARCH.search(filters), [filters]);

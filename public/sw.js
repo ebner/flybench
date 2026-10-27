@@ -1,11 +1,16 @@
 // Flybench service worker: makes the site work offline once visited.
 // Same-origin GET requests are answered from the cache when possible and refreshed
 // from the network in the background (stale-while-revalidate).
-const CACHE = "flybench-v2";
+
+// The build (scripts/prerender.ts) fills these in: a cache name per build, so a new
+// deployment replaces the old cache, and the app's own files (scripts, styles, fonts),
+// which the first visit loads before this worker is running.
+const CACHE = "flybench-dev";
+const SHELL = ["./", "./manifest.webmanifest", "./favicon.svg", "./logo.svg"];
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(["./", "./manifest.webmanifest", "./favicon.svg", "./logo.svg"])));
+  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)));
 });
 
 self.addEventListener("activate", (event) => {
@@ -25,7 +30,10 @@ self.addEventListener("fetch", (event) => {
       // Every page is the same app; a page not visited before falls back to the front page's
       // HTML when offline, and the app shows the right page for the address.
       const navigation = request.mode === "navigate";
-      const cached = (await cache.match(request, { ignoreSearch: navigation })) ?? (navigation ? await cache.match("./") : undefined);
+      // The site's files are the same whatever Origin or encoding was asked for, so Vary
+      // headers (Vary: Origin from module scripts) must not stop a cached copy from matching.
+      const options = { ignoreSearch: navigation, ignoreVary: true };
+      const cached = (await cache.match(request, options)) ?? (navigation ? await cache.match("./", options) : undefined);
       const network = fetch(request)
         .then((response) => {
           if (response.ok) cache.put(request, response.clone());

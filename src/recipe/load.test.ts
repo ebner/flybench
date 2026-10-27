@@ -205,6 +205,12 @@ describe("schema validation", () => {
     expect(errors("fur hares-ear-dubbing", "fur hares-ear-dubbing shaggy=2")).toMatch(/shaggy/);
     expect(errors("wool color=red", "wool color=red shaggy=0.5")).toMatch(/"shaggy" does not apply to wool/);
   });
+
+  it("accepts only web links as sources", () => {
+    const withSource = (url: string) => load(VALID_STEPS, `${HEADER}sources {\n    "A source" url="${url}"\n}\n`);
+    expect(withSource("https://example.org/fly").ok).toBe(true);
+    expect(errorsOf(withSource("javascript:alert(1)")).join("\n")).toMatch(/sources/);
+  });
 });
 
 describe("semantic validation", () => {
@@ -336,7 +342,8 @@ materials {
     ["weight with wire only", steps.replace("weight lead", "weight fur"), /weighting is done with wire/],
     ["weight runs forward", steps.replace("from=0.4 to=0.8", "from=0.8 to=0.4"), /must run forward/],
     ["wind needs to or around", steps.replace("wind hackle around=post turns=4", "wind hackle turns=4"), /either `to`.*or `around`/],
-    ["posts stand upright", steps.replace("tie-in post length=0.8 angle=90", "tie-in post length=0.8 angle=20"), /must be tied in upright/],
+    ["posts stand upright", steps.replace("tie-in post length=0.8 angle=90", "tie-in post length=0.8 angle=20"), /must be a bunch tied in upright/],
+    ["posts are bunches, not strands across", steps.replace("tie-in post length=0.8 angle=90", "tie-in post length=0.8 angle=90 side=across"), /must be a bunch tied in upright/],
     ["pull over after tying in", steps.replace("tie-in case\n", ""), /must be tied in \(and not yet used\)/],
     ["pull over up to the thread", steps.replace("pull-over case to=0.7", "pull-over case to=0.9"), /tie the material down there/],
     ["spin only hair", steps.replace("spin head", "spin fur"), /only hair can be spun/],

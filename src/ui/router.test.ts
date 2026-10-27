@@ -16,6 +16,9 @@ describe("routes", () => {
     expect(parseRoute("about/")).toEqual({ page: "about" });
     expect(parseRoute("a/b/c")).toEqual({ page: "not-found", path: "a/b/c" });
     expect(parseRoute("red-tag")).toEqual({ page: "not-found", path: "red-tag" });
+    // A stray "%" (or a broken encoding) is not a page, and must not throw.
+    expect(parseRoute("fly/100%zz%/")).toEqual({ page: "not-found", path: "fly/100%zz%/" });
+    expect(parseRoute("fly/%E0%A4/")).toEqual({ page: "not-found", path: "fly/%E0%A4/" });
   });
 
   it("round-trip links", () => {

@@ -370,7 +370,7 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   // Dubbing is a felt of mottled fur, not a smooth strand of one colour.
   const mottled = piece.look === "dubbing";
   if (mottled) {
-    const rand = mulberry32(piece.id * 31 + 5);
+    const rand = mulberry32((piece.seed ?? piece.id) * 31 + 5);
     const count = tube.getAttribute("position").count;
     const colors = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) colors.fill(0.62 + 0.38 * rand(), i * 3, i * 3 + 3);
@@ -382,7 +382,7 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   if (piece.fibreLength && piece.look in WOUND_FIBRES) {
     const spec = WOUND_FIBRES[piece.look as keyof typeof WOUND_FIBRES];
     const color = piece.look === "herl" ? "#26341a" : piece.color;
-    const list = placeFibres(woundFibres(piece, mulberry32(piece.id * 7919 + 1)), space);
+    const list = placeFibres(woundFibres(piece, mulberry32((piece.seed ?? piece.id) * 7919 + 1)), space);
     fibres = fibreMesh(list, surfaces.get(piece.look, color, true), spec.tip);
     group.add(fibres.object);
   }
@@ -424,7 +424,7 @@ const BUNDLE = {
 
 function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const spec = BUNDLE[piece.look as keyof typeof BUNDLE] ?? BUNDLE.yarn;
-  const rand = mulberry32(piece.id * 104729 + 3);
+  const rand = mulberry32((piece.seed ?? piece.id) * 104729 + 3);
   const forward = piece.direction === "forward";
   const radialHair = piece.direction === "radial";
   // Under the shank, everything is mirrored top to bottom.
@@ -651,7 +651,7 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
  */
 function featherFringe(piece: FeatherPiece): Fibre[] {
   const form = featherForm(piece);
-  const rand = mulberry32(piece.id * 6151 + 7);
+  const rand = mulberry32((piece.seed ?? piece.id) * 6151 + 7);
   const n = Math.round(form.L * FRINGE_PER_GAPE);
   const list: Fibre[] = [];
   for (const side of [-1, 1]) {
@@ -939,7 +939,7 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
 
   let fuzz: ReturnType<typeof fibreMesh> | null = null;
   if (piece.fuzz) {
-    const rand = mulberry32(piece.id * 4111 + 9);
+    const rand = mulberry32((piece.seed ?? piece.id) * 4111 + 9);
     const list: Fibre[] = [];
     const n = Math.round(L * 900);
     for (let k = 0; k < n; k++) {
@@ -971,7 +971,7 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
 /** Legs tied across the shank: each strand sticks out on both sides, leaning back and sagging. */
 function legsView(piece: LegsPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const list: Fibre[] = [];
-  const rand = mulberry32(piece.id * 7177 + 5);
+  const rand = mulberry32((piece.seed ?? piece.id) * 7177 + 5);
   for (let i = 0; i < piece.count; i++) {
     // Strands a little apart along the shank, as when they are wrapped on one by one.
     const x = piece.x + (i - (piece.count - 1) / 2) * 0.09;

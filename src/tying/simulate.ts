@@ -29,6 +29,8 @@ interface PieceBase {
   window: [number, number];
   /** Time (seconds) from which the piece is gone again, e.g. trimmed butts. */
   until?: number;
+  /** Seeds the piece's random fibres; a piece that replaces another keeps its seed, so nothing jumps. */
+  seed?: number;
 }
 
 export interface WrapsPiece extends PieceBase {
@@ -702,12 +704,19 @@ export function simulate(recipe: Recipe): Build {
         pieces.push(piece);
         wound.set(step.material, piece);
         if (piece.path === "travel") {
-          // Each turn over the top of a wing case or back presses it in.
-          for (const c of covers.values()) {
+          // Each turn over the top of a wing case or back presses it in. The dented case
+          // replaces the smooth one from this step on, so earlier moments stay smooth.
+          for (const [id, c] of covers) {
+            const dents: number[] = [];
             for (let k = 0; k < step.turns; k++) {
               const x = piece.x0 + ((piece.x1 - piece.x0) * (k + 0.25)) / step.turns;
-              if (x > c.x0 + 0.02 && x < c.x1 - 0.02) c.dents.push(x);
+              if (x > c.x0 + 0.02 && x < c.x1 - 0.02) dents.push(x);
             }
+            if (dents.length === 0) continue;
+            c.until = time;
+            const dented: CoverPiece = { ...c, id: nextId++, seed: c.seed ?? c.id, dents: [...c.dents, ...dents], window: [0, 0.0001], until: undefined };
+            pieces.push(dented);
+            covers.set(id, dented);
           }
         }
         if (piece.fibreLength && piece.path === "travel") {
@@ -734,8 +743,14 @@ export function simulate(recipe: Recipe): Build {
         pieces.push(cover);
         covers.set(step.material, cover);
         profile = profile.withLayer(from, to, thickness * 0.8);
-        for (const w of wound.values()) {
-          if (w.fibreLength && w.path === "travel" && Math.min(w.x0, w.x1) < to && Math.max(w.x0, w.x1) > from) w.covered = [from, to, cover.halfAngle];
+        // Fibres on top of what it covers are pressed flat: from this step on, those wraps are
+        // replaced by copies without them, so earlier moments still show the fibres.
+        for (const [id, w] of wound) {
+          if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) continue;
+          w.until = time;
+          const pressed: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, covered: [from, to, cover.halfAngle], window: [0, 0.0001], until: undefined };
+          pieces.push(pressed);
+          wound.set(id, pressed);
         }
         freeEnds.delete(step.material);
         ends = restingEnds();
@@ -766,7 +781,7 @@ export function simulate(recipe: Recipe): Build {
           // The same hackle, with only its side fibres left.
           const w = wound.get(step.material)!;
           w.until = cutAt;
-          pieces.push({ ...w, id: nextId++, keep: step.keep, window: [0.5, 0.5001], until: undefined });
+          pieces.push({ ...w, id: nextId++, seed: w.seed ?? w.id, keep: step.keep, window: [0.5, 0.5001], until: undefined });
           ctx.keep = true;
         } else if (covers.has(step.material)) {
           // The excess of a foam back, cut flush or left as a stub over the eye.
@@ -835,6 +850,23 @@ export function simulate(recipe: Recipe): Build {
 }
 
 /** Index of the step playing at time t (the last step once t reaches the end). */
+/** Seconds before a step's end that still count as that step, finished. */
+const END_MARGIN = 1e-6;
+
+/**
+ * The last moment of a step, showing it finished. At `start + duration` the next step has
+ * already begun (see `stepAt`), so stopping or holding at the end of a step uses this.
+ */
+export function stepEnd(step: SimStep): number {
+  return step.start + step.duration - END_MARGIN;
+}
+
+/** How far through a step `t` is, from 0 to 1; its last moment (`stepEnd`) counts as done. */
+export function stepProgress(step: SimStep, t: number): number {
+  const p = (t - step.start) / step.duration;
+  return p >= 1 - (2 * END_MARGIN) / step.duration ? 1 : Math.max(0, p);
+}
+
 export function stepAt(build: Build, t: number): number {
   for (let i = build.steps.length - 1; i >= 0; i--) {
     if (t >= build.steps[i]!.start) return i;

@@ -30,7 +30,13 @@ const SINGLE = ["techniques", "learn", "about", "box", "materials"] as const;
 export function parseRoute(relative: string): Route {
   const [path = "", query = ""] = relative.replace(/^\/+/, "").split("?");
   const params = new URLSearchParams(query);
-  const parts = path.split("/").filter(Boolean).map(decodeURIComponent);
+  let parts: string[];
+  try {
+    parts = path.split("/").filter(Boolean).map(decodeURIComponent);
+  } catch {
+    // A stray "%" in a hand-typed or mangled address.
+    return { page: "not-found", path };
+  }
   if (parts.length === 0) return { page: "gallery", query };
   if (parts[0] === "fly" && parts[1] && parts.length <= 3) {
     // The step used to be a path segment; it is a query parameter now.
@@ -90,6 +96,10 @@ function currentRelative(): string {
 
 const NAVIGATE = "flybench:navigate";
 
+/** Whether the last change of page was Back or Forward, where the browser restores the scroll position. */
+let restoring = false;
+export const restoresScroll = () => restoring;
+
 /** Goes to an address on this site without reloading the page. */
 export function navigate(url: string) {
   history.pushState(null, "", url);
@@ -98,7 +108,9 @@ export function navigate(url: string) {
 
 /** Changes the address without adding a history entry (for filters and step changes). */
 export function replaceUrl(url: string) {
-  if (location.pathname + location.search !== url) history.replaceState(null, "", url);
+  if (location.pathname + location.search === url) return;
+  history.replaceState(null, "", url);
+  window.dispatchEvent(new Event(NAVIGATE));
 }
 
 /** A click on a plain link to a page of this site, which the app handles itself. */
@@ -122,7 +134,8 @@ export function useRoute(): Route {
     return legacy ?? parseRoute(currentRelative());
   });
   useEffect(() => {
-    const update = () => {
+    const update = (e: Event) => {
+      restoring = e.type === "popstate";
       const legacy = legacyRoute(location.hash);
       if (legacy) history.replaceState(null, "", routeHref(legacy));
       setRoute(legacy ?? parseRoute(currentRelative()));

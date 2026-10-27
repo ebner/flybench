@@ -8,7 +8,7 @@ import { Learn } from "./Learn";
 import { FlyBox, Materials } from "./Personal";
 import { TechniquePage, TechniquesIndex } from "./Techniques";
 import { PatternPage } from "./PatternPage";
-import { href, useRoute } from "./router";
+import { href, restoresScroll, useRoute } from "./router";
 import { useTheme } from "./theme";
 
 export function App() {
@@ -17,7 +17,7 @@ export function App() {
 
   useEffect(() => {
     if (route.page === "gallery") document.title = SITE_TITLE;
-    window.scrollTo(0, 0);
+    if (!restoresScroll()) window.scrollTo(0, 0);
   }, [route.page, route.page === "fly" || route.page === "technique" ? route.id : null]);
 
   return (
