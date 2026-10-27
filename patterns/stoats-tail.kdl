@@ -11,20 +11,23 @@ season may june july august september
 origin region="Scotland"
 description "An oval silver tag, a golden pheasant crest tail, a black floss body ribbed with oval silver, a black throat hackle and a low black hair wing."
 history """
-    Nobody has documented who tied it first. The wing was originally the black tip of a stoat's
-    tail; black squirrel is the usual material now. It belongs with the Hairy Mary and the Munro
-    Killer among the plain hairwings that took over salmon fishing in the second half of the
-    twentieth century. Hugh Falkus called it one of the best flies we have.
+    Who tied it first is not documented; John Gray says only that it has been around a long
+    time, though GlobalFlyFisher's video page gives James Wright as the pattern's author. The
+    wing was originally hair from a stoat's tail; dyed black squirrel is the usual substitute.
+    Hugh Falkus, as Gray quotes him, rated it "one of the best we have" for summer fishing with
+    a floating line, and Sea Trout Nights counts it among the most popular sea-trout flies of
+    modern times.
     """
 fishing """
-    The classic summer fly: on a floating line in low, clear water, swung across and down on small
-    doubles or trebles. It is good at dusk and in low light, and for grilse and sea trout. Larger
-    tubes and doubles cover higher, colder water.
+    A summer fly for a floating line, at its best in low, clear water and in the evening or
+    other low light, and a good fly for grilse and for sea trout at night on rivers. It is tied
+    on singles, doubles, trebles and tubes.
     """
 sources {
     "Trout & Salmon Fishing: Stoat's Tail (John Gray)" url="https://trout-salmon-fishing.com/stoats-tail.htm"
-    "GlobalFlyFisher: Stoat's Tail long wing" url="https://globalflyfisher.com/video/stoats-tail-long-wing"
+    "GlobalFlyFisher: Stoat's Tail long wing (Ivar's Fly Workshop)" url="https://globalflyfisher.com/video/stoats-tail-long-wing"
     "Fish4Flies: Stoat's Tail" url="https://www.fish4flies.com/Salmon-Atlantic/Big-Mouth-Doubles/Stoats-Tail"
+    "Sea Trout Nights: Flies and Fly Tying" url="https://seatrout-fishing.com/sea-trout-nights/flies-and-fly-tying/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -52,7 +55,7 @@ steps {
     wrap-thread to=0.06
     wind tag to=0.06 turns=4 note="A few close turns at the start of the bend."
     tie-off tag
-    // A general salmon-fly guide: about one and a half gapes, curving up.
+    // Assumption: about one and a half gapes, curving up, as usual on salmon flies.
     tie-in tail length=1.5 angle=14 spread=8
     tie-in rib
     tie-in body
@@ -62,7 +65,7 @@ steps {
     wind rib to=0.84 turns=5 note="Evenly spaced open turns."
     tie-off rib
     tie-in throat length=1.0 angle=30 side=under note="A little shorter than the wing; reaching about the hook point."
-    // Gray's photos: the wing reaches about the tip of the tail.
+    // Gray's photo: the wing reaches about the tip of the tail.
     tie-in wing length=3.7 angle=8 spread=20 note="A small, cleaned bunch, low over the body."
     trim wing note="Butts cut at a taper for a small head."
     whip-finish note="Two or three coats of black varnish."

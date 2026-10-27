@@ -11,23 +11,29 @@ season march april may september
 origin originator="James Wright for Canon William Greenwell" year=1854 region="Sprouston, River Tweed, Scotland"
 description "A body of waxed yellow silk ribbed with fine gold wire, a coch-y-bonddu hen hackle and a dark blackbird or starling quill wing."
 history """
-    Canon William Greenwell of Durham came in fishless in May 1854 with a dun the trout were
-    taking, and James Wright, the fly dresser at Sprouston near Kelso, tied an imitation.
-    After a heavy catch the next day the fly was named at a gathering in Wright's shop. The
-    Canon's own dressing, in a letter to the Fishing Gazette: "wings, inside of a blackbird
-    wing; body, red and black hackle; tied with yellow silk." The gold rib came later, as an
-    option.
+    In May 1854 Canon William Greenwell of Durham had a blank day on the Tweed while the trout
+    fed on a dun. He took one of the naturals to James Wright, the fly dresser at Sprouston near
+    Kelso, who tied imitations; the Canon did so well with them the next day that the fly was
+    named over a celebration at Wright's. The tellings differ in detail, and the 1854 date rests
+    on later accounts. Late in life the Canon gave R. B. Marston of the Fishing Gazette his own
+    dressing: "the wings, inside of a blackbird wing; body, red and black hackle; tied with
+    yellow silk". Courtney Williams quotes another letter allowing gold thread "if wished", and
+    by 1903 E. M. Tod ribbed the body with fine gold wire.
     """
 fishing """
-    A river fly for the olive hatches of spring and autumn, fished across and down or upstream
-    on a team of wets, often on the dropper. It also serves as a general wet fly on lochs. A
-    lighter dressing keeps it working through the summer.
+    A wet fly for the olives. Edmonds and Lee give it March to early May and again September,
+    and keep it going through the summer months between with a lighter wing, body and hackle.
+    On Scottish lochs it is one of the traditional flies for a cast of three or four fished
+    from a drifting boat, and Alastair Gowans lists it among the wet flies for autumn grayling.
     """
 sources {
-    "Fly Anglers Online: Just Old Flies #106 (archived)" url="https://web.archive.org/web/2020/https://www.flyanglersonline.com/features/oldflies/part106.php"
-    "Fly Anglers Online: The Greenwell's Glory Tales (archived)" url="https://web.archive.org/web/2020/https://www.flyanglersonline.com/features/oldflies/part234.php"
-    "Edmonds & Lee, Brook and River Trouting (1916)" url="https://archive.org/details/brookrivertrouti00edmorich"
+    "Fly Anglers Online: Greenwell's Glory, Just Old Flies #106 (Deanna Birkholm, archived)" url="https://web.archive.org/web/20181229104611/http://flyanglersonline.com/features/oldflies/part106.php"
+    "Fly Anglers Online: The Greenwell's Glory Tales (Alan Shepherd, archived)" url="https://web.archive.org/web/20181229111919/http://flyanglersonline.com/features/oldflies/part234.php"
+    "Internet Archive: Brook and River Trouting (Edmonds & Lee, 1916)" url="https://archive.org/details/brookrivertrouti00edmorich"
     "SWTU: Greenwell's Glory, Tweed style (Rusty Dunn)" url="https://www.swtu.org/2018/02/08/greenwells-glory-tweed-style/"
+    "Trout & Salmon Fishing: Trout Flies, Traditional Scottish Flies" url="https://www.trout-salmon-fishing.com/trout-flies.htm"
+    "Let's Fly Fish: Grayling fly fishing (Alastair Gowans)" url="https://letsflyfish.com/graylingpage.htm"
+    "Sexyloops: Greenwell's Glory (fly fishing glossary)" url="https://www.sexyloops.com/glossary/greenwell.shtml"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

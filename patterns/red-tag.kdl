@@ -4,9 +4,8 @@
 
 id red-tag
 name "Red Tag"
-aliases "Worcestershire Gem" "Worcester Gem"
+aliases "Worcestershire Gem" "Worcestershire Wonder"
 type dry
-imitates attractor
 difficulty beginner
 species trout grayling
 // Assumption: fished through the season, best known as an autumn grayling fly.
@@ -15,18 +14,21 @@ origin originator="Martyn Flynn" region="Worcestershire, England"
 description "Peacock herl body with a short red wool tag and a brown cock hackle. Fished dry or wet for grayling and trout."
 history """
     Usually credited to Martyn Flynn of Worcestershire in the 1850s, who tied it as a dry
-    fly for grayling and called it the Worcestershire Gem. It travelled to Australia and
-    New Zealand, where it became a standard brown trout fly, particularly in Tasmania.
-    The date and originator are repeated widely but rest on secondary accounts.
+    fly for grayling and called it the Worcestershire Gem; it was also known as the
+    Worcestershire Wonder. It later reached Australia, where it became a standard brown trout
+    fly, above all in Tasmania. The date and originator are repeated widely but rest on
+    secondary accounts.
     """
 fishing """
-    A general attractor rather than an imitation of a particular insect. Fish it dry on
-    a dead drift, or let it sink and swing it as a wet fly. A classic for grayling in
-    autumn, when the red tag seems to provoke them.
+    It suggests nothing in particular; at most, Martin Joergensen thinks, a small beetle. Fish
+    it dry on a dead drift, or let it sink and fish it as a wet fly. Alastair Gowans singles it
+    out as a dry fly for grayling and also lists it among the wet flies for autumn grayling.
     """
 sources {
     "Wikipedia: Red Tag (artificial fly)" url="https://en.wikipedia.org/wiki/Red_Tag_(artificial_fly)"
     "FlyLife: A modernized 170 year old trout fly" url="https://flylifemagazine.com/a-modernized-170-year-old-trout-fly-is-still-simple-and-deadly-red-tag/"
+    "GlobalFlyFisher: Red Tag (Martin Joergensen)" url="https://globalflyfisher.com/patterns/red-tag"
+    "Let's Fly Fish: Grayling fly fishing (Alastair Gowans)" url="https://letsflyfish.com/graylingpage.htm"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

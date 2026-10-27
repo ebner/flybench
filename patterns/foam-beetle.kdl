@@ -5,24 +5,27 @@ name "Foam Beetle"
 type terrestrial
 imitates terrestrial
 difficulty beginner
-species trout panfish bass
+species trout panfish
 season june july august september
 origin region="United States"
 description "A black foam shell folded over a peacock herl body, moose hair legs at the sides and a small orange sighter on top."
 history """
-    No one is credited with it. It is the foam descendant of the folded deer-hair Crowe Beetle,
-    developed and popularised by John Crowe of Johnstown, Pennsylvania. A Crowe Beetle could be
-    torn apart by one or two fish; a foam one often survives a dozen. When foam replaced the
-    deer hair is not recorded.
+    The sources credit no one with it. It is the foam descendant of the folded deer-hair Crowe
+    Beetle, developed and popularised by John Crowe of Johnstown, Pennsylvania. Deer hair wears
+    out quickly, often after a fish or two, while a foam beetle can last through a dozen. None
+    of the sources says when foam took over from deer hair.
     """
 fishing """
-    Cast it tight to banks and under overhanging grass and trees in summer, landing it with an
-    audible plop, then dead-drift it or give it a small twitch. It floats indefinitely, and the
-    sighter makes the low-riding black fly visible; it is also a good top fly for a dry-dropper.
+    Fish it close to the banks in summer, when beetles fall in. Let it land with a plop: George
+    Daniel points out that trout lying deep under an undercut bank may feel the impact before
+    they see the fly. The foam keeps it afloat, and the sighter makes the low-riding black fly
+    easier to follow. Beetles are also a standby for panfish.
     """
 sources {
     "Fly Fisherman: Foam Beetle (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-foam-beetle/151931"
     "Fly Fishers Paradise: Foam Beetle" url="https://flyfishersparadise.com/fly-tying/foam-beetle"
+    "Gink & Gasoline: Sudden impact, fishing a better beetle (George Daniel)" url="https://www.ginkandgasoline.com/fly-fishing-tips-technique/sudden-impact-fishing-a-better-beetle/"
+    "Panfish On The Fly: Terrestrial patterns for panfish" url="https://www.panfishonthefly.com/blog/2020/3/30/terrestrial-patterns-for-panfish"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

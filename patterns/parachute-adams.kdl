@@ -5,24 +5,25 @@ name "Parachute Adams"
 type dry
 imitates mayfly
 difficulty intermediate
-species trout grayling
+species trout
 season april may june july august september
 origin region="North America"
 description "Mixed brown and grizzly tail, Adams grey body, a white calf-hair post and a parachute hackle of brown and grizzly."
 history """
     The Adams (Leonard Halladay, Michigan, 1922) tied with a parachute hackle round a wing
-    post. Parachute dry flies became popular in the 1950s and the Parachute Adams followed;
-    no single originator is documented.
+    post. Rusty Dunn dates the popularity of parachute Adams to the 1950s; none of the
+    sources names who tied the first one.
     """
 fishing """
-    An everyday searching dry that lands upright and sits low in the film like a dun or a
-    cripple, with a post you can see in broken water. Fish it dead drift, or as the
-    indicator fly in a dry-dropper rig. Sizes 16 to 20 cover olives and midges.
+    An everyday searching dry with the outline of an adult mayfly. The hackle wound round
+    the post helps it float, and the white post is easy to follow in rough water. Fish it on
+    a dead drift; Charlie Craven fishes it in sizes 14 and 16 through the summer.
     """
 sources {
     "Fly Fisherman: Parachute Adams" url="https://www.flyfisherman.com/editorial/parachute-adams/152452"
     "Fly Fisherman: Tweaking the Adams fly (Charlie Craven)" url="https://www.flyfisherman.com/editorial/tweaking-the-adams-fly/152123"
     "Wikipedia: Adams (dry fly)" url="https://en.wikipedia.org/wiki/Adams_(dry_fly)"
+    "SWTU: The Adams (Rusty Dunn)" url="https://www.swtu.org/2023/12/04/adams/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

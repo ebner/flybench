@@ -1,4 +1,4 @@
-// Europea 12 with a pheasant tail tail, as in the Ahrex dressing.
+// Europea 12 with the pheasant tail tail of the Ahrex dressing (which lists no rib).
 
 id europea-12-tailed
 name "Europea 12"
@@ -12,7 +12,7 @@ season may june july august september
 origin originator="André Ragot" region="France"
 description "The Europea 12 with a short tail of pheasant tail fibres."
 sources {
-    "Ahrex: Europea 12" url="https://ahrexhooks.com/2019/09/16/europea-12/"
+    "Ahrex: Europea 12 (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2019/09/16/europea-12/"
 }
 
 hook dry-standard size=12

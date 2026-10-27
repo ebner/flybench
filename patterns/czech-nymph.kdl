@@ -10,24 +10,26 @@ season january february march april may june july august september october novem
 origin region="Poland and Czechoslovakia, 1980s"
 description "A heavily weighted body on a curved hook: olive dubbed abdomen, dark thorax, a tan shellback and two ribs."
 history """
-    Less a single pattern than a style. Czech competitors learned short-line nymphing from
-    the Poles at a competition in 1984 and placed second behind Poland at the 1985 world
-    championship; Slavoj Svoboda won the individual title in 1986. The flies imitated
-    free-living caddis larvae such as Hydropsyche and Rhyacophila.
+    Less a single pattern than a style. Czech competitors saw the Poles' short-line nymphing at a
+    competition in Poland in 1984, used it to place second behind Poland at the 1985 world
+    championship, and in 1986 Slavoj Svoboda won the individual title with it. The Polish flies
+    imitated free-living caddis larvae such as Hydropsyche and Rhyacophila.
 
-    Early Czech nymphs had bodies of washing-up sponge and backs of mackintosh; they grew
-    slimmer as materials improved. Some credit the method to the Pole Władysław Trzebunia.
+    Early Czech nymphs had bodies of washing-up sponge, horsehair ribs and backs of mackintosh;
+    they grew slimmer as materials improved. Skip Clement sees the method as that of the Polish
+    champion Władysław Trzebunia under another name.
     """
 fishing """
-    Fished dead drift on the bottom in moderate to fast runs, classically as a team of two
-    or three on a short line led downstream by the rod tip, without an indicator. The slim,
-    heavy profile sinks fast. It works for trout and grayling all year, especially in cold
-    or high water.
+    Fished dead-drift along the bottom, classically as a team of two or three on a short line,
+    close to the rod tip with little or no line on the water; takes show as a check in the
+    leader, and a coloured indicator section helps to see them. Grayling take it best, trout too.
+    It fishes all year, and is especially useful in high water.
     """
 sources {
     "GlobalFlyFisher: Czech nymphs (Bob Petti)" url="https://globalflyfisher.com/node/14107"
-    "Charlie's Fly Box: Czech nymph" url="https://charliesflybox.com/blogs/step-by-step-tutorials/czech-nymph"
+    "Charlie's Fly Box: Czech Nymph" url="https://charliesflybox.com/blogs/step-by-step-tutorials/czech-nymph"
     "GlobalFlyFisher: Czech nymphing (Pavel Adamovsky)" url="https://globalflyfisher.com/fish-better-tie-better/czech-nymphing"
+    "FlyLife: Vladi's nymphing has been reborn to illegitimate fathers (Skip Clement)" url="https://flylifemagazine.com/vladis-nymphing-has-been-reborn-to-new-fathers-of-new-nationalities/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

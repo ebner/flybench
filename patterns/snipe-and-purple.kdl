@@ -50,7 +50,7 @@ steps {
     wrap-thread to=0.86 note="A thin, even, single layer of silk."
     tie-in hackle note="By the tip, paler side up, barbs reaching just past the bend."
     wrap-thread to=0.93
-    wind hackle to=0.93 turns=2 note="The barbs should splay like the spokes of an umbrella."
+    wind hackle to=0.93 turns=2 note="Barbs flared evenly all round, so they catch the current."
     tie-off hackle
     whip-finish note="A small purple head."
 }

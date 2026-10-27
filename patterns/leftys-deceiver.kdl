@@ -11,22 +11,25 @@ season january february march april may june july august september october novem
 origin originator="Lefty Kreh" region="Chesapeake Bay, Maryland, USA, late 1950s"
 description "A long tail of white saddle hackles with silver flash at the bend, a silver tinsel body, and a white bucktail collar round the front reaching just past the bend."
 history """
-    Lefty Kreh, then a Maryland outdoor writer fishing for striped bass on Chesapeake Bay, was
-    tired of streamers whose saddle hackles fouled round the bend. Tying the hackles in at the
-    bend and the bucktail at the head gave a fly that never fouls, casts well in wind, looks like a
-    fish and can be tied at any length. The original was all white, for smelt. It is a design as
-    much as a pattern, and it was on a US postage stamp in 1991.
+    Lefty Kreh, then an outdoor writer in Maryland, fished for striped bass on
+    Chesapeake Bay, where the big streamers of the day, their saddle hackles tied in near the
+    eye, kept fouling round the bend. Tying the hackles in at the bend and the bucktail at the
+    head gave a fly that does not foul when cast, slims down in the air, keeps the shape of a
+    fish and can be tied at any length. The original was all white, for the smelt the stripers
+    ate. It is a design as much as a pattern, and it was on a US postage stamp in 1991.
     """
 fishing """
-    Cast on an intermediate or sinking line and stripped like a fleeing baitfish, with pauses to
-    let the hackles and bucktail breathe. Fish it around rips, jetties, flats and bait schools for
-    striped bass, bluefish, snook, tarpon and pike.
+    Retrieve it like a fleeing baitfish, on a floating or sinking line to suit the depth. In salt
+    water it is cast along surf bars and into channels and passes for striped bass, bluefish and
+    tarpon; in fresh water it takes bass and pike.
     """
 sources {
     "Wikipedia: Lefty's Deceiver" url="https://en.wikipedia.org/wiki/Lefty%27s_Deceiver"
-    "FlyLife: Lefty's Deceiver" url="https://flylifemagazine.com/?p=25063"
-    "Orvis: Lefty's Deceiver video" url="https://howtoflyfish.orvis.com/fly-tying-videos/salt-bass-streamer-flies/647-leftys-deceiver"
+    "FlyLife: Is the Deceiver the all-time best fly? (Skip Clement)" url="https://flylifemagazine.com/?p=25063"
+    "Orvis Learning Center: Lefty's Deceiver (video)" url="https://howtoflyfish.orvis.com/fly-tying-videos/salt-bass-streamer-flies/647-leftys-deceiver"
     "The Fisherman: Tying a Deceiver (Bill Smith)" url="https://www.thefisherman.com/article/tying-a-deceiver/"
+    "Texas Saltwater Fishing: Fly of the month, Lefty's Deceiver (Casey Smartt)" url="https://www.texassaltwaterfishingmagazine.com/fishing/by-type/fly-fishing/fly-month-lefty-deceiver"
+    "Outdoor Canada: How to fly fish like a bassmaster (Scott Gardner)" url="https://www.outdoorcanada.ca/how-to-fly-fish-like-a-bassmaster-all-summer-long/3/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

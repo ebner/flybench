@@ -11,22 +11,25 @@ season january february march april may june july august september october novem
 origin originator="Don Gapen" year=1937 region="Nipigon River, Ontario, Canada"
 description "Turkey quill tail, a flat gold tinsel body, a squirrel tail underwing under matched turkey slips, and a spun deer-hair collar and clipped head."
 history """
-    Don Gapen of Anoka, Minnesota, tied it at his family's lodge on the Nipigon River in 1936 or
-    1937 to imitate the sculpins the big brook trout fed on, after watching Ojibwe guides catch
-    them for bait. His head and collar were one sparse, ragged clump of deer hair. The dense,
-    neatly clipped head most tyers make today came from Dan Bailey of Livingston, Montana, around
-    1950, and Joe Brooks made the fly famous in Field & Stream.
+    Don Gapen of Anoka, Minnesota, made it on the Nipigon River in Ontario in 1936 or 1937 to
+    imitate the sculpins the big brook trout fed on, after watching First Nations guides catch
+    them. His head and collar were one sparse, ragged clump of deer hair. The dense, neatly
+    clipped head most tyers make today was Dan Bailey's, of Livingston, Montana, around 1950,
+    and Joe Brooks made the fly famous in Field & Stream.
     """
 fishing """
-    Deep, it is a sculpin: dead-drift it or strip it in short bursts near the bottom on a sinking
-    line. Greased, the deer-hair head makes it wake on the surface, or drift like a hopper in
-    summer. For salmon it is swung or skated. Let it hang and wobble in the current before
-    recasting; that is often when it is taken.
+    As a sculpin it is fished slowly along the bottom, with an occasional fast strip. Unweighted,
+    the deer-hair head floats it: stripped, it wakes on the surface, or it drifts like a
+    hopper. For salmon it is swung like a wet fly or waked in the film; for sea trout at night
+    it is fished in the surface, where it makes a commotion. Before recasting, let it hang and
+    wobble in the current for a moment.
     """
 sources {
     "Wikipedia: Muddler Minnow" url="https://en.wikipedia.org/wiki/Muddler_Minnow"
     "Fly Fisherman: Muddler Minnow (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-muddler-minnow/151927"
-    "Fly Tying Archive: Muddler Minnow" url="https://flytyingarchive.com/?p=79"
+    "Fly Tying Archive: Muddler Minnow (Timo Kontio)" url="https://flytyingarchive.com/?p=79"
+    "MidCurrent: Muddlers made easy (John Likakis)" url="https://midcurrent.com/flies/muddlers-made-easy/"
+    "GlobalFlyFisher: Baltic flies for night fishing (Martin Joergensen)" url="https://globalflyfisher.com/patterns/baltic-flies-night-fishing"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

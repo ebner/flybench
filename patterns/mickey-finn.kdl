@@ -6,26 +6,30 @@ aliases "Red and Yellow Bucktail" "Assassin"
 type streamer
 imitates baitfish attractor
 difficulty beginner
-species trout bass pike sea-trout
+species trout salmon sea-trout
 season january february march april may june july august september october november december
 origin region="Eastern North America, by 1932"
 description "A flat silver tinsel body with an oval silver rib, and a three-layer bucktail wing: yellow, a sparse red, and yellow again on top."
 history """
-    Its maker is unknown. It probably began as the Red and Yellow Bucktail, perhaps one of a
-    series sold by William Mills & Son of New York. In spring 1932 John Alden Knight was given one
-    by Junior Vanderhoff near Greenwich, Connecticut; they called it the Assassin. Gregory Clark
-    of the Toronto Star renamed it after the knockout drink, and Knight's 1937 magazine article
-    made it one of the best-known streamers in America.
+    Its maker is unknown. It was first called the Red and Yellow Bucktail. Wikipedia, after
+    Joseph Bates, traces it to eastern Canada in the late 19th century; Nick Karas thought a
+    commercial tyer made it for William Mills of New York. In spring 1932 John Alden Knight was
+    given one by Junior Vanderhoff on the Mianus River near Greenwich, Connecticut, and they
+    called it the Assassin. Gregory Clark of the Toronto Star renamed it the Mickey Finn, and
+    Knight's 1937 magazine article, which came out at the time of the New York Sportsmen's Show,
+    made it hugely popular.
     """
 fishing """
-    Stripped or swung as a bright minnow, especially for brook trout early in the season and in
-    high or coloured water. Big ones on salmon hooks were trolled behind canoes in Canada; it is
-    also a popular sea-trout fly in Denmark.
+    A bright streamer with a long record for brook trout, and a favourite early in the season
+    and in murky water. In Canada big ones on hooks up to 4/0 were trolled behind
+    canoes, and it was one of the first flies Danish anglers used when they took up fly fishing
+    for sea trout in the late 1960s.
     """
 sources {
     "Wikipedia: Mickey Finn (fly)" url="https://en.wikipedia.org/wiki/Mickey_Finn_(fly)"
-    "American Museum of Fly Fishing: A personal natural history of the Mickey Finn" url="https://amff.org/personal-natural-history-mickey-finn/"
-    "MidCurrent: Mickey Finn (Tim Flagler)" url="https://midcurrent.com/?p=37998"
+    "American Museum of Fly Fishing: A personal natural history of the Mickey Finn (Willard P. Greenwood II)" url="https://amff.org/personal-natural-history-mickey-finn/"
+    "MidCurrent: How to tie a Mickey Finn (Tim Flagler)" url="https://midcurrent.com/?p=37998"
+    "Ahrex Hooks: Streamers, bucktails and Mickey Finn, part II (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2020/01/24/streamers-bucktails-and-mickey-finn-part-ii/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

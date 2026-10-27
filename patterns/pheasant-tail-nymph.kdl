@@ -11,23 +11,27 @@ season march april may june july august september october
 origin originator="Frank Sawyer" year=1958 region="River Avon, Wiltshire, England"
 description "Four pheasant tail fibres and fine copper wire, with no thread: a short tail, a slim body, a wire thorax hump and a double wing case."
 history """
-    Frank Sawyer kept the upper Avon at Netheravon for more than fifty years. Watching olive
-    nymphs swim with their legs held tight to the body, he left off hackle legs altogether and
-    used fine copper wire, taken from electrical coils, for both weight and thread. The fly was
-    published in Nymphs and the Trout in 1958; when he first tied it is less certain, with
-    accounts ranging from the 1930s to the 1950s. He tied it by hand, without a vise.
+    Frank Sawyer was a river keeper on the Wiltshire Avon from 1925 until he died on its banks at
+    Netheravon in 1980, from 1928 for the Officers' (later Services Dry Fly) Fishing
+    Association. He saw that olive nymphs swim with their legs tucked in, so his nymph has no
+    hackle, and he tied it with fine copper wire in place of silk, which also gives it weight;
+    Sporting Road says the wire came from a relay coil. The fly was published in Nymphs and the
+    Trout in 1958; when he first tied it is less certain: Sporting Road dates the method to the
+    1930s, Fly Fishing the Sierra the fly to the 1950s. He often tied it on the river bank,
+    without a vise.
     """
 fishing """
-    Made for sight-fishing to trout in clear chalk streams: cast well upstream of a seen fish,
-    let the nymph sink to its level, and lift the rod gently as it arrives so the nymph rises
-    like a hatching one. Sawyer called this the induced take. It also fishes well dead-drift
-    near the bottom, or slowly retrieved just under the surface on lakes.
+    Made for clear chalk streams, where the trout can be seen: cast well upstream of the fish,
+    let the nymph sink to its depth, and as it comes near, lift the rod gently so the nymph
+    swims up in front of it: Sawyer's induced take. It also catches fish on lakes,
+    worked slowly below the surface.
     """
 sources {
     "Wikipedia: Pheasant Tail Nymph" url="https://en.wikipedia.org/wiki/Pheasant_Tail_Nymph"
+    "Wikipedia: Frank Sawyer (writer)" url="https://en.wikipedia.org/wiki/Frank_Sawyer_(writer)"
     "Sporting Road: Frank Sawyer's Pheasant Tail" url="https://sportingroad.com/2019/02/12/frank-sawyers-pheasant-tail/"
     "Fly Fishing the Sierra: Pheasant Tail Nymph" url="https://flyfishingthesierra.com/pheasant-tail-nymph/"
-    "Fly Anglers Online: Frank Sawyer PT nymph (Hans Weilenmann)" url="https://www.flyanglersonline.com/t/frank-sawyer-pt-nymph/15310"
+    "Fly Anglers Online: Frank Sawyer PT nymph, tying steps (Hans Weilenmann)" url="https://www.flyanglersonline.com/t/frank-sawyer-pt-nymph/15310"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -50,8 +54,9 @@ steps {
     weight hump from=0.5 to=0.85 note="Three or four overlapping layers just in front of the middle of the shank."
     attach-thread at=0.9 note="The same wire: wind it back over the shank to the bend."
     wrap-thread to=0.0
-    // Sources disagree, from a quarter of the body to Sawyer's own longer tails on film; this follows the reference photos.
-    tie-in fibres length=0.9 spread=25 note="Tips first, with two turns of wire; snug but not cutting the fibres."
+    // Sources keep it short: an eighth of an inch (Sporting Road, Fly Fishing the Sierra) or a quarter to a third
+    // of the body (Weilenmann); this follows the reference photos.
+    tie-in fibres length=0.9 spread=25 note="Tips first, under two turns of wire. Pheasant tail cuts easily, so go gently."
     // Assumption: Sawyer folds the same butts back and forward over the thorax for the wing
     // case; drawn as a second bunch tied in behind the thorax before the body is wound.
     wrap-thread to=0.52

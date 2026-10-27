@@ -12,17 +12,18 @@ season january february march april may june july august september october novem
 origin originator="Oliver Edwards and Graydon Bell" region="England"
 description "A lead-weighted hare's mask case over the rear two thirds of a long-shank hook, with a white larva lying forward to a dark head at the eye and its legs underneath."
 history """
-    Oliver Edwards' realistic cased caddis, with Graydon Bell: the grub comes out of the front of
-    the case, where a real larva's head and legs are, and the hare's mask case is built over a
-    flat lead underbody.
+    Oliver Edwards' realistic cased caddis, here as Graydon Bell ties it: the grub comes out of
+    the front of the case, where a real larva's head and legs are, and the hare's mask case is
+    built over a flat lead underbody. Fulling Mill's OE Peeping Caddis gets its weight from a
+    split shot instead.
     """
 fishing """
-    Fished deep and slow, dead-drift along the bottom, for grayling and trout; heavy enough to be
-    the point fly of a team.
+    Fished slowly along the bottom of rivers, for trout, and for grayling in winter.
     """
 sources {
     "Fish4Flies: Peeping Caddis (Edwards and Bell)" url="https://www.fish4flies.com/Nymphs/Caddis-and-Larva-and-Pupa/Peeping-Caddis"
-    "Fly Anglers Online: Cased caddis fly pattern (Edwards' dressing)" url="https://www.flyanglersonline.com/t/cased-caddis-fly-pattern/2945"
+    "Fly Anglers Online: Cased Caddis (Mike Murgida, after Oliver Edwards)" url="https://www.flyanglersonline.com/t/cased-caddis-fly-pattern/2945"
+    "Fulling Mill: OE Peeping Caddis" url="https://www.fullingmill.co.uk/Products-UK/Tactical-River-Nymphs-UK/OE-Peeping-Caddis-Debris-S10-UK"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -33,8 +34,9 @@ hook nymph-2xl size=10
 thread black size="8/0"
 
 materials {
-    weight lead-free-wire label="Lead-free wire (Edwards uses flat lead)"
+    weight lead-free-wire label="Lead-free wire (Bell uses flat lead)"
     case hares-ear-dubbing label="Hare's mask dubbing brush"
+    // Fly Anglers Online gives golden pheasant centre tail for the legs; Fish4Flies lists peacock.
     legs pheasant-tail count=8 label="Golden pheasant centre tail fibres (legs)"
     larva wool color=cream label="White or glow yarn (larva)"
 }

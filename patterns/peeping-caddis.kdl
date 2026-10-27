@@ -11,19 +11,19 @@ season january february march april may june july august september october novem
 origin region="Europe"
 description "A burnt-tipped chartreuse chenille larva peeping out behind a bushy hare's ear case, with a partridge collar where they meet and a tungsten bead at the eye, on a jig hook."
 history """
-    A cased caddis larva with its head and legs out of the case. The pattern has been around a
-    long time and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's
-    Peeping Caddis has the larva at the front, as it is in nature; the version most tied today,
-    on a jig hook with a tungsten bead, has the larva sticking out at the back and the weight at
-    the eye, as in Hans van Klinken's split-shot LeadHead.
+    A cased caddis larva with its head and legs out of the case. Ralph D'Andrea counts it an
+    old, familiar pattern, and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's Peeping Caddis has the larva at the front, as
+    it is in nature; the jig version here has the larva sticking out at the back and the weight
+    at the eye. Hans van Klinken's LeadHead, another cased caddis, is weighted with a split shot
+    that also turns the hook point up.
     """
 fishing """
-    A heavy anchor fly for short-line and Euro nymphing, bounced along the bottom of runs and
-    pockets, and a standby for winter grayling and early-season high water. On a jig hook it
-    rides point up and snags less.
+    A heavy point fly that gets down fast, dead-drifted along the bottom while caddis larvae are
+    drifting, with a lighter nymph above it. It fishes all year, best when the water is cold and
+    the fish lie deep, and is a standby for grayling in winter. On a jig hook it rides point up.
     """
 sources {
-    "ExpediTom: Peeping Caddis (Tom O'Connor)" url="https://expeditom.com/peeping-caddis/"
+    "ExpediTom: Peeping Caddis Jig Nymph (Tom O'Connor)" url="https://expeditom.com/peeping-caddis/"
     "Fulling Mill: OE Peeping Caddis" url="https://www.fullingmill.co.uk/Products-UK/Tactical-River-Nymphs-UK/OE-Peeping-Caddis-Debris-S10-UK"
     "Fly Anglers Online: The Peeking Caddis (Ralph D'Andrea)" url="https://www.flyanglersonline.com/t/the-peeking-caddis-fly-of-the-week-137/2469"
     "Sexyloops: LeadHead (Viking Lars)" url="https://mail.sexyloops.com/index.php/ps/leadhead"
@@ -42,7 +42,8 @@ materials {
     bead tungsten-bead color=black mm=3.5
     larva chenille color=chartreuse label="Fluorescent chartreuse chenille"
     legs partridge-hackle fibre=0.55 sweep=75
-    rib copper-wire
+    // ExpediTom ribs it with black wire.
+    rib copper-wire color=black label="Black wire"
     case hares-ear-dubbing label="Hare's mask dubbing with plenty of guard hair"
 }
 

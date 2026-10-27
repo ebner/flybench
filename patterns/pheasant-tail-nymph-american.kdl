@@ -13,22 +13,24 @@ season january february march april may june july august september october novem
 origin originator="Al Troth" region="Montana, USA"
 description "Pheasant tail tail and abdomen with a counter-wound copper rib, a weighted peacock herl thorax, a pheasant tail wing case and legs."
 history """
-    Al Troth, the Montana tier behind the Elk Hair Caddis, wanted Sawyer's nymph bulkier and
-    with prominent legs. He added lead under the thorax, a copper wire rib, a peacock herl
-    thorax and legs made from the wing-case tips. Dave Hughes lists it as the Pheasant Tail
-    Peacock Thorax; in the United States it is simply the Pheasant Tail. The gold bead
-    (Theo Bakelaar, 1988) and the flashback (Andre Puyans) came later.
+    Al Troth, the Montana tyer behind the Elk Hair Caddis, wanted a heavier-looking nymph than
+    Sawyer's, with legs that show, and weighted it with lead wire. His version has a peacock
+    herl thorax; Dave Hughes lists it as the Pheasant Tail Peacock Thorax, and in the United
+    States it is known as the Pheasant Tail Nymph, American version. Ben Spinks, though, credits
+    the idea of the peacock thorax to John Gierach's Good Flies (2000). The gold bead (Theo
+    Bakelaar, 1988) and the flashback (Andre Puyans) came later.
     """
 fishing """
-    A staple searching nymph: dead-drift under an indicator, as the dropper below a dry fly or
-    tight-lined through riffles and runs. On lakes, fish it slowly just under the surface during
-    Callibaetis hatches. It is good all year and especially in winter and in Baetis season.
+    A staple searching nymph, tied in the size of whatever mayfly nymphs are about; Orvis
+    presents it as a Baetis imitation. Rogue Fly Fishers rate it for winter trout in western
+    streams, and on lakes it does well when Callibaetis are hatching.
     """
 sources {
-    "Orvis: How to tie the Pheasant Tail Nymph" url="https://news.orvis.com/fly-fishing/video-how-to-tie-the-pheasant-tail-nymph"
+    "Orvis News: Video: How to Tie the Pheasant Tail Nymph (Phil Monahan; tied by Tim Flagler)" url="https://news.orvis.com/fly-fishing/video-how-to-tie-the-pheasant-tail-nymph"
     "Rogue Fly Fishers: Pheasant Tail Nymph" url="https://rogueflyfishers.org/?p=45"
     "Sexyloops: Pheasant Tail Nymph (Ben Spinks)" url="https://www.sexyloops.com/flytying/ptn.shtml"
     "Fly Fishing the Sierra: Pheasant Tail Nymph" url="https://flyfishingthesierra.com/pheasant-tail-nymph/"
+    "Wikipedia: Pheasant Tail Nymph" url="https://en.wikipedia.org/wiki/Pheasant_Tail_Nymph"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -53,7 +55,7 @@ steps {
     weight weight from=0.62 to=0.88 note="Under the thorax only."
     attach-thread at=0.9
     wrap-thread to=0.0
-    // Sources range from half the body to a shank length; about one gape past the bend.
+    // Rogue Fly Fishers: a shank long; others tie it shorter. About one gape past the bend.
     tie-in tail length=1.0 note="Tips aligned, on top; keep the butts for the abdomen."
     tie-in rib
     wrap-thread to=0.62

@@ -3,28 +3,31 @@
 id magnus
 name "Magnus"
 type saltwater
-imitates crustacean baitfish attractor
+imitates crustacean baitfish
 difficulty beginner
 species sea-trout
 season january february march april may june july august september october november december
 origin originator="Magnus Ting Mortensen" year=1973 region="Funen, Denmark"
 description "Splayed grizzly hackle-tip tail, a sparse grey hare's fur body with an oval silver rib, a palmered grizzly hackle and a longer grizzly front hackle, behind bead-chain eyes and a red head."
 history """
-    Tied in the spring of 1973 by Magnus Ting Mortensen on Funen from what he had at hand: hare
-    he had hunted and grizzly hackle from a friend's Plymouth Rock chickens. Palmered wet flies
-    like the Chillimps were the inspiration. A local shop made it a staple, and it became the
-    model for countless Danish coastal flies; the Grey Fred is the best known of its lookalikes.
+    Magnus Ting Mortensen tied it on Funen in the spring of 1973 from what he had to hand: hare
+    from his own hunting and grizzly hackle from a friend's Plymouth Rock chickens. He did not
+    set out to copy any particular creature, only to make something that looked alive. It
+    resembles a Woolly Bugger, but GlobalFlyFisher traces it to palmered wet flies such as the
+    Chillimps and the Red Tag Palmer. It caught on first through a local shop that stocked it
+    as a staple, then through magazines and books; GlobalFlyFisher counts it the original of
+    the many grey, grizzly-hackled Danish coastal flies. The Grey Fred (1989) looks much like
+    it but is a separate pattern with different materials, and the two are often confused.
     """
 fishing """
-    Fished from the shore on the Danish and Baltic coasts on a floating or intermediate line,
-    stripped in short, irregular pulls over mixed bottom and along the eelgrass. The bead-chain
-    eyes give it weight and a jigging motion. A searching fly for sea trout all year, and a
-    standard in cold water.
+    A coastal sea-trout fly, found in most Danish fly boxes and fished along the Baltic coasts.
+    It suggests shrimps and small fish without copying either, and has also taken steelhead,
+    salmon and saltwater fish further afield. The bead-chain eyes add weight and make it jig.
     """
 sources {
-    "GlobalFlyFisher: Magnus (Martin Joergensen)" url="https://globalflyfisher.com/patterns/magnus"
-    "GlobalFlyFisher: Magnus Classic" url="https://globalflyfisher.com/patterns/magnus-classic"
-    "GlobalFlyFisher: The Magnus and Fred clan" url="https://globalflyfisher.com/patterns/magnus-and-fred-clan"
+    "GlobalFlyFisher: Magnus (Martin Joergensen, Ken Bonde Larsen)" url="https://globalflyfisher.com/patterns/magnus"
+    "GlobalFlyFisher: Magnus Classic (Martin Joergensen)" url="https://globalflyfisher.com/patterns/magnus-classic"
+    "GlobalFlyFisher: The Magnus and Fred Clan (Martin Joergensen)" url="https://globalflyfisher.com/patterns/magnus-and-fred-clan"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

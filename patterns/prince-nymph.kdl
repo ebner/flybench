@@ -6,28 +6,32 @@ aliases "Bead Head Prince" "Brown Forked Tail Nymph"
 type nymph
 imitates stonefly caddis attractor
 difficulty intermediate
-species trout grayling
+species trout
 season january february march april may june july august september october november december
 origin originator="Doug Prince" region="California, USA, 1940s"
 description "A forked brown biot tail, a peacock herl body ribbed with gold, a brown hen collar and two white biot horns, behind a gold bead."
 history """
-    Doug Prince, who started tying in 1943, called it the Brown Forked Tail Nymph. When Buz
-    Buszek put it in his mail-order catalogue in a hurry he couldn't remember the name, and
-    listed it as the Prince Nymph. Prince's own dressing, published in 1966, had no bead.
-    Ken McCoy traces it further back to the Brown Forked Tail of Don and Dick Olson of Bemidji,
-    Minnesota, in the 1930s, with an ostrich herl body and upturned white wings; Prince gave it
-    peacock and turned the wings down.
+    Its forerunner, the Brown Forked Tail, is credited (Wikipedia, citing Ken McCoy among others)
+    to the brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s, with a black ostrich
+    herl body and white biot wings curving up. Doug Prince of Oakland, California, gave it a
+    peacock body and turned the wings down. He took up tying in 1943, by Dennis Bitton's account,
+    though Trout Unlimited has him first tying the fly in the 1930s. Prince tied for his friend
+    Buz Buszek, who, rushing out his catalogue, forgot what Prince called the fly and listed it as
+    the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead and lead
+    came later.
     """
 fishing """
-    A searching attractor nymph. Dead-drift it near the bottom under an indicator or on a tight
-    line, often as the heavy point fly with a smaller nymph above, or as a dropper under a big
-    dry. Stripped back, it fishes like a wet fly or a small streamer.
+    A searching nymph, fished at or near the bottom, or as the dropper below a dry fly. In big
+    sizes it reads as a stonefly nymph, in middling ones as a caddis. Once the drift is done, a
+    few strips back, wet-fly fashion, can still bring a take.
     """
 sources {
     "Fly Fishers International: Doug Prince, Buszek Award 1981 (Dennis Bitton)" url="https://flyfishersinternational.org/Portals/0/FlyTyingGroup/FTGDocuments/Buszek/1981_DougPrince.pdf"
     "Wikipedia: Prince Nymph" url="https://en.wikipedia.org/wiki/Prince_Nymph"
     "Fly Fisherman: Beadhead Prince Nymph (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-beadhead-prince-nymph/151924"
-    "Orvis: Prince Nymph video" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/666-prince-nymph"
+    "Orvis Learning Center: Prince Nymph" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/666-prince-nymph"
+    "Orvis News: Tying the Prince Nymph (Eric Rickstad)" url="https://news.orvis.com/fly-fishing/Tying-the-Prince-Nymph"
+    "Trout Unlimited: Spring Fly Showdown: The Prince Nymph vs. the RS2 (Chris Hunt)" url="https://www.tu.org/magazine/community/spring-fly-showdown-the-prince-nymph-vs-the-rs2/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -54,7 +58,7 @@ steps {
     weight weight from=0.5 to=0.85 note="Ten or twelve turns, pushed up into the bead."
     attach-thread at=0.85 note="Build a dam behind the wire and cover it."
     wrap-thread to=0.0
-    // Sources range from half a shank (Prince) to a full shank (Orvis).
+    // Prince: not over half an inch from the bend; the Orvis video: about a shank.
     tie-in tail length=1.3 spread=35 note="One biot each side, concave sides out, so they fork apart."
     tie-in rib note="On the near side."
     tie-in body note="By the tips."

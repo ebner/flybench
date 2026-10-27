@@ -100,9 +100,18 @@ the timeline says for `t`, so scrubbing and replaying need no extra state.
 
 ## Hosting
 
-The site is published on GitHub Pages by `.github/workflows/deploy.yml` on every push to
-`main` (one-time setup: Settings > Pages > Source: GitHub Actions). `npm run build` takes
-two settings from the environment, which the workflow fills in from Pages:
+The site is published at <https://flybench.ebner.se> on GitHub Pages by
+`.github/workflows/deploy.yml` on every push to `main`. One-time setup:
+
+- Repository Settings > Pages: Source "GitHub Actions", custom domain `flybench.ebner.se`,
+  Enforce HTTPS once the certificate is issued.
+- DNS (Cloudflare, ebner.se): a CNAME record `flybench` → `ebner.github.io`, DNS only (not
+  proxied), so GitHub can verify the domain and issue the certificate. Verifying `ebner.se`
+  under the account's Settings > Pages adds a TXT record and protects the subdomain from takeover.
+
+With a custom domain no CNAME file is needed in the repository; the workflow takes the
+address from Pages. `npm run build` takes two settings from the environment, which the
+workflow fills in:
 
 - `BASE_PATH`: where the site lives on its host, `/flybench/` for the project site or `/`
   on a custom domain (default `/`).

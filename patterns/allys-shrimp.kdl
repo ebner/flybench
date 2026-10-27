@@ -4,30 +4,40 @@ id allys-shrimp
 name "Ally's Shrimp"
 aliases "Allys Shrimp" "Ally Shrimp"
 type salmon
-imitates crustacean attractor
+imitates crustacean
 difficulty intermediate
 species salmon sea-trout
 season march april may june july august september october
-origin originator="Alastair Gowans" year=1979 region="Scotland"
+origin originator="Alastair Gowans" year=1980 region="Scotland"
 description "A long hot-orange bucktail tail, a red and black floss body ribbed with oval silver, grey squirrel above and below, a golden pheasant tippet overwing and a long orange collar hackle."
 history """
-    Alastair "Ally" Gowans got the idea from the big, translucent orange-pink prawns in a
-    lobster trawler's catch off the Scottish west coast. He dates it to 1979; other accounts say
-    the early 1980s. It was first published in Trout and Salmon in 1988, and readers of three
-    British magazines later voted it Salmon Fly of the Millennium. The tippet's black bars
-    suggest the shrimp's eyes.
+    Alastair "Ally" Gowans took the idea from the prawns that came up when he went out on an
+    inshore trawler after Norway lobster off the Scottish west coast: long, slim, quick and
+    half translucent, with an orange-pink tinge and a dark gut. He dates the first fly to about
+    1980; Fieldsports Channel says 1979 and Fly Fisherman the early 1980s. Gowans placed the
+    trawl near Loch Linnhe, Trout and Salmon in the Minch. The fly was first published in Trout
+    and Salmon in August 1988, and readers of three British fishing magazines later voted it
+    Salmon Fly of the Millennium. In Gowans' account each part stands for something: the
+    bucktail for feelers, the tippets for eyes and shell, the black front of the body for the
+    gut, the long collar for legs.
     """
 fishing """
-    Gowans fishes it mostly on a conventional swing, down and across, and finds depth matters
-    less than one would think: it has worked from just under the surface to the bottom. Orange is
-    the all-season colour; red and purple versions are favoured in autumn. Doubles and tubes are
-    as common as singles.
+    Gowans mostly fishes it on an ordinary swing, with the line chosen for the conditions, and
+    has found the depth matters little: it takes fish inches under the surface on a floater and
+    scraped along the bottom. Small, light ones suit low, warm summer water; heavy tubes and
+    Waddingtons on sinking lines suit high, cold water early in the season. Besides the orange
+    original he ties red and purple versions, and it is tied on singles, doubles, trebles and
+    tubes.
     """
 sources {
     "Let's Fly Fish: Ally's Shrimp (Alastair Gowans)" url="https://letsflyfish.com/allyshrimp.htm"
+    "Let's Fly Fish: Ally's Shrimp, where the idea came from (Alastair Gowans)" url="https://letsflyfish.com/allys_shrimp.htm"
+    "Let's Fly Fish: Ally's Shrimp, designing the fly (Alastair Gowans)" url="https://letsflyfish.com/allys_shrimp_p2.htm"
+    "Let's Fly Fish: Ally's Shrimp, how to fish it and colour versions (Alastair Gowans)" url="https://letsflyfish.com/allys_shrimp_p4.htm"
     "Fly Fisherman: Ally's Shrimp" url="https://www.flyfisherman.com/editorial/allys-shrimp-atlantic-salmon-fly/497485"
     "Trout and Salmon: How to tie the Ally's Shrimp" url="https://troutandsalmon.com/fly-tying/how-to-tie-the-ally8217s-shrimp-salmon-fly/"
     "Gwent Angling Society: Ally's Shrimp" url="https://gwentanglingsociety.co.uk/2013/01/05/allys-shrimp-salmon-fly/"
+    "Fieldsports Channel: Ally Gowans ties his Ally Shrimp" url="https://www.fieldsportschannel.tv/?p=6993"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -54,13 +64,13 @@ materials {
 steps {
     attach-thread at=0.86
     wrap-thread to=0.0 note="To a point above the hook point."
-    // The tag is in most modern dressings, though not in Gowans' own list.
+    // Trout and Salmon's steps add a tag of fine oval silver; Gowans' own list has none.
     tie-in tag
     wrap-thread to=0.06
     wind tag to=0.06 turns=4
     tie-off tag
     // Trout and Salmon: about twice the shank; Gwent: no longer than two and a half.
-    tie-in tail length=5.2 angle=3 spread=12 note="A long, thin bunch, locked with a few fibres folded back; bind the butts along the shank."
+    tie-in tail length=5.2 angle=3 spread=12 note="Slim and long; lock it with a few fibres folded back, and bind the butts along the shank."
     trim tail
     tie-in tail-flash length=5.0 angle=4 spread=10 note="Optional."
     tie-in rib
@@ -72,9 +82,9 @@ steps {
     wrap-thread to=0.82
     wind front to=0.82 turns=8
     tie-off front
-    wind rib to=0.82 turns=6 note="Six evenly spaced turns."
+    wind rib to=0.82 turns=6 note="Six turns, spread evenly over both halves."
     tie-off rib
-    tie-in beard length=1.6 angle=25 side=under note="A slim bunch, with the hook turned over."
+    tie-in beard length=1.6 angle=25 side=under note="A sparse bunch under the shank; turn the hook over to tie it in."
     trim beard
     // Gwent: the underwing no longer than the hook.
     tie-in underwing length=2.6 angle=6 spread=20 note="Low over the body."

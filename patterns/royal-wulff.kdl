@@ -5,26 +5,34 @@ name "Royal Wulff"
 type dry
 imitates attractor
 difficulty intermediate
-species trout grayling salmon
+species trout salmon
 season may june july august september
 origin originator="Lee Wulff" year=1930 region="New York, USA"
 description "A moose hair tail, a body of peacock herl with a red floss band, divided white calf-hair wings and a heavy brown hackle."
 history """
-    Lee Wulff designed his hair-winged dries in the winter of 1929–30 for the Ausable and
-    other New York rivers; one of them, the Bucktail Coachman, became the Royal Wulff when Dan
-    Bailey persuaded him to rename them, and Bailey popularised them in the West from 1938.
-    Around 1930 Rube Cross also tied a nearly identical hair-winged Royal Coachman for
-    L. Q. Quackenbush, the "Quack Coachman"; the two seem to have been independent.
+    Lee Wulff tied his first three hair-winged dries in 1929–30, because the slim Catskill
+    flies of the day would not stay up on fast water. Rusty Dunn places this on New York's Ausable;
+    Wikipedia's article on the Wulff series has him fishing the Esopus and other Catskill
+    rivers. One of the three, the Bucktail Coachman, became the Royal Wulff when Dan Bailey
+    suggested new names for them, and from 1938 Bailey promoted the series to western anglers
+    from his shop in Livingston, Montana.
+
+    At about the same time Quackenbush, a member of the Beaverkill Trout Club, arrived at a
+    nearly identical hair-winged Royal Coachman, which Rube Cross tied commercially as the
+    "Quack Coachman". The two seem to have been independent. Many writers credit Wulff alone,
+    but Quackenbush is often named as the creator, and Wikipedia lists them both.
     """
 fishing """
-    A high-floating, very visible attractor for pocket water, riffles and broken freestone
-    rivers, when no hatch dominates. Fish it dead drift with the odd twitch, or as the
-    indicator in a dry-dropper rig. Large sizes are used for Atlantic salmon.
+    A high-floating attractor for fast, broken water. It imitates nothing in particular, so
+    try it when no hatch dominates, or when trout ignore everything else. Fish it on a dead
+    drift. Wulff flies are fished for Atlantic salmon as well as trout.
     """
 sources {
     "Wikipedia: Royal Wulff" url="https://en.wikipedia.org/wiki/Royal_Wulff"
-    "SWTU: Royal Wulff" url="https://www.swtu.org/2022/12/07/royal-wulff/"
+    "SWTU: Royal Wulff (Rusty Dunn)" url="https://www.swtu.org/2022/12/07/royal-wulff/"
     "Fly Fisherman: Royal Wulff (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-royal-wulff/152082"
+    "Wikipedia: Wulff series of dry flies" url="https://en.wikipedia.org/wiki/Wulff_series_of_dry_flies"
+    "Wikipedia: Artificial fly (attractor patterns)" url="https://en.wikipedia.org/wiki/Artificial_fly"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -38,6 +46,7 @@ thread black size="8/0"
 
 materials {
     wings calf-tail
+    // Moose as in Craven's dressing; Wikipedia and Rusty Dunn give brown bucktail.
     tail moose-mane label="Moose body hair"
     butt peacock-herl strands=3
     band silk-floss color=red

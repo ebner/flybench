@@ -6,25 +6,29 @@ aliases "CDC and Elk"
 type dry
 imitates caddis
 difficulty intermediate
-species trout grayling
+species trout
 season may june july august september
 origin originator="Hans Weilenmann" year=1992 region="Netherlands"
 description "A single CDC feather wound from the tip to make body and soft hackle, and a fine deer hair wing whose square-cut butts form the head."
 history """
-    Hans Weilenmann developed it in 1992 as a reworking of Al Troth's Elk Hair Caddis, inspired
-    by a trip to Montana ten years earlier: the dubbed body and palmered hackle are replaced by
-    one whole CDC feather. Despite the name, he ties the wing with fine-tipped deer hair; elk is
-    a common substitute.
+    The Dutch tyer Hans Weilenmann designed it in 1992 as a reworking of Al Troth's Elk Hair
+    Caddis, which had been one of his most reliable dry flies since a trip to Montana in 1982.
+    Looking for a fly that floated better and moved more, he replaced the dubbed body and
+    palmered hackle with one whole CDC feather, stem and all. Despite the name, he ties the
+    wing with fine-tipped deer hair.
     """
 fishing """
-    Rides low in the film like a hatching or egg-laying caddis, and works as a general
-    searching dry. Fish it dead drift or with a twitch; tie it sparse for flat water and
-    heavier for rough water.
+    A low-riding caddis that Weilenmann also uses during many mayfly hatches, as a searching
+    fly when nothing is hatching, as an emerger, and even wet. Greased with floatant it rides
+    higher; left untreated, the CDC soaks up water and it fishes as an emerger or cripple. Use
+    less hair in the wing for smooth water and more for broken water.
     """
 sources {
     "GlobalFlyFisher: CDC & Elk (Hans Weilenmann)" url="https://globalflyfisher.com/node/13606"
+    "GlobalFlyFisher: Tying with CDC (Hans Weilenmann)" url="https://globalflyfisher.com/tie-better/tying-cdc"
+    "GlobalFlyFisher: The CDC & Elk family (Martin Joergensen)" url="https://globalflyfisher.com/node/14532"
     "Charlie's Fly Box: CDC & Elk" url="https://charliesflybox.com/blogs/step-by-step-tutorials/cdc-elk"
-    "Rogue Fly Fishers: CDC & Elk" url="https://rogueflyfishers.org/?p=494"
+    "Rogue Fly Fishers: CDC & Elk (Dan Kellogg)" url="https://rogueflyfishers.org/?p=494"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {

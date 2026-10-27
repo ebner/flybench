@@ -55,7 +55,7 @@ hook size switch, deep links to steps.
   cited and assumptions flagged; the user reviews.
 - A local-only authoring studio (dev server page): KDL editor, inline errors, live 3D
   preview, saves to `patterns/`. Not shipped to the public site.
-- Hosting: GitHub Pages, deployed by a workflow on every push to main. Every page has a real
+- Hosting: GitHub Pages at flybench.ebner.se, deployed by a workflow on every push to main. Every page has a real
   address and its own prerendered HTML file (title, description, preview picture, text), so
   pages can be shared and found by search engines; the build stays a plain static `dist/`.
 
@@ -68,7 +68,7 @@ hook size switch, deep links to steps.
 3. ✅ a. Render pipeline (headless renders of finished flies, also for gallery thumbnails)
       and the reference check (contact sheets against reference photos).
    ✅ b. Field-journal design system, gallery front page, search. App name: Flybench
-      (flybench.app).
+      (flybench.ebner.se).
 4. ✅ Pattern page and viewer features (auto camera, callouts, hook size, deep links).
    Engine: curved and long hooks (8 hook models), beads, weighting, tinsel, chenille,
    soft hackles, biots, marabou, CDC, flash, feather pairs, beards, eyes, wing cases,

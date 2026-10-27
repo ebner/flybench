@@ -12,22 +12,25 @@ season january february march april may june july august september october novem
 origin originator="Russell Blessing" year=1967 region="Pennsylvania, USA"
 description "A cone head, a marabou tail, an olive chenille body, a black saddle hackle palmered along it and a copper wire rib."
 history """
-    Russ Blessing tied the first Woolly Bugger in 1967, trying to imitate a hellgrammite
-    for smallmouth bass. He took the marabou tail from Mark Sosin's Blossom fly and meant
-    to trim the hackle, then left it as it was after seeing the fly move in the water.
-    Barry Beck's 1984 article in Fly Fisherman made it known everywhere.
+    Russ Blessing of Harrisburg, Pennsylvania, is believed to have tied the first Woolly Bugger
+    in 1967, as a hellgrammite imitation with more movement. He took the marabou tail from Mark
+    Sosin's Blossom fly and meant to trim the hackle, then left it as it was after seeing the
+    fly in the water. Barry Beck's 1984 article in Fly Fisherman made it known everywhere.
 
     It descends from the Woolly Worm and the old British palmer flies.
     """
 fishing """
-    Dead drift it like a nymph, swing it like a wet fly, or strip it like a streamer: the
-    marabou breathes even when the fly is barely moving. In lakes, fish it on a sinking line
-    with a slow retrieve. Weighted versions bounce along the bottom for crayfish and sculpin.
+    Blessing started with a dead drift near the bottom, and when that failed tried swings,
+    jigging or strips. In lakes, work it back from along the shore, with a sinking-tip line in
+    deep water. Brown ones pass for a crayfish, and where a stream has sculpins it can be fished
+    like one; split shot or a weighted leader keeps it near the bottom.
     """
 sources {
     "Wikipedia: Woolly Bugger" url="https://en.wikipedia.org/wiki/Woolly_Bugger"
-    "Fly Fisherman: Imitative Woolly Buggers" url="https://www.flyfisherman.com/editorial/imitative-woolly-buggers/514688"
+    "Fly Fisherman: Imitative Woolly Buggers (Paul Marriner)" url="https://www.flyfisherman.com/editorial/imitative-woolly-buggers/514688"
+    "Fly Fisherman: The Woolly Bugger, 1984 (Barry Beck)" url="https://www.flyfisherman.com/editorial/woolly-bugger/516095"
     "Fly Fisherman: Fly tying the Woolly Bugger (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-the-wooly-bugger/151947"
+    "MidCurrent: Fishing Woolly Buggers (Gary Soucie)" url="https://midcurrent.com/flies/fishing-woolly-buggers/"
 }
 // Photos for checking proportions while authoring (npm run refcheck); never published.
 references {
@@ -56,7 +59,7 @@ steps {
     weight weight from=0.55 to=1.0 note="A few turns pushed up into the back of the cone."
     attach-thread at=0.85
     wrap-thread to=0.0
-    // Sources: the tail reaches about one shank length past the bend.
+    // Craven: the tail reaches about one shank length past the bend.
     tie-in tail length=3.5 note="Bind the butts along the top of the shank for an even underbody."
     tie-in flash length=3.3 note="Two strands on each side."
     tie-in rib
