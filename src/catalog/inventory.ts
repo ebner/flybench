@@ -58,6 +58,11 @@ export function missingKinds(c: Coverage): number {
   return new Set(c.missing.map((n) => n.kind)).size;
 }
 
+/** The member of a pattern family closest to tieable: each variant is a complete recipe of its own. */
+export function bestCoverage(recipes: Recipe[], owned: Set<string>): Coverage {
+  return recipes.map((r) => coverage(r, owned)).reduce((best, c) => (missingKinds(c) < missingKinds(best) ? c : best));
+}
+
 export function coverage(recipe: Recipe, owned: Set<string>): Coverage {
   const missing: Need[] = [];
   const substitutes: Need[] = [];

@@ -5,7 +5,7 @@ import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } fro
 import { CATALOG, SEARCH } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/schema";
-import { colorWord, coverage, missingKinds, type Need } from "../catalog/inventory";
+import { bestCoverage, colorWord, missingKinds, type Need } from "../catalog/inventory";
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
 import { href, replaceUrl } from "./router";
@@ -23,10 +23,12 @@ export function Gallery({ query }: { query: string }) {
   const renders = useRenders();
   const owned = useStoredSet(INVENTORY_KEY);
   const found = useMemo(() => SEARCH.search(filters), [filters]);
-  const results = filters.have ? found.filter((e) => coverage(e.recipe, owned.values).missing.length === 0) : found;
+  // A family counts as tieable, or one material short, by its member closest to tieable.
+  const family = (e: CatalogEntry) => bestCoverage([e.recipe, ...e.variants], owned.values);
+  const results = filters.have ? found.filter((e) => missingKinds(family(e)) === 0) : found;
   const oneShort = filters.have
     ? found.flatMap((e) => {
-        const c = coverage(e.recipe, owned.values);
+        const c = family(e);
         return missingKinds(c) === 1 ? [{ entry: e, missing: c.missing[0]! }] : [];
       })
     : [];

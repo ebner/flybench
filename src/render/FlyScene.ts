@@ -64,6 +64,7 @@ export class FlyScene {
   private space: ShankSpace | null = null;
   private resizeObserver: ResizeObserver;
   private frame = 0;
+  private baseMaxDistance: number;
   /** Bounds of the finished fly, which the default view frames. */
   private finished = new THREE.Box3();
   /** Once the user orbits or zooms, resizing no longer re-frames the fly. */
@@ -122,8 +123,10 @@ export class FlyScene {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.minDistance = 0.8;
-    // Allow at least the distance a narrow field of view needs to frame the fly.
-    this.controls.maxDistance = 14 * Math.max(1, 32 / (options.fov ?? 32));
+    // Allow at least the distance a narrow field of view needs to frame the fly; framing a
+    // long fly in a narrow viewport raises it (see allowDistance).
+    this.baseMaxDistance = 14 * Math.max(1, 32 / (options.fov ?? 32));
+    this.controls.maxDistance = this.baseMaxDistance;
     this.controls.addEventListener("start", () => {
       this.userMoved = true;
       if (this.follow) {
@@ -263,6 +266,7 @@ export class FlyScene {
     const k = 1 - Math.exp(-dt * 2.5);
     this.controls.target.lerp(target, k);
     const d = offset.length() + (distance - offset.length()) * k;
+    this.allowDistance(distance);
     this.camera.position.copy(this.controls.target).addScaledVector(direction, d);
   }
 
@@ -320,8 +324,14 @@ export class FlyScene {
         ? Math.max(...Array.from({ length: 36 }, (_, i) => this.fitDistance(framed, target, this.viewDirection(i * 10))))
         : this.fitDistance(framed, target, view);
     this.controls.target.copy(target);
+    this.allowDistance(distance * 1.08);
     this.camera.position.copy(target).addScaledVector(view, distance * 1.08);
     this.controls.update();
+  }
+
+  /** Lets the controls reach a framing distance, with room to zoom out a little further. */
+  private allowDistance(distance: number) {
+    this.controls.maxDistance = Math.max(this.baseMaxDistance, distance * 1.5);
   }
 
   private viewDirection(orbit: number): THREE.Vector3 {

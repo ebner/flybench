@@ -13,6 +13,7 @@
  * Read ratios off the photos relative to the hook gape (the gap between shank and
  * point), compare them with the recipe, and adjust the recipe where it is off.
  */
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import sharp from "sharp";
@@ -40,7 +41,8 @@ async function loadPattern(id: string): Promise<Recipe> {
 
 async function fetchReference(id: string, index: number, url: string): Promise<string> {
   const ext = url.match(/\.(jpe?g|png|webp)(?:$|\?)/i)?.[1] ?? "jpg";
-  const path = `.cache/references/${id}/${index + 1}.${ext}`;
+  // Named after the photo's address, so replacing or reordering photos never reuses an old one.
+  const path = `.cache/references/${id}/${index + 1}-${createHash("sha256").update(url).digest("hex").slice(0, 12)}.${ext}`;
   if (existsSync(path)) return path;
   const response = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
   if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);

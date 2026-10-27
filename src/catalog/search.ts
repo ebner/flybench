@@ -58,7 +58,8 @@ export class CatalogSearch {
         return {
           id: e.recipe.id,
           name: e.recipe.name,
-          aliases: e.recipe.aliases.join(" "),
+          // Variants have no entries of their own: their names and aliases find the family.
+          aliases: all.flatMap((r) => [...r.aliases, ...(r.variant ? [r.variant] : [])]).join(" "),
           materials: all
             .flatMap((r) => r.materials.map((m) => `${materialName(m)} ${MATERIALS[m.kind].name}`))
             .join(" "),

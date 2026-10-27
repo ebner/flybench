@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { catalogNeeds, colorWord, coverage, inventoryKey, missingKinds } from "../catalog/inventory";
+import { bestCoverage, catalogNeeds, colorWord, inventoryKey, missingKinds } from "../catalog/inventory";
 import { CATALOG } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
@@ -48,8 +48,9 @@ export function Materials() {
   }, []);
   const byKind = useMemo(() => catalogNeeds(CATALOG.flatMap((e) => [e.recipe, ...e.variants])), []);
   const kinds = [...byKind.keys()].sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
-  const tieable = CATALOG.filter((e) => coverage(e.recipe, owned.values).missing.length === 0);
-  const oneShort = CATALOG.filter((e) => missingKinds(coverage(e.recipe, owned.values)) === 1);
+  const family = (e: (typeof CATALOG)[number]) => missingKinds(bestCoverage([e.recipe, ...e.variants], owned.values));
+  const tieable = CATALOG.filter((e) => family(e) === 0);
+  const oneShort = CATALOG.filter((e) => family(e) === 1);
 
   return (
     <main className="reading materials-page">

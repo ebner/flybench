@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { catalogNeeds, coverage, inventoryKey, match, missingKinds, needs } from "./inventory";
+import { bestCoverage, catalogNeeds, coverage, inventoryKey, match, missingKinds, needs } from "./inventory";
 
 const recipe = (() => {
   const r = loadRecipe(`
@@ -62,6 +62,13 @@ steps {
     const c = coverage(two.recipe, new Set());
     expect(c.missing).toHaveLength(2);
     expect(missingKinds(c)).toBe(1);
+  });
+
+  it("judges a family by its member closest to tieable", () => {
+    const variant = { ...recipe, id: "t-variant", materials: recipe.materials.filter((m) => m.kind !== "peacock-herl") };
+    const owned = new Set(["wool:red", "cock-hackle:brown"]);
+    expect(missingKinds(coverage(recipe, owned))).toBe(1);
+    expect(missingKinds(bestCoverage([recipe, variant], owned))).toBe(0);
   });
 
   it("collects the catalog's materials by kind", () => {

@@ -138,7 +138,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
         text = `Tie the ${mat(step.material)} ${under ? "under" : "on top of"} the shank with figure-of-eight turns.`;
       } else if (step.length && step.extended) {
         const tip = step.tip ? ` Colour the end ${colorName(step.tip) || "darker"}${step.tip === "black" ? " (singe it with a lighter)" : ""}.` : "";
-        text = `Tie in the ${mat(step.material)} so it sticks out ${gapeText(step.length)} behind as one piece.${tip}`;
+        text = `Tie in the ${mat(step.material)} so it sticks out ${gapeText(step.length)} ${step.forward ? "forward over the eye" : "behind"} as one piece.${tip}`;
       } else if (step.length && step.side === "across") {
         const strands = m?.count ?? 2;
         text = `Tie ${strands === 1 ? "a strand" : `${strands} strands`} of ${mat(step.material)} across the shank by the middle with figure-of-eight turns, so ${gapeText(step.length)} sticks out on each side as legs.`;

@@ -7,8 +7,11 @@ import { useCallback, useEffect, useState } from "react";
  */
 /** The sets for this visit, shared by every page, for when storage can't keep them. */
 const memory = new Map<string, string[]>();
+/** Keys whose last write didn't reach storage (full, or blocked): memory has the newer set. */
+const unsaved = new Set<string>();
 
 function read(key: string): string[] {
+  if (unsaved.has(key)) return memory.get(key) ?? [];
   try {
     const v = JSON.parse(localStorage.getItem(key) ?? "[]");
     return Array.isArray(v) ? v.filter((x) => typeof x === "string") : [];
@@ -21,8 +24,10 @@ function write(key: string, values: string[]) {
   memory.set(key, values);
   try {
     localStorage.setItem(key, JSON.stringify(values));
+    unsaved.delete(key);
   } catch {
     // Not persisted; the shared in-memory copy lasts for this visit.
+    unsaved.add(key);
   }
 }
 
