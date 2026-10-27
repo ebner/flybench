@@ -136,6 +136,9 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
     setStopAt(null);
     player.play();
   };
+  // Vise mode pauses after every step: play the next one, or this one if it is unfinished.
+  const playNext = () => playStep(player.time >= step.start + step.duration - 0.05 ? current + 1 : current);
+  const play = () => (vise ? playNext() : playAll());
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -148,7 +151,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
       } else if (e.key === " ") {
         e.preventDefault();
         if (player.playing) player.pause();
-        else playAll();
+        else play();
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
         playStep(current + 1);
@@ -179,7 +182,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
         <div
           className="now"
           aria-live="polite"
-          onClick={vise ? () => playStep(player.time >= step.start + step.duration - 0.05 ? current + 1 : current) : undefined}
+          onClick={vise ? playNext : undefined}
         >
           <p className="now-index">
             Step {current + 1} of {build.steps.length}
@@ -192,7 +195,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
           <button onClick={() => playStep(current - 1)} disabled={current === 0} aria-label="Previous step">
             <TransportIcon name="previous" />
           </button>
-          <button className="play" onClick={() => (player.playing ? player.pause() : playAll())} aria-label={player.playing ? "Pause" : "Play"}>
+          <button className="play" onClick={() => (player.playing ? player.pause() : play())} aria-label={player.playing ? "Pause" : "Play"}>
             <TransportIcon name={player.playing ? "pause" : "play"} />
           </button>
           <button onClick={() => playStep(current)} aria-label="Replay this step">

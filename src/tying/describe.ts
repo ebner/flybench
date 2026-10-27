@@ -51,11 +51,15 @@ export function materialsList(recipe: Recipe): MaterialsListEntry[] {
   ];
 }
 
-export function positionText(s: number): string {
-  if (s <= 0.02) return "the start of the bend";
-  if (s >= 0.95) return "just behind the eye";
-  if (Math.abs(s - 0.5) <= 0.02) return "halfway along the shank";
-  return `${Math.round(s * 100)}% of the way along the shank`;
+/** What the fly is dressed on: a hook, a tube, or a Waddington shank (no bend on either). */
+export type Mount = "hook" | "tube" | "waddington";
+
+export function positionText(s: number, mount: Mount = "hook"): string {
+  const along = mount === "tube" ? "the tube" : "the shank";
+  if (s <= 0.02) return mount === "hook" ? "the start of the bend" : `the rear end of ${along}`;
+  if (s >= 0.95) return mount === "tube" ? "just behind the front of the tube" : "just behind the eye";
+  if (Math.abs(s - 0.5) <= 0.02) return `halfway along ${along}`;
+  return `${Math.round(s * 100)}% of the way along ${along}`;
 }
 
 const GAPE_WORDS: [number, string][] = [
@@ -73,9 +77,13 @@ export function gapeText(n: number): string {
   return word ? word[1] : `${n}× the gape`;
 }
 
-/** Where tips end, relative to the bend (x in gapes; the bend ends at bendEnd). */
-function reachText(tipX: number, bendEnd: number): string | null {
+/** Where tips end, relative to the bend (x in gapes; the bend ends at bendEnd), or to the rear of a tube or shank. */
+function reachText(tipX: number, bendEnd: number, mount: Mount): string | null {
   if (tipX > 0.1) return null;
+  if (mount !== "hook") {
+    const end = mount === "tube" ? "the tube" : "the shank";
+    return tipX > -0.15 ? `to the rear end of ${end}` : `well past the rear end of ${end}`;
+  }
   if (tipX > -0.15) return "to the start of the bend";
   if (tipX > bendEnd + 0.15) return "over the bend";
   if (tipX > bendEnd - 0.2) return "just past the end of the bend";
@@ -103,6 +111,8 @@ export interface StepContext {
 
 /** Instruction text for one step, generated from the recipe; the step's note is appended. */
 export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): string {
+  const mount: Mount = hookModel(recipe.hook).tube?.kind ?? "hook";
+  const at = (s: number) => positionText(s, mount);
   const find = (id: string) => recipe.materials.find((m) => m.id === id);
   const mat = (id: string) => {
     const m = find(id);
@@ -114,22 +124,22 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       text = `Slide the ${mat(step.material)} round the bend and up to the eye, small hole first.`;
       break;
     case "weight":
-      text = `Wrap the ${mat(step.material)} in touching turns from ${positionText(step.from)} to ${positionText(step.to)}.`;
+      text = `Wrap the ${mat(step.material)} in touching turns from ${at(step.from)} to ${at(step.to)}.`;
       break;
     case "attach-thread":
-      text = `Attach the thread at ${positionText(step.at)} with a few turns and trim the tag end.`;
+      text = `Attach the thread at ${at(step.at)} with a few turns and trim the tag end.`;
       break;
     case "wrap-thread":
       text = step.turns
-        ? `Wrap the thread to ${positionText(step.to)} in ${step.turns} open turns.`
-        : `Wrap the thread to ${positionText(step.to)} in touching turns.`;
+        ? `Wrap the thread to ${at(step.to)} in ${step.turns} open turns.`
+        : `Wrap the thread to ${at(step.to)} in touching turns.`;
       break;
     case "tie-in": {
       const m = find(step.material);
       const archetype = m ? MATERIALS[m.kind].archetype : null;
       const what =
         archetype === "herl" && m?.strands
-          ? `${m.strands} strands of peacock herl`
+          ? `${m.strands === 1 ? "a strand" : `${m.strands} strands`} of peacock herl`
           : archetype === "hair" || archetype === "marabou" || archetype === "cdc"
             ? `a bunch of ${mat(step.material)}`
             : `the ${mat(step.material)}`;
@@ -151,7 +161,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
         text = `Tie in ${what} under the shank as a beard, reaching ${gapeText(step.length)} back.`;
       } else if (step.length) {
         const angle = step.angle ? `, angled about ${step.angle}° up from the shank` : "";
-        const reach = ctx.tipX !== undefined && ctx.bendEnd !== undefined ? reachText(ctx.tipX, ctx.bendEnd) : null;
+        const reach = ctx.tipX !== undefined && ctx.bendEnd !== undefined ? reachText(ctx.tipX, ctx.bendEnd, mount) : null;
         const wing = archetype === "hair" || archetype === "feather";
         const pick = archetype === "feather" && step.width ? `Pick a feather about ${gapeText(step.width)} wide. ` : "";
         const flare = (step.spread ?? 0) >= 60 ? " Let it flare out round the sides of the body." : "";
@@ -169,22 +179,22 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       if (step.around) {
         text = `Wind the ${mat(step.material)} round the base of the ${mat(step.around)} in ${step.turns} turns, each one under the last.`;
       } else if (ctx.rear) {
-        text = `Palmer the ${mat(step.material)} back to ${positionText(to)} in ${step.turns} open turns.`;
+        text = `Palmer the ${mat(step.material)} back to ${at(to)} in ${step.turns} open turns.`;
       } else if (ctx.through) {
-        text = `Wind the ${mat(step.material)} forward to ${positionText(to)} in ${step.turns} turns through the ${mat(ctx.through)}. The first turn traps its tip.`;
+        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns through the ${mat(ctx.through)}. The first turn traps its tip.`;
       } else {
-        text = `Wind the ${mat(step.material)} forward to ${positionText(to)} in ${step.turns} turns.`;
+        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns.`;
       }
       break;
     }
     case "pull-over":
-      text = `Pull the ${mat(step.material)} forward over the top of the body and tie it down at ${positionText(step.to)}. Trim the excess.`;
+      text = `Pull the ${mat(step.material)} forward over the top of the body and tie it down at ${at(step.to)}. Trim the excess.`;
       break;
     case "spin":
-      text = `Spin clumps of ${mat(step.material)} round the shank, packing each one back against the last, up to ${positionText(step.to)}.`;
+      text = `Spin clumps of ${mat(step.material)} round the shank, packing each one back against the last, up to ${at(step.to)}.`;
       break;
     case "dub":
-      text = `Twist a thin noodle of ${mat(step.material)} onto the thread and wrap it forward to ${positionText(step.to)}.`;
+      text = `Twist a thin noodle of ${mat(step.material)} onto the thread and wrap it forward to ${at(step.to)}.`;
       break;
     case "tie-off":
       text = `Tie off the ${mat(step.material)} with a few thread turns and trim the excess.`;

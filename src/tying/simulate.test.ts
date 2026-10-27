@@ -36,16 +36,31 @@ describe("simulate", () => {
       if (!loaded.ok) throw new Error(file);
       const steps = simulate(loaded.recipe).steps;
       const coverStep = new Map<string, number>();
+      const firstStub = new Map<string, number>();
       steps.forEach((s, i) => {
         for (const p of s.pieces) {
-          if (p.type === "cover" && !coverStep.has(p.material)) coverStep.set(p.material, i);
+          if (p.type === "cover" && !coverStep.has(p.material)) {
+            coverStep.set(p.material, i);
+            firstStub.set(p.material, p.stub);
+          }
           // Fibres pressed flat by a wing case, and rib dents in it, never show before they happen.
           if (p.type === "wraps" && p.covered) expect(i, file).toBeGreaterThanOrEqual(Math.min(...coverStep.values()));
           if (p.type === "cover" && p.dents.length > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
-          if (p.type === "cover" && p.stub > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
+          // Trimming changes what sticks out past the tie-down, never before it happens.
+          if (p.type === "cover" && p.stub !== firstStub.get(p.material)) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
         }
       });
     }
+  });
+
+  it("presses dubbed fur flat under a wing case, as well as wound fibres", () => {
+    const loaded = loadRecipe(readFileSync(new URL("../../patterns/gold-ribbed-hares-ear-nymph.kdl", import.meta.url), "utf8"));
+    if (!loaded.ok) throw new Error("hare's ear");
+    const steps = simulate(loaded.recipe).steps;
+    const pull = loaded.recipe.steps.findIndex((s) => s.op === "pull-over");
+    const pressed = steps[pull]!.pieces.filter((p) => p.type === "wraps" && p.look === "dubbing" && p.covered);
+    // Both passes of the thorax.
+    expect(pressed.length).toBeGreaterThanOrEqual(2);
   });
 
   it("never leaves a material out of sight at the start of a step, in every pattern", () => {

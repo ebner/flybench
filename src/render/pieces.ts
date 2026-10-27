@@ -521,7 +521,8 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       u: rand(), base, dir, length,
       // Clipped hair shows its thick cut ends.
       // Fibres deep in a bunch are shaded by the rest, so a mass of white hair still has depth.
-      radius: (radialHair && piece.cut ? spec.radius * 1.6 : spec.radius) * (piece.fibreWidth ?? 1),
+      // Rubber and silicone strands keep their real thickness, as they do tied across.
+      radius: piece.look === "legs" ? piece.bundleRadius : (radialHair && piece.cut ? spec.radius * 1.6 : spec.radius) * (piece.fibreWidth ?? 1),
       shade: (0.85 + 0.3 * rand()) * (piece.cut ? 1 : 1 - 0.32 * Math.pow(rand(), 0.6)),
       bend, bendDir: bend > 0 ? perpendicular(dir, toward, rand) : undefined,
     });

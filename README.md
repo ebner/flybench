@@ -45,7 +45,8 @@ Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan.
 Space plays and pauses, ← and → step back and forward. Click a step to play just that step.
 
 Rendering uses the GPU through Vulkan in headless Chromium when there is one, and
-falls back to software rendering (much slower) when there isn't.
+falls back to software rendering (SwiftShader, much slower) when there isn't;
+`FLYBENCH_SOFTWARE_RENDER=1` asks for software rendering directly.
 
 ## Adding a pattern
 

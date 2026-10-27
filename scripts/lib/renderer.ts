@@ -43,10 +43,15 @@ export class Renderer {
     await server.listen();
     const base = server.resolvedUrls!.local[0]!;
     // Vulkan reaches the real GPU from headless Chromium (about 50× faster than software
-    // rendering); without a GPU, ANGLE falls back to SwiftShader.
-    const browser = await chromium.launch({
-      args: ["--use-angle=vulkan", "--enable-features=Vulkan", "--enable-unsafe-swiftshader"],
-    });
+    // rendering). Without a usable Vulkan driver WebGL fails outright rather than falling
+    // back, so check, and use the SwiftShader software renderer instead.
+    // FLYBENCH_SOFTWARE_RENDER=1 asks for software rendering directly.
+    let browser = await chromium.launch({ args: ["--use-angle=vulkan", "--enable-features=Vulkan", "--enable-unsafe-swiftshader"] });
+    if (process.env.FLYBENCH_SOFTWARE_RENDER || !(await hasWebGL(browser))) {
+      await browser.close();
+      console.warn("Rendering in software (SwiftShader), which is much slower.");
+      browser = await chromium.launch({ args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
+    }
     return new Renderer(server, browser, base);
   }
 
@@ -101,5 +106,15 @@ export class Renderer {
   async stop(): Promise<void> {
     await this.browser.close();
     await this.server.close();
+  }
+}
+
+/** Whether pages in this browser can create a WebGL 2 context. */
+async function hasWebGL(browser: Browser): Promise<boolean> {
+  const page = await browser.newPage();
+  try {
+    return await page.evaluate(() => document.createElement("canvas").getContext("webgl2") !== null);
+  } finally {
+    await page.close();
   }
 }

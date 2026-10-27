@@ -7,6 +7,9 @@ import { getLocation, parse } from "@bgotink/kdl";
  * characters are removed but its line breaks kept, so line numbers still match. Text that
  * doesn't parse is returned unchanged, for the loader to report.
  */
+/** Image addresses: none may be left in a published recipe, however a block was hidden. */
+export const IMAGE_URL = /https?:\/\/\S+?\.(?:jpe?g|png|webp|gif)\b/i;
+
 export function withoutReferences(text: string): string {
   let doc;
   try {
