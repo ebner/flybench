@@ -228,7 +228,16 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
               ))}
             </div>
           </div>
-          <button className="vise-toggle" aria-pressed={vise} onClick={() => setVise(!vise)}>
+          <button
+            className="vise-toggle"
+            aria-pressed={vise}
+            onClick={() => {
+              // Playing on into the next steps is what vise mode stops: pause at this step's end.
+              if (!vise && player.playing) setStopAt(stepEnd(step));
+              if (vise && player.playing) setStopAt(null);
+              setVise(!vise);
+            }}
+          >
             {vise ? "Leave vise mode" : "Vise mode"}
           </button>
           <select value={player.speed} onChange={(e) => player.setSpeed(Number(e.target.value))} aria-label="Speed">

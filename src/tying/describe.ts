@@ -49,7 +49,9 @@ export function materialsList(recipe: Recipe): MaterialsListEntry[] {
         m.strands !== undefined
           ? `${m.strands} strand${m.strands === 1 ? "" : "s"}`
           : m.fibre !== undefined
-            ? `fibres ${m.fibre}× gape`
+            ? hook.tube
+              ? `fibres ${Math.round(m.fibre * unitMm(recipe.hook))} mm`
+              : `fibres ${m.fibre}× gape`
             : m.mm !== undefined
               ? `${m.mm} mm`
               : m.size ?? (m.count !== undefined ? countText(m.count, COUNT_UNITS[MATERIALS[m.kind].archetype] ?? "fibres") : undefined),

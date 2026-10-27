@@ -237,6 +237,25 @@ materials {
     expect(errorsOf(run("    attach-thread at=0.8\n    tie-in wing length=1 forward=#true\n    whip-finish")).join("\n")).toMatch(/feathers are tied in pointing back/);
   });
 
+  it("lets nothing, not even weighting, come between winding and tying off", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    body floss color=black\n    lead lead-free-wire\n");
+    const steps = "    attach-thread at=0.1\n    tie-in body\n    wrap-thread to=0.8\n    wind body to=0.8 turns=5\n    weight lead from=0.3 to=0.6\n    tie-off body\n    whip-finish";
+    expect(errorsOf(run(steps, h.replace("floss color", "silk-floss color"))).join("\n")).toMatch(/must be tied off before anything else/);
+  });
+
+  it("secures a palmered tip only by winding over it", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    hackle cock-hackle color=brown fibre=1\n    rib gold-wire\n");
+    const steps = (ribTo: number) =>
+      `    attach-thread at=0.8\n    tie-in hackle\n    wrap-thread to=0.0\n    tie-in rib\n    wrap-thread to=0.8\n    wind hackle to=0.4 turns=4\n    wind rib to=${ribTo} turns=3\n    tie-off rib\n    trim hackle\n    whip-finish`;
+    expect(run(steps(0.8), h).ok || errorsOf(run(steps(0.8), h)).join("\n")).toBe(true);
+    expect(errorsOf(run(steps(0.2), h)).join("\n")).toMatch(/must be secured by winding another material forward over its tip/);
+  });
+
+  it("needs a whip finish even when the thread was never attached", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    lead lead-free-wire\n");
+    expect(errorsOf(run("    weight lead from=0.3 to=0.6", h)).join("\n")).toMatch(/must end with a whip finish/);
+  });
+
   it("places an error about a missing section at the top of the file", () => {
     const errors = errorsOf(run("    attach-thread at=0.8\n    whip-finish", head.replace("difficulty beginner\n", "")));
     expect(errors[0]).toMatch(/^line 1:1: difficulty/);

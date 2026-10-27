@@ -57,6 +57,26 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     }
     const archetype = "material" in step ? archetypes.get(step.material)! : null;
 
+    // What was just wound comes first: nothing, not even weighting, may come in between.
+    if (pending) {
+      const p = pending;
+      pending = null;
+      if (!p.rear && !(step.op === "tie-off" && step.material === p.material)) {
+        err(`"${p.material}" was just wound and must be tied off before anything else`, path);
+      } else if (p.rear) {
+        const end = materials.get(p.material)!;
+        // Wound forward from at or behind the palmered tip, and over it.
+        const securing =
+          step.op === "wind" &&
+          step.material !== p.material &&
+          (materials.get(step.material)?.at ?? Infinity) <= end.at + POSITION_TOLERANCE &&
+          step.to !== undefined &&
+          step.to > end.at + POSITION_TOLERANCE;
+        if (securing) end.state = "secured";
+        else err(`"${p.material}" was palmered back and must be secured by winding another material forward over its tip`, path);
+      }
+    }
+
     // Steps that can come before the thread.
     if (step.op === "slide-bead") {
       if (archetype !== "bead") err(`"${step.material}" is not a bead`, [...path, "material"]);
@@ -80,21 +100,6 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       return;
     }
 
-    if (pending) {
-      const p = pending;
-      pending = null;
-      if (!p.rear && !(step.op === "tie-off" && step.material === p.material)) {
-        err(`"${p.material}" was just wound and must be tied off before anything else`, path);
-      } else if (p.rear) {
-        const end = materials.get(p.material)!;
-        const securing =
-          step.op === "wind" &&
-          step.material !== p.material &&
-          (materials.get(step.material)?.at ?? Infinity) <= end.at + POSITION_TOLERANCE;
-        if (securing) end.state = "secured";
-        else err(`"${p.material}" was palmered back and must be secured by winding another material forward over its tip`, path);
-      }
-    }
 
     switch (step.op) {
       case "wrap-thread":
@@ -271,6 +276,6 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   for (const [id, m] of materials) {
     if (m.state === "secured") err(`the tip of "${id}" is still hanging at the bend; trim it`, ["steps"]);
   }
-  if (!finished && thread !== null) err("the fly must end with a whip finish", ["steps"]);
+  if (!finished) err("the fly must end with a whip finish", ["steps"]);
   return errors;
 }
