@@ -116,7 +116,8 @@ export function filtersFromQuery(query: string): Filters {
   for (const key of FILTER_KEYS) {
     const v = params.get(key);
     if (!v) continue;
-    f[key] = key === "materials" ? v.split(",").filter((m) => m in MATERIALS) : v;
+    // Only real catalog kinds: `in` would also accept inherited names such as "__proto__".
+    f[key] = key === "materials" ? v.split(",").filter((m) => Object.hasOwn(MATERIALS, m)) : v;
   }
   return f as Filters;
 }

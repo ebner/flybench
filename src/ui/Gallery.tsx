@@ -5,7 +5,7 @@ import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } fro
 import { CATALOG, SEARCH } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/schema";
-import { colorWord, coverage, type Need } from "../catalog/inventory";
+import { colorWord, coverage, missingKinds, type Need } from "../catalog/inventory";
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
 import { href, replaceUrl } from "./router";
@@ -27,7 +27,7 @@ export function Gallery({ query }: { query: string }) {
   const oneShort = filters.have
     ? found.flatMap((e) => {
         const c = coverage(e.recipe, owned.values);
-        return c.missing.length === 1 ? [{ entry: e, missing: c.missing[0]! }] : [];
+        return missingKinds(c) === 1 ? [{ entry: e, missing: c.missing[0]! }] : [];
       })
     : [];
 

@@ -40,7 +40,8 @@ export function usePlayer(duration: number, stopAt: number | null): Player {
   }, [playing]);
 
   const play = useCallback(() => {
-    if (state.current.time >= state.current.duration) setTime(0);
+    // At the end, or at the last step's end (a hair before it), play starts over.
+    if (state.current.time >= state.current.duration - 0.001) setTime(0);
     setPlaying(true);
   }, []);
   const playFrom = useCallback((t: number) => {

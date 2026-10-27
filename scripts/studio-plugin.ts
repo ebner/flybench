@@ -34,7 +34,10 @@ export function studioPlugin(root: string): Plugin {
 
 async function handle(dir: string, req: IncomingMessage, res: ServerResponse) {
   const host = (req.headers.host ?? "").replace(/:\d+$/, "");
-  if (!LOCAL_HOSTS.has(host) || req.headers["x-flybench-studio"] !== "1") return send(res, 403, "studio requests only from this machine");
+  // The Host header is the client's word; the connection's address is not (vite --host).
+  const peer = req.socket.remoteAddress ?? "";
+  const loopback = peer === "::1" || peer.startsWith("127.") || peer.startsWith("::ffff:127.");
+  if (!loopback || !LOCAL_HOSTS.has(host) || req.headers["x-flybench-studio"] !== "1") return send(res, 403, "studio requests only from this machine");
   // Browsers send Origin on cross-origin requests and on writes; it must be this server.
   const origin = req.headers.origin;
   if (origin !== undefined && origin !== `http://${req.headers.host}`) return send(res, 403, "studio requests only from the studio page");

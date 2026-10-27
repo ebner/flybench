@@ -197,9 +197,9 @@ how it is drawn and which extra properties it takes:
 | yarn       | `wool`, `poly-yarn` | |
 | herl       | `peacock-herl` | `strands` (1–6, default 3) |
 | hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind) |
-| dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur` | `shaggy` (0–1: how rough, from fine and tight to picked out with long guard hairs; default from the kind) |
+| dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur`, `dubbing` | `shaggy` (0–1: how rough, from fine and tight to picked out with long guard hairs; default from the kind) |
 | wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
-| floss      | `rib-thread`, `silk-floss` | `size` (thread size) |
+| floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
 | hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane` | |
@@ -209,7 +209,7 @@ how it is drawn and which extra properties it takes:
 | cdc        | `cdc` | (can be wound: barbs lengthen from tip to butt) |
 | flash      | `krystal-flash`, `flashabou` | `count` |
 | feather    | `mallard-breast`, `teal-flank` (breast), `hackle-tips`, `saddle-feathers` (tip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
-| foam       | `foam` | |
+| foam       | `foam`, `scud-back` | |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
 | legs       | `rubber-legs`, `silicone-legs` | `count` (strands) |
@@ -281,7 +281,8 @@ bend"). When proportions are taken from reference photos, say so in a comment.
   another material forward from at or behind its tip, and its tip must be trimmed before
   the whip finish.
 - `trim` needs something to trim; `leave` only applies to hair butts, spun hair and foam backs.
-- A parachute hackle needs a post tied in upright (`angle` of 60° or more).
+- A parachute hackle needs a post: a bunch tied in upright (`angle` of 60° or more), not a
+  feather pair, an extended body or strands tied across.
 - `pull-over` needs the material tied in and unused, and the thread at `to`.
 - Only hair is spun, only wire weights, only beads are slid on.
 - `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), and every recipe has one.

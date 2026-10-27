@@ -44,7 +44,9 @@ export function materialsList(recipe: Recipe): MaterialsListEntry[] {
           ? `${m.strands} strand${m.strands === 1 ? "" : "s"}`
           : m.fibre !== undefined
             ? `fibres ${m.fibre}× gape`
-            : m.size ?? (m.count !== undefined ? `${m.count} fibres` : undefined),
+            : m.mm !== undefined
+              ? `${m.mm} mm`
+              : m.size ?? (m.count !== undefined ? `${m.count} fibres` : undefined),
     })),
   ];
 }

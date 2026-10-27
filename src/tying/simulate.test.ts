@@ -42,6 +42,7 @@ describe("simulate", () => {
           // Fibres pressed flat by a wing case, and rib dents in it, never show before they happen.
           if (p.type === "wraps" && p.covered) expect(i, file).toBeGreaterThanOrEqual(Math.min(...coverStep.values()));
           if (p.type === "cover" && p.dents.length > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
+          if (p.type === "cover" && p.stub > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
         }
       });
     }

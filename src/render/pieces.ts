@@ -169,7 +169,11 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
       }
     },
     dispose() {
-      for (const { mesh } of parts) mesh.geometry.dispose();
+      // The instanced mesh holds its own GPU buffers (matrices, colours) besides the geometry.
+      for (const { mesh } of parts) {
+        mesh.geometry.dispose();
+        mesh.dispose();
+      }
     },
   };
 }
@@ -257,12 +261,14 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       shade = guard ? 0.45 : 0.6 + 0.4 * rand();
     }
     // A hackle trimmed top and bottom keeps only the fibres pointing out to the sides; one
-    // trimmed underneath keeps everything that doesn't point down.
-    if (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) continue;
-    if (piece.keep === "top" && Math.sin(spin) < -0.35) continue;
-    if (piece.keep === "under" && Math.sin(spin) > 0.35) continue;
-    // Under a wing case the fibres on top are pressed flat out of sight.
-    if (piece.covered && px > piece.covered[0] && px < piece.covered[1] && Math.sin(spin) > Math.cos(piece.covered[2] + 0.2)) continue;
+    // trimmed underneath keeps everything that doesn't point down. Under a wing case the
+    // fibres on top are pressed flat out of sight. Hidden fibres still draw their random
+    // numbers below, so the ones left stay exactly where they were before.
+    const hidden =
+      (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) ||
+      (piece.keep === "top" && Math.sin(spin) < -0.35) ||
+      (piece.keep === "under" && Math.sin(spin) > 0.35) ||
+      (piece.covered !== undefined && px > piece.covered[0] && px < piece.covered[1] && Math.sin(spin) > Math.cos(piece.covered[2] + 0.2));
     let dir: THREE.Vector3;
     if (onPost) {
       // Parachute: barbs stand out flat round the post, drooping a little.
@@ -286,7 +292,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     const inward = new THREE.Vector3(0, -py, -pz);
     const bend = lie ? 0.35 + 0.2 * rand() : (soft ? 0.12 + 0.25 * Math.min(1, (piece.sweep ?? 0.8) / 1.2) : spec.wave) * (0.5 + rand());
     const bendDir = bend > 0 ? perpendicular(dir, lie ? inward : soft ? BACK : ZERO, rand) : undefined;
-    list.push({ u, base, dir, length, radius: spec.radius, shade, bend, bendDir });
+    if (!hidden) list.push({ u, base, dir, length, radius: spec.radius, shade, bend, bendDir });
   }
   return list;
 }
