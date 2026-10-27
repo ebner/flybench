@@ -95,7 +95,9 @@ function matches(e: CatalogEntry, f: Filters): boolean {
   if (f.difficulty && r.difficulty !== f.difficulty) return false;
   if (f.species && !r.species.includes(f.species)) return false;
   if (f.month && !r.season.includes(f.month)) return false;
-  if (f.materials?.some((m) => !e.materials.has(m))) return false;
+  // All of the materials in one version: variants are complete recipes of their own.
+  const wanted = f.materials ?? [];
+  if (wanted.length && ![e.recipe, ...e.variants].some((v) => wanted.every((m) => v.materials.some((x) => x.kind === m)))) return false;
   return true;
 }
 

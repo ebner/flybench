@@ -231,6 +231,8 @@ const Step = z.discriminatedUnion("op", [
     /** Parachute: wind horizontally around this upright post instead of the shank. */
     around: MaterialRef.optional(),
     turns: z.number().int().positive(),
+    /** Wound the opposite way round to the material under it (a counter-wound rib). */
+    counter: z.boolean().optional(),
     note: Note,
   }),
   /** Fold a material tied in at the rear forward over the top of the body and tie it down at the thread. */

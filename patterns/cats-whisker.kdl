@@ -63,7 +63,7 @@ steps {
     wrap-thread to=0.86
     wind body to=0.86 turns=12 note="Touching turns, stopping short of the eyes."
     tie-off body
-    wind rib to=0.86 turns=5 note="Counter-wound."
+    wind rib to=0.86 turns=5 counter=#true
     tie-off rib
     tie-in wing length=5.0 angle=10 spread=20 note="A second large pinch, reaching about the tail tip."
     whip-finish note="A small head in front of the eyes, varnished."

@@ -192,14 +192,15 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
     }
     case "wind": {
       const to = step.to ?? 0;
+      const counter = step.counter ? ", the opposite way round to the turns under it" : "";
       if (step.around) {
         text = `Wind the ${mat(step.material)} round the base of the ${mat(step.around)} in ${step.turns} turns, each one under the last.`;
       } else if (ctx.rear) {
         text = `Palmer the ${mat(step.material)} back to ${at(to)} in ${step.turns} open turns.`;
       } else if (ctx.through) {
-        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns through the ${mat(ctx.through)}. The first turn traps its tip.`;
+        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns${counter} through the ${mat(ctx.through)}. The first turn traps its tip.`;
       } else {
-        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns.`;
+        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns${counter}.`;
       }
       break;
     }

@@ -31,6 +31,13 @@ describe("catalog search", () => {
     expect(ids({ q: "worcester" })).not.toContain("elk-hair-caddis");
   });
 
+  it("needs one version of a pattern to have every material asked for", () => {
+    // Gold wire in the Elk Hair Caddis, copper wire in its Troth variant: neither has both.
+    expect(ids({ materials: ["gold-wire", "elk-hair"] })).toContain("elk-hair-caddis");
+    expect(ids({ materials: ["copper-wire", "elk-hair"] })).toContain("elk-hair-caddis");
+    expect(ids({ materials: ["gold-wire", "copper-wire"] })).not.toContain("elk-hair-caddis");
+  });
+
   it("finds a family by a variant's name or alias", () => {
     expect(ids({ q: "American Pheasant Tail" })).toContain("pheasant-tail-nymph");
   });

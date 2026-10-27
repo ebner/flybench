@@ -62,7 +62,7 @@ steps {
     wrap-thread to=0.72
     wind body to=0.72 turns=9 note="Touching turns, a plump acorn-shaped body."
     tie-off body
-    wind rib to=0.72 turns=5 note="Counter-wound through the herl."
+    wind rib to=0.72 turns=5 counter=#true note="Through the herl."
     tie-off rib
     tie-in hackle
     wrap-thread to=0.9
