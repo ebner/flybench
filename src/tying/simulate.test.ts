@@ -1,7 +1,7 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { simulate, stepAt, wrapAt, type WrapsPiece } from "./simulate";
+import { simulate, stepAt, stepEnd, stepProgress, wrapAt, type WrapsPiece } from "./simulate";
 
 function redTag() {
   const result = loadRecipe(readFileSync(new URL("../../patterns/red-tag.kdl", import.meta.url), "utf8"));
@@ -27,6 +27,31 @@ describe("simulate", () => {
     expect(stepAt(build, 0)).toBe(0);
     expect(stepAt(build, build.steps[3]!.start + 0.01)).toBe(3);
     expect(stepAt(build, build.duration)).toBe(build.steps.length - 1);
+  });
+
+  it("shows each step's effects only from that step on, in every pattern", () => {
+    const dir = new URL("../../patterns/", import.meta.url);
+    for (const file of readdirSync(dir).filter((f) => f.endsWith(".kdl"))) {
+      const loaded = loadRecipe(readFileSync(new URL(file, dir), "utf8"));
+      if (!loaded.ok) throw new Error(file);
+      const steps = simulate(loaded.recipe).steps;
+      const coverStep = new Map<string, number>();
+      steps.forEach((s, i) => {
+        for (const p of s.pieces) {
+          if (p.type === "cover" && !coverStep.has(p.material)) coverStep.set(p.material, i);
+          // Fibres pressed flat by a wing case, and rib dents in it, never show before they happen.
+          if (p.type === "wraps" && p.covered) expect(i, file).toBeGreaterThanOrEqual(Math.min(...coverStep.values()));
+          if (p.type === "cover" && p.dents.length > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
+        }
+      });
+    }
+  });
+
+  it("shows a step finished at its end, before the next one begins", () => {
+    for (const step of build.steps) {
+      expect(stepAt(build, stepEnd(step))).toBe(step.index);
+      expect(stepProgress(step, stepEnd(step))).toBe(1);
+    }
   });
 
   it("winds the herl body over the thread base, from the bend to the tie-off point", () => {

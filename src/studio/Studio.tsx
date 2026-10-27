@@ -3,7 +3,7 @@ import { formatError, type RecipeError } from "../recipe/errors";
 import { loadRecipe } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
 import { FlyScene, type ViewName } from "../render/FlyScene";
-import { simulate, stepAt, type Build } from "../tying/simulate";
+import { simulate, stepAt, stepEnd, type Build } from "../tying/simulate";
 import { useTheme } from "../ui/theme";
 import { usePlayer } from "../ui/usePlayer";
 import { listPatterns, readPattern, savePattern } from "./api";
@@ -139,7 +139,7 @@ export function Studio() {
           {status || (dirty ? "Unsaved changes" : file ? "No unsaved changes" : "")}
         </p>
         {file && !unsavedFile && (
-          <a className="studio-site" href={`./#/fly/${file.replace(/\.kdl$/, "")}`} target="_blank" rel="noreferrer">
+          <a className="studio-site" href={`./fly/${file.replace(/\.kdl$/, "")}/`} target="_blank" rel="noreferrer">
             Open on the site
           </a>
         )}
@@ -364,7 +364,7 @@ function StepList({ build, current, onPick }: { build: Build; current: number; o
     <ol className="studio-steps" ref={list}>
       {build.steps.map((s, i) => (
         <li key={i} aria-current={i === current ? "step" : undefined}>
-          <button onClick={() => onPick(s.start + s.duration)}>
+          <button onClick={() => onPick(stepEnd(s))}>
             <strong>{s.title}</strong> {s.text}
           </button>
         </li>

@@ -238,7 +238,7 @@ The archetype decides how a material behaves and is drawn:
 ## Steps
 
 Steps run in order. The **thread position** is part of the tying state. Only
-`attach-thread`, `wrap-thread` and `dub` move it. Tie-ins, tie-offs and the whip finish
+`attach-thread`, `wrap-thread`, `dub` and `spin` move it. Tie-ins, tie-offs and the whip finish
 happen wherever the thread is, as they do at the vise.
 
 Every step accepts `note="…"`, which is appended to the generated instruction text.
@@ -265,7 +265,8 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
   which occurs once.
 - A material is tied in once and wound at most once. Dubbing is only used with `dub`.
 - Hair and feather wings need a `length`. `angle` needs a `length`. `spread` only applies
-  to tags, tails and hair wings tied in with a length; `width` only to feather wings.
+  to material tied in with a length (tags, tails, wings; for feathers it makes a pair);
+  `width` only to feather wings.
 
 ### Proportions
 
@@ -279,7 +280,7 @@ bend"). When proportions are taken from reference photos, say so in a comment.
 - A rearward-wound (palmered) material must be secured in the very next step, by winding
   another material forward from at or behind its tip, and its tip must be trimmed before
   the whip finish.
-- `trim` needs something to trim; `leave` only applies to hair butts.
+- `trim` needs something to trim; `leave` only applies to hair butts, spun hair and foam backs.
 - A parachute hackle needs a post tied in upright (`angle` of 60° or more).
 - `pull-over` needs the material tied in and unused, and the thread at `to`.
 - Only hair is spun, only wire weights, only beads are slid on.

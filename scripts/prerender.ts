@@ -8,6 +8,7 @@
  *   SITE_URL   the host's address ("https://ebner.github.io"); needed for absolute links
  *              in previews, canonical links and the sitemap
  */
+import { createHash } from "node:crypto";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import sharp from "sharp";
@@ -78,6 +79,18 @@ for (const page of pages) {
   await mkdir(`${DIST}/${page.path}`, { recursive: true });
   await writeFile(`${DIST}/${page.path}index.html`, html);
 }
+
+// The service worker caches the app's own files on install, so the site works offline
+// after the first visit; the cache is named after this build's files.
+const assets = (await readdir(`${DIST}/assets`)).filter((f) => /\.(js|css|woff2)$/.test(f)).sort();
+const shell = ["./", "./manifest.webmanifest", "./favicon.svg", "./logo.svg", "./renders/manifest.json", ...assets.map((f) => `./assets/${f}`)];
+const build = createHash("sha256").update(shell.join("\n")).update(await readFile("public/renders/manifest.json")).digest("hex").slice(0, 12);
+const sw = await readFile(`${DIST}/sw.js`, "utf8");
+const filled = sw
+  .replace('const CACHE = "flybench-dev";', () => `const CACHE = "flybench-${build}";`)
+  .replace(/const SHELL = \[[^\]]*\];/, () => `const SHELL = ${JSON.stringify(shell)};`);
+if (!filled.includes(build) || !filled.includes("./assets/")) throw new Error("sw.js: CACHE or SHELL not found to fill in");
+await writeFile(`${DIST}/sw.js`, filled);
 
 // GitHub Pages serves 404.html for any address without a file; the app shows "not found".
 await writeFile(

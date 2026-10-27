@@ -157,7 +157,14 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
             state: archetype === "eyes" || step.extended || step.side === "across" ? "done" : "tied-in",
             at: thread,
             butts: archetype === "hair" && step.side !== "across",
-            post: step.length !== undefined && (step.angle ?? 0) >= 60,
+            // Only an upright bunch makes a post a hackle can be wound round: not a feather
+            // pair, an extended body or strands tied across.
+            post:
+              step.length !== undefined &&
+              (step.angle ?? 0) >= 60 &&
+              archetype !== "feather" &&
+              !step.extended &&
+              step.side !== "across",
           });
         }
         break;
@@ -183,7 +190,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.around !== undefined) {
           const post = materials.get(step.around);
           if (archetype !== "hackle") err("only hackle is wound around a post", [...path, "material"]);
-          else if (!post?.post) err(`"${step.around}" must be tied in upright (angle 60° or more) to be a post`, [...path, "around"]);
+          else if (!post?.post) err(`"${step.around}" must be a bunch tied in upright (angle 60° or more) to be a post`, [...path, "around"]);
           m.state = "wound";
           pending = { material: step.material, rear: false };
           break;

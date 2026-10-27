@@ -15,8 +15,9 @@ const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]"]);
  *   GET  /__studio/patterns          the pattern file names
  *   GET  /__studio/patterns/<file>   one file's text
  *   PUT  /__studio/patterns/<file>   save it (with ?create=1, only if it doesn't exist yet)
- * Requests must come to a local host name and carry the X-Flybench-Studio header, which a
- * page on another site can't send without a preflight the dev server doesn't grant.
+ * Requests must come to a local host name, carry the X-Flybench-Studio header, and come from
+ * the studio page itself: Vite grants cross-origin requests to any localhost port, so a page
+ * served by another local process is turned away by its Origin header.
  */
 export function studioPlugin(root: string): Plugin {
   const dir = path.join(root, "patterns");
@@ -34,6 +35,9 @@ export function studioPlugin(root: string): Plugin {
 async function handle(dir: string, req: IncomingMessage, res: ServerResponse) {
   const host = (req.headers.host ?? "").replace(/:\d+$/, "");
   if (!LOCAL_HOSTS.has(host) || req.headers["x-flybench-studio"] !== "1") return send(res, 403, "studio requests only from this machine");
+  // Browsers send Origin on cross-origin requests and on writes; it must be this server.
+  const origin = req.headers.origin;
+  if (origin !== undefined && origin !== `http://${req.headers.host}`) return send(res, 403, "studio requests only from the studio page");
 
   const url = new URL(req.url ?? "/", "http://localhost");
   const name = decodeURIComponent(url.pathname.replace(/^\//, ""));

@@ -23,13 +23,16 @@ const FRAME = { width: 600, height: 400 };
 const OUT = "public/renders";
 const MANIFEST = `${OUT}/manifest.json`;
 /** Code that affects how a finished fly looks. */
-const RENDER_SOURCES = ["src/render", "src/tying", "src/recipe/materials.ts", "src/recipe/schema.ts", "scripts/render-catalog.ts"];
+const RENDER_SOURCES = [
+  "src/render", "src/tying", "src/recipe/materials.ts", "src/recipe/schema.ts",
+  "src/render-page.ts", "render.html", "scripts/lib/renderer.ts", "scripts/render-catalog.ts",
+];
 const CONCURRENCY = 3;
 
 const { values, positionals } = parseArgs({ allowPositionals: true, options: { force: { type: "boolean", default: false } } });
 
 async function filesUnder(path: string): Promise<string[]> {
-  if (path.endsWith(".ts")) return [path];
+  if (/\.[a-z]+$/.test(path)) return [path];
   const entries = await readdir(path, { withFileTypes: true, recursive: true });
   return entries
     .filter((e) => e.isFile() && !e.name.endsWith(".test.ts"))

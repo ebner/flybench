@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { stepAt, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
+import { stepAt, stepEnd, stepProgress, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
 import { buildHook } from "./hook";
 import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
@@ -49,6 +49,7 @@ function leaveDirection(angle: number, target = new THREE.Vector3()) {
  */
 export class FlyScene {
   private renderer: THREE.WebGLRenderer;
+  private environment: THREE.WebGLRenderTarget;
   private scene = new THREE.Scene();
   private camera: THREE.PerspectiveCamera;
   private controls: OrbitControls;
@@ -104,7 +105,10 @@ export class FlyScene {
     container.appendChild(this.renderer.domElement);
 
     const pmrem = new THREE.PMREMGenerator(this.renderer);
-    this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const room = new RoomEnvironment();
+    this.environment = pmrem.fromScene(room, 0.04);
+    this.scene.environment = this.environment.texture;
+    room.dispose();
     // Assumption: toned down so material colours read close to their swatches.
     this.scene.environmentIntensity = 0.75;
     pmrem.dispose();
@@ -180,7 +184,7 @@ export class FlyScene {
     const build = this.build!;
     const time = this.time;
     this.stepBounds = build.steps.map((step, i) => {
-      this.setTime(step.start + step.duration);
+      this.setTime(stepEnd(step));
       const box = this.visibleBounds(this.stepViews[i]!.map((v) => v.piece.object));
       return box.isEmpty() ? new THREE.Box3() : box;
     });
@@ -348,7 +352,7 @@ export class FlyScene {
     if (!build) return;
     this.time = t;
     build.steps.forEach((step, i) => {
-      const p = clamp01((t - step.start) / step.duration);
+      const p = stepProgress(step, t);
       for (const { piece, window, until } of this.stepViews[i]!) {
         const gone = until !== undefined && t >= until;
         piece.setProgress(gone ? 0 : clamp01((p - window[0]) / (window[1] - window[0])));
@@ -358,7 +362,7 @@ export class FlyScene {
     this.currentStep = stepAt(build, t);
     this.atEnd = t >= build.duration;
     const current = build.steps[this.currentStep]!;
-    const p = clamp01((t - current.start) / current.duration);
+    const p = stepProgress(current, t);
     this.poseThread(current.thread, p);
     this.poseLooseEnds(current.freeEnds, p);
     this.anchor.copy(this.anchorFor(current, p));
@@ -431,8 +435,12 @@ export class FlyScene {
     for (const views of this.stepViews) for (const { piece } of views) piece.dispose();
     for (const view of this.looseEnds.values()) view.dispose();
     this.bobbin?.dispose();
+    // The hook has its own materials, made fresh with it.
     this.hook?.traverse((o) => {
-      if (o instanceof THREE.Mesh) o.geometry.dispose();
+      if (o instanceof THREE.Mesh) {
+        o.geometry.dispose();
+        (o.material as THREE.Material).dispose();
+      }
     });
     this.hook = null;
     this.fly.clear();
@@ -458,7 +466,10 @@ export class FlyScene {
     this.surfaces.dispose();
     this.setGrid(false);
     this.controls.dispose();
+    this.environment.dispose();
     this.renderer.dispose();
+    // Release the WebGL context now: browsers allow only a few at a time.
+    this.renderer.forceContextLoss();
     this.renderer.domElement.remove();
   }
 }

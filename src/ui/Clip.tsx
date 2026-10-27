@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Recipe } from "../recipe/schema";
-import { simulate } from "../tying/simulate";
+import { simulate, stepEnd } from "../tying/simulate";
 import { Viewer } from "./Viewer";
 
 /**
@@ -22,7 +22,7 @@ export function Clip({ recipe, step }: { recipe: Recipe; step: number }) {
       // Play the step, hold the result for a moment, then start again.
       t += Math.min(0.1, (now - last) / 1000);
       last = now;
-      const end = s.start + s.duration;
+      const end = stepEnd(s);
       if (t > end + 1.2) t = s.start;
       setTime(Math.min(t, end));
       frame = requestAnimationFrame(tick);
