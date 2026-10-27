@@ -80,14 +80,15 @@ self.addEventListener("fetch", (event) => {
       // headers (Vary: Origin from module scripts) must not stop a cached copy from matching.
       const options = { ignoreSearch: navigation, ignoreVary: true };
       const cached = await cache.match(request, options);
-      const network = fetch(request).then((response) => {
-        if (response.ok) cache.put(request, response.clone());
-        return response;
-      });
-      if (cached) {
-        network.catch(() => {});
-        return cached;
-      }
+      const network = fetch(request);
+      // Refreshing the cache runs on after the response, and the browser keeps the worker
+      // alive until it is done.
+      event.waitUntil(
+        network
+          .then((response) => (response.ok ? cache.put(request, response.clone()) : undefined))
+          .catch(() => {}),
+      );
+      if (cached) return cached;
       // Not cached yet: the network. Offline, any page falls back to the front page's HTML,
       // and the app shows the right page for the address.
       return network.catch(async () => (navigation ? await cache.match("./", options) : undefined) ?? Response.error());

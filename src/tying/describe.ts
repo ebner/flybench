@@ -231,7 +231,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
           ? `Trim the excess ${mat(step.material)}, leaving a stub ${len(step.leave)} long over the eye as the head.`
           : `Trim the excess ${mat(step.material)} flush with the tie-down.`
         : step.leave
-          ? `Trim the butts of the ${mat(step.material)}, leaving a short head ${step.leave}× the gape long.`
+          ? `Trim the butts of the ${mat(step.material)}, leaving a short head ${len(step.leave)} long.`
           : `Trim the butts of the ${mat(step.material)} flush.`;
       break;
     case "whip-finish":

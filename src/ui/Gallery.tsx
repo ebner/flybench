@@ -29,7 +29,7 @@ export function Gallery({ query }: { query: string }) {
   const oneShort = filters.have
     ? found.flatMap((e) => {
         const c = family(e);
-        return missingKinds(c) === 1 ? [{ entry: e, missing: c.missing[0]! }] : [];
+        return missingKinds(c) === 1 ? [{ entry: e, missing: c.missing[0]!, open: c.recipe.id }] : [];
       })
     : [];
 
@@ -150,7 +150,8 @@ export function Gallery({ query }: { query: string }) {
       ) : (
         <ul className="plates">
           {results.map((e) => (
-            <Plate key={e.recipe.id} entry={e} render={renders?.[e.recipe.id]} />
+            // With "tie with what I have", open the version that can be tied (perhaps a variant).
+            <Plate key={e.recipe.id} entry={e} render={renders?.[e.recipe.id]} open={filters.have ? family(e).recipe.id : undefined} />
           ))}
         </ul>
       )}
@@ -159,8 +160,8 @@ export function Gallery({ query }: { query: string }) {
         <section className="one-short">
           <h2>One material short</h2>
           <ul className="plates">
-            {oneShort.map(({ entry, missing }) => (
-              <Plate key={entry.recipe.id} entry={entry} render={renders?.[entry.recipe.id]} missing={missing} />
+            {oneShort.map(({ entry, missing, open }) => (
+              <Plate key={entry.recipe.id} entry={entry} render={renders?.[entry.recipe.id]} missing={missing} open={open} />
             ))}
           </ul>
         </section>
@@ -287,7 +288,8 @@ function FlyOfTheDay({ renders }: { renders: Record<string, RenderInfo> }) {
   );
 }
 
-export function Plate({ entry, render, missing }: { entry: CatalogEntry; render?: RenderInfo; missing?: Need }) {
+/** `open`: the id of the version to open, when it isn't the main pattern. */
+export function Plate({ entry, render, missing, open }: { entry: CatalogEntry; render?: RenderInfo; missing?: Need; open?: string }) {
   const r = entry.recipe;
   const urls = render ? renderUrls(r.id, render) : null;
   const origin = originLine(r);
@@ -296,7 +298,7 @@ export function Plate({ entry, render, missing }: { entry: CatalogEntry; render?
     : undefined;
   return (
     <li className="plate">
-      <a href={href.fly(r.id)}>
+      <a href={href.fly(open ?? r.id)}>
         <div className="plate-image" style={style}>
           {urls ? (
             <>
