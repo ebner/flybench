@@ -17,15 +17,17 @@ export interface DraftCheck {
 /**
  * Checks a draft the way the site will: parse, schema and tying rules, then the catalog rules
  * (unique id, file name, variant-of) against the other patterns. `others` are the other files'
- * recipes; the draft replaces any entry for its own file.
+ * recipes; the draft replaces any entry for its own file. Errors the draft causes in other
+ * files (its variants, when it becomes a variant itself) count too; ones already there don't.
  */
 export function checkDraft(text: string, file: string, others: { file: string; recipe: Recipe }[]): DraftCheck {
   const result = loadRecipe(text);
   if (!result.ok) return { errors: result.errors };
   const catalog = [...others.filter((o) => o.file !== file), { file, recipe: result.recipe }];
+  const before = new Set(validateCatalog(others).map((e) => `${e.file}\n${e.message}`));
   const errors = validateCatalog(catalog)
-    .filter((e) => e.file === file)
-    .map((e) => ({ message: e.message, path: [] }));
+    .filter((e) => e.file === file || !before.has(`${e.file}\n${e.message}`))
+    .map((e) => ({ message: e.file === file ? e.message : `${e.file}: ${e.message}`, path: [] }));
   return { recipe: errors.length === 0 ? result.recipe : undefined, errors };
 }
 

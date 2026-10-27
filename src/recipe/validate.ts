@@ -124,6 +124,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           err(`beads go on with "slide-bead" before the thread`, [...path, "material"]);
           break;
         }
+        if (step.forward && archetype === "feather") err("feathers are tied in pointing back, not forward", [...path, "forward"]);
         // A feather slip pulled over as a wing case lies on the body instead of sticking out.
         const pulledOver = recipe.steps.slice(i + 1).some((s) => s.op === "pull-over" && s.material === step.material);
         if (NEEDS_LENGTH.includes(archetype!) && step.length === undefined && !(archetype === "feather" && pulledOver)) {
@@ -219,8 +220,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           break;
         }
         if (step.to <= m.at + POSITION_TOLERANCE) err(`pull "${step.material}" forward from where it is tied in`, [...path, "to"]);
-        if (step.to > thread + POSITION_TOLERANCE) {
-          err(`the thread is at ${thread}; move it to ${step.to} or beyond to tie the material down there`, [...path, "to"]);
+        // Tied down by the thread, so it ends where the thread is.
+        if (Math.abs(step.to - thread) > POSITION_TOLERANCE) {
+          err(`the thread is at ${thread}; move it to ${step.to} to tie the material down there`, [...path, "to"]);
         }
         m.state = "done";
         // Foam is cut after it is tied down, flush or leaving a head; other strips are trimmed at once.

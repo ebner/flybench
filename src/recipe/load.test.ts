@@ -213,6 +213,36 @@ describe("schema validation", () => {
   });
 });
 
+describe("rules found in review", () => {
+  const head = `id t
+name "T"
+type nymph
+difficulty beginner
+hook dry-standard size=14
+thread black size="8/0"
+materials {
+    case turkey-quill
+    wing hackle-tips color=grizzly
+}
+`;
+  const run = (steps: string, h = head) => loadRecipe(`${h}steps {\n${steps}\n}\n`);
+
+  it("ties a pulled-over strip down where the thread is", () => {
+    const steps = (to: number) => `    attach-thread at=0.1\n    tie-in case\n    wrap-thread to=0.9\n    pull-over case to=${to}\n    whip-finish`;
+    expect(run(steps(0.9)).ok).toBe(true);
+    expect(errorsOf(run(steps(0.3))).join("\n")).toMatch(/the thread is at 0.9; move it to 0.3/);
+  });
+
+  it("ties feathers in pointing back", () => {
+    expect(errorsOf(run("    attach-thread at=0.8\n    tie-in wing length=1 forward=#true\n    whip-finish")).join("\n")).toMatch(/feathers are tied in pointing back/);
+  });
+
+  it("places an error about a missing section at the top of the file", () => {
+    const errors = errorsOf(run("    attach-thread at=0.8\n    whip-finish", head.replace("difficulty beginner\n", "")));
+    expect(errors[0]).toMatch(/^line 1:1: difficulty/);
+  });
+});
+
 describe("trimming a hackle with keep", () => {
   const head = `id t
 name "T"

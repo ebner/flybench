@@ -30,6 +30,18 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// The first visit loads the page's files (gallery pictures among them) before this worker
+// runs; the page sends their addresses once it is ready, and the missing ones are cached.
+self.addEventListener("message", (event) => {
+  if (event.data?.type !== "cache" || !Array.isArray(event.data.urls)) return;
+  const own = event.data.urls.filter((url) => typeof url === "string" && new URL(url).origin === self.location.origin);
+  event.waitUntil(
+    caches.open(CACHE).then((cache) =>
+      Promise.all(own.map((url) => cache.match(url, { ignoreVary: true }).then((hit) => hit ?? cache.add(url).catch(() => {})))),
+    ),
+  );
+});
+
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;

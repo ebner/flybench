@@ -59,9 +59,11 @@ steps {
     wrap-thread to=0.75
     // Sources: wings and tail one shank long.
     tie-in wings length=1.9 angle=90 spread=20 note="Stacked, tied in tips forward, stood up and divided with figure-of-eight turns."
+    trim wings note="Cut the butts at a slant behind the wings and bind them down."
     wrap-thread to=0.0
     // Sources say one shank long; the reference photos show about 1.5× the gape, used here.
     tie-in tail length=1.5
+    trim tail note="Trim the butts so they meet the wing butts, for a level underbody."
     tie-in butt
     wrap-thread to=0.25
     wind butt to=0.25 turns=4 note="The rear third of the body."
