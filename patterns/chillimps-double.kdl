@@ -60,7 +60,7 @@ steps {
     wrap-thread to=0.84 note="A slim, even thread body."
     wind palmer to=0.84 turns=6 note="Open turns."
     tie-off palmer
-    wind rib to=0.84 turns=5 note="Counter-wound through the hackle, to protect the stem."
+    wind rib to=0.84 turns=5 counter=#true note="Through the hackle, to protect the stem."
     tie-off rib
     tie-in front
     wrap-thread to=0.9

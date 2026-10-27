@@ -53,6 +53,16 @@ describe("simulate", () => {
     }
   });
 
+  it("winds a counter-wound rib the other way round", () => {
+    const loaded = loadRecipe(readFileSync(new URL("../../patterns/gold-ribbed-hares-ear-nymph.kdl", import.meta.url), "utf8"));
+    if (!loaded.ok) throw new Error("hare's ear");
+    const steps = simulate(loaded.recipe).steps;
+    const wraps = (material: string) =>
+      steps.flatMap((s) => s.pieces).find((p): p is WrapsPiece => p.type === "wraps" && p.material === material)!;
+    expect(wrapAt(wraps("abdomen"), 0.1).angle).toBeGreaterThan(0);
+    expect(wrapAt(wraps("rib"), 0.1).angle).toBeLessThan(0);
+  });
+
   it("presses dubbed fur flat under a wing case, as well as wound fibres", () => {
     const loaded = loadRecipe(readFileSync(new URL("../../patterns/gold-ribbed-hares-ear-nymph.kdl", import.meta.url), "utf8"));
     if (!loaded.ok) throw new Error("hare's ear");

@@ -61,7 +61,7 @@ steps {
     wrap-thread to=0.62
     wind tail to=0.62 turns=8 note="The butts as a flat ribbon over the rear two thirds."
     tie-off tail
-    wind rib to=0.62 turns=5 note="Counter-wound, in open turns."
+    wind rib to=0.62 turns=5 counter=#true note="In open turns."
     tie-off rib
     tie-in case note="On top at the front of the abdomen, tips forward."
     tie-in thorax

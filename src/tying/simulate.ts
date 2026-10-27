@@ -55,6 +55,8 @@ export interface WrapsPiece extends PieceBase {
   barred?: boolean;
   /** Dubbing: how rough, 0 (fine) to 1 (long guard hairs). */
   shaggy?: number;
+  /** Wound the opposite way round to the usual direction (a counter-wound rib). */
+  counter?: boolean;
   /** Lies flat as a band when wound (silk floss, flat tinsel, wound fibres) rather than as a round strand. */
   band?: boolean;
   /** Post wraps: the post's x, the heights (above the shank axis) the wraps run between, and its radius. */
@@ -223,7 +225,7 @@ export interface Build {
 
 /** Position on a shank wraps piece at progress u (0..1). */
 export function wrapAt(p: WrapsPiece, u: number): { x: number; radius: number; angle: number } {
-  const angle = 2 * Math.PI * p.turns * u;
+  const angle = (p.counter ? -1 : 1) * 2 * Math.PI * p.turns * u;
   if (p.path === "travel") {
     const x = p.x0 + (p.x1 - p.x0) * u;
     return { x, radius: p.base.radiusAt(x) + p.strandRadius, angle };
@@ -251,9 +253,10 @@ export function wrapPoint(p: WrapsPiece, u: number): { point: V3; leave: V3; x: 
     };
   }
   const w = wrapAt(p, u);
+  const way = p.counter ? -1 : 1;
   return {
     point: [w.x, w.radius * Math.sin(w.angle), w.radius * Math.cos(w.angle)],
-    leave: [0, -Math.cos(w.angle), Math.sin(w.angle)],
+    leave: [0, -Math.cos(w.angle) * way, Math.sin(w.angle) * way],
     x: w.x,
   };
 }
@@ -695,7 +698,7 @@ export function simulate(recipe: Recipe): Build {
             ctx.through = palmered;
             palmered = null;
           }
-          piece = materialWraps(step.material, l, from, to, step.turns);
+          piece = { ...materialWraps(step.material, l, from, to, step.turns), counter: step.counter };
           const coverage = (step.turns * 2 * l.strandRadius) / Math.max(Math.abs(to - from), 0.01);
           profile = profile.withLayer(from, to, l.layerThickness(coverage));
           if (ctx.rear) {

@@ -61,7 +61,7 @@ steps {
     dub body to=0.86 note="Slightly tapered; pick it out a little."
     wind hackle to=0.86 turns=6 note="Open turns, tail to head."
     tie-off hackle
-    wind rib to=0.86 turns=5 note="Counter-wound through the hackle, crossing the stem."
+    wind rib to=0.86 turns=5 counter=#true note="Through the hackle, crossing the stem."
     tie-off rib
     whip-finish
 }

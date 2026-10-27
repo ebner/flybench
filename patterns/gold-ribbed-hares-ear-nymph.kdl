@@ -58,7 +58,7 @@ steps {
     tie-in tail length=1.0 spread=20 note="A small bunch on top; bind the butts along the shank."
     tie-in rib
     dub abdomen to=0.64 note="A thin noodle, tapering thicker toward the front, over the rear two thirds."
-    wind rib to=0.64 turns=7 note="Open turns, the opposite way to the dubbing."
+    wind rib to=0.64 turns=7 counter=#true note="Open turns."
     tie-off rib
     tie-in case note="A slip about as wide as the gape, shiny side up, tip back over the abdomen."
     dub thorax to=0.88 note="Rougher fur, with more guard hair; leave an eye length for the head."

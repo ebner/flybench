@@ -63,7 +63,7 @@ steps {
     dub abdomen to=0.62 note="Thin, with a slight taper."
     tie-in hackle-body
     wind hackle-body to=0.05 turns=6
-    wind rib to=0.62 turns=6 note="Through the hackle, the other way, to protect it."
+    wind rib to=0.62 turns=6 counter=#true note="Through the hackle, to protect it."
     tie-off rib
     trim hackle-body
     // Sources: the wing reaches from the front of the abdomen to the middle of the tail.
