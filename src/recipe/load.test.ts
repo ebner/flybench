@@ -256,6 +256,13 @@ materials {
     expect(errorsOf(run("    weight lead from=0.3 to=0.6", h)).join("\n")).toMatch(/must end with a whip finish/);
   });
 
+  it("reports a wind with both `to` and `around` once, and goes no further", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    rib gold-wire\n");
+    const errors = errorsOf(run("    attach-thread at=0.8\n    tie-in rib\n    wind rib to=0.9 around=wing turns=3\n    tie-off rib\n    whip-finish", h));
+    expect(errors.filter((e) => e.startsWith("line 15:"))).toHaveLength(1);
+    expect(errors.join("\n")).toMatch(/give either `to`/);
+  });
+
   it("places an error about a missing section at the top of the file", () => {
     const errors = errorsOf(run("    attach-thread at=0.8\n    whip-finish", head.replace("difficulty beginner\n", "")));
     expect(errors[0]).toMatch(/^line 1:1: difficulty/);
