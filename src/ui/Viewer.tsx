@@ -17,6 +17,8 @@ export interface ViewerProps {
 
 export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false }: ViewerProps) {
   const [turned, setTurned] = useState(false);
+  // WebGL can be turned off (browser settings, policies, old graphics drivers).
+  const [unavailable, setUnavailable] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
   const scene = useRef<FlyScene | null>(null);
@@ -25,7 +27,13 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
 
   useEffect(() => {
     // A transparent canvas over the page's paper, so the fly can cast a soft CSS shadow on it.
-    const s = new FlyScene(container.current!, { background: null });
+    let s: FlyScene;
+    try {
+      s = new FlyScene(container.current!, { background: null });
+    } catch {
+      setUnavailable(true);
+      return;
+    }
     s.onFollowChange = (on) => followChange.current(on);
     // Positioned directly each frame, without re-rendering React.
     s.onAnchor = (point) => {
@@ -56,6 +64,14 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
   useEffect(() => {
     scene.current?.setTime(time);
   }, [build, time]);
+
+  if (unavailable) {
+    return (
+      <div className="viewer viewer-unavailable">
+        <p>The 3D view needs WebGL, which this browser has turned off. The steps and the dressing still work.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="viewer">

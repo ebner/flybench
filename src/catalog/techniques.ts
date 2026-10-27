@@ -250,7 +250,13 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     case "trim": {
       const a = archetype(step.material);
       const spun = recipe.steps.some((s) => s.op === "spin" && s.material === step.material);
-      return spun ? "spinning-hair" : a === "hair" ? "hair-wing" : "palmering";
+      if (spun) return "spinning-hair";
+      if (a === "hair") return "hair-wing";
+      // The excess of a strip pulled over the body: a wing case or foam back.
+      if (recipe.steps.some((s) => s.op === "pull-over" && s.material === step.material)) return "wing-case";
+      // A trimmed hackle (keep), or a palmered hackle's tip: part of how that hackle was wound.
+      const wound = recipe.steps.findIndex((s) => s.op === "wind" && s.material === step.material);
+      return wound >= 0 ? stepTechnique(recipe, wound) : "palmering";
     }
     case "tie-in": {
       const a = archetype(step.material);
@@ -267,7 +273,9 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       if (step.around) return "parachute";
       if (a === "hackle") {
         const tiedAt = tieInPosition(recipe, index, step.material);
-        if (step.to !== undefined && tiedAt !== null && step.to < tiedAt) return "palmering";
+        // Palmered: wound back towards the bend, or forward over most of the body in open
+        // turns (Zulu, Griffith's Gnat); a collar or soft hackle covers a short span.
+        if (step.to !== undefined && tiedAt !== null && (step.to < tiedAt || step.to - tiedAt > 0.5)) return "palmering";
         const kind = recipe.materials.find((m) => m.id === step.material)!.kind;
         return ["hen-hackle", "partridge-hackle", "snipe-hackle"].includes(kind) ? "soft-hackle" : "hackle-collar";
       }

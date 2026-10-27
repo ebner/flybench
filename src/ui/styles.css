@@ -1296,3 +1296,15 @@ select {
 .about h2 {
   margin-top: 2rem;
 }
+
+.viewer-unavailable {
+  display: grid;
+  place-items: center;
+  padding: 2rem var(--gutter);
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.viewer-unavailable p {
+  max-width: 26rem;
+}

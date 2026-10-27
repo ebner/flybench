@@ -34,6 +34,23 @@ describe("techniques", () => {
     expect(at("whip-finish")).toBe("whip-finish");
   });
 
+  it("recognise palmering forward over the body as well as back", () => {
+    const step = (id: string, op: string, material: string) =>
+      stepTechnique(byId(id), byId(id).steps.findIndex((s) => s.op === op && "material" in s && s.material === material));
+    expect(step("zulu", "wind", "hackle")).toBe("palmering");
+    expect(step("woolly-bugger", "wind", "hackle")).toBe("palmering");
+    expect(step("adams", "wind", "hackle-brown")).toBe("hackle-collar");
+  });
+
+  it("file a trim under what is being trimmed", () => {
+    const trim = (id: string, material: string) =>
+      stepTechnique(byId(id), byId(id).steps.findIndex((s) => s.op === "trim" && s.material === material));
+    expect(trim("foam-beetle", "back")).toBe("wing-case");
+    expect(trim("black-ant", "hackle")).toBe("hackle-collar");
+    expect(trim("prince-nymph", "hackle")).toBe("soft-hackle");
+    expect(trim("dyret", "hackle")).toBe("palmering");
+  });
+
   it("recognise a hackle collar and a herl body", () => {
     expect(patternTechniques(byId("red-tag"))).toEqual(
       expect.arrayContaining(["attach-thread", "thread-base", "tail", "herl-body", "hackle-collar", "whip-finish"]),

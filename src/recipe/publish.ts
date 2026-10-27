@@ -10,7 +10,9 @@ import { getLocation, parse } from "@bgotink/kdl";
 export function withoutReferences(text: string): string {
   let doc;
   try {
-    doc = parse(text, { storeLocations: true });
+    // A commented-out block (`/-references`) is no node, but its text would still ship:
+    // parse with the slashdash blanked, which keeps every offset the same.
+    doc = parse(text.replace(/\/-(\s*references\b)/g, "  $1"), { storeLocations: true });
   } catch {
     return text;
   }
@@ -21,6 +23,8 @@ export function withoutReferences(text: string): string {
     const loc = getLocation(node);
     if (!loc) continue;
     let start = loc.start.offset;
+    // Take a slashdash in front of it along.
+    start -= out.slice(0, start).match(/\/-\s*$/)?.[0].length ?? 0;
     // The comment introducing the block, on the line just before it.
     const lineStart = out.lastIndexOf("\n", start - 1) + 1;
     const previousStart = out.lastIndexOf("\n", lineStart - 2) + 1;
