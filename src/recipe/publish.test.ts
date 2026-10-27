@@ -23,6 +23,7 @@ describe("withoutReferences", () => {
     ["on one line", 'references { "https://example.org/a.jpg" note="side"; }'],
     ["empty, on one line", "references {}"],
     ["indented", '  references {\n      "https://example.org/a.jpg"\n  }'],
+    ["commented out", '/-references {\n    "https://example.org/a.jpg"\n}'],
   ])("strips a references block written %s", (_, block) => {
     const text = base.replace("\nhook ", `\n${block}\nhook `);
     expect(loadRecipe(text).ok).toBe(true);

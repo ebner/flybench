@@ -687,6 +687,9 @@ function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace)
   fringe.setProgress(1);
   const root = anchored(space, piece.x);
   const growers: THREE.Object3D[] = [];
+  // The second feather of a pair shares the fringe's geometry, but its instanced meshes have
+  // buffers of their own to release.
+  const copies: THREE.Object3D[] = [];
   const sides = piece.pair > 0 ? [-1, 1] : [0];
   for (const sign of sides) {
     // Turned round the shank axis: out to one side for pairs, underneath for beards.
@@ -697,7 +700,9 @@ function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace)
     // Local +X runs back along the body, `angle` above the shank.
     orient.rotation.z = Math.PI - piece.angle;
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.add(sign > 0 ? fringe.object.clone() : fringe.object);
+    const edge = sign > 0 ? fringe.object.clone() : fringe.object;
+    if (edge !== fringe.object) copies.push(edge);
+    mesh.add(edge);
     if (piece.shape !== "breast") mesh.rotation.x = Math.PI / 2;
     orient.add(mesh);
     turn.add(orient);
@@ -713,6 +718,7 @@ function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace)
     dispose() {
       geometry.dispose();
       fringe.dispose();
+      for (const copy of copies) copy.traverse((o) => o instanceof THREE.InstancedMesh && o.dispose());
     },
   };
 }

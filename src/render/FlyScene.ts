@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { stepAt, stepEnd, stepProgress, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
+import { pieceProgress, stepAt, stepEnd, stepProgress, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
 import { buildHook } from "./hook";
 import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
@@ -362,11 +362,7 @@ export class FlyScene {
     if (!build) return;
     this.time = t;
     build.steps.forEach((step, i) => {
-      const p = stepProgress(step, t);
-      for (const { piece, window, until } of this.stepViews[i]!) {
-        const gone = until !== undefined && t >= until;
-        piece.setProgress(gone ? 0 : clamp01((p - window[0]) / (window[1] - window[0])));
-      }
+      for (const view of this.stepViews[i]!) view.piece.setProgress(pieceProgress(step, view, t));
     });
 
     this.currentStep = stepAt(build, t);

@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { simulate, stepAt, stepEnd, stepProgress, wrapAt, type WrapsPiece } from "./simulate";
+import { pieceProgress, simulate, stepAt, stepEnd, stepProgress, wrapAt, type WrapsPiece } from "./simulate";
 
 function redTag() {
   const result = loadRecipe(readFileSync(new URL("../../patterns/red-tag.kdl", import.meta.url), "utf8"));
@@ -45,6 +45,23 @@ describe("simulate", () => {
           if (p.type === "cover" && p.stub > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
         }
       });
+    }
+  });
+
+  it("never leaves a material out of sight at the start of a step, in every pattern", () => {
+    const dir = new URL("../../patterns/", import.meta.url);
+    for (const file of readdirSync(dir).filter((f) => f.endsWith(".kdl"))) {
+      const loaded = loadRecipe(readFileSync(new URL(file, dir), "utf8"));
+      if (!loaded.ok) throw new Error(file);
+      const steps = simulate(loaded.recipe).steps;
+      const shown = (t: number) =>
+        new Set(steps.flatMap((s) => s.pieces.filter((p) => pieceProgress(s, p, t) > 0).map((p) => p.material)));
+      // Replacements (pressed fibres, dents, trims) swap pieces; the material stays in view.
+      for (const step of steps.slice(1)) {
+        const before = shown(step.start - 1e-3);
+        const at = shown(step.start);
+        for (const m of before) expect(at.has(m), `${file}: ${m} at the start of step ${step.index + 1}`).toBe(true);
+      }
     }
   });
 

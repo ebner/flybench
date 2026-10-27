@@ -874,6 +874,17 @@ export function stepProgress(step: SimStep, t: number): number {
   return p >= 1 - (2 * END_MARGIN) / step.duration ? 1 : Math.max(0, p);
 }
 
+/**
+ * How much of a piece is drawn at `t`, from 0 (not yet, or gone) to 1. A piece replaced by
+ * a later one (`until`) still shows at that exact moment, while its replacement starts from
+ * nothing, so the swap never leaves a gap.
+ */
+export function pieceProgress(step: SimStep, piece: Pick<Piece, "window" | "until">, t: number): number {
+  if (piece.until !== undefined && t > piece.until) return 0;
+  const [a, b] = piece.window;
+  return Math.min(1, Math.max(0, (stepProgress(step, t) - a) / (b - a)));
+}
+
 export function stepAt(build: Build, t: number): number {
   for (let i = build.steps.length - 1; i >= 0; i--) {
     if (t >= build.steps[i]!.start) return i;
