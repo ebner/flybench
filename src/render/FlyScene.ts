@@ -376,14 +376,16 @@ export class FlyScene {
 
   /** The point a step works at: the material being wound, else the thread, else what the step adds. */
   private anchorFor(step: Build["steps"][number], p: number): THREE.Vector3 {
+    // Points on the fly are in its own frame; it may be turned over ("As it swims").
+    const world = (v: THREE.Vector3) => this.fly.localToWorld(v);
     const following = step.freeEnds.find((e) => e.kind === "follow");
-    if (following && following.kind === "follow") return this.followed(following.piece, p).point;
+    if (following && following.kind === "follow") return world(this.followed(following.piece, p).point);
     const box = this.stepBounds[step.index];
     if (step.pieces.some((piece) => piece.type !== "wraps" || piece.material !== "thread") && box && !box.isEmpty()) {
       return box.getCenter(new THREE.Vector3());
     }
-    if (step.thread?.kind === "follow") return this.followed(step.thread.piece, p).point;
-    if (step.thread?.kind === "rest") return this.space!.around(step.thread.x, step.thread.radius, 0);
+    if (step.thread?.kind === "follow") return world(this.followed(step.thread.piece, p).point);
+    if (step.thread?.kind === "rest") return world(this.space!.around(step.thread.x, step.thread.radius, 0));
     return this.finished.getCenter(new THREE.Vector3());
   }
 

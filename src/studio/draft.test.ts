@@ -45,6 +45,17 @@ describe("checkDraft", () => {
     );
   });
 
+  it("reports errors the draft causes in other files", () => {
+    const read = (id: string) => readFileSync(new URL(`../../patterns/${id}.kdl`, import.meta.url), "utf8");
+    const others = ["elk-hair-caddis", "elk-hair-caddis-troth", "red-tag"].map((id) => ({ file: `${id}.kdl`, recipe: loaded(read(id)) }));
+    // The main Elk Hair Caddis turned into a variant of the Red Tag: its own variant is left pointing at a variant.
+    const draft = read("elk-hair-caddis").replace(/^name .*$/m, '$&\nvariant-of red-tag\nvariant "Test"');
+    const messages = checkDraft(draft, "elk-hair-caddis.kdl", others).errors.map((e) => e.message);
+    expect(messages.some((m) => m.startsWith("elk-hair-caddis-troth.kdl: "))).toBe(true);
+    // Errors that were there before the draft are not the draft's.
+    expect(checkDraft(read("elk-hair-caddis"), "elk-hair-caddis.kdl", others).errors).toEqual([]);
+  });
+
   it("checks the draft in place of the saved version of the same file", () => {
     const others = [{ file: "red-tag.kdl", recipe: loaded(redTag) }];
     expect(checkDraft(redTag, "red-tag.kdl", others).errors).toEqual([]);

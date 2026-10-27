@@ -52,6 +52,7 @@ steps {
     // Sources say the post is trimmed to about the shank length; the reference photos show
     // it nearer 1.2× the gape above the shank, which is used here.
     tie-in post length=1.2 angle=90 note="Stack the hair, tie it in tips forward, stand it up and make a few turns round its base."
+    trim post note="Cut the butts at a slant behind the post and bind them down."
     tie-in hackle-brown note="Stems stripped and bound up the side of the post."
     tie-in hackle-grizzly
     wrap-thread to=0.02

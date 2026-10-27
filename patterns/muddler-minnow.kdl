@@ -59,6 +59,7 @@ steps {
     wind body to=0.75 turns=18 note="Touching turns."
     tie-off body
     tie-in underwing length=4.0 angle=8 spread=25 note="A sparse, cleaned bunch, about a shank long."
+    trim underwing note="Trim the butts short, so the deer hair can be spun over them."
     tie-in wing length=4.3 angle=5 spread=16 width=0.75 note="One slip each side, concave in, the tips reaching the end of the tail."
     // Craven: collar tips reach about mid-wing.
     spin head to=0.97 collar=1.9 note="A large stacked clump, tips back, then butts-only clumps packed hard in front."

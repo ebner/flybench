@@ -58,6 +58,7 @@ steps {
     attach-thread at=0.7
     wrap-thread to=0.0
     tie-in tail length=1.0 spread=45 note="A short, flared bunch, about a gape long."
+    trim tail note="Trim the butts and bind them down."
     tie-in rib
     dub abdomen to=0.62 note="Thin, with a slight taper."
     tie-in hackle-body
