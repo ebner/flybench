@@ -28,9 +28,12 @@ export function Studio() {
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
+    // A load that has been superseded (StrictMode runs this twice) must not replace the editor's text.
+    let stale = false;
     (async () => {
       const files = await listPatterns();
       const texts = await Promise.all(files.map(readPattern));
+      if (stale) return;
       setSaved(new Map(files.map((f, i) => [f, texts[i]!])));
       const wanted = new URLSearchParams(location.search).get("pattern");
       const first = wanted && files.includes(`${wanted}.kdl`) ? `${wanted}.kdl` : files[0] ?? null;
@@ -39,7 +42,12 @@ export function Studio() {
         setText(texts[files.indexOf(first)]!);
       }
       setStatus("");
-    })().catch((e: unknown) => setStatus(`Couldn't load the patterns: ${String(e)}. Is this the dev server (pnpm dev)?`));
+    })().catch((e: unknown) => {
+      if (!stale) setStatus(`Couldn't load the patterns: ${String(e)}. Is this the dev server (pnpm dev)?`);
+    });
+    return () => {
+      stale = true;
+    };
   }, []);
 
   const dirty = file !== null && (unsavedFile || saved.get(file) !== text);
