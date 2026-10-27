@@ -202,7 +202,7 @@ how it is drawn and which extra properties it takes:
 | floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
-| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane` | |
+| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane` | `count` (hairs, for legs tied across) |
 | fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `coq-de-leon` | `count` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | |
@@ -264,7 +264,7 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 - Beads go on before the thread; nothing else but weighting may come before `attach-thread`,
   which occurs once.
 - A material is tied in once and wound at most once. Dubbing is only used with `dub`.
-- Hair and feather wings need a `length`. `angle` needs a `length`. `spread` only applies
+- Hair and feather wings need a `length`; feathers point back (no `forward`). `angle` needs a `length`. `spread` only applies
   to material tied in with a length (tags, tails, wings; for feathers it makes a pair);
   `width` only to feather wings.
 - `wind … to` must differ from the tie-in point. A forward wind may go no further than

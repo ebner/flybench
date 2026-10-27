@@ -22,13 +22,38 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches
-      .keys()
+    carryPictures()
+      .then(() => caches.keys())
       // Other sites on the same origin (a GitHub Pages user site) have their own caches.
       .then((keys) => Promise.all(keys.filter((k) => k.startsWith("flybench-") && k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });
+
+/**
+ * Gallery pictures cached by the previous deployment's worker that this deployment still
+ * uses (same version in the render manifest) move into the new cache before the old one
+ * is deleted, so offline pictures survive a deployment.
+ */
+async function carryPictures() {
+  const cache = await caches.open(CACHE);
+  const manifest = await cache
+    .match("./renders/manifest.json")
+    .then((r) => r?.json())
+    .catch(() => null);
+  if (!manifest) return;
+  for (const key of await caches.keys()) {
+    if (!key.startsWith("flybench-") || key === CACHE) continue;
+    const old = await caches.open(key);
+    for (const request of await old.keys()) {
+      const url = new URL(request.url);
+      const picture = url.pathname.match(/\/renders\/([^/]+)\/(?:card|spin)\.webp$/);
+      if (!picture || manifest[decodeURIComponent(picture[1])]?.hash !== url.searchParams.get("v")) continue;
+      const response = await old.match(request);
+      if (response) await cache.put(request, response);
+    }
+  }
+}
 
 // The first visit loads the page's files (gallery pictures among them) before this worker
 // runs; the page sends their addresses once it is ready, and the missing ones are cached.

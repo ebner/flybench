@@ -13,10 +13,17 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
   navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
     // Without a service worker the site still works, just not offline.
   });
-  // Files this visit loaded before the worker was running (gallery pictures): it caches them.
+  // Files this visit loaded, or started loading, before the worker was running (gallery
+  // pictures): it caches them as each one finishes, including those that finish later.
   navigator.serviceWorker.ready.then((registration) => {
+    new PerformanceObserver((list) => {
+      registration.active?.postMessage({ type: "cache", urls: list.getEntries().map((e) => e.name) });
+    }).observe({ type: "resource", buffered: true });
+  });
+  // A new deployment's worker taking over gets the whole list again.
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
     const urls = performance.getEntriesByType("resource").map((e) => e.name);
-    registration.active?.postMessage({ type: "cache", urls });
+    navigator.serviceWorker.controller?.postMessage({ type: "cache", urls });
   });
 }
 

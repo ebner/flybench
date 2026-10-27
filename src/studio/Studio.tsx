@@ -51,16 +51,16 @@ export function Studio() {
     return () => removeEventListener("beforeunload", warn);
   }, [dirty]);
 
-  // The other patterns, for the catalog rules (unique ids, variant-of targets).
+  // The saved patterns, for the catalog rules (unique ids, variant-of targets). This file's
+  // saved version is included: the draft replaces it, and errors already there aren't the draft's.
   const others = useMemo(() => {
     const list: { file: string; recipe: Recipe }[] = [];
     for (const [f, t] of saved) {
-      if (f === file) continue;
       const r = loadRecipe(t);
       if (r.ok) list.push({ file: f, recipe: r.recipe });
     }
     return list;
-  }, [saved, file]);
+  }, [saved]);
 
   // Checked a moment behind the typing; file and text are deferred together so they always match.
   const input = useMemo(() => ({ file, text }), [file, text]);

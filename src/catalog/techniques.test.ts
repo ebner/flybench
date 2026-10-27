@@ -42,6 +42,15 @@ describe("techniques", () => {
     expect(step("adams", "wind", "hackle-brown")).toBe("hackle-collar");
   });
 
+  it("tell a tail from a bunch tied in near the eye, and a rib from a body beside another", () => {
+    const at = (id: string, op: string, material: string) =>
+      stepTechnique(byId(id), byId(id).steps.findIndex((s) => s.op === op && "material" in s && s.material === material));
+    expect(at("f-fly", "tie-in", "wing")).toBe("tie-in");
+    expect(at("adams", "tie-in", "tail-brown")).toBe("tail");
+    expect(at("allys-shrimp", "wind", "front")).toBe("wound-body");
+    expect(at("gold-ribbed-hares-ear-nymph", "wind", "rib")).toBe("ribbing");
+  });
+
   it("file a trim under what is being trimmed", () => {
     const trim = (id: string, material: string) =>
       stepTechnique(byId(id), byId(id).steps.findIndex((s) => s.op === "trim" && s.material === material));

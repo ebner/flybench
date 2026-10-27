@@ -266,7 +266,9 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       if ((step.angle ?? 0) >= 60) return "wing-post";
       if (a === "hair") return "hair-wing";
       if (a === "feather") return "feather-wing";
-      return "tail";
+      // A bunch tied in at the rear is a tail; one further forward (a CDC or marabou wing)
+      // is simply tied in on top.
+      return threadAt(recipe, index) > 0.5 ? "tie-in" : "tail";
     }
     case "wind": {
       const a = archetype(step.material);
@@ -288,6 +290,16 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
 }
 
 /** Where the thread was when the material was tied in (shank fraction), or null. */
+/** Where the thread is when step `index` begins. */
+function threadAt(recipe: Recipe, index: number): number {
+  let thread = 0;
+  for (const s of recipe.steps.slice(0, index)) {
+    if (s.op === "attach-thread") thread = s.at;
+    if (s.op === "wrap-thread" || s.op === "dub" || s.op === "spin") thread = s.to;
+  }
+  return thread;
+}
+
 function tieInPosition(recipe: Recipe, before: number, material: string): number | null {
   let thread: number | null = null;
   for (let i = 0; i < before; i++) {
@@ -299,10 +311,31 @@ function tieInPosition(recipe: Recipe, before: number, material: string): number
   return null;
 }
 
+/**
+ * Whether a winding goes over an earlier body (dubbing or another wound material), as a rib
+ * does, rather than beside it, as the two halves of a body or a band of floss do.
+ */
 function woundOverBody(recipe: Recipe, index: number): boolean {
-  return recipe.steps
-    .slice(0, index)
-    .some((s) => s.op === "dub" || (s.op === "wind" && s.material !== (recipe.steps[index] as { material: string }).material));
+  const step = recipe.steps[index];
+  if (step?.op !== "wind" || step.to === undefined) return false;
+  const from = tieInPosition(recipe, index, step.material);
+  if (from === null) return false;
+  const [a, b] = [Math.min(from, step.to), Math.max(from, step.to)];
+  let thread = 0;
+  for (let i = 0; i < index; i++) {
+    const s = recipe.steps[i]!;
+    let range: [number, number] | null = null;
+    if (s.op === "dub") range = [Math.min(thread, s.to), Math.max(thread, s.to)];
+    if (s.op === "wind" && s.to !== undefined && s.material !== step.material) {
+      const start = tieInPosition(recipe, i, s.material);
+      if (start !== null) range = [Math.min(start, s.to), Math.max(start, s.to)];
+    }
+    if (s.op === "attach-thread") thread = s.at;
+    if (s.op === "wrap-thread" || s.op === "dub" || s.op === "spin") thread = s.to;
+    // Over most of its own length.
+    if (range && Math.min(b, range[1]) - Math.max(a, range[0]) >= 0.5 * (b - a)) return true;
+  }
+  return false;
 }
 
 /** The techniques a pattern uses, in the order they first appear. */
