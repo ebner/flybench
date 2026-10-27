@@ -282,6 +282,10 @@ interface MaterialLook {
 
 const deg = (d: number) => (d * Math.PI) / 180;
 
+// Assumption: the excess of a pulled-over strip sticks out about 0.8 gape past the
+// tie-down until it is trimmed.
+const UNTRIMMED = 0.8;
+
 /** Colours whose feathers and hackles are barred or mottled. */
 const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6 };
 
@@ -450,6 +454,8 @@ export function simulate(recipe: Recipe): Build {
 
   /** Fluffy material (herl, dubbing, hackle) wound between a and b so far, which a cover squashes. */
   const fluffy: { x0: number; x1: number; height: number }[] = [];
+  /** Every pass of dubbing, which a wing case or back later lies over. */
+  const dubbed: WrapsPiece[] = [];
   const fluffUnder = (a: number, b: number) =>
     Math.max(0, ...fluffy.filter((f) => Math.min(f.x0, f.x1) < b && Math.max(f.x0, f.x1) > a).map((f) => f.height));
 
@@ -549,6 +555,7 @@ export function simulate(recipe: Recipe): Build {
         // Each pass thins out at its ends, so passes built on each other round off into a ball.
         profile = profile.withLayer(from, to, l.layerThickness(coverage), Math.min(0.2, Math.abs(to - from) * 0.25), true);
         pieces.push(piece);
+        dubbed.push(piece);
         // The dubbing is on the thread, so the bobbin follows it.
         thread = { kind: "follow", piece: piece.id };
         threadX = to;
@@ -738,20 +745,30 @@ export function simulate(recipe: Recipe): Build {
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
-          dents: [], stub: 0, barring: l.barring,
+          // A strip trimmed later sticks out over the eye until then.
+          dents: [], stub: recipe.steps.slice(index + 1).some((s) => s.op === "trim" && s.material === step.material) ? UNTRIMMED : 0,
+          barring: l.barring,
         };
         pieces.push(cover);
         covers.set(step.material, cover);
         profile = profile.withLayer(from, to, thickness * 0.8);
-        // Fibres on top of what it covers are pressed flat: from this step on, those wraps are
-        // replaced by copies without them, so earlier moments still show the fibres.
-        for (const [id, w] of wound) {
-          if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) continue;
+        // Fibres on top of what it covers, wound or dubbed, are pressed flat: from this step on,
+        // those wraps are replaced by copies without them, so earlier moments still show them.
+        const press = (w: WrapsPiece): WrapsPiece | null => {
+          if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) return null;
           w.until = time;
           const pressed: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, covered: [from, to, cover.halfAngle], window: [0, 0.0001], until: undefined };
           pieces.push(pressed);
-          wound.set(id, pressed);
+          return pressed;
+        };
+        for (const [id, w] of wound) {
+          const pressed = press(w);
+          if (pressed) wound.set(id, pressed);
         }
+        dubbed.forEach((w, k) => {
+          const pressed = press(w);
+          if (pressed) dubbed[k] = pressed;
+        });
         freeEnds.delete(step.material);
         ends = restingEnds();
         const wraps = inPlace(threadX!, 5, [0.6, 1]);

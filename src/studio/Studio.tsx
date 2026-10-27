@@ -21,6 +21,9 @@ export function Studio() {
   const [text, setText] = useState("");
   /** A new pattern that is not on disk yet. */
   const [unsavedFile, setUnsavedFile] = useState(false);
+  // The draft open now, for a save that finishes after another draft was opened.
+  const openFile = useRef<string | null>(null);
+  openFile.current = file;
   const [status, setStatus] = useState("Loading patterns…");
   const [creating, setCreating] = useState(false);
 
@@ -89,7 +92,8 @@ export function Studio() {
     try {
       await savePattern(file, text, unsavedFile);
       setSaved((m) => new Map(m).set(file, text));
-      setUnsavedFile(false);
+      // Only if this draft is still open: a new one opened meanwhile is not saved yet.
+      if (openFile.current === file) setUnsavedFile(false);
       const problems = checkDraft(text, file, others).errors.length;
       setStatus(problems ? `Saved ${file}, with ${problems} ${problems === 1 ? "problem" : "problems"} still to fix` : `Saved ${file}`);
     } catch (e) {

@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "./load";
-import { withoutReferences } from "./publish";
+import { IMAGE_URL, withoutReferences } from "./publish";
 
 const patternsDir = new URL("../../patterns/", import.meta.url);
 const patternFiles = readdirSync(patternsDir).filter((f) => f.endsWith(".kdl"));
@@ -12,6 +12,7 @@ describe("withoutReferences", () => {
     const stripped = withoutReferences(text);
     expect(stripped.split("\n")).toHaveLength(text.split("\n").length);
     expect(stripped).not.toMatch(/^references\b|refcheck|reference only/m);
+    expect(stripped).not.toMatch(IMAGE_URL);
     const before = loadRecipe(text);
     const after = loadRecipe(stripped);
     expect(after.ok).toBe(true);

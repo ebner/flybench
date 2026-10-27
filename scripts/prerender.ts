@@ -15,7 +15,7 @@ import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
 import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
-import { withoutReferences } from "../src/recipe/publish";
+import { IMAGE_URL, withoutReferences } from "../src/recipe/publish";
 import type { Recipe } from "../src/recipe/schema";
 
 const DIST = "dist";
@@ -29,7 +29,11 @@ async function loadPatterns(): Promise<Recipe[]> {
   return Promise.all(
     files.map(async (f) => {
       // The text the site ships, without its reference photos: what the app will load.
-      const result = loadRecipe(withoutReferences(await readFile(`patterns/${f}`, "utf8")));
+      const published = withoutReferences(await readFile(`patterns/${f}`, "utf8"));
+      // A reference block hidden some other way (a /* */ or // comment) would still ship.
+      const leak = published.match(IMAGE_URL);
+      if (leak) throw new Error(`${f}: an image address would be published (${leak[0]}); remove it or put it under references`);
+      const result = loadRecipe(published);
       if (!result.ok) throw new Error(`${f}:\n${result.errors.map(formatError).join("\n")}`);
       return result.recipe;
     }),
