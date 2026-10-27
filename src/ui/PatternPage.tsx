@@ -136,8 +136,12 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
     setStopAt(null);
     player.play();
   };
-  // Vise mode pauses after every step: play the next one, or this one if it is unfinished.
-  const playNext = () => playStep(player.time >= step.start + step.duration - 0.05 ? current + 1 : current);
+  // Vise mode pauses after every step: play the next one; a step paused halfway resumes.
+  const playNext = () => {
+    if (player.time >= step.start + step.duration - 0.05) return playStep(current + 1);
+    setStopAt(stepEnd(step));
+    player.play();
+  };
   const play = () => (vise ? playNext() : playAll());
 
   useEffect(() => {

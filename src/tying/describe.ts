@@ -1,5 +1,5 @@
-import { hookModel, trebleSize } from "./hook";
-import { MATERIALS } from "../recipe/materials";
+import { hookModel, trebleSize, unitMm } from "./hook";
+import { MATERIALS, type Archetype } from "../recipe/materials";
 import type { Material, Recipe, Step } from "../recipe/schema";
 
 function colorName(color: string): string {
@@ -26,6 +26,12 @@ export interface MaterialsListEntry {
   detail?: string;
 }
 
+/** What a material's `count` counts, where it isn't fibres. */
+const COUNT_UNITS: Partial<Record<Archetype, string>> = { legs: "strands", flash: "strands", biot: "biots", hair: "hairs" };
+
+/** "1 strand", "6 fibres". */
+const countText = (n: number, unit: string) => `${n} ${n === 1 ? unit.replace(/s$/, "") : unit}`;
+
 export function materialsList(recipe: Recipe): MaterialsListEntry[] {
   const hook = hookModel(recipe.hook);
   const treble = trebleSize(recipe.hook);
@@ -46,7 +52,7 @@ export function materialsList(recipe: Recipe): MaterialsListEntry[] {
             ? `fibres ${m.fibre}× gape`
             : m.mm !== undefined
               ? `${m.mm} mm`
-              : m.size ?? (m.count !== undefined ? `${m.count} fibres` : undefined),
+              : m.size ?? (m.count !== undefined ? countText(m.count, COUNT_UNITS[MATERIALS[m.kind].archetype] ?? "fibres") : undefined),
     })),
   ];
 }
@@ -104,6 +110,8 @@ export interface StepContext {
   keep?: boolean;
   /** trim: cutting the excess of a strip pulled over the body (a foam back). */
   cover?: boolean;
+  /** pull-over: a later step trims the excess, so it is left for now. */
+  trimmedLater?: boolean;
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
@@ -113,6 +121,9 @@ export interface StepContext {
 export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): string {
   const mount: Mount = hookModel(recipe.hook).tube?.kind ?? "hook";
   const at = (s: number) => positionText(s, mount);
+  // A tube has no gape: lengths on one are given in millimetres.
+  const len = (n: number) => (mount === "hook" ? gapeText(n) : `${Math.round(n * unitMm(recipe.hook))} mm`);
+  const body = mount === "tube" ? "the tube" : "the shank";
   const find = (id: string) => recipe.materials.find((m) => m.id === id);
   const mat = (id: string) => {
     const m = find(id);
@@ -121,7 +132,10 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
   let text: string;
   switch (step.op) {
     case "slide-bead":
-      text = `Slide the ${mat(step.material)} round the bend and up to the eye, small hole first.`;
+      text =
+        mount === "tube"
+          ? `Slide the ${mat(step.material)} onto the front of the tube.`
+          : `Slide the ${mat(step.material)} ${mount === "hook" ? "round the bend and " : ""}up to the eye, small hole first.`;
       break;
     case "weight":
       text = `Wrap the ${mat(step.material)} in touching turns from ${at(step.from)} to ${at(step.to)}.`;
@@ -148,27 +162,27 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
         text = `Tie the ${mat(step.material)} ${under ? "under" : "on top of"} the shank with figure-of-eight turns.`;
       } else if (step.length && step.extended) {
         const tip = step.tip ? ` Colour the end ${colorName(step.tip) || "darker"}${step.tip === "black" ? " (singe it with a lighter)" : ""}.` : "";
-        text = `Tie in the ${mat(step.material)} so it sticks out ${gapeText(step.length)} ${step.forward ? "forward over the eye" : "behind"} as one piece.${tip}`;
+        text = `Tie in the ${mat(step.material)} so it sticks out ${len(step.length)} ${step.forward ? "forward over the eye" : "behind"} as one piece.${tip}`;
       } else if (step.length && step.side === "across") {
         const strands = m?.count ?? 2;
-        text = `Tie ${strands === 1 ? "a strand" : `${strands} strands`} of ${mat(step.material)} across the shank by the middle with figure-of-eight turns, so ${gapeText(step.length)} sticks out on each side as legs.`;
+        text = `Tie ${strands === 1 ? "a strand" : `${strands} strands`} of ${mat(step.material)} across the shank by the middle with figure-of-eight turns, so ${len(step.length)} sticks out on each side as legs.`;
       } else if (step.length && step.forward) {
-        text = `Tie in the ${mat(step.material)} pointing forward over the eye, ${gapeText(step.length)} long.`;
+        text = `Tie in the ${mat(step.material)} pointing forward over the eye, ${len(step.length)} long.`;
       } else if (step.length && (step.angle ?? 0) >= 60) {
         const pair = (step.spread ?? 0) > 0 ? " Divide them into a V with figure-of-eight turns." : "";
-        text = `Tie in ${what} upright, ${gapeText(step.length)} tall, with turns in front to stand it up.${pair}`;
+        text = `Tie in ${what} upright, ${len(step.length)} tall, with turns in front to stand it up.${pair}`;
       } else if (step.length && under) {
-        text = `Tie in ${what} under the shank as a beard, reaching ${gapeText(step.length)} back.`;
+        text = `Tie in ${what} under the shank as a beard, reaching ${len(step.length)} back.`;
       } else if (step.length) {
-        const angle = step.angle ? `, angled about ${step.angle}° up from the shank` : "";
+        const angle = step.angle ? `, angled about ${step.angle}° up from ${body}` : "";
         const reach = ctx.tipX !== undefined && ctx.bendEnd !== undefined ? reachText(ctx.tipX, ctx.bendEnd, mount) : null;
         const wing = archetype === "hair" || archetype === "feather";
-        const pick = archetype === "feather" && step.width ? `Pick a feather about ${gapeText(step.width)} wide. ` : "";
+        const pick = archetype === "feather" && step.width ? `Pick a feather about ${len(step.width)} wide. ` : "";
         const flare = (step.spread ?? 0) >= 60 ? " Let it flare out round the sides of the body." : "";
         text =
           wing && reach
-            ? `${pick}Tie in ${what} so the tips reach ${reach} (${gapeText(step.length)} from the tie-in point)${angle}.${flare}`
-            : `${pick}Tie in ${what}, leaving ${gapeText(step.length)} sticking out behind${angle}.${flare}`;
+            ? `${pick}Tie in ${what} so the tips reach ${reach} (${len(step.length)} from the tie-in point)${angle}.${flare}`
+            : `${pick}Tie in ${what}, leaving ${len(step.length)} sticking out behind${angle}.${flare}`;
       } else {
         text = `Tie in ${what} with a few firm thread turns.`;
       }
@@ -188,10 +202,10 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       break;
     }
     case "pull-over":
-      text = `Pull the ${mat(step.material)} forward over the top of the body and tie it down at ${at(step.to)}. Trim the excess.`;
+      text = `Pull the ${mat(step.material)} forward over the top of the body and tie it down at ${at(step.to)}.${ctx.trimmedLater ? "" : " Trim the excess."}`;
       break;
     case "spin":
-      text = `Spin clumps of ${mat(step.material)} round the shank, packing each one back against the last, up to ${at(step.to)}.`;
+      text = `Spin clumps of ${mat(step.material)} round ${body}, packing each one back against the last, up to ${at(step.to)}.`;
       break;
     case "dub":
       text = `Twist a thin noodle of ${mat(step.material)} onto the thread and wrap it forward to ${at(step.to)}.`;
@@ -207,12 +221,12 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
             ? `Clip the fibres of the ${mat(step.material)} on top close to the body, leaving a flat seat for the wing.`
             : `Cut away the fibres of the ${mat(step.material)} on top and underneath, leaving two flat rows sticking out at the sides.`
         : ctx.spun
-        ? `Trim the spun ${mat(step.material)} to shape, leaving a head about ${gapeText(step.leave ?? 0.4)} thick on each side.`
+        ? `Trim the spun ${mat(step.material)} to shape, leaving a head about ${len(step.leave ?? 0.4)} thick on each side.`
         : ctx.tip
         ? `Trim the tip of the ${mat(step.material)} close to the body.`
         : ctx.cover
         ? step.leave
-          ? `Trim the excess ${mat(step.material)}, leaving a stub ${gapeText(step.leave)} long over the eye as the head.`
+          ? `Trim the excess ${mat(step.material)}, leaving a stub ${len(step.leave)} long over the eye as the head.`
           : `Trim the excess ${mat(step.material)} flush with the tie-down.`
         : step.leave
           ? `Trim the butts of the ${mat(step.material)}, leaving a short head ${step.leave}× the gape long.`
