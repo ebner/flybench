@@ -360,7 +360,7 @@ export class FlyScene {
     });
 
     this.currentStep = stepAt(build, t);
-    this.atEnd = t >= build.duration;
+    this.atEnd = t >= stepEnd(build.steps[build.steps.length - 1]!);
     const current = build.steps[this.currentStep]!;
     const p = stepProgress(current, t);
     this.poseThread(current.thread, p);

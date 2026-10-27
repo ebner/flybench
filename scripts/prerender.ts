@@ -15,6 +15,7 @@ import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
 import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
+import { withoutReferences } from "../src/recipe/publish";
 import type { Recipe } from "../src/recipe/schema";
 
 const DIST = "dist";
@@ -27,7 +28,8 @@ async function loadPatterns(): Promise<Recipe[]> {
   const files = (await readdir("patterns")).filter((f) => f.endsWith(".kdl")).sort();
   return Promise.all(
     files.map(async (f) => {
-      const result = loadRecipe(await readFile(`patterns/${f}`, "utf8"));
+      // The text the site ships, without its reference photos: what the app will load.
+      const result = loadRecipe(withoutReferences(await readFile(`patterns/${f}`, "utf8")));
       if (!result.ok) throw new Error(`${f}:\n${result.errors.map(formatError).join("\n")}`);
       return result.recipe;
     }),
@@ -82,14 +84,18 @@ for (const page of pages) {
 
 // The service worker caches the app's own files on install, so the site works offline
 // after the first visit; the cache is named after this build's files.
-const assets = (await readdir(`${DIST}/assets`)).filter((f) => /\.(js|css|woff2)$/.test(f)).sort();
-const shell = ["./", "./manifest.webmanifest", "./favicon.svg", "./logo.svg", "./renders/manifest.json", ...assets.map((f) => `./assets/${f}`)];
-const build = createHash("sha256").update(shell.join("\n")).update(await readFile("public/renders/manifest.json")).digest("hex").slice(0, 12);
+const assets = (await readdir(`${DIST}/assets`)).sort();
+const shell = ["./", "./manifest.webmanifest", "./favicon.svg", "./logo.svg", "./renders/manifest.json", ...assets.filter((f) => /\.(js|css)$/.test(f)).map((f) => `./assets/${f}`)];
+// Only the Latin subsets: the text is English with some Nordic and Polish names; browsers
+// fetch other subsets when a page needs them.
+const fonts = assets.filter((f) => /-latin(-ext)?-.*\.woff2$/.test(f)).map((f) => `./assets/${f}`);
+const build = createHash("sha256").update([...shell, ...fonts].join("\n")).update(await readFile("public/renders/manifest.json")).digest("hex").slice(0, 12);
 const sw = await readFile(`${DIST}/sw.js`, "utf8");
 const filled = sw
   .replace('const CACHE = "flybench-dev";', () => `const CACHE = "flybench-${build}";`)
-  .replace(/const SHELL = \[[^\]]*\];/, () => `const SHELL = ${JSON.stringify(shell)};`);
-if (!filled.includes(build) || !filled.includes("./assets/")) throw new Error("sw.js: CACHE or SHELL not found to fill in");
+  .replace(/const SHELL = \[[^\]]*\];/, () => `const SHELL = ${JSON.stringify(shell)};`)
+  .replace("const FONTS = [];", () => `const FONTS = ${JSON.stringify(fonts)};`);
+if (!filled.includes(build) || !filled.includes("./assets/index-") || !filled.includes("woff2")) throw new Error("sw.js: CACHE, SHELL or FONTS not found to fill in");
 await writeFile(`${DIST}/sw.js`, filled);
 
 // GitHub Pages serves 404.html for any address without a file; the app shows "not found".

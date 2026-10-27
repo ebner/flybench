@@ -61,5 +61,7 @@ describe("catalog search", () => {
     const f = { q: "elk hair", type: "dry" as const, materials: ["elk-hair" as const, "gold-wire" as const] };
     expect(filtersFromQuery(filtersToQuery(f))).toEqual(f);
     expect(filtersFromQuery("materials=elk-hair,unicorn")).toEqual({ materials: ["elk-hair"] });
+    // Inherited object names are not materials.
+    expect(filtersFromQuery("materials=__proto__,constructor,toString")).toEqual({ materials: [] });
   });
 });

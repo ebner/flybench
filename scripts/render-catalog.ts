@@ -26,6 +26,8 @@ const MANIFEST = `${OUT}/manifest.json`;
 const RENDER_SOURCES = [
   "src/render", "src/tying", "src/recipe/materials.ts", "src/recipe/schema.ts",
   "src/render-page.ts", "render.html", "scripts/lib/renderer.ts", "scripts/render-catalog.ts",
+  // Dependency versions: a three.js upgrade can change how everything looks.
+  "pnpm-lock.yaml",
 ];
 const CONCURRENCY = 3;
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
 import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
@@ -26,7 +26,7 @@ export function PatternPage({ id, step }: { id: string; step?: number }) {
       </main>
     );
   }
-  return <PatternView key={id} recipe={pattern.recipe} initialStep={step} />;
+  return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} />;
 }
 
 const Icon = {
@@ -62,7 +62,8 @@ function hookSizes(size: number): number[] {
   return sizes;
 }
 
-function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initialStep?: number }) {
+/** `linkedStep` is the step in the address (1-based), which the page also keeps up to date itself. */
+function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedStep?: number }) {
   // The hook size can be changed to see the same fly at another size: proportions stay,
   // thread bulk changes as it would at the vise.
   // Tubes are sized by length, so only hooks offer other sizes.
@@ -110,14 +111,20 @@ function PatternView({ recipe: original, initialStep }: { recipe: Recipe; initia
     document.title = `${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}, Flybench`;
   }, [recipe]);
 
-  // Open at the linked step, paused at its start.
+  // The step this page last wrote into the address (null: none yet). The address reaches
+  // the router a render later, when playback may have moved on, so the page tells its own
+  // writes from links by this, not by the current step.
+  const written = useRef<number | undefined | null>(null);
+  // Open at the linked step, paused at its start, and follow a link to another step of this fly.
   useEffect(() => {
-    if (initialStep) player.seek(build.steps[Math.min(initialStep, build.steps.length) - 1]!.start);
+    if (linkedStep === written.current) return;
+    player.seek(build.steps[Math.min(linkedStep ?? 1, build.steps.length) - 1]!.start);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [linkedStep]);
   // Keep the URL on the current step, so it can be shared.
   useEffect(() => {
-    replaceUrl(href.fly(recipe.id, current > 0 ? current + 1 : undefined));
+    written.current = current > 0 ? current + 1 : undefined;
+    replaceUrl(href.fly(recipe.id, written.current));
   }, [recipe.id, current]);
 
   const playStep = (i: number) => {

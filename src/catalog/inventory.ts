@@ -50,6 +50,14 @@ export interface Coverage {
   substitutes: Need[];
 }
 
+/**
+ * How many materials still have to be bought: colours of one kind count once, since any
+ * colour of a kind stands in for the others (see `match`).
+ */
+export function missingKinds(c: Coverage): number {
+  return new Set(c.missing.map((n) => n.kind)).size;
+}
+
 export function coverage(recipe: Recipe, owned: Set<string>): Coverage {
   const missing: Need[] = [];
   const substitutes: Need[] = [];

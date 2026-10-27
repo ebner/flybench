@@ -5,20 +5,24 @@ import { useCallback, useEffect, useState } from "react";
  * missing or throw (private windows, blocked site data); then the set lasts for the
  * visit only. Changes in another tab show up here too.
  */
+/** The sets for this visit, shared by every page, for when storage can't keep them. */
+const memory = new Map<string, string[]>();
+
 function read(key: string): string[] {
   try {
     const v = JSON.parse(localStorage.getItem(key) ?? "[]");
     return Array.isArray(v) ? v.filter((x) => typeof x === "string") : [];
   } catch {
-    return [];
+    return memory.get(key) ?? [];
   }
 }
 
 function write(key: string, values: string[]) {
+  memory.set(key, values);
   try {
     localStorage.setItem(key, JSON.stringify(values));
   } catch {
-    // Not persisted; the in-memory state still works for this visit.
+    // Not persisted; the shared in-memory copy lasts for this visit.
   }
 }
 

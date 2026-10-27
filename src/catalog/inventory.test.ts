@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { catalogNeeds, coverage, inventoryKey, match, needs } from "./inventory";
+import { catalogNeeds, coverage, inventoryKey, match, missingKinds, needs } from "./inventory";
 
 const recipe = (() => {
   const r = loadRecipe(`
@@ -40,6 +40,28 @@ describe("inventory", () => {
     const c = coverage(recipe, new Set(["wool:red", "cock-hackle:grizzly"]));
     expect(c.missing.map(inventoryKey)).toEqual(["peacock-herl:#26341a"]);
     expect(c.substitutes.map(inventoryKey)).toEqual(["cock-hackle:brown"]);
+  });
+
+  it("counts a kind missing in two colours as one material to buy", () => {
+    const two = loadRecipe(`id u
+name "U"
+type streamer
+difficulty beginner
+hook streamer-4xl size=8
+thread black size="8/0"
+materials {
+    yellow bucktail color=yellow
+    red bucktail color=red
+}
+steps {
+    attach-thread at=0.8
+    whip-finish
+}
+`);
+    if (!two.ok) throw new Error("fixture");
+    const c = coverage(two.recipe, new Set());
+    expect(c.missing).toHaveLength(2);
+    expect(missingKinds(c)).toBe(1);
   });
 
   it("collects the catalog's materials by kind", () => {

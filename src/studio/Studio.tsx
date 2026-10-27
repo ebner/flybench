@@ -36,7 +36,7 @@ export function Studio() {
         setText(texts[files.indexOf(first)]!);
       }
       setStatus("");
-    })().catch((e: unknown) => setStatus(`Couldn't load the patterns: ${String(e)}. Is this the dev server (npm run dev)?`));
+    })().catch((e: unknown) => setStatus(`Couldn't load the patterns: ${String(e)}. Is this the dev server (pnpm dev)?`));
   }, []);
 
   const dirty = file !== null && (unsavedFile || saved.get(file) !== text);
@@ -348,7 +348,7 @@ function PreviewPane({ build, recipe, stale }: { build: Build | null; recipe: Re
           </ul>
         )}
         <p>
-          Contact sheet against them: <code>npm run refcheck -- {recipe.id}</code>
+          Contact sheet against them: <code>pnpm refcheck {recipe.id}</code>
         </p>
       </div>
     </section>
@@ -387,12 +387,17 @@ function Preview({ build, time, view, grid }: { build: Build; time: number; view
     };
   }, []);
 
+  // A new build resets the scene's time; the effect below puts it back. View and grid
+  // changes keep the build and its time.
   useEffect(() => {
-    const s = scene.current!;
-    s.setBuild(build);
-    s.setView(view);
-    s.setGrid(grid);
-  }, [build, view, grid]);
+    scene.current!.setBuild(build);
+  }, [build]);
+  useEffect(() => {
+    scene.current!.setView(view);
+  }, [view]);
+  useEffect(() => {
+    scene.current!.setGrid(grid);
+  }, [grid]);
 
   useEffect(() => {
     scene.current?.setTime(time);

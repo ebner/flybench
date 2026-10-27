@@ -784,9 +784,14 @@ export function simulate(recipe: Recipe): Build {
           pieces.push({ ...w, id: nextId++, seed: w.seed ?? w.id, keep: step.keep, window: [0.5, 0.5001], until: undefined });
           ctx.keep = true;
         } else if (covers.has(step.material)) {
-          // The excess of a foam back, cut flush or left as a stub over the eye.
+          // The excess of a foam back, cut flush or left as a stub over the eye: the trimmed
+          // back replaces the untrimmed one from the cut on.
           ctx.cover = true;
-          covers.get(step.material)!.stub = step.leave ?? 0;
+          const c = covers.get(step.material)!;
+          c.until = cutAt;
+          const trimmed: CoverPiece = { ...c, id: nextId++, seed: c.seed ?? c.id, stub: step.leave ?? 0, window: [0.5, 0.5001], until: undefined };
+          pieces.push(trimmed);
+          covers.set(step.material, trimmed);
         } else if (palmeredTips.has(step.material)) {
           ctx.tip = true;
           palmeredTips.delete(step.material);

@@ -21,6 +21,7 @@ import { loadRecipe } from "../src/recipe/load";
 import type { Recipe } from "../src/recipe/schema";
 import { materialName } from "../src/tying/describe";
 import { hookModel } from "../src/tying/hook";
+import { simulate } from "../src/tying/simulate";
 import { patternIds, Renderer } from "./lib/renderer";
 
 // Wikimedia throttles anonymous agents; identify the tool and where it comes from.
@@ -55,17 +56,18 @@ export function proportions(recipe: Recipe): string[] {
     return m ? materialName(m) : id;
   };
   const lines = [`${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}`, `hook ${recipe.hook.model} ${recipe.hook.size !== undefined ? `#${recipe.hook.size}` : `${recipe.hook.length} mm`}`, ""];
-  let thread = 0;
-  for (const step of recipe.steps) {
-    if (step.op === "attach-thread") thread = step.at;
-    if (step.op === "wrap-thread" || step.op === "dub") thread = step.to;
+  // Where things are tied in comes from the simulation: it knows the hook's shank length,
+  // a bead's room and every step that moves the thread.
+  const steps = simulate(recipe).steps;
+  recipe.steps.forEach((step, i) => {
     if (step.op === "tie-in" && step.length) {
+      const piece = steps[i]!.pieces.find((p) => p.material === step.material && "x" in p) as { x: number } | undefined;
       const extra = [
         step.angle !== undefined && `${step.angle}° up`,
         step.spread !== undefined && `spread ${step.spread}°`,
         step.width !== undefined && `${step.width} wide`,
       ].filter(Boolean);
-      lines.push(`${name(step.material)}: ${step.length} gapes from x=${(thread * 2).toFixed(2)}${extra.length ? `, ${extra.join(", ")}` : ""}`);
+      lines.push(`${name(step.material)}: ${step.length} gapes from x=${(piece?.x ?? 0).toFixed(2)}${extra.length ? `, ${extra.join(", ")}` : ""}`);
     }
     if (step.op === "dub") lines.push(`${name(step.material)}: body to ${step.to} of the shank`);
     if (step.op === "wind") {
@@ -75,7 +77,7 @@ export function proportions(recipe: Recipe): string[] {
           : `${name(step.material)}: wound to ${step.to} of the shank, ${step.turns} turns`,
       );
     }
-  }
+  });
   for (const m of recipe.materials) if (m.fibre) lines.push(`${materialName(m)}: fibres ${m.fibre} gapes`);
   const hook = hookModel(recipe.hook);
   lines.push(

@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { catalogNeeds, colorWord, coverage, inventoryKey } from "../catalog/inventory";
+import { catalogNeeds, colorWord, coverage, inventoryKey, missingKinds } from "../catalog/inventory";
 import { CATALOG } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
@@ -49,7 +49,7 @@ export function Materials() {
   const byKind = useMemo(() => catalogNeeds(CATALOG.flatMap((e) => [e.recipe, ...e.variants])), []);
   const kinds = [...byKind.keys()].sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
   const tieable = CATALOG.filter((e) => coverage(e.recipe, owned.values).missing.length === 0);
-  const oneShort = CATALOG.filter((e) => coverage(e.recipe, owned.values).missing.length === 1);
+  const oneShort = CATALOG.filter((e) => missingKinds(coverage(e.recipe, owned.values)) === 1);
 
   return (
     <main className="reading materials-page">
