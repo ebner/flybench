@@ -86,3 +86,63 @@ refcheck pass. Scandinavian additions chosen from a survey of flugor.se (see
 .cache/research/flugor-se-survey.md when present). Supported since the engine round after milestone 7: doubles and trebles, tubes and
 Waddingtons, cone heads, jig hooks (and point-up flies generally), rubber legs, legs tied
 across the shank, and extended bodies.
+
+## Next milestones (planned 2026-10-28)
+
+Agreed with the user in an interview; one milestone at a time, each stopping for feedback.
+
+8. Quick wins.
+   - Pedal and remote control: Page Down / Page Up (Bluetooth page-turner pedals,
+     presentation clickers) play the next step and go back, in and out of vise mode.
+   - Share a variation: the address keeps the hook size and (with milestone 11) the colours
+     as well as the step.
+   - Common mistakes per step: a step shows the mistakes of its technique, extended per
+     pattern where sources mention them.
+   - Proportion guide: a switchable gape ruler on the pattern page, marking tail, wing,
+     hackle and body proportions on the 3D fly.
+   - Printable recipe card: one page per pattern with the fly, the dressing and numbered
+     steps with small step pictures.
+9. Naturals. What a pattern imitates, shown in 3D by the same renderer.
+   - Natural recipes in KDL (`naturals/*.kdl`), validated like patterns, with cited
+     entomology sources: about 25 naturals at group and life-stage level (mayfly nymph,
+     emerger, dun, spinner; caddis larva, pupa, adult; stonefly nymph; midge pupa; shrimp;
+     ant; beetle; small baitfish…), with size and colour ranges. Patterns refer to them.
+   - Shown beside the fly on its page (same scale, with an overlay toggle), in the water
+     view (milestone 10), and in a Naturals section: life stages, when they hatch, how to
+     fish them, and the patterns that imitate them.
+   - Hatch calendar: which naturals are about, month by month, and which flies match. The
+     visitor picks a region (e.g. southern Sweden, northern Scandinavia, British Isles,
+     central Europe), remembered in the browser; no location prompt. Timings researched
+     and cited per region.
+10. In the water. A view switch on the pattern page ("In the water", beside "Whole fly")
+    with the finished fly in moving water: an animated surface, the surface line seen from
+    the side (the fly above as the angler sees it, below as the fish does), the trout's view
+    from below (Snell's window, the dimples a dry fly makes in the film), drift and swim
+    (a dry fly riding the ripples, a nymph tumbling, a streamer stripped with marabou
+    pulsing), and wet materials (darker colours, hair clumping, bubbles in CDC and dubbing).
+    Real behaviour drawn in the house style (herbarium and cyanotype palettes); the water is
+    a function of time like the rest of the scene; a still-water setting for slow devices
+    and reduced motion. How a fly sits in the water comes from its type and its materials'
+    buoyancy (new wet properties in the materials catalog), with a recipe override.
+11. Planning and practice.
+    - Colour playground: change a pattern's colours; the 3D fly, step texts and materials
+      list follow; variations can be saved to the fly box.
+    - Shopping list: the materials still missing for chosen flies or a fly box, merged
+      across patterns, with substitutes, checked against the Materials page.
+    - Trip fly box: water, month, species and region give a suggested box of patterns and
+      sizes, from the hatch calendar and the materials at hand.
+    - Tying log and progress: flies tied (count, size, notes), learning-path progress and
+      practised techniques, kept in the browser.
+12. Swedish and German. The whole site, the generated step texts included.
+    - A glossary as data (`glossary/*.kdl`): every term per language with its grammar
+      (gender, plural and definite forms) and translator notes (preferred term, rejected
+      alternatives and why, a source). The step generator and the interface take their
+      words from it; tests fail on a missing term or form.
+    - Pattern prose (history, how to fish it, step notes) is drafted with the glossary and
+      marked as a draft until reviewed; the user reviews Swedish and German. English shows
+      where no translation exists.
+    - The i18n architecture (how texts and the generator are localised, how a language is
+      chosen) is to be proposed with options before work starts.
+
+New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
+list them in the About page's Privacy section as they come.
