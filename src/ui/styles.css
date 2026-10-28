@@ -613,7 +613,8 @@ select {
   position: absolute;
   left: 2.2rem;
   bottom: 1.6rem;
-  white-space: nowrap;
+  /* One line where there is room; Viewer.tsx limits the width, and a long label wraps upwards. */
+  width: max-content;
   padding: 0 0.35rem;
   background: color-mix(in srgb, var(--paper) 82%, transparent);
 }
