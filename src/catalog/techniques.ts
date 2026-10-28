@@ -251,8 +251,9 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     case "tie-off":
       return "tie-off";
     case "trim": {
+      // Spun hair, or hair butts flared round the shank and trimmed to a shape (a head).
       const spun = recipe.steps.some((s) => s.op === "spin" && s.material === step.material);
-      if (spun) return "spinning-hair";
+      if (spun || step.shape !== undefined) return "spinning-hair";
       // Hair butts: part of tying in that hair, as a tail or a wing.
       const tieIn = recipe.steps.findIndex((s) => s.op === "tie-in" && s.material === step.material);
       if (archetype(step.material) === "hair" && tieIn >= 0) return stepTechnique(recipe, tieIn);
@@ -406,9 +407,12 @@ export function techniqueExample(recipes: Recipe[], id: string): { recipe: Recip
   const candidates = recipes
     .filter((r) => r.variantOf === undefined)
     .sort((a, b) => DIFFICULTY_RANK[a.difficulty] - DIFFICULTY_RANK[b.difficulty] || a.steps.length - b.steps.length);
-  for (const recipe of candidates) {
-    const step = recipe.steps.findIndex((_, i) => stepTechnique(recipe, i) === id);
-    if (step >= 0) return { recipe, step };
+  // A trim shows the least of a technique: use one only when no pattern has another step of it.
+  for (const trims of [false, true]) {
+    for (const recipe of candidates) {
+      const step = recipe.steps.findIndex((s, i) => (trims || s.op !== "trim") && stepTechnique(recipe, i) === id);
+      if (step >= 0) return { recipe, step };
+    }
   }
   return null;
 }

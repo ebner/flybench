@@ -543,6 +543,7 @@ select {
 }
 
 .stage {
+  container-type: inline-size;
   position: sticky;
   top: var(--header);
   display: flex;
@@ -555,6 +556,7 @@ select {
   position: relative;
   flex: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 .viewer-canvas {
@@ -625,6 +627,19 @@ select {
   border-top: 1px solid var(--ink-soft);
   transform-origin: 0 0;
   transform: rotate(-36deg);
+}
+
+/* Near the right edge the label goes up and to the left instead. */
+.callout.flip span {
+  left: auto;
+  right: 2.2rem;
+}
+
+.callout.flip::before {
+  left: auto;
+  right: 0;
+  transform-origin: 100% 0;
+  transform: rotate(36deg);
 }
 
 .callout[hidden] {
@@ -711,8 +726,9 @@ select {
   accent-color: var(--accent);
 }
 
-/* A phone can't fit the buttons and a usable timeline on one row: the timeline gets its own. */
-@media (max-width: 40rem) {
+/* A narrow stage (a phone, or beside the notes on a small window) can't fit the buttons and
+   a usable timeline on one row: the timeline gets its own. */
+@container (max-width: 40rem) {
   .transport {
     flex-wrap: wrap;
   }

@@ -48,7 +48,8 @@ steps {
     wrap-thread to=0.0
     dub body to=0.67 note="Slim, leaving the front third bare: hair only spins on a bare shank."
     // Assumption: wing tips about a third of a shank past the bend, from the photos.
-    tie-in wing length=2.0 angle=22 spread=110 note="A bigger bunch than for a wing alone, tips stacked and pointing back. Tight turns forward through the butts make them flare and spin."
+    tie-in wing length=2.0 angle=22 spread=110 note="A bigger bunch than for a wing alone, tips stacked and pointing back."
+    wrap-thread to=0.97 note="Tight turns forward through the butts make them flare and spin."
     whip-finish note="Push the hair back and whip finish at the eye."
     trim wing leave=0.42 shape=round note="Trim the butts to a dense, rounded head, smallest at the eye; clear the gape underneath."
 }

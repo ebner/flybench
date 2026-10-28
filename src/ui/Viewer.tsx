@@ -40,7 +40,11 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
       const el = label.current;
       if (!el) return;
       el.style.visibility = point ? "" : "hidden";
-      if (point) el.style.transform = `translate(${Math.round(point.x)}px, ${Math.round(point.y)}px)`;
+      if (!point) return;
+      el.style.transform = `translate(${Math.round(point.x)}px, ${Math.round(point.y)}px)`;
+      const text = el.firstElementChild as HTMLElement | null;
+      // The label sits about 2.6rem right of the point: flip it left if it wouldn't fit.
+      el.classList.toggle("flip", point.x + (text?.offsetWidth ?? 0) + 48 > container.current!.clientWidth);
     };
     scene.current = s;
     return () => {
