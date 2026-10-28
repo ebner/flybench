@@ -12,18 +12,18 @@ import { href, replaceUrl } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
 import { usePlayer } from "./usePlayer";
+import { NotFound } from "./NotFound";
 import { Viewer } from "./Viewer";
 
 export function PatternPage({ id, step }: { id: string; step?: number }) {
   const pattern = findPattern(id);
   if (!pattern) {
     return (
-      <main className="not-found">
-        <h1>No pattern called “{id}”</h1>
+      <NotFound heading={<>No pattern called “{id}”</>}>
         <p>
           It may have been renamed. <a href={href.gallery()}>Browse all patterns</a> or search for it there.
         </p>
-      </main>
+      </NotFound>
     );
   }
   return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} />;
@@ -137,6 +137,8 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   // Open at the linked step, paused at its start, and follow a link to another step of this fly.
   useEffect(() => {
     if (linkedStep === written.current) return;
+    player.pause();
+    setStopAt(null);
     player.seek(build.steps[Math.min(linkedStep ?? 1, build.steps.length) - 1]!.start);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedStep]);
@@ -162,6 +164,12 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
     player.play();
   };
   const play = () => (vise ? playNext() : playAll());
+  const toggleVise = () => {
+    // Playing on into the next steps is what vise mode stops: pause at this step's end.
+    if (!vise && player.playing) setStopAt(stepEnd(step));
+    if (vise && player.playing) setStopAt(null);
+    setVise(!vise);
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -172,7 +180,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
       // Space on a focused button or link presses it.
       if (e.key === " " && t instanceof Element && t.closest("button, a, summary")) return;
       if (e.key === "Escape" && vise) {
-        setVise(false);
+        toggleVise();
       } else if (e.key === " ") {
         e.preventDefault();
         if (player.playing) player.pause();
@@ -252,12 +260,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
           <button
             className="vise-toggle"
             aria-pressed={vise}
-            onClick={() => {
-              // Playing on into the next steps is what vise mode stops: pause at this step's end.
-              if (!vise && player.playing) setStopAt(stepEnd(step));
-              if (vise && player.playing) setStopAt(null);
-              setVise(!vise);
-            }}
+            onClick={toggleVise}
           >
             {vise ? "Leave vise mode" : "Vise mode"}
           </button>

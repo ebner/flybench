@@ -263,6 +263,13 @@ materials {
     expect(errors.join("\n")).toMatch(/give either `to`/);
   });
 
+  it("winds a material forward to the thread, not short of it", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    rib gold-wire\n");
+    const steps = (to: number) => `    attach-thread at=0.1\n    tie-in rib\n    wrap-thread to=0.85\n    wind rib to=${to} turns=3\n    tie-off rib\n    whip-finish`;
+    expect(run(steps(0.85), h).ok).toBe(true);
+    expect(errorsOf(run(steps(0.4), h)).join("\n")).toMatch(/the thread is at 0.85; wind forward to it/);
+  });
+
   it("doesn't spin or weight with a material that is already on the hook", () => {
     const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    hair deer-hair\n    lead lead-free-wire\n");
     const spun = "    attach-thread at=0.1\n    tie-in hair length=1.5\n    spin hair to=0.9\n    whip-finish";

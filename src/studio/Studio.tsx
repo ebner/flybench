@@ -99,8 +99,11 @@ export function Studio() {
     history.replaceState(null, "", `?pattern=${f.replace(/\.kdl$/, "")}`);
   };
 
+  // One save at a time: a slow earlier write must not land after, and over, a later one.
+  const saving = useRef(false);
   const save = useCallback(async () => {
-    if (!file) return;
+    if (!file || saving.current) return;
+    saving.current = true;
     try {
       await savePattern(file, text, unsavedFile);
       setSaved((m) => new Map(m).set(file, text));
@@ -110,6 +113,8 @@ export function Studio() {
       setStatus(problems ? `Saved ${file}, with ${problems} ${problems === 1 ? "problem" : "problems"} still to fix` : `Saved ${file}`);
     } catch (e) {
       setStatus(`Not saved: ${e instanceof Error ? e.message : String(e)}`);
+    } finally {
+      saving.current = false;
     }
   }, [file, text, unsavedFile, others]);
 

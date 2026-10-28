@@ -5,6 +5,7 @@ import { About, REPO_URL } from "./About";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
+import { NotFound } from "./NotFound";
 import { FlyBox, Materials } from "./Personal";
 import { TechniquePage, TechniquesIndex } from "./Techniques";
 import { PatternPage } from "./PatternPage";
@@ -49,12 +50,11 @@ export function App() {
         {route.page === "materials" && <Materials />}
         {route.page === "about" && <About />}
         {route.page === "not-found" && (
-          <main className="not-found">
-            <h1>There is nothing at this address</h1>
+          <NotFound heading="There is nothing at this address">
             <p>
               <a href={href.gallery()}>Browse all patterns</a>
             </p>
-          </main>
+          </NotFound>
         )}
       </div>
       <footer className="site-footer">

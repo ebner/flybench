@@ -631,9 +631,20 @@ select {
   display: none;
 }
 
+/* Long instructions scroll rather than squeeze the viewer, which keeps at least 45% of the stage. */
+.viewer {
+  min-height: 45%;
+}
+
 .now {
+  min-height: 0;
+  overflow-y: auto;
   padding: 0.9rem var(--gutter) 0.2rem;
   border-top: 1px solid var(--rule);
+}
+
+.transport {
+  flex: none;
 }
 
 .now-index {

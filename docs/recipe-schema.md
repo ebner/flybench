@@ -267,8 +267,8 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 - Hair and feather wings need a `length`; feathers point back (no `forward`). `angle` needs a `length`. `spread` only applies
   to material tied in with a length (tags, tails, wings; for feathers it makes a pair);
   `width` only to feather wings.
-- `wind … to` must differ from the tie-in point. A forward wind may go no further than
-  the thread.
+- `wind … to` must differ from the tie-in point. A forward wind ends at the thread, where
+  the material is then tied off.
 - A forward-wound material is tied off in the very next step.
 - A rearward-wound (palmered) material must be secured in the very next step, by winding
   another material forward from at or behind its tip, and its tip must be trimmed before

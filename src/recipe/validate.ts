@@ -216,8 +216,11 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           break;
         }
         const rear = to < m.at;
+        // Wound forward, a material ends where the thread is, to be tied off there.
         if (!rear && to > thread + POSITION_TOLERANCE) {
-          err(`the thread is at ${thread}; move it to ${to} or beyond before winding there`, [...path, "to"]);
+          err(`the thread is at ${thread}; move it to ${to} before winding there`, [...path, "to"]);
+        } else if (!rear && to < thread - POSITION_TOLERANCE) {
+          err(`the thread is at ${thread}; wind forward to it, or move the thread back to ${to} first`, [...path, "to"]);
         }
         m.state = rear ? "wound-rear" : "wound";
         m.wound = true;

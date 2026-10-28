@@ -31,6 +31,15 @@ export function loadRecipe(text: string): LoadResult {
   return { ok: true, recipe: parsed.data };
 }
 
+/** An error found outside loading (the catalog rules), placed in the recipe's text. */
+export function locate(text: string, error: RecipeError): RecipeError {
+  try {
+    return withLocation(error, kdlToObject(text).locations);
+  } catch {
+    return error;
+  }
+}
+
 /**
  * Attaches the source location of the closest path prefix that has one. Something missing
  * altogether (a required section) has none: it is reported at the top of the file.
