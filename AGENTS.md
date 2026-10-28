@@ -46,7 +46,8 @@ src/recipe/     kdl.ts (KDL → plain object + source locations), schema.ts (Zod
                 load.ts (all three, errors with line numbers), catalog.ts (cross-recipe rules)
 src/tying/      hook.ts (hook models, sizes), simulate.ts (recipe → timeline of geometry
                 pieces as plain data), describe.ts (instruction text, materials list)
-src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends
+src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends, naturals,
+                water (the in-the-water view: its own clock, also a pure function of time)
 src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook, for its picture),
                 pages.ts (every page's title, description and
                 static HTML for the build; no React; tested in Node)

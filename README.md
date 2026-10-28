@@ -49,7 +49,10 @@ page-turner pedal or presentation clicker. The step bar under the view has a seg
 it, drag along it to scrub. Click a step in the list to play just that step. On a touch screen
 one finger scrolls the page and two fingers turn and zoom the fly. "Proportions" shows the gape
 grid and each part's measurements; "Print recipe card" prints the dressing and the steps
-with a picture of each. A link keeps the step and the hook size (`?step=7&size=16`).
+with a picture of each. "In the water" shows the finished fly in moving water where it fishes
+(on the surface, in the film, just under or deep), from the side or from below as a trout sees
+it; "Still water" stops the motion (it starts still when the system asks for reduced motion).
+Stepping or playing goes back to the vise. A link keeps the step and the hook size (`?step=7&size=16`).
 
 Rendering uses the GPU through Vulkan in headless Chromium when there is one, and
 falls back to software rendering (SwiftShader, much slower) when there isn't;

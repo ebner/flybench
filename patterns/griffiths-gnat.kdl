@@ -3,6 +3,8 @@
 id griffiths-gnat
 name "Griffith's Gnat"
 type midge
+// A dry fly, though it imitates midges: it floats.
+fishes surface
 imitates chironomid
 naturals midge-adult
 difficulty beginner

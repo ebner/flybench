@@ -329,6 +329,8 @@ export const RecipeSchema = z.strictObject({
   references: z.array(Reference).default([]),
   /** Which way up the fly swims; jig hooks ride point up unless the recipe says otherwise. */
   rides: z.enum(["point-down", "point-up"]).optional(),
+  /** Where it fishes, when its type and materials don't say it (see src/tying/fishing.ts). */
+  fishes: z.enum(["surface", "film", "below", "deep"]).optional(),
   hook: Hook,
   thread: Thread,
   materials: z.array(Material).default([]),

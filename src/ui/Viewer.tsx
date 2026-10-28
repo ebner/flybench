@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FlyScene } from "../render/FlyScene";
+import { WATER_LOOKS } from "../render/water";
 import type { Natural } from "../recipe/natural";
+import type { Fishing } from "../tying/fishing";
 import type { Build } from "../tying/simulate";
 
 export interface ViewerProps {
@@ -18,10 +20,31 @@ export interface ViewerProps {
   guide?: boolean;
   /** A natural to show with the fly: `length` in gapes, beside it or laid over it. */
   natural?: { natural: Natural; length: number; at: "beside" | "over" } | null;
+  /** Offer the finished fly in water, fished like this. */
+  water?: Fishing;
+  /** The water view opened or closed (the page pauses playback while it is open). */
+  onWater?: (on: boolean) => void;
 }
 
-export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false, guide = false, natural = null }: ViewerProps) {
+const reducedMotion = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+export function Viewer({
+  build,
+  time,
+  follow,
+  onFollowChange,
+  callout,
+  onCalloutClick,
+  pointUp = false,
+  guide = false,
+  natural = null,
+  water,
+  onWater,
+}: ViewerProps) {
   const [turned, setTurned] = useState(false);
+  // The finished fly in water, seen from the side or from below; closed again by stepping or playing.
+  const [inWater, setInWater] = useState<"side" | "below" | null>(null);
+  const [still, setStill] = useState(reducedMotion);
   // WebGL can be turned off (browser settings, policies, old graphics drivers).
   const [unavailable, setUnavailable] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -108,21 +131,57 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
   }, [follow]);
 
   useEffect(() => {
-    scene.current?.setTurnedOver(pointUp && turned);
-  }, [build, pointUp, turned]);
+    // In the water a point-up fly is always shown the way it swims.
+    scene.current?.setTurnedOver(pointUp && (turned || inWater !== null));
+  }, [build, pointUp, turned, inWater]);
 
   useEffect(() => {
-    scene.current?.setTime(time);
-  }, [build, time]);
+    if (!inWater) scene.current?.setTime(time);
+  }, [build, time, inWater]);
+
+  // Moving through the steps takes the fly back to the vise.
+  const shownTime = useRef(time);
+  useEffect(() => {
+    if (time === shownTime.current) return;
+    shownTime.current = time;
+    if (inWater) openWater(null);
+  }, [time]);
 
   // The natural, placed after the fly (it goes beside the finished fly), and again whenever the
   // fly changes (another hook size).
   const shownNatural = useRef(false);
   useEffect(() => {
     if (!natural && !shownNatural.current) return;
-    shownNatural.current = natural !== null;
-    scene.current?.setNatural(natural?.natural ?? null, natural?.length, natural?.at);
-  }, [natural?.natural, natural?.length, natural?.at, build, pointUp, turned]);
+    const shown = inWater ? null : natural;
+    shownNatural.current = shown !== null;
+    scene.current?.setNatural(shown?.natural ?? null, shown?.length, shown?.at);
+  }, [natural?.natural, natural?.length, natural?.at, build, pointUp, turned, inWater]);
+
+  // The water, after the fly is placed, in the theme's colours.
+  useEffect(() => {
+    const s = scene.current;
+    if (!s) return;
+    const apply = () =>
+      s.setWater(
+        inWater && water
+          ? { fishing: water, view: inWater, still, look: WATER_LOOKS[document.documentElement.dataset.theme === "dark" ? "dark" : "light"] }
+          : null,
+      );
+    apply();
+    if (!inWater) return;
+    const watch = new MutationObserver(apply);
+    watch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => watch.disconnect();
+  }, [inWater, still, water, build, pointUp, turned]);
+
+  const openWater = (view: "side" | "below" | null) => {
+    if (view && !inWater) {
+      setProportions(false);
+      onFollowChange(false);
+    }
+    setInWater(view);
+    if (!view !== !inWater) onWater?.(view !== null);
+  };
 
   if (unavailable) {
     return (
@@ -133,7 +192,7 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
   }
 
   return (
-    <div className="viewer">
+    <div className={inWater ? "viewer in-water" : "viewer"}>
       <div
         className="viewer-canvas"
         ref={container}
@@ -157,26 +216,50 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
         <span key={callout}>{callout}</span>
       </button>
       <div className="viewer-tools" ref={toolsRef}>
-        <button aria-pressed={follow} onClick={() => onFollowChange(!follow)}>
-          <span className="long">{follow ? "Following the action" : "Follow the action"}</span>
-          <span className="short">Follow</span>
-        </button>
-        <button
-          onClick={() => {
-            onFollowChange(false);
-            scene.current?.resetCamera();
-          }}
-        >
-          Whole fly
-        </button>
-        {guide && (
-          <button aria-pressed={proportions} onClick={() => setProportions(!proportions)} title="The gape grid and each part's proportions">
-            Proportions
-          </button>
+        {inWater ? (
+          <>
+            <button aria-pressed={inWater === "side"} onClick={() => openWater("side")} title="From the side, at the waterline">
+              Side
+            </button>
+            <button aria-pressed={inWater === "below"} onClick={() => openWater("below")} title="As a trout sees it, from below">
+              <span className="long">From below</span>
+              <span className="short">Below</span>
+            </button>
+            <button aria-pressed={still} onClick={() => setStill(!still)}>
+              <span className="long">Still water</span>
+              <span className="short">Still</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <button aria-pressed={follow} onClick={() => onFollowChange(!follow)}>
+              <span className="long">{follow ? "Following the action" : "Follow the action"}</span>
+              <span className="short">Follow</span>
+            </button>
+            <button
+              onClick={() => {
+                onFollowChange(false);
+                scene.current?.resetCamera();
+              }}
+            >
+              Whole fly
+            </button>
+            {guide && (
+              <button aria-pressed={proportions} onClick={() => setProportions(!proportions)} title="The gape grid and each part's proportions">
+                Proportions
+              </button>
+            )}
+            {pointUp && (
+              <button aria-pressed={turned} onClick={() => setTurned(!turned)} title="Tied hook point down, it swims point up">
+                As it swims
+              </button>
+            )}
+          </>
         )}
-        {pointUp && (
-          <button aria-pressed={turned} onClick={() => setTurned(!turned)} title="Tied hook point down, it swims point up">
-            As it swims
+        {water && (
+          <button aria-pressed={inWater !== null} onClick={() => openWater(inWater ? null : "side")} title="The finished fly in moving water">
+            <span className="long">In the water</span>
+            <span className="short">Water</span>
           </button>
         )}
       </div>

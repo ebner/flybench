@@ -4,6 +4,7 @@ import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
 import type { Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
+import { fishing, fishingText } from "../tying/fishing";
 import { ridesPointUp } from "../tying/hook";
 import { simulate, stepAt, stepEnd, stepProgress } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
@@ -87,6 +88,8 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   const sized = (s: typeof size) => (s === original.hook.size ? original : { ...original, hook: { ...original.hook, size: s } });
   const recipe = useMemo(() => sized(size), [original, size]);
   const build = useMemo(() => simulate(recipe), [recipe]);
+  const fishingFor = useMemo(() => fishing(recipe), [recipe]);
+  const [inWater, setInWater] = useState(false);
   const [follow, setFollowState] = useState(readFollow);
   const setFollow = (on: boolean) => {
     setFollowState(on);
@@ -294,6 +297,11 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           onCalloutClick={showInDressing}
           pointUp={ridesPointUp(recipe)}
           guide
+          water={fishingFor}
+          onWater={(on) => {
+            setInWater(on);
+            if (on) player.pause();
+          }}
           natural={compared ? { natural: compared, length: naturalLengthFor(compared, recipe), at: compare!.at } : null}
         />
         <div
@@ -302,12 +310,22 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           aria-live="polite"
           onClick={vise ? playNext : undefined}
         >
-          <p className="now-index">
-            Step {current + 1} of {build.steps.length}
-          </p>
-          <h2>{step.title}</h2>
-          <p className="now-text">{step.text}</p>
-          {mistakes.length > 0 && (
+          {inWater ? (
+            <>
+              <p className="now-index">The finished fly</p>
+              <h2>In the water</h2>
+              <p className="now-text">{fishingText(fishingFor)}</p>
+            </>
+          ) : (
+            <>
+              <p className="now-index">
+                Step {current + 1} of {build.steps.length}
+              </p>
+              <h2>{step.title}</h2>
+              <p className="now-text">{step.text}</p>
+            </>
+          )}
+          {!inWater && mistakes.length > 0 && (
             <details
               className="mistakes"
               open={showMistakes}

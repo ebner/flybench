@@ -4,6 +4,8 @@ id black-ant
 name "Black Ant"
 aliases "Fur Ant" "Black Fur Ant"
 type terrestrial
+// Floats half sunk in the film (see history).
+fishes film
 imitates terrestrial
 naturals ant
 difficulty beginner
