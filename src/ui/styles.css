@@ -625,7 +625,7 @@ select {
 .viewer-canvas {
   position: absolute;
   inset: 0;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 /* The fly casts a faint shadow on the paper behind it, as on the gallery plates. */
@@ -706,24 +706,47 @@ select {
   transform: rotate(36deg);
 }
 
+.viewer-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.35rem 0.8rem;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--ink) 80%, transparent);
+  color: var(--paper);
+  font-size: var(--step--1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Below the point instead, where above would run into the view buttons. */
+.callout.below span {
+  bottom: auto;
+  top: 1.6rem;
+}
+
+.callout.below::before {
+  transform: rotate(36deg);
+}
+
+.callout.flip.below::before {
+  transform: rotate(-36deg);
+}
+
 .callout[hidden] {
   display: none;
 }
 
-/* Long instructions scroll rather than squeeze the viewer, which keeps at least 45% of the stage. */
-.viewer {
-  min-height: 45%;
-}
-
+/* The instructions get a fixed share of the stage and scroll inside it, so the 3D view
+   keeps its size from step to step instead of jumping as the text gets longer or shorter. */
 .now {
-  min-height: 0;
+  flex: none;
+  height: var(--now-height, 20%);
   overflow-y: auto;
   padding: 0.9rem var(--gutter) 0.2rem;
   border-top: 1px solid var(--rule);
-}
-
-.transport {
-  flex: none;
 }
 
 .now-index {
@@ -742,18 +765,159 @@ select {
   min-height: 3.2em;
 }
 
+/* A wide stage has one row: the buttons, the step bar between them, vise mode and speed. */
 .transport {
+  flex: none;
   display: flex;
   align-items: center;
   gap: 0.35rem;
   padding: 0.5rem var(--gutter) 0.9rem;
 }
 
+.transport-buttons {
+  display: contents;
+}
+
+.step-bar {
+  order: 1;
+  flex: 1;
+  margin: 0 0.5rem;
+}
+
+.transport-buttons .vise-toggle,
+.transport-buttons select,
+.more {
+  order: 2;
+}
+
+/* The steps, one segment each: a tall enough strip to tap, with a thin bar drawn in it. */
+.step-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.step-segments {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  height: 2rem;
+  align-items: center;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+
+.step-segments > span {
+  flex: 1;
+  height: 0.5rem;
+  border-radius: 1px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.step-segments > span.current {
+  height: 0.8rem;
+}
+
+.step-segments > span > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.step-segments:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.step-count {
+  min-width: 3.2rem;
+  text-align: right;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.more {
+  position: relative;
+  display: none;
+  margin-left: auto;
+}
+
+.more-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.4rem);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  min-width: 11rem;
+  padding: 0.3rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  box-shadow: 0 0.4rem 1rem -0.4rem var(--specimen-shadow);
+}
+
+.transport .more-menu button {
+  display: block;
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.75rem;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+}
+
+.transport .more-menu button[aria-pressed="true"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* A narrow stage: the step bar gets its own row above one row of buttons, and vise mode
+   and speed move behind "more". */
+@container (max-width: 40rem) {
+  .transport {
+    display: block;
+    padding-top: 0.25rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .transport-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .step-bar {
+    margin: 0 0 0.2rem;
+  }
+
+  .transport-buttons .vise-toggle,
+  .transport-buttons select {
+    display: none;
+  }
+
+  .more {
+    display: block;
+    margin-left: auto;
+  }
+
+  .pattern.vise .stage .now h2 {
+    font-size: var(--step-2);
+  }
+
+  .pattern.vise .stage .now-text {
+    font-size: 1.1rem;
+  }
+}
+
 .transport button {
   display: grid;
   place-items: center;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: var(--paper-raised);
@@ -772,53 +936,13 @@ select {
 }
 
 .transport select {
-  height: 2.6rem;
+  height: 2.75rem;
   padding: 0 0.4rem;
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: var(--paper-raised);
 }
 
-.scrub {
-  position: relative;
-  flex: 1;
-  margin: 0 0.5rem;
-}
-
-.scrub input {
-  width: 100%;
-  accent-color: var(--accent);
-}
-
-/* A narrow stage (a phone, or beside the notes on a small window) can't fit the buttons and
-   a usable timeline on one row: the timeline gets its own. */
-@container (max-width: 40rem) {
-  .transport {
-    flex-wrap: wrap;
-  }
-
-  .scrub {
-    order: -1;
-    flex-basis: 100%;
-    margin: 0 0 0.5rem;
-  }
-}
-
-.ticks {
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: -5px;
-  height: 5px;
-  pointer-events: none;
-}
-
-.ticks span {
-  position: absolute;
-  width: 1px;
-  height: 5px;
-  background: var(--ink-faint);
-}
 
 .notes {
   padding: 1.5rem var(--gutter) 4rem;
@@ -1030,22 +1154,19 @@ select {
     gap: 1rem;
   }
 
-  /* Scrolled to from the callout: just below the pinned stage. */
-  .dressing div {
-    scroll-margin-top: calc(var(--header) + 68dvh + 0.75rem);
-  }
-
   .pattern {
     display: block;
   }
 
+  /* One column: the stage fills the screen below the header, and the notes follow it when
+     you scroll down, with the whole screen to themselves. */
   .stage {
-    top: var(--header);
-    z-index: 5;
-    height: 68dvh;
+    position: relative;
+    top: auto;
+    height: calc(100dvh - var(--header));
     border-right: 0;
     border-bottom: 1px solid var(--rule);
-    background: var(--paper);
+    --now-height: 30%;
   }
 
   .now {
@@ -1339,6 +1460,7 @@ select {
 .pattern.vise .stage {
   height: calc(100dvh - var(--header));
   border-right: 0;
+  --now-height: 34%;
 }
 
 .pattern.vise .now {
@@ -1480,10 +1602,7 @@ select {
   }
 
   .now {
+    height: auto;
     overflow: visible;
-  }
-
-  .dressing div {
-    scroll-margin-top: 0.75rem;
   }
 }

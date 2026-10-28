@@ -13,6 +13,7 @@ import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
 import { usePlayer } from "./usePlayer";
 import { NotFound } from "./NotFound";
+import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
 
 export function PatternPage({ id, step }: { id: string; step?: number }) {
@@ -35,7 +36,14 @@ const Icon = {
   pause: <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />,
   replay: <path d="M5 12a7 7 0 1 0 2.05-4.95M5 4v4h4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />,
   next: <path d="M16 5h2.5v14H16zM5 5l10 7-10 7z" />,
+  more: <path d="M5 10.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm7 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm7 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Z" />,
 };
+
+const SPEEDS: [number, string][] = [
+  [0.5, "Half speed"],
+  [1, "Normal speed"],
+  [2, "Double speed"],
+];
 
 function TransportIcon({ name }: { name: keyof typeof Icon }) {
   return (
@@ -122,10 +130,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : "Thread";
   const showInDressing = () => {
     setFlash(inUse);
-    // In one column the stage stays pinned at the top: bring the row up just below it
-    // (styles.css gives the rows a scroll margin for that) rather than to the middle, behind it.
-    const pinned = matchMedia("(max-width: 52rem)").matches;
-    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: pinned ? "start" : "center", behavior: "smooth" });
+    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: "center", behavior: "smooth" });
     setTimeout(() => setFlash(null), 1600);
   };
 
@@ -172,6 +177,26 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
     player.play();
   };
   const play = () => (vise ? playNext() : playAll());
+  // Back to the start of step 1, paused: holding the previous-step button, or Home.
+  const toStart = () => {
+    player.pause();
+    setStopAt(null);
+    player.seek(0);
+  };
+  const hold = useRef({ timer: 0, fired: false });
+  const [moreOpen, setMoreOpen] = useState(false);
+  useEffect(() => {
+    if (!moreOpen) return;
+    const close = (e: Event) => {
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !(e.target as Element).closest?.(".more")) setMoreOpen(false);
+    };
+    addEventListener("keydown", close);
+    addEventListener("pointerdown", close);
+    return () => {
+      removeEventListener("keydown", close);
+      removeEventListener("pointerdown", close);
+    };
+  }, [moreOpen]);
   const toggleVise = () => {
     // Playing on into the next steps is what vise mode stops: pause at this step's end.
     if (!vise && player.playing) setStopAt(stepEnd(step));
@@ -196,6 +221,9 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
         playStep(current + 1);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        toStart();
       } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         // Within the first second of a step, go to the previous one; otherwise replay this one.
@@ -234,7 +262,36 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
           {vise && <p className="vise-hint">Tap here to play the next step. Esc or “Leave vise mode” to go back.</p>}
         </div>
         <div className="transport">
-          <button onClick={() => playStep(current - 1)} disabled={current === 0} aria-label="Previous step">
+          <StepBar
+            build={build}
+            time={player.time}
+            onSeek={(t) => {
+              player.pause();
+              setStopAt(null);
+              player.seek(t);
+            }}
+          />
+          <div className="transport-buttons">
+          <button
+            onPointerDown={() => {
+              hold.current.fired = false;
+              hold.current.timer = window.setTimeout(() => {
+                hold.current.fired = true;
+                toStart();
+              }, 550);
+            }}
+            onPointerUp={() => clearTimeout(hold.current.timer)}
+            onPointerLeave={() => clearTimeout(hold.current.timer)}
+            onPointerCancel={() => clearTimeout(hold.current.timer)}
+            onContextMenu={(e) => e.preventDefault()}
+            onClick={() => {
+              if (hold.current.fired) hold.current.fired = false;
+              else playStep(current - 1);
+            }}
+            disabled={current === 0}
+            aria-label="Previous step"
+            title="Previous step (hold for step 1)"
+          >
             <TransportIcon name="previous" />
           </button>
           <button className="play" onClick={() => (player.playing ? player.pause() : play())} aria-label={player.playing ? "Pause" : "Play"}>
@@ -246,38 +303,35 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
           <button onClick={() => playStep(current + 1)} disabled={current === build.steps.length - 1} aria-label="Next step">
             <TransportIcon name="next" />
           </button>
-          <div className="scrub">
-            <input
-              type="range"
-              min={0}
-              max={build.duration}
-              step="any"
-              value={player.time}
-              onChange={(e) => {
-                player.pause();
-                setStopAt(null);
-                player.seek(Number(e.target.value));
-              }}
-              aria-label="Timeline"
-            />
-            <div className="ticks" aria-hidden="true">
-              {build.steps.slice(1).map((s) => (
-                <span key={s.index} style={{ left: `${(s.start / build.duration) * 100}%` }} />
-              ))}
-            </div>
-          </div>
-          <button
-            className="vise-toggle"
-            aria-pressed={vise}
-            onClick={toggleVise}
-          >
+          <button className="vise-toggle" aria-pressed={vise} onClick={toggleVise}>
             {vise ? "Leave vise mode" : "Vise mode"}
           </button>
           <select value={player.speed} onChange={(e) => player.setSpeed(Number(e.target.value))} aria-label="Speed">
-            <option value={0.5}>Half speed</option>
-            <option value={1}>Normal speed</option>
-            <option value={2}>Double speed</option>
+            {SPEEDS.map(([v, name]) => (
+              <option key={v} value={v}>
+                {name}
+              </option>
+            ))}
           </select>
+          {/* On a narrow stage, vise mode and speed are behind a "more" button. */}
+          <div className="more">
+            <button className="more-toggle" aria-expanded={moreOpen} aria-label="More" onClick={() => setMoreOpen(!moreOpen)}>
+              <TransportIcon name="more" />
+            </button>
+            {moreOpen && (
+              <div className="more-menu" onClick={() => setMoreOpen(false)}>
+                <button aria-pressed={vise} onClick={toggleVise}>
+                  {vise ? "Leave vise mode" : "Vise mode"}
+                </button>
+                {SPEEDS.map(([v, name]) => (
+                  <button key={v} aria-pressed={player.speed === v} onClick={() => player.setSpeed(v)}>
+                    {name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          </div>
         </div>
       </section>
 

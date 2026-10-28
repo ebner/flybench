@@ -21,6 +21,15 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
   const [unavailable, setUnavailable] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
+  const toolsRef = useRef<HTMLDivElement>(null);
+  // One finger scrolls the page; a sideways drag with one finger shows how to turn the fly.
+  const [hint, setHint] = useState(false);
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    if (!hint) return;
+    const t = setTimeout(() => setHint(false), 1800);
+    return () => clearTimeout(t);
+  }, [hint]);
   const scene = useRef<FlyScene | null>(null);
   const followChange = useRef(onFollowChange);
   followChange.current = onFollowChange;
@@ -61,6 +70,11 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
       const flip = width > here && there > here + 24 ? !flipped : flipped;
       el.classList.toggle("flip", flip);
       text.style.maxWidth = `${Math.max(96, flip ? left : right)}px`;
+      // Above the point it would run into the view buttons: put it below.
+      const tools = toolsRef.current?.getBoundingClientRect();
+      const box = container.current!.getBoundingClientRect();
+      const below = !!tools && point.y - 30 - text.offsetHeight < tools.bottom - box.top + 4;
+      el.classList.toggle("below", below);
     };
     scene.current = s;
     return () => {
@@ -95,7 +109,18 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
 
   return (
     <div className="viewer">
-      <div className="viewer-canvas" ref={container} />
+      <div
+        className="viewer-canvas"
+        ref={container}
+        onTouchStart={(e) => (touch.current = e.touches.length === 1 ? { x: e.touches[0]!.clientX, y: e.touches[0]!.clientY } : null)}
+        onTouchMove={(e) => {
+          const t = touch.current;
+          if (!t || e.touches.length !== 1) return;
+          const dx = Math.abs(e.touches[0]!.clientX - t.x);
+          if (dx > 24 && dx > 2 * Math.abs(e.touches[0]!.clientY - t.y)) setHint(true);
+        }}
+      />
+      {hint && <p className="viewer-hint">Use two fingers to turn and zoom the fly</p>}
       <button
         ref={label}
         className="callout"
@@ -106,7 +131,7 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
       >
         <span>{callout}</span>
       </button>
-      <div className="viewer-tools">
+      <div className="viewer-tools" ref={toolsRef}>
         <button aria-pressed={follow} onClick={() => onFollowChange(!follow)}>
           {follow ? "Following the action" : "Follow the action"}
         </button>
