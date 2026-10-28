@@ -1,4 +1,6 @@
+import { swatchRecipe } from "./catalog/swatch";
 import { findPattern } from "./patterns";
+import type { MaterialKind } from "./recipe/materials";
 import { FlyScene, VIEW_NAMES, type ViewName } from "./render/FlyScene";
 import { ridesPointUp } from "./tying/hook";
 import { simulate } from "./tying/simulate";
@@ -11,6 +13,7 @@ import { simulate } from "./tying/simulate";
  *     &fov=<degrees>    field of view (default 8: nearly free of perspective)
  *     &fit=sphere       same framing from every angle (turntables)
  *     &pose=pictured    as flies are usually pictured: point-up flies point up, others as tied
+ *   render.html?swatch=<kind>:<colour>&…   a material on a bare hook, framed close (Materials page)
  * Sets `data-ready` on <body> when the frame is drawn, or `data-error` on failure.
  * `window.turnTo(degrees)` turns the view around the vertical axis for turntable frames.
  */
@@ -27,7 +30,8 @@ declare global {
 
 const nextFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
 
-const pattern = findPattern(id);
+const swatch = params.get("swatch")?.match(/^([a-z-]+):(.+)$/);
+const pattern = swatch ? { recipe: swatchRecipe(swatch[1] as MaterialKind, swatch[2]!) } : findPattern(id);
 if (!pattern || !VIEW_NAMES.includes(view)) {
   document.body.dataset.error = !pattern ? `unknown pattern "${id}"` : `unknown view "${view}"`;
 } else {
@@ -42,6 +46,7 @@ if (!pattern || !VIEW_NAMES.includes(view)) {
   // Flies that swim point up (jigs, weighted eyes) are usually photographed that way; others as tied.
   if (params.get("pose") === "pictured" && ridesPointUp(pattern.recipe)) scene.setTurnedOver(true);
   scene.setView(view, 0, fit);
+  if (swatch) scene.setFraming("dressing");
   scene.setGrid(params.get("grid") === "1");
   scene.setTime(build.duration);
   window.turnTo = async (degrees) => {

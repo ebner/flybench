@@ -8,6 +8,8 @@ export type View = (typeof VIEWS)[number];
 
 export interface RenderOptions {
   pattern: string;
+  /** Instead of a pattern: a material swatch, "<kind>:<colour>". */
+  swatch?: string;
   view: View;
   grid?: boolean;
   transparent?: boolean;
@@ -66,13 +68,14 @@ export class Renderer {
       fov: String(options.fov ?? 8),
       fit: options.fit ?? "box",
       pose: options.pose ?? "tied",
+      ...(options.swatch ? { swatch: options.swatch } : {}),
     });
     await page.goto(`${this.base}render.html?${query}`);
     await page.waitForFunction(() => document.body.dataset.ready || document.body.dataset.error, null, { timeout: 60_000 });
     const error = await page.evaluate(() => document.body.dataset.error);
     if (error) {
       await page.close();
-      throw new Error(`${options.pattern}: ${error}`);
+      throw new Error(`${options.swatch ?? options.pattern}: ${error}`);
     }
     return page;
   }

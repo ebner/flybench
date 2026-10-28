@@ -4,7 +4,8 @@ import { CATALOG } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
 import { Plate } from "./Gallery";
-import { useRenders } from "./renders";
+import { useRenders, useSwatches } from "./renders";
+import { swatchName } from "../catalog/swatch";
 import { href } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
@@ -47,6 +48,7 @@ export function FlyBox() {
 
 export function Materials() {
   const owned = useStoredSet(INVENTORY_KEY);
+  const swatches = useSwatches();
   useEffect(() => {
     document.title = "Your materials, Flybench";
   }, []);
@@ -83,10 +85,15 @@ export function Materials() {
               {byKind.get(kind)!.map((color) => {
                 const key = inventoryKey({ kind, color });
                 const on = owned.has(key);
+                const picture = swatches?.[swatchName(kind, color)];
                 return (
-                  <button key={key} className={on ? "on" : ""} aria-pressed={on} onClick={() => owned.toggle(key)}>
-                    <span className="swatch" style={{ background: resolveColor(color === "natural" ? "#999999" : color) }} aria-hidden="true" />
-                    {colorWord(color, kind)}
+                  <button key={key} className={picture ? (on ? "on pictured" : "pictured") : on ? "on" : ""} aria-pressed={on} onClick={() => owned.toggle(key)}>
+                    {picture ? (
+                      <img src={picture} alt="" width={120} height={90} loading="lazy" />
+                    ) : (
+                      <span className="swatch" style={{ background: resolveColor(color === "natural" ? "#999999" : color) }} aria-hidden="true" />
+                    )}
+                    <span>{colorWord(color, kind)}</span>
                   </button>
                 );
               })}

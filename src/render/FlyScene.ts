@@ -87,6 +87,8 @@ export class FlyScene {
   private stepBounds: THREE.Box3[] = [];
   private currentStep = 0;
   private atEnd = false;
+  /** What resetCamera frames: the whole fly, or only what is tied on the hook (material swatches). */
+  private framing: "fly" | "dressing" = "fly";
   /** World point the current step works at (thread contact, material being wound), for callouts. */
   private anchor = new THREE.Vector3();
   private lastFrame = 0;
@@ -312,12 +314,19 @@ export class FlyScene {
     return box;
   }
 
+  setFraming(framing: "fly" | "dressing") {
+    this.framing = framing;
+    this.resetCamera();
+  }
+
   /** Frames the finished fly from the current view, with a small margin. */
   resetCamera() {
     if (!this.build || this.finished.isEmpty()) return;
     this.userMoved = false;
+    const subject =
+      this.framing === "dressing" ? this.stepBounds.reduce((all, b) => all.union(b), new THREE.Box3()).expandByScalar(0.12) : this.finished;
     // With the measuring grid on, leave room for its labels.
-    const framed = this.finished.clone().expandByScalar(this.grid ? 0.45 : 0);
+    const framed = subject.clone().expandByScalar(this.grid ? 0.45 : 0);
     const target = framed.getCenter(new THREE.Vector3());
     const view = this.viewDirection(this.orbit);
     // "sphere": the distance that fits the fly from every turntable angle, so its size
