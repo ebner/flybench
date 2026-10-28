@@ -208,7 +208,7 @@ how it is drawn and which extra properties it takes:
 | marabou    | `marabou` | |
 | cdc        | `cdc` | (can be wound: barbs lengthen from tip to butt) |
 | flash      | `krystal-flash`, `flashabou` | `count` |
-| feather    | `mallard-breast`, `teal-flank` (breast), `hackle-tips`, `saddle-feathers` (tip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
+| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
 | foam       | `foam`, `scud-back` | |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |

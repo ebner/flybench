@@ -43,12 +43,14 @@ export function sitePages(recipes: Recipe[], base: string): Page[] {
   const link = (path: string, text: string) => `<a href="${escape(base + path)}">${escape(text)}</a>`;
   const flyPath = (id: string) => `fly/${encodeURIComponent(id)}/`;
   const byName = [...recipes].sort((a, b) => fullName(a).localeCompare(fullName(b)));
+  // Patterns as the gallery counts them: a pattern's variants are versions of it.
+  const patterns = recipes.filter((r) => !r.variantOf).length;
 
   const pages: Page[] = [
     {
       path: "",
       title: SITE_TITLE,
-      description: `${recipes.length} fly patterns, each tied in front of you in 3D, one step at a time, with its materials, history and how to fish it.`,
+      description: `${patterns} fly patterns, each tied in front of you in 3D, one step at a time, with its materials, history and how to fish it.`,
       body:
         `<main class="gallery"><h1>${escape(SITE_TAGLINE)}</h1>` +
         `<p>Every pattern can be turned, paused and replayed one step at a time.</p><ul>` +
@@ -129,7 +131,7 @@ export function sitePages(recipes: Recipe[], base: string): Page[] {
     description: `${SITE_NAME} is a field guide to tying flies: every pattern tied in 3D, one step at a time, from cited dressings. Open source.`,
     body:
       `<main class="reading"><h1>About ${SITE_NAME}</h1>` +
-      `<p>${SITE_NAME} is a field guide to tying flies. Each of its ${recipes.length} patterns is tied in front of you in 3D, one step at a time, and comes with its materials, its history and how to fish it.</p>` +
+      `<p>${SITE_NAME} is a field guide to tying flies. Each of its ${patterns} patterns is tied in front of you in 3D, one step at a time, and comes with its materials, its history and how to fish it.</p>` +
       `<h2>Privacy</h2><p>No accounts, no cookies and no tracking. Your fly box, materials and settings stay in your browser. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.</p></main>`,
   });
 
