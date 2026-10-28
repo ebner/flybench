@@ -166,7 +166,7 @@ A wing tied all round a tube takes `spread=180`.
 Flies with dumbbell eyes and flies on jig hooks swim hook point up. Jig hooks imply it; for
 other flies say so with `rides point-up` (the default is `point-down`). The steps are always
 shown as tied, point down; the viewer offers to turn a point-up fly over, and the gallery
-pictures jig flies point up, as they are usually photographed.
+pictures every point-up fly point up, as they are usually photographed.
 
 ## Colours
 

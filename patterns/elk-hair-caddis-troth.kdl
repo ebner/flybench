@@ -1,5 +1,5 @@
-// Elk Hair Caddis after Al Troth's 1978 article: copper wire rib and untrimmed butts
-// (sources disagree on both; see history).
+// Elk Hair Caddis after Al Troth's 1978 article: the hair butts left untrimmed
+// (sources disagree on the butts and on the wire; see history).
 
 id elk-hair-caddis-troth
 name "Elk Hair Caddis"
@@ -11,13 +11,13 @@ difficulty intermediate
 species trout grayling
 season may june july august september
 origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
-description "The Elk Hair Caddis after Troth's 1978 article: a copper wire rib, and the hair butts left long instead of trimmed into a neat head."
+description "The Elk Hair Caddis after Troth's 1978 article: the hair butts left long instead of trimmed into a neat head."
 history """
-    Troth described the fly in Fly Tyer in 1978 (the Fall issue; some give November). The
-    Golden Fly Shop's account of the article has a body of fine copper wire, dubbing and
-    rooster hackle, which this variant follows; Fly Tyer's own reprint of his dressing, the
-    Federation of Fly Fishers' 1998 Fly of the Month and the Fly Fishers International
-    (FFI) skills award version give fine gold wire instead. Fly Tyer notes that the article
+    Troth described the fly in Fly Tyer in 1978 (the Fall issue; some give November). Fly
+    Tyer's own reprint of his dressing, the Federation of Fly Fishers' 1998 Fly of the Month
+    and the Fly Fishers International (FFI) skills award version give a fine gold wire rib,
+    which this variant follows; the Golden Fly Shop's account of the article has fine copper
+    wire instead. Fly Tyer notes that the article
     does not mention the clipped-hair head, which other tyers added. The FFI version, meant
     to be as close to Troth's original as possible, still clips the butts, but at an angle
     in line with the wing rather than square.
@@ -33,7 +33,7 @@ hook dry-standard size=14
 thread tan size="8/0"
 
 materials {
-    rib    copper-wire
+    rib    gold-wire
     body   dry-fly-dubbing color=tan
     // Assumption: fibres as in the parent pattern; the FFI says Troth liked them 1½ × the gape.
     hackle cock-hackle color=brown fibre=0.8

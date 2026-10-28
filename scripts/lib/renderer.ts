@@ -13,7 +13,7 @@ export interface RenderOptions {
   transparent?: boolean;
   fov?: number;
   fit?: "box" | "sphere";
-  /** "pictured": as flies are usually photographed (jig flies point up). Default: as tied. */
+  /** "pictured": as flies are usually photographed (point-up flies point up). Default: as tied. */
   pose?: "tied" | "pictured";
   width?: number;
   height?: number;
