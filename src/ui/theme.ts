@@ -4,6 +4,8 @@ export type ThemeChoice = "system" | "light" | "dark";
 export type Theme = "light" | "dark";
 
 const KEY = "flybench.theme";
+/** --paper in styles.css, for each theme. */
+const PAPER: Record<Theme, string> = { light: "#e9e7dd", dark: "#102a4c" };
 
 function readChoice(): ThemeChoice {
   try {
@@ -33,6 +35,8 @@ export function useTheme(): { choice: ThemeChoice; theme: Theme; setChoice: (c: 
   const theme = choice === "system" ? system : choice;
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    // The browser's own bars take the page's paper colour (as in index.html).
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute("content", PAPER[theme]);
   }, [theme]);
 
   const setChoice = (c: ThemeChoice) => {
