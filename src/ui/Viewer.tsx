@@ -129,7 +129,7 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
         onClick={onCalloutClick}
         tabIndex={-1}
       >
-        <span>{callout}</span>
+        <span key={callout}>{callout}</span>
       </button>
       <div className="viewer-tools" ref={toolsRef}>
         <button aria-pressed={follow} onClick={() => onFollowChange(!follow)}>

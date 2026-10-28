@@ -29,7 +29,9 @@ export function usePlayer(duration: number, stopAt: number | null): Player {
     let last = performance.now();
     let frame = requestAnimationFrame(function tick(now) {
       const s = state.current;
-      const dt = Math.min(0.1, (now - last) / 1000) * s.speed;
+      // A frame's timestamp can be a little earlier than the moment play was pressed: never
+      // run backwards, which would show the previous step for a frame.
+      const dt = Math.min(0.1, Math.max(0, (now - last) / 1000)) * s.speed;
       last = now;
       const limit = s.stopAt !== null && s.time < s.stopAt ? s.stopAt : s.duration;
       const next = Math.min(limit, s.time + dt);
