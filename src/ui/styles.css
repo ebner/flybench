@@ -966,6 +966,11 @@ select {
     gap: 1rem;
   }
 
+  /* Scrolled to from the callout: just below the pinned stage. */
+  .dressing div {
+    scroll-margin-top: calc(var(--header) + 68dvh + 0.75rem);
+  }
+
   .pattern {
     display: block;
   }
@@ -1369,4 +1374,31 @@ select {
 
 .viewer-unavailable p {
   max-width: 26rem;
+}
+
+/* A short window (a phone held sideways) has no room for a pinned stage with the viewer,
+   instructions and controls in it: everything scrolls with the page instead. */
+@media (max-height: 30rem) {
+  .site-header {
+    position: static;
+  }
+
+  .stage,
+  .pattern.vise .stage {
+    position: static;
+    height: auto;
+  }
+
+  .viewer {
+    flex: none;
+    height: 80dvh;
+  }
+
+  .now {
+    overflow: visible;
+  }
+
+  .dressing div {
+    scroll-margin-top: 0.75rem;
+  }
 }
