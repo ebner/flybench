@@ -13,7 +13,10 @@ import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
 import { usePlayer } from "./usePlayer";
 import { NotFound } from "./NotFound";
+import { naturalLengthFor } from "../catalog/naturals";
+import { findNatural } from "../naturals";
 import { PrintCard } from "./PrintCard";
+import { useNaturalPictures } from "./renders";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
 
@@ -209,6 +212,17 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   const hold = useRef({ timer: 0, fired: false });
   const [moreOpen, setMoreOpen] = useState(false);
   // The recipe card is made on the first request and kept (with its pictures) for more prints.
+  // What the fly imitates, which can be shown with it in the viewer, at the size its hook matches.
+  const naturals = recipe.naturals.flatMap((id) => findNatural(id) ?? []);
+  const naturalPictures = useNaturalPictures();
+  const [compare, setCompare] = useState<{ id: string; at: "beside" | "over" } | null>(null);
+  const compared = compare ? (findNatural(compare.id) ?? null) : null;
+  const showNatural = (next: typeof compare) => {
+    setCompare(next);
+    // On a phone the stage is above the notes: bring it into view.
+    const stage = document.querySelector(".stage");
+    if (next && stage && stage.getBoundingClientRect().bottom < 80) stage.scrollIntoView({ behavior: "smooth" });
+  };
   const [printRequest, setPrintRequest] = useState(0);
   const [preparing, setPreparing] = useState(false);
   const printed = useCallback(() => setPreparing(false), []);
@@ -280,6 +294,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           onCalloutClick={showInDressing}
           pointUp={ridesPointUp(recipe)}
           guide
+          natural={compared ? { natural: compared, length: naturalLengthFor(compared, recipe), at: compare!.at } : null}
         />
         <div
           className="now"
@@ -428,6 +443,34 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           </button>
         </div>
         {printRequest > 0 && <PrintCard recipe={recipe} build={build} request={printRequest} onPrinted={printed} />}
+
+        {naturals.length > 0 && (
+          <section className="imitates">
+            <h3>What it imitates</h3>
+            <ul>
+              {naturals.map((n) => (
+                <li key={n.id}>
+                  <a href={href.natural(n.id)} className="imitates-natural">
+                    {naturalPictures?.[n.id] && <img src={naturalPictures[n.id]} alt="" width={96} height={64} loading="lazy" />}
+                    <span>{n.name}</span>
+                  </a>
+                  <span className="compare">
+                    {(["beside", "over"] as const).map((at) => (
+                      <button
+                        key={at}
+                        className="link-button"
+                        aria-pressed={compare?.id === n.id && compare.at === at}
+                        onClick={() => showNatural(compare?.id === n.id && compare.at === at ? null : { id: n.id, at })}
+                      >
+                        {at === "beside" ? "Beside the fly" : "Over the fly"}
+                      </button>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <h3>Dressing</h3>
         <dl className="dressing">

@@ -4,6 +4,8 @@
  *   spin.webp   a turntable: FRAMES views in one row, played on hover
  * and a swatch for every material and colour the patterns use, for the Materials page:
  *   materials/<kind>--<colour>.webp, listed in materials/manifest.json
+ * and a picture of every natural, for the Naturals pages:
+ *   naturals/<id>.webp, listed in naturals/manifest.json
  *
  *   pnpm render:catalog           only patterns whose recipe or renderer changed
  *   pnpm render:catalog --force   everything
@@ -31,9 +33,12 @@ const MANIFEST = `${OUT}/manifest.json`;
 const SWATCHES = `${OUT}/materials`;
 const SWATCH_MANIFEST = `${SWATCHES}/manifest.json`;
 const SWATCH = { width: 240, height: 180 };
+const NATURALS_OUT = `${OUT}/naturals`;
+const NATURAL_MANIFEST = `${NATURALS_OUT}/manifest.json`;
+const NATURAL_FRAME = { width: 480, height: 320 };
 /** Code that affects how a finished fly looks. */
 const RENDER_SOURCES = [
-  "src/render", "src/tying", "src/recipe/materials.ts", "src/recipe/schema.ts",
+  "src/render", "src/tying", "src/recipe/materials.ts", "src/recipe/schema.ts", "src/recipe/natural.ts",
   "src/render-page.ts", "render.html", "scripts/lib/renderer.ts", "scripts/render-catalog.ts",
   // Dependency versions: a three.js upgrade can change how everything looks.
   "pnpm-lock.yaml",
@@ -87,7 +92,17 @@ const swatchTodo = swatches
   .filter((s) => values.force || swatchManifest[s.name] !== s.hash || !existsSync(`${SWATCHES}/${s.name}.webp`));
 for (const name of Object.keys(swatchManifest)) if (!swatches.some((s) => s.name === name)) delete swatchManifest[name];
 
-if (todo.length === 0 && swatchTodo.length === 0) {
+// Naturals: every naturals/*.kdl.
+const naturalManifest: Record<string, string> = existsSync(NATURAL_MANIFEST) ? JSON.parse(await readFile(NATURAL_MANIFEST, "utf8")) : {};
+const naturalIds = (await readdir("naturals")).filter((f) => f.endsWith(".kdl")).map((f) => f.replace(/\.kdl$/, "")).sort();
+const naturalTodo: { id: string; hash: string }[] = [];
+for (const id of naturalIds) {
+  const hash = createHash("sha256").update(codeHash).update(await readFile(`naturals/${id}.kdl`)).digest("hex").slice(0, 16);
+  if (values.force || naturalManifest[id] !== hash || !existsSync(`${NATURALS_OUT}/${id}.webp`)) naturalTodo.push({ id, hash });
+}
+for (const id of Object.keys(naturalManifest)) if (!naturalIds.includes(id)) delete naturalManifest[id];
+
+if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0) {
   console.log("All renders are up to date.");
 } else {
   const renderer = await Renderer.start();
@@ -113,6 +128,15 @@ if (todo.length === 0 && swatchTodo.length === 0) {
         }
       }),
     );
+    await mkdir(NATURALS_OUT, { recursive: true });
+    for (const n of naturalTodo) {
+      const out = `${NATURALS_OUT}/${n.id}.png`;
+      await renderer.render({ pattern: "", natural: n.id, view: "default", transparent: true, fov: 20, ...NATURAL_FRAME, out });
+      await sharp(out).webp({ quality: 85, alphaQuality: 90 }).toFile(`${NATURALS_OUT}/${n.id}.webp`);
+      await unlink(out);
+      naturalManifest[n.id] = n.hash;
+      console.log(`${NATURALS_OUT}/${n.id}`);
+    }
     await mkdir(SWATCHES, { recursive: true });
     const swatchQueue = [...swatchTodo];
     await Promise.all(
@@ -132,4 +156,5 @@ if (todo.length === 0 && swatchTodo.length === 0) {
   }
 }
 await writeFile(MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(manifest).sort()), null, 2) + "\n");
+await writeFile(NATURAL_MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(naturalManifest).sort()), null, 2) + "\n");
 await writeFile(SWATCH_MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(swatchManifest).sort()), null, 2) + "\n");

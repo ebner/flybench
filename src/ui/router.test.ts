@@ -12,6 +12,8 @@ describe("routes", () => {
     expect(parseRoute("fly/red-tag/4")).toEqual({ page: "fly", id: "red-tag", step: 4 });
     expect(parseRoute("techniques/")).toEqual({ page: "techniques" });
     expect(parseRoute("technique/palmering/")).toEqual({ page: "technique", id: "palmering" });
+    expect(parseRoute("naturals/")).toEqual({ page: "naturals" });
+    expect(parseRoute("natural/mayfly-dun/")).toEqual({ page: "natural", id: "mayfly-dun" });
     expect(parseRoute("learn")).toEqual({ page: "learn" });
     expect(parseRoute("about/")).toEqual({ page: "about" });
     expect(parseRoute("a/b/c")).toEqual({ page: "not-found", path: "a/b/c" });

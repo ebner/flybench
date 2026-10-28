@@ -72,3 +72,4 @@ export function useStoredSet(key: string): {
 
 export const FLY_BOX_KEY = "flybench.flybox";
 export const INVENTORY_KEY = "flybench.inventory";
+export const REGION_KEY = "flybench.region";

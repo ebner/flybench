@@ -5,6 +5,7 @@ import { About, AUTHOR, REPO_URL } from "./About";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
+import { NaturalPage, NaturalsIndex } from "./Naturals";
 import { NotFound } from "./NotFound";
 import { FlyBox, Materials } from "./Personal";
 import { TechniquePage, TechniquesIndex } from "./Techniques";
@@ -19,7 +20,7 @@ export function App() {
   useEffect(() => {
     if (route.page === "gallery") document.title = SITE_TITLE;
     if (!restoresScroll()) window.scrollTo(0, 0);
-  }, [route.page, route.page === "fly" || route.page === "technique" ? route.id : null]);
+  }, [route.page, route.page === "fly" || route.page === "technique" || route.page === "natural" ? route.id : null]);
 
   return (
     <>
@@ -49,6 +50,8 @@ export function App() {
         {route.page === "box" && <FlyBox />}
         {route.page === "materials" && <Materials />}
         {route.page === "about" && <About />}
+        {route.page === "naturals" && <NaturalsIndex />}
+        {route.page === "natural" && <NaturalPage id={route.id} />}
         {route.page === "not-found" && (
           <NotFound heading="There is nothing at this address">
             <p>

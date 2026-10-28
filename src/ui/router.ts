@@ -21,11 +21,13 @@ export type Route =
   | { page: "about" }
   | { page: "box" }
   | { page: "materials" }
+  | { page: "naturals" }
+  | { page: "natural"; id: string }
   | { page: "not-found"; path: string };
 
 const BASE = import.meta.env.BASE_URL;
 
-const SINGLE = ["techniques", "learn", "about", "box", "materials"] as const;
+const SINGLE = ["techniques", "learn", "about", "box", "materials", "naturals"] as const;
 
 /** Parses a path relative to the site's base, with its query: "fly/red-tag/?step=4". */
 export function parseRoute(relative: string): Route {
@@ -55,6 +57,7 @@ export function parseRoute(relative: string): Route {
     if (single) return { page: single };
   }
   if (parts[0] === "technique" && parts[1] && parts.length === 2) return { page: "technique", id: parts[1] };
+  if (parts[0] === "natural" && parts[1] && parts.length === 2) return { page: "natural", id: parts[1] };
   return { page: "not-found", path };
 }
 
@@ -80,6 +83,8 @@ export const href = {
   about: () => `${BASE}about/`,
   box: () => `${BASE}box/`,
   materials: () => `${BASE}materials/`,
+  naturals: () => `${BASE}naturals/`,
+  natural: (id: string) => `${BASE}natural/${encodeURIComponent(id)}/`,
 };
 
 /** The address of a page. */
@@ -91,6 +96,8 @@ export function routeHref(route: Route): string {
       return href.fly(route.id, route.step, route.size);
     case "technique":
       return href.technique(route.id);
+    case "natural":
+      return href.natural(route.id);
     case "not-found":
       return BASE + route.path;
     default:

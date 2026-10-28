@@ -83,6 +83,7 @@ of the published site.
 
 ```
 patterns/          fly recipes (KDL)
+naturals/          the insects, shrimps and fish the flies imitate (KDL), with hatch months
 docs/              the recipe schema, how to research and write a pattern, the product plan
 src/recipe/        KDL → object mapping, Zod schema, materials catalog,
                    semantic and catalog-level validation
