@@ -86,7 +86,7 @@ export function Gallery({ query }: { query: string }) {
             type="search"
             value={filters.q ?? ""}
             onChange={(e) => setFilters({ ...filters, q: e.target.value || undefined })}
-            placeholder="Search by name, insect or material"
+            placeholder="Name, insect or material"
             autoComplete="off"
           />
         </label>
