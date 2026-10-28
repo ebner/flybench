@@ -195,6 +195,8 @@ export class FlyScene {
    * appearing with the step that ties it. `color` is the theme's ink for lines and labels.
    */
   setProportions(on: boolean, color?: string) {
+    // Already showing: a new colour (the theme changed) or a rebuild leaves the camera where it is.
+    const redraw = on && this.guide !== null;
     if (color) this.guideColor = color;
     if (this.guide) {
       disposeTree(this.guide);
@@ -206,7 +208,7 @@ export class FlyScene {
       this.guideView = on;
       this.setView(on ? "side" : "default", 0, this.fit);
     }
-    this.setGrid(on, this.guideColor);
+    this.setGrid(on, this.guideColor, !redraw);
     if (!on || !this.build) return;
     const guide = new THREE.Group();
     const space = this.space!;
@@ -239,7 +241,7 @@ export class FlyScene {
     this.fly.add(guide);
     this.showGuide();
     // Framed again now that the measurements are there (following does this by itself).
-    this.resetCamera();
+    if (!redraw) this.resetCamera();
   }
 
   private showGuide() {
@@ -305,7 +307,7 @@ export class FlyScene {
    * A measuring grid in the plane of the hook: thin lines every quarter gape, strong lines
    * every gape, labelled in gapes. x = 0 is the start of the bend, y = 0 the shank.
    */
-  setGrid(on: boolean, color = "#2a4a6a") {
+  setGrid(on: boolean, color = "#2a4a6a", reframe = true) {
     if (this.grid) {
       this.grid.traverse((o) => {
         if (o instanceof THREE.LineSegments || o instanceof THREE.Sprite) {
@@ -321,7 +323,7 @@ export class FlyScene {
     if (!on) return;
     this.grid = measuringGrid(this.finished.isEmpty() ? new THREE.Box3(new THREE.Vector3(-1, -1, 0), new THREE.Vector3(3, 1, 0)) : this.finished, color);
     this.scene.add(this.grid);
-    this.resetCamera();
+    if (reframe) this.resetCamera();
   }
 
   /** Follow the action (true) or leave the camera where the user puts it (false). */
