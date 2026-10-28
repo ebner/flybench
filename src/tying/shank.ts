@@ -75,22 +75,25 @@ export function bendPath(hook: HookModel, step = 0.02): Vec2[] {
   const points: Vec2[] = [];
   // A tube or Waddington has no bend of its own: the treble behind it is drawn separately.
   if (hook.tube) return points;
-  // The bend: a half circle continuing the shank's curve, so the gape (inside of
-  // shank to inside of point) is one unit.
+  // The bend: an arc continuing the shank's curve, of a radius that makes the gape (inside
+  // of shank to inside of point) one unit on a straight shank. It turns until the point runs
+  // parallel to the hook's axis (eye to bend), as on real hooks: a half circle on a straight
+  // shank, less on a curved one, whose rear already slopes down into the bend.
   const start = shankAt(hook, 0);
   const R = (1 + 2 * hook.wireRadius) / 2;
   const back = Math.atan2(-start.t.y, -start.t.x);
+  const sweep = Math.PI - Math.atan2(start.t.y, start.t.x);
   // Centre of the bend lies to the left of travel when heading back (i.e. below the shank).
   const cx = start.p.x + R * Math.cos(back + Math.PI / 2);
   const cy = start.p.y + R * Math.sin(back + Math.PI / 2);
-  const steps = Math.ceil((Math.PI * R) / step);
+  const steps = Math.ceil((sweep * R) / step);
   for (let i = 0; i <= steps; i++) {
-    const a = back - Math.PI / 2 + (Math.PI * i) / steps;
+    const a = back - Math.PI / 2 + (sweep * i) / steps;
     points.push({ x: cx + R * Math.cos(a), y: cy + R * Math.sin(a) });
   }
   // The point section, rising slightly towards the shank.
   const end = points[points.length - 1]!;
-  const dir = back + Math.PI;
+  const dir = back + sweep;
   const rise = 0.12;
   const n = Math.ceil(hook.pointLength / step);
   for (let i = 1; i <= n; i++) {

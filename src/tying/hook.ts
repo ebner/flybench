@@ -61,12 +61,12 @@ export const HOOK_MODELS: Record<HookModelId, HookModel> = {
   },
   "emerger-curved": {
     label: "Curved emerger hook",
-    shankLength: 2.3, shankCurve: 45, wireRadius: 0.045, eyeRadius: 0.17, eyeAngle: 20, pointLength: 0.75,
+    shankLength: 2.3, shankCurve: 45, wireRadius: 0.045, eyeRadius: 0.17, eyeAngle: 20, pointLength: 0.6,
     example: "Partridge 15BN Klinkhamer",
   },
   "scud-curved": {
     label: "Curved scud and pupa hook",
-    shankLength: 1.9, shankCurve: 75, wireRadius: 0.055, eyeRadius: 0.17, eyeAngle: 15, pointLength: 0.75,
+    shankLength: 1.9, shankCurve: 75, wireRadius: 0.055, eyeRadius: 0.17, eyeAngle: 15, pointLength: 0.5,
     example: "TMC 2457",
   },
   "salmon-up-eye": {
