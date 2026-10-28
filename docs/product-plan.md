@@ -12,7 +12,8 @@ personal data in browser storage (no accounts, no sync).
 
 - Beginners and experienced tyers, with **layered detail**: concise by default,
   expandable explanations (technique lessons) for beginners.
-- English only for now; keep UI strings in one place so translation stays possible.
+- English for now; Swedish and German planned (milestone 12), with a glossary that keeps
+  fly-tying terms consistent. Keep UI strings in one place so translation stays possible.
 
 ## Catalog
 
