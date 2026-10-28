@@ -26,6 +26,8 @@ export function Studio() {
   openFile.current = file;
   const [status, setStatus] = useState("Loading patterns…");
   const [creating, setCreating] = useState(false);
+  // A new pattern's id is checked against the saved files, so they must be loaded first.
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     // A load that has been superseded (StrictMode runs this twice) must not replace the editor's text.
@@ -37,10 +39,12 @@ export function Studio() {
       setSaved(new Map(files.map((f, i) => [f, texts[i]!])));
       const wanted = new URLSearchParams(location.search).get("pattern");
       const first = wanted && files.includes(`${wanted}.kdl`) ? `${wanted}.kdl` : files[0] ?? null;
-      if (first) {
+      // A new pattern may have been opened while the files were loading: keep it.
+      if (first && openFile.current === null) {
         setFile(first);
         setText(texts[files.indexOf(first)]!);
       }
+      setLoaded(true);
       setStatus("");
     })().catch((e: unknown) => {
       if (!stale) setStatus(`Couldn't load the patterns: ${String(e)}. Is this the dev server (pnpm dev)?`);
@@ -142,7 +146,9 @@ export function Studio() {
         {creating ? (
           <NewPatternForm existing={files} onCreate={create} onCancel={() => setCreating(false)} />
         ) : (
-          <button onClick={() => setCreating(true)}>New pattern</button>
+          <button onClick={() => setCreating(true)} disabled={!loaded}>
+            New pattern
+          </button>
         )}
         <button className="primary" onClick={save} disabled={!dirty}>
           Save
