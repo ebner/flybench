@@ -4,6 +4,7 @@ id parachute-adams
 name "Parachute Adams"
 type dry
 imitates mayfly
+naturals mayfly-dun
 difficulty intermediate
 species trout
 season april may june july august september

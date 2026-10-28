@@ -5,6 +5,7 @@ name "Goddard Caddis"
 aliases "G&H Sedge" "Goddard Sedge"
 type dry
 imitates caddis
+naturals caddis-adult
 difficulty advanced
 species trout grayling
 season june july august september

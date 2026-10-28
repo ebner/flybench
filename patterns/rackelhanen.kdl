@@ -5,6 +5,7 @@ name "Rackelhanen"
 aliases "Rackelhahn" "Polysedge" "Honk"
 type dry
 imitates caddis
+naturals caddis-adult caddis-pupa
 difficulty beginner
 species trout grayling char
 season june july august september

@@ -2,7 +2,7 @@
 
 id leech
 name "Leech"
-group crustacean
+group leech
 stage adult
 examples "freshwater leeches (Erpobdellidae)"
 description "A soft, flattened, segmented worm with a sucker at each end, swimming with slow undulations of the whole body. Black, brown or olive."

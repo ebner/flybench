@@ -4,6 +4,7 @@ id stimulator
 name "Stimulator"
 type dry
 imitates stonefly caddis attractor
+naturals stonefly-adult caddis-adult grasshopper
 difficulty intermediate
 species trout grayling
 season may june july august september october

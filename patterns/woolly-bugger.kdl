@@ -4,6 +4,7 @@ id woolly-bugger
 name "Woolly Bugger"
 type streamer
 imitates baitfish attractor
+naturals leech fry-minnow sculpin damselfly-nymph
 difficulty beginner
 species trout bass panfish sea-trout
 season january february march april may june july august september october november december

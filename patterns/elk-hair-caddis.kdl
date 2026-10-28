@@ -5,6 +5,7 @@ name "Elk Hair Caddis"
 aliases "EHC"
 type dry
 imitates caddis
+naturals caddis-adult
 difficulty intermediate
 species trout grayling
 season may june july august september

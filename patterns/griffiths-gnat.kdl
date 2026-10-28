@@ -4,6 +4,7 @@ id griffiths-gnat
 name "Griffith's Gnat"
 type midge
 imitates chironomid
+naturals midge-adult
 difficulty beginner
 species trout grayling
 season january february march april may june july august september october november december

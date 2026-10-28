@@ -5,6 +5,7 @@ name "Black Ant"
 aliases "Fur Ant" "Black Fur Ant"
 type terrestrial
 imitates terrestrial
+naturals ant
 difficulty beginner
 species trout panfish
 season may june july august september

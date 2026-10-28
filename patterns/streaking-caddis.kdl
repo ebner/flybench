@@ -4,6 +4,7 @@ id streaking-caddis
 name "Streaking Caddis"
 type dry
 imitates caddis
+naturals caddis-adult
 difficulty intermediate
 species trout grayling
 season june july august

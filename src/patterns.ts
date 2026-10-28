@@ -1,4 +1,5 @@
 import { CatalogSearch, catalogEntries } from "./catalog/search";
+import { NATURALS } from "./naturals";
 import { validateCatalog } from "./recipe/catalog";
 import { formatError } from "./recipe/errors";
 import { loadRecipe, locate } from "./recipe/load";
@@ -27,7 +28,7 @@ for (const [path, text] of Object.entries(sources)) {
   else PATTERN_ERRORS.push(...result.errors.map((e) => `${file}: ${formatError(e)}`));
 }
 PATTERN_ERRORS.push(
-  ...validateCatalog(loaded).map((e) => `${e.file}: ${formatError(locate(texts.get(e.file)!, { message: e.message, path: e.path }))}`),
+  ...validateCatalog(loaded, new Set(NATURALS.map((n) => n.id))).map((e) => `${e.file}: ${formatError(locate(texts.get(e.file)!, { message: e.message, path: e.path }))}`),
 );
 
 export const PATTERNS: Pattern[] = loaded.sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));

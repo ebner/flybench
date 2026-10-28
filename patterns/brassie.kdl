@@ -4,6 +4,7 @@ id brassie
 name "Brassie"
 type midge
 imitates chironomid
+naturals midge-larva midge-pupa caddis-larva-free
 difficulty beginner
 species trout
 season january february march april may june july august september october november december

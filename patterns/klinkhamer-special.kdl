@@ -5,6 +5,7 @@ name "Klinkhåmer Special"
 aliases "Klinkhammer" "Klinki" "LT Caddis"
 type emerger
 imitates caddis mayfly
+naturals caddis-pupa mayfly-emerger
 difficulty intermediate
 species trout grayling
 season may june july august september

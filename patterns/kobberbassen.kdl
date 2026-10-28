@@ -5,6 +5,7 @@ name "Kobberbassen"
 aliases "Copper Bully" "Kobberlusen" "Copper Louse"
 type saltwater
 imitates crustacean
+naturals freshwater-shrimp
 difficulty beginner
 species sea-trout
 season january february march april may june july august september october november december

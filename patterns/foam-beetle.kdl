@@ -4,6 +4,7 @@ id foam-beetle
 name "Foam Beetle"
 type terrestrial
 imitates terrestrial
+naturals beetle
 difficulty beginner
 species trout panfish
 season june july august september

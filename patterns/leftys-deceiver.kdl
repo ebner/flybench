@@ -5,6 +5,7 @@ name "Lefty's Deceiver"
 aliases "Deceiver"
 type saltwater
 imitates baitfish
+naturals marine-baitfish
 difficulty intermediate
 species striped-bass bass pike
 season january february march april may june july august september october november december

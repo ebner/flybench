@@ -5,6 +5,7 @@ name "Coch-y-Bonddu"
 aliases "Coch-y-Bondhu" "Shorn Fly" "Marlow Buzz" "Bracken Clock"
 type dry
 imitates terrestrial
+naturals beetle
 difficulty beginner
 species trout grayling sea-trout
 season may june july august

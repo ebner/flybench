@@ -5,6 +5,7 @@ name "Clouser Minnow"
 aliases "Clouser Deep Minnow" "Clouser"
 type saltwater
 imitates baitfish
+naturals marine-baitfish sculpin fry-minnow
 difficulty beginner
 rides point-up
 species bass striped-bass bonefish trout pike

@@ -5,6 +5,7 @@ name "Partridge & Orange"
 aliases "Orange Partridge" "Partridge and Orange"
 type wet
 imitates mayfly caddis
+naturals caddis-pupa mayfly-emerger mayfly-spinner
 difficulty beginner
 species trout grayling
 season april may june july august september

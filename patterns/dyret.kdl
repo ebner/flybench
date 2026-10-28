@@ -5,6 +5,7 @@ name "Dyret"
 aliases "The Beast" "The Animal"
 type emerger
 imitates caddis
+naturals caddis-pupa caddis-adult
 difficulty beginner
 species trout grayling
 season june july august september

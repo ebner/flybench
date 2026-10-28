@@ -4,6 +4,7 @@ id zebra-midge
 name "Zebra Midge"
 type midge
 imitates chironomid
+naturals midge-pupa
 difficulty beginner
 species trout
 season january february march april may june july august september october november december

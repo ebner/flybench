@@ -5,6 +5,7 @@ name "Greenwell's Glory"
 aliases "Greenwell"
 type wet
 imitates mayfly
+naturals mayfly-emerger
 difficulty intermediate
 species trout grayling
 season march april may september

@@ -4,6 +4,7 @@ id black-pennell
 name "Black Pennell"
 type wet
 imitates chironomid attractor
+naturals midge-pupa
 difficulty beginner
 species trout sea-trout
 season april may june july august september

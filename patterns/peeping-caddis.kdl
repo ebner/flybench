@@ -5,6 +5,7 @@ name "Peeping Caddis"
 aliases "Peeking Caddis"
 type nymph
 imitates caddis
+naturals caddis-larva-cased
 difficulty intermediate
 species grayling trout
 season january february march april may june july august september october november december

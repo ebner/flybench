@@ -7,9 +7,17 @@ export interface CatalogError {
   path: string[];
 }
 
-/** Rules that span several recipes: unique ids, and variants pointing at a main pattern. */
-export function validateCatalog(entries: { file: string; recipe: Recipe }[]): CatalogError[] {
+/**
+ * Rules that span several recipes: unique ids, variants pointing at a main pattern, and
+ * (given the naturals' ids) naturals that exist.
+ */
+export function validateCatalog(entries: { file: string; recipe: Recipe }[], naturals?: ReadonlySet<string>): CatalogError[] {
   const errors: CatalogError[] = [];
+  if (naturals) {
+    for (const e of entries) {
+      for (const n of e.recipe.naturals) if (!naturals.has(n)) errors.push({ file: e.file, message: `naturals: no natural "${n}" in naturals/`, path: ["naturals"] });
+    }
+  }
   const byId = new Map<string, { file: string; recipe: Recipe }>();
   for (const e of entries) {
     const other = byId.get(e.recipe.id);

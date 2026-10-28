@@ -5,6 +5,7 @@ name "Grey Duster"
 aliases "Grey Dusty" "Duster"
 type dry
 imitates mayfly attractor
+naturals mayfly-emerger mayfly-dun midge-adult
 difficulty beginner
 species trout grayling
 season may june july august september

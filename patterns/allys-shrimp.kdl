@@ -5,6 +5,7 @@ name "Ally's Shrimp"
 aliases "Allys Shrimp" "Ally Shrimp"
 type salmon
 imitates crustacean
+naturals prawn
 difficulty intermediate
 species salmon sea-trout
 season march april may june july august september october

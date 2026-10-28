@@ -5,6 +5,7 @@ name "Prince Nymph"
 aliases "Bead Head Prince" "Brown Forked Tail Nymph"
 type nymph
 imitates stonefly caddis attractor
+naturals stonefly-nymph caddis-larva-free
 difficulty intermediate
 species trout
 season january february march april may june july august september october november december

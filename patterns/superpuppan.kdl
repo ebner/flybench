@@ -5,6 +5,7 @@ name "Superpuppan"
 aliases "Super Pupa" "Floating Caddis Pupa" "Superpubban"
 type emerger
 imitates caddis
+naturals caddis-pupa
 difficulty beginner
 species trout grayling
 season june july august september

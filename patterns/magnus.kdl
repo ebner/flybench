@@ -4,6 +4,7 @@ id magnus
 name "Magnus"
 type saltwater
 imitates crustacean baitfish
+naturals prawn fry-minnow
 difficulty beginner
 species sea-trout
 season january february march april may june july august september october november december

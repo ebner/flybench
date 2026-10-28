@@ -5,6 +5,7 @@ name "Snipe & Purple"
 aliases "Dark Snipe" "Snipe and Purple"
 type wet
 imitates mayfly
+naturals mayfly-emerger mayfly-nymph-swimming midge-pupa
 difficulty beginner
 species trout grayling
 season march april may september october

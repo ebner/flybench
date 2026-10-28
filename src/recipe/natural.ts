@@ -11,7 +11,7 @@ import { Color, MONTHS, Source } from "./schema";
  * size is a range in millimetres, so a natural can be shown to scale beside a fly.
  */
 
-export const NATURAL_GROUPS = ["mayfly", "caddis", "stonefly", "chironomid", "damselfly", "terrestrial", "baitfish", "crustacean"] as const;
+export const NATURAL_GROUPS = ["mayfly", "caddis", "stonefly", "chironomid", "damselfly", "terrestrial", "baitfish", "crustacean", "leech"] as const;
 
 export const STAGES = ["nymph", "larva", "pupa", "emerger", "dun", "spinner", "adult", "juvenile"] as const;
 

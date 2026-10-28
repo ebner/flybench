@@ -5,6 +5,7 @@ name "Europea 12"
 aliases "E-12"
 type dry
 imitates caddis
+naturals caddis-adult
 difficulty intermediate
 species trout grayling
 season may june july august september
