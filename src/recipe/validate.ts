@@ -44,6 +44,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number }
   >();
   let thread: number | null = null;
+  let weighted = false;
   let finished = false;
   /** A material that the next step has to tie off or secure. */
   let pending: { material: string; rear: boolean } | null = null;
@@ -85,6 +86,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     if (step.op === "slide-bead") {
       if (archetype !== "bead") err(`"${step.material}" is not a bead`, [...path, "material"]);
       else if (thread !== null) err("slide the bead on before attaching the thread", path);
+      // A bead can't pass over wire already on the shank.
+      else if (weighted) err("slide the bead on before weighting the shank", path);
       else if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, path);
       else materials.set(step.material, { state: "done", at: 1, butts: false });
       return;
@@ -94,6 +97,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       if (step.to <= step.from + POSITION_TOLERANCE) err("the weighting must run forward from `from` to `to`", [...path, "to"]);
       if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, [...path, "material"]);
       else materials.set(step.material, { state: "done", at: step.from, butts: false });
+      weighted = true;
       return;
     }
     if (step.op === "attach-thread") {

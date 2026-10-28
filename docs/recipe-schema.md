@@ -261,8 +261,8 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 
 ### Tying rules (semantic validation)
 
-- Beads go on before the thread; nothing else but weighting may come before `attach-thread`,
-  which occurs once.
+- Beads go on before the thread and before any weighting; nothing else but weighting may
+  come before `attach-thread`, which occurs once.
 - A material is tied in once and wound at most once. Dubbing is only used with `dub`.
 - Hair, feathers, biots, marabou, flash and legs need a `length`; feathers point back (no `forward`). `angle` needs a `length`. `spread` only applies
   to material tied in with a length (tags, tails, wings; for feathers it makes a pair);

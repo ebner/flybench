@@ -152,7 +152,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       break;
     case "wrap-thread":
       text = step.turns
-        ? `Wrap the thread to ${at(step.to)} in ${step.turns} open turns.`
+        ? `Wrap the thread to ${at(step.to)} in ${countText(step.turns, "open turns")}.`
         : `Wrap the thread to ${at(step.to)} in touching turns.`;
       break;
     case "tie-in": {
@@ -199,13 +199,13 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       const to = step.to ?? 0;
       const counter = step.counter ? ", the opposite way round to the turns under it" : "";
       if (step.around) {
-        text = `Wind the ${mat(step.material)} round the base of the ${mat(step.around)} in ${step.turns} turns, each one under the last.`;
+        text = `Wind the ${mat(step.material)} round the base of the ${mat(step.around)} in ${countText(step.turns, "turns")}, each one under the last.`;
       } else if (ctx.rear) {
-        text = `Palmer the ${mat(step.material)} back to ${at(to)} in ${step.turns} open turns${counter}.`;
+        text = `Palmer the ${mat(step.material)} back to ${at(to)} in ${countText(step.turns, "open turns")}${counter}.`;
       } else if (ctx.through) {
-        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns${counter} through the ${mat(ctx.through)}. The first turn traps its tip.`;
+        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${countText(step.turns, "turns")}${counter} through the ${mat(ctx.through)}. The first turn traps its tip.`;
       } else {
-        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${step.turns} turns${counter}.`;
+        text = `Wind the ${mat(step.material)} forward to ${at(to)} in ${countText(step.turns, "turns")}${counter}.`;
       }
       break;
     }
@@ -241,7 +241,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
           : `Trim the butts of the ${mat(step.material)} flush.`;
       break;
     case "whip-finish":
-      text = `Form a small head, whip finish with ${step.turns} turns and cut the thread.`;
+      text = `Form a small head, whip finish with ${countText(step.turns, "turns")} and cut the thread.`;
       break;
   }
   return step.note ? `${text} ${step.note}` : text;
