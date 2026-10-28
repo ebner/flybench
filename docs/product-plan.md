@@ -120,7 +120,9 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
      visitor picks a region (e.g. southern Sweden, northern Scandinavia, British Isles,
      central Europe), remembered in the browser; no location prompt. Timings researched
      and cited per region.
-10. In the water. A view switch on the pattern page ("In the water", beside "Whole fly")
+10. ✅ In the water. (How a fly sits comes from its type and weighting, with `fishes` to
+    override, rather than per-material buoyancy; wet fibres clump by archetype. Not done: hair
+    clumping into strands, and the fibres moving individually.) A view switch on the pattern page ("In the water", beside "Whole fly")
     with the finished fly in moving water: an animated surface, the surface line seen from
     the side (the fly above as the angler sees it, below as the fish does), the trout's view
     from below (Snell's window, the dimples a dry fly makes in the film), drift and swim

@@ -10,6 +10,9 @@ import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
 import { pieceView, type PieceView } from "./pieces";
 import { ShankSpace } from "./space";
+import { patchFogForWater, Water, waveHeight, type WaterLook } from "./water";
+import { CLUMPS, HOLDS_AIR, WET_SPREAD, type Fishing } from "../tying/fishing";
+import { mulberry32 } from "./random";
 
 const REST_DIRECTIONS = {
   "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
@@ -28,10 +31,23 @@ const VIEWS = {
   top: new THREE.Vector3(0, 1, 0.02).normalize(),
   front: new THREE.Vector3(1, 0.05, 0).normalize(),
   "three-quarter": new THREE.Vector3(0.55, 0.35, 1).normalize(),
+  /** In the water, from the side: just above the waterline, looking into a cut-away tank. */
+  "water-side": new THREE.Vector3(0, 0.07, 1).normalize(),
+  /** In the water, a trout's view: from below and in front, looking up at the fly against the surface. */
+  "water-below": new THREE.Vector3(0.25, -1, 0.75).normalize(),
 };
 
 export type ViewName = keyof typeof VIEWS;
 export const VIEW_NAMES = Object.keys(VIEWS) as ViewName[];
+
+/** The finished fly shown in water. */
+export interface WaterSetting {
+  fishing: Fishing;
+  view: "side" | "below";
+  /** No waves, drift or swimming: the water held still (and for reduced motion). */
+  still: boolean;
+  look: WaterLook;
+}
 
 export interface FlySceneOptions {
   /** Vertical field of view in degrees. A narrow one gives a nearly distortion-free view for measuring. */
@@ -58,6 +74,8 @@ export class FlyScene {
   private controls: OrbitControls;
   private surfaces = new Surfaces();
   private fly = new THREE.Group();
+  /** Holds the fly; moves it as the water carries it, without touching the fly's own transform. */
+  private rig = new THREE.Group();
   private hook: THREE.Group | null = null;
   private stepViews: { piece: PieceView; window: [number, number]; until?: number }[][] = [];
   private wraps = new Map<number, WrapsPiece>();
@@ -89,6 +107,21 @@ export class FlyScene {
   private natural: THREE.Group | null = null;
   /** The time last shown, so re-measuring can come back to it. */
   private time = 0;
+  private water: {
+    setting: WaterSetting;
+    view: Water;
+    level: number;
+    pivot: THREE.Vector3;
+    /** The fly as it hangs in the water, for framing. */
+    bounds: THREE.Box3;
+    /** How the fly hangs in the water before it moves (tail down in the film). */
+    hang: THREE.Matrix4;
+    bubbles: THREE.InstancedMesh | null;
+    /** Soft fibres under water, drawn closer to the shank. */
+    soft: THREE.Object3D[];
+  } | null = null;
+  /** Seconds of water motion shown, kept apart from the tying timeline. */
+  private waterTime = 0;
 
   /** Follow the action: the camera eases towards whatever the current step works on. */
   private follow = false;
@@ -132,7 +165,10 @@ export class FlyScene {
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
     key.position.set(2, 4, 5);
     this.scene.add(key, new THREE.HemisphereLight(0xffffff, 0x8a8070, 0.6));
-    this.scene.add(this.fly);
+    this.rig.matrixAutoUpdate = false;
+    this.rig.add(this.fly);
+    this.scene.add(this.rig);
+    patchFogForWater();
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
@@ -161,6 +197,7 @@ export class FlyScene {
       const dt = Math.min(0.1, (now - (this.lastFrame || now)) / 1000);
       this.lastFrame = now;
       if (this.follow) this.followAction(dt);
+      if (this.water && !this.water.setting.still) this.setWaterTime(this.waterTime + dt);
       this.controls.update();
       this.renderer.render(this.scene, this.camera);
       this.reportAnchor();
@@ -264,6 +301,9 @@ export class FlyScene {
   private measure() {
     const build = this.build!;
     const time = this.time;
+    // Measured where the fly is tied, not where the water has carried it.
+    const water = this.water?.setting ?? null;
+    if (water) this.setWater(null);
     this.stepBounds = build.steps.map((step, i) => {
       this.setTime(stepEnd(step));
       const box = this.visibleBounds(this.stepViews[i]!.map((v) => v.piece.object));
@@ -275,6 +315,169 @@ export class FlyScene {
     this.followFresh = true;
     this.resetCamera();
     this.setTime(time);
+    if (water) this.setWater(water);
+  }
+
+  /**
+   * The finished fly in water, placed by how it fishes: riding on the surface, hanging in the
+   * film, just under or deep. null takes it back to the vise.
+   */
+  setWater(setting: WaterSetting | null) {
+    if (this.water) {
+      this.water.view.dispose();
+      this.scene.remove(this.water.view.group);
+      if (this.water.bubbles) {
+        this.water.bubbles.geometry.dispose();
+        (this.water.bubbles.material as THREE.Material).dispose();
+        this.fly.remove(this.water.bubbles);
+      }
+      for (const o of this.water.soft) o.scale.set(1, 1, 1);
+      this.water = null;
+      this.scene.fog = null;
+      this.rig.matrix.identity();
+      this.rig.updateMatrixWorld(true);
+    }
+    if (!setting || !this.build) {
+      if (this.view.startsWith("water-")) this.setView("default");
+      return;
+    }
+    this.setTime(this.build.duration);
+    const fly = this.finished;
+    const level = waterLevel(setting.fishing.depth, fly);
+    // Tail down from the front of the shank, for an emerger in the film.
+    const front = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.85 * this.build.hook.shankLength, 0, 0)));
+    this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
+    this.rig.updateMatrixWorld(true);
+    const bounds = this.visibleBounds();
+    const pivot = bounds.getCenter(new THREE.Vector3());
+    const view = new Water({
+      level,
+      centre: pivot,
+      look: setting.look,
+      dimples: setting.fishing.depth === "surface" || setting.fishing.depth === "film" ? this.dimples(level) : [],
+      motion: setting.fishing.motion,
+      cut: setting.view === "side" ? fly.max.z + 0.4 : null,
+    });
+    this.scene.add(view.group);
+    // Wet and tinted below the waterline (see patchFogForWater), more so the deeper it is.
+    this.scene.fog = new THREE.Fog(setting.look.water, level, 6);
+    // Fibres clump only where the whole fly is under water.
+    const sunk = setting.fishing.depth === "below" || setting.fishing.depth === "deep";
+    const soft = sunk
+      ? this.build.steps.flatMap((step, i) => step.pieces.flatMap((p, j) => (CLUMPS.has(p.look) ? [this.stepViews[i]![j]!.piece.object] : [])))
+      : [];
+    for (const o of soft) o.scale.set(1, WET_SPREAD, WET_SPREAD);
+    this.water = { setting, view, level, pivot, bounds, hang: this.rig.matrix.clone(), bubbles: this.bubbles(level), soft };
+    // Stilling the water holds it where it is.
+    this.setWaterTime(this.waterTime);
+    this.setView(setting.view === "side" ? "water-side" : "water-below");
+  }
+
+  /** The water and the fly in it at `t` seconds of water time. */
+  setWaterTime(t: number) {
+    this.waterTime = t;
+    const w = this.water;
+    if (!w) return;
+    w.view.setTime(t);
+    const { depth, motion } = w.setting.fishing;
+    const c = w.pivot;
+    let lift = 0;
+    let pitch = 0;
+    let roll = 0;
+    if (motion === "swim") {
+      // Straightens and lifts on each pull, dips nose first in the pause after it.
+      const f = (t % Water.STRIP) / Water.STRIP;
+      const pull = f < 0.3 ? Math.sin((f / 0.3) * Math.PI) : 0;
+      const glide = f < 0.3 ? 0 : (f - 0.3) / 0.7;
+      lift = 0.06 * pull - 0.08 * glide;
+      pitch = 0.05 * pull - 0.07 * glide;
+      roll = 0.03 * Math.sin(1.3 * t);
+      // Soft fibres pressed in by the pull, opening out again in the pause.
+      const spread = WET_SPREAD * (1 - 0.12 * pull + 0.08 * Math.sin(Math.PI * glide));
+      for (const o of w.soft) o.scale.set(1, spread, spread);
+    } else if (depth === "surface" || depth === "film") {
+      // Rides the waves.
+      lift = waveHeight(c.x, c.z, t);
+      pitch = 6 * (waveHeight(c.x + 0.5, c.z, t) - waveHeight(c.x - 0.5, c.z, t));
+      roll = 6 * (waveHeight(c.x, c.z + 0.5, t) - waveHeight(c.x, c.z - 0.5, t));
+    } else {
+      // Tumbles slowly in the current.
+      lift = 0.05 * Math.sin(0.5 * t);
+      pitch = 0.1 * Math.sin(0.31 * t);
+      roll = 0.18 * Math.sin(0.43 * t + 1);
+    }
+    const turn = new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(roll, 0, pitch));
+    this.rig.matrix
+      .makeTranslation(c.x, c.y + lift, c.z)
+      .multiply(turn)
+      .multiply(new THREE.Matrix4().makeTranslation(-c.x, -c.y, -c.z))
+      .multiply(w.hang);
+    this.rig.updateMatrixWorld(true);
+  }
+
+  /** Where the fly dents the surface film: the fibres (hackle, tail, legs) that reach through it. */
+  private dimples(level: number): { x: number; z: number; r: number }[] {
+    const cells = new Map<string, { x: number; z: number; r: number }>();
+    const m = new THREE.Matrix4();
+    const a = new THREE.Vector3();
+    const b = new THREE.Vector3();
+    this.fly.updateMatrixWorld(true);
+    this.fly.traverse((o) => {
+      if (!(o instanceof THREE.InstancedMesh) || !o.visible) return;
+      // Each instance is one fibre along its own y axis.
+      o.geometry.computeBoundingBox();
+      const { min, max } = o.geometry.boundingBox!;
+      for (let i = 0; i < o.count; i++) {
+        o.getMatrixAt(i, m).premultiply(o.matrixWorld);
+        a.set(0, min.y, 0).applyMatrix4(m);
+        b.set(0, max.y, 0).applyMatrix4(m);
+        if ((a.y - level) * (b.y - level) > 0) continue;
+        const p = a.lerp(b, (level - a.y) / (b.y - a.y || 1));
+        const key = `${Math.round(p.x / 0.15)},${Math.round(p.z / 0.15)}`;
+        if (!cells.has(key)) cells.set(key, { x: p.x, z: p.z, r: 0.07 });
+      }
+    });
+    // At most 24 (the shader's limit), spread over the whole fly.
+    const all = [...cells.values()];
+    return Array.from({ length: Math.min(24, all.length) }, (_, i) => all[Math.floor((i * all.length) / Math.min(24, all.length))]!);
+  }
+
+  /** Silvery air caught in CDC, dubbing and marabou under water. */
+  private bubbles(level: number): THREE.InstancedMesh | null {
+    const random = mulberry32(11);
+    const points: THREE.Vector3[] = [];
+    const v = new THREE.Vector3();
+    const m = new THREE.Matrix4();
+    const inverse = this.fly.matrixWorld.clone().invert();
+    this.build!.steps.forEach((step, i) => {
+      step.pieces.forEach((p, j) => {
+        if (!HOLDS_AIR.has(p.look)) return;
+        this.stepViews[i]![j]!.piece.object.traverse((o) => {
+          if (!(o instanceof THREE.Mesh) || !o.visible) return;
+          const instances = o instanceof THREE.InstancedMesh ? o.count : 1;
+          if (instances === 0) return;
+          const pos = o.geometry.getAttribute("position");
+          for (let k = 0; k < 12; k++) {
+            if (o instanceof THREE.InstancedMesh) o.getMatrixAt(Math.floor(random() * instances), m).premultiply(o.matrixWorld);
+            else m.copy(o.matrixWorld);
+            v.fromBufferAttribute(pos, Math.floor(random() * pos.count)).applyMatrix4(m);
+            if (v.y < level - 0.02) points.push(v.clone().applyMatrix4(inverse));
+          }
+        });
+      });
+    });
+    if (points.length === 0) return null;
+    const mesh = new THREE.InstancedMesh(
+      new THREE.SphereGeometry(1, 10, 8),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.08, fog: false }),
+      Math.min(points.length, 160),
+    );
+    for (let i = 0; i < mesh.count; i++) {
+      const s = 0.012 + 0.02 * random();
+      mesh.setMatrixAt(i, m.makeScale(s, s, s).setPosition(points[i]!));
+    }
+    this.fly.add(mesh);
+    return mesh;
   }
 
   setBackground(color: string | null) {
@@ -466,6 +669,13 @@ export class FlyScene {
       if (this.natural) this.frameBox(this.naturalBounds());
       return;
     }
+    if (this.water) {
+      // The waterline in the picture too, when the fly is near it.
+      const framed = this.water.bounds.clone().expandByScalar(0.3);
+      if (this.water.setting.fishing.depth !== "deep") framed.expandByPoint(new THREE.Vector3(this.water.pivot.x, this.water.level + 0.3, 0));
+      this.frameBox(framed);
+      return;
+    }
     this.userMoved = false;
     const subject = (
       this.framing === "dressing" ? this.stepBounds.reduce((all, b) => all.union(b), new THREE.Box3()).expandByScalar(0.12) : this.finished
@@ -644,6 +854,7 @@ export class FlyScene {
     this.clearFly();
     this.surfaces.dispose();
     this.setGrid(false);
+    this.setWater(null);
     this.controls.dispose();
     this.environment.dispose();
     this.renderer.dispose();
@@ -752,6 +963,31 @@ function measuringGrid(bounds: THREE.Box3, color: string): THREE.Group {
   for (let x = Math.ceil(x0); x <= x1; x++) label(String(x), x, y0 - 0.12);
   for (let y = Math.ceil(y0); y <= y1; y++) label(String(y), x0 - 0.18, y);
   return group;
+}
+
+/** A rotation by `angle` about the z axis through `at`. */
+function rotationAbout(at: THREE.Vector3, angle: number): THREE.Matrix4 {
+  return new THREE.Matrix4()
+    .makeTranslation(at.x, at.y, at.z)
+    .multiply(new THREE.Matrix4().makeRotationZ(angle))
+    .multiply(new THREE.Matrix4().makeTranslation(-at.x, -at.y, -at.z));
+}
+
+/** World y of the water's surface for a fly fishing at `depth`, from the finished fly's bounds. */
+// Assumption: a dry fly sits with its body just above the film and the hook's bend and the
+// hackle's lower fibres through it; an emerger hangs with its shank just under the film and its
+// wing or post above; a wet fly or nymph fishes a little under the surface, a weighted one deep.
+function waterLevel(depth: Fishing["depth"], fly: THREE.Box3): number {
+  switch (depth) {
+    case "surface":
+      return -0.12;
+    case "film":
+      return 0.08;
+    case "below":
+      return fly.max.y + 0.7;
+    case "deep":
+      return fly.max.y + 2.5;
+  }
 }
 
 function clamp01(v: number) {

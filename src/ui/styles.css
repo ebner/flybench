@@ -649,12 +649,25 @@ select {
   filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
 }
 
+/* In the water the fly is in a scene of its own, not on the paper. */
+.viewer.in-water .viewer-canvas canvas {
+  filter: none;
+}
+
 .viewer-tools {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
+  left: 0.75rem;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.4rem;
+  pointer-events: none;
+}
+
+.viewer-tools > * {
+  pointer-events: auto;
 }
 
 .viewer-tools button {
@@ -680,6 +693,7 @@ select {
   .viewer-tools {
     top: 0.5rem;
     right: 0.5rem;
+    left: 0.5rem;
     gap: 0.3rem;
   }
 
