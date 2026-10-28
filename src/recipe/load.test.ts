@@ -316,6 +316,13 @@ materials {
     expect(errorsOf(loadRecipe(`${h}steps {\n${unused}\n}\n`)).join("\n")).toMatch(/"wing" is listed but never used/);
   });
 
+  it("slides a bead on before weighting", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    bead brass-bead mm=3\n    lead lead-free-wire\n");
+    const steps = (first: string, second: string) => `${first}\n${second}\n    attach-thread at=0.8\n    whip-finish`;
+    expect(run(steps("    slide-bead bead", "    weight lead from=0.5 to=0.9"), h).ok).toBe(true);
+    expect(errorsOf(run(steps("    weight lead from=0.5 to=0.9", "    slide-bead bead"), h)).join("\n")).toMatch(/before weighting/);
+  });
+
   it("doesn't spin or weight with a material that is already on the hook", () => {
     const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    hair deer-hair\n    lead lead-free-wire\n");
     const spun = "    attach-thread at=0.1\n    tie-in hair length=1.5\n    spin hair to=0.9\n    whip-finish";
