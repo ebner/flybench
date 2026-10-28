@@ -36,7 +36,7 @@ pnpm studio        # the authoring studio (dev server only), /studio.html
 pnpm test          # recipe parsing/validation and simulation tests
 pnpm typecheck
 pnpm build         # type-check, production build and one HTML file per page into dist/
-pnpm render:catalog  # gallery images into public/renders/ (commit them)
+pnpm render:catalog  # gallery images and material swatches into public/renders/ (commit them)
 pnpm render        # render finished flies to .cache/renders/ (headless Chromium)
 pnpm refcheck      # contact sheets: render on a gape grid next to reference photos
 pnpm icons         # app icon PNGs from public/icons/*.svg
@@ -90,7 +90,7 @@ src/catalog/       catalog search and wording, and the site's pages with their t
                    descriptions and text for the build (plain logic, tested in Node)
 src/ui/            React UI: gallery, pattern page, viewer, theme, routing
 src/studio/        the authoring studio (studio.html, dev server only)
-public/renders/    rendered gallery images (generated, committed)
+public/renders/    rendered gallery images and material swatches (generated, committed)
 public/logo.svg    the logo (also the header mark); favicon.svg is a simplified version
                    for small sizes, and public/icons/*.svg the app icons (pnpm icons)
 render.html        dev-only page that scripts/ drive to render a finished fly

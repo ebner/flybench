@@ -2,6 +2,8 @@
  * Renders the gallery images for every pattern into public/renders/<id>/ (committed):
  *   card.webp   the finished fly on a transparent ground
  *   spin.webp   a turntable: FRAMES views in one row, played on hover
+ * and a swatch for every material and colour the patterns use, for the Materials page:
+ *   materials/<kind>--<colour>.webp, listed in materials/manifest.json
  *
  *   pnpm render:catalog           only patterns whose recipe or renderer changed
  *   pnpm render:catalog --force   everything
@@ -12,16 +14,23 @@
  */
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 import sharp from "sharp";
+import { catalogNeeds } from "../src/catalog/inventory";
+import { swatchName } from "../src/catalog/swatch";
+import { loadRecipe } from "../src/recipe/load";
+import type { Recipe } from "../src/recipe/schema";
 import { patternIds, Renderer } from "./lib/renderer";
 
 export const FRAMES = 24;
 const FRAME = { width: 600, height: 400 };
 const OUT = "public/renders";
 const MANIFEST = `${OUT}/manifest.json`;
+const SWATCHES = `${OUT}/materials`;
+const SWATCH_MANIFEST = `${SWATCHES}/manifest.json`;
+const SWATCH = { width: 240, height: 180 };
 /** Code that affects how a finished fly looks. */
 const RENDER_SOURCES = [
   "src/render", "src/tying", "src/recipe/materials.ts", "src/recipe/schema.ts",
@@ -63,7 +72,22 @@ for (const id of ids) {
 // Patterns that no longer exist.
 for (const id of Object.keys(manifest)) if (!all.includes(id)) delete manifest[id];
 
-if (todo.length === 0) {
+// Material swatches: every kind and colour the patterns use.
+type SwatchManifest = Record<string, string>;
+const swatchManifest: SwatchManifest = existsSync(SWATCH_MANIFEST) ? JSON.parse(await readFile(SWATCH_MANIFEST, "utf8")) : {};
+const recipes: Recipe[] = [];
+for (const id of all) {
+  const r = loadRecipe(await readFile(`patterns/${id}.kdl`, "utf8"));
+  if (r.ok) recipes.push(r.recipe);
+}
+const swatchCode = createHash("sha256").update(codeHash).update(await readFile("src/catalog/swatch.ts")).digest("hex");
+const swatches = [...catalogNeeds(recipes)].flatMap(([kind, colors]) => colors.map((color) => ({ kind, color, name: swatchName(kind, color) })));
+const swatchTodo = swatches
+  .map((s) => ({ ...s, hash: createHash("sha256").update(swatchCode).update(`${s.kind}:${s.color}`).digest("hex").slice(0, 16) }))
+  .filter((s) => values.force || swatchManifest[s.name] !== s.hash || !existsSync(`${SWATCHES}/${s.name}.webp`));
+for (const name of Object.keys(swatchManifest)) if (!swatches.some((s) => s.name === name)) delete swatchManifest[name];
+
+if (todo.length === 0 && swatchTodo.length === 0) {
   console.log("All renders are up to date.");
 } else {
   const renderer = await Renderer.start();
@@ -89,8 +113,23 @@ if (todo.length === 0) {
         }
       }),
     );
+    await mkdir(SWATCHES, { recursive: true });
+    const swatchQueue = [...swatchTodo];
+    await Promise.all(
+      Array.from({ length: Math.min(CONCURRENCY, swatchQueue.length) }, async () => {
+        for (let s = swatchQueue.shift(); s; s = swatchQueue.shift()) {
+          const out = `${SWATCHES}/${s.name}.png`;
+          await renderer.render({ pattern: "", swatch: `${s.kind}:${s.color}`, view: "default", transparent: true, fov: 20, ...SWATCH, out });
+          await sharp(out).webp({ quality: 82, alphaQuality: 90 }).toFile(`${SWATCHES}/${s.name}.webp`);
+          await unlink(out);
+          swatchManifest[s.name] = s.hash;
+          console.log(`${SWATCHES}/${s.name}`);
+        }
+      }),
+    );
   } finally {
     await renderer.stop();
   }
 }
 await writeFile(MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(manifest).sort()), null, 2) + "\n");
+await writeFile(SWATCH_MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(swatchManifest).sort()), null, 2) + "\n");

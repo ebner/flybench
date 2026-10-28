@@ -1432,6 +1432,47 @@ select {
   margin-top: 0;
 }
 
+/* A colour with its swatch: the material on a hook above the colour's name. */
+.inventory .chips button.pictured {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 7.5rem;
+  height: auto;
+  padding: 0.25rem 0.25rem 0.35rem;
+  line-height: 1.3;
+}
+
+.inventory .chips button.pictured img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+
+/* Ticked: the picture stays as it is, framed in the accent colour, with a check by the name. */
+.inventory .chips button.pictured.on {
+  background: var(--paper-raised);
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  font-weight: 600;
+}
+
+.inventory .chips button.pictured.on span::after {
+  content: " ✓";
+}
+
+@media (max-width: 40rem) {
+  .inventory .chips:has(.pictured) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .inventory .chips button.pictured {
+    width: auto;
+  }
+}
+
 .inventory-name {
   padding-top: 0.2rem;
 }
