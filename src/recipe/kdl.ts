@@ -18,7 +18,7 @@ import type { RecipeError, SourceLocation } from "./errors";
  * came from, so later validation errors can point at a line.
  */
 
-type Shape = { key?: string } & (
+export type Shape = { key?: string } & (
   | { kind: "scalar" }
   | { kind: "values" }
   | { kind: "record"; arg: string | null }
@@ -60,7 +60,8 @@ export class KdlMappingError extends Error {
   }
 }
 
-export function kdlToObject(text: string): KdlMapping {
+/** `sections`: the top-level nodes a document may have (a pattern's by default; naturals have their own). */
+export function kdlToObject(text: string, sections: Record<string, Shape> = TOP_LEVEL): KdlMapping {
   let doc;
   try {
     doc = parse(text, { storeLocations: true });
@@ -119,9 +120,9 @@ export function kdlToObject(text: string): KdlMapping {
 
   for (const node of doc.nodes) {
     const name = node.getName();
-    const shape = TOP_LEVEL[name];
+    const shape = sections[name];
     if (!shape) {
-      fail(`unknown section "${name}" (expected one of: ${Object.keys(TOP_LEVEL).join(", ")})`, [name], node);
+      fail(`unknown section "${name}" (expected one of: ${Object.keys(sections).join(", ")})`, [name], node);
       continue;
     }
     const key = shape.key ?? name;

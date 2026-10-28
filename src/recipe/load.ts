@@ -44,7 +44,7 @@ export function locate(text: string, error: RecipeError): RecipeError {
  * Attaches the source location of the closest path prefix that has one. Something missing
  * altogether (a required section) has none: it is reported at the top of the file.
  */
-function withLocation(error: RecipeError, locations: Map<string, SourceLocation>): RecipeError {
+export function withLocation(error: RecipeError, locations: Map<string, SourceLocation>): RecipeError {
   for (let n = error.path.length; n > 0; n--) {
     const loc = locations.get(error.path.slice(0, n).join("."));
     if (loc) return { ...error, ...loc };

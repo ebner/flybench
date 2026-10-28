@@ -10,6 +10,8 @@ export interface RenderOptions {
   pattern: string;
   /** Instead of a pattern: a material swatch, "<kind>:<colour>". */
   swatch?: string;
+  /** Instead of a pattern: a natural, by id. */
+  natural?: string;
   view: View;
   grid?: boolean;
   transparent?: boolean;
@@ -69,6 +71,7 @@ export class Renderer {
       fit: options.fit ?? "box",
       pose: options.pose ?? "tied",
       ...(options.swatch ? { swatch: options.swatch } : {}),
+      ...(options.natural ? { natural: options.natural } : {}),
     });
     await page.goto(`${this.base}render.html?${query}`);
     await page.waitForFunction(() => document.body.dataset.ready || document.body.dataset.error, null, { timeout: 60_000 });

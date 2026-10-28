@@ -1,0 +1,29 @@
+id beetle
+name "Beetle"
+group terrestrial
+stage adult
+examples "garden chafer (Phyllopertha horticola)"
+description "A stout, round beetle with hard wing cases. The garden chafer has chestnut-brown cases and a shiny dark green head and thorax; it lands on the water with a plop and floats low."
+size min=8.5 max=11
+rides in-film
+body {
+    // The chestnut-brown, hairy wing cases cover the back (Wikipedia); the underside is dark green.
+    abdomen length=0.55 radius=0.21 taper=0.8 color="#7a4a22" belly="#1e2a1e" flatten=0.75 round=1
+    thorax length=0.27 radius=0.19 taper=0.8 color="#1e3024" flatten=0.75 round=0.7
+    head length=0.18 radius=0.12 taper=0.8 color="#1a2a20" flatten=0.75 round=1
+}
+parts {
+    legs count=6 length=0.45 color="#1e3024"
+    antennae length=0.15 color="#3a2a1a"
+    eyes size=0.03 color=black
+}
+hatches {
+    southern-sweden from=june to=june note="Estimate."
+    british-isles from=april to=july note="Many in June (Wikipedia); the Coch-y-Bonddu is best in June."
+    central-europe from=may to=july note="Estimate."
+    northern-usa from=july to=september note="Beetles from mid-July on the Madison (Montana Angler)."
+}
+sources {
+    "Wikipedia: Phyllopertha horticola" url="https://en.wikipedia.org/wiki/Phyllopertha_horticola"
+    "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}

@@ -1,0 +1,32 @@
+id caddis-larva-cased
+name "Caddis larva, cased"
+group caddis
+stage larva
+examples "Sericostoma, Lepidostoma, grannom (Brachycentrus), limnephilids"
+description "A soft, pale larva living in a portable case of sand grains, stones or plant pieces, crawling over the bottom with its dark head and legs out of the front. Trout eat them case and all."
+size min=13 max=25
+rides crawling
+body {
+    abdomen length=0.66 radius=0.08 taper=0.8 segments=9 color="#e4dcc0"
+    thorax length=0.22 radius=0.07 taper=0.85 color="#6a4a28"
+    head length=0.12 radius=0.055 taper=0.8 color="#3a2614"
+}
+parts {
+    // A sand case about 18 mm on a 12 mm larva (Sericostoma, Dalarna 2013).
+    case material=sand length=0.76 radius=0.13 color="#9a8a6a"
+    legs count=6 length=0.22 color="#5a3c20"
+}
+hatches {
+    southern-sweden from=january to=december note="In the water all year; drifting larvae are taken spring to autumn."
+    northern-scandinavia from=january to=december note="In the water all year; drifting larvae are taken spring to autumn."
+    british-isles from=january to=december note="In the water all year; drifting larvae are taken spring to autumn."
+    central-europe from=january to=december note="In the water all year; drifting larvae are taken spring to autumn."
+    northern-usa from=january to=december note="In the water all year; drifting larvae are taken spring to autumn."
+}
+sources {
+    "Wikipedia: Caddisfly" url="https://en.wikipedia.org/wiki/Caddisfly"
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "Missouri Department of Conservation: Caddisflies" url="https://mdc.mo.gov/discover-nature/field-guide/caddisflies"
+    "Troutnut: Order Trichoptera" url="https://www.troutnut.com/hatch/12/Insect-Trichoptera-Caddisflies"
+    "Wikipedia (de): Köcherfliegen" url="https://de.wikipedia.org/wiki/Köcherfliegen"
+}

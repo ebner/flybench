@@ -1,0 +1,41 @@
+// Up to about 30 mm (Wikipedia; First Nature).
+
+id mayfly-nymph-burrowing
+name "Mayfly nymph, burrowing"
+group mayfly
+stage nymph
+examples "the mayfly (Ephemera danica, E. vulgata)"
+description "The big nymph of the mayfly, living for one to three years in burrows in sand and silt, waving its feathery gills over its back. It rises to the surface to hatch."
+size min=18 max=30
+rides crawling
+body {
+    abdomen length=0.62 radius=0.06 taper=0.5 segments=10 color="#cdbb86" belly="#e0d4aa"
+    thorax length=0.25 radius=0.07 taper=0.95 color="#b8a470"
+    head length=0.13 radius=0.055 taper=0.7 color="#a8925e"
+}
+parts {
+    tails count=3 length=0.35 spread=40 color="#b8a470"
+    // Seven pairs of deeply split, fringed gills held over the back (Naturschutzbund; DCRT).
+    gills count=7 length=0.12 color="#d8c898"
+    wingpads length=0.2 color="#6a5530"
+    // Strong digging legs.
+    legs count=6 length=0.4 color="#b8a470"
+    antennae length=0.2 color="#a8925e"
+    eyes size=0.022 color=black
+}
+hatches {
+    southern-sweden from=may to=june note="E. vulgata in May; Scandinavian peak usually the first week of June (Ahrex)."
+    northern-scandinavia from=june to=july note="Estimate."
+    british-isles from=may to=june time="afternoon" note="Main hatch from mid-May to the first week of June (First Nature)."
+    central-europe from=may to=june note="Main hatch; egg-laying females May–September (Naturschutzbund)."
+    northern-usa from=may to=june time="afternoon" note="Brown and green drakes (Troutnut; Beaverkill)."
+}
+sources {
+    "Wikipedia: Ephemera danica" url="https://en.wikipedia.org/wiki/Ephemera_danica"
+    "Naturschutzbund Österreich: Insekt des Jahres 2021, Dänische Eintagsfliege" url="https://naturschutzbund.at/insekt-leser/items/id-2021-daenische-eintagsfliege.html?pdf=645"
+    "First Nature: Mayfly (Ephemera danica)" url="https://www.first-nature.com/insects/e-ephemera-danica.php"
+    "Hancock / Don Catchment Rivers Trust: Mayfly Identification (after FBA 66)" url="https://dcrt.org.uk/wp-content/uploads/2026/01/Mayfly-Identification-DCRT-Paul-Hancock-pdf.pdf"
+    "Ahrex (Lars Chr. Bentsen) 2024: It's that time of year again" url="https://ahrexhooks.com/2024/05/17/its-that-time-of-year-again/"
+    "Troutnut: Genus Ephemera" url="https://www.troutnut.com/hatch/52/Mayfly-Ephemera-Brown-Drakes"
+    "Dick Talleur, Fly Fisherman: Meeting the Beaverkill Hatches" url="https://www.flyfisherman.com/editorial/meeting-beaverkill-hatches/461963"
+}

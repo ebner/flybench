@@ -1,0 +1,34 @@
+// Minnow about 7 cm (Wikipedia); stickleback 3–4 cm (Wikipedia).
+
+id fry-minnow
+name "Fry and minnows"
+group baitfish
+stage juvenile
+examples "minnow (Phoxinus), stickleback, trout and perch fry"
+description "Small fish of rivers and lake shores: olive-brown or greenish backs, silvery flanks and pale bellies, shoaling in the shallows. Trout chase them most in late summer and autumn."
+size min=30 max=70
+rides swimming
+body {
+    tail length=0.3 radius=0.06 taper=0.35 color="#5a6a3a" belly="#d8dcd0" flatten=2.2
+    trunk length=0.5 radius=0.085 taper=0.95 color="#5a6a3a" belly="#e8eae0" flatten=1.9
+    head length=0.2 radius=0.08 taper=0.55 color="#4a5a32" belly="#e0e2d8" flatten=1.6 round=0.6
+}
+parts {
+    fin kind=caudal at=0 size=0.22 color="#8a8a6a"
+    fin kind=dorsal at=0.45 size=0.14 color="#8a8a6a"
+    fin kind=anal at=0.3 size=0.1 color="#8a8a6a"
+    fin kind=pelvic at=0.5 size=0.08 color="#8a8a6a"
+    fin kind=pectoral at=0.78 size=0.1 color="#8a8a6a"
+    eyes size=0.03 color="#1a1a14"
+}
+hatches {
+    southern-sweden from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    northern-scandinavia from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    british-isles from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    central-europe from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    northern-usa from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+}
+sources {
+    "Wikipedia: Phoxinus phoxinus" url="https://en.wikipedia.org/wiki/Phoxinus_phoxinus"
+    "Wikipedia: Three-spined stickleback" url="https://en.wikipedia.org/wiki/Three-spined_stickleback"
+}

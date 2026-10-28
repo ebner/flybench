@@ -1,0 +1,38 @@
+id caddis-adult
+name "Caddis adult (sedge)"
+group caddis
+stage adult
+examples "small sedges, grannom, great red sedge"
+description "A moth-like insect with hairy wings folded like a roof over its back and long thread-like antennae. It skitters and flutters on the water when it hatches and when it lays its eggs."
+size min=8 max=20
+rides on-surface
+body {
+    abdomen length=0.6 radius=0.06 taper=0.6 segments=8 color="#6a6a40" belly="#8a8a5a"
+    thorax length=0.28 radius=0.07 taper=0.9 color="#4a3e28"
+    head length=0.12 radius=0.055 taper=0.75 color="#3a3020"
+}
+parts {
+    // Wings roof-like over the body (Wikipedia; First Nature). Assumption: reaching a third past the abdomen.
+    wings count=4 shape=tent length=1.25 width=0.35 color="#8a7556" clarity=0.08 veins=#true
+    // Antennae about as long as the body, often longer (MDC; First Nature).
+    antennae length=1.1 color="#5a4a32"
+    legs count=6 length=0.55 color="#7a6a48"
+    eyes size=0.03 color=black
+}
+hatches {
+    southern-sweden from=june to=september time="evening" note="July and August the main months (Gullefors 2014)."
+    northern-scandinavia from=june to=september time="evening" note="First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna)."
+    british-isles from=april to=september time="evening" note="Grannom in April (First Nature); many caddis at dusk."
+    central-europe from=may to=september time="evening" note="Estimate; mostly at dusk and night (Wikipedia de)."
+    northern-usa from=april to=october note="Mother's Day caddis from late April, then May–October (Montana Angler)."
+}
+sources {
+    "Wikipedia: Caddisfly" url="https://en.wikipedia.org/wiki/Caddisfly"
+    "First Nature: Caddisflies" url="https://www.first-nature.com/insects/index-t.php"
+    "Missouri Department of Conservation: Caddisflies" url="https://mdc.mo.gov/discover-nature/field-guide/caddisflies"
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "Gardensafari: Phryganea grandis" url="https://www.gardensafari.nl/english/picpages/phryganea_grandis.htm"
+    "First Nature: Grannom" url="https://www.first-nature.com/insects/t-brachycentrus-subnubilis.php"
+    "Gullefors 2015: Sveriges nattsländor (Trichoptera), utbredning, vanlighetsgrad, habitat och flygtider. Entomologisk Tidskrift 136" url="https://www.sef.nu/"
+    "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}

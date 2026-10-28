@@ -1,0 +1,28 @@
+id midge-larva
+name "Midge larva"
+group chironomid
+stage larva
+examples "bloodworms (Chironomus)"
+description "A slender, segmented worm living in tubes in the mud of lakes and slow rivers; bloodworms are bright red with haemoglobin. It swims, when it must, by lashing from side to side."
+size min=8 max=15
+rides swimming
+curve 70
+body {
+    body length=1.0 radius=0.045 taper=0.7 segments=12 color="#a02424" belly="#c04040" translucency=0.25
+}
+parts {
+    eyes size=0.012 color="#2a0a0a"
+}
+hatches {
+    southern-sweden from=april to=october note="Estimate: peak May–June."
+    northern-scandinavia from=june to=september note="Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate."
+    british-isles from=march to=october time="morning, evening" note="All year on stillwaters; big buzzers March–April, peak May–June, again September–October (The Essential Fly)."
+    central-europe from=april to=october note="Estimate, as in Britain."
+    northern-usa from=january to=december note="Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure)."
+}
+sources {
+    "Missouri Department of Conservation: Midges" url="https://mdc.mo.gov/discover-nature/field-guide/midges"
+    "Wikipedia: Chironomidae" url="https://en.wikipedia.org/wiki/Chironomidae"
+    "Wikipedia (de): Zuckmücken" url="https://de.wikipedia.org/wiki/Zuckmücken"
+    "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
+}

@@ -1,0 +1,36 @@
+id caddis-pupa
+name "Caddis pupa"
+group caddis
+stage pupa
+examples "sedges of all kinds"
+description "The pupa cuts out of its case and rises or swims to hatch, rowing with its long fringed middle legs, the wing sheaths dark along its sides and the antennae swept back."
+size min=8 max=18
+rides swimming
+curve 20
+body {
+    abdomen length=0.62 radius=0.075 taper=0.6 segments=9 color="#8aa05a" belly="#b8c888" translucency=0.2
+    thorax length=0.26 radius=0.075 taper=0.85 color="#6a6a3a"
+    head length=0.12 radius=0.055 taper=0.75 color="#4a3a22"
+}
+parts {
+    // Assumption: wing sheaths along the sides, darkening before hatching (Troutnut); antennae swept back.
+    wingpads length=0.4 color="#2e2a1c"
+    antennae length=0.9 color="#6a5a3a" swept=#true
+    // Oar-like swimming legs (Wikipedia: Caddisfly).
+    legs count=6 length=0.6 color="#7a6a42"
+    eyes size=0.03 color=black
+}
+hatches {
+    southern-sweden from=june to=september time="evening" note="July and August the main months (Gullefors 2014)."
+    northern-scandinavia from=june to=september time="evening" note="First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna)."
+    british-isles from=april to=september time="evening" note="Grannom in April (First Nature); many caddis at dusk."
+    central-europe from=may to=september time="evening" note="Estimate; mostly at dusk and night (Wikipedia de)."
+    northern-usa from=april to=october note="Mother's Day caddis from late April, then May–October (Montana Angler)."
+}
+sources {
+    "Troutnut: Order Trichoptera" url="https://www.troutnut.com/hatch/12/Insect-Trichoptera-Caddisflies"
+    "Wikipedia: Caddisfly" url="https://en.wikipedia.org/wiki/Caddisfly"
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "Wikipedia (de): Köcherfliegen" url="https://de.wikipedia.org/wiki/Köcherfliegen"
+    "Gullefors 2014: Nattsländorna (Trichoptera) längs Forsån i Ångermanland. Entomologisk Tidskrift 135" url="https://www.sef.nu/download/entomologisk_tidskrift/et_2014/ET-2014-153"
+}
