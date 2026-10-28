@@ -1,6 +1,6 @@
 import { findPattern } from "./patterns";
 import { FlyScene, VIEW_NAMES, type ViewName } from "./render/FlyScene";
-import { hookModel } from "./tying/hook";
+import { ridesPointUp } from "./tying/hook";
 import { simulate } from "./tying/simulate";
 
 /**
@@ -10,7 +10,7 @@ import { simulate } from "./tying/simulate";
  *     &transparent=1    no background
  *     &fov=<degrees>    field of view (default 8: nearly free of perspective)
  *     &fit=sphere       same framing from every angle (turntables)
- *     &pose=pictured    as flies are usually pictured: jig flies point up, others as tied
+ *     &pose=pictured    as flies are usually pictured: point-up flies point up, others as tied
  * Sets `data-ready` on <body> when the frame is drawn, or `data-error` on failure.
  * `window.turnTo(degrees)` turns the view around the vertical axis for turntable frames.
  */
@@ -39,8 +39,8 @@ if (!pattern || !VIEW_NAMES.includes(view)) {
   });
   const build = simulate(pattern.recipe);
   scene.setBuild(build);
-  // Jig flies are usually photographed point up, the way they swim; other flies as tied.
-  if (params.get("pose") === "pictured" && hookModel(pattern.recipe.hook).jig) scene.setTurnedOver(true);
+  // Flies that swim point up (jigs, weighted eyes) are usually photographed that way; others as tied.
+  if (params.get("pose") === "pictured" && ridesPointUp(pattern.recipe)) scene.setTurnedOver(true);
   scene.setView(view, 0, fit);
   scene.setGrid(params.get("grid") === "1");
   scene.setTime(build.duration);

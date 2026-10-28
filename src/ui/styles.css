@@ -16,6 +16,9 @@
   --accent-wash: #dbe0e4;
   --danger: #8a2a1a;
   --specimen-shadow: rgb(40 30 20 / 0.3);
+  /* A hairline round the fly, so white hair and feathers stand out from the pale paper.
+     Dark materials hide it; the dark theme doesn't need it. */
+  --specimen-edge: rgb(60 50 40 / 0.5);
 
   --display: "IM Fell English", "Iowan Old Style", Georgia, serif;
   --text: "Spectral", Georgia, serif;
@@ -52,6 +55,7 @@
   --accent-wash: #22477a;
   --danger: #ffb4a4;
   --specimen-shadow: rgb(0 8 20 / 0.45);
+  --specimen-edge: transparent;
   color-scheme: dark;
 }
 
@@ -250,7 +254,7 @@ select {
   position: relative;
   aspect-ratio: 3 / 2;
   overflow: hidden;
-  filter: drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
 }
 
 .fly-of-the-day-image img {
@@ -462,10 +466,10 @@ select {
   object-fit: contain;
 }
 
-/* A pinned specimen casts a faint shadow on its plate, which also outlines white flies. */
+/* A pinned specimen casts a faint shadow on its plate; the edge outlines white flies. */
 .plate-image img,
 .plate-spin {
-  filter: drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
 }
 
 .plate-spin {
@@ -568,7 +572,7 @@ select {
 /* The fly casts a faint shadow on the paper behind it, as on the gallery plates. */
 .viewer-canvas canvas,
 .studio-canvas canvas {
-  filter: drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
 }
 
 .viewer-tools {

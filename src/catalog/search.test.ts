@@ -32,10 +32,10 @@ describe("catalog search", () => {
   });
 
   it("needs one version of a pattern to have every material asked for", () => {
-    // Gold wire in the Elk Hair Caddis, copper wire in its Troth variant: neither has both.
-    expect(ids({ materials: ["gold-wire", "elk-hair"] })).toContain("elk-hair-caddis");
-    expect(ids({ materials: ["copper-wire", "elk-hair"] })).toContain("elk-hair-caddis");
-    expect(ids({ materials: ["gold-wire", "copper-wire"] })).not.toContain("elk-hair-caddis");
+    // Chenille in the Peeping Caddis, wool in its Edwards variant: neither has both.
+    expect(ids({ materials: ["chenille", "copper-wire"] })).toContain("peeping-caddis");
+    expect(ids({ materials: ["wool", "lead-free-wire"] })).toContain("peeping-caddis");
+    expect(ids({ materials: ["chenille", "wool"] })).not.toContain("peeping-caddis");
   });
 
   it("needs one version to meet every filter at once", () => {
@@ -56,8 +56,9 @@ describe("catalog search", () => {
   it("finds by material, including variants' materials", () => {
     expect(ids({ q: "peacock" })).toContain("red-tag");
     expect(ids({ q: "peacock" })).not.toContain("elk-hair-caddis");
-    expect(ids({ materials: ["copper-wire"] })).toContain("elk-hair-caddis");
-    expect(ids({ materials: ["copper-wire"] })).not.toContain("europea-12");
+    // Only the conehead variant of the Woolly Bugger has a cone.
+    expect(ids({ materials: ["brass-cone"] })).toContain("woolly-bugger");
+    expect(ids({ materials: ["brass-cone"] })).not.toContain("europea-12");
     const both = ids({ materials: ["hares-ear-dubbing", "mallard-breast"] });
     expect(both).toContain("europea-12");
     expect(both).not.toContain("red-tag");
