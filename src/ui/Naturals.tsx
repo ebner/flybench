@@ -114,7 +114,7 @@ export function NaturalsIndex() {
                 <tr>
                   <th scope="col">Natural</th>
                   {MONTH_NAMES.map((m, i) => (
-                    <th key={m} scope="col" className={i === month ? "now" : undefined} title={m}>
+                    <th key={m} scope="col" className={i === month ? "current" : undefined} title={m}>
                       {m.charAt(0)}
                     </th>
                   ))}
@@ -130,7 +130,7 @@ export function NaturalsIndex() {
                         <a href={href.natural(n.id)}>{n.name}</a>
                       </th>
                       {MONTH_NAMES.map((m, i) => (
-                        <td key={m} className={[months.includes(i) ? "on" : "", i === month ? "now" : ""].join(" ").trim() || undefined}>
+                        <td key={m} className={[months.includes(i) ? "on" : "", i === month ? "current" : ""].join(" ").trim() || undefined}>
                           <span className="visually-hidden">{months.includes(i) ? m : ""}</span>
                         </td>
                       ))}

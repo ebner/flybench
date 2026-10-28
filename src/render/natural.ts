@@ -12,6 +12,9 @@ export function buildNatural(n: Natural): THREE.Group {
   const group = new THREE.Group();
   group.name = n.id;
   const spine = new Spine(n);
+  // Where the body ends, front and rear, for laying it over a fly's hook.
+  group.userData.head = spine.point(1);
+  group.userData.rear = spine.point(0);
   group.add(bodyMesh(n, spine));
   const random = mulberry32(hash(n.id));
   for (const part of n.parts) {
@@ -170,7 +173,7 @@ function bodyMesh(n: Natural, spine: Spine): THREE.Mesh {
     for (let j = 0; j < around; j++) {
       const a = i * (around + 1) + j;
       const b = a + around + 1;
-      indices.push(a, b, a + 1, b, b + 1, a + 1);
+      indices.push(a, a + 1, b, b, a + 1, b + 1);
     }
   }
   const g = new THREE.BufferGeometry();
@@ -398,7 +401,7 @@ function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => n
         for (let j = 0; j < around; j++) {
           const a = i * (around + 1) + j;
           const b = a + around + 1;
-          indices.push(a, b, a + 1, b, b + 1, a + 1);
+          indices.push(a, a + 1, b, b, a + 1, b + 1);
         }
       }
       const g = new THREE.BufferGeometry();
