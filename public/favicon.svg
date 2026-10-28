@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 58 58">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 1 58 58">
   <!-- The Flybench dry fly, simplified to read at 16 pixels. -->
   <style>svg { color: #233e66; } @media (prefers-color-scheme: dark) { svg { color: #efe3c2; } }</style>
   <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M51.5 34H22C12.5 34 9.5 41 9.5 47.3S13.5 58.5 21 58.5 31.5 54.5 31.5 48.5" stroke-width="4.6"/>
+    <path d="M51.5 34H22C16.6 34 13.4 37.6 13.4 41.8S16.8 49.6 22.4 49.6C25.6 49.6 28.4 49.2 30.6 48.2" stroke-width="4.6"/>
     <circle cx="55.2" cy="34" r="3.4" stroke-width="3.6"/>
     <path d="M20 33L6 27.5" stroke-width="4"/>
   </g>
