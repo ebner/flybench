@@ -1,4 +1,4 @@
-import { hookModel, trebleSize, unitMm } from "./hook";
+import { hookModel, ridesPointUp, trebleSize, unitMm } from "./hook";
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import type { Material, Recipe, Step } from "../recipe/schema";
 
@@ -161,7 +161,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       const what =
         archetype === "herl" && m?.strands
           ? `${m.strands === 1 ? "a strand" : `${m.strands} strands`} of peacock herl`
-          : archetype === "hair" || archetype === "marabou" || archetype === "cdc"
+          : archetype === "hair" || archetype === "marabou" || (archetype === "cdc" && step.length)
             ? `a bunch of ${mat(step.material)}`
             : `the ${mat(step.material)}`;
       const under = step.side === "under";
@@ -178,6 +178,9 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       } else if (step.length && (step.angle ?? 0) >= 60) {
         const pair = (step.spread ?? 0) > 0 ? " Divide them into a V with figure-of-eight turns." : "";
         text = `Tie in ${what} upright, ${len(step.length)} tall, with turns in front to stand it up.${pair}`;
+      } else if (step.length && under && ridesPointUp(recipe)) {
+        // Under the shank is on top when the fly swims point-up: there it is the wing.
+        text = `Tie in ${what} under the shank as the wing (on top when the fly swims point-up), reaching ${len(step.length)} back.`;
       } else if (step.length && under) {
         text = `Tie in ${what} under the shank as a beard, reaching ${len(step.length)} back.`;
       } else if (step.length) {
