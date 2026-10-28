@@ -4,6 +4,7 @@ group damselfly
 stage nymph
 examples "Coenagrion, Enallagma"
 description "A slender nymph of weedy lakes and slow water with three leaf-like tail gills. It swims with fish-like wriggles of the body and climbs out of the water to hatch."
+// Assumption: 18–26 mm, younger nymphs included; mature Coenagrion puella nymphs 22–26 mm (DELTA).
 size min=18 max=26
 rides swimming
 body {

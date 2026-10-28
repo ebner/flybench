@@ -23,7 +23,7 @@ hatches {
     northern-scandinavia from=july to=august note="Estimate."
     british-isles from=june to=november note="Field grasshopper adults June to early December (ORS)."
     central-europe from=july to=october note="Estimate."
-    northern-usa from=july to=september note="Hoppers from mid-July on the Madison (Montana Angler)."
+    northern-usa from=july to=september note="Hoppers from mid-July on the Madison (Montana Angler); the end is an estimate."
 }
 sources {
     "Grasshoppers and Related Insects Recording Scheme: Chorthippus brunneus" url="https://orthoptera.org.uk/node/3354"

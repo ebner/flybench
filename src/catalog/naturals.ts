@@ -102,6 +102,12 @@ export function naturalLengthFor(n: Natural, recipe: Recipe): number {
   return Math.min(n.size.max, Math.max(n.size.min, shank)) / unit;
 }
 
+/** "April to October", or "All year". */
+export function hatchText(h: Natural["hatches"][number]): string {
+  const month = (m: string) => m.charAt(0).toUpperCase() + m.slice(1);
+  return hatchMonths(h).length === 12 ? "All year" : `${month(h.from)} to ${month(h.to)}`;
+}
+
 /** "6–11 mm" */
 export function sizeText(n: Natural): string {
   const mm = (v: number) => (Number.isInteger(v) ? String(v) : String(Math.round(v * 10) / 10));

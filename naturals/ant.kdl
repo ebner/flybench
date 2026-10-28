@@ -23,7 +23,7 @@ hatches {
     northern-scandinavia from=june to=august note="Estimate."
     british-isles from=may to=september note="Estimate; flying-ant swarms July–August (Wikipedia)."
     central-europe from=may to=september note="Estimate; flights July–August (Wikipedia)."
-    northern-usa from=june to=september note="Ants from mid-July on the Madison (Montana Angler); flights usually in autumn (Wikipedia)."
+    northern-usa from=june to=september note="Estimate from June; ants from mid-July on the Madison (Montana Angler); flights usually in autumn (Wikipedia)."
 }
 sources {
     "Wikipedia: Lasius niger" url="https://en.wikipedia.org/wiki/Lasius_niger"
