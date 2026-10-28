@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { patternsUsing, stepTechnique, technique, TECHNIQUES, techniqueExample } from "../catalog/techniques";
 import { PATTERNS } from "../patterns";
 import { Clip } from "./Clip";
+import { NotFound } from "./NotFound";
 import { Paragraphs } from "./Paragraphs";
 import { href } from "./router";
 
@@ -41,12 +42,11 @@ export function TechniquePage({ id }: { id: string }) {
   }, [t]);
   if (!t) {
     return (
-      <main className="reading">
-        <h1>No technique called “{id}”</h1>
+      <NotFound className="reading" heading={<>No technique called “{id}”</>}>
         <p>
           <a href={href.techniques()}>See all techniques</a>
         </p>
-      </main>
+      </NotFound>
     );
   }
   const example = techniqueExample(recipes(), id);

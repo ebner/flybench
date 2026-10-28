@@ -45,6 +45,12 @@ describe("checkDraft", () => {
     );
   });
 
+  it("places catalog errors on the line they are about", () => {
+    const draft = redTag.replace(/^name .*$/m, '$&\nvariant-of nothing-here\nvariant "Test"');
+    const error = checkDraft(draft, "red-tag.kdl", []).errors.find((e) => e.message.includes("no such pattern"));
+    expect(error?.line).toBe(draft.split("\n").findIndex((l) => l.startsWith("variant-of")) + 1);
+  });
+
   it("reports errors the draft causes in other files", () => {
     const read = (id: string) => readFileSync(new URL(`../../patterns/${id}.kdl`, import.meta.url), "utf8");
     const others = ["elk-hair-caddis", "elk-hair-caddis-troth", "red-tag"].map((id) => ({ file: `${id}.kdl`, recipe: loaded(read(id)) }));

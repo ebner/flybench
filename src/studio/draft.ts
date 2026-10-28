@@ -1,6 +1,6 @@
 import { validateCatalog } from "../recipe/catalog";
 import type { RecipeError } from "../recipe/errors";
-import { loadRecipe } from "../recipe/load";
+import { loadRecipe, locate } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
 
 /** Pattern files the studio may read and write: an id plus .kdl, and nothing else. */
@@ -27,7 +27,7 @@ export function checkDraft(text: string, file: string, others: { file: string; r
   const before = new Set(validateCatalog(others).map((e) => `${e.file}\n${e.message}`));
   const errors = validateCatalog(catalog)
     .filter((e) => e.file === file || !before.has(`${e.file}\n${e.message}`))
-    .map((e) => ({ message: e.file === file ? e.message : `${e.file}: ${e.message}`, path: [] }));
+    .map((e) => (e.file === file ? locate(text, { message: e.message, path: e.path }) : { message: `${e.file}: ${e.message}`, path: [] }));
   return { recipe: errors.length === 0 ? result.recipe : undefined, errors };
 }
 

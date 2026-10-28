@@ -1,7 +1,7 @@
 import { CatalogSearch, catalogEntries } from "./catalog/search";
 import { validateCatalog } from "./recipe/catalog";
 import { formatError } from "./recipe/errors";
-import { loadRecipe } from "./recipe/load";
+import { loadRecipe, locate } from "./recipe/load";
 import type { Recipe } from "./recipe/schema";
 
 const sources = import.meta.glob("../patterns/*.kdl", { query: "?raw", import: "default", eager: true }) as Record<
@@ -18,13 +18,17 @@ export interface Pattern {
 export const PATTERN_ERRORS: string[] = [];
 
 const loaded: Pattern[] = [];
+const texts = new Map<string, string>();
 for (const [path, text] of Object.entries(sources)) {
   const file = path.split("/").pop()!;
+  texts.set(file, text);
   const result = loadRecipe(text);
   if (result.ok) loaded.push({ file, recipe: result.recipe });
   else PATTERN_ERRORS.push(...result.errors.map((e) => `${file}: ${formatError(e)}`));
 }
-PATTERN_ERRORS.push(...validateCatalog(loaded).map((e) => `${e.file}: ${e.message}`));
+PATTERN_ERRORS.push(
+  ...validateCatalog(loaded).map((e) => `${e.file}: ${formatError(locate(texts.get(e.file)!, { message: e.message, path: e.path }))}`),
+);
 
 export const PATTERNS: Pattern[] = loaded.sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
 
