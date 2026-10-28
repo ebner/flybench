@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SITE_TITLE } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
-import { About, REPO_URL } from "./About";
+import { About, AUTHOR, REPO_URL } from "./About";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
@@ -64,7 +64,8 @@ export function App() {
           <a href={`${REPO_URL}/issues`}>Report a mistake</a>
         </nav>
         <p>
-          Patterns and pictures <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
+          Made by <a href={AUTHOR.url}>{AUTHOR.name}</a>. Patterns and pictures{" "}
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
         </p>
       </footer>
     </>

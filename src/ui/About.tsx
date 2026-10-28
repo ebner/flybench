@@ -3,6 +3,7 @@ import { CATALOG } from "../patterns";
 import { href } from "./router";
 
 export const REPO_URL = "https://github.com/ebner/flybench";
+export const AUTHOR = { name: "Hannes Ebner", url: "https://github.com/ebner" };
 
 export function About() {
   useEffect(() => {
@@ -58,6 +59,12 @@ export function About() {
         <a href={`${REPO_URL}/blob/main/docs/recipe-schema.md`}>recipe format</a> and the{" "}
         <a href={`${REPO_URL}/blob/main/docs/authoring-patterns.md`}>authoring guide</a> explain how to write one. The
         source is on <a href={REPO_URL}>GitHub</a>.
+      </p>
+
+      <h2>Who makes it</h2>
+      <p>
+        Flybench is made by <a href={AUTHOR.url}>{AUTHOR.name}</a>. Corrections and new patterns are welcome on{" "}
+        <a href={REPO_URL}>GitHub</a>.
       </p>
 
       <h2>Licence and credits</h2>
