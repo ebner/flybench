@@ -433,6 +433,17 @@ select {
   cursor: pointer;
 }
 
+@media (max-width: 40rem) {
+  .finder .types {
+    display: none;
+  }
+
+  .finder.more-open .types,
+  .finder .types.chosen {
+    display: flex;
+  }
+}
+
 .more-filters {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));

@@ -75,7 +75,7 @@ export function Gallery({ query }: { query: string }) {
         {renders && <FlyOfTheDay renders={renders} />}
       </section>
 
-      <section className="finder" aria-label="Find a pattern">
+      <section className={moreOpen ? "finder more-open" : "finder"} aria-label="Find a pattern">
         <label className="search">
           <span className="visually-hidden">Search patterns</span>
           <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
@@ -91,7 +91,8 @@ export function Gallery({ query }: { query: string }) {
           />
         </label>
 
-        <div className="chips" role="group" aria-label="Type">
+        {/* On a phone the types are among the "more" filters, unless one is chosen. */}
+        <div className={filters.type ? "chips types chosen" : "chips types"} role="group" aria-label="Type">
           <button className={filters.type ? "" : "on"} aria-pressed={!filters.type} onClick={() => setFilters({ ...filters, type: undefined })}>
             All types
           </button>
