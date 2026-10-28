@@ -1,0 +1,33 @@
+// Palaemon serratus typically 100 mm (Wikipedia). Ally's Shrimp: "long, slim, quick and half translucent" (recipe history).
+
+id prawn
+name "Prawn"
+group crustacean
+stage adult
+examples "Palaemon (rockpool and common prawns)"
+description "A long, slim, half-translucent prawn with a pink-orange tinge, long antennae and a fan tail, darting backwards with a flick of the tail when alarmed. The prawn the salmon flies suggest."
+size min=40 max=100
+rides swimming
+curve 25
+body {
+    abdomen length=0.55 radius=0.07 taper=0.55 segments=6 color="#d8a090" belly="#e8c0b0" flatten=1.3 translucency=0.5
+    thorax length=0.33 radius=0.08 taper=0.9 color="#d09888" flatten=1.3 translucency=0.5
+    head length=0.12 radius=0.06 taper=0.25 color="#c88878" flatten=1.4 translucency=0.5
+}
+parts {
+    fin kind=caudal at=0 size=0.16 color="#d8a090"
+    // Assumption: antennae 1–1.5 × the body; five pairs of walking legs.
+    antennae length=1.3 color="#c08070"
+    legs count=10 length=0.3 color="#d8a898"
+    eyes size=0.03 color="#1a1a1a"
+}
+hatches {
+    southern-sweden from=january to=december note="All year; fished in the salmon and sea-trout seasons."
+    northern-scandinavia from=january to=december note="All year; fished in the salmon and sea-trout seasons."
+    british-isles from=january to=december note="All year; fished in the salmon and sea-trout seasons."
+    central-europe from=january to=december note="All year; fished in the salmon and sea-trout seasons."
+    northern-usa from=january to=december note="All year; fished in the salmon and sea-trout seasons."
+}
+sources {
+    "Wikipedia: Palaemon serratus" url="https://en.wikipedia.org/wiki/Palaemon_serratus"
+}

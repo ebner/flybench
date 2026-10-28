@@ -1,0 +1,41 @@
+// Mayfly dun (subimago): the freshly hatched mayfly, drifting on the surface while its wings dry.
+// Research notes: .cache/research/naturals.md (2.5).
+
+id mayfly-dun
+name "Mayfly dun"
+group mayfly
+stage dun
+examples "olives (Baetis), blue-winged olive (Serratella), iron blue (Alainites), mayfly (Ephemera)"
+description "The newly hatched mayfly: upright smoky wings, a slim curved body and two or three long tails. It drifts on the surface while its wings dry, then flies to the bank."
+// Olives and BWO 6–11 mm; Ephemera danica up to about 22 mm (Dalarna 2013; Wikipedia).
+size min=6 max=11
+rides on-surface
+// Assumption: the abdomen curves up a little towards the tail.
+curve -14
+body {
+    abdomen length=0.62 radius=0.055 taper=0.55 segments=10 color="#6b6a34" belly="#c9c39a"
+    thorax length=0.27 radius=0.075 taper=0.9 color="#5c5a32" belly=olive
+    head length=0.11 radius=0.055 taper=0.7 color="#4a4428"
+}
+parts {
+    // Two or three tails, about the body's length in the dun (Wikipedia: Mayfly; Dalarna 2013).
+    tails count=2 length=1.0 spread=35 color=dun
+    // Forewing about the body length, upright and together at rest; the hindwing very small (Dalarna 2013).
+    wings count=2 shape=upright length=0.95 width=0.5 color=dun clarity=0.25 veins=#true
+    legs count=6 length=0.55 color="#6a6040"
+    eyes size=0.035 color=black
+}
+hatches {
+    southern-sweden from=april to=october time="midday" note="Baetis: two generations, spring and autumn (Dalarna 2013)."
+    northern-scandinavia from=june to=august note="Estimate: one generation in the mountains."
+    british-isles from=march to=october time="midday" note="Large dark olive from February, peaks March–April and late autumn (first-nature)."
+    central-europe from=april to=september note="Serratella mostly June–September; one generation July–September above 1000 m."
+    northern-usa from=march to=october note="Blue-winged olives spring and autumn (Montana Angler)."
+}
+sources {
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+    "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
+    "Wikipedia (de): Serratella ignita" url="https://de.wikipedia.org/wiki/Serratella_ignita"
+    "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}

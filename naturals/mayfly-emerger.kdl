@@ -1,0 +1,34 @@
+id mayfly-emerger
+name "Mayfly emerger"
+group mayfly
+stage emerger
+examples "olives, blue-winged olive, the mayfly"
+description "The moment of hatching: the nymph splits its skin in the surface film and the dun struggles out, its crumpled wings half raised, the old shuck still trailing below."
+size min=6 max=11
+rides in-film
+curve 35
+body {
+    abdomen length=0.6 radius=0.058 taper=0.5 segments=10 color="#6e5e3c" belly="#a8986e" translucency=0.25
+    thorax length=0.28 radius=0.075 taper=0.9 color="#5c5a32"
+    head length=0.12 radius=0.055 taper=0.7 color="#4a4428"
+}
+parts {
+    // Assumption: the abdomen hangs below the film at 30–60°, the wings crumpled and half raised, the shuck trailing.
+    shuck length=0.35 color="#8a7a55"
+    wings count=2 shape=upright length=0.55 width=0.35 color=dun clarity=0.15
+    legs count=6 length=0.45 color="#6a6040"
+    eyes size=0.032 color=black
+}
+hatches {
+    southern-sweden from=april to=october time="midday" note="Baetis: two generations, spring and autumn (Dalarna 2013)."
+    northern-scandinavia from=june to=august note="Estimate: one generation in the mountains."
+    british-isles from=march to=october time="midday" note="Large dark olive peaks March–April and late autumn (First Nature)."
+    central-europe from=april to=september note="Serratella mostly June–September; above 1000 m July–September (Wikipedia de)."
+    northern-usa from=march to=october note="Blue-winged olives in spring and autumn (Montana Angler)."
+}
+sources {
+    "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+    "Troutnut: Genus Baetis" url="https://www.troutnut.com/hatch/180/Mayfly-Baetis-Blue-Winged-Olives"
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
+}

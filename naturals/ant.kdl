@@ -1,0 +1,31 @@
+id ant
+name "Ant"
+group terrestrial
+stage adult
+examples "black garden ant (Lasius niger)"
+description "A glossy black worker: head, thorax and a large rounded gaster joined by a thin waist. Ants fall onto the water on warm days and float half sunk in the film; in late summer winged swarms come down in numbers."
+size min=3 max=9
+rides in-film
+body {
+    gaster length=0.42 radius=0.13 taper=0.9 color="#141414" round=1
+    waist length=0.06 radius=0.035 taper=1 color="#141414"
+    thorax length=0.3 radius=0.08 taper=0.9 color="#1a1a1a" round=0.8
+    head length=0.22 radius=0.11 taper=0.9 color="#141414" round=1
+}
+parts {
+    // Assumption: head a quarter, thorax 30%, gaster 45% of the length.
+    legs count=6 length=0.65 color="#1e1e1e"
+    antennae length=0.45 color="#1e1e1e"
+    eyes size=0.03 color="#2a2a2a"
+}
+hatches {
+    southern-sweden from=may to=september note="Estimate; flying ants July–August."
+    northern-scandinavia from=june to=august note="Estimate."
+    british-isles from=may to=september note="Estimate; flying-ant swarms July–August (Wikipedia)."
+    central-europe from=may to=september note="Estimate; flights July–August (Wikipedia)."
+    northern-usa from=june to=september note="Ants from mid-July on the Madison (Montana Angler); flights usually in autumn (Wikipedia)."
+}
+sources {
+    "Wikipedia: Lasius niger" url="https://en.wikipedia.org/wiki/Lasius_niger"
+    "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}

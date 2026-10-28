@@ -1,0 +1,32 @@
+id caddis-larva-free
+name "Caddis larva, free-living"
+group caddis
+stage larva
+examples "Rhyacophila, Hydropsyche"
+description "A larva without a case: green or olive, slightly flattened, with tufts of gills along the sides, a dark head and thorax plates, and hooks at the tail to hold on in fast water."
+size min=14 max=25
+rides drifting
+curve 15
+body {
+    abdomen length=0.68 radius=0.075 taper=0.55 segments=9 color="#6f8a42" belly="#9ab062" flatten=0.8
+    thorax length=0.2 radius=0.065 taper=0.9 color="#5a3e22" belly="#7a5a32"
+    head length=0.12 radius=0.05 taper=0.8 color="#3a2614"
+}
+parts {
+    // Gill tufts along the sides (Rhyacophila, Dalarna 2013); white tufts underneath in Hydropsyche (Troutnut).
+    gills count=6 length=0.05 color="#e0d8c8"
+    legs count=6 length=0.25 color="#5a3e22"
+}
+hatches {
+    southern-sweden from=january to=december note="In the water all year; larvae drift often (Troutnut)."
+    northern-scandinavia from=january to=december note="In the water all year; larvae drift often (Troutnut)."
+    british-isles from=january to=december note="In the water all year; larvae drift often (Troutnut)."
+    central-europe from=january to=december note="In the water all year; larvae drift often (Troutnut)."
+    northern-usa from=january to=december note="In the water all year; larvae drift often (Troutnut)."
+}
+sources {
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "Troutnut: Genus Hydropsyche" url="https://www.troutnut.com/hatch/1916/Caddisfly-Hydropsyche-Spotted-Sedges"
+    "Troutnut: Order Trichoptera" url="https://www.troutnut.com/hatch/12/Insect-Trichoptera-Caddisflies"
+    "Wikipedia (de): Köcherfliegen" url="https://de.wikipedia.org/wiki/Köcherfliegen"
+}

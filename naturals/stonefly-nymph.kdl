@@ -1,0 +1,38 @@
+// Perla marginata larvae 15–34 mm (Wikipedia de).
+
+id stonefly-nymph
+name "Stonefly nymph"
+group stonefly
+stage nymph
+examples "Perla, Diura, Isoperla; salmonfly and golden stone (North America)"
+description "A flat, sturdy nymph with two tails, long antennae and sprawling legs, clinging under stones in fast water for up to three years. Dislodged nymphs drift helplessly; before hatching they crawl out onto the stones."
+size min=15 max=34
+rides crawling
+body {
+    abdomen length=0.55 radius=0.07 taper=0.5 segments=10 color="#4a3626" belly="#b08a4a" flatten=0.55
+    thorax length=0.33 radius=0.085 taper=0.95 color="#3e2e20" belly="#a07a40" flatten=0.55
+    head length=0.12 radius=0.07 taper=0.8 color="#3a2a1c" flatten=0.6
+}
+parts {
+    // Two long tails and antennae (MDC; Wikipedia: Plecoptera).
+    tails count=2 length=0.5 spread=45 color="#5a4430"
+    antennae length=0.5 color="#5a4430"
+    wingpads length=0.28 color="#2a1e14"
+    legs count=6 length=0.6 color="#6a5236"
+    eyes size=0.022 color=black
+}
+hatches {
+    southern-sweden from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
+    northern-scandinavia from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
+    british-isles from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
+    central-europe from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
+    northern-usa from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
+}
+sources {
+    "Missouri Department of Conservation: Stoneflies" url="https://mdc.mo.gov/discover-nature/field-guide/stoneflies"
+    "Wikipedia: Plecoptera" url="https://en.wikipedia.org/wiki/Plecoptera"
+    "Wikipedia (de): Perla marginata" url="https://de.wikipedia.org/wiki/Perla_marginata"
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "Troutnut: Order Plecoptera" url="https://www.troutnut.com/hatch/13/Insect-Plecoptera-Stoneflies"
+    "Troutnut: Pteronarcys californica" url="https://www.troutnut.com/hatch/973/Stonefly-Pteronarcys-californica-Giant-Salmonfly"
+}

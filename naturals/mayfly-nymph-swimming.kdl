@@ -1,0 +1,38 @@
+id mayfly-nymph-swimming
+name "Mayfly nymph, swimming"
+group mayfly
+stage nymph
+examples "olives (Baetis), iron blue (Alainites)"
+description "A slim, torpedo-shaped nymph that swims in short jerky dashes among stones and weed, with three tails and small gills along the abdomen. Wing cases darken as it nears hatching."
+size min=4.5 max=10
+rides swimming
+body {
+    abdomen length=0.6 radius=0.06 taper=0.45 segments=10 color="#7a6a45" belly="#b0a27a" translucency=0.3
+    thorax length=0.28 radius=0.075 taper=0.9 color="#55462c" belly="#8a7a55"
+    head length=0.12 radius=0.06 taper=0.7 color="#4a3c26"
+}
+parts {
+    // Three tails, the middle one shorter in Baetis (DCRT; First Nature); "fairly long" (Dalarna 2013).
+    tails count=3 length=0.5 spread=40 color="#6a5a3a"
+    // Seven pairs of small gills (First Nature).
+    gills count=7 length=0.06 color="#c8b88a"
+    wingpads length=0.2 color="#2e2618"
+    legs count=6 length=0.42 color="#6a5a3a"
+    // Assumption: antennae about a quarter of the body length.
+    antennae length=0.25 color="#6a5a3a"
+    eyes size=0.025 color=black
+}
+hatches {
+    southern-sweden from=april to=october time="midday" note="Baetis: two generations, spring and autumn (Dalarna 2013)."
+    northern-scandinavia from=june to=august note="Estimate: one generation in the mountains."
+    british-isles from=march to=october time="midday" note="Large dark olive peaks March–April and late autumn (First Nature)."
+    central-europe from=april to=september note="Serratella mostly June–September; above 1000 m July–September (Wikipedia de)."
+    northern-usa from=march to=october note="Blue-winged olives in spring and autumn (Montana Angler)."
+}
+sources {
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
+    "Hancock / Don Catchment Rivers Trust: Mayfly Identification (after FBA 66)" url="https://dcrt.org.uk/wp-content/uploads/2026/01/Mayfly-Identification-DCRT-Paul-Hancock-pdf.pdf"
+    "Troutnut: Genus Baetis" url="https://www.troutnut.com/hatch/180/Mayfly-Baetis-Blue-Winged-Olives"
+    "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+}

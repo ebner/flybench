@@ -1,0 +1,25 @@
+// Assumption: the leeches trout eat are 2–6 cm.
+
+id leech
+name "Leech"
+group crustacean
+stage adult
+examples "freshwater leeches (Erpobdellidae)"
+description "A soft, flattened, segmented worm with a sucker at each end, swimming with slow undulations of the whole body. Black, brown or olive."
+size min=20 max=60
+rides swimming
+body {
+    body length=1.0 radius=0.07 taper=0.6 segments=20 color="#1e1e1a" belly="#3a3a30" flatten=0.5
+}
+parts {
+}
+hatches {
+    southern-sweden from=january to=december note="All year (estimate)."
+    northern-scandinavia from=january to=december note="All year (estimate)."
+    british-isles from=january to=december note="All year (estimate)."
+    central-europe from=january to=december note="All year (estimate)."
+    northern-usa from=january to=december note="All year (estimate)."
+}
+sources {
+    "Wikipedia: Leech" url="https://en.wikipedia.org/wiki/Leech"
+}

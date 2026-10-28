@@ -3,6 +3,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { pieceProgress, stepAt, stepEnd, stepProgress, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
 import { buildHook } from "./hook";
+import { buildNatural, disposeNatural } from "./natural";
+import type { Natural } from "../recipe/natural";
 import { proportions } from "../tying/proportions";
 import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
@@ -83,6 +85,8 @@ export class FlyScene {
   private guide: THREE.Group | null = null;
   private guideColor = "#2a4a6a";
   private guideView = false;
+  /** A natural (insect, shrimp, fish) shown beside or over the fly, or on its own. */
+  private natural: THREE.Group | null = null;
   /** The time last shown, so re-measuring can come back to it. */
   private time = 0;
 
@@ -338,7 +342,7 @@ export class FlyScene {
    * it never zooms in on a detail and the hook always shows where on it the work is.
    */
   private actionBox(): THREE.Box3 {
-    const box = this.atEnd ? this.finished.clone() : this.hookBounds.clone();
+    const box = (this.atEnd ? this.finished.clone() : this.hookBounds.clone()).union(this.naturalBounds());
     if (!this.atEnd) for (let i = 0; i <= this.currentStep; i++) box.union(this.stepBounds[i]!);
     // With the proportion guide on, its measurements so far are in the picture too.
     if (this.guide) {
@@ -408,18 +412,74 @@ export class FlyScene {
     this.resetCamera();
   }
 
+  /**
+   * Shows a natural with the fly, `length` gapes long (its body length at the fly's scale):
+   * "beside" below the finished fly, "over" laid along the hook, half see-through. Without a
+   * fly, it is shown on its own. null takes it away.
+   */
+  setNatural(n: Natural | null, length = 4, at: "beside" | "over" = "beside") {
+    if (this.natural) {
+      disposeNatural(this.natural);
+      this.scene.remove(this.natural);
+      this.natural = null;
+    }
+    if (!n) {
+      this.resetCamera();
+      return;
+    }
+    const g = buildNatural(n);
+    g.scale.setScalar(length);
+    if (this.build && !this.finished.isEmpty()) {
+      const fly = this.finished;
+      const own = new THREE.Box3().setFromObject(g);
+      if (at === "over") {
+        // Head at the eye, along the shank.
+        g.position.set(this.build.hook.shankLength + 0.1 - length, -own.getCenter(new THREE.Vector3()).y * 0.2, 0);
+        g.traverse((o) => {
+          if (o instanceof THREE.Mesh) {
+            const m = o.material as THREE.Material;
+            m.transparent = true;
+            m.opacity = Math.min(m.opacity, 0.5);
+            m.depthWrite = false;
+          }
+        });
+      } else {
+        const gap = 0.25 * (fly.max.y - fly.min.y);
+        g.position.set(fly.getCenter(new THREE.Vector3()).x - own.getCenter(new THREE.Vector3()).x, fly.min.y - gap - own.max.y, 0);
+      }
+    }
+    this.natural = g;
+    this.scene.add(g);
+    this.resetCamera();
+  }
+
+  private naturalBounds(): THREE.Box3 {
+    return this.natural ? new THREE.Box3().setFromObject(this.natural) : new THREE.Box3();
+  }
+
   /** Frames the finished fly from the current view, with a small margin. */
   resetCamera() {
-    if (!this.build || this.finished.isEmpty()) return;
+    if (!this.build || this.finished.isEmpty()) {
+      // A natural on its own.
+      if (this.natural) this.frameBox(this.naturalBounds());
+      return;
+    }
     this.userMoved = false;
-    const subject =
-      this.framing === "dressing" ? this.stepBounds.reduce((all, b) => all.union(b), new THREE.Box3()).expandByScalar(0.12) : this.finished;
+    const subject = (
+      this.framing === "dressing" ? this.stepBounds.reduce((all, b) => all.union(b), new THREE.Box3()).expandByScalar(0.12) : this.finished
+    ).clone().union(this.naturalBounds());
     // With the measuring grid on, leave room for its labels, and for the proportion guide's.
     const framed = subject.clone().expandByScalar(this.grid ? 0.45 : 0);
     if (this.guide) {
       for (const item of this.guide.children) framed.union(guideBounds(item));
       framed.max.y += 0.12 * (framed.max.y - framed.min.y);
     }
+    this.frameBox(framed);
+  }
+
+  /** Points the camera at `framed` from the current view, filling the picture with a small margin. */
+  private frameBox(framed: THREE.Box3) {
+    this.userMoved = false;
     const target = framed.getCenter(new THREE.Vector3());
     const view = this.viewDirection(this.orbit);
     // "sphere": the distance that fits the fly from every turntable angle, so its size

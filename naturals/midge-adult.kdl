@@ -1,0 +1,33 @@
+id midge-adult
+name "Midge adult"
+group chironomid
+stage adult
+examples "non-biting midges (Chironomidae)"
+description "A small, slender fly with one pair of wings held back over its body, long legs and, in the males, feathery antennae. Mating clusters drift on the surface on calm evenings."
+size min=2 max=10
+rides on-surface
+body {
+    abdomen length=0.62 radius=0.05 taper=0.65 segments=8 color="#2a2a26"
+    thorax length=0.26 radius=0.075 taper=0.85 color="#24221e"
+    head length=0.12 radius=0.05 taper=0.7 color="#24221e"
+}
+parts {
+    // One pair of wings (MDC), roof-like at rest (Wikipedia de).
+    wings count=2 shape=back length=0.85 width=0.25 color="#d0d4d4" clarity=0.75 veins=#true
+    antennae length=0.4 color="#3a3a30"
+    legs count=6 length=0.75 color="#3a3a30"
+    eyes size=0.028 color=black
+}
+hatches {
+    southern-sweden from=april to=october note="Estimate: peak May–June."
+    northern-scandinavia from=june to=september note="Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate."
+    british-isles from=march to=october time="morning, evening" note="All year on stillwaters; big buzzers March–April, peak May–June, again September–October (The Essential Fly)."
+    central-europe from=april to=october note="Estimate, as in Britain."
+    northern-usa from=january to=december note="Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure)."
+}
+sources {
+    "Missouri Department of Conservation: Midges" url="https://mdc.mo.gov/discover-nature/field-guide/midges"
+    "Wikipedia (de): Zuckmücken" url="https://de.wikipedia.org/wiki/Zuckmücken"
+    "Wikipedia: Chironomidae" url="https://en.wikipedia.org/wiki/Chironomidae"
+    "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
+}

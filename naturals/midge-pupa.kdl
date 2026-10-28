@@ -1,0 +1,35 @@
+id midge-pupa
+name "Midge pupa (buzzer)"
+group chironomid
+stage pupa
+examples "buzzers (Chironomus and kin)"
+description "A slim, segmented pupa with a bulbous thorax and white breathing filaments at the head. It rises slowly in short bursts, hangs still below the surface, and takes minutes to break through the film."
+size min=6 max=20
+rides in-film
+curve 45
+body {
+    abdomen length=0.68 radius=0.045 taper=0.55 segments=9 color="#1e1e1e" belly="#2e2a24"
+    thorax length=0.24 radius=0.09 taper=0.85 color="#2a2620"
+    head length=0.08 radius=0.06 taper=0.7 color="#2a2620"
+}
+parts {
+    // Head and wing case a quarter to a third of the length, white feathery gills at the head (BC Adventure).
+    // Assumption: the gills drawn as two short white filaments.
+    antennae length=0.14 color="#f0f0ea"
+    wingpads length=0.18 color="#14120e"
+    eyes size=0.022 color="#3a1a10"
+}
+hatches {
+    southern-sweden from=april to=october note="Estimate: peak May–June."
+    northern-scandinavia from=june to=september note="Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate."
+    british-isles from=march to=october time="morning, evening" note="All year on stillwaters; big buzzers March–April, peak May–June, again September–October (The Essential Fly)."
+    central-europe from=april to=october note="Estimate, as in Britain."
+    northern-usa from=january to=december note="Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure)."
+}
+sources {
+    "Ron Newman, BC Adventure: Chironomids" url="https://bcadventure.com/adventure/angling/bugs/chironomid/chironomid.phtml"
+    "Naturalis, Chironomidae Exuviae: family Chironomidae" url="https://chironomidae-exuviae.linnaeus.naturalis.nl/linnaeus_ng/app/views/highertaxa/taxon.php?id=63297"
+    "The Essential Fly: Midge hatches" url="https://www.theessentialfly.com/blog/midgehatches.html"
+    "Wikipedia (de): Zuckmücken" url="https://de.wikipedia.org/wiki/Zuckmücken"
+    "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
+}

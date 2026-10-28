@@ -62,7 +62,7 @@ export const NAMED_COLORS = {
 
 export type NamedColor = keyof typeof NAMED_COLORS;
 
-const Color = z.union([
+export const Color = z.union([
   z.enum(Object.keys(NAMED_COLORS) as [NamedColor, ...NamedColor[]]),
   z.string().regex(/^#[0-9a-fA-F]{6}$/, "expected a named colour or a hex colour like \"#c8102e\""),
 ]);
@@ -288,7 +288,7 @@ const Origin = z.strictObject({
 /** Web links only: a recipe's links end up on the published pages. */
 const WebUrl = z.url({ protocol: /^https?$/ });
 
-const Source = z.strictObject({
+export const Source = z.strictObject({
   title: z.string().min(1),
   url: WebUrl.optional(),
 });

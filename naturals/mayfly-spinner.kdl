@@ -1,0 +1,36 @@
+id mayfly-spinner
+name "Mayfly spinner"
+group mayfly
+stage spinner
+examples "sherry spinner (Serratella), red spinner (Baetis), the mayfly"
+description "The mature mayfly: clear glassy wings, long tails and a shiny body. After mating the females lay their eggs and fall spent on the water, wings flat out."
+size min=6 max=11
+rides on-surface
+curve -8
+body {
+    abdomen length=0.62 radius=0.05 taper=0.55 segments=10 color="#7a3a22" belly="#9a5a3a"
+    thorax length=0.27 radius=0.07 taper=0.9 color="#5a2c18"
+    head length=0.11 radius=0.05 taper=0.7 color="#4a2414"
+}
+parts {
+    // Tails longer than the dun's, 1.5–3 × the body (Dalarna 2013).
+    tails count=2 length=2.0 spread=30 color="#5a3a2a"
+    // Clear, glassy wings with dark veins (Dalarna 2013; First Nature), spent on the water.
+    wings count=2 shape=spent length=0.95 width=0.45 color="#b8bec4" clarity=0.7 veins=#true
+    legs count=6 length=0.6 color="#5a3a2a"
+    eyes size=0.035 color="#6a1a10"
+}
+hatches {
+    southern-sweden from=april to=october time="evening" note="Baetis: two generations, spring and autumn (Dalarna 2013)."
+    northern-scandinavia from=june to=august note="Estimate: one generation in the mountains."
+    british-isles from=march to=october time="evening" note="Large dark olive peaks March–April and late autumn (First Nature)."
+    central-europe from=april to=september note="Serratella mostly June–September; above 1000 m July–September (Wikipedia de)."
+    northern-usa from=march to=october note="Blue-winged olives in spring and autumn (Montana Angler)."
+}
+sources {
+    "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
+    "First Nature: Blue-winged Olive" url="https://www.first-nature.com/insects/e-serratella-ignita.php"
+    "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
+    "First Nature: Mayfly (Ephemera danica)" url="https://www.first-nature.com/insects/e-ephemera-danica.php"
+    "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+}

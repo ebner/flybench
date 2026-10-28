@@ -1,0 +1,32 @@
+id grasshopper
+name "Grasshopper"
+group terrestrial
+stage adult
+examples "field and meadow grasshoppers (Chorthippus)"
+description "A long-bodied insect with big jumping hind legs, folded wings and short antennae. Blown or jumping onto the water, it lands with a splash and kicks."
+size min=15 max=25
+rides on-surface
+body {
+    abdomen length=0.55 radius=0.075 taper=0.6 segments=8 color="#7a6a3a" belly="#a8985a" flatten=1.2
+    thorax length=0.3 radius=0.1 taper=0.9 color="#6a5a32" flatten=1.3
+    head length=0.15 radius=0.09 taper=0.75 color="#6a5a32" flatten=1.3
+}
+parts {
+    wings count=4 shape=back length=0.7 width=0.15 color="#7a6a42" clarity=0.1
+    // Assumption: the jumping legs about twice the others, reaching past the abdomen.
+    legs count=6 length=0.45 color="#7a6a3a" hind=2.0
+    antennae length=0.45 color="#6a5a32"
+    eyes size=0.035 color="#3a3020"
+}
+hatches {
+    southern-sweden from=july to=september note="Estimate."
+    northern-scandinavia from=july to=august note="Estimate."
+    british-isles from=june to=november note="Field grasshopper adults June to early December (ORS)."
+    central-europe from=july to=october note="Estimate."
+    northern-usa from=july to=september note="Hoppers from mid-July on the Madison (Montana Angler)."
+}
+sources {
+    "Grasshoppers and Related Insects Recording Scheme: Chorthippus brunneus" url="https://orthoptera.org.uk/node/3354"
+    "Wikipedia: Meadow grasshopper" url="https://en.wikipedia.org/wiki/Meadow_grasshopper"
+    "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}

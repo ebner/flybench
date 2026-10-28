@@ -1,0 +1,34 @@
+id damselfly-nymph
+name "Damselfly nymph"
+group damselfly
+stage nymph
+examples "Coenagrion, Enallagma"
+description "A slender nymph of weedy lakes and slow water with three leaf-like tail gills. It swims with fish-like wriggles of the body and climbs out of the water to hatch."
+size min=18 max=26
+rides swimming
+body {
+    abdomen length=0.64 radius=0.035 taper=0.75 segments=10 color="#6a7a3a" belly="#9aa868"
+    thorax length=0.22 radius=0.05 taper=0.95 color="#5a6a30"
+    head length=0.14 radius=0.055 taper=0.8 color="#5a6a30" flatten=0.7
+}
+parts {
+    // Three leaf-like caudal gills (MDC; Wikipedia). Assumption: about a quarter of the length.
+    tails count=3 length=0.28 spread=25 color="#8a9a5a" leaf=#true
+    wingpads length=0.15 color="#4a5426"
+    legs count=6 length=0.5 color="#6a7a3a"
+    antennae length=0.12 color="#5a6a30"
+    eyes size=0.04 color="#2a3014"
+}
+hatches {
+    southern-sweden from=may to=august note="Adults May–August (Wikipedia); nymphs migrate to hatch just before."
+    northern-scandinavia from=june to=august note="Estimate."
+    british-isles from=may to=august note="Coenagrion puella late April to early September, best late May–mid August (DELTA)."
+    central-europe from=may to=august note="Estimate."
+    northern-usa from=may to=august note="Estimate."
+}
+sources {
+    "Missouri Department of Conservation: Damselflies" url="https://mdc.mo.gov/discover-nature/field-guide/damselflies"
+    "Wikipedia: Damselfly" url="https://en.wikipedia.org/wiki/Damselfly"
+    "DELTA British Odonata: Coenagrion puella" url="https://www.delta-intkey.com/britin/odo/www/puella.htm"
+    "Wikipedia: Enallagma cyathigerum" url="https://en.wikipedia.org/wiki/Enallagma_cyathigerum"
+}
