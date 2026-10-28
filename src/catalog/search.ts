@@ -83,8 +83,8 @@ export class CatalogSearch {
 
   /** How many entries each value of a facet would leave, given the other filters. */
   facetCounts<K extends "type" | "imitates" | "difficulty" | "species">(key: K, values: readonly string[], filters: Filters) {
-    const rest = this.search({ ...filters, [key]: undefined });
-    return new Map(values.map((v) => [v, rest.filter((e) => matches(e, { [key]: v } as Filters)).length]));
+    // All filters together, so one version has to meet them all, as when the value is chosen.
+    return new Map(values.map((v) => [v, this.search({ ...filters, [key]: v }).length]));
   }
 }
 
@@ -93,7 +93,7 @@ function matches(e: CatalogEntry, f: Filters): boolean {
   return [e.recipe, ...e.variants].some((r) => versionMatches(r, f));
 }
 
-function versionMatches(r: Recipe, f: Filters): boolean {
+export function versionMatches(r: Recipe, f: Filters): boolean {
   if (f.type && r.type !== f.type) return false;
   if (f.imitates && !r.imitates.includes(f.imitates)) return false;
   if (f.difficulty && r.difficulty !== f.difficulty) return false;

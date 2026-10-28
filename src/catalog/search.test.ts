@@ -44,6 +44,9 @@ describe("catalog search", () => {
     // The Zulu is fished for char; only the Blue Zulu has hen hackle.
     expect(ids({ species: "char" })).toContain("zulu");
     expect(ids({ species: "char", materials: ["hen-hackle"] })).not.toContain("zulu");
+    // A facet's count is what choosing it would leave.
+    const counts = search.facetCounts("species", ["char"], { materials: ["hen-hackle"] });
+    expect(counts.get("char")).toBe(ids({ species: "char", materials: ["hen-hackle"] }).length);
   });
 
   it("finds a family by a variant's name or alias", () => {
