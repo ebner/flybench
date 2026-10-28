@@ -122,6 +122,9 @@ export class FlyScene {
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
+    // One finger scrolls the page past the view; two fingers turn and zoom the fly.
+    this.controls.touches = { ONE: null, TWO: THREE.TOUCH.DOLLY_ROTATE };
+    this.renderer.domElement.style.touchAction = "pan-y";
     this.controls.minDistance = 0.8;
     // Allow at least the distance a narrow field of view needs to frame the fly; framing a
     // long fly in a narrow viewport raises it (see allowDistance).
