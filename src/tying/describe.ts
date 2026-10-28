@@ -101,7 +101,7 @@ function reachText(tipX: number, bendEnd: number, mount: Mount): string | null {
 
 /** What the simulation knows about a step that the text needs. */
 export interface StepContext {
-  /** wind: winding back towards the bend (palmering). */
+  /** wind: winding back towards the bend (palmering); dub: dubbing back towards it. */
   rear?: boolean;
   /** wind: the palmered material this wind secures. */
   through?: string;
@@ -219,7 +219,7 @@ export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): str
       text = `Spin clumps of ${mat(step.material)} round ${body}, packing each one back against the last, up to ${at(step.to)}.`;
       break;
     case "dub":
-      text = `Twist a thin noodle of ${mat(step.material)} onto the thread and wrap it forward to ${at(step.to)}.`;
+      text = `Twist a thin noodle of ${mat(step.material)} onto the thread and wrap it ${ctx.rear ? "back" : "forward"} to ${at(step.to)}.`;
       break;
     case "tie-off":
       text = `Tie off the ${mat(step.material)} with a few thread turns and trim the excess.`;

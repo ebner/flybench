@@ -88,17 +88,18 @@ export class CatalogSearch {
   }
 }
 
+/** A pattern matches when one of its versions meets every filter: variants are complete recipes of their own. */
 function matches(e: CatalogEntry, f: Filters): boolean {
-  const r = e.recipe;
+  return [e.recipe, ...e.variants].some((r) => versionMatches(r, f));
+}
+
+function versionMatches(r: Recipe, f: Filters): boolean {
   if (f.type && r.type !== f.type) return false;
   if (f.imitates && !r.imitates.includes(f.imitates)) return false;
   if (f.difficulty && r.difficulty !== f.difficulty) return false;
   if (f.species && !r.species.includes(f.species)) return false;
   if (f.month && !r.season.includes(f.month)) return false;
-  // All of the materials in one version: variants are complete recipes of their own.
-  const wanted = f.materials ?? [];
-  if (wanted.length && ![e.recipe, ...e.variants].some((v) => wanted.every((m) => v.materials.some((x) => x.kind === m)))) return false;
-  return true;
+  return (f.materials ?? []).every((m) => r.materials.some((x) => x.kind === m));
 }
 
 /** Filters <-> URL query string, so a filtered gallery can be linked to. */

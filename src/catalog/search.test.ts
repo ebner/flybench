@@ -38,6 +38,14 @@ describe("catalog search", () => {
     expect(ids({ materials: ["gold-wire", "copper-wire"] })).not.toContain("elk-hair-caddis");
   });
 
+  it("needs one version to meet every filter at once", () => {
+    // Only the American Pheasant Tail has peacock herl, and only it is fished in November.
+    expect(ids({ month: "november", materials: ["peacock-herl"] })).toContain("pheasant-tail-nymph");
+    // The Zulu is fished for char; only the Blue Zulu has hen hackle.
+    expect(ids({ species: "char" })).toContain("zulu");
+    expect(ids({ species: "char", materials: ["hen-hackle"] })).not.toContain("zulu");
+  });
+
   it("finds a family by a variant's name or alias", () => {
     expect(ids({ q: "American Pheasant Tail" })).toContain("pheasant-tail-nymph");
   });
