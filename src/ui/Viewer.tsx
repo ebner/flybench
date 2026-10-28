@@ -43,8 +43,24 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
       if (!point) return;
       el.style.transform = `translate(${Math.round(point.x)}px, ${Math.round(point.y)}px)`;
       const text = el.firstElementChild as HTMLElement | null;
-      // The label sits about 2.6rem right of the point: flip it left if it wouldn't fit.
-      el.classList.toggle("flip", point.x + (text?.offsetWidth ?? 0) + 48 > container.current!.clientWidth);
+      if (!text) return;
+      // The label's width on one line, measured again whenever it changes.
+      if (text.dataset.for !== text.textContent) {
+        text.style.maxWidth = "none";
+        text.dataset.width = String(text.offsetWidth);
+        text.dataset.for = text.textContent ?? "";
+      }
+      const width = Number(text.dataset.width);
+      // It sits about 3rem to one side of the point. It moves to the other side only when it
+      // doesn't fit where it is and the other side is clearly roomier, so it doesn't jump about
+      // as the thread moves; where it still doesn't fit, it wraps upwards.
+      const right = container.current!.clientWidth - point.x - 48;
+      const left = point.x - 48;
+      const flipped = el.classList.contains("flip");
+      const [here, there] = flipped ? [left, right] : [right, left];
+      const flip = width > here && there > here + 24 ? !flipped : flipped;
+      el.classList.toggle("flip", flip);
+      text.style.maxWidth = `${Math.max(96, flip ? left : right)}px`;
     };
     scene.current = s;
     return () => {
