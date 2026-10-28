@@ -26,13 +26,29 @@ materials {
 }
 `;
 
+/**
+ * A recipe from a shared header and some steps. The header lists more materials than most
+ * tests use, and unused materials are an error: only those the steps mention are kept.
+ */
+function recipeText(header: string, steps: string): string {
+  const mentioned = (line: string) => {
+    const id = line.match(/^ {4}([\w-]+) /)?.[1];
+    return !id || new RegExp(`\\b${id}\\b`).test(steps);
+  };
+  const kept = header.replace(
+    /(materials \{\n)([\s\S]*?)(\n\})/,
+    (_, open: string, body: string, close: string) => open + body.split("\n").filter(mentioned).join("\n") + close,
+  );
+  return `${kept}\nsteps {\n${steps}\n}\n`;
+}
+
 function load(steps: string, header = HEADER): LoadResult {
-  return loadRecipe(`${header}\nsteps {\n${steps}\n}\n`);
+  return loadRecipe(recipeText(header, steps));
 }
 
 /** 1-based line of `needle` in a document built by `load`. */
 function lineOf(steps: string, needle: string, header = HEADER): number {
-  const text = `${header}\nsteps {\n${steps}\n}\n`;
+  const text = recipeText(header, steps);
   return text.slice(0, text.indexOf(needle)).split("\n").length;
 }
 
@@ -53,6 +69,28 @@ const VALID_STEPS = `
     wrap-thread to=0.7
     wind herl to=0.7 turns=8
     tie-off herl
+    whip-finish
+`;
+
+/** Every material in HEADER: tag, herl butt, ribbed dubbed body, hackle and hair wing. */
+const ALL_STEPS = `
+    attach-thread at=0.8
+    wrap-thread to=0.0
+    tie-in tag length=0.3
+    tie-in rib
+    tie-in herl
+    wrap-thread to=0.3
+    wind herl to=0.3 turns=4
+    tie-off herl
+    dub fur to=0.75
+    wind rib to=0.75 turns=5
+    tie-off rib
+    tie-in hackle
+    tie-in wing length=1.5 angle=15
+    trim wing leave=0.15
+    wrap-thread to=0.85
+    wind hackle to=0.85 turns=3
+    tie-off hackle
     whip-finish
 `;
 
@@ -180,7 +218,7 @@ describe("schema validation", () => {
   });
 
   it("rejects bad colours", () => {
-    expect(errorsOf(load(VALID_STEPS, HEADER.replace("color=red", "color=mauve")))[0]).toMatch(/materials\.1\.color/);
+    expect(errorsOf(load(ALL_STEPS, HEADER.replace("color=red", "color=mauve")))[0]).toMatch(/materials\.1\.color/);
   });
 
   it("requires a type and difficulty, from fixed lists", () => {
@@ -193,15 +231,15 @@ describe("schema validation", () => {
   });
 
   it("rejects unknown materials kinds", () => {
-    expect(errorsOf(load(VALID_STEPS, HEADER.replace("hares-ear-dubbing", "unicorn-hair")))[0]).toMatch(/materials\.4\.kind/);
+    expect(errorsOf(load(ALL_STEPS, HEADER.replace("hares-ear-dubbing", "unicorn-hair")))[0]).toMatch(/materials\.4\.kind/);
   });
 
   it("checks material properties against the archetype", () => {
-    const errors = (from: string, to: string) => errorsOf(load(VALID_STEPS, HEADER.replace(from, to))).join("\n");
+    const errors = (from: string, to: string) => errorsOf(load(ALL_STEPS, HEADER.replace(from, to))).join("\n");
     expect(errors("wool color=red", "wool color=red strands=2")).toMatch(/"strands" does not apply to wool/);
     expect(errors("fibre=1.0", "")).toMatch(/needs its fibre length/);
     expect(errors("tag wool color=red", "tag wool")).toMatch(/wool needs a colour/);
-    expect(load(VALID_STEPS, HEADER.replace("fur hares-ear-dubbing", "fur hares-ear-dubbing shaggy=1")).ok).toBe(true);
+    expect(load(ALL_STEPS, HEADER.replace("fur hares-ear-dubbing", "fur hares-ear-dubbing shaggy=1")).ok).toBe(true);
     expect(errors("fur hares-ear-dubbing", "fur hares-ear-dubbing shaggy=2")).toMatch(/shaggy/);
     expect(errors("wool color=red", "wool color=red shaggy=0.5")).toMatch(/"shaggy" does not apply to wool/);
   });
@@ -225,7 +263,7 @@ materials {
     wing hackle-tips color=grizzly
 }
 `;
-  const run = (steps: string, h = head) => loadRecipe(`${h}steps {\n${steps}\n}\n`);
+  const run = (steps: string, h = head) => loadRecipe(recipeText(h, steps));
 
   it("ties a pulled-over strip down where the thread is", () => {
     const steps = (to: number) => `    attach-thread at=0.1\n    tie-in case\n    wrap-thread to=0.9\n    pull-over case to=${to}\n    whip-finish`;
@@ -268,6 +306,14 @@ materials {
     const steps = (to: number) => `    attach-thread at=0.1\n    tie-in rib\n    wrap-thread to=0.85\n    wind rib to=${to} turns=3\n    tie-off rib\n    whip-finish`;
     expect(run(steps(0.85), h).ok).toBe(true);
     expect(errorsOf(run(steps(0.4), h)).join("\n")).toMatch(/the thread is at 0.85; wind forward to it/);
+  });
+
+  it("uses every material listed, and leaves nothing tied in and hanging", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    rib gold-wire\n");
+    const hanging = "    attach-thread at=0.8\n    tie-in rib\n    tie-in case\n    pull-over case to=0.8\n    whip-finish";
+    expect(errorsOf(run(hanging, h)).join("\n")).toMatch(/"rib" is tied in but never wound or pulled over/);
+    const unused = "    attach-thread at=0.8\n    tie-in case\n    pull-over case to=0.8\n    whip-finish";
+    expect(errorsOf(loadRecipe(`${h}steps {\n${unused}\n}\n`)).join("\n")).toMatch(/"wing" is listed but never used/);
   });
 
   it("doesn't spin or weight with a material that is already on the hook", () => {

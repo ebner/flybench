@@ -90,7 +90,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 | `season`      | month names, `january` … `december`              | no       |
 | `origin`      | `origin originator="…" year=1957 region="…"` (all optional) | no |
 | `description` | one or two sentences for the catalog              | no       |
-| `rides`       | `point-down` (default) or `point-up`               | no       |
+| `rides`       | `point-down` or `point-up` (default: `point-up` on jig hooks, `point-down` on the rest) | no |
 | `history`     | multi-line text                                   | no       |
 | `fishing`     | multi-line text: how and when to fish it          | no       |
 | `sources`     | block of `"Title" url="…"` lines (url optional)   | no       |
@@ -232,7 +232,7 @@ The archetype decides how a material behaves and is drawn:
 - **feather** wings: breast feathers lie over the body like a roof; hackle tips and quill
   slips stand on edge. With `spread`, they are a pair turned out to either side (an
   upright divided wing at `angle=90`, or slips along the sides of a wet fly).
-- Windable materials (yarn, herl, hackle, wire, floss, tinsel, chenille, fibres) can be
+- Windable materials (yarn, herl, hackle, cdc, wire, floss, tinsel, chenille, fibres) can be
   tied in without a length and then wound, or pulled over (`pull-over`).
 
 ## Steps
@@ -256,7 +256,7 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 | `pull-over`     | `pull-over <material> to=<pos>`                   | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. |
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess. |
-| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` flattens it top and bottom, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
+| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
 | `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. |
 
 ### Tying rules (semantic validation)
@@ -264,22 +264,24 @@ Every step accepts `note="…"`, which is appended to the generated instruction 
 - Beads go on before the thread; nothing else but weighting may come before `attach-thread`,
   which occurs once.
 - A material is tied in once and wound at most once. Dubbing is only used with `dub`.
-- Hair and feather wings need a `length`; feathers point back (no `forward`). `angle` needs a `length`. `spread` only applies
+- Hair, feathers, biots, marabou, flash and legs need a `length`; feathers point back (no `forward`). `angle` needs a `length`. `spread` only applies
   to material tied in with a length (tags, tails, wings; for feathers it makes a pair);
   `width` only to feather wings.
 - `wind … to` must differ from the tie-in point. A forward wind ends at the thread, where
   the material is then tied off.
 - A forward-wound material is tied off in the very next step.
 - A rearward-wound (palmered) material must be secured in the very next step, by winding
-  another material forward from at or behind its tip, and its tip must be trimmed before
-  the whip finish.
+  another material forward from at or behind its tip, and its tip must be trimmed (before
+  or after the whip finish).
 - `trim` needs something to trim; `leave` only applies to hair butts, spun hair and foam backs.
 - A parachute hackle needs a post: a bunch tied in upright (`angle` of 60° or more), not a
   feather pair, an extended body or strands tied across.
 - `pull-over` needs the material tied in and unused, and the thread at `to`.
 - Only hair is spun, only wire weights, only beads are slid on.
 - `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), and every recipe has one.
-- Materials have unique ids, and steps refer only to defined materials.
+- Materials have unique ids, and steps refer only to defined materials. Every listed
+  material is used, and one tied in without a length is wound or pulled over (otherwise
+  it would be left hanging).
 
 ### Proportions
 
