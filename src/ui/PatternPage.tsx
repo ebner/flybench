@@ -163,10 +163,19 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
     nowRef.current?.scrollTo(0, 0);
   }, [current]);
   // Keep the URL on the current step and hook size, so it can be shared.
+  const writtenSize = useRef<number | undefined | null>(null);
   useEffect(() => {
     written.current = current > 0 ? current + 1 : undefined;
-    replaceUrl(href.fly(recipe.id, written.current, size !== tiedSize ? size : undefined));
+    writtenSize.current = size !== tiedSize ? size : undefined;
+    replaceUrl(href.fly(recipe.id, written.current, writtenSize.current));
   }, [recipe.id, current, size, tiedSize]);
+  // A link to this fly on another size (or on the size it is tied on) changes it.
+  useEffect(() => {
+    if (writtenSize.current === null || linkedSize === writtenSize.current || tiedSize === undefined) return;
+    const target = linkedSize !== undefined && hookSizes(tiedSize).includes(linkedSize) ? linkedSize : tiedSize;
+    if (target !== size) changeSize(target);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [linkedSize]);
 
   const playStep = (i: number) => {
     const s = build.steps[Math.max(0, Math.min(build.steps.length - 1, i))]!;

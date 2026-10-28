@@ -26,6 +26,8 @@ export function proportions(build: Build): Dimension[] {
   const shank = build.hook.shankLength;
 
   build.steps.forEach((step) => {
+    // Weighting wire lies under the dressing: not a proportion anyone checks.
+    if (build.recipe.steps[step.index]?.op === "weight") return;
     for (const piece of step.pieces as Piece[]) {
       const id = piece.material;
       if (id === "thread") continue;
@@ -46,6 +48,11 @@ export function proportions(build: Build): Dimension[] {
         seen.add(id);
         dims.push({ kind: "out", step: step.index, material: id, label: `${role(id)}: ${times(piece.length)}`, x: piece.x, r: piece.radius, length: piece.length, side: "under" });
       }
+      if (piece.type === "wraps" && piece.path === "post" && piece.look === "hackle" && piece.fibreLength && !seen.has(id)) {
+        // A parachute hackle: its fibres stand out level from the post.
+        seen.add(id);
+        dims.push({ kind: "along", step: step.index, material: id, label: `${role(id)} fibres: ${times(piece.fibreLength)}`, x0: piece.x0, x1: piece.x0 + piece.fibreLength });
+      }
       if (piece.type === "wraps" && piece.path === "travel") {
         // Hackle stands out from where it is wound; other wound or dubbed materials make a body.
         if (piece.look === "hackle" && piece.fibreLength) {
@@ -54,7 +61,7 @@ export function proportions(build: Build): Dimension[] {
             const x = Math.max(piece.x0, piece.x1);
             dims.push({ kind: "out", step: step.index, material: id, label: `${role(id)} fibres: ${times(piece.fibreLength)}`, x, r: 0, length: piece.fibreLength, side: "top" });
           }
-        } else if (piece.look !== "wire" && piece.look !== "tinsel") {
+        } else {
           const b = bodies.get(id);
           const [a, z] = [Math.min(piece.x0, piece.x1), Math.max(piece.x0, piece.x1)];
           bodies.set(id, b ? { step: b.step, x0: Math.min(b.x0, a), x1: Math.max(b.x1, z) } : { step: step.index, x0: a, x1: z });
@@ -64,6 +71,9 @@ export function proportions(build: Build): Dimension[] {
   });
   for (const [id, b] of bodies) {
     if (b.x1 - b.x0 < 0.15 * shank) continue;
+    // Wound over an earlier body for most of its length: a rib, not a body of its own.
+    const over = [...bodies].some(([other, o]) => other !== id && o.step < b.step && Math.min(o.x1, b.x1) - Math.max(o.x0, b.x0) > 0.5 * (b.x1 - b.x0));
+    if (over) continue;
     dims.push({ kind: "along", step: b.step, material: id, label: `${role(id)}: ${Math.round(((b.x1 - b.x0) / shank) * 100)}% of the shank`, x0: b.x0, x1: b.x1 });
   }
   // Parts measured the same at the same place (a brown and a grizzly tail, two hackles wound

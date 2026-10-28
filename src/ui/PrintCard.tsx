@@ -12,6 +12,37 @@ import { href } from "./router";
  * a small picture of the fly after it, drawn here in the browser. Shown only in print; it
  * opens the print dialog once its pictures are ready and calls `onDone` when printing ends.
  */
+/** The box around everything that isn't white paper in a picture. */
+function inkBounds(canvas: HTMLCanvasElement): { x: number; y: number; w: number; h: number } {
+  const { width, height } = canvas;
+  const data = canvas.getContext("2d")!.getImageData(0, 0, width, height).data;
+  let [x0, y0, x1, y1] = [width, height, 0, 0];
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * 4;
+      if (data[i]! < 235 || data[i + 1]! < 235 || data[i + 2]! < 235) {
+        x0 = Math.min(x0, x);
+        x1 = Math.max(x1, x);
+        y0 = Math.min(y0, y);
+        y1 = Math.max(y1, y);
+      }
+    }
+  }
+  if (x1 < x0) return { x: 0, y: 0, w: width, h: height };
+  const m = Math.round(0.03 * width);
+  const x = Math.max(0, x0 - m);
+  const y = Math.max(0, y0 - m);
+  return { x, y, w: Math.min(width, x1 + m) - x, h: Math.min(height, y1 + m) - y };
+}
+
+function cropped(canvas: HTMLCanvasElement, box: { x: number; y: number; w: number; h: number }): string {
+  const out = document.createElement("canvas");
+  out.width = box.w;
+  out.height = box.h;
+  out.getContext("2d")!.drawImage(canvas, box.x, box.y, box.w, box.h, 0, 0, box.w, box.h);
+  return out.toDataURL("image/jpeg", 0.88);
+}
+
 export function PrintCard({ recipe, build, onDone }: { recipe: Recipe; build: Build; onDone: () => void }) {
   const [pictures, setPictures] = useState<string[] | null>(null);
 
@@ -30,7 +61,10 @@ export function PrintCard({ recipe, build, onDone }: { recipe: Recipe; build: Bu
         return scene!.snapshot();
       });
       scene.setTime(build.duration);
-      setPictures([scene.snapshot(), ...shots]);
+      const finished = scene.snapshot();
+      // Every picture cropped alike, to the finished fly with a little margin: same scale, less paper.
+      const crop = inkBounds(finished);
+      setPictures([finished, ...shots].map((c) => cropped(c, crop)));
     } catch {
       // No WebGL: the card prints without pictures.
       setPictures([]);

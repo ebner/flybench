@@ -103,8 +103,9 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
      pattern where sources mention them.
    - Proportion guide: a switchable gape ruler on the pattern page, marking tail, wing,
      hackle and body proportions on the 3D fly.
-   - Printable recipe card: one page per pattern with the fly, the dressing and numbered
-     steps with small step pictures.
+   - Printable recipe card: the fly, the dressing and numbered steps with small step
+     pictures, on one page for patterns of up to about 20 steps (longer ones continue on a
+     second).
 9. Naturals. What a pattern imitates, shown in 3D by the same renderer.
    - Natural recipes in KDL (`naturals/*.kdl`), validated like patterns, with cited
      entomology sources: about 25 naturals at group and life-stage level (mayfly nymph,
