@@ -113,19 +113,25 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   // Another hook size changes how long the steps take: keep the same point of the same step,
   // and a replayed step's stop, rather than the same number of seconds. Time and size change
   // in one render, so the address never shows a step in between.
-  const changeSize = (s: number) => {
+  // `toStep`: go to the start of this step instead (a link that names a size and a step).
+  const changeSize = (s: number, toStep?: number) => {
     const next = simulate(sized(s));
     const same = (i: number) => next.steps[Math.min(i, next.steps.length - 1)]!;
     const progress = stepProgress(step, player.time);
     const t =
-      player.time >= build.duration - 0.001
-        ? next.duration
-        : progress >= 1
-          ? stepEnd(same(current))
-          : same(current).start + progress * same(current).duration;
+      toStep !== undefined
+        ? same(toStep).start
+        : player.time >= build.duration - 0.001
+          ? next.duration
+          : progress >= 1
+            ? stepEnd(same(current))
+            : same(current).start + progress * same(current).duration;
     setSize(s);
     player.seek(t, next.duration);
-    if (stopAt !== null) setStopAt(stepEnd(same(stepAt(build, stopAt))));
+    if (toStep !== undefined) {
+      player.pause();
+      setStopAt(null);
+    } else if (stopAt !== null) setStopAt(stepEnd(same(stepAt(build, stopAt))));
   };
   const family = variantFamily(recipe);
   const recipeStep = recipe.steps[current]!;
@@ -173,7 +179,8 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   useEffect(() => {
     if (writtenSize.current === null || linkedSize === writtenSize.current || tiedSize === undefined) return;
     const target = linkedSize !== undefined && hookSizes(tiedSize).includes(linkedSize) ? linkedSize : tiedSize;
-    if (target !== size) changeSize(target);
+    // The link names its step too (none means step 1), unless it is the one already shown.
+    if (target !== size) changeSize(target, linkedStep === written.current ? undefined : (linkedStep ?? 1) - 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedSize]);
 
@@ -201,8 +208,10 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   };
   const hold = useRef({ timer: 0, fired: false });
   const [moreOpen, setMoreOpen] = useState(false);
-  const [printing, setPrinting] = useState(false);
-  const endPrinting = useCallback(() => setPrinting(false), []);
+  // The recipe card is made on the first request and kept (with its pictures) for more prints.
+  const [printRequest, setPrintRequest] = useState(0);
+  const [preparing, setPreparing] = useState(false);
+  const printed = useCallback(() => setPreparing(false), []);
   useEffect(() => {
     if (!moreOpen) return;
     const close = (e: Event) => {
@@ -284,7 +293,20 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           <h2>{step.title}</h2>
           <p className="now-text">{step.text}</p>
           {mistakes.length > 0 && (
-            <details className="mistakes" open={showMistakes} onToggle={(e) => setShowMistakes(e.currentTarget.open)} onClick={(e) => e.stopPropagation()}>
+            <details
+              className="mistakes"
+              open={showMistakes}
+              onToggle={(e) => {
+                const details = e.currentTarget;
+                setShowMistakes(details.open);
+                // The instructions pane scrolls: bring the list into it when it opens.
+                const pane = nowRef.current;
+                if (!details.open || !pane) return;
+                const below = details.getBoundingClientRect().bottom - pane.getBoundingClientRect().bottom;
+                if (below > 0) pane.scrollTop += below;
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
               <summary>Common mistakes</summary>
               <ul>
                 {mistakes.map((m) => (
@@ -393,11 +415,19 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           <button className="box-toggle" aria-pressed={box.has(mainId)} onClick={() => box.toggle(mainId)}>
             {box.has(mainId) ? "In your fly box" : "Add to fly box"}
           </button>
-          <button className="box-toggle print-toggle" onClick={() => setPrinting(true)} disabled={printing}>
-            {printing ? "Preparing the card…" : "Print recipe card"}
+          <button
+            className="box-toggle print-toggle"
+            onClick={() => {
+              if (preparing) return;
+              setPreparing(true);
+              setPrintRequest((r) => r + 1);
+            }}
+            aria-busy={preparing}
+          >
+            {preparing ? "Preparing the card…" : "Print recipe card"}
           </button>
         </div>
-        {printing && <PrintCard recipe={recipe} build={build} onDone={endPrinting} />}
+        {printRequest > 0 && <PrintCard recipe={recipe} build={build} request={printRequest} onPrinted={printed} />}
 
         <h3>Dressing</h3>
         <dl className="dressing">

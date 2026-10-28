@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { DIFFICULTY_LABELS, factsLine } from "../catalog/describe";
 import type { Recipe } from "../recipe/schema";
@@ -9,8 +9,8 @@ import { href } from "./router";
 
 /**
  * The printable recipe card: the finished fly, the dressing and the numbered steps, each with
- * a small picture of the fly after it, drawn here in the browser. Shown only in print; it
- * opens the print dialog once its pictures are ready and calls `onDone` when printing ends.
+ * a small picture of the fly after it, drawn here in the browser. Shown only in print; each
+ * `request` opens the print dialog once the pictures are ready, then calls `onPrinted`.
  */
 /** The box around everything that isn't white paper in a picture. */
 function inkBounds(canvas: HTMLCanvasElement): { x: number; y: number; w: number; h: number } {
@@ -43,7 +43,7 @@ function cropped(canvas: HTMLCanvasElement, box: { x: number; y: number; w: numb
   return out.toDataURL("image/jpeg", 0.88);
 }
 
-export function PrintCard({ recipe, build, onDone }: { recipe: Recipe; build: Build; onDone: () => void }) {
+export function PrintCard({ recipe, build, request, onPrinted }: { recipe: Recipe; build: Build; request: number; onPrinted: () => void }) {
   const [pictures, setPictures] = useState<string[] | null>(null);
 
   useEffect(() => {
@@ -74,22 +74,36 @@ export function PrintCard({ recipe, build, onDone }: { recipe: Recipe; build: Bu
     }
   }, [build]);
 
+  // Each request (a click on "Print recipe card") prints the card once its pictures are ready.
+  // New pictures (another hook size) don't print again: only a new request does.
+  const handled = useRef(0);
   useEffect(() => {
-    if (!pictures) return;
-    document.documentElement.classList.add("printing-card");
-    const done = () => {
-      document.documentElement.classList.remove("printing-card");
-      onDone();
+    if (!pictures || request === handled.current) return;
+    handled.current = request;
+    const html = document.documentElement;
+    html.classList.add("printing-card");
+    // Back to printing the page itself after the dialog. Browsers differ (and may ignore a
+    // print() called soon after a cancelled one), so afterprint is not relied on alone: the
+    // first tap or key press after the dialog will do as well.
+    const restore = () => {
+      html.classList.remove("printing-card");
+      removeEventListener("afterprint", restore);
+      removeEventListener("pointerdown", restore, true);
+      removeEventListener("keydown", restore, true);
     };
-    addEventListener("afterprint", done, { once: true });
+    addEventListener("afterprint", restore);
     // Let the pictures load before the dialog takes its copy of the page.
-    const t = setTimeout(() => print(), 300);
+    const t = setTimeout(() => {
+      print();
+      onPrinted();
+      addEventListener("pointerdown", restore, true);
+      addEventListener("keydown", restore, true);
+    }, 300);
     return () => {
       clearTimeout(t);
-      removeEventListener("afterprint", done);
-      document.documentElement.classList.remove("printing-card");
+      restore();
     };
-  }, [pictures, onDone]);
+  }, [pictures, request, onPrinted]);
 
   if (!pictures) return null;
   const [finished, ...steps] = pictures;
