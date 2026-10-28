@@ -39,6 +39,22 @@ export function useSwatches(): Record<string, string> | null {
   return m;
 }
 
+let naturalPictures: Promise<Record<string, string>> | null = null;
+
+/** Pictures of the naturals by id (public/renders/naturals/), or null while loading. */
+export function useNaturalPictures(): Record<string, string> | null {
+  const [m, setM] = useState<Record<string, string> | null>(null);
+  useEffect(() => {
+    naturalPictures ??= fetch(`${import.meta.env.BASE_URL}renders/naturals/manifest.json`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({}));
+    naturalPictures.then((hashes: Record<string, string>) =>
+      setM(Object.fromEntries(Object.entries(hashes).map(([id, hash]) => [id, `${import.meta.env.BASE_URL}renders/naturals/${id}.webp?v=${hash}`]))),
+    );
+  }, []);
+  return m;
+}
+
 export function renderUrls(id: string, info: RenderInfo) {
   const base = `${import.meta.env.BASE_URL}renders/${encodeURIComponent(id)}`;
   return { card: `${base}/card.webp?v=${info.hash}`, spin: `${base}/spin.webp?v=${info.hash}` };

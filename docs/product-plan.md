@@ -106,7 +106,9 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
    - Printable recipe card: the fly, the dressing and numbered steps with small step
      pictures, on one page for patterns of up to about 20 steps (longer ones continue on a
      second).
-9. Naturals. What a pattern imitates, shown in 3D by the same renderer.
+9. ✅ Naturals. What a pattern imitates, shown in 3D by the same renderer. (25 naturals; the
+   burrowing mayfly nymph has no pattern yet. Hatch months marked "Estimate" where no source
+   gave them, mostly northern Scandinavia and central Europe.)
    - Natural recipes in KDL (`naturals/*.kdl`), validated like patterns, with cited
      entomology sources: about 25 naturals at group and life-stage level (mayfly nymph,
      emerger, dun, spinner; caddis larva, pupa, adult; stonefly nymph; midge pupa; shrimp;

@@ -85,6 +85,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 | `aliases`     | `aliases "Worcestershire Gem" "Worcester Gem"`    | no       |
 | `type`        | one of `dry wet nymph emerger midge streamer terrestrial salmon saltwater` | yes |
 | `imitates`    | any of `mayfly caddis stonefly chironomid damselfly terrestrial baitfish crustacean attractor` | no |
+| `naturals`    | ids of the naturals it imitates (`naturals/*.kdl`), the main one first, e.g. `naturals mayfly-dun caddis-adult`; leave out for attractors | no |
 | `difficulty`  | `beginner`, `intermediate` or `advanced`          | yes      |
 | `species`     | any of `trout grayling sea-trout salmon char bass panfish pike striped-bass bonefish` | no |
 | `season`      | month names, `january` … `december`              | no       |
@@ -292,3 +293,65 @@ corrected per pattern. The generated text states them the way a tyer measures: i
 fractions of the gape, and for wings by where the tips end ("just past the end of the
 bend"); on tubes and Waddingtons, which have no gape, in millimetres. When proportions
 are taken from reference photos, say so in a comment.
+
+## Naturals
+
+A natural (`naturals/<id>.kdl`) is something patterns imitate: an insect at one stage of its
+life, a shrimp, a small fish. It is described like a pattern so the same renderer can draw
+it beside a fly, and it carries the hatch calendar's months. Patterns refer to it by id in
+`naturals`.
+
+```kdl
+id mayfly-dun
+name "Mayfly dun"
+group mayfly                 // mayfly caddis stonefly chironomid damselfly terrestrial baitfish crustacean leech
+stage dun                    // nymph larva pupa emerger dun spinner adult juvenile
+examples "olives (Baetis), blue-winged olive (Serratella)"
+description "The newly hatched mayfly: …"
+size min=6 max=11            // body length in mm, tails and antennae left out
+rides on-surface             // on-surface in-film drifting swimming crawling
+curve -14                    // degrees the body bends along its length (a shrimp's C: 110)
+body {
+    // Rear to front; lengths are fractions of the body length and add up to 1.
+    abdomen length=0.62 radius=0.055 taper=0.55 segments=10 color="#6b6a34" belly="#c9c39a"
+    thorax length=0.27 radius=0.075 taper=0.9 color="#5c5a32"
+    head length=0.11 radius=0.055 taper=0.7 color="#4a4428"
+}
+parts {
+    tails count=2 length=1.0 spread=35 color=dun
+    wings count=2 shape=upright length=0.95 width=0.5 color=dun clarity=0.25 veins=#true
+    legs count=6 length=0.55 color="#6a6040"
+    eyes size=0.035 color=black
+}
+hatches {
+    southern-sweden from=april to=october time="midday" note="…"
+}
+sources {
+    "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+}
+```
+
+Body sections take `length` and `radius` (fractions of the body length), `taper` (the end's
+radius relative to the start's), `segments` (rings), `color` and `belly`, `flatten` (height
+over width: below 1 flat like a stonefly nymph, above 1 narrow like a fish or a shrimp),
+`translucency` (0–1) and `round` (0 a straight taper, 1 egg-shaped). All lengths in `parts`
+are fractions of the body length:
+
+| Part | Properties |
+|---|---|
+| `tails` | `count` 1–3, `length`, `spread` (degrees between the outer ones), `color`, `leaf=#true` for flat tail gills |
+| `wings` | `count` 2 or 4, `shape` (`upright`, `tent`, `flat`, `spent`, `back`), `length`, `width`, `color`, `clarity` (0 opaque – 1 clear), `veins` |
+| `legs` | `count`, `length`, `color`, `at` (the body section; default the thorax), `hind` (the last pair's length relative to the rest) |
+| `antennae` | `length`, `color`, `swept=#true` to lay them back along the body |
+| `gills` | `count` (pairs along the abdomen), `length`, `color` |
+| `wingpads` | `length`, `color` |
+| `case` | `material` (`sand`, `gravel`, `plant`), `length`, `radius`, `color` |
+| `shuck` | `length`, `color` (an emerger's trailing skin) |
+| `eyes` | `size`, `color` |
+| `fin` | `kind` (`dorsal`, `caudal`, `pectoral`, `pelvic`, `anal`, `adipose`), `at` (0 rear – 1 front), `size`, `color` |
+
+`hatches` gives, per region (`southern-sweden`, `northern-scandinavia`, `british-isles`,
+`central-europe`, `northern-usa`), the months a natural hatches or is most about (`from`,
+`to`; January to December for all year), with an optional `time` of day and `note`. Mark
+months that are an estimate rather than a source's in the note ("Estimate: …").
+

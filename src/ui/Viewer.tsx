@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FlyScene } from "../render/FlyScene";
+import type { Natural } from "../recipe/natural";
 import type { Build } from "../tying/simulate";
 
 export interface ViewerProps {
@@ -15,9 +16,11 @@ export interface ViewerProps {
   pointUp?: boolean;
   /** Offer the proportion guide (the pattern page, not the small technique clips). */
   guide?: boolean;
+  /** A natural to show with the fly: `length` in gapes, beside it or laid over it. */
+  natural?: { natural: Natural; length: number; at: "beside" | "over" } | null;
 }
 
-export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false, guide = false }: ViewerProps) {
+export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false, guide = false, natural = null }: ViewerProps) {
   const [turned, setTurned] = useState(false);
   // WebGL can be turned off (browser settings, policies, old graphics drivers).
   const [unavailable, setUnavailable] = useState(false);
@@ -111,6 +114,15 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
   useEffect(() => {
     scene.current?.setTime(time);
   }, [build, time]);
+
+  // The natural, placed after the fly (it goes beside the finished fly), and again whenever the
+  // fly changes (another hook size).
+  const shownNatural = useRef(false);
+  useEffect(() => {
+    if (!natural && !shownNatural.current) return;
+    shownNatural.current = natural !== null;
+    scene.current?.setNatural(natural?.natural ?? null, natural?.length, natural?.at);
+  }, [natural?.natural, natural?.length, natural?.at, build, pointUp, turned]);
 
   if (unavailable) {
     return (

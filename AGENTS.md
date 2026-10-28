@@ -38,6 +38,7 @@ Run `pnpm test` and `pnpm typecheck` before reporting work as done. Every file i
 
 ```
 patterns/       recipes (KDL v2)
+naturals/       what the patterns imitate (KDL): body, parts, sizes, hatch months by region
 docs/           recipe-schema.md: the recipe format reference; authoring-patterns.md: how to
                 research, write and check a pattern
 src/recipe/     kdl.ts (KDL → plain object + source locations), schema.ts (Zod),
@@ -88,7 +89,8 @@ state of the app; keep it true, or re-evaluate:
 - Nothing loaded from other hosts at runtime: fonts, scripts, images and data are all
   served by the site itself. Links out to sources are fine; loading from them is not.
 - Browser storage (`localStorage`) holds only what the visitor asks for: the theme, the
-  camera-follow setting, the fly box and the materials inventory (keys `flybench.*`). The
+  camera-follow setting, the fly box, the materials inventory and the hatch calendar's
+  region (keys `flybench.*`). The
   service worker caches the site's own files for offline use.
 - No data leaves the browser; the only server is GitHub Pages, which logs IP addresses.
 

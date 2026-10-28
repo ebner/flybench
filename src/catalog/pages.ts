@@ -8,6 +8,8 @@ import type { Recipe } from "../recipe/schema";
 import { materialsList } from "../tying/describe";
 import { simulate } from "../tying/simulate";
 import { DIFFICULTY_LABELS, factsLine, factsSentence, originLine } from "./describe";
+import type { Natural } from "../recipe/natural";
+import { GROUP_LABELS, imitatedBy, REGION_LABELS, sizeText, STAGE_LABELS } from "./naturals";
 import { learningPath, patternsUsing, TECHNIQUES } from "./techniques";
 
 export const SITE_NAME = "Flybench";
@@ -39,7 +41,7 @@ const paragraphs = (text: string) =>
 
 const fullName = (r: Recipe) => (r.variant ? `${r.name} (${r.variant})` : r.name);
 
-export function sitePages(recipes: Recipe[], base: string): Page[] {
+export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] = []): Page[] {
   const link = (path: string, text: string) => `<a href="${escape(base + path)}">${escape(text)}</a>`;
   const flyPath = (id: string) => `fly/${encodeURIComponent(id)}/`;
   const byName = [...recipes].sort((a, b) => fullName(a).localeCompare(fullName(b)));
@@ -124,6 +126,36 @@ export function sitePages(recipes: Recipe[], base: string): Page[] {
       path.map((s) => `<li>${link(flyPath(s.recipe.id), fullName(s.recipe))}: ${escape(factsLine(s.recipe))}</li>`).join("") +
       `</ol></main>`,
   });
+
+  if (naturals.length) {
+    const sorted = [...naturals].sort((a, b) => a.name.localeCompare(b.name));
+    pages.push({
+      path: "naturals/",
+      title: `Naturals and hatches, ${SITE_NAME}`,
+      description: "The insects, shrimps and small fish that fly patterns imitate, and when they hatch in your region.",
+      body:
+        `<main class="reading"><h1>Naturals and hatches</h1><ul>` +
+        sorted.map((n) => `<li>${link(`natural/${encodeURIComponent(n.id)}/`, n.name)}: ${escape(n.description)}</li>`).join("") +
+        `</ul></main>`,
+    });
+    for (const n of sorted) {
+      const flies = imitatedBy(recipes, n.id);
+      pages.push({
+        path: `natural/${encodeURIComponent(n.id)}/`,
+        title: `${n.name}, ${SITE_NAME}`,
+        description: n.description,
+        image: flies[0]?.id,
+        body:
+          `<main class="reading"><h1>${escape(n.name)}</h1><p>${escape(n.description)}</p>` +
+          `<p>${escape(GROUP_LABELS[n.group])}, ${escape(STAGE_LABELS[n.stage])}, ${escape(sizeText(n))}.</p>` +
+          (n.hatches.length
+            ? `<h2>When it hatches</h2><ul>${n.hatches.map((h) => `<li>${escape(REGION_LABELS[h.region])}: ${escape(h.from)} to ${escape(h.to)}</li>`).join("")}</ul>`
+            : "") +
+          (flies.length ? `<h2>Flies that imitate it</h2><ul>${flies.map((r) => `<li>${link(flyPath(r.id), fullName(r))}</li>`).join("")}</ul>` : "") +
+          `</main>`,
+      });
+    }
+  }
 
   pages.push({
     path: "about/",

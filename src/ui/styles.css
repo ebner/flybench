@@ -1603,8 +1603,9 @@ select {
   }
 }
 
-/* On a phone the sections and the theme are behind a menu button, in a panel below the header. */
-@media (max-width: 40rem) {
+/* On a phone or a narrow window the sections and the theme are behind a menu button, in a
+   panel below the header. */
+@media (max-width: 52rem) {
   .menu-toggle {
     display: inline-flex;
     margin-left: auto;
@@ -1841,4 +1842,207 @@ select {
     font-size: 8.5pt;
     color: #555555;
   }
+}
+
+/* Naturals and the hatch calendar */
+
+.natural-viewer {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  margin: 1rem 0 1.5rem;
+  background: var(--paper-raised);
+  touch-action: pan-y;
+}
+
+.natural-viewer canvas {
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+}
+
+.natural-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
+  gap: 1.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.natural-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.natural-card-image {
+  aspect-ratio: 3 / 2;
+  background: var(--paper-raised);
+}
+
+.natural-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+}
+
+.natural-card h3 {
+  margin: 0.5rem 0 0;
+  font-size: var(--step-0);
+}
+
+.natural-card a:hover h3 {
+  text-decoration: underline;
+}
+
+.region-choice {
+  margin: 0.5rem 0;
+  padding: 0;
+  border: 0;
+}
+
+.region-choice legend {
+  margin-bottom: 0.4rem;
+  color: var(--ink-soft);
+}
+
+.hatch-scroll {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.hatch-calendar {
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.hatch-calendar th[scope="row"] {
+  padding: 0.2rem 0.75rem 0.2rem 0;
+  text-align: left;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.hatch-calendar thead th {
+  width: 1.6rem;
+  font-weight: normal;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+.hatch-calendar td {
+  height: 1.5rem;
+  border-left: 1px solid var(--paper);
+  border-bottom: 3px solid var(--paper);
+  background: var(--paper-raised);
+}
+
+.year-round {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.hatch-calendar td.on {
+  background: var(--accent);
+}
+
+.hatch-calendar .now {
+  box-shadow: inset 0 0 0 2px var(--ink-faint);
+}
+
+.hatch-calendar thead th.now {
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.this-month {
+  padding-left: 1.1rem;
+}
+
+.this-month .when {
+  color: var(--ink-soft);
+}
+
+.natural-facts div,
+.hatch-table th,
+.hatch-table td {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.natural-facts {
+  margin: 0;
+}
+
+.natural-facts div {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.75rem;
+}
+
+.natural-facts dt,
+.hatch-table th {
+  font-style: italic;
+  font-weight: normal;
+  color: var(--ink-soft);
+  text-align: left;
+}
+
+.natural-facts dd {
+  margin: 0;
+}
+
+.hatch-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hatch-table th {
+  width: 11rem;
+  padding-right: 0.75rem;
+  vertical-align: top;
+}
+
+.hatch-note {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.imitates ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.imitates li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.imitates-natural {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 12rem;
+  color: inherit;
+}
+
+.imitates-natural img {
+  width: 4.5rem;
+  height: auto;
+  background: var(--paper-raised);
+}
+
+.imitates .compare {
+  display: inline-flex;
+  gap: 0.9rem;
+  font-size: var(--step--1);
+}
+
+.imitates .compare button[aria-pressed="true"] {
+  font-weight: 600;
+  text-decoration: none;
 }

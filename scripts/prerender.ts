@@ -15,6 +15,7 @@ import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
 import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
+import { loadNatural, type Natural } from "../src/recipe/natural";
 import { IMAGE_URL, withoutReferences } from "../src/recipe/publish";
 import type { Recipe } from "../src/recipe/schema";
 
@@ -66,9 +67,20 @@ async function siteImage(ids: string[]): Promise<Buffer> {
   return sharp({ create: { ...OG, channels: 3, background: PAPER } }).composite(tiles).jpeg({ quality: 85 }).toBuffer();
 }
 
+async function loadNaturals(): Promise<Natural[]> {
+  const files = (await readdir("naturals")).filter((f) => f.endsWith(".kdl")).sort();
+  return Promise.all(
+    files.map(async (f) => {
+      const result = loadNatural(await readFile(`naturals/${f}`, "utf8"));
+      if (!result.ok) throw new Error(`${f}:\n${result.errors.map(formatError).join("\n")}`);
+      return result.natural;
+    }),
+  );
+}
+
 const recipes = await loadPatterns();
 const template = await readFile(`${DIST}/index.html`, "utf8");
-const pages = sitePages(recipes, BASE);
+const pages = sitePages(recipes, BASE, await loadNaturals());
 const rendered = (id?: string) => (id && existsSync(card(id)) ? id : undefined);
 
 await mkdir(`${DIST}/og`, { recursive: true });
