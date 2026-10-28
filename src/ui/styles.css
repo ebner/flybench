@@ -170,6 +170,11 @@ select {
   mask: url("/logo.svg") center / contain no-repeat;
 }
 
+/* On a wide screen the menu's contents sit in the header row; on a phone they drop down. */
+.site-menu {
+  display: contents;
+}
+
 .site-header nav {
   display: flex;
   gap: 1.25rem;
@@ -186,12 +191,66 @@ select {
   color: var(--ink);
 }
 
-.theme-toggle {
+/* The theme is a quiet icon button: it needn't be prominent. */
+.theme-toggle,
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 2.75rem;
+  height: 2.75rem;
   border: 0;
+  border-radius: 3px;
   background: none;
   color: var(--ink-soft);
-  font-size: var(--step--1);
+  font: inherit;
   cursor: pointer;
+}
+
+.theme-toggle:hover,
+.menu-toggle:hover {
+  color: var(--ink);
+}
+
+.menu-toggle,
+.menu-theme {
+  display: none;
+}
+
+.menu-theme {
+  margin: 0;
+  padding: 0.75rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.menu-theme legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 0.4rem;
+  padding: 0;
+  color: var(--ink-soft);
+}
+
+.menu-theme button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 2.75rem;
+  margin-right: 0.4rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.menu-theme button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* Gallery */
@@ -1032,6 +1091,11 @@ select {
   line-height: 1.65;
 }
 
+.stored-note {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
 .lede {
   font-size: var(--step-1);
   color: var(--ink-soft);
@@ -1305,38 +1369,54 @@ select {
     grid-template-columns: 1fr;
   }
 
-  /* Five sections don't fit beside the wordmark on a phone: let them scroll sideways. */
   .site-header nav {
-    overflow-x: auto;
-    scrollbar-width: none;
     gap: 1rem;
-    white-space: nowrap;
-  }
-
-  .theme-toggle {
     white-space: nowrap;
   }
 }
 
-/* On a phone the sections get a row of their own below the wordmark. */
+/* On a phone the sections and the theme are behind a menu button, in a panel below the header. */
 @media (max-width: 40rem) {
-  :root {
-    --header: 5.6rem;
-  }
-
-  .site-header {
-    flex-wrap: wrap;
-    align-content: center;
-    row-gap: 0.15rem;
-  }
-
-  .site-header nav {
-    order: 1;
-    flex-basis: 100%;
-  }
-
-  .theme-toggle {
+  .menu-toggle {
+    display: inline-flex;
     margin-left: auto;
+    margin-right: -0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .site-header > .theme-toggle {
+    display: none;
+  }
+
+  .site-menu {
+    display: none;
+  }
+
+  .site-header.open .site-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0.25rem var(--gutter) 1rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 0.6rem 1rem -0.6rem var(--specimen-shadow);
+  }
+
+  .site-header.open nav {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .site-header.open nav a {
+    padding: 0.55rem 0;
+    font-size: var(--step-1);
+  }
+
+  .site-header.open .menu-theme {
+    display: block;
+    margin-top: 0.5rem;
   }
 }
 

@@ -10,6 +10,9 @@ import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+const STORED_NOTE =
+  "Saved in this browser only: clearing your browsing data starts it empty again, and another browser or device has its own.";
+
 export function FlyBox() {
   const box = useStoredSet(FLY_BOX_KEY);
   const renders = useRenders();
@@ -21,7 +24,8 @@ export function FlyBox() {
     <main className="gallery">
       <section className="intro">
         <h1>Your fly box</h1>
-        <p>Flies you have saved, kept in this browser.</p>
+        <p>Flies you have saved.</p>
+        <p className="stored-note">{STORED_NOTE}</p>
       </section>
       {saved.length === 0 ? (
         <div className="empty-results">
@@ -59,6 +63,7 @@ export function Materials() {
         Tick what you have. The gallery can then show what you can tie now, and what you are one material short of.
         Another colour of the same material counts as a substitute.
       </p>
+      <p className="stored-note">{STORED_NOTE}</p>
       <p className="summary" aria-live="polite">
         {owned.values.size === 0 ? (
           "Nothing ticked yet."
