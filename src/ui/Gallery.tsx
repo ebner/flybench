@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { DIFFICULTY_LABELS, factsLine, IMITATES_LABELS, originLine, SPECIES_LABELS, TYPE_LABELS } from "../catalog/describe";
 import { learningPath } from "../catalog/techniques";
-import { filtersFromQuery, filtersToQuery, type CatalogEntry, type Filters } from "../catalog/search";
+import { filtersFromQuery, filtersToQuery, versionMatches, type CatalogEntry, type Filters } from "../catalog/search";
 import { CATALOG, SEARCH } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/schema";
@@ -24,11 +24,10 @@ export function Gallery({ query }: { query: string }) {
   const owned = useStoredSet(INVENTORY_KEY);
   const found = useMemo(() => SEARCH.search(filters), [filters]);
   // A family counts as tieable, or one material short, by its member closest to tieable,
-  // among the versions that have any materials asked for (search matched on one of those).
+  // among the versions that meet the filters (search matched the family on one of those).
   const family = (e: CatalogEntry) => {
     const all = [e.recipe, ...e.variants];
-    const wanted = filters.materials ?? [];
-    const versions = wanted.length ? all.filter((v) => wanted.every((k) => v.materials.some((m) => m.kind === k))) : all;
+    const versions = all.filter((v) => versionMatches(v, filters));
     return bestCoverage(versions.length ? versions : all, owned.values);
   };
   const results = filters.have ? found.filter((e) => missingKinds(family(e)) === 0) : found;

@@ -1390,7 +1390,7 @@ select {
     height: auto;
   }
 
-  .viewer {
+  .stage .viewer {
     flex: none;
     height: 80dvh;
   }
