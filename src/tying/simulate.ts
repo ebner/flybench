@@ -568,6 +568,7 @@ export function simulate(recipe: Recipe): Build {
         // The dubbing is on the thread, so the bobbin follows it.
         thread = { kind: "follow", piece: piece.id };
         threadX = to;
+        ctx.rear = step.to < threadAt;
         threadAt = step.to;
         duration = Math.max(2.5, turns * DURATION.perDubbingTurn);
         break;

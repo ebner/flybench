@@ -161,6 +161,17 @@ describe("simulate: palmering, dubbing and hair wings", () => {
     expect(has(step("Tie in: bleached elk hair"))).toBe(false);
   });
 
+  it("says which way the dubbing is wrapped", () => {
+    const text = `id t\nname "T"\ntype nymph\ndifficulty beginner\nhook dry-standard size=14\nthread black size="8/0"
+materials {\n    body hares-ear-dubbing\n}
+steps {\n    attach-thread at=0.8\n    dub body to=0.2\n    dub body to=0.7\n    whip-finish\n}\n`;
+    const r = loadRecipe(text);
+    if (!r.ok) throw new Error(r.errors[0]!.message);
+    const [, back, forward] = simulate(r.recipe).steps;
+    expect(back!.text).toMatch(/wrap it back to 20%/);
+    expect(forward!.text).toMatch(/wrap it forward to 70%/);
+  });
+
   it("palmers back a short way from right behind the eye, where positions share one x", () => {
     const text = `id t\nname "T"\ntype dry\ndifficulty beginner\nhook dry-standard size=14\nthread black size="8/0"
 materials {\n    hackle cock-hackle color=brown fibre=1\n    rib gold-wire\n}

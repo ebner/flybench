@@ -400,9 +400,17 @@ function StepList({ build, current, onPick }: { build: Build; current: number; o
 function Preview({ build, time, view, grid }: { build: Build; time: number; view: ViewName; grid: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const scene = useRef<FlyScene | null>(null);
+  const [unavailable, setUnavailable] = useState(false);
 
   useEffect(() => {
-    const s = new FlyScene(container.current!, { background: null, fov: 12 });
+    let s: FlyScene;
+    try {
+      s = new FlyScene(container.current!, { background: null, fov: 12 });
+    } catch {
+      // No WebGL: the editor and its checks still work without the preview.
+      setUnavailable(true);
+      return;
+    }
     scene.current = s;
     return () => {
       s.dispose();
@@ -413,18 +421,22 @@ function Preview({ build, time, view, grid }: { build: Build; time: number; view
   // A new build resets the scene's time; the effect below puts it back. View and grid
   // changes keep the build and its time.
   useEffect(() => {
-    scene.current!.setBuild(build);
+    scene.current?.setBuild(build);
   }, [build]);
   useEffect(() => {
-    scene.current!.setView(view);
+    scene.current?.setView(view);
   }, [view]);
   useEffect(() => {
-    scene.current!.setGrid(grid);
+    scene.current?.setGrid(grid);
   }, [grid]);
 
   useEffect(() => {
     scene.current?.setTime(time);
   }, [build, time]);
 
-  return <div className="studio-canvas" ref={container} />;
+  return (
+    <div className="studio-canvas" ref={container}>
+      {unavailable && <p className="viewer-unavailable">No 3D preview: this browser has WebGL turned off or unavailable.</p>}
+    </div>
+  );
 }
