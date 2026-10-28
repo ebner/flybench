@@ -241,7 +241,9 @@ Steps run in order. The **thread position** is part of the tying state. Only
 `attach-thread`, `wrap-thread`, `dub` and `spin` move it. Tie-ins, tie-offs and the whip finish
 happen wherever the thread is, as they do at the vise.
 
-Every step accepts `note="…"`, which is appended to the generated instruction text.
+Every step accepts `note="…"`, which is appended to the generated instruction text. It can also take
+`mistake="…"`: a mistake typical of this step in this pattern, shown first under "Common
+mistakes", before the general ones of the step's technique. Cite where it comes from in a comment.
 
 | Step            | Form                                              | Meaning |
 |-----------------|---------------------------------------------------|---------|

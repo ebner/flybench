@@ -671,6 +671,32 @@ select {
   color: var(--accent);
 }
 
+.viewer-tools .short {
+  display: none;
+}
+
+/* A narrow stage: shorter labels and tighter buttons, so the tools keep to one row. */
+@container (max-width: 30rem) {
+  .viewer-tools {
+    top: 0.5rem;
+    right: 0.5rem;
+    gap: 0.3rem;
+  }
+
+  .viewer-tools button {
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+  }
+
+  .viewer-tools .long {
+    display: none;
+  }
+
+  .viewer-tools .short {
+    display: inline;
+  }
+}
+
 /* The label beside the material in use: a short leader line up and to the right of it. */
 .callout {
   position: absolute;
@@ -1507,6 +1533,22 @@ select {
   font-size: 0.95rem;
 }
 
+.mistakes {
+  margin: 0.4rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.mistakes summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.mistakes ul {
+  margin: 0.3rem 0 0;
+  padding-left: 1.1rem;
+}
+
 .vise-hint {
   margin: 0.4rem 0 0;
   font-size: var(--step--1);
@@ -1668,5 +1710,127 @@ select {
   .now {
     height: auto;
     overflow: visible;
+  }
+}
+
+/* Printing */
+
+.pattern-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* The recipe card exists only on paper. */
+.print-card {
+  display: none;
+}
+
+@media print {
+  :root {
+    --paper: #ffffff;
+    --ink: #000000;
+    font-size: 11pt;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  /* Printing the page itself: the text, without the 3D stage and the site's furniture. */
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .stage,
+  .pattern-actions,
+  .back,
+  .load-errors {
+    display: none !important;
+  }
+
+  .pattern {
+    display: block;
+  }
+
+  /* Printing the recipe card: only the card. */
+  html.printing-card body > :not(.print-card) {
+    display: none !important;
+  }
+
+  html.printing-card .print-card {
+    display: block;
+    color: #000000;
+  }
+
+  .print-card h1 {
+    margin: 0;
+    font-size: 20pt;
+  }
+
+  .print-card header p {
+    margin: 0.2em 0 0.8em;
+    font-style: italic;
+  }
+
+  .print-top {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: 1.2em;
+    align-items: start;
+    margin-bottom: 1em;
+  }
+
+  .print-top img {
+    width: 100%;
+  }
+
+  .print-dressing {
+    margin: 0;
+  }
+
+  .print-dressing div {
+    display: grid;
+    grid-template-columns: 7em 1fr;
+    gap: 0.6em;
+    padding: 0.15em 0;
+    border-bottom: 0.5pt solid #cccccc;
+  }
+
+  .print-dressing dt {
+    font-style: italic;
+  }
+
+  .print-dressing dd {
+    margin: 0;
+  }
+
+  .print-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em 1.4em;
+    margin: 0;
+    padding-left: 1.2em;
+    font-size: 9pt;
+  }
+
+  .print-steps li {
+    break-inside: avoid;
+  }
+
+  .print-steps li > div p {
+    margin: 0.1em 0 0;
+    line-height: 1.35;
+  }
+
+  .print-steps img {
+    display: block;
+    width: 85%;
+    margin-bottom: 0.1em;
+  }
+
+  .print-card footer {
+    margin-top: 1em;
+    font-size: 8.5pt;
+    color: #555555;
   }
 }

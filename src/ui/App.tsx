@@ -42,7 +42,7 @@ export function App() {
       <Header theme={choice} onTheme={setChoice} page={route.page} />
       <div id="content" tabIndex={-1}>
         {route.page === "gallery" && <Gallery query={route.query} />}
-        {route.page === "fly" && <PatternPage id={route.id} step={route.step} />}
+        {route.page === "fly" && <PatternPage id={route.id} step={route.step} size={route.size} />}
         {route.page === "techniques" && <TechniquesIndex />}
         {route.page === "technique" && <TechniquePage id={route.id} />}
         {route.page === "learn" && <Learn />}

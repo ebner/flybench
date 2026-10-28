@@ -3,6 +3,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { pieceProgress, stepAt, stepEnd, stepProgress, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
 import { buildHook } from "./hook";
+import { proportions } from "../tying/proportions";
 import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
 import { pieceView, type PieceView } from "./pieces";
@@ -78,6 +79,10 @@ export class FlyScene {
    */
   private fit: "box" | "sphere" = "box";
   private grid: THREE.Group | null = null;
+  /** The proportion guide: a measurement for each part, shown once its step is reached. */
+  private guide: THREE.Group | null = null;
+  private guideColor = "#2a4a6a";
+  private guideView = false;
   /** The time last shown, so re-measuring can come back to it. */
   private time = 0;
 
@@ -181,6 +186,63 @@ export class FlyScene {
     this.time = 0;
     this.measure();
     if (this.grid) this.setGrid(true);
+    if (this.guide) this.setProportions(true);
+  }
+
+  /**
+   * The proportion guide: the gape grid behind the fly, and labelled measurements of each
+   * part (tail and wing lengths, hackle fibres, how much of the shank the body covers), each
+   * appearing with the step that ties it. `color` is the theme's ink for lines and labels.
+   */
+  setProportions(on: boolean, color?: string) {
+    if (color) this.guideColor = color;
+    if (this.guide) {
+      disposeTree(this.guide);
+      this.fly.remove(this.guide);
+      this.guide = null;
+    }
+    // Proportions are judged from the side, square to the grid.
+    if (on !== this.guideView) {
+      this.guideView = on;
+      this.setView(on ? "side" : "default", 0, this.fit);
+    }
+    this.setGrid(on, this.guideColor);
+    if (!on || !this.build) return;
+    const guide = new THREE.Group();
+    const space = this.space!;
+    const at = (x: number, y: number) => space.point(new THREE.Vector3(x, y, 0));
+    // Lengthwise measurements stack above the fly, each on its own line.
+    const local = this.finished.clone().applyMatrix4(this.fly.matrixWorld.clone().invert());
+    const size = local.getSize(new THREE.Vector3());
+    // Labels and spacing in proportion to the fly, so they read the same on a midge and a streamer.
+    const h = Math.max(0.2, 0.07 * Math.max(size.x, size.y));
+    let level = 0;
+    for (const d of proportions(this.build)) {
+      const item = new THREE.Group();
+      item.userData.step = d.step;
+      if (d.kind === "along") {
+        const y = local.max.y + 1.6 * h + 2 * h * level++;
+        const a = at(d.x0, y);
+        const b = at(d.x1, y);
+        item.add(guideLines([a, b, a, a.clone().setY(a.y - h / 2), b, b.clone().setY(b.y - h / 2)], this.guideColor));
+        item.add(guideLabel(d.label, a.clone().lerp(b, 0.5).setY(y + 0.75 * h), this.guideColor, "center", h));
+      } else {
+        const sign = d.side === "top" ? 1 : -1;
+        const a = at(d.x, sign * d.r);
+        const b = at(d.x, sign * (d.r + d.length));
+        item.add(guideLines([a, b, b.clone().setX(b.x - h / 3), b.clone().setX(b.x + h / 3)], this.guideColor));
+        item.add(guideLabel(d.label, b.clone().setX(b.x + h / 2), this.guideColor, "left", h));
+      }
+      guide.add(item);
+    }
+    this.guide = guide;
+    this.fly.add(guide);
+    this.showGuide();
+  }
+
+  private showGuide() {
+    if (!this.guide) return;
+    for (const item of this.guide.children) item.visible = this.atEnd || item.userData.step <= this.currentStep;
   }
 
   /** Shows the fly upside down, turned about the shank, the way a point-up fly swims. */
@@ -224,11 +286,19 @@ export class FlyScene {
     this.renderer.render(this.scene, this.camera);
   }
 
+  /** The fly as it is at the current time, framed whole, as an image (the printable recipe card). */
+  snapshot(type = "image/jpeg"): string {
+    this.resetCamera();
+    this.controls.update();
+    this.renderNow();
+    return this.renderer.domElement.toDataURL(type, 0.88);
+  }
+
   /**
    * A measuring grid in the plane of the hook: thin lines every quarter gape, strong lines
    * every gape, labelled in gapes. x = 0 is the start of the bend, y = 0 the shank.
    */
-  setGrid(on: boolean) {
+  setGrid(on: boolean, color = "#2a4a6a") {
     if (this.grid) {
       this.grid.traverse((o) => {
         if (o instanceof THREE.LineSegments || o instanceof THREE.Sprite) {
@@ -242,7 +312,7 @@ export class FlyScene {
       this.grid = null;
     }
     if (!on) return;
-    this.grid = measuringGrid(this.finished.isEmpty() ? new THREE.Box3(new THREE.Vector3(-1, -1, 0), new THREE.Vector3(3, 1, 0)) : this.finished);
+    this.grid = measuringGrid(this.finished.isEmpty() ? new THREE.Box3(new THREE.Vector3(-1, -1, 0), new THREE.Vector3(3, 1, 0)) : this.finished, color);
     this.scene.add(this.grid);
     this.resetCamera();
   }
@@ -259,9 +329,14 @@ export class FlyScene {
    * it never zooms in on a detail and the hook always shows where on it the work is.
    */
   private actionBox(): THREE.Box3 {
-    if (this.atEnd) return this.finished;
-    const box = this.hookBounds.clone();
-    for (let i = 0; i <= this.currentStep; i++) box.union(this.stepBounds[i]!);
+    const box = this.atEnd ? this.finished.clone() : this.hookBounds.clone();
+    if (!this.atEnd) for (let i = 0; i <= this.currentStep; i++) box.union(this.stepBounds[i]!);
+    // With the proportion guide on, its measurements so far are in the picture too.
+    if (this.guide) {
+      for (const item of this.guide.children) if (item.visible) box.union(guideBounds(item));
+      // Headroom for the view buttons over the top of the picture.
+      box.max.y += 0.12 * (box.max.y - box.min.y);
+    }
     return box;
   }
 
@@ -330,8 +405,12 @@ export class FlyScene {
     this.userMoved = false;
     const subject =
       this.framing === "dressing" ? this.stepBounds.reduce((all, b) => all.union(b), new THREE.Box3()).expandByScalar(0.12) : this.finished;
-    // With the measuring grid on, leave room for its labels.
+    // With the measuring grid on, leave room for its labels, and for the proportion guide's.
     const framed = subject.clone().expandByScalar(this.grid ? 0.45 : 0);
+    if (this.guide) {
+      for (const item of this.guide.children) framed.union(guideBounds(item));
+      framed.max.y += 0.12 * (framed.max.y - framed.min.y);
+    }
     const target = framed.getCenter(new THREE.Vector3());
     const view = this.viewDirection(this.orbit);
     // "sphere": the distance that fits the fly from every turntable angle, so its size
@@ -391,6 +470,7 @@ export class FlyScene {
     // The label's point is where the step leaves its material or thread, for the whole step:
     // following the tip round each turn would swing the label about while it plays.
     this.anchor.copy(this.anchorFor(current, 1));
+    this.showGuide();
   }
 
   /** The point a step works at: the material being wound, else the thread, else what the step adds. */
@@ -470,6 +550,7 @@ export class FlyScene {
       }
     });
     this.hook = null;
+    if (this.guide) disposeTree(this.guide);
     this.fly.clear();
     this.stepViews = [];
     this.wraps.clear();
@@ -501,7 +582,64 @@ export class FlyScene {
   }
 }
 
-function measuringGrid(bounds: THREE.Box3): THREE.Group {
+/** Disposes the geometries, materials and textures of a group of lines and labels. */
+function disposeTree(group: THREE.Object3D) {
+  group.traverse((o) => {
+    if (o instanceof THREE.LineSegments || o instanceof THREE.Sprite) {
+      o.geometry.dispose();
+      const m = o.material as THREE.Material & { map?: THREE.Texture | null };
+      m.map?.dispose();
+      m.dispose();
+    }
+  });
+}
+
+/** World bounds of a measurement, its labels included (a sprite's own bounds ignore its size and anchor). */
+function guideBounds(item: THREE.Object3D): THREE.Box3 {
+  const box = new THREE.Box3();
+  item.updateWorldMatrix(true, true);
+  for (const o of item.children) {
+    if (o instanceof THREE.Sprite) {
+      const p = o.getWorldPosition(new THREE.Vector3());
+      const left = p.x - o.scale.x * o.center.x;
+      box.expandByPoint(new THREE.Vector3(left, p.y - o.scale.y / 2, p.z));
+      box.expandByPoint(new THREE.Vector3(left + o.scale.x, p.y + o.scale.y / 2, p.z));
+    } else box.union(new THREE.Box3().setFromObject(o));
+  }
+  return box;
+}
+
+/** Line segments (pairs of points) drawn over the fly. */
+function guideLines(points: THREE.Vector3[], color: string): THREE.LineSegments {
+  const g = new THREE.BufferGeometry().setFromPoints(points);
+  const l = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.9, depthTest: false, depthWrite: false }));
+  l.renderOrder = 2;
+  return l;
+}
+
+/** A text label facing the camera, `h` gapes tall, anchored at its centre or its left end. */
+function guideLabel(text: string, at: THREE.Vector3, color: string, align: "center" | "left", h: number): THREE.Sprite {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d")!;
+  const font = "italic 44px Spectral, Georgia, serif";
+  ctx.font = font;
+  canvas.width = Math.ceil(ctx.measureText(text).width) + 8;
+  canvas.height = 64;
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, 4, 32);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, depthWrite: false }));
+  sprite.scale.set((h * canvas.width) / canvas.height, h, 1);
+  sprite.center.set(align === "left" ? 0 : 0.5, 0.5);
+  sprite.position.copy(at);
+  sprite.renderOrder = 2;
+  return sprite;
+}
+
+function measuringGrid(bounds: THREE.Box3, color: string): THREE.Group {
   const group = new THREE.Group();
   const x0 = Math.floor(bounds.min.x * 4) / 4 - 0.25;
   const x1 = Math.ceil(bounds.max.x * 4) / 4 + 0.25;
@@ -520,7 +658,7 @@ function measuringGrid(bounds: THREE.Box3): THREE.Group {
     l.renderOrder = -1;
     return l;
   };
-  group.add(lines(minor, "#5a6a7a", 0.25), lines(major, "#2a4a6a", 0.6));
+  group.add(lines(minor, color, 0.18), lines(major, color, 0.5));
 
   const label = (text: string, x: number, y: number) => {
     const canvas = document.createElement("canvas");
@@ -528,7 +666,7 @@ function measuringGrid(bounds: THREE.Box3): THREE.Group {
     canvas.height = 64;
     const ctx = canvas.getContext("2d")!;
     ctx.font = "bold 40px sans-serif";
-    ctx.fillStyle = "#2a4a6a";
+    ctx.fillStyle = color;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(text, 64, 32);
