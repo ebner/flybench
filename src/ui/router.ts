@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
  * Real paths under the site's base, so every page has its own address for sharing and
  * search (the build writes an HTML file for each, see scripts/prerender.ts):
  *   /                      the gallery (filters in the query: /?type=dry&q=elk)
- *   /fly/<id>/             a pattern; /fly/<id>/?step=<n> at a step (1-based)
+ *   /fly/<id>/             a pattern; /fly/<id>/?step=<n> at a step (1-based), &size=<n> on
+ *                          another hook size than it is tied on
  *   /techniques/           the techniques index; /technique/<id>/ one technique
  *   /learn/                the learning path
  *   /about/                what Flybench is
@@ -13,7 +14,7 @@ import { useEffect, useState } from "react";
  */
 export type Route =
   | { page: "gallery"; query: string }
-  | { page: "fly"; id: string; step?: number }
+  | { page: "fly"; id: string; step?: number; size?: number }
   | { page: "techniques" }
   | { page: "technique"; id: string }
   | { page: "learn" }
@@ -41,7 +42,13 @@ export function parseRoute(relative: string): Route {
   if (parts[0] === "fly" && parts[1] && parts.length <= 3) {
     // The step used to be a path segment; it is a query parameter now.
     const step = Number(parts[2] ?? params.get("step"));
-    return { page: "fly", id: parts[1], ...(Number.isInteger(step) && step > 0 ? { step } : {}) };
+    const size = Number(params.get("size"));
+    return {
+      page: "fly",
+      id: parts[1],
+      ...(Number.isInteger(step) && step > 0 ? { step } : {}),
+      ...(Number.isInteger(size) && size > 0 ? { size } : {}),
+    };
   }
   if (parts.length === 1) {
     const single = SINGLE.find((p) => p === parts[0]);
@@ -63,7 +70,10 @@ export function legacyRoute(hash: string): Route | null {
 
 export const href = {
   gallery: (query = "") => (query ? `${BASE}?${query}` : BASE),
-  fly: (id: string, step?: number) => `${BASE}fly/${encodeURIComponent(id)}/${step ? `?step=${step}` : ""}`,
+  fly: (id: string, step?: number, size?: number) => {
+    const query = new URLSearchParams({ ...(step ? { step: String(step) } : {}), ...(size ? { size: String(size) } : {}) }).toString();
+    return `${BASE}fly/${encodeURIComponent(id)}/${query ? `?${query}` : ""}`;
+  },
   techniques: () => `${BASE}techniques/`,
   technique: (id: string) => `${BASE}technique/${encodeURIComponent(id)}/`,
   learn: () => `${BASE}learn/`,
@@ -78,7 +88,7 @@ export function routeHref(route: Route): string {
     case "gallery":
       return href.gallery(route.query);
     case "fly":
-      return href.fly(route.id, route.step);
+      return href.fly(route.id, route.step, route.size);
     case "technique":
       return href.technique(route.id);
     case "not-found":

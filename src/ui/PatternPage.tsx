@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
 import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
@@ -13,10 +13,11 @@ import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
 import { usePlayer } from "./usePlayer";
 import { NotFound } from "./NotFound";
+import { PrintCard } from "./PrintCard";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
 
-export function PatternPage({ id, step }: { id: string; step?: number }) {
+export function PatternPage({ id, step, size }: { id: string; step?: number; size?: number }) {
   const pattern = findPattern(id);
   if (!pattern) {
     return (
@@ -27,7 +28,7 @@ export function PatternPage({ id, step }: { id: string; step?: number }) {
       </NotFound>
     );
   }
-  return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} />;
+  return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} linkedSize={size} />;
 }
 
 const Icon = {
@@ -71,12 +72,15 @@ function hookSizes(size: number): number[] {
 }
 
 /** `linkedStep` is the step in the address (1-based), which the page also keeps up to date itself. */
-function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedStep?: number }) {
+function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Recipe; linkedStep?: number; linkedSize?: number }) {
   // The hook size can be changed to see the same fly at another size: proportions stay,
   // thread bulk changes as it would at the vise.
   // Tubes are sized by length, so only hooks offer other sizes.
   const tiedSize = original.hook.size;
-  const [size, setSize] = useState(tiedSize);
+  // A shared link can open the fly on another hook size (one the size menu offers).
+  const [size, setSize] = useState(() =>
+    tiedSize !== undefined && linkedSize !== undefined && hookSizes(tiedSize).includes(linkedSize) ? linkedSize : tiedSize,
+  );
   const sized = (s: typeof size) => (s === original.hook.size ? original : { ...original, hook: { ...original.hook, size: s } });
   const recipe = useMemo(() => sized(size), [original, size]);
   const build = useMemo(() => simulate(recipe), [recipe]);
@@ -125,6 +129,9 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   };
   const family = variantFamily(recipe);
   const recipeStep = recipe.steps[current]!;
+  // What goes wrong at this step: the pattern's own warning, then its technique's usual mistakes.
+  const mistakes = [...(recipeStep.mistake ? [recipeStep.mistake] : []), ...(technique(stepTechnique(original, current) ?? "")?.mistakes ?? [])];
+  const [showMistakes, setShowMistakes] = useState(false);
   const inUse = "material" in recipeStep ? recipeStep.material : "thread";
   const inUseMaterial = recipe.materials.find((m) => m.id === inUse);
   const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : "Thread";
@@ -155,11 +162,11 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   useEffect(() => {
     nowRef.current?.scrollTo(0, 0);
   }, [current]);
-  // Keep the URL on the current step, so it can be shared.
+  // Keep the URL on the current step and hook size, so it can be shared.
   useEffect(() => {
     written.current = current > 0 ? current + 1 : undefined;
-    replaceUrl(href.fly(recipe.id, written.current));
-  }, [recipe.id, current]);
+    replaceUrl(href.fly(recipe.id, written.current, size !== tiedSize ? size : undefined));
+  }, [recipe.id, current, size, tiedSize]);
 
   const playStep = (i: number) => {
     const s = build.steps[Math.max(0, Math.min(build.steps.length - 1, i))]!;
@@ -185,6 +192,8 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   };
   const hold = useRef({ timer: 0, fired: false });
   const [moreOpen, setMoreOpen] = useState(false);
+  const [printing, setPrinting] = useState(false);
+  const endPrinting = useCallback(() => setPrinting(false), []);
   useEffect(() => {
     if (!moreOpen) return;
     const close = (e: Event) => {
@@ -218,6 +227,11 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
         e.preventDefault();
         if (player.playing) player.pause();
         else play();
+      } else if (vise && (e.key === "PageDown" || e.key === "PageUp")) {
+        // A page-turner pedal or presentation clicker at the vise: next step, or back.
+        e.preventDefault();
+        if (e.key === "PageDown") playNext();
+        else playStep(player.time - step.start < 1 ? current - 1 : current);
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
         playStep(current + 1);
@@ -247,6 +261,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
           callout={callout}
           onCalloutClick={showInDressing}
           pointUp={ridesPointUp(recipe)}
+          guide
         />
         <div
           className="now"
@@ -259,6 +274,16 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
           </p>
           <h2>{step.title}</h2>
           <p className="now-text">{step.text}</p>
+          {mistakes.length > 0 && (
+            <details className="mistakes" open={showMistakes} onToggle={(e) => setShowMistakes(e.currentTarget.open)} onClick={(e) => e.stopPropagation()}>
+              <summary>Common mistakes</summary>
+              <ul>
+                {mistakes.map((m) => (
+                  <li key={m}>{m}</li>
+                ))}
+              </ul>
+            </details>
+          )}
           {vise && <p className="vise-hint">Tap here to play the next step. Esc or “Leave vise mode” to go back.</p>}
         </div>
         <div className="transport">
@@ -355,9 +380,15 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
         </p>
         {recipe.description && <p className="description">{recipe.description}</p>}
         {origin && <p className="origin">First tied by {origin}.</p>}
-        <button className="box-toggle" aria-pressed={box.has(mainId)} onClick={() => box.toggle(mainId)}>
-          {box.has(mainId) ? "In your fly box" : "Add to fly box"}
-        </button>
+        <div className="pattern-actions">
+          <button className="box-toggle" aria-pressed={box.has(mainId)} onClick={() => box.toggle(mainId)}>
+            {box.has(mainId) ? "In your fly box" : "Add to fly box"}
+          </button>
+          <button className="box-toggle print-toggle" onClick={() => setPrinting(true)} disabled={printing}>
+            {printing ? "Preparing the card…" : "Print recipe card"}
+          </button>
+        </div>
+        {printing && <PrintCard recipe={recipe} build={build} onDone={endPrinting} />}
 
         <h3>Dressing</h3>
         <dl className="dressing">

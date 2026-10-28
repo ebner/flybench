@@ -13,15 +13,28 @@ export interface ViewerProps {
   onCalloutClick?: () => void;
   /** The fly swims hook point up: offer to turn it over from the way it is tied. */
   pointUp?: boolean;
+  /** Offer the proportion guide (the pattern page, not the small technique clips). */
+  guide?: boolean;
 }
 
-export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false }: ViewerProps) {
+export function Viewer({ build, time, follow, onFollowChange, callout, onCalloutClick, pointUp = false, guide = false }: ViewerProps) {
   const [turned, setTurned] = useState(false);
   // WebGL can be turned off (browser settings, policies, old graphics drivers).
   const [unavailable, setUnavailable] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
   const toolsRef = useRef<HTMLDivElement>(null);
+  const [proportions, setProportions] = useState(false);
+  // In the theme's ink, and again when the theme changes.
+  useEffect(() => {
+    const apply = () =>
+      scene.current?.setProportions(proportions, getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || undefined);
+    apply();
+    if (!proportions) return;
+    const watch = new MutationObserver(apply);
+    watch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => watch.disconnect();
+  }, [proportions, build]);
   // One finger scrolls the page; a sideways drag with one finger shows how to turn the fly.
   const [hint, setHint] = useState(false);
   const touch = useRef<{ x: number; y: number } | null>(null);
@@ -133,7 +146,8 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
       </button>
       <div className="viewer-tools" ref={toolsRef}>
         <button aria-pressed={follow} onClick={() => onFollowChange(!follow)}>
-          {follow ? "Following the action" : "Follow the action"}
+          <span className="long">{follow ? "Following the action" : "Follow the action"}</span>
+          <span className="short">Follow</span>
         </button>
         <button
           onClick={() => {
@@ -143,6 +157,11 @@ export function Viewer({ build, time, follow, onFollowChange, callout, onCallout
         >
           Whole fly
         </button>
+        {guide && (
+          <button aria-pressed={proportions} onClick={() => setProportions(!proportions)} title="The gape grid and each part's proportions">
+            Proportions
+          </button>
+        )}
         {pointUp && (
           <button aria-pressed={turned} onClick={() => setTurned(!turned)} title="Tied hook point down, it swims point up">
             As it swims

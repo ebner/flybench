@@ -92,7 +92,9 @@ across the shank, and extended bodies.
 
 Agreed with the user in an interview; one milestone at a time, each stopping for feedback.
 
-8. Quick wins.
+8. ✅ Quick wins. (Page Down/Up control steps in vise mode only: elsewhere they keep
+   scrolling the page, as people expect; arrow keys work everywhere, and most clickers send
+   either.)
    - Pedal and remote control: Page Down / Page Up (Bluetooth page-turner pedals,
      presentation clickers) play the next step and go back, in and out of vise mode.
    - Share a variation: the address keeps the hook size and (with milestone 11) the colours

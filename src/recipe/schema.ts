@@ -182,22 +182,22 @@ const Side = z.enum(["top", "under", "across"]);
 
 const Step = z.discriminatedUnion("op", [
   /** Before the thread: slide a bead round the bend up to the eye. */
-  z.strictObject({ op: z.literal("slide-bead"), material: MaterialRef, note: Note }),
+  z.strictObject({ op: z.literal("slide-bead"), material: MaterialRef, note: Note, mistake: Note }),
   /** Wrap weighting wire on the shank, in touching turns. Allowed before the thread. */
   z.strictObject({
     op: z.literal("weight"),
     material: MaterialRef,
     from: Position,
     to: Position,
-    note: Note,
+    note: Note, mistake: Note,
   }),
-  z.strictObject({ op: z.literal("attach-thread"), at: Position, note: Note }),
+  z.strictObject({ op: z.literal("attach-thread"), at: Position, note: Note, mistake: Note }),
   z.strictObject({
     op: z.literal("wrap-thread"),
     to: Position,
     /** Omitted: touching turns. */
     turns: z.number().int().positive().optional(),
-    note: Note,
+    note: Note, mistake: Note,
   }),
   z.strictObject({
     op: z.literal("tie-in"),
@@ -221,7 +221,7 @@ const Step = z.discriminatedUnion("op", [
     extended: z.boolean().optional(),
     /** Extended bodies: the colour of the very end (a larva's head burnt black). */
     tip: Color.optional(),
-    note: Note,
+    note: Note, mistake: Note,
   }),
   z.strictObject({
     op: z.literal("wind"),
@@ -233,10 +233,10 @@ const Step = z.discriminatedUnion("op", [
     turns: z.number().int().positive(),
     /** Wound the opposite way round to the material under it (a counter-wound rib). */
     counter: z.boolean().optional(),
-    note: Note,
+    note: Note, mistake: Note,
   }),
   /** Fold a material tied in at the rear forward over the top of the body and tie it down at the thread. */
-  z.strictObject({ op: z.literal("pull-over"), material: MaterialRef, to: Position, note: Note }),
+  z.strictObject({ op: z.literal("pull-over"), material: MaterialRef, to: Position, note: Note, mistake: Note }),
   /** Spin hair round the shank in clumps from the thread forward to `to`; the thread ends there. */
   z.strictObject({
     op: z.literal("spin"),
@@ -244,7 +244,7 @@ const Step = z.discriminatedUnion("op", [
     to: Position,
     /** Leave the tips of the first clump trailing back as a collar this long (gapes), as on a Muddler. */
     collar: GapeLength.optional(),
-    note: Note,
+    note: Note, mistake: Note,
   }),
   z.strictObject({
     op: z.literal("dub"),
@@ -252,9 +252,9 @@ const Step = z.discriminatedUnion("op", [
     to: Position,
     /** Omitted: touching turns. */
     turns: z.number().int().positive().optional(),
-    note: Note,
+    note: Note, mistake: Note,
   }),
-  z.strictObject({ op: z.literal("tie-off"), material: MaterialRef, note: Note }),
+  z.strictObject({ op: z.literal("tie-off"), material: MaterialRef, note: Note, mistake: Note }),
   z.strictObject({
     op: z.literal("trim"),
     material: MaterialRef,
@@ -270,12 +270,12 @@ const Step = z.discriminatedUnion("op", [
      * "top" cuts away only those underneath, so the fly sits low (Dyret).
      */
     keep: z.enum(["sides", "top", "under"]).optional(),
-    note: Note,
+    note: Note, mistake: Note,
   }),
   z.strictObject({
     op: z.literal("whip-finish"),
     turns: z.number().int().positive().default(5),
-    note: Note,
+    note: Note, mistake: Note,
   }),
 ]);
 
