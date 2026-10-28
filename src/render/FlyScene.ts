@@ -85,6 +85,9 @@ export class FlyScene {
   private follow = false;
   /** Bounds of what each step adds, for following the action. */
   private stepBounds: THREE.Box3[] = [];
+  private hookBounds = new THREE.Box3();
+  /** A new fly: the following camera takes its framing at once instead of easing to it. */
+  private followFresh = true;
   private currentStep = 0;
   private atEnd = false;
   /** What resetCamera frames: the whole fly, or only what is tied on the hook (material swatches). */
@@ -198,6 +201,8 @@ export class FlyScene {
     });
     this.setTime(build.duration);
     this.finished = this.visibleBounds();
+    this.hookBounds = this.visibleBounds([this.hook!]);
+    this.followFresh = true;
     this.resetCamera();
     this.setTime(time);
   }
@@ -248,17 +253,16 @@ export class FlyScene {
     if (on) this.userMoved = false;
   }
 
-  /** Where the camera should look while following: the current step's work, or the whole fly at the end. */
+  /**
+   * What the camera frames while following: the whole hook and everything tied on it by the
+   * end of the current step. The frame only widens as the fly grows (a tail, a long wing), so
+   * it never zooms in on a detail and the hook always shows where on it the work is.
+   */
   private actionBox(): THREE.Box3 {
     if (this.atEnd) return this.finished;
-    let box = this.stepBounds[this.currentStep];
-    for (let i = this.currentStep; (!box || box.isEmpty()) && i > 0; i--) box = this.stepBounds[i - 1];
-    if (!box || box.isEmpty()) return this.finished;
-    // Not closer than about a gape and a half around the action, with the anchor in view.
-    const framed = box.clone().expandByPoint(this.anchor);
-    const center = framed.getCenter(new THREE.Vector3());
-    const size = framed.getSize(new THREE.Vector3()).max(new THREE.Vector3(1.6, 1.2, 1.2));
-    return new THREE.Box3().setFromCenterAndSize(center, size);
+    const box = this.hookBounds.clone();
+    for (let i = 0; i <= this.currentStep; i++) box.union(this.stepBounds[i]!);
+    return box;
   }
 
   private followAction(dt: number) {
@@ -266,9 +270,10 @@ export class FlyScene {
     const target = box.getCenter(new THREE.Vector3());
     const offset = this.camera.position.clone().sub(this.controls.target);
     const direction = offset.clone().normalize();
-    const distance = this.fitDistance(box, target, direction) * 1.15;
-    // Ease towards the action rather than jumping.
-    const k = 1 - Math.exp(-dt * 2.5);
+    const distance = this.fitDistance(box, target, direction) * 1.1;
+    // Ease towards the new framing rather than jumping, except on a new fly, which starts framed.
+    const k = this.followFresh ? 1 : 1 - Math.exp(-dt * 2.5);
+    this.followFresh = false;
     this.controls.target.lerp(target, k);
     const d = offset.length() + (distance - offset.length()) * k;
     this.allowDistance(distance);
