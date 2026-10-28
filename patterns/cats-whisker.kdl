@@ -66,5 +66,6 @@ steps {
     wind rib to=0.86 turns=5 counter=#true
     tie-off rib
     tie-in wing length=5.0 angle=10 spread=20 note="A second large pinch, reaching about the tail tip."
+    wrap-thread to=0.97 note="Past the eyes, crossing between them."
     whip-finish note="A small head in front of the eyes, varnished."
 }

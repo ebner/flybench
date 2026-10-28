@@ -1,3 +1,4 @@
+import { ridesPointUp } from "../tying/hook";
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import type { Recipe } from "../recipe/schema";
 
@@ -159,7 +160,7 @@ Whole feathers are tied in by the stem; strip the fluff from the base first.`,
     id: "beard",
     name: "Beards and throats",
     summary: "A small bunch of fibres tied in under the hook, behind the eye.",
-    how: `Turn the hook over or reach under it, hold the bunch under the shank and secure it with a pinch wrap. The fibres should reach about to the point.`,
+    how: `Turn the hook over or reach under it, hold the bunch under the shank and secure it with a pinch wrap. On a wet fly the fibres reach about to the point; a hair throat on a salmon fly is often shorter, about halfway there.`,
     mistakes: ["A beard that slides round to the side.", "Too thick, which unbalances the fly."],
   },
   {
@@ -250,10 +251,11 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     case "tie-off":
       return "tie-off";
     case "trim": {
-      const a = archetype(step.material);
       const spun = recipe.steps.some((s) => s.op === "spin" && s.material === step.material);
       if (spun) return "spinning-hair";
-      if (a === "hair") return "hair-wing";
+      // Hair butts: part of tying in that hair, as a tail or a wing.
+      const tieIn = recipe.steps.findIndex((s) => s.op === "tie-in" && s.material === step.material);
+      if (archetype(step.material) === "hair" && tieIn >= 0) return stepTechnique(recipe, tieIn);
       // The excess of a strip pulled over the body: a wing case or foam back.
       if (recipe.steps.some((s) => s.op === "pull-over" && s.material === step.material)) return "wing-case";
       // A trimmed hackle (keep), or a palmered hackle's tip: part of how that hackle was wound.
@@ -264,15 +266,17 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       const a = archetype(step.material);
       if (a === "eyes") return "eyes";
       if (step.length === undefined) return "tie-in";
-      if (step.side === "under") return "beard";
+      // Under the shank of a point-up fly is its top: a wing there, not a beard.
+      if (step.side === "under") return !ridesPointUp(recipe) ? "beard" : a === "hair" ? "hair-wing" : "tie-in";
       // Legs tied across the shank and extended bodies are tied in like any material.
       if (step.side === "across" || step.extended) return "tie-in";
       if ((step.angle ?? 0) >= 60) return "wing-post";
+      // A bunch tied in at the rear is a tail, whatever it is made of.
+      if (!step.forward && threadAt(recipe, index) <= 0.5) return "tail";
       if (a === "hair") return "hair-wing";
       if (a === "feather") return "feather-wing";
-      // A bunch tied in at the rear is a tail; one further forward (a CDC or marabou wing)
-      // is simply tied in on top.
-      return threadAt(recipe, index) > 0.5 ? "tie-in" : "tail";
+      // Further forward, anything else (a CDC or marabou wing) is simply tied in on top.
+      return "tie-in";
     }
     case "wind": {
       const a = archetype(step.material);
