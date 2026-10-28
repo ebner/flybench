@@ -1944,11 +1944,11 @@ select {
   background: var(--accent);
 }
 
-.hatch-calendar .now {
+.hatch-calendar .current {
   box-shadow: inset 0 0 0 2px var(--ink-faint);
 }
 
-.hatch-calendar thead th.now {
+.hatch-calendar thead th.current {
   color: var(--ink);
   box-shadow: none;
 }

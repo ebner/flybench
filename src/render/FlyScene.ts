@@ -433,8 +433,10 @@ export class FlyScene {
       const fly = this.finished;
       const own = new THREE.Box3().setFromObject(g);
       if (at === "over") {
-        // Head at the eye, along the shank.
-        g.position.set(this.build.hook.shankLength + 0.1 - length, -own.getCenter(new THREE.Vector3()).y * 0.2, 0);
+        // Its head just behind the eye, its body along the shank: front end to the shank's end.
+        const eye = this.fly.localToWorld(this.space!.point(new THREE.Vector3(this.build.hook.shankLength, 0, 0)));
+        const head = (g.userData.head as THREE.Vector3).clone().multiplyScalar(length);
+        g.position.copy(eye).sub(head);
         g.traverse((o) => {
           if (o instanceof THREE.Mesh) {
             const m = o.material as THREE.Material;
