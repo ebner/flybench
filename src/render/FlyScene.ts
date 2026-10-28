@@ -238,6 +238,8 @@ export class FlyScene {
     this.guide = guide;
     this.fly.add(guide);
     this.showGuide();
+    // Framed again now that the measurements are there (following does this by itself).
+    this.resetCamera();
   }
 
   private showGuide() {
@@ -286,12 +288,17 @@ export class FlyScene {
     this.renderer.render(this.scene, this.camera);
   }
 
-  /** The fly as it is at the current time, framed whole, as an image (the printable recipe card). */
-  snapshot(type = "image/jpeg"): string {
+  /** The fly as it is at the current time, framed whole, copied to a canvas (the printable recipe card). */
+  snapshot(): HTMLCanvasElement {
     this.resetCamera();
     this.controls.update();
     this.renderNow();
-    return this.renderer.domElement.toDataURL(type, 0.88);
+    const source = this.renderer.domElement;
+    const copy = document.createElement("canvas");
+    copy.width = source.width;
+    copy.height = source.height;
+    copy.getContext("2d")!.drawImage(source, 0, 0);
+    return copy;
   }
 
   /**

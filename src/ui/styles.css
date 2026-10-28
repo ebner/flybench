@@ -1762,9 +1762,13 @@ select {
     color: #000000;
   }
 
+  @page {
+    margin: 12mm;
+  }
+
   .print-card h1 {
     margin: 0;
-    font-size: 20pt;
+    font-size: 18pt;
   }
 
   .print-card header p {
@@ -1774,14 +1778,15 @@ select {
 
   .print-top {
     display: grid;
-    grid-template-columns: 40% 1fr;
+    grid-template-columns: 34% 1fr;
     gap: 1.2em;
     align-items: start;
     margin-bottom: 1em;
   }
 
   .print-top img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 55mm;
   }
 
   .print-dressing {
@@ -1792,7 +1797,8 @@ select {
     display: grid;
     grid-template-columns: 7em 1fr;
     gap: 0.6em;
-    padding: 0.15em 0;
+    padding: 0.1em 0;
+    font-size: 9pt;
     border-bottom: 0.5pt solid #cccccc;
   }
 
@@ -1806,11 +1812,11 @@ select {
 
   .print-steps {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5em 1.4em;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4em 1.2em;
     margin: 0;
-    padding-left: 1.2em;
-    font-size: 9pt;
+    padding-left: 1.8em;
+    font-size: 8pt;
   }
 
   .print-steps li {
@@ -1824,7 +1830,9 @@ select {
 
   .print-steps img {
     display: block;
-    width: 85%;
+    height: 19mm;
+    max-width: 100%;
+    object-fit: contain;
     margin-bottom: 0.1em;
   }
 
