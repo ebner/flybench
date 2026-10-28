@@ -1281,6 +1281,28 @@ select {
   }
 }
 
+/* On a phone the sections get a row of their own below the wordmark. */
+@media (max-width: 40rem) {
+  :root {
+    --header: 5.6rem;
+  }
+
+  .site-header {
+    flex-wrap: wrap;
+    align-content: center;
+    row-gap: 0.15rem;
+  }
+
+  .site-header nav {
+    order: 1;
+    flex-basis: 100%;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+  }
+}
+
 /* Footer */
 
 .site-footer {

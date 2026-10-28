@@ -165,6 +165,8 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      // With a modifier the keys are the browser's (Alt+Left is Back).
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
       const t = e.target;
       if ((t instanceof HTMLInputElement && t.type !== "range") || t instanceof HTMLSelectElement || t instanceof HTMLTextAreaElement) return;
       // Space on a focused button or link presses it.
