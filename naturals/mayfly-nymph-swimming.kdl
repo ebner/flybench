@@ -25,7 +25,7 @@ parts {
 hatches {
     southern-sweden from=april to=october time="midday" note="Baetis: two generations, spring and autumn (Dalarna 2013)."
     northern-scandinavia from=june to=august note="Estimate: one generation in the mountains."
-    british-isles from=march to=october time="midday" note="Large dark olive peaks March–April and late autumn (First Nature)."
+    british-isles from=february to=october time="midday" note="Large dark olive peaks March–April and late autumn (First Nature)."
     central-europe from=april to=september note="Serratella mostly June–September; above 1000 m July–September (Wikipedia de)."
     northern-usa from=march to=october note="Blue-winged olives in spring and autumn (Montana Angler)."
 }

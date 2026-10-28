@@ -4,6 +4,7 @@ group crustacean
 stage adult
 examples "Gammarus pulex; coastal gammarids"
 description "A small crustacean flattened from side to side, curled into a C at rest and straighter when it swims on its side. Translucent grey, brown or olive; abundant all year in streams and along coasts."
+// Assumption: 6–21 mm, young shrimps included; adults 10–21 mm (Wikipedia).
 size min=6 max=21
 rides swimming
 curve 110
@@ -20,11 +21,11 @@ parts {
     eyes size=0.02 color="#2a1a10"
 }
 hatches {
-    southern-sweden from=january to=december note="All year, several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
-    northern-scandinavia from=january to=december note="All year, several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
-    british-isles from=january to=december note="All year, several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
-    central-europe from=january to=december note="All year, several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
-    northern-usa from=january to=december note="All year, several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
+    southern-sweden from=january to=december note="Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
+    northern-scandinavia from=january to=december note="Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
+    british-isles from=january to=december note="Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
+    central-europe from=january to=december note="Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
+    northern-usa from=january to=december note="Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex)."
 }
 sources {
     "Wikipedia: Gammarus pulex" url="https://en.wikipedia.org/wiki/Gammarus_pulex"

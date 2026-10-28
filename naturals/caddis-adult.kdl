@@ -20,7 +20,7 @@ parts {
     eyes size=0.03 color=black
 }
 hatches {
-    southern-sweden from=june to=september time="evening" note="July and August the main months (Gullefors 2014)."
+    southern-sweden from=may to=october time="evening" note="From May (Sericostoma, Hydropsyche; Dalarna 2013) into autumn (Rhyacophila to November; Gullefors 2015); July and August the main months (Gullefors 2014)."
     northern-scandinavia from=june to=september time="evening" note="First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna)."
     british-isles from=april to=september time="evening" note="Grannom in April (First Nature); many caddis at dusk."
     central-europe from=may to=september time="evening" note="Estimate; mostly at dusk and night (Wikipedia de)."

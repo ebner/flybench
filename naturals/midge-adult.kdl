@@ -21,7 +21,7 @@ parts {
 hatches {
     southern-sweden from=april to=october note="Estimate: peak May–June."
     northern-scandinavia from=june to=september note="Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate."
-    british-isles from=march to=october time="morning, evening" note="All year on stillwaters; big buzzers March–April, peak May–June, again September–October (The Essential Fly)."
+    british-isles from=january to=december time="morning, evening" note="On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly)."
     central-europe from=april to=october note="Estimate, as in Britain."
     northern-usa from=january to=december note="Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure)."
 }

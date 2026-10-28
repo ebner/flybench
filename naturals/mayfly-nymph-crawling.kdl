@@ -3,7 +3,7 @@ name "Mayfly nymph, crawling"
 group mayfly
 stage nymph
 examples "blue-winged olive (Serratella), Ephemerella, clingers (Heptagenia)"
-description "A sturdier nymph that crawls through moss and under stones, or clings flat to them in fast water: broad, with banded legs and tails and gill plates over the back. A clumsy swimmer."
+description "A sturdier nymph that crawls through moss and under stones, or clings flat to them in fast water: broad, with banded legs and tails and gill plates over the back."
 size min=5.5 max=14
 rides crawling
 body {
@@ -22,7 +22,7 @@ parts {
     eyes size=0.025 color=black
 }
 hatches {
-    southern-sweden from=june to=september note="Ephemerella aurivillii on the wing June–September (Dalarna 2013)."
+    southern-sweden from=may to=september note="Heptagenia and Leptophlebia from May, Ephemerella aurivillii June–September (Dalarna 2013)."
     northern-scandinavia from=june to=september note="Estimate: nymphs mature until September in Norrland (Dalarna 2013)."
     british-isles from=june to=august time="midday" note="Blue-winged olive duns June to early August (First Nature)."
     central-europe from=april to=september note="Serratella April–September, mostly June–September (Wikipedia de)."

@@ -5,7 +5,7 @@ name "Leech"
 group leech
 stage adult
 examples "freshwater leeches (Erpobdellidae)"
-description "A soft, flattened, segmented worm with a sucker at each end, swimming with slow undulations of the whole body. Black, brown or olive."
+description "A soft, flattened, segmented worm with a sucker at each end, swimming fast in waves of the whole body. Black, brown or olive."
 size min=20 max=60
 rides swimming
 body {
@@ -14,11 +14,11 @@ body {
 parts {
 }
 hatches {
-    southern-sweden from=january to=december note="All year (estimate)."
-    northern-scandinavia from=january to=december note="All year (estimate)."
-    british-isles from=january to=december note="All year (estimate)."
-    central-europe from=january to=december note="All year (estimate)."
-    northern-usa from=january to=december note="All year (estimate)."
+    southern-sweden from=january to=december note="Estimate."
+    northern-scandinavia from=january to=december note="Estimate."
+    british-isles from=january to=december note="Estimate."
+    central-europe from=january to=december note="Estimate."
+    northern-usa from=january to=december note="Estimate."
 }
 sources {
     "Wikipedia: Leech" url="https://en.wikipedia.org/wiki/Leech"

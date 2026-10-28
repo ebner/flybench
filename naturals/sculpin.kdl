@@ -20,11 +20,11 @@ parts {
     eyes size=0.035 color="#2a2014"
 }
 hatches {
-    southern-sweden from=january to=december note="All year."
-    northern-scandinavia from=january to=december note="All year."
-    british-isles from=january to=december note="All year."
-    central-europe from=january to=december note="All year."
-    northern-usa from=january to=december note="All year."
+    southern-sweden from=january to=december note="Estimate."
+    northern-scandinavia from=january to=december note="Estimate."
+    british-isles from=january to=december note="Estimate."
+    central-europe from=january to=december note="Estimate."
+    northern-usa from=january to=december note="Estimate."
 }
 sources {
     "Wikipedia: European bullhead" url="https://en.wikipedia.org/wiki/European_bullhead"

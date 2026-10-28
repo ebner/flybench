@@ -22,11 +22,11 @@ parts {
     eyes size=0.03 color="#1a1a14"
 }
 hatches {
-    southern-sweden from=january to=december note="All year (estimate)."
-    northern-scandinavia from=january to=december note="All year (estimate)."
-    british-isles from=january to=december note="All year (estimate)."
-    central-europe from=january to=december note="All year (estimate)."
-    northern-usa from=january to=december note="All year (estimate)."
+    southern-sweden from=january to=december note="Estimate."
+    northern-scandinavia from=january to=december note="Estimate."
+    british-isles from=january to=december note="Estimate."
+    central-europe from=january to=december note="Estimate."
+    northern-usa from=january to=december note="Estimate."
 }
 sources {
     "Wikipedia: Atlantic silverside" url="https://en.wikipedia.org/wiki/Atlantic_silverside"

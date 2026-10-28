@@ -22,11 +22,11 @@ parts {
     eyes size=0.03 color="#1a1a14"
 }
 hatches {
-    southern-sweden from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
-    northern-scandinavia from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
-    british-isles from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
-    central-europe from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
-    northern-usa from=january to=december note="All year; most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    southern-sweden from=january to=december note="Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    northern-scandinavia from=january to=december note="Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    british-isles from=january to=december note="Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    central-europe from=january to=december note="Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
+    northern-usa from=january to=december note="Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
 }
 sources {
     "Wikipedia: Phoxinus phoxinus" url="https://en.wikipedia.org/wiki/Phoxinus_phoxinus"

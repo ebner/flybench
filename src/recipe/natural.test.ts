@@ -31,6 +31,6 @@ describe("loading a natural", () => {
   });
 
   it("needs a size range the right way round", () => {
-    expect(errors(base.replace("size min=6 max=11", "size min=11 max=6")).join("\n")).toMatch(/min is larger than max/);
+    expect(errors(base.replace("size min=5 max=11", "size min=11 max=5")).join("\n")).toMatch(/min is larger than max/);
   });
 });

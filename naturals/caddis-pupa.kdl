@@ -3,7 +3,8 @@ name "Caddis pupa"
 group caddis
 stage pupa
 examples "sedges of all kinds"
-description "The pupa cuts out of its case and rises or swims to hatch, rowing with its long fringed middle legs, the wing sheaths dark along its sides and the antennae swept back."
+description "The pupa cuts out of its case and rises or swims to hatch, rowing with its oar-like legs, the wing sheaths dark along its sides and the antennae swept back."
+// Assumption: 8–18 mm; pupae are one to three hook sizes smaller than the larvae (Troutnut).
 size min=8 max=18
 rides swimming
 curve 20
@@ -21,7 +22,7 @@ parts {
     eyes size=0.03 color=black
 }
 hatches {
-    southern-sweden from=june to=september time="evening" note="July and August the main months (Gullefors 2014)."
+    southern-sweden from=may to=october time="evening" note="From May (Sericostoma, Hydropsyche; Dalarna 2013) into autumn (Rhyacophila to November; Gullefors 2015); July and August the main months (Gullefors 2014)."
     northern-scandinavia from=june to=september time="evening" note="First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna)."
     british-isles from=april to=september time="evening" note="Grannom in April (First Nature); many caddis at dusk."
     central-europe from=may to=september time="evening" note="Estimate; mostly at dusk and night (Wikipedia de)."

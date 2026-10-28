@@ -3,6 +3,7 @@ import {
   activeIn,
   GROUP_LABELS,
   hatchMonths,
+  hatchText,
   imitatedBy,
   matchingHookSizes,
   REGION_LABELS,
@@ -114,8 +115,8 @@ export function NaturalsIndex() {
                 <tr>
                   <th scope="col">Natural</th>
                   {MONTH_NAMES.map((m, i) => (
-                    <th key={m} scope="col" className={i === month ? "current" : undefined} title={m}>
-                      {m.charAt(0)}
+                    <th key={m} scope="col" className={i === month ? "current" : undefined} title={m} aria-label={m}>
+                      <span aria-hidden="true">{m.charAt(0)}</span>
                     </th>
                   ))}
                 </tr>
@@ -265,7 +266,7 @@ export function NaturalPage({ id }: { id: string }) {
                 <tr key={h.region}>
                   <th scope="row">{REGION_LABELS[h.region]}</th>
                   <td>
-                    {h.from === "january" && h.to === "december" ? "All year" : `${capitalize(h.from)} to ${h.to}`}
+                    {hatchText(h)}
                     {h.time && `, ${h.time}`}
                     {h.note && <span className="hatch-note"> {h.note}</span>}
                   </td>

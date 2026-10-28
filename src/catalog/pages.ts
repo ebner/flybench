@@ -9,7 +9,7 @@ import { materialsList } from "../tying/describe";
 import { simulate } from "../tying/simulate";
 import { DIFFICULTY_LABELS, factsLine, factsSentence, originLine } from "./describe";
 import type { Natural } from "../recipe/natural";
-import { GROUP_LABELS, imitatedBy, REGION_LABELS, sizeText, STAGE_LABELS } from "./naturals";
+import { GROUP_LABELS, hatchText, imitatedBy, REGION_LABELS, sizeText, STAGE_LABELS } from "./naturals";
 import { learningPath, patternsUsing, TECHNIQUES } from "./techniques";
 
 export const SITE_NAME = "Flybench";
@@ -149,7 +149,7 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
           `<main class="reading"><h1>${escape(n.name)}</h1><p>${escape(n.description)}</p>` +
           `<p>${escape(GROUP_LABELS[n.group])}, ${escape(STAGE_LABELS[n.stage])}, ${escape(sizeText(n))}.</p>` +
           (n.hatches.length
-            ? `<h2>When it hatches</h2><ul>${n.hatches.map((h) => `<li>${escape(REGION_LABELS[h.region])}: ${escape(h.from)} to ${escape(h.to)}</li>`).join("")}</ul>`
+            ? `<h2>When it hatches</h2><ul>${n.hatches.map((h) => `<li>${escape(REGION_LABELS[h.region])}: ${escape(hatchText(h))}</li>`).join("")}</ul>`
             : "") +
           (flies.length ? `<h2>Flies that imitate it</h2><ul>${flies.map((r) => `<li>${link(flyPath(r.id), fullName(r))}</li>`).join("")}</ul>` : "") +
           `</main>`,

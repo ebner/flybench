@@ -5,7 +5,7 @@ name "Prawn"
 group crustacean
 stage adult
 examples "Palaemon (rockpool and common prawns)"
-description "A long, slim, half-translucent prawn with a pink-orange tinge, long antennae and a fan tail, darting backwards with a flick of the tail when alarmed. The prawn the salmon flies suggest."
+description "A long, slim, half-translucent prawn with a pink-orange tinge, long antennae and a fan tail. The prawn the salmon flies suggest."
 size min=40 max=100
 rides swimming
 curve 25
@@ -22,11 +22,11 @@ parts {
     eyes size=0.03 color="#1a1a1a"
 }
 hatches {
-    southern-sweden from=january to=december note="All year; fished in the salmon and sea-trout seasons."
-    northern-scandinavia from=january to=december note="All year; fished in the salmon and sea-trout seasons."
-    british-isles from=january to=december note="All year; fished in the salmon and sea-trout seasons."
-    central-europe from=january to=december note="All year; fished in the salmon and sea-trout seasons."
-    northern-usa from=january to=december note="All year; fished in the salmon and sea-trout seasons."
+    southern-sweden from=january to=december note="Fished in the salmon and sea-trout seasons."
+    northern-scandinavia from=january to=december note="Fished in the salmon and sea-trout seasons."
+    british-isles from=january to=december note="Fished in the salmon and sea-trout seasons."
+    central-europe from=january to=december note="Fished in the salmon and sea-trout seasons."
+    northern-usa from=january to=december note="Fished in the salmon and sea-trout seasons."
 }
 sources {
     "Wikipedia: Palaemon serratus" url="https://en.wikipedia.org/wiki/Palaemon_serratus"
