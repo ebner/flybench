@@ -142,6 +142,11 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
     player.seek(build.steps[Math.min(linkedStep ?? 1, build.steps.length) - 1]!.start);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedStep]);
+  // A long instruction scrolls; the next one starts at its beginning.
+  const nowRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    nowRef.current?.scrollTo(0, 0);
+  }, [current]);
   // Keep the URL on the current step, so it can be shared.
   useEffect(() => {
     written.current = current > 0 ? current + 1 : undefined;
@@ -214,6 +219,7 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
         />
         <div
           className="now"
+          ref={nowRef}
           aria-live="polite"
           onClick={vise ? playNext : undefined}
         >

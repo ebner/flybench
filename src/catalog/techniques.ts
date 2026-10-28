@@ -103,9 +103,11 @@ Tie off with a few tight turns and trim the tip.`,
     id: "palmering",
     name: "Palmering",
     summary: "Winding a hackle in open turns along the body, often secured by the rib.",
-    how: `Tie the hackle in at the front of the body. Wind it back towards the bend in evenly spaced open turns and hold the tip there with hackle pliers.
+    how: `A palmered hackle can be wound either way along the body.
 
-Now wind the rib forward through the hackle, wiggling it so it traps no barbs. The first turn of rib locks the hackle tip; trim the tip afterwards.`,
+Forward: tie the hackle in at the rear of the body and make the body. Wind the hackle forward over it in evenly spaced open turns, then tie it off at the front like a collar.
+
+Back: tie the hackle in at the front of the body, wind it back towards the bend in open turns and hold the tip there with hackle pliers. Then wind the rib forward through the hackle, wiggling it so it traps no barbs. The first turn of rib locks the hackle tip; trim the tip afterwards.`,
     mistakes: ["Trapping barbs under the rib.", "Turns too close, so the hackle hides the body."],
   },
   {
