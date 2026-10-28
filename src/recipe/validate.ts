@@ -88,6 +88,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     if (step.op === "weight") {
       if (archetype !== "wire") err(`weighting is done with wire, not "${step.material}"`, [...path, "material"]);
       if (step.to <= step.from + POSITION_TOLERANCE) err("the weighting must run forward from `from` to `to`", [...path, "to"]);
+      if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, [...path, "material"]);
+      else materials.set(step.material, { state: "done", at: step.from, butts: false });
       return;
     }
     if (step.op === "attach-thread") {
@@ -117,6 +119,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       case "spin":
         if (archetype !== "hair") err(`only hair can be spun, not "${step.material}"`, [...path, "material"]);
         else if (step.to <= thread + POSITION_TOLERANCE) err("spin the hair forward from the thread", [...path, "to"]);
+        else if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, [...path, "material"]);
         else materials.set(step.material, { state: "done", at: thread, butts: true });
         thread = step.to;
         break;

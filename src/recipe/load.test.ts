@@ -263,6 +263,14 @@ materials {
     expect(errors.join("\n")).toMatch(/give either `to`/);
   });
 
+  it("doesn't spin or weight with a material that is already on the hook", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    hair deer-hair\n    lead lead-free-wire\n");
+    const spun = "    attach-thread at=0.1\n    tie-in hair length=1.5\n    spin hair to=0.9\n    whip-finish";
+    expect(errorsOf(run(spun, h)).join("\n")).toMatch(/"hair" is already on the hook/);
+    const weighted = "    weight lead from=0.3 to=0.6\n    attach-thread at=0.8\n    tie-in lead\n    tie-off lead\n    whip-finish";
+    expect(errorsOf(run(weighted, h)).join("\n")).toMatch(/"lead" is already tied in/);
+  });
+
   it("places an error about a missing section at the top of the file", () => {
     const errors = errorsOf(run("    attach-thread at=0.8\n    whip-finish", head.replace("difficulty beginner\n", "")));
     expect(errors[0]).toMatch(/^line 1:1: difficulty/);
