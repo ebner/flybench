@@ -123,7 +123,13 @@ describe("pattern files", () => {
       file,
       recipe: recipeOf(loadRecipe(readFileSync(new URL(file, patternsDir), "utf8"))),
     }));
-    expect(validateCatalog(entries)).toEqual([]);
+    const naturals = new Set(readdirSync(new URL("../../naturals/", import.meta.url)).map((f) => f.replace(/\.kdl$/, "")));
+    expect(validateCatalog(entries, naturals)).toEqual([]);
+  });
+
+  it("refer only to naturals that exist", () => {
+    const entry = { file: "a.kdl", recipe: { ...recipeOf(load(VALID_STEPS)), id: "a", naturals: ["mayfly-dun", "unicorn"] } };
+    expect(validateCatalog([entry], new Set(["mayfly-dun"])).map((e) => e.message)).toEqual(['naturals: no natural "unicorn" in naturals/']);
   });
 });
 

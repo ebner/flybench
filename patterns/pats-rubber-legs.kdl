@@ -5,6 +5,7 @@ name "Pat's Rubber Legs"
 aliases "Pat's Rubberlegs" "Rubber Legs"
 type nymph
 imitates stonefly
+naturals stonefly-nymph
 difficulty beginner
 species trout
 season january february march april may june july august september october november december

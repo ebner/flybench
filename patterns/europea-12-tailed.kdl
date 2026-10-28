@@ -6,6 +6,7 @@ variant-of europea-12
 variant "With tail"
 type dry
 imitates caddis
+naturals caddis-adult
 difficulty intermediate
 species trout grayling
 season may june july august september

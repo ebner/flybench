@@ -5,6 +5,7 @@ name "Gold-Ribbed Hare's Ear"
 aliases "GRHE" "Hare's Ear Nymph" "Hares Ear"
 type nymph
 imitates mayfly caddis crustacean
+naturals mayfly-nymph-crawling caddis-larva-free freshwater-shrimp stonefly-nymph
 difficulty beginner
 species trout grayling panfish
 season january february march april may june july august september october november december

@@ -5,6 +5,7 @@ name "Crazy Charlie"
 aliases "Nasty Charlie"
 type saltwater
 imitates baitfish crustacean
+naturals marine-baitfish prawn
 difficulty beginner
 rides point-up
 species bonefish

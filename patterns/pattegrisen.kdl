@@ -5,6 +5,7 @@ name "Pattegrisen"
 aliases "Pink Pig" "Pattegris"
 type saltwater
 imitates crustacean
+naturals prawn
 difficulty intermediate
 species sea-trout
 season january february march april may june july august september october november december

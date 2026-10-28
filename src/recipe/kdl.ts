@@ -33,6 +33,7 @@ const TOP_LEVEL: Record<string, Shape> = {
   variant: { kind: "scalar" },
   type: { kind: "scalar" },
   imitates: { kind: "values" },
+  naturals: { kind: "values" },
   difficulty: { kind: "scalar" },
   species: { kind: "values" },
   season: { kind: "values" },

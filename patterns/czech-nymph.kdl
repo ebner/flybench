@@ -4,6 +4,7 @@ id czech-nymph
 name "Czech Nymph"
 type nymph
 imitates caddis crustacean
+naturals caddis-larva-free freshwater-shrimp
 difficulty intermediate
 species trout grayling
 season january february march april may june july august september october november december

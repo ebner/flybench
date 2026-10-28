@@ -7,7 +7,10 @@ import { simulate, stepAt, stepEnd, type Build } from "../tying/simulate";
 import { useTheme } from "../ui/theme";
 import { usePlayer } from "../ui/usePlayer";
 import { listPatterns, readPattern, savePattern } from "./api";
+import { NATURALS } from "../naturals";
 import { checkDraft, isPatternFile, newPatternText } from "./draft";
+
+const NATURAL_IDS = new Set(NATURALS.map((n) => n.id));
 
 /**
  * The authoring studio: edit a pattern's KDL with its problems listed as you type, and watch
@@ -78,7 +81,7 @@ export function Studio() {
   const input = useMemo(() => ({ file, text }), [file, text]);
   const draft = useDeferredValue(input);
   const check = useMemo(
-    () => (draft.file ? checkDraft(draft.text, draft.file, others) : { errors: [] }),
+    () => (draft.file ? checkDraft(draft.text, draft.file, others, NATURAL_IDS) : { errors: [] }),
     [draft, others],
   );
 
@@ -109,7 +112,7 @@ export function Studio() {
       setSaved((m) => new Map(m).set(file, text));
       // Only if this draft is still open: a new one opened meanwhile is not saved yet.
       if (openFile.current === file) setUnsavedFile(false);
-      const problems = checkDraft(text, file, others).errors.length;
+      const problems = checkDraft(text, file, others, NATURAL_IDS).errors.length;
       setStatus(problems ? `Saved ${file}, with ${problems} ${problems === 1 ? "problem" : "problems"} still to fix` : `Saved ${file}`);
     } catch (e) {
       setStatus(`Not saved: ${e instanceof Error ? e.message : String(e)}`);

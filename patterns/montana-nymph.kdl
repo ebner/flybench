@@ -5,6 +5,7 @@ name "Montana Nymph"
 aliases "Montana Stone" "Montana"
 type nymph
 imitates stonefly damselfly
+naturals stonefly-nymph damselfly-nymph
 difficulty beginner
 species trout bass
 season january february march april may june july august september october november december

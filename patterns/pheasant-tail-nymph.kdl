@@ -5,6 +5,7 @@ name "Pheasant Tail Nymph"
 aliases "PTN" "Sawyer's Pheasant Tail" "Sawyer Nymph"
 type nymph
 imitates mayfly
+naturals mayfly-nymph-swimming
 difficulty beginner
 species trout grayling
 season march april may june july august september october

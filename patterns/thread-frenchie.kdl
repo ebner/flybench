@@ -5,6 +5,7 @@ name "Thread Frenchie"
 aliases "Frenchie" "Egan's Thread Frenchie"
 type nymph
 imitates mayfly attractor
+naturals mayfly-nymph-swimming
 difficulty beginner
 species trout
 season january february march april may june july august september october november december

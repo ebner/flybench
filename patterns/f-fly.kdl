@@ -5,6 +5,7 @@ name "F-Fly"
 aliases "Fratnik Fly"
 type dry
 imitates caddis
+naturals caddis-adult midge-adult mayfly-emerger
 difficulty beginner
 species trout grayling
 season may june july august september

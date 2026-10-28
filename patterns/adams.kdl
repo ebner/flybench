@@ -4,6 +4,7 @@ id adams
 name "Adams"
 type dry
 imitates mayfly caddis
+naturals mayfly-dun caddis-adult midge-adult
 difficulty intermediate
 species trout
 season april may june july august september

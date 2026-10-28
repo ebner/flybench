@@ -5,6 +5,7 @@ name "CDC & Elk"
 aliases "CDC and Elk"
 type dry
 imitates caddis
+naturals caddis-adult mayfly-emerger
 difficulty intermediate
 species trout
 season may june july august september

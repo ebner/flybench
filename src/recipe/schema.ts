@@ -316,6 +316,8 @@ export const RecipeSchema = z.strictObject({
   variant: z.string().min(1).optional(),
   type: z.enum(FLY_TYPES),
   imitates: z.array(z.enum(IMITATES)).default([]),
+  /** The naturals (naturals/*.kdl) it imitates, the main one first. */
+  naturals: z.array(z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "natural ids are lower case words joined by hyphens")).default([]),
   difficulty: z.enum(DIFFICULTIES),
   species: z.array(z.enum(SPECIES)).default([]),
   season: z.array(z.enum(MONTHS)).default([]),

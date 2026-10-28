@@ -5,6 +5,7 @@ name "Teal Blue & Silver"
 aliases "Teal, Blue and Silver" "Teal & Silver"
 type wet
 imitates baitfish attractor
+naturals fry-minnow marine-baitfish
 difficulty intermediate
 species sea-trout trout
 season june july august september october
