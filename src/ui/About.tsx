@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { PATTERNS } from "../patterns";
+import { CATALOG } from "../patterns";
 import { href } from "./router";
 
 export const REPO_URL = "https://github.com/ebner/flybench";
@@ -12,7 +12,7 @@ export function About() {
     <main className="reading about">
       <h1>About Flybench</h1>
       <p className="lede">
-        Flybench is a field guide to tying flies. Each of its {PATTERNS.length} patterns is tied in front of you in 3D, one
+        Flybench is a field guide to tying flies. Each of its {CATALOG.length} patterns is tied in front of you in 3D, one
         step at a time, and comes with its materials, its history and how to fish it.
       </p>
 
