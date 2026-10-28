@@ -122,7 +122,10 @@ function PatternView({ recipe: original, linkedStep }: { recipe: Recipe; linkedS
   const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : "Thread";
   const showInDressing = () => {
     setFlash(inUse);
-    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: "center", behavior: "smooth" });
+    // In one column the stage stays pinned at the top: bring the row up just below it
+    // (styles.css gives the rows a scroll margin for that) rather than to the middle, behind it.
+    const pinned = matchMedia("(max-width: 52rem)").matches;
+    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: pinned ? "start" : "center", behavior: "smooth" });
     setTimeout(() => setFlash(null), 1600);
   };
 
