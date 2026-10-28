@@ -20,7 +20,7 @@ export function Clip({ recipe, step }: { recipe: Recipe; step: number }) {
     let t = s.start;
     let frame = requestAnimationFrame(function tick(now) {
       // Play the step, hold the result for a moment, then start again.
-      t += Math.min(0.1, (now - last) / 1000);
+      t += Math.min(0.1, Math.max(0, (now - last) / 1000));
       last = now;
       const end = stepEnd(s);
       if (t > end + 1.2) t = s.start;

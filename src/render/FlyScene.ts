@@ -388,7 +388,9 @@ export class FlyScene {
     const p = stepProgress(current, t);
     this.poseThread(current.thread, p);
     this.poseLooseEnds(current.freeEnds, p);
-    this.anchor.copy(this.anchorFor(current, p));
+    // The label's point is where the step leaves its material or thread, for the whole step:
+    // following the tip round each turn would swing the label about while it plays.
+    this.anchor.copy(this.anchorFor(current, 1));
   }
 
   /** The point a step works at: the material being wound, else the thread, else what the step adds. */
