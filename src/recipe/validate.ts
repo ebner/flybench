@@ -37,8 +37,12 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   });
 
   type State = "tied-in" | "wound" | "wound-rear" | "secured" | "done";
-  // `wound`: wound round the hook or a post (not pulled over); `kept`: already trimmed with keep.
-  const materials = new Map<string, { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean }>();
+  // `wound`: wound round the hook or a post (not pulled over); `kept`: already trimmed with keep;
+  // `hanging`: the step that tied it in without a length, so it waits to be wound or pulled over.
+  const materials = new Map<
+    string,
+    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number }
+  >();
   let thread: number | null = null;
   let finished = false;
   /** A material that the next step has to tie off or secure. */
@@ -167,6 +171,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
             state: archetype === "eyes" || step.extended || step.side === "across" ? "done" : "tied-in",
             at: thread,
             butts: archetype === "hair" && step.side !== "across",
+            hanging: step.length === undefined ? i : undefined,
             // Only an upright bunch makes a post a hackle can be wound round: not a feather
             // pair, an extended body or strands tied across.
             post:
@@ -285,7 +290,14 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   }
   for (const [id, m] of materials) {
     if (m.state === "secured") err(`the tip of "${id}" is still hanging at the bend; trim it`, ["steps"]);
+    if (m.state === "tied-in" && m.hanging !== undefined) {
+      err(`"${id}" is tied in but never wound or pulled over`, ["steps", m.hanging, "material"]);
+    }
   }
+  const used = new Set(recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : []].flat()));
+  recipe.materials.forEach((m, i) => {
+    if (!used.has(m.id)) err(`"${m.id}" is listed but never used`, ["materials", i, "id"]);
+  });
   if (!finished) err("the fly must end with a whip finish", ["steps"]);
   return errors;
 }

@@ -432,11 +432,15 @@ export function simulate(recipe: Recipe): Build {
   // A double's shank is two wires side by side, so the dressing sits on a wider base.
   let profile = Profile.bare(-0.3, L + 0.2, hook.points === 2 ? hook.wireRadius * 1.8 : hook.wireRadius);
   let threadX: number | null = null;
+  // The thread's recipe position: near the eye, positions a little apart share one x
+  // (frontLimit), so which way a wind goes is decided here, as validation does.
+  let threadAt = 0;
   let nextId = 0;
   let time = 0;
   const looks = new Map(recipe.materials.map((m) => [m.id, materialLook(recipe, m)]));
   const kinds = new Map(recipe.materials.map((m) => [m.id, m]));
   const tiedAt = new Map<string, number>();
+  const tiedAtPosition = new Map<string, number>();
   const freeEnds = new Map<string, FreeEndPose>();
   /** Untrimmed hair butts and spun hair, by material. */
   const butts = new Map<string, BundlePiece>();
@@ -528,6 +532,7 @@ export function simulate(recipe: Recipe): Build {
       }
       case "attach-thread": {
         threadX = Math.min(step.at * span, frontLimit);
+        threadAt = step.at;
         const piece = inPlace(threadX, 6);
         pieces.push(piece);
         thread = { kind: "follow", piece: piece.id };
@@ -544,6 +549,7 @@ export function simulate(recipe: Recipe): Build {
         pieces.push(piece);
         thread = { kind: "follow", piece: piece.id };
         threadX = to;
+        threadAt = step.to;
         duration = Math.min(4, Math.max(1.2, turns * DURATION.perThreadTurn));
         break;
       }
@@ -562,6 +568,7 @@ export function simulate(recipe: Recipe): Build {
         // The dubbing is on the thread, so the bobbin follows it.
         thread = { kind: "follow", piece: piece.id };
         threadX = to;
+        threadAt = step.to;
         duration = Math.max(2.5, turns * DURATION.perDubbingTurn);
         break;
       }
@@ -590,6 +597,7 @@ export function simulate(recipe: Recipe): Build {
         profile = profile.withLayer(from, to, 0.08);
         thread = { kind: "rest", x: to, radius: profile.radiusAt(to) };
         threadX = to;
+        threadAt = step.to;
         duration = DURATION.spin;
         break;
       }
@@ -597,6 +605,7 @@ export function simulate(recipe: Recipe): Build {
         const x = threadX!;
         const l = looks.get(step.material)!;
         tiedAt.set(step.material, x);
+        tiedAtPosition.set(step.material, threadAt);
         const radius = profile.radiusAt(x);
         const side: Side = step.side === "under" ? "under" : "top";
         const angle = deg(step.angle ?? (l.look === "yarn" ? 5 : 3));
@@ -693,7 +702,7 @@ export function simulate(recipe: Recipe): Build {
           };
         } else {
           const to = Math.min(step.to! * span, frontLimit);
-          ctx.rear = to < from;
+          ctx.rear = step.to! < tiedAtPosition.get(step.material)!;
           if (!ctx.rear && palmered) {
             ctx.through = palmered;
             palmered = null;

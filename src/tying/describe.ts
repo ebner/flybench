@@ -62,10 +62,11 @@ export function materialsList(recipe: Recipe): MaterialsListEntry[] {
 /** What the fly is dressed on: a hook, a tube, or a Waddington shank (no bend on either). */
 export type Mount = "hook" | "tube" | "waddington";
 
-export function positionText(s: number, mount: Mount = "hook"): string {
+/** `head`: the bead or cone the front positions are measured to, when there is one. */
+export function positionText(s: number, mount: Mount = "hook", head?: "bead" | "cone"): string {
   const along = mount === "tube" ? "the tube" : "the shank";
   if (s <= 0.02) return mount === "hook" ? "the start of the bend" : `the rear end of ${along}`;
-  if (s >= 0.95) return mount === "tube" ? "just behind the front of the tube" : "just behind the eye";
+  if (s >= 0.95) return head ? `just behind the ${head}` : mount === "tube" ? "just behind the front of the tube" : "just behind the eye";
   if (Math.abs(s - 0.5) <= 0.02) return `halfway along ${along}`;
   return `${Math.round(s * 100)}% of the way along ${along}`;
 }
@@ -122,7 +123,11 @@ export interface StepContext {
 /** Instruction text for one step, generated from the recipe; the step's note is appended. */
 export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): string {
   const mount: Mount = hookModel(recipe.hook).tube?.kind ?? "hook";
-  const at = (s: number) => positionText(s, mount);
+  // With a bead or cone, 1 is just behind it rather than the eye.
+  const bead = recipe.steps.find((s) => s.op === "slide-bead");
+  const headKind = bead && "material" in bead ? recipe.materials.find((m) => m.id === bead.material)?.kind : undefined;
+  const head = headKind ? (headKind.endsWith("-cone") ? "cone" : "bead") : undefined;
+  const at = (s: number) => positionText(s, mount, head);
   // A tube has no gape: lengths on one are given in millimetres.
   const len = (n: number) => (mount === "hook" ? gapeText(n) : `${Math.round(n * unitMm(recipe.hook))} mm`);
   const body = mount === "tube" ? "the tube" : "the shank";

@@ -48,7 +48,7 @@ materials {
 
 steps {
     slide-bead bead note="Slot towards the point."
-    attach-thread at=0.95 note="Just behind the bead."
+    attach-thread at=0.95
     wrap-thread to=0.0
     // Assumption: a tail about a shank long, from the photos; the sources give no length.
     tie-in tail length=1.3 spread=15 note="A sparse pinch, tips evened; bind the butts forward to the bead so there is no bump."

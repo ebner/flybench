@@ -161,6 +161,17 @@ describe("simulate: palmering, dubbing and hair wings", () => {
     expect(has(step("Tie in: bleached elk hair"))).toBe(false);
   });
 
+  it("palmers back a short way from right behind the eye, where positions share one x", () => {
+    const text = `id t\nname "T"\ntype dry\ndifficulty beginner\nhook dry-standard size=14\nthread black size="8/0"
+materials {\n    hackle cock-hackle color=brown fibre=1\n    rib gold-wire\n}
+steps {
+    attach-thread at=0.5\n    tie-in rib\n    wrap-thread to=1\n    tie-in hackle\n    wind hackle to=0.97 turns=2
+    wind rib to=1 turns=3\n    tie-off rib\n    trim hackle\n    whip-finish\n}\n`;
+    const r = loadRecipe(text);
+    if (!r.ok) throw new Error(r.errors[0]!.message);
+    expect(() => simulate(r.recipe)).not.toThrow();
+  });
+
   it("removes the long butts when they are trimmed and leaves a short head", () => {
     const tieIn = step("Tie in: bleached elk hair");
     const trim = step("Trim: bleached elk hair");

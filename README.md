@@ -34,6 +34,7 @@ pnpm install
 pnpm dev           # http://localhost:5173
 pnpm studio        # the authoring studio (dev server only), /studio.html
 pnpm test          # recipe parsing/validation and simulation tests
+pnpm typecheck
 pnpm build         # type-check, production build and one HTML file per page into dist/
 pnpm render:catalog  # gallery images into public/renders/ (commit them)
 pnpm render        # render finished flies to .cache/renders/ (headless Chromium)
@@ -76,7 +77,7 @@ of the published site.
 
 ```
 patterns/          fly recipes (KDL)
-docs/              recipe schema documentation
+docs/              the recipe schema, how to research and write a pattern, the product plan
 src/recipe/        KDL → object mapping, Zod schema, materials catalog,
                    semantic and catalog-level validation
 src/tying/         hook models and the tying simulation: recipe → timeline of
@@ -92,8 +93,8 @@ public/logo.svg    the logo (also the header mark); favicon.svg is a simplified 
 render.html        dev-only page that scripts/ drive to render a finished fly
 scripts/           authoring tools: render, render-catalog, refcheck, the
                    dev-server plugin that lets the studio read and save patterns,
-                   the build plugin that leaves reference photos out, and
-                   prerender (the HTML file and preview picture for each page)
+                   the build plugin that leaves reference photos out, the app
+                   icons, and prerender (the HTML file and preview picture for each page)
 .github/workflows/ deployment to GitHub Pages
 ```
 

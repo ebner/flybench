@@ -17,6 +17,16 @@ materials {
 }
 steps {
     attach-thread at=0.8
+    wrap-thread to=0.0
+    tie-in tag length=0.3
+    tie-in body
+    wrap-thread to=0.75
+    wind body to=0.75 turns=8
+    tie-off body
+    tie-in hackle
+    wrap-thread to=0.85
+    wind hackle to=0.85 turns=3
+    tie-off hackle
     whip-finish
 }
 `);
@@ -55,6 +65,8 @@ materials {
 }
 steps {
     attach-thread at=0.8
+    tie-in yellow length=2
+    tie-in red length=2
     whip-finish
 }
 `);
