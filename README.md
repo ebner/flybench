@@ -17,10 +17,16 @@ example taken from a real pattern; every step of every pattern links to its tech
 The learning path (`/learn/`) orders the catalog so each fly adds only a few new
 techniques.
 
-Personal features live in the browser (no account, no sync): a fly box (`/box/`), a
-materials inventory (`/materials/`) that drives "Tie with what I have" in the gallery,
-and vise mode on pattern pages for following along at the bench. The built site
-installs as an app and works offline after the first visit.
+Personal features live in the browser (no account, no sync): a fly box (`/box/`) with a
+shopping list of what its flies still need, a materials inventory (`/materials/`) that
+drives "Tie with what I have" in the gallery, a tying log (`/log/`, "I tied this" on every
+pattern) with learning-path progress and the techniques practised, and vise mode on pattern
+pages for following along at the bench. "Try other colours" on a pattern page changes any
+part's colour: the 3D fly, the steps and the dressing follow, the colours go into the
+address (`?colours=body:yellow`), and a variation can be saved to the fly box. A fly box for
+a trip (`/trip/`) suggests a dozen patterns and their sizes for a region, month, water and
+fish, from the hatch calendar. The built site installs as an app and works offline after
+the first visit.
 
 Product decisions and the milestone plan: [docs/product-plan.md](docs/product-plan.md).
 
