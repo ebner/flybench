@@ -292,6 +292,7 @@ export class FlyScene {
 
   /** Shows the fly upside down, turned about the shank, the way a point-up fly swims. */
   setTurnedOver(on: boolean) {
+    if (this.fly.rotation.x === (on ? Math.PI : 0)) return;
     this.fly.rotation.x = on ? Math.PI : 0;
     this.fly.updateMatrixWorld(true);
     if (this.build) this.measure();
@@ -323,10 +324,14 @@ export class FlyScene {
    * film, just under or deep. null takes it back to the vise.
    */
   setWater(setting: WaterSetting | null) {
+    // Stilling the water or a new theme keeps the camera where the visitor put it.
+    const before = this.water?.setting;
+    const sameView = !!before && !!setting && before.view === setting.view && before.fishing === setting.fishing;
     if (this.water) {
       this.water.view.dispose();
       this.scene.remove(this.water.view.group);
       if (this.water.bubbles) {
+        this.water.bubbles.dispose();
         this.water.bubbles.geometry.dispose();
         (this.water.bubbles.material as THREE.Material).dispose();
         this.fly.remove(this.water.bubbles);
@@ -367,10 +372,11 @@ export class FlyScene {
       ? this.build.steps.flatMap((step, i) => step.pieces.flatMap((p, j) => (CLUMPS.has(p.look) ? [this.stepViews[i]![j]!.piece.object] : [])))
       : [];
     for (const o of soft) o.scale.set(1, WET_SPREAD, WET_SPREAD);
+    this.fly.updateMatrixWorld(true);
     this.water = { setting, view, level, pivot, bounds, hang: this.rig.matrix.clone(), bubbles: this.bubbles(level), soft };
     // Stilling the water holds it where it is.
     this.setWaterTime(this.waterTime);
-    this.setView(setting.view === "side" ? "water-side" : "water-below");
+    if (!sameView) this.setView(setting.view === "side" ? "water-side" : "water-below");
   }
 
   /** The water and the fly in it at `t` seconds of water time. */
@@ -394,6 +400,13 @@ export class FlyScene {
       roll = 0.03 * Math.sin(1.3 * t);
       // Soft fibres pressed in by the pull, opening out again in the pause.
       const spread = WET_SPREAD * (1 - 0.12 * pull + 0.08 * Math.sin(Math.PI * glide));
+      for (const o of w.soft) o.scale.set(1, spread, spread);
+    } else if (motion === "swing") {
+      // Held against the current, swaying a little, its fibres working in the flow.
+      lift = 0.02 * Math.sin(1.1 * t);
+      pitch = 0.03 * Math.sin(0.8 * t);
+      roll = 0.08 * Math.sin(0.9 * t);
+      const spread = WET_SPREAD * (1 + 0.05 * Math.sin(3 * t));
       for (const o of w.soft) o.scale.set(1, spread, spread);
     } else if (depth === "surface" || depth === "film") {
       // Rides the waves.

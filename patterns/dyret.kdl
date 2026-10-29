@@ -4,6 +4,8 @@ id dyret
 name "Dyret"
 aliases "The Beast" "The Animal"
 type emerger
+// Bingen fishes it dry (see fishing).
+fishes surface
 imitates caddis
 naturals caddis-pupa caddis-adult
 difficulty beginner

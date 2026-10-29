@@ -132,7 +132,7 @@ export interface WaterOptions {
   look: WaterLook;
   /** Points where the fly dents the film (world x, z) with a radius, at most 24. */
   dimples: { x: number; z: number; r: number }[];
-  motion: "drift" | "swim";
+  motion: "drift" | "swim" | "swing";
   /**
    * From the side the water is a tank cut away at this z (world), in front of the fly, so its
    * part under the surface shows; null for water all round (the view from below).
@@ -222,9 +222,13 @@ export class Water {
   /** Seconds between strips of a swum fly. */
   static readonly STRIP = 1.4;
 
-  /** How far the water has moved past the fly by time t (gapes): steady, or in strips' pulses. */
-  static flow(motion: "drift" | "swim", t: number): number {
+  /**
+   * How far the water has moved past the fly by time t (gapes), from its eye towards its tail:
+   * slowly as it drifts, faster held against the current on the swing, in pulses when stripped.
+   */
+  static flow(motion: "drift" | "swim" | "swing", t: number): number {
     if (motion === "drift") return 0.35 * t;
+    if (motion === "swing") return 1.1 * t;
     // A quick pull, then a glide.
     const n = Math.floor(t / Water.STRIP);
     const f = (t - n * Water.STRIP) / Water.STRIP;
@@ -237,7 +241,8 @@ export class Water {
     const pos = this.specks.geometry.getAttribute("position") as THREE.BufferAttribute;
     const flow = Water.flow(this.o.motion, t);
     for (let i = 0; i < pos.count; i++) {
-      const x = this.speckBase[i * 3]! + flow;
+      // The eye is towards +x: the water streams past it to the tail.
+      const x = this.speckBase[i * 3]! - flow;
       // Wrap within the 12-gape span the specks fill.
       pos.setX(i, ((((x + 6) % 12) + 12) % 12) - 6);
     }

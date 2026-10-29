@@ -164,6 +164,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   // Open at the linked step, paused at its start, and follow a link to another step of this fly.
   useEffect(() => {
     if (linkedStep === written.current) return;
+    setInWater(false);
     player.pause();
     setStopAt(null);
     player.seek(build.steps[Math.min(linkedStep ?? 1, build.steps.length) - 1]!.start);
@@ -190,17 +191,21 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedSize]);
 
+  // Stepping, playing or seeking takes the fly back to the vise.
   const playStep = (i: number) => {
+    setInWater(false);
     const s = build.steps[Math.max(0, Math.min(build.steps.length - 1, i))]!;
     setStopAt(stepEnd(s));
     player.playFrom(s.start);
   };
   const playAll = () => {
+    setInWater(false);
     setStopAt(null);
     player.play();
   };
   // Vise mode pauses after every step: play the next one; a step paused halfway resumes.
   const playNext = () => {
+    setInWater(false);
     if (player.time >= step.start + step.duration - 0.05) return playStep(current + 1);
     setStopAt(stepEnd(step));
     player.play();
@@ -208,6 +213,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   const play = () => (vise ? playNext() : playAll());
   // Back to the start of step 1, paused: holding the previous-step button, or Home.
   const toStart = () => {
+    setInWater(false);
     player.pause();
     setStopAt(null);
     player.seek(0);
@@ -298,6 +304,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
           pointUp={ridesPointUp(recipe)}
           guide
           water={fishingFor}
+          waterOpen={inWater}
           onWater={(on) => {
             setInWater(on);
             if (on) player.pause();
@@ -355,6 +362,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
             build={build}
             time={player.time}
             onSeek={(t) => {
+              setInWater(false);
               player.pause();
               setStopAt(null);
               player.seek(t);

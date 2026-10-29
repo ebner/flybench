@@ -86,7 +86,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 | `type`        | one of `dry wet nymph emerger midge streamer terrestrial salmon saltwater` | yes |
 | `imitates`    | any of `mayfly caddis stonefly chironomid damselfly terrestrial baitfish crustacean attractor` | no |
 | `naturals`    | ids of the naturals it imitates (`naturals/*.kdl`), the main one first, e.g. `naturals mayfly-dun caddis-adult`; leave out for attractors | no |
-| `fishes`      | `surface`, `film`, `below` or `deep`: where the fly fishes, for the water view. Leave out to derive it: dry flies and terrestrials float, emergers hang in the film (tail down), weighted flies (a bead, eyes other than mono, weighting) go deep, others fish just under the surface. Streamers, salmon and saltwater flies are swum, the rest drift | no |
+| `fishes`      | `surface`, `film`, `below` or `deep`: where the fly fishes, for the water view. Leave out to derive it: dry flies and terrestrials float, emergers hang in the film (tail down), weighted flies (a bead, eyes other than mono, weighting) go deep, others fish just under the surface. Streamers and saltwater flies are stripped, salmon flies swung across the current, the rest drift | no |
 | `difficulty`  | `beginner`, `intermediate` or `advanced`          | yes      |
 | `species`     | any of `trout grayling sea-trout salmon char bass panfish pike striped-bass bonefish` | no |
 | `season`      | month names, `january` … `december`              | no       |

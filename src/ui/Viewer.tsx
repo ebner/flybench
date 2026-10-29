@@ -22,7 +22,9 @@ export interface ViewerProps {
   natural?: { natural: Natural; length: number; at: "beside" | "over" } | null;
   /** Offer the finished fly in water, fished like this. */
   water?: Fishing;
-  /** The water view opened or closed (the page pauses playback while it is open). */
+  /** The water view is open: the page closes it when the visitor steps, plays or seeks. */
+  waterOpen?: boolean;
+  /** The visitor opens or closes the water view (the page pauses playback while it is open). */
   onWater?: (on: boolean) => void;
 }
 
@@ -39,11 +41,13 @@ export function Viewer({
   guide = false,
   natural = null,
   water,
+  waterOpen = false,
   onWater,
 }: ViewerProps) {
   const [turned, setTurned] = useState(false);
-  // The finished fly in water, seen from the side or from below; closed again by stepping or playing.
-  const [inWater, setInWater] = useState<"side" | "below" | null>(null);
+  // The finished fly in water, seen from the side or from below.
+  const [waterView, setWaterView] = useState<"side" | "below">("side");
+  const inWater = waterOpen && water ? waterView : null;
   const [still, setStill] = useState(reducedMotion);
   // WebGL can be turned off (browser settings, policies, old graphics drivers).
   const [unavailable, setUnavailable] = useState(false);
@@ -109,10 +113,13 @@ export function Viewer({
       const flip = width > here && there > here + 24 ? !flipped : flipped;
       el.classList.toggle("flip", flip);
       text.style.maxWidth = `${Math.max(96, flip ? left : right)}px`;
-      // Above the point it would run into the view buttons: put it below.
-      const tools = toolsRef.current?.getBoundingClientRect();
+      // Above the point it would run into a view button over it: put it below.
       const box = container.current!.getBoundingClientRect();
-      const below = !!tools && point.y - 30 - text.offsetHeight < tools.bottom - box.top + 4;
+      const span = Math.min(width, Math.max(96, flip ? left : right));
+      const [from, to] = flip ? [point.x - 48 - span, point.x - 48] : [point.x + 48, point.x + 48 + span];
+      const buttons = [...(toolsRef.current?.children ?? [])].map((b) => b.getBoundingClientRect());
+      const over = buttons.filter((b) => b.right - box.left > from && b.left - box.left < to);
+      const below = over.some((b) => point.y - 30 - text.offsetHeight < b.bottom - box.top + 4);
       el.classList.toggle("below", below);
     };
     scene.current = s;
@@ -139,13 +146,6 @@ export function Viewer({
     if (!inWater) scene.current?.setTime(time);
   }, [build, time, inWater]);
 
-  // Moving through the steps takes the fly back to the vise.
-  const shownTime = useRef(time);
-  useEffect(() => {
-    if (time === shownTime.current) return;
-    shownTime.current = time;
-    if (inWater) openWater(null);
-  }, [time]);
 
   // The natural, placed after the fly (it goes beside the finished fly), and again whenever the
   // fly changes (another hook size).
@@ -179,7 +179,7 @@ export function Viewer({
       setProportions(false);
       onFollowChange(false);
     }
-    setInWater(view);
+    if (view) setWaterView(view);
     if (!view !== !inWater) onWater?.(view !== null);
   };
 

@@ -4,6 +4,8 @@ id superpuppan
 name "Superpuppan"
 aliases "Super Pupa" "Floating Caddis Pupa" "Superpubban"
 type emerger
+// Fished in the surface, held high by its two rows of trimmed fibres (see fishing).
+fishes surface
 imitates caddis
 naturals caddis-pupa
 difficulty beginner

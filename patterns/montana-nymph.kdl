@@ -4,6 +4,8 @@ id montana-nymph
 name "Montana Nymph"
 aliases "Montana Stone" "Montana"
 type nymph
+// Swung deep in rivers, fished on a sinking line on lakes (see fishing).
+fishes deep
 imitates stonefly damselfly
 naturals stonefly-nymph damselfly-nymph
 difficulty beginner
