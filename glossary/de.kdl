@@ -510,6 +510,10 @@ parts {
 }
 
 words {
+    noun waddington-shank "Schaft" gender=m plural="Schäfte" {
+        note "The Waddington's straight shank in the dressing list; plain 'Schaft', as it is no hook's shank (Hakenschenkel)."
+        source "Wiktionary (de): Schaft" url="https://de.wiktionary.org/wiki/Schaft"
+    }
     noun thread "Bindefaden" gender=m plural="Bindefäden" {
         note "Chosen: 'Bindefaden', in lists and steps alike (\"Den Bindefaden festlegen\"). Alternatives: 'Bindeseide' (older, also common: Karwath), 'Bindegarn' (shops), and the short 'Faden'."
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"

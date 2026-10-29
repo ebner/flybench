@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./glossaries";
-import "./translations";
 import { App } from "./ui/App";
+import { splitLang } from "./i18n/lang";
+import { loadLanguage } from "./i18n/load";
 import "@fontsource/im-fell-english/400.css";
 import "@fontsource/im-fell-english/400-italic.css";
 import "@fontsource/spectral/400.css";
@@ -29,8 +29,17 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
   });
 }
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+// A Swedish or German page first fetches its language's words; the prerendered page shows meanwhile.
+const base = import.meta.env.BASE_URL;
+const [first] = splitLang(location.pathname.startsWith(base) ? location.pathname.slice(base.length) : "");
+loadLanguage(first)
+  .catch(() => {
+    // Offline and never fetched: the app still starts; the page shows what it can.
+  })
+  .finally(() =>
+    createRoot(document.getElementById("root")!).render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    ),
+  );

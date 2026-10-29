@@ -131,7 +131,17 @@ for (const f of (await readdir(`${DIST}/assets`)).filter((f) => f.endsWith(".js"
 // The service worker caches the app's own files on install, so the site works offline
 // after the first visit; the cache is named after this build's files.
 const assets = (await readdir(`${DIST}/assets`)).sort();
-const shell = ["./", "./manifest.webmanifest", "./favicon.svg", "./logo.svg", "./renders/manifest.json", ...assets.filter((f) => /\.(js|css)$/.test(f)).map((f) => `./assets/${f}`)];
+// A language's words (assets/sv-*.js, de-*.js) are cached when that language is first used,
+// not fetched for every visitor.
+const languageChunk = (f: string) => LANGS.some((l) => l !== "en" && f.startsWith(`${l}-`));
+const shell = [
+  "./",
+  "./manifest.webmanifest",
+  "./favicon.svg",
+  "./logo.svg",
+  "./renders/manifest.json",
+  ...assets.filter((f) => /\.(js|css)$/.test(f) && !languageChunk(f)).map((f) => `./assets/${f}`),
+];
 // Only the Latin subsets: the text is English with some Nordic and Polish names; browsers
 // fetch other subsets when a page needs them.
 const fonts = assets.filter((f) => /-latin(-ext)?-.*\.woff2$/.test(f)).map((f) => `./assets/${f}`);

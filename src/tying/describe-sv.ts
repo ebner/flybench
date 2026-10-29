@@ -171,7 +171,7 @@ function writerFor(recipe: Recipe) {
       case "palmer":
         return `Linda ${mat(said.m)} bakåt ${place(said.to).to} i ${turns(said.turns, true)}${counter(said.counter)}.`;
       case "wind-through":
-        return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)} genom ${mat(said.through)}. Det första varvet låser dess ${svNoun(word("tip"), "indefinite")}.`;
+        return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)} genom ${mat(said.through)}${counter(said.counter)}. Det första varvet låser dess ${svNoun(word("tip"), "indefinite")}.`;
       case "wind":
         return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)}.`;
       case "pull-over":
@@ -180,7 +180,7 @@ function writerFor(recipe: Recipe) {
         return `Spinn ${svNoun(word("clump"), "plural")} av ${mat(said.m, "indefinite")} runt ${along} och packa var och en bakåt mot den förra, ${place(said.to).to}.`;
       case "dub": {
         const noodle = word("noodle");
-        return `Snurra ${article(noodle)} tunn${noodle.gender === "ett" ? "t" : ""} ${noodle.text} av ${mat(said.m, "indefinite")} på ${thread} och linda ${pronoun(noodle).object} ${said.rear ? "bakåt" : "framåt"} ${place(said.to).to}.`;
+        return `Snurra ${article(noodle)} ${noodle.gender === "ett" ? "tunt" : "tunn"} ${noodle.text} av ${mat(said.m, "indefinite")} på ${thread} och linda ${pronoun(noodle).object} ${said.rear ? "bakåt" : "framåt"} ${place(said.to).to}.`;
       }
       case "tie-off":
         return `Fäst ${mat(said.m)} med några ${svNoun(word("turn"), "plural")} tråd och klipp bort ${excess}.`;
@@ -227,6 +227,16 @@ function partName(id: string): string {
   return capitalize([...adjText, nounText].filter(Boolean).join(" "));
 }
 
+/** The noun a part's name is built on ("hackel" in "hackle-grizzly"), for agreement. */
+function partHead(id: string): Noun | undefined {
+  if (hasTerm("sv", "parts", id) && id.includes("-")) return term("sv", "parts", id, "noun");
+  return id
+    .split("-")
+    .filter((w) => !(w in NAMED_COLORS))
+    .map(termOf)
+    .find((w): w is Noun => w.kind === "noun");
+}
+
 const termOf = (w: string): Noun | Adjective => {
   try {
     return term("sv", "parts", w, "noun");
@@ -243,6 +253,13 @@ export const sv: Writer = {
   // A label is the translation of the recipe's own (see i18n/prose.ts); otherwise the glossary's name.
   materialName: (m) => m.label ?? capitalize(svPhrase(material(m), colour(m.color), "indefinite", usedInPlural(m))),
   colourWord: (c) => (c ? term("sv", "colours", c, "adjective").text : "naturfärg"),
+  // "Hackel rött": the colour agrees with the part's noun.
+  partInColour: (id, c) => {
+    const colour = term("sv", "colours", c, "adjective");
+    const head = id === "thread" ? word("thread") : partHead(id);
+    const form = !colour.invariable && head?.gender === "ett" ? colour.forms.neuter! : colour.text;
+    return `${id === "thread" ? capitalize(word("thread").text) : partName(id)} ${form}`;
+  },
   threadName: (c) => capitalize(svPhrase(word("thread"), colour(c), "indefinite")),
   hookName: (model, english, length) => {
     const name = term("sv", "hooks", model, "phrase").text;

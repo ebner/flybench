@@ -172,16 +172,19 @@ function internalLink(e: MouseEvent): HTMLAnchorElement | null {
 
 export function useRoute(): Route {
   const [route, setRoute] = useState(() => {
+    // The language first (from the path), so an old hash link under /sv/ stays Swedish.
+    const relative = currentRelative();
     const legacy = legacyRoute(location.hash);
     if (legacy) history.replaceState(null, "", routeHref(legacy));
-    return legacy ?? parseRoute(currentRelative());
+    return legacy ?? parseRoute(relative);
   });
   useEffect(() => {
     const update = (e: Event) => {
       restoring = e.type === "popstate";
+      const relative = currentRelative();
       const legacy = legacyRoute(location.hash);
       if (legacy) history.replaceState(null, "", routeHref(legacy));
-      setRoute(legacy ?? parseRoute(currentRelative()));
+      setRoute(legacy ?? parseRoute(relative));
     };
     const onClick = (e: MouseEvent) => {
       const a = internalLink(e);
