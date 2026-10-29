@@ -335,16 +335,18 @@ sources {
 Body sections take `length` and `radius` (fractions of the body length), `taper` (the end's
 radius relative to the start's), `segments` (rings), `color` and `belly`, `flatten` (height
 over width: below 1 flat like a stonefly nymph, above 1 narrow like a fish or a shrimp),
-`translucency` (0–1) and `round` (0 a straight taper, 1 egg-shaped). All lengths in `parts`
-are fractions of the body length:
+`translucency` (0–1), `round` (0 a straight taper, 1 egg-shaped), `hairs` (0 smooth – 1 furry)
+and `marks` (`bands`, `spots`, `mottle`, `stripe`) drawn in an `ink` colour. All lengths in
+`parts` are fractions of the body length:
 
 | Part | Properties |
 |---|---|
-| `tails` | `count` 1–3, `length`, `spread` (degrees between the outer ones), `color`, `leaf=#true` for flat tail gills |
-| `wings` | `count` 2 or 4, `shape` (`upright`, `tent`, `flat`, `spent`, `back`), `length`, `width`, `color`, `clarity` (0 opaque – 1 clear), `veins` |
-| `legs` | `count`, `length`, `color`, `at` (the body section; default the thorax), `hind` (the last pair's length relative to the rest) |
+| `tails` | `count` 1–3, `length`, `spread` (degrees between the outer ones), `color`, `leaf=#true` for flat tail gills, `hairs` (0–1, fringes) |
+| `wings` | `count` 2 or 4, `shape` (`upright`, `tent`, `flat`, `spent`, `back`), `length`, `width`, `color`, `clarity` (0 opaque – 1 clear), `veins`, `hind` (hind wing length as a fraction of the fore wing's; 0 none), `hairs` (0–1, a caddis's haired wings), `mottle` (colour of darker flecks) |
+| `legs` | `count`, `length`, `color`, `at` (the body section; default the thorax), `hind` (the last pair's length relative to the rest), `femur` and `tibia` (fractions of the leg; the foot is the rest; defaults 0.38 and 0.34), `hairs` (0–1, swimming fringes), `banded=#true` |
 | `antennae` | `length`, `color`, `swept=#true` to lay them back along the body |
-| `gills` | `count` (pairs along the abdomen), `length`, `color` |
+| `gills` | `count` (pairs along the abdomen), `length`, `color`, `shape` (`plate`, `feather`, `tuft`) |
+| `tusks` | `length`, `color` (a burrowing mayfly nymph's mandibles) |
 | `wingpads` | `length`, `color` |
 | `case` | `material` (`sand`, `gravel`, `plant`), `length`, `radius`, `color` |
 | `shuck` | `length`, `color` (an emerger's trailing skin) |

@@ -167,6 +167,14 @@ export const en = {
     water: "In the water",
     waterShort: "Water",
     waterTitle: "The finished fly in moving water",
+    above: "From above",
+    aboveShort: "Above",
+    aboveTitle: "As the angler sees it, looking down onto the water",
+    explore: "Explore in 3D",
+    exploreTitle: "Turn and zoom the view, with the water moving",
+    loadingRiver: "Loading the river…",
+    stillAlt: (view: "angler" | "below"): string =>
+      view === "angler" ? "In a gravel-bedded river, seen from above" : "In a gravel-bedded river, seen from below as a trout sees it",
   },
   stepBar: {
     label: "Steps",
@@ -378,6 +386,11 @@ export const en = {
     who: (author: ReactNode, github: Link) => ["Flybench is made by ", author, ". Corrections and new patterns are welcome on ", github("GitHub"), "."],
     translations: "The Swedish and German translations are drafts until reviewed; where a text has no translation yet, it is shown in English.",
     licenceHeading: "Licence and credits",
+    photoscans: (polyHaven: Link) => [
+      "The river panorama and the gravel bed in the realistic water are photoscans from ",
+      polyHaven("Poly Haven"),
+      ", released into the public domain (CC0). The site serves its own copies.",
+    ],
     licence: (cc: Link, mit: Link) => [
       "The pattern texts, the pictures of the flies and the logo are licensed under ",
       cc("CC BY 4.0"),

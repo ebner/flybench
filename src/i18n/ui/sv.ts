@@ -162,6 +162,14 @@ export const sv: Messages = {
     water: "I vattnet",
     waterShort: "Vatten",
     waterTitle: "Den färdiga flugan i strömmande vatten",
+    above: "Ovanifrån",
+    aboveShort: "Ovan",
+    aboveTitle: "Som fiskaren ser den, uppifrån mot vattnet",
+    explore: "Utforska i 3D",
+    exploreTitle: "Vrid och zooma vyn, med vattnet i rörelse",
+    loadingRiver: "Laddar ån…",
+    stillAlt: (view: "angler" | "below") =>
+      view === "angler" ? "I en å med grusbotten, sett ovanifrån" : "I en å med grusbotten, sett underifrån som öringen ser den",
   },
   stepBar: {
     label: "Steg",
@@ -373,6 +381,11 @@ export const sv: Messages = {
     who: (author: ReactNode, github: Link) => ["Flybench görs av ", author, ". Rättelser och nya mönster tas gärna emot på ", github("GitHub"), "."],
     translations: "Den svenska och den tyska översättningen är utkast tills de granskats; där en text inte översatts än visas den på engelska.",
     licenceHeading: "Licens och tack",
+    photoscans: (polyHaven: Link) => [
+      "Älvpanoramat och grusbotten i det realistiska vattnet är fotoskanningar från ",
+      polyHaven("Poly Haven"),
+      ", fritt tillgängliga (CC0). Webbplatsen har egna kopior av dem.",
+    ],
     licence: (cc: Link, mit: Link) => [
       "Mönstrens texter, bilderna av flugorna och logotypen är licensierade under ",
       cc("CC BY 4.0"),

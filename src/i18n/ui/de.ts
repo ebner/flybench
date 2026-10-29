@@ -162,6 +162,14 @@ export const de: Messages = {
     water: "Im Wasser",
     waterShort: "Wasser",
     waterTitle: "Die fertige Fliege in bewegtem Wasser",
+    above: "Von oben",
+    aboveShort: "Oben",
+    aboveTitle: "Wie der Fischer sie sieht, von oben auf das Wasser",
+    explore: "In 3D erkunden",
+    exploreTitle: "Die Ansicht drehen und zoomen, mit bewegtem Wasser",
+    loadingRiver: "Der Fluss wird geladen …",
+    stillAlt: (view: "angler" | "below") =>
+      view === "angler" ? "In einem Fluss mit Kiesgrund, von oben gesehen" : "In einem Fluss mit Kiesgrund, von unten gesehen, wie die Forelle sie sieht",
   },
   stepBar: {
     label: "Schritte",
@@ -373,6 +381,11 @@ export const de: Messages = {
     who: (author: ReactNode, github: Link) => ["Flybench wird von ", author, " gemacht. Korrekturen und neue Muster sind auf ", github("GitHub"), " willkommen."],
     translations: "Die schwedische und die deutsche Übersetzung sind Entwürfe, bis sie geprüft sind; wo ein Text noch nicht übersetzt ist, erscheint er auf Englisch.",
     licenceHeading: "Lizenz und Dank",
+    photoscans: (polyHaven: Link) => [
+      "Das Flusspanorama und der Kiesgrund im realistischen Wasser sind Fotoscans von ",
+      polyHaven("Poly Haven"),
+      ", gemeinfrei (CC0). Die Website liefert eigene Kopien aus.",
+    ],
     licence: (cc: Link, mit: Link) => [
       "Die Texte der Muster, die Bilder der Fliegen und das Logo stehen unter ",
       cc("CC BY 4.0"),

@@ -54,6 +54,7 @@ export function About() {
 
       <h2>{t.about.licenceHeading}</h2>
       <p>{t.about.licence(linkTo("https://creativecommons.org/licenses/by/4.0/"), linkTo(`${REPO_URL}/blob/main/LICENSE`))}</p>
+      <p>{t.about.photoscans(linkTo("https://polyhaven.com/"))}</p>
     </main>
   );
 }

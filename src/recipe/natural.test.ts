@@ -30,6 +30,12 @@ describe("loading a natural", () => {
     expect(errors(base.replace("british-isles from", "atlantis from")).join("\n")).toMatch(/hatches\.2\.region/);
   });
 
+  it("needs an ink for markings, and room for the foot in a leg", () => {
+    expect(errors(base.replace("abdomen length=0.62", "abdomen marks=bands length=0.62")).join("\n")).toMatch(/marks but no ink/);
+    expect(errors(base.replace("abdomen length=0.62", "abdomen marks=bands ink=black length=0.62"))).toEqual([]);
+    expect(errors(base.replace("femur=0.36 tibia=0.36", "femur=0.5 tibia=0.45")).join("\n")).toMatch(/no room for the foot/);
+  });
+
   it("needs a size range the right way round", () => {
     expect(errors(base.replace("size min=5 max=11", "size min=11 max=5")).join("\n")).toMatch(/min is larger than max/);
   });

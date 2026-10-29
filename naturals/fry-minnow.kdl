@@ -9,16 +9,24 @@ description "Small fish of rivers and lake shores: olive-brown or greenish backs
 size min=30 max=70
 rides swimming
 body {
-    tail length=0.3 radius=0.06 taper=0.35 color="#5a6a3a" belly="#d8dcd0" flatten=2.2
-    trunk length=0.5 radius=0.085 taper=0.95 color="#5a6a3a" belly="#e8eae0" flatten=1.9
-    head length=0.2 radius=0.08 taper=0.55 color="#4a5a32" belly="#e0e2d8" flatten=1.6 round=0.6
+    // The minnow: a brownish-green back over a whitish-grey belly, divided by a row of
+    // upright dark blotches along the lateral line, a third to half the body deep, often run
+    // together into a stripe (Wikipedia; FishBase). Lengths here leave out the tail fin.
+    // Assumption: from the photo on Wikipedia's Phoxinus phoxinus page, the head about a quarter
+    // of the length, the body a fifth as deep as long, the tail's narrow end about 0.07.
+    tail length=0.28 radius=0.055 taper=0.45 color="#5a6a3a" belly="#d8dcd0" flatten=2.2 marks=stripe ink="#2e3420"
+    trunk length=0.48 radius=0.075 taper=0.95 color="#5a6a3a" belly="#e8eae0" flatten=1.8 marks=stripe ink="#2e3420"
+    head length=0.24 radius=0.072 taper=0.5 color="#4a5a32" belly="#e0e2d8" flatten=1.5 round=0.6
 }
 parts {
-    fin kind=caudal at=0 size=0.22 color="#8a8a6a"
-    fin kind=dorsal at=0.45 size=0.14 color="#8a8a6a"
+    // The anal fin begins in front of the end of the dorsal fin's base (Wikipedia; FishBase).
+    // Assumption: positions and sizes read off the photo: the dorsal fin starting a little behind
+    // the middle, the pelvic fins just ahead of it, the tail fin about a fifth of the length.
+    fin kind=caudal at=0 size=0.2 color="#8a8a6a"
+    fin kind=dorsal at=0.42 size=0.13 color="#8a8a6a"
     fin kind=anal at=0.3 size=0.1 color="#8a8a6a"
-    fin kind=pelvic at=0.5 size=0.08 color="#8a8a6a"
-    fin kind=pectoral at=0.78 size=0.1 color="#8a8a6a"
+    fin kind=pelvic at=0.46 size=0.09 color="#8a8a6a"
+    fin kind=pectoral at=0.75 size=0.11 color="#8a8a6a"
     eyes size=0.03 color="#1a1a14"
 }
 hatches {
@@ -30,5 +38,6 @@ hatches {
 }
 sources {
     "Wikipedia: Phoxinus phoxinus" url="https://en.wikipedia.org/wiki/Phoxinus_phoxinus"
+    "FishBase: Phoxinus phoxinus" url="https://www.fishbase.se/summary/Phoxinus-phoxinus.html"
     "Wikipedia: Three-spined stickleback" url="https://en.wikipedia.org/wiki/Three-spined_stickleback"
 }

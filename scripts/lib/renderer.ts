@@ -83,6 +83,19 @@ export class Renderer {
     return page;
   }
 
+  /** Opens render.html with any query (the realistic water's stills), waiting up to `timeout` ms for it to be ready. */
+  async openQuery(query: Record<string, string>, size: { width: number; height: number }, timeout: number): Promise<Page> {
+    const page = await this.browser.newPage({ viewport: size });
+    await page.goto(`${this.base}render.html?${new URLSearchParams(query)}`);
+    await page.waitForFunction(() => document.body.dataset.ready || document.body.dataset.error, null, { timeout, polling: 1000 });
+    const error = await page.evaluate(() => document.body.dataset.error);
+    if (error) {
+      await page.close();
+      throw new Error(`${query.pattern ?? query.natural}: ${error}`);
+    }
+    return page;
+  }
+
   /** Renders one view to a PNG file. */
   async render(options: RenderOptions & { out: string }): Promise<void> {
     const page = await this.open(options);

@@ -7,19 +7,26 @@ description "A slim, torpedo-shaped nymph that swims in short jerky dashes among
 size min=4.5 max=10
 rides swimming
 body {
-    abdomen length=0.6 radius=0.06 taper=0.45 segments=10 color="#7a6a45" belly="#b0a27a" translucency=0.3
+    // Pale olive-brown, translucent (First Nature); B. rhodani yellow-grey with a "characteristic body pattern"
+    // (Dalarna 2013). Assumption: the pattern drawn as paler spots on each segment.
+    abdomen length=0.6 radius=0.06 taper=0.45 segments=10 color="#7a6a45" belly="#b0a27a" translucency=0.3 marks=spots ink="#b8a87c"
     thorax length=0.28 radius=0.075 taper=0.9 color="#55462c" belly="#8a7a55"
     head length=0.12 radius=0.06 taper=0.7 color="#4a3c26"
 }
 parts {
     // Three tails, the middle one shorter in Baetis (DCRT; First Nature); "fairly long" (Dalarna 2013).
-    tails count=3 length=0.5 spread=40 color="#6a5a3a"
-    // Seven pairs of small gills (First Nature).
-    gills count=7 length=0.06 color="#c8b88a"
+    // Swimming nymphs' tails are densely haired at the sides (Wikipedia de: Eintagsfliegen).
+    tails count=3 length=0.5 spread=40 color="#6a5a3a" hairs=0.7
+    // Seven pairs of small gills from the sides (First Nature; DCRT), oval or heart-shaped plates
+    // (macroinvertebrates.org), held straight out from the body at rest (Dalarna 2013).
+    gills count=7 length=0.06 color="#c8b88a" shape=plate
     wingpads length=0.2 color="#2e2618"
-    legs count=6 length=0.42 color="#6a5a3a"
-    // Assumption: antennae about a quarter of the body length.
-    antennae length=0.25 color="#6a5a3a"
+    // "Slender legs" (Dalarna 2013), one claw each (macroinvertebrates.org). Assumption: the femur the longest
+    // segment, a row of short bristles.
+    legs count=6 length=0.42 color="#6a5a3a" femur=0.4 tibia=0.32 hairs=0.2
+    // Baetid antennae at least two or three times the head's width (macroinvertebrates.org): the head here is
+    // 0.12 of the body wide.
+    antennae length=0.3 color="#6a5a3a"
     eyes size=0.025 color=black
 }
 hatches {
@@ -35,4 +42,6 @@ sources {
     "Hancock / Don Catchment Rivers Trust: Mayfly Identification (after FBA 66)" url="https://dcrt.org.uk/wp-content/uploads/2026/01/Mayfly-Identification-DCRT-Paul-Hancock-pdf.pdf"
     "Troutnut: Genus Baetis" url="https://www.troutnut.com/hatch/180/Mayfly-Baetis-Blue-Winged-Olives"
     "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+    "Wikipedia (de): Eintagsfliegen" url="https://de.wikipedia.org/wiki/Eintagsfliegen"
+    "Macroinvertebrates.org: Baetidae (larva)" url="https://www.macroinvertebrates.org/taxa-info/ephemeroptera-larva/baetidae"
 }

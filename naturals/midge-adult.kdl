@@ -7,15 +7,22 @@ description "A small, slender fly with one pair of wings held back over its body
 size min=2 max=10
 rides on-surface
 body {
-    abdomen length=0.62 radius=0.05 taper=0.65 segments=8 color="#2a2a26"
-    thorax length=0.26 radius=0.075 taper=0.85 color="#24221e"
+    // Lighter bands between the abdominal segments (Wikipedia de: Chironomus plumosus).
+    abdomen length=0.62 radius=0.05 taper=0.65 segments=8 color="#2a2a26" marks=bands ink="#5e5c4a"
+    // A high-arched thorax (Wikipedia de).
+    thorax length=0.26 radius=0.075 taper=0.85 color="#24221e" round=0.6
     head length=0.12 radius=0.05 taper=0.7 color="#24221e"
 }
 parts {
-    // One pair of wings (MDC), roof-like at rest (Wikipedia de).
-    wings count=2 shape=back length=0.85 width=0.25 color="#d0d4d4" clarity=0.75 veins=#true
+    // One pair of long, narrow wings (MDC), roof-like at rest (Wikipedia de); 6–8 mm on a 9–13 mm Chironomus plumosus
+    // (Wikipedia de: Chironomus plumosus). Assumption: a wing about a quarter as wide as it is long.
+    wings count=2 shape=back length=0.65 width=0.17 color="#d0d4d4" clarity=0.75 veins=#true
+    // Antennae with whorls of hairs (Wikipedia de), feathery in the males (MDC).
     antennae length=0.4 color="#3a3a30"
-    legs count=6 length=0.75 color="#3a3a30"
+    // Long, skinny legs, the front pair held forward and up, their feet very long in many midges (MDC); in C. plumosus
+    // the fore thigh and shin about equal and the first foot joint longer than the shin (chironomidae.net).
+    // Assumption: over all three pairs, the foot a little under half the leg.
+    legs count=6 length=0.8 femur=0.28 tibia=0.28 color="#3a3a30"
     eyes size=0.028 color=black
 }
 hatches {
@@ -29,5 +36,7 @@ sources {
     "Missouri Department of Conservation: Midges" url="https://mdc.mo.gov/discover-nature/field-guide/midges"
     "Wikipedia (de): Zuckmücken" url="https://de.wikipedia.org/wiki/Zuckmücken"
     "Wikipedia: Chironomidae" url="https://en.wikipedia.org/wiki/Chironomidae"
+    "Wikipedia (de): Chironomus plumosus" url="https://de.wikipedia.org/wiki/Chironomus_plumosus"
+    "Martin, chironomidae.net: Chironomus species in the Nearctic (C. plumosus)" url="https://chironomidae.net/Martin/NACytfiles/Spp.html"
     "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
 }

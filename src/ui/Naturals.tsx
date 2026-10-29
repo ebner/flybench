@@ -16,10 +16,13 @@ import { findNatural, localNaturals } from "../naturals";
 import { CATALOG, PATTERNS } from "../patterns";
 import { NATURAL_GROUPS, REGIONS, type Natural } from "../recipe/natural";
 import { MONTH_NAMES } from "../i18n/months";
-import { FlyScene } from "../render/FlyScene";
+import { FlyScene, naturalAlone, naturalFishing } from "../render/FlyScene";
+import { WATER_LOOKS } from "../render/water";
+import { realisticCapable } from "./realistic";
+import { useRealAssets } from "./Viewer";
 import { Plate } from "./Gallery";
 import { NotFound } from "./NotFound";
-import { useNaturalPictures, useRenders } from "./renders";
+import { useNaturalPictures, useNaturalStills, useRenders, useWaterStills } from "./renders";
 import { href } from "./router";
 import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
@@ -30,27 +33,96 @@ const recipes = () => PATTERNS.map((p) => p.recipe);
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 
-/** The natural turning in 3D, on its own. */
+/** Where a natural is best seen in the water: from above if it floats, else from below. */
+const seenFrom = (n: Natural): "angler" | "below" => (n.rides === "on-surface" || n.rides === "in-film" ? "angler" : "below");
+
+/**
+ * The natural: in the realistic water where the device can take it (a path-traced picture first,
+ * the live river when the visitor asks), else turning in 3D on its own.
+ */
 export function NaturalViewer({ natural }: { natural: Natural }) {
   const container = useRef<HTMLDivElement>(null);
+  const scene = useRef<FlyScene | null>(null);
   const [unavailable, setUnavailable] = useState(false);
+  const [capable] = useState(realisticCapable);
+  const stills = useWaterStills("naturals", natural.id);
+  const [view, setView] = useState<"angler" | "below">(() => seenFrom(natural));
+  const [explore, setExplore] = useState(false);
+  // The pictures for every device; exploring gives the live river where the device can take it,
+  // else the natural turning on its own.
+  const inWater = !!stills;
+  const { assets, failed } = useRealAssets(capable && inWater && explore);
+  const live = capable && inWater && explore && assets && !failed ? assets : null;
+  // The pictures until the live river is there (and again if it fails to load).
+  const [broken, setBroken] = useState<string | null>(null);
+  const pick = stills && !live ? stills[view] : null;
+  const still = pick !== broken ? pick : null;
+  const tools = useRef<HTMLDivElement>(null);
+  const exploreFocused = useRef(false);
   useEffect(() => {
-    let scene: FlyScene;
+    if (!still && exploreFocused.current) {
+      exploreFocused.current = false;
+      tools.current?.querySelector("button")?.focus();
+    }
+  }, [still]);
+  useEffect(() => {
+    let s: FlyScene;
     try {
-      scene = new FlyScene(container.current!, { background: null, fov: 20 });
+      // The stills' field of view, so the live river takes over without a jump.
+      s = new FlyScene(container.current!, { background: null, fov: 20 });
     } catch {
       setUnavailable(true);
       return;
     }
-    scene.setNatural(natural);
-    scene.setView("default");
-    return () => scene.dispose();
+    // At its real size against the gravel and ripples, as in the stills.
+    s.setNatural(natural, naturalAlone(natural));
+    s.setView("default");
+    scene.current = s;
+    return () => {
+      s.dispose();
+      scene.current = null;
+    };
   }, [natural]);
-  if (unavailable) return <p className="viewer-unavailable">{t.naturals.noWebgl}</p>;
-  return <div className="natural-viewer" ref={container} />;
+  useEffect(() => {
+    scene.current?.setWater(live ? { fishing: naturalFishing(natural), view, still: false, look: WATER_LOOKS.light, real: live } : null);
+  }, [live, view, natural]);
+  // Without WebGL the pictures still show, with nothing to explore.
+  if (unavailable && !still) return <p className="viewer-unavailable">{t.naturals.noWebgl}</p>;
+  return (
+    <div className={still || live ? "natural-viewer in-water" : "natural-viewer"}>
+      <div className="natural-canvas" ref={container} />
+      {still && (
+        <figure className="water-still">
+          <img src={still} alt={t.viewer.stillAlt(view)} onError={() => setBroken(still)} />
+          {!unavailable && capable && !failed && (
+            <button
+              className="water-explore"
+              onClick={(e) => {
+                exploreFocused.current = e.currentTarget === document.activeElement;
+                setExplore(true);
+              }}
+              title={t.viewer.exploreTitle}
+              aria-busy={explore}
+            >
+              {explore ? t.viewer.loadingRiver : t.viewer.explore}
+            </button>
+          )}
+        </figure>
+      )}
+      {inWater && (still || live) && (
+        <div className="viewer-tools" ref={tools}>
+          <button aria-pressed={view === "angler"} onClick={() => setView("angler")} title={t.viewer.aboveTitle}>
+            {t.viewer.above}
+          </button>
+          <button aria-pressed={view === "below"} onClick={() => setView("below")} title={t.viewer.belowTitle}>
+            {t.viewer.below}
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
 
-/** The visitor's region, kept in this browser; none until they choose one. */
 export function useRegion(): [Region | null, (r: Region) => void] {
   const stored = useStoredSet(REGION_KEY);
   const region = REGIONS.find((r) => stored.has(r)) ?? null;
@@ -61,11 +133,13 @@ export function useRegion(): [Region | null, (r: Region) => void] {
   return [region, choose];
 }
 
-function NaturalCard({ natural, picture }: { natural: Natural; picture?: string }) {
+function NaturalCard({ natural, picture, photo }: { natural: Natural; picture?: string; photo?: string }) {
   return (
     <li className="natural-card">
       <a href={href.natural(natural.id)}>
-        <div className="natural-card-image">{picture && <img src={picture} alt="" width={480} height={320} loading="lazy" />}</div>
+        <div className={photo ? "natural-card-image photo" : "natural-card-image"}>
+          {(photo ?? picture) && <img src={photo ?? picture} alt="" width={480} height={320} loading="lazy" />}
+        </div>
         <h3>{natural.name}</h3>
         <p className="plate-facts">
           {capitalize(STAGE_LABELS[natural.stage])}, {sizeText(natural)}
@@ -77,6 +151,7 @@ function NaturalCard({ natural, picture }: { natural: Natural; picture?: string 
 
 export function NaturalsIndex() {
   const pictures = useNaturalPictures();
+  const stills = useNaturalStills();
   const [region, chooseRegion] = useRegion();
   const month = new Date().getMonth();
   useEffect(() => {
@@ -192,7 +267,7 @@ export function NaturalsIndex() {
             <h2>{GROUP_LABELS[g]}</h2>
             <ul className="natural-cards">
               {inGroup.map((n) => (
-                <NaturalCard key={n.id} natural={n} picture={pictures?.[n.id]} />
+                <NaturalCard key={n.id} natural={n} picture={pictures?.[n.id]} photo={stills?.[n.id]?.[seenFrom(n)]} />
               ))}
             </ul>
           </section>
@@ -226,7 +301,7 @@ export function NaturalPage({ id }: { id: string }) {
       </a>
       <h1>{natural.name}</h1>
       <p className="lede">{natural.description}</p>
-      <NaturalViewer natural={natural} />
+      <NaturalViewer key={natural.id} natural={natural} />
       <dl className="natural-facts">
         <div>
           <dt>{t.naturals.group}</dt>

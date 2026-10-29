@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { FlyScene } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
+import { loadRealAssets, siteAssets, type RealAssets } from "../render/real/assets";
+import { realisticCapable } from "./realistic";
+import type { WaterStills } from "./renders";
 import { t } from "../i18n/ui";
 import type { Natural } from "../recipe/natural";
 import type { Fishing } from "../tying/fishing";
@@ -27,6 +30,26 @@ export interface ViewerProps {
   waterOpen?: boolean;
   /** The visitor opens or closes the water view (the page pauses playback while it is open). */
   onWater?: (on: boolean) => void;
+  /** Path-traced pictures of this fly in the realistic water, shown first (only for the fly as tied); "loading" until it is known whether there are any. */
+  stills?: WaterStills | null | "loading";
+}
+
+/** The realistic water's panorama and gravel, loaded the first time it is shown. */
+export function useRealAssets(wanted: boolean): { assets: RealAssets | null; failed: boolean } {
+  const [assets, setAssets] = useState<RealAssets | null>(null);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    if (!wanted || assets || failed) return;
+    let live = true;
+    loadRealAssets(siteAssets(import.meta.env.BASE_URL)).then(
+      (a) => live && setAssets(a),
+      () => live && setFailed(true),
+    );
+    return () => {
+      live = false;
+    };
+  }, [wanted, assets, failed]);
+  return { assets, failed };
 }
 
 const reducedMotion = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,12 +67,32 @@ export function Viewer({
   water,
   waterOpen = false,
   onWater,
+  stills: stillsOrLoading = null,
 }: ViewerProps) {
+  const stills = stillsOrLoading === "loading" ? null : stillsOrLoading;
   const [turned, setTurned] = useState(false);
-  // The finished fly in water, seen from the side or from below.
-  const [waterView, setWaterView] = useState<"side" | "below">("side");
+  // The realistic water where the device can take it, else the drawn one.
+  const [capable] = useState(realisticCapable);
+  // The finished fly in water: from above (realistic) or the side (drawn), or from below.
+  // "angler" stands for the side view in the drawn water (see the water effect).
+  const [waterView, setWaterView] = useState<"side" | "below" | "angler">("angler");
   const inWater = waterOpen && water ? waterView : null;
-  const [still, setStill] = useState(reducedMotion);
+  // The stills come first; the live water when the visitor asks for it (or there are no stills).
+  const [explore, setExplore] = useState(false);
+  // Not before it is known whether there are stills: they spare the download.
+  const wantReal = inWater !== null && capable && stillsOrLoading !== "loading" && (explore || !stills);
+  const { assets: real, failed } = useRealAssets(wantReal);
+  const liveReal = wantReal && real && !failed ? real : null;
+  // Pictures need nothing of the device; exploring live on a slow one gives the drawn water.
+  // A picture that fails to load (offline, not cached) gives way to the 3D view.
+  const [broken, setBroken] = useState<string | null>(null);
+  const pick = inWater !== null && inWater !== "side" && stills && (!explore || (capable && !real && !failed)) ? stills[inWater] : null;
+  const still = pick !== broken ? pick : null;
+  // The view buttons follow what shows: the stills and the realistic water have a view from
+  // above; the drawn water a side view instead.
+  const drawn = inWater !== null && !still && !liveReal;
+  const fromAbove = inWater === null ? capable || stills !== null : !drawn;
+  const [stillWater, setStillWater] = useState(reducedMotion);
   // WebGL can be turned off (browser settings, policies, old graphics drivers).
   const [unavailable, setUnavailable] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -143,10 +186,20 @@ export function Viewer({
   useEffect(() => {
     const s = scene.current;
     if (!s) return;
+    // The drawn water has no view from above: it shows the side. Under a still (or until the
+    // stills are known) nothing needs drawing.
+    const hidden = still !== null || (inWater !== null && stillsOrLoading === "loading");
+    const view = hidden ? null : inWater === "angler" && !liveReal ? "side" : inWater;
     const apply = () =>
       s.setWater(
-        inWater && water
-          ? { fishing: water, view: inWater, still, look: WATER_LOOKS[document.documentElement.dataset.theme === "dark" ? "dark" : "light"] }
+        view && water
+          ? {
+              fishing: water,
+              view,
+              still: stillWater,
+              look: WATER_LOOKS[document.documentElement.dataset.theme === "dark" ? "dark" : "light"],
+              real: liveReal ?? undefined,
+            }
           : null,
       );
     apply();
@@ -154,7 +207,16 @@ export function Viewer({
     const watch = new MutationObserver(apply);
     watch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => watch.disconnect();
-  }, [inWater, still, water, build, pointUp, turned]);
+  }, [inWater, stillWater, water, build, pointUp, turned, liveReal, still, stillsOrLoading]);
+
+  // Keyboard focus on "Explore in 3D" goes on to the view buttons when the live water replaces it.
+  const exploreFocused = useRef(false);
+  useEffect(() => {
+    if (!still && exploreFocused.current) {
+      exploreFocused.current = false;
+      toolsRef.current?.querySelector("button")?.focus();
+    }
+  }, [still]);
 
   useEffect(() => {
     // In the water a point-up fly is always shown the way it swims.
@@ -176,13 +238,14 @@ export function Viewer({
     scene.current?.setNatural(shown?.natural ?? null, shown?.length, shown?.at);
   }, [natural?.natural, natural?.length, natural?.at, build, pointUp, turned, inWater]);
 
-  const openWater = (view: "side" | "below" | null) => {
+  const openWater = (view: "side" | "below" | "angler" | null) => {
     if (view && !inWater) setProportions(false);
     if (view) setWaterView(view);
     if (!view !== !inWater) onWater?.(view !== null);
   };
 
-  if (unavailable) {
+  // Without WebGL the water's pictures still show, with nothing to explore.
+  if (unavailable && !still) {
     return (
       <div className="viewer viewer-unavailable">
         <p>{t.viewer.noWebgl}</p>
@@ -204,11 +267,29 @@ export function Viewer({
         }}
       />
       {hint && <p className="viewer-hint">{t.viewer.hint}</p>}
+      {still && (
+        <figure className="water-still">
+          <img src={still} alt={t.viewer.stillAlt(inWater === "below" ? "below" : "angler")} onError={() => setBroken(still)} />
+          {!unavailable && (
+            <button
+              className="water-explore"
+              onClick={(e) => {
+                exploreFocused.current = e.currentTarget === document.activeElement;
+                setExplore(true);
+              }}
+              title={t.viewer.exploreTitle}
+              aria-busy={explore}
+            >
+              {explore ? t.viewer.loadingRiver : t.viewer.explore}
+            </button>
+          )}
+        </figure>
+      )}
       <button
         ref={label}
         className="callout"
         style={{ visibility: "hidden" }}
-        hidden={!callout}
+        hidden={!callout || still !== null}
         onClick={onCalloutClick}
         tabIndex={-1}
       >
@@ -217,17 +298,26 @@ export function Viewer({
       <div className="viewer-tools" ref={toolsRef}>
         {inWater ? (
           <>
-            <button aria-pressed={inWater === "side"} onClick={() => openWater("side")} title={t.viewer.sideTitle}>
-              {t.viewer.side}
-            </button>
+            {fromAbove ? (
+              <button aria-pressed={inWater === "angler"} onClick={() => openWater("angler")} title={t.viewer.aboveTitle}>
+                <span className="long">{t.viewer.above}</span>
+                <span className="short">{t.viewer.aboveShort}</span>
+              </button>
+            ) : (
+              <button aria-pressed={inWater === "side" || inWater === "angler"} onClick={() => openWater("side")} title={t.viewer.sideTitle}>
+                {t.viewer.side}
+              </button>
+            )}
             <button aria-pressed={inWater === "below"} onClick={() => openWater("below")} title={t.viewer.belowTitle}>
               <span className="long">{t.viewer.below}</span>
               <span className="short">{t.viewer.belowShort}</span>
             </button>
-            <button aria-pressed={still} onClick={() => setStill(!still)}>
-              <span className="long">{t.viewer.still}</span>
-              <span className="short">{t.viewer.stillShort}</span>
-            </button>
+            {!still && (
+              <button aria-pressed={stillWater} onClick={() => setStillWater(!stillWater)}>
+                <span className="long">{t.viewer.still}</span>
+                <span className="short">{t.viewer.stillShort}</span>
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -256,7 +346,7 @@ export function Viewer({
           </>
         )}
         {water && (
-          <button aria-pressed={inWater !== null} onClick={() => openWater(inWater ? null : "side")} title={t.viewer.waterTitle}>
+          <button aria-pressed={inWater !== null} onClick={() => openWater(inWater ? null : "angler")} title={t.viewer.waterTitle}>
             <span className="long">{t.viewer.water}</span>
             <span className="short">{t.viewer.waterShort}</span>
           </button>

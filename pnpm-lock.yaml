@@ -212,6 +212,12 @@ importers:
       sharp:
         specifier: ^0.35.5
         version: 0.35.5(@types/node@26.6.5)
+      three-gpu-pathtracer:
+        specifier: 0.0.27
+        version: 0.0.27(three-mesh-bvh@0.9.17(three@0.186.1))(three@0.186.1)(xatlas-web@0.1.0)
+      three-mesh-bvh:
+        specifier: 0.9.17
+        version: 0.9.17(three@0.186.1)
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
@@ -1052,6 +1058,18 @@ packages:
   std-env@4.3.0:
     resolution: {integrity: sha512-OtU/EgQ1kIm5KwqQpBC6ZEMXrZRui11w8zgfTWp8cdO9B8OaPsbA8bTHO2P+HNo1VlUTGMVBwPhydu6poeXiag==}
 
+  three-gpu-pathtracer@0.0.27:
+    resolution: {integrity: sha512-NLUYnL9nSLcUFurIHHLHbnmpKLaXi8JbGqfTeWRSx4h+l7Ndpllwj2DK2uOYTSUaN5+PuZ1JRqv1ynHEB1XCwQ==}
+    peerDependencies:
+      three: '>=0.185.0'
+      three-mesh-bvh: '>=0.9.15'
+      xatlas-web: ^0.1.0
+
+  three-mesh-bvh@0.9.17:
+    resolution: {integrity: sha512-uU2DNnTHsMcrsAM1kiLXEeLx4JNsPLayLTPE5Rf7exbFRuQYEifS4DhGEA+lDiU8/7mID1PsE9sH8i6p5prZSg==}
+    peerDependencies:
+      three: '>= 0.159.0'
+
   three@0.186.1:
     resolution: {integrity: sha512-blFeqb49wRCSGUGj7gtpfnSGHy2lwDk94RhUmS1c/hTby70kvChbWpkJ4Pm1390LqzzvTmzgXKHPEafJwCb8jA==}
 
@@ -1171,6 +1189,9 @@ packages:
     resolution: {integrity: sha512-Tb2FUhB4vUsGQlfSquQLYkApkuPAFQXGFzxWKHHumVz2dK+X1RUm/HnID4+TfIGYJ1kTcwOaCk/buYCEJr6YjQ==}
     engines: {node: '>=20.11'}
     hasBin: true
+
+  xatlas-web@0.1.0:
+    resolution: {integrity: sha512-PprVfuXbaIskxLTLBUQRaWfgSy9xUQqAMIRooOw0P6NYqwgh6T0voeer6+Z5M7AFt5SGXUybuww/uDGs1yw8vQ==}
 
   zod@4.6.7:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
@@ -1744,6 +1765,16 @@ snapshots:
 
   std-env@4.3.0: {}
 
+  three-gpu-pathtracer@0.0.27(three-mesh-bvh@0.9.17(three@0.186.1))(three@0.186.1)(xatlas-web@0.1.0):
+    dependencies:
+      three: 0.186.1
+      three-mesh-bvh: 0.9.17(three@0.186.1)
+      xatlas-web: 0.1.0
+
+  three-mesh-bvh@0.9.17(three@0.186.1):
+    dependencies:
+      three: 0.186.1
+
   three@0.186.1: {}
 
   tinybench@6.2.2: {}
@@ -1824,5 +1855,7 @@ snapshots:
       - msw
 
   why-is-node-running@3.2.1: {}
+
+  xatlas-web@0.1.0: {}
 
   zod@4.6.7: {}

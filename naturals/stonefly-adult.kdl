@@ -12,12 +12,18 @@ body {
     head length=0.12 radius=0.06 taper=0.8 color="#4a3a26" flatten=0.8
 }
 parts {
-    // Wings flat over the back, the forewings over the hindwings (MDC; Wikipedia).
-    wings count=4 shape=flat length=1.12 width=0.24 color="#8a7a5a" clarity=0.3 veins=#true
+    // Wings flat over the back, the forewings over the hindwings (MDC; Wikipedia); the hind wings as long or slightly
+    // shorter, much broader, their fan folded at rest (Wikipedia de). Fore wings often longer than the abdomen (Lucid).
+    // Assumption: the wing tips about a quarter of the body past the abdomen (photos).
+    wings count=4 shape=flat length=1.0 width=0.24 color="#8a7a5a" clarity=0.3 veins=#true hind=0.95
+    // Long antennae (MDC), to about half the body length (Wikipedia de), as long as the body in Taeniopteryx (Dalarna 2013).
     antennae length=0.7 color="#5a4a30"
-    // Short cerci in Isoperla (Dalarna 2013).
-    tails count=2 length=0.2 spread=40 color="#5a4a30"
-    legs count=6 length=0.55 color="#6a5a3a"
+    // Short cerci in Isoperla (Dalarna 2013); long in Perla, showing past the wings (Wikipedia de: Perla marginata).
+    // Assumption: just reaching out from under the wing tips.
+    tails count=2 length=0.3 spread=40 color="#5a4a30"
+    // Robust legs ending in two claws (Wikipedia), three-jointed feet, the hind legs usually longer than the rest (Wikipedia de);
+    // legs about as long as the body in Taeniopteryx (Dalarna 2013). Assumption: short feet, a fifth of the leg (photos).
+    legs count=6 length=0.7 hind=1.25 femur=0.42 tibia=0.38 color="#6a5a3a"
     eyes size=0.025 color=black
 }
 hatches {
@@ -30,6 +36,8 @@ hatches {
 sources {
     "Missouri Department of Conservation: Stoneflies" url="https://mdc.mo.gov/discover-nature/field-guide/stoneflies"
     "Wikipedia: Plecoptera" url="https://en.wikipedia.org/wiki/Plecoptera"
+    "Wikipedia (de): Steinfliegen" url="https://de.wikipedia.org/wiki/Steinfliegen"
+    "Lucid: Factsheet Plecoptera" url="https://keyserver.lucidcentral.org/key-server/data/05060b08-0f0e-4d04-8c01-070203010505/media/Html/Plecoptera.htm"
     "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
     "Wikipedia (de): Perla marginata" url="https://de.wikipedia.org/wiki/Perla_marginata"
     "Wikipedia (de): Isoperla grammatica" url="https://de.wikipedia.org/wiki/Isoperla_grammatica"

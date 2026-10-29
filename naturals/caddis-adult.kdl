@@ -7,16 +7,23 @@ description "A moth-like insect with hairy wings folded like a roof over its bac
 size min=8 max=20
 rides on-surface
 body {
-    abdomen length=0.6 radius=0.06 taper=0.6 segments=8 color="#6a6a40" belly="#8a8a5a"
-    thorax length=0.28 radius=0.07 taper=0.9 color="#4a3e28"
-    head length=0.12 radius=0.055 taper=0.75 color="#3a3020"
+    // Body and wings clothed with long silky hairs (NC State). Assumption: thickest on the thorax and head, the abdomen thinly haired (photos).
+    abdomen length=0.6 radius=0.06 taper=0.6 segments=8 color="#6a6a40" belly="#8a8a5a" hairs=0.15
+    thorax length=0.28 radius=0.07 taper=0.9 color="#4a3e28" hairs=0.5
+    head length=0.12 radius=0.055 taper=0.75 color="#3a3020" hairs=0.5
 }
 parts {
-    // Wings roof-like over the body (Wikipedia; First Nature). Assumption: reaching a third past the abdomen.
-    wings count=4 shape=tent length=1.25 width=0.35 color="#8a7556" clarity=0.08 veins=#true
-    // Antennae about as long as the body, often longer (MDC; First Nature).
+    // Hairy wings roof-like over the body (Wikipedia; First Nature; NC State), the fore wings often spotted or patterned,
+    // longer than the hind wings, which are broader (Wikipedia de); faintly spotted in Hydropsyche (Dalarna 2013).
+    // Phryganea grandis: body 20 mm, 33 mm with the wings (Gardensafari), so the fore wing about 1.4 body lengths from its root.
+    // Assumption: hind wings 0.85 of the fore wing's length.
+    wings count=4 shape=tent length=1.35 width=0.35 color="#8a7556" clarity=0.08 veins=#true hind=0.85 hairs=0.7 mottle="#4a3a26"
+    // Antennae about as long as the body, often longer (MDC; First Nature); as long as the fore wing in Hydropsyche,
+    // shorter in Sericostoma, longer in Lepidostoma (Dalarna 2013).
     antennae length=1.1 color="#5a4a32"
-    legs count=6 length=0.55 color="#7a6a48"
+    // Long, slender legs (Wikipedia de) with five-jointed feet (Wikipedia).
+    // Assumption: the hind legs about a body length, the feet a third of the leg (photos).
+    legs count=6 length=0.75 hind=1.3 femur=0.3 tibia=0.36 color="#7a6a48"
     eyes size=0.03 color=black
 }
 hatches {
@@ -28,6 +35,8 @@ hatches {
 }
 sources {
     "Wikipedia: Caddisfly" url="https://en.wikipedia.org/wiki/Caddisfly"
+    "Wikipedia (de): Köcherfliegen" url="https://de.wikipedia.org/wiki/Köcherfliegen"
+    "NC State University, General Entomology: Order Trichoptera" url="https://genent.cals.ncsu.edu/insect-identification/order-trichoptera"
     "First Nature: Caddisflies" url="https://www.first-nature.com/insects/index-t.php"
     "Missouri Department of Conservation: Caddisflies" url="https://mdc.mo.gov/discover-nature/field-guide/caddisflies"
     "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"

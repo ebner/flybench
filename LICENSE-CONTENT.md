@@ -18,5 +18,7 @@ Not covered by either licence:
 - Reference photos listed under `references` in the recipes are other people's work.
   They are linked for checking proportions while authoring, never copied into this
   repository and left out of the built site.
+- The river panorama and gravel textures in `public/env/` (and the sharper copies the
+  water stills are rendered with) are from Poly Haven, released under CC0.
 - The fonts (IM Fell English, Spectral) are under the SIL Open Font License 1.1, and
   third-party libraries under their own licences (see `package.json`).

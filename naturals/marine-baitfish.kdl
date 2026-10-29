@@ -9,17 +9,28 @@ description "The slim schooling fish of coasts and estuaries: a translucent body
 size min=40 max=120
 rides swimming
 body {
-    tail length=0.3 radius=0.05 taper=0.35 color="#7a8a6a" belly="#e8eef0" flatten=1.8 translucency=0.3
-    trunk length=0.5 radius=0.065 taper=0.95 color="#7a8a6a" belly="#eef2f4" flatten=1.6 translucency=0.3
-    head length=0.2 radius=0.06 taper=0.5 color="#6a7a5a" belly="#e8eef0" flatten=1.5 translucency=0.2 round=0.6
+    // Drawn after the Atlantic silverside: mostly translucent, with a silver stripe the length of
+    // the body along the lateral line and brown speckling on the head and upper back; rounder
+    // and less compressed than its relatives (Wikipedia). Lengths leave out the tail fin.
+    // Assumption: from the drawing on Wikipedia's Atlantic silverside page, the head about 0.22
+    // of the length, the body about a sixth as deep as long, the tail's narrow end about 0.06.
+    tail length=0.28 radius=0.055 taper=0.45 color="#7a8a6a" belly="#e8eef0" flatten=1.6 translucency=0.35 marks=stripe ink="#dfe6ea"
+    trunk length=0.5 radius=0.068 taper=0.95 color="#7a8a6a" belly="#eef2f4" flatten=1.4 translucency=0.35 marks=stripe ink="#dfe6ea"
+    head length=0.22 radius=0.066 taper=0.45 color="#6a7a5a" belly="#e8eef0" flatten=1.4 translucency=0.2 round=0.6
 }
 parts {
-    fin kind=caudal at=0 size=0.22 color="#b8c0b8"
-    fin kind=dorsal at=0.45 size=0.14 color="#b8c0b8"
-    fin kind=anal at=0.3 size=0.1 color="#b8c0b8"
-    fin kind=pelvic at=0.5 size=0.08 color="#b8c0b8"
-    fin kind=pectoral at=0.78 size=0.1 color="#b8c0b8"
-    eyes size=0.03 color="#1a1a14"
+    // Two dorsal fins, a spiny one and a soft one behind it (Wikipedia: Atlantic
+    // silverside); a forked tail, as the sand eel's (Wikipedia: Lesser sand eel).
+    // Assumption: positions and sizes read off the drawing: the first dorsal fin starting just
+    // behind the middle, over the start of the long anal fin; the pelvic fins well ahead of
+    // them; the pectoral fins high behind the head.
+    fin kind=caudal at=0 size=0.18 color="#b8c0b8"
+    fin kind=dorsal at=0.46 size=0.08 color="#b8c0b8"
+    fin kind=dorsal at=0.32 size=0.1 color="#b8c0b8"
+    fin kind=anal at=0.44 size=0.14 color="#b8c0b8"
+    fin kind=pelvic at=0.63 size=0.07 color="#b8c0b8"
+    fin kind=pectoral at=0.76 size=0.1 color="#b8c0b8"
+    eyes size=0.032 color="#1a1a14"
 }
 hatches {
     southern-sweden from=january to=december note="Estimate."

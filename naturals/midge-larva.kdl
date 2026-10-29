@@ -9,7 +9,11 @@ size min=8 max=15
 rides swimming
 curve 70
 body {
-    body length=1.0 radius=0.045 taper=0.7 segments=12 color="#a02424" belly="#c04040" translucency=0.25
+    // Slender and worm-like: a head capsule, three thoracic and nine abdominal segments (Wikipedia de).
+    // Assumption: the head capsule narrower than the body and brown, about a twentieth of its length (photos).
+    abdomen length=0.75 radius=0.04 taper=1.1 segments=9 color="#a02424" belly="#c04040" translucency=0.25
+    thorax length=0.19 radius=0.044 taper=0.95 segments=3 color="#a02424" belly="#c04040" translucency=0.25
+    head length=0.06 radius=0.03 taper=0.8 color="#6a3418" round=0.6
 }
 parts {
     eyes size=0.012 color="#2a0a0a"
