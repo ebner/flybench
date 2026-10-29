@@ -52,7 +52,7 @@ export function App() {
         {route.page === "box" && <FlyBox />}
         {route.page === "materials" && <Materials />}
         {route.page === "log" && <Log />}
-        {route.page === "trip" && <Trip />}
+        {route.page === "trip" && <Trip query={route.query} />}
         {route.page === "about" && <About />}
         {route.page === "naturals" && <NaturalsIndex />}
         {route.page === "natural" && <NaturalPage id={route.id} />}

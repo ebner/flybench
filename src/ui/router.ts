@@ -25,14 +25,14 @@ export type Route =
   | { page: "box" }
   | { page: "materials" }
   | { page: "log" }
-  | { page: "trip" }
+  | { page: "trip"; query: string }
   | { page: "naturals" }
   | { page: "natural"; id: string }
   | { page: "not-found"; path: string };
 
 const BASE = import.meta.env.BASE_URL;
 
-const SINGLE = ["techniques", "learn", "about", "box", "materials", "log", "trip", "naturals"] as const;
+const SINGLE = ["techniques", "learn", "about", "box", "materials", "log", "naturals"] as const;
 
 /** Parses a path relative to the site's base, with its query: "fly/red-tag/?step=4". */
 export function parseRoute(relative: string): Route {
@@ -59,6 +59,7 @@ export function parseRoute(relative: string): Route {
       ...(colours ? { colours } : {}),
     };
   }
+  if (parts.length === 1 && parts[0] === "trip") return { page: "trip", query };
   if (parts.length === 1) {
     const single = SINGLE.find((p) => p === parts[0]);
     if (single) return { page: single };
@@ -111,6 +112,8 @@ export function routeHref(route: Route): string {
       return href.technique(route.id);
     case "natural":
       return href.natural(route.id);
+    case "trip":
+      return href.trip(route.query);
     case "not-found":
       return BASE + route.path;
     default:

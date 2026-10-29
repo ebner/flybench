@@ -74,15 +74,9 @@ function useVariationPictures(flies: { key: string; recipe: Recipe }[]): Record<
   return Object.fromEntries(flies.map((f) => [f.key, pictures[f.key] ?? null]));
 }
 
-export function FlyBox() {
-  const box = useStoredSet(FLY_BOX_KEY);
-  const renders = useRenders();
-  useEffect(() => {
-    document.title = "Fly box, Flybench";
-  }, []);
-  const saved = CATALOG.filter((e) => box.has(e.recipe.id));
-  // Flies saved in the visitor's colours: "id?colours=…" entries.
-  const variations = [...box.values].flatMap((value) => {
+/** The flies saved in the visitor's colours: "id?colours=…" fly box entries, recoloured. */
+function boxVariations(values: Set<string>) {
+  return [...values].flatMap((value) => {
     const { id, colours } = parseBoxEntry(value);
     const recipe = findPattern(id)?.recipe;
     const entry = recipe && CATALOG.find((e) => e.recipe.id === (recipe.variantOf ?? recipe.id));
@@ -92,6 +86,17 @@ export function FlyBox() {
       ? [{ value, recipe: recolor(recipe, parsed), entry, colours: coloursSpec(parsed, recipe), text: coloursText(parsed, recipe) }]
       : [];
   });
+}
+
+export function FlyBox() {
+  const box = useStoredSet(FLY_BOX_KEY);
+  const renders = useRenders();
+  useEffect(() => {
+    document.title = "Fly box, Flybench";
+  }, []);
+  const saved = CATALOG.filter((e) => box.has(e.recipe.id));
+  // Flies saved in the visitor's colours: "id?colours=…" entries.
+  const variations = boxVariations(box.values);
   const pictures = useVariationPictures(useMemo(() => variations.map((v) => ({ key: v.value, recipe: v.recipe })), [variations.map((v) => v.value).join("\n")]));
   return (
     <main className="gallery">
@@ -222,7 +227,14 @@ export function Materials() {
   useEffect(() => {
     document.title = "Your materials, Flybench";
   }, []);
-  const byKind = useMemo(() => catalogNeeds(CATALOG.flatMap((e) => [e.recipe, ...e.variants])), []);
+  // The colours the catalog uses, and those of the flies saved in other colours (so what their
+  // shopping list asks for can be ticked here).
+  const box = useStoredSet(FLY_BOX_KEY);
+  const saved = [...box.values].filter((v) => v.includes("?")).sort().join("\n");
+  const byKind = useMemo(
+    () => catalogNeeds([...CATALOG.flatMap((e) => [e.recipe, ...e.variants]), ...boxVariations(box.values).map((v) => v.recipe)]),
+    [saved],
+  );
   const kinds = [...byKind.keys()].sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
   const family = (e: (typeof CATALOG)[number]) => missingKinds(bestCoverage([e.recipe, ...e.variants], owned.values));
   const tieable = CATALOG.filter((e) => family(e) === 0);

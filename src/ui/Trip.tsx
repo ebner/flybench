@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SPECIES_LABELS } from "../catalog/describe";
 import { coverage, missingKinds } from "../catalog/inventory";
 import { REGION_LABELS } from "../catalog/naturals";
@@ -19,8 +19,8 @@ const WATERS = Object.keys(WATER_LABELS) as Water[];
 const BOX_SIZE = 12;
 
 /** The trip as the address has it: ?month=6&water=river&species=trout (month 1-based). */
-function readQuery(): { month: number; water: Water; species: Species } {
-  const q = new URLSearchParams(location.search);
+function readQuery(query: string): { month: number; water: Water; species: Species } {
+  const q = new URLSearchParams(query);
   const month = Number(q.get("month"));
   const water = q.get("water");
   const species = q.get("species");
@@ -31,18 +31,26 @@ function readQuery(): { month: number; water: Water; species: Species } {
   };
 }
 
-export function Trip() {
+const writeQuery = (t: ReturnType<typeof readQuery>) => `month=${t.month + 1}&water=${t.water}&species=${t.species}`;
+
+export function Trip({ query }: { query: string }) {
   const [region, chooseRegion] = useRegion();
-  const [trip, setTrip] = useState(readQuery);
+  const [trip, setTrip] = useState(() => readQuery(query));
   const box = useStoredSet(FLY_BOX_KEY);
   const owned = useStoredSet(INVENTORY_KEY);
   const renders = useRenders();
   useEffect(() => {
     document.title = "A fly box for a trip, Flybench";
   }, []);
+  // The choices go into the address; an address changed from outside (Back, a link) changes them.
+  const written = useRef<string | null>(null);
   useEffect(() => {
-    replaceUrl(href.trip(`month=${trip.month + 1}&water=${trip.water}&species=${trip.species}`));
+    written.current = writeQuery(trip);
+    replaceUrl(href.trip(written.current));
   }, [trip]);
+  useEffect(() => {
+    if (written.current !== null && query !== written.current) setTrip(readQuery(query));
+  }, [query]);
   const suggestions = useMemo(
     () => (region ? suggestBox(PATTERNS.map((p) => p.recipe), NATURALS, { region, ...trip }) : []),
     [region, trip],
