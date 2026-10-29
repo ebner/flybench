@@ -2,7 +2,7 @@ import { NAMED_COLORS, type NamedColor, type Recipe } from "../recipe/schema";
 import { materialColor } from "./inventory";
 import { hasTerm, term } from "../i18n/glossary";
 import { deAdjective, inSentence } from "../i18n/grammar";
-import { colourWord, partLabel } from "../tying/describe";
+import { partInColour } from "../tying/describe";
 import { lang, type Lang } from "../i18n/lang";
 
 /**
@@ -106,7 +106,7 @@ export function coloursText(colours: Colours, recipe: Recipe): string {
     .filter(Boolean)
     .map((pair, i) => {
       const [part = "", colour = ""] = pair.split(":");
-      const text = `${partLabel(part)} ${colourWord(colour)}`;
+      const text = partInColour(part, colour as NamedColor);
       return i === 0 ? text : inSentence(text);
     })
     .join(", ");

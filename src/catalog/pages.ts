@@ -80,7 +80,11 @@ const paragraphs = (text: string) =>
     .map((p) => `<p>${escape(p.replace(/\s+/g, " ").trim())}</p>`)
     .join("");
 
-const fullName = (r: Recipe) => (r.variant ? `${r.name} (${r.variant})` : r.name);
+/** "Willie Gunn (Tube)", the variant named in the page's language. */
+const fullName = (english: Recipe) => {
+  const r = inPageLanguage(english);
+  return r.variant ? `${r.name} (${r.variant})` : r.name;
+};
 
 export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] = []): Page[] {
   const link = (path: string, text: string) => `<a href="${escape(base + path)}">${escape(text)}</a>`;

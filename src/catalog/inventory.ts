@@ -1,5 +1,7 @@
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import type { Material, Recipe } from "../recipe/schema";
+import { kindName } from "../tying/describe";
+import { lang } from "../i18n/lang";
 
 /**
  * The materials inventory: what a tyer owns, as "kind:colour" entries. A material in a
@@ -111,6 +113,6 @@ export function shoppingList(recipes: Recipe[], owned: Set<string>): ShoppingIte
   }
   const rank = (i: ShoppingItem) => (i.status === "missing" ? 0 : 1);
   return [...items.values()].sort(
-    (a, b) => rank(a) - rank(b) || MATERIALS[a.need.kind].name.localeCompare(MATERIALS[b.need.kind].name) || a.need.color.localeCompare(b.need.color),
+    (a, b) => rank(a) - rank(b) || kindName(a.need.kind).localeCompare(kindName(b.need.kind), lang()) || a.need.color.localeCompare(b.need.color),
   );
 }

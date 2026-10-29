@@ -51,6 +51,11 @@ export function partLabel(id: string): string {
   return id === "thread" ? writer().role("thread") : writer().partName(id);
 }
 
+/** A part and its colour, as a variation is described ("Tail red", "Hackel rött"). */
+export function partInColour(id: string, color: NamedColor): string {
+  return writer().partInColour(id, color);
+}
+
 function englishMaterialName(m: Material): string {
   if (m.label) return m.label;
   const cat = MATERIALS[m.kind];
@@ -94,7 +99,7 @@ export function materialsList(recipe: Recipe): MaterialsListEntry[] {
   return [
     treble === null
       ? { id: "hook", role: w.role("hook"), name: w.hookName(recipe.hook.model, hook.label), detail: detail({ kind: "size", size: recipe.hook.size }) }
-      : { id: "hook", role: w.role(hook.tube?.kind === "waddington" ? "shank" : "tube"), name: w.hookName(recipe.hook.model, hook.label, recipe.hook.length ?? 25) },
+      : { id: "hook", role: w.role(hook.tube?.kind === "waddington" ? "waddington-shank" : "tube"), name: w.hookName(recipe.hook.model, hook.label, recipe.hook.length ?? 25) },
     ...(treble === null ? [] : [{ id: "treble", role: w.role("hook"), name: w.hookName("treble", "Treble hook"), detail: detail({ kind: "size", size: treble }) }]),
     { id: "thread", role: w.role("thread"), name: w.threadName(recipe.thread.color), detail: recipe.thread.size },
     ...recipe.materials.map((m) => ({
@@ -320,12 +325,14 @@ export interface Writer {
   /** A hook model's name; `length` is a tube's or Waddington's length in mm. */
   hookName(model: string, english: string, length?: number): string;
   /** The role of hook, thread, tube or shank in the dressing list. */
-  role(id: "hook" | "thread" | "tube" | "shank"): string;
+  role(id: "hook" | "thread" | "tube" | "waddington-shank"): string;
   /** The role of a recipe's part in the dressing list, from its id ("wing-case"). */
   partName(id: string): string;
   detail(d: Detail): string;
   /** A colour on its own ("red"); null is a material's own, natural colour. */
   colourWord(color: NamedColor | null): string;
+  /** A part and its colour ("Tail red"): the colour agreeing with the part's noun where the language wants it. */
+  partInColour(id: string, color: NamedColor): string;
   /** The step written out; `note` is the step's own note (in this language, or English). */
   text(said: Said, recipe: Recipe, note: string | undefined): string;
   title(op: Step["op"] | "palmer", material: Material | undefined, id: string | undefined): string;
@@ -334,10 +341,11 @@ export interface Writer {
 const english: Writer = {
   materialName: englishMaterialName,
   colourWord: (c) => (c ? colorName(c) : "natural"),
+  partInColour: (id, c) => `${partLabel(id)} ${colorName(c)}`,
   threadName: (color) => capitalize(`${colorName(color)} thread`.trim()),
   // The English label is the hook model's own, a tube's or shank's length included.
   hookName: (_model, label) => label,
-  role: (id) => ({ hook: "Hook", thread: "Thread", tube: "Tube", shank: "Shank" })[id],
+  role: (id) => ({ hook: "Hook", thread: "Thread", tube: "Tube", "waddington-shank": "Shank" })[id],
   partName: (id) => capitalize(id.replace(/-/g, " ")),
   detail: (d) => {
     switch (d.kind) {
@@ -447,7 +455,7 @@ function englishText(said: Said, recipe: Recipe): string {
     case "palmer":
       return `Palmer the ${mat(said.m)} back to ${at(said.to)} in ${countText(said.turns, "open turns")}${counter(said.counter)}.`;
     case "wind-through":
-      return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")}${counter(said.counter)} through the ${mat(said.through)}. The first turn traps its tip.`;
+      return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")} through the ${mat(said.through)}${counter(said.counter)}. The first turn traps its tip.`;
     case "wind":
       return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")}${counter(said.counter)}.`;
     case "pull-over":

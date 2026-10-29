@@ -184,9 +184,9 @@ function writerFor(recipe: Recipe) {
       case "palmer":
         return `Palmere ${mat(said.m, "acc")} in ${turns(said.turns, true)} zurück ${place(said.to).to}${counter(said.counter)}.`;
       case "wind-through":
-        return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)}${counter(said.counter)} durch ${mat(said.through, "acc")} nach vorn ${place(said.to).to}. Die erste Windung hält ${the("tip", "acc")} fest.`;
+        return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} durch ${mat(said.through, "acc")} nach vorn ${place(said.to).to}${counter(said.counter)}. Die erste Windung hält ${the("tip", "acc")} fest.`;
       case "wind":
-        return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)}${counter(said.counter)} nach vorn ${place(said.to).to}.`;
+        return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
       case "spin": {
@@ -268,6 +268,8 @@ export const de: Writer = {
   // A label is the translation of the recipe's own (see i18n/prose.ts); otherwise the glossary's name.
   materialName: (m) => m.label ?? capitalize(phrase(material(m), colour(m.color), usedInPlural(m))),
   colourWord: (c) => (c ? term("de", "colours", c, "adjective").text : "naturfarben"),
+  // After the noun the colour stays as it is: "Hechel rot".
+  partInColour: (id, c) => `${id === "thread" ? word("thread").text : partName(id)} ${term("de", "colours", c, "adjective").text}`,
   threadName: (c) => capitalize(phrase(word("thread"), colour(c))),
   hookName: (model, english, length) => {
     const name = term("de", "hooks", model, "phrase").text;

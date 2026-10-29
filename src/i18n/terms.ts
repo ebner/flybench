@@ -11,6 +11,7 @@ export const WORDS = {
   hook: "a fishing hook",
   thread: "the tying thread",
   shank: "the hook's shank",
+  "waddington-shank": "the shank of a Waddington (a straight wire shank with no bend, a treble at its end), as the dressing names it",
   bend: "the hook's bend",
   eye: "the hook's eye",
   gape: "the hook's gape, the unit of proportions",

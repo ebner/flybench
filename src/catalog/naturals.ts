@@ -127,6 +127,6 @@ export function hatchText(h: Natural["hatches"][number]): string {
 
 /** "6–11 mm" */
 export function sizeText(n: Natural): string {
-  const mm = (v: number) => (Number.isInteger(v) ? String(v) : String(Math.round(v * 10) / 10));
+  const mm = (v: number) => (Math.round(v * 10) / 10).toLocaleString({ en: "en-GB", sv: "sv-SE", de: "de-DE" }[lang()]);
   return n.size.max >= 40 ? `${mm(n.size.min / 10)}–${mm(n.size.max / 10)} cm` : `${mm(n.size.min)}–${mm(n.size.max)} mm`;
 }
