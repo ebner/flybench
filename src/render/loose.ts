@@ -91,7 +91,7 @@ export class LooseEndView {
           radius: hackle ? 0.0045 : 0.0035,
         });
       }
-      const mesh = fibreMesh(fibres, surfaces.get(end.look, hackle ? end.color : "#26341a", true));
+      const mesh = fibreMesh(fibres, surfaces.get(end.look, end.color, true));
       this.disposers.push(() => mesh.dispose());
       this.object.add(mesh.object);
     }

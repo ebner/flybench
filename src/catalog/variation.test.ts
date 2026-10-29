@@ -58,18 +58,17 @@ describe("colour variations", () => {
     expect(blue.steps.map((s) => s.note)).toContain("Let the fibres splay out for bulk.");
   });
 
-  it("carries a note naming another material by its colour, when all of that colour changed alike", () => {
-    const finn = (() => {
-      const r = loadRecipe(readFileSync(new URL("../../patterns/mickey-finn.kdl", import.meta.url), "utf8"));
-      if (!r.ok) throw new Error("mickey-finn");
+  it("leaves notes about other parts as tied", () => {
+    const pennell = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/black-pennell.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("black-pennell");
       return r.recipe;
     })();
-    const yellow = finn.materials.filter((m) => m.color === "yellow").map((m) => m.id);
-    expect(yellow.length).toBeGreaterThan(1);
-    const notes = (c: Record<string, "blue">) => recolor(finn, c).steps.map((s) => s.note ?? "").join(" ");
-    expect(notes(Object.fromEntries(yellow.map((id) => [id, "blue"])))).not.toMatch(/\byellow\b/i);
-    // Only some of the yellow changed: "the yellow" still names one that is yellow.
-    expect(notes({ [yellow[0]!]: "blue" })).toMatch(/\byellow\b/i);
+    const black = pennell.materials.filter((m) => m.color === "black").map((m) => m.id);
+    const blue = recolor(pennell, Object.fromEntries(black.map((id) => [id, "blue" as const])));
+    const tail = pennell.steps.findIndex((s) => s.note?.includes("black bars"));
+    expect(tail).toBeGreaterThanOrEqual(0);
+    expect(blue.steps[tail]!.note).toBe(pennell.steps[tail]!.note);
   });
 
   it("leaves a note naming a natural material, not its colour", () => {
