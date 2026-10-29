@@ -6,6 +6,9 @@ const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one :
 /** German. A draft until reviewed. */
 export const de: Messages = {
   site: {
+    loadFailed: "Die Wörter dieser Seite konnten nicht geladen werden (bist du offline?).",
+    retry: "Erneut versuchen",
+    inEnglish: "Auf Englisch lesen",
     skip: "Zum Inhalt springen",
     titled: (title: string) => `${title}, Flybench`,
     loadErrors: (n: number) => `${n} Fehler in den Musterdateien`,

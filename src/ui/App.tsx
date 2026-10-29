@@ -12,7 +12,7 @@ import { NotFound } from "./NotFound";
 import { FlyBox, Materials } from "./Personal";
 import { TechniquePage, TechniquesIndex } from "./Techniques";
 import { PatternPage } from "./PatternPage";
-import { href, restoresScroll, useRoute } from "./router";
+import { href, restoresScroll, routeHrefIn, useRoute } from "./router";
 import { useTheme } from "./theme";
 import { lang } from "../i18n/lang";
 import { isLoaded, loadLanguage } from "../i18n/load";
@@ -24,11 +24,17 @@ export function App() {
   // Switching to Swedish or German the first time fetches that language's words; the pages
   // wait for them (the header and footer need only the interface's, which are always here).
   const language = lang();
-  const [, loaded] = useState(0);
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const ready = isLoaded(language);
   useEffect(() => {
-    if (!isLoaded(language)) loadLanguage(language).then(() => loaded((n) => n + 1), () => loaded((n) => n + 1));
-  }, [language]);
+    if (isLoaded(language)) return;
+    setFailed(false);
+    loadLanguage(language).then(
+      () => setAttempt((n) => n + 1),
+      () => setFailed(true),
+    );
+  }, [language, attempt]);
 
   useEffect(() => {
     if (route.page === "gallery") document.title = siteTitle();
@@ -60,6 +66,17 @@ export function App() {
         </p>
       )}
       <div id="content" tabIndex={-1}>
+        {!ready && failed && (
+          <main className="reading">
+            <p>{t.site.loadFailed}</p>
+            <p>
+              <button className="box-toggle" onClick={() => setAttempt((n) => n + 1)}>
+                {t.site.retry}
+              </button>{" "}
+              <a href={routeHrefIn("en", route)}>{t.site.inEnglish}</a>
+            </p>
+          </main>
+        )}
         {ready && (
           <>
             {route.page === "gallery" && <Gallery query={route.query} />}

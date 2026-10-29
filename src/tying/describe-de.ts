@@ -68,7 +68,11 @@ function writerFor(recipe: Recipe) {
   /** The material in a sentence, in a case: "die rote Wolle", "der roten Wolle"; without article "rote Wolle". */
   const mat = (id: string, c: Case, article: "definite" | "none" = "definite") => {
     const m = find(id);
-    return m ? dePhrase(material(m), { case: c, article, colour: colour(m.color), plural: usedInPlural(m) }) : id;
+    if (!m) return id;
+    const phrase = dePhrase(material(m), { case: c, article, colour: colour(m.color), plural: usedInPlural(m) });
+    // A translated label says more than the glossary's name ("Weiße Hechelstiele"): it follows
+    // in quotation marks, as it can't be declined.
+    return m.label ? `${phrase} („${m.label}“)` : phrase;
   };
   /** What a pronoun for the material refers to: its noun, or several. */
   const noun = (id: string): Noun | "plural" => {
@@ -302,6 +306,6 @@ export const de: Writer = {
   title: (op, m, id) => {
     const title = term("de", "steps", op, "phrase").text;
     if (id === undefined) return title;
-    return `${title}: ${m ? phrase(material(m), colour(m.color), usedInPlural(m)) : id}`;
+    return `${title}: ${m ? (m.label ?? phrase(material(m), colour(m.color), usedInPlural(m))) : id}`;
   },
 };

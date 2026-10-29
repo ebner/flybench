@@ -18,9 +18,16 @@ export function loadLanguage(l: Lang): Promise<void> {
   if (l === "en" || loaded.has(l)) return Promise.resolve();
   let p = loading.get(l);
   if (!p) {
-    p = LOADERS[l]().then(() => {
-      loaded.add(l);
-    });
+    p = LOADERS[l]().then(
+      () => {
+        loaded.add(l);
+      },
+      (e: unknown) => {
+        // Offline or a failed fetch: the next request tries again.
+        loading.delete(l);
+        throw e;
+      },
+    );
     loading.set(l, p);
   }
   return p;

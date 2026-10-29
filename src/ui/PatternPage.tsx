@@ -24,7 +24,7 @@ import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
 import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
-import { boxEntry, coloursSpec, DYE_COLORS, parseColours, recolor, tiedColour, type Colours } from "../catalog/variation";
+import { boxEntry, coloursSpec, parseBoxEntry, DYE_COLORS, parseColours, recolor, tiedColour, type Colours } from "../catalog/variation";
 import { LogForm, useLog } from "./Log";
 import { tiedCounts } from "../catalog/log";
 import { PATTERNS } from "../patterns";
@@ -128,6 +128,13 @@ function PatternView({
   const box = useStoredSet(FLY_BOX_KEY);
   const owned = useStoredSet(INVENTORY_KEY);
   const log = useLog();
+  // The fly box entry for these colours, however it was written (a link from before a part was renamed).
+  const savedVariation = spec
+    ? [...box.values].find((v) => {
+        const e = parseBoxEntry(v);
+        return e.id === recipe.id && e.colours !== "" && coloursSpec(parseColours(e.colours, original), original) === spec;
+      })
+    : undefined;
   const [logging, setLogging] = useState<"form" | "done" | null>(null);
   const tiedButton = useRef<HTMLButtonElement>(null);
   const mainId = original.variantOf ?? original.id;
@@ -617,8 +624,8 @@ function PatternView({
           original={original}
           colours={colours}
           onChange={setColours}
-          saved={box.has(boxEntry(recipe.id, spec))}
-          onSave={() => box.toggle(boxEntry(recipe.id, spec))}
+          saved={savedVariation !== undefined}
+          onSave={() => (savedVariation ? box.set(savedVariation, false) : box.set(boxEntry(recipe.id, spec), true))}
         />
 
         <h3>{t.pattern.steps}</h3>
