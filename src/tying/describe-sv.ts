@@ -52,7 +52,11 @@ function writerFor(recipe: Recipe) {
   /** The material in a sentence: "den röda ullen" (definite) or "röd ull". */
   const mat = (id: string, form: "definite" | "indefinite" = "definite") => {
     const m = find(id);
-    return m ? svPhrase(material(m), colour(m.color), form, usedInPlural(m)) : id;
+    if (!m) return id;
+    // A translated label says more than the glossary's name ("vita hackelstjälkar", not just
+    // fibres): it follows in brackets, as it can't be inflected.
+    const phrase = svPhrase(material(m), colour(m.color), form, usedInPlural(m));
+    return m.label ? `${phrase} (${m.label.charAt(0).toLowerCase()}${m.label.slice(1)})` : phrase;
   };
   /** What a pronoun for the material refers to: its noun, or several. */
   const noun = (id: string): Noun | "plural" => {
@@ -292,6 +296,7 @@ export const sv: Writer = {
   title: (op, m, id) => {
     const title = term("sv", "steps", op, "phrase").text;
     if (id === undefined) return title;
-    return `${title}: ${m ? svPhrase(material(m), colour(m.color), "indefinite", usedInPlural(m)) : id}`;
+    const name = m?.label ? m.label.charAt(0).toLowerCase() + m.label.slice(1) : m && svPhrase(material(m), colour(m.color), "indefinite", usedInPlural(m));
+    return `${title}: ${name ?? id}`;
   },
 };

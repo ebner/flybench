@@ -6,6 +6,9 @@ const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one :
 /** Swedish. A draft until reviewed. */
 export const sv: Messages = {
   site: {
+    loadFailed: "Sidans ord kunde inte hämtas (är du utan uppkoppling?).",
+    retry: "Försök igen",
+    inEnglish: "Läs den på engelska",
     skip: "Hoppa till innehållet",
     titled: (title: string) => `${title}, Flybench`,
     loadErrors: (n: number) => `${n} fel i mönsterfilerna`,

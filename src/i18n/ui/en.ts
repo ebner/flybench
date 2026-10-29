@@ -11,6 +11,9 @@ const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one :
  */
 export const en = {
   site: {
+    loadFailed: "This page's words couldn't be fetched (are you offline?).",
+    retry: "Try again",
+    inEnglish: "Read it in English",
     skip: "Skip to content",
     titled: (title: string) => `${title}, Flybench`,
     loadErrors: (n: number) => `${n} problem(s) in pattern files`,
