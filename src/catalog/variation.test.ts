@@ -37,6 +37,18 @@ describe("colour variations", () => {
     expect(materialsList(recolor(recipe, { hackle: "olive" })).find((m) => m.id === "hackle")!.name).toBe("Olive cock hackle");
   });
 
+  it("carries a step's note about its own part into the new colour, and leaves other notes", () => {
+    const ullsocken = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/ullsocken.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("ullsocken");
+      return r.recipe;
+    })();
+    const blue = recolor(ullsocken, { butt: "blue", thread: "red" });
+    expect(blue.steps.map((s) => s.note)).toContain("A short blue butt.");
+    expect(blue.steps.map((s) => s.note)).toContain("A small red head.");
+    expect(blue.steps.map((s) => s.note)).toContain("Let the fibres splay out for bulk.");
+  });
+
   it("names the changes and round-trips fly box entries", () => {
     expect(coloursText({ thread: "blue-dun" }, recipe)).toBe("Thread blue dun");
     expect(parseBoxEntry(boxEntry("red-tag", "thread:olive"))).toEqual({ id: "red-tag", colours: "thread:olive" });

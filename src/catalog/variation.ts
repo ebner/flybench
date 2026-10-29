@@ -47,6 +47,20 @@ export function recolor(recipe: Recipe, colours: Colours): Recipe {
     thread: colours.thread ? { ...recipe.thread, color: colours.thread } : recipe.thread,
     // A label names the material as tied ("Red game cock hackle"): in another colour it goes.
     materials: recipe.materials.map((m) => (colours[m.id] ? { ...m, color: colours[m.id], label: undefined } : m)),
+    steps: recipe.steps.map((step) => {
+      // A step's note about its own part follows the part's colour ("A short red butt."); the
+      // thread's steps are those without a material (the head at the whip finish).
+      const part = "material" in step ? step.material : "thread";
+      const from = tiedColour(recipe, part);
+      const to = colours[part];
+      if (!step.note || !to || !from || !isNamed(from)) return step;
+      const word = new RegExp(`\\b${from.replace(/-/g, "[ -]")}\\b`, "gi");
+      const note = step.note.replace(word, (found) => {
+        const name = to.replace(/-/g, " ");
+        return found[0] === found[0]!.toUpperCase() ? name.charAt(0).toUpperCase() + name.slice(1) : name;
+      });
+      return note === step.note ? step : { ...step, note };
+    }),
   };
 }
 
