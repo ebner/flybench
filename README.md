@@ -76,11 +76,15 @@ falls back to software rendering (SwiftShader, much slower) when there isn't;
 
 ## Adding a pattern
 
-The easiest way is the authoring studio (`pnpm studio`): pick a pattern or start a new
-one, edit its KDL with problems listed as you type (click one to jump to its line), and
-watch the fly in 3D on a gape grid, step by step. Save writes to `patterns/`. The studio
-exists only on the dev server, which only accepts its requests from this machine; the
-built site doesn't include it.
+The easiest way is the authoring studio (`pnpm studio`): pick a pattern or a natural, or
+start a new one, and edit it either as KDL text, with problems listed as you type (click one
+to jump to its line), or through a form built from the schema: sliders and numbers with their
+ranges, menus, colour pickers, and list items to add, reorder and remove. The form writes
+into the text in place, so comments, sources and formatting stay as they are. Beside it the
+fly appears in 3D on a gape grid, step by step (a natural on a grid in tenths of its body
+length, or in the realistic river), with the reference photos to compare. Save writes to
+`patterns/` or `naturals/`. The studio exists only on the dev server, which only accepts its
+requests from this machine; the built site doesn't include it.
 
 Or write a new `patterns/<id>.kdl` by hand and it gets picked up automatically. Materials come
 from the catalog in `src/recipe/materials.ts`; add new ones there. The test suite
@@ -98,7 +102,8 @@ and run `pnpm refcheck <id>`. It writes `.cache/refcheck/<id>.png`: the fly from
 the side on a grid in gape units, the recipe's proportions, and the photos. Read the
 ratios off the photos relative to the hook gape and adjust the recipe. The photos stay
 in `.cache/` and are never committed, and the build leaves the `references` blocks out
-of the published site.
+of the published site. Naturals work the same way (`pnpm refcheck mayfly-dun`), on a grid in
+tenths of the body length.
 
 ## Layout
 

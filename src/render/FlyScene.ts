@@ -1094,6 +1094,7 @@ export class FlyScene {
   dispose() {
     cancelAnimationFrame(this.frame);
     this.resizeObserver.disconnect();
+    this.setNatural(null);
     this.clearFly();
     this.surfaces.dispose();
     this.setGrid(false);

@@ -25,7 +25,7 @@ export type Shape = { key?: string } & (
   | { kind: "list"; nameKey: string; arg: string | null }
 );
 
-const TOP_LEVEL: Record<string, Shape> = {
+export const PATTERN_SECTIONS: Record<string, Shape> = {
   id: { kind: "scalar" },
   name: { kind: "scalar" },
   aliases: { kind: "values" },
@@ -63,7 +63,7 @@ export class KdlMappingError extends Error {
 }
 
 /** `sections`: the top-level nodes a document may have (a pattern's by default; naturals have their own). */
-export function kdlToObject(text: string, sections: Record<string, Shape> = TOP_LEVEL): KdlMapping {
+export function kdlToObject(text: string, sections: Record<string, Shape> = PATTERN_SECTIONS): KdlMapping {
   let doc;
   try {
     doc = parse(text, { storeLocations: true });

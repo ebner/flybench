@@ -21,7 +21,7 @@ How to research and write a pattern: [docs/authoring-patterns.md](docs/authoring
 ```sh
 pnpm install
 pnpm dev           # Vite dev server
-pnpm studio        # authoring studio on the dev server (/studio.html)
+pnpm studio        # authoring studio on the dev server (/studio.html): patterns and naturals, as text or a form
 pnpm test          # Vitest: recipe parsing/validation, simulation
 pnpm typecheck
 pnpm build         # typecheck + production build into dist/
@@ -60,6 +60,8 @@ src/render/     three.js: FlyScene (scene = pure function of time), pieces, loos
 src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook, for its picture),
                 pages.ts (every page's title, description and
                 static HTML for the build; no React; tested in Node)
+src/studio/     the authoring studio (dev server only): kdlEdit.ts edits KDL text in place
+                (format-preserving), schemaForm.ts describes the form from the Zod schemas
 src/ui/         React UI (path routing under the base, theme, gallery, pattern page, about)
 scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
 public/renders/ generated gallery images, material swatches (materials/) and water stills
