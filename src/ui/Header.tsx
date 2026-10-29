@@ -71,7 +71,7 @@ export function Header({ theme, onTheme, page }: { theme: ThemeChoice; onTheme: 
           <a href={href.naturals()} aria-current={current(["naturals", "natural"])}>
             Naturals
           </a>
-          <a href={href.box()} aria-current={current(["box", "log"])}>
+          <a href={href.box()} aria-current={current(["box", "log", "trip"])}>
             Fly box
           </a>
           <a href={href.materials()} aria-current={current(["materials"])}>

@@ -20,11 +20,12 @@ export const STORED_NOTE =
   "Saved in this browser only: clearing your browsing data starts it empty again, and another browser or device has its own.";
 
 /** Links between the visitor's own pages. */
-export function BenchNav({ current }: { current: "box" | "log" | "materials" }) {
+export function BenchNav({ current }: { current: "box" | "log" | "materials" | "trip" }) {
   const links = [
     ["box", href.box(), "Fly box"],
     ["log", href.log(), "Tying log"],
     ["materials", href.materials(), "Materials"],
+    ["trip", href.trip(), "Plan a trip"],
   ] as const;
   return (
     <nav className="bench-nav" aria-label="Your bench">

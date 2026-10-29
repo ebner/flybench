@@ -168,6 +168,13 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
       `<h2>Who makes it</h2><p>${SITE_NAME} is made by <a href="https://github.com/ebner">Hannes Ebner</a>.</p></main>`,
   });
 
+  pages.push({
+    path: "trip/",
+    title: `A fly box for a trip, ${SITE_NAME}`,
+    description: "Where and when you fish, and for what: the flies to take, matched to what hatches then, in the sizes to tie them.",
+    body: `<main class="reading"><h1>A fly box for a trip</h1><p>Where and when you fish, and for what: the flies to take, matched to what hatches then, in the sizes to tie them.</p></main>`,
+  });
+
   for (const [path, title] of [
     ["box/", "Fly box"],
     ["materials/", "Your materials"],

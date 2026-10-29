@@ -48,7 +48,7 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
 }
 
 /** The visitor's region, kept in this browser; none until they choose one. */
-function useRegion(): [Region | null, (r: Region) => void] {
+export function useRegion(): [Region | null, (r: Region) => void] {
   const stored = useStoredSet(REGION_KEY);
   const region = REGIONS.find((r) => stored.has(r)) ?? null;
   const choose = (r: Region) => {
@@ -107,7 +107,7 @@ export function NaturalsIndex() {
         <>
           <p className="stored-note">
             Your region is saved in this browser. Months are when each natural hatches or is most about; dates move with
-            altitude, water temperature and the year.
+            altitude, water temperature and the year. <a href={href.trip()}>Plan a fly box for a trip</a> from it.
           </p>
           <div className="hatch-scroll">
             <table className="hatch-calendar">

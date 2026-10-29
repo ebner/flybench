@@ -6,6 +6,7 @@ import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
 import { Log } from "./Log";
+import { Trip } from "./Trip";
 import { NaturalPage, NaturalsIndex } from "./Naturals";
 import { NotFound } from "./NotFound";
 import { FlyBox, Materials } from "./Personal";
@@ -51,6 +52,7 @@ export function App() {
         {route.page === "box" && <FlyBox />}
         {route.page === "materials" && <Materials />}
         {route.page === "log" && <Log />}
+        {route.page === "trip" && <Trip />}
         {route.page === "about" && <About />}
         {route.page === "naturals" && <NaturalsIndex />}
         {route.page === "natural" && <NaturalPage id={route.id} />}
