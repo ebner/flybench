@@ -195,7 +195,7 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       (Poly Haven, compressed, served by the site); two stills per pattern and natural, the
       angler's view and the trout's.)
 
-14. Fish and insects drawn true to life (decided 2026-10-29). Everything in the natural recipes,
+14. ✅ Fish and insects drawn true to life (decided 2026-10-29). Everything in the natural recipes,
     with sources, as before; values read off photos marked as assumptions.
     - Fish anatomy: body outlines with their own back and belly heights per section; fins with
       base length, height, ray and spine counts, shape (rounded, pointed, forked, truncate) and
@@ -215,7 +215,7 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       the build) and `pnpm refcheck <natural>` puts the render beside the photos on a grid in body
       lengths; every natural is compared and corrected.
     - Re-rendered: catalog pictures and water stills; translations of the new naturals' prose.
-15. The studio for naturals, with a visual editor. The dev-only studio edits naturals as well as
+15. ✅ The studio for naturals, with a visual editor. The dev-only studio edits naturals as well as
     patterns: KDL text with live errors, a live 3D preview on the bench and in the realistic
     river, a grid in gapes or body lengths, the reference photos beside it. A form beside the
     text, built from the schema, edits every field with sliders, numbers, menus and colour

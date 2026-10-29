@@ -32,9 +32,9 @@ export function loadRecipe(text: string): LoadResult {
 }
 
 /** An error found outside loading (the catalog rules), placed in the recipe's text. */
-export function locate(text: string, error: RecipeError): RecipeError {
+export function locate(text: string, error: RecipeError, sections?: Parameters<typeof kdlToObject>[1]): RecipeError {
   try {
-    return withLocation(error, kdlToObject(text).locations);
+    return withLocation(error, kdlToObject(text, sections).locations);
   } catch {
     return error;
   }

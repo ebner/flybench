@@ -2,6 +2,7 @@ import { validateCatalog } from "../recipe/catalog";
 import type { RecipeError } from "../recipe/errors";
 import { loadRecipe, locate } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
+import { loadNatural, NATURAL_SECTIONS, type Natural } from "../recipe/natural";
 
 /** Pattern files the studio may read and write: an id plus .kdl, and nothing else. */
 export const PATTERN_FILE = /^[a-z][a-z0-9-]*\.kdl$/;
@@ -69,6 +70,53 @@ steps {
     wind body to=0.86 turns=8
     tie-off body
     whip-finish
+}
+`;
+}
+
+export interface NaturalCheck {
+  /** The natural, when it loads without errors. */
+  natural?: Natural;
+  errors: RecipeError[];
+}
+
+/** Checks a natural's draft the way the site will, and that its id matches its file name. */
+export function checkNatural(text: string, file: string): NaturalCheck {
+  const result = loadNatural(text);
+  if (!result.ok) return { errors: result.errors };
+  if (file !== `${result.natural.id}.kdl`) return { errors: [locate(text, { message: `the id should match the file name: ${file.replace(/\.kdl$/, "")}`, path: ["id"] }, NATURAL_SECTIONS)] };
+  return { natural: result.natural, errors: [] };
+}
+
+/** A starting point for a new natural: valid as it stands, with the parts to fill in marked. */
+export function newNaturalText(id: string): string {
+  return `// ${id}: what it is, and the stage the patterns imitate.
+
+id ${id}
+name "New natural"
+group mayfly
+stage nymph
+examples "The species it stands for"
+description "What it looks like and where it lives, in a sentence or two."
+size min=5 max=10
+rides drifting
+body {
+    // Rear to front; radius and taper: the size at the section's rear end, scaled towards its front.
+    abdomen length=0.6 radius=0.04 taper=1.5 segments=10 color=olive
+    thorax length=0.28 radius=0.06 color=olive
+    head length=0.12 radius=0.05 taper=0.8 color=olive
+}
+parts {
+    legs length=0.5 color=olive
+    eyes size=0.03 color=black
+}
+hatches {
+}
+sources {
+    "Title of the source" url="https://example.com/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
 }
 `;
 }
