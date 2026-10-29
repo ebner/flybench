@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { DIFFICULTY_LABELS, factsLine, IMITATES_LABELS, originLine, SPECIES_LABELS, TYPE_LABELS } from "../catalog/describe";
 import { learningPath } from "../catalog/techniques";
 import { filtersFromQuery, filtersToQuery, versionMatches, type CatalogEntry, type Filters } from "../catalog/search";
@@ -322,9 +322,31 @@ function FeaturedFly({ id, name, info, urls }: { id: string; name: string; info:
 }
 
 /** `open`: the id of the version to open, when it isn't the main pattern. */
-export function Plate({ entry, render, missing, open }: { entry: CatalogEntry; render?: RenderInfo; missing?: Need; open?: string }) {
+export function Plate({
+  entry,
+  render,
+  missing,
+  open,
+  link,
+  note,
+  action,
+  picture,
+}: {
+  entry: CatalogEntry;
+  render?: RenderInfo;
+  missing?: Need;
+  /** The version to open, when not the main pattern. */
+  open?: string;
+  /** The address to open instead (a fly in the visitor's colours). */
+  link?: string;
+  note?: string;
+  /** A control under the plate, outside its link. */
+  action?: ReactNode;
+  /** A picture drawn in the browser (a fly in the visitor's colours), instead of the rendered one. */
+  picture?: string | null;
+}) {
   const r = entry.recipe;
-  const urls = render ? renderUrls(r.id, render) : null;
+  const urls = render && picture === undefined ? renderUrls(r.id, render) : null;
   const origin = originLine(r);
   const style = urls
     ? ({ "--spin": `url("${urls.spin}")`, "--frames": render!.frames } as CSSProperties)
@@ -332,9 +354,11 @@ export function Plate({ entry, render, missing, open }: { entry: CatalogEntry; r
   const [ready, load] = useSpin(urls?.spin);
   return (
     <li className="plate">
-      <a href={href.fly(open ?? r.id)} onPointerEnter={load} onFocus={load}>
+      <a href={link ?? href.fly(open ?? r.id)} onPointerEnter={load} onFocus={load}>
         <div className={ready ? "plate-image spin-ready" : "plate-image"} style={style}>
-          {urls ? (
+          {picture ? (
+            <img src={picture} alt="" width={600} height={400} />
+          ) : picture === null ? null : urls ? (
             <>
               <div className="plate-spin" aria-hidden="true" />
               <img src={urls.card} alt="" loading="lazy" width={600} height={400} />
@@ -354,6 +378,7 @@ export function Plate({ entry, render, missing, open }: { entry: CatalogEntry; r
             </span>
           )}
         </p>
+        {note && <p className="plate-note">{note}</p>}
         {missing && (
           <p className="plate-missing-material">
             Needs {colorWord(missing.color, missing.kind) === "natural" ? "" : `${colorWord(missing.color, missing.kind)} `}
@@ -361,6 +386,7 @@ export function Plate({ entry, render, missing, open }: { entry: CatalogEntry; r
           </p>
         )}
       </a>
+      {action}
     </li>
   );
 }

@@ -2,13 +2,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
 import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
-import type { Recipe } from "../recipe/schema";
+import { resolveColor, type Recipe } from "../recipe/schema";
 import { materialName, materialsList } from "../tying/describe";
 import { fishing, fishingText } from "../tying/fishing";
 import { ridesPointUp } from "../tying/hook";
 import { simulate, stepAt, stepEnd, stepProgress } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
-import { match, materialColor } from "../catalog/inventory";
+import { colorWord, match, materialColor } from "../catalog/inventory";
 import { href, replaceUrl } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
@@ -20,11 +20,12 @@ import { PrintCard } from "./PrintCard";
 import { useNaturalPictures } from "./renders";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
+import { boxEntry, coloursSpec, DYE_COLORS, parseColours, recolor, tiedColour, type Colours } from "../catalog/variation";
 import { LogForm, useLog } from "./Log";
 import { tiedCounts } from "../catalog/log";
 import { PATTERNS } from "../patterns";
 
-export function PatternPage({ id, step, size }: { id: string; step?: number; size?: number }) {
+export function PatternPage({ id, step, size, colours }: { id: string; step?: number; size?: number; colours?: string }) {
   const pattern = findPattern(id);
   if (!pattern) {
     return (
@@ -35,7 +36,7 @@ export function PatternPage({ id, step, size }: { id: string; step?: number; siz
       </NotFound>
     );
   }
-  return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} linkedSize={size} />;
+  return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} linkedSize={size} linkedColours={colours} />;
 }
 
 const Icon = {
@@ -79,7 +80,17 @@ function hookSizes(size: number): number[] {
 }
 
 /** `linkedStep` is the step in the address (1-based), which the page also keeps up to date itself. */
-function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Recipe; linkedStep?: number; linkedSize?: number }) {
+function PatternView({
+  recipe: original,
+  linkedStep,
+  linkedSize,
+  linkedColours,
+}: {
+  recipe: Recipe;
+  linkedStep?: number;
+  linkedSize?: number;
+  linkedColours?: string;
+}) {
   // The hook size can be changed to see the same fly at another size: proportions stay,
   // thread bulk changes as it would at the vise.
   // Tubes are sized by length, so only hooks offer other sizes.
@@ -88,8 +99,12 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   const [size, setSize] = useState(() =>
     tiedSize !== undefined && linkedSize !== undefined && hookSizes(tiedSize).includes(linkedSize) ? linkedSize : tiedSize,
   );
-  const sized = (s: typeof size) => (s === original.hook.size ? original : { ...original, hook: { ...original.hook, size: s } });
-  const recipe = useMemo(() => sized(size), [original, size]);
+  // The colour playground: some parts in other colours (a link can carry them).
+  const [colours, setColours] = useState(() => parseColours(linkedColours ?? "", original));
+  const spec = coloursSpec(colours, original);
+  const sized = (s: typeof size) =>
+    recolor(s === original.hook.size ? original : { ...original, hook: { ...original.hook, size: s } }, colours);
+  const recipe = useMemo(() => sized(size), [original, size, spec]);
   const build = useMemo(() => simulate(recipe), [recipe]);
   const fishingFor = useMemo(() => fishing(recipe), [recipe]);
   const [inWater, setInWater] = useState(false);
@@ -180,13 +195,21 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   useEffect(() => {
     nowRef.current?.scrollTo(0, 0);
   }, [current]);
-  // Keep the URL on the current step and hook size, so it can be shared.
+  // Keep the URL on the current step, hook size and colours, so it can be shared.
   const writtenSize = useRef<number | undefined | null>(null);
+  const writtenColours = useRef<string | null>(null);
   useEffect(() => {
     written.current = current > 0 ? current + 1 : undefined;
     writtenSize.current = size !== tiedSize ? size : undefined;
-    replaceUrl(href.fly(recipe.id, written.current, writtenSize.current));
-  }, [recipe.id, current, size, tiedSize]);
+    writtenColours.current = spec;
+    replaceUrl(href.fly(recipe.id, written.current, writtenSize.current, spec || undefined));
+  }, [recipe.id, current, size, tiedSize, spec]);
+  // A link to this fly in other colours (or its own) changes them.
+  useEffect(() => {
+    if (writtenColours.current === null || (linkedColours ?? "") === writtenColours.current) return;
+    setColours(parseColours(linkedColours ?? "", original));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [linkedColours]);
   // A link to this fly on another size (or on the size it is tied on) changes it.
   useEffect(() => {
     if (writtenSize.current === null || linkedSize === writtenSize.current || tiedSize === undefined) return;
@@ -480,6 +503,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
               id={recipe.id}
               sizes={tiedSize !== undefined ? hookSizes(tiedSize) : []}
               size={recipe.hook.size}
+              colours={spec || undefined}
               onClose={(logged) => setLogging(logged ? "done" : null)}
             />
           ) : (
@@ -533,6 +557,7 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
         )}
 
         <h3>Dressing</h3>
+        {spec && <p className="variation-note">In your colours. The description above is of the pattern as tied.</p>}
         <dl className="dressing">
           {materialsList(recipe).map((m) => (
             <div
@@ -572,6 +597,14 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
             </div>
           ))}
         </dl>
+
+        <ColourPlayground
+          original={original}
+          colours={colours}
+          onChange={setColours}
+          saved={box.has(boxEntry(recipe.id, spec))}
+          onSave={() => box.toggle(boxEntry(recipe.id, spec))}
+        />
 
         <h3>Steps</h3>
         <ol className="steps">
@@ -625,5 +658,72 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
         )}
       </aside>
     </div>
+  );
+}
+
+/** Other colours for the pattern's parts: the fly, its steps and its dressing follow. */
+function ColourPlayground({
+  original,
+  colours,
+  onChange,
+  saved,
+  onSave,
+}: {
+  original: Recipe;
+  colours: Colours;
+  onChange: (c: Colours) => void;
+  saved: boolean;
+  onSave: () => void;
+}) {
+  const changed = Object.keys(colours).length > 0;
+  const parts = materialsList(original).filter((p) => p.id !== "hook" && p.id !== "treble");
+  const asTied = (id: string) => {
+    if (id === "thread") return original.thread.color;
+    const m = original.materials.find((m) => m.id === id)!;
+    return materialColor(m);
+  };
+  return (
+    <details className="playground" open={changed || undefined}>
+      <summary>Try other colours</summary>
+      <p>Choose a colour for any part: the fly, the steps and the dressing follow.</p>
+      <div className="playground-parts">
+        {parts.map((p) => {
+          const tied = asTied(p.id);
+          const shown = colours[p.id] ?? tied;
+          return (
+            <label key={p.id}>
+              <span className="swatch" style={{ background: resolveColor(shown === "natural" ? "#999999" : shown) }} aria-hidden="true" />
+              <span className="playground-part">{p.role}</span>
+              <select
+                value={colours[p.id] ?? ""}
+                onChange={(e) => {
+                  const next = { ...colours };
+                  if (e.target.value) next[p.id] = e.target.value as Colours[string];
+                  else delete next[p.id];
+                  onChange(next);
+                }}
+              >
+                <option value="">As tied ({colorWord(tied, original.materials.find((m) => m.id === p.id)?.kind)})</option>
+                {DYE_COLORS.filter((c) => c !== tiedColour(original, p.id)).map((c) => (
+                  <option key={c} value={c}>
+                    {c.replace(/-/g, " ")}
+                  </option>
+                ))}
+              </select>
+            </label>
+          );
+        })}
+      </div>
+      {changed && (
+        <div className="pattern-actions">
+          <button className="box-toggle" aria-pressed={saved} onClick={onSave}>
+            {saved ? "These colours are in your fly box" : "Save these colours to your fly box"}
+          </button>
+          <button className="link-button" onClick={() => onChange({})}>
+            Back to the pattern's colours
+          </button>
+        </div>
+      )}
+    </details>
   );
 }

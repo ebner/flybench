@@ -1,12 +1,17 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { bestCoverage, catalogNeeds, colorWord, inventoryKey, missingKinds } from "../catalog/inventory";
-import { CATALOG } from "../patterns";
+import { CATALOG, findPattern } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
 import { Plate } from "./Gallery";
 import { useRenders, useSwatches } from "./renders";
 import { swatchName } from "../catalog/swatch";
 import { href } from "./router";
+import { coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "../catalog/variation";
+import { FlyScene } from "../render/FlyScene";
+import { simulate } from "../tying/simulate";
+import { ridesPointUp } from "../tying/hook";
+import type { Recipe } from "../recipe/schema";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -32,6 +37,42 @@ export function BenchNav({ current }: { current: "box" | "log" | "materials" }) 
   );
 }
 
+/**
+ * Pictures of flies in the visitor's colours, drawn here in one offscreen 3D view (the
+ * gallery's pictures are of the patterns as tied). null while drawing, or without WebGL.
+ */
+function useVariationPictures(flies: { key: string; recipe: Recipe }[]): Record<string, string | null> {
+  const [pictures, setPictures] = useState<Record<string, string>>({});
+  const keys = flies.map((f) => f.key).join("\n");
+  useEffect(() => {
+    if (flies.length === 0) return;
+    const host = document.createElement("div");
+    host.style.cssText = "position:fixed;left:-10000px;top:0;width:600px;height:400px";
+    document.body.appendChild(host);
+    let scene: FlyScene | null = null;
+    const drawn: Record<string, string> = {};
+    try {
+      scene = new FlyScene(host, { background: null, fov: 20 });
+      for (const f of flies) {
+        const build = simulate(f.recipe);
+        scene.setBuild(build);
+        // As the gallery pictures them: point-up flies point up.
+        scene.setTurnedOver(ridesPointUp(f.recipe));
+        scene.setTime(build.duration);
+        scene.setView("default");
+        drawn[f.key] = scene.snapshot().toDataURL("image/png");
+      }
+    } catch {
+      // No WebGL: the plates go without pictures.
+    }
+    scene?.dispose();
+    host.remove();
+    setPictures(drawn);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keys]);
+  return Object.fromEntries(flies.map((f) => [f.key, pictures[f.key] ?? null]));
+}
+
 export function FlyBox() {
   const box = useStoredSet(FLY_BOX_KEY);
   const renders = useRenders();
@@ -39,6 +80,18 @@ export function FlyBox() {
     document.title = "Fly box, Flybench";
   }, []);
   const saved = CATALOG.filter((e) => box.has(e.recipe.id));
+  // Flies saved in the visitor's colours: "id?colours=…" entries.
+  const variations = [...box.values].flatMap((value) => {
+    const { id, colours } = parseBoxEntry(value);
+    const recipe = findPattern(id)?.recipe;
+    const entry = recipe && CATALOG.find((e) => e.recipe.id === (recipe.variantOf ?? recipe.id));
+    if (!colours || !recipe || !entry) return [];
+    const parsed = parseColours(colours, recipe);
+    return Object.keys(parsed).length
+      ? [{ value, recipe: recolor(recipe, parsed), entry, colours: coloursSpec(parsed, recipe), text: coloursText(parsed, recipe) }]
+      : [];
+  });
+  const pictures = useVariationPictures(useMemo(() => variations.map((v) => ({ key: v.value, recipe: v.recipe })), [variations.map((v) => v.value).join("\n")]));
   return (
     <main className="gallery">
       <BenchNav current="box" />
@@ -47,7 +100,7 @@ export function FlyBox() {
         <p>Flies you have saved.</p>
         <p className="stored-note">{STORED_NOTE}</p>
       </section>
-      {saved.length === 0 ? (
+      {saved.length === 0 && variations.length === 0 ? (
         <div className="empty-results">
           <p>Your fly box is empty.</p>
           <p>
@@ -55,11 +108,35 @@ export function FlyBox() {
           </p>
         </div>
       ) : (
-        <ul className="plates boxed">
-          {saved.map((e) => (
-            <Plate key={e.recipe.id} entry={e} render={renders?.[e.recipe.id]} />
-          ))}
-        </ul>
+        <>
+          <ul className="plates boxed">
+            {saved.map((e) => (
+              <Plate key={e.recipe.id} entry={e} render={renders?.[e.recipe.id]} />
+            ))}
+          </ul>
+          {variations.length > 0 && (
+            <>
+              <h2 className="box-heading">In your colours</h2>
+              <ul className="plates boxed">
+                {variations.map((v) => (
+                  <Plate
+                    key={v.value}
+                    entry={v.entry}
+                    render={renders?.[v.entry.recipe.id]}
+                    picture={pictures[v.value]}
+                    link={href.fly(v.recipe.id, undefined, undefined, v.colours)}
+                    note={`${v.recipe.variant ? `${v.recipe.variant}. ` : ""}${v.text}`}
+                    action={
+                      <button className="link-button plate-remove" onClick={() => box.set(v.value, false)}>
+                        Remove from your fly box
+                      </button>
+                    }
+                  />
+                ))}
+              </ul>
+            </>
+          )}
+        </>
       )}
     </main>
   );
