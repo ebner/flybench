@@ -221,7 +221,7 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     text, built from the schema, edits every field with sliders, numbers, menus and colour
     pickers, and writes back into the KDL text without disturbing its comments; the text stays
     the source of truth.
-16. A public fly editor ("Build a fly"). Visitors build their own fly, from scratch or as a copy
+16. ✅ A public fly editor ("Build a fly"). Visitors build their own fly, from scratch or as a copy
     of a pattern: hook and size, thread, materials from the catalog with colours, tying steps
     from a menu with their settings, the 3D fly and the generated steps (in the page's language)
     following as they go, with the tying rules' warnings. Saved only in the browser (a new

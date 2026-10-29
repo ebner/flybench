@@ -1,12 +1,13 @@
 # Translating Flybench
 
 Flybench is in English, Swedish and German. English is at the site's root, the others under
-`/sv/` and `/de/`. Four kinds of text are translated, each in its own place:
+`/sv/` and `/de/`. Five kinds of text are translated, each in its own place:
 
 | What | Where | Notes |
 |---|---|---|
 | The interface (buttons, headings, page texts) | `src/i18n/ui/sv.ts`, `de.ts` | Typed: a missing or misnamed string fails `pnpm typecheck`. |
 | Catalog words (fly types, fish, regions, months, natural groups) | `src/catalog/describe.ts`, `naturals.ts`, `trip.ts`, `src/i18n/months.ts` | `localized({ en, sv, de })` records. |
+| The tying rules' messages (what the fly builder says is wrong or left to do) | `src/i18n/rules/en.ts`, `sv.ts`, `de.ts` | Typed: one message for every rule in `src/recipe/rules.ts`; tested. Written for visitors, without the recipe's keywords. |
 | Generated texts (step instructions, titles, the dressing) | written by `src/tying/describe-sv.ts` and `describe-de.ts` | Their words, with all their forms, come from the glossary: see [glossary.md](glossary.md). |
 | Prose people wrote (a pattern's description, history, how to fish it, labels, step notes and mistakes; naturals; techniques) | `translations/<lang>/patterns/<id>.kdl`, `translations/<lang>/naturals/<id>.kdl`, `src/catalog/techniques-sv.ts`, `-de.ts` | Below. |
 

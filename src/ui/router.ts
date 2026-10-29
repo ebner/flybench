@@ -27,6 +27,7 @@ export type Route =
   | { page: "materials" }
   | { page: "log" }
   | { page: "trip"; query: string }
+  | { page: "build"; query: string }
   | { page: "naturals" }
   | { page: "natural"; id: string }
   | { page: "not-found"; path: string };
@@ -63,6 +64,7 @@ export function parseRoute(relative: string): Route {
     };
   }
   if (parts.length === 1 && parts[0] === "trip") return { page: "trip", query };
+  if (parts.length === 1 && parts[0] === "build") return { page: "build", query };
   if (parts.length === 1) {
     const single = SINGLE.find((p) => p === parts[0]);
     if (single) return { page: single };
@@ -78,7 +80,7 @@ export function legacyRoute(hash: string): Route | null {
   const raw = hash.slice(2);
   const parts = (raw.split("?")[0] ?? "").split("/").filter(Boolean);
   // #/<id> was the first form of a pattern link.
-  const single = parts.length === 1 && !SINGLE.some((p) => p === parts[0]) && parts[0] !== "trip";
+  const single = parts.length === 1 && !SINGLE.some((p) => p === parts[0]) && parts[0] !== "trip" && parts[0] !== "build";
   return parseRoute(single ? `fly/${raw}` : raw);
 }
 
@@ -102,6 +104,8 @@ export const href = {
   materials: () => `${root()}materials/`,
   log: () => `${root()}log/`,
   trip: (query = "") => `${root()}trip/${query ? `?${query}` : ""}`,
+  /** The fly builder: "edit=<own id>" or "from=<pattern id>"; a shared fly follows the "#". */
+  build: (query = "") => `${root()}build/${query ? `?${query}` : ""}`,
   naturals: () => `${root()}naturals/`,
   natural: (id: string) => `${root()}natural/${encodeURIComponent(id)}/`,
 };
@@ -119,6 +123,9 @@ export function routeHref(route: Route): string {
       return href.natural(route.id);
     case "trip":
       return href.trip(route.query);
+    case "build":
+      // A shared fly travels in the "#": another language keeps it.
+      return href.build(route.query) + (typeof location !== "undefined" && location.hash.startsWith("#fly=") ? location.hash : "");
     case "not-found":
       return root() + route.path;
     default:
@@ -143,8 +150,20 @@ const NAVIGATE = "flybench:navigate";
 let restoring = false;
 export const restoresScroll = () => restoring;
 
+/**
+ * Asked before the app leaves a page for another (a link, the language menu, Back): false keeps
+ * the visitor where they are. The fly builder sets it while it has unsaved changes.
+ */
+let leaveGuard: (() => boolean) | null = null;
+export function setLeaveGuard(guard: (() => boolean) | null) {
+  leaveGuard = guard;
+}
+/** The address the app shows (without a "#"), to go back to when Back is refused. */
+let shown = "";
+
 /** Goes to an address on this site without reloading the page. */
 export function navigate(url: string) {
+  if (leaveGuard && !leaveGuard()) return;
   history.pushState(null, "", url);
   window.dispatchEvent(new Event(NAVIGATE));
 }
@@ -180,12 +199,19 @@ export function useRoute(): Route {
   });
   useEffect(() => {
     const update = (e: Event) => {
+      // Back or Forward away from a page that asks first: stay, and put its address back.
+      if (e.type === "popstate" && leaveGuard && location.pathname + location.search !== shown && !leaveGuard()) {
+        history.pushState(null, "", shown);
+        return;
+      }
       restoring = e.type === "popstate";
       const relative = currentRelative();
       const legacy = legacyRoute(location.hash);
       if (legacy) history.replaceState(null, "", routeHref(legacy));
       setRoute(legacy ?? parseRoute(relative));
+      shown = location.pathname + location.search;
     };
+    shown = location.pathname + location.search;
     const onClick = (e: MouseEvent) => {
       const a = internalLink(e);
       if (!a) return;

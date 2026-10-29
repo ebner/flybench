@@ -52,7 +52,8 @@ src/tying/      hook.ts (hook models, sizes), simulate.ts (recipe → timeline o
                 pieces as plain data), describe.ts (instruction text, materials list: a step
                 analysed, then written by describe-sv.ts / describe-de.ts in other languages)
 src/i18n/       lang.ts (the page's language, from the address), localized.ts, ui/ (the
-                interface's words per language), glossary.ts, grammar.ts, prose.ts
+                interface's words per language), rules/ (the tying rules' messages for visitors),
+                glossary.ts, grammar.ts, prose.ts
 src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends, naturals,
                 water (the drawn in-the-water view: its own clock, also a pure function of time),
                 real/ (the realistic river: RealWater, gravel, panorama assets; trace.ts path
@@ -60,16 +61,18 @@ src/render/     three.js: FlyScene (scene = pure function of time), pieces, loos
 src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook, for its picture),
                 pages.ts (every page's title, description and
                 static HTML for the build; no React; tested in Node)
-src/studio/     the authoring studio (dev server only): kdlEdit.ts edits KDL text in place
-                (format-preserving), schemaForm.ts describes the form from the Zod schemas
-src/ui/         React UI (path routing under the base, theme, gallery, pattern page, about)
+src/edit/       editing recipes (no React): kdlEdit.ts edits KDL text in place (format-preserving),
+                schemaForm.ts describes a form from the Zod schemas, write.ts writes a recipe as KDL,
+                own.ts the visitors' own flies (fly builder: drafts, starting values, share links)
+src/studio/     the authoring studio (dev server only), on src/edit
+src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder, about)
 scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
 public/renders/ generated gallery images, material swatches (materials/) and water stills
                 (water/), committed; regenerate after recipe/renderer changes
 public/env/     the realistic water's panorama and gravel (Poly Haven, CC0), served by the site
 ```
 
-- `src/recipe` and `src/tying` must not import three.js or React; they are unit-tested in Node.
+- `src/recipe`, `src/tying` and `src/edit` must not import three.js or React; they are unit-tested in Node.
 - The renderer derives everything from `simulate()` output. `FlyScene.setTime(t)` must show
   exactly the state at `t` with no accumulated state, so scrubbing and replay stay correct.
 - Use seeded randomness (`render/random.ts`) so fibres look the same on every render.
@@ -103,7 +106,8 @@ state of the app; keep it true, or re-evaluate:
   served by the site itself. Links out to sources are fine; loading from them is not.
 - Browser storage (`localStorage`) holds only what the visitor asks for: the theme, the
   camera-follow setting, the fly box, the materials inventory, the hatch calendar's
-  region and the tying log (keys `flybench.*`). The
+  region, the tying log and the flies they build (keys `flybench.*`). A link to share
+  an own fly carries it after the `#`, which browsers don't send to a server. The
   service worker caches the site's own files for offline use.
 - No data leaves the browser; the only server is GitHub Pages, which logs IP addresses.
 

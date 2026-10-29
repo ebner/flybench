@@ -30,6 +30,8 @@ describe("routes", () => {
     expect(parseRoute("fly/red-tag/?size=abc")).toEqual({ page: "fly", id: "red-tag" });
     expect(parseRoute(rel(href.technique("wing-case")))).toEqual({ page: "technique", id: "wing-case" });
     expect(parseRoute(rel(href.gallery("type=dry")))).toEqual({ page: "gallery", query: "type=dry" });
+    expect(parseRoute(rel(href.build("from=red-tag")))).toEqual({ page: "build", query: "from=red-tag" });
+    expect(parseRoute(rel(href.build()))).toEqual({ page: "build", query: "" });
     for (const page of ["techniques", "learn", "about", "box", "materials"] as const) {
       expect(parseRoute(rel(routeHref({ page })))).toEqual({ page });
     }

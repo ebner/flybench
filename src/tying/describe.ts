@@ -1,4 +1,4 @@
-import { hookModel, ridesPointUp, trebleSize, unitMm } from "./hook";
+import { hookModel, modelLabel, ridesPointUp, trebleSize, unitMm } from "./hook";
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import { NAMED_COLORS, type Material, type NamedColor, type Recipe, type Step } from "../recipe/schema";
 import type { MaterialKind } from "../recipe/materials";
@@ -37,6 +37,11 @@ export function kindName(kind: MaterialKind): string {
  */
 export function needName(kind: MaterialKind, color: string): string {
   return writer().materialName({ id: kind, kind, ...(color in NAMED_COLORS ? { color: color as NamedColor } : {}) });
+}
+
+/** A hook model's or tube's name in the page's language, without a size or length (a menu of hooks). */
+export function hookModelName(model: Recipe["hook"]["model"]): string {
+  return writer().hookName(model, modelLabel(model));
 }
 
 /** A colour's word in the page's language ("red", "röd", "rot"); a material's own colour is "natural". */
@@ -508,6 +513,11 @@ const writer = () => WRITERS[lang()]();
 /** Instruction text for one step, generated from the recipe; the step's note is appended. */
 export function stepText(recipe: Recipe, step: Step, ctx: StepContext = {}): string {
   return writer().text(analyse(recipe, step, ctx), recipe, step.note);
+}
+
+/** A kind of step on its own ("Tie in", "Wind"), as a menu of steps names it. */
+export function opTitle(op: Step["op"]): string {
+  return writer().title(op, undefined, undefined);
 }
 
 export function stepTitle(recipe: Recipe, step: Step, ctx: StepContext = {}): string {

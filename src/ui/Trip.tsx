@@ -5,6 +5,9 @@ import { REGION_LABELS } from "../catalog/naturals";
 import { sizesText, suggestBox, WATER_LABELS, type Species, type Suggestion, type Water } from "../catalog/trip";
 import { localNaturals } from "../naturals";
 import { PATTERNS } from "../patterns";
+import { isOwnId } from "../edit/own";
+import { useOwnFlies } from "./ownFlies";
+import { useFlyPictures } from "./pictures";
 import { REGIONS } from "../recipe/natural";
 import { SPECIES } from "../recipe/schema";
 import { MONTH_NAMES } from "../i18n/months";
@@ -71,9 +74,15 @@ export function Trip({ query }: { query: string }) {
     if (query === "") replaceUrl(href.trip(written.current));
     else setTrip(readQuery(query));
   }, [query]);
+  // The visitor's own finished flies are candidates too.
+  const own = useOwnFlies();
+  const yours = useMemo(() => own.flies.flatMap((f) => f.recipe ?? []), [own.flies]);
   const suggestions = useMemo(
-    () => (region ? suggestBox(PATTERNS.map((p) => p.recipe), localNaturals(), { region, ...trip }) : []),
-    [region, trip, lang()],
+    () => (region ? suggestBox([...PATTERNS.map((p) => p.recipe), ...yours], localNaturals(), { region, ...trip }) : []),
+    [region, trip, lang(), yours],
+  );
+  const pictures = useFlyPictures(
+    useMemo(() => suggestions.filter((s) => isOwnId(s.recipe.id)).map((s) => ({ key: s.recipe.id, recipe: s.recipe })), [suggestions]),
   );
   const chosen = suggestions.slice(0, BOX_SIZE);
   const more = suggestions.slice(BOX_SIZE);
@@ -85,7 +94,11 @@ export function Trip({ query }: { query: string }) {
     return (
       <li key={s.recipe.id} className="trip-fly">
         <a className="trip-picture" href={href.fly(s.recipe.id)} tabIndex={-1} aria-hidden="true">
-          {info && <img src={renderUrls(s.recipe.id, info).card} alt="" width={150} height={100} loading="lazy" />}
+          {info ? (
+            <img src={renderUrls(s.recipe.id, info).card} alt="" width={150} height={100} loading="lazy" />
+          ) : (
+            pictures[s.recipe.id] && <img src={pictures[s.recipe.id]!} alt="" width={150} height={100} />
+          )}
         </a>
         <div>
           <a href={href.fly(s.recipe.id)} className="trip-name">

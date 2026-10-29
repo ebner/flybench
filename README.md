@@ -25,7 +25,12 @@ pages for following along at the bench. "Try other colours" on a pattern page ch
 part's colour: the 3D fly, the steps and the dressing follow, the colours go into the
 address (`?colours=body:yellow`), and a variation can be saved to the fly box. A fly box for
 a trip (`/trip/`) suggests a dozen patterns and their sizes for a region, month, water and
-fish, from the hatch calendar. The built site installs as an app and works offline after
+fish, from the hatch calendar. "Build a fly" (`/build/`) makes a fly of your own, from a
+bare hook or a copy of a pattern: hook, thread, materials and steps chosen from menus, with
+the 3D fly, the written steps and the tying rules (in the page's language) following each
+change. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
+log and the trip box, can be downloaded as a recipe file, and shared as a link that carries
+the whole fly after the `#`. The built site installs as an app and works offline after
 the first visit.
 
 The site is in English, Swedish (`/sv/`) and German (`/de/`), every page prerendered in each.
@@ -122,7 +127,10 @@ src/render/        three.js scene built from the timeline; real/ the realistic r
 src/i18n/          languages: the interface's words, the glossary and grammar, prose translations
 src/catalog/       catalog search and wording, and the site's pages with their titles,
                    descriptions and text for the build (plain logic, tested in Node)
-src/ui/            React UI: gallery, pattern page, viewer, theme, routing
+src/edit/          editing recipes, shared by the studio and the fly builder: KDL edited in
+                   place, forms from the schemas, recipes written as KDL, visitors' own flies
+                   and their share links (plain logic, tested in Node)
+src/ui/            React UI: gallery, pattern page, viewer, fly builder, theme, routing
 src/studio/        the authoring studio (studio.html, dev server only)
 public/renders/    rendered gallery images, material swatches and water stills (generated, committed)
 public/env/        the realistic water's river panorama and gravel (Poly Haven, CC0)

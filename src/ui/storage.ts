@@ -10,7 +10,8 @@ const memory = new Map<string, unknown[]>();
 /** Keys whose last write didn't reach storage (full, or blocked): memory has the newer value. */
 const unsaved = new Set<string>();
 
-function readList(key: string): unknown[] {
+/** A stored list as it is now, outside a component. */
+export function readList(key: string): unknown[] {
   if (unsaved.has(key)) return memory.get(key) ?? [];
   try {
     const v = JSON.parse(localStorage.getItem(key) ?? "[]");
@@ -110,3 +111,4 @@ export const FLY_BOX_KEY = "flybench.flybox";
 export const INVENTORY_KEY = "flybench.inventory";
 export const REGION_KEY = "flybench.region";
 export const LOG_KEY = "flybench.log";
+export const OWN_FLIES_KEY = "flybench.flies";

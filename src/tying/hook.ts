@@ -126,6 +126,11 @@ const TUBES: Record<TubeModelId, { label: string; diameter: number; color: strin
 
 const DEFAULT_TREBLE = 12;
 
+/** A hook model's or tube's English name on its own, without a length. */
+export function modelLabel(model: HookModelId | TubeModelId): string {
+  return isTube(model) ? TUBES[model].label : HOOK_MODELS[model].label;
+}
+
 /** A heavy (copper or brass) tube, which sinks the fly tied on it. */
 export function heavyTube(hook: Recipe["hook"]): boolean {
   return isTube(hook.model) && TUBES[hook.model].heavy === true;

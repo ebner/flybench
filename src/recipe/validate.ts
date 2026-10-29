@@ -1,4 +1,5 @@
 import type { RecipeError } from "./errors";
+import { RULES, type RuleKey, type RuleParams } from "./rules";
 import { MATERIALS, WINDABLE, type Archetype } from "./materials";
 import type { Recipe } from "./schema";
 
@@ -28,11 +29,12 @@ const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
  */
 export function validateSemantics(recipe: Recipe): RecipeError[] {
   const errors: RecipeError[] = [];
-  const err = (message: string, path: (string | number)[]) => errors.push({ message, path });
+  const rule = <K extends RuleKey>(key: K, params: RuleParams<K>, path: (string | number)[]) =>
+    errors.push({ message: (RULES[key] as (p: RuleParams<K>) => string)(params), path, rule: key, params: params as Record<string, unknown> });
 
   const archetypes = new Map<string, Archetype>();
   recipe.materials.forEach((m, i) => {
-    if (archetypes.has(m.id)) err(`material "${m.id}" is defined more than once`, ["materials", i, "id"]);
+    if (archetypes.has(m.id)) rule("duplicateMaterial", { m: m.id }, ["materials", i, "id"]);
     archetypes.set(m.id, MATERIALS[m.kind].archetype);
   });
 
@@ -53,11 +55,11 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     const path = ["steps", i];
     // Trimming after the whip finish is common (heads, hackles); nothing else is.
     if (finished && step.op !== "trim") {
-      err("nothing but trimming can follow the whip finish", path);
+      rule("afterWhipFinish", {}, path);
       return;
     }
     if ("material" in step && !archetypes.has(step.material)) {
-      err(`unknown material "${step.material}"`, [...path, "material"]);
+      rule("unknownMaterial", { m: step.material }, [...path, "material"]);
       return;
     }
     const archetype = "material" in step ? archetypes.get(step.material)! : null;
@@ -67,7 +69,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       const p = pending;
       pending = null;
       if (!p.rear && !(step.op === "tie-off" && step.material === p.material)) {
-        err(`"${p.material}" was just wound and must be tied off before anything else`, path);
+        rule("tieOffNext", { m: p.material }, path);
       } else if (p.rear) {
         const end = materials.get(p.material)!;
         // Wound forward from at or behind the palmered tip, and over it.
@@ -78,97 +80,97 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           step.to !== undefined &&
           step.to > end.at + POSITION_TOLERANCE;
         if (securing) end.state = "secured";
-        else err(`"${p.material}" was palmered back and must be secured by winding another material forward over its tip`, path);
+        else rule("securePalmer", { m: p.material }, path);
       }
     }
 
     // Steps that can come before the thread.
     if (step.op === "slide-bead") {
-      if (archetype !== "bead") err(`"${step.material}" is not a bead`, [...path, "material"]);
-      else if (thread !== null) err("slide the bead on before attaching the thread", path);
+      if (archetype !== "bead") rule("notABead", { m: step.material }, [...path, "material"]);
+      else if (thread !== null) rule("beadBeforeThread", {}, path);
       // A bead can't pass over wire already on the shank.
-      else if (weighted) err("slide the bead on before weighting the shank", path);
-      else if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, path);
+      else if (weighted) rule("beadBeforeWeight", {}, path);
+      else if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, path);
       else materials.set(step.material, { state: "done", at: 1, butts: false });
       return;
     }
     if (step.op === "weight") {
-      if (archetype !== "wire") err(`weighting is done with wire, not "${step.material}"`, [...path, "material"]);
-      if (step.to <= step.from + POSITION_TOLERANCE) err("the weighting must run forward from `from` to `to`", [...path, "to"]);
-      if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, [...path, "material"]);
+      if (archetype !== "wire") rule("weightWithWire", { m: step.material }, [...path, "material"]);
+      if (step.to <= step.from + POSITION_TOLERANCE) rule("weightForward", {}, [...path, "to"]);
+      if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, [...path, "material"]);
       else materials.set(step.material, { state: "done", at: step.from, butts: false });
       weighted = true;
       return;
     }
     if (step.op === "attach-thread") {
-      if (thread !== null) err("the thread is already attached", path);
+      if (thread !== null) rule("threadAttached", {}, path);
       thread = step.at;
       return;
     }
     if (thread === null) {
-      err("the thread must be attached first", path);
+      rule("threadFirst", {}, path);
       return;
     }
 
 
     switch (step.op) {
       case "wrap-thread":
-        if (Math.abs(step.to - thread) < POSITION_TOLERANCE) err("the thread is already there", [...path, "to"]);
+        if (Math.abs(step.to - thread) < POSITION_TOLERANCE) rule("threadThere", {}, [...path, "to"]);
         thread = step.to;
         break;
       case "dub":
         if (archetype !== "dubbing") {
-          err(`only dubbing can be dubbed; tie in "${step.material}" instead`, [...path, "material"]);
+          rule("onlyDubbing", { m: step.material }, [...path, "material"]);
         } else if (Math.abs(step.to - thread) < POSITION_TOLERANCE) {
-          err("the thread is already there", [...path, "to"]);
+          rule("threadThere", {}, [...path, "to"]);
         }
         thread = step.to;
         break;
       case "spin":
-        if (archetype !== "hair") err(`only hair can be spun, not "${step.material}"`, [...path, "material"]);
-        else if (step.to <= thread + POSITION_TOLERANCE) err("spin the hair forward from the thread", [...path, "to"]);
-        else if (materials.has(step.material)) err(`"${step.material}" is already on the hook`, [...path, "material"]);
+        if (archetype !== "hair") rule("onlyHairSpun", { m: step.material }, [...path, "material"]);
+        else if (step.to <= thread + POSITION_TOLERANCE) rule("spinForward", {}, [...path, "to"]);
+        else if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, [...path, "material"]);
         else materials.set(step.material, { state: "done", at: thread, butts: true });
         thread = step.to;
         break;
       case "tie-in": {
         if (archetype === "dubbing") {
-          err(`dubbing is applied to the thread with "dub", not tied in`, [...path, "material"]);
+          rule("dubNotTie", {}, [...path, "material"]);
           break;
         }
         if (archetype === "bead") {
-          err(`beads go on with "slide-bead" before the thread`, [...path, "material"]);
+          rule("beadSlides", {}, [...path, "material"]);
           break;
         }
-        if (step.forward && archetype === "feather") err("feathers are tied in pointing back, not forward", [...path, "forward"]);
+        if (step.forward && archetype === "feather") rule("featherBack", {}, [...path, "forward"]);
         // A feather slip pulled over as a wing case lies on the body instead of sticking out.
         const pulledOver = recipe.steps.slice(i + 1).some((s) => s.op === "pull-over" && s.material === step.material);
         if (NEEDS_LENGTH.includes(archetype!) && step.length === undefined && !(archetype === "feather" && pulledOver)) {
-          err(`${MATERIALS[recipe.materials.find((m) => m.id === step.material)!.kind].name} sticks out from where it is tied in, so it needs a length`, [...path, "material"]);
+          rule("needsLength", { kind: recipe.materials.find((m) => m.id === step.material)!.kind }, [...path, "material"]);
         }
-        if (archetype === "eyes" && step.length !== undefined) err("eyes do not take a length", [...path, "length"]);
+        if (archetype === "eyes" && step.length !== undefined) rule("eyesNoLength", {}, [...path, "length"]);
         if (step.angle !== undefined && step.length === undefined) {
-          err("an angle only applies to material tied in with a length", [...path, "angle"]);
+          rule("angleNeedsLength", {}, [...path, "angle"]);
         }
         if (step.spread !== undefined && step.length === undefined) {
-          err("spread only applies to tags, tails and wings tied in with a length", [...path, "spread"]);
+          rule("spreadOnly", {}, [...path, "spread"]);
         }
         if (step.width !== undefined && archetype !== "feather") {
-          err("width only applies to feather wings", [...path, "width"]);
+          rule("widthOnly", {}, [...path, "width"]);
         }
         if (step.side !== undefined && step.length === undefined && archetype !== "eyes") {
-          err("side only applies to tails, beards, wings and eyes", [...path, "side"]);
+          rule("sideOnly", {}, [...path, "side"]);
         }
         if (step.side === "across" && !ACROSS.includes(archetype!)) {
-          err("only legs and strands of hair, fibres, biots or flash can be tied across the shank", [...path, "side"]);
+          rule("acrossOnly", {}, [...path, "side"]);
         }
-        if (step.forward && step.length === undefined) err("forward only applies to material tied in with a length", [...path, "forward"]);
-        if (step.forward && (step.angle ?? 0) >= 60) err("a material pointing forward can't also stand upright", [...path, "angle"]);
+        if (step.forward && step.length === undefined) rule("forwardNeedsLength", {}, [...path, "forward"]);
+        if (step.forward && (step.angle ?? 0) >= 60) rule("forwardUpright", {}, [...path, "angle"]);
         if (step.extended && (!EXTENDABLE.includes(archetype!) || step.length === undefined)) {
-          err("only chenille, yarn or foam tied in with a length can be extended", [...path, "extended"]);
+          rule("extendedOnly", {}, [...path, "extended"]);
         }
-        if (step.tip !== undefined && !step.extended) err("tip only applies to extended bodies", [...path, "tip"]);
-        if (materials.has(step.material)) err(`"${step.material}" is already tied in`, [...path, "material"]);
+        if (step.tip !== undefined && !step.extended) rule("tipOnly", {}, [...path, "tip"]);
+        if (materials.has(step.material)) rule("alreadyTiedIn", { m: step.material }, [...path, "material"]);
         else {
           materials.set(step.material, {
             // Eyes, extended bodies and legs across the shank are finished once tied in.
@@ -191,29 +193,29 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       case "wind": {
         const m = materials.get(step.material);
         if (!m) {
-          err(`"${step.material}" must be tied in before it can be wound`, [...path, "material"]);
+          rule("tieInBeforeWind", { m: step.material }, [...path, "material"]);
           break;
         }
         if (m.state !== "tied-in") {
-          err(`"${step.material}" has already been wound`, [...path, "material"]);
+          rule("alreadyWound", { m: step.material }, [...path, "material"]);
           break;
         }
         if (!WINDABLE.includes(archetype!)) {
-          err(`${archetype} can't be wound`, [...path, "material"]);
+          rule("cantWind", { kind: recipe.materials.find((m) => m.id === step.material)!.kind }, [...path, "material"]);
           break;
         }
         if ((step.to === undefined) === (step.around === undefined)) {
-          err("give either `to` (along the shank) or `around` (a parachute post)", path);
+          rule("toOrAround", {}, path);
           break;
         }
         if (step.counter && step.around !== undefined) {
-          err("counter applies to winding along the shank, not round a post", [...path, "counter"]);
+          rule("counterAlong", {}, [...path, "counter"]);
           break;
         }
         if (step.around !== undefined) {
           const post = materials.get(step.around);
-          if (archetype !== "hackle") err("only hackle is wound around a post", [...path, "material"]);
-          else if (!post?.post) err(`"${step.around}" must be a bunch tied in upright (angle 60° or more) to be a post`, [...path, "around"]);
+          if (archetype !== "hackle") rule("hackleAroundPost", {}, [...path, "material"]);
+          else if (!post?.post) rule("notAPost", { post: step.around }, [...path, "around"]);
           m.state = "wound";
           m.wound = true;
           pending = { material: step.material, rear: false };
@@ -221,15 +223,15 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         }
         const to = step.to!;
         if (Math.abs(to - m.at) <= POSITION_TOLERANCE) {
-          err(`"${step.material}" is tied in at ${m.at}; wind it forward or back from there`, [...path, "to"]);
+          rule("windFromTieIn", { m: step.material, at: m.at }, [...path, "to"]);
           break;
         }
         const rear = to < m.at;
         // Wound forward, a material ends where the thread is, to be tied off there.
         if (!rear && to > thread + POSITION_TOLERANCE) {
-          err(`the thread is at ${thread}; move it to ${to} before winding there`, [...path, "to"]);
+          rule("threadElsewhere", { thread, to }, [...path, "to"]);
         } else if (!rear && to < thread - POSITION_TOLERANCE) {
-          err(`the thread is at ${thread}; wind forward to it, or move the thread back to ${to} first`, [...path, "to"]);
+          rule("windToThread", { thread, to }, [...path, "to"]);
         }
         m.state = rear ? "wound-rear" : "wound";
         m.wound = true;
@@ -240,13 +242,13 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       case "pull-over": {
         const m = materials.get(step.material);
         if (!m || m.state !== "tied-in") {
-          err(`"${step.material}" must be tied in (and not yet used) before it is pulled over`, [...path, "material"]);
+          rule("tieInBeforePull", { m: step.material }, [...path, "material"]);
           break;
         }
-        if (step.to <= m.at + POSITION_TOLERANCE) err(`pull "${step.material}" forward from where it is tied in`, [...path, "to"]);
+        if (step.to <= m.at + POSITION_TOLERANCE) rule("pullForward", { m: step.material }, [...path, "to"]);
         // Tied down by the thread, so it ends where the thread is.
         if (Math.abs(step.to - thread) > POSITION_TOLERANCE) {
-          err(`the thread is at ${thread}; move it to ${step.to} to tie the material down there`, [...path, "to"]);
+          rule("threadForPull", { thread, to: step.to }, [...path, "to"]);
         }
         m.state = "done";
         // Foam is cut after it is tied down, flush or leaving a head; other strips are trimmed at once.
@@ -255,15 +257,15 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       }
       case "tie-off": {
         const m = materials.get(step.material);
-        if (!m || m.state !== "wound") err(`"${step.material}" must be wound forward before it is tied off`, [...path, "material"]);
+        if (!m || m.state !== "wound") rule("windBeforeTieOff", { m: step.material }, [...path, "material"]);
         else m.state = "done";
         break;
       }
       case "trim": {
         const m = materials.get(step.material);
         if (step.keep !== undefined) {
-          if (archetype !== "hackle" || m?.state !== "done" || !m.wound) err("keep only applies to a hackle that has been wound and tied off", [...path, "keep"]);
-          else if (m.kept) err(`"${step.material}" has already been trimmed with keep`, [...path, "keep"]);
+          if (archetype !== "hackle" || m?.state !== "done" || !m.wound) rule("keepOnly", {}, [...path, "keep"]);
+          else if (m.kept) rule("alreadyKept", { m: step.material }, [...path, "keep"]);
           else m.kept = true;
           break;
         }
@@ -272,13 +274,13 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         } else if (m?.butts) {
           m.butts = false;
         } else {
-          err(`there is nothing of "${step.material}" to trim`, [...path, "material"]);
+          rule("nothingToTrim", { m: step.material }, [...path, "material"]);
         }
         if (step.leave !== undefined && archetype !== "hair" && archetype !== "foam") {
-          err("leave only applies to hair butts, spun hair and foam backs", [...path, "leave"]);
+          rule("leaveOnly", {}, [...path, "leave"]);
         }
         if (step.shape !== undefined && archetype !== "hair") {
-          err("shape only applies to trimming spun hair or hair butts", [...path, "shape"]);
+          rule("shapeOnly", {}, [...path, "shape"]);
         }
         break;
       }
@@ -290,18 +292,18 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
 
   if (pending) {
     const p = pending as { material: string; rear: boolean };
-    err(`"${p.material}" is wound but never ${p.rear ? "secured" : "tied off"}`, ["steps", recipe.steps.length - 1]);
+    rule("neverTiedOff", { m: p.material, rear: p.rear }, ["steps", recipe.steps.length - 1]);
   }
   for (const [id, m] of materials) {
-    if (m.state === "secured") err(`the tip of "${id}" is still hanging at the bend; trim it`, ["steps"]);
+    if (m.state === "secured") rule("trimTip", { m: id }, ["steps"]);
     if (m.state === "tied-in" && m.hanging !== undefined) {
-      err(`"${id}" is tied in but never wound or pulled over`, ["steps", m.hanging, "material"]);
+      rule("neverUsedAfterTieIn", { m: id }, ["steps", m.hanging, "material"]);
     }
   }
   const used = new Set(recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : []].flat()));
   recipe.materials.forEach((m, i) => {
-    if (!used.has(m.id)) err(`"${m.id}" is listed but never used`, ["materials", i, "id"]);
+    if (!used.has(m.id)) rule("neverUsed", { m: m.id }, ["materials", i, "id"]);
   });
-  if (!finished) err("the fly must end with a whip finish", ["steps"]);
+  if (!finished) rule("endWithWhipFinish", {}, ["steps"]);
   return errors;
 }

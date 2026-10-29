@@ -277,7 +277,7 @@ export const de: Writer = {
   threadName: (c) => capitalize(phrase(word("thread"), colour(c))),
   hookName: (model, english, length) => {
     const name = term("de", "hooks", model, "phrase").text;
-    return isTube(model) ? `${name}, ${length} mm` : name || english;
+    return isTube(model) && length !== undefined ? `${name}, ${length} mm` : name || english;
   },
   role: (id) => word(id).text,
   partName,

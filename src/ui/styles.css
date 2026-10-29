@@ -2399,3 +2399,318 @@ select {
     justify-self: start;
   }
 }
+
+/* The fly builder: the pattern page's stage, with the recipe as a form beside it. */
+
+.build .now {
+  --now-height: 24%;
+}
+
+.build-shown {
+  margin: 0.3rem 0 0;
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.build-note {
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+}
+
+.build-note.problem,
+.build-problems {
+  color: var(--danger);
+}
+
+.build-note.problem {
+  border-left-color: var(--danger);
+}
+
+.build-start {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.build-form select,
+.build-form input:not([type="checkbox"], [type="range"], [type="color"]),
+.build-form textarea {
+  max-width: 100%;
+  padding: 0.3rem 0.45rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.build-form textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+/* Label beside control, two columns wide; one column on a phone. */
+.build-fields {
+  display: grid;
+  grid-template-columns: minmax(6rem, auto) minmax(0, 1fr);
+  gap: 0.5rem 0.9rem;
+  align-items: center;
+  margin: 0.4rem 0;
+}
+
+.build-fields > label {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.build-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.build-control > select,
+.build-control > input:not([type="checkbox"]) {
+  flex: 1;
+  min-width: 0;
+}
+
+.build-number input {
+  width: 6rem;
+}
+
+.build-number {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.build-shank,
+.build-colour {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.build-shank input {
+  flex: 1;
+  min-width: 0;
+}
+
+.build-shank output {
+  min-width: 9rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.build-colour select {
+  flex: 1;
+  min-width: 0;
+}
+
+.build-colour input[type="color"] {
+  width: 2.2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--rule);
+  background: none;
+}
+
+.build-leave {
+  padding: 0 0.3rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.build-list {
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.build-list > li {
+  border-top: 1px solid var(--rule);
+}
+
+.build-list > li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.build-list summary,
+.build-step-title {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.build-step-number {
+  color: var(--ink-faint);
+  font-size: var(--step--1);
+}
+
+.build-steps > li.active > .build-step-title {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.build-list > li.has-problem > .build-step-title,
+.build-list > li.has-problem summary {
+  color: var(--danger);
+}
+
+.build-item {
+  padding: 0 0 0.75rem 0.75rem;
+  border-left: 2px solid var(--accent-wash);
+}
+
+.build-item-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.build-problems {
+  margin: 0.3rem 0 0.5rem;
+  padding-left: 1.1rem;
+  font-size: 0.95rem;
+}
+
+.build-add,
+.build-more {
+  margin-top: 0.3rem;
+}
+
+.build-hint {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.build-todo {
+  margin-top: 1.5rem;
+}
+
+.build-todo ul {
+  padding-left: 1.1rem;
+}
+
+.build-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.2rem;
+  margin-top: 1rem;
+}
+
+.build-actions .box-toggle {
+  margin-top: 0;
+}
+
+.link-button.danger {
+  color: var(--danger);
+}
+
+.build-link input {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 52rem) {
+  /* On a phone the form is the work: the fly keeps a shorter stage above it. */
+  .build .stage {
+    height: 60dvh;
+    --now-height: 32%;
+  }
+}
+
+@media (max-width: 30rem) {
+  .build-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+  }
+
+  .build-fields > label {
+    margin-top: 0.4rem;
+  }
+}
+
+.pattern-actions .build-link-out {
+  align-self: end;
+  padding: 0.3rem 0;
+}
+
+.your-flies {
+  margin: 2rem 0 2.5rem;
+}
+
+.your-flies h2 {
+  font-size: var(--step-3);
+  font-style: italic;
+}
+
+.your-unfinished {
+  padding-left: 1.1rem;
+}
+
+.build-choose {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.build-choose select {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.build-choose .box-toggle {
+  margin-top: 0;
+}
+
+.build-choose .box-toggle:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.build-choose label {
+  flex: 1 1 100%;
+}
+
+.build-species {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.build-species legend {
+  margin-bottom: 0.3rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.build-species label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}

@@ -9,6 +9,9 @@ export interface RecipeError {
   path: (string | number)[];
   line?: number;
   column?: number;
+  /** A tying rule's key and parameters (rules.ts), for saying it in another language. */
+  rule?: string;
+  params?: Record<string, unknown>;
 }
 
 export function formatError(e: RecipeError): string {

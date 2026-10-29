@@ -267,7 +267,7 @@ export const sv: Writer = {
   threadName: (c) => capitalize(svPhrase(word("thread"), colour(c), "indefinite")),
   hookName: (model, english, length) => {
     const name = term("sv", "hooks", model, "phrase").text;
-    return isTube(model) ? `${name}, ${length} mm` : name || english;
+    return isTube(model) && length !== undefined ? `${name}, ${length} mm` : name || english;
   },
   role: (id) => capitalize(word(id).text),
   partName,
