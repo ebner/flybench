@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { bestCoverage, catalogNeeds, colorWord, inventoryKey, missingKinds, shoppingList, type Need } from "../catalog/inventory";
+import { bestCoverage, catalogNeeds, inventoryKey, missingKinds, shoppingList, type Need } from "../catalog/inventory";
 import { CATALOG, findPattern } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
@@ -8,6 +8,8 @@ import { useRenders, useSwatches } from "./renders";
 import { swatchName } from "../catalog/swatch";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { colourWord, kindName, needName } from "../tying/describe";
+import { lang } from "../i18n/lang";
 import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 import { coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "../catalog/variation";
@@ -17,7 +19,6 @@ import { ridesPointUp } from "../tying/hook";
 import type { Recipe } from "../recipe/schema";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 /** Where the visitor's own things are kept, said on each of their pages. */
 export const storedNote = () => t.bench.stored;
@@ -96,7 +97,7 @@ export function FlyBox() {
   const renders = useRenders();
   useEffect(() => {
     document.title = t.site.titled(t.box.title);
-  }, []);
+  }, [lang()]);
   const saved = CATALOG.filter((e) => box.has(e.recipe.id));
   // Flies saved in the visitor's colours: "id?colours=…" entries.
   const variations = boxVariations(box.values);
@@ -164,8 +165,7 @@ function ShoppingList({ flies }: { flies: { recipe: Recipe; name: string }[] }) 
   );
   const nameOf = (r: Recipe) => flies.find((f) => f.recipe === r)!.name;
   const material = (n: Need) => {
-    const colour = colorWord(n.color, n.kind);
-    return capitalize(`${colour === "natural" ? "" : `${colour} `}${MATERIALS[n.kind].name}`);
+    return needName(n.kind, n.color);
   };
   const missing = list.filter((i) => i.status === "missing");
   const substitutes = list.filter((i) => i.status === "substitute");
@@ -226,7 +226,7 @@ export function Materials() {
   const swatches = useSwatches();
   useEffect(() => {
     document.title = t.site.titled(t.materials.title);
-  }, []);
+  }, [lang()]);
   // The colours the catalog uses, and those of the flies saved in other colours (so what their
   // shopping list asks for can be ticked here).
   const box = useStoredSet(FLY_BOX_KEY);
@@ -243,7 +243,7 @@ export function Materials() {
     }
     return kinds;
   }, [saved, ticked]);
-  const kinds = [...byKind.keys()].sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
+  const kinds = [...byKind.keys()].sort((a, b) => kindName(a).localeCompare(kindName(b), lang()));
   const family = (e: (typeof CATALOG)[number]) => missingKinds(bestCoverage([e.recipe, ...e.variants], owned.values));
   const tieable = CATALOG.filter((e) => family(e) === 0);
   const oneShort = CATALOG.filter((e) => family(e) === 1);
@@ -268,7 +268,7 @@ export function Materials() {
       <ul className="inventory">
         {kinds.map((kind: MaterialKind) => (
           <li key={kind}>
-            <span className="inventory-name">{capitalize(MATERIALS[kind].name)}</span>
+            <span className="inventory-name">{kindName(kind)}</span>
             <span className="chips">
               {byKind.get(kind)!.map((color) => {
                 const key = inventoryKey({ kind, color });
@@ -281,7 +281,7 @@ export function Materials() {
                     ) : (
                       <span className="swatch" style={{ background: resolveColor(color === "natural" ? "#999999" : color) }} aria-hidden="true" />
                     )}
-                    <span>{colorWord(color, kind)}</span>
+                    <span>{colourWord(color, kind)}</span>
                   </button>
                 );
               })}

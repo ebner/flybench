@@ -1,5 +1,9 @@
 import { NAMED_COLORS, type NamedColor, type Recipe } from "../recipe/schema";
 import { materialColor } from "./inventory";
+import { hasTerm, term } from "../i18n/glossary";
+import { deAdjective, inSentence } from "../i18n/grammar";
+import { colourWord, partLabel } from "../tying/describe";
+import { lang, type Lang } from "../i18n/lang";
 
 /**
  * A pattern in other colours: the colour playground. A variation is the recipe with some of
@@ -29,9 +33,12 @@ export function tiedColour(recipe: Recipe, part: string): string | undefined {
 export function parseColours(spec: string, recipe: Recipe): Colours {
   const colours: Colours = {};
   for (const pair of spec.split(",")) {
-    const [part = "", colour = ""] = pair.split(":");
-    const known = part === "thread" || recipe.materials.some((m) => m.id === part);
-    if (known && isNamed(colour) && tiedColour(recipe, part) !== colour) colours[part] = colour;
+    const [given = "", colour = ""] = pair.split(":");
+    // A part renamed since the link was made ("case" → "larva-case") is the one material
+    // whose id ends with the old name.
+    const renamed = recipe.materials.filter((m) => m.id.endsWith(`-${given}`));
+    const part = given === "thread" || recipe.materials.some((m) => m.id === given) ? given : renamed.length === 1 ? renamed[0]!.id : "";
+    if (part && isNamed(colour) && tiedColour(recipe, part) !== colour) colours[part] = colour;
   }
   return colours;
 }
@@ -42,8 +49,8 @@ export function coloursSpec(colours: Colours, recipe: Recipe): string {
   return order.filter((p) => colours[p]).map((p) => `${p}:${colours[p]}`).join(",");
 }
 
-/** The recipe in these colours. */
-export function recolor(recipe: Recipe, colours: Colours): Recipe {
+/** The recipe in these colours; its notes are in `l` (the page's language: they may be translated). */
+export function recolor(recipe: Recipe, colours: Colours, l: Lang = lang()): Recipe {
   if (Object.keys(colours).length === 0) return recipe;
   return {
     ...recipe,
@@ -59,30 +66,50 @@ export function recolor(recipe: Recipe, colours: Colours): Recipe {
       const part = "material" in step ? step.material : "thread";
       const own = tiedColour(recipe, part);
       const to = colours[part];
-      const note = own && to ? swapColour(step.note, own, to) : step.note;
+      const note = own && to ? swapColour(step.note, own, to, l) : step.note;
       return note === step.note ? step : { ...step, note };
     }),
   };
 }
 
-/** The note with the colour word `from` (whole words, any case) as `to`; only dyed shades. */
-function swapColour(note: string, from: string, to: NamedColor): string {
+/**
+ * A colour's word in each of its forms in a language, in a fixed order, so a form of one colour
+ * can be swapped for the same form of another: English "red"; Swedish röd, rött, röda; German
+ * rot, rote, roten, roter, rotes, rotem.
+ */
+function colourForms(l: Lang, c: NamedColor): string[] {
+  if (l === "en") return [c.replace(/-/g, " ")];
+  const a = term(l, "colours", c, "adjective");
+  if (a.invariable) return [a.text];
+  if (l === "sv") return [a.text, a.forms.neuter!, a.forms.plural!];
+  return ["", "e", "en", "er", "es", "em"].map((ending) => deAdjective(a, ending));
+}
+
+/** The note with the colour `from` (whole words, any case, any form) as `to`; only dyed shades. */
+function swapColour(note: string, from: string, to: NamedColor, l: Lang): string {
   // "pheasant tail", "teal" or "partridge" in a note name the material itself.
-  if (from === to || !DYE_COLORS.includes(from as NamedColor)) return note;
-  return note.replace(new RegExp(`\\b${from.replace(/-/g, "[ -]")}\\b`, "gi"), (found) => {
-    const name = to.replace(/-/g, " ");
+  if (from === to || !DYE_COLORS.includes(from as NamedColor) || (l !== "en" && !hasTerm(l, "colours", from))) return note;
+  const fromForms = colourForms(l, from as NamedColor);
+  const toForms = colourForms(l, to);
+  const alternatives = [...new Set(fromForms)].sort((a, b) => b.length - a.length).map((f) => f.replace(/[ -]/g, "[ -]"));
+  return note.replace(new RegExp(`(?<!\\p{L})(${alternatives.join("|")})(?!\\p{L})`, "giu"), (found) => {
+    const index = fromForms.findIndex((f) => f.toLowerCase() === found.toLowerCase().replace(/-/g, " ") || f.toLowerCase() === found.toLowerCase());
+    const name = toForms[Math.min(Math.max(index, 0), toForms.length - 1)]!;
     return found[0] === found[0]!.toUpperCase() ? name.charAt(0).toUpperCase() + name.slice(1) : name;
   });
 }
 
-/** "Body yellow, tail red" */
+/** "Body yellow, tail red", in the page's language. */
 export function coloursText(colours: Colours, recipe: Recipe): string {
-  const text = coloursSpec(colours, recipe)
+  return coloursSpec(colours, recipe)
     .split(",")
     .filter(Boolean)
-    .map((pair) => pair.replace(":", " ").replace(/-/g, " "))
+    .map((pair, i) => {
+      const [part = "", colour = ""] = pair.split(":");
+      const text = `${partLabel(part)} ${colourWord(colour)}`;
+      return i === 0 ? text : inSentence(text);
+    })
     .join(", ");
-  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 /** A fly box entry: a recipe id, with "?colours=…" for a variation. */

@@ -224,11 +224,19 @@ export function naturalInPageLanguage(n: Natural, l: Lang = lang()): Natural {
   if (l === "en") return n;
   const p = naturalProse(l, n.id);
   if (!p) return n;
-  return {
+  // The same object each time, so a natural shown in the 3D view isn't built again.
+  const cached = translatedNaturals.get(n)?.get(l);
+  if (cached) return cached;
+  const translated: Natural = {
     ...n,
     ...(p.name ? { name: p.name } : {}),
     ...(p.description ? { description: p.description } : {}),
     ...(p.examples ? { examples: p.examples } : {}),
     hatches: n.hatches.map((h) => ({ ...h, ...(p.hatches[h.region] ?? {}) })),
   };
+  if (!translatedNaturals.has(n)) translatedNaturals.set(n, new Map());
+  translatedNaturals.get(n)!.set(l, translated);
+  return translated;
 }
+
+const translatedNaturals = new WeakMap<Natural, Map<Lang, Natural>>();

@@ -6,6 +6,7 @@ import { href } from "./router";
 import { LOG_KEY, useStoredList } from "./storage";
 import { BenchNav, storedNote } from "./Personal";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
 import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 
@@ -25,7 +26,7 @@ export function Log() {
   const log = useLog();
   useEffect(() => {
     document.title = t.site.titled(t.log.title);
-  }, []);
+  }, [lang()]);
   const all = recipes();
   const p = useMemo(() => progress(log.items, all), [log.items]);
   const counts = useMemo(() => tiedCounts(log.items, all), [log.items]);

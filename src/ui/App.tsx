@@ -24,7 +24,7 @@ export function App() {
   useEffect(() => {
     if (route.page === "gallery") document.title = siteTitle();
     if (!restoresScroll()) window.scrollTo(0, 0);
-  }, [route.page, route.page === "fly" || route.page === "technique" || route.page === "natural" ? route.id : null]);
+  }, [route.page, route.page === "fly" || route.page === "technique" || route.page === "natural" ? route.id : null, lang()]);
 
   return (
     <>

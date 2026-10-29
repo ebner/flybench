@@ -22,6 +22,7 @@ import { NotFound } from "./NotFound";
 import { useNaturalPictures, useRenders } from "./renders";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
 import { linkTo } from "./linkTo";
 import { REGION_KEY, useStoredSet } from "./storage";
 
@@ -80,7 +81,7 @@ export function NaturalsIndex() {
   const month = new Date().getMonth();
   useEffect(() => {
     document.title = t.site.titled(t.naturals.title);
-  }, []);
+  }, [lang()]);
   const naturals = localNaturals();
   const now = region ? activeIn(naturals, region, month) : [];
   // Naturals about all year (shrimps, fish, larvae) are listed apart, so the calendar shows the hatches.
@@ -206,7 +207,7 @@ export function NaturalPage({ id }: { id: string }) {
   const renders = useRenders();
   useEffect(() => {
     if (natural) document.title = t.site.titled(natural.name);
-  }, [natural]);
+  }, [natural, lang()]);
   if (!natural) {
     return (
       <NotFound className="reading" heading={t.notFound.natural(id)}>

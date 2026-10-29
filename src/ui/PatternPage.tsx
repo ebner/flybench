@@ -3,12 +3,12 @@ import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
 import { stepTechnique, technique } from "../catalog/techniques";
 import { findPattern, variantFamily } from "../patterns";
 import { resolveColor, type Recipe } from "../recipe/schema";
-import { materialName, materialsList } from "../tying/describe";
+import { colourWord, materialName, materialsList } from "../tying/describe";
 import { fishing, fishingText } from "../tying/fishing";
 import { ridesPointUp } from "../tying/hook";
 import { simulate, stepAt, stepEnd, stepProgress } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
-import { colorWord, match, materialColor } from "../catalog/inventory";
+import { match, materialColor } from "../catalog/inventory";
 import { href, replaceUrl } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
@@ -180,7 +180,7 @@ function PatternView({
 
   useEffect(() => {
     document.title = t.site.titled(`${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}`);
-  }, [recipe]);
+  }, [recipe, lang()]);
 
   // The step this page last wrote into the address (null: none yet). The address reaches
   // the router a render later, when playback may have moved on, so the page tells its own
@@ -718,10 +718,10 @@ function ColourPlayground({
                   onChange(next);
                 }}
               >
-                <option value="">{t.playground.asTied(colorWord(tied, original.materials.find((m) => m.id === p.id)?.kind))}</option>
+                <option value="">{t.playground.asTied(colourWord(tied, original.materials.find((m) => m.id === p.id)?.kind))}</option>
                 {DYE_COLORS.filter((c) => c !== tiedColour(original, p.id)).map((c) => (
                   <option key={c} value={c}>
-                    {c.replace(/-/g, " ")}
+                    {colourWord(c)}
                   </option>
                 ))}
               </select>

@@ -1,4 +1,5 @@
 import type { Adjective, Noun } from "./glossary";
+import { lang } from "./lang";
 
 /**
  * Putting glossary words together: a noun with its article and a colour, in the form a
@@ -6,6 +7,9 @@ import type { Adjective, Noun } from "./glossary";
  */
 
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** A name inside a sentence: small in English and Swedish ("needs red wool"); German nouns keep their capital. */
+export const inSentence = (s: string) => (lang() === "de" ? s : s.charAt(0).toLowerCase() + s.slice(1));
 
 // Swedish
 

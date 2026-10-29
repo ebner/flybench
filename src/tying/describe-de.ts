@@ -267,6 +267,7 @@ type Colour = Adjective | undefined;
 export const de: Writer = {
   // A label is the translation of the recipe's own (see i18n/prose.ts); otherwise the glossary's name.
   materialName: (m) => m.label ?? capitalize(phrase(material(m), colour(m.color), usedInPlural(m))),
+  colourWord: (c) => (c ? term("de", "colours", c, "adjective").text : "naturfarben"),
   threadName: (c) => capitalize(phrase(word("thread"), colour(c))),
   hookName: (model, english, length) => {
     const name = term("de", "hooks", model, "phrase").text;

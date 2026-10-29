@@ -14,6 +14,7 @@ import { BenchNav } from "./Personal";
 import { renderUrls, useRenders } from "./renders";
 import { href, replaceUrl } from "./router";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
 import { linkTo } from "./linkTo";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
@@ -57,7 +58,7 @@ export function Trip({ query }: { query: string }) {
   const renders = useRenders();
   useEffect(() => {
     document.title = t.site.titled(t.trip.title);
-  }, []);
+  }, [lang()]);
   // The choices go into the address; an address changed from outside (Back, a link) changes them.
   const written = useRef<string | null>(null);
   useEffect(() => {
@@ -72,7 +73,7 @@ export function Trip({ query }: { query: string }) {
   }, [query]);
   const suggestions = useMemo(
     () => (region ? suggestBox(PATTERNS.map((p) => p.recipe), localNaturals(), { region, ...trip }) : []),
-    [region, trip],
+    [region, trip, lang()],
   );
   const chosen = suggestions.slice(0, BOX_SIZE);
   const more = suggestions.slice(BOX_SIZE);

@@ -5,13 +5,14 @@ import { PATTERNS } from "../patterns";
 import { renderUrls, useRenders } from "./renders";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
 import { tiedCounts } from "../catalog/log";
 import { useLog } from "./Log";
 
 export function Learn() {
   useEffect(() => {
     document.title = t.site.titled(t.learn.title);
-  }, []);
+  }, [lang()]);
   const path = useMemo(() => learningPath(PATTERNS.map((p) => p.recipe)), []);
   const renders = useRenders();
   const log = useLog();

@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
 import { simulate } from "../tying/simulate";
 import { materialsList } from "../tying/describe";
+import { loadGlossaries, loadTranslations } from "../i18n/files";
+import { inPageLanguage } from "../i18n/prose";
 import { boxEntry, coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "./variation";
 
 const recipe = (() => {
@@ -56,6 +58,34 @@ describe("colour variations", () => {
     expect(blue.steps.map((s) => s.note)).toContain("A short blue butt.");
     expect(blue.steps.map((s) => s.note)).toContain("A small red head.");
     expect(blue.steps.map((s) => s.note)).toContain("Let the fibres splay out for bulk.");
+  });
+
+  it("carries a translated note into the new colour, in its language's forms", () => {
+    loadGlossaries();
+    loadTranslations();
+    const ullsocken = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/ullsocken.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("ullsocken");
+      return r.recipe;
+    })();
+    const step = ullsocken.steps.findIndex((s) => s.note === "A short red butt.");
+    for (const l of ["sv", "de"] as const) {
+      const translated = inPageLanguage(ullsocken, l);
+      const note = translated.steps[step]!.note!;
+      const blue = recolor(translated, { butt: "blue" }, l).steps[step]!.note!;
+      expect(note, l).not.toBe(blue);
+      expect(blue.toLowerCase(), l).toMatch(l === "sv" ? /blå/ : /blau/);
+      expect(blue.toLowerCase(), l).not.toMatch(l === "sv" ? /röd/ : /\brot/);
+    }
+  });
+
+  it("reads a colour link made before a part was renamed", () => {
+    const peeping = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/peeping-caddis.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("peeping-caddis");
+      return r.recipe;
+    })();
+    expect(parseColours("case:orange", peeping)).toEqual({ "larva-case": "orange" });
   });
 
   it("leaves notes about other parts as tied", () => {
