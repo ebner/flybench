@@ -84,7 +84,8 @@ function materialSwaps(recipe: Recipe, colours: Colours): [string, NamedColor][]
 
 /** The note with each colour word (whole words, any case) swapped for its new colour. */
 function swapColours(note: string, swaps: Map<string, NamedColor>): string {
-  for (const [from, to] of swaps) if (from === to) swaps.delete(from);
+  // Only dyed shades: "pheasant tail", "teal" or "partridge" in a note name the material itself.
+  for (const [from, to] of swaps) if (from === to || !DYE_COLORS.includes(from as NamedColor)) swaps.delete(from);
   if (swaps.size === 0) return note;
   const pattern = [...swaps.keys()].map((c) => c.replace(/-/g, "[ -]")).join("|");
   return note.replace(new RegExp(`\\b(${pattern})\\b`, "gi"), (found) => {

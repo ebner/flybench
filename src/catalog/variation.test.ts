@@ -72,6 +72,17 @@ describe("colour variations", () => {
     expect(notes({ [yellow[0]!]: "blue" })).toMatch(/\byellow\b/i);
   });
 
+  it("leaves a note naming a natural material, not its colour", () => {
+    const ptn = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/pheasant-tail-nymph.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("pheasant-tail-nymph");
+      return r.recipe;
+    })();
+    const tail = ptn.materials.find((m) => m.kind === "pheasant-tail")!;
+    const notes = (r: typeof ptn) => r.steps.map((s) => s.note ?? "");
+    expect(notes(recolor(ptn, { [tail.id]: "purple" }))).toEqual(notes(ptn));
+  });
+
   it("names the changes and round-trips fly box entries", () => {
     expect(coloursText({ thread: "blue-dun" }, recipe)).toBe("Thread blue dun");
     expect(parseBoxEntry(boxEntry("red-tag", "thread:olive"))).toEqual({ id: "red-tag", colours: "thread:olive" });
