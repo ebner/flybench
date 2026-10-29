@@ -6,8 +6,8 @@ export type Depth = "surface" | "film" | "below" | "deep";
 
 export interface Fishing {
   depth: Depth;
-  /** Drifts with the current, or is stripped and swims. */
-  motion: "drift" | "swim";
+  /** Drifts with the current, is stripped and swims, or is swung across the current on a tight line. */
+  motion: "drift" | "swim" | "swing";
   /** Degrees it hangs tail down from the front of its shank (an emerger in the film). */
   hang: number;
 }
@@ -17,10 +17,10 @@ export interface Fishing {
  * weighting takes a nymph deep), unless the recipe says so with `fishes`.
  */
 // Assumption: dry flies and terrestrials float, emergers hang in the film, wet flies and
-// unweighted nymphs fish just under the surface, weighted ones deep; streamers, salmon and
-// saltwater flies are swum rather than drifted.
+// unweighted nymphs fish just under the surface, weighted ones deep; streamers and saltwater
+// flies are stripped, salmon flies swung.
 export function fishing(recipe: Recipe): Fishing {
-  const motion = recipe.type === "streamer" || recipe.type === "salmon" || recipe.type === "saltwater" ? "swim" : "drift";
+  const motion = recipe.type === "salmon" ? "swing" : recipe.type === "streamer" || recipe.type === "saltwater" ? "swim" : "drift";
   const depth = recipe.fishes ?? depthFor(recipe);
   // Assumption: an emerger hangs about 35° tail down from the film; other flies lie level.
   return { depth, motion, hang: depth === "film" && recipe.type === "emerger" ? 35 : 0 };
@@ -52,16 +52,21 @@ export const WET_SPREAD = 0.85;
 // Assumption: the usual way each kind of fly is fished, not the only one.
 export function fishingText(f: Fishing): string {
   const where = {
-    surface: "It rides on the surface, held up by its hackle and tail, with the bend of the hook through the film. From below, a trout sees the dents it makes in the film before the fly itself comes into view.",
-    film: "It hangs in the surface film like an insect hatching: its body just under the surface, its wing or post above it.",
+    surface: "It floats on the surface, the bend of the hook hanging through the film. From below, a trout sees the dents it makes in the film before the fly itself comes into view.",
+    film:
+      f.hang > 0
+        ? "It hangs in the surface film like an insect hatching: its body down in the water, its wing or post above it."
+        : "It floats low, half sunk in the surface film.",
     below: "It fishes just under the surface, where its soft fibres move with the water.",
     deep: "Weighted, it sinks and fishes deep, near the bottom.",
   }[f.depth];
   const how =
     f.motion === "swim"
       ? "It is stripped back in pulls: it darts forward on each one and sinks back a little in the pause after it."
-      : f.depth === "surface" || f.depth === "film"
-        ? "It drifts with the current, riding the ripples."
-        : "It drifts with the current, turning slowly as it goes.";
+      : f.motion === "swing"
+        ? "It is swung across the current on a tight line, holding against the flow with its fibres working in it."
+        : f.depth === "surface" || f.depth === "film"
+          ? "It drifts with the current, riding the ripples."
+          : "It drifts with the current, turning slowly as it goes."
   return `${where} ${how}`;
 }

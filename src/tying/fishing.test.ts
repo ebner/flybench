@@ -19,6 +19,8 @@ describe("how a fly fishes", () => {
     expect(fishing(recipe("woolly-bugger"))).toEqual({ depth: "deep", motion: "swim", hang: 0 });
     // A midge pattern that is a dry fly says so.
     expect(fishing(recipe("griffiths-gnat")).depth).toBe("surface");
+    // Salmon flies are swung, not stripped.
+    expect(fishing(recipe("stoats-tail")).motion).toBe("swing");
   });
 
   it("hangs emergers tail down, and nothing else", () => {
@@ -28,7 +30,9 @@ describe("how a fly fishes", () => {
   });
 
   it("says where and how it fishes", () => {
-    expect(fishingText(fishing(recipe("adams")))).toMatch(/rides on the surface.*drifts/);
+    expect(fishingText(fishing(recipe("adams")))).toMatch(/floats on the surface.*drifts/);
     expect(fishingText(fishing(recipe("woolly-bugger")))).toMatch(/deep.*stripped/);
+    expect(fishingText(fishing(recipe("black-ant")))).toMatch(/half sunk/);
+    expect(fishingText(fishing(recipe("klinkhamer-special")))).toMatch(/hatching/);
   });
 });

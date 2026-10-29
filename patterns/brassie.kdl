@@ -3,6 +3,8 @@
 id brassie
 name "Brassie"
 type midge
+// The wire body makes it heavy; fished deep (see fishing).
+fishes deep
 imitates chironomid
 naturals midge-larva midge-pupa caddis-larva-free
 difficulty beginner

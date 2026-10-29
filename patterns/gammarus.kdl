@@ -4,6 +4,8 @@ id gammarus
 name "Gammarus"
 aliases "Scud" "Freshwater shrimp" "Simple Scud"
 type nymph
+// Fished near the bottom (see fishing).
+fishes deep
 imitates crustacean
 naturals freshwater-shrimp
 difficulty beginner
