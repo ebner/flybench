@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { bestCoverage, catalogNeeds, colorWord, inventoryKey, missingKinds } from "../catalog/inventory";
+import { bestCoverage, catalogNeeds, colorWord, inventoryKey, missingKinds, shoppingList, type Need } from "../catalog/inventory";
 import { CATALOG, findPattern } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
@@ -136,9 +136,82 @@ export function FlyBox() {
               </ul>
             </>
           )}
+          <ShoppingList flies={[...saved.map((e) => ({ recipe: e.recipe, name: e.recipe.name })), ...variations.map((v) => ({ recipe: v.recipe, name: `${v.recipe.name} (your colours)` }))]} />
         </>
       )}
     </main>
+  );
+}
+
+/** What the flies in the box still need, merged across them, less what the Materials page says is owned. */
+function ShoppingList({ flies }: { flies: { recipe: Recipe; name: string }[] }) {
+  const owned = useStoredSet(INVENTORY_KEY);
+  const [copied, setCopied] = useState(false);
+  const list = shoppingList(
+    flies.map((f) => f.recipe),
+    owned.values,
+  );
+  const nameOf = (r: Recipe) => flies.find((f) => f.recipe === r)!.name;
+  const material = (n: Need) => {
+    const colour = colorWord(n.color, n.kind);
+    return capitalize(`${colour === "natural" ? "" : `${colour} `}${MATERIALS[n.kind].name}`);
+  };
+  const missing = list.filter((i) => i.status === "missing");
+  const substitutes = list.filter((i) => i.status === "substitute");
+  const lines = (items: typeof list) =>
+    items.map((i) => (
+      <li key={inventoryKey(i.need)}>
+        <strong>{material(i.need)}</strong> for {i.flies.map(nameOf).join(", ")}
+      </li>
+    ));
+  const text = [
+    ...missing.map((i) => `${material(i.need)} (${i.flies.map(nameOf).join(", ")})`),
+    ...substitutes.map((i) => `${material(i.need)}, or use another colour you have (${i.flies.map(nameOf).join(", ")})`),
+  ].join("\n");
+  return (
+    <section className="shopping">
+      <h2 className="box-heading">Shopping list</h2>
+      <p className="stored-note">
+        {owned.values.size === 0 ? (
+          <>
+            Everything these flies need. Tick what you already have on <a href={href.materials()}>your materials</a> page,
+            and this list leaves it out. Hooks and thread are left out too.
+          </>
+        ) : (
+          <>
+            What these flies need, less what you have ticked on <a href={href.materials()}>your materials</a> page. Hooks
+            and thread are left out.
+          </>
+        )}
+      </p>
+      {list.length === 0 ? (
+        <p>You have everything these flies need.</p>
+      ) : (
+        <>
+          {missing.length > 0 && <ul className="shopping-list">{lines(missing)}</ul>}
+          {substitutes.length > 0 && (
+            <>
+              <h3>You have these in another colour</h3>
+              <ul className="shopping-list">{lines(substitutes)}</ul>
+            </>
+          )}
+          <p>
+            <button
+              className="box-toggle"
+              onClick={() =>
+                navigator.clipboard?.writeText(text).then(
+                  () => setCopied(true),
+                  () => setCopied(false),
+                )
+              }
+            >
+              Copy the list
+            </button>{" "}
+            <span aria-live="polite">{copied ? "Copied." : ""}</span>
+          </p>
+        </>
+      )}
+    </section>
   );
 }
 
