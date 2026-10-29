@@ -72,11 +72,11 @@ const Id = z
   .regex(/^[a-z][a-z0-9-]*$/, "expected a lowercase id like \"peacock-herl\"");
 
 /** Fraction of the shank, 0 = start of the bend, 1 = just behind the eye. */
-const Position = z.number().min(0).max(1);
+export const Position = z.number().min(0).max(1);
 
 /** Multiple of the hook gape. */
 // Long saltwater wings and Deceiver tails run to two or three shank lengths.
-const GapeLength = z.number().positive().max(10);
+export const GapeLength = z.number().positive().max(10);
 
 const Note = z.string().min(1).optional();
 
@@ -176,9 +176,13 @@ const Material = z
     }
   });
 
-const MaterialRef = Id;
+/** A material of the recipe, by its id (a schema of its own, so the editors can tell it from other ids). */
+export const MaterialRef = Id.clone();
 
 const Side = z.enum(["top", "under", "across"]);
+
+/** Turns of one winding: far more than any fly needs, and a bound on the work of drawing it. */
+const Turns = z.number().int().positive().max(100);
 
 const Step = z.discriminatedUnion("op", [
   /** Before the thread: slide a bead round the bend up to the eye. */
@@ -196,7 +200,7 @@ const Step = z.discriminatedUnion("op", [
     op: z.literal("wrap-thread"),
     to: Position,
     /** Omitted: touching turns. */
-    turns: z.number().int().positive().optional(),
+    turns: Turns.optional(),
     note: Note, mistake: Note,
   }),
   z.strictObject({
@@ -230,7 +234,7 @@ const Step = z.discriminatedUnion("op", [
     to: Position.optional(),
     /** Parachute: wind horizontally around this upright post instead of the shank. */
     around: MaterialRef.optional(),
-    turns: z.number().int().positive(),
+    turns: Turns,
     /** Wound the opposite way round to the material under it (a counter-wound rib). */
     counter: z.boolean().optional(),
     note: Note, mistake: Note,
@@ -251,7 +255,7 @@ const Step = z.discriminatedUnion("op", [
     material: MaterialRef,
     to: Position,
     /** Omitted: touching turns. */
-    turns: z.number().int().positive().optional(),
+    turns: Turns.optional(),
     note: Note, mistake: Note,
   }),
   z.strictObject({ op: z.literal("tie-off"), material: MaterialRef, note: Note, mistake: Note }),
@@ -274,7 +278,7 @@ const Step = z.discriminatedUnion("op", [
   }),
   z.strictObject({
     op: z.literal("whip-finish"),
-    turns: z.number().int().positive().default(5),
+    turns: Turns.default(5),
     note: Note, mistake: Note,
   }),
 ]);
@@ -306,6 +310,9 @@ export const Reference = z.strictObject({
   note: z.string().min(1).optional(),
 });
 
+export const MAX_STEPS = 150;
+export const MAX_MATERIALS = 40;
+
 export const RecipeSchema = z.strictObject({
   id: Id,
   name: z.string().min(1),
@@ -333,8 +340,9 @@ export const RecipeSchema = z.strictObject({
   fishes: z.enum(["surface", "film", "below", "deep"]).optional(),
   hook: Hook,
   thread: Thread,
-  materials: z.array(Material).default([]),
-  steps: z.array(Step).min(1),
+  // Bounds well beyond any pattern, so a recipe from a link can't ask for endless drawing.
+  materials: z.array(Material).max(MAX_MATERIALS).default([]),
+  steps: z.array(Step).min(1).max(MAX_STEPS),
 }).superRefine((r, ctx) => {
   if ((r.variantOf === undefined) !== (r.variant === undefined)) {
     ctx.addIssue({ code: "custom", path: ["variant"], message: "variant and variant-of go together" });

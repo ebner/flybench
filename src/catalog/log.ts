@@ -76,12 +76,13 @@ export interface Progress {
   techniques: number;
 }
 
-export function progress(log: LogEntry[], recipes: Recipe[]): Progress {
+/** `tied`: every recipe a log entry can name (the visitor's own flies too), for the techniques practised; the path is `recipes`'. */
+export function progress(log: LogEntry[], recipes: Recipe[], tied: Recipe[] = recipes): Progress {
   const counts = tiedCounts(log, recipes);
   const path = learningPath(recipes).map((s) => ({ ...s, tied: counts.has(s.recipe.id) }));
   const practised = new Map<string, number>();
   for (const e of log) {
-    const recipe = recipes.find((r) => r.id === e.id);
+    const recipe = tied.find((r) => r.id === e.id);
     if (!recipe) continue;
     for (const t of patternTechniques(recipe)) practised.set(t, (practised.get(t) ?? 0) + e.count);
   }

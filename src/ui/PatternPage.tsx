@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { DIFFICULTY_LABELS, factsSentence } from "../catalog/describe";
 import { stepTechnique, technique } from "../catalog/techniques";
-import { findPattern, variantFamily } from "../patterns";
+import { variantFamily } from "../patterns";
+import { allRecipes, findFly, useOwnFlies } from "./ownFlies";
+import { isOwnId } from "../edit/own";
 import { resolveColor, type Recipe } from "../recipe/schema";
 import { colourWord, materialName, materialsList } from "../tying/describe";
 import { fishing, fishingText } from "../tying/fishing";
@@ -27,18 +29,20 @@ import { linkTo } from "./linkTo";
 import { boxEntry, coloursSpec, parseBoxEntry, DYE_COLORS, parseColours, recolor, tiedColour, type Colours } from "../catalog/variation";
 import { LogForm, useLog } from "./Log";
 import { tiedCounts } from "../catalog/log";
-import { PATTERNS } from "../patterns";
 
 export function PatternPage({ id, step, size, colours }: { id: string; step?: number; size?: number; colours?: string }) {
-  const pattern = findPattern(id);
-  if (!pattern) {
+  // A pattern, or one of the visitor's own flies (kept in this browser).
+  useOwnFlies();
+  const recipe = findFly(id);
+  if (!recipe) {
     return (
       <NotFound heading={t.notFound.pattern(id)}>
         <p>{t.notFound.patternHint(linkTo(href.gallery()))}</p>
       </NotFound>
     );
   }
-  return <PatternView key={id} recipe={inPageLanguage(pattern.recipe)} linkedStep={step} linkedSize={size} linkedColours={colours} />;
+  // An own fly is in the visitor's words: it has no translations, and its labels stay.
+  return <PatternView key={id} recipe={isOwnId(id) ? recipe : inPageLanguage(recipe)} linkedStep={step} linkedSize={size} linkedColours={colours} />;
 }
 
 const Icon = {
@@ -131,6 +135,8 @@ function PatternView({
   const box = useStoredSet(FLY_BOX_KEY);
   const owned = useStoredSet(INVENTORY_KEY);
   const log = useLog();
+  const own = useOwnFlies();
+  const yours = isOwnId(original.id);
   // The fly box entry for these colours, however it was written (a link from before a part was renamed).
   const savedVariation = spec
     ? [...box.values].find((v) => {
@@ -493,6 +499,7 @@ function PatternView({
           {factsSentence(recipe)} {DIFFICULTY_LABELS[recipe.difficulty]}.
         </p>
         {recipe.description && <p className="description">{recipe.description}</p>}
+        {yours && <p className="origin">{t.build.yourOwn}</p>}
         {origin && <p className="origin">{t.pattern.firstTied(origin)}</p>}
         <div className="pattern-actions">
           <button className="box-toggle" aria-pressed={box.has(mainId)} onClick={() => box.toggle(mainId)}>
@@ -509,9 +516,12 @@ function PatternView({
           >
             {preparing ? t.pattern.preparing : t.pattern.print}
           </button>
+          <a className="build-link-out" href={href.build(yours ? `edit=${recipe.id}` : `from=${recipe.id}`)}>
+            {yours ? t.build.edit : t.build.editCopy}
+          </a>
         </div>
         {(() => {
-          const tied = tiedCounts(log.items, PATTERNS.map((p) => p.recipe)).get(mainId) ?? 0;
+          const tied = tiedCounts(log.items, allRecipes(own.flies)).get(mainId) ?? 0;
           return (
             <>
               <p className="tied">

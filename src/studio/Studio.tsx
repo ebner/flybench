@@ -14,8 +14,8 @@ import { listFiles, readFile, saveFile, type FileKind } from "./api";
 import { NATURALS } from "../naturals";
 import { checkDraft, checkNatural, isPatternFile, newNaturalText, newPatternText } from "./draft";
 import { Form } from "./Form";
-import { editKdl, type Edit } from "./kdlEdit";
-import { formSections } from "./schemaForm";
+import { editKdl, type Edit } from "../edit/kdlEdit";
+import { formSections } from "../edit/schemaForm";
 
 const NATURAL_IDS = new Set(NATURALS.map((n) => n.id));
 const FORMS = { patterns: formSections(PATTERN_SECTIONS, RecipeSchema), naturals: formSections(NATURAL_SECTIONS, NaturalSchema) };

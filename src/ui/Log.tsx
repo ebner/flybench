@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { isLogEntry, newestFirst, progress, tiedCounts, today, type LogEntry } from "../catalog/log";
 import { technique } from "../catalog/techniques";
 import { PATTERNS } from "../patterns";
+import { allRecipes, useOwnFlies } from "./ownFlies";
 import { href } from "./router";
 import { LOG_KEY, useStoredList } from "./storage";
 import { BenchNav, storedNote } from "./Personal";
@@ -28,7 +29,10 @@ export function Log() {
     document.title = t.site.titled(t.log.title);
   }, [lang()]);
   const all = recipes();
-  const p = useMemo(() => progress(log.items, all), [log.items]);
+  // The visitor's own flies are named in the log too (the learning path is the patterns').
+  const own = useOwnFlies();
+  const named = useMemo(() => allRecipes(own.flies), [own.flies]);
+  const p = useMemo(() => progress(log.items, all, named), [log.items, named]);
   const counts = useMemo(() => tiedCounts(log.items, all), [log.items]);
   const flies = [...counts.values()].reduce((a, b) => a + b, 0);
   const tiedOnPath = p.path.filter((s) => s.tied).length;
@@ -80,7 +84,7 @@ export function Log() {
           <h2>{t.log.flies}</h2>
           <ul className="log-entries">
             {newestFirst(log.items).map((e) => {
-              const english = all.find((r) => r.id === e.id);
+              const english = named.find((r) => r.id === e.id);
               const recipe = english && inPageLanguage(english);
               const name = recipe ? `${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}` : e.id;
               return (

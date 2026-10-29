@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import type { Shape } from "../recipe/kdl";
-import { Color } from "../recipe/schema";
+import { Color, GapeLength, MaterialRef, Position } from "../recipe/schema";
 import { ARG, NAME } from "./kdlEdit";
 
 /**
@@ -8,7 +8,7 @@ import { ARG, NAME } from "./kdlEdit";
  * range, a choice, a colour, a yes/no, text) and where it is written in the KDL (a property, a
  * node's argument or a list item's name). Pure data, so it can be tested in Node.
  */
-export type FieldType = "number" | "integer" | "boolean" | "enum" | "color" | "string" | "text" | "values";
+export type FieldType = "number" | "integer" | "boolean" | "enum" | "color" | "material" | "string" | "text" | "values";
 
 export interface Field {
   /** The key in the parsed object. */
@@ -25,6 +25,8 @@ export interface Field {
   numeric?: boolean;
   /** A web address. */
   url?: boolean;
+  /** A number measured along the shank (0 the bend, 1 behind the eye), or in hook gapes. */
+  measure?: "shank" | "gape";
 }
 
 export interface ItemKind {
@@ -76,13 +78,15 @@ export function fieldOf(key: string, kdl: string, schema: z.ZodType): Field | nu
   const d = def(inner);
   const base = { key, kdl, optional, ...(dflt !== undefined && { default: dflt }) };
   if (inner === (Color as unknown as z.ZodType)) return { ...base, type: "color" };
+  if (inner === (MaterialRef as unknown as z.ZodType)) return { ...base, type: "material" };
+  const measure = inner === (Position as unknown as z.ZodType) ? "shank" : inner === (GapeLength as unknown as z.ZodType) ? "gape" : undefined;
   switch (d.type) {
     case "number": {
       const checks = ((d.checks as { _zod: { def: { check: string; value?: number; format?: string } } }[] | undefined) ?? []).map((c) => c._zod.def);
       const min = checks.find((c) => c.check === "greater_than")?.value;
       const max = checks.find((c) => c.check === "less_than")?.value;
       const integer = checks.some((c) => c.format === "safeint");
-      return { ...base, type: integer ? "integer" : "number", ...(min !== undefined && { min }), ...(max !== undefined && { max }) };
+      return { ...base, type: integer ? "integer" : "number", ...(min !== undefined && { min }), ...(max !== undefined && { max }), ...(measure && { measure }) };
     }
     case "boolean":
       return { ...base, type: "boolean" };

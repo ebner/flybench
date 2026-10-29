@@ -51,4 +51,12 @@ describe("tying log", () => {
     for (const t of patternTechniques(first)) expect(tied.practised.get(t)).toBe(2);
     expect(tied.techniques).toBeGreaterThanOrEqual(tied.practised.size);
   });
+
+  it("counts the techniques of a visitor's own fly, off the path", () => {
+    const first = progress([], recipes).path[0]!.recipe;
+    const own = { ...first, id: "my-copy" };
+    const p = progress([entry("my-copy", "2026-10-29")], recipes, [...recipes, own]);
+    expect(p.path.some((s) => s.recipe.id === "my-copy")).toBe(false);
+    for (const t of patternTechniques(first)) expect(p.practised.get(t)).toBe(1);
+  });
 });

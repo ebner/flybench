@@ -1,8 +1,8 @@
 import { useEffect, useId, useMemo, useState } from "react";
 import { kdlToObject, KdlMappingError, type Shape } from "../recipe/kdl";
 import { resolveColor } from "../recipe/schema";
-import { ARG, NAME, type Edit, type KdlValue } from "./kdlEdit";
-import { newItemText, type Field, type FormSection } from "./schemaForm";
+import { ARG, NAME, type Edit, type KdlValue } from "../edit/kdlEdit";
+import { newItemText, type Field, type FormSection } from "../edit/schemaForm";
 
 /**
  * The recipe as a form: every value with a control fitting its type, lists with their items to

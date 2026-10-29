@@ -24,7 +24,7 @@ export function About() {
       <p>{t.about.sources(linkTo(`${REPO_URL}/issues`))}</p>
 
       <h2>{t.about.privacyHeading}</h2>
-      <p>{t.about.privacy(linkTo(href.box()), linkTo(href.materials()), linkTo(href.log()))}</p>
+      <p>{t.about.privacy(linkTo(href.box()), linkTo(href.materials()), linkTo(href.log()), linkTo(href.build()))}</p>
       <p>
         {t.about.hosting(
           linkTo("https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection"),

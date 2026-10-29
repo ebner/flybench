@@ -15,6 +15,8 @@ import { inSentence } from "../i18n/grammar";
 import { lang } from "../i18n/lang";
 import { MONTH_NAMES } from "../i18n/months";
 import { linkTo } from "./linkTo";
+import { ownEntry, useOwnFlies } from "./ownFlies";
+import { useFlyPictures } from "./pictures";
 
 
 export function Gallery({ query }: { query: string }) {
@@ -73,10 +75,13 @@ export function Gallery({ query }: { query: string }) {
               </a>
             )}
             <a href={href.learn()}>{t.gallery.path}</a>
+            <a href={href.build()}>{t.build.nav}</a>
           </p>
         </div>
         {renders && <FlyOfTheDay renders={renders} />}
       </section>
+
+      <YourFlies />
 
       <section className={moreOpen ? "finder more-open" : "finder"} aria-label={t.gallery.finder}>
         <label className="search">
@@ -174,6 +179,44 @@ export function Gallery({ query }: { query: string }) {
         </section>
       )}
     </main>
+  );
+}
+
+/** The visitor's own flies, when there are any: the finished ones as plates, the others to carry on with. */
+function YourFlies() {
+  const own = useOwnFlies();
+  const finished = own.flies.flatMap((f) => (f.recipe ? [f.recipe] : []));
+  const unfinished = own.flies.filter((f) => !f.recipe);
+  const pictures = useFlyPictures(useMemo(() => finished.map((r) => ({ key: r.id, recipe: r })), [finished.map((r) => `${r.id}:${JSON.stringify(r)}`).join("\n")]));
+  if (own.flies.length === 0) return null;
+  return (
+    <section className="your-flies">
+      <h2>{t.build.yours}</h2>
+      <p className="stored-note">{t.build.yoursIntro}</p>
+      {finished.length > 0 && (
+        <ul className="plates">
+          {finished.map((r) => (
+            <Plate key={r.id} entry={ownEntry(r)} picture={pictures[r.id]} />
+          ))}
+        </ul>
+      )}
+      {unfinished.length > 0 && (
+        <ul className="your-unfinished">
+          {unfinished.map((f) => (
+            <li key={f.fly.id}>
+              <a href={href.build(`edit=${f.fly.id}`)}>{t.build.carryOn(f.name)}</a>{" "}
+              <button
+                className="link-button danger"
+                aria-label={t.build.removeLabel(f.name)}
+                onClick={() => confirm(t.build.deleteConfirm(f.name)) && own.save(own.stored.filter((x) => x.id !== f.fly.id))}
+              >
+                {t.build.delete}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
 

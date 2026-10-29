@@ -263,6 +263,11 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 | `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
 | `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. |
 
+A `turns` is at most 100, a recipe has at most 150 steps and 40 materials: far beyond any
+pattern, they bound the work of drawing a recipe that arrives in a link. The fly builder
+also stops drawing a fly past 600 turns of material or 3000 of thread in all, as the simulation
+lays them (touching turns included); the patterns lay at most 115 and 664.
+
 ### Tying rules (semantic validation)
 
 - Beads go on before the thread and before any weighting; nothing else but weighting may
@@ -286,6 +291,20 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 - Materials have unique ids, and steps refer only to defined materials. Every listed
   material is used, and one tied in without a length is wound or pulled over (otherwise
   it would be left hanging).
+
+Each rule has a key in `src/recipe/rules.ts` (with its English wording for authors); its
+error carries the key and its values, so the fly builder says it to visitors in the page's
+language (`src/i18n/rules/`). A new rule needs its message in every language there. The
+rules about what is left to do (`neverTiedOff`, `trimTip`, `neverUsedAfterTieIn`,
+`neverUsed`, `endWithWhipFinish`) mark a fly as unfinished rather than wrong.
+
+### Visitors' own flies
+
+The fly builder (`/build/`) writes the same recipes, kept in the visitor's browser and
+shared as links. Their ids start with `my-`, and their materials' ids are parts the patterns
+already use, which the glossaries name in every language. A fly the builder can't show
+(an unknown material, colour, hook or step) is refused when it is opened from a link or a
+file.
 
 ### Proportions
 

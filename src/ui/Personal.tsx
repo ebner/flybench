@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { bestCoverage, catalogNeeds, inventoryKey, missingKinds, shoppingList, type Need } from "../catalog/inventory";
-import { CATALOG, findPattern } from "../patterns";
+import { CATALOG } from "../patterns";
+import { isOwnId } from "../edit/own";
+import { findFly, ownEntry, useOwnFlies } from "./ownFlies";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { resolveColor } from "../recipe/schema";
 import { Plate } from "./Gallery";
@@ -13,23 +15,22 @@ import { lang } from "../i18n/lang";
 import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 import { coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "../catalog/variation";
-import { FlyScene } from "../render/FlyScene";
-import { simulate } from "../tying/simulate";
-import { ridesPointUp } from "../tying/hook";
 import type { Recipe } from "../recipe/schema";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
+import { useFlyPictures } from "./pictures";
 
 
 /** Where the visitor's own things are kept, said on each of their pages. */
 export const storedNote = () => t.bench.stored;
 
 /** Links between the visitor's own pages. */
-export function BenchNav({ current }: { current: "box" | "log" | "materials" | "trip" }) {
+export function BenchNav({ current }: { current: "box" | "log" | "materials" | "trip" | "build" }) {
   const links = [
     ["box", href.box(), t.bench.box],
     ["log", href.log(), t.bench.log],
     ["materials", href.materials(), t.bench.materials],
     ["trip", href.trip(), t.bench.trip],
+    ["build", href.build(), t.build.nav],
   ] as const;
   return (
     <nav className="bench-nav" aria-label={t.bench.nav}>
@@ -42,48 +43,12 @@ export function BenchNav({ current }: { current: "box" | "log" | "materials" | "
   );
 }
 
-/**
- * Pictures of flies in the visitor's colours, drawn here in one offscreen 3D view (the
- * gallery's pictures are of the patterns as tied). null while drawing, or without WebGL.
- */
-function useVariationPictures(flies: { key: string; recipe: Recipe }[]): Record<string, string | null> {
-  const [pictures, setPictures] = useState<Record<string, string>>({});
-  const keys = flies.map((f) => f.key).join("\n");
-  useEffect(() => {
-    if (flies.length === 0) return;
-    const host = document.createElement("div");
-    host.style.cssText = "position:fixed;left:-10000px;top:0;width:600px;height:400px";
-    document.body.appendChild(host);
-    let scene: FlyScene | null = null;
-    const drawn: Record<string, string> = {};
-    try {
-      scene = new FlyScene(host, { background: null, fov: 20 });
-      for (const f of flies) {
-        const build = simulate(f.recipe);
-        scene.setBuild(build);
-        // As the gallery pictures them: point-up flies point up.
-        scene.setTurnedOver(ridesPointUp(f.recipe));
-        scene.setTime(build.duration);
-        scene.setView("default");
-        drawn[f.key] = scene.snapshot().toDataURL("image/png");
-      }
-    } catch {
-      // No WebGL: the plates go without pictures.
-    }
-    scene?.dispose();
-    host.remove();
-    setPictures(drawn);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keys]);
-  return Object.fromEntries(flies.map((f) => [f.key, pictures[f.key] ?? null]));
-}
-
 /** The flies saved in the visitor's colours: "id?colours=…" fly box entries, recoloured. */
 function boxVariations(values: Set<string>) {
   return [...values].flatMap((value) => {
     const { id, colours } = parseBoxEntry(value);
-    const recipe = findPattern(id)?.recipe;
-    const entry = recipe && CATALOG.find((e) => e.recipe.id === (recipe.variantOf ?? recipe.id));
+    const recipe = findFly(id);
+    const entry = recipe && (isOwnId(id) ? ownEntry(recipe) : CATALOG.find((e) => e.recipe.id === (recipe.variantOf ?? recipe.id)));
     if (!colours || !recipe || !entry) return [];
     const parsed = parseColours(colours, recipe);
     return Object.keys(parsed).length
@@ -99,9 +64,13 @@ export function FlyBox() {
     document.title = t.site.titled(t.box.title);
   }, [lang()]);
   const saved = CATALOG.filter((e) => box.has(e.recipe.id));
+  // The visitor's own flies in the box, drawn here like the variations.
+  const own = useOwnFlies();
+  const yours = own.flies.flatMap((f) => (f.recipe && box.has(f.fly.id) ? [f.recipe] : []));
   // Flies saved in the visitor's colours: "id?colours=…" entries.
   const variations = boxVariations(box.values);
-  const pictures = useVariationPictures(useMemo(() => variations.map((v) => ({ key: v.value, recipe: v.recipe })), [variations.map((v) => v.value).join("\n")]));
+  const drawn = [...yours.map((r) => ({ key: r.id, recipe: r })), ...variations.map((v) => ({ key: v.value, recipe: v.recipe }))];
+  const pictures = useFlyPictures(useMemo(() => drawn, [drawn.map((d) => `${d.key}:${JSON.stringify(d.recipe)}`).join("\n")]));
   return (
     <main className="gallery">
       <BenchNav current="box" />
@@ -110,7 +79,7 @@ export function FlyBox() {
         <p>{t.box.intro}</p>
         <p className="stored-note">{storedNote()}</p>
       </section>
-      {saved.length === 0 && variations.length === 0 ? (
+      {saved.length === 0 && variations.length === 0 && yours.length === 0 ? (
         <div className="empty-results">
           <p>{t.box.empty}</p>
           <p>{t.box.emptyHint(linkTo(href.gallery()))}</p>
@@ -120,6 +89,9 @@ export function FlyBox() {
           <ul className="plates boxed">
             {saved.map((e) => (
               <Plate key={e.recipe.id} entry={e} render={renders?.[e.recipe.id]} />
+            ))}
+            {yours.map((r) => (
+              <Plate key={r.id} entry={ownEntry(r)} picture={pictures[r.id]} note={t.build.yourOwn} />
             ))}
           </ul>
           {variations.length > 0 && (
@@ -148,7 +120,7 @@ export function FlyBox() {
               </ul>
             </>
           )}
-          <ShoppingList flies={[...saved.map((e) => ({ recipe: e.recipe, name: e.recipe.name })), ...variations.map((v) => ({ recipe: v.recipe, name: t.box.yourColours(v.recipe.name) }))]} />
+          <ShoppingList flies={[...saved.map((e) => ({ recipe: e.recipe, name: e.recipe.name })), ...yours.map((r) => ({ recipe: r, name: r.name })), ...variations.map((v) => ({ recipe: v.recipe, name: t.box.yourColours(v.recipe.name) }))]} />
         </>
       )}
     </main>
@@ -231,10 +203,13 @@ export function Materials() {
   // shopping list asks for can be ticked here).
   const box = useStoredSet(FLY_BOX_KEY);
   const saved = [...box.values].filter((v) => v.includes("?")).sort().join("\n");
+  // And those of the visitor's own flies in the box.
+  const own = useOwnFlies();
+  const yours = own.flies.flatMap((f) => (f.recipe && box.has(f.fly.id) ? [f.recipe] : []));
   // And whatever is ticked, so it can always be unticked (a variation since removed).
   const ticked = [...owned.values].sort().join("\n");
   const byKind = useMemo(() => {
-    const kinds = catalogNeeds([...CATALOG.flatMap((e) => [e.recipe, ...e.variants]), ...boxVariations(box.values).map((v) => v.recipe)]);
+    const kinds = catalogNeeds([...CATALOG.flatMap((e) => [e.recipe, ...e.variants]), ...boxVariations(box.values).map((v) => v.recipe), ...yours]);
     for (const key of owned.values) {
       const [kind = "", color = ""] = key.split(":");
       if (!(kind in MATERIALS) || !color) continue;
@@ -242,7 +217,8 @@ export function Materials() {
       if (!colors.includes(color)) kinds.set(kind as MaterialKind, [...colors, color].sort());
     }
     return kinds;
-  }, [saved, ticked]);
+    // An own fly edited in another tab changes its variations' materials too.
+  }, [saved, ticked, [...yours, ...boxVariations(box.values).map((v) => v.recipe)].map((r) => JSON.stringify(r.materials)).join("\n")]);
   const kinds = [...byKind.keys()].sort((a, b) => kindName(a).localeCompare(kindName(b), lang()));
   const family = (e: (typeof CATALOG)[number]) => missingKinds(bestCoverage([e.recipe, ...e.variants], owned.values));
   const tieable = CATALOG.filter((e) => family(e) === 0);

@@ -28,7 +28,7 @@ const WORDS = localized({
     learn: "A learning path through fly tying: each fly adds a few new techniques, starting with the easiest.",
     naturals: "The insects, shrimps and small fish that fly patterns imitate, and when they hatch in your region.",
     about: `${SITE_NAME} is a field guide to tying flies: every pattern tied in 3D, one step at a time, from cited dressings. Open source.`,
-    privacy: "No accounts, no cookies and no tracking. Your fly box, materials, tying log and settings stay in your browser. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.",
+    privacy: "No accounts, no cookies and no tracking. Your fly box, materials, tying log, the flies you build and your settings stay in your browser; a link to share a fly carries the fly after the “#”, which browsers don't send to any server. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.",
     kept: "Kept in your browser.",
   },
   sv: {
@@ -39,7 +39,7 @@ const WORDS = localized({
     learn: "En inlärningsväg genom flugbindningen: varje fluga lägger till några nya tekniker, de lättaste först.",
     naturals: "Insekterna, märlorna och småfisken som flugmönstren imiterar, och när de kläcks där du bor.",
     about: `${SITE_NAME} är en fälthandbok i flugbindning: varje mönster bundet i 3D, ett steg i taget, efter citerade recept. Öppen källkod.`,
-    privacy: "Inga konton, inga kakor och ingen spårning. Din flugask, dina material, din bindlogg och dina inställningar stannar i din webbläsare. Webbplatsen ligger på GitHub Pages, som loggar besökarnas IP-adresser av säkerhetsskäl.",
+    privacy: "Inga konton, inga kakor och ingen spårning. Din flugask, dina material, din bindlogg, flugorna du binder här och dina inställningar stannar i din webbläsare; en länk för att dela en fluga bär flugan efter ”#”, som webbläsare inte skickar till någon server. Webbplatsen ligger på GitHub Pages, som loggar besökarnas IP-adresser av säkerhetsskäl.",
     kept: "Sparas i din webbläsare.",
   },
   de: {
@@ -50,7 +50,7 @@ const WORDS = localized({
     learn: "Ein Lernpfad durch das Fliegenbinden: jede Fliege fügt ein paar neue Techniken hinzu, die leichtesten zuerst.",
     naturals: "Die Insekten, Bachflohkrebse und kleinen Fische, die Fliegenmuster imitieren, und wann sie in deiner Region schlüpfen.",
     about: `${SITE_NAME} ist ein Feldführer zum Fliegenbinden: jedes Muster in 3D gebunden, Schritt für Schritt, nach zitierten Rezepten. Open Source.`,
-    privacy: "Keine Konten, keine Cookies, kein Tracking. Deine Fliegendose, dein Material, dein Bindetagebuch und deine Einstellungen bleiben in deinem Browser. Die Seite liegt auf GitHub Pages, das die IP-Adressen der Besucher aus Sicherheitsgründen protokolliert.",
+    privacy: "Keine Konten, keine Cookies, kein Tracking. Deine Fliegendose, dein Material, dein Bindetagebuch, die Fliegen, die du hier bindest, und deine Einstellungen bleiben in deinem Browser; ein Link zum Teilen einer Fliege trägt die Fliege nach dem „#“, das Browser an keinen Server senden. Die Seite liegt auf GitHub Pages, das die IP-Adressen der Besucher aus Sicherheitsgründen protokolliert.",
     kept: "In deinem Browser gespeichert.",
   },
 });
@@ -219,6 +219,13 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
     title: t.site.titled(t.trip.title),
     description: t.trip.intro,
     body: `<main class="reading"><h1>${escape(t.trip.heading)}</h1><p>${escape(t.trip.intro)}</p></main>`,
+  });
+
+  pages.push({
+    path: "build/",
+    title: t.site.titled(t.build.title),
+    description: t.build.intro,
+    body: `<main class="reading"><h1>${escape(t.build.heading)}</h1><p>${escape(t.build.intro)}</p></main>`,
   });
 
   for (const [path, title] of [

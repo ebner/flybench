@@ -1,5 +1,6 @@
 import { lang, type Lang } from "./i18n/lang";
 import { inPageLanguage } from "./i18n/prose";
+import { partIds } from "./i18n/terms";
 import { CatalogSearch, catalogEntries } from "./catalog/search";
 import { NATURALS } from "./naturals";
 import { validateCatalog } from "./recipe/catalog";
@@ -34,6 +35,9 @@ PATTERN_ERRORS.push(
 );
 
 export const PATTERNS: Pattern[] = loaded.sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
+
+/** The part ids the patterns use: the glossaries name them in every language, so own flies use these. */
+export const KNOWN_PARTS: readonly string[] = partIds(PATTERNS.map((p) => p.recipe));
 
 export function findPattern(id: string): Pattern | undefined {
   return PATTERNS.find((p) => p.recipe.id === id);

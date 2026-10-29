@@ -1,4 +1,6 @@
 import { registerLanguage } from "../register";
+import { registerRules } from "../rules";
+import { RULES_SV } from "../rules/sv";
 
 /** The Swedish glossary and prose: a chunk of its own, loaded only for Swedish pages. */
 registerLanguage("sv", {
@@ -6,3 +8,4 @@ registerLanguage("sv", {
   patterns: import.meta.glob("../../../translations/sv/patterns/*.kdl", { query: "?raw", import: "default", eager: true }) as Record<string, string>,
   naturals: import.meta.glob("../../../translations/sv/naturals/*.kdl", { query: "?raw", import: "default", eager: true }) as Record<string, string>,
 });
+registerRules("sv", RULES_SV);

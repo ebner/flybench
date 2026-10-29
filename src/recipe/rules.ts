@@ -1,0 +1,70 @@
+import { MATERIALS, type MaterialKind } from "./materials";
+
+/**
+ * The tying rules' messages (validate.ts), by key, in English. A rule's error carries its key and
+ * parameters too, so the editors can say it in the page's language (src/i18n/rules/).
+ * `m`: a material's id in the recipe; `kind`: its catalog kind; positions are fractions of the shank.
+ */
+export const RULES = {
+  duplicateMaterial: (p: { m: string }) => `material "${p.m}" is defined more than once`,
+  afterWhipFinish: () => "nothing but trimming can follow the whip finish",
+  unknownMaterial: (p: { m: string }) => `unknown material "${p.m}"`,
+  tieOffNext: (p: { m: string }) => `"${p.m}" was just wound and must be tied off before anything else`,
+  securePalmer: (p: { m: string }) => `"${p.m}" was palmered back and must be secured by winding another material forward over its tip`,
+  notABead: (p: { m: string }) => `"${p.m}" is not a bead`,
+  beadBeforeThread: () => "slide the bead on before attaching the thread",
+  beadBeforeWeight: () => "slide the bead on before weighting the shank",
+  alreadyOnHook: (p: { m: string }) => `"${p.m}" is already on the hook`,
+  weightWithWire: (p: { m: string }) => `weighting is done with wire, not "${p.m}"`,
+  weightForward: () => "the weighting must run forward from `from` to `to`",
+  threadAttached: () => "the thread is already attached",
+  threadFirst: () => "the thread must be attached first",
+  threadThere: () => "the thread is already there",
+  onlyDubbing: (p: { m: string }) => `only dubbing can be dubbed; tie in "${p.m}" instead`,
+  onlyHairSpun: (p: { m: string }) => `only hair can be spun, not "${p.m}"`,
+  spinForward: () => "spin the hair forward from the thread",
+  dubNotTie: () => `dubbing is applied to the thread with "dub", not tied in`,
+  beadSlides: () => `beads go on with "slide-bead" before the thread`,
+  featherBack: () => "feathers are tied in pointing back, not forward",
+  needsLength: (p: { kind: MaterialKind }) => `${MATERIALS[p.kind].name} sticks out from where it is tied in, so it needs a length`,
+  eyesNoLength: () => "eyes do not take a length",
+  angleNeedsLength: () => "an angle only applies to material tied in with a length",
+  spreadOnly: () => "spread only applies to tags, tails and wings tied in with a length",
+  widthOnly: () => "width only applies to feather wings",
+  sideOnly: () => "side only applies to tails, beards, wings and eyes",
+  acrossOnly: () => "only legs and strands of hair, fibres, biots or flash can be tied across the shank",
+  forwardNeedsLength: () => "forward only applies to material tied in with a length",
+  forwardUpright: () => "a material pointing forward can't also stand upright",
+  extendedOnly: () => "only chenille, yarn or foam tied in with a length can be extended",
+  tipOnly: () => "tip only applies to extended bodies",
+  alreadyTiedIn: (p: { m: string }) => `"${p.m}" is already tied in`,
+  tieInBeforeWind: (p: { m: string }) => `"${p.m}" must be tied in before it can be wound`,
+  alreadyWound: (p: { m: string }) => `"${p.m}" has already been wound`,
+  cantWind: (p: { kind: MaterialKind }) => `${MATERIALS[p.kind].name} can't be wound`,
+  toOrAround: () => "give either `to` (along the shank) or `around` (a parachute post)",
+  counterAlong: () => "counter applies to winding along the shank, not round a post",
+  hackleAroundPost: () => "only hackle is wound around a post",
+  notAPost: (p: { post: string }) => `"${p.post}" must be a bunch tied in upright (angle 60° or more) to be a post`,
+  windFromTieIn: (p: { m: string; at: number }) => `"${p.m}" is tied in at ${p.at}; wind it forward or back from there`,
+  threadElsewhere: (p: { thread: number; to: number }) => `the thread is at ${p.thread}; move it to ${p.to} before winding there`,
+  windToThread: (p: { thread: number; to: number }) => `the thread is at ${p.thread}; wind forward to it, or move the thread back to ${p.to} first`,
+  tieInBeforePull: (p: { m: string }) => `"${p.m}" must be tied in (and not yet used) before it is pulled over`,
+  pullForward: (p: { m: string }) => `pull "${p.m}" forward from where it is tied in`,
+  threadForPull: (p: { thread: number; to: number }) => `the thread is at ${p.thread}; move it to ${p.to} to tie the material down there`,
+  windBeforeTieOff: (p: { m: string }) => `"${p.m}" must be wound forward before it is tied off`,
+  keepOnly: () => "keep only applies to a hackle that has been wound and tied off",
+  alreadyKept: (p: { m: string }) => `"${p.m}" has already been trimmed with keep`,
+  nothingToTrim: (p: { m: string }) => `there is nothing of "${p.m}" to trim`,
+  leaveOnly: () => "leave only applies to hair butts, spun hair and foam backs",
+  shapeOnly: () => "shape only applies to trimming spun hair or hair butts",
+  neverTiedOff: (p: { m: string; rear: boolean }) => `"${p.m}" is wound but never ${p.rear ? "secured" : "tied off"}`,
+  trimTip: (p: { m: string }) => `the tip of "${p.m}" is still hanging at the bend; trim it`,
+  neverUsedAfterTieIn: (p: { m: string }) => `"${p.m}" is tied in but never wound or pulled over`,
+  neverUsed: (p: { m: string }) => `"${p.m}" is listed but never used`,
+  endWithWhipFinish: () => "the fly must end with a whip finish",
+  // Not a tying rule: the fly builder's bound on the work of drawing a fly (src/edit/own.ts).
+  tooMuchToDraw: () => "more turns than the 3D view draws; the steps from here on aren't shown",
+} as const;
+
+export type RuleKey = keyof typeof RULES;
+export type RuleParams<K extends RuleKey> = Parameters<(typeof RULES)[K]> extends [] ? Record<string, never> : Parameters<(typeof RULES)[K]>[0];
