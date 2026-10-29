@@ -20,6 +20,9 @@ import { PrintCard } from "./PrintCard";
 import { useNaturalPictures } from "./renders";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
+import { LogForm, useLog } from "./Log";
+import { tiedCounts } from "../catalog/log";
+import { PATTERNS } from "../patterns";
 
 export function PatternPage({ id, step, size }: { id: string; step?: number; size?: number }) {
   const pattern = findPattern(id);
@@ -105,6 +108,8 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
   useWakeLock(vise);
   const box = useStoredSet(FLY_BOX_KEY);
   const owned = useStoredSet(INVENTORY_KEY);
+  const log = useLog();
+  const [logging, setLogging] = useState<"form" | "done" | null>(null);
   const mainId = original.variantOf ?? original.id;
   const ownership = (id: string) => {
     const m = recipe.materials.find((m) => m.id === id);
@@ -468,6 +473,35 @@ function PatternView({ recipe: original, linkedStep, linkedSize }: { recipe: Rec
             {preparing ? "Preparing the card…" : "Print recipe card"}
           </button>
         </div>
+        {(() => {
+          const tied = tiedCounts(log.items, PATTERNS.map((p) => p.recipe)).get(mainId) ?? 0;
+          return logging === "form" ? (
+            <LogForm
+              id={recipe.id}
+              sizes={tiedSize !== undefined ? hookSizes(tiedSize) : []}
+              size={recipe.hook.size}
+              onClose={(logged) => setLogging(logged ? "done" : null)}
+            />
+          ) : (
+            <p className="tied" aria-live="polite">
+              {logging === "done" ? "Added to your tying log. " : ""}
+              {tied > 0 && (
+                <>
+                  You have tied {tied} of {tied === 1 ? "this fly" : "these"}.{" "}
+                </>
+              )}
+              <button className="link-button" onClick={() => setLogging("form")}>
+                I tied this
+              </button>
+              {tied > 0 && (
+                <>
+                  {" "}
+                  <a href={href.log()}>Your tying log</a>
+                </>
+              )}
+            </p>
+          );
+        })()}
         {printRequest > 0 && <PrintCard recipe={recipe} build={build} request={printRequest} onPrinted={printed} />}
 
         {naturals.length > 0 && (

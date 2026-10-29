@@ -1025,6 +1025,68 @@ select {
   color: var(--ink-soft);
 }
 
+/* The visitor's own pages, linked to each other. */
+.bench-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.bench-nav a {
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.bench-nav a[aria-current="page"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.log-entries {
+  list-style: none;
+  padding: 0;
+}
+
+.log-entries li {
+  display: grid;
+  grid-template-columns: 10rem 1fr auto;
+  gap: 0.2rem 1rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.log-date {
+  color: var(--ink-soft);
+}
+
+.log-note {
+  grid-column: 2;
+  grid-row: 2;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 40rem) {
+  .log-entries li {
+    grid-template-columns: 1fr auto;
+  }
+
+  .log-date {
+    grid-column: 1 / -1;
+  }
+
+  .log-note {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
 .variants {
   display: flex;
   flex-wrap: wrap;
@@ -1334,6 +1396,17 @@ select {
 .uses {
   columns: 2 14rem;
   padding-left: 1.1rem;
+}
+
+.tied-mark {
+  margin-left: 0.6rem;
+  padding: 0 0.45rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  font-family: var(--text);
+  font-size: var(--step--1);
+  vertical-align: middle;
 }
 
 .path {
@@ -1734,6 +1807,52 @@ select {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.tied {
+  margin: 0.8rem 0 0;
+}
+
+.log-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  align-items: end;
+  margin: 0.8rem 0 0;
+  padding: 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+.log-form label {
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.log-form input,
+.log-form select {
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.log-form input[type="number"] {
+  width: 5rem;
+}
+
+.log-form-note {
+  flex: 1 1 100%;
+}
+
+.log-form-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 /* The recipe card exists only on paper. */

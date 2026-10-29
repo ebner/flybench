@@ -37,7 +37,8 @@ export function About() {
       <p>
         Flybench has no accounts, sets no cookies and does not track you: there are no analytics, no adverts and nothing
         is loaded from other sites. What you keep in Flybench stays in your browser and never leaves your device: your{" "}
-        <a href={href.box()}>fly box</a>, your <a href={href.materials()}>materials</a>, and the settings you choose (the
+        <a href={href.box()}>fly box</a>, your <a href={href.materials()}>materials</a>, your{" "}
+        <a href={href.log()}>tying log</a>, and the settings you choose (the
         theme, whether the camera follows each step, and your region for the hatch calendar). Your browser also keeps a copy of the site so that pages you
         have visited work offline. Clearing this site's data in your browser removes all of it.
       </p>

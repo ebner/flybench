@@ -5,29 +5,32 @@ import { useEffect, useState } from "react";
  * search (the build writes an HTML file for each, see scripts/prerender.ts):
  *   /                      the gallery (filters in the query: /?type=dry&q=elk)
  *   /fly/<id>/             a pattern; /fly/<id>/?step=<n> at a step (1-based), &size=<n> on
- *                          another hook size than it is tied on
+ *                          another hook size than it is tied on, &colours=body:yellow,tail:red
+ *                          in other colours (see catalog/variation.ts)
  *   /techniques/           the techniques index; /technique/<id>/ one technique
  *   /learn/                the learning path
  *   /about/                what Flybench is
- *   /box/                  the user's fly box; /materials/ their materials inventory
+ *   /box/                  the user's fly box; /materials/ their materials inventory;
+ *                          /log/ their tying log
  * Older hash links (#/fly/<id>/<step>, #/<id>, #/?type=dry) are redirected (see `legacyRoute`).
  */
 export type Route =
   | { page: "gallery"; query: string }
-  | { page: "fly"; id: string; step?: number; size?: number }
+  | { page: "fly"; id: string; step?: number; size?: number; colours?: string }
   | { page: "techniques" }
   | { page: "technique"; id: string }
   | { page: "learn" }
   | { page: "about" }
   | { page: "box" }
   | { page: "materials" }
+  | { page: "log" }
   | { page: "naturals" }
   | { page: "natural"; id: string }
   | { page: "not-found"; path: string };
 
 const BASE = import.meta.env.BASE_URL;
 
-const SINGLE = ["techniques", "learn", "about", "box", "materials", "naturals"] as const;
+const SINGLE = ["techniques", "learn", "about", "box", "materials", "log", "naturals"] as const;
 
 /** Parses a path relative to the site's base, with its query: "fly/red-tag/?step=4". */
 export function parseRoute(relative: string): Route {
@@ -45,11 +48,13 @@ export function parseRoute(relative: string): Route {
     // The step used to be a path segment; it is a query parameter now.
     const step = Number(parts[2] ?? params.get("step"));
     const size = Number(params.get("size"));
+    const colours = params.get("colours");
     return {
       page: "fly",
       id: parts[1],
       ...(Number.isInteger(step) && step > 0 ? { step } : {}),
       ...(Number.isInteger(size) && size > 0 ? { size } : {}),
+      ...(colours ? { colours } : {}),
     };
   }
   if (parts.length === 1) {
@@ -73,8 +78,12 @@ export function legacyRoute(hash: string): Route | null {
 
 export const href = {
   gallery: (query = "") => (query ? `${BASE}?${query}` : BASE),
-  fly: (id: string, step?: number, size?: number) => {
-    const query = new URLSearchParams({ ...(step ? { step: String(step) } : {}), ...(size ? { size: String(size) } : {}) }).toString();
+  fly: (id: string, step?: number, size?: number, colours?: string) => {
+    const query = new URLSearchParams({
+      ...(step ? { step: String(step) } : {}),
+      ...(size ? { size: String(size) } : {}),
+      ...(colours ? { colours } : {}),
+    }).toString();
     return `${BASE}fly/${encodeURIComponent(id)}/${query ? `?${query}` : ""}`;
   },
   techniques: () => `${BASE}techniques/`,
@@ -83,6 +92,7 @@ export const href = {
   about: () => `${BASE}about/`,
   box: () => `${BASE}box/`,
   materials: () => `${BASE}materials/`,
+  log: () => `${BASE}log/`,
   naturals: () => `${BASE}naturals/`,
   natural: (id: string) => `${BASE}natural/${encodeURIComponent(id)}/`,
 };
@@ -93,7 +103,7 @@ export function routeHref(route: Route): string {
     case "gallery":
       return href.gallery(route.query);
     case "fly":
-      return href.fly(route.id, route.step, route.size);
+      return href.fly(route.id, route.step, route.size, route.colours);
     case "technique":
       return href.technique(route.id);
     case "natural":
