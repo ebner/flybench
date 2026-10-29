@@ -1,3 +1,5 @@
+import { lang, type Lang } from "./i18n/lang";
+import { inPageLanguage } from "./i18n/prose";
 import { CatalogSearch, catalogEntries } from "./catalog/search";
 import { NATURALS } from "./naturals";
 import { validateCatalog } from "./recipe/catalog";
@@ -46,4 +48,16 @@ export function variantFamily(recipe: Recipe): Pattern[] {
 }
 
 export const CATALOG = catalogEntries(PATTERNS.map((p) => p.recipe));
-export const SEARCH = new CatalogSearch(CATALOG);
+const searches = new Map<Lang, CatalogSearch>();
+
+/** The catalog's search, in the page's language (material names, types, descriptions), made on first use. */
+export function catalogSearch(): CatalogSearch {
+  const l = lang();
+  let s = searches.get(l);
+  if (!s) {
+    const local = (r: Recipe) => inPageLanguage(r, l);
+    s = new CatalogSearch(CATALOG.map((e) => ({ ...e, recipe: local(e.recipe), variants: e.variants.map(local) })));
+    searches.set(l, s);
+  }
+  return s;
+}

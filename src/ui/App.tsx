@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SITE_TITLE } from "../catalog/pages";
+import { siteTitle } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
 import { About, AUTHOR, REPO_URL } from "./About";
 import { Gallery } from "./Gallery";
@@ -22,7 +22,7 @@ export function App() {
   const { choice, setChoice } = useTheme();
 
   useEffect(() => {
-    if (route.page === "gallery") document.title = SITE_TITLE;
+    if (route.page === "gallery") document.title = siteTitle();
     if (!restoresScroll()) window.scrollTo(0, 0);
   }, [route.page, route.page === "fly" || route.page === "technique" || route.page === "natural" ? route.id : null]);
 

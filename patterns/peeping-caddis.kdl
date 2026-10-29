@@ -45,7 +45,7 @@ materials {
     legs partridge-hackle fibre=0.55 sweep=75
     // ExpediTom ribs it with black wire.
     rib copper-wire color=black label="Black wire"
-    case hares-ear-dubbing label="Hare's mask dubbing with plenty of guard hair"
+    larva-case hares-ear-dubbing label="Hare's mask dubbing with plenty of guard hair"
 }
 
 steps {
@@ -59,7 +59,7 @@ steps {
     wind legs to=0.06 turns=1 note="One or two turns as a collar, stroked back over the larva."
     tie-off legs
     tie-in rib
-    dub case to=0.98 note="Bushy, and an even cylinder rather than tapered: it is a case."
+    dub larva-case to=0.98 note="Bushy, and an even cylinder rather than tapered: it is a case."
     wind rib to=0.98 turns=5
     tie-off rib
     whip-finish note="Behind the bead; brush the case to pull out the guard hairs."

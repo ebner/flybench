@@ -36,7 +36,7 @@ thread black size="8/0"
 
 materials {
     weight lead-free-wire label="Lead-free wire (Bell uses flat lead)"
-    case hares-ear-dubbing label="Hare's mask dubbing brush"
+    larva-case hares-ear-dubbing label="Hare's mask dubbing brush"
     // Fly Anglers Online gives golden pheasant centre tail for the legs; Fish4Flies lists peacock.
     legs pheasant-tail count=8 label="Golden pheasant centre tail fibres (legs)"
     larva wool color=cream label="White or glow yarn (larva)"
@@ -46,7 +46,7 @@ steps {
     weight weight from=0.1 to=0.65 note="Flattened, under the case."
     attach-thread at=0.7
     wrap-thread to=0.0
-    dub case to=0.66 note="Thick and rough over the rear two thirds."
+    dub larva-case to=0.66 note="Thick and rough over the rear two thirds."
     tie-in legs length=0.6 angle=30 side=under note="Under the shank, sloping back."
     // Assumption: the larva covers the front third and ends at the eye.
     tie-in larva length=0.85 extended=#true forward=#true tip=brown note="The top of the head tinted dark with a marker."

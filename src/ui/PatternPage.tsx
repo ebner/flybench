@@ -21,6 +21,8 @@ import { useNaturalPictures } from "./renders";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
+import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 import { boxEntry, coloursSpec, DYE_COLORS, parseColours, recolor, tiedColour, type Colours } from "../catalog/variation";
 import { LogForm, useLog } from "./Log";
@@ -36,7 +38,7 @@ export function PatternPage({ id, step, size, colours }: { id: string; step?: nu
       </NotFound>
     );
   }
-  return <PatternView key={id} recipe={pattern.recipe} linkedStep={step} linkedSize={size} linkedColours={colours} />;
+  return <PatternView key={id} recipe={inPageLanguage(pattern.recipe)} linkedStep={step} linkedSize={size} linkedColours={colours} />;
 }
 
 const Icon = {
@@ -105,7 +107,9 @@ function PatternView({
   const sized = (s: typeof size) =>
     recolor(s === original.hook.size ? original : { ...original, hook: { ...original.hook, size: s } }, colours);
   const recipe = useMemo(() => sized(size), [original, size, spec]);
-  const build = useMemo(() => simulate(recipe), [recipe]);
+  // The step texts are in the page's language: made again when it changes.
+  const language = lang();
+  const build = useMemo(() => simulate(recipe), [recipe, language]);
   const fishingFor = useMemo(() => fishing(recipe), [recipe]);
   const [inWater, setInWater] = useState(false);
   const [follow, setFollowState] = useState(readFollow);

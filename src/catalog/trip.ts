@@ -1,6 +1,7 @@
 import type { Natural } from "../recipe/natural";
 import { isTube, MONTHS, type Recipe, type SPECIES } from "../recipe/schema";
 import { fishing } from "../tying/fishing";
+import { localized } from "../i18n/localized";
 import { hookModel } from "../tying/hook";
 import { activeIn, matchingHookSizes, type Region } from "./naturals";
 
@@ -24,7 +25,11 @@ export interface Suggestion {
   sizes: number[];
 }
 
-export const WATER_LABELS: Record<Water, string> = { river: "River", lake: "Lake", coast: "Sea coast" };
+export const WATER_LABELS = localized<Record<Water, string>>({
+  en: { river: "River", lake: "Lake", coast: "Sea coast" },
+  sv: { river: "Älv eller å", lake: "Sjö", coast: "Havskust" },
+  de: { river: "Fluss", lake: "See", coast: "Meeresküste" },
+});
 
 const COASTAL_NATURALS = new Set(["prawn", "marine-baitfish"]);
 const FRESHWATER: Species[] = ["trout", "grayling", "salmon", "char", "bass", "panfish", "pike"];

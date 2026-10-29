@@ -39,13 +39,19 @@ Run `pnpm test` and `pnpm typecheck` before reporting work as done. Every file i
 ```
 patterns/       recipes (KDL v2)
 naturals/       what the patterns imitate (KDL): body, parts, sizes, hatch months by region
+glossary/       sv.kdl, de.kdl: the words generated texts take, with their grammatical forms and
+                translator notes (docs/glossary.md)
+translations/   <lang>/patterns|naturals/<id>.kdl: translated prose (docs/translating.md)
 docs/           recipe-schema.md: the recipe format reference; authoring-patterns.md: how to
                 research, write and check a pattern
 src/recipe/     kdl.ts (KDL → plain object + source locations), schema.ts (Zod),
                 materials.ts (materials catalog), validate.ts (tying-sense rules),
                 load.ts (all three, errors with line numbers), catalog.ts (cross-recipe rules)
 src/tying/      hook.ts (hook models, sizes), simulate.ts (recipe → timeline of geometry
-                pieces as plain data), describe.ts (instruction text, materials list)
+                pieces as plain data), describe.ts (instruction text, materials list: a step
+                analysed, then written by describe-sv.ts / describe-de.ts in other languages)
+src/i18n/       lang.ts (the page's language, from the address), localized.ts, ui/ (the
+                interface's words per language), glossary.ts, grammar.ts, prose.ts
 src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends, naturals,
                 water (the in-the-water view: its own clock, also a pure function of time)
 src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook, for its picture),
@@ -118,3 +124,7 @@ the Privacy section.
 - Design: see the header of src/ui/styles.css (herbarium light theme, cyanotype dark theme,
   IM Fell English + Spectral). No all-caps labels, no middle-dot meta strings.
 - Commit only when asked.
+- Languages: English, Swedish (/sv/) and German (/de/). Every visible string is in a catalog
+  (src/i18n/ui) or a `localized({ en, sv, de })` record; never write English straight into a
+  component. New materials, colours, part words and hook models need glossary entries in
+  both languages (the tests say which). See docs/translating.md.

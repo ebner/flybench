@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { patternsUsing, stepTechnique, technique, TECHNIQUES, techniqueExample } from "../catalog/techniques";
+import { localTechniques, patternsUsing, stepTechnique, technique, techniqueExample } from "../catalog/techniques";
 import { PATTERNS } from "../patterns";
 import { Clip } from "./Clip";
 import { NotFound } from "./NotFound";
@@ -14,7 +14,7 @@ export function TechniquesIndex() {
   useEffect(() => {
     document.title = t.site.titled(t.techniques.title);
   }, []);
-  const used = TECHNIQUES.filter((t) => patternsUsing(recipes(), t.id).length > 0);
+  const used = localTechniques().filter((t) => patternsUsing(recipes(), t.id).length > 0);
   return (
     <main className="reading">
       <h1>{t.techniques.heading}</h1>

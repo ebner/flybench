@@ -6,17 +6,57 @@
  */
 import type { Recipe } from "../recipe/schema";
 import { LANGS, langPrefix, type Lang } from "../i18n/lang";
+import { localized } from "../i18n/localized";
+import { t } from "../i18n/ui";
+import { inPageLanguage, naturalInPageLanguage } from "../i18n/prose";
 import { materialsList } from "../tying/describe";
 import { simulate } from "../tying/simulate";
 import { DIFFICULTY_LABELS, factsLine, factsSentence, originLine } from "./describe";
 import type { Natural } from "../recipe/natural";
 import { GROUP_LABELS, hatchText, imitatedBy, REGION_LABELS, sizeText, STAGE_LABELS } from "./naturals";
-import { learningPath, patternsUsing, TECHNIQUES } from "./techniques";
+import { learningPath, localTechniques, patternsUsing } from "./techniques";
 
 export const SITE_NAME = "Flybench";
-export const SITE_TAGLINE = "Fly patterns to tie, step by step, in 3D";
-/** The front page's title. */
-export const SITE_TITLE = `${SITE_NAME}: fly patterns to tie, step by step, in 3D`;
+
+/** Words of the pages that the interface doesn't have. */
+const WORDS = localized({
+  en: {
+    title: `${SITE_NAME}: fly patterns to tie, step by step, in 3D`,
+    home: (n: number) => `${n} fly patterns, each tied in front of you in 3D, one step at a time, with its materials, history and how to fish it.`,
+    howToTie: (name: string) => `How to tie the ${name}, step by step in 3D.`,
+    techniques: "The techniques of fly tying, each explained for beginners and shown in 3D on a real pattern.",
+    learn: "A learning path through fly tying: each fly adds a few new techniques, starting with the easiest.",
+    naturals: "The insects, shrimps and small fish that fly patterns imitate, and when they hatch in your region.",
+    about: `${SITE_NAME} is a field guide to tying flies: every pattern tied in 3D, one step at a time, from cited dressings. Open source.`,
+    privacy: "No accounts, no cookies and no tracking. Your fly box, materials, tying log and settings stay in your browser. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.",
+    kept: "Kept in your browser.",
+  },
+  sv: {
+    title: `${SITE_NAME}: flugmönster att binda, steg för steg, i 3D`,
+    home: (n: number) => `${n} flugmönster, vart och ett bundet framför dig i 3D, ett steg i taget, med sina material, sin historia och hur det fiskas.`,
+    howToTie: (name: string) => `Så binder du ${name}, steg för steg i 3D.`,
+    techniques: "Flugbindningens tekniker, var och en förklarad för nybörjare och visad i 3D på ett riktigt mönster.",
+    learn: "En inlärningsväg genom flugbindningen: varje fluga lägger till några nya tekniker, de lättaste först.",
+    naturals: "Insekterna, märlorna och småfisken som flugmönstren imiterar, och när de kläcks där du bor.",
+    about: `${SITE_NAME} är en fälthandbok i flugbindning: varje mönster bundet i 3D, ett steg i taget, efter citerade recept. Öppen källkod.`,
+    privacy: "Inga konton, inga kakor och ingen spårning. Din flugask, dina material, din bindlogg och dina inställningar stannar i din webbläsare. Webbplatsen ligger på GitHub Pages, som loggar besökarnas IP-adresser av säkerhetsskäl.",
+    kept: "Sparas i din webbläsare.",
+  },
+  de: {
+    title: `${SITE_NAME}: Fliegenmuster zum Binden, Schritt für Schritt, in 3D`,
+    home: (n: number) => `${n} Fliegenmuster, jedes vor deinen Augen in 3D gebunden, Schritt für Schritt, mit Materialien, Geschichte und wie man es fischt.`,
+    howToTie: (name: string) => `So bindest du die ${name}, Schritt für Schritt in 3D.`,
+    techniques: "Die Techniken des Fliegenbindens, jede für Anfänger erklärt und in 3D an einem echten Muster gezeigt.",
+    learn: "Ein Lernpfad durch das Fliegenbinden: jede Fliege fügt ein paar neue Techniken hinzu, die leichtesten zuerst.",
+    naturals: "Die Insekten, Bachflohkrebse und kleinen Fische, die Fliegenmuster imitieren, und wann sie in deiner Region schlüpfen.",
+    about: `${SITE_NAME} ist ein Feldführer zum Fliegenbinden: jedes Muster in 3D gebunden, Schritt für Schritt, nach zitierten Rezepten. Open Source.`,
+    privacy: "Keine Konten, keine Cookies, kein Tracking. Deine Fliegendose, dein Material, dein Bindetagebuch und deine Einstellungen bleiben in deinem Browser. Die Seite liegt auf GitHub Pages, das die IP-Adressen der Besucher aus Sicherheitsgründen protokolliert.",
+    kept: "In deinem Browser gespeichert.",
+  },
+});
+
+/** The front page's title, in the page's language. */
+export const siteTitle = () => WORDS.title;
 
 export interface Page {
   /** Path relative to the site's base: "" for the front page, "fly/adams/". */
@@ -52,39 +92,40 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
   const pages: Page[] = [
     {
       path: "",
-      title: SITE_TITLE,
-      description: `${patterns} fly patterns, each tied in front of you in 3D, one step at a time, with its materials, history and how to fish it.`,
+      title: siteTitle(),
+      description: WORDS.home(patterns),
       body:
-        `<main class="gallery"><h1>${escape(SITE_TAGLINE)}</h1>` +
-        `<p>Every pattern can be turned, paused and replayed one step at a time.</p><ul>` +
+        `<main class="gallery"><h1>${escape(t.gallery.heading)}</h1>` +
+        `<p>${escape(t.gallery.intro)}</p><ul>` +
         byName.map((r) => `<li>${link(flyPath(r.id), fullName(r))}: ${escape(factsLine(r))}</li>`).join("") +
         `</ul></main>`,
     },
   ];
 
-  for (const r of recipes) {
+  for (const english of recipes) {
+    const r = inPageLanguage(english);
     const steps = simulate(r).steps;
     const origin = originLine(r);
     pages.push({
       path: flyPath(r.id),
-      title: `${fullName(r)}, ${SITE_NAME}`,
-      description: `How to tie the ${fullName(r)}, step by step in 3D. ${r.description ?? factsSentence(r)}`,
+      title: t.site.titled(fullName(r)),
+      description: `${WORDS.howToTie(fullName(r))} ${r.description ?? factsSentence(r)}`,
       image: r.id,
       body:
         `<main class="reading"><h1>${escape(fullName(r))}</h1>` +
         `<p>${escape(factsSentence(r))} ${escape(DIFFICULTY_LABELS[r.difficulty])}.${origin ? ` ${escape(origin)}.` : ""}</p>` +
         (r.description ? `<p>${escape(r.description)}</p>` : "") +
-        `<h2>Materials</h2><ul>` +
+        `<h2>${escape(t.pattern.dressing)}</h2><ul>` +
         materialsList(r)
           .map((m) => `<li>${escape(m.role)}: ${escape(m.name)}${m.detail ? `, ${escape(m.detail)}` : ""}</li>`)
           .join("") +
-        `</ul><h2>Steps</h2><ol>` +
+        `</ul><h2>${escape(t.pattern.steps)}</h2><ol>` +
         steps.map((s) => `<li><strong>${escape(s.title)}</strong> ${escape(s.text)}</li>`).join("") +
         `</ol>` +
-        (r.history ? `<h2>History</h2>${paragraphs(r.history)}` : "") +
-        (r.fishing ? `<h2>Fishing it</h2>${paragraphs(r.fishing)}` : "") +
+        (r.history ? `<h2>${escape(t.pattern.history)}</h2>${paragraphs(r.history)}` : "") +
+        (r.fishing ? `<h2>${escape(t.pattern.fishing)}</h2>${paragraphs(r.fishing)}` : "") +
         (r.sources.length
-          ? `<h2>Sources</h2><ul>` +
+          ? `<h2>${escape(t.pattern.sources)}</h2><ul>` +
             r.sources.map((s) => `<li>${s.url ? `<a href="${escape(s.url)}">${escape(s.title)}</a>` : escape(s.title)}</li>`).join("") +
             `</ul>`
           : "") +
@@ -94,24 +135,24 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
 
   pages.push({
     path: "techniques/",
-    title: `Techniques, ${SITE_NAME}`,
-    description: "The techniques of fly tying, each explained for beginners and shown in 3D on a real pattern.",
+    title: t.site.titled(t.techniques.title),
+    description: WORDS.techniques,
     body:
-      `<main class="reading"><h1>Techniques</h1><ul>` +
-      TECHNIQUES.map((t) => `<li>${link(`technique/${encodeURIComponent(t.id)}/`, t.name)}: ${escape(t.summary)}</li>`).join("") +
+      `<main class="reading"><h1>${escape(t.techniques.heading)}</h1><ul>` +
+      localTechniques().map((x) => `<li>${link(`technique/${encodeURIComponent(x.id)}/`, x.name)}: ${escape(x.summary)}</li>`).join("") +
       `</ul></main>`,
   });
-  for (const t of TECHNIQUES) {
-    const using = patternsUsing(recipes, t.id);
+  for (const x of localTechniques()) {
+    const using = patternsUsing(recipes, x.id);
     pages.push({
-      path: `technique/${encodeURIComponent(t.id)}/`,
-      title: `${t.name}, ${SITE_NAME}`,
-      description: t.summary,
+      path: `technique/${encodeURIComponent(x.id)}/`,
+      title: t.site.titled(x.name),
+      description: x.summary,
       image: using[0]?.id,
       body:
-        `<main class="reading"><h1>${escape(t.name)}</h1><p>${escape(t.summary)}</p>${paragraphs(t.how)}` +
-        (t.mistakes.length ? `<h2>Common mistakes</h2><ul>${t.mistakes.map((m) => `<li>${escape(m)}</li>`).join("")}</ul>` : "") +
-        (using.length ? `<h2>Patterns that use it</h2><ul>${using.map((r) => `<li>${link(flyPath(r.id), fullName(r))}</li>`).join("")}</ul>` : "") +
+        `<main class="reading"><h1>${escape(x.name)}</h1><p>${escape(x.summary)}</p>${paragraphs(x.how)}` +
+        (x.mistakes.length ? `<h2>${escape(t.techniques.mistakes)}</h2><ul>${x.mistakes.map((m) => `<li>${escape(m)}</li>`).join("")}</ul>` : "") +
+        (using.length ? `<h2>${escape(t.techniques.using)}</h2><ul>${using.map((r) => `<li>${link(flyPath(r.id), fullName(r))}</li>`).join("")}</ul>` : "") +
         `</main>`,
     });
   }
@@ -119,23 +160,23 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
   const path = learningPath(recipes);
   pages.push({
     path: "learn/",
-    title: `Learn to tie, ${SITE_NAME}`,
-    description: "A learning path through fly tying: each fly adds a few new techniques, starting with the easiest.",
+    title: t.site.titled(t.learn.title),
+    description: WORDS.learn,
     image: path[0]?.recipe.id,
     body:
-      `<main class="reading"><h1>Learn to tie, one fly at a time</h1><ol>` +
+      `<main class="reading"><h1>${escape(t.learn.heading)}</h1><ol>` +
       path.map((s) => `<li>${link(flyPath(s.recipe.id), fullName(s.recipe))}: ${escape(factsLine(s.recipe))}</li>`).join("") +
       `</ol></main>`,
   });
 
   if (naturals.length) {
-    const sorted = [...naturals].sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = naturals.map((n) => naturalInPageLanguage(n)).sort((a, b) => a.name.localeCompare(b.name));
     pages.push({
       path: "naturals/",
-      title: `Naturals and hatches, ${SITE_NAME}`,
-      description: "The insects, shrimps and small fish that fly patterns imitate, and when they hatch in your region.",
+      title: t.site.titled(t.naturals.title),
+      description: WORDS.naturals,
       body:
-        `<main class="reading"><h1>Naturals and hatches</h1><ul>` +
+        `<main class="reading"><h1>${escape(t.naturals.heading)}</h1><ul>` +
         sorted.map((n) => `<li>${link(`natural/${encodeURIComponent(n.id)}/`, n.name)}: ${escape(n.description)}</li>`).join("") +
         `</ul></main>`,
     });
@@ -143,16 +184,16 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
       const flies = imitatedBy(recipes, n.id);
       pages.push({
         path: `natural/${encodeURIComponent(n.id)}/`,
-        title: `${n.name}, ${SITE_NAME}`,
+        title: t.site.titled(n.name),
         description: n.description,
         image: flies[0]?.id,
         body:
           `<main class="reading"><h1>${escape(n.name)}</h1><p>${escape(n.description)}</p>` +
           `<p>${escape(GROUP_LABELS[n.group])}, ${escape(STAGE_LABELS[n.stage])}, ${escape(sizeText(n))}.</p>` +
           (n.hatches.length
-            ? `<h2>When it hatches</h2><ul>${n.hatches.map((h) => `<li>${escape(REGION_LABELS[h.region])}: ${escape(hatchText(h))}</li>`).join("")}</ul>`
+            ? `<h2>${escape(t.naturals.hatches)}</h2><ul>${n.hatches.map((h) => `<li>${escape(REGION_LABELS[h.region])}: ${escape(hatchText(h))}</li>`).join("")}</ul>`
             : "") +
-          (flies.length ? `<h2>Flies that imitate it</h2><ul>${flies.map((r) => `<li>${link(flyPath(r.id), fullName(r))}</li>`).join("")}</ul>` : "") +
+          (flies.length ? `<h2>${escape(t.naturals.flies)}</h2><ul>${flies.map((r) => `<li>${link(flyPath(r.id), fullName(r))}</li>`).join("")}</ul>` : "") +
           `</main>`,
       });
     }
@@ -160,31 +201,31 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
 
   pages.push({
     path: "about/",
-    title: `About, ${SITE_NAME}`,
-    description: `${SITE_NAME} is a field guide to tying flies: every pattern tied in 3D, one step at a time, from cited dressings. Open source.`,
+    title: t.site.titled(t.about.title),
+    description: WORDS.about,
     body:
-      `<main class="reading"><h1>About ${SITE_NAME}</h1>` +
-      `<p>${SITE_NAME} is a field guide to tying flies. Each of its ${patterns} patterns is tied in front of you in 3D, one step at a time, and comes with its materials, its history and how to fish it.</p>` +
-      `<h2>Privacy</h2><p>No accounts, no cookies and no tracking. Your fly box, materials, tying log and settings stay in your browser. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.</p>` +
-      `<h2>Who makes it</h2><p>${SITE_NAME} is made by <a href="https://github.com/ebner">Hannes Ebner</a>.</p></main>`,
+      `<main class="reading"><h1>${escape(t.about.heading)}</h1>` +
+      `<p>${escape(t.about.lede(patterns))}</p>` +
+      `<h2>${escape(t.about.privacyHeading)}</h2><p>${escape(WORDS.privacy)}</p>` +
+      `<h2>${escape(t.about.whoHeading)}</h2><p><a href="https://github.com/ebner">Hannes Ebner</a></p></main>`,
   });
 
   pages.push({
     path: "trip/",
-    title: `A fly box for a trip, ${SITE_NAME}`,
-    description: "Where and when you fish, and for what: the flies to take, matched to what hatches then, in the sizes to tie them.",
-    body: `<main class="reading"><h1>A fly box for a trip</h1><p>Where and when you fish, and for what: the flies to take, matched to what hatches then, in the sizes to tie them.</p></main>`,
+    title: t.site.titled(t.trip.title),
+    description: t.trip.intro,
+    body: `<main class="reading"><h1>${escape(t.trip.heading)}</h1><p>${escape(t.trip.intro)}</p></main>`,
   });
 
   for (const [path, title] of [
-    ["box/", "Fly box"],
-    ["materials/", "Your materials"],
-    ["log/", "Your tying log"],
+    ["box/", t.box.title],
+    ["materials/", t.materials.title],
+    ["log/", t.log.title],
   ] as const) {
     pages.push({
       path,
-      title: `${title}, ${SITE_NAME}`,
-      description: "Kept in your browser.",
+      title: t.site.titled(title),
+      description: WORDS.kept,
       noindex: true,
       body: `<main class="reading"><h1>${escape(title)}</h1></main>`,
     });

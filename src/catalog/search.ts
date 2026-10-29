@@ -1,3 +1,4 @@
+import { IMITATES_LABELS, TYPE_LABELS } from "./describe";
 import MiniSearch from "minisearch";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import type { Recipe } from "../recipe/schema";
@@ -63,9 +64,12 @@ export class CatalogSearch {
           materials: all
             .flatMap((r) => r.materials.map((m) => `${materialName(m)} ${MATERIALS[m.kind].name}`))
             .join(" "),
+          // The type and what it imitates as the page's language says them, and as the ids.
           about: [
             e.recipe.type,
+            TYPE_LABELS[e.recipe.type],
             ...e.recipe.imitates,
+            ...e.recipe.imitates.map((i) => IMITATES_LABELS[i]),
             e.recipe.origin?.originator ?? "",
             e.recipe.origin?.region ?? "",
             e.recipe.description ?? "",

@@ -1,5 +1,6 @@
 import { MATERIALS } from "../recipe/materials";
 import type { Recipe } from "../recipe/schema";
+import { lang, type Lang } from "../i18n/lang";
 import { heavyTube } from "./hook";
 
 /** Where a fly fishes: on the surface, in the film, just under it, or deep. */
@@ -54,22 +55,45 @@ export const WET_SPREAD = 0.85;
 /** What the water view shows, in words: where the fly fishes and how it moves. */
 // Assumption: the usual way each kind of fly is fished, not the only one.
 export function fishingText(f: Fishing): string {
-  const where = {
-    surface: "It floats on the surface, the bend of the hook hanging through the film. From below, a trout sees the dents it makes in the film before the fly itself comes into view.",
-    film:
-      f.hang > 0
-        ? "It hangs in the surface film like an insect hatching: its body down in the water, its wing or post above it."
-        : "It floats low, half sunk in the surface film.",
-    below: "It fishes just under the surface, where its soft fibres move with the water.",
-    deep: "It sinks and fishes deep, near the bottom.",
-  }[f.depth];
+  const w = FISHING_WORDS[lang()];
+  const where = f.depth === "film" ? (f.hang > 0 ? w.filmHangs : w.filmLow) : w[f.depth];
   const how =
-    f.motion === "swim"
-      ? "It is stripped back in pulls: it darts forward on each one and sinks back a little in the pause after it."
-      : f.motion === "swing"
-        ? "It is swung across the current on a tight line, holding against the flow with its fibres working in it."
-        : f.depth === "surface" || f.depth === "film"
-          ? "It drifts with the current, riding the ripples."
-          : "It drifts with the current, turning slowly as it goes."
+    f.motion === "swim" ? w.swim : f.motion === "swing" ? w.swing : f.depth === "surface" || f.depth === "film" ? w.driftTop : w.driftUnder;
   return `${where} ${how}`;
 }
+
+const FISHING_WORDS: Record<Lang, Record<"surface" | "filmHangs" | "filmLow" | "below" | "deep" | "swim" | "swing" | "driftTop" | "driftUnder", string>> = {
+  en: {
+    surface: "It floats on the surface, the bend of the hook hanging through the film. From below, a trout sees the dents it makes in the film before the fly itself comes into view.",
+    filmHangs: "It hangs in the surface film like an insect hatching: its body down in the water, its wing or post above it.",
+    filmLow: "It floats low, half sunk in the surface film.",
+    below: "It fishes just under the surface, where its soft fibres move with the water.",
+    deep: "It sinks and fishes deep, near the bottom.",
+    swim: "It is stripped back in pulls: it darts forward on each one and sinks back a little in the pause after it.",
+    swing: "It is swung across the current on a tight line, holding against the flow with its fibres working in it.",
+    driftTop: "It drifts with the current, riding the ripples.",
+    driftUnder: "It drifts with the current, turning slowly as it goes.",
+  },
+  sv: {
+    surface: "Den flyter på ytan med krokböjen hängande genom ytfilmen. Underifrån ser öringen intrycken den gör i ytfilmen innan själva flugan syns.",
+    filmHangs: "Den hänger i ytfilmen som en insekt som kläcks: kroppen nere i vattnet, vingen eller posten ovanför.",
+    filmLow: "Den flyter lågt, halvt nedsjunken i ytfilmen.",
+    below: "Den fiskar strax under ytan, där de mjuka fibrerna rör sig med vattnet.",
+    deep: "Den sjunker och fiskar djupt, nära botten.",
+    swim: "Den strippas in i ryck: den rusar framåt i varje ryck och sjunker tillbaka lite i pausen efter.",
+    swing: "Den svepas tvärs över strömmen på sträckt lina och håller emot strömmen medan fibrerna arbetar.",
+    driftTop: "Den driver med strömmen och rider på krusningarna.",
+    driftUnder: "Den driver med strömmen och vänder sig sakta medan den driver.",
+  },
+  de: {
+    surface: "Sie schwimmt auf der Oberfläche, der Hakenbogen hängt durch den Oberflächenfilm. Von unten sieht die Forelle die Dellen, die sie in den Film drückt, bevor die Fliege selbst ins Blickfeld kommt.",
+    filmHangs: "Sie hängt im Oberflächenfilm wie ein schlüpfendes Insekt: der Körper unten im Wasser, Flügel oder Post darüber.",
+    filmLow: "Sie liegt tief, halb eingesunken im Oberflächenfilm.",
+    below: "Sie fischt knapp unter der Oberfläche, wo sich ihre weichen Fibern mit dem Wasser bewegen.",
+    deep: "Sie sinkt und fischt tief, nahe am Grund.",
+    swim: "Sie wird in Zügen eingestrippt: bei jedem Zug schießt sie vor, in der Pause danach sinkt sie etwas ab.",
+    swing: "Sie wird an gestraffter Schnur quer durch die Strömung geschwungen, steht gegen die Strömung, und ihre Fibern arbeiten darin.",
+    driftTop: "Sie treibt mit der Strömung und reitet auf den kleinen Wellen.",
+    driftUnder: "Sie treibt mit der Strömung und dreht sich dabei langsam.",
+  },
+};

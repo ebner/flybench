@@ -14,6 +14,12 @@ import { existsSync } from "node:fs";
 import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
 import { LANGS, langPrefix, setLang } from "../src/i18n/lang";
+import { loadGlossaries, loadTranslations } from "../src/i18n/files";
+
+// The Swedish and German step texts and dressings take their words from the glossaries, the
+// prose from the translations.
+loadGlossaries();
+loadTranslations();
 import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
 import { loadNatural, type Natural } from "../src/recipe/natural";
