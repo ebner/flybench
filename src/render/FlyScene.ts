@@ -437,8 +437,9 @@ export class FlyScene {
     const a = new THREE.Vector3();
     const b = new THREE.Vector3();
     this.fly.updateMatrixWorld(true);
-    this.fly.traverse((o) => {
-      if (!(o instanceof THREE.InstancedMesh) || !o.visible) return;
+    // Only what shows: hidden loose ends and superseded wraps leave no dents.
+    this.fly.traverseVisible((o) => {
+      if (!(o instanceof THREE.InstancedMesh)) return;
       // Each instance is one fibre along its own y axis.
       o.geometry.computeBoundingBox();
       const { min, max } = o.geometry.boundingBox!;
@@ -467,8 +468,8 @@ export class FlyScene {
     this.build!.steps.forEach((step, i) => {
       step.pieces.forEach((p, j) => {
         if (!HOLDS_AIR.has(p.look)) return;
-        this.stepViews[i]![j]!.piece.object.traverse((o) => {
-          if (!(o instanceof THREE.Mesh) || !o.visible) return;
+        this.stepViews[i]![j]!.piece.object.traverseVisible((o) => {
+          if (!(o instanceof THREE.Mesh)) return;
           const instances = o instanceof THREE.InstancedMesh ? o.count : 1;
           if (instances === 0) return;
           const pos = o.geometry.getAttribute("position");
