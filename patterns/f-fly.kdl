@@ -4,6 +4,8 @@ id f-fly
 name "F-Fly"
 aliases "Fratnik Fly"
 type dry
+// The body lies in the film with only the wing above it (see fishing).
+fishes film
 imitates caddis
 naturals caddis-adult midge-adult mayfly-emerger
 difficulty beginner

@@ -182,7 +182,8 @@ export class FlyScene {
     this.controls.maxDistance = this.baseMaxDistance;
     this.controls.addEventListener("start", () => {
       this.userMoved = true;
-      if (this.follow) {
+      // Turning the fly in the water leaves following as it is, for back at the vise.
+      if (this.follow && !this.water) {
         this.follow = false;
         this.onFollowChange?.(false);
       }
@@ -196,7 +197,8 @@ export class FlyScene {
       this.frame = requestAnimationFrame(loop);
       const dt = Math.min(0.1, (now - (this.lastFrame || now)) / 1000);
       this.lastFrame = now;
-      if (this.follow) this.followAction(dt);
+      // Following waits while the fly is in the water, and goes on when it is back at the vise.
+      if (this.follow && !this.water) this.followAction(dt);
       if (this.water && !this.water.setting.still) this.setWaterTime(this.waterTime + dt);
       this.controls.update();
       this.renderer.render(this.scene, this.camera);
