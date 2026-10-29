@@ -10,13 +10,20 @@ rides swimming
 body {
     abdomen length=0.64 radius=0.035 taper=0.75 segments=10 color="#6a7a3a" belly="#9aa868"
     thorax length=0.22 radius=0.05 taper=0.95 color="#5a6a30"
-    head length=0.14 radius=0.055 taper=0.8 color="#5a6a30" flatten=0.7
+    // Head wider than the thorax and abdomen (macroinvertebrates.org); Coenagrion puella's head "with prominent
+    // spots" (DELTA), Enallagma's without.
+    head length=0.14 radius=0.055 taper=0.8 color="#5a6a30" flatten=0.7 marks=spots ink="#3a4420"
 }
 parts {
-    // Three leaf-like caudal gills (MDC; Wikipedia). Assumption: about a quarter of the length.
-    tails count=3 length=0.28 spread=25 color="#8a9a5a" leaf=#true
+    // Three leaf-like caudal gills (MDC; Wikipedia), pointed (DELTA). In Enallagma the median gill is around
+    // 4.5 mm on a body of about 11 mm and more (aquaticinsects.org), so roughly a third of the body. C. puella's
+    // are clear, Enallagma's usually with one to three narrow dark bands (DELTA); bands not drawn.
+    tails count=3 length=0.32 spread=25 color="#8a9a5a" leaf=#true
     wingpads length=0.15 color="#4a5426"
-    legs count=6 length=0.5 color="#6a7a3a"
+    // "Six thin legs" (MDC), two claws each (macroinvertebrates.org). Assumption: femur and tibia long and
+    // about equal, a short three-segmented foot.
+    legs count=6 length=0.5 color="#6a7a3a" femur=0.4 tibia=0.38
+    // Seven-segmented antennae (DELTA). Assumption: about an eighth of the body.
     antennae length=0.12 color="#5a6a30"
     eyes size=0.04 color="#2a3014"
 }
@@ -32,4 +39,7 @@ sources {
     "Wikipedia: Damselfly" url="https://en.wikipedia.org/wiki/Damselfly"
     "DELTA British Odonata: Coenagrion puella" url="https://www.delta-intkey.com/britin/odo/www/puella.htm"
     "Wikipedia: Enallagma cyathigerum" url="https://en.wikipedia.org/wiki/Enallagma_cyathigerum"
+    "DELTA British Odonata: Enallagma cyathigerum" url="https://www.delta-intkey.com/britin/odo/www/cyathige.htm"
+    "Macroinvertebrates.org: Coenagrionidae (larva)" url="https://www.macroinvertebrates.org/taxa-info/odonata-larva/coenagrionidae"
+    "Aquatic Insects of Central Virginia: key to Enallagma larvae" url="https://aquaticinsects.org/Keys/Odonata/id_oom_coenagrionidae_enallagma.html"
 }

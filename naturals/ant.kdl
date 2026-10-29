@@ -7,14 +7,22 @@ description "A glossy black worker: head, thorax and a large rounded gaster join
 size min=3 max=9
 rides in-film
 body {
-    gaster length=0.42 radius=0.13 taper=0.9 color="#141414" round=1
-    waist length=0.06 radius=0.035 taper=1 color="#141414"
-    thorax length=0.3 radius=0.08 taper=0.9 color="#1a1a1a" round=0.8
-    head length=0.22 radius=0.11 taper=0.9 color="#141414" round=1
+    // Dense silvery hair with longer hairs among it (Wikipedia de); a narrow waist, the petiole,
+    // between the mesosoma and the gaster (Wikipedia: Ant).
+    // Assumption: proportions read off the photo on Wikipedia's Lasius niger page: gaster about
+    // 0.42 of the length, the waist 0.05, the narrow mesosoma 0.28 and the head a quarter; the
+    // gaster about 0.3 of the length wide, the mesosoma under half that; four gaster rings.
+    gaster length=0.42 radius=0.14 taper=0.9 segments=4 color="#141414" round=1 hairs=0.25
+    waist length=0.05 radius=0.035 taper=1 color="#141414"
+    thorax length=0.28 radius=0.07 taper=0.9 color="#1a1a1a" flatten=1.3 round=0.8 hairs=0.15
+    head length=0.25 radius=0.11 taper=0.9 color="#141414" round=1 hairs=0.15
 }
 parts {
-    // Assumption: head a quarter, thorax 30%, gaster 45% of the length.
-    legs count=6 length=0.65 color="#1e1e1e"
+    // Six legs and the wings on the mesosoma, legs ending in a hooked claw (Wikipedia: Ant).
+    // Assumption: from the photo, the legs reach about two thirds of the body length out, long
+    // thin thighs and shins and a long five-jointed foot.
+    legs count=6 length=0.65 color="#1e1e1e" femur=0.36 tibia=0.32 hairs=0.1
+    // Elbowed antennae (Wikipedia: Ant), drawn as one strand. Assumption: about 0.45 of the body.
     antennae length=0.45 color="#1e1e1e"
     eyes size=0.03 color="#2a2a2a"
 }
@@ -27,5 +35,7 @@ hatches {
 }
 sources {
     "Wikipedia: Lasius niger" url="https://en.wikipedia.org/wiki/Lasius_niger"
+    "Wikipedia (de): Schwarze Wegameise" url="https://de.wikipedia.org/wiki/Schwarze_Wegameise"
+    "Wikipedia: Ant" url="https://en.wikipedia.org/wiki/Ant"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
 }

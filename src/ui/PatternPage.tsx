@@ -17,7 +17,7 @@ import { NotFound } from "./NotFound";
 import { naturalLengthFor } from "../catalog/naturals";
 import { findNatural } from "../naturals";
 import { PrintCard } from "./PrintCard";
-import { useNaturalPictures } from "./renders";
+import { useNaturalPictures, useWaterStills } from "./renders";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
 import { t } from "../i18n/ui";
@@ -111,6 +111,9 @@ function PatternView({
   const language = lang();
   const build = useMemo(() => simulate(recipe), [recipe, language]);
   const fishingFor = useMemo(() => fishing(recipe), [recipe]);
+  // The stills show the fly as tied: not on another hook size or in other colours.
+  const waterStills = useWaterStills("patterns", recipe.id);
+  const stills = size === tiedSize && spec === "" ? (waterStills === undefined ? "loading" : waterStills) : null;
   const [inWater, setInWater] = useState(false);
   const [follow, setFollowState] = useState(readFollow);
   const setFollow = (on: boolean) => {
@@ -350,6 +353,7 @@ function PatternView({
             if (on) player.pause();
           }}
           natural={compared ? { natural: compared, length: naturalLengthFor(compared, recipe), at: compare!.at } : null}
+          stills={stills}
         />
         <div
           className="now"

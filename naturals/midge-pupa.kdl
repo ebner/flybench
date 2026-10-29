@@ -8,16 +8,20 @@ size min=6 max=20
 rides in-film
 curve 45
 body {
-    abdomen length=0.68 radius=0.045 taper=0.55 segments=9 color="#1e1e1e" belly="#2e2a24"
+    // A nine-segmented abdomen behind the cephalothorax (Naturalis). Assumption: paler rings at the segment joints (photos).
+    abdomen length=0.68 radius=0.045 taper=0.55 segments=9 color="#1e1e1e" belly="#2e2a24" marks=bands ink="#4a4438"
     thorax length=0.24 radius=0.09 taper=0.85 color="#2a2620"
     head length=0.08 radius=0.06 taper=0.7 color="#2a2620"
 }
 parts {
-    // Head and wing case a quarter to a third of the length, white feathery gills at the head (BC Adventure).
-    // Assumption: the gills drawn as two short white filaments.
+    // Head and wing case a quarter to a third of the length, white feathery gills at the head (BC Adventure): the thoracic
+    // horns, in Chironomini usually a dense tuft (Naturalis). Assumption: the gills drawn as two short white filaments.
     antennae length=0.14 color="#f0f0ea"
     wingpads length=0.18 color="#14120e"
     eyes size=0.022 color="#3a1a10"
+    // A pair of flattened anal lobes, often with a fringe of long hairs (Naturalis): its swimming fan (Wikipedia de).
+    // Assumption: a twelfth of the body long, pale and see-through.
+    tails count=2 length=0.08 spread=40 color="#bdb6a4" leaf=#true hairs=0.8
 }
 hatches {
     southern-sweden from=april to=october note="Estimate: peak May–June."

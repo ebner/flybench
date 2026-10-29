@@ -18,11 +18,20 @@ body {
     head length=0.11 radius=0.055 taper=0.7 color="#4a4428"
 }
 parts {
-    // Two or three tails, about the body's length in the dun (Wikipedia: Mayfly; Dalarna 2013).
+    // Two or three tails, about the body's length in the dun (Wikipedia: Mayfly; Dalarna 2013); two in Baetis
+    // (Hackston 2021), grey and shorter than the spinner's (Dalarna 2013).
     tails count=2 length=1.0 spread=35 color=dun
-    // Forewing about the body length, upright and together at rest; the hindwing very small (Dalarna 2013).
-    wings count=2 shape=upright length=0.95 width=0.5 color=dun clarity=0.25 veins=#true
-    legs count=6 length=0.55 color="#6a6040"
+    // Forewing about the body length, upright and together at rest (Dalarna 2013; Baetis body 5.2 mm, forewing
+    // 5.1 mm: Tiunova 2024). Baetis hind wings "very small" (Dalarna 2013), "very much reduced, with only two or
+    // three major veins" or absent (Hackston 2021); in most other mayflies the hind wing is a quarter to a third
+    // of the forewing, in Ephemera a third to a half (Troutnut key). The dun's wings are cloudy, finely
+    // haired and fringed at the hind edge (Wikipedia de: Eintagsfliegen; Wikipedia: Mayfly).
+    // Assumption: drawn as an olive (Baetis), the hind wing about an eighth of the forewing.
+    wings count=2 shape=upright length=0.95 width=0.5 color=dun clarity=0.25 veins=#true hind=0.12 hairs=0.1
+    // A male Baetis spinner's foreleg is femur 1.2, tibia 1.7, tarsus 2.0 mm on a 5.2 mm body (Tiunova 2024);
+    // the dun's forelegs are shorter (Dalarna 2013). Assumption: the six legs drawn alike, about half the body
+    // long, with femur and tibia about equal and a shorter foot.
+    legs count=6 length=0.55 color="#6a6040" femur=0.36 tibia=0.36
     eyes size=0.035 color=black
 }
 hatches {
@@ -35,6 +44,10 @@ hatches {
 sources {
     "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
     "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+    "Wikipedia (de): Eintagsfliegen" url="https://de.wikipedia.org/wiki/Eintagsfliegen"
+    "Hackston 2021: Key to UK families and genera of adult Ephemeroptera (after Elliott & Humpesch 1983, Kimmins 1950)" url="https://quelestcetanimal-lagalerie.com/wp-content/uploads/2022/02/Order-Ephemeroptera-key-to-British-families-adults.pdf"
+    "Troutnut: Easy Angler's Key to Identify Common Adult Mayflies, couplet 6" url="https://www.troutnut.com/taxonomic-key/110/Easy-Anglers-Key-to-Identify-Common-Adult-Mayflies/couplet-6"
+    "Tiunova 2024: A description of the adult male Baetis pentaphyllus (Euroasian Entomological Journal 23(1))" url="https://kmkjournals.com/upload/PDF/EEJ/23/23_1_018_021_Tiunova.pdf"
     "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
     "Wikipedia (de): Serratella ignita" url="https://de.wikipedia.org/wiki/Serratella_ignita"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"

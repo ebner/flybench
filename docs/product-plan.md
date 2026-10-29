@@ -169,7 +169,7 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       - Prose (history, how to fish, notes, technique texts, naturals) in translation files
         beside the originals, marked as drafts until reviewed; English shows where a
         translation is missing.
-13. Photorealistic water and naturals (decided 2026-10-29, the recommended option of each).
+13. ✅ Photorealistic water and naturals (decided 2026-10-29, the recommended option of each). (Done: `src/render/real/`, `pnpm render:water`; slow devices, data savers, reduced motion and software rendering get the drawn water; the naturals' new anatomy fields are in docs/recipe-schema.md.)
     The "In the water" view and the naturals become photorealistic; the step-by-step fly view
     keeps the herbarium and cyanotype look for teaching. Everything is still generated from
     the recipes: no photos (real insect photos were rejected, so the same-scale overlay on the
@@ -186,7 +186,14 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     - Moderate cost: about 1–3 MB more download; weak devices and reduced motion keep
       today's stylised view.
     - First a trial: the mayfly dun and the Elk Hair Caddis on water, live against
-      path-traced, as screenshots for the user to judge before the full milestone.
+      path-traced, as screenshots for the user to judge before the full milestone. (Done
+      2026-10-29: the path-traced stills came close to photographic, the live view a step
+      below; a photoscanned riverbed made the biggest difference, and the naturals' simple
+      shapes showed. Decided after it, the recommended option of each: go on with both
+      formats; an anatomy upgrade for the naturals from their recipes (segment plates,
+      jointed legs, setae, hindwings, compound eyes); CC0 photoscans for the riverbed and sky
+      (Poly Haven, compressed, served by the site); two stills per pattern and natural, the
+      angler's view and the trout's.)
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

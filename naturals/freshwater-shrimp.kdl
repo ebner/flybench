@@ -9,15 +9,27 @@ size min=6 max=21
 rides swimming
 curve 110
 body {
+    // Translucent grey with brown or green markings (Wikipedia: Gammarus pulex). Behind the
+    // head, a thorax (pereon) with seven pairs of legs and an abdomen of six segments (Wikipedia:
+    // Amphipoda; Gammarus pulex). Numerous bristles (Wikipedia de).
+    // Assumption: from the photo on Wikipedia's Gammarus pulex page, the body with its side
+    // plates about a fifth as deep as long and half as wide as deep.
     abdomen length=0.34 radius=0.07 taper=0.6 segments=6 color="#8a8a68" belly="#a8a888" flatten=2 translucency=0.4
-    thorax length=0.54 radius=0.085 taper=1.0 segments=7 color="#7e7e5c" belly="#a0a080" flatten=2 translucency=0.4
+    thorax length=0.54 radius=0.08 taper=1.0 segments=7 color="#7e7e5c" belly="#a0a080" flatten=2.1 translucency=0.4
     head length=0.12 radius=0.07 taper=0.7 color="#7a7a58" flatten=1.8 translucency=0.4
 }
 parts {
     // Seven pairs of thoracic legs, two pairs of antennae (Wikipedia: Gammarus pulex).
-    legs count=14 length=0.22 color="#9a9a78"
-    // Assumption: the first antennae about half the body length.
-    antennae length=0.5 color="#8a8a68"
+    // Assumption: from the photo, the hind legs reach about 0.28 of the body and are bristly.
+    legs count=14 length=0.28 color="#9a9a78" hairs=0.4
+    // Three pairs of swimming legs (pleopods) under the front of the abdomen (Wikipedia:
+    // Amphipoda). Assumption: short, fringed with bristles.
+    legs count=6 length=0.1 color="#a0a080" at=abdomen hairs=0.7
+    // The uropods at the end of the abdomen (Wikipedia: Amphipoda), the third pair's outer branch
+    // the longer (Wikipedia de). Assumption: drawn as a short bristly pair, about 0.08.
+    tails count=2 length=0.08 spread=40 color="#9a9a78" hairs=0.5
+    // Assumption: the first antennae a little under half the body length, from the photo.
+    antennae length=0.45 color="#8a8a68"
     eyes size=0.02 color="#2a1a10"
 }
 hatches {

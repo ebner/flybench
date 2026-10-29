@@ -18,6 +18,9 @@ export const STAGES = ["nymph", "larva", "pupa", "emerger", "dun", "spinner", "a
 /** Where and how a natural is found in the water, for the water view. */
 export const RIDES = ["on-surface", "in-film", "drifting", "swimming", "crawling"] as const;
 
+/** Markings on a body section, drawn in its `ink`. */
+export const MARKS = ["none", "bands", "spots", "mottle", "stripe"] as const;
+
 export const REGIONS = ["southern-sweden", "northern-scandinavia", "british-isles", "central-europe", "northern-usa"] as const;
 
 const Fraction = z.number().min(0).max(4);
@@ -40,6 +43,12 @@ const Section = z.strictObject({
   translucency: z.number().min(0).max(1).default(0),
   /** 0: a straight taper; 1: rounded like an egg (an ant's gaster, a fish's head). */
   round: z.number().min(0).max(1).default(0),
+  /** How hairy: 0 smooth (a mayfly) to 1 furry (a caddis adult's thorax, a stonefly nymph's fringes). */
+  hairs: z.number().min(0).max(1).default(0),
+  /** Markings: bands across the segments, spots, mottling (a sculpin), a stripe along the back. */
+  marks: z.enum(MARKS).default("none"),
+  /** The markings' colour. */
+  ink: Color.optional(),
 });
 
 const Part = z.discriminatedUnion("part", [
@@ -52,6 +61,8 @@ const Part = z.discriminatedUnion("part", [
     color: Color,
     /** Flat leaves rather than threads (a damselfly nymph's tail gills). */
     leaf: z.boolean().default(false),
+    /** Fringes of fine hairs along them (a swimming mayfly nymph's tails), 0–1. */
+    hairs: z.number().min(0).max(1).default(0),
   }),
   z.strictObject({
     part: z.literal("wings"),
@@ -64,6 +75,12 @@ const Part = z.discriminatedUnion("part", [
     /** 0 opaque to 1 clear. */
     clarity: z.number().min(0).max(1).default(0.3),
     veins: z.boolean().default(false),
+    /** The hind wing's length as a fraction of the fore wing's (a mayfly's small hind wing; 0 none). */
+    hind: z.number().min(0).max(1.2).default(0),
+    /** Hairy wings, as a caddis's: 0 bare to 1 densely haired. */
+    hairs: z.number().min(0).max(1).default(0),
+    /** Darker flecks over the wing, if any (a caddis's mottled wing, a stonefly's). */
+    mottle: Color.optional(),
   }),
   z.strictObject({
     part: z.literal("legs"),
@@ -74,11 +91,28 @@ const Part = z.discriminatedUnion("part", [
     at: z.string().optional(),
     /** The last pair's length relative to the others (a grasshopper's jumping legs). */
     hind: z.number().positive().max(4).optional(),
+    /** The thigh and shin as fractions of the leg's length; the foot (tarsus) is the rest. */
+    femur: z.number().min(0.1).max(0.7).default(0.38),
+    tibia: z.number().min(0.1).max(0.7).default(0.34),
+    /** Fringes of swimming hairs (0–1), and light and dark bands (a crawling mayfly nymph's legs). */
+    hairs: z.number().min(0).max(1).default(0),
+    banded: z.boolean().default(false),
   }),
   /** `swept`: laid back along the body (a caddis pupa) rather than reaching forward. */
   z.strictObject({ part: z.literal("antennae"), length: Fraction, color: Color, swept: z.boolean().default(false) }),
-  /** Gill plates or tufts along the sides of the abdomen (mayfly nymphs). */
-  z.strictObject({ part: z.literal("gills"), count: z.number().int().min(1).max(10), length: Fraction, color: Color }),
+  /**
+   * Gills along the abdomen (mayfly nymphs): plates (over the back or at the sides), feathery
+   * plumes (a burrowing nymph's, held over the back) or tufts (at a stonefly nymph's legs).
+   */
+  z.strictObject({
+    part: z.literal("gills"),
+    count: z.number().int().min(1).max(10),
+    length: Fraction,
+    color: Color,
+    shape: z.enum(["plate", "feather", "tuft"]).default("plate"),
+  }),
+  /** A burrowing mayfly nymph's mandibular tusks, curving forward from the head. */
+  z.strictObject({ part: z.literal("tusks"), length: Fraction, color: Color }),
   /** Wing pads on top of the thorax (nymphs). */
   z.strictObject({ part: z.literal("wingpads"), length: Fraction, color: Color }),
   /** A caddis larva's case, over the abdomen. */
@@ -159,6 +193,12 @@ export function loadNatural(text: string): NaturalResult {
   const errors: RecipeError[] = [];
   const err = (message: string, path: (string | number)[]) => errors.push(withLocation({ message, path }, mapped.locations));
   if (n.size.min > n.size.max) err("size min is larger than max", ["size", "min"]);
+  n.body.forEach((b, i) => {
+    if (b.marks !== "none" && !b.ink) err(`"${b.section}" has marks but no ink colour`, ["body", i, "marks"]);
+  });
+  n.parts.forEach((p, i) => {
+    if (p.part === "legs" && p.femur + p.tibia > 0.9) err("femur and tibia leave no room for the foot (together at most 0.9)", ["parts", i, "tibia"]);
+  });
   const total = n.body.reduce((s, b) => s + b.length, 0);
   if (Math.abs(total - 1) > 0.02) err(`the body sections' lengths add up to ${Math.round(total * 100) / 100}, not 1`, ["body"]);
   n.hatches.forEach((h, i) => {

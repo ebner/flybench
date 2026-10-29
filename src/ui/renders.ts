@@ -59,3 +59,43 @@ export function renderUrls(id: string, info: RenderInfo) {
   const base = `${import.meta.env.BASE_URL}renders/${encodeURIComponent(id)}`;
   return { card: `${base}/card.webp?v=${info.hash}`, spin: `${base}/spin.webp?v=${info.hash}` };
 }
+
+/** The realistic water's stills: what scripts/render-water.ts writes to public/renders/water/manifest.json. */
+type WaterManifest = { patterns: Record<string, string>; naturals: Record<string, string> };
+export type WaterStills = { angler: string; below: string };
+
+let waterManifest: Promise<WaterManifest> | null = null;
+
+/** The stills of a pattern or natural, from above and from below; null when it has none, undefined while loading. */
+export function useWaterStills(kind: "patterns" | "naturals", id: string): WaterStills | null | undefined {
+  const [m, setM] = useState<WaterManifest | null>(null);
+  useEffect(() => {
+    waterManifest ??= fetch(`${import.meta.env.BASE_URL}renders/water/manifest.json`)
+      .then((r) => (r.ok ? r.json() : { patterns: {}, naturals: {} }))
+      .catch(() => ({ patterns: {}, naturals: {} }));
+    waterManifest.then(setM);
+  }, []);
+  if (!m) return undefined;
+  const hash = m[kind]?.[id];
+  if (!hash) return null;
+  const base = `${import.meta.env.BASE_URL}renders/water/${kind}/${encodeURIComponent(id)}`;
+  return { angler: `${base}/angler.webp?v=${hash}`, below: `${base}/below.webp?v=${hash}` };
+}
+
+/** All naturals' stills by id (the Naturals index), or null while loading. */
+export function useNaturalStills(): Record<string, WaterStills> | null {
+  const [m, setM] = useState<WaterManifest | null>(null);
+  useEffect(() => {
+    waterManifest ??= fetch(`${import.meta.env.BASE_URL}renders/water/manifest.json`)
+      .then((r) => (r.ok ? r.json() : { patterns: {}, naturals: {} }))
+      .catch(() => ({ patterns: {}, naturals: {} }));
+    waterManifest.then(setM);
+  }, []);
+  if (!m) return null;
+  return Object.fromEntries(
+    Object.entries(m.naturals ?? {}).map(([id, hash]) => {
+      const base = `${import.meta.env.BASE_URL}renders/water/naturals/${encodeURIComponent(id)}`;
+      return [id, { angler: `${base}/angler.webp?v=${hash}`, below: `${base}/below.webp?v=${hash}` }];
+    }),
+  );
+}

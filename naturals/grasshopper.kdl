@@ -7,15 +7,30 @@ description "A long-bodied insect with big jumping hind legs, folded wings and s
 size min=15 max=25
 rides on-surface
 body {
-    abdomen length=0.55 radius=0.075 taper=0.6 segments=8 color="#7a6a3a" belly="#a8985a" flatten=1.2
-    thorax length=0.3 radius=0.1 taper=0.9 color="#6a5a32" flatten=1.3
-    head length=0.15 radius=0.09 taper=0.75 color="#6a5a32" flatten=1.3
+    // Field grasshopper: brownish, in striped and mottled forms; the underside distinctly hairy
+    // (ORS). The pronotum 3.1 mm in males, 3.9 mm in females (Tarasova et al.): about a fifth of
+    // the body, taking males at about 15 mm and females at 20 (ORS gives 15–25). Eleven abdominal
+    // segments, the last three reduced (Wikipedia: Grasshopper).
+    // Assumption: from the photo on Wikipedia's Chorthippus brunneus page, the head 0.14 of the
+    // body, the whole thorax 0.28, and the body about a fifth as deep as long.
+    abdomen length=0.58 radius=0.075 taper=0.6 segments=8 color="#7a6a3a" belly="#a8985a" flatten=1.2
+    thorax length=0.28 radius=0.085 taper=0.9 color="#6a5a32" belly="#8a7a4a" flatten=1.4 hairs=0.15 marks=stripe ink="#3a3020"
+    head length=0.14 radius=0.09 taper=0.75 color="#6a5a32" flatten=1.3
 }
 parts {
-    wings count=4 shape=back length=0.7 width=0.15 color="#7a6a42" clarity=0.1
-    // Assumption: the jumping legs about twice the others, reaching past the abdomen.
-    legs count=6 length=0.45 color="#7a6a3a" hind=2.0
-    antennae length=0.45 color="#6a5a32"
+    // Narrow leathery fore wings over large membranous hind wings (Wikipedia: Grasshopper),
+    // reaching past the hind knees (DELTA); the fore wing 14.3 mm in males, 17.1 mm in females
+    // (Tarasova et al.), about 0.85 of the body. Often mottled (ORS; Wikipedia).
+    // Assumption: the hind wings, folded underneath, nearly as long as the fore wings.
+    wings count=4 shape=back length=0.85 width=0.15 color="#7a6a42" clarity=0.1 veins=#true hind=0.95 mottle="#3a2e1e"
+    // The hind femur 9.6 mm in males and 12.2 mm in females (Tarasova et al.), about 0.6 of the
+    // body; a robust, ridged femur and a spined tibia (Wikipedia: Grasshopper).
+    // Assumption: the hind tibia a little shorter than the femur and the foot short, so the hind
+    // leg about 1.3 times the body; the other legs about 0.38 of it.
+    legs count=6 length=0.38 color="#7a6a3a" hind=3.4 femur=0.44 tibia=0.4
+    // Short antennae (Wikipedia: Grasshopper; DELTA). Assumption: about 0.4 of the body, from
+    // the photo (a male's; a female's are shorter).
+    antennae length=0.4 color="#6a5a32"
     eyes size=0.035 color="#3a3020"
 }
 hatches {
@@ -28,5 +43,9 @@ hatches {
 sources {
     "Grasshoppers and Related Insects Recording Scheme: Chorthippus brunneus" url="https://orthoptera.org.uk/node/3354"
     "Wikipedia: Meadow grasshopper" url="https://en.wikipedia.org/wiki/Meadow_grasshopper"
+    "Wikipedia: Grasshopper" url="https://en.wikipedia.org/wiki/Grasshopper"
+    "Wikipedia: Chorthippus brunneus" url="https://en.wikipedia.org/wiki/Chorthippus_brunneus"
+    "DELTA, British Orthoptera: Chorthippus" url="https://www.delta-intkey.com/britin/ort/www/chorthip.htm"
+    "Tarasova, Tishechkin and Vedenina 2021, ZooKeys 1073: Table 1, morphology of the Chorthippus biguttulus group" url="https://zenodo.org/records/15143081"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
 }

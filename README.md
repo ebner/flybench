@@ -49,6 +49,7 @@ pnpm test          # recipe parsing/validation and simulation tests
 pnpm typecheck
 pnpm build         # type-check, production build and one HTML file per page into dist/
 pnpm render:catalog  # gallery images and material swatches into public/renders/ (commit them)
+pnpm render:water  # path-traced stills of every fly and natural in the river into public/renders/water/ (commit them)
 pnpm render        # render finished flies to .cache/renders/ (headless Chromium)
 pnpm refcheck      # contact sheets: render on a gape grid next to reference photos
 pnpm icons         # app icon PNGs from public/icons/*.svg
@@ -61,9 +62,12 @@ page-turner pedal or presentation clicker. The step bar under the view has a seg
 it, drag along it to scrub. Click a step in the list to play just that step. On a touch screen
 one finger scrolls the page and two fingers turn and zoom the fly. "Proportions" shows the gape
 grid and each part's measurements; "Print recipe card" prints the dressing and the steps
-with a picture of each. "In the water" shows the finished fly in moving water where it fishes
-(on the surface, in the film, just under or deep), from the side or from below as a trout sees
-it; "Still water" stops the motion (it starts still when the system asks for reduced motion).
+with a picture of each. "In the water" shows the finished fly in a river where it fishes (on
+the surface, in the film, just under or deep), from above as the angler sees it or from below
+as a trout does: first a path-traced picture, then, with "Explore in 3D", the live river with
+reflections, refraction, Snell's window and a photoscanned gravel bed. A slow device, a data
+saver or reduced motion gets the drawn water instead, from the side or from below. "Still
+water" stops the motion. The naturals' pages show each natural in the river the same way.
 Stepping or playing goes back to the vise. A link keeps the step and the hook size (`?step=7&size=16`).
 
 Rendering uses the GPU through Vulkan in headless Chromium when there is one, and
@@ -82,8 +86,10 @@ Or write a new `patterns/<id>.kdl` by hand and it gets picked up automatically. 
 from the catalog in `src/recipe/materials.ts`; add new ones there. The test suite
 loads every pattern file, so `pnpm test` reports recipe errors with line numbers.
 Problems in pattern files also show in a banner in the dev server. Then run
-`pnpm render:catalog` and commit the images it writes to `public/renders/`; it only
-re-renders patterns whose recipe or rendering code changed. The format is
+`pnpm render:catalog` and `pnpm render:water` and commit the images they write to
+`public/renders/`; they only re-render patterns whose recipe or rendering code changed
+(`render:water` path traces, tens of seconds a picture, and fetches its 2k panorama and
+gravel from Poly Haven into `.cache/env/` the first time). The format is
 described in [docs/recipe-schema.md](docs/recipe-schema.md), and the authoring procedure
 (research, proportions, checks) in [docs/authoring-patterns.md](docs/authoring-patterns.md).
 
@@ -106,17 +112,19 @@ src/recipe/        KDL → object mapping, Zod schema, materials catalog,
                    semantic and catalog-level validation
 src/tying/         hook models and the tying simulation: recipe → timeline of
                    geometry pieces (plain data, no three.js)
-src/render/        three.js scene built from the timeline
+src/render/        three.js scene built from the timeline; real/ the realistic river (water
+                   shader, photoscanned gravel, panorama) and the build-time path tracer
 src/i18n/          languages: the interface's words, the glossary and grammar, prose translations
 src/catalog/       catalog search and wording, and the site's pages with their titles,
                    descriptions and text for the build (plain logic, tested in Node)
 src/ui/            React UI: gallery, pattern page, viewer, theme, routing
 src/studio/        the authoring studio (studio.html, dev server only)
-public/renders/    rendered gallery images and material swatches (generated, committed)
+public/renders/    rendered gallery images, material swatches and water stills (generated, committed)
+public/env/        the realistic water's river panorama and gravel (Poly Haven, CC0)
 public/logo.svg    the logo (also the header mark); favicon.svg is a simplified version
                    for small sizes, and public/icons/*.svg the app icons (pnpm icons)
 render.html        dev-only page that scripts/ drive to render a finished fly
-scripts/           authoring tools: render, render-catalog, refcheck, the
+scripts/           authoring tools: render, render-catalog, render-water, refcheck, the
                    dev-server plugin that lets the studio read and save patterns,
                    the build plugin that leaves reference photos out, the app
                    icons, and prerender (the HTML file and preview picture for each page)

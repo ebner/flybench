@@ -8,16 +8,25 @@ size min=6 max=11
 rides on-surface
 curve -8
 body {
-    abdomen length=0.62 radius=0.05 taper=0.55 segments=10 color="#7a3a22" belly="#9a5a3a"
+    // A male Baetis rhodani spinner's front abdomen is glass-clear (Dalarna 2013). Assumption: the female drawn
+    // here a little translucent too.
+    abdomen length=0.62 radius=0.05 taper=0.55 segments=10 color="#7a3a22" belly="#9a5a3a" translucency=0.2
     thorax length=0.27 radius=0.07 taper=0.9 color="#5a2c18"
     head length=0.11 radius=0.05 taper=0.7 color="#4a2414"
 }
 parts {
     // Tails longer than the dun's, 1.5–3 × the body (Dalarna 2013).
     tails count=2 length=2.0 spread=30 color="#5a3a2a"
-    // Clear, glassy wings with dark veins (Dalarna 2013; First Nature), spent on the water.
-    wings count=2 shape=spent length=0.95 width=0.45 color="#b8bec4" clarity=0.7 veins=#true
-    legs count=6 length=0.6 color="#5a3a2a"
+    // Clear, glassy wings with dark veins (Dalarna 2013; First Nature), spent on the water; unhaired except in
+    // Caenis (Wikipedia de: Eintagsfliegen). Two tails and a tiny hind wing as in the red spinner (Baetis: Dalarna
+    // 2013; Hackston 2021); Serratella's sherry spinner has three tails and a "large oval hindwing" (Wikipedia de:
+    // Serratella ignita; First Nature), Ephemera a hind wing a third to a half of the forewing (Troutnut key).
+    // Assumption: hind wing an eighth of the forewing.
+    wings count=2 shape=spent length=0.95 width=0.45 color="#b8bec4" clarity=0.7 veins=#true hind=0.12
+    // A male Baetis's foreleg is femur 1.2, tibia 1.7, tarsus 2.0 mm on a 5.2 mm body, nearly the body's length
+    // (Tiunova 2024); females and the other legs are shorter. Assumption: all six drawn alike, femur and tibia
+    // about equal and a shorter foot.
+    legs count=6 length=0.6 color="#5a3a2a" femur=0.36 tibia=0.36
     eyes size=0.035 color="#6a1a10"
 }
 hatches {
@@ -33,4 +42,9 @@ sources {
     "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
     "First Nature: Mayfly (Ephemera danica)" url="https://www.first-nature.com/insects/e-ephemera-danica.php"
     "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
+    "Wikipedia (de): Eintagsfliegen" url="https://de.wikipedia.org/wiki/Eintagsfliegen"
+    "Wikipedia (de): Serratella ignita" url="https://de.wikipedia.org/wiki/Serratella_ignita"
+    "Hackston 2021: Key to UK families and genera of adult Ephemeroptera (after Elliott & Humpesch 1983, Kimmins 1950)" url="https://quelestcetanimal-lagalerie.com/wp-content/uploads/2022/02/Order-Ephemeroptera-key-to-British-families-adults.pdf"
+    "Troutnut: Easy Angler's Key to Identify Common Adult Mayflies, couplet 6" url="https://www.troutnut.com/taxonomic-key/110/Easy-Anglers-Key-to-Identify-Common-Adult-Mayflies/couplet-6"
+    "Tiunova 2024: A description of the adult male Baetis pentaphyllus (Euroasian Entomological Journal 23(1))" url="https://kmkjournals.com/upload/PDF/EEJ/23/23_1_018_021_Tiunova.pdf"
 }

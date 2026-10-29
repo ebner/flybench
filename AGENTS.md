@@ -26,6 +26,7 @@ pnpm test          # Vitest: recipe parsing/validation, simulation
 pnpm typecheck
 pnpm build         # typecheck + production build into dist/
 pnpm render:catalog  # gallery images and material swatches into public/renders/ (commit them)
+pnpm render:water  # path-traced stills of flies and naturals in the river (public/renders/water/, commit them)
 pnpm render        # finished flies to .cache/renders/ via headless Chromium
 pnpm refcheck      # proportion contact sheets against reference photos
 pnpm icons         # app icon PNGs from public/icons/*.svg (after logo changes)
@@ -53,14 +54,17 @@ src/tying/      hook.ts (hook models, sizes), simulate.ts (recipe → timeline o
 src/i18n/       lang.ts (the page's language, from the address), localized.ts, ui/ (the
                 interface's words per language), glossary.ts, grammar.ts, prose.ts
 src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends, naturals,
-                water (the in-the-water view: its own clock, also a pure function of time)
+                water (the drawn in-the-water view: its own clock, also a pure function of time),
+                real/ (the realistic river: RealWater, gravel, panorama assets; trace.ts path
+                traces the build-time stills and is only imported by render-page.ts)
 src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook, for its picture),
                 pages.ts (every page's title, description and
                 static HTML for the build; no React; tested in Node)
 src/ui/         React UI (path routing under the base, theme, gallery, pattern page, about)
 scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
-public/renders/ generated gallery images and material swatches (materials/), committed; regenerate
-                after recipe/renderer changes
+public/renders/ generated gallery images, material swatches (materials/) and water stills
+                (water/), committed; regenerate after recipe/renderer changes
+public/env/     the realistic water's panorama and gravel (Poly Haven, CC0), served by the site
 ```
 
 - `src/recipe` and `src/tying` must not import three.js or React; they are unit-tested in Node.

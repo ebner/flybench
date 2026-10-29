@@ -15,8 +15,11 @@ body {
 parts {
     // Assumption: the abdomen hangs below the film at 30–60°, the wings crumpled and half raised, the shuck trailing.
     shuck length=0.35 color="#8a7a55"
-    wings count=2 shape=upright length=0.55 width=0.35 color=dun clarity=0.15
-    legs count=6 length=0.45 color="#6a6040"
+    // The dun's wings: cloudy and finely haired (Wikipedia de: Eintagsfliegen), the hind wing very small in
+    // Baetis (Dalarna 2013; Hackston 2021). Assumption: hind wing an eighth of the forewing, as on the dun.
+    wings count=2 shape=upright length=0.55 width=0.35 color=dun clarity=0.15 hind=0.12 hairs=0.1
+    // Assumption: as on the dun, femur and tibia about equal and a shorter foot.
+    legs count=6 length=0.45 color="#6a6040" femur=0.36 tibia=0.36
     eyes size=0.032 color=black
 }
 hatches {
@@ -29,6 +32,8 @@ hatches {
 sources {
     "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
     "Troutnut: Genus Baetis" url="https://www.troutnut.com/hatch/180/Mayfly-Baetis-Blue-Winged-Olives"
+    "Wikipedia (de): Eintagsfliegen" url="https://de.wikipedia.org/wiki/Eintagsfliegen"
+    "Hackston 2021: Key to UK families and genera of adult Ephemeroptera (after Elliott & Humpesch 1983, Kimmins 1950)" url="https://quelestcetanimal-lagalerie.com/wp-content/uploads/2022/02/Order-Ephemeroptera-key-to-British-families-adults.pdf"
     "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
     "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
 }

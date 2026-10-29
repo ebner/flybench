@@ -1,4 +1,4 @@
-// Assumption: the leeches trout eat are 2–6 cm.
+// Erpobdella octoculata 3–7 cm (Wikipedia), Nephelopsis 2–5 cm (Wikipedia); the horse leech up to 10 cm (Wikipedia).
 
 id leech
 name "Leech"
@@ -9,7 +9,16 @@ description "A soft, flattened, segmented worm with a sucker at each end, swimmi
 size min=20 max=60
 rides swimming
 body {
-    body length=1.0 radius=0.07 taper=0.6 segments=20 color="#1e1e1a" belly="#3a3a30" flatten=0.5
+    // 32 segments, a sucker at each end; flattened top to bottom and tapering at both ends
+    // (Wikipedia: Leech). Erpobdella: tube-shaped (Wikipedia), the front long and roundish, the
+    // rear somewhat flattened with a comparatively small sucker (Wikipedia de); yellow-green to
+    // red-brown, shaded by unpigmented spots (Wikipedia). The horse leech is brownish-black,
+    // sometimes with streaks and spots (Wikipedia: Haemopis sanguisuga).
+    // Assumption: stretched out while swimming, about a tenth as wide as long and widest in the
+    // rear half, narrowing over the front third to a small head.
+    sucker length=0.05 radius=0.035 taper=1.1 color="#1e1e1a" belly="#3a3a30" flatten=0.6
+    body length=0.65 radius=0.04 taper=0.9 segments=20 color="#1e1e1a" belly="#3a3a30" flatten=0.55 marks=spots ink="#6a6040"
+    front length=0.3 radius=0.036 taper=0.4 segments=10 color="#1e1e1a" belly="#3a3a30" flatten=0.8 marks=spots ink="#6a6040"
 }
 parts {
 }
@@ -22,4 +31,8 @@ hatches {
 }
 sources {
     "Wikipedia: Leech" url="https://en.wikipedia.org/wiki/Leech"
+    "Wikipedia: Erpobdella octoculata" url="https://en.wikipedia.org/wiki/Erpobdella_octoculata"
+    "Wikipedia (de): Rollegel" url="https://de.wikipedia.org/wiki/Rollegel"
+    "Wikipedia: Haemopis sanguisuga" url="https://en.wikipedia.org/wiki/Haemopis_sanguisuga"
+    "Wikipedia: Nephelopsis" url="https://en.wikipedia.org/wiki/Nephelopsis"
 }

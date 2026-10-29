@@ -13,6 +13,10 @@ import { ShankSpace } from "./space";
 import { patchFogForWater, Water, waveHeight, type WaterLook } from "./water";
 import { CLUMPS, HOLDS_AIR, WET_SPREAD, type Fishing } from "../tying/fishing";
 import { mulberry32 } from "./random";
+import type { RealAssets } from "./real/assets";
+import { RealWater } from "./real/RealWater";
+import { realMaterials } from "./real/upgrade";
+import { MAX_DIMPLES, type Dimple } from "./real/waves";
 
 const REST_DIRECTIONS = {
   "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
@@ -35,18 +39,54 @@ const VIEWS = {
   "water-side": new THREE.Vector3(0, 0.07, 1).normalize(),
   /** In the water, a trout's view: from below and in front, looking up at the fly against the surface. */
   "water-below": new THREE.Vector3(0.25, -1, 0.75).normalize(),
+  /** In the realistic water, the angler's view: from above and in front, looking down onto the water. */
+  "water-angler": new THREE.Vector3(0.55, 0.5, 1).normalize(),
+  /** In the realistic water, a trout's view of something deep or on the bottom: level with it, a little above the stones. */
+  "water-bed": new THREE.Vector3(0.45, 0.5, 1).normalize(),
+  /** In the realistic water, the angler looking steeply down on something deep (the water bends a shallow look away). */
+  "water-angler-deep": new THREE.Vector3(0.35, 1.3, 0.6).normalize(),
 };
 
 export type ViewName = keyof typeof VIEWS;
 export const VIEW_NAMES = Object.keys(VIEWS) as ViewName[];
 
-/** The finished fly shown in water. */
+/** The finished fly (or, in the realistic water, a natural on its own) shown in water. */
 export interface WaterSetting {
   fishing: Fishing;
-  view: "side" | "below";
+  /** "side" for the drawn water's cut-away tank; "angler" from above in the realistic water; "below" a trout's view. */
+  view: "side" | "below" | "angler";
   /** No waves, drift or swimming: the water held still (and for reduced motion). */
   still: boolean;
   look: WaterLook;
+  /** Realistic water: a river panorama, a gravel bed, reflection and refraction. Without it, the drawn water. */
+  real?: RealAssets;
+  /** A finer riverbed (the build-time stills). */
+  detailed?: boolean;
+}
+
+/**
+ * A natural's length in gapes when shown on its own, at its middle size.
+ * Assumption: the gape of a #12 hook, about 5 mm, as the unit.
+ */
+export function naturalAlone(n: Natural): number {
+  return (n.size.min + n.size.max) / 2 / 5;
+}
+
+/** How a natural is shown in the realistic water, from where it is found. */
+export function naturalFishing(n: Natural): Fishing {
+  switch (n.rides) {
+    case "on-surface":
+      return { depth: "surface", motion: "drift", hang: 0 };
+    case "in-film":
+      // Assumption: an emerger hangs tail down in the film, as an emerger pattern does.
+      return { depth: "film", motion: "drift", hang: n.stage === "emerger" ? 35 : 0 };
+    case "swimming":
+      return { depth: "below", motion: "swim", hang: 0 };
+    case "crawling":
+      return { depth: "deep", motion: "drift", hang: 0 };
+    default:
+      return { depth: "below", motion: "drift", hang: 0 };
+  }
 }
 
 export interface FlySceneOptions {
@@ -69,6 +109,8 @@ function leaveDirection(angle: number, target = new THREE.Vector3()) {
 export class FlyScene {
   private renderer: THREE.WebGLRenderer;
   private environment: THREE.WebGLRenderTarget;
+  /** The studio lights; the realistic water is lit by its panorama alone. */
+  private lights: THREE.Light[];
   private scene = new THREE.Scene();
   private camera: THREE.PerspectiveCamera;
   private controls: OrbitControls;
@@ -109,7 +151,13 @@ export class FlyScene {
   private time = 0;
   private water: {
     setting: WaterSetting;
-    view: Water;
+    view: Water | RealWater;
+    /** What is in the water: the finished fly, or a natural on its own (moved into the rig while there). */
+    subject: "fly" | "natural";
+    /** A natural's own transform before it went into the water. */
+    home: THREE.Matrix4;
+    /** Puts back what the realistic water changed: materials, sky and lights. */
+    restore: (() => void) | null;
     level: number;
     pivot: THREE.Vector3;
     /** The fly as it hangs in the water, for framing. */
@@ -164,7 +212,8 @@ export class FlyScene {
 
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
     key.position.set(2, 4, 5);
-    this.scene.add(key, new THREE.HemisphereLight(0xffffff, 0x8a8070, 0.6));
+    this.lights = [key, new THREE.HemisphereLight(0xffffff, 0x8a8070, 0.6)];
+    this.scene.add(...this.lights);
     this.rig.matrixAutoUpdate = false;
     this.rig.add(this.fly);
     this.scene.add(this.rig);
@@ -201,7 +250,7 @@ export class FlyScene {
       if (this.follow && !this.water) this.followAction(dt);
       if (this.water && !this.water.setting.still) this.setWaterTime(this.waterTime + dt);
       this.controls.update();
-      this.renderer.render(this.scene, this.camera);
+      this.draw();
       this.reportAnchor();
     };
     this.frame = requestAnimationFrame(loop);
@@ -323,12 +372,13 @@ export class FlyScene {
 
   /**
    * The finished fly in water, placed by how it fishes: riding on the surface, hanging in the
-   * film, just under or deep. null takes it back to the vise.
+   * film, just under or deep. In the realistic water a natural shown on its own can go in too,
+   * placed by where it is found. null takes it back to the vise.
    */
   setWater(setting: WaterSetting | null) {
     // Stilling the water or a new theme keeps the camera where the visitor put it.
     const before = this.water?.setting;
-    const sameView = !!before && !!setting && before.view === setting.view && before.fishing === setting.fishing;
+    const sameView = !!before && !!setting && before.view === setting.view && before.fishing === setting.fishing && !!before.real === !!setting.real;
     if (this.water) {
       this.water.view.dispose();
       this.scene.remove(this.water.view.group);
@@ -339,46 +389,132 @@ export class FlyScene {
         this.fly.remove(this.water.bubbles);
       }
       for (const o of this.water.soft) o.scale.set(1, 1, 1);
+      this.water.restore?.();
+      // Back where it was, without the water's motion.
+      if (this.water.subject === "natural" && this.natural) {
+        this.fly.remove(this.natural);
+        this.scene.add(this.natural);
+        this.natural.matrix.copy(this.water.home);
+        this.natural.matrix.decompose(this.natural.position, this.natural.quaternion, this.natural.scale);
+      }
       this.water = null;
       this.scene.fog = null;
       this.rig.matrix.identity();
       this.rig.updateMatrixWorld(true);
     }
-    if (!setting || !this.build) {
+    const alone = !this.build && !!this.natural && !!setting?.real;
+    if (!setting || (!this.build && !alone)) {
       if (this.view.startsWith("water-")) this.setView("default");
       return;
     }
-    this.setTime(this.build.duration);
-    const fly = this.finished;
-    const level = waterLevel(setting.fishing.depth, fly);
-    // Tail down from the front of the shank, for an emerger in the film.
-    const front = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.85 * this.build.hook.shankLength, 0, 0)));
-    this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
+    let level: number;
+    let subject: THREE.Box3;
+    const home = new THREE.Matrix4();
+    if (this.build) {
+      this.setTime(this.build.duration);
+      subject = this.finished;
+      // Deep in the realistic water: room for the camera above the fly, under the surface.
+      level = setting.real && setting.fishing.depth === "deep" ? subject.max.y + deepWater(subject) : waterLevel(setting.fishing.depth, subject);
+      // Tail down from the front of the shank, for an emerger in the film.
+      const front = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.85 * this.build.hook.shankLength, 0, 0)));
+      this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
+    } else {
+      // The natural moves into the rig (still at rest), so the water carries it as it does a fly.
+      this.natural!.updateMatrix();
+      home.copy(this.natural!.matrix);
+      this.fly.attach(this.natural!);
+      subject = this.naturalBounds();
+      level = naturalLevel(setting.fishing.depth, subject);
+      const front = new THREE.Vector3(subject.max.x - 0.15 * (subject.max.x - subject.min.x), subject.getCenter(new THREE.Vector3()).y, 0);
+      this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
+    }
     this.rig.updateMatrixWorld(true);
     const bounds = this.visibleBounds();
     const pivot = bounds.getCenter(new THREE.Vector3());
-    const view = new Water({
-      level,
-      centre: pivot,
-      look: setting.look,
-      dimples: setting.fishing.depth === "surface" || setting.fishing.depth === "film" ? this.dimples(level) : [],
-      motion: setting.fishing.motion,
-      cut: setting.view === "side" ? fly.max.z + 0.4 : null,
-    });
+    const touches = setting.fishing.depth === "surface" || setting.fishing.depth === "film";
+    let view: Water | RealWater;
+    let restore: (() => void) | null = null;
+    if (setting.real) {
+      const real = setting.real;
+      const crawling = !this.build && setting.fishing.depth === "deep";
+      // Assumption: a shallow glide, the gravel some 4 cm under a floating fly; a natural that
+      // crawls sits on the stones.
+      // From below the camera goes some gapes under the fly: the bed lies deeper then.
+      const bed = crawling ? bounds.min.y + 0.1 : Math.min(level - (setting.view === "below" ? 14 : 8), bounds.min.y - 1.5);
+      // The panorama's sun behind the angler's shoulder, a little to the left.
+      const angler = VIEWS["water-angler"];
+      const skyRotation = Math.atan2(angler.x, angler.z) + 0.6 - real.sunAzimuth;
+      view = new RealWater({ assets: real, level, centre: pivot, bed, dimples: touches ? this.contactDimples(level) : [], skyRotation, detailed: setting.detailed });
+      const environment = this.scene.environment;
+      const background = this.scene.background;
+      const intensity = this.scene.environmentIntensity;
+      const exposure = this.renderer.toneMappingExposure;
+      const far = this.camera.far;
+      this.scene.environment = real.sky;
+      this.scene.background = real.sky;
+      this.scene.environmentRotation.set(0, skyRotation, 0);
+      this.scene.backgroundRotation.set(0, skyRotation, 0);
+      this.scene.backgroundBlurriness = 0.06;
+      this.scene.environmentIntensity = 1;
+      this.renderer.toneMappingExposure = 1.45;
+      this.camera.far = 900;
+      this.camera.updateProjectionMatrix();
+      for (const light of this.lights) light.visible = false;
+      const materials = realMaterials(this.fly);
+      restore = () => {
+        materials();
+        this.scene.environment = environment;
+        this.scene.background = background;
+        this.scene.environmentRotation.set(0, 0, 0);
+        this.scene.backgroundRotation.set(0, 0, 0);
+        this.scene.backgroundBlurriness = 0;
+        this.scene.environmentIntensity = intensity;
+        this.renderer.toneMappingExposure = exposure;
+        this.camera.far = far;
+        this.camera.updateProjectionMatrix();
+        for (const light of this.lights) light.visible = true;
+      };
+      // From below, what is under water is seen through it (from above the water's shader tints it).
+      if (setting.view === "below") this.scene.fog = new THREE.Fog("#4a5648", level, 40);
+    } else {
+      view = new Water({
+        level,
+        centre: pivot,
+        look: setting.look,
+        dimples: touches ? this.dimples(level) : [],
+        motion: setting.fishing.motion,
+        cut: setting.view === "side" ? subject.max.z + 0.4 : null,
+      });
+      // Wet and tinted below the waterline (see patchFogForWater), more so the deeper it is.
+      this.scene.fog = new THREE.Fog(setting.look.water, level, 6);
+    }
     this.scene.add(view.group);
-    // Wet and tinted below the waterline (see patchFogForWater), more so the deeper it is.
-    this.scene.fog = new THREE.Fog(setting.look.water, level, 6);
     // Fibres clump only where the whole fly is under water.
     const sunk = setting.fishing.depth === "below" || setting.fishing.depth === "deep";
-    const soft = sunk
-      ? this.build.steps.flatMap((step, i) => step.pieces.flatMap((p, j) => (CLUMPS.has(p.look) ? [this.stepViews[i]![j]!.piece.object] : [])))
-      : [];
+    const soft =
+      sunk && this.build
+        ? this.build.steps.flatMap((step, i) => step.pieces.flatMap((p, j) => (CLUMPS.has(p.look) ? [this.stepViews[i]![j]!.piece.object] : [])))
+        : [];
     for (const o of soft) o.scale.set(1, WET_SPREAD, WET_SPREAD);
     this.fly.updateMatrixWorld(true);
-    this.water = { setting, view, level, pivot, bounds, hang: this.rig.matrix.clone(), bubbles: this.bubbles(level), soft };
+    this.water = {
+      setting,
+      view,
+      subject: this.build ? "fly" : "natural",
+      home,
+      restore,
+      level,
+      pivot,
+      bounds,
+      hang: this.rig.matrix.clone(),
+      bubbles: this.build ? this.bubbles(level) : null,
+      soft,
+    };
     // Stilling the water holds it where it is.
     this.setWaterTime(this.waterTime);
-    if (!sameView) this.setView(setting.view === "side" ? "water-side" : "water-below");
+    // Deep down, a trout sees the fly level with it rather than against the surface.
+    const deep = setting.real && setting.fishing.depth === "deep";
+    if (!sameView) this.setView(setting.view === "side" ? "water-side" : setting.view === "angler" ? (deep ? "water-angler-deep" : "water-angler") : deep ? "water-bed" : "water-below");
   }
 
   /** The water and the fly in it at `t` seconds of water time. */
@@ -388,11 +524,15 @@ export class FlyScene {
     if (!w) return;
     w.view.setTime(t);
     const { depth, motion } = w.setting.fishing;
+    const view = w.view;
+    const height = (x: number, z: number) => (view instanceof RealWater ? view.height(x, z) : waveHeight(x, z, t));
     const c = w.pivot;
     let lift = 0;
     let pitch = 0;
     let roll = 0;
-    if (motion === "swim") {
+    if (w.subject === "natural" && depth === "deep") {
+      // Resting on the stones.
+    } else if (motion === "swim") {
       // Straightens and lifts on each pull, dips nose first in the pause after it.
       const f = (t % Water.STRIP) / Water.STRIP;
       const pull = f < 0.3 ? Math.sin((f / 0.3) * Math.PI) : 0;
@@ -412,9 +552,9 @@ export class FlyScene {
       for (const o of w.soft) o.scale.set(1, spread, spread);
     } else if (depth === "surface" || depth === "film") {
       // Rides the waves.
-      lift = waveHeight(c.x, c.z, t);
-      pitch = 6 * (waveHeight(c.x + 0.5, c.z, t) - waveHeight(c.x - 0.5, c.z, t));
-      roll = 6 * (waveHeight(c.x, c.z + 0.5, t) - waveHeight(c.x, c.z - 0.5, t));
+      lift = height(c.x, c.z);
+      pitch = 6 * (height(c.x + 0.5, c.z) - height(c.x - 0.5, c.z));
+      roll = 6 * (height(c.x, c.z + 0.5) - height(c.x, c.z - 0.5));
     } else {
       // Tumbles slowly in the current.
       lift = 0.05 * Math.sin(0.5 * t);
@@ -428,6 +568,38 @@ export class FlyScene {
       .multiply(new THREE.Matrix4().makeTranslation(-c.x, -c.y, -c.z))
       .multiply(w.hang);
     this.rig.updateMatrixWorld(true);
+  }
+
+  /**
+   * Where something dents the surface film, for the realistic water: the lowest points of
+   * whatever reaches through it (hackle tips, tails, an insect's feet), at most MAX_DIMPLES.
+   */
+  private contactDimples(level: number): Dimple[] {
+    const cells = new Map<string, { x: number; z: number; y: number }>();
+    const v = new THREE.Vector3();
+    const m = new THREE.Matrix4();
+    this.fly.updateMatrixWorld(true);
+    this.fly.traverseVisible((o) => {
+      if (!(o instanceof THREE.Mesh)) return;
+      const pos = o.geometry.getAttribute("position");
+      const instances = o instanceof THREE.InstancedMesh ? o.count : 1;
+      // Sampled, so a dense hackle doesn't cost a pass over every vertex of every fibre.
+      const stride = Math.max(1, Math.floor((pos.count * instances) / 60000));
+      for (let k = 0; k < instances; k++) {
+        if (o instanceof THREE.InstancedMesh) o.getMatrixAt(k, m).premultiply(o.matrixWorld);
+        else m.copy(o.matrixWorld);
+        for (let i = (k * 7) % stride; i < pos.count; i += stride) {
+          v.fromBufferAttribute(pos, i).applyMatrix4(m);
+          if (v.y > level + 0.02 || v.y < level - 0.3) continue;
+          const key = `${Math.round(v.x / 0.12)},${Math.round(v.z / 0.12)}`;
+          const cell = cells.get(key);
+          if (!cell || v.y < cell.y) cells.set(key, { x: v.x, z: v.z, y: v.y });
+        }
+      }
+    });
+    const all = [...cells.values()].sort((a, b) => a.y - b.y);
+    // Assumption: a dent about a sixth of a gape across (under a millimetre), deeper where it presses harder.
+    return all.slice(0, MAX_DIMPLES).map((c) => ({ x: c.x, z: c.z, r: 0.12, d: Math.min(0.05, 0.02 + 0.15 * Math.max(0, level - c.y)) }));
   }
 
   /** Where the fly dents the surface film: the fibres (hackle, tail, legs) that reach through it. */
@@ -508,9 +680,31 @@ export class FlyScene {
     this.resetCamera();
   }
 
+  /**
+   * Hands the scene as it is now to the build-time path tracer (scripts/render-water.ts): the
+   * renderer, scene and camera, and the realistic water if it is showing. The scene stops
+   * drawing itself, as the tracer draws instead.
+   */
+  forTracing(): { renderer: THREE.WebGLRenderer; scene: THREE.Scene; camera: THREE.PerspectiveCamera; water: RealWater | null; target: THREE.Vector3 } {
+    cancelAnimationFrame(this.frame);
+    this.controls.update();
+    return {
+      renderer: this.renderer,
+      scene: this.scene,
+      camera: this.camera,
+      water: this.water?.view instanceof RealWater ? this.water.view : null,
+      target: this.controls.target.clone(),
+    };
+  }
+
   /** Draws a frame right away, for screenshots between animation frames. */
   renderNow() {
-    this.renderer.render(this.scene, this.camera);
+    this.draw();
+  }
+
+  private draw() {
+    if (this.water?.view instanceof RealWater) this.water.view.render(this.renderer, this.scene, this.camera);
+    else this.renderer.render(this.scene, this.camera);
   }
 
   /** The fly as it is at the current time, framed whole, copied to a canvas (the printable recipe card). */
@@ -607,7 +801,7 @@ export class FlyScene {
     const box = new THREE.Box3();
     const part = new THREE.Box3();
     this.fly.updateMatrixWorld(true);
-    const skip = new Set<THREE.Object3D>([this.bobbin!.object, ...[...this.looseEnds.values()].map((v) => v.object)]);
+    const skip = new Set<THREE.Object3D>([...(this.bobbin ? [this.bobbin.object] : []), ...[...this.looseEnds.values()].map((v) => v.object)]);
     const visit = (o: THREE.Object3D) => {
       if (!o.visible || skip.has(o)) return;
       if (o instanceof THREE.InstancedMesh) {
@@ -637,6 +831,9 @@ export class FlyScene {
    * fly, it is shown on its own. null takes it away.
    */
   setNatural(n: Natural | null, length = 4, at: "beside" | "over" = "beside") {
+    // A natural in the water on its own comes out first, and the new one goes in.
+    const water = this.water?.subject === "natural" ? this.water.setting : null;
+    if (water) this.setWater(null);
     if (this.natural) {
       disposeNatural(this.natural);
       this.scene.remove(this.natural);
@@ -671,7 +868,8 @@ export class FlyScene {
     }
     this.natural = g;
     this.scene.add(g);
-    this.resetCamera();
+    if (water && !this.build) this.setWater({ ...water, fishing: naturalFishing(n) });
+    else this.resetCamera();
   }
 
   private naturalBounds(): THREE.Box3 {
@@ -680,16 +878,40 @@ export class FlyScene {
 
   /** Frames the finished fly from the current view, with a small margin. */
   resetCamera() {
+    if (this.water) {
+      // The waterline in the picture too, when the fly is near it; in the realistic water some
+      // of the river round it.
+      const real = !!this.water.setting.real;
+      const framed = this.water.bounds.clone().expandByScalar(real ? 0.35 : 0.3);
+      // The realistic water shows the surface all round; the drawn tank needs its waterline framed.
+      if (!real && this.water.setting.fishing.depth !== "deep") framed.expandByPoint(new THREE.Vector3(this.water.pivot.x, this.water.level + 0.3, 0));
+      this.frameBox(framed);
+      // A trout's view of something deep stays under the surface: closer in, if need be.
+      if (real && this.view === "water-bed") {
+        const target = this.controls.target;
+        const dir = this.camera.position.clone().sub(target).normalize();
+        const most = (this.water.level - 1 - target.y) / Math.max(0.05, dir.y);
+        if (this.camera.position.distanceTo(target) > most) {
+          this.camera.position.copy(target).addScaledVector(dir, most);
+          this.controls.update();
+        }
+      }
+      // The angler stands above the water: looking down on a sunk fly from further back.
+      if (real && (this.view === "water-angler" || this.view === "water-angler-deep")) {
+        const target = this.controls.target;
+        const dir = this.camera.position.clone().sub(target).normalize();
+        const needed = (this.water.level + 1.5 - target.y) / Math.max(0.05, dir.y);
+        if (this.camera.position.distanceTo(target) < needed) {
+          this.allowDistance(needed);
+          this.camera.position.copy(target).addScaledVector(dir, needed);
+          this.controls.update();
+        }
+      }
+      return;
+    }
     if (!this.build || this.finished.isEmpty()) {
       // A natural on its own.
       if (this.natural) this.frameBox(this.naturalBounds());
-      return;
-    }
-    if (this.water) {
-      // The waterline in the picture too, when the fly is near it.
-      const framed = this.water.bounds.clone().expandByScalar(0.3);
-      if (this.water.setting.fishing.depth !== "deep") framed.expandByPoint(new THREE.Vector3(this.water.pivot.x, this.water.level + 0.3, 0));
-      this.frameBox(framed);
       return;
     }
     this.userMoved = false;
@@ -1003,6 +1225,26 @@ function waterLevel(depth: Fishing["depth"], fly: THREE.Box3): number {
       return fly.max.y + 0.7;
     case "deep":
       return fly.max.y + 2.5;
+  }
+}
+
+/** How far under the surface something deep is in the realistic water: room for the camera to look at it from under the surface, more for a big fish. */
+function deepWater(body: THREE.Box3): number {
+  return Math.max(6, 0.75 * (body.max.x - body.min.x));
+}
+
+/** The level of the water for a natural on its own, from where it is found. */
+function naturalLevel(depth: Fishing["depth"], body: THREE.Box3): number {
+  switch (depth) {
+    case "surface":
+      // Standing on the film: its feet just dent it.
+      return body.min.y + 0.04;
+    case "film":
+      return body.getCenter(new THREE.Vector3()).y;
+    case "below":
+      return body.max.y + 1;
+    case "deep":
+      return body.max.y + deepWater(body);
   }
 }
 

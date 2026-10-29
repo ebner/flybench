@@ -7,14 +7,20 @@ description "A stout, round beetle with hard wing cases. The garden chafer has c
 size min=8.5 max=11
 rides in-film
 body {
-    // The chestnut-brown, hairy wing cases cover the back (Wikipedia); the underside is dark green.
-    abdomen length=0.55 radius=0.21 taper=0.8 color="#7a4a22" belly="#1e2a1e" flatten=0.75 round=1
-    thorax length=0.27 radius=0.19 taper=0.8 color="#1e3024" flatten=0.75 round=0.7
-    head length=0.18 radius=0.12 taper=0.8 color="#1a2a20" flatten=0.75 round=1
+    // The chestnut-brown wing cases, covered with long upright hairs, cover the back; head,
+    // thorax and legs shiny dark green or bluish, the underside green too (Wikipedia).
+    // Assumption: from the photo on Wikipedia's page, the wing cases about 0.58 of the length,
+    // the thorax 0.27 and the head 0.15; long pale hairs at the sides and under the thorax.
+    abdomen length=0.58 radius=0.21 taper=0.8 color="#7a4a22" belly="#1e2a1e" flatten=0.75 round=1 hairs=0.35
+    thorax length=0.27 radius=0.19 taper=0.8 color="#1e3024" belly="#1e2a1e" flatten=0.75 round=0.7 hairs=0.5
+    head length=0.15 radius=0.12 taper=0.8 color="#1a2a20" flatten=0.75 round=1 hairs=0.15
 }
 parts {
-    legs count=6 length=0.45 color="#1e3024"
-    antennae length=0.15 color="#3a2a1a"
+    // Assumption: from the photo, the legs reach a little under half the body length out, with
+    // long jointed feet ending in claws.
+    legs count=6 length=0.45 color="#1e3024" femur=0.34 tibia=0.32 hairs=0.15
+    // Short antennae ending in a club of three leaves (Wikipedia); about 0.15 in the photo.
+    antennae length=0.15 color="#2a2a1e"
     eyes size=0.03 color=black
 }
 hatches {
