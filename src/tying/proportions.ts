@@ -1,3 +1,7 @@
+import { term } from "../i18n/glossary";
+import { deNoun, dePhrase, inSentence, svNoun } from "../i18n/grammar";
+import { lang } from "../i18n/lang";
+import { partLabel } from "./describe";
 import type { Build, Piece } from "./simulate";
 
 /**
@@ -12,14 +16,32 @@ export type Dimension =
   /** Standing out from the shank at x: from radius r out to r + length. */
   | { kind: "out"; step: number; material: string; label: string; x: number; r: number; length: number; side: "top" | "under" };
 
-const times = (n: number) => `${Math.round(n * 10) / 10}× gape`;
+/** The guide's words in the page's language: "1.5× gape", "fibrer", "78 % av krokskaftet". */
+function words() {
+  const l = lang();
+  const number = (n: number) => (Math.round(n * 10) / 10).toLocaleString({ en: "en-GB", sv: "sv-SE", de: "de-DE" }[l]);
+  if (l === "en") {
+    return { times: (n: number) => `${number(n)}× gape`, fibres: (role: string) => `${role} fibres`, ofShank: (p: number) => `${p}% of the shank` };
+  }
+  const word = (id: string) => term(l, "words", id, "noun");
+  if (l === "sv") {
+    return {
+      times: (n: number) => `${number(n)} × ${svNoun(word("gape"), "definite")}`,
+      fibres: (role: string) => `${role}, ${svNoun(word("fibre"), "plural")}`,
+      ofShank: (p: number) => `${p} % av ${svNoun(word("shank"), "definite")}`,
+    };
+  }
+  return {
+    times: (n: number) => `${number(n)} × ${word("gape").text}`,
+    fibres: (role: string) => `${role}, ${deNoun(word("fibre"), "nom", true)}`,
+    ofShank: (p: number) => `${p} % ${dePhrase(word("shank"), { case: "gen", article: "definite" })}`,
+  };
+}
 
 export function proportions(build: Build): Dimension[] {
   const dims: Dimension[] = [];
-  const role = (id: string) => {
-    const r = id.replace(/-/g, " ");
-    return r.charAt(0).toUpperCase() + r.slice(1);
-  };
+  const role = partLabel;
+  const { times, fibres, ofShank } = words();
   const seen = new Set<string>();
   // A body: every pass of the same material along the shank, from the first step it appears in.
   const bodies = new Map<string, { step: number; x0: number; x1: number }>();
@@ -51,7 +73,7 @@ export function proportions(build: Build): Dimension[] {
       if (piece.type === "wraps" && piece.path === "post" && piece.look === "hackle" && piece.fibreLength && !seen.has(id)) {
         // A parachute hackle: its fibres stand out level from the post.
         seen.add(id);
-        dims.push({ kind: "along", step: step.index, material: id, label: `${role(id)} fibres: ${times(piece.fibreLength)}`, x0: piece.x0, x1: piece.x0 + piece.fibreLength });
+        dims.push({ kind: "along", step: step.index, material: id, label: `${fibres(role(id))}: ${times(piece.fibreLength)}`, x0: piece.x0, x1: piece.x0 + piece.fibreLength });
       }
       if (piece.type === "wraps" && piece.path === "travel") {
         // Hackle stands out from where it is wound; other wound or dubbed materials make a body.
@@ -59,7 +81,7 @@ export function proportions(build: Build): Dimension[] {
           if (!seen.has(id)) {
             seen.add(id);
             const x = Math.max(piece.x0, piece.x1);
-            dims.push({ kind: "out", step: step.index, material: id, label: `${role(id)} fibres: ${times(piece.fibreLength)}`, x, r: 0, length: piece.fibreLength, side: "top" });
+            dims.push({ kind: "out", step: step.index, material: id, label: `${fibres(role(id))}: ${times(piece.fibreLength)}`, x, r: 0, length: piece.fibreLength, side: "top" });
           }
         } else {
           const b = bodies.get(id);
@@ -74,7 +96,7 @@ export function proportions(build: Build): Dimension[] {
     // Wound over an earlier body for most of its length: a rib, not a body of its own.
     const over = [...bodies].some(([other, o]) => other !== id && o.step < b.step && Math.min(o.x1, b.x1) - Math.max(o.x0, b.x0) > 0.5 * (b.x1 - b.x0));
     if (over) continue;
-    dims.push({ kind: "along", step: b.step, material: id, label: `${role(id)}: ${Math.round(((b.x1 - b.x0) / shank) * 100)}% of the shank`, x0: b.x0, x1: b.x1 });
+    dims.push({ kind: "along", step: b.step, material: id, label: `${role(id)}: ${ofShank(Math.round(((b.x1 - b.x0) / shank) * 100))}`, x0: b.x0, x1: b.x1 });
   }
   // Parts measured the same at the same place (a brown and a grizzly tail, two hackles wound
   // together) share one measurement: "Tail brown, tail grizzly: 1.7× gape".
@@ -89,7 +111,7 @@ export function proportions(build: Build): Dimension[] {
           ? Math.abs(m.x0 - d.x0) < 0.1 && Math.abs(m.x1 - d.x1) < 0.1
           : m.kind === "out" && d.kind === "out" && Math.abs(m.x - d.x) < 0.1 && m.side === d.side),
     );
-    if (same) same.label = `${same.label.slice(0, -value.length)}, ${d.label.charAt(0).toLowerCase()}${d.label.slice(1)}`;
+    if (same) same.label = `${same.label.slice(0, -value.length)}, ${inSentence(d.label)}`;
     else merged.push({ ...d });
   }
   return merged;
