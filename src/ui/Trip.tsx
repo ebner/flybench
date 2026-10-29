@@ -49,7 +49,10 @@ export function Trip({ query }: { query: string }) {
     replaceUrl(href.trip(written.current));
   }, [trip]);
   useEffect(() => {
-    if (written.current !== null && query !== written.current) setTrip(readQuery(query));
+    if (written.current === null || query === written.current) return;
+    // "Plan a trip" from the page itself keeps the choices.
+    if (query === "") replaceUrl(href.trip(written.current));
+    else setTrip(readQuery(query));
   }, [query]);
   const suggestions = useMemo(
     () => (region ? suggestBox(PATTERNS.map((p) => p.recipe), NATURALS, { region, ...trip }) : []),
@@ -89,7 +92,12 @@ export function Trip({ query }: { query: string }) {
             {missing !== null && (missing === 0 ? ". You can tie it" : `. Needs ${missing} more ${missing === 1 ? "material" : "materials"}`)}.
           </p>
         </div>
-        <button className="link-button" aria-pressed={box.has(s.recipe.id)} onClick={() => box.toggle(s.recipe.id)}>
+        <button
+          className="link-button"
+          aria-pressed={box.has(s.recipe.id)}
+          aria-label={`${s.recipe.name}: in your fly box`}
+          onClick={() => box.toggle(s.recipe.id)}
+        >
           {box.has(s.recipe.id) ? "In your fly box" : "Add to fly box"}
         </button>
       </li>

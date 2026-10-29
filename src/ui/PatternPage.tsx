@@ -125,6 +125,7 @@ function PatternView({
   const owned = useStoredSet(INVENTORY_KEY);
   const log = useLog();
   const [logging, setLogging] = useState<"form" | "done" | null>(null);
+  const tiedButton = useRef<HTMLButtonElement>(null);
   const mainId = original.variantOf ?? original.id;
   const ownership = (id: string) => {
     const m = recipe.materials.find((m) => m.id === id);
@@ -498,32 +499,42 @@ function PatternView({
         </div>
         {(() => {
           const tied = tiedCounts(log.items, PATTERNS.map((p) => p.recipe)).get(mainId) ?? 0;
-          return logging === "form" ? (
-            <LogForm
-              id={recipe.id}
-              sizes={tiedSize !== undefined ? hookSizes(tiedSize) : []}
-              size={recipe.hook.size}
-              colours={spec || undefined}
-              onClose={(logged) => setLogging(logged ? "done" : null)}
-            />
-          ) : (
-            <p className="tied" aria-live="polite">
-              {logging === "done" ? "Added to your tying log. " : ""}
-              {tied > 0 && (
-                <>
-                  You have tied {tied} of {tied === 1 ? "this fly" : "these"}.{" "}
-                </>
+          return (
+            <>
+              <p className="tied">
+                {/* Always there, so a screen reader hears what changes in it. */}
+                <span aria-live="polite">{logging === "done" ? "Added to your tying log. " : ""}</span>
+                {tied > 0 && (
+                  <>
+                    You have tied {tied} of {tied === 1 ? "this fly" : "these"}.{" "}
+                  </>
+                )}
+                {logging !== "form" && (
+                  <button ref={tiedButton} className="link-button" onClick={() => setLogging("form")}>
+                    I tied this
+                  </button>
+                )}
+                {tied > 0 && (
+                  <>
+                    {" "}
+                    <a href={href.log()}>Your tying log</a>
+                  </>
+                )}
+              </p>
+              {logging === "form" && (
+                <LogForm
+                  id={recipe.id}
+                  sizes={tiedSize !== undefined ? hookSizes(tiedSize) : []}
+                  size={recipe.hook.size}
+                  colours={spec || undefined}
+                  onClose={(logged) => {
+                    setLogging(logged ? "done" : null);
+                    // Back to the button the form came from.
+                    requestAnimationFrame(() => tiedButton.current?.focus());
+                  }}
+                />
               )}
-              <button className="link-button" onClick={() => setLogging("form")}>
-                I tied this
-              </button>
-              {tied > 0 && (
-                <>
-                  {" "}
-                  <a href={href.log()}>Your tying log</a>
-                </>
-              )}
-            </p>
+            </>
           );
         })()}
         {printRequest > 0 && <PrintCard recipe={recipe} build={build} request={printRequest} onPrinted={printed} />}

@@ -124,7 +124,8 @@ export function LogForm({
 }) {
   const log = useLog();
   const [date, setDate] = useState(today);
-  const [count, setCount] = useState(1);
+  // As typed, so the field can be cleared while typing; a whole number from 1 to 999 is kept.
+  const [count, setCount] = useState("1");
   const [chosenSize, setChosenSize] = useState(size);
   const [note, setNote] = useState("");
   return (
@@ -136,7 +137,7 @@ export function LogForm({
           key: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
           date: DATE_INPUT.test(date) ? date : today(),
           id,
-          count: Math.max(1, Math.round(count) || 1),
+          count: Math.min(999, Math.max(1, Math.round(Number(count)) || 1)),
           ...(chosenSize !== undefined ? { size: chosenSize } : {}),
           ...(colours ? { colours } : {}),
           ...(note.trim() ? { note: note.trim() } : {}),
@@ -147,7 +148,7 @@ export function LogForm({
     >
       <label>
         How many
-        <input type="number" min={1} max={999} value={count} onChange={(e) => setCount(Number(e.target.value))} />
+        <input type="number" min={1} max={999} value={count} onChange={(e) => setCount(e.target.value)} autoFocus />
       </label>
       {sizes.length > 0 && (
         <label>

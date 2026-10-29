@@ -79,11 +79,11 @@ export function imitatedBy(recipes: Recipe[], id: string): Recipe[] {
 }
 
 /**
- * Hook sizes whose shank is about as long as the natural's body, on a standard-shank hook:
- * the sizes it is usually matched with (the shank, not the whole fly, matches the body).
+ * Hook sizes whose shank is about as long as the natural's body: the sizes it is usually
+ * matched with (the shank, not the whole fly, matches the body). On a standard-shank hook
+ * unless another shank length (in gapes) is given.
  */
-export function matchingHookSizes(n: Natural): number[] {
-  const shank = HOOK_MODELS["dry-standard"].shankLength;
+export function matchingHookSizes(n: Natural, shank = HOOK_MODELS["dry-standard"].shankLength): number[] {
   const sizes: number[] = [];
   for (let s = 2; s <= 24; s += 2) {
     const mm = shank * gapeMm(s);

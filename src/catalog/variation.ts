@@ -1,4 +1,5 @@
 import { NAMED_COLORS, type NamedColor, type Recipe } from "../recipe/schema";
+import { materialColor } from "./inventory";
 
 /**
  * A pattern in other colours: the colour playground. A variation is the recipe with some of
@@ -17,9 +18,11 @@ export const DYE_COLORS: NamedColor[] = [
 
 const isNamed = (c: string): c is NamedColor => c in NAMED_COLORS;
 
-/** The colour a part is tied in by the pattern (a material's own, or none: its natural colour). */
+/** The colour a part is tied in by the pattern: its own, or the catalog's default for it. */
 export function tiedColour(recipe: Recipe, part: string): string | undefined {
-  return part === "thread" ? recipe.thread.color : recipe.materials.find((m) => m.id === part)?.color;
+  if (part === "thread") return recipe.thread.color;
+  const m = recipe.materials.find((m) => m.id === part);
+  return m && materialColor(m);
 }
 
 /** Reads "body:yellow,tail:red", keeping only the recipe's parts in named colours that differ from the pattern's. */
