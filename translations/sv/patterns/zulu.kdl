@@ -7,9 +7,9 @@ description "En kort stjärt av rött ullgarn, en kropp av svart sälhår ribbad
 // en history: Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders with red tips, commonly called Zulus" among the flies for a fortnight on remote Scottish lochs, and in 1892 Niven's lexicon described it as "made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking Lars reports it, gives it a silver tag and hen hackles. Two modern sources say it was once banned, from competitions or in some waters, for catching too well; neither gives details.
 history """
     Ingen vet vem som band den första. Redan 1882 kunde ”Black Palmer” räkna upp ”svarta
-    spiders med röda spetsar, vanligen kallade Zulus” bland flugorna för två veckor vid
+    spiders med röda spetsar, vanligen kallade Zulus” (”black spiders with red tips, commonly called Zulus”) bland flugorna för två veckor vid
     avlägsna skotska sjöar, och 1892 beskrev Nivens lexikon den som ”bunden som en palmer,
-    svart hackel, svart kropp, ribbad med silvertinsel, med en tag av röd ull som stjärt”.
+    svart hackel, svart kropp, ribbad med silvertinsel, med en tag av röd ull som stjärt” (”made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail”).
     Walbrans katalog från 1889 ger den, enligt Viking Lars, en tag av silver och hönshackel.
     Två moderna källor uppger att den en gång förbjöds, i tävlingar eller i vissa vatten,
     för att den fångade för bra; ingen av dem ger några detaljer.
@@ -21,7 +21,7 @@ fishing """
     flugor, fiskad genom vågtopparna från en drivande båt. Mörka, blåsiga dagar passar den.
     Den tar öring och havsöring över hela Storbritannien och Irland, och öring och röding på
     Island. Ett brev till Fishing Gazette 1893 rekommenderade den för havsöring i Donegal,
-    ”bunden liten, men med långt hackel och gott om tinsel”.
+    ”bunden liten, men med långt hackel och gott om tinsel” (”dressed small, but with long hackle and with plenty of tinsel”).
     """
 
 labels {

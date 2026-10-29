@@ -8,7 +8,7 @@ name "Köcherfliege (Sedge)"
 description "Ein mottenähnliches Insekt mit behaarten Flügeln, die es wie ein Dach über dem Rücken zusammenlegt, und langen, fadenförmigen Fühlern. Beim Schlüpfen und bei der Eiablage huscht und flattert es über das Wasser."
 
 // en examples: small sedges, grannom, great red sedge
-examples "kleine Sedges, Grannom, Great Red Sedge"
+examples "kleine Köcherfliegen, Grannom (Brachycentrus), Große Köcherfliege (Great Red Sedge)"
 
 hatches {
     // en southern-sweden time: evening

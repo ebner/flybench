@@ -2,7 +2,7 @@ id peeping-caddis
 status draft
 
 // en description: A burnt-tipped chartreuse chenille larva peeping out behind a bushy hare's ear case, with a partridge collar where they meet and a tungsten bead at the eye, on a jig hook.
-description "En larv av fluorescerande chartreuse chenille med bränd spets som tittar fram bakom ett yvigt hus av haröra, med en krage av rapphöna där de möts och en tungstenkula vid krokögat, på jiggkrok."
+description "En larv av fluorescerande chartreuse chenille med bränd spets som tittar fram bakom ett yvigt hus av haröra, med en krage av rapphöna där de möts och en tungstenskalle vid krokögat, på jiggkrok."
 
 // en history: A cased caddis larva with its head and legs out of the case. Ralph D'Andrea counts it an old, familiar pattern, and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's Peeping Caddis has the larva at the front, as it is in nature; the jig version here has the larva sticking out at the back and the weight at the eye. Hans van Klinken's LeadHead, another cased caddis, is weighted with a split shot that also turns the hook point up.
 history """
@@ -41,5 +41,5 @@ notes {
     // en step 10 (dub larva-case): Bushy, and an even cylinder rather than tapered: it is a case.
     step 10 "Yvigt och jämntjockt som en cylinder, inte avsmalnande: det är ett hus."
     // en step 13 (whip-finish): Behind the bead; brush the case to pull out the guard hairs.
-    step 13 "Bakom kulan; borsta huset så att täckhåren dras ut."
+    step 13 "Bakom skallen; borsta huset så att täckhåren dras ut."
 }

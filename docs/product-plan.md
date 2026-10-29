@@ -169,6 +169,24 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       - Prose (history, how to fish, notes, technique texts, naturals) in translation files
         beside the originals, marked as drafts until reviewed; English shows where a
         translation is missing.
+13. Photorealistic water and naturals (decided 2026-10-29, the recommended option of each).
+    The "In the water" view and the naturals become photorealistic; the step-by-step fly view
+    keeps the herbarium and cyanotype look for teaching. Everything is still generated from
+    the recipes: no photos (real insect photos were rejected, so the same-scale overlay on the
+    fly keeps working) and no generated images.
+    - Both formats: path-traced stills rendered at build time (three-gpu-pathtracer in
+      headless Chromium, beside `pnpm render:catalog`) are the first picture; the upgraded
+      live 3D takes over when the visitor interacts.
+    - Live renderer: photographed CC0 sky and river panoramas (HDRI) served by the site,
+      physical materials per archetype (sheen for fur and dubbing, transmission and
+      iridescence for wings, a wet gloss, anisotropic tinsel), insect detail from the
+      natural's recipe (venation, segment bands, setae), water with Fresnel reflection and
+      refraction, Snell's window, the dimples feet and hackle make in the film, caustics on a
+      riverbed, depth of field and contact shadows.
+    - Moderate cost: about 1–3 MB more download; weak devices and reduced motion keep
+      today's stylised view.
+    - First a trial: the mayfly dun and the Elk Hair Caddis on water, live against
+      path-traced, as screenshots for the user to judge before the full milestone.
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

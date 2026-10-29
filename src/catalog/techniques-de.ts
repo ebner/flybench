@@ -36,11 +36,11 @@ Binde die Enden entlang des Schenkels zum Öhr hin fest und schneide sie dort ab
   },
   dubbing: {
     name: "Einen Körper dubben",
-    summary: "Fell auf den Faden drehen und zu einem flauschigen Körper winden.",
-    how: `Nimm ein wenig Dubbing, viel weniger, als du denkst, und zupfe die Fasern auseinander, damit sie locker liegen. Drücke es an den Faden und drehe es zwischen Daumen und Finger nur in eine Richtung, sodass es sich als schlanke Rolle um den Faden festzieht.
+    summary: "Fell auf den Faden zwirbeln und zu einem flauschigen Körper winden.",
+    how: `Nimm ein wenig Dubbing, viel weniger, als du denkst, und zupfe die Fasern auseinander, damit sie locker liegen. Drücke es an den Faden und zwirble es zwischen Daumen und Finger nur in eine Richtung, sodass es sich als schlanker Strang um den Faden festzieht.
 
-Winde die Rolle in dichten Windungen nach vorn. Gib nach vorn hin etwas mehr dazu, damit der Körper konisch wird.`,
-    mistakes: ["Zu viel Dubbing, das einen dicken, formlosen Körper ergibt.", "Hin und her drehen, wodurch sich die Rolle wieder lockert."],
+Winde den Strang in dichten Windungen nach vorn. Gib nach vorn hin etwas mehr dazu, damit der Körper konisch wird.`,
+    mistakes: ["Zu viel Dubbing, das einen dicken, formlosen Körper ergibt.", "Hin und her zwirbeln, wodurch sich der Strang wieder lockert."],
   },
   "herl-body": {
     name: "Körper aus Pfauengras",
@@ -60,7 +60,7 @@ Binde sie vorn ab und schneide den Überstand ab.`,
   },
   "wound-body": {
     name: "Gewickelte Körper",
-    summary: "Körper aus Floss, Tinsel, Chenille oder Fibern, in dichten Windungen gewickelt.",
+    summary: "Körper aus Floss, Tinsel, Chenille oder Fibern, in dichten Windungen gewunden.",
     how: `Binde das Material am Hakenbogen ein und führe den Faden nach vorn bis dorthin, wo der Körper endet. Winde das Material in dichten oder leicht überlappenden Windungen nach vorn und halte es dabei flach und unverdreht.
 
 Binde es dort ab, wo der Faden hängt, und schneide den Überstand ab.`,
@@ -145,7 +145,7 @@ Ganze Federn werden am Kiel eingebunden; streife vorher den Flaum am Ansatz ab.`
   weighting: {
     name: "Beschweren",
     summary: "Drahtwindungen unter dem Körper, damit die Fliege sinkt.",
-    how: `Wickle bleifreien Draht in dichten Windungen um die Mitte des blanken Hakenschenkels, schiebe die Windungen dann zusammen und fixiere sie mit Faden, bevor du den Körper darüber formst.`,
+    how: `Winde bleifreien Draht in dichten Windungen um die Mitte des blanken Hakenschenkels, schiebe die Windungen dann zusammen und fixiere sie mit Faden, bevor du den Körper darüber formst.`,
     mistakes: ["Eine Beschwerung, die sich auf dem Schenkel dreht: Fixiere sie mit Faden.", "Eine Beschwerung zu nah am Öhr, sodass kein Platz für den Kopf bleibt."],
   },
   eyes: {

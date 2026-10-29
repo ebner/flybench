@@ -48,7 +48,7 @@ materials {
         source "Der-FliegenBinder: Weiche Federn, Ingo Karwath (\"Rebhuhnhechel an der Spitze eingebunden\")" url="https://der-fliegenbinder.de/16174-2"
     }
     noun snipe-hackle "Schnepfenhechel" gender=f plural="Schnepfenhecheln" {
-        note "German tyers call the snipe feather 'Schnepfe' (Karwath: \"Schnepfe ist heller als Waldschnepfe\"). The zoologically exact 'Bekassine' did not turn up in tying texts, so it is not used."
+        note "German tyers call the snipe feather 'Schnepfe' (Karwath: \"Schnepfe ist heller als Waldschnepfe\"). The zoologically exact 'Bekassine' did not turn up in tying texts. Decided by the reviewer (2026-10-29): 'Schnepfe'."
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Softhackle-Fliegen (\"Hechel: Schnepfe\")" url="https://www.fliegenfischer-forum.de/softhackleflies.html"
         source "Der-FliegenBinder: Weiche Federn, Ingo Karwath" url="https://der-fliegenbinder.de/16174-2"
     }
@@ -106,7 +106,7 @@ materials {
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"aus verdicktem und schwarz lackiertem Monofil\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
     noun flat-tinsel "Flachtinsel" gender=n mass=#true {
-        note "Chosen: 'Flachtinsel', neuter (\"rotes Flachtinsel\"). Rejected: 'Flachlametta'. 'Lametta' is the older German book word, but I found no current tying text or shop using 'Flachlametta' or 'Ovallametta'; today's sources all write 'Tinsel'."
+        note "Chosen: 'Flachtinsel', neuter (\"rotes Flachtinsel\"). Rejected: 'Flachlametta'. 'Lametta' is the older German book word, but I found no current tying text or shop using 'Flachlametta' or 'Ovallametta'; today's sources all write 'Tinsel'. Decided by the reviewer (2026-10-29): 'Flachtinsel' and 'Ovaltinsel'."
         source "Fliegenfischer-Forum: Lachs-Tubenfliegen Spezial No.1, Michael Müller (\"Flachtinsel silber\")" url="https://www.fliegenfischer-forum.de/tuben1.html"
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Klassische Nassfliegen (\"rotes Flachtinsel\")" url="https://www.fliegenfischer-forum.de/monspe48.html"
         source "Rudi Heger: Bindeseiden, Draht & Tinsel (\"Silver & Gold Flachtinsel\")" url="https://www.rudiheger.eu/zubehoer/fliegenbinden-werkzeuge/bindeseiden-draht-tinsel.html"
@@ -120,8 +120,8 @@ materials {
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (heading \"Chenille\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
         source "Rudi Heger: Körpermaterial, Dubbing & Flügel (\"Standard Chenille\")" url="https://www.rudiheger.eu/zubehoer/fliegenbinden-werkzeuge/koerpermaterial-dubbing-fluegel.html"
     }
-    noun elk-hair "Wapitihaar" gender=n mass=#true {
-        note "Sources disagree, so the reviewer should decide. English 'elk' is the wapiti, whereas German 'Elch' is the moose. Rudi Heger sells elk hair as \"Das dicke Wapitihaar\" and AOS as \"Wapiti-Hirschhaar\", but Flyfishing Europe sells it as \"Elchhaar (Elk Hair)\", and many tyers say 'Elchhaar' or just 'Elk Hair'. I chose 'Wapitihaar' because 'Elchhaar' is also moose body hair, and moose-mane is 'Elchmähne'."
+    noun elk-hair "Elchhaar" gender=n mass=#true {
+        note "German tyers say 'Elchhaar' (Flyfishing Europe sells elk hair as \"Elchhaar (Elk Hair)\"), though zoologically English 'elk' is the wapiti and German 'Elch' the moose; shops also write 'Wapitihaar' or 'Elk Hair'. Decided by the reviewer (2026-10-29): Elchhaar."
         source "Rudi Heger: Natural Elk Hair" url="https://www.rudiheger.eu/natural-elk-hair.html"
         source "AOS: Wapsi Elk Body Hair - Wapiti-Hirschhaar" url="https://www.aos.cc/de/wapsi-elk-body-hair-elchhaar.html"
         source "Flyfishing Europe: Elchhaar (Elk Hair)" url="https://www.flyfishingeurope-shop.de/elchhaar-elk-hair.html"
@@ -236,7 +236,7 @@ materials {
         source "Flyfishing Europe: Sattelhecheln Strung (\"wichtigen Bestandteil vieler Salzwasserstreamer\")" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
     }
     noun foam "Foam" gender=n mass=#true genitive="Foams" {
-        note "Tyers write 'Foam', neuter (\"Nun wird das Foam zum Hakenöhr umgeklappt\"). 'Schaumstoff' is the German word and is just as clear; the reviewer may prefer it."
+        note "Tyers write 'Foam', neuter (\"Nun wird das Foam zum Hakenöhr umgeklappt\"). 'Schaumstoff' is the German word and is just as clear. Decided by the reviewer (2026-10-29): 'Foam'."
         source "Fliegenfischer-Forum: der 3. Fly-Swap (Foam-Fliegen) (\"Körper: Foam schwarz\")" url="https://www.fliegenfischer-forum.de/monspez8.html"
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Schaumstoffe\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
@@ -263,7 +263,7 @@ materials {
         source "Rudi Heger: Augen & Köpfe (\"Tungsten Coneheads geschlitzt\")" url="https://www.rudiheger.eu/zubehoer/fliegenbinden-werkzeuge/augen-koepfe.html"
     }
     noun dumbbell-eyes "Bleiauge" gender=n plural="Bleiaugen" {
-        note "Chosen: 'Bleiaugen', the shops' generic word for dumbbell eyes, used even for tungsten ones (AOS: \"Fulling Mill Tungsten Dumbbells Bleiaugen\"). Rejected: 'Hantelaugen', which I could not find as a product name ('Hantelform' only describes them), and 'Dumbbell Eyes', also common. Plural in use."
+        note "Decided by the reviewer (2026-10-29): 'Bleiaugen', the shops' generic word for dumbbell eyes, used even for tungsten ones (AOS: \"Fulling Mill Tungsten Dumbbells Bleiaugen\"). Rejected: 'Hantelaugen', which I could not find as a product name ('Hantelform' only describes them), and 'Dumbbell Eyes', also common. Plural in use."
         source "AOS: Bleiaugen, vernickelt (\"Bleiaugen sind unverzichtbar, wenn man Streamer ... auf Tiefe bringen möchte\")" url="https://www.aos.cc/de/bleiaugen-vernickelt.html"
         source "1000 Fliegen: Fish eyes (\"in einer besonders praktischen Hantelform\")" url="https://www.1000fliegen.de/fish-eyes"
     }
@@ -309,13 +309,13 @@ colours {
         source "Flyfishing Europe: Skalps, Sättel & Bälge (colour filter \"ginger\")" url="https://www.flyfishingeurope-shop.de/fliegenbinden/fliegenbindematerial/skalps-saettel-baelge.html"
     }
     adjective tan "hellbraun" {
-        note "Shops keep the English 'tan' after the noun ('Kaninchen Dubbing (Tan)'), but it can't be declined before one. 'hellbraun' is the plain German. 'sandfarben' or 'beige' would also fit."
+        note "Shops keep the English 'tan' after the noun ('Kaninchen Dubbing (Tan)'), but it can't be declined before one. 'hellbraun' is the plain German. 'sandfarben' or 'beige' would also fit. Decided by the reviewer (2026-10-29): 'hellbraun'."
     }
     adjective grizzly "Grizzly" compound=#true {
         source "Fliegenfischer-Forum: Bindeanleitung GM-Goldkopfbesen (\"Hechel: grössere Grizzly-Hahnenhechel\")" url="https://www.fliegenfischer-forum.de/fliegen/gmbesen.pdf"
     }
     adjective olive "olivfarben" {
-        note "Tyers write 'oliv' (\"Antron Dubbing oliv\"), which is not declined in standard German. 'olivfarben' is the declinable form closest to that. Rejected: 'olivgrün', because tyers' olive is not a green."
+        note "Tyers write 'oliv' (\"Antron Dubbing oliv\"), which is not declined in standard German. 'olivfarben' is the declinable form closest to that. Rejected: 'olivgrün', because tyers' olive is not a green. Decided by the reviewer (2026-10-29): 'olivfarben'."
     }
     adjective grey "grau"
     adjective dun "Dun" compound=#true {
@@ -332,7 +332,7 @@ colours {
     adjective bleached "gebleicht" {
         source "Fliegenfischer-Forum: Bindeanleitung Compara Zebra (\"gebleichtes Rehhaar\")" url="https://fliegenfischer-forum.de/fliegen1/24021701.pdf"
     }
-    adjective elk "Wapiti" compound=#true {
+    adjective elk "Elch" compound=#true {
         note "Natural shade of elk hair; see materials elk-hair."
     }
     adjective hares-ear "Hasenohr" compound=#true
@@ -364,7 +364,7 @@ colours {
     }
     adjective blue-dun "Blue-Dun" compound=#true
     adjective purple "violett" {
-        note "Rejected: 'lila' (not declined) and the English 'purple', which tyers also use. 'violett' is declinable and fits the dark shade (#4b2a6b)."
+        note "Rejected: 'lila' (not declined) and the English 'purple', which tyers also use. 'violett' is declinable and fits the dark shade (#4b2a6b). Decided by the reviewer (2026-10-29): 'violett'."
     }
     adjective orange "orangefarben" {
         note "'orange' is not declined in standard German (colloquially 'orangene'); 'orangefarben' is the standard declinable form."
@@ -373,7 +373,7 @@ colours {
         note "Not declined: 'die rosa Wolle'. 'pink' is also common among tyers."
     }
     adjective claret "weinrot" {
-        note "Tyers also keep 'claret' (\"Hennen Cape claret\"), which can't be declined; 'weinrot' is the German word."
+        note "Tyers also keep 'claret' (\"Hennen Cape claret\"), which can't be declined; 'weinrot' is the German word. Decided by the reviewer (2026-10-29): 'weinrot'."
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Coq de Leon" url="https://www.fliegenfischer-forum.de/coqdeleon.html"
     }
     adjective chartreuse "chartreuse" invariable=#true {
@@ -486,7 +486,7 @@ parts {
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
     }
     noun tail "Schwanz" gender=m plural="Schwänze" {
-        note "Dressings write both 'Schwanz' and 'Schwänzchen'. 'Schwanz' fits a streamer's marabou tail as well as a dry fly's; 'Schwänzchen' is a fine alternative."
+        note "Dressings write both 'Schwanz' and 'Schwänzchen'. 'Schwanz' fits a streamer's marabou tail as well as a dry fly's; 'Schwänzchen' is a fine alternative. Decided by the reviewer (2026-10-29): 'Schwanz'."
         source "Fliegenfischer-Forum: Alte Klassiker (\"Schwanz: graue Hechelfibern\")" url="https://www.fliegenfischer-forum.de/klassike.html"
     }
     noun tails "Schwänze" gender=m plural="Schwänze"
@@ -559,7 +559,7 @@ words {
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Klassische Nassfliegen" url="https://www.fliegenfischer-forum.de/monspe48.html"
     }
     noun turn "Windung" gender=f plural="Windungen" {
-        note "Chosen: 'Windung'. 'Wicklung' is just as common, especially for thread (\"Grundwicklung\", \"mit achter Wicklungen\"); either reads naturally."
+        note "Decided by the reviewer (2026-10-29): 'Windung' with the verb 'winden' for turns of material (\"In ca. 4 – 5 Windungen nach vorne führen\"); 'Wicklung' is mostly said of thread (\"Grundwicklung\", \"mit achter Wicklungen\"), so it stays for thread."
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020 (\"Ich mache 6 bis 7 Windungen.\")" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
         source "Fliegenfischer-Forum: Fly-Swap No.35 (\"einige feste Windungen mit der Bindeseide\")" url="https://www.fliegenfischer-forum.de/monspe87.html"
     }
@@ -594,9 +594,10 @@ words {
         note "Same word as bunch: German tyers spin 'Büschel' of deer hair too."
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Reh, Hirsch, Ren (\"Ein Büschel Rehhaar nach hinten oben auf den Haken binden\")" url="https://www.fliegenfischer-forum.de/flyswap68.html"
     }
-    noun noodle "Rolle" gender=f plural="Rollen" {
-        note "Tyers speak of 'dünne Dubbingrollen' or of dubbing rolled onto the thread. 'Dubbingwurst' is colloquial and did not turn up on a page I could check."
-        source "Fliegenfischer-Forum: Thread 'Verschiedene dubbing Methoden' (\"dünne und gleichmäßige Rollen hinzubekommen\")" url="https://www.fliegenfischer-forum.de/flyfishing/viewtopic.php?t=275210"
+    noun noodle "Strang" gender=m plural="Stränge" {
+        note "Decided by the reviewer (2026-10-29): 'Strang', twisted ('gezwirbelt') onto the thread. Rejected: 'Rolle' (found once: \"dünne und gleichmäßige Rollen hinzubekommen\") and 'Dubbingwurst', which did not turn up on a page I could check."
+        source "Forelle & Äsche: Fliegenbinden, Dubbing in 12 Schritten, Teil 8 (\"Mit dem Strang wird nun der Körper geformt.\")" url="https://www.forelleundaesche.com/fliegenbinden-dubbing-in-12-schritten-teil-8/"
+        source "Leidenschaft Meerforelle: Forum 'Dubbingschlaufe!!' (\"zwirbelst zwischen zwei Fingern schonmal einen dünnen Strang\")" url="https://www.leidenschaft-meerforelle.de/forum/viewtopic.php?t=10246"
     }
     noun body "Körper" gender=m plural="Körper" {
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020 (\"Den Körper mit Bisamdubbing dünn formen\")" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
