@@ -83,3 +83,34 @@ export function catalogNeeds(recipes: Recipe[]): Map<MaterialKind, string[]> {
   }
   return new Map([...byKind].map(([k, colors]) => [k, [...colors].sort()]));
 }
+
+export interface ShoppingItem {
+  need: Need;
+  /** Not owned at all, or owned in another colour that could stand in. */
+  status: "missing" | "substitute";
+  /** The flies that need it. */
+  flies: Recipe[];
+}
+
+/**
+ * What to buy to tie these flies: their materials merged (one line per material and colour,
+ * with the flies needing it), less what is owned. Missing ones first, then those owned in
+ * another colour; by material name within each.
+ */
+export function shoppingList(recipes: Recipe[], owned: Set<string>): ShoppingItem[] {
+  const items = new Map<string, ShoppingItem>();
+  for (const r of recipes) {
+    for (const n of needs(r)) {
+      const status = match(n, owned);
+      if (status === "have") continue;
+      const key = inventoryKey(n);
+      const item = items.get(key) ?? { need: n, status, flies: [] };
+      if (!item.flies.includes(r)) item.flies.push(r);
+      items.set(key, item);
+    }
+  }
+  const rank = (i: ShoppingItem) => (i.status === "missing" ? 0 : 1);
+  return [...items.values()].sort(
+    (a, b) => rank(a) - rank(b) || MATERIALS[a.need.kind].name.localeCompare(MATERIALS[b.need.kind].name) || a.need.color.localeCompare(b.need.color),
+  );
+}

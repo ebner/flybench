@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { bestCoverage, catalogNeeds, coverage, inventoryKey, match, missingKinds, needs } from "./inventory";
+import { bestCoverage, catalogNeeds, coverage, inventoryKey, match, missingKinds, needs, shoppingList } from "./inventory";
 
 const recipe = (() => {
   const r = loadRecipe(`
@@ -85,5 +85,18 @@ steps {
 
   it("collects the catalog's materials by kind", () => {
     expect(catalogNeeds([recipe]).get("wool")).toEqual(["red"]);
+  });
+});
+
+describe("shopping list", () => {
+  it("merges what the flies need, less what is owned, missing first", () => {
+    const other = { ...recipe, id: "t2", materials: recipe.materials.map((m) => (m.id === "tag" ? { ...m, color: "yellow" as const } : m)) };
+    const list = shoppingList([recipe, other], new Set(["cock-hackle:brown", "wool:green"]));
+    expect(list.map((i) => `${inventoryKey(i.need)} ${i.status} ${i.flies.map((f) => f.id).join("+")}`)).toEqual([
+      "peacock-herl:#26341a missing t+t2",
+      "wool:red substitute t",
+      "wool:yellow substitute t2",
+    ]);
+    expect(shoppingList([recipe], new Set(needs(recipe).map(inventoryKey)))).toEqual([]);
   });
 });

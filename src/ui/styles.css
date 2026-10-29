@@ -1542,6 +1542,19 @@ select {
   margin: 2.5rem 0 0;
 }
 
+.shopping {
+  max-width: 44rem;
+}
+
+.shopping-list {
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.shopping h3 {
+  margin: 1.2rem 0 0;
+}
+
 .plate-missing-material {
   margin: 0.2rem 0 0;
   font-size: var(--step--1);
