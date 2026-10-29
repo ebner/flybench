@@ -113,17 +113,23 @@ const THREAD_DIAMETER_MM: Record<Recipe["thread"]["size"], number> = {
  * Tubes have no gape, so their unit is four times their outer diameter, about the gape of a
  * hook of the same size. A Waddington's twisted shank is taken as 2 mm wide.
  */
-// Assumption: typical outer diameters in mm, liner included for plastic tubes.
-const TUBES: Record<TubeModelId, { label: string; diameter: number; color: string; kind: "tube" | "waddington" }> = {
+// Assumption: typical outer diameters in mm, liner included for plastic tubes; copper and brass
+// tubes are the heavy ones, which sink a fly like weighting.
+const TUBES: Record<TubeModelId, { label: string; diameter: number; color: string; kind: "tube" | "waddington"; heavy?: boolean }> = {
   "tube-plastic": { label: "Plastic tube", diameter: 3, color: "#2a2a2a", kind: "tube" },
   "tube-aluminium": { label: "Aluminium tube", diameter: 3.5, color: "#c9ccd1", kind: "tube" },
-  "tube-copper": { label: "Copper tube", diameter: 3.5, color: "#b87333", kind: "tube" },
-  "tube-brass": { label: "Brass tube", diameter: 3.5, color: "#c9a23a", kind: "tube" },
+  "tube-copper": { label: "Copper tube", diameter: 3.5, color: "#b87333", kind: "tube", heavy: true },
+  "tube-brass": { label: "Brass tube", diameter: 3.5, color: "#c9a23a", kind: "tube", heavy: true },
   "tube-needle": { label: "Needle tube", diameter: 1.8, color: "#c9ccd1", kind: "tube" },
   waddington: { label: "Waddington shank", diameter: 2, color: "#3a2e22", kind: "waddington" },
 };
 
 const DEFAULT_TREBLE = 12;
+
+/** A heavy (copper or brass) tube, which sinks the fly tied on it. */
+export function heavyTube(hook: Recipe["hook"]): boolean {
+  return isTube(hook.model) && TUBES[hook.model].heavy === true;
+}
 
 /** Millimetres in one unit (one gape) of the recipe's hook or tube. */
 export function unitMm(hook: Recipe["hook"]): number {

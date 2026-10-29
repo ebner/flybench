@@ -1,5 +1,6 @@
 import { MATERIALS } from "../recipe/materials";
 import type { Recipe } from "../recipe/schema";
+import { heavyTube } from "./hook";
 
 /** Where a fly fishes: on the surface, in the film, just under it, or deep. */
 export type Depth = "surface" | "film" | "below" | "deep";
@@ -17,7 +18,7 @@ export interface Fishing {
  * weighting takes a nymph deep), unless the recipe says so with `fishes`.
  */
 // Assumption: dry flies and terrestrials float, emergers hang in the film, wet flies and
-// unweighted nymphs fish just under the surface, weighted ones deep; streamers and saltwater
+// unweighted nymphs fish just under the surface, weighted ones (or on a heavy tube) deep; streamers and saltwater
 // flies are stripped, salmon flies swung.
 export function fishing(recipe: Recipe): Fishing {
   const motion = recipe.type === "salmon" ? "swing" : recipe.type === "streamer" || recipe.type === "saltwater" ? "swim" : "drift";
@@ -27,8 +28,10 @@ export function fishing(recipe: Recipe): Fishing {
 }
 
 function depthFor(recipe: Recipe): Depth {
-  const weighted = recipe.steps.some((s) => s.op === "weight" || s.op === "slide-bead") ||
-    recipe.materials.some((m) => MATERIALS[m.kind].archetype === "eyes" && m.kind !== "mono-eyes");
+  const weighted =
+    recipe.steps.some((s) => s.op === "weight" || s.op === "slide-bead") ||
+    recipe.materials.some((m) => MATERIALS[m.kind].archetype === "eyes" && m.kind !== "mono-eyes") ||
+    heavyTube(recipe.hook);
   switch (recipe.type) {
     case "dry":
     case "terrestrial":
@@ -58,7 +61,7 @@ export function fishingText(f: Fishing): string {
         ? "It hangs in the surface film like an insect hatching: its body down in the water, its wing or post above it."
         : "It floats low, half sunk in the surface film.",
     below: "It fishes just under the surface, where its soft fibres move with the water.",
-    deep: "Weighted, it sinks and fishes deep, near the bottom.",
+    deep: "It sinks and fishes deep, near the bottom.",
   }[f.depth];
   const how =
     f.motion === "swim"

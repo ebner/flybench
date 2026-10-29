@@ -137,6 +137,24 @@ export function Viewer({
     scene.current?.setFollow(follow);
   }, [follow]);
 
+  // The water, in the theme's colours. Before the fly is turned, timed and given its natural, so
+  // that leaving the water clears its transform first and they are placed on the fly at the vise.
+  useEffect(() => {
+    const s = scene.current;
+    if (!s) return;
+    const apply = () =>
+      s.setWater(
+        inWater && water
+          ? { fishing: water, view: inWater, still, look: WATER_LOOKS[document.documentElement.dataset.theme === "dark" ? "dark" : "light"] }
+          : null,
+      );
+    apply();
+    if (!inWater) return;
+    const watch = new MutationObserver(apply);
+    watch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => watch.disconnect();
+  }, [inWater, still, water, build, pointUp, turned]);
+
   useEffect(() => {
     // In the water a point-up fly is always shown the way it swims.
     scene.current?.setTurnedOver(pointUp && (turned || inWater !== null));
@@ -157,28 +175,8 @@ export function Viewer({
     scene.current?.setNatural(shown?.natural ?? null, shown?.length, shown?.at);
   }, [natural?.natural, natural?.length, natural?.at, build, pointUp, turned, inWater]);
 
-  // The water, after the fly is placed, in the theme's colours.
-  useEffect(() => {
-    const s = scene.current;
-    if (!s) return;
-    const apply = () =>
-      s.setWater(
-        inWater && water
-          ? { fishing: water, view: inWater, still, look: WATER_LOOKS[document.documentElement.dataset.theme === "dark" ? "dark" : "light"] }
-          : null,
-      );
-    apply();
-    if (!inWater) return;
-    const watch = new MutationObserver(apply);
-    watch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => watch.disconnect();
-  }, [inWater, still, water, build, pointUp, turned]);
-
   const openWater = (view: "side" | "below" | null) => {
-    if (view && !inWater) {
-      setProportions(false);
-      onFollowChange(false);
-    }
+    if (view && !inWater) setProportions(false);
     if (view) setWaterView(view);
     if (!view !== !inWater) onWater?.(view !== null);
   };

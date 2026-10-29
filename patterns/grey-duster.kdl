@@ -4,6 +4,8 @@ id grey-duster
 name "Grey Duster"
 aliases "Grey Dusty" "Duster"
 type dry
+// Without a tail it hangs in the film (see fishing).
+fishes film
 imitates mayfly attractor
 naturals mayfly-emerger mayfly-dun midge-adult
 difficulty beginner
