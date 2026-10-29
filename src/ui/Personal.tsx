@@ -133,7 +133,11 @@ export function FlyBox() {
                     link={href.fly(v.recipe.id, undefined, undefined, v.colours)}
                     note={`${v.recipe.variant ? `${v.recipe.variant}. ` : ""}${v.text}`}
                     action={
-                      <button className="link-button plate-remove" onClick={() => box.set(v.value, false)}>
+                      <button
+                        className="link-button plate-remove"
+                        aria-label={`Remove ${v.recipe.name} in your colours (${v.text.toLowerCase()}) from your fly box`}
+                        onClick={() => box.set(v.value, false)}
+                      >
                         Remove from your fly box
                       </button>
                     }
@@ -152,7 +156,7 @@ export function FlyBox() {
 /** What the flies in the box still need, merged across them, less what the Materials page says is owned. */
 function ShoppingList({ flies }: { flies: { recipe: Recipe; name: string }[] }) {
   const owned = useStoredSet(INVENTORY_KEY);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<"copied" | "unavailable" | null>(null);
   const list = shoppingList(
     flies.map((f) => f.recipe),
     owned.values,
@@ -204,16 +208,19 @@ function ShoppingList({ flies }: { flies: { recipe: Recipe; name: string }[] }) 
           <p>
             <button
               className="box-toggle"
-              onClick={() =>
-                navigator.clipboard?.writeText(text).then(
-                  () => setCopied(true),
-                  () => setCopied(false),
-                )
-              }
+              onClick={() => {
+                if (!navigator.clipboard) return setCopied("unavailable");
+                navigator.clipboard.writeText(text).then(
+                  () => setCopied("copied"),
+                  () => setCopied("unavailable"),
+                );
+              }}
             >
               Copy the list
             </button>{" "}
-            <span aria-live="polite">{copied ? "Copied." : ""}</span>
+            <span aria-live="polite">
+              {copied === "copied" ? "Copied." : copied === "unavailable" ? "This browser doesn't allow copying here: select the list and copy it." : ""}
+            </span>
           </p>
         </>
       )}

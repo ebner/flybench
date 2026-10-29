@@ -1,6 +1,7 @@
 import type { Natural } from "../recipe/natural";
 import { isTube, MONTHS, type Recipe, type SPECIES } from "../recipe/schema";
 import { fishing } from "../tying/fishing";
+import { hookModel } from "../tying/hook";
 import { activeIn, matchingHookSizes, type Region } from "./naturals";
 
 /** A fly box for a trip: where, when, on what water and for what fish. */
@@ -32,7 +33,7 @@ const FRESHWATER: Species[] = ["trout", "grayling", "salmon", "char", "bass", "p
  * Whether a fly is fished on this water.
  */
 // Assumption: on the coast, saltwater flies, flies imitating prawns and sea fish, and the sea
-// trout's wet flies and streamers that imitate small fish or shrimps; salmon flies (prawn-like as
+// trout's flies that imitate small fish or shrimps (a Gammarus too); salmon flies (prawn-like as
 // some are) stay in the rivers. On rivers and lakes, no saltwater fly unless it is tied for the
 // freshwater fish chosen (a Clouser for trout or pike); salmon flies only on rivers.
 function fitsWater(r: Recipe, water: Water, species: Species): boolean {
@@ -42,9 +43,7 @@ function fitsWater(r: Recipe, water: Water, species: Species): boolean {
     return (
       saltwater ||
       r.naturals.some((n) => COASTAL_NATURALS.has(n)) ||
-      (r.species.includes("sea-trout") &&
-        (r.type === "wet" || r.type === "streamer") &&
-        r.imitates.some((i) => i === "baitfish" || i === "crustacean"))
+      (r.species.includes("sea-trout") && r.imitates.some((i) => i === "baitfish" || i === "crustacean"))
     );
   }
   if (saltwater && !(FRESHWATER.includes(species) && r.species.includes(species))) return false;
@@ -71,15 +70,18 @@ export function suggestBox(recipes: Recipe[], naturals: Natural[], trip: Trip): 
   const scored = recipes
     .filter((r) => r.variantOf === undefined && r.species.includes(trip.species) && fitsWater(r, trip.water, trip.species))
     .flatMap((r) => {
-      const matches = r.naturals.flatMap((id) => about.get(id) ?? []);
+      // Sea fish and prawns are about only on the coast.
+      const matches = r.naturals.flatMap((id) => (trip.water !== "coast" && COASTAL_NATURALS.has(id) ? [] : (about.get(id) ?? [])));
       const inSeason = r.season.length === 0 || r.season.includes(month);
       if (matches.length === 0 && !inSeason) return [];
       const score = (matches.length > 0 ? (about.has(r.naturals[0]!) ? 3 : 2) : 0) + (inSeason ? 1 : 0);
       let sizes: number[] = [];
       if (!isTube(r.hook.model) && r.hook.size !== undefined) {
         const near = nearSizes(r.hook.size);
-        // Sized for its main natural of those about.
-        const matching = matches.length ? matchingHookSizes(matches[0]!).filter((s) => near.includes(s)) : [];
+        // Sized for its main natural of those about, on the fly's own hook (a long shank matches
+        // a long body on a smaller size).
+        const shank = hookModel(r.hook).shankLength;
+        const matching = matches.length ? matchingHookSizes(matches[0]!, shank).filter((s) => near.includes(s)) : [];
         sizes = matching.length ? matching.sort((a, b) => b - a) : [r.hook.size];
       }
       return [{ suggestion: { recipe: r, matches, sizes }, score }];

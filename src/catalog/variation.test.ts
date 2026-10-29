@@ -19,6 +19,15 @@ describe("colour variations", () => {
     expect(parseColours(`${tag}:#ff0000`, recipe)).toEqual({});
     if (own) expect(parseColours(`${tag}:${own}`, recipe)).toEqual({});
     expect(parseColours("", recipe)).toEqual({});
+    // Gold wire is gold by the catalog's default: choosing gold for it changes nothing.
+    const wire = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/partridge-and-orange.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("partridge-and-orange");
+      return r.recipe;
+    })();
+    const gold = wire.materials.find((m) => m.kind === "gold-wire" && m.color === undefined);
+    expect(gold).toBeDefined();
+    expect(parseColours(`${gold!.id}:gold`, wire)).toEqual({});
   });
 
   it("writes the parts in the recipe's order", () => {

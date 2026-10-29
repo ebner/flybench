@@ -48,13 +48,24 @@ describe("a fly box for a trip", () => {
     const coast = ids({ region: "southern-sweden", month: 3, water: "coast", species: "sea-trout" });
     expect(coast).toContain("pattegrisen");
     expect(coast).not.toContain("adams");
-    // A Clouser is tied for trout too, so it fishes a river for trout.
-    expect(ids({ region: "central-europe", month: 7, water: "river", species: "trout" })).toContain("clouser-minnow");
+    expect(coast).toContain("gammarus");
+    // A Clouser is tied for trout too, so it fishes a river for trout, but sea fish are not
+    // about there: it is in season, not matching a hatch.
+    const river = suggestBox(recipes, naturals, { region: "central-europe", month: 7, water: "river", species: "trout" });
+    const clouser = river.find((s) => s.recipe.id === "clouser-minnow")!;
+    expect(clouser.matches.map((n) => n.id)).not.toContain("marine-baitfish");
   });
 
   it("leaves out flies out of season with nothing they imitate about", () => {
     const january = ids({ region: "northern-scandinavia", month: 0, water: "river", species: "trout" });
     expect(january).not.toContain("elk-hair-caddis");
+  });
+
+  it("sizes a fly for its natural on its own hook", () => {
+    // A long-shank stonefly nymph is matched on its long shank, not a dry fly's.
+    const may = suggestBox(recipes, naturals, { region: "northern-usa", month: 4, water: "river", species: "trout" });
+    const prince = may.find((s) => s.recipe.id === "prince-nymph");
+    if (prince) expect(Math.max(...prince.sizes)).toBeGreaterThanOrEqual(10);
   });
 
   it("writes sizes as a range", () => {

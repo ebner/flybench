@@ -140,7 +140,7 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     - Shopping list: the materials still missing for chosen flies or a fly box, merged
       across patterns, with substitutes, checked against the Materials page.
     - Trip fly box: water, month, species and region give a suggested box of patterns and
-      sizes, from the hatch calendar and the materials at hand.
+      sizes, from the hatch calendar, noting what the materials at hand still lack.
     - Tying log and progress: flies tied (count, size, notes), learning-path progress and
       practised techniques, kept in the browser.
 12. Swedish and German. The whole site, the generated step texts included.

@@ -82,11 +82,13 @@ export function legacyRoute(hash: string): Route | null {
 export const href = {
   gallery: (query = "") => (query ? `${BASE}?${query}` : BASE),
   fly: (id: string, step?: number, size?: number, colours?: string) => {
-    const query = new URLSearchParams({
-      ...(step ? { step: String(step) } : {}),
-      ...(size ? { size: String(size) } : {}),
-      ...(colours ? { colours } : {}),
-    }).toString();
+    // The colours ("body:yellow,tail:red") are written as they are, readable in a shared link.
+    const query = [
+      new URLSearchParams({ ...(step ? { step: String(step) } : {}), ...(size ? { size: String(size) } : {}) }).toString(),
+      colours ? `colours=${colours.replace(/[^a-z0-9:,-]/g, "")}` : "",
+    ]
+      .filter(Boolean)
+      .join("&");
     return `${BASE}fly/${encodeURIComponent(id)}/${query ? `?${query}` : ""}`;
   },
   techniques: () => `${BASE}techniques/`,
