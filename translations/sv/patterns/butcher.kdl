@@ -1,0 +1,37 @@
+id butcher
+status draft
+
+// en description: A red tail, a flat silver tinsel body with a wire rib, a black hackle throat and paired blue-black mallard wing slips.
+description "En röd stjärt, en kropp av platt silvertinsel med trådribb, ett skägg av svart hackel och ett par vingsektioner av blåsvart gräsand."
+
+// en history: First called Moon's Fly. Smedley (Fly Patterns and Their Origins) says it came from John Jewhurst of Tunbridge, Kent, and that William Blacker renamed it about 1838 after the trade of Mr Moon, a butcher who favoured it. Other accounts make Moon and Jewhurst joint inventors, place them in Tunbridge Wells, or give 1836. The colours as blood, blade and apron are a popular story; Timo Kontio calls it a theory.
+history """
+    Hette först Moon's Fly. Enligt Smedley (Fly Patterns and Their Origins) kom den från John Jewhurst i Tunbridge i Kent, och William Blacker döpte om den omkring 1838 efter yrket hos en herr Moon, en slaktare som gärna fiskade med den. Andra berättelser gör Moon och Jewhurst till upphovsmän tillsammans, förlägger dem till Tunbridge Wells eller anger 1836. Att färgerna skulle stå för blod, kniv och förkläde är en populär historia; Timo Kontio kallar det en teori.
+    """
+
+// en fishing: A winged wet fly for rivers and still waters. Global FlyFisher's video puts its close relative, the Bloody Butcher, on a middle dropper or the point of a team of wets, on lochs and lakes as well as rivers, and ties it bigger for sea trout, even as a streamer. Fly sellers describe its silver body and dark wing as suggesting a small fish.
+fishing """
+    En vingad våtfluga för strömmande och stilla vatten. I Global FlyFishers video sitter dess nära släkting Bloody Butcher på en mellersta dropper eller som spetsfluga i ett tackel med flera våtflugor, på skotska lochar och sjöar lika väl som i älvar, och binds större för havsöring, till och med som streamer. Flugsäljare beskriver den silvriga kroppen och den mörka vingen som en antydan om en liten fisk.
+    """
+
+labels {
+    // en tail: Red-dyed duck quill slip
+    tail "Sektion av rödfärgad andvingpenna"
+    // en throat: Black hen hackle fibres
+    throat "Svarta hönshackelfibrer"
+    // en wing: Blue-black mallard secondary slips
+    wing "Sektioner av blåsvarta sekundärpennor från gräsand"
+}
+
+notes {
+    // en step 3 (tie-in tail): A narrow slip, on top at the bend.
+    step 3 "En smal sektion, ovanpå vid krokböjen."
+    // en step 7 (wind body): Touching turns, smooth and untapered.
+    step 7 "Täta varv, slätt och utan avsmalning."
+    // en step 11 (tie-in throat): Reaching about to the hook point.
+    step 11 "Når ungefär till krokspetsen."
+    // en step 12 (tie-in wing): Matching left and right slips, concave sides together, set on top with a pinch-and-loop.
+    step 12 "En vänster- och en högersektion som matchar varandra, med de konkava sidorna mot varandra, satta ovanpå med nypgrepp (pinch and loop)."
+    // en step 13 (whip-finish): A smooth, tapered black head.
+    step 13 "Ett slätt, avsmalnande svart huvud."
+}

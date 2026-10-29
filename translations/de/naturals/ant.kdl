@@ -1,0 +1,24 @@
+id ant
+status draft
+
+// en name: Ant
+name "Ameise"
+
+// en description: A glossy black worker: head, thorax and a large rounded gaster joined by a thin waist. Ants fall onto the water on warm days and float half sunk in the film; in late summer winged swarms come down in numbers.
+description "Eine glänzend schwarze Arbeiterin: Kopf, Thorax und ein großer, rundlicher Hinterleib, der über eine dünne Taille ansetzt. An warmen Tagen fallen Ameisen aufs Wasser und treiben halb eingesunken im Oberflächenfilm; im Spätsommer gehen Schwärme geflügelter Ameisen in großer Zahl nieder."
+
+// en examples: black garden ant (Lasius niger)
+examples "Schwarze Wegameise (Lasius niger)"
+
+hatches {
+    // en southern-sweden note: Estimate; flying ants July–August.
+    southern-sweden note="Schätzung; Flugameisen Juli–August."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Schätzung."
+    // en british-isles note: Estimate; flying-ant swarms July–August (Wikipedia).
+    british-isles note="Schätzung; Schwärme von Flugameisen Juli–August (Wikipedia)."
+    // en central-europe note: Estimate; flights July–August (Wikipedia).
+    central-europe note="Schätzung; Schwärmflüge Juli–August (Wikipedia)."
+    // en northern-usa note: Estimate from June; ants from mid-July on the Madison (Montana Angler); flights usually in autumn (Wikipedia).
+    northern-usa note="Schätzung ab Juni; Ameisen ab Mitte Juli am Madison (Montana Angler); Schwärmflüge meist im Herbst (Wikipedia)."
+}

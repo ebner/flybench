@@ -1,0 +1,26 @@
+id mayfly-nymph-burrowing
+status draft
+
+// en name: Mayfly nymph, burrowing
+name "Dagsländenymf, grävande"
+
+// en description: The big nymph of the mayfly, living for one to three years in burrows in sand and silt, waving its feathery gills over its back. It rises to the surface to hatch.
+description "Sanddagsländornas stora nymf, som lever i ett till tre år i gångar i sand och slam och viftar med de fjäderlika gälarna över ryggen. Den stiger till ytan för att kläckas."
+
+// en examples: the mayfly (Ephemera danica, E. vulgata)
+examples "sanddagsländor (Ephemera danica, E. vulgata)"
+
+hatches {
+    // en southern-sweden note: E. vulgata in May; Scandinavian peak usually the first week of June (Ahrex).
+    southern-sweden note="E. vulgata i maj; i Skandinavien är toppen oftast första veckan i juni (Ahrex)."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles time: afternoon
+    // en british-isles note: Main hatch from mid-May to the first week of June (First Nature).
+    british-isles time="på eftermiddagen" note="Huvudkläckningen från mitten av maj till första veckan i juni (First Nature)."
+    // en central-europe note: Main hatch; egg-laying females May–September (Naturschutzbund).
+    central-europe note="Huvudkläckningen; äggläggande honor i maj–september (Naturschutzbund)."
+    // en northern-usa time: afternoon
+    // en northern-usa note: Brown and green drakes (Troutnut; Beaverkill).
+    northern-usa time="på eftermiddagen" note="Brown drake och green drake (Troutnut; Beaverkill)."
+}

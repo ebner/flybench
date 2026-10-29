@@ -1,0 +1,50 @@
+id thread-frenchie
+status draft
+
+// en description: A slotted tungsten bead on a jig hook, a sparse Coq de León tail, a slim thread body ribbed with fine wire, and a collar of pink Ice Dub behind the bead.
+description "En slitsad tungstenkula på jiggkrok, en gles stjärt av coq de León, en smal kropp av bindtråd ribbad med tunn metalltråd, och en krage av rosa Ice Dub bakom kulan."
+
+// en history: The Frenchie is a pared-down Pheasant Tail Nymph, without wing case or legs and with a bright hot spot behind the bead. Richard Anderson traces it to a French angler who won a world championship with such a fly; who tied the first is not recorded. By Lance Egan's account, the early Frenchie had red thread, a pheasant tail tail and body, a copper wire rib and a hot spot thorax. His later Frenchie takes a tail of Coq de León, which is stronger, and the Thread Frenchie, one of his staple nymphs, also trades the pheasant tail body for slim thread. It is a fly for tying in batches, in many colours.
+history """
+    Frenchie är en avskalad Pheasant Tail Nymph, utan vingsäck och ben och med en lysande
+    hotspot bakom kulan. Richard Anderson härleder den till en fransk fiskare som vann ett
+    världsmästerskap med en sådan fluga; vem som band den första finns inte nedtecknat.
+    Enligt Lance Egan hade den tidiga Frenchie röd bindtråd, stjärt och kropp av
+    fasanstjärt, ribb av koppartråd och en thorax som hotspot. Hans senare Frenchie får en
+    stjärt av coq de León, som är starkare, och Thread Frenchie, en av hans basnymfer, byter
+    dessutom ut kroppen av fasanstjärt mot smal bindtråd. Det är en fluga att binda i
+    omgångar, i många färger.
+    """
+
+// en fishing: Slim and dense, it gets down fast. Fish it on the point or the dropper of a two-nymph rig, on a Euro-nymph rig, under a hopper in summer, or below an indicator on lakes. The bead turns a jig hook point up.
+fishing """
+    Smal och kompakt sjunker den snabbt. Fiska den som spetsfluga eller på droppern i ett
+    tackel med två nymfer, i ett euronymftackel, under en gräshoppa på sommaren, eller under
+    en indikator i sjöar. Kulan vänder jiggkroken med krokspetsen uppåt.
+    """
+
+labels {
+    // en tail: Coq de León fibres, dark pardo
+    tail "Coq de León-fibrer, mörk pardo"
+    // en rib: Fine copper-brown wire
+    rib "Tunn kopparbrun metalltråd"
+    // en hotspot: UV pink Ice Dub
+    hotspot "Ice Dub, UV pink"
+}
+
+notes {
+    // en step 1 (slide-bead bead): Slot towards the point.
+    step 1 "Slitsen mot krokspetsen."
+    // en step 4 (tie-in tail): A sparse pinch, tips evened; bind the butts forward to the bead so there is no bump.
+    step 4 "En gles nypa med jämnade spetsar; bind rotändarna framåt ända till kulan, så att det inte blir någon knöl."
+    // en step 5 (tie-in rib): Bound down the back of the shank.
+    step 5 "Inbunden längs krokskaftets baksida."
+    // en step 8 (wrap-thread): A slim, slightly tapered thread body.
+    step 8 "En smal, lätt avsmalnande kropp av bindtråd."
+    // en step 9 (wind rib): About four turns under tension; helicopter the wire off.
+    step 9 "Ungefär fyra varv under spänning; helikoptra av tråden."
+    // en step 11 (dub hotspot): A small pinch, dubbed tight, a few turns against the bead.
+    step 11 "En liten nypa, hårt dubbad, några varv mot kulan."
+    // en step 12 (whip-finish): So a band of the hot-spot thread shows at the bead.
+    step 12 "Så att ett band av hotspot-tråden syns vid kulan."
+}

@@ -1,0 +1,46 @@
+id pats-rubber-legs
+status draft
+
+// en description: A weighted body of black and coffee variegated chenille with rubber-leg tails and antennae and three pairs of rubber legs.
+description "En förtyngd kropp av svart- och kaffebrunmelerad chenille, med stjärtspröt och antenner av gummiben och tre par gummiben."
+
+// en history: Tied by Pat Bennett, a guide at Hyde Outfitters in Island Park, Idaho, after big rubber-legged stonefly patterns such as the Girdle Bug. The date isn't recorded. Black and coffee chenille is a favourite of guides across the Rockies, who fish it all year.
+history """
+    Bunden av Pat Bennett, guide hos Hyde Outfitters i Island Park, Idaho, efter förebild av
+    stora bäcksländemönster med gummiben, som Girdle Bug. Årtalet finns inte nedtecknat.
+    Svart och kaffebrun chenille är en favorit bland guider i hela Klippiga bergen, som
+    fiskar den året runt.
+    """
+
+// en fishing: A guide's searching nymph, for anywhere big stoneflies live: empty nymph shucks on the rocks are a good sign. Fish it deep and bump it along the bottom and into pools.
+fishing """
+    En guidens avsökande nymf, för alla vatten där det finns stora bäcksländor: tomma
+    nymfskal på stenarna är ett gott tecken. Fiska den djupt och låt den studsa fram längs
+    botten och ner i höljorna.
+    """
+
+labels {
+    // en antennae: Black Spanflex (antennae)
+    antennae "Svart Spanflex (antenner)"
+    // en tails: Black Spanflex (tails)
+    tails "Svart Spanflex (stjärtspröt)"
+    // en body: Black and coffee variegated chenille, medium
+    body "Svart- och kaffebrunmelerad chenille, medium"
+    // en legs-rear: Black Spanflex (legs)
+    legs-rear "Svart Spanflex (ben)"
+    // en legs-middle: Black Spanflex (legs)
+    legs-middle "Svart Spanflex (ben)"
+    // en legs-front: Black Spanflex (legs)
+    legs-front "Svart Spanflex (ben)"
+}
+
+notes {
+    // en step 3 (tie-in antennae): Splayed; trim to about the tail length.
+    step 3 "Utspretade; klipp dem till ungefär stjärtens längd."
+    // en step 5 (tie-in tails): They splay naturally.
+    step 5 "De spretar ut av sig själva."
+    // en step 8 (tie-in legs-rear): A turn of the strand round shank and finger, locked with resin; snip the loop.
+    step 8 "Ett varv av strået runt krokskaftet och fingret, låst med resin; klipp upp öglan."
+    // en step 14 (wind body): Forward between the legs.
+    step 14 "Framåt mellan benen."
+}

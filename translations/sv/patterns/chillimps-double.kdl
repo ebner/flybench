@@ -1,0 +1,44 @@
+id chillimps-double
+status draft
+
+// en variant: On a double
+variant "På dubbelkrok"
+
+// en description: Orange hackle-tip tail, a slim orange body ribbed with oval gold, an orange palmer hackle and a slightly longer orange front hackle.
+description "Stjärt av orange hackelspetsar, en smal orange kropp med ribb av oval guldtinsel, ett orange kroppshackel och ett något längre orange framhackel."
+
+// en history: Tied by Rolf Vilhelmsson (Ahrex and Michael Jensen spell it Vilhelmson) at the Valhalla inn by the Mörrum: in 1942 according to Ahrex, in the early 1940s according to a reader's account on GlobalFlyFisher. That account has Olle Törnblom and Sven Hallman there to see it, and Törnblom refining it later; Michael Jensen names all three as its makers. Vilhelmsson chose a strong colour because the river, clear as it is, is always tinged brown. The name stories are anecdote: one says it was meant to name the colour of a shrimp and came out as pidgin English after a whisky or two, with the spelling fixed by a hard-to-read last letter in the fishing journal. ABU brought out a version with Optic eyes in 1969, by which time the plain fly was famous on the Mörrum.
+history """
+    Bunden av Rolf Vilhelmsson (Ahrex och Michael Jensen stavar Vilhelmson) på värdshuset Valhalla vid Mörrumsån: 1942 enligt Ahrex, i början av 1940-talet enligt en läsares berättelse på GlobalFlyFisher. Enligt den berättelsen var Olle Törnblom och Sven Hallman med och såg den bli till, och Törnblom förfinade den senare; Michael Jensen nämner alla tre som dess upphovsmän. Vilhelmsson valde en stark färg eftersom ån, hur klar den än är, alltid har en brunaktig ton. Historierna om namnet är anekdoter: enligt en av dem skulle det beskriva färgen på en räka men blev till pidginengelska efter en whisky eller två, och stavningen avgjordes av en svårläst sista bokstav i fiskejournalen. ABU gav 1969 ut en version med Optic-ögon, och då var den enkla flugan redan berömd i Mörrum.
+    """
+
+// en fishing: A salmon and sea-trout fly, fished like any wet fly for salmon. Ahrex also ties it on doubles. In small sizes on wet-fly hooks it is a Danish coastal fly for garfish (Martin Joergensen), and Ahrex suggests the same dressing on a saltwater hook for the cold season in the sea.
+fishing """
+    En fluga för lax och havsöring, som fiskas som vilken våtfluga för lax som helst. Ahrex binder den också på dubbelkrok. I små storlekar på våtflugekrok är den en dansk kustfluga för horngädda (Martin Joergensen), och Ahrex föreslår samma dressing på saltvattenskrok för den kalla årstiden i havet.
+    """
+
+labels {
+    // en tail: Orange hackle tips
+    tail "Orange hackelspetsar"
+    // en palmer: Orange cock hackle
+    palmer "Orange tupphackel"
+    // en front: Orange cock hackle, a little longer
+    front "Orange tupphackel, något längre"
+}
+
+notes {
+    // en step 3 (tie-in tail): Two hackle tips, on top.
+    step 3 "Två hackelspetsar, ovanpå."
+    // en step 4 (tie-in rib): Under the shank.
+    step 4 "Under krokskaftet."
+    // en step 6 (wrap-thread): A slim, even thread body.
+    step 6 "En smal, jämn kropp av bindtråd."
+    // en step 7 (wind palmer): Open turns.
+    step 7 "Glesa varv."
+    // en step 9 (wind rib): Through the hackle, to protect the stem.
+    step 9 "Genom hacklet, så att stammen skyddas."
+    // en step 13 (wind front): Stroke the fibres back.
+    step 13 "Stryk fibrerna bakåt."
+    // en step 15 (whip-finish): A small, neat head; varnish it.
+    step 15 "Ett litet, prydligt huvud; lacka det."
+}

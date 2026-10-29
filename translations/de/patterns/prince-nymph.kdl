@@ -1,0 +1,45 @@
+id prince-nymph
+status draft
+
+// en description: A forked brown biot tail, a peacock herl body ribbed with gold, a brown hen collar and two white biot horns, behind a gold bead.
+description "Ein gegabelter Schwanz aus braunen Biots, ein Körper aus Pfauengras mit Goldrippung, ein Kragen aus brauner Hennenhechel und zwei weiße Biot-Hörner, hinter einer Goldperle."
+
+// en history: Its forerunner, the Brown Forked Tail, is credited (Wikipedia, citing Ken McCoy among others) to the brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s, with a black ostrich herl body and white biot wings curving up. Doug Prince of Oakland, California, gave it a peacock body and turned the wings down. He took up tying in 1943, by Dennis Bitton's account, though Trout Unlimited has him first tying the fly in the 1930s. Prince tied for his friend Buz Buszek, who, rushing out his catalogue, forgot what Prince called the fly and listed it as the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead and lead came later.
+history """
+    Ihr Vorläufer, die Brown Forked Tail, wird (von Wikipedia, die unter anderen Ken McCoy zitiert) den Brüdern Don und Dick Olson aus Bemidji, Minnesota, in den 1930er Jahren zugeschrieben; sie hatte einen Körper aus schwarzem Straußenherl und weiße, nach oben geschwungene Biot-Flügel. Doug Prince aus Oakland, Kalifornien, gab ihr einen Pfauenkörper und drehte die Flügel nach unten. Nach Dennis Bittons Darstellung begann er 1943 mit dem Binden, während Prince die Fliege laut Trout Unlimited schon in den 1930er Jahren zum ersten Mal band. Prince band für seinen Freund Buz Buszek, der beim eiligen Zusammenstellen seines Katalogs vergaß, wie Prince die Fliege genannt hatte, und sie als Prince Nymph aufführte. Prince’ eigene Bindeanleitung, 1966 veröffentlicht, hat keine Perle; Perle und Blei kamen später.
+    """
+
+// en fishing: A searching nymph, fished at or near the bottom, or as the dropper below a dry fly. In big sizes it reads as a stonefly nymph, in middling ones as a caddis. Once the drift is done, a few strips back, wet-fly fashion, can still bring a take.
+fishing """
+    Eine Suchnymphe, am oder nahe am Grund gefischt oder als Dropper unter einer Trockenfliege. In großen Größen geht sie als Steinfliegennymphe durch, in mittleren als Köcherfliege. Ist die Drift zu Ende, können ein paar Züge zurück, nach Art der Nassfliege, noch einen Biss bringen.
+    """
+
+labels {
+    // en tail: Brown goose biots
+    tail "Braune Gänsebiots"
+    // en horns: White goose biots
+    horns "Weiße Gänsebiots"
+}
+
+notes {
+    // en step 2 (weight weight): Ten or twelve turns, pushed up into the bead.
+    step 2 "Zehn oder zwölf Windungen, bis an die Perle geschoben."
+    // en step 3 (attach-thread): Build a dam behind the wire and cover it.
+    step 3 "Baue hinter dem Draht einen Damm auf und überwickle ihn."
+    // en step 5 (tie-in tail): One biot each side, concave sides out, so they fork apart.
+    step 5 "Je ein Biot pro Seite, die konkaven Seiten nach außen, damit sie auseinanderstreben."
+    // en step 6 (tie-in rib): On the near side.
+    step 6 "Auf der dir zugewandten Seite."
+    // en step 7 (tie-in body): By the tips.
+    step 7 "An den Spitzen."
+    // en step 9 (wind body): Twist the herls into a rope; slightly fatter toward the front.
+    step 9 "Verdrille die Pfauengrasfibern zu einem Strang; nach vorn etwas dicker."
+    // en step 11 (wind rib): To protect the herl.
+    step 11 "Zum Schutz des Pfauengrases."
+    // en step 15 (wind hackle): Sweep the fibres back and down.
+    step 15 "Streiche die Fibern nach hinten und unten."
+    // en step 18 (tie-in horns): Crossed on top, in a V, curving down over the body.
+    step 18 "Oben gekreuzt, als V, nach unten über den Körper gebogen."
+    // en step 19 (whip-finish): Behind the bead.
+    step 19 "Hinter der Perle."
+}

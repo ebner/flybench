@@ -1,0 +1,43 @@
+id peeping-caddis-edwards
+status draft
+
+// en variant: Edwards, larva at the front
+variant "Edwards, larven framtill"
+
+// en description: A lead-weighted hare's mask case over the rear two thirds of a long-shank hook, with a white larva lying forward to a dark head at the eye and its legs underneath.
+description "Ett blyförtyngt hus av harmask över de bakre två tredjedelarna av en långskaftad krok, med en vit larv som ligger framåt mot ett mörkt huvud vid krokögat och benen under."
+
+// en history: Oliver Edwards' realistic cased caddis, here as Graydon Bell ties it: the grub comes out of the front of the case, where a real larva's head and legs are, and the hare's mask case is built over a flat lead underbody. Fulling Mill's OE Peeping Caddis gets its weight from a split shot instead.
+history """
+    Oliver Edwards realistiska husmask, här som Graydon Bell binder den: larven kommer ut ur
+    husets främre ände, där en verklig larvs huvud och ben sitter, och huset av harmask
+    byggs över en underkropp av platt bly. Fulling Mills OE Peeping Caddis får i stället sin
+    tyngd från ett blyhagel.
+    """
+
+// en fishing: Fished slowly along the bottom of rivers, for trout, and for grayling in winter.
+fishing "Fiskas långsamt längs botten i rinnande vatten, efter öring och vintertid efter harr."
+
+labels {
+    // en weight: Lead-free wire (Bell uses flat lead)
+    weight "Blyfri tråd (Bell använder platt bly)"
+    // en larva-case: Hare's mask dubbing brush
+    larva-case "Dubbingborste av harmask"
+    // en legs: Golden pheasant centre tail fibres (legs)
+    legs "Fibrer från guldfasanens mittstjärtfjäder (ben)"
+    // en larva: White or glow yarn (larva)
+    larva "Vitt eller självlysande garn (larv)"
+}
+
+notes {
+    // en step 1 (weight weight): Flattened, under the case.
+    step 1 "Tillplattad, under huset."
+    // en step 4 (dub larva-case): Thick and rough over the rear two thirds.
+    step 4 "Tjockt och grovt över de bakre två tredjedelarna."
+    // en step 5 (tie-in legs): Under the shank, sloping back.
+    step 5 "Under krokskaftet, lutande bakåt."
+    // en step 6 (tie-in larva): The top of the head tinted dark with a marker.
+    step 6 "Huvudets ovansida färgad mörk med en märkpenna."
+    // en step 8 (whip-finish): A small black head at the eye.
+    step 8 "Ett litet svart huvud vid krokögat."
+}

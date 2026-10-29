@@ -1,0 +1,37 @@
+id butcher
+status draft
+
+// en description: A red tail, a flat silver tinsel body with a wire rib, a black hackle throat and paired blue-black mallard wing slips.
+description "Ein roter Schwanz, ein Körper aus silbernem Flachtinsel mit Drahtrippung, ein Bart aus schwarzer Hechel und ein Paar blauschwarzer Flügelsegmente von der Stockente."
+
+// en history: First called Moon's Fly. Smedley (Fly Patterns and Their Origins) says it came from John Jewhurst of Tunbridge, Kent, and that William Blacker renamed it about 1838 after the trade of Mr Moon, a butcher who favoured it. Other accounts make Moon and Jewhurst joint inventors, place them in Tunbridge Wells, or give 1836. The colours as blood, blade and apron are a popular story; Timo Kontio calls it a theory.
+history """
+    Zuerst hieß sie Moon's Fly. Smedley (Fly Patterns and Their Origins) schreibt, sie stamme von John Jewhurst aus Tunbridge in Kent, und William Blacker habe sie um 1838 nach dem Beruf von Mr Moon umbenannt, einem Metzger (englisch butcher), der sie gern fischte. Andere Darstellungen machen Moon und Jewhurst zu gemeinsamen Erfindern, verlegen beide nach Tunbridge Wells oder nennen 1836. Dass die Farben für Blut, Messer und Schürze stehen, ist eine beliebte Geschichte; Timo Kontio nennt es eine Theorie.
+    """
+
+// en fishing: A winged wet fly for rivers and still waters. Global FlyFisher's video puts its close relative, the Bloody Butcher, on a middle dropper or the point of a team of wets, on lochs and lakes as well as rivers, and ties it bigger for sea trout, even as a streamer. Fly sellers describe its silver body and dark wing as suggesting a small fish.
+fishing """
+    Eine geflügelte Nassfliege für Fließ- und Stillwasser. Das Video von Global FlyFisher fischt ihre nahe Verwandte, die Bloody Butcher, an einem mittleren Springer oder als Endfliege einer Nassfliegenmontage, auf Lochs und Seen ebenso wie im Fluss, und bindet sie für Meerforellen größer, sogar als Streamer. Fliegenhändler beschreiben, wie ihr silberner Körper und der dunkle Flügel an einen kleinen Fisch denken lassen.
+    """
+
+labels {
+    // en tail: Red-dyed duck quill slip
+    tail "Rot gefärbtes Entenflügelsegment"
+    // en throat: Black hen hackle fibres
+    throat "Schwarze Hennenhechelfibern"
+    // en wing: Blue-black mallard secondary slips
+    wing "Blauschwarze Segmente aus Stockenten-Armschwingen"
+}
+
+notes {
+    // en step 3 (tie-in tail): A narrow slip, on top at the bend.
+    step 3 "Ein schmales Segment, oben am Hakenbogen."
+    // en step 7 (wind body): Touching turns, smooth and untapered.
+    step 7 "Windung an Windung, glatt und ohne Verjüngung."
+    // en step 11 (tie-in throat): Reaching about to the hook point.
+    step 11 "Reicht etwa bis zur Hakenspitze."
+    // en step 12 (tie-in wing): Matching left and right slips, concave sides together, set on top with a pinch-and-loop.
+    step 12 "Ein passendes linkes und rechtes Segment, die hohlen Seiten zueinander, oben mit der Pinch-and-Loop-Technik aufgesetzt."
+    // en step 13 (whip-finish): A smooth, tapered black head.
+    step 13 "Ein glatter, konischer schwarzer Kopf."
+}

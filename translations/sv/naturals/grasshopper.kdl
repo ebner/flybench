@@ -1,0 +1,24 @@
+id grasshopper
+status draft
+
+// en name: Grasshopper
+name "Gräshoppa"
+
+// en description: A long-bodied insect with big jumping hind legs, folded wings and short antennae. Blown or jumping onto the water, it lands with a splash and kicks.
+description "En långsträckt insekt med stora hoppben, hopfällda vingar och korta antenner. När den blåser eller hoppar ut på vattnet landar den med ett plask och sparkar."
+
+// en examples: field and meadow grasshoppers (Chorthippus)
+examples "fält- och ängsgräshoppor (Chorthippus)"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Uppskattning."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles note: Field grasshopper adults June to early December (ORS).
+    british-isles note="Fullbildade fältgräshoppor från juni till början av december (ORS)."
+    // en central-europe note: Estimate.
+    central-europe note="Uppskattning."
+    // en northern-usa note: Hoppers from mid-July on the Madison (Montana Angler); the end is an estimate.
+    northern-usa note="Gräshoppor från mitten av juli på Madison (Montana Angler); slutet är uppskattat."
+}

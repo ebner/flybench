@@ -1,0 +1,32 @@
+id elk-hair-caddis
+status draft
+
+// en description: A buoyant searching caddis: a slim dubbed body, a palmered hackle held down by a gold wire rib, and a flared elk hair wing.
+description "En högflytande nattslända att leta fisk med: en smal dubbad kropp, ett kroppshackel som hålls på plats av en ribb av guldtråd, och en utspärrad vinge av elkhår."
+
+// en history: Al Troth tied the first Elk Hair Caddis in 1957 for the green caddis on his home streams in Pennsylvania, and first fished it on Loyalsock Creek; he moved to Montana in 1973. He set out to make a wet fly, but it floated so well that he fished it dry. He used bleached elk hair so that the wing would be easier to see. The neatly trimmed head that most tyers now give it was added by others; see the Troth variant for his own way.
+history """
+    Al Troth band den första Elk Hair Caddis 1957 för den gröna nattsländan i sina hemmavatten i Pennsylvania, och fiskade den första gången i Loyalsock Creek; 1973 flyttade han till Montana. Han hade tänkt göra en våtfluga, men den flöt så bra att han fiskade den torr. Han använde blekt elkhår för att vingen skulle synas bättre. Det prydligt klippta huvud som de flesta bindare ger den i dag lades till av andra; se Troth-varianten för hans eget sätt.
+    """
+
+// en fishing: A searching pattern for any water where caddis hatch, riffles and runs included: the hair wing and palmered hackle float it high. It is mostly fished on a dead drift; skating it, or pulling it through the film like a caddis hatching, works too.
+fishing """
+    En sökfluga för alla vatten där nattsländor kläcker, strömsträckor och forsnackar inräknade: hårvingen och kroppshacklet håller den högt på vattnet. Oftast får den driva fritt, men att låta den skejta över ytan, eller dra den genom ytfilmen som en kläckande nattslända, fungerar också.
+    """
+
+notes {
+    // en step 4 (dub body): Keep the body slim, with a slight taper towards the front.
+    step 4 "Håll kroppen smal, med en svag konisk form framåt."
+    // en step 5 (tie-in hackle): Tie it in by the butt, shiny side forward.
+    step 5 "Bind in det i rotänden, med den blanka sidan framåt."
+    // en step 6 (wind hackle): Hold the tip with hackle pliers at the bend.
+    step 6 "Håll spetsen med hackelklämman vid krokböjen."
+    // en step 7 (wind rib): Wiggle the wire as you go so no fibres are trapped.
+    step 7 "Vicka på tråden medan du lindar, så att inga fibrer kläms fast."
+    // en step 10 (tie-in wing): Clean the underfur out and stack the hair so the tips are even.
+    step 10 "Rensa bort underullen och jämna håret i stacker så att topparna blir jämna."
+    // en step 11 (trim wing): Cut straight across, parallel to the eye.
+    step 11 "Klipp rakt av, parallellt med krokögat."
+    // en step 12 (whip-finish): Whip finish behind the trimmed butts.
+    step 12 "Gör whipfinishknuten bakom de klippta rotändarna."
+}

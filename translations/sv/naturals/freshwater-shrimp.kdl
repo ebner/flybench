@@ -1,0 +1,24 @@
+id freshwater-shrimp
+status draft
+
+// en name: Freshwater shrimp (Gammarus)
+name "Märla (Gammarus)"
+
+// en description: A small crustacean flattened from side to side, curled into a C at rest and straighter when it swims on its side. Translucent grey, brown or olive; abundant all year in streams and along coasts.
+description "Ett litet kräftdjur, hoptryckt från sidorna, som ligger böjt som ett C i vila och sträcker ut sig mer när det simmar på sidan. Märlan är genomskinligt grå, brun eller olivgrön och talrik året runt i bäckar och längs kusterna."
+
+// en examples: Gammarus pulex; coastal gammarids
+examples "Gammarus pulex; märlor längs kusterna"
+
+hatches {
+    // en southern-sweden note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    southern-sweden note="Flera kullar per år (Wikipedia); kustfiske i södra Skandinavien året runt (Ahrex)."
+    // en northern-scandinavia note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    northern-scandinavia note="Flera kullar per år (Wikipedia); kustfiske i södra Skandinavien året runt (Ahrex)."
+    // en british-isles note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    british-isles note="Flera kullar per år (Wikipedia); kustfiske i södra Skandinavien året runt (Ahrex)."
+    // en central-europe note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    central-europe note="Flera kullar per år (Wikipedia); kustfiske i södra Skandinavien året runt (Ahrex)."
+    // en northern-usa note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    northern-usa note="Flera kullar per år (Wikipedia); kustfiske i södra Skandinavien året runt (Ahrex)."
+}

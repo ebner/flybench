@@ -1,0 +1,35 @@
+id red-tag
+status draft
+
+// en description: Peacock herl body with a short red wool tag and a brown cock hackle. Fished dry or wet for grayling and trout.
+description "Ein Körper aus Pfauengras mit einem kurzen Tag aus roter Wolle und einer braunen Hahnenhechel. Trocken oder nass auf Äschen und Forellen gefischt."
+
+// en history: Usually credited to Martyn Flynn of Worcestershire in the 1850s, who tied it as a dry fly for grayling and called it the Worcestershire Gem; it was also known as the Worcestershire Wonder. It later reached Australia, where it became a standard brown trout fly, above all in Tasmania. The date and originator are repeated widely but rest on secondary accounts.
+history """
+    Meist Martyn Flynn aus Worcestershire in den 1850er Jahren zugeschrieben, der sie als Trockenfliege für Äschen band und Worcestershire Gem nannte; sie war auch als Worcestershire Wonder bekannt. Später gelangte sie nach Australien, wo sie zu einer Standardfliege für Bachforellen wurde, vor allem in Tasmanien. Datum und Urheber werden vielfach wiederholt, beruhen aber auf Berichten aus zweiter Hand.
+    """
+
+// en fishing: It suggests nothing in particular; at most, Martin Joergensen thinks, a small beetle. Fish it dry on a dead drift, or let it sink and fish it as a wet fly. Alastair Gowans singles it out as a dry fly for grayling and also lists it among the wet flies for autumn grayling.
+fishing """
+    Sie imitiert nichts Bestimmtes, höchstens, meint Martin Joergensen, einen kleinen Käfer. Fische sie trocken und frei treibend, oder lass sie absinken und fische sie als Nassfliege. Alastair Gowans hebt sie als Trockenfliege für Äschen hervor und führt sie auch unter den Nassfliegen für Äschen im Herbst auf.
+    """
+
+labels {
+    // en hackle: Red game cock hackle
+    hackle "Red-Game-Hahnenhechel"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave room behind the eye for the hackle and a small head.
+    step 1 "Lass hinter dem Öhr Platz für die Hechel und einen kleinen Kopf."
+    // en step 2 (wrap-thread): Touching turns give a smooth base for the body.
+    step 2 "Windung an Windung ergibt eine glatte Unterlage für den Körper."
+    // en step 4 (tie-in body): Tie the herl in by the tips.
+    step 4 "Binde das Pfauengras an den Spitzen ein."
+    // en step 6 (wind body): Touching turns, so the flue stands out and the body looks full.
+    step 6 "Windung an Windung, damit die Härchen abstehen und der Körper voll wirkt."
+    // en step 8 (tie-in hackle): Shiny side facing forward, stripped stem tied along the shank.
+    step 8 "Glänzende Seite nach vorn, den abgestreiften Kiel entlang des Hakenschenkels eingebunden."
+    // en step 10 (wind hackle): Each turn in front of the last.
+    step 10 "Jede Windung vor die vorige."
+}

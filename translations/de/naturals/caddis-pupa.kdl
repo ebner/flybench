@@ -1,0 +1,28 @@
+id caddis-pupa
+status draft
+
+// en name: Caddis pupa
+name "Köcherfliege, Puppe"
+
+// en description: The pupa cuts out of its case and rises or swims to hatch, rowing with its oar-like legs, the wing sheaths dark along its sides and the antennae swept back.
+description "Die Puppe schneidet sich aus ihrem Köcher frei und steigt auf oder schwimmt davon, um zu schlüpfen; dabei schlagen ihre Beine wie Ruder. Die Flügelscheiden liegen dunkel an den Seiten, die Fühler sind nach hinten gelegt."
+
+// en examples: sedges of all kinds
+examples "Köcherfliegen aller Art"
+
+hatches {
+    // en southern-sweden time: evening
+    // en southern-sweden note: From May (Sericostoma, Hydropsyche; Dalarna 2013) into autumn (Rhyacophila to November; Gullefors 2015); July and August the main months (Gullefors 2014).
+    southern-sweden time="abends" note="Ab Mai (Sericostoma, Hydropsyche; Dalarna 2013) bis in den Herbst (Rhyacophila bis November; Gullefors 2015); Hauptmonate sind Juli und August (Gullefors 2014)."
+    // en northern-scandinavia time: evening
+    // en northern-scandinavia note: First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna).
+    northern-scandinavia time="abends" note="Die ersten Vollinsekten Anfang Juni an der Forsån (Gullefors 2014); im August wird in der Dämmerung mit Köcherfliegen gefischt (Visit Dalarna)."
+    // en british-isles time: evening
+    // en british-isles note: Grannom in April (First Nature); many caddis at dusk.
+    british-isles time="abends" note="Grannom im April (First Nature); viele Köcherfliegen in der Dämmerung."
+    // en central-europe time: evening
+    // en central-europe note: Estimate; mostly at dusk and night (Wikipedia de).
+    central-europe time="abends" note="Schätzung; meist in der Dämmerung und nachts (Wikipedia de)."
+    // en northern-usa note: Mother's Day caddis from late April, then May–October (Montana Angler).
+    northern-usa note="Mother's Day Caddis ab Ende April, dann Mai–Oktober (Montana Angler)."
+}

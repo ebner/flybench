@@ -1,0 +1,55 @@
+id prince-nymph
+status draft
+
+// en description: A forked brown biot tail, a peacock herl body ribbed with gold, a brown hen collar and two white biot horns, behind a gold bead.
+description "En kluven stjärt av bruna biots, en kropp av påfågelherl ribbad med guld, en krage av brunt hönshackel och två vita horn av biots, bakom en guldkula."
+
+// en history: Its forerunner, the Brown Forked Tail, is credited (Wikipedia, citing Ken McCoy among others) to the brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s, with a black ostrich herl body and white biot wings curving up. Doug Prince of Oakland, California, gave it a peacock body and turned the wings down. He took up tying in 1943, by Dennis Bitton's account, though Trout Unlimited has him first tying the fly in the 1930s. Prince tied for his friend Buz Buszek, who, rushing out his catalogue, forgot what Prince called the fly and listed it as the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead and lead came later.
+history """
+    Dess föregångare, Brown Forked Tail, tillskrivs (av Wikipedia, som bland andra hänvisar
+    till Ken McCoy) bröderna Don och Dick Olson från Bemidji i Minnesota på 1930-talet, med
+    en kropp av svart strutsherl och vita vingar av biots som böjde sig uppåt. Doug Prince
+    från Oakland i Kalifornien gav den en kropp av påfågel och vände vingarna nedåt. Enligt
+    Dennis Bitton började han binda 1943, men enligt Trout Unlimited band han flugan första
+    gången redan på 1930-talet. Prince band åt sin vän Buz Buszek, som i brådskan med att få
+    ut sin katalog glömde vad Prince kallade flugan och listade den som Prince Nymph.
+    Princes egen bindning, publicerad 1966, har ingen kula; kulan och blyet kom senare.
+    """
+
+// en fishing: A searching nymph, fished at or near the bottom, or as the dropper below a dry fly. In big sizes it reads as a stonefly nymph, in middling ones as a caddis. Once the drift is done, a few strips back, wet-fly fashion, can still bring a take.
+fishing """
+    En avsökande nymf som fiskas vid eller nära botten, eller som hängande nymf under en
+    torrfluga. I stora storlekar uppfattas den som en bäcksländenymf, i mellanstorlekar som
+    en nattslända. När driften är slut kan några indragningar, som med en våtfluga, ändå ge
+    ett hugg.
+    """
+
+labels {
+    // en tail: Brown goose biots
+    tail "Bruna gåsbiots"
+    // en horns: White goose biots
+    horns "Vita gåsbiots"
+}
+
+notes {
+    // en step 2 (weight weight): Ten or twelve turns, pushed up into the bead.
+    step 2 "Tio eller tolv varv, uppskjutna mot kulan."
+    // en step 3 (attach-thread): Build a dam behind the wire and cover it.
+    step 3 "Bygg en vall av bindtråd bakom förtyngningen och linda över den."
+    // en step 5 (tie-in tail): One biot each side, concave sides out, so they fork apart.
+    step 5 "En biot på var sida, med de konkava sidorna utåt, så att de spretar isär som en gaffel."
+    // en step 6 (tie-in rib): On the near side.
+    step 6 "På sidan närmast dig."
+    // en step 7 (tie-in body): By the tips.
+    step 7 "I spetsarna."
+    // en step 9 (wind body): Twist the herls into a rope; slightly fatter toward the front.
+    step 9 "Tvinna herlen till ett rep; något tjockare framtill."
+    // en step 11 (wind rib): To protect the herl.
+    step 11 "För att skydda herlet."
+    // en step 15 (wind hackle): Sweep the fibres back and down.
+    step 15 "Stryk fibrerna bakåt och nedåt."
+    // en step 18 (tie-in horns): Crossed on top, in a V, curving down over the body.
+    step 18 "Korsade ovanpå i ett V, böjda nedåt över kroppen."
+    // en step 19 (whip-finish): Behind the bead.
+    step 19 "Bakom kulan."
+}

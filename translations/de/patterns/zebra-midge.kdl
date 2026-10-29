@@ -1,0 +1,32 @@
+id zebra-midge
+status draft
+
+// en description: A slim tapered black thread body with a silver wire rib, behind a silver bead, on a short curved hook.
+description "Ein schlanker, verjüngter Körper aus schwarzem Bindefaden mit Silberdrahtrippung hinter einer Silberperle, auf einem kurzen, gebogenen Haken."
+
+// en history: Created by Ted Welling, a guide at Lees Ferry on the Colorado River in Arizona, a tailwater full of midges at the head of the Grand Canyon. Ralph Scherder dates it to about 1996 and sees it as a variation of Kelly Davidson's Ice Cream Cone, a 1992 chironomid for British Columbia lakes; other sources give no date or ancestor.
+history """
+    Geschaffen von Ted Welling, einem Guide in Lees Ferry am Colorado River in Arizona, einer Strecke unterhalb eines Staudamms (Tailwater) voller Zuckmücken am oberen Ende des Grand Canyon. Ralph Scherder datiert sie auf etwa 1996 und sieht in ihr eine Abwandlung von Kelly Davidsons Ice Cream Cone, einer Chironomiden-Fliege von 1992 für die Seen von British Columbia; andere Quellen nennen weder Datum noch Vorläufer.
+    """
+
+// en fishing: Imitates a midge pupa that sinks quickly; McFly Angler argues the silver bead makes it an emerger. Fish it under an indicator, below a dry fly, or as a dropper behind a larger fly such as a San Juan Worm or egg; Pat Dorsey, cited by Orvis News, finds fish are often drawn by the big fly but take the midge. It works all year, best from autumn to early spring, on tailwaters, freestones and lakes. Red and olive bodies are popular colour variants.
+fishing """
+    Sie imitiert eine Zuckmückenpuppe, die schnell absinkt; McFly Angler meint, die Silberperle mache sie zu einem Emerger. Fische sie unter einem Bissanzeiger, unter einer Trockenfliege oder als Springer hinter einer größeren Fliege wie einem San Juan Worm oder einer Eifliege; Pat Dorsey, zitiert von Orvis News, stellt fest, dass die große Fliege die Fische oft anlockt, sie dann aber die Midge nehmen. Sie fängt das ganze Jahr, am besten vom Herbst bis ins zeitige Frühjahr, in Tailwaters, Freestone-Flüssen und Seen. Rote und olivfarbene Körper sind beliebte Farbvarianten.
+    """
+
+notes {
+    // en step 1 (slide-bead bead): Small hole first, up against the eye.
+    step 1 "Mit dem kleinen Loch voran, bis ans Öhr."
+    // en step 2 (attach-thread): Right behind the bead, with a small dam so it can't slide back.
+    step 2 "Direkt hinter der Perle, mit einem kleinen Damm, damit sie nicht zurückrutschen kann."
+    // en step 3 (wrap-thread): Partway down the bend.
+    step 3 "Ein Stück weit in den Hakenbogen hinein."
+    // en step 4 (tie-in rib): On the near side.
+    step 4 "Auf der dir zugewandten Seite."
+    // en step 7 (wrap-thread): Build a slim taper: thinnest at the rear, thickest behind the bead.
+    step 7 "Baue eine schlanke Verjüngung auf: hinten am dünnsten, hinter der Perle am dicksten."
+    // en step 8 (wind rib): Evenly spaced open turns.
+    step 8 "Gleichmäßig verteilte offene Windungen."
+    // en step 10 (whip-finish): Behind the bead.
+    step 10 "Hinter der Perle."
+}

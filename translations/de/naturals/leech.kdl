@@ -1,0 +1,24 @@
+id leech
+status draft
+
+// en name: Leech
+name "Egel"
+
+// en description: A soft, flattened, segmented worm with a sucker at each end, swimming fast in waves of the whole body. Black, brown or olive.
+description "Ein weicher, abgeflachter, geringelter Wurm mit einem Saugnapf an jedem Ende, der schnell schwimmt, indem er den ganzen Körper in Wellen bewegt. Schwarz, braun oder oliv."
+
+// en examples: freshwater leeches (Erpobdellidae)
+examples "Süßwasseregel (Erpobdellidae)"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Schätzung."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Schätzung."
+    // en british-isles note: Estimate.
+    british-isles note="Schätzung."
+    // en central-europe note: Estimate.
+    central-europe note="Schätzung."
+    // en northern-usa note: Estimate.
+    northern-usa note="Schätzung."
+}

@@ -1,0 +1,30 @@
+id dyret
+status draft
+
+// en description: A clump of deer hair bound along the shank, its tips a tuft behind and its butts a square stub in front, with a dubbed body and a long palmered hackle trimmed underneath.
+description "Ein Büschel Rehhaar, am Hakenschenkel entlang festgebunden, die Spitzen hinten als Schopf, die Enden vorn als gerade abgeschnittener Stummel, dazu ein gedubbter Körper und eine lange, gepalmerte Hechel, unten gestutzt."
+
+// en history: Gunnar Bingen, who lives by the Rena, designed it around 1991 (his design sheet is dated that year) as a mix of the Superpuppan and the Devil Bug: in his words the Superpuppan "lacked" something in some situations, and the Devil Bug was efficient but fragile. Thomas Züllich notes that, though meant as a caddis emerger, it has earned its place in many other situations too. Torben Meldgaard captioned his photo of it "extremely ugly but highly efficient".
+history """
+    Gunnar Bingen, der an der Rena lebt, entwarf sie um 1991 (sein Entwurfsblatt trägt diese Jahreszahl) als Mischung aus Superpuppan und Devil Bug: Mit seinen Worten „fehlte“ der Superpuppan in manchen Situationen etwas, und die Devil Bug war fängig, aber empfindlich. Thomas Züllich bemerkt, dass sie, obwohl als Köcherfliegen-Emerger gedacht, sich auch in vielen anderen Situationen ihren Platz verdient hat. Torben Meldgaard schrieb unter sein Foto von ihr „extrem hässlich, aber höchst fängig“.
+    """
+
+// en fishing: Bingen likes best to fish dry late in the evening, when big trout move in along the bank to feed on caddis. Many tyers, Bingen among them, clip the hackle underneath; Thomas Züllich leaves it full. Popular with trout and grayling anglers across Scandinavia, and Markus Hoffman calls his version a killer for northern grayling.
+fishing """
+    Am liebsten fischt Bingen sie spät am Abend trocken, wenn große Forellen ans Ufer ziehen, um Köcherfliegen zu fressen. Viele Binder, darunter Bingen, stutzen die Hechel unten; Thomas Züllich lässt sie voll. Beliebt bei Forellen- und Äschenanglern in ganz Skandinavien; Markus Hoffman nennt seine Version einen Killer für nordische Äschen.
+    """
+
+notes {
+    // en step 2 (tie-in hair): A small stacked clump on top, tips back, bound down along the whole shank as an underbody.
+    step 2 "Ein kleines, gestacktes Büschel oben, Spitzen nach hinten, als Unterkörper über den ganzen Hakenschenkel festgebunden."
+    // en step 4 (tie-in hackle): By the stripped stem, at the bend.
+    step 4 "Am freigelegten Kiel, am Hakenbogen."
+    // en step 5 (dub body): Over the bound-down hair, to just behind the eye.
+    step 5 "Über das festgebundene Haar, bis knapp hinter das Öhr."
+    // en step 6 (wind hackle): Open turns, a long hackle.
+    step 6 "Offene Windungen, eine lange Hechel."
+    // en step 8 (whip-finish): Behind the deer-hair butts.
+    step 8 "Hinter den Enden des Rehhaars."
+    // en step 9 (trim hair): Straight across, leaving a short square stub in front of the eye.
+    step 9 "Gerade quer abschneiden, so dass vor dem Öhr ein kurzer, eckiger Stummel bleibt."
+}

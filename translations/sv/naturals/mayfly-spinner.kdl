@@ -1,0 +1,26 @@
+id mayfly-spinner
+status draft
+
+// en name: Mayfly spinner
+name "Dagslända, imago"
+
+// en description: The mature mayfly: clear glassy wings, long tails and a shiny body. After mating the females lay their eggs and fall spent on the water, wings flat out.
+description "Den könsmogna dagsländan: klara, glasartade vingar, långa stjärtspröt och en blank kropp. Efter parningen lägger honorna sina ägg och faller utmattade ner på vattnet med vingarna platt utbredda."
+
+// en examples: sherry spinner (Serratella), red spinner (Baetis), the mayfly
+examples "sherry spinner (Serratella), red spinner (Baetis), sanddagsländor"
+
+hatches {
+    // en southern-sweden time: evening
+    // en southern-sweden note: Baetis: two generations, spring and autumn (Dalarna 2013).
+    southern-sweden time="på kvällen" note="Baetis: två generationer, vår och höst (Dalarna 2013)."
+    // en northern-scandinavia note: Estimate: one generation in the mountains.
+    northern-scandinavia note="Uppskattning: en generation i fjällen."
+    // en british-isles time: evening
+    // en british-isles note: Large dark olive peaks March–April and late autumn (First Nature).
+    british-isles time="på kvällen" note="Large dark olive: flest i mars–april och på senhösten (First Nature)."
+    // en central-europe note: Serratella mostly June–September; above 1000 m July–September (Wikipedia de).
+    central-europe note="Serratella mest i juni–september; över 1 000 m i juli–september (tyska Wikipedia)."
+    // en northern-usa note: Blue-winged olives in spring and autumn (Montana Angler).
+    northern-usa note="Blue-winged olive på våren och hösten (Montana Angler)."
+}

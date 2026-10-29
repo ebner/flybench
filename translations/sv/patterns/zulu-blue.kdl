@@ -1,0 +1,49 @@
+id zulu-blue
+status draft
+
+// en variant: Blue Zulu
+variant "Blue Zulu"
+
+// en description: A short red wool tail, a black seal's fur body ribbed with fine oval silver, a black cock hackle palmered from tail to head, and a bright blue hen front hackle.
+description "En kort stjärt av rött ullgarn, en kropp av svart sälhår ribbad med fin oval silvertinsel, ett svart tupphackel lindat från stjärten till huvudet och ett klarblått främre hackel av höna."
+
+// en history: Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders with red tips, commonly called Zulus" among the flies for a fortnight on remote Scottish lochs, and in 1892 Niven's lexicon described it as "made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking Lars reports it, gives it a silver tag and hen hackles. Two modern sources say it was once banned, from competitions or in some waters, for catching too well; neither gives details.
+history """
+    Ingen vet vem som band den första. Redan 1882 kunde ”Black Palmer” räkna upp ”svarta
+    spiders med röda spetsar, vanligen kallade Zulus” bland flugorna för två veckor vid
+    avlägsna skotska sjöar, och 1892 beskrev Nivens lexikon den som ”bunden som en palmer,
+    svart hackel, svart kropp, ribbad med silvertinsel, med en tag av röd ull som stjärt”.
+    Walbrans katalog från 1889 ger den, enligt Viking Lars, en tag av silver och hönshackel.
+    Två moderna källor uppger att den en gång förbjöds, i tävlingar eller i vissa vatten,
+    för att den fångade för bra; ingen av dem ger några detaljer.
+    """
+
+// en fishing: A loch fly, at its best on the bob: the top dropper of a team of three or four, worked through the wave tops from a drifting boat. Dark, windy days suit it. Alan the Highlander rates the blue-hackled version above all as a sea-trout fly; it takes brown trout as well.
+fishing """
+    En sjöfluga, som bäst som bobfluga: den översta droppern på en tafs med tre eller fyra
+    flugor, fiskad genom vågtopparna från en drivande båt. Mörka, blåsiga dagar passar den.
+    Alan the Highlander framhåller versionen med blått hackel framför allt som
+    havsöringsfluga; den tar också öring.
+    """
+
+labels {
+    // en rib: Fine oval silver tinsel
+    rib "Fin oval silvertinsel"
+    // en front: Bright blue hen hackle
+    front "Klarblått hönshackel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short tuft, on top.
+    step 3 "En kort tofs, ovanpå."
+    // en step 5 (tie-in hackle): Shiny side forward.
+    step 5 "Den blanka sidan framåt."
+    // en step 6 (dub body): Slightly tapered; pick it out a little.
+    step 6 "Lätt avsmalnande; plocka ut den lite."
+    // en step 7 (wind hackle): Open turns, tail to head.
+    step 7 "Glesa varv, från stjärten till huvudet."
+    // en step 9 (wind rib): Through the hackle, crossing the stem.
+    step 9 "Genom hacklet, så att den korsar stjälken."
+    // en step 13 (wind front): A slightly longer collar, stroked back.
+    step 13 "En något längre krage, struken bakåt."
+}

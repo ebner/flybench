@@ -1,0 +1,29 @@
+id black-pennell
+status draft
+
+// en description: A tail of golden pheasant tippet, a slim black floss body ribbed with silver, and a long, sparse black hackle.
+description "Ein Schwanz aus Goldfasan-Tippet, ein schlanker Körper aus schwarzem Floss mit silberner Rippung und eine lange, spärliche schwarze Hechel."
+
+// en history: Credited to Henry Cholmondeley-Pennell (1837-1913), the Victorian angling writer. Smedley (Fly Patterns and Their Origins) says Pennell recommended "hackle" flies with a hard, thin silk body and a very sparse hackle "a little longer than usual", in brown, yellow and green. The black version is credited to him by later writers, among them John Gray of Kilsyth, who says only that it was devised in the nineteenth century. Some early dressings had a wing, of crow among other materials; most modern ones leave it out.
+history """
+    Zugeschrieben wird sie Henry Cholmondeley-Pennell (1837–1913), dem viktorianischen Angelschriftsteller. Smedley (Fly Patterns and Their Origins) schreibt, Pennell habe „Hechelfliegen“ mit einem harten, dünnen Seidenkörper und einer sehr spärlichen Hechel empfohlen, „etwas länger als üblich“, in Braun, Gelb und Grün. Die schwarze Version schreiben ihm spätere Autoren zu, darunter John Gray aus Kilsyth, der nur sagt, sie sei im 19. Jahrhundert entstanden. Einige frühe Bindeweisen hatten einen Flügel, unter anderem aus Krähenfeder; die meisten heutigen lassen ihn weg.
+    """
+
+// en fishing: A loch fly for trout and sea trout, usually fished on the bob, the top dropper of a team of wets. John Gray notes its following on remote Highland waters and rates it highest in the early season, while black midges hatch. Bushy versions, such as the Irish Black Pennell, are used for dapping, and it is tied large on doubles for sea trout and salmon.
+fishing """
+    Eine Fliege für die schottischen Lochs, auf Forelle und Meerforelle, meist am Bob gefischt, dem obersten Springer einer Montage aus mehreren Nassfliegen. John Gray erwähnt, wie viele Anhänger sie an abgelegenen Gewässern der Highlands hat, und schätzt sie am meisten in der frühen Saison, wenn schwarze Zuckmücken schlüpfen. Buschige Versionen wie die Irish Black Pennell nimmt man zum Dapping, und für Meerforelle und Lachs wird sie groß auf Doppelhaken gebunden.
+    """
+
+labels {
+    // en hackle: Long black cock or hen hackle
+    hackle "Lange schwarze Hahnen- oder Hennenhechel"
+}
+
+notes {
+    // en step 3 (tie-in tail): About six fibres, so the black bars show.
+    step 3 "Etwa sechs Fibern, damit die schwarzen Querbänder zu sehen sind."
+    // en step 7 (wind body): Slim and even, to just behind the eye.
+    step 7 "Schlank und gleichmäßig, bis knapp hinter das Öhr."
+    // en step 13 (wind hackle): Sparse: the long, sparse hackle is the Pennell signature.
+    step 13 "Spärlich: Die lange, spärliche Hechel ist das Markenzeichen der Pennell."
+}

@@ -1,0 +1,40 @@
+id teal-blue-and-silver
+status draft
+
+// en description: A golden pheasant tippet tail, a flat silver body with a wire rib, a blue hackle throat and a barred teal flank wing.
+description "En stjärt av guldfasantippet, en kropp av platt silvertinsel med ribb av metalltråd, ett skägg av blått hackel och en vinge av tvärrandig sidfjäder från krickand."
+
+// en history: One of the Teal series of Scottish loch and sea-trout flies, which share the barred teal wing and vary the body and hackle. No originator or date is recorded. Tom Stewart saw it as a pared-down Silver Doctor. R. C. Bridgett's 1929 ranking of the ten most popular Scottish sea-trout flies includes a "Teal & Silver", which may or may not have had the blue hackle.
+history """
+    En av flugorna i Teal-serien av skotska sjö- och havsöringsflugor, som alla har den
+    tvärrandiga krickandsvingen men varierar kropp och hackel. Varken upphovsman eller årtal
+    finns nedtecknat. Tom Stewart såg den som en avskalad Silver Doctor. R. C. Bridgetts
+    rangordning från 1929 av de tio populäraste skotska havsöringsflugorna tar med en ”Teal
+    & Silver”, som kanske hade det blå hacklet, kanske inte.
+    """
+
+// en fishing: Above all a sea-trout fly. Stewart rated it highly for sea trout, and for salmon in brackish water, where it passes for fry or sprats; small sizes take brown trout at night in high summer. On lochs and rivers it shows up well in coloured water, and it does best in September and October, when trout are chasing fry.
+fishing """
+    Framför allt en havsöringsfluga. Stewart satte den högt för havsöring, och för lax i
+    brackvatten, där den kan tas för yngel eller skarpsill; små storlekar tar öring på
+    natten under högsommaren. I sjöar och älvar syns den väl i grumligt vatten, och den gör
+    sig bäst i september och oktober, när öringen jagar yngel.
+    """
+
+labels {
+    // en throat: Kingfisher-blue hackle fibres
+    throat "Kungsfiskarblå hackelfibrer"
+}
+
+notes {
+    // en step 3 (tie-in tail): Five or six fibres, so the black bars show at the tips.
+    step 3 "Fem eller sex fibrer, så att de svarta banden syns i spetsarna."
+    // en step 7 (wind body): Touching turns, untapered.
+    step 7 "Täta varv, utan avsmalning."
+    // en step 9 (wind rib): Open turns, protecting the tinsel.
+    step 9 "Glesa varv, som skyddar tinseln."
+    // en step 12 (tie-in wing): A section of teal flank folded lengthwise, so the barring shows on both sides; start wider than you think.
+    step 12 "En sektion av sidfjäder från krickand, vikt på längden så att randningen syns på båda sidor; börja bredare än du tror."
+    // en step 13 (whip-finish): Varnish the head black.
+    step 13 "Lacka huvudet svart."
+}

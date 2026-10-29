@@ -1,0 +1,45 @@
+id adams
+status draft
+
+// en description: Mixed brown and grizzly tail, a grey dubbed body, upright grizzly hackle-tip wings and a collar of brown and grizzly hackle.
+description "Blandad stjärt av brunt och grizzly, en grå dubbad kropp, upprätta vingar av grizzly hackelspetsar och en krage av brunt och grizzly hackel."
+
+// en history: Leonard Halladay, an innkeeper and tyer at Mayfield, Michigan, created the Adams in 1922 and named it after his friend Charles F. Adams, an Ohio attorney. Accounts of how it came about differ: Wikipedia has Adams first fishing it on the Boardman River near Traverse City, Rusty Dunn has him bringing Halladay an insect to copy, and a MidCurrent video has the two of them fishing the Mayfield pond. The original had a golden pheasant tippet tail and hackle-tip wings, which Dunn describes as set three-quarters spent.
+//
+//    The upright-winged, hackle-fibre-tailed Catskill dressing tied today appeared in the 1930s.
+history """
+    Leonard Halladay, värdshusvärd och flugbindare i Mayfield i Michigan, skapade Adams 1922 och döpte den efter sin vän Charles F. Adams, advokat från Ohio. Berättelserna om hur den kom till går isär: enligt Wikipedia fiskade Adams den första gången i Boardman River nära Traverse City, enligt Rusty Dunn kom han till Halladay med en insekt som han ville ha efterliknad, och i en video från MidCurrent fiskar de två tillsammans i dammen i Mayfield. Originalet hade stjärt av guldfasantippet och vingar av hackelspetsar, som enligt Dunn var satta trekvarts spent.
+
+    Den dressing i Catskillstil som binds i dag, med upprätta vingar och stjärt av hackelfibrer, kom till på 1930-talet.
+    """
+
+// en fishing: A searching dry for when nothing in particular is hatching: it copies no one insect, and its grey passes for mayflies, caddis and midges alike. Fish it on a dead drift. Sizes 12 to 18 are the usual range.
+fishing """
+    En torrfluga att leta fisk med när inget särskilt kläcker: den efterliknar ingen enskild insekt, och det grå går för dagsländor, nattsländor och fjädermyggor lika väl. Låt den driva fritt. Storlek 12–18 är det vanliga.
+    """
+
+labels {
+    // en wings: Grizzly hen hackle tips
+    wings "Spetsar av grizzly hönshackel"
+    // en tail-brown: Brown cock hackle fibres
+    tail-brown "Bruna tupphackelfibrer"
+    // en tail-grizzly: Grizzly cock hackle fibres
+    tail-grizzly "Grizzly tupphackelfibrer"
+    // en body: Adams grey dubbing (muskrat)
+    body "Adamsgrå dubbing (bisam)"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave one eye-length bare behind the eye.
+    step 1 "Lämna lika mycket bart skaft bakom krokögat som ögat är långt."
+    // en step 3 (tie-in wings): Tie the tips in pointing over the eye, then stand them up with turns in front.
+    step 3 "Bind in spetsarna så att de pekar fram över krokögat och res dem sedan med några varv framför."
+    // en step 5 (tie-in tail-brown): The tail is about as long as the shank.
+    step 5 "Stjärten är ungefär lika lång som krokskaftet."
+    // en step 7 (dub body): Thin and slightly tapered, stopping just behind the wings.
+    step 7 "Tunn och lätt avsmalnande; sluta strax bakom vingarna."
+    // en step 11 (wind hackle-brown): Two turns behind the wings, two in front.
+    step 11 "Två varv bakom vingarna, två framför."
+    // en step 13 (wind hackle-grizzly): Wind it through the brown without trapping its barbs.
+    step 13 "Linda det genom det bruna hacklet utan att klämma fast dess fibrer."
+}

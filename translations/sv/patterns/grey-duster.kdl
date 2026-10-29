@@ -1,0 +1,31 @@
+id grey-duster
+status draft
+
+// en description: A carrot-shaped body of blue-grey rabbit underfur and a badger cock hackle, without tail or wings.
+description "En morotsformad kropp av blågrå underull från kanin och ett tupphackel i badger, utan stjärt och vingar."
+
+// en history: An old British pattern of unknown origin. Scott Sadil traces it to anglers on the upper Dee in Wales, a century or more ago; Fish4Flies gives England and says it began as a stillwater midge. Neither gives a source. Courtney Williams ranked it with the best mayfly imitations or above them, and Stan Headley writes of anglers who use no other fly whenever mayflies hatch (both as reported by Sadil).
+history """
+    Ett gammalt brittiskt mönster av okänt ursprung. Scott Sadil spårar det till fiskare vid övre Dee i Wales, för ett sekel sedan eller mer; Fish4Flies anger England och säger att det började som en fjädermygga för sjöfiske. Ingen av dem anger någon källa. Courtney Williams ställde den i nivå med de bästa dagsländeimitationerna eller över dem, och Stan Headley skriver om fiskare som inte använder någon annan fluga när dagsländorna kläcker (båda enligt Sadil).
+    """
+
+// en fishing: For rivers and stillwaters. Without a tail the rear end breaks the surface and the fly hangs in the film; Bob Wyatt reads it as an emerger rather than a dun. A general mayfly imitation, tied small for Caenis, the angler's curse; Preben Torp Jacobsen found a parachute version took Caenis feeders that refused everything else. It is hard to see once it settles: watch for any rise near it. Andrew Overend fishes it as a searching dry for trout and grayling, above all on the Welsh Dee.
+fishing """
+    För strömmande och stilla vatten. Utan stjärt bryter bakdelen ytan och flugan hänger i ytfilmen; Bob Wyatt ser den som en kläckare snarare än en dun. En allmän dagsländeimitation, bunden liten för Caenis, ”fiskarens förbannelse”; Preben Torp Jacobsen fann att en parachuteversion tog fisk som stod och åt Caenis och refuserade allt annat. Den är svår att se när den väl har lagt sig: håll utkik efter varje vak nära den. Andrew Overend fiskar den som torrfluga att leta fisk med, för öring och harr, framför allt i walesiska Dee.
+    """
+
+labels {
+    // en body: Blue-grey rabbit underfur
+    body "Blågrå underull från kanin"
+    // en hackle: Badger cock hackle
+    hackle "Tupphackel i badger"
+}
+
+notes {
+    // en step 3 (dub body): Carrot-shaped: thin at the rear, fatter forward, a little further forward than on a winged fly.
+    step 3 "Morotsformad: tunn baktill, tjockare framåt, och lite längre fram än på en vingad fluga."
+    // en step 4 (tie-in hackle): Webby base stripped, underside facing you.
+    step 4 "Den duniga basen rensad, undersidan mot dig."
+    // en step 8 (whip-finish): A small, neat head.
+    step 8 "Ett litet, prydligt huvud."
+}

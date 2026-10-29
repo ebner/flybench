@@ -1,0 +1,33 @@
+id teal-blue-and-silver
+status draft
+
+// en description: A golden pheasant tippet tail, a flat silver body with a wire rib, a blue hackle throat and a barred teal flank wing.
+description "Ein Schwanz aus Goldfasan-Tippet, ein flacher Silberkörper mit Drahtrippung, ein blauer Bart und ein Flügel aus gebänderter Flankenfeder der Krickente."
+
+// en history: One of the Teal series of Scottish loch and sea-trout flies, which share the barred teal wing and vary the body and hackle. No originator or date is recorded. Tom Stewart saw it as a pared-down Silver Doctor. R. C. Bridgett's 1929 ranking of the ten most popular Scottish sea-trout flies includes a "Teal & Silver", which may or may not have had the blue hackle.
+history """
+    Eine aus der Teal-Serie schottischer Loch- und Meerforellenfliegen, die alle den gebänderten Krickentenflügel teilen und Körper und Hechel variieren. Urheber und Datum sind nicht überliefert. Tom Stewart sah in ihr eine abgespeckte Silver Doctor. R. C. Bridgetts Rangliste der zehn beliebtesten schottischen Meerforellenfliegen von 1929 enthält eine „Teal & Silver“, die die blaue Hechel gehabt haben mag oder auch nicht.
+    """
+
+// en fishing: Above all a sea-trout fly. Stewart rated it highly for sea trout, and for salmon in brackish water, where it passes for fry or sprats; small sizes take brown trout at night in high summer. On lochs and rivers it shows up well in coloured water, and it does best in September and October, when trout are chasing fry.
+fishing """
+    Vor allem eine Meerforellenfliege. Stewart schätzte sie sehr für Meerforellen und für Lachse im Brackwasser, wo sie als Fischbrut oder Sprotte durchgeht; kleine Größen fangen im Hochsommer nachts Bachforellen. An Lochs und Flüssen ist sie in angetrübtem Wasser gut zu sehen, und am besten läuft sie im September und Oktober, wenn die Forellen Fischbrut jagen.
+    """
+
+labels {
+    // en throat: Kingfisher-blue hackle fibres
+    throat "Eisvogelblaue Hechelfibern"
+}
+
+notes {
+    // en step 3 (tie-in tail): Five or six fibres, so the black bars show at the tips.
+    step 3 "Fünf oder sechs Fibern, damit die schwarzen Bänder an den Spitzen zu sehen sind."
+    // en step 7 (wind body): Touching turns, untapered.
+    step 7 "Windung an Windung, ohne Verjüngung."
+    // en step 9 (wind rib): Open turns, protecting the tinsel.
+    step 9 "Offene Windungen, die das Tinsel schützen."
+    // en step 12 (tie-in wing): A section of teal flank folded lengthwise, so the barring shows on both sides; start wider than you think.
+    step 12 "Ein Stück Krickentenflanke, der Länge nach gefaltet, damit die Bänderung auf beiden Seiten zu sehen ist; nimm es anfangs breiter, als du denkst."
+    // en step 13 (whip-finish): Varnish the head black.
+    step 13 "Lackiere den Kopf schwarz."
+}

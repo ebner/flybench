@@ -1,0 +1,31 @@
+id griffiths-gnat
+status draft
+
+// en description: A peacock herl body with an undersized grizzly hackle palmered over it; no tail, no wing.
+description "Ein Körper aus Pfauengras, darüber eine für den Haken zu kleine Grizzly-Hechel gepalmert; kein Schwanz, kein Flügel."
+
+// en history: Usually credited to George Griffith (1901–1998) of the Au Sable River in Michigan, at whose home Trout Unlimited was founded in 1959. Its origin is not well documented: Sexyloops reports that some credit a Walt Shaw with the fly and Griffith with making it known, and that it seems to go back at least to the 1930s.
+history """
+    Meist George Griffith (1901–1998) vom Au Sable River in Michigan zugeschrieben, in dessen Haus 1959 Trout Unlimited gegründet wurde. Ihre Herkunft ist schlecht belegt: Sexyloops berichtet, manche schrieben die Fliege einem Walt Shaw zu und Griffith nur ihre Bekanntheit, und sie scheine mindestens bis in die 1930er-Jahre zurückzureichen.
+    """
+
+// en fishing: Imitates a cluster of mating midges, or a single adult in the smallest sizes. A fly for gentle, sipping rises on smooth water. Rusty Dunn suggests clipping the hackle off underneath so it rides lower, like a stillborn or crippled midge, or hanging a small pupa just under the surface behind it. It is also fished behind a larger, more visible dry.
+fishing """
+    Sie imitiert einen Klumpen paarender Zuckmücken oder, in den kleinsten Größen, eine einzelne erwachsene Mücke. Eine Fliege für sanftes, schlürfendes Steigen auf glattem Wasser. Rusty Dunn schlägt vor, die Hechel unten abzuschneiden, damit sie tiefer liegt wie eine im Schlupf steckengebliebene oder verkrüppelte Mücke, oder eine kleine Puppe knapp unter der Oberfläche dahinter zu hängen. Sie wird auch hinter einer größeren, besser sichtbaren Trockenfliege gefischt.
+    """
+
+labels {
+    // en hackle: Grizzly cock (saddle) hackle
+    hackle "Grizzly-Hahnenhechel (Sattel)"
+}
+
+notes {
+    // en step 3 (tie-in hackle): By the butt, at the bend; deliberately undersized.
+    step 3 "Am Kielende, am Hakenbogen; bewusst zu klein."
+    // en step 4 (tie-in body): Fine herls from near the eye of the quill.
+    step 4 "Feine Stränge von nahe dem Auge der Pfauenfeder."
+    // en step 6 (wind body): Touching turns; twisting the herl round the thread makes it tougher.
+    step 6 "Windung an Windung; um den Bindefaden gedrillt wird das Pfauengras haltbarer."
+    // en step 8 (wind hackle): Five evenly spaced turns.
+    step 8 "Fünf gleichmäßig verteilte Windungen."
+}

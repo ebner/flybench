@@ -1,0 +1,24 @@
+id prawn
+status draft
+
+// en name: Prawn
+name "Garnele"
+
+// en description: A long, slim, half-translucent prawn with a pink-orange tinge, long antennae and a fan tail. The prawn the salmon flies suggest.
+description "Eine lange, schlanke, halb durchscheinende Garnele mit rosa-orangem Schimmer, langen Antennen und einem Schwanzfächer. Die Garnele, die die Lachsfliegen andeuten."
+
+// en examples: Palaemon (rockpool and common prawns)
+examples "Palaemon (Kleine und Große Felsengarnele)"
+
+hatches {
+    // en southern-sweden note: Fished in the salmon and sea-trout seasons.
+    southern-sweden note="In der Lachs- und Meerforellensaison gefischt."
+    // en northern-scandinavia note: Fished in the salmon and sea-trout seasons.
+    northern-scandinavia note="In der Lachs- und Meerforellensaison gefischt."
+    // en british-isles note: Fished in the salmon and sea-trout seasons.
+    british-isles note="In der Lachs- und Meerforellensaison gefischt."
+    // en central-europe note: Fished in the salmon and sea-trout seasons.
+    central-europe note="In der Lachs- und Meerforellensaison gefischt."
+    // en northern-usa note: Fished in the salmon and sea-trout seasons.
+    northern-usa note="In der Lachs- und Meerforellensaison gefischt."
+}

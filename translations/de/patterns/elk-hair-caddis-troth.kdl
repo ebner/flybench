@@ -1,0 +1,18 @@
+id elk-hair-caddis-troth
+status draft
+
+// en variant: Troth original
+variant "Troths Original"
+
+// en description: The Elk Hair Caddis after Troth's 1978 article: the hair butts left long instead of trimmed into a neat head.
+description "Die Elk Hair Caddis nach Troths Artikel von 1978: Die Haarenden bleiben lang, statt zu einem sauberen Kopf gestutzt zu werden."
+
+// en history: Troth described the fly in Fly Tyer in 1978 (the Fall issue; some give November). Fly Tyer's own reprint of his dressing, the Federation of Fly Fishers' 1998 Fly of the Month and the Fly Fishers International (FFI) skills award version give a fine gold wire rib, which this variant follows; the Golden Fly Shop's account of the article has fine copper wire instead. Fly Tyer notes that the article does not mention the clipped-hair head, which other tyers added. The FFI version, meant to be as close to Troth's original as possible, still clips the butts, but at an angle in line with the wing rather than square.
+history """
+    Troth beschrieb die Fliege 1978 in Fly Tyer (in der Herbstausgabe; manche nennen November). Fly Tyers eigener Nachdruck seiner Bindeweise, die Fly of the Month 1998 der Federation of Fly Fishers und die Version für das Skills-Award-Programm von Fly Fishers International (FFI) nennen eine Rippung aus feinem Golddraht, der diese Variante folgt; der Bericht des Golden Fly Shop über den Artikel hat stattdessen feinen Kupferdraht. Fly Tyer merkt an, dass der Artikel den gestutzten Haarkopf nicht erwähnt, den andere Binder hinzufügten. Die FFI-Version, die Troths Original so nahe wie möglich kommen soll, stutzt die Enden trotzdem, aber schräg in einer Linie mit dem Flügel statt gerade.
+    """
+
+notes {
+    // en step 11 (whip-finish): Whip finish behind the hair; the butts stay long.
+    step 11 "Kopfknoten hinter dem Haar; die Enden bleiben lang."
+}

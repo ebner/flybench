@@ -1,0 +1,28 @@
+id brassie
+status draft
+
+// en description: A body of copper wire in touching turns and a small peacock herl head.
+description "Ein Körper aus Kupferdraht, Windung an Windung gewickelt, und ein kleiner Kopf aus Pfauengras."
+
+// en history: From the South Platte in Colorado in the 1960s. Rusty Dunn credits Gene Lynch of Colorado Springs, with Ken Chandler and Tug Davenport refining it: Lynch had wrapped bare hooks with copper wire as underbodies for weighted nymphs, and when he fished one as a weight ahead of a nymph, the fish took the bare wire hook instead. Pierre Joubert reports only a claim that an electronics hobbyist created it. It is named after the brass-plated copper wire of the originals, which had heads of black heat-shrink tubing.
+history """
+    Sie stammt vom South Platte in Colorado, aus den 1960er-Jahren. Rusty Dunn schreibt sie Gene Lynch aus Colorado Springs zu, verfeinert von Ken Chandler und Tug Davenport: Lynch hatte blanke Haken als Unterkörper für beschwerte Nymphen mit Kupferdraht umwickelt, und als er einen davon als Gewicht vor einer Nymphe fischte, nahmen die Fische stattdessen den blanken Drahthaken. Pierre Joubert gibt nur die Behauptung wieder, ein Elektronikbastler habe sie erfunden. Benannt ist sie nach dem vermessingten Kupferdraht der Originale, die einen Kopf aus schwarzem Schrumpfschlauch hatten.
+    """
+
+// en fishing: A heavy, slim fly that sinks quickly, suggesting midge and caddis larvae. In rivers, fish it deep in a nymph rig or below a dry fly; on lakes it can be fished like a buzzer, behind other flies with a figure-of-eight retrieve. Plain copper is the usual wire, with red and green close behind, and many tie it with a bead.
+fishing """
+    Eine schwere, schlanke Fliege, die schnell sinkt und an Zuckmücken- und Köcherfliegenlarven erinnert. Im Fluss fischst du sie tief an einer Nymphenmontage oder unter einer Trockenfliege; im See lässt sie sich wie ein Buzzer fischen, hinter anderen Fliegen und mit Handwickeleinzug (Figure of Eight). Blankes Kupfer ist der übliche Draht, Rot und Grün folgen dicht dahinter, und viele binden sie mit Kopfperle.
+    """
+
+notes {
+    // en step 1 (attach-thread): Leave room for the head.
+    step 1 "Lass Platz für den Kopf."
+    // en step 2 (wrap-thread): Binding the wire along the near side, for a smooth underbody.
+    step 2 "Binde dabei den Draht an der dir zugewandten Seite fest, für einen glatten Unterkörper."
+    // en step 5 (wind body): Tight, touching turns, by hand; nudge them together.
+    step 5 "Feste Windungen dicht an dicht, von Hand; schieb sie zusammen."
+    // en step 6 (tie-off body): Break the wire off by flexing it.
+    step 6 "Brich den Draht durch Hin- und Herbiegen ab."
+    // en step 9 (wind head): A short, fat herl head.
+    step 9 "Ein kurzer, dicker Kopf aus Pfauengras."
+}

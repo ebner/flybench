@@ -1,0 +1,24 @@
+id ant
+status draft
+
+// en name: Ant
+name "Myra"
+
+// en description: A glossy black worker: head, thorax and a large rounded gaster joined by a thin waist. Ants fall onto the water on warm days and float half sunk in the film; in late summer winged swarms come down in numbers.
+description "En blanksvart arbetsmyra: huvud, mellankropp och en stor, rundad bakkropp med en smal midja emellan. Myror faller ner på vattnet varma dagar och flyter halvt nedsjunkna i ytfilmen; på sensommaren kommer svärmar av flygmyror ner i mängder."
+
+// en examples: black garden ant (Lasius niger)
+examples "svart trädgårdsmyra (Lasius niger)"
+
+hatches {
+    // en southern-sweden note: Estimate; flying ants July–August.
+    southern-sweden note="Uppskattning; flygmyror i juli–augusti."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles note: Estimate; flying-ant swarms July–August (Wikipedia).
+    british-isles note="Uppskattning; svärmar av flygmyror i juli–augusti (Wikipedia)."
+    // en central-europe note: Estimate; flights July–August (Wikipedia).
+    central-europe note="Uppskattning; svärmning i juli–augusti (Wikipedia)."
+    // en northern-usa note: Estimate from June; ants from mid-July on the Madison (Montana Angler); flights usually in autumn (Wikipedia).
+    northern-usa note="Uppskattning från juni; myror från mitten av juli på Madison (Montana Angler); svärmningen oftast på hösten (Wikipedia)."
+}

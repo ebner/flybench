@@ -1,0 +1,50 @@
+id pheasant-tail-nymph-american
+status draft
+
+// en variant: American (Troth)
+variant "Amerikansk (Troth)"
+
+// en description: Pheasant tail tail and abdomen with a counter-wound copper rib, a weighted peacock herl thorax, a pheasant tail wing case and legs.
+description "Stjärt och bakkropp av fasanstjärt med en motlindad ribb av koppartråd, en förtyngd thorax av påfågelherl, och vingsäck och ben av fasanstjärt."
+
+// en history: Al Troth, the Montana tyer behind the Elk Hair Caddis, wanted a heavier-looking nymph than Sawyer's, with legs that show, and weighted it with lead wire. His version has a peacock herl thorax; Dave Hughes lists it as the Pheasant Tail Peacock Thorax, and in the United States it is known as the Pheasant Tail Nymph, American version. Ben Spinks, though, credits the idea of the peacock thorax to John Gierach's Good Flies (2000). The gold bead (Theo Bakelaar, 1988) and the flashback (Andre Puyans) came later.
+history """
+    Al Troth, bindaren från Montana bakom Elk Hair Caddis, ville ha en nymf som såg tyngre
+    ut än Sawyers, med ben som syns, och förtyngde den med blytråd. Hans version har en
+    thorax av påfågelherl; Dave Hughes listar den som Pheasant Tail Peacock Thorax, och i
+    USA är den känd som Pheasant Tail Nymph, American version. Ben Spinks tillskriver dock
+    idén med påfågelthoraxen John Gierachs Good Flies (2000). Guldkulan (Theo Bakelaar,
+    1988) och flashbacken (Andre Puyans) kom senare.
+    """
+
+// en fishing: A staple searching nymph, tied in the size of whatever mayfly nymphs are about; Orvis presents it as a Baetis imitation. Rogue Fly Fishers rate it for winter trout in western streams, and on lakes it does well when Callibaetis are hatching.
+fishing """
+    En given avsökande nymf, bunden i samma storlek som de dagsländenymfer som finns i
+    vattnet; Orvis presenterar den som en Baetis-imitation. Rogue Fly Fishers framhåller den
+    för vinterfiske efter öring i strömmarna i västra USA, och i sjöar gör den sig bra när
+    Callibaetis kläcker.
+    """
+
+labels {
+    // en case: Pheasant tail fibres (wing case and legs)
+    case "Fasanstjärtfibrer (vingsäck och ben)"
+    // en legs: Pheasant tail fibre tips (legs)
+    legs "Spetsar av fasanstjärtfibrer (ben)"
+}
+
+notes {
+    // en step 1 (weight weight): Under the thorax only.
+    step 1 "Bara under thoraxen."
+    // en step 4 (tie-in tail): Tips aligned, on top; keep the butts for the abdomen.
+    step 4 "Spetsarna i jämnhöjd, ovanpå; spara rotändarna till bakkroppen."
+    // en step 7 (wind tail): The butts as a flat ribbon over the rear two thirds.
+    step 7 "Rotändarna som ett platt band över de bakre två tredjedelarna."
+    // en step 9 (wind rib): In open turns.
+    step 9 "I glesa varv."
+    // en step 11 (tie-in case): On top at the front of the abdomen, tips forward.
+    step 11 "Ovanpå, framtill på bakkroppen, med spetsarna framåt."
+    // en step 14 (wind thorax): Twist the herls lightly and wind in touching turns.
+    step 14 "Tvinna herlen lätt och linda i täta varv."
+    // en step 17 (tie-in legs): About as long as the thorax.
+    step 17 "Ungefär lika långa som thoraxen."
+}

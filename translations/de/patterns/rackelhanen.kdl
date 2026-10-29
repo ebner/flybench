@@ -1,0 +1,31 @@
+id rackelhanen
+status draft
+
+// en description: A shaggy body of chopped poly yarn, fuller at the rear, a double poly-yarn wing folded over the back, and a dubbed front body.
+description "Ein struppiger Körper aus zerschnittenem Polystrang, hinten voller, ein doppelter Flügel aus Polystrang, über den Rücken gefaltet, und ein gedubbter Vorderkörper."
+
+// en history: Kenneth Boström tied it in 1967 during a caddis hatch on the Vänneån in southern Sweden, where the fish took only caddis hatching just under the surface. He thought it ugly and was slow to show it to his friends. One of them named it after the rackelhane, the hybrid of a black grouse and a capercaillie, because it looked like a "bastard". Boström does not name the friend; Lars Chr. Bentsen (Ahrex), who heard the story from Boström, says it was Lennart Bergqvist, and that Boström had called it Boström's Sedge.
+history """
+    Kenneth Boström band sie 1967 während eines Köcherfliegenschlupfs an der Vänneån in Südschweden, wo die Fische nur Köcherfliegen nahmen, die knapp unter der Oberfläche schlüpften. Er fand sie hässlich und zögerte lange, sie seinen Freunden zu zeigen. Einer von ihnen benannte sie nach dem Rackelhahn, der Kreuzung aus Birkhuhn und Auerhuhn, weil sie wie ein „Bastard“ aussah. Boström nennt den Freund nicht; Lars Chr. Bentsen (Ahrex), der die Geschichte von Boström selbst gehört hat, sagt, es sei Lennart Bergqvist gewesen und Boström habe sie Boström’s Sedge genannt.
+    """
+
+// en fishing: Always treat it with floatant. Boström's four ways: short, nervous strips for egg-laying caddis; without wings as a swimming pupa; pulled under and let go so it pops up like a hatching caddis; or dead drift as a spent caddis. Pulled under, it trails bubbles from the air in its wing. Kasper Mühlbach uses it for grayling in fast water, where it stays visible even in the light summer nights.
+fishing """
+    Behandle sie immer mit Schwimmmittel. Boströms vier Methoden: kurze, nervöse Züge für eierlegende Köcherfliegen; ohne Flügel als schwimmende Puppe; unter Wasser gezogen und losgelassen, damit sie wie eine schlüpfende Köcherfliege auftaucht; oder frei treibend als verendete Köcherfliege. Unter Wasser gezogen, zieht sie Luftblasen aus ihrem Flügel hinter sich her. Kasper Mühlbach fischt sie in schnellem Wasser auf Äschen, wo sie selbst in den hellen Sommernächten gut zu sehen bleibt.
+    """
+
+labels {
+    // en body: Poly yarn, cut into 1 cm pieces and dubbed
+    body "Polystrang, in 1 cm lange Stücke geschnitten und gedubbt"
+    // en front: Poly yarn, cut into 1–2 cm pieces and dubbed
+    front "Polystrang, in 1–2 cm lange Stücke geschnitten und gedubbt"
+}
+
+notes {
+    // en step 3 (dub body): Touch-dub the fluffed yarn onto waxed thread; two turns back towards the bend, then forward, so the rear is fuller.
+    step 3 "Bringe das aufgezupfte Garn per Touch-Dubbing auf den gewachsten Bindefaden; zwei Windungen zurück zum Hakenbogen, dann nach vorn, damit der hintere Teil voller wird."
+    // en step 4 (tie-in wing): Tied in by its middle, one half back, the other folded back over it; trimmed to end just behind the bend.
+    step 4 "In der Mitte eingebunden, eine Hälfte nach hinten, die andere darüber nach hinten gefaltet; so gekürzt, dass er knapp hinter dem Hakenbogen endet."
+    // en step 6 (whip-finish): Tease out the body fibres for legs.
+    step 6 "Zupfe die Körperfibern als Beine heraus."
+}

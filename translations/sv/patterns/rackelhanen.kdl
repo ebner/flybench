@@ -1,0 +1,41 @@
+id rackelhanen
+status draft
+
+// en description: A shaggy body of chopped poly yarn, fuller at the rear, a double poly-yarn wing folded over the back, and a dubbed front body.
+description "En raggig kropp av finklippt polygarn, fylligare baktill, en dubbel vinge av polygarn vikt över ryggen, och en dubbad framkropp."
+
+// en history: Kenneth Boström tied it in 1967 during a caddis hatch on the Vänneån in southern Sweden, where the fish took only caddis hatching just under the surface. He thought it ugly and was slow to show it to his friends. One of them named it after the rackelhane, the hybrid of a black grouse and a capercaillie, because it looked like a "bastard". Boström does not name the friend; Lars Chr. Bentsen (Ahrex), who heard the story from Boström, says it was Lennart Bergqvist, and that Boström had called it Boström's Sedge.
+history """
+    Kenneth Boström band den 1967 under en nattsländekläckning i Vänneån i södra Sverige,
+    där fisken bara tog nattsländor som kläckte strax under ytan. Han tyckte att den var ful
+    och dröjde med att visa den för sina vänner. En av dem döpte den efter rackelhanen,
+    korsningen mellan orre och tjäder, eftersom den såg ut som en ”bastard”. Boström nämner
+    inte vännen vid namn; Lars Chr. Bentsen (Ahrex), som hörde historien av Boström, säger
+    att det var Lennart Bergqvist och att Boström hade kallat den Boström's Sedge.
+    """
+
+// en fishing: Always treat it with floatant. Boström's four ways: short, nervous strips for egg-laying caddis; without wings as a swimming pupa; pulled under and let go so it pops up like a hatching caddis; or dead drift as a spent caddis. Pulled under, it trails bubbles from the air in its wing. Kasper Mühlbach uses it for grayling in fast water, where it stays visible even in the light summer nights.
+fishing """
+    Behandla den alltid med flytmedel. Boströms fyra sätt: korta, nervösa ryck för
+    äggläggande nattsländor; utan vingar som en simmande puppa; neddragen och släppt så att
+    den poppar upp som en kläckande nattslända; eller fritt drivande som en utmattad
+    nattslända. Dras den under ytan släpar den med sig luftbubblor från vingen. Kasper
+    Mühlbach använder den för harr i strömt vatten, där den syns även under de ljusa
+    sommarnätterna.
+    """
+
+labels {
+    // en body: Poly yarn, cut into 1 cm pieces and dubbed
+    body "Polygarn, klippt i 1 cm långa bitar och dubbat"
+    // en front: Poly yarn, cut into 1–2 cm pieces and dubbed
+    front "Polygarn, klippt i 1–2 cm långa bitar och dubbat"
+}
+
+notes {
+    // en step 3 (dub body): Touch-dub the fluffed yarn onto waxed thread; two turns back towards the bend, then forward, so the rear is fuller.
+    step 3 "Touch-dubba det luftiga garnet på vaxad bindtråd; två varv bakåt mot krokböjen, sedan framåt, så att bakdelen blir fylligare."
+    // en step 4 (tie-in wing): Tied in by its middle, one half back, the other folded back over it; trimmed to end just behind the bend.
+    step 4 "Inbunden på mitten, ena halvan bakåt och den andra vikt bakåt över den; klippt så att den slutar strax bakom krokböjen."
+    // en step 6 (whip-finish): Tease out the body fibres for legs.
+    step 6 "Plocka ut kroppsfibrerna till ben."
+}

@@ -1,0 +1,41 @@
+id foam-beetle
+status draft
+
+// en description: A black foam shell folded over a peacock herl body, moose hair legs at the sides and a small orange sighter on top.
+description "Ett svart skal av foam vikt över en kropp av påfågelherl, ben av älghår på sidorna och en liten orange markör ovanpå."
+
+// en history: The sources credit no one with it. It is the foam descendant of the folded deer-hair Crowe Beetle, developed and popularised by John Crowe of Johnstown, Pennsylvania. Deer hair wears out quickly, often after a fish or two, while a foam beetle can last through a dozen. None of the sources says when foam took over from deer hair.
+history """
+    Källorna tillskriver den ingen. Den är en ättling i foam till Crowe Beetle, en skalbagge av vikt hjorthår som togs fram och gjordes populär av John Crowe från Johnstown i Pennsylvania. Hjorthår slits fort, ofta efter en fisk eller två, medan en skalbagge av foam kan hålla för ett dussin. Ingen av källorna säger när foam tog över efter hjorthåret.
+    """
+
+// en fishing: Fish it close to the banks in summer, when beetles fall in. Let it land with a plop: George Daniel points out that trout lying deep under an undercut bank may feel the impact before they see the fly. The foam keeps it afloat, and the sighter makes the low-riding black fly easier to follow. Beetles are also a standby for panfish.
+fishing """
+    Fiska den nära stränderna på sommaren, när skalbaggar ramlar i. Låt den landa med ett plopp: George Daniel påpekar att öring som står djupt in under en urholkad strandkant kan känna nedslaget innan den ser flugan. Foamen håller den flytande, och markören gör den lågt flytande svarta flugan lättare att följa. Skalbaggar är också en självklar fluga för panfish.
+    """
+
+labels {
+    // en back: Black foam strip, as wide as the gape
+    back "Remsa av svart foam, lika bred som krokgapet"
+    // en legs: Moose hair (legs)
+    legs "Älghår (ben)"
+    // en sighter: Orange foam or yarn sighter
+    sighter "Markör av orange foam eller garn"
+}
+
+notes {
+    // en step 1 (attach-thread): Craven ties the pointed end of the foam in here and binds it back on top of the shank.
+    step 1 "Craven binder in foamens spetsiga ände här och binder den bakåt ovanpå krokskaftet."
+    // en step 3 (tie-in back): Bound down on top to just past the bend, the long end trailing.
+    step 3 "Nedbunden ovanpå till strax förbi krokböjen, med den långa änden hängande bakåt."
+    // en step 6 (tie-in legs): Six moose hairs crosswise, three a side.
+    step 6 "Sex älghår på tvären, tre på varje sida."
+    // en step 8 (wind body): Touching turns, past the legs to just behind the eye.
+    step 8 "Täta varv, förbi benen till strax bakom krokögat."
+    // en step 11 (pull-over back): Fold it over the body and lock it down with a few tight turns.
+    step 11 "Vik den över kroppen och lås den med några hårt dragna varv."
+    // en step 13 (tie-in sighter): A narrow strip on top at the joint, trimmed short.
+    step 13 "En smal remsa ovanpå vid infästningen, kortklippt."
+    // en step 14 (whip-finish): At the joint; pull the legs down and trim them.
+    step 14 "Vid infästningen; dra ner benen och klipp dem."
+}

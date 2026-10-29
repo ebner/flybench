@@ -1,0 +1,35 @@
+id gammarus
+status draft
+
+// en description: A plump olive dubbed body on a curved hook, a tan shellback and a gold wire rib, with the dubbing brushed out underneath for legs.
+description "Ein praller, gedubbter olivfarbener Körper auf einem gebogenen Haken, ein hellbrauner Rücken und eine Golddrahtrippung; unten ist das Dubbing als Beine herausgebürstet."
+
+// en history: Not one pattern but a family: imitations of the freshwater shrimps (Gammarus and other amphipods) that trout and grayling eat all year. This is the plain dubbed, shellbacked and ribbed scud; Oliver Edwards' Deep Diving Shrimp and Nick Thomas' Shwimp are well-known relatives. Orange and pink versions are fished for sea trout on Scandinavian coasts.
+history """
+    Kein einzelnes Muster, sondern eine Familie: Imitationen der Flohkrebse des Süßwassers (Gammarus und andere Amphipoden), die Forellen und Äschen das ganze Jahr über fressen. Dies ist der schlichte Scud, gedubbt, mit Rücken und Rippung; Oliver Edwards' Deep Diving Shrimp und Nick Thomas' Shwimp sind bekannte Verwandte. Orangefarbene und rosa Versionen werden an skandinavischen Küsten auf Meerforelle gefischt.
+    """
+
+// en fishing: Fish it near the bottom, where the naturals live among weed, gravel and stones; the tyer in Orvis's Simple Scud video finds trout will take a scud in most places, above all on overcast days. Nick Thomas fishes his weighted Shwimp on a dropper for winter grayling on big rivers, and on its own in plunge pools on small streams. Weight decides the depth: the Simple Scud has none, the Deep Diving Shrimp has lead-free foil, the Shwimp a tungsten bead.
+fishing """
+    Fische sie grundnah, wo die Vorbilder zwischen Kraut, Kies und Steinen leben; der Binder im Orvis-Video Simple Scud findet, dass Forellen einen Scud fast überall nehmen, vor allem an bedeckten Tagen. Nick Thomas fischt seinen beschwerten Shwimp im Winter an einem Springer auf Äschen in großen Flüssen und an kleinen Bächen allein in Gumpen. Das Gewicht bestimmt die Tiefe: Der Simple Scud hat keines, der Deep Diving Shrimp bleifreie Folie, der Shwimp eine Tungstenperle.
+    """
+
+labels {
+    // en antennae: Olive fibres (antennae)
+    antennae "Olivfarbene Fibern (Antennen)"
+    // en body: Smoky olive scud dubbing
+    body "Scud-Dubbing in Smoky Olive"
+}
+
+notes {
+    // en step 3 (tie-in antennae): A thin wisp, trimmed short.
+    step 3 "Nur ein paar Fibern, kurz geschnitten."
+    // en step 5 (tie-in back): Wrapped back into the bend, centred on top.
+    step 5 "Bis in den Hakenbogen zurück festgebunden, mittig oben."
+    // en step 6 (dub body): A plump body tapering at both ends, stopping short of the eye.
+    step 6 "Ein praller Körper, an beiden Enden verjüngt, mit etwas Abstand vor dem Öhr endend."
+    // en step 8 (wind rib): Open turns over shell and body; firmer pressure gives deeper segments.
+    step 8 "Offene Windungen über Rücken und Körper; mit mehr Zug werden die Segmente tiefer."
+    // en step 10 (whip-finish): Brush out the dubbing underneath for legs about a gape long.
+    step 10 "Bürste das Dubbing unten als Beine heraus, etwa eine Bogenweite lang."
+}

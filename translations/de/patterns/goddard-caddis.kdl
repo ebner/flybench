@@ -1,0 +1,26 @@
+id goddard-caddis
+status draft
+
+// en description: A body of spun and clipped deer hair trimmed to a sedge's tent-shaped wing, and a brown hackle at the front.
+description "Ein Körper aus aufgesponnenem, geschnittenem Rehhaar, getrimmt in die zeltförmige Flügelform einer Köcherfliege, und vorn eine braune Hechel."
+
+// en history: Developed by John Goddard and Cliff Henry in England; G&H are their initials. The Feather Bender takes the original dressing from a 1977 reprint of Goddard's Trout Flies of Still-Water (1969): a belly of dark green seal's fur, two rusty dun hackles and their stripped stems as antennae. Hans Weilenmann gives the belly as olive. Today it is mostly tied with a hard-packed hair body and no belly, and is better known as the Goddard Caddis; posters on Fly Anglers Online, Weilenmann among them, credit that name to the American tyer Andre Puyans.
+history """
+    Entwickelt von John Goddard und Cliff Henry in England; G&H sind ihre Initialen. The Feather Bender entnimmt die ursprüngliche Bindeweise einem Nachdruck von 1977 von Goddards Trout Flies of Still-Water (1969): ein Bauch aus dunkelgrünem Seehunddubbing, zwei Rusty-Dun-Hecheln und deren abgestreifte Kiele als Antennen. Hans Weilenmann gibt den Bauch als olivfarben an. Heute wird sie meist mit einem dicht gepackten Haarkörper und ohne Bauch gebunden und ist besser als Goddard Caddis bekannt; Teilnehmer auf Fly Anglers Online, darunter Weilenmann, schreiben diesen Namen dem amerikanischen Binder Andre Puyans zu.
+    """
+
+// en fishing: Packed deer hair makes it very buoyant, even in rough water, so it can be skated, twitched or pulled to leave a wake, and that movement is often what draws a rise. Global FlyFisher notes that it is easy to see in the last light of a big hatch, but finds it too clumsy for very selective trout.
+fishing """
+    Das dicht gepackte Rehhaar macht sie sehr schwimmfähig, selbst in rauem Wasser; man kann sie skaten, zupfen oder mit Bugwelle ziehen, und gerade diese Bewegung lockt oft einen Fisch nach oben. Global FlyFisher merkt an, dass sie im letzten Licht eines großen Schlupfs gut zu sehen ist, findet sie aber für sehr wählerische Forellen zu plump.
+    """
+
+notes {
+    // en step 3 (spin body): Comb out the underfur; pack each bunch back hard against the last.
+    step 3 "Kämm die Unterwolle aus; drück jedes Büschel fest gegen das vorige zurück."
+    // en step 4 (trim body): Flat underneath at the depth of the eye, the top rising towards the rear, the sides flaring back.
+    step 4 "Unten flach auf Höhe des Öhrs, oben nach hinten ansteigend, die Seiten nach hinten ausgestellt."
+    // en step 5 (tie-in hackle): Slightly undersized.
+    step 5 "Etwas zu klein für den Haken."
+    // en step 7 (wind hackle): A couple of turns back into the hair, then forward.
+    step 7 "Ein, zwei Windungen zurück ins Haar, dann nach vorn."
+}

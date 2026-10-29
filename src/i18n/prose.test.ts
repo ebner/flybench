@@ -55,6 +55,7 @@ notes {
     it(`fit their patterns and naturals (${lang})`, () => {
       const problems: string[] = [];
       for (const f of files(`translations/${lang}/patterns/`)) {
+        if (read(`translations/${lang}/patterns/${f}`).includes('"TODO"')) problems.push(`${f}: TODO left`);
         const p = parsePatternProse(read(`translations/${lang}/patterns/${f}`));
         if (!p.ok) {
           problems.push(...p.errors.map((e) => `${f}:${e.line}: ${e.message}`));
@@ -69,6 +70,7 @@ notes {
         if (recipe.ok) problems.push(...proseMismatches(p.prose, recipe.recipe).map((e) => `${f}: ${e}`));
       }
       for (const f of files(`translations/${lang}/naturals/`)) {
+        if (read(`translations/${lang}/naturals/${f}`).includes('"TODO"')) problems.push(`${f}: TODO left`);
         const p = parseNaturalProse(read(`translations/${lang}/naturals/${f}`));
         if (!p.ok) {
           problems.push(...p.errors.map((e) => `${f}:${e.line}: ${e.message}`));

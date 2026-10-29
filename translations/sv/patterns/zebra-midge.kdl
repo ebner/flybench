@@ -1,0 +1,42 @@
+id zebra-midge
+status draft
+
+// en description: A slim tapered black thread body with a silver wire rib, behind a silver bead, on a short curved hook.
+description "En smal, avsmalnande kropp av svart bindtråd med ribb av silvertråd, bakom en silverkula, på en kort böjd krok."
+
+// en history: Created by Ted Welling, a guide at Lees Ferry on the Colorado River in Arizona, a tailwater full of midges at the head of the Grand Canyon. Ralph Scherder dates it to about 1996 and sees it as a variation of Kelly Davidson's Ice Cream Cone, a 1992 chironomid for British Columbia lakes; other sources give no date or ancestor.
+history """
+    Skapad av Ted Welling, guide vid Lees Ferry på Coloradofloden i Arizona, en sträcka
+    nedanför en damm som är full av fjädermygg, där Grand Canyon börjar. Ralph Scherder
+    daterar den till omkring 1996 och ser den som en variant av Kelly Davidsons Ice Cream
+    Cone, en chironomid från 1992 för sjöarna i British Columbia; andra källor anger varken
+    årtal eller förebild.
+    """
+
+// en fishing: Imitates a midge pupa that sinks quickly; McFly Angler argues the silver bead makes it an emerger. Fish it under an indicator, below a dry fly, or as a dropper behind a larger fly such as a San Juan Worm or egg; Pat Dorsey, cited by Orvis News, finds fish are often drawn by the big fly but take the midge. It works all year, best from autumn to early spring, on tailwaters, freestones and lakes. Red and olive bodies are popular colour variants.
+fishing """
+    Imiterar en fjädermyggpuppa som sjunker snabbt; McFly Angler hävdar att silverkulan gör
+    den till en kläckare. Fiska den under en indikator, under en torrfluga, eller som
+    droppare bakom en större fluga som en San Juan Worm eller en äggimitation; Pat Dorsey,
+    som Orvis News citerar, märker att fisken ofta lockas av den stora flugan men tar
+    myggan. Den fungerar året runt, bäst från hösten till tidig vår, i vatten nedanför
+    dammar, i fritt strömmande vattendrag och i sjöar. Röda och olivgröna kroppar är
+    populära färgvarianter.
+    """
+
+notes {
+    // en step 1 (slide-bead bead): Small hole first, up against the eye.
+    step 1 "Det lilla hålet först, upp mot krokögat."
+    // en step 2 (attach-thread): Right behind the bead, with a small dam so it can't slide back.
+    step 2 "Precis bakom kulan, med en liten vall så att den inte kan glida bakåt."
+    // en step 3 (wrap-thread): Partway down the bend.
+    step 3 "En bit ner i krokböjen."
+    // en step 4 (tie-in rib): On the near side.
+    step 4 "På sidan närmast dig."
+    // en step 7 (wrap-thread): Build a slim taper: thinnest at the rear, thickest behind the bead.
+    step 7 "Bygg upp en smal avsmalning: tunnast baktill, tjockast bakom kulan."
+    // en step 8 (wind rib): Evenly spaced open turns.
+    step 8 "Jämnt fördelade glesa varv."
+    // en step 10 (whip-finish): Behind the bead.
+    step 10 "Bakom kulan."
+}

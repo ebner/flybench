@@ -1,0 +1,26 @@
+id mayfly-nymph-burrowing
+status draft
+
+// en name: Mayfly nymph, burrowing
+name "Eintagsfliege, grabende Nymphe"
+
+// en description: The big nymph of the mayfly, living for one to three years in burrows in sand and silt, waving its feathery gills over its back. It rises to the surface to hatch.
+description "Die große Nymphe der Maifliege. Sie lebt ein bis drei Jahre in Röhren in Sand und Schlick und fächelt mit ihren federartigen Kiemen über dem Rücken. Zum Schlüpfen steigt sie an die Oberfläche."
+
+// en examples: the mayfly (Ephemera danica, E. vulgata)
+examples "die Maifliege (Ephemera danica, E. vulgata)"
+
+hatches {
+    // en southern-sweden note: E. vulgata in May; Scandinavian peak usually the first week of June (Ahrex).
+    southern-sweden note="E. vulgata im Mai; in Skandinavien liegt der Höhepunkt meist in der ersten Juniwoche (Ahrex)."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Schätzung."
+    // en british-isles time: afternoon
+    // en british-isles note: Main hatch from mid-May to the first week of June (First Nature).
+    british-isles time="nachmittags" note="Hauptschlupf von Mitte Mai bis in die erste Juniwoche (First Nature)."
+    // en central-europe note: Main hatch; egg-laying females May–September (Naturschutzbund).
+    central-europe note="Hauptschlupf; eierlegende Weibchen Mai–September (Naturschutzbund)."
+    // en northern-usa time: afternoon
+    // en northern-usa note: Brown and green drakes (Troutnut; Beaverkill).
+    northern-usa time="nachmittags" note="Brown und Green Drakes (Troutnut; Beaverkill)."
+}

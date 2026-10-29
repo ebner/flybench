@@ -6,6 +6,7 @@ import { NotFound } from "./NotFound";
 import { Paragraphs } from "./Paragraphs";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
@@ -55,7 +56,7 @@ export function TechniquePage({ id }: { id: string }) {
       </a>
       <h1>{tech.name}</h1>
       <p className="lede">{tech.summary}</p>
-      {example && <Clip key={`${example.recipe.id}:${example.step}`} recipe={example.recipe} step={example.step} />}
+      {example && <Clip key={`${example.recipe.id}:${example.step}`} recipe={inPageLanguage(example.recipe)} step={example.step} />}
       <h2>{t.techniques.how}</h2>
       <Paragraphs text={tech.how} />
       <h2>{t.techniques.mistakes}</h2>

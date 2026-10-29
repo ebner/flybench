@@ -1,0 +1,43 @@
+id partridge-and-orange
+status draft
+
+// en description: A short, slim body of orange silk, optionally ribbed with gold wire, and one or two turns of mottled brown partridge.
+description "En kort, smal kropp av orange silke, eventuellt ribbad med guldtråd, och ett eller två varv spräcklig brun rapphöna."
+
+// en history: A North Country spider from the Yorkshire Dales. The earliest dressing found is Pritt's "Orange Partridge" in Yorkshire Trout Flies (1885), a body of orange silk and a well dappled feather from a partridge's back; Pritt fished it from April to September on warm days. Wikipedia says the style was first described by Joseph Wells in 1842, but gives no source. Edmonds and Lee (1916) ask for a mottled, not barred, feather. Sylvester Nemes' The Soft-Hackled Fly (1975) popularised soft-hackled flies like it in America.
+history """
+    En North Country-spider från Yorkshire Dales. Den äldsta bindning som hittats är Pritts
+    ”Orange Partridge” i Yorkshire Trout Flies (1885): en kropp av orange silke och en väl
+    spräcklig fjäder från en rapphönas rygg. Pritt fiskade den från april till september
+    under varma dagar. Wikipedia uppger att stilen beskrevs första gången av Joseph Wells
+    1842, men anger ingen källa. Edmonds och Lee (1916) föreskriver en spräcklig fjäder,
+    inte en tvärrandig. Sylvester Nemes bok The Soft-Hackled Fly (1975) gjorde mjukhacklade
+    flugor av det här slaget populära i Amerika.
+    """
+
+// en fishing: Fished across and down on a team of two or three spiders, or upstream on a short line, just under the surface: the soft partridge fibres move with the slightest current and suggest a hatching nymph or pupa.
+fishing """
+    Fiskas tvärs nedströms på en tafs med två eller tre spiders, eller uppströms på kort
+    lina, strax under ytan: de mjuka rapphönsfibrerna rör sig i minsta ström och för
+    tankarna till en kläckande nymf eller puppa.
+    """
+
+labels {
+    // en hackle: Brown partridge (back or neck feather)
+    hackle "Brun rapphöna (rygg- eller nackfjäder)"
+}
+
+notes {
+    // en step 2 (wrap-thread): Touching turns, to above the hook point.
+    step 2 "Täta varv, till ovanför krokspetsen."
+    // en step 3 (tie-in rib): Optional; the classic dressing has none.
+    step 3 "Valfri; den klassiska bindningen har ingen."
+    // en step 4 (wrap-thread): A slim, single-layer silk body; don't build a taper.
+    step 4 "En smal silkeskropp i ett enda lager; bygg inte upp någon avsmalning."
+    // en step 7 (tie-in hackle): By the tip, just behind the eye, fluff stripped and barbs stroked out.
+    step 7 "I spetsen, strax bakom krokögat, med dunet bortrensat och fibrerna utstrukna."
+    // en step 9 (wind hackle): One or two turns, stroking the barbs back after each.
+    step 9 "Ett eller två varv; stryk fibrerna bakåt efter varje varv."
+    // en step 11 (whip-finish): A small orange head.
+    step 11 "Ett litet orange huvud."
+}

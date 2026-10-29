@@ -1,0 +1,41 @@
+id thread-frenchie
+status draft
+
+// en description: A slotted tungsten bead on a jig hook, a sparse Coq de León tail, a slim thread body ribbed with fine wire, and a collar of pink Ice Dub behind the bead.
+description "Eine geschlitzte Tungstenperle auf einem Jighaken, ein spärlicher Schwanz aus Coq de León, ein schlanker Körper aus Bindefaden mit feiner Drahtrippung und ein Kragen aus pinkem Ice Dub hinter der Perle."
+
+// en history: The Frenchie is a pared-down Pheasant Tail Nymph, without wing case or legs and with a bright hot spot behind the bead. Richard Anderson traces it to a French angler who won a world championship with such a fly; who tied the first is not recorded. By Lance Egan's account, the early Frenchie had red thread, a pheasant tail tail and body, a copper wire rib and a hot spot thorax. His later Frenchie takes a tail of Coq de León, which is stronger, and the Thread Frenchie, one of his staple nymphs, also trades the pheasant tail body for slim thread. It is a fly for tying in batches, in many colours.
+history """
+    Die Frenchie ist eine abgespeckte Pheasant Tail Nymph, ohne Flügelscheide und Beine und mit einem leuchtenden Hotspot hinter der Perle. Richard Anderson führt sie auf einen französischen Angler zurück, der mit einer solchen Fliege eine Weltmeisterschaft gewann; wer die erste gebunden hat, ist nicht überliefert. Nach Lance Egans Darstellung hatte die frühe Frenchie roten Bindefaden, Schwanz und Körper aus Fasanenstoß, eine Rippung aus Kupferdraht und einen Thorax als Hotspot. Seine spätere Frenchie bekommt einen Schwanz aus Coq de León, der haltbarer ist, und die Thread Frenchie, eine seiner Standardnymphen, ersetzt außerdem den Körper aus Fasanenstoß durch schlanken Bindefaden. Sie ist eine Fliege, die man in Serie bindet, in vielen Farben.
+    """
+
+// en fishing: Slim and dense, it gets down fast. Fish it on the point or the dropper of a two-nymph rig, on a Euro-nymph rig, under a hopper in summer, or below an indicator on lakes. The bead turns a jig hook point up.
+fishing """
+    Schlank und kompakt, sinkt sie schnell ab. Fische sie als End- oder Springerfliege an einer Montage mit zwei Nymphen, an einer Euro-Nymphing-Montage, im Sommer unter einem Hopper oder an Seen unter einem Bissanzeiger. Die Perle dreht die Spitze eines Jighakens nach oben.
+    """
+
+labels {
+    // en tail: Coq de León fibres, dark pardo
+    tail "Coq-de-León-Fibern, dunkles Pardo"
+    // en rib: Fine copper-brown wire
+    rib "Feiner kupferbrauner Draht"
+    // en hotspot: UV pink Ice Dub
+    hotspot "Ice Dub in UV-Pink"
+}
+
+notes {
+    // en step 1 (slide-bead bead): Slot towards the point.
+    step 1 "Schlitz zur Hakenspitze hin."
+    // en step 4 (tie-in tail): A sparse pinch, tips evened; bind the butts forward to the bead so there is no bump.
+    step 4 "Eine spärliche Prise, Spitzen ausgerichtet; binde die Enden bis zur Perle nach vorn ab, damit kein Buckel entsteht."
+    // en step 5 (tie-in rib): Bound down the back of the shank.
+    step 5 "Auf der Rückseite des Hakenschenkels entlang festgelegt."
+    // en step 8 (wrap-thread): A slim, slightly tapered thread body.
+    step 8 "Ein schlanker, leicht verjüngter Körper aus Bindefaden."
+    // en step 9 (wind rib): About four turns under tension; helicopter the wire off.
+    step 9 "Etwa vier Windungen unter Spannung; brich den Draht durch Kreisen ab („Helikoptern“)."
+    // en step 11 (dub hotspot): A small pinch, dubbed tight, a few turns against the bead.
+    step 11 "Eine kleine Prise, fest gedubbt, ein paar Windungen an der Perle."
+    // en step 12 (whip-finish): So a band of the hot-spot thread shows at the bead.
+    step 12 "So, dass an der Perle ein Band des Hotspot-Fadens zu sehen bleibt."
+}

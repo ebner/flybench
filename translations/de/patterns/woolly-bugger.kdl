@@ -1,0 +1,40 @@
+id woolly-bugger
+status draft
+
+// en description: A marabou tail, an olive chenille body, a black saddle hackle palmered along it and a copper wire rib.
+description "Ein Schwanz aus Marabou, ein Körper aus olivfarbener Chenille, darüber eine schwarze Sattelhechel als Körperhechel und eine Rippung aus Kupferdraht."
+
+// en history: Russ Blessing of Harrisburg, Pennsylvania, is believed to have tied the first Woolly Bugger in 1967, as a hellgrammite imitation with more movement. He took the marabou tail from Mark Sosin's Blossom fly and meant to trim the hackle, then left it as it was after seeing the fly in the water. Barry Beck's 1984 article in Fly Fisherman made it known everywhere.
+//    
+//    It descends from the Woolly Worm and the old British palmer flies.
+history """
+    Russ Blessing aus Harrisburg, Pennsylvania, soll 1967 den ersten Woolly Bugger gebunden haben, als Hellgrammite-Imitation mit mehr Bewegung. Den Marabouschwanz übernahm er von Mark Sosins Blossom-Fliege, und eigentlich wollte er die Hechel stutzen, ließ sie dann aber, wie sie war, nachdem er die Fliege im Wasser gesehen hatte. Barry Becks Artikel von 1984 in Fly Fisherman machte ihn überall bekannt.
+
+    Er stammt vom Woolly Worm und den alten britischen Palmerfliegen ab.
+    """
+
+// en fishing: Blessing started with a dead drift near the bottom, and when that failed tried swings, jigging or strips. In lakes, work it back from along the shore, with a sinking-tip line in deep water. Brown ones pass for a crayfish, and where a stream has sculpins it can be fished like one; split shot or a weighted leader keeps it near the bottom.
+fishing """
+    Blessing fischte ihn zuerst frei treibend nahe am Grund und versuchte es, wenn das nicht klappte, mit Schwingen, Jiggen oder Strippen. Im See führst du ihn entlang des Ufers zurück, in tiefem Wasser mit einer Sinktip-Schnur. Braune gehen als Flusskrebs durch, und wo ein Bach Groppen hat, kann man ihn wie eine Groppe fischen; Klemmblei oder ein beschwertes Vorfach halten ihn nah am Grund.
+    """
+
+notes {
+    // en step 1 (weight weight): Lock the turns with thread dams at both ends.
+    step 1 "Sichere die Windungen an beiden Enden mit einem Damm aus Bindefaden."
+    // en step 4 (tie-in tail): Bind the butts along the top of the shank for an even underbody.
+    step 4 "Binde die Enden oben entlang des Hakenschenkels ab, für einen gleichmäßigen Unterbau."
+    // en step 5 (tie-in flash): Two strands on each side.
+    step 5 "Zwei Stränge auf jeder Seite."
+    // en step 7 (tie-in body): Strip a little fluff to expose the core where it is tied in.
+    step 7 "Streife an der Einbindestelle etwas Flor ab, damit der Kern frei liegt."
+    // en step 9 (wind body): Touching turns, ending one eye-length behind the eye.
+    step 9 "Windung an Windung, bis eine Öhrlänge hinter dem Öhr."
+    // en step 11 (tie-in hackle): By the butt, the inside of the feather facing back.
+    step 11 "Am Kielende eingebunden, die Innenseite der Feder nach hinten."
+    // en step 12 (wind hackle): Even open turns back to the bend.
+    step 12 "Gleichmäßige offene Windungen zurück zum Hakenbogen."
+    // en step 13 (wind rib): Wiggle the wire so it traps no fibres.
+    step 13 "Wackle den Draht beim Winden hin und her, damit er keine Fibern einklemmt."
+    // en step 16 (whip-finish): A small, smooth head.
+    step 16 "Ein kleiner, glatter Kopf."
+}

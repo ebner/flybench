@@ -1,0 +1,29 @@
+id f-fly
+status draft
+
+// en description: A body of tying thread and a wing of natural dun CDC, cut to length.
+description "Ein Körper aus Bindefaden und ein auf Länge geschnittener Flügel aus naturfarbenem Dun-CDC."
+
+// en history: Designed by Marjan Fratnik, born in 1919 at Most na Soči in Slovenia's Soča valley, as a caddis imitation: in 1980 according to Hans Weilenmann, or from a CDC fly the Swiss tyer Jules Rindlisbacher gave him in 1983 according to his obituary in Forelle & Äsche. The original had no body material at all, just silk thread. Tomaž Modic, who knew Fratnik, explains that the wing was cut to length because the cut end is stiff, so the fly dries quickly in the cast and rides high.
+history """
+    Entworfen von Marjan Fratnik, geboren 1919 in Most na Soči im slowenischen Sočatal, als Köcherfliegenimitation: 1980 laut Hans Weilenmann, oder laut seinem Nachruf in Forelle & Äsche ausgehend von einer CDC-Fliege, die ihm der Schweizer Binder Jules Rindlisbacher 1983 geschenkt hatte. Das Original hatte überhaupt kein Körpermaterial, nur Seidenfaden. Tomaž Modic, der Fratnik kannte, erklärt, der Flügel sei auf Länge geschnitten worden, weil das geschnittene Ende steif ist; so trocknet die Fliege beim Werfen schnell und schwimmt hoch.
+    """
+
+// en fishing: Modic points out that the body lies in the film with only the wing above it, so the fly is really an emerger; fish it during midge, caddis or mayfly hatches, or as a general pattern. After a fish, dry the CDC with amadou and a few false casts: Weilenmann warns that paste or liquid floatant collapses the feather, and finds that drying powders last only a fish.
+fishing """
+    Modic weist darauf hin, dass der Körper im Film liegt und nur der Flügel herausragt, die Fliege also eigentlich ein Emerger ist; fische sie beim Schlupf von Zuckmücken, Köcherfliegen oder Eintagsfliegen oder als allgemeines Muster. Trockne das CDC nach einem Fisch mit Amadou und ein paar Leerwürfen: Weilenmann warnt, dass Paste oder flüssiges Schwimmmittel die Feder zusammenfallen lassen, und findet, dass Trockenpulver nur für einen Fisch vorhält.
+    """
+
+labels {
+    // en wing: Natural dun CDC feathers, two stacked
+    wing "Naturfarbene Dun-CDC-Federn, zwei aufeinandergelegt"
+}
+
+notes {
+    // en step 3 (wrap-thread): A thin, even thread body: the original has no other body material.
+    step 3 "Ein dünner, gleichmäßiger Körper aus Bindefaden: Das Original hat kein anderes Körpermaterial."
+    // en step 4 (tie-in wing): Stacked with tips and curves matched; pinch-wrapped on top just behind the eye.
+    step 4 "Aufeinandergelegt, Spitzen und Krümmung passend; mit der Pinch-Technik oben knapp hinter dem Öhr eingebunden."
+    // en step 5 (whip-finish): Trim the butts short, then cut the wing to length.
+    step 5 "Schneide die Enden kurz und dann den Flügel auf Länge."
+}

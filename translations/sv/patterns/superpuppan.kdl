@@ -1,0 +1,45 @@
+id superpuppan
+status draft
+
+// en description: A sparse yellow body and short brown thorax with a dun hackle palmered over them, trimmed top and bottom so only the side fibres remain.
+description "En gles gul bakkropp och en kort brun thorax med ett dun-hackel lindat som kroppshackel över dem, klippt upptill och nertill så att bara fibrerna åt sidorna blir kvar."
+
+// en history: Lennart Bergqvist began developing it in 1977 on the Norwegian river Rena, studying hatching caddis with Kenneth Boström, Jan Sekander and Preben Torp Jacobsen. Early versions had wing buds and legs; by the early 1980s it had reached its simple form. Bergqvist called it the Floating Caddis Pupa; his friend Bengt Öste named it Superpuppan.
+history """
+    Lennart Bergqvist började utveckla den 1977 i den norska älven Rena, där han studerade
+    kläckande nattsländor tillsammans med Kenneth Boström, Jan Sekander och Preben Torp
+    Jacobsen. De tidiga versionerna hade vinganlag och ben; i början av 1980-talet hade den
+    fått sin enkla form. Bergqvist kallade den Floating Caddis Pupa; hans vän Bengt Öste gav
+    den namnet Superpuppan.
+    """
+
+// en fishing: Imitates a caddis pupa swimming in the surface towards the bank to hatch. Fish it dead drift first; then twitch it, or swing it so it ploughs towards the bank. The two rows of fibres keep it high and make a wake. A searching fly for grayling, which rise to it from deep water. Guideline calls it a must on the Rena and Glomma in July and August.
+fishing """
+    Imiterar en nattsländepuppa som simmar i ytan in mot land för att kläcka. Fiska den
+    först fritt drivande; ryck den sedan, eller låt den svepa så att den plöjer in mot land.
+    De två raderna av fibrer håller den högt och får den att lämna ett svall. En avsökande
+    fluga för harr, som stiger efter den från djupt vatten. Guideline kallar den ett måste i
+    Rena och Glomma i juli och augusti.
+    """
+
+labels {
+    // en hackle: Dark dun cock hackle
+    hackle "Tupphackel, mörk dun"
+    // en abdomen: Golden yellow dry fly dubbing
+    abdomen "Guldgul torrflugedubbing"
+}
+
+notes {
+    // en step 3 (tie-in hackle): One size too large, by the stripped stem, pointing back.
+    step 3 "En storlek för stort, inbundet i den rensade stjälken, riktat bakåt."
+    // en step 4 (dub abdomen): Sparse and slim.
+    step 4 "Gles och smal."
+    // en step 5 (dub thorax): Short and dark.
+    step 5 "Kort och mörk."
+    // en step 6 (wind hackle): Four or five open turns over the whole body.
+    step 6 "Fyra eller fem glesa varv över hela kroppen."
+    // en step 8 (whip-finish): A very small head.
+    step 8 "Ett mycket litet huvud."
+    // en step 9 (trim hackle): The two rows of fibres make it float, and wake when it is pulled.
+    step 9 "De två raderna av fibrer får den att flyta och att lämna ett svall när den dras."
+}

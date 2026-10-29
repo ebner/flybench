@@ -1,0 +1,40 @@
+id willie-gunn-double
+status draft
+
+// en variant: On a double
+variant "Doppelhaken"
+
+// en description: An oval gold tag and rib over a black floss body, a short orange throat, and a long wing of yellow, orange and black bucktail.
+description "Tag und Rippung aus ovalem Goldtinsel über einem Körper aus schwarzem Floss, ein kurzer orangefarbener Bart und ein langer Flügel aus gelbem, orangefarbenem und schwarzem Bucktail."
+
+// en history: Named after Willie Gunn, who worked for the Sutherland Estates as keeper and gillie, and linked in every account to Rob Wilson's tackle shop in Brora. Who designed it is disputed. The best-known story, told on GlobalFlyFisher and by John Gray, credits Flight Lieutenant "Dusty" Miller, who tied flies for Wilson; Gray dates it to the 1940s. Ross Macdonald gives the account of Gunn's nephew, Jim MacKenzie, who says he tied the first ones, with a blended wing, in March 1968. Gray describes the colours as those of the Thunder & Lightning. Fish4Flies says the first were tied on Waddington shanks, while Macdonald's telling of the Miller story speaks of tubes. Macdonald also thinks the gold-bodied version may now be more popular than the black.
+history """
+    Benannt nach Willie Gunn, der für die Sutherland Estates als Aufseher und Gillie arbeitete, und in allen Berichten mit Rob Wilsons Angelgeschäft in Brora verbunden. Wer sie entworfen hat, ist umstritten. Die bekannteste Geschichte, erzählt auf GlobalFlyFisher und von John Gray, schreibt sie Flight Lieutenant „Dusty“ Miller zu, der für Wilson Fliegen band; Gray datiert sie in die 1940er Jahre. Ross Macdonald gibt die Darstellung von Gunns Neffen Jim MacKenzie wieder, der sagt, er habe die ersten im März 1968 gebunden, mit gemischtem Flügel. Gray beschreibt die Farben als die der Thunder & Lightning. Laut Fish4Flies wurden die ersten auf Waddington-Schäften gebunden, während in Macdonalds Fassung der Miller-Geschichte von Tuben die Rede ist. Macdonald meint außerdem, die Version mit Goldkörper sei heute vielleicht beliebter als die schwarze.
+    """
+
+// en fishing: To Ross Macdonald it stands for spring fishing in Scotland, and it is tied in every size from small summer flies to the biggest tubes. Big Waddingtons and heavy tubes are for the cold, high water of early spring, fished deep; small, lightly dressed singles and doubles for low summer water. Swing it across and down. Changing the share of each colour suits it to dark or clear rivers.
+fishing """
+    Für Ross Macdonald steht sie für das Frühjahrsfischen in Schottland, und sie wird in allen Größen gebunden, von kleinen Sommerfliegen bis zu den größten Tuben. Große Waddingtons und schwere Tuben sind für das kalte, hohe Wasser des zeitigen Frühjahrs und werden tief gefischt; kleine, sparsam gebundene Einzel- und Doppelhaken für niedriges Sommerwasser. Lass sie quer und stromab über den Strom schwingen. Über den Anteil der einzelnen Farben passt man sie an dunkle oder klare Flüsse an.
+    """
+
+labels {
+    // en tag: Fine oval gold tinsel
+    tag "Feines ovales Goldtinsel"
+    // en throat: Orange bucktail (or mixed orange, yellow and black)
+    throat "Orangefarbenes Bucktail (oder Orange, Gelb und Schwarz gemischt)"
+}
+
+notes {
+    // en step 7 (tie-in rib): Under the shank.
+    step 7 "Unter dem Hakenschenkel."
+    // en step 10 (wind body): Back to the tag and forward again, slim and even.
+    step 10 "Zurück zum Tag und wieder nach vorn, schlank und gleichmäßig."
+    // en step 14 (tie-in throat): Short, about halfway to the hook point.
+    step 14 "Kurz, etwa bis auf halbem Weg zur Hakenspitze."
+    // en step 16 (tie-in yellow): Equal parts of each colour.
+    step 16 "Von jeder Farbe gleich viel."
+    // en step 21 (trim black): Cut at an angle so the head tapers.
+    step 21 "Schräg abschneiden, damit der Kopf sich verjüngt."
+    // en step 22 (whip-finish): A small, neat black head.
+    step 22 "Ein kleiner, sauberer schwarzer Kopf."
+}

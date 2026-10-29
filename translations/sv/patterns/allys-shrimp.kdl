@@ -1,0 +1,51 @@
+id allys-shrimp
+status draft
+
+// en description: A long hot-orange bucktail tail, a red and black floss body ribbed with oval silver, grey squirrel above and below, a golden pheasant tippet overwing and a long orange collar hackle.
+description "En lång stjärt av bucktail i hot orange, en kropp av rött och svart flossilke med ribb av oval silvertinsel, grå ekorre ovanför och under, en övervinge av guldfasantippet och en lång orange hackelkrage."
+
+// en history: Alastair "Ally" Gowans took the idea from the prawns that came up when he went out on an inshore trawler after Norway lobster off the Scottish west coast: long, slim, quick and half translucent, with an orange-pink tinge and a dark gut. He dates the first fly to about 1980; Fieldsports Channel says 1979 and Fly Fisherman the early 1980s. Gowans placed the trawl near Loch Linnhe, Trout and Salmon in the Minch. The fly was first published in Trout and Salmon in August 1988, and readers of three British fishing magazines later voted it Salmon Fly of the Millennium. In Gowans' account each part stands for something: the bucktail for feelers, the tippets for eyes and shell, the black front of the body for the gut, the long collar for legs.
+history """
+    Alastair ”Ally” Gowans fick idén från räkorna som kom upp när han följde med en kusttrålare ut efter havskräfta utanför Skottlands västkust: långa, smala, snabba och halvt genomskinliga, med en orangerosa ton och en mörk tarm. Själv daterar han den första flugan till omkring 1980; Fieldsports Channel säger 1979 och Fly Fisherman början av 1980-talet. Gowans förlägger trålningen till trakten av Loch Linnhe, Trout and Salmon till sundet the Minch. Flugan publicerades första gången i Trout and Salmon i augusti 1988, och läsarna av tre brittiska fisketidningar röstade senare fram den till ”Salmon Fly of the Millennium”. Enligt Gowans står varje del för något: bucktailen för spröten, tippetfjädrarna för ögon och skal, kroppens svarta främre del för tarmen och den långa kragen för benen.
+    """
+
+// en fishing: Gowans mostly fishes it on an ordinary swing, with the line chosen for the conditions, and has found the depth matters little: it takes fish inches under the surface on a floater and scraped along the bottom. Small, light ones suit low, warm summer water; heavy tubes and Waddingtons on sinking lines suit high, cold water early in the season. Besides the orange original he ties red and purple versions, and it is tied on singles, doubles, trebles and tubes.
+fishing """
+    Gowans fiskar den mest med ett vanligt tvärströmssvep, med linan vald efter förhållandena, och har märkt att djupet spelar liten roll: den tar fisk strax under ytan på flytlina och när den skrapar fram längs botten. Små, lätta flugor passar i lågt och varmt sommarvatten; tunga tuber och Waddingtonskaft på sjunklina passar i högt och kallt vatten tidigt på säsongen. Förutom det orange originalet binder han röda och lila versioner, och den binds på enkelkrok, dubbelkrok, trekrok och tub.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Fin oval silvertinsel"
+    // en tail: Hot orange bucktail
+    tail "Bucktail i hot orange"
+    // en beard: Natural grey squirrel tail
+    beard "Naturgrå ekorrsvans"
+    // en underwing: Natural grey squirrel tail
+    underwing "Naturgrå ekorrsvans"
+    // en collar: Hot orange cock hackle, long and soft
+    collar "Tupphackel i hot orange, långt och mjukt"
+}
+
+notes {
+    // en step 2 (wrap-thread): To a point above the hook point.
+    step 2 "Till en punkt ovanför krokspetsen."
+    // en step 7 (tie-in tail): Slim and long; lock it with a few fibres folded back, and bind the butts along the shank.
+    step 7 "Smal och lång; lås den med några fibrer som viks bakåt, och bind ner rotändarna längs krokskaftet."
+    // en step 9 (tie-in tail-flash): Optional.
+    step 9 "Valfritt."
+    // en step 13 (wind rear): Half the body: back to the tail and forward again.
+    step 13 "Halva kroppen: bakåt till stjärten och fram igen."
+    // en step 19 (wind rib): Six turns, spread evenly over both halves.
+    step 19 "Sex varv, jämnt fördelade över båda halvorna."
+    // en step 21 (tie-in beard): A sparse bunch under the shank; turn the hook over to tie it in.
+    step 21 "En gles bunt under krokskaftet; vänd kroken upp och ner när du binder in den."
+    // en step 23 (tie-in underwing): Low over the body.
+    step 23 "Lågt över kroppen."
+    // en step 25 (tie-in overwing): Tippet fibres, or a whole tippet feather tied flat.
+    step 25 "Tippetfibrer, eller en hel tippetfjäder som binds in platt."
+    // en step 28 (wind collar): Touching turns, stroking the fibres back each time.
+    step 28 "Täta varv; stryk fibrerna bakåt för varje varv."
+    // en step 30 (whip-finish): A small tapered head, varnished red.
+    step 30 "Ett litet avsmalnande huvud, lackat rött."
+}

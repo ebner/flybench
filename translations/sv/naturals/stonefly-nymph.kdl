@@ -1,0 +1,24 @@
+id stonefly-nymph
+status draft
+
+// en name: Stonefly nymph
+name "Bäcksländenymf"
+
+// en description: A flat, sturdy nymph with two tails, long antennae and sprawling legs, clinging under stones in fast water for up to three years. Dislodged nymphs drift helplessly; before hatching they crawl out onto the stones.
+description "En platt, kraftig nymf med två stjärtspröt, långa antenner och utspärrade ben, som håller sig fast under stenar i strömt vatten i upp till tre år. Nymfer som slitits loss driver hjälplöst; före kläckningen kryper de upp på stenarna."
+
+// en examples: Perla, Diura, Isoperla; salmonfly and golden stone (North America)
+examples "Perla, Diura, Isoperla; salmonfly och golden stone (Nordamerika)"
+
+hatches {
+    // en southern-sweden note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    southern-sweden note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
+    // en northern-scandinavia note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    northern-scandinavia note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
+    // en british-isles note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    british-isles note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
+    // en central-europe note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    central-europe note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
+    // en northern-usa note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    northern-usa note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
+}

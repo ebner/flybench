@@ -1,0 +1,40 @@
+id peeping-caddis-edwards
+status draft
+
+// en variant: Edwards, larva at the front
+variant "Edwards, Larve vorn"
+
+// en description: A lead-weighted hare's mask case over the rear two thirds of a long-shank hook, with a white larva lying forward to a dark head at the eye and its legs underneath.
+description "Ein mit Blei beschwerter Köcher aus Hasenmaske über den hinteren zwei Dritteln eines langschenkligen Hakens, davor eine weiße Larve, die nach vorn bis zu einem dunklen Kopf am Öhr reicht, mit den Beinen darunter."
+
+// en history: Oliver Edwards' realistic cased caddis, here as Graydon Bell ties it: the grub comes out of the front of the case, where a real larva's head and legs are, and the hare's mask case is built over a flat lead underbody. Fulling Mill's OE Peeping Caddis gets its weight from a split shot instead.
+history """
+    Oliver Edwards’ realistische Köcherlarve, hier so, wie Graydon Bell sie bindet: Die Larve kommt vorn aus dem Köcher, wo bei einer echten Larve Kopf und Beine sitzen, und der Köcher aus Hasenmaske wird über einen flachen Unterbau aus Blei gebunden. Die OE Peeping Caddis von Fulling Mill bekommt ihr Gewicht stattdessen von einem Klemmblei.
+    """
+
+// en fishing: Fished slowly along the bottom of rivers, for trout, and for grayling in winter.
+fishing "Langsam am Grund von Flüssen gefischt, auf Forellen und im Winter auf Äschen."
+
+labels {
+    // en weight: Lead-free wire (Bell uses flat lead)
+    weight "Bleifreier Draht (Bell nimmt flaches Blei)"
+    // en larva-case: Hare's mask dubbing brush
+    larva-case "Dubbingbürste aus Hasenmaske"
+    // en legs: Golden pheasant centre tail fibres (legs)
+    legs "Fibern aus den mittleren Schwanzfedern des Goldfasans (Beine)"
+    // en larva: White or glow yarn (larva)
+    larva "Weißes oder nachleuchtendes Garn (Larve)"
+}
+
+notes {
+    // en step 1 (weight weight): Flattened, under the case.
+    step 1 "Flachgedrückt, unter dem Köcher."
+    // en step 4 (dub larva-case): Thick and rough over the rear two thirds.
+    step 4 "Dick und struppig über die hinteren zwei Drittel."
+    // en step 5 (tie-in legs): Under the shank, sloping back.
+    step 5 "Unter dem Hakenschenkel, nach hinten geneigt."
+    // en step 6 (tie-in larva): The top of the head tinted dark with a marker.
+    step 6 "Die Oberseite des Kopfes mit einem Filzstift dunkel gefärbt."
+    // en step 8 (whip-finish): A small black head at the eye.
+    step 8 "Ein kleiner schwarzer Kopf am Öhr."
+}

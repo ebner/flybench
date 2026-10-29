@@ -1,0 +1,24 @@
+id stonefly-nymph
+status draft
+
+// en name: Stonefly nymph
+name "Steinfliege, Nymphe"
+
+// en description: A flat, sturdy nymph with two tails, long antennae and sprawling legs, clinging under stones in fast water for up to three years. Dislodged nymphs drift helplessly; before hatching they crawl out onto the stones.
+description "Eine flache, kräftige Nymphe mit zwei Schwanzfäden, langen Fühlern und weit abgespreizten Beinen, die sich bis zu drei Jahre lang in schneller Strömung unter Steine klammert. Losgerissene Nymphen treiben hilflos ab; vor dem Schlüpfen kriechen sie aus dem Wasser auf die Steine."
+
+// en examples: Perla, Diura, Isoperla; salmonfly and golden stone (North America)
+examples "Perla, Diura, Isoperla; Salmonfly und Golden Stone (Nordamerika)"
+
+hatches {
+    // en southern-sweden note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    southern-sweden note="Das ganze Jahr im Wasser: ein bis drei Jahre als Nymphe (Wikipedia de; Dalarna 2013)."
+    // en northern-scandinavia note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    northern-scandinavia note="Das ganze Jahr im Wasser: ein bis drei Jahre als Nymphe (Wikipedia de; Dalarna 2013)."
+    // en british-isles note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    british-isles note="Das ganze Jahr im Wasser: ein bis drei Jahre als Nymphe (Wikipedia de; Dalarna 2013)."
+    // en central-europe note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    central-europe note="Das ganze Jahr im Wasser: ein bis drei Jahre als Nymphe (Wikipedia de; Dalarna 2013)."
+    // en northern-usa note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
+    northern-usa note="Das ganze Jahr im Wasser: ein bis drei Jahre als Nymphe (Wikipedia de; Dalarna 2013)."
+}

@@ -1,0 +1,46 @@
+id stimulator
+status draft
+
+// en description: An elk hair tail and wing, a yellow abdomen with a palmered brown hackle and wire rib, and an orange thorax with a grizzly hackle.
+description "Stjärt och vinge av elkhår, en gul bakkropp med ett brunt kroppshackel och ribb av metalltråd, och en orange thorax med ett grizzlyhackel."
+
+// en history: Randall Kaufmann's own account: in 1980 his friend Rick Verheghe did well on the Deschutes with a fly labelled "Hank's Special" from a bin at the Oasis Café in Maupin. Kaufmann refined it, David Lambroughton suggested the name in 1981, and it first appeared in the Kaufmann Streamborn catalogue in 1982; he says no one else was involved. Jim Slattery of New Jersey tells a different story (in Rusty Dunn's SWTU article): Kaufmann phoned him about his "Fluttering Stonefly" of the late 1970s, said he had slimmed the wing and shortened the front hackle, and agreed to the name Slattery suggested. Neither account has been independently confirmed. Kaufmann published it in Tying Dry Flies (1991), with the fly on the cover. He also says the style was not new: he mixed the Improved Sofa Pillow and the Royal Trude.
+history """
+    Enligt Randall Kaufmanns egen berättelse fick hans vän Rick Verheghe 1980 bra fiske i
+    Deschutes med en fluga märkt ”Hank's Special” ur en låda på Oasis Café i Maupin.
+    Kaufmann förfinade den, David Lambroughton föreslog namnet 1981, och den dök först upp i
+    Kaufmann Streamborns katalog 1982; han säger att ingen annan var inblandad. Jim Slattery
+    från New Jersey berättar en annan historia (i Rusty Dunns artikel för SWTU): Kaufmann
+    ringde honom om hans ”Fluttering Stonefly” från slutet av 1970-talet, sa att han hade
+    gjort vingen smalare och kortat det främre hacklet, och gick med på namnet som Slattery
+    föreslog. Ingen av berättelserna har bekräftats av någon oberoende källa. Kaufmann
+    publicerade den i Tying Dry Flies (1991), med flugan på omslaget. Han säger också att
+    stilen inte var ny: han blandade Improved Sofa Pillow och Royal Trude.
+    """
+
+// en fishing: A high-floating searching fly, easy to see even in broken pocket water, and often the dry in a dry-dropper rig. It imitates stoneflies of all sizes; sizes 12 to 16 also do for caddis, and the largest pass for grasshoppers.
+fishing """
+    En högflytande avsökande fluga, lätt att se även i brutet vatten bland stenfickor, och
+    ofta torrflugan i ett dry dropper-tackel. Den imiterar bäcksländor av alla storlekar;
+    storlek 12–16 duger också som nattslända, och de största går för gräshoppor.
+    """
+
+labels {
+    // en thorax: Fire orange dubbing
+    thorax "Eldorange dubbing"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short, flared bunch, about a gape long.
+    step 3 "En kort, utspärrad bunt, ungefär ett krokgap lång."
+    // en step 4 (trim tail): Trim the butts and bind them down.
+    step 4 "Klipp rotändarna och bind ner dem."
+    // en step 6 (dub abdomen): Thin, with a slight taper.
+    step 6 "Tunn, lätt avsmalnande."
+    // en step 9 (wind rib): To protect it.
+    step 9 "För att skydda det."
+    // en step 12 (tie-in wing): About twice as much hair as the tail, flaring over the top half of the shank.
+    step 12 "Ungefär dubbelt så mycket hår som i stjärten, utspärrat över krokskaftets övre halva."
+    // en step 15 (dub thorax): Thin, to just short of the eye.
+    step 15 "Tunn, till strax före krokögat."
+}

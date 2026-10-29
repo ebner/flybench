@@ -1,0 +1,24 @@
+id caddis-larva-free
+status draft
+
+// en name: Caddis larva, free-living
+name "Nattsländelarv, frilevande"
+
+// en description: A larva without a case: green or olive, slightly flattened, with tufts of gills along the sides, a dark head and thorax plates, and hooks at the tail to hold on in fast water.
+description "En larv utan hus: grön eller olivgrön, något tillplattad, med gältofsar längs sidorna, mörkt huvud och mörka plåtar på mellankroppen, och hakar längst bak som håller den kvar i strömt vatten."
+
+// en examples: Rhyacophila, Hydropsyche
+examples "Rhyacophila, Hydropsyche"
+
+hatches {
+    // en southern-sweden note: In the water all year; larvae drift often (Troutnut).
+    southern-sweden note="I vattnet hela året; larverna driver ofta (Troutnut)."
+    // en northern-scandinavia note: In the water all year; larvae drift often (Troutnut).
+    northern-scandinavia note="I vattnet hela året; larverna driver ofta (Troutnut)."
+    // en british-isles note: In the water all year; larvae drift often (Troutnut).
+    british-isles note="I vattnet hela året; larverna driver ofta (Troutnut)."
+    // en central-europe note: In the water all year; larvae drift often (Troutnut).
+    central-europe note="I vattnet hela året; larverna driver ofta (Troutnut)."
+    // en northern-usa note: In the water all year; larvae drift often (Troutnut).
+    northern-usa note="I vattnet hela året; larverna driver ofta (Troutnut)."
+}

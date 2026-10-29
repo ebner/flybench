@@ -1,0 +1,42 @@
+id pheasant-tail-nymph-american
+status draft
+
+// en variant: American (Troth)
+variant "Amerikanisch (Troth)"
+
+// en description: Pheasant tail tail and abdomen with a counter-wound copper rib, a weighted peacock herl thorax, a pheasant tail wing case and legs.
+description "Schwanz und Abdomen aus Fasanenstoß mit gegenläufig gewundener Kupferrippung, ein beschwerter Thorax aus Pfauengras sowie Flügelscheide und Beine aus Fasanenstoß."
+
+// en history: Al Troth, the Montana tyer behind the Elk Hair Caddis, wanted a heavier-looking nymph than Sawyer's, with legs that show, and weighted it with lead wire. His version has a peacock herl thorax; Dave Hughes lists it as the Pheasant Tail Peacock Thorax, and in the United States it is known as the Pheasant Tail Nymph, American version. Ben Spinks, though, credits the idea of the peacock thorax to John Gierach's Good Flies (2000). The gold bead (Theo Bakelaar, 1988) and the flashback (Andre Puyans) came later.
+history """
+    Al Troth, der Binder aus Montana, von dem die Elk Hair Caddis stammt, wollte eine kräftiger wirkende Nymphe als die von Sawyer, mit Beinen, die man sieht, und beschwerte sie mit Bleidraht. Seine Version hat einen Thorax aus Pfauengras; Dave Hughes führt sie als Pheasant Tail Peacock Thorax, und in den USA kennt man sie als Pheasant Tail Nymph, American version. Ben Spinks allerdings schreibt die Idee des Pfauengras-Thorax John Gierachs Good Flies (2000) zu. Die Goldperle (Theo Bakelaar, 1988) und der Flashback (Andre Puyans) kamen später.
+    """
+
+// en fishing: A staple searching nymph, tied in the size of whatever mayfly nymphs are about; Orvis presents it as a Baetis imitation. Rogue Fly Fishers rate it for winter trout in western streams, and on lakes it does well when Callibaetis are hatching.
+fishing """
+    Eine bewährte Suchnymphe, gebunden in der Größe der Eintagsfliegennymphen, die gerade unterwegs sind; Orvis stellt sie als Baetis-Imitation vor. Rogue Fly Fishers empfehlen sie im Winter für Forellen in den Flüssen des amerikanischen Westens, und an Seen läuft sie gut, wenn Callibaetis schlüpfen.
+    """
+
+labels {
+    // en case: Pheasant tail fibres (wing case and legs)
+    case "Fasanenstoßfibern (Flügelscheide und Beine)"
+    // en legs: Pheasant tail fibre tips (legs)
+    legs "Spitzen der Fasanenstoßfibern (Beine)"
+}
+
+notes {
+    // en step 1 (weight weight): Under the thorax only.
+    step 1 "Nur unter dem Thorax."
+    // en step 4 (tie-in tail): Tips aligned, on top; keep the butts for the abdomen.
+    step 4 "Spitzen ausgerichtet, oben; behalte die Enden für das Abdomen."
+    // en step 7 (wind tail): The butts as a flat ribbon over the rear two thirds.
+    step 7 "Die Enden als flaches Band über die hinteren zwei Drittel."
+    // en step 9 (wind rib): In open turns.
+    step 9 "In offenen Windungen."
+    // en step 11 (tie-in case): On top at the front of the abdomen, tips forward.
+    step 11 "Oben am vorderen Ende des Abdomens, Spitzen nach vorn."
+    // en step 14 (wind thorax): Twist the herls lightly and wind in touching turns.
+    step 14 "Verdrille die Pfauengrasfibern leicht und winde sie Windung an Windung."
+    // en step 17 (tie-in legs): About as long as the thorax.
+    step 17 "Etwa so lang wie der Thorax."
+}

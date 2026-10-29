@@ -1,0 +1,25 @@
+id stonefly-adult
+status draft
+
+// en name: Stonefly adult
+name "Bäckslända, fullbildad"
+
+// en description: A long, flat insect with its four wings folded flat over its back, long antennae and two short tails. Females flutter over the water dropping their eggs, and spent ones collect in the eddies.
+description "En lång, platt insekt med de fyra vingarna platt hopvikta över ryggen, långa antenner och två korta stjärtspröt. Honorna fladdrar över vattnet och släpper sina ägg, och de utmattade samlas i bakvattnen."
+
+// en examples: yellow sally (Isoperla), Perlodes, Diura; salmonfly and golden stone (North America)
+examples "yellow sally (Isoperla), Perlodes, Diura; salmonfly och golden stone (Nordamerika)"
+
+hatches {
+    // en southern-sweden note: February red March onwards, yellow sally May–July, Diura May–August (Dalarna 2013).
+    southern-sweden note="February red från mars, yellow sally i maj–juli, Diura i maj–augusti (Dalarna 2013)."
+    // en northern-scandinavia note: Yellow sally June–September (Dalarna 2013).
+    northern-scandinavia note="Yellow sally i juni–september (Dalarna 2013)."
+    // en british-isles time: midday
+    // en british-isles note: Perlodes end of March to mid-June; yellow sally in summer (First Nature).
+    british-isles time="mitt på dagen" note="Perlodes från slutet av mars till mitten av juni; yellow sally på sommaren (First Nature)."
+    // en central-europe note: Isoperla April–September (Wikipedia de); Perla late May–July.
+    central-europe note="Isoperla i april–september (tyska Wikipedia); Perla från slutet av maj till juli."
+    // en northern-usa note: Salmonfly April–July, later in the north; yellow sally mid-June to early August (Troutnut; Montana Angler).
+    northern-usa note="Salmonfly i april–juli, senare längre norrut; yellow sally från mitten av juni till början av augusti (Troutnut; Montana Angler)."
+}

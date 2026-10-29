@@ -1,0 +1,24 @@
+id marine-baitfish
+status draft
+
+// en name: Marine baitfish
+name "Futterfische im Meer"
+
+// en description: The slim schooling fish of coasts and estuaries: a translucent body with a silver band along the side, a green-grey back and a white belly. Sea trout and saltwater fish feed on them in the shallows.
+description "Die schlanken Schwarmfische der Küsten und Flussmündungen: ein durchscheinender Körper mit einem silbernen Band entlang der Seite, ein graugrüner Rücken und ein weißer Bauch. Meerforellen und Salzwasserfische fressen sie im Flachwasser."
+
+// en examples: silversides, sand eels, smelt, glass minnows
+examples "Ährenfische, Sandaale, Stinte, Glass Minnows"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Schätzung."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Schätzung."
+    // en british-isles note: Estimate.
+    british-isles note="Schätzung."
+    // en central-europe note: Estimate.
+    central-europe note="Schätzung."
+    // en northern-usa note: Estimate.
+    northern-usa note="Schätzung."
+}

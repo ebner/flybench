@@ -54,12 +54,12 @@ materials {
 
 steps {
     weight weight from=0.25 to=0.75 note="About 15 turns centred on the hook."
-    attach-thread at=0.85 note="Wrap over the lead so it tapers smoothly at both ends."
+    attach-thread at=0.85 note="Wrap over the weighting so it tapers smoothly at both ends."
     wrap-thread to=0.0
     tie-in back note="On top, stretched, wrapped back deep into the bend."
     tie-in under-rib
     tie-in over-rib note="On the far side, so it makes almost a full turn before crossing the back."
-    dub abdomen to=0.65 note="Sparse and even: the lead already gives the taper."
+    dub abdomen to=0.65 note="Sparse and even: the weighting already gives the taper."
     dub thorax to=0.9
     wind under-rib to=0.9 turns=7 note="Open, even turns."
     tie-off under-rib

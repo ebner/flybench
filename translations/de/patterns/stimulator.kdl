@@ -1,0 +1,35 @@
+id stimulator
+status draft
+
+// en description: An elk hair tail and wing, a yellow abdomen with a palmered brown hackle and wire rib, and an orange thorax with a grizzly hackle.
+description "Schwanz und Flügel aus Wapitihaar, ein gelbes Abdomen mit einer braunen Körperhechel und Drahtrippung sowie ein orangefarbener Thorax mit einer Grizzly-Hechel."
+
+// en history: Randall Kaufmann's own account: in 1980 his friend Rick Verheghe did well on the Deschutes with a fly labelled "Hank's Special" from a bin at the Oasis Café in Maupin. Kaufmann refined it, David Lambroughton suggested the name in 1981, and it first appeared in the Kaufmann Streamborn catalogue in 1982; he says no one else was involved. Jim Slattery of New Jersey tells a different story (in Rusty Dunn's SWTU article): Kaufmann phoned him about his "Fluttering Stonefly" of the late 1970s, said he had slimmed the wing and shortened the front hackle, and agreed to the name Slattery suggested. Neither account has been independently confirmed. Kaufmann published it in Tying Dry Flies (1991), with the fly on the cover. He also says the style was not new: he mixed the Improved Sofa Pillow and the Royal Trude.
+history """
+    Randall Kaufmanns eigene Darstellung: 1980 fing sein Freund Rick Verheghe am Deschutes gut mit einer Fliege aus einer Kiste im Oasis Café in Maupin, die mit „Hank's Special“ beschriftet war. Kaufmann verfeinerte sie, David Lambroughton schlug 1981 den Namen vor, und 1982 erschien sie zum ersten Mal im Katalog von Kaufmann Streamborn; niemand sonst, sagt er, sei beteiligt gewesen. Jim Slattery aus New Jersey erzählt es anders (in Rusty Dunns Artikel für die SWTU): Kaufmann habe ihn wegen seiner „Fluttering Stonefly“ aus den späten 1970er Jahren angerufen, gesagt, er habe den Flügel schlanker und die vordere Hechel kürzer gemacht, und dem Namen zugestimmt, den Slattery vorschlug. Keine der beiden Darstellungen ist unabhängig bestätigt. Kaufmann veröffentlichte sie in Tying Dry Flies (1991), mit der Fliege auf dem Titelbild. Er sagt auch, der Stil sei nicht neu gewesen: Er habe die Improved Sofa Pillow und die Royal Trude gemischt.
+    """
+
+// en fishing: A high-floating searching fly, easy to see even in broken pocket water, and often the dry in a dry-dropper rig. It imitates stoneflies of all sizes; sizes 12 to 16 also do for caddis, and the largest pass for grasshoppers.
+fishing """
+    Eine hoch schwimmende Suchfliege, selbst in gebrochenem Pocket Water gut zu sehen und oft die Trockenfliege einer Dry-Dropper-Montage. Sie imitiert Steinfliegen aller Größen; in den Größen 12 bis 16 taugt sie auch als Köcherfliege, und die größten gehen als Grashüpfer durch.
+    """
+
+labels {
+    // en thorax: Fire orange dubbing
+    thorax "Feuerorangefarbenes Dubbing"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short, flared bunch, about a gape long.
+    step 3 "Ein kurzes, gespreiztes Büschel, etwa eine Bogenweite lang."
+    // en step 4 (trim tail): Trim the butts and bind them down.
+    step 4 "Schneide die Enden ab und überwickle sie."
+    // en step 6 (dub abdomen): Thin, with a slight taper.
+    step 6 "Dünn, leicht verjüngt."
+    // en step 9 (wind rib): To protect it.
+    step 9 "Zum Schutz der Hechel."
+    // en step 12 (tie-in wing): About twice as much hair as the tail, flaring over the top half of the shank.
+    step 12 "Etwa doppelt so viel Haar wie beim Schwanz, über die obere Hälfte des Hakenschenkels gespreizt."
+    // en step 15 (dub thorax): Thin, to just short of the eye.
+    step 15 "Dünn, bis kurz vor das Öhr."
+}

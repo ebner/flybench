@@ -1,0 +1,24 @@
+id damselfly-nymph
+status draft
+
+// en name: Damselfly nymph
+name "Flicksländenymf"
+
+// en description: A slender nymph of weedy lakes and slow water with three leaf-like tail gills. It swims with fish-like wriggles of the body and climbs out of the water to hatch.
+description "En smal nymf i vegetationsrika sjöar och lugnt vatten, med tre bladlika stjärtgälar. Den simmar med slingrande, fisklika rörelser av kroppen och klättrar upp ur vattnet för att kläckas."
+
+// en examples: Coenagrion, Enallagma
+examples "Coenagrion, Enallagma"
+
+hatches {
+    // en southern-sweden note: Adults May–August (Wikipedia); nymphs migrate to hatch just before.
+    southern-sweden note="Fullbildade i maj–augusti (Wikipedia); strax innan vandrar nymferna iväg för att kläckas."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles note: Coenagrion puella late April to early September, best late May–mid August (DELTA).
+    british-isles note="Coenagrion puella från slutet av april till början av september, bäst från slutet av maj till mitten av augusti (DELTA)."
+    // en central-europe note: Estimate.
+    central-europe note="Uppskattning."
+    // en northern-usa note: Estimate.
+    northern-usa note="Uppskattning."
+}

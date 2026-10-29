@@ -1,0 +1,53 @@
+id pheasant-tail-nymph
+status draft
+
+// en description: Four pheasant tail fibres and fine copper wire, with no thread: a short tail, a slim body, a wire thorax hump and a double wing case.
+description "Fyra fasanstjärtfibrer och tunn koppartråd, ingen bindtråd: en kort stjärt, en smal kropp, en thoraxpuckel av koppartråd och en dubbel vingsäck."
+
+// en history: Frank Sawyer was a river keeper on the Wiltshire Avon from 1925 until he died on its banks at Netheravon in 1980, from 1928 for the Officers' (later Services Dry Fly) Fishing Association. He saw that olive nymphs swim with their legs tucked in, so his nymph has no hackle, and he tied it with fine copper wire in place of silk, which also gives it weight; Sporting Road says the wire came from a relay coil. The fly was published in Nymphs and the Trout in 1958; when he first tied it is less certain: Sporting Road dates the method to the 1930s, Fly Fishing the Sierra the fly to the 1950s. He often tied it on the river bank, without a vise.
+history """
+    Frank Sawyer var fiskevårdare vid Wiltshire Avon från 1925 tills han dog vid dess strand
+    i Netheravon 1980, från 1928 för Officers' (senare Services Dry Fly) Fishing
+    Association. Han såg att olivdagsländornas nymfer simmar med benen indragna, så hans
+    nymf har inget hackel, och han band den med tunn koppartråd i stället för silke, vilket
+    också ger den tyngd; enligt Sporting Road kom tråden från en reläspole. Flugan
+    publicerades i Nymphs and the Trout 1958; när han först band den är mindre säkert:
+    Sporting Road daterar metoden till 1930-talet, Fly Fishing the Sierra flugan till
+    1950-talet. Han band den ofta på flodstranden, utan bindstäd.
+    """
+
+// en fishing: Made for clear chalk streams, where the trout can be seen: cast well upstream of the fish, let the nymph sink to its depth, and as it comes near, lift the rod gently so the nymph swims up in front of it: Sawyer's induced take. It also catches fish on lakes, worked slowly below the surface.
+fishing """
+    Skapad för klara kalkströmmar där öringen syns: kasta en god bit uppströms fisken, låt
+    nymfen sjunka till fiskens djup, och lyft spöet försiktigt när den närmar sig, så att
+    nymfen stiger upp framför fisken: Sawyers ”induced take”. Den fångar också fisk i sjöar,
+    långsamt fiskad under ytan.
+    """
+
+labels {
+    // en hump: Fine red copper wire
+    hump "Tunn röd koppartråd"
+    // en fibres: Cock pheasant centre tail fibres
+    fibres "Mittstjärtfibrer från fasantupp"
+    // en case: Pheasant tail fibres (the butts, folded over)
+    case "Fasanstjärtfibrer (rotändarna, vikta över)"
+}
+
+notes {
+    // en step 1 (weight hump): Three or four overlapping layers just in front of the middle of the shank.
+    step 1 "Tre eller fyra överlappande lager strax framför mitten av krokskaftet."
+    // en step 2 (attach-thread): The same wire: wind it back over the shank to the bend.
+    step 2 "Samma koppartråd: linda den bakåt över krokskaftet till krokböjen."
+    // en step 4 (tie-in fibres): Tips first, under two turns of wire. Pheasant tail cuts easily, so go gently.
+    step 4 "Spetsarna först, under två varv koppartråd. Fasanstjärt går lätt av, så var varsam."
+    // en step 6 (tie-in case): Lying back over the tail for now.
+    step 6 "Liggande bakåt över stjärten tills vidare."
+    // en step 7 (wrap-thread): In Sawyer's method the wire is twisted round the fibres and wound with them.
+    step 7 "I Sawyers metod tvinnas koppartråden runt fibrerna och lindas tillsammans med dem."
+    // en step 8 (wind fibres): Touching turns over the abdomen and thorax.
+    step 8 "Täta varv över bakkroppen och thoraxen."
+    // en step 10 (pull-over case): Over the thorax, then back and forward again: a double, darker wing case.
+    step 10 "Över thoraxen, sedan tillbaka och fram igen: en dubbel, mörkare vingsäck."
+    // en step 11 (whip-finish): A few turns of wire behind the eye; break off the excess.
+    step 11 "Några varv koppartråd bakom krokögat; bryt av överskottet."
+}

@@ -1,0 +1,25 @@
+id midge-adult
+status draft
+
+// en name: Midge adult
+name "Zuckmücke"
+
+// en description: A small, slender fly with one pair of wings held back over its body, long legs and, in the males, feathery antennae. Mating clusters drift on the surface on calm evenings.
+description "Eine kleine, schlanke Mücke mit einem einzigen Flügelpaar, das sie nach hinten über den Körper legt, langen Beinen und, bei den Männchen, federartigen Fühlern. An windstillen Abenden treiben Paarungsknäuel auf der Oberfläche."
+
+// en examples: non-biting midges (Chironomidae)
+examples "Zuckmücken (Chironomidae)"
+
+hatches {
+    // en southern-sweden note: Estimate: peak May–June.
+    southern-sweden note="Schätzung: Höhepunkt Mai–Juni."
+    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
+    northern-scandinavia note="Dunkle Zuckmücken schwärmen an warmen Junitagen (Visit Dalarna); sonst eine Schätzung."
+    // en british-isles time: morning, evening
+    // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
+    british-isles time="morgens und abends" note="Auf Stillgewässern das ganze Jahr, im November und Dezember spärlich; große Buzzer März–April, Höhepunkt Mai–Juni, dann wieder September–Oktober (The Essential Fly)."
+    // en central-europe note: Estimate, as in Britain.
+    central-europe note="Schätzung, wie auf den Britischen Inseln."
+    // en northern-usa note: Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure).
+    northern-usa note="Immer wenn das Wasser eisfrei ist; an Seen Höhepunkt Ende Mai bis Mitte Juni (BC Adventure)."
+}

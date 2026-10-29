@@ -1,0 +1,43 @@
+id zulu
+status draft
+
+// en description: A short red wool tail, a black seal's fur body ribbed with fine oval silver, and a black cock hackle palmered from tail to head.
+description "En kort stjärt av rött ullgarn, en kropp av svart sälhår ribbad med fin oval silvertinsel och ett svart tupphackel lindat från stjärten till huvudet."
+
+// en history: Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders with red tips, commonly called Zulus" among the flies for a fortnight on remote Scottish lochs, and in 1892 Niven's lexicon described it as "made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking Lars reports it, gives it a silver tag and hen hackles. Two modern sources say it was once banned, from competitions or in some waters, for catching too well; neither gives details.
+history """
+    Ingen vet vem som band den första. Redan 1882 kunde ”Black Palmer” räkna upp ”svarta
+    spiders med röda spetsar, vanligen kallade Zulus” bland flugorna för två veckor vid
+    avlägsna skotska sjöar, och 1892 beskrev Nivens lexikon den som ”bunden som en palmer,
+    svart hackel, svart kropp, ribbad med silvertinsel, med en tag av röd ull som stjärt”.
+    Walbrans katalog från 1889 ger den, enligt Viking Lars, en tag av silver och hönshackel.
+    Två moderna källor uppger att den en gång förbjöds, i tävlingar eller i vissa vatten,
+    för att den fångade för bra; ingen av dem ger några detaljer.
+    """
+
+// en fishing: A loch fly, at its best on the bob: the top dropper of a team of three or four, worked through the wave tops from a drifting boat. Dark, windy days suit it. It takes brown trout and sea trout all over Britain and Ireland, and brown trout and Arctic char in Iceland. A letter to the Fishing Gazette in 1893 recommended it for Donegal sea trout "dressed small, but with long hackle and with plenty of tinsel".
+fishing """
+    En sjöfluga, som bäst som bobfluga: den översta droppern på en tafs med tre eller fyra
+    flugor, fiskad genom vågtopparna från en drivande båt. Mörka, blåsiga dagar passar den.
+    Den tar öring och havsöring över hela Storbritannien och Irland, och öring och röding på
+    Island. Ett brev till Fishing Gazette 1893 rekommenderade den för havsöring i Donegal,
+    ”bunden liten, men med långt hackel och gott om tinsel”.
+    """
+
+labels {
+    // en rib: Fine oval silver tinsel
+    rib "Fin oval silvertinsel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short tuft, on top.
+    step 3 "En kort tofs, ovanpå."
+    // en step 5 (tie-in hackle): Shiny side forward.
+    step 5 "Den blanka sidan framåt."
+    // en step 6 (dub body): Slightly tapered; pick it out a little.
+    step 6 "Lätt avsmalnande; plocka ut den lite."
+    // en step 7 (wind hackle): Open turns, tail to head.
+    step 7 "Glesa varv, från stjärten till huvudet."
+    // en step 9 (wind rib): Through the hackle, crossing the stem.
+    step 9 "Genom hacklet, så att den korsar stjälken."
+}

@@ -1,0 +1,24 @@
+id sculpin
+status draft
+
+// en name: Sculpin (bullhead)
+name "Groppe (Koppe)"
+
+// en description: A bottom fish of cold, clear streams: a big broad head with eyes on top, mottled brown, resting on the stones with its large pectoral fins spread like wings.
+description "Ein Grundfisch kalter, klarer Bäche, braun marmoriert, mit großem, breitem Kopf und oben liegenden Augen. Er ruht auf den Steinen, die großen Brustflossen wie Flügel ausgebreitet."
+
+// en examples: European bullhead (Cottus gobio), slimy sculpin
+examples "Groppe (Cottus gobio), Schleimige Groppe"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Schätzung."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Schätzung."
+    // en british-isles note: Estimate.
+    british-isles note="Schätzung."
+    // en central-europe note: Estimate.
+    central-europe note="Schätzung."
+    // en northern-usa note: Estimate.
+    northern-usa note="Schätzung."
+}

@@ -1,0 +1,43 @@
+id mickey-finn
+status draft
+
+// en description: A flat silver tinsel body with an oval silver rib, and a three-layer bucktail wing: yellow, a sparse red, and yellow again on top.
+description "En kropp av platt silvertinsel med ribb av oval silvertinsel, och en vinge av bucktail i tre lager: gult, glest rött och gult igen överst."
+
+// en history: Its maker is unknown. It was first called the Red and Yellow Bucktail. Wikipedia, after Joseph Bates, traces it to eastern Canada in the late 19th century; Nick Karas thought a commercial tyer made it for William Mills of New York. In spring 1932 John Alden Knight was given one by Junior Vanderhoff on the Mianus River near Greenwich, Connecticut, and they called it the Assassin. Gregory Clark of the Toronto Star renamed it the Mickey Finn, and Knight's 1937 magazine article, which came out at the time of the New York Sportsmen's Show, made it hugely popular.
+history """
+    Upphovsmannen är okänd. Först hette den Red and Yellow Bucktail. Wikipedia, som följer Joseph Bates, spårar den till östra Kanada i slutet av 1800-talet; Nick Karas trodde att en yrkesbindare gjorde den åt William Mills i New York. Våren 1932 fick John Alden Knight en av Junior Vanderhoff vid Mianus River nära Greenwich i Connecticut, och de kallade den the Assassin. Gregory Clark på Toronto Star döpte om den till Mickey Finn, och Knights tidningsartikel från 1937, som kom ut samtidigt med New York Sportsmen's Show, gjorde den enormt populär.
+    """
+
+// en fishing: A bright streamer with a long record for brook trout, and a favourite early in the season and in murky water. In Canada big ones on hooks up to 4/0 were trolled behind canoes, and it was one of the first flies Danish anglers used when they took up fly fishing for sea trout in the late 1960s.
+fishing """
+    En färgglad streamer med lång meritlista för bäckröding, och en favorit tidigt på säsongen och i grumligt vatten. I Kanada trollades stora exemplar på krokar upp till 4/0 efter kanoter, och den var en av de första flugorna danska fiskare använde när de började flugfiska efter havsöring i slutet av 1960-talet.
+    """
+
+labels {
+    // en lower: Yellow bucktail, a small bunch
+    lower "Gul bucktail, en liten bunt"
+    // en middle: Red bucktail, sparse
+    middle "Röd bucktail, gles"
+    // en upper: Yellow bucktail, a larger bunch
+    upper "Gul bucktail, en större bunt"
+}
+
+notes {
+    // en step 1 (attach-thread): One eye length behind the eye.
+    step 1 "Lika långt bakom krokögat som ögat är långt."
+    // en step 2 (wrap-thread): Binding the rib along the underside for a level underbody.
+    step 2 "Bind fast ribben längs undersidan så att underkroppen blir jämn."
+    // en step 6 (wind body): Touching turns, back to the bend and forward again.
+    step 6 "Täta varv, bakåt till krokböjen och fram igen."
+    // en step 8 (wind rib): Evenly spaced, at about 45° to the shank.
+    step 8 "Jämnt fördelad, i ungefär 45° mot krokskaftet."
+    // en step 10 (tie-in lower): Cleaned and stacked, on top of the shank.
+    step 10 "Rensad och jämnad i stacker, ovanpå krokskaftet."
+    // en step 11 (trim lower): Butts cut at a shallow angle, so the head tapers.
+    step 11 "Rotändarna avklippta i flack vinkel, så att huvudet smalnar av."
+    // en step 12 (tie-in middle): Tips level with the yellow.
+    step 12 "Topparna jäms med det gula."
+    // en step 16 (whip-finish): A small, tapered head, varnished.
+    step 16 "Ett litet, avsmalnande huvud, lackat."
+}

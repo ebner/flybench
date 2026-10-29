@@ -1,0 +1,41 @@
+id pats-rubber-legs
+status draft
+
+// en description: A weighted body of black and coffee variegated chenille with rubber-leg tails and antennae and three pairs of rubber legs.
+description "Ein beschwerter Körper aus melierter Chenille in Schwarz und Kaffeebraun, Schwänze und Antennen aus Gummibeinen und drei Paar Gummibeine."
+
+// en history: Tied by Pat Bennett, a guide at Hyde Outfitters in Island Park, Idaho, after big rubber-legged stonefly patterns such as the Girdle Bug. The date isn't recorded. Black and coffee chenille is a favourite of guides across the Rockies, who fish it all year.
+history """
+    Gebunden von Pat Bennett, einem Guide bei Hyde Outfitters in Island Park, Idaho, nach dem Vorbild großer Steinfliegenmuster mit Gummibeinen wie dem Girdle Bug. Das Datum ist nicht überliefert. Die Version mit Chenille in Schwarz und Kaffeebraun ist ein Favorit der Guides in den gesamten Rocky Mountains, die sie das ganze Jahr über fischen.
+    """
+
+// en fishing: A guide's searching nymph, for anywhere big stoneflies live: empty nymph shucks on the rocks are a good sign. Fish it deep and bump it along the bottom and into pools.
+fishing """
+    Eine Suchnymphe der Guides, für alle Gewässer, in denen große Steinfliegen leben: Leere Nymphenhäute auf den Steinen sind ein gutes Zeichen. Fische sie tief und lass sie über den Grund holpern und in die Gumpen treiben.
+    """
+
+labels {
+    // en antennae: Black Spanflex (antennae)
+    antennae "Schwarzes Spanflex (Antennen)"
+    // en tails: Black Spanflex (tails)
+    tails "Schwarzes Spanflex (Schwänze)"
+    // en body: Black and coffee variegated chenille, medium
+    body "Melierte Chenille in Schwarz und Kaffeebraun, mittel"
+    // en legs-rear: Black Spanflex (legs)
+    legs-rear "Schwarzes Spanflex (Beine)"
+    // en legs-middle: Black Spanflex (legs)
+    legs-middle "Schwarzes Spanflex (Beine)"
+    // en legs-front: Black Spanflex (legs)
+    legs-front "Schwarzes Spanflex (Beine)"
+}
+
+notes {
+    // en step 3 (tie-in antennae): Splayed; trim to about the tail length.
+    step 3 "Gespreizt; auf etwa Schwanzlänge kürzen."
+    // en step 5 (tie-in tails): They splay naturally.
+    step 5 "Sie spreizen sich von selbst."
+    // en step 8 (tie-in legs-rear): A turn of the strand round shank and finger, locked with resin; snip the loop.
+    step 8 "Lege den Strang einmal um Hakenschenkel und Finger, sichere ihn mit Harz und schneide die Schlaufe auf."
+    // en step 14 (wind body): Forward between the legs.
+    step 14 "Zwischen den Beinen hindurch nach vorn."
+}

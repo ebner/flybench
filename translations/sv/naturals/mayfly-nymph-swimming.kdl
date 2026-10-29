@@ -1,0 +1,26 @@
+id mayfly-nymph-swimming
+status draft
+
+// en name: Mayfly nymph, swimming
+name "Dagsländenymf, simmande"
+
+// en description: A slim, torpedo-shaped nymph that swims in short jerky dashes among stones and weed, with three tails and small gills along the abdomen. Wing cases darken as it nears hatching.
+description "En smal, torpedformad nymf som simmar i korta, ryckiga rusningar bland stenar och växter, med tre stjärtspröt och små gälar längs bakkroppen. Vingsäckarna mörknar när kläckningen närmar sig."
+
+// en examples: olives (Baetis), iron blue (Alainites)
+examples "ådagsländor (Baetis), iron blue (Alainites)"
+
+hatches {
+    // en southern-sweden time: midday
+    // en southern-sweden note: Baetis: two generations, spring and autumn (Dalarna 2013).
+    southern-sweden time="mitt på dagen" note="Baetis: två generationer, vår och höst (Dalarna 2013)."
+    // en northern-scandinavia note: Estimate: one generation in the mountains.
+    northern-scandinavia note="Uppskattning: en generation i fjällen."
+    // en british-isles time: midday
+    // en british-isles note: Large dark olive peaks March–April and late autumn (First Nature).
+    british-isles time="mitt på dagen" note="Large dark olive: flest i mars–april och på senhösten (First Nature)."
+    // en central-europe note: Serratella mostly June–September; above 1000 m July–September (Wikipedia de).
+    central-europe note="Serratella mest i juni–september; över 1 000 m i juli–september (tyska Wikipedia)."
+    // en northern-usa note: Blue-winged olives in spring and autumn (Montana Angler).
+    northern-usa note="Blue-winged olive på våren och hösten (Montana Angler)."
+}

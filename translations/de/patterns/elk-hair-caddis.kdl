@@ -1,0 +1,32 @@
+id elk-hair-caddis
+status draft
+
+// en description: A buoyant searching caddis: a slim dubbed body, a palmered hackle held down by a gold wire rib, and a flared elk hair wing.
+description "Eine gut schwimmende Köcherfliege zum Absuchen: ein schlanker gedubbter Körper, eine gepalmerte Hechel, von einer Golddrahtrippung gehalten, und ein abgespreizter Flügel aus Wapitihaar."
+
+// en history: Al Troth tied the first Elk Hair Caddis in 1957 for the green caddis on his home streams in Pennsylvania, and first fished it on Loyalsock Creek; he moved to Montana in 1973. He set out to make a wet fly, but it floated so well that he fished it dry. He used bleached elk hair so that the wing would be easier to see. The neatly trimmed head that most tyers now give it was added by others; see the Troth variant for his own way.
+history """
+    Al Troth band die erste Elk Hair Caddis 1957 für die grüne Köcherfliege an seinen Hausbächen in Pennsylvania und fischte sie zuerst am Loyalsock Creek; 1973 zog er nach Montana. Eigentlich wollte er eine Nassfliege binden, doch sie schwamm so gut, dass er sie trocken fischte. Er nahm gebleichtes Wapitihaar, damit der Flügel besser zu sehen war. Den sauber gestutzten Kopf, den ihr die meisten Binder heute geben, haben andere hinzugefügt; seine eigene Bindeweise zeigt die Variante „Troths Original“.
+    """
+
+// en fishing: A searching pattern for any water where caddis hatch, riffles and runs included: the hair wing and palmered hackle float it high. It is mostly fished on a dead drift; skating it, or pulling it through the film like a caddis hatching, works too.
+fishing """
+    Ein Suchmuster für jedes Wasser, in dem Köcherfliegen schlüpfen, flache Schnellen und Rinnen eingeschlossen: Haarflügel und gepalmerte Hechel lassen sie hoch schwimmen. Meist wird sie dragfrei gefischt; geskatet oder wie eine schlüpfende Köcherfliege durch den Film gezogen, fängt sie ebenfalls.
+    """
+
+notes {
+    // en step 4 (dub body): Keep the body slim, with a slight taper towards the front.
+    step 4 "Halte den Körper schlank, nach vorn leicht konisch."
+    // en step 5 (tie-in hackle): Tie it in by the butt, shiny side forward.
+    step 5 "Binde sie am Kielende ein, die glänzende Seite nach vorn."
+    // en step 6 (wind hackle): Hold the tip with hackle pliers at the bend.
+    step 6 "Halte die Spitze am Hakenbogen mit einer Hechelklemme fest."
+    // en step 7 (wind rib): Wiggle the wire as you go so no fibres are trapped.
+    step 7 "Wackle beim Wickeln mit dem Draht, damit keine Fibern eingeklemmt werden."
+    // en step 10 (tie-in wing): Clean the underfur out and stack the hair so the tips are even.
+    step 10 "Kämm die Unterwolle aus und richte das Haar im Stacker aus, so dass die Spitzen gleich lang sind."
+    // en step 11 (trim wing): Cut straight across, parallel to the eye.
+    step 11 "Gerade quer abschneiden, parallel zum Öhr."
+    // en step 12 (whip-finish): Whip finish behind the trimmed butts.
+    step 12 "Kopfknoten hinter den gestutzten Haarenden."
+}

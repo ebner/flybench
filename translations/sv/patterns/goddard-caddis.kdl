@@ -1,0 +1,26 @@
+id goddard-caddis
+status draft
+
+// en description: A body of spun and clipped deer hair trimmed to a sedge's tent-shaped wing, and a brown hackle at the front.
+description "En kropp av spunnet hjorthår, klippt till en nattsländas taklagda vinge, och ett brunt hackel framtill."
+
+// en history: Developed by John Goddard and Cliff Henry in England; G&H are their initials. The Feather Bender takes the original dressing from a 1977 reprint of Goddard's Trout Flies of Still-Water (1969): a belly of dark green seal's fur, two rusty dun hackles and their stripped stems as antennae. Hans Weilenmann gives the belly as olive. Today it is mostly tied with a hard-packed hair body and no belly, and is better known as the Goddard Caddis; posters on Fly Anglers Online, Weilenmann among them, credit that name to the American tyer Andre Puyans.
+history """
+    Framtagen av John Goddard och Cliff Henry i England; G&H är deras initialer. The Feather Bender hämtar originaldressingen ur en nyutgåva från 1977 av Goddards Trout Flies of Still-Water (1969): en buk av mörkgrönt sälhår, två rusty dun-hackel och deras rensade stammar som antenner. Hans Weilenmann anger buken som olivgrön. I dag binds den mest med en hårt packad hårkropp utan buk och är mer känd som Goddard Caddis; skribenter på Fly Anglers Online, Weilenmann bland dem, tillskriver det namnet den amerikanske flugbindaren Andre Puyans.
+    """
+
+// en fishing: Packed deer hair makes it very buoyant, even in rough water, so it can be skated, twitched or pulled to leave a wake, and that movement is often what draws a rise. Global FlyFisher notes that it is easy to see in the last light of a big hatch, but finds it too clumsy for very selective trout.
+fishing """
+    Det packade hjorthåret gör den mycket flytkraftig, även i oroligt vatten, så den kan skejtas, ryckas eller dras så att den lämnar en svallvåg efter sig, och det är ofta just den rörelsen som lockar fram ett vak. Global FlyFisher påpekar att den är lätt att se i sista ljuset under en stor kläckning, men tycker att den är för klumpig för mycket selektiv öring.
+    """
+
+notes {
+    // en step 3 (spin body): Comb out the underfur; pack each bunch back hard against the last.
+    step 3 "Kamma ur underullen; packa varje bunt hårt bakåt mot den förra."
+    // en step 4 (trim body): Flat underneath at the depth of the eye, the top rising towards the rear, the sides flaring back.
+    step 4 "Plant undertill i höjd med krokögat, ovansidan stigande bakåt och sidorna utsvängda bakåt."
+    // en step 5 (tie-in hackle): Slightly undersized.
+    step 5 "Något kortare i fibern än normalt."
+    // en step 7 (wind hackle): A couple of turns back into the hair, then forward.
+    step 7 "Ett par varv bakåt in i håret, sedan framåt."
+}

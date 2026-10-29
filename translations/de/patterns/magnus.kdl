@@ -1,0 +1,43 @@
+id magnus
+status draft
+
+// en description: Splayed grizzly hackle-tip tail, a sparse grey hare's fur body with an oval silver rib, a palmered grizzly hackle and a longer grizzly front hackle, behind bead-chain eyes and a red head.
+description "Ein gespreizter Schwanz aus Grizzly-Hechelspitzen, ein spärlicher Körper aus grauem Hasenfell mit Rippung aus ovalem Silbertinsel, eine gepalmerte Grizzly-Hechel und vorn eine längere Grizzly-Hechel, davor Kettenaugen und ein roter Kopf."
+
+// en history: Magnus Ting Mortensen tied it on Funen in the spring of 1973 from what he had to hand: hare from his own hunting and grizzly hackle from a friend's Plymouth Rock chickens. He did not set out to copy any particular creature, only to make something that looked alive. It resembles a Woolly Bugger, but GlobalFlyFisher traces it to palmered wet flies such as the Chillimps and the Red Tag Palmer. It caught on first through a local shop that stocked it as a staple, then through magazines and books; GlobalFlyFisher counts it the original of the many grey, grizzly-hackled Danish coastal flies. The Grey Fred (1989) looks much like it but is a separate pattern with different materials, and the two are often confused.
+history """
+    Magnus Ting Mortensen band sie im Frühjahr 1973 auf Fünen aus dem, was er zur Hand hatte: Hase aus eigener Jagd und Grizzly-Hechel von den Plymouth-Rock-Hühnern eines Freundes. Er wollte kein bestimmtes Tier nachahmen, nur etwas schaffen, das lebendig wirkt. Sie ähnelt einem Woolly Bugger, doch GlobalFlyFisher führt sie auf gepalmerte Nassfliegen wie die Chillimps und die Red Tag Palmer zurück. Bekannt wurde sie zuerst über einen örtlichen Laden, der sie als Standardfliege führte, dann über Zeitschriften und Bücher; GlobalFlyFisher hält sie für das Original der vielen grauen dänischen Küstenfliegen mit Grizzly-Hechel. Die Grey Fred (1989) sieht ihr sehr ähnlich, ist aber ein eigenes Muster mit anderen Materialien, und die beiden werden oft verwechselt.
+    """
+
+// en fishing: A coastal sea-trout fly, found in most Danish fly boxes and fished along the Baltic coasts. It suggests shrimps and small fish without copying either, and has also taken steelhead, salmon and saltwater fish further afield. The bead-chain eyes add weight and make it jig.
+fishing """
+    Eine Meerforellenfliege für die Küste, in den meisten dänischen Fliegendosen zu finden und an den Ostseeküsten gefischt. Sie erinnert an Garnelen und kleine Fische, ohne eines von beiden zu kopieren, und hat anderswo auch Steelhead, Lachse und Salzwasserfische gefangen. Die Kettenaugen geben Gewicht und lassen sie wie einen Jig auf und ab tanzen.
+    """
+
+labels {
+    // en tail: Grizzly hackle tips
+    tail "Grizzly-Hechelspitzen"
+    // en body: Grey hare's fur
+    body "Graues Hasenfell"
+    // en front: Grizzly cock hackle, longer
+    front "Grizzly-Hahnenhechel, länger"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, one eye width behind the eye; the originator ties them underneath.
+    step 2 "Oben, eine Öhrbreite hinter dem Öhr; der Erfinder bindet sie unten ein."
+    // en step 4 (tie-in tail): Two small neck feathers, curving away from each other.
+    step 4 "Zwei kleine Nackenfedern, voneinander weg gebogen."
+    // en step 6 (dub body): Sparse; stop one eye width behind the eyes.
+    step 6 "Spärlich; hör eine Augenbreite hinter den Kettenaugen auf."
+    // en step 7 (tie-in palmer): By the butt, at the front.
+    step 7 "Am Kielende, vorn."
+    // en step 8 (wind palmer): Backward, in open turns, to the bend.
+    step 8 "Rückwärts in offenen Windungen bis zum Hakenbogen."
+    // en step 11 (trim palmer): The hackle tip at the bend.
+    step 11 "Die Hechelspitze am Hakenbogen."
+    // en step 14 (wind front): A wet-fly collar behind the eyes.
+    step 14 "Ein Nassfliegenkragen hinter den Augen."
+    // en step 16 (whip-finish): Varnish the head red (the original had the eyes varnished too); tease out the fur.
+    step 16 "Lackiere den Kopf rot (beim Original waren auch die Augen lackiert); zupf das Fell heraus."
+}

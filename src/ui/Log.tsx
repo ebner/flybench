@@ -6,6 +6,7 @@ import { href } from "./router";
 import { LOG_KEY, useStoredList } from "./storage";
 import { BenchNav, storedNote } from "./Personal";
 import { t } from "../i18n/ui";
+import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
@@ -78,7 +79,8 @@ export function Log() {
           <h2>{t.log.flies}</h2>
           <ul className="log-entries">
             {newestFirst(log.items).map((e) => {
-              const recipe = all.find((r) => r.id === e.id);
+              const english = all.find((r) => r.id === e.id);
+              const recipe = english && inPageLanguage(english);
               const name = recipe ? `${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}` : e.id;
               return (
                 <li key={e.key}>

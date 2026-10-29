@@ -1,0 +1,53 @@
+id pattegrisen
+status draft
+
+// en description: A reversed shrimp in shell pink: hackle-stem and synthetic-hair feelers, a Spey hackle collar and black eyes at the bend, a tapered SLF body with a palmered Spey hackle, and an Antron shellback segmented by a mono rib.
+description "Ein rückwärts gebundener Shrimp in Shell Pink: Fühler aus Hechelkielen und Kunsthaar, ein Kragen aus Spey-Hechel und schwarze Augen am Hakenbogen, ein verjüngter Körper aus SLF mit einer Spey-Hechel als Körperhechel und ein Rückenschild aus Antron, durch eine Mono-Rippung segmentiert."
+
+// en history: Claus Eriksen tied it on Funen in 2006, and its tenth birthday was celebrated in Odense in 2016. It grew out of Morten Øland's Spey Shrimp (also called Oeland's Shrimp), a more neutral grey fly, which Eriksen redid in pink and coral with some materials changed. It was one of the flies in two Danish sea-trout films released in 2006 that were known for their underwater footage of sea trout following flies. The key material is a long, thin Spey hackle; the Ahrex video names Whiting Spey feathers. Eriksen has tied it in all colours, and says the pink catches best.
+history """
+    Claus Eriksen hat sie 2006 auf Fünen gebunden, und 2016 wurde in Odense ihr zehnter Geburtstag gefeiert. Sie ging aus Morten Ølands Spey Shrimp (auch Oeland's Shrimp genannt) hervor, einer neutraleren, grauen Fliege, die Eriksen in Pink und Koralle neu band und dabei einige Materialien änderte. Sie war eine der Fliegen in zwei dänischen Meerforellenfilmen, die 2006 erschienen und für ihre Unterwasseraufnahmen von Meerforellen bekannt waren, die Fliegen folgen. Das entscheidende Material ist eine lange, dünne Spey-Hechel; das Ahrex-Video nennt Spey-Federn von Whiting. Eriksen hat sie in allen Farben gebunden und sagt, Pink fange am besten.
+    """
+
+// en fishing: A Danish coastal fly for sea trout. Eriksen fishes it as the point fly in all conditions, bright sun and flat calm included, often with a small grey gammarus about 50 cm up the leader. He uses sizes 4 to 6 even in midsummer and early autumn, when the usual advice is small flies on fine leaders. It has also taken salmon, steelhead, bonefish and tarpon.
+fishing """
+    Eine dänische Küstenfliege für Meerforellen. Eriksen fischt sie bei allen Bedingungen als Endfliege, auch bei praller Sonne und spiegelglattem Wasser, oft mit einem kleinen grauen Gammarus etwa 50 cm weiter oben am Vorfach. Er nimmt die Größen 4 bis 6 selbst im Hochsommer und Frühherbst, wenn man sonst zu kleinen Fliegen an feinen Vorfächern rät. Sie hat auch schon Lachse, Steelheads, Bonefish und Tarpune gefangen.
+    """
+
+labels {
+    // en weight: Lead-free wire, or tungsten foil under the shank
+    weight "Bleifreier Draht oder Tungstenfolie unter dem Hakenschenkel"
+    // en feelers: White hackle stems
+    feelers "Weiße Hechelkiele"
+    // en mouth: Shrimp-pink Spey hackle
+    mouth "Spey-Hechel in Shrimp Pink"
+    // en antennae: Shrimp-pink Ultra Hair
+    antennae "Ultra Hair in Shrimp Pink"
+    // en body: Shell-pink SLF
+    body "SLF in Shell Pink"
+    // en legs: Shrimp-pink Spey hackle
+    legs "Spey-Hechel in Shrimp Pink"
+    // en back: Shrimp-pink Antron yarn
+    back "Antron-Garn in Shrimp Pink"
+}
+
+notes {
+    // en step 4 (tie-in feelers): Splayed apart.
+    step 4 "Auseinandergespreizt."
+    // en step 5 (tie-in mouth): The mouth parts.
+    step 5 "Die Mundwerkzeuge."
+    // en step 7 (wind mouth): A collar round the feelers.
+    step 7 "Ein Kragen um die Fühler."
+    // en step 10 (tie-in eyes): Angled slightly outwards.
+    step 10 "Leicht nach außen gewinkelt."
+    // en step 14 (dub body): Tapered: thickest at the bend, slimmer toward the eye.
+    step 14 "Verjüngt: am dicksten am Hakenbogen, zum Öhr hin schlanker."
+    // en step 15 (wind legs): Fibres down and back.
+    step 15 "Fibern nach unten und hinten."
+    // en step 17 (pull-over back): Over the top, stretched.
+    step 17 "Straff gespannt über den Rücken."
+    // en step 18 (wind rib): Over the shellback, the turns closer together toward the eye.
+    step 18 "Über den Rückenschild, die Windungen zum Öhr hin enger."
+    // en step 20 (whip-finish): Brush out the underside, trim, and varnish the head and a little of the back.
+    step 20 "Bürste die Unterseite aus, schneide sie zurecht und lackiere den Kopf und ein Stück des Rückens."
+}

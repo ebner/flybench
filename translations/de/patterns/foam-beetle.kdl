@@ -1,0 +1,41 @@
+id foam-beetle
+status draft
+
+// en description: A black foam shell folded over a peacock herl body, moose hair legs at the sides and a small orange sighter on top.
+description "Ein schwarzer Foam-Rücken, über einen Körper aus Pfauengras geklappt, seitlich Beine aus Elchmähne und oben eine kleine orangefarbene Sichthilfe."
+
+// en history: The sources credit no one with it. It is the foam descendant of the folded deer-hair Crowe Beetle, developed and popularised by John Crowe of Johnstown, Pennsylvania. Deer hair wears out quickly, often after a fish or two, while a foam beetle can last through a dozen. None of the sources says when foam took over from deer hair.
+history """
+    Die Quellen schreiben sie niemandem zu. Sie ist der Foam-Nachfahre des Crowe Beetle aus umgeklapptem Rehhaar, den John Crowe aus Johnstown, Pennsylvania, entwickelt und bekannt gemacht hat. Rehhaar nutzt sich schnell ab, oft schon nach ein, zwei Fischen, während ein Foam-Käfer ein Dutzend überstehen kann. Keine der Quellen sagt, wann Foam das Rehhaar ablöste.
+    """
+
+// en fishing: Fish it close to the banks in summer, when beetles fall in. Let it land with a plop: George Daniel points out that trout lying deep under an undercut bank may feel the impact before they see the fly. The foam keeps it afloat, and the sighter makes the low-riding black fly easier to follow. Beetles are also a standby for panfish.
+fishing """
+    Fische sie im Sommer nah am Ufer, wenn Käfer ins Wasser fallen. Lass sie mit einem Plopp landen: George Daniel weist darauf hin, dass Forellen, die tief unter einem unterspülten Ufer stehen, den Aufprall spüren können, bevor sie die Fliege sehen. Das Foam hält sie oben, und die Sichthilfe macht die flach liegende schwarze Fliege leichter zu verfolgen. Käfer sind auch eine bewährte Wahl für Panfish, kleine Barsche wie den Sonnenbarsch.
+    """
+
+labels {
+    // en back: Black foam strip, as wide as the gape
+    back "Schwarzer Foamstreifen, so breit wie die Bogenweite"
+    // en legs: Moose hair (legs)
+    legs "Elchmähne (Beine)"
+    // en sighter: Orange foam or yarn sighter
+    sighter "Sichthilfe aus orangefarbenem Foam oder Polystrang"
+}
+
+notes {
+    // en step 1 (attach-thread): Craven ties the pointed end of the foam in here and binds it back on top of the shank.
+    step 1 "Craven bindet hier das spitze Ende des Foams ein und bindet es oben auf dem Hakenschenkel nach hinten fest."
+    // en step 3 (tie-in back): Bound down on top to just past the bend, the long end trailing.
+    step 3 "Oben bis knapp über den Hakenbogen festgebunden, das lange Ende hängt nach hinten."
+    // en step 6 (tie-in legs): Six moose hairs crosswise, three a side.
+    step 6 "Sechs Haare der Elchmähne quer, drei auf jeder Seite."
+    // en step 8 (wind body): Touching turns, past the legs to just behind the eye.
+    step 8 "Windung an Windung, an den Beinen vorbei bis knapp hinter das Öhr."
+    // en step 11 (pull-over back): Fold it over the body and lock it down with a few tight turns.
+    step 11 "Klapp es über den Körper und fixiere es mit ein paar festen Windungen."
+    // en step 13 (tie-in sighter): A narrow strip on top at the joint, trimmed short.
+    step 13 "Ein schmaler Streifen oben an der Einbindestelle, kurz abgeschnitten."
+    // en step 14 (whip-finish): At the joint; pull the legs down and trim them.
+    step 14 "An der Einbindestelle; zieh die Beine nach unten und kürze sie."
+}

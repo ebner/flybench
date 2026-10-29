@@ -1,0 +1,25 @@
+id midge-pupa
+status draft
+
+// en name: Midge pupa (buzzer)
+name "Fjädermyggpuppa (buzzer)"
+
+// en description: A slim, segmented pupa with a bulbous thorax and white breathing filaments at the head. It rises slowly in short bursts, hangs still below the surface, and takes minutes to break through the film.
+description "En smal, segmenterad puppa med uppsvälld mellankropp och vita andningstrådar vid huvudet. Den stiger långsamt i korta ryck, hänger stilla under ytan och behöver flera minuter för att ta sig igenom ytfilmen."
+
+// en examples: buzzers (Chironomus and kin)
+examples "buzzers (Chironomus med släktingar)"
+
+hatches {
+    // en southern-sweden note: Estimate: peak May–June.
+    southern-sweden note="Uppskattning: flest i maj–juni."
+    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
+    northern-scandinavia note="Mörka fjädermyggor svärmar varma junidagar (Visit Dalarna); annars en uppskattning."
+    // en british-isles time: morning, evening
+    // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
+    british-isles time="morgon och kväll" note="I stillastående vatten hela året, fåtaliga i november–december; stora buzzers i mars–april, flest i maj–juni och igen i september–oktober (The Essential Fly)."
+    // en central-europe note: Estimate, as in Britain.
+    central-europe note="Uppskattning, som i Storbritannien."
+    // en northern-usa note: Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure).
+    northern-usa note="Så länge vattnet är isfritt; i sjöarna flest från slutet av maj till mitten av juni (BC Adventure)."
+}

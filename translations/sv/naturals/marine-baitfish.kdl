@@ -1,0 +1,24 @@
+id marine-baitfish
+status draft
+
+// en name: Marine baitfish
+name "Bytesfisk i havet"
+
+// en description: The slim schooling fish of coasts and estuaries: a translucent body with a silver band along the side, a green-grey back and a white belly. Sea trout and saltwater fish feed on them in the shallows.
+description "De smala stimfiskarna längs kuster och i flodmynningar: en genomskinlig kropp med ett silverband längs sidan, grågrön rygg och vit buk. Havsöring och saltvattensfiskar äter dem på grunt vatten."
+
+// en examples: silversides, sand eels, smelt, glass minnows
+examples "silversidor, tobis, nors, glass minnows"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Uppskattning."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles note: Estimate.
+    british-isles note="Uppskattning."
+    // en central-europe note: Estimate.
+    central-europe note="Uppskattning."
+    // en northern-usa note: Estimate.
+    northern-usa note="Uppskattning."
+}

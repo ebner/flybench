@@ -1,0 +1,13 @@
+id europea-12-tailed
+status draft
+
+// en variant: With tail
+variant "Mit Schwanz"
+
+// en description: The Europea 12 with a short tail of pheasant tail fibres.
+description "Die Europea 12 mit einem kurzen Schwanz aus Fasanenstoßfibern."
+
+notes {
+    // en step 8 (tie-in wing): Tie the feather in by the stem, flat over the body, convex side up.
+    step 8 "Binde die Feder am Kiel ein, flach über dem Körper, die gewölbte Seite nach oben."
+}

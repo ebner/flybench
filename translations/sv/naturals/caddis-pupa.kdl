@@ -1,0 +1,28 @@
+id caddis-pupa
+status draft
+
+// en name: Caddis pupa
+name "Nattsländepuppa"
+
+// en description: The pupa cuts out of its case and rises or swims to hatch, rowing with its oar-like legs, the wing sheaths dark along its sides and the antennae swept back.
+description "Puppan skär sig ut ur huset och stiger eller simmar upp för att kläckas. Den ror med sina årformade ben, med de mörka vingslidorna längs sidorna och antennerna bakåtstrukna."
+
+// en examples: sedges of all kinds
+examples "nattsländor av alla slag"
+
+hatches {
+    // en southern-sweden time: evening
+    // en southern-sweden note: From May (Sericostoma, Hydropsyche; Dalarna 2013) into autumn (Rhyacophila to November; Gullefors 2015); July and August the main months (Gullefors 2014).
+    southern-sweden time="på kvällen" note="Från maj (Sericostoma, Hydropsyche; Dalarna 2013) in på hösten (Rhyacophila till november; Gullefors 2015); juli och augusti är huvudmånaderna (Gullefors 2014)."
+    // en northern-scandinavia time: evening
+    // en northern-scandinavia note: First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna).
+    northern-scandinavia time="på kvällen" note="De första fullbildade nattsländorna i början av juni i Forsån (Gullefors 2014); nattsländefiske i augustiskymningen (Visit Dalarna)."
+    // en british-isles time: evening
+    // en british-isles note: Grannom in April (First Nature); many caddis at dusk.
+    british-isles time="på kvällen" note="Grannom i april (First Nature); många nattsländor i skymningen."
+    // en central-europe time: evening
+    // en central-europe note: Estimate; mostly at dusk and night (Wikipedia de).
+    central-europe time="på kvällen" note="Uppskattning; mest i skymningen och på natten (tyska Wikipedia)."
+    // en northern-usa note: Mother's Day caddis from late April, then May–October (Montana Angler).
+    northern-usa note="Mother's Day caddis från slutet av april, sedan maj–oktober (Montana Angler)."
+}
