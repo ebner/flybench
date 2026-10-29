@@ -132,7 +132,9 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     a function of time like the rest of the scene; a still-water setting for slow devices
     and reduced motion. How a fly sits in the water comes from its type and its materials'
     buoyancy (new wet properties in the materials catalog), with a recipe override.
-11. Planning and practice.
+11. ✅ Planning and practice. (The trip box suggests from the patterns' species, seasons and
+    naturals; water is river, lake or sea coast. The shopping list is on the Fly box page.
+    Variations are pictured in the fly box by drawing them in the browser.)
     - Colour playground: change a pattern's colours; the 3D fly, step texts and materials
       list follow; variations can be saved to the fly box.
     - Shopping list: the materials still missing for chosen flies or a fly box, merged
