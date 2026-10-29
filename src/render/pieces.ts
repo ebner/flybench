@@ -387,9 +387,8 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   let fibres: ReturnType<typeof fibreMesh> | null = null;
   if (piece.fibreLength && piece.look in WOUND_FIBRES) {
     const spec = WOUND_FIBRES[piece.look as keyof typeof WOUND_FIBRES];
-    const color = piece.look === "herl" ? "#26341a" : piece.color;
     const list = placeFibres(woundFibres(piece, mulberry32((piece.seed ?? piece.id) * 7919 + 1)), space);
-    fibres = fibreMesh(list, surfaces.get(piece.look, color, true), spec.tip);
+    fibres = fibreMesh(list, surfaces.get(piece.look, piece.color, true), spec.tip);
     group.add(fibres.object);
   }
 

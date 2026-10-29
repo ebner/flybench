@@ -53,43 +53,23 @@ export function recolor(recipe: Recipe, colours: Colours): Recipe {
     steps: recipe.steps.map((step) => {
       if (!step.note) return step;
       // A step's note about its own part follows the part's colour ("A short red butt."); the
-      // thread's steps are those without a material (the head at the whip finish).
+      // thread's steps are those without a material (the head at the whip finish). A colour
+      // named in a note about another part may be that part's own ("black bars" on a tippet
+      // tail), so those notes stay as tied.
       const part = "material" in step ? step.material : "thread";
-      // A note naming another material by its colour ("level with the yellow") follows it too,
-      // when every material of that colour has the same new one. All at once, so one swap
-      // doesn't feed the next (a black head made red, then the red made blue).
-      const swaps = new Map(materialSwaps(recipe, colours));
       const own = tiedColour(recipe, part);
-      if (own && isNamed(own) && colours[part]) swaps.set(own, colours[part]);
-      const note = swapColours(step.note, swaps);
+      const to = colours[part];
+      const note = own && to ? swapColour(step.note, own, to) : step.note;
       return note === step.note ? step : { ...step, note };
     }),
   };
 }
 
-/** Each colour all of whose materials changed to one new colour, with that colour. */
-function materialSwaps(recipe: Recipe, colours: Colours): [string, NamedColor][] {
-  const byColour = new Map<string, Set<string | undefined>>();
-  for (const m of recipe.materials) {
-    const from = materialColor(m);
-    if (!isNamed(from)) continue;
-    if (!byColour.has(from)) byColour.set(from, new Set());
-    byColour.get(from)!.add(colours[m.id]);
-  }
-  return [...byColour].flatMap(([from, to]) => {
-    const [only] = [...to];
-    return to.size === 1 && only ? [[from, only] as [string, NamedColor]] : [];
-  });
-}
-
-/** The note with each colour word (whole words, any case) swapped for its new colour. */
-function swapColours(note: string, swaps: Map<string, NamedColor>): string {
-  // Only dyed shades: "pheasant tail", "teal" or "partridge" in a note name the material itself.
-  for (const [from, to] of swaps) if (from === to || !DYE_COLORS.includes(from as NamedColor)) swaps.delete(from);
-  if (swaps.size === 0) return note;
-  const pattern = [...swaps.keys()].map((c) => c.replace(/-/g, "[ -]")).join("|");
-  return note.replace(new RegExp(`\\b(${pattern})\\b`, "gi"), (found) => {
-    const to = swaps.get(found.toLowerCase().replace(/ /g, "-"))!;
+/** The note with the colour word `from` (whole words, any case) as `to`; only dyed shades. */
+function swapColour(note: string, from: string, to: NamedColor): string {
+  // "pheasant tail", "teal" or "partridge" in a note name the material itself.
+  if (from === to || !DYE_COLORS.includes(from as NamedColor)) return note;
+  return note.replace(new RegExp(`\\b${from.replace(/-/g, "[ -]")}\\b`, "gi"), (found) => {
     const name = to.replace(/-/g, " ");
     return found[0] === found[0]!.toUpperCase() ? name.charAt(0).toUpperCase() + name.slice(1) : name;
   });

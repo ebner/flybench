@@ -568,7 +568,12 @@ function PatternView({
         )}
 
         <h3>Dressing</h3>
-        {spec && <p className="variation-note">In your colours. The description above is of the pattern as tied.</p>}
+        {spec && (
+          <p className="variation-note">
+            In your colours. The description above, and step notes about other parts than the one changed, are of the pattern
+            as tied.
+          </p>
+        )}
         <dl className="dressing">
           {materialsList(recipe).map((m) => (
             <div
