@@ -6,6 +6,7 @@ import { NotFound } from "./NotFound";
 import { Paragraphs } from "./Paragraphs";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
 import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 
@@ -14,7 +15,7 @@ const recipes = () => PATTERNS.map((p) => p.recipe);
 export function TechniquesIndex() {
   useEffect(() => {
     document.title = t.site.titled(t.techniques.title);
-  }, []);
+  }, [lang()]);
   const used = localTechniques().filter((t) => patternsUsing(recipes(), t.id).length > 0);
   return (
     <main className="reading">
@@ -37,7 +38,7 @@ export function TechniquePage({ id }: { id: string }) {
   const tech = technique(id);
   useEffect(() => {
     if (tech) document.title = t.site.titled(tech.name);
-  }, [tech]);
+  }, [tech, lang()]);
   if (!tech) {
     return (
       <NotFound className="reading" heading={t.notFound.technique(id)}>

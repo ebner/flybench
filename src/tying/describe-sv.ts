@@ -242,6 +242,7 @@ const DETAIL = {
 export const sv: Writer = {
   // A label is the translation of the recipe's own (see i18n/prose.ts); otherwise the glossary's name.
   materialName: (m) => m.label ?? capitalize(svPhrase(material(m), colour(m.color), "indefinite", usedInPlural(m))),
+  colourWord: (c) => (c ? term("sv", "colours", c, "adjective").text : "naturfärg"),
   threadName: (c) => capitalize(svPhrase(word("thread"), colour(c), "indefinite")),
   hookName: (model, english, length) => {
     const name = term("sv", "hooks", model, "phrase").text;

@@ -1,6 +1,7 @@
 import { hookModel, ridesPointUp, trebleSize, unitMm } from "./hook";
 import { MATERIALS, type Archetype } from "../recipe/materials";
-import type { Material, Recipe, Step } from "../recipe/schema";
+import { NAMED_COLORS, type Material, type NamedColor, type Recipe, type Step } from "../recipe/schema";
+import type { MaterialKind } from "../recipe/materials";
 import { lang, type Lang } from "../i18n/lang";
 import { de } from "./describe-de";
 import { sv } from "./describe-sv";
@@ -23,6 +24,31 @@ function capitalize(s: string): string {
 /** Display name: the label, or the colour (if given in the recipe) plus the catalog name. */
 export function materialName(m: Material): string {
   return writer().materialName(m);
+}
+
+/** A material kind, as the page's language names it ("Cock hackle", "Tupphackel"). */
+export function kindName(kind: MaterialKind): string {
+  return writer().materialName({ id: kind, kind });
+}
+
+/**
+ * A material in a colour, as a shopping list or a gallery card names it ("Red wool", "Röd ull");
+ * a hex colour or "natural" is the material's own, left unsaid.
+ */
+export function needName(kind: MaterialKind, color: string): string {
+  return writer().materialName({ id: kind, kind, ...(color in NAMED_COLORS ? { color: color as NamedColor } : {}) });
+}
+
+/** A colour's word in the page's language ("red", "röd", "rot"); a material's own colour is "natural". */
+export function colourWord(color: string, kind?: MaterialKind): string {
+  const cat = kind ? MATERIALS[kind] : undefined;
+  const own = !(color in NAMED_COLORS) || (cat !== undefined && "defaultColor" in cat && cat.defaultColor === color);
+  return writer().colourWord(own ? null : (color as NamedColor));
+}
+
+/** A part of a recipe as the dressing names it ("Tail", "Stjärt"); "thread" is the thread. */
+export function partLabel(id: string): string {
+  return id === "thread" ? writer().role("thread") : writer().partName(id);
 }
 
 function englishMaterialName(m: Material): string {
@@ -298,6 +324,8 @@ export interface Writer {
   /** The role of a recipe's part in the dressing list, from its id ("wing-case"). */
   partName(id: string): string;
   detail(d: Detail): string;
+  /** A colour on its own ("red"); null is a material's own, natural colour. */
+  colourWord(color: NamedColor | null): string;
   /** The step written out; `note` is the step's own note (in this language, or English). */
   text(said: Said, recipe: Recipe, note: string | undefined): string;
   title(op: Step["op"] | "palmer", material: Material | undefined, id: string | undefined): string;
@@ -305,6 +333,7 @@ export interface Writer {
 
 const english: Writer = {
   materialName: englishMaterialName,
+  colourWord: (c) => (c ? colorName(c) : "natural"),
   threadName: (color) => capitalize(`${colorName(color)} thread`.trim()),
   // The English label is the hook model's own, a tube's or shank's length included.
   hookName: (_model, label) => label,

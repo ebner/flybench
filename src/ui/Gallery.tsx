@@ -5,16 +5,17 @@ import { filtersFromQuery, filtersToQuery, versionMatches, type CatalogEntry, ty
 import { CATALOG, catalogSearch } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/schema";
-import { bestCoverage, colorWord, missingKinds, type Need } from "../catalog/inventory";
+import { bestCoverage, missingKinds, type Need } from "../catalog/inventory";
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
 import { href, replaceUrl } from "./router";
 import { t } from "../i18n/ui";
+import { kindName, needName } from "../tying/describe";
+import { inSentence } from "../i18n/grammar";
 import { lang } from "../i18n/lang";
 import { MONTH_NAMES } from "../i18n/months";
 import { linkTo } from "./linkTo";
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 export function Gallery({ query }: { query: string }) {
   const [filters, setFiltersState] = useState<Filters>(() => filtersFromQuery(query));
@@ -193,7 +194,7 @@ function MoreFilters({
   const species = SPECIES.filter((s) => CATALOG.some((e) => e.recipe.species.includes(s)));
   const usedMaterials = (Object.keys(MATERIALS) as MaterialKind[])
     .filter((m) => CATALOG.some((e) => e.materials.has(m)))
-    .sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
+    .sort((a, b) => kindName(a).localeCompare(kindName(b), lang()));
   const chosen = filters.materials ?? [];
   const imitatesCounts = catalogSearch().facetCounts("imitates", imitates, filters);
   const difficultyCounts = catalogSearch().facetCounts("difficulty", DIFFICULTIES, filters);
@@ -245,7 +246,7 @@ function MoreFilters({
         <div className="chips">
           {chosen.map((m) => (
             <button key={m} className="on removable" onClick={() => setFilters({ ...filters, materials: chosen.filter((x) => x !== m) })}>
-              {capitalize(MATERIALS[m].name)}
+              {kindName(m)}
               <span className="visually-hidden">{t.gallery.remove}</span>
               <svg aria-hidden="true" viewBox="0 0 12 12" width="10" height="10">
                 <path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" strokeWidth="1.6" />
@@ -262,7 +263,7 @@ function MoreFilters({
               .filter((m) => !chosen.includes(m))
               .map((m) => (
                 <option key={m} value={m}>
-                  {capitalize(MATERIALS[m].name)}
+                  {kindName(m)}
                 </option>
               ))}
           </select>
@@ -379,7 +380,7 @@ export function Plate({
         {note && <p className="plate-note">{note}</p>}
         {missing && (
           <p className="plate-missing-material">
-            {t.gallery.needs(`${colorWord(missing.color, missing.kind) === "natural" ? "" : `${colorWord(missing.color, missing.kind)} `}${MATERIALS[missing.kind].name}`)}
+            {t.gallery.needs(inSentence(needName(missing.kind, missing.color)))}
           </p>
         )}
       </a>

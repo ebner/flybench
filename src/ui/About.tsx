@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { CATALOG } from "../patterns";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
 import { linkTo } from "./linkTo";
 
 export const REPO_URL = "https://github.com/ebner/flybench";
@@ -10,7 +11,7 @@ export const AUTHOR = { name: "Hannes Ebner", url: "https://github.com/ebner" };
 export function About() {
   useEffect(() => {
     document.title = t.site.titled(t.about.title);
-  }, []);
+  }, [lang()]);
   return (
     <main className="reading about">
       <h1>{t.about.heading}</h1>
