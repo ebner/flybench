@@ -22,6 +22,7 @@ export const de: Messages = {
     naturals: "Vorbilder",
     box: "Fliegendose",
     materials: "Material",
+    build: "Eigene Fliege",
     theme: "Darstellung",
     themes: { system: "System", light: "Hell", dark: "Dunkel" },
     themeLabel: (now: string, next: string) => `Darstellung: ${now}. Wechseln zu ${next}`,

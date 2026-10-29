@@ -1821,8 +1821,8 @@ select {
 }
 
 /* On a phone or a narrow window the sections and the theme are behind a menu button, in a
-   panel below the header. */
-@media (max-width: 52rem) {
+   panel below the header. The seven sections need about 63rem in German. */
+@media (max-width: 65rem) {
   .menu-toggle {
     display: inline-flex;
     margin-left: auto;

@@ -27,6 +27,7 @@ export const en = {
     naturals: "Naturals",
     box: "Fly box",
     materials: "Materials",
+    build: "Build a fly",
     theme: "Theme",
     themes: { system: "System", light: "Light", dark: "Dark" },
     themeLabel: (now: string, next: string) => `Theme: ${now.toLowerCase()}. Switch to ${next.toLowerCase()}`,

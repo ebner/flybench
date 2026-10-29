@@ -75,7 +75,7 @@ Binde sie mit ein paar festen Windungen ab und schneide die Spitze ab.`,
     mistakes: ["Über frühere Windungen winden und die Fibern plattdrücken.", "Eine Hechel, die für den Haken zu lang oder zu kurz ist: Prüfe vorher die Fiberlänge."],
   },
   palmering: {
-    name: "Palmern",
+    name: "Über den Körper winden (Palmern)",
     summary: "Eine Hechel in offenen Windungen über den Körper winden, oft von der Rippung gesichert.",
     how: `Eine Körperhechel lässt sich in beide Richtungen über den Körper winden.
 
