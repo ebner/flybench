@@ -5,6 +5,7 @@ import { About, AUTHOR, REPO_URL } from "./About";
 import { Gallery } from "./Gallery";
 import { Header } from "./Header";
 import { Learn } from "./Learn";
+import { Log } from "./Log";
 import { NaturalPage, NaturalsIndex } from "./Naturals";
 import { NotFound } from "./NotFound";
 import { FlyBox, Materials } from "./Personal";
@@ -49,6 +50,7 @@ export function App() {
         {route.page === "learn" && <Learn />}
         {route.page === "box" && <FlyBox />}
         {route.page === "materials" && <Materials />}
+        {route.page === "log" && <Log />}
         {route.page === "about" && <About />}
         {route.page === "naturals" && <NaturalsIndex />}
         {route.page === "natural" && <NaturalPage id={route.id} />}

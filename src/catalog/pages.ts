@@ -164,13 +164,14 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
     body:
       `<main class="reading"><h1>About ${SITE_NAME}</h1>` +
       `<p>${SITE_NAME} is a field guide to tying flies. Each of its ${patterns} patterns is tied in front of you in 3D, one step at a time, and comes with its materials, its history and how to fish it.</p>` +
-      `<h2>Privacy</h2><p>No accounts, no cookies and no tracking. Your fly box, materials and settings stay in your browser. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.</p>` +
+      `<h2>Privacy</h2><p>No accounts, no cookies and no tracking. Your fly box, materials, tying log and settings stay in your browser. The site is hosted on GitHub Pages, which logs visitors' IP addresses for security.</p>` +
       `<h2>Who makes it</h2><p>${SITE_NAME} is made by <a href="https://github.com/ebner">Hannes Ebner</a>.</p></main>`,
   });
 
   for (const [path, title] of [
     ["box/", "Fly box"],
     ["materials/", "Your materials"],
+    ["log/", "Your tying log"],
   ] as const) {
     pages.push({
       path,

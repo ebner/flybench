@@ -11,8 +11,26 @@ import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-const STORED_NOTE =
+export const STORED_NOTE =
   "Saved in this browser only: clearing your browsing data starts it empty again, and another browser or device has its own.";
+
+/** Links between the visitor's own pages. */
+export function BenchNav({ current }: { current: "box" | "log" | "materials" }) {
+  const links = [
+    ["box", href.box(), "Fly box"],
+    ["log", href.log(), "Tying log"],
+    ["materials", href.materials(), "Materials"],
+  ] as const;
+  return (
+    <nav className="bench-nav" aria-label="Your bench">
+      {links.map(([id, url, name]) => (
+        <a key={id} href={url} aria-current={id === current ? "page" : undefined}>
+          {name}
+        </a>
+      ))}
+    </nav>
+  );
+}
 
 export function FlyBox() {
   const box = useStoredSet(FLY_BOX_KEY);
@@ -23,6 +41,7 @@ export function FlyBox() {
   const saved = CATALOG.filter((e) => box.has(e.recipe.id));
   return (
     <main className="gallery">
+      <BenchNav current="box" />
       <section className="intro">
         <h1>Your fly box</h1>
         <p>Flies you have saved.</p>
@@ -60,6 +79,7 @@ export function Materials() {
 
   return (
     <main className="reading materials-page">
+      <BenchNav current="materials" />
       <h1>Your materials</h1>
       <p className="lede">
         Tick what you have. The gallery can then show what you can tie now, and what you are one material short of.
