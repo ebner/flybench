@@ -33,6 +33,8 @@ sources {
     "Orvis Learning Center: Prince Nymph" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/666-prince-nymph"
     "Orvis News: Tying the Prince Nymph (Eric Rickstad)" url="https://news.orvis.com/fly-fishing/Tying-the-Prince-Nymph"
     "Trout Unlimited: Spring Fly Showdown: The Prince Nymph vs. the RS2 (Chris Hunt)" url="https://www.tu.org/magazine/community/spring-fly-showdown-the-prince-nymph-vs-the-rs2/"
+    "Brit + Co Guides: How to tie a bead head Prince's nymph for fly fishing" url="https://guides.brit.co/guides/tie-a-bead-head-princes-nymph-for-fly-fishing"
+    "Oregon Fly Fishing Blog: Hook size to bead size" url="https://oregonflyfishingblog.com/2010/05/26/hook-size-to-bead-size/"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
@@ -44,7 +46,8 @@ hook nymph-2xl size=12
 thread black size="8/0"
 
 materials {
-    // Assumption: a 3.3 mm (7/64") bead on a #12.
+    // A 3.3 mm (1/8") bead: the Oregon Fly Fishing Blog's chart puts 1/8" on #10–14 and 7/64"
+    // (2.8 mm) on #12–16, so both fit a #12. The reviewer chose 3.3 mm (2026-10-29).
     bead brass-bead mm=3.3
     weight lead-free-wire
     tail goose-biot color=brown count=2 label="Brown goose biots"
@@ -73,7 +76,8 @@ steps {
     wind hackle to=0.9 turns=3 note="Sweep the fibres back and down."
     tie-off hackle
     trim hackle keep=under
-    // Assumption: the horns reach about the end of the body; their length isn't sourced.
-    tie-in horns length=1.5 angle=18 spread=30 note="Crossed on top, in a V, curving down over the body."
+    // About the length of the body, back from the eye (Bead Head Prince guide, brit.co); Prince
+    // gives only the V of about 30°. The reviewer chose the body's length (2026-10-29).
+    tie-in horns length=2.2 angle=18 spread=30 note="Crossed on top, in a V, curving down over the body."
     whip-finish note="Behind the bead."
 }

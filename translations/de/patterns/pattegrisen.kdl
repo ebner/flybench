@@ -40,12 +40,14 @@ notes {
     step 7 "Ein Kragen um die Fühler."
     // en step 10 (tie-in eyes): Angled slightly outwards.
     step 10 "Leicht nach außen gewinkelt."
-    // en step 14 (dub body): Tapered: thickest at the bend, slimmer toward the eye.
-    step 14 "Verjüngt: am dicksten am Hakenbogen, zum Öhr hin schlanker."
-    // en step 15 (wind legs): Fibres down and back.
-    step 15 "Fibern nach unten und hinten."
-    // en step 17 (pull-over back): Over the top, stretched.
-    step 17 "Straff gespannt über den Rücken."
+    // en step 13 (dub body): Tapered: thickest at the bend, slimmer toward the eye.
+    step 13 "Verjüngt: am dicksten am Hakenbogen, zum Öhr hin schlanker."
+    // en step 14 (wind legs): Fibres down and back.
+    step 14 "Fibern nach unten und hinten."
+    // en step 16 (tie-in back): One or two strands, at the eye.
+    step 16 "Ein oder zwei Stränge, am Öhr."
+    // en step 17 (pull-over back): Back over the top to the bend, stretched; the rib's first turn holds it just behind the eyes.
+    step 17 "Straff über den Rücken nach hinten bis zum Hakenbogen; die erste Windung der Rippung hält es direkt hinter den Augen."
     // en step 18 (wind rib): Over the shellback, the turns closer together toward the eye.
     step 18 "Über den Rückenschild, die Windungen zum Öhr hin enger."
     // en step 20 (whip-finish): Brush out the underside, trim, and varnish the head and a little of the back.

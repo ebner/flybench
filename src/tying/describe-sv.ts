@@ -180,6 +180,8 @@ function writerFor(recipe: Recipe) {
         return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)}.`;
       case "pull-over":
         return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
+      case "lay-back":
+        return `Lägg ${mat(said.m)} bakåt över ${genitive(def("body"))} ovansida ${place(said.to).to}. Nästa lindning håller ${pronoun(noun(said.m)).object} där.`;
       case "spin":
         return `Spinn ${svNoun(word("clump"), "plural")} av ${mat(said.m, "indefinite")} runt ${along} och packa var och en bakåt mot den förra, ${place(said.to).to}.`;
       case "dub": {

@@ -193,6 +193,8 @@ function writerFor(recipe: Recipe) {
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
+      case "lay-back":
+        return `Lege ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach hinten ${place(said.to).to}. Die nächsten Windungen halten ${pronoun(noun(said.m)).acc} dort fest.`;
       case "spin": {
         const clump = word("clump");
         const each = { m: "jeden gegen den vorigen", f: "jede gegen die vorige", n: "jedes gegen das vorige" }[clump.gender as Gender];

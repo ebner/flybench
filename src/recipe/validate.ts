@@ -38,7 +38,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     archetypes.set(m.id, MATERIALS[m.kind].archetype);
   });
 
-  type State = "tied-in" | "wound" | "wound-rear" | "secured" | "done";
+  type State = "tied-in" | "wound" | "wound-rear" | "secured" | "laid-back" | "done";
   // `wound`: wound round the hook or a post (not pulled over); `kept`: already trimmed with keep;
   // `hanging`: the step that tied it in without a length, so it waits to be wound or pulled over.
   const materials = new Map<
@@ -79,8 +79,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           (materials.get(step.material)?.at ?? Infinity) <= end.at + POSITION_TOLERANCE &&
           step.to !== undefined &&
           step.to > end.at + POSITION_TOLERANCE;
-        if (securing) end.state = "secured";
-        else rule("securePalmer", { m: p.material }, path);
+        const laid = end.state === "laid-back";
+        if (securing) end.state = laid ? "done" : "secured";
+        else rule(laid ? "secureLaidBack" : "securePalmer", { m: p.material }, path);
       }
     }
 
@@ -245,12 +246,22 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("tieInBeforePull", { m: step.material }, [...path, "material"]);
           break;
         }
-        if (step.to <= m.at + POSITION_TOLERANCE) rule("pullForward", { m: step.material }, [...path, "to"]);
-        // Tied down by the thread, so it ends where the thread is.
-        if (Math.abs(step.to - thread) > POSITION_TOLERANCE) {
-          rule("threadForPull", { thread, to: step.to }, [...path, "to"]);
+        if (Math.abs(step.to - m.at) <= POSITION_TOLERANCE) {
+          rule("pullForward", { m: step.material }, [...path, "to"]);
+          m.state = "done";
+        } else if (step.to < m.at) {
+          // Laid back from where it is tied in (a shellback tied in at the eye): its end is held
+          // by the next step, a winding forward over it, as a palmered tip is.
+          m.at = step.to;
+          m.state = "laid-back";
+          pending = { material: step.material, rear: true };
+        } else {
+          // Tied down by the thread, so it ends where the thread is.
+          if (Math.abs(step.to - thread) > POSITION_TOLERANCE) {
+            rule("threadForPull", { thread, to: step.to }, [...path, "to"]);
+          }
+          m.state = "done";
         }
-        m.state = "done";
         // Foam is cut after it is tied down, flush or leaving a head; other strips are trimmed at once.
         m.butts = archetype === "foam";
         break;
@@ -292,7 +303,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
 
   if (pending) {
     const p = pending as { material: string; rear: boolean };
-    rule("neverTiedOff", { m: p.material, rear: p.rear }, ["steps", recipe.steps.length - 1]);
+    if (materials.get(p.material)?.state === "laid-back") rule("secureLaidBack", { m: p.material }, ["steps", recipe.steps.length - 1]);
+    else rule("neverTiedOff", { m: p.material, rear: p.rear }, ["steps", recipe.steps.length - 1]);
   }
   for (const [id, m] of materials) {
     if (m.state === "secured") rule("trimTip", { m: id }, ["steps"]);

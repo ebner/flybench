@@ -277,6 +277,14 @@ materials {
     expect(errorsOf(run(steps(0.3))).join("\n")).toMatch(/the thread is at 0.9; move it to 0.3/);
   });
 
+  it("lays a strip back from the eye, held by the next winding over its end", () => {
+    const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    rib gold-wire\n");
+    const steps = (next: string) => `    attach-thread at=0.8\n    wrap-thread to=0.05\n    tie-in rib\n    wrap-thread to=0.8\n    tie-in case\n    pull-over case to=0.05\n${next}\n    whip-finish`;
+    const held = "    wind rib to=0.8 turns=6\n    tie-off rib";
+    expect(run(steps(held), h).ok || errorsOf(run(steps(held), h)).join("\n")).toBe(true);
+    expect(errorsOf(run(steps("    wrap-thread to=0.9\n    wind rib to=0.9 turns=6\n    tie-off rib"), h)).join("\n")).toMatch(/laid back over the body and must be held/);
+  });
+
   it("ties feathers in pointing back", () => {
     expect(errorsOf(run("    attach-thread at=0.8\n    tie-in wing length=1 forward=#true\n    whip-finish")).join("\n")).toMatch(/feathers are tied in pointing back/);
   });

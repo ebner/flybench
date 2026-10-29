@@ -144,13 +144,13 @@ const Material = z
     label: z.string().min(1).optional(),
     /** herl: number of strands wound together. */
     strands: z.number().int().min(1).max(6).optional(),
-    /** hackle: fibre (barb) length in gapes. */
+    /** hackle, CDC: fibre (barb) length in gapes; for wound CDC, the longest barbs (near the butt). */
     fibre: GapeLength.optional(),
     /** floss: thread size. */
     size: z.enum(THREAD_SIZES).optional(),
     /** fibres, biots, flash: number of fibres or strands in the bunch. */
     count: z.number().int().min(1).max(60).optional(),
-    /** hackle: how far the fibres lean back when wound, in degrees (overrides the catalog). */
+    /** hackle, CDC: how far the fibres lean back when wound, in degrees (overrides the catalog). */
     sweep: z.number().min(0).max(80).optional(),
     /** dubbing: how rough, from 0 (fine and tight) to 1 (picked out, long guard hairs); overrides the catalog. */
     shaggy: z.number().min(0).max(1).optional(),

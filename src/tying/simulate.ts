@@ -373,7 +373,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "cdc":
       // Wound, a CDC feather's barbs are short near the tip and long near the butt.
       return {
-        ...base, strandRadius: 0.06, count: 260, fibreLength: 0.6, sweep: deg(45),
+        // Assumption: 0.6 gape where the recipe doesn't say.
+        ...base, strandRadius: 0.06, count: 260, fibreLength: m.fibre ?? 0.6, sweep: deg(m.sweep ?? 45),
         tieInThickness: 0.02, layerThickness: () => 0.05,
       };
     case "flash":
@@ -750,8 +751,13 @@ export function simulate(recipe: Recipe): Build {
       }
       case "pull-over": {
         const l = looks.get(step.material)!;
-        const from = tiedAt.get(step.material)!;
-        const to = Math.min(step.to * span, frontLimit);
+        const tied = tiedAt.get(step.material)!;
+        const end = Math.min(step.to * span, frontLimit);
+        // Pulled forward and tied down at the thread, or laid back from where it is tied in (a
+        // shellback tied in at the eye), its end held by the next winding.
+        const back = end < tied;
+        ctx.rear = back;
+        const [from, to] = back ? [end, tied] : [tied, end];
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
         const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
@@ -761,7 +767,7 @@ export function simulate(recipe: Recipe): Build {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
           // A strip trimmed later sticks out over the eye until then.
-          dents: [], stub: trimmedLater ? UNTRIMMED : 0,
+          dents: [], stub: trimmedLater && !back ? UNTRIMMED : 0,
           barring: l.barring,
         };
         pieces.push(cover);
@@ -786,9 +792,11 @@ export function simulate(recipe: Recipe): Build {
         });
         freeEnds.delete(step.material);
         ends = restingEnds();
-        const wraps = inPlace(threadX!, 5, [0.6, 1]);
-        pieces.push(wraps);
-        thread = { kind: "follow", piece: wraps.id };
+        if (!back) {
+          const wraps = inPlace(threadX!, 5, [0.6, 1]);
+          pieces.push(wraps);
+          thread = { kind: "follow", piece: wraps.id };
+        }
         duration = DURATION.pullOver;
         break;
       }

@@ -50,12 +50,14 @@ notes {
     step 7 "En krage runt spröten."
     // en step 10 (tie-in eyes): Angled slightly outwards.
     step 10 "Lätt vinklade utåt."
-    // en step 14 (dub body): Tapered: thickest at the bend, slimmer toward the eye.
-    step 14 "Avsmalnande: tjockast vid krokböjen, smalare mot krokögat."
-    // en step 15 (wind legs): Fibres down and back.
-    step 15 "Fibrerna nedåt och bakåt."
-    // en step 17 (pull-over back): Over the top, stretched.
-    step 17 "Över ovansidan, väl sträckt."
+    // en step 13 (dub body): Tapered: thickest at the bend, slimmer toward the eye.
+    step 13 "Avsmalnande: tjockast vid krokböjen, smalare mot krokögat."
+    // en step 14 (wind legs): Fibres down and back.
+    step 14 "Fibrerna nedåt och bakåt."
+    // en step 16 (tie-in back): One or two strands, at the eye.
+    step 16 "En eller två trådar, vid krokögat."
+    // en step 17 (pull-over back): Back over the top to the bend, stretched; the rib's first turn holds it just behind the eyes.
+    step 17 "Bakåt över ovansidan till krokböjen, väl sträckt; ribbens första varv håller den precis bakom ögonen."
     // en step 18 (wind rib): Over the shellback, the turns closer together toward the eye.
     step 18 "Över ryggskölden, med varven tätare mot krokögat."
     // en step 20 (whip-finish): Brush out the underside, trim, and varnish the head and a little of the back.
