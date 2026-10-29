@@ -12,6 +12,8 @@ import { useRegion } from "./Naturals";
 import { BenchNav } from "./Personal";
 import { renderUrls, useRenders } from "./renders";
 import { href, replaceUrl } from "./router";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
 const MONTH_NAMES = MONTHS.map((m) => m.charAt(0).toUpperCase() + m.slice(1));
@@ -53,7 +55,7 @@ export function Trip({ query }: { query: string }) {
   const owned = useStoredSet(INVENTORY_KEY);
   const renders = useRenders();
   useEffect(() => {
-    document.title = "A fly box for a trip, Flybench";
+    document.title = t.site.titled(t.trip.title);
   }, []);
   // The choices go into the address; an address changed from outside (Back, a link) changes them.
   const written = useRef<string | null>(null);
@@ -87,31 +89,31 @@ export function Trip({ query }: { query: string }) {
           <a href={href.fly(s.recipe.id)} className="trip-name">
             {s.recipe.name}
           </a>
-          {s.sizes.length > 0 && <span className="trip-sizes">, size {sizesText(s.sizes)}</span>}
+          {s.sizes.length > 0 && <span className="trip-sizes">{t.trip.size(sizesText(s.sizes))}</span>}
           <p className="trip-why">
             {s.matches.length > 0 ? (
               <>
-                For{" "}
+                {t.trip.for2}
                 {s.matches.map((n, i) => (
                   <span key={n.id}>
-                    {i > 0 && (i === s.matches.length - 1 ? " and " : ", ")}
+                    {i > 0 && (i === s.matches.length - 1 ? t.trip.and : ", ")}
                     <a href={href.natural(n.id)}>{n.name.toLowerCase()}</a>
                   </span>
                 ))}
               </>
             ) : (
-              "In season"
+              t.trip.inSeason
             )}
-            {missing !== null && (missing === 0 ? ". You can tie it" : `. Needs ${missing} more ${missing === 1 ? "material" : "materials"}`)}.
+            {missing !== null && (missing === 0 ? t.trip.canTie : t.trip.needs(missing))}.
           </p>
         </div>
         <button
           className="link-button"
           aria-pressed={box.has(s.recipe.id)}
-          aria-label={`${s.recipe.name}: ${box.has(s.recipe.id) ? "In your fly box" : "Add to fly box"}`}
+          aria-label={`${s.recipe.name}: ${box.has(s.recipe.id) ? t.trip.inBox : t.trip.add}`}
           onClick={() => box.toggle(s.recipe.id)}
         >
-          {box.has(s.recipe.id) ? "In your fly box" : "Add to fly box"}
+          {box.has(s.recipe.id) ? t.trip.inBox : t.trip.add}
         </button>
       </li>
     );
@@ -120,13 +122,11 @@ export function Trip({ query }: { query: string }) {
   return (
     <main className="reading trip-page">
       <BenchNav current="trip" />
-      <h1>A fly box for a trip</h1>
-      <p className="lede">
-        Where and when you fish, and for what: the flies to take, matched to what hatches then, in the sizes to tie them.
-      </p>
+      <h1>{t.trip.heading}</h1>
+      <p className="lede">{t.trip.intro}</p>
 
       <fieldset className="chips region-choice">
-        <legend>Where</legend>
+        <legend>{t.trip.where}</legend>
         {REGIONS.map((r) => (
           <button key={r} className={region === r ? "on" : ""} aria-pressed={region === r} onClick={() => chooseRegion(r)}>
             {REGION_LABELS[r]}
@@ -134,7 +134,7 @@ export function Trip({ query }: { query: string }) {
         ))}
       </fieldset>
       <fieldset className="chips region-choice">
-        <legend>On what water</legend>
+        <legend>{t.trip.water}</legend>
         {WATERS.map((w) => (
           <button key={w} className={trip.water === w ? "on" : ""} aria-pressed={trip.water === w} onClick={() => setTrip({ ...trip, water: w })}>
             {WATER_LABELS[w]}
@@ -143,7 +143,7 @@ export function Trip({ query }: { query: string }) {
       </fieldset>
       <div className="trip-selects">
         <label>
-          When{" "}
+          {t.trip.when}{" "}
           <select value={trip.month} onChange={(e) => setTrip({ ...trip, month: Number(e.target.value) })}>
             {MONTH_NAMES.map((m, i) => (
               <option key={m} value={i}>
@@ -153,7 +153,7 @@ export function Trip({ query }: { query: string }) {
           </select>
         </label>
         <label>
-          For{" "}
+          {t.trip.for}{" "}
           <select value={trip.species} onChange={(e) => setTrip({ ...trip, species: e.target.value as Species })}>
             {SPECIES.map((s) => (
               <option key={s} value={s}>
@@ -165,14 +165,12 @@ export function Trip({ query }: { query: string }) {
       </div>
 
       {!region ? (
-        <p>Choose where you fish to see the flies for it.</p>
+        <p>{t.trip.chooseWhere}</p>
       ) : suggestions.length === 0 ? (
-        <p>No pattern here suits that water and fish. Try another month or another fish.</p>
+        <p>{t.trip.none}</p>
       ) : (
         <>
-          <h2>
-            {SPECIES_LABELS[trip.species]} in {MONTH_NAMES[trip.month]}, {REGION_LABELS[region]}
-          </h2>
+          <h2>{t.trip.heading2(SPECIES_LABELS[trip.species], MONTH_NAMES[trip.month]!, REGION_LABELS[region])}</h2>
           <ul className="trip-flies">{chosen.map(item)}</ul>
           <p>
             <button
@@ -180,20 +178,17 @@ export function Trip({ query }: { query: string }) {
               disabled={allIn}
               onClick={() => chosen.forEach((s) => box.set(s.recipe.id, true))}
             >
-              {allIn ? "All in your fly box" : `Add all ${chosen.length} to your fly box`}
+              {allIn ? t.trip.allIn : t.trip.addAll(chosen.length)}
             </button>{" "}
-            {box.values.size > 0 && <a href={href.box()}>Your fly box and shopping list</a>}
+            {box.values.size > 0 && <a href={href.box()}>{t.trip.boxLink}</a>}
           </p>
           {more.length > 0 && (
             <details className="trip-more">
-              <summary>{more.length} more that would fish</summary>
+              <summary>{t.trip.more(more.length)}</summary>
               <ul className="trip-flies">{more.map(item)}</ul>
             </details>
           )}
-          <p className="stored-note">
-            Sizes are matched to the naturals about then, within two sizes of how each pattern is usually tied. Hatches
-            move with altitude, water temperature and the year: see the <a href={href.naturals()}>hatch calendar</a>.
-          </p>
+          <p className="stored-note">{t.trip.note(linkTo(href.naturals()))}</p>
         </>
       )}
     </main>

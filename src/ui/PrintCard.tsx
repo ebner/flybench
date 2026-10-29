@@ -6,6 +6,7 @@ import { FlyScene } from "../render/FlyScene";
 import { materialsList } from "../tying/describe";
 import { stepEnd, type Build } from "../tying/simulate";
 import { href } from "./router";
+import { t } from "../i18n/ui";
 
 /**
  * The printable recipe card: the finished fly, the dressing and the numbered steps, each with
@@ -145,7 +146,7 @@ export function PrintCard({ recipe, build, request, onPrinted }: { recipe: Recip
       </ol>
       <footer>
         {location.host}
-        {href.fly(recipe.id)}. Text and pictures from Flybench, CC BY 4.0.
+        {href.fly(recipe.id)}. {t.print.footer}
       </footer>
     </article>,
     document.body,

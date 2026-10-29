@@ -14,6 +14,8 @@ import { TechniquePage, TechniquesIndex } from "./Techniques";
 import { PatternPage } from "./PatternPage";
 import { href, restoresScroll, useRoute } from "./router";
 import { useTheme } from "./theme";
+import { lang } from "../i18n/lang";
+import { DRAFT, t } from "../i18n/ui";
 
 export function App() {
   const route = useRoute();
@@ -28,7 +30,7 @@ export function App() {
     <>
       {import.meta.env.DEV && PATTERN_ERRORS.length > 0 && (
         <details className="load-errors">
-          <summary>{PATTERN_ERRORS.length} problem(s) in pattern files</summary>
+          <summary>{t.site.loadErrors(PATTERN_ERRORS.length)}</summary>
           <ul>
             {PATTERN_ERRORS.map((e, i) => (
               <li key={i}>
@@ -40,9 +42,14 @@ export function App() {
       )}
       {/* Moves focus too, which following an #anchor doesn't do everywhere. */}
       <button className="skip-link" onClick={() => document.getElementById("content")?.focus()}>
-        Skip to content
+        {t.site.skip}
       </button>
-      <Header theme={choice} onTheme={setChoice} page={route.page} />
+      <Header theme={choice} onTheme={setChoice} route={route} />
+      {DRAFT[lang()] && (
+        <p className="draft-note" lang={lang()}>
+          {t.header.draft}
+        </p>
+      )}
       <div id="content" tabIndex={-1}>
         {route.page === "gallery" && <Gallery query={route.query} />}
         {route.page === "fly" && <PatternPage id={route.id} step={route.step} size={route.size} colours={route.colours} />}
@@ -57,22 +64,23 @@ export function App() {
         {route.page === "naturals" && <NaturalsIndex />}
         {route.page === "natural" && <NaturalPage id={route.id} />}
         {route.page === "not-found" && (
-          <NotFound heading="There is nothing at this address">
+          <NotFound heading={t.notFound.heading}>
             <p>
-              <a href={href.gallery()}>Browse all patterns</a>
+              <a href={href.gallery()}>{t.notFound.browse}</a>
             </p>
           </NotFound>
         )}
       </div>
       <footer className="site-footer">
-        <nav aria-label="About this site">
-          <a href={href.about()}>About Flybench</a>
-          <a href={REPO_URL}>Source on GitHub</a>
-          <a href={`${REPO_URL}/issues`}>Report a mistake</a>
+        <nav aria-label={t.footer.nav}>
+          <a href={href.about()}>{t.footer.about}</a>
+          <a href={REPO_URL}>{t.footer.source}</a>
+          <a href={`${REPO_URL}/issues`}>{t.footer.report}</a>
         </nav>
         <p>
-          Made by <a href={AUTHOR.url}>{AUTHOR.name}</a>. Patterns and pictures{" "}
-          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
+          {t.footer.madeBy(<a key="author" href={AUTHOR.url}>{AUTHOR.name}</a>)}
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+          {t.footer.licence}
         </p>
       </footer>
     </>

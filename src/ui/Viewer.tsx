@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FlyScene } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
+import { t } from "../i18n/ui";
 import type { Natural } from "../recipe/natural";
 import type { Fishing } from "../tying/fishing";
 import type { Build } from "../tying/simulate";
@@ -184,7 +185,7 @@ export function Viewer({
   if (unavailable) {
     return (
       <div className="viewer viewer-unavailable">
-        <p>The 3D view needs WebGL, which this browser has turned off. The steps and the dressing still work.</p>
+        <p>{t.viewer.noWebgl}</p>
       </div>
     );
   }
@@ -202,7 +203,7 @@ export function Viewer({
           if (dx > 24 && dx > 2 * Math.abs(e.touches[0]!.clientY - t.y)) setHint(true);
         }}
       />
-      {hint && <p className="viewer-hint">Use two fingers to turn and zoom the fly</p>}
+      {hint && <p className="viewer-hint">{t.viewer.hint}</p>}
       <button
         ref={label}
         className="callout"
@@ -216,23 +217,23 @@ export function Viewer({
       <div className="viewer-tools" ref={toolsRef}>
         {inWater ? (
           <>
-            <button aria-pressed={inWater === "side"} onClick={() => openWater("side")} title="From the side, at the waterline">
-              Side
+            <button aria-pressed={inWater === "side"} onClick={() => openWater("side")} title={t.viewer.sideTitle}>
+              {t.viewer.side}
             </button>
-            <button aria-pressed={inWater === "below"} onClick={() => openWater("below")} title="As a trout sees it, from below">
-              <span className="long">From below</span>
-              <span className="short">Below</span>
+            <button aria-pressed={inWater === "below"} onClick={() => openWater("below")} title={t.viewer.belowTitle}>
+              <span className="long">{t.viewer.below}</span>
+              <span className="short">{t.viewer.belowShort}</span>
             </button>
             <button aria-pressed={still} onClick={() => setStill(!still)}>
-              <span className="long">Still water</span>
-              <span className="short">Still</span>
+              <span className="long">{t.viewer.still}</span>
+              <span className="short">{t.viewer.stillShort}</span>
             </button>
           </>
         ) : (
           <>
             <button aria-pressed={follow} onClick={() => onFollowChange(!follow)}>
-              <span className="long">{follow ? "Following the action" : "Follow the action"}</span>
-              <span className="short">Follow</span>
+              <span className="long">{follow ? t.viewer.following : t.viewer.follow}</span>
+              <span className="short">{t.viewer.followShort}</span>
             </button>
             <button
               onClick={() => {
@@ -240,24 +241,24 @@ export function Viewer({
                 scene.current?.resetCamera();
               }}
             >
-              Whole fly
+              {t.viewer.wholeFly}
             </button>
             {guide && (
-              <button aria-pressed={proportions} onClick={() => setProportions(!proportions)} title="The gape grid and each part's proportions">
-                Proportions
+              <button aria-pressed={proportions} onClick={() => setProportions(!proportions)} title={t.viewer.proportionsTitle}>
+                {t.viewer.proportions}
               </button>
             )}
             {pointUp && (
-              <button aria-pressed={turned} onClick={() => setTurned(!turned)} title="Tied hook point down, it swims point up">
-                As it swims
+              <button aria-pressed={turned} onClick={() => setTurned(!turned)} title={t.viewer.asItSwimsTitle}>
+                {t.viewer.asItSwims}
               </button>
             )}
           </>
         )}
         {water && (
-          <button aria-pressed={inWater !== null} onClick={() => openWater(inWater ? null : "side")} title="The finished fly in moving water">
-            <span className="long">In the water</span>
-            <span className="short">Water</span>
+          <button aria-pressed={inWater !== null} onClick={() => openWater(inWater ? null : "side")} title={t.viewer.waterTitle}>
+            <span className="long">{t.viewer.water}</span>
+            <span className="short">{t.viewer.waterShort}</span>
           </button>
         )}
       </div>

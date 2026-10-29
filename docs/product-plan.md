@@ -151,8 +151,21 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     - Pattern prose (history, how to fish it, step notes) is drafted with the glossary and
       marked as a draft until reviewed; the user reviews Swedish and German. English shows
       where no translation exists.
-    - The i18n architecture (how texts and the generator are localised, how a language is
-      chosen) is to be proposed with options before work starts.
+    - The i18n architecture (decided 2026-10-29, the recommended option of each):
+      - Language in the path: English at the root, `/sv/…` and `/de/…`, every page
+        prerendered in each with `hreflang` links; a language switch in the header leads to
+        the same page in another language. No automatic redirect and nothing stored, so the
+        privacy section is unchanged. (Rejected: a stored choice without the address, which
+        can't be shared or found.)
+      - Interface text in typed message catalogs (`src/i18n/`), no i18n library: a missing
+        or mistyped string fails the typecheck. (Rejected: i18next or FormatJS, more bundle
+        for plurals the catalogs can say themselves.)
+      - Generated text (steps, dressing, facts) from a generator per language sharing the
+        step analysis, taking its words and their forms (gender, definite and plural, the
+        German cases, adjective endings) from `glossary/*.kdl`.
+      - Prose (history, how to fish, notes, technique texts, naturals) in translation files
+        beside the originals, marked as drafts until reviewed; English shows where a
+        translation is missing.
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

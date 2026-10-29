@@ -4,12 +4,13 @@ import { learningPath, technique } from "../catalog/techniques";
 import { PATTERNS } from "../patterns";
 import { renderUrls, useRenders } from "./renders";
 import { href } from "./router";
+import { t } from "../i18n/ui";
 import { tiedCounts } from "../catalog/log";
 import { useLog } from "./Log";
 
 export function Learn() {
   useEffect(() => {
-    document.title = "Learn to tie, Flybench";
+    document.title = t.site.titled(t.learn.title);
   }, []);
   const path = useMemo(() => learningPath(PATTERNS.map((p) => p.recipe)), []);
   const renders = useRenders();
@@ -18,14 +19,12 @@ export function Learn() {
   const done = path.filter((s) => tied.has(s.recipe.id)).length;
   return (
     <main className="reading learn">
-      <h1>Learn to tie, one fly at a time</h1>
-      <p className="lede">
-        Each fly on this path adds only a few new techniques to what the ones before it taught, starting with the
-        easiest. Tie them in order and you will have met every technique in the catalog.
-      </p>
+      <h1>{t.learn.heading}</h1>
+      <p className="lede">{t.learn.intro}</p>
       {log.items.length > 0 && (
         <p className="path-progress">
-          You have tied {done} of the {path.length} flies on the path. <a href={href.log()}>Your tying log</a>
+          {t.learn.progress(done, path.length)}
+          <a href={href.log()}>{t.learn.yourLog}</a>
         </p>
       )}
       <ol className="path">
@@ -40,14 +39,14 @@ export function Learn() {
               <div>
                 <h2>
                   <a href={href.fly(r.id)}>{r.name}</a>
-                  {tied.has(r.id) && <span className="tied-mark">Tied</span>}
+                  {tied.has(r.id) && <span className="tied-mark">{t.learn.tied}</span>}
                 </h2>
                 <p className="path-facts">{factsLine(r)}</p>
                 <p>
-                  New here:{" "}
+                  {t.learn.newHere}
                   {stage.learns.map((id, i) => (
                     <span key={id}>
-                      {i > 0 && (i === stage.learns.length - 1 ? " and " : ", ")}
+                      {i > 0 && (i === stage.learns.length - 1 ? t.learn.and : ", ")}
                       <a href={href.technique(id)}>{technique(id)?.name.toLowerCase() ?? id}</a>
                     </span>
                   ))}

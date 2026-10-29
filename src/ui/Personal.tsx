@@ -7,6 +7,8 @@ import { Plate } from "./Gallery";
 import { useRenders, useSwatches } from "./renders";
 import { swatchName } from "../catalog/swatch";
 import { href } from "./router";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 import { coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "../catalog/variation";
 import { FlyScene } from "../render/FlyScene";
 import { simulate } from "../tying/simulate";
@@ -16,19 +18,19 @@ import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export const STORED_NOTE =
-  "Saved in this browser only: clearing your browsing data starts it empty again, and another browser or device has its own.";
+/** Where the visitor's own things are kept, said on each of their pages. */
+export const storedNote = () => t.bench.stored;
 
 /** Links between the visitor's own pages. */
 export function BenchNav({ current }: { current: "box" | "log" | "materials" | "trip" }) {
   const links = [
-    ["box", href.box(), "Fly box"],
-    ["log", href.log(), "Tying log"],
-    ["materials", href.materials(), "Materials"],
-    ["trip", href.trip(), "Plan a trip"],
+    ["box", href.box(), t.bench.box],
+    ["log", href.log(), t.bench.log],
+    ["materials", href.materials(), t.bench.materials],
+    ["trip", href.trip(), t.bench.trip],
   ] as const;
   return (
-    <nav className="bench-nav" aria-label="Your bench">
+    <nav className="bench-nav" aria-label={t.bench.nav}>
       {links.map(([id, url, name]) => (
         <a key={id} href={url} aria-current={id === current ? "page" : undefined}>
           {name}
@@ -92,7 +94,7 @@ export function FlyBox() {
   const box = useStoredSet(FLY_BOX_KEY);
   const renders = useRenders();
   useEffect(() => {
-    document.title = "Fly box, Flybench";
+    document.title = t.site.titled(t.box.title);
   }, []);
   const saved = CATALOG.filter((e) => box.has(e.recipe.id));
   // Flies saved in the visitor's colours: "id?colours=…" entries.
@@ -102,16 +104,14 @@ export function FlyBox() {
     <main className="gallery">
       <BenchNav current="box" />
       <section className="intro">
-        <h1>Your fly box</h1>
-        <p>Flies you have saved.</p>
-        <p className="stored-note">{STORED_NOTE}</p>
+        <h1>{t.box.heading}</h1>
+        <p>{t.box.intro}</p>
+        <p className="stored-note">{storedNote()}</p>
       </section>
       {saved.length === 0 && variations.length === 0 ? (
         <div className="empty-results">
-          <p>Your fly box is empty.</p>
-          <p>
-            Open a pattern and choose “Add to fly box” to keep it here. <a href={href.gallery()}>Browse the patterns</a>.
-          </p>
+          <p>{t.box.empty}</p>
+          <p>{t.box.emptyHint(linkTo(href.gallery()))}</p>
         </div>
       ) : (
         <>
@@ -122,7 +122,7 @@ export function FlyBox() {
           </ul>
           {variations.length > 0 && (
             <>
-              <h2 className="box-heading">In your colours</h2>
+              <h2 className="box-heading">{t.box.inYourColours}</h2>
               <ul className="plates boxed">
                 {variations.map((v) => (
                   <Plate
@@ -135,10 +135,10 @@ export function FlyBox() {
                     action={
                       <button
                         className="link-button plate-remove"
-                        aria-label={`Remove ${v.recipe.name} in your colours (${v.text.toLowerCase()}) from your fly box`}
+                        aria-label={t.box.removeLabel(v.recipe.name, v.text)}
                         onClick={() => box.set(v.value, false)}
                       >
-                        Remove from your fly box
+                        {t.box.remove}
                       </button>
                     }
                   />
@@ -146,7 +146,7 @@ export function FlyBox() {
               </ul>
             </>
           )}
-          <ShoppingList flies={[...saved.map((e) => ({ recipe: e.recipe, name: e.recipe.name })), ...variations.map((v) => ({ recipe: v.recipe, name: `${v.recipe.name} (your colours)` }))]} />
+          <ShoppingList flies={[...saved.map((e) => ({ recipe: e.recipe, name: e.recipe.name })), ...variations.map((v) => ({ recipe: v.recipe, name: t.box.yourColours(v.recipe.name) }))]} />
         </>
       )}
     </main>
@@ -171,37 +171,29 @@ function ShoppingList({ flies }: { flies: { recipe: Recipe; name: string }[] }) 
   const lines = (items: typeof list) =>
     items.map((i) => (
       <li key={inventoryKey(i.need)}>
-        <strong>{material(i.need)}</strong> for {i.flies.map(nameOf).join(", ")}
+        <strong>{material(i.need)}</strong>
+        {t.shopping.for}
+        {i.flies.map(nameOf).join(", ")}
       </li>
     ));
   const text = [
     ...missing.map((i) => `${material(i.need)} (${i.flies.map(nameOf).join(", ")})`),
-    ...substitutes.map((i) => `${material(i.need)}, or use another colour you have (${i.flies.map(nameOf).join(", ")})`),
+    ...substitutes.map((i) => `${material(i.need)}${t.shopping.useOther} (${i.flies.map(nameOf).join(", ")})`),
   ].join("\n");
   return (
     <section className="shopping">
-      <h2 className="box-heading">Shopping list</h2>
+      <h2 className="box-heading">{t.shopping.heading}</h2>
       <p className="stored-note">
-        {owned.values.size === 0 ? (
-          <>
-            Everything these flies need. Tick what you already have on <a href={href.materials()}>your materials</a> page,
-            and this list leaves it out. Hooks and thread are left out too.
-          </>
-        ) : (
-          <>
-            What these flies need, less what you have ticked on <a href={href.materials()}>your materials</a> page. Hooks
-            and thread are left out.
-          </>
-        )}
+        {owned.values.size === 0 ? t.shopping.nothingTicked(linkTo(href.materials())) : t.shopping.lessTicked(linkTo(href.materials()))}
       </p>
       {list.length === 0 ? (
-        <p>You have everything these flies need.</p>
+        <p>{t.shopping.allThere}</p>
       ) : (
         <>
           {missing.length > 0 && <ul className="shopping-list">{lines(missing)}</ul>}
           {substitutes.length > 0 && (
             <>
-              <h3>You have these in another colour</h3>
+              <h3>{t.shopping.otherColour}</h3>
               <ul className="shopping-list">{lines(substitutes)}</ul>
             </>
           )}
@@ -216,10 +208,10 @@ function ShoppingList({ flies }: { flies: { recipe: Recipe; name: string }[] }) 
                 );
               }}
             >
-              Copy the list
+              {t.shopping.copy}
             </button>{" "}
             <span aria-live="polite">
-              {copied === "copied" ? "Copied." : copied === "unavailable" ? "This browser doesn't allow copying here: select the list and copy it." : ""}
+              {copied === "copied" ? t.shopping.copied : copied === "unavailable" ? t.shopping.cannotCopy : ""}
             </span>
           </p>
         </>
@@ -232,7 +224,7 @@ export function Materials() {
   const owned = useStoredSet(INVENTORY_KEY);
   const swatches = useSwatches();
   useEffect(() => {
-    document.title = "Your materials, Flybench";
+    document.title = t.site.titled(t.materials.title);
   }, []);
   // The colours the catalog uses, and those of the flies saved in other colours (so what their
   // shopping list asks for can be ticked here).
@@ -258,20 +250,17 @@ export function Materials() {
   return (
     <main className="reading materials-page">
       <BenchNav current="materials" />
-      <h1>Your materials</h1>
-      <p className="lede">
-        Tick what you have. The gallery can then show what you can tie now, and what you are one material short of.
-        Another colour of the same material counts as a substitute.
-      </p>
-      <p className="stored-note">{STORED_NOTE}</p>
+      <h1>{t.materials.heading}</h1>
+      <p className="lede">{t.materials.intro}</p>
+      <p className="stored-note">{storedNote()}</p>
       <p className="summary" aria-live="polite">
         {owned.values.size === 0 ? (
-          "Nothing ticked yet."
+          t.materials.nothing
         ) : (
           <>
-            You can tie {tieable.length} {tieable.length === 1 ? "pattern" : "patterns"}
-            {oneShort.length > 0 && <>, and {oneShort.length} more with one material added</>}.{" "}
-            <a href={href.gallery("have=1")}>Show them</a>
+            {t.materials.canTie(tieable.length)}
+            {oneShort.length > 0 && t.materials.oneMore(oneShort.length)}.{" "}
+            <a href={href.gallery("have=1")}>{t.materials.show}</a>
           </>
         )}
       </p>

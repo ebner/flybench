@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Recipe } from "../recipe/schema";
 import { simulate, stepEnd } from "../tying/simulate";
 import { Viewer } from "./Viewer";
+import { t } from "../i18n/ui";
 
 /**
  * One step of a pattern, played on a loop with the camera following the action:
@@ -37,9 +38,9 @@ export function Clip({ recipe, step }: { recipe: Recipe; step: number }) {
       </div>
       <figcaption>
         <button className="link-button" onClick={() => setPlaying(!playing)}>
-          {playing ? "Pause" : "Play"}
+          {playing ? t.clip.pause : t.clip.play}
         </button>{" "}
-        {s.title}, from the {recipe.name}.
+        {t.clip.from(s.title, recipe.name)}
       </figcaption>
     </figure>
   );

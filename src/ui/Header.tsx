@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { href } from "./router";
+import { lang, LANG_NAMES, LANGS } from "../i18n/lang";
+import { t } from "../i18n/ui";
+import { href, navigate, routeHrefIn, type Route } from "./router";
 import type { ThemeChoice } from "./theme";
 
 const THEME_NEXT: Record<ThemeChoice, ThemeChoice> = { system: "light", light: "dark", dark: "system" };
-const THEME_NAME: Record<ThemeChoice, string> = { system: "System", light: "Light", dark: "Dark" };
 
 /** Half a disc for "as the system", a sun for light, a crescent for dark. */
 function ThemeIcon({ theme }: { theme: ThemeChoice }) {
@@ -26,8 +27,10 @@ function ThemeIcon({ theme }: { theme: ThemeChoice }) {
   );
 }
 
-export function Header({ theme, onTheme, page }: { theme: ThemeChoice; onTheme: (c: ThemeChoice) => void; page: string }) {
+export function Header({ theme, onTheme, route }: { theme: ThemeChoice; onTheme: (c: ThemeChoice) => void; route: Route }) {
+  const page = route.page;
   const current = (p: string[]) => (p.includes(page) ? "page" : undefined);
+  const THEME_NAME = t.header.themes;
   // On a phone the sections and the theme are behind a menu button.
   const [open, setOpen] = useState(false);
   const header = useRef<HTMLElement>(null);
@@ -55,31 +58,38 @@ export function Header({ theme, onTheme, page }: { theme: ThemeChoice; onTheme: 
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
           {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
         </svg>
-        Menu
+        {t.header.menu}
       </button>
       <div className="site-menu" id="site-menu">
-        <nav aria-label="Main" onClick={() => setOpen(false)}>
+        <nav aria-label={t.header.nav} onClick={() => setOpen(false)}>
           <a href={href.gallery()} aria-current={current(["gallery", "fly"])}>
-            Patterns
+            {t.header.patterns}
           </a>
           <a href={href.techniques()} aria-current={current(["techniques", "technique"])}>
-            Techniques
+            {t.header.techniques}
           </a>
           <a href={href.learn()} aria-current={current(["learn"])}>
-            Learn
+            {t.header.learn}
           </a>
           <a href={href.naturals()} aria-current={current(["naturals", "natural"])}>
-            Naturals
+            {t.header.naturals}
           </a>
           <a href={href.box()} aria-current={current(["box", "log", "trip"])}>
-            Fly box
+            {t.header.box}
           </a>
           <a href={href.materials()} aria-current={current(["materials"])}>
-            Materials
+            {t.header.materials}
           </a>
         </nav>
+        <nav className="menu-language" aria-label={t.header.language}>
+          {LANGS.map((l) => (
+            <a key={l} href={routeHrefIn(l, route)} hrefLang={l} lang={l} aria-current={l === lang() ? "true" : undefined}>
+              {LANG_NAMES[l]}
+            </a>
+          ))}
+        </nav>
         <fieldset className="menu-theme">
-          <legend>Theme</legend>
+          <legend>{t.header.theme}</legend>
           {(["system", "light", "dark"] as const).map((c) => (
             <button key={c} aria-pressed={theme === c} onClick={() => onTheme(c)}>
               <ThemeIcon theme={c} />
@@ -88,11 +98,23 @@ export function Header({ theme, onTheme, page }: { theme: ThemeChoice; onTheme: 
           ))}
         </fieldset>
       </div>
+      <select
+        className="language-switch"
+        value={lang()}
+        aria-label={t.header.language}
+        onChange={(e) => navigate(routeHrefIn(e.target.value as (typeof LANGS)[number], route))}
+      >
+        {LANGS.map((l) => (
+          <option key={l} value={l} lang={l}>
+            {LANG_NAMES[l]}
+          </option>
+        ))}
+      </select>
       <button
         className="theme-toggle"
         onClick={() => onTheme(THEME_NEXT[theme])}
-        aria-label={`Theme: ${THEME_NAME[theme].toLowerCase()}. Switch to ${THEME_NAME[THEME_NEXT[theme]].toLowerCase()}`}
-        title={`Theme: ${THEME_NAME[theme].toLowerCase()} (click for ${THEME_NAME[THEME_NEXT[theme]].toLowerCase()})`}
+        aria-label={t.header.themeLabel(THEME_NAME[theme], THEME_NAME[THEME_NEXT[theme]])}
+        title={t.header.themeTitle(THEME_NAME[theme], THEME_NAME[THEME_NEXT[theme]])}
       >
         <ThemeIcon theme={theme} />
       </button>
