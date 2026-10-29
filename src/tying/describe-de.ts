@@ -200,7 +200,7 @@ function writerFor(recipe: Recipe) {
       }
       case "dub": {
         const noodle = word("noodle");
-        return `Drehe ${a("noodle", "acc", "dünn")} aus ${mat(said.m, "dat", "none")} auf ${thread} und wickle ${pronoun(noodle).acc} ${said.rear ? "zurück" : "nach vorn"} ${place(said.to).to}.`;
+        return `Zwirble ${a("noodle", "acc", "dünn")} aus ${mat(said.m, "dat", "none")} auf ${thread} und wickle ${pronoun(noodle).acc} ${said.rear ? "zurück" : "nach vorn"} ${place(said.to).to}.`;
       }
       case "tie-off":
         return `Binde ${mat(said.m, "acc")} mit ein paar ${many("turn", "dat")} ab und schneide ${excess} ab.`;

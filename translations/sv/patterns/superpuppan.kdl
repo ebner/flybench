@@ -2,7 +2,7 @@ id superpuppan
 status draft
 
 // en description: A sparse yellow body and short brown thorax with a dun hackle palmered over them, trimmed top and bottom so only the side fibres remain.
-description "En gles gul bakkropp och en kort brun thorax med ett dun-hackel lindat som kroppshackel över dem, klippt upptill och nertill så att bara fibrerna åt sidorna blir kvar."
+description "En gles gul bakkropp och en kort brun thorax med ett mörkgrått hackel lindat som kroppshackel över dem, klippt upptill och nertill så att bara fibrerna åt sidorna blir kvar."
 
 // en history: Lennart Bergqvist began developing it in 1977 on the Norwegian river Rena, studying hatching caddis with Kenneth Boström, Jan Sekander and Preben Torp Jacobsen. Early versions had wing buds and legs; by the early 1980s it had reached its simple form. Bergqvist called it the Floating Caddis Pupa; his friend Bengt Öste named it Superpuppan.
 history """
@@ -24,9 +24,9 @@ fishing """
 
 labels {
     // en hackle: Dark dun cock hackle
-    hackle "Tupphackel, mörk dun"
+    hackle "Tupphackel, mörkgrått"
     // en abdomen: Golden yellow dry fly dubbing
-    abdomen "Guldgul torrflugedubbing"
+    abdomen "Guldgul fin dubbing"
 }
 
 notes {
