@@ -58,6 +58,20 @@ describe("colour variations", () => {
     expect(blue.steps.map((s) => s.note)).toContain("Let the fibres splay out for bulk.");
   });
 
+  it("carries a note naming another material by its colour, when all of that colour changed alike", () => {
+    const finn = (() => {
+      const r = loadRecipe(readFileSync(new URL("../../patterns/mickey-finn.kdl", import.meta.url), "utf8"));
+      if (!r.ok) throw new Error("mickey-finn");
+      return r.recipe;
+    })();
+    const yellow = finn.materials.filter((m) => m.color === "yellow").map((m) => m.id);
+    expect(yellow.length).toBeGreaterThan(1);
+    const notes = (c: Record<string, "blue">) => recolor(finn, c).steps.map((s) => s.note ?? "").join(" ");
+    expect(notes(Object.fromEntries(yellow.map((id) => [id, "blue"])))).not.toMatch(/\byellow\b/i);
+    // Only some of the yellow changed: "the yellow" still names one that is yellow.
+    expect(notes({ [yellow[0]!]: "blue" })).toMatch(/\byellow\b/i);
+  });
+
   it("names the changes and round-trips fly box entries", () => {
     expect(coloursText({ thread: "blue-dun" }, recipe)).toBe("Thread blue dun");
     expect(parseBoxEntry(boxEntry("red-tag", "thread:olive"))).toEqual({ id: "red-tag", colours: "thread:olive" });

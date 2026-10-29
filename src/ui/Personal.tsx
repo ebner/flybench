@@ -238,10 +238,18 @@ export function Materials() {
   // shopping list asks for can be ticked here).
   const box = useStoredSet(FLY_BOX_KEY);
   const saved = [...box.values].filter((v) => v.includes("?")).sort().join("\n");
-  const byKind = useMemo(
-    () => catalogNeeds([...CATALOG.flatMap((e) => [e.recipe, ...e.variants]), ...boxVariations(box.values).map((v) => v.recipe)]),
-    [saved],
-  );
+  // And whatever is ticked, so it can always be unticked (a variation since removed).
+  const ticked = [...owned.values].sort().join("\n");
+  const byKind = useMemo(() => {
+    const kinds = catalogNeeds([...CATALOG.flatMap((e) => [e.recipe, ...e.variants]), ...boxVariations(box.values).map((v) => v.recipe)]);
+    for (const key of owned.values) {
+      const [kind = "", color = ""] = key.split(":");
+      if (!(kind in MATERIALS) || !color) continue;
+      const colors = kinds.get(kind as MaterialKind) ?? [];
+      if (!colors.includes(color)) kinds.set(kind as MaterialKind, [...colors, color].sort());
+    }
+    return kinds;
+  }, [saved, ticked]);
   const kinds = [...byKind.keys()].sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
   const family = (e: (typeof CATALOG)[number]) => missingKinds(bestCoverage([e.recipe, ...e.variants], owned.values));
   const tieable = CATALOG.filter((e) => family(e) === 0);

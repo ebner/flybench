@@ -51,20 +51,47 @@ export function recolor(recipe: Recipe, colours: Colours): Recipe {
     // A label names the material as tied ("Red game cock hackle"): in another colour it goes.
     materials: recipe.materials.map((m) => (colours[m.id] ? { ...m, color: colours[m.id], label: undefined } : m)),
     steps: recipe.steps.map((step) => {
+      if (!step.note) return step;
       // A step's note about its own part follows the part's colour ("A short red butt."); the
       // thread's steps are those without a material (the head at the whip finish).
       const part = "material" in step ? step.material : "thread";
-      const from = tiedColour(recipe, part);
-      const to = colours[part];
-      if (!step.note || !to || !from || !isNamed(from)) return step;
-      const word = new RegExp(`\\b${from.replace(/-/g, "[ -]")}\\b`, "gi");
-      const note = step.note.replace(word, (found) => {
-        const name = to.replace(/-/g, " ");
-        return found[0] === found[0]!.toUpperCase() ? name.charAt(0).toUpperCase() + name.slice(1) : name;
-      });
+      // A note naming another material by its colour ("level with the yellow") follows it too,
+      // when every material of that colour has the same new one. All at once, so one swap
+      // doesn't feed the next (a black head made red, then the red made blue).
+      const swaps = new Map(materialSwaps(recipe, colours));
+      const own = tiedColour(recipe, part);
+      if (own && isNamed(own) && colours[part]) swaps.set(own, colours[part]);
+      const note = swapColours(step.note, swaps);
       return note === step.note ? step : { ...step, note };
     }),
   };
+}
+
+/** Each colour all of whose materials changed to one new colour, with that colour. */
+function materialSwaps(recipe: Recipe, colours: Colours): [string, NamedColor][] {
+  const byColour = new Map<string, Set<string | undefined>>();
+  for (const m of recipe.materials) {
+    const from = materialColor(m);
+    if (!isNamed(from)) continue;
+    if (!byColour.has(from)) byColour.set(from, new Set());
+    byColour.get(from)!.add(colours[m.id]);
+  }
+  return [...byColour].flatMap(([from, to]) => {
+    const [only] = [...to];
+    return to.size === 1 && only ? [[from, only] as [string, NamedColor]] : [];
+  });
+}
+
+/** The note with each colour word (whole words, any case) swapped for its new colour. */
+function swapColours(note: string, swaps: Map<string, NamedColor>): string {
+  for (const [from, to] of swaps) if (from === to) swaps.delete(from);
+  if (swaps.size === 0) return note;
+  const pattern = [...swaps.keys()].map((c) => c.replace(/-/g, "[ -]")).join("|");
+  return note.replace(new RegExp(`\\b(${pattern})\\b`, "gi"), (found) => {
+    const to = swaps.get(found.toLowerCase().replace(/ /g, "-"))!;
+    const name = to.replace(/-/g, " ");
+    return found[0] === found[0]!.toUpperCase() ? name.charAt(0).toUpperCase() + name.slice(1) : name;
+  });
 }
 
 /** "Body yellow, tail red" */
