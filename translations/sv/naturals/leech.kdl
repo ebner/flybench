@@ -1,0 +1,24 @@
+id leech
+status draft
+
+// en name: Leech
+name "Igel"
+
+// en description: A soft, flattened, segmented worm with a sucker at each end, swimming fast in waves of the whole body. Black, brown or olive.
+description "En mjuk, tillplattad, segmenterad mask med en sugskål i vardera änden, som simmar snabbt med vågrörelser genom hela kroppen. Svart, brun eller olivgrön."
+
+// en examples: freshwater leeches (Erpobdellidae)
+examples "hundiglar (Erpobdellidae)"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Uppskattning."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles note: Estimate.
+    british-isles note="Uppskattning."
+    // en central-europe note: Estimate.
+    central-europe note="Uppskattning."
+    // en northern-usa note: Estimate.
+    northern-usa note="Uppskattning."
+}

@@ -1,0 +1,44 @@
+id ullsocken
+status draft
+
+// en description: A red wool butt, two black wool body segments and three stiff brown cock hackles: at the rear, in the middle and at the front.
+description "En butt av rött ullgarn, två kroppssegment av svart ullgarn och tre styva bruna tupphackel: baktill, i mitten och framtill."
+
+// en history: A Mörrum fly whose name is Swedish for "the wool sock". Its origins are unclear: Ahrex's video notes credit Alf Jansson in the 1960s and name the old Irish shrimp flies as its model, while Viking Lars dates it to the 1950s and says nobody knows who first tied it. Jan Grünwald recalls it as one of the two flies that took most of the Mörrum's May and June salmon in the early 1980s. Viking Lars gives the original as a red wool butt, black wool bodies and stiff brown cock hackles, with no tail. Newer dressings from Mörrum add a red rear hackle and red flash, and Ahrex's notes suggest doubles, trebles and tubes as the ones to carry.
+history """
+    En Mörrumsfluga, vars namn helt enkelt betyder ullsocken. Ursprunget är oklart: Ahrex
+    videoanteckningar tillskriver Alf Jansson den på 1960-talet och nämner de gamla
+    irländska shrimpflugorna som förebild, medan Viking Lars daterar den till 1950-talet och
+    säger att ingen vet vem som band den först. Jan Grünwald minns den som en av de två
+    flugor som tog det mesta av Mörrumslaxen i maj och juni i början av 1980-talet. Enligt
+    Viking Lars bestod originalet av en butt av rött ullgarn, kroppar av svart ullgarn och
+    styva bruna tupphackel, utan stjärt. Nyare bindningar från Mörrum lägger till ett rött
+    bakre hackel och röd flash, och Ahrex anteckningar föreslår dubbelkrok, trekrok och tub
+    som de man bör ha med sig.
+    """
+
+// en fishing: Fished like any wet fly for salmon, across and down. Viking Lars catches late-summer and autumn salmon on it in Danish rivers, deep on a sinking shooting head. He prefers stiff cock hackles, which he thinks push water and vibrate rather than lie back in the current.
+fishing """
+    Fiskas som vilken laxvåtfluga som helst, tvärs nedströms. Viking Lars fångar sensommar-
+    och höstlax på den i danska åar, djupt på en sjunkande skjutklump. Han föredrar styva
+    tupphackel, som han menar trycker undan vatten och vibrerar i stället för att lägga sig
+    bakåt i strömmen.
+    """
+
+labels {
+    // en rear: Stiff brown cock hackle
+    rear "Styvt brunt tupphackel"
+    // en middle: Stiff brown cock hackle
+    middle "Styvt brunt tupphackel"
+    // en front: Stiff brown cock hackle, the longest
+    front "Styvt brunt tupphackel, det längsta"
+}
+
+notes {
+    // en step 5 (wind butt): A short red butt.
+    step 5 "En kort röd butt."
+    // en step 9 (wind rear): Let the fibres splay out for bulk.
+    step 9 "Låt fibrerna spreta ut för volymens skull."
+    // en step 27 (whip-finish): A small black head.
+    step 27 "Ett litet svart huvud."
+}

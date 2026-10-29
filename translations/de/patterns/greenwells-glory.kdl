@@ -1,0 +1,37 @@
+id greenwells-glory
+status draft
+
+// en description: A body of waxed yellow silk ribbed with fine gold wire, a coch-y-bonddu hen hackle and a dark blackbird or starling quill wing.
+description "Ein Körper aus gewachster gelber Seide mit Rippung aus feinem Golddraht, eine Coch-y-Bonddu-Hennenhechel und ein dunkler Flügel aus Amsel- oder Starflügelsegmenten."
+
+// en history: In May 1854 Canon William Greenwell of Durham had a blank day on the Tweed while the trout fed on a dun. He took one of the naturals to James Wright, the fly dresser at Sprouston near Kelso, who tied imitations; the Canon did so well with them the next day that the fly was named over a celebration at Wright's. The tellings differ in detail, and the 1854 date rests on later accounts. Late in life the Canon gave R. B. Marston of the Fishing Gazette his own dressing: "the wings, inside of a blackbird wing; body, red and black hackle; tied with yellow silk". Courtney Williams quotes another letter allowing gold thread "if wished", and by 1903 E. M. Tod ribbed the body with fine gold wire.
+history """
+    Im Mai 1854 blieb Kanonikus William Greenwell aus Durham einen Tag lang am Tweed ohne Fang, während die Forellen eine Eintagsfliegen-Subimago fraßen. Er brachte eines der Insekten zu James Wright, dem Fliegenbinder in Sprouston bei Kelso, der Imitationen band; der Kanonikus fing damit am nächsten Tag so gut, dass die Fliege bei einer Feier bei Wright ihren Namen bekam. Die Erzählungen weichen in Einzelheiten voneinander ab, und das Datum 1854 beruht auf späteren Berichten. Spät im Leben gab der Kanonikus R. B. Marston von der Fishing Gazette seine eigene Bindeweise: „Flügel: Innenseite eines Amselflügels; Körper: rote und schwarze Hechel; gebunden mit gelber Seide“. Courtney Williams zitiert einen anderen Brief, der Goldfaden „wenn gewünscht“ zulässt, und 1903 rippte E. M. Tod den Körper bereits mit feinem Golddraht.
+    """
+
+// en fishing: A wet fly for the olives. Edmonds and Lee give it March to early May and again September, and keep it going through the summer months between with a lighter wing, body and hackle. On Scottish lochs it is one of the traditional flies for a cast of three or four fished from a drifting boat, and Alastair Gowans lists it among the wet flies for autumn grayling.
+fishing """
+    Eine Nassfliege für die olivfarbenen Eintagsfliegen (Olives). Edmonds und Lee empfehlen sie von März bis Anfang Mai und wieder im September und fischen sie in den Sommermonaten dazwischen mit hellerem Flügel, Körper und Hechel weiter. Auf schottischen Lochs gehört sie zu den traditionellen Fliegen für eine Montage aus drei oder vier Fliegen, vom driftenden Boot gefischt, und Alastair Gowans zählt sie zu den Nassfliegen für Äschen im Herbst.
+    """
+
+labels {
+    // en hackle: Coch-y-bonddu or furnace hen hackle
+    hackle "Coch-y-Bonddu- oder Furnace-Hennenhechel"
+    // en wing: Blackbird or starling quill slips
+    wing "Amsel- oder Starflügelsegmente"
+}
+
+notes {
+    // en step 4 (wrap-thread): Close, even turns of the waxed silk make the body.
+    step 4 "Dichte, gleichmäßige Windungen der gewachsten Seide bilden den Körper."
+    // en step 5 (wind rib): Four open turns (Edmonds & Lee).
+    step 5 "Vier offene Windungen (Edmonds & Lee)."
+    // en step 7 (tie-in hackle): Hen hackle, shiny side forward.
+    step 7 "Hennenhechel, glänzende Seite nach vorn."
+    // en step 9 (wind hackle): Sparse; stroke the fibres down and back.
+    step 9 "Spärlich; streich die Fibern nach unten und hinten."
+    // en step 11 (tie-in wing): Matching left and right slips, concave sides together, sloping back over the body.
+    step 11 "Ein passendes linkes und rechtes Segment, die hohlen Seiten zueinander, schräg nach hinten über den Körper."
+    // en step 12 (whip-finish): A small head of the same silk.
+    step 12 "Ein kleiner Kopf aus derselben Seide."
+}

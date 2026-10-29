@@ -1,0 +1,24 @@
+id fry-minnow
+status draft
+
+// en name: Fry and minnows
+name "Fischbrut und Elritzen"
+
+// en description: Small fish of rivers and lake shores: olive-brown or greenish backs, silvery flanks and pale bellies, shoaling in the shallows. Trout chase them most in late summer and autumn.
+description "Kleine Fische der Flüsse und Seeufer: olivbrauner oder grünlicher Rücken, silbrige Flanken und heller Bauch, in Schwärmen im Flachwasser. Forellen jagen sie vor allem im Spätsommer und im Herbst."
+
+// en examples: minnow (Phoxinus), stickleback, trout and perch fry
+examples "Elritze (Phoxinus), Stichling, Forellen- und Barschbrut"
+
+hatches {
+    // en southern-sweden note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    southern-sweden note="Vor allem im Spätsommer und im Herbst, wenn die Forellen die diesjährige Brut jagen (Cat's Whisker; Teal Blue and Silver)."
+    // en northern-scandinavia note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    northern-scandinavia note="Vor allem im Spätsommer und im Herbst, wenn die Forellen die diesjährige Brut jagen (Cat's Whisker; Teal Blue and Silver)."
+    // en british-isles note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    british-isles note="Vor allem im Spätsommer und im Herbst, wenn die Forellen die diesjährige Brut jagen (Cat's Whisker; Teal Blue and Silver)."
+    // en central-europe note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    central-europe note="Vor allem im Spätsommer und im Herbst, wenn die Forellen die diesjährige Brut jagen (Cat's Whisker; Teal Blue and Silver)."
+    // en northern-usa note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    northern-usa note="Vor allem im Spätsommer und im Herbst, wenn die Forellen die diesjährige Brut jagen (Cat's Whisker; Teal Blue and Silver)."
+}

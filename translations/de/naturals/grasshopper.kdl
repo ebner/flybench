@@ -1,0 +1,24 @@
+id grasshopper
+status draft
+
+// en name: Grasshopper
+name "Grashüpfer"
+
+// en description: A long-bodied insect with big jumping hind legs, folded wings and short antennae. Blown or jumping onto the water, it lands with a splash and kicks.
+description "Ein langgestrecktes Insekt mit großen Sprungbeinen, angelegten Flügeln und kurzen Fühlern. Vom Wind aufs Wasser geweht oder hineingesprungen, landet es mit einem Platschen und strampelt."
+
+// en examples: field and meadow grasshoppers (Chorthippus)
+examples "Feld- und Wiesengrashüpfer (Chorthippus)"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Schätzung."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Schätzung."
+    // en british-isles note: Field grasshopper adults June to early December (ORS).
+    british-isles note="Ausgewachsene Braune Grashüpfer von Juni bis Anfang Dezember (ORS)."
+    // en central-europe note: Estimate.
+    central-europe note="Schätzung."
+    // en northern-usa note: Hoppers from mid-July on the Madison (Montana Angler); the end is an estimate.
+    northern-usa note="Hopper ab Mitte Juli am Madison (Montana Angler); das Ende ist geschätzt."
+}

@@ -1,0 +1,63 @@
+id pattegrisen
+status draft
+
+// en description: A reversed shrimp in shell pink: hackle-stem and synthetic-hair feelers, a Spey hackle collar and black eyes at the bend, a tapered SLF body with a palmered Spey hackle, and an Antron shellback segmented by a mono rib.
+description "En baklängesbunden räka i ljusrosa: spröt av hackelstjälkar och syntethår, en krage av spey-hackel och svarta ögon vid krokböjen, en avsmalnande kropp av SLF med ett spey-hackel lindat som kroppshackel, och en ryggsköld av Antron som delas i segment av en ribb av nylonlina."
+
+// en history: Claus Eriksen tied it on Funen in 2006, and its tenth birthday was celebrated in Odense in 2016. It grew out of Morten Øland's Spey Shrimp (also called Oeland's Shrimp), a more neutral grey fly, which Eriksen redid in pink and coral with some materials changed. It was one of the flies in two Danish sea-trout films released in 2006 that were known for their underwater footage of sea trout following flies. The key material is a long, thin Spey hackle; the Ahrex video names Whiting Spey feathers. Eriksen has tied it in all colours, and says the pink catches best.
+history """
+    Claus Eriksen band den på Fyn 2006, och dess tioårsdag firades i Odense 2016. Den växte
+    fram ur Morten Ølands Spey Shrimp (även kallad Oeland's Shrimp), en mer neutral grå
+    fluga, som Eriksen gjorde om i rosa och korall, med en del material utbytta. Den var
+    en av flugorna i två danska havsöringsfilmer från 2006 som blev kända för sina
+    undervattensbilder av havsöring som följer efter flugor. Nyckelmaterialet är ett långt,
+    tunt spey-hackel; Ahrex-videon nämner Spey-fjädrar från Whiting. Eriksen har bundit den
+    i alla färger och säger att den rosa fångar bäst.
+    """
+
+// en fishing: A Danish coastal fly for sea trout. Eriksen fishes it as the point fly in all conditions, bright sun and flat calm included, often with a small grey gammarus about 50 cm up the leader. He uses sizes 4 to 6 even in midsummer and early autumn, when the usual advice is small flies on fine leaders. It has also taken salmon, steelhead, bonefish and tarpon.
+fishing """
+    En dansk kustfluga för havsöring. Eriksen fiskar den som spetsfluga i alla förhållanden,
+    strålande sol och blickstilla vatten inräknat, ofta med en liten grå gammarus ungefär 50
+    cm upp på tafsen. Han använder storlek 4–6 även mitt i sommaren och tidigt på hösten,
+    när det vanliga rådet är små flugor på tunna tafsar. Den har också tagit lax, steelhead,
+    bonefish och tarpon.
+    """
+
+labels {
+    // en weight: Lead-free wire, or tungsten foil under the shank
+    weight "Blyfri tråd, eller tungstenfolie under krokskaftet"
+    // en feelers: White hackle stems
+    feelers "Vita hackelstjälkar"
+    // en mouth: Shrimp-pink Spey hackle
+    mouth "Räkrosa spey-hackel"
+    // en antennae: Shrimp-pink Ultra Hair
+    antennae "Räkrosa Ultra Hair"
+    // en body: Shell-pink SLF
+    body "SLF i shell pink"
+    // en legs: Shrimp-pink Spey hackle
+    legs "Räkrosa spey-hackel"
+    // en back: Shrimp-pink Antron yarn
+    back "Räkrosa Antrongarn"
+}
+
+notes {
+    // en step 4 (tie-in feelers): Splayed apart.
+    step 4 "Spretande isär."
+    // en step 5 (tie-in mouth): The mouth parts.
+    step 5 "Mundelarna."
+    // en step 7 (wind mouth): A collar round the feelers.
+    step 7 "En krage runt spröten."
+    // en step 10 (tie-in eyes): Angled slightly outwards.
+    step 10 "Lätt vinklade utåt."
+    // en step 14 (dub body): Tapered: thickest at the bend, slimmer toward the eye.
+    step 14 "Avsmalnande: tjockast vid krokböjen, smalare mot krokögat."
+    // en step 15 (wind legs): Fibres down and back.
+    step 15 "Fibrerna nedåt och bakåt."
+    // en step 17 (pull-over back): Over the top, stretched.
+    step 17 "Över ovansidan, väl sträckt."
+    // en step 18 (wind rib): Over the shellback, the turns closer together toward the eye.
+    step 18 "Över ryggskölden, med varven tätare mot krokögat."
+    // en step 20 (whip-finish): Brush out the underside, trim, and varnish the head and a little of the back.
+    step 20 "Borsta ut undersidan, putsa till med saxen och lacka huvudet och en liten bit av ryggen."
+}

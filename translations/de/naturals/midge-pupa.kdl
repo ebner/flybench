@@ -1,0 +1,25 @@
+id midge-pupa
+status draft
+
+// en name: Midge pupa (buzzer)
+name "Zuckmücke, Puppe (Buzzer)"
+
+// en description: A slim, segmented pupa with a bulbous thorax and white breathing filaments at the head. It rises slowly in short bursts, hangs still below the surface, and takes minutes to break through the film.
+description "Eine schlanke, segmentierte Puppe mit kugelig verdicktem Thorax und weißen Atemfäden am Kopf. Sie steigt langsam in kurzen Schüben auf, hängt reglos unter der Oberfläche und braucht Minuten, um den Film zu durchbrechen."
+
+// en examples: buzzers (Chironomus and kin)
+examples "Buzzer (Chironomus und Verwandte)"
+
+hatches {
+    // en southern-sweden note: Estimate: peak May–June.
+    southern-sweden note="Schätzung: Höhepunkt Mai–Juni."
+    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
+    northern-scandinavia note="Dunkle Zuckmücken schwärmen an warmen Junitagen (Visit Dalarna); sonst eine Schätzung."
+    // en british-isles time: morning, evening
+    // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
+    british-isles time="morgens und abends" note="Auf Stillgewässern das ganze Jahr, im November und Dezember spärlich; große Buzzer März–April, Höhepunkt Mai–Juni, dann wieder September–Oktober (The Essential Fly)."
+    // en central-europe note: Estimate, as in Britain.
+    central-europe note="Schätzung, wie auf den Britischen Inseln."
+    // en northern-usa note: Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure).
+    northern-usa note="Immer wenn das Wasser eisfrei ist; an Seen Höhepunkt Ende Mai bis Mitte Juni (BC Adventure)."
+}

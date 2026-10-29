@@ -1,0 +1,24 @@
+id sculpin
+status draft
+
+// en name: Sculpin (bullhead)
+name "Simpa (stensimpa)"
+
+// en description: A bottom fish of cold, clear streams: a big broad head with eyes on top, mottled brown, resting on the stones with its large pectoral fins spread like wings.
+description "En brunmarmorerad bottenfisk i kalla, klara vattendrag: ett stort, brett huvud med ögonen på ovansidan. Den vilar på stenarna med de stora bröstfenorna utbredda som vingar."
+
+// en examples: European bullhead (Cottus gobio), slimy sculpin
+examples "stensimpa (Cottus gobio), slimy sculpin"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Uppskattning."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
+    // en british-isles note: Estimate.
+    british-isles note="Uppskattning."
+    // en central-europe note: Estimate.
+    central-europe note="Uppskattning."
+    // en northern-usa note: Estimate.
+    northern-usa note="Uppskattning."
+}

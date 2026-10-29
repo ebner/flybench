@@ -1,0 +1,49 @@
+id willie-gunn-waddington
+status draft
+
+// en variant: On a Waddington
+variant "Waddington"
+
+// en description: An oval gold tag and rib over a black floss body, a short orange throat, and a long wing of yellow, orange and black bucktail.
+description "Tag och ribb av oval guldtinsel över en kropp av svart flossilke, ett kort orange skägg och en lång vinge av gul, orange och svart bucktail."
+
+// en history: Named after Willie Gunn, who worked for the Sutherland Estates as keeper and gillie, and linked in every account to Rob Wilson's tackle shop in Brora. Who designed it is disputed. The best-known story, told on GlobalFlyFisher and by John Gray, credits Flight Lieutenant "Dusty" Miller, who tied flies for Wilson; Gray dates it to the 1940s. Ross Macdonald gives the account of Gunn's nephew, Jim MacKenzie, who says he tied the first ones, with a blended wing, in March 1968. Gray describes the colours as those of the Thunder & Lightning. Fish4Flies says the first were tied on Waddington shanks, while Macdonald's telling of the Miller story speaks of tubes. Macdonald also thinks the gold-bodied version may now be more popular than the black.
+history """
+    Uppkallad efter Willie Gunn, som arbetade för Sutherland Estates som fiskevårdare och
+    gillie, och i alla berättelser förknippad med Rob Wilsons fiskebutik i Brora. Vem som
+    skapade den är omstritt. Den mest kända historien, som berättas på GlobalFlyFisher och
+    av John Gray, tillskriver den flyglöjtnant ”Dusty” Miller, som band flugor åt Wilson;
+    Gray daterar den till 1940-talet. Ross Macdonald återger berättelsen från Gunns
+    brors- eller systerson, Jim MacKenzie, som säger att han band de första, med blandad vinge, i mars
+    1968. Gray beskriver färgerna som desamma som i Thunder & Lightning. Fish4Flies uppger
+    att de första bands på Waddingtonskaft, medan Macdonalds version av Miller-historien
+    talar om tuber. Macdonald tror också att versionen med guldkropp i dag kan vara
+    populärare än den svarta.
+    """
+
+// en fishing: To Ross Macdonald it stands for spring fishing in Scotland, and it is tied in every size from small summer flies to the biggest tubes. Big Waddingtons and heavy tubes are for the cold, high water of early spring, fished deep; small, lightly dressed singles and doubles for low summer water. Swing it across and down. Changing the share of each colour suits it to dark or clear rivers.
+fishing """
+    För Ross Macdonald står den för vårfisket i Skottland, och den binds i alla storlekar,
+    från små sommarflugor till de största tuberna. Stora Waddingtons och tunga tuber är till
+    för den tidiga vårens kalla, höga vatten och fiskas djupt; små, glest bundna enkel- och
+    dubbelkrokar för sommarens låga vatten. Fiska den tvärs nedströms. Genom att ändra
+    andelen av varje färg anpassar du den till mörka eller klara älvar.
+    """
+
+labels {
+    // en tag: Fine oval gold tinsel
+    tag "Fin oval guldtinsel"
+}
+
+notes {
+    // en step 7 (tie-in rib): Under the shank.
+    step 7 "Under krokskaftet."
+    // en step 10 (wind body): Back to the tag and forward again, slim and even.
+    step 10 "Bakåt till tagen och fram igen, smalt och jämnt."
+    // en step 14 (tie-in yellow): All round the shank, equal parts of each colour.
+    step 14 "Runt hela skaftet, lika delar av varje färg."
+    // en step 19 (trim black): Cut at an angle so the head tapers.
+    step 19 "Snett avklippt så att huvudet smalnar av."
+    // en step 20 (whip-finish): A small, neat black head.
+    step 20 "Ett litet, prydligt svart huvud."
+}

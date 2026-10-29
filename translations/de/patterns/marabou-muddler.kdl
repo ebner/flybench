@@ -1,0 +1,35 @@
+id marabou-muddler
+status draft
+
+// en description: A red hackle-fibre tail, a silver tinsel body, a full white marabou wing topped with peacock herl, and a spun deer-hair collar and clipped head.
+description "Ein Schwanz aus roten Hechelfibern, ein Körper aus Silbertinsel, ein voller Flügel aus weißem Marabou mit Pfauengras darüber und ein Kragen und gestutzter Kopf aus aufgesponnenem Rehhaar."
+
+// en history: Dan Bailey, the Livingston fly-shop owner credited with the Muddler's dense clipped head, swapped its turkey wing for marabou to imitate river minnows. Wikipedia's article on Bailey dates it to the 1940s; the other sources give no date. Bailey preferred white; brown, yellow and black are also popular in the West.
+history """
+    Dan Bailey, der Fliegenhändler aus Livingston, dem der dichte, gestutzte Kopf des Muddler zugeschrieben wird, ersetzte dessen Truthahnflügel durch Marabou, um kleine Flussfische nachzuahmen. Der Wikipedia-Artikel über Bailey datiert die Fliege in die 1940er-Jahre; die anderen Quellen nennen kein Datum. Bailey bevorzugte Weiß; im amerikanischen Westen sind auch Braun, Gelb und Schwarz beliebt.
+    """
+
+// en fishing: Tied light, the deer-hair head keeps it near the top: it suspends, and stripped it wakes on the surface. Weighted and fished on a sinking line, it bobs up and down on the retrieve.
+fishing """
+    Leicht gebunden hält der Rehhaarkopf sie nahe an der Oberfläche: Sie schwebt im Wasser, und eingestrippt zieht sie an der Oberfläche eine Bugwelle. Beschwert und an sinkender Schnur gefischt, taucht sie beim Einholen auf und ab.
+    """
+
+labels {
+    // en tail: Red hackle fibres
+    tail "Rote Hechelfibern"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave the front quarter bare for the hair.
+    step 1 "Lass das vordere Viertel für das Haar frei."
+    // en step 6 (wind body): Touching turns.
+    step 6 "Windung an Windung."
+    // en step 8 (tie-in wing): Tied full: one or two plumes, stripped from the quill.
+    step 8 "Voll gebunden: ein oder zwei Büschel, vom Kiel abgestreift."
+    // en step 9 (tie-in topping): About six strands over the wing.
+    step 9 "Etwa sechs Stränge über dem Flügel."
+    // en step 10 (spin head): Tips back to about the hook point, then butts-only clumps packed tight.
+    step 10 "Spitzen nach hinten bis etwa zur Hakenspitze, dann Büschel ohne Spitzen, dicht gepackt."
+    // en step 12 (trim head): A cone, wide at the back; flat underneath to keep the gape clear. Leave the collar.
+    step 12 "Ein Kegel, hinten breit; unten flach, damit die Bogenweite frei bleibt. Lass den Kragen stehen."
+}

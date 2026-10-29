@@ -1,0 +1,13 @@
+id europea-12-tailed
+status draft
+
+// en variant: With tail
+variant "Med stjärt"
+
+// en description: The Europea 12 with a short tail of pheasant tail fibres.
+description "Europea 12 med en kort stjärt av fasanstjärtfibrer."
+
+notes {
+    // en step 8 (tie-in wing): Tie the feather in by the stem, flat over the body, convex side up.
+    step 8 "Bind in fjädern i stammen, platt över kroppen, med den kupiga sidan uppåt."
+}

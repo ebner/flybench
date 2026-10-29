@@ -1,0 +1,36 @@
+id ullsocken-treble
+status draft
+
+// en variant: On a treble
+variant "Drilling"
+
+// en description: A red wool butt, two black wool body segments and three stiff brown cock hackles: at the rear, in the middle and at the front.
+description "Ein Butt aus roter Wolle, zwei Körpersegmente aus schwarzer Wolle und drei steife braune Hahnenhecheln: hinten, in der Mitte und vorn."
+
+// en history: A Mörrum fly whose name is Swedish for "the wool sock". Its origins are unclear: Ahrex's video notes credit Alf Jansson in the 1960s and name the old Irish shrimp flies as its model, while Viking Lars dates it to the 1950s and says nobody knows who first tied it. Jan Grünwald recalls it as one of the two flies that took most of the Mörrum's May and June salmon in the early 1980s. Viking Lars gives the original as a red wool butt, black wool bodies and stiff brown cock hackles, with no tail. Newer dressings from Mörrum add a red rear hackle and red flash, and Ahrex's notes suggest doubles, trebles and tubes as the ones to carry.
+history """
+    Eine Fliege von der Mörrum, deren Name auf Schwedisch „die Wollsocke“ bedeutet. Ihre Herkunft ist unklar: Die Notizen zum Ahrex-Video schreiben sie Alf Jansson in den 1960er Jahren zu und nennen die alten irischen Shrimp-Fliegen als Vorbild, während Viking Lars sie in die 1950er Jahre datiert und sagt, niemand wisse, wer sie zuerst gebunden hat. Jan Grünwald erinnert sich an sie als eine der beiden Fliegen, die Anfang der 1980er Jahre die meisten Mai- und Junilachse der Mörrum fingen. Viking Lars gibt als Original einen Butt aus roter Wolle, Körper aus schwarzer Wolle und steife braune Hahnenhecheln an, ohne Schwanz. Neuere Bindeweisen von der Mörrum fügen eine rote hintere Hechel und rotes Flash hinzu, und Ahrex’ Notizen empfehlen, sie auf Doppelhaken, Drillingen und Tuben dabeizuhaben.
+    """
+
+// en fishing: Fished like any wet fly for salmon, across and down. Viking Lars catches late-summer and autumn salmon on it in Danish rivers, deep on a sinking shooting head. He prefers stiff cock hackles, which he thinks push water and vibrate rather than lie back in the current.
+fishing """
+    Gefischt wie jede Nassfliege auf Lachs, quer und stromab. Viking Lars fängt mit ihr im Spätsommer und Herbst Lachse in dänischen Flüssen, tief an einem sinkenden Schusskopf. Er bevorzugt steife Hahnenhecheln, die seiner Meinung nach Wasser verdrängen und vibrieren, statt sich in der Strömung nach hinten anzulegen.
+    """
+
+labels {
+    // en rear: Stiff brown cock hackle
+    rear "Steife braune Hahnenhechel"
+    // en middle: Stiff brown cock hackle
+    middle "Steife braune Hahnenhechel"
+    // en front: Stiff brown cock hackle, the longest
+    front "Steife braune Hahnenhechel, die längste"
+}
+
+notes {
+    // en step 5 (wind butt): A short red butt.
+    step 5 "Ein kurzer roter Butt."
+    // en step 9 (wind rear): Let the fibres splay out for bulk.
+    step 9 "Lass die Fibern für mehr Volumen abstehen."
+    // en step 27 (whip-finish): A small black head.
+    step 27 "Ein kleiner schwarzer Kopf."
+}

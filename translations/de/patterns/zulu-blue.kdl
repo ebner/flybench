@@ -1,0 +1,40 @@
+id zulu-blue
+status draft
+
+// en variant: Blue Zulu
+variant "Blue Zulu"
+
+// en description: A short red wool tail, a black seal's fur body ribbed with fine oval silver, a black cock hackle palmered from tail to head, and a bright blue hen front hackle.
+description "Ein kurzer Schwanz aus roter Wolle, ein Körper aus schwarzem Seehunddubbing mit einer Rippung aus feinem ovalem Silbertinsel, eine schwarze Hahnenhechel, vom Schwanz bis zum Kopf als Körperhechel gewunden, und vorn eine leuchtend blaue Hennenhechel."
+
+// en history: Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders with red tips, commonly called Zulus" among the flies for a fortnight on remote Scottish lochs, and in 1892 Niven's lexicon described it as "made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking Lars reports it, gives it a silver tag and hen hackles. Two modern sources say it was once banned, from competitions or in some waters, for catching too well; neither gives details.
+history """
+    Wer die erste gebunden hat, weiß niemand. Schon 1882 konnte „Black Palmer“ „black spiders with red tips, commonly called Zulus“ unter den Fliegen für vierzehn Tage an abgelegenen schottischen Lochs aufführen, und 1892 beschrieb Nivens Lexikon sie als „made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail“. Walbrans Katalog von 1889 gibt ihr, wie Viking Lars berichtet, einen silbernen Tag und Hennenhecheln. Zwei moderne Quellen sagen, sie sei einmal verboten gewesen, bei Wettbewerben oder an manchen Gewässern, weil sie zu gut fing; keine von beiden nennt Einzelheiten.
+    """
+
+// en fishing: A loch fly, at its best on the bob: the top dropper of a team of three or four, worked through the wave tops from a drifting boat. Dark, windy days suit it. Alan the Highlander rates the blue-hackled version above all as a sea-trout fly; it takes brown trout as well.
+fishing """
+    Eine Lochfliege, am besten als Bob Fly: der oberste Springer eines Teams aus drei oder vier Fliegen, vom treibenden Boot aus durch die Wellenkämme geführt. Dunkle, windige Tage liegen ihr. Alan the Highlander schätzt die Version mit blauer Hechel vor allem als Meerforellenfliege; Bachforellen fängt sie ebenfalls.
+    """
+
+labels {
+    // en rib: Fine oval silver tinsel
+    rib "Feines ovales Silbertinsel"
+    // en front: Bright blue hen hackle
+    front "Leuchtend blaue Hennenhechel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short tuft, on top.
+    step 3 "Ein kurzes Büschel, oben."
+    // en step 5 (tie-in hackle): Shiny side forward.
+    step 5 "Glänzende Seite nach vorn."
+    // en step 6 (dub body): Slightly tapered; pick it out a little.
+    step 6 "Leicht verjüngt; zupfe es etwas auf."
+    // en step 7 (wind hackle): Open turns, tail to head.
+    step 7 "Offene Windungen, vom Schwanz zum Kopf."
+    // en step 9 (wind rib): Through the hackle, crossing the stem.
+    step 9 "Durch die Hechel, dabei über den Kiel hinweg."
+    // en step 13 (wind front): A slightly longer collar, stroked back.
+    step 13 "Ein etwas längerer Kragen, nach hinten gestrichen."
+}

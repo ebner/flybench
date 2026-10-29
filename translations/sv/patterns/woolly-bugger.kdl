@@ -1,0 +1,48 @@
+id woolly-bugger
+status draft
+
+// en description: A marabou tail, an olive chenille body, a black saddle hackle palmered along it and a copper wire rib.
+description "En stjärt av marabou, en kropp av olivgrön chenille, ett svart sadelhackel lindat längs den som kroppshackel och en ribb av koppartråd."
+
+// en history: Russ Blessing of Harrisburg, Pennsylvania, is believed to have tied the first Woolly Bugger in 1967, as a hellgrammite imitation with more movement. He took the marabou tail from Mark Sosin's Blossom fly and meant to trim the hackle, then left it as it was after seeing the fly in the water. Barry Beck's 1984 article in Fly Fisherman made it known everywhere.
+//    
+//    It descends from the Woolly Worm and the old British palmer flies.
+history """
+    Russ Blessing från Harrisburg i Pennsylvania anses ha bundit den första Woolly Bugger
+    1967, som en hellgrammite-imitation med mer rörelse. Han tog marabou-stjärten från Mark
+    Sosins fluga Blossom och tänkte klippa hacklet, men lät det vara som det var sedan han
+    sett flugan i vattnet. Barry Becks artikel i Fly Fisherman 1984 gjorde den känd
+    överallt.
+
+    Den härstammar från Woolly Worm och de gamla brittiska palmerflugorna.
+    """
+
+// en fishing: Blessing started with a dead drift near the bottom, and when that failed tried swings, jigging or strips. In lakes, work it back from along the shore, with a sinking-tip line in deep water. Brown ones pass for a crayfish, and where a stream has sculpins it can be fished like one; split shot or a weighted leader keeps it near the bottom.
+fishing """
+    Blessing började med att låta den driva fritt nära botten, och när det inte gav något
+    prövade han att fiska den tvärströms, jigga den eller dra in den. I sjöar fiskar du in
+    den längs stranden, med sjunkspetslina på djupt vatten. Bruna exemplar går för kräftor,
+    och där det finns simpor i vattendraget kan den fiskas som en sådan; ett blyhagel eller
+    en förtyngd tafs håller den nära botten.
+    """
+
+notes {
+    // en step 1 (weight weight): Lock the turns with thread dams at both ends.
+    step 1 "Lås varven med trådvallar i båda ändar."
+    // en step 4 (tie-in tail): Bind the butts along the top of the shank for an even underbody.
+    step 4 "Bind rotändarna längs krokskaftets ovansida för en jämn underkropp."
+    // en step 5 (tie-in flash): Two strands on each side.
+    step 5 "Två strån på var sida."
+    // en step 7 (tie-in body): Strip a little fluff to expose the core where it is tied in.
+    step 7 "Rensa bort lite fluff där den binds in, så att kärnan blir bar."
+    // en step 9 (wind body): Touching turns, ending one eye-length behind the eye.
+    step 9 "Täta varv, som slutar ett krokögas längd bakom krokögat."
+    // en step 11 (tie-in hackle): By the butt, the inside of the feather facing back.
+    step 11 "I rotänden, med fjäderns insida bakåt."
+    // en step 12 (wind hackle): Even open turns back to the bend.
+    step 12 "Jämna, glesa varv tillbaka till krokböjen."
+    // en step 13 (wind rib): Wiggle the wire so it traps no fibres.
+    step 13 "Vicka tråden fram och tillbaka så att den inte fångar några fibrer."
+    // en step 16 (whip-finish): A small, smooth head.
+    step 16 "Ett litet, slätt huvud."
+}

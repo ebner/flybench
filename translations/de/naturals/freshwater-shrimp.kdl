@@ -1,0 +1,24 @@
+id freshwater-shrimp
+status draft
+
+// en name: Freshwater shrimp (Gammarus)
+name "Bachflohkrebs (Gammarus)"
+
+// en description: A small crustacean flattened from side to side, curled into a C at rest and straighter when it swims on its side. Translucent grey, brown or olive; abundant all year in streams and along coasts.
+description "Ein kleiner, seitlich abgeflachter Krebs, in Ruhe zu einem C gekrümmt und gestreckter, wenn er auf der Seite liegend schwimmt. Durchscheinend grau, braun oder oliv; das ganze Jahr über häufig in Bächen und an den Küsten."
+
+// en examples: Gammarus pulex; coastal gammarids
+examples "Gammarus pulex; Flohkrebse der Küsten"
+
+hatches {
+    // en southern-sweden note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    southern-sweden note="Mehrere Bruten im Jahr (Wikipedia); an den Küsten Südskandinaviens das ganze Jahr gefischt (Ahrex)."
+    // en northern-scandinavia note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    northern-scandinavia note="Mehrere Bruten im Jahr (Wikipedia); an den Küsten Südskandinaviens das ganze Jahr gefischt (Ahrex)."
+    // en british-isles note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    british-isles note="Mehrere Bruten im Jahr (Wikipedia); an den Küsten Südskandinaviens das ganze Jahr gefischt (Ahrex)."
+    // en central-europe note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    central-europe note="Mehrere Bruten im Jahr (Wikipedia); an den Küsten Südskandinaviens das ganze Jahr gefischt (Ahrex)."
+    // en northern-usa note: Several broods a year (Wikipedia); coastal fishing in southern Scandinavia all year (Ahrex).
+    northern-usa note="Mehrere Bruten im Jahr (Wikipedia); an den Küsten Südskandinaviens das ganze Jahr gefischt (Ahrex)."
+}

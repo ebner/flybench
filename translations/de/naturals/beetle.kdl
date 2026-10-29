@@ -1,0 +1,22 @@
+id beetle
+status draft
+
+// en name: Beetle
+name "Käfer"
+
+// en description: A stout, round beetle with hard wing cases. The garden chafer has chestnut-brown cases and a shiny dark green head and thorax; it lands on the water with a plop and floats low.
+description "Ein gedrungener, rundlicher Käfer mit harten Flügeldecken. Der Gartenlaubkäfer hat kastanienbraune Flügeldecken, Kopf und Halsschild glänzen dunkelgrün; er landet mit einem Plumps auf dem Wasser und liegt tief darin."
+
+// en examples: garden chafer (Phyllopertha horticola)
+examples "Gartenlaubkäfer (Phyllopertha horticola)"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Schätzung."
+    // en british-isles note: Many in June (Wikipedia); the Coch-y-Bonddu is best in June.
+    british-isles note="Viele im Juni (Wikipedia); die Coch-y-Bonddu fängt im Juni am besten."
+    // en central-europe note: Estimate.
+    central-europe note="Schätzung."
+    // en northern-usa note: Beetles from mid-July on the Madison (Montana Angler); the end is an estimate.
+    northern-usa note="Käfer ab Mitte Juli am Madison (Montana Angler); das Ende ist geschätzt."
+}

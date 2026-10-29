@@ -1,0 +1,45 @@
+id czech-nymph
+status draft
+
+// en description: A heavily weighted body on a curved hook: olive dubbed abdomen, dark thorax, a tan shellback and two ribs.
+description "En kraftigt förtyngd kropp på böjd krok: olivgrön dubbad bakkropp, mörk thorax, en ljusbrun ryggsköld och två ribbar."
+
+// en history: Less a single pattern than a style. Czech competitors saw the Poles' short-line nymphing at a competition in Poland in 1984, used it to place second behind Poland at the 1985 world championship, and in 1986 Slavoj Svoboda won the individual title with it. The Polish flies imitated free-living caddis larvae such as Hydropsyche and Rhyacophila.
+//    
+//    Early Czech nymphs had bodies of washing-up sponge, horsehair ribs and backs of mackintosh; they grew slimmer as materials improved. Skip Clement sees the method as that of the Polish champion Władysław Trzebunia under another name.
+history """
+    Mindre ett enskilt mönster än en stil. Tjeckiska tävlingsfiskare såg polackernas nymffiske med kort lina vid en tävling i Polen 1984, använde det för att ta andraplatsen efter Polen i VM 1985, och 1986 vann Slavoj Svoboda den individuella titeln med det. De polska flugorna imiterade frilevande nattsländelarver som Hydropsyche och Rhyacophila.
+
+    De tidiga tjeckiska nymferna hade kroppar av disksvamp, ribbar av tagel och ryggar av regnrockstyg; de blev smalare i takt med att materialen blev bättre. Skip Clement ser metoden som den polske mästaren Władysław Trzebunias under ett annat namn.
+    """
+
+// en fishing: Fished dead-drift along the bottom, classically as a team of two or three on a short line, close to the rod tip with little or no line on the water; takes show as a check in the leader, and a coloured indicator section helps to see them. Grayling take it best, trout too. It fishes all year, and is especially useful in high water.
+fishing """
+    Fiskas fritt drivande längs botten, klassiskt två eller tre flugor på kort lina, nära spötoppen och med lite eller ingen lina på vattnet; hugget syns som ett stopp i tafsen, och en färgad indikatorbit gör det lättare att se. Harren tar den bäst, men öringen också. Den fiskar året runt och är särskilt användbar vid högvatten.
+    """
+
+labels {
+    // en thorax: Black peacock Ice Dub
+    thorax "Ice Dub i black peacock"
+}
+
+notes {
+    // en step 1 (weight weight): About 15 turns centred on the hook.
+    step 1 "Omkring 15 varv, mitt på kroken."
+    // en step 2 (attach-thread): Wrap over the weighting so it tapers smoothly at both ends.
+    step 2 "Linda över förtyngningen så att den smalnar av jämnt i båda ändar."
+    // en step 4 (tie-in back): On top, stretched, wrapped back deep into the bend.
+    step 4 "Ovanpå, sträckt, och bunden bakåt långt ner i krokböjen."
+    // en step 6 (tie-in over-rib): On the far side, so it makes almost a full turn before crossing the back.
+    step 6 "På bortre sidan, så att den går nästan ett helt varv innan den korsar ryggen."
+    // en step 7 (dub abdomen): Sparse and even: the weighting already gives the taper.
+    step 7 "Glest och jämnt: förtyngningen ger redan formen."
+    // en step 9 (wind under-rib): Open, even turns.
+    step 9 "Glesa, jämna varv."
+    // en step 11 (pull-over back): Centred over the top, stretched slightly.
+    step 11 "Mitt över ovansidan, lätt sträckt."
+    // en step 12 (wind over-rib): Between the copper turns, pulling up on the near side so the back stays put.
+    step 12 "Mellan kopparvarven; dra uppåt på den sida som är närmast dig, så att ryggen ligger kvar."
+    // en step 14 (whip-finish): Pick out the thorax dubbing with a bodkin for legs.
+    step 14 "Peta ut thoraxdubbingen med en dubbingnål till ben."
+}

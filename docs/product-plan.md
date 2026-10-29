@@ -143,7 +143,10 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       sizes, from the hatch calendar, noting what the materials at hand still lack.
     - Tying log and progress: flies tied (count, size, notes), learning-path progress and
       practised techniques, kept in the browser.
-12. Swedish and German. The whole site, the generated step texts included.
+12. ✅ Swedish and German. The whole site, the generated step texts included. (Drafts throughout,
+    marked on every Swedish and German page, for the user's review: the interface catalogs, the
+    glossaries with their translator notes and sources, the prose of every pattern, natural and
+    technique.)
     - A glossary as data (`glossary/*.kdl`): every term per language with its grammar
       (gender, plural and definite forms) and translator notes (preferred term, rejected
       alternatives and why, a source). The step generator and the interface take their

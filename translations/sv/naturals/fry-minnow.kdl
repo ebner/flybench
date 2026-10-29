@@ -1,0 +1,24 @@
+id fry-minnow
+status draft
+
+// en name: Fry and minnows
+name "Yngel och elritsor"
+
+// en description: Small fish of rivers and lake shores: olive-brown or greenish backs, silvery flanks and pale bellies, shoaling in the shallows. Trout chase them most in late summer and autumn.
+description "Småfisk i strömmande vatten och längs sjöstränder: olivbruna eller grönaktiga ryggar, silvriga sidor och ljusa bukar, i stim på grunt vatten. Öringen jagar dem mest på sensommaren och hösten."
+
+// en examples: minnow (Phoxinus), stickleback, trout and perch fry
+examples "elritsa (Phoxinus), spigg, öring- och abborryngel"
+
+hatches {
+    // en southern-sweden note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    southern-sweden note="Mest på sensommaren och hösten, när öringen jagar årets yngel (Cat's Whisker; Teal Blue and Silver)."
+    // en northern-scandinavia note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    northern-scandinavia note="Mest på sensommaren och hösten, när öringen jagar årets yngel (Cat's Whisker; Teal Blue and Silver)."
+    // en british-isles note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    british-isles note="Mest på sensommaren och hösten, när öringen jagar årets yngel (Cat's Whisker; Teal Blue and Silver)."
+    // en central-europe note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    central-europe note="Mest på sensommaren och hösten, när öringen jagar årets yngel (Cat's Whisker; Teal Blue and Silver)."
+    // en northern-usa note: Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver).
+    northern-usa note="Mest på sensommaren och hösten, när öringen jagar årets yngel (Cat's Whisker; Teal Blue and Silver)."
+}

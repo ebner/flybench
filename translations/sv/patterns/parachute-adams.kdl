@@ -1,0 +1,46 @@
+id parachute-adams
+status draft
+
+// en description: Mixed brown and grizzly tail, Adams grey body, a white calf-hair post and a parachute hackle of brown and grizzly.
+description "Blandad stjärt av brunt och grizzly, adamsgrå kropp, en vit post av kalvsvans och ett parachutehackel av brunt och grizzly."
+
+// en history: The Adams (Leonard Halladay, Michigan, 1922) tied with a parachute hackle round a wing post. Rusty Dunn dates the popularity of parachute Adams to the 1950s; none of the sources names who tied the first one.
+history """
+    En Adams (Leonard Halladay, Michigan, 1922) bunden med ett parachutehackel runt en
+    vingpost. Rusty Dunn daterar parachute-Adamsens popularitet till 1950-talet; ingen av
+    källorna säger vem som band den första.
+    """
+
+// en fishing: An everyday searching dry with the outline of an adult mayfly. The hackle wound round the post helps it float, and the white post is easy to follow in rough water. Fish it on a dead drift; Charlie Craven fishes it in sizes 14 and 16 through the summer.
+fishing """
+    En avsökande torrfluga för vardagsbruk, med en fullvuxen dagsländas siluett. Hacklet som
+    är lindat runt posten hjälper den att flyta, och den vita posten är lätt att följa i
+    oroligt vatten. Låt den driva fritt; Charlie Craven fiskar den i storlek 14 och 16 hela
+    sommaren.
+    """
+
+labels {
+    // en tail-grizzly: Grizzly cock hackle fibres
+    tail-grizzly "Fibrer av grizzly tupphackel"
+    // en tail-brown: Brown cock hackle fibres
+    tail-brown "Fibrer av brunt tupphackel"
+    // en body: Adams grey dubbing
+    body "Adamsgrå dubbing"
+}
+
+notes {
+    // en step 3 (tie-in tail-grizzly): The tail is one shank long.
+    step 3 "Stjärten är ett krokskaft lång."
+    // en step 6 (tie-in post): Stack the hair, tie it in tips forward, stand it up and make a few turns round its base.
+    step 6 "Jämna håret, bind in det med spetsarna framåt, res det och lägg några varv runt basen."
+    // en step 7 (trim post): Cut the butts at a slant behind the post and bind them down.
+    step 7 "Klipp rotändarna snett bakom posten och bind ner dem."
+    // en step 8 (tie-in hackle-brown): Stems stripped and bound up the side of the post.
+    step 8 "Stjälkarna rensade och bundna uppåt längs postens sida."
+    // en step 11 (dub body): Up to the post, with a slight taper.
+    step 11 "Fram till posten, lätt avsmalnande."
+    // en step 12 (wind hackle-brown): Start at the top and wind down, each turn under the last.
+    step 12 "Börja upptill och linda nedåt, varje varv under det föregående."
+    // en step 16 (whip-finish): Whip finish behind the eye, under the hackle.
+    step 16 "Gör whipfinishknuten bakom krokögat, under hacklet."
+}

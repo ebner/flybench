@@ -1,0 +1,41 @@
+id parachute-adams
+status draft
+
+// en description: Mixed brown and grizzly tail, Adams grey body, a white calf-hair post and a parachute hackle of brown and grizzly.
+description "Ein Schwanz aus braunen und Grizzly-Fibern gemischt, ein Körper in Adams-Grau, ein Post aus weißem Kalbsschwanz und eine Parachute-Hechel in Braun und Grizzly."
+
+// en history: The Adams (Leonard Halladay, Michigan, 1922) tied with a parachute hackle round a wing post. Rusty Dunn dates the popularity of parachute Adams to the 1950s; none of the sources names who tied the first one.
+history """
+    Die Adams (Leonard Halladay, Michigan, 1922), gebunden mit einer Parachute-Hechel um einen Post. Rusty Dunn datiert die Beliebtheit der Parachute Adams auf die 1950er Jahre; keine der Quellen nennt, wer die erste gebunden hat.
+    """
+
+// en fishing: An everyday searching dry with the outline of an adult mayfly. The hackle wound round the post helps it float, and the white post is easy to follow in rough water. Fish it on a dead drift; Charlie Craven fishes it in sizes 14 and 16 through the summer.
+fishing """
+    Eine Trockenfliege für jeden Tag, zum Absuchen des Wassers, mit dem Umriss einer ausgewachsenen Eintagsfliege. Die um den Post gewundene Hechel hilft ihr beim Schwimmen, und den weißen Post kann man auch in unruhigem Wasser gut verfolgen. Lass sie frei treiben; Charlie Craven fischt sie den Sommer über in den Größen 14 und 16.
+    """
+
+labels {
+    // en tail-grizzly: Grizzly cock hackle fibres
+    tail-grizzly "Grizzly-Hahnenhechelfibern"
+    // en tail-brown: Brown cock hackle fibres
+    tail-brown "Braune Hahnenhechelfibern"
+    // en body: Adams grey dubbing
+    body "Adams-graues Dubbing"
+}
+
+notes {
+    // en step 3 (tie-in tail-grizzly): The tail is one shank long.
+    step 3 "Der Schwanz ist eine Schenkellänge lang."
+    // en step 6 (tie-in post): Stack the hair, tie it in tips forward, stand it up and make a few turns round its base.
+    step 6 "Gleiche das Haar aus, binde es mit den Spitzen nach vorn ein, richte es auf und lege ein paar Windungen um seinen Ansatz."
+    // en step 7 (trim post): Cut the butts at a slant behind the post and bind them down.
+    step 7 "Schneide die Enden hinter dem Post schräg ab und überwickle sie."
+    // en step 8 (tie-in hackle-brown): Stems stripped and bound up the side of the post.
+    step 8 "Die Kiele abgestreift und seitlich am Post hinauf festgebunden."
+    // en step 11 (dub body): Up to the post, with a slight taper.
+    step 11 "Bis zum Post, leicht verjüngt."
+    // en step 12 (wind hackle-brown): Start at the top and wind down, each turn under the last.
+    step 12 "Beginne oben und winde nach unten, jede Windung unter die vorige."
+    // en step 16 (whip-finish): Whip finish behind the eye, under the hackle.
+    step 16 "Kopfknoten hinter dem Öhr, unter der Hechel."
+}

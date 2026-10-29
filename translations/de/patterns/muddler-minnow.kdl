@@ -1,0 +1,43 @@
+id muddler-minnow
+status draft
+
+// en description: Turkey quill tail, a flat gold tinsel body, a squirrel tail underwing under matched turkey slips, and a spun deer-hair collar and clipped head.
+description "Ein Schwanz aus Truthahnfedersegmenten, ein Körper aus flachem Goldtinsel, ein Unterflügel aus Eichhörnchenschwanz unter gegengleichen Truthahnfedersegmenten sowie ein aufgesponnener Kragen und ein geschnittener Kopf aus Rehhaar."
+
+// en history: Don Gapen of Anoka, Minnesota, made it on the Nipigon River in Ontario in 1936 or 1937 to imitate the sculpins the big brook trout fed on, after watching First Nations guides catch them. His head and collar were one sparse, ragged clump of deer hair. The dense, neatly clipped head most tyers make today was Dan Bailey's, of Livingston, Montana, around 1950, and Joe Brooks made the fly famous in Field & Stream.
+history """
+    Don Gapen aus Anoka, Minnesota, schuf sie 1936 oder 1937 am Nipigon River in Ontario, um die Groppen zu imitieren, von denen sich die großen Bachsaiblinge ernährten, nachdem er beobachtet hatte, wie Guides der First Nations sie fingen. Kopf und Kragen bestanden bei ihm aus einem einzigen spärlichen, zerzausten Büschel Rehhaar. Den dichten, sauber geschnittenen Kopf, den die meisten Binder heute machen, hat um 1950 Dan Bailey aus Livingston, Montana, eingeführt, und Joe Brooks machte die Fliege in Field & Stream berühmt.
+    """
+
+// en fishing: As a sculpin it is fished slowly along the bottom, with an occasional fast strip. Unweighted, the deer-hair head floats it: stripped, it wakes on the surface, or it drifts like a hopper. For salmon it is swung like a wet fly or waked in the film; for sea trout at night it is fished in the surface, where it makes a commotion. Before recasting, let it hang and wobble in the current for a moment.
+fishing """
+    Als Groppe fischt man sie langsam am Grund, mit gelegentlichem schnellem Zug. Unbeschwert hält der Rehhaarkopf sie an der Oberfläche: Eingestrippt zieht sie eine Bugwelle, oder sie treibt wie ein Grashüpfer. Auf Lachs wird sie wie eine Nassfliege über den Strom geschwungen oder mit Bugwelle im Oberflächenfilm geführt; auf Meerforelle fischt man sie nachts in der Oberfläche, wo sie für Unruhe sorgt. Bevor du neu wirfst, lass sie einen Moment in der Strömung hängen und taumeln.
+    """
+
+labels {
+    // en tail: Mottled turkey quill slips
+    tail "Marmorierte Truthahnfedersegmente"
+    // en underwing: Grey squirrel tail
+    underwing "Grauer Eichhörnchenschwanz"
+    // en wing: Mottled turkey quill slips
+    wing "Marmorierte Truthahnfedersegmente"
+}
+
+notes {
+    // en step 1 (attach-thread): A quarter of the shank behind the eye: the front is kept bare for the hair.
+    step 1 "Ein Viertel des Hakenschenkels hinter dem Öhr: Vorn bleibt der Schenkel für das Haar frei."
+    // en step 3 (tie-in tail): Matched slips, concave sides together, on top with a pinch wrap.
+    step 3 "Gegengleiche Segmente, die konkaven Seiten zueinander, oben mit der Pinch-Technik eingebunden."
+    // en step 6 (wind body): Touching turns.
+    step 6 "Windung an Windung."
+    // en step 8 (tie-in underwing): A sparse, cleaned bunch, about a shank long.
+    step 8 "Ein spärliches, ausgekämmtes Büschel, etwa eine Schenkellänge lang."
+    // en step 9 (trim underwing): Trim the butts short, so the deer hair can be spun over them.
+    step 9 "Schneide die Enden kurz ab, damit sich das Rehhaar darüber aufspinnen lässt."
+    // en step 10 (tie-in wing): One slip each side, concave in, the tips reaching the end of the tail.
+    step 10 "Je ein Segment pro Seite, die konkave Seite nach innen; die Spitzen reichen bis zum Ende des Schwanzes."
+    // en step 11 (spin head): A large stacked clump, tips back, then butts-only clumps packed hard in front.
+    step 11 "Ein großes, im Stacker ausgeglichenes Büschel mit den Spitzen nach hinten, davor Büschel nur aus Haarenden, kräftig zusammengeschoben."
+    // en step 13 (trim head): Clip the butts to a cone tapering to the eye; leave the tips as a collar.
+    step 13 "Schneide die Enden zu einem Kegel, der zum Öhr hin schmaler wird; die Spitzen bleiben als Kragen stehen."
+}

@@ -1,0 +1,43 @@
+id pheasant-tail-nymph
+status draft
+
+// en description: Four pheasant tail fibres and fine copper wire, with no thread: a short tail, a slim body, a wire thorax hump and a double wing case.
+description "Vier Fasanenstoßfibern und feiner Kupferdraht, ohne Bindefaden: ein kurzer Schwanz, ein schlanker Körper, ein Thoraxbuckel aus Draht und eine doppelte Flügelscheide."
+
+// en history: Frank Sawyer was a river keeper on the Wiltshire Avon from 1925 until he died on its banks at Netheravon in 1980, from 1928 for the Officers' (later Services Dry Fly) Fishing Association. He saw that olive nymphs swim with their legs tucked in, so his nymph has no hackle, and he tied it with fine copper wire in place of silk, which also gives it weight; Sporting Road says the wire came from a relay coil. The fly was published in Nymphs and the Trout in 1958; when he first tied it is less certain: Sporting Road dates the method to the 1930s, Fly Fishing the Sierra the fly to the 1950s. He often tied it on the river bank, without a vise.
+history """
+    Frank Sawyer war ab 1925 Flussaufseher am Avon in Wiltshire, ab 1928 für die Officers’ (später Services Dry Fly) Fishing Association, bis er 1980 bei Netheravon an dessen Ufer starb. Er sah, dass Olive-Nymphen beim Schwimmen die Beine anlegen, darum hat seine Nymphe keine Hechel, und er band sie statt mit Seide mit feinem Kupferdraht, der ihr auch Gewicht gibt; laut Sporting Road stammte der Draht aus einer Relaisspule. Veröffentlicht wurde die Fliege 1958 in Nymphs and the Trout; wann er sie zum ersten Mal gebunden hat, ist weniger sicher: Sporting Road datiert die Methode in die 1930er Jahre, Fly Fishing the Sierra die Fliege in die 1950er. Oft band er sie am Flussufer, ohne Bindestock.
+    """
+
+// en fishing: Made for clear chalk streams, where the trout can be seen: cast well upstream of the fish, let the nymph sink to its depth, and as it comes near, lift the rod gently so the nymph swims up in front of it: Sawyer's induced take. It also catches fish on lakes, worked slowly below the surface.
+fishing """
+    Gemacht für klare Kreideflüsse, in denen man die Forellen sehen kann: Wirf weit oberhalb des Fisches, lass die Nymphe auf seine Tiefe absinken, und wenn sie sich ihm nähert, hebe die Rute sanft an, sodass die Nymphe vor ihm aufsteigt. Das ist Sawyers „induced take“. Sie fängt auch an Seen, langsam unter der Oberfläche geführt.
+    """
+
+labels {
+    // en hump: Fine red copper wire
+    hump "Feiner roter Kupferdraht"
+    // en fibres: Cock pheasant centre tail fibres
+    fibres "Fibern aus den mittleren Stoßfedern des Fasanenhahns"
+    // en case: Pheasant tail fibres (the butts, folded over)
+    case "Fasanenstoßfibern (die Enden, umgeschlagen)"
+}
+
+notes {
+    // en step 1 (weight hump): Three or four overlapping layers just in front of the middle of the shank.
+    step 1 "Drei oder vier sich überlappende Lagen direkt vor der Mitte des Hakenschenkels."
+    // en step 2 (attach-thread): The same wire: wind it back over the shank to the bend.
+    step 2 "Derselbe Draht: Winde ihn über den Hakenschenkel zurück bis zum Hakenbogen."
+    // en step 4 (tie-in fibres): Tips first, under two turns of wire. Pheasant tail cuts easily, so go gently.
+    step 4 "Spitzen zuerst, unter zwei Windungen Draht. Fasanenstoß reißt leicht, geh also behutsam vor."
+    // en step 6 (tie-in case): Lying back over the tail for now.
+    step 6 "Vorerst nach hinten über den Schwanz gelegt."
+    // en step 7 (wrap-thread): In Sawyer's method the wire is twisted round the fibres and wound with them.
+    step 7 "Bei Sawyers Methode wird der Draht um die Fibern gedreht und mit ihnen zusammen gewunden."
+    // en step 8 (wind fibres): Touching turns over the abdomen and thorax.
+    step 8 "Windung an Windung über Abdomen und Thorax."
+    // en step 10 (pull-over case): Over the thorax, then back and forward again: a double, darker wing case.
+    step 10 "Über den Thorax, dann zurück und wieder nach vorn: eine doppelte, dunklere Flügelscheide."
+    // en step 11 (whip-finish): A few turns of wire behind the eye; break off the excess.
+    step 11 "Ein paar Windungen Draht hinter dem Öhr; brich den Überstand ab."
+}

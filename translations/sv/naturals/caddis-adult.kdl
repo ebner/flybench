@@ -1,0 +1,28 @@
+id caddis-adult
+status draft
+
+// en name: Caddis adult (sedge)
+name "Nattslända, fullbildad"
+
+// en description: A moth-like insect with hairy wings folded like a roof over its back and long thread-like antennae. It skitters and flutters on the water when it hatches and when it lays its eggs.
+description "En nattfjärilslik insekt med håriga vingar som den lägger som ett tak över ryggen, och långa, trådsmala antenner. Den kilar och fladdrar över vattnet när den kläcks och när den lägger sina ägg."
+
+// en examples: small sedges, grannom, great red sedge
+examples "små nattsländor, grannom, great red sedge"
+
+hatches {
+    // en southern-sweden time: evening
+    // en southern-sweden note: From May (Sericostoma, Hydropsyche; Dalarna 2013) into autumn (Rhyacophila to November; Gullefors 2015); July and August the main months (Gullefors 2014).
+    southern-sweden time="på kvällen" note="Från maj (Sericostoma, Hydropsyche; Dalarna 2013) in på hösten (Rhyacophila till november; Gullefors 2015); juli och augusti är huvudmånaderna (Gullefors 2014)."
+    // en northern-scandinavia time: evening
+    // en northern-scandinavia note: First adults in early June on the Forsån (Gullefors 2014); caddis fishing in the August dusk (Visit Dalarna).
+    northern-scandinavia time="på kvällen" note="De första fullbildade nattsländorna i början av juni i Forsån (Gullefors 2014); nattsländefiske i augustiskymningen (Visit Dalarna)."
+    // en british-isles time: evening
+    // en british-isles note: Grannom in April (First Nature); many caddis at dusk.
+    british-isles time="på kvällen" note="Grannom i april (First Nature); många nattsländor i skymningen."
+    // en central-europe time: evening
+    // en central-europe note: Estimate; mostly at dusk and night (Wikipedia de).
+    central-europe time="på kvällen" note="Uppskattning; mest i skymningen och på natten (tyska Wikipedia)."
+    // en northern-usa note: Mother's Day caddis from late April, then May–October (Montana Angler).
+    northern-usa note="Mother's Day caddis från slutet av april, sedan maj–oktober (Montana Angler)."
+}

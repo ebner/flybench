@@ -1,0 +1,25 @@
+id mayfly-nymph-crawling
+status draft
+
+// en name: Mayfly nymph, crawling
+name "Eintagsfliege, kriechende Nymphe"
+
+// en description: A sturdier nymph that crawls through moss and under stones, or clings flat to them in fast water: broad, with banded legs and tails and gill plates over the back.
+description "Eine kräftigere Nymphe, die durch Moos und unter Steinen kriecht oder sich in schneller Strömung flach an die Steine drückt: breit, mit gebänderten Beinen und Schwanzfäden und Kiemenplättchen auf dem Rücken."
+
+// en examples: blue-winged olive (Serratella), Ephemerella, clingers (Heptagenia)
+examples "Blue Winged Olive (Serratella), Ephemerella, Flachlarven (Heptagenia)"
+
+hatches {
+    // en southern-sweden note: Heptagenia and Leptophlebia from May, Ephemerella aurivillii June–September (Dalarna 2013).
+    southern-sweden note="Heptagenia und Leptophlebia ab Mai, Ephemerella aurivillii Juni–September (Dalarna 2013)."
+    // en northern-scandinavia note: Estimate: nymphs mature until September in Norrland (Dalarna 2013).
+    northern-scandinavia note="Schätzung: In Norrland wachsen die Nymphen bis in den September heran (Dalarna 2013)."
+    // en british-isles time: midday
+    // en british-isles note: Blue-winged olive duns June to early August (First Nature).
+    british-isles time="mittags" note="Duns der Blue Winged Olive Juni bis Anfang August (First Nature)."
+    // en central-europe note: Serratella April–September, mostly June–September (Wikipedia de).
+    central-europe note="Serratella April–September, meist Juni–September (Wikipedia de)."
+    // en northern-usa note: Hendrickson mid April–mid May (Beaverkill); PMD late June–July (Montana Angler).
+    northern-usa note="Hendrickson Mitte April bis Mitte Mai (Beaverkill); PMD Ende Juni–Juli (Montana Angler)."
+}

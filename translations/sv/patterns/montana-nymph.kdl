@@ -1,0 +1,44 @@
+id montana-nymph
+status draft
+
+// en description: A black tail and chenille body, a yellow chenille thorax with a black hackle wound through it, and a black chenille wing case.
+description "Svart stjärt, kropp av svart chenille, en thorax av gul chenille med ett svart hackel lindat genom den, och en vingsäck av svart chenille."
+
+// en history: An old American pattern meant to imitate large stonefly nymphs. Ahrex, Peter Driver and JustGone.Fishing say it was first tied by Lew Oatman of New York, but none gives a date or a primary source. The dressing has changed over time and is tied in many colours; black and yellow is the classic. Today it is also widely fished on stillwaters for rainbow trout, and in Scandinavia it is fished in lakes as a damsel and dragonfly nymph.
+history """
+    Ett gammalt amerikanskt mönster, tänkt att imitera stora bäcksländenymfer. Enligt Ahrex,
+    Peter Driver och JustGone.Fishing bands den först av Lew Oatman från New York, men ingen
+    av dem anger något årtal eller någon primärkälla. Bindningen har förändrats med tiden
+    och flugan binds i många färger; svart och gult är klassikern. I dag fiskas den också
+    flitigt i sjöar och dammar efter regnbåge, och i Skandinavien fiskas den i sjöar som
+    flick- och trollsländenymf.
+    """
+
+// en fishing: In rivers, dead drift it as a stonefly nymph, or cast it across heavy water on the point and let the current swing it down into calmer water. On lakes, fish it on a sinking line with a very slow retrieve, or on an intermediate line along the shore. It is also a searching pattern, and Guideline rates it for late evening and night fishing.
+fishing """
+    I rinnande vatten låter du den driva fritt som en bäcksländenymf, eller kastar den som
+    spetsfluga tvärs över kraftigt strömmande vatten och låter strömmen svepa ner den i
+    lugnare vatten. I sjöar fiskar du den på sjunklina med mycket långsam indragning, eller
+    på intermediatelina längs stranden. Den fungerar också som avsökande fluga, och
+    Guideline framhåller den för fiske sent på kvällen och på natten.
+    """
+
+labels {
+    // en tail: Black hackle fibres
+    tail "Svarta hackelfibrer"
+    // en case: Black chenille (wing case)
+    case "Svart chenille (vingsäck)"
+}
+
+notes {
+    // en step 6 (wind body): A little more than half the shank.
+    step 6 "Lite mer än halva krokskaftet."
+    // en step 8 (tie-in case): On top, lying back over the body.
+    step 8 "Ovanpå, liggande bakåt över kroppen."
+    // en step 9 (tie-in hackle): Soft hackle, curved side down, tight against the body.
+    step 9 "Mjukt hackel, med den kupade sidan nedåt, tätt intill kroppen."
+    // en step 14 (wind hackle): Open turns through the thorax, fibres sloping back.
+    step 14 "Glesa varv genom thoraxen, med fibrerna lutande bakåt."
+    // en step 16 (pull-over case): Over the top of the thorax, pushing the hackle down to the sides.
+    step 16 "Över thoraxens ovansida, så att hacklet trycks ner åt sidorna."
+}

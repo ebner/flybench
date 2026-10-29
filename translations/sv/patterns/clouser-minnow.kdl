@@ -1,0 +1,37 @@
+id clouser-minnow
+status draft
+
+// en description: Painted dumbbell eyes a third of the way back, a sparse white bucktail belly over them, pearl flash, and a chartreuse bucktail back on the hook-point side.
+description "Målade hantelögon en tredjedel av skaftet bakom krokögat, en gles buk av vit bucktail över dem, pärlemorfärgad flash och en rygg av bucktail i chartreuse på krokspetsens sida."
+
+// en history: Bob Clouser, a fly-shop owner and guide, made it in 1987 for smallmouth bass on the Susquehanna. Lefty Kreh named it in a 1989 Fly Fisherman article and later said he had caught more than eighty species on it; in 1994 he called it the most important underwater fly of the previous twenty years. The first ones were white and brown with gold flash, or white and grey with silver.
+history """
+    Bob Clouser, flugbutiksägare och guide, gjorde den 1987 för smallmouth bass i Susquehanna. Lefty Kreh gav den dess namn i en artikel i Fly Fisherman 1989 och sade senare att han hade fångat mer än åttio arter på den; 1994 kallade han den de senaste tjugo årens viktigaste sjunkande fluga. De första var vita och bruna med guldflash, eller vita och grå med silver.
+    """
+
+// en fishing: Strip it in with pauses: on each pull the heavy eyes lift it and it darts forward, and on each pause it dips again. It rides point up, which makes it hard to snag. Clouser made it to fish deep for river smallmouth; in salt water it is cast on the flats, in the surf and into rips, with eyes as heavy as the depth needs.
+fishing """
+    Dra in den med pauser: vid varje drag lyfter de tunga ögonen den så att den rusar framåt, och vid varje paus dyker den igen. Den går med krokspetsen uppåt och fastnar därför sällan. Clouser gjorde den för att fiska djupt efter smallmouth i floder; i saltvatten kastas den på flats, i bränningen och i tidvattenströmmar, med så tunga ögon som djupet kräver.
+    """
+
+labels {
+    // en eyes: Lead dumbbell eyes, painted red
+    eyes "Hantelögon av bly, rödmålade"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, with crossing turns; post under them and glue.
+    step 2 "Ovanpå, med kryssvarv; linda några varv runt infästningen under dem och limma."
+    // en step 3 (wrap-thread): Between the hook eye and the dumbbell.
+    step 3 "Mellan krokögat och hantelögonen."
+    // en step 4 (tie-in belly): Keep it sparse, about as thick as a big toothpick. Pull it back between the eyes and bind it lightly behind them.
+    step 4 "Håll den gles, ungefär så tjock som en grov tandpetare. Dra den bakåt mellan ögonen och bind fast den lätt bakom dem."
+    // en step 6 (tie-in flash): Turn the hook over; fold the strands round the thread, a little longer than the belly.
+    step 6 "Vänd kroken; vik strånen runt tråden, något längre än buken."
+    // en step 7 (tie-in back): Slightly more hair than the belly, the same length.
+    step 7 "Lite mer hår än i buken, lika långt."
+    // en step 8 (trim back): At an angle, to taper the head.
+    step 8 "Snett, så att huvudet smalnar av."
+    // en step 9 (whip-finish): A small, smooth head, coated with epoxy or resin.
+    step 9 "Ett litet, slätt huvud, belagt med epoxi eller resin."
+}

@@ -1,0 +1,48 @@
+id stoats-tail
+status draft
+
+// en description: An oval silver tag, a golden pheasant crest tail, a black floss body ribbed with oval silver, a black throat hackle and a low black hair wing.
+description "En tag av oval silvertinsel, en stjärt av guldfasantopping, en kropp av svart flossilke ribbad med oval silvertinsel, ett svart skägghackel och en låg vinge av svart hår."
+
+// en history: Who tied it first is not documented; John Gray says only that it has been around a long time, though GlobalFlyFisher's video page gives James Wright as the pattern's author. The wing was originally hair from a stoat's tail; dyed black squirrel is the usual substitute. Hugh Falkus, as Gray quotes him, rated it "one of the best we have" for summer fishing with a floating line, and Sea Trout Nights counts it among the most popular sea-trout flies of modern times.
+history """
+    Vem som band den först finns inte dokumenterat; John Gray säger bara att den har funnits
+    länge, men GlobalFlyFishers videosida anger James Wright som mönstrets upphovsman.
+    Vingen var ursprungligen hår från en hermelins svans; svartfärgad ekorre är den vanliga
+    ersättningen. Hugh Falkus, som Gray citerar honom, räknade den som ”en av de bästa vi
+    har” för sommarfiske med flytlina, och Sea Trout Nights räknar den till den moderna
+    tidens populäraste havsöringsflugor.
+    """
+
+// en fishing: A summer fly for a floating line, at its best in low, clear water and in the evening or other low light, and a good fly for grilse and for sea trout at night on rivers. It is tied on singles, doubles, trebles and tubes.
+fishing """
+    En sommarfluga för flytlina, som bäst i lågt, klart vatten och på kvällen eller i annat
+    svagt ljus, och en bra fluga för smålax och för havsöring på natten i älvarna. Den binds
+    på enkelkrok, dubbelkrok, trekrok och tub.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Fin oval silvertinsel"
+    // en throat: Black cock hackle fibres
+    throat "Svarta tupphackelfibrer"
+    // en wing: Stoat's tail or black squirrel
+    wing "Hermelinsvans eller svart ekorre"
+}
+
+notes {
+    // en step 5 (wind tag): A few close turns at the start of the bend.
+    step 5 "Några täta varv där krokböjen börjar."
+    // en step 11 (wind body): Back to the tail and forward again: a smooth double layer, slightly tapered.
+    step 11 "Bakåt till stjärten och fram igen: ett jämnt dubbelt lager, lätt avsmalnande."
+    // en step 13 (wind rib): Evenly spaced open turns.
+    step 13 "Jämnt fördelade glesa varv."
+    // en step 15 (tie-in throat): A little shorter than the wing; reaching about the hook point.
+    step 15 "Lite kortare än vingen; når ungefär till krokspetsen."
+    // en step 16 (tie-in wing): A small, cleaned bunch, low over the body.
+    step 16 "En liten, rensad bunt, lågt över kroppen."
+    // en step 17 (trim wing): Butts cut at a taper for a small head.
+    step 17 "Rotändarna avsmalnande klippta, för ett litet huvud."
+    // en step 18 (whip-finish): Two or three coats of black varnish.
+    step 18 "Två eller tre lager svart lack."
+}

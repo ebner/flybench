@@ -1,0 +1,37 @@
+id cats-whisker
+status draft
+
+// en description: A white marabou tail and wing, a fluorescent lime chenille body with a silver wire rib, and silver bead-chain eyes behind the eye.
+description "Schwanz und Flügel aus weißem Marabou, ein Körper aus fluoreszierend limettengrüner Chenille mit Rippung aus Silberdraht und silberne Kettenaugen hinter dem Öhr."
+
+// en history: David Train's lure from the 1980s; Funky Fly Tying says the early 1980s, the GlobalFlyFisher video about 1985. The first version had no eyes, and to keep the marabou from fouling round the hook Train tied in four white whiskers his cat had shed. Adding bead-chain eyes, to make it sink and swim level, did away with the whiskers, but not the name. Train sent some to Bob Church, who won competitions with them, and it became one of the best known British stillwater lures.
+history """
+    Ein Streamer von David Train aus den 1980er-Jahren; Funky Fly Tying nennt die frühen 1980er, das Video von GlobalFlyFisher etwa 1985. Die erste Version hatte keine Augen, und damit sich das Marabou nicht um den Haken schlang, band Train vier weiße Schnurrhaare ein, die seine Katze verloren hatte. Mit den Kettenaugen, die die Fliege sinken und waagerecht schwimmen lassen, wurden die Schnurrhaare überflüssig, der Name aber blieb. Train schickte einige an Bob Church, der damit Wettbewerbe gewann, und die Fliege wurde zu einem der bekanntesten britischen Stillwasser-Streamer.
+    """
+
+// en fishing: A weighted stillwater lure, fished on whatever line puts it at the trout's depth, from floating to fast-sinking. Strip it in long, uneven pulls and break the rhythm now and then with a pause and a few quick, short jerks. When it stops, the eyes tip its head down; when it moves, it darts up again like a fleeing fry, and the marabou keeps moving throughout. It fishes all year. The English Fly Fishing Shop rates it highest in autumn, when trout feed on the year's fry; Funky Fly Tying prefers it in cold water, from late October to April.
+fishing """
+    Ein beschwerter Streamer fürs Stillwasser, gefischt an der Schnur, die ihn in die Tiefe der Forellen bringt, von schwimmend bis schnell sinkend. Zieh ihn in langen, ungleichmäßigen Zügen ein und unterbrich den Rhythmus ab und zu mit einer Pause und ein paar schnellen, kurzen Rucken. Hält er an, kippen die Augen seinen Kopf nach unten; zieht er wieder an, schießt er nach oben wie ein fliehendes Brutfischchen, und das Marabou spielt die ganze Zeit. Er fängt das ganze Jahr über. The English Fly Fishing Shop schätzt ihn am meisten im Herbst, wenn die Forellen der diesjährigen Brut nachstellen; Funky Fly Tying fischt ihn am liebsten in kaltem Wasser, von Ende Oktober bis April.
+    """
+
+labels {
+    // en body: Fluorescent lime chenille
+    body "Fluoreszierend limettengrüne Chenille"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, just behind the eye, with figure-of-eight turns.
+    step 2 "Oben, knapp hinter dem Öhr, mit Achterwicklungen."
+    // en step 4 (tie-in tail): A large pinch; tear it to length, never cut it.
+    step 4 "Ein großes Büschel; zupf es auf Länge, schneide es nie."
+    // en step 6 (tie-in body): Above the wire.
+    step 6 "Über dem Draht."
+    // en step 8 (wind body): Touching turns, stopping short of the eyes.
+    step 8 "Windung an Windung, mit etwas Abstand vor den Augen enden."
+    // en step 12 (tie-in wing): A second large pinch, reaching about the tail tip.
+    step 12 "Ein zweites großes Büschel, das etwa bis zur Schwanzspitze reicht."
+    // en step 13 (wrap-thread): Past the eyes, crossing between them.
+    step 13 "An den Augen vorbei nach vorn, zwischen ihnen gekreuzt."
+    // en step 14 (whip-finish): A small head in front of the eyes, varnished.
+    step 14 "Ein kleiner Kopf vor den Augen, lackiert."
+}

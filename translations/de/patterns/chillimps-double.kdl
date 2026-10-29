@@ -1,0 +1,44 @@
+id chillimps-double
+status draft
+
+// en variant: On a double
+variant "Doppelhaken"
+
+// en description: Orange hackle-tip tail, a slim orange body ribbed with oval gold, an orange palmer hackle and a slightly longer orange front hackle.
+description "Ein Schwanz aus orangefarbenen Hechelspitzen, ein schlanker orangefarbener Körper mit Rippung aus ovalem Goldtinsel, eine orangefarbene Körperhechel und vorn eine etwas längere orangefarbene Hechel."
+
+// en history: Tied by Rolf Vilhelmsson (Ahrex and Michael Jensen spell it Vilhelmson) at the Valhalla inn by the Mörrum: in 1942 according to Ahrex, in the early 1940s according to a reader's account on GlobalFlyFisher. That account has Olle Törnblom and Sven Hallman there to see it, and Törnblom refining it later; Michael Jensen names all three as its makers. Vilhelmsson chose a strong colour because the river, clear as it is, is always tinged brown. The name stories are anecdote: one says it was meant to name the colour of a shrimp and came out as pidgin English after a whisky or two, with the spelling fixed by a hard-to-read last letter in the fishing journal. ABU brought out a version with Optic eyes in 1969, by which time the plain fly was famous on the Mörrum.
+history """
+    Gebunden von Rolf Vilhelmsson (Ahrex und Michael Jensen schreiben Vilhelmson) im Gasthof Valhalla an der Mörrum: 1942 laut Ahrex, Anfang der 1940er-Jahre laut einem Leserbericht auf GlobalFlyFisher. Nach diesem Bericht waren Olle Törnblom und Sven Hallman dabei, und Törnblom verfeinerte die Fliege später; Michael Jensen nennt alle drei als ihre Urheber. Vilhelmsson wählte eine kräftige Farbe, weil der Fluss, so klar er ist, immer bräunlich getönt ist. Die Geschichten zum Namen sind Anekdoten: Nach einer sollte der Name die Farbe einer Garnele bezeichnen und kam nach ein, zwei Whiskys als Pidgin-Englisch heraus, und die Schreibweise geht auf einen schwer lesbaren letzten Buchstaben im Fangbuch zurück. ABU brachte 1969 eine Version mit Optic-Augen heraus; da war die schlichte Fliege an der Mörrum schon berühmt.
+    """
+
+// en fishing: A salmon and sea-trout fly, fished like any wet fly for salmon. Ahrex also ties it on doubles. In small sizes on wet-fly hooks it is a Danish coastal fly for garfish (Martin Joergensen), and Ahrex suggests the same dressing on a saltwater hook for the cold season in the sea.
+fishing """
+    Eine Fliege für Lachs und Meerforelle, gefischt wie jede Nassfliege auf Lachs. Ahrex bindet sie auch auf Doppelhaken. In kleinen Größen auf Nassfliegenhaken ist sie eine dänische Küstenfliege für Hornhechte (Martin Joergensen), und Ahrex empfiehlt dieselbe Bindeweise auf einem Salzwasserhaken für die kalte Jahreszeit im Meer.
+    """
+
+labels {
+    // en tail: Orange hackle tips
+    tail "Orangefarbene Hechelspitzen"
+    // en palmer: Orange cock hackle
+    palmer "Orangefarbene Hahnenhechel"
+    // en front: Orange cock hackle, a little longer
+    front "Orangefarbene Hahnenhechel, etwas länger"
+}
+
+notes {
+    // en step 3 (tie-in tail): Two hackle tips, on top.
+    step 3 "Zwei Hechelspitzen, oben."
+    // en step 4 (tie-in rib): Under the shank.
+    step 4 "Unter dem Hakenschenkel."
+    // en step 6 (wrap-thread): A slim, even thread body.
+    step 6 "Ein schlanker, gleichmäßiger Körper aus Bindefaden."
+    // en step 7 (wind palmer): Open turns.
+    step 7 "Offene Windungen."
+    // en step 9 (wind rib): Through the hackle, to protect the stem.
+    step 9 "Durch die Hechel, um den Kiel zu schützen."
+    // en step 13 (wind front): Stroke the fibres back.
+    step 13 "Streich die Fibern nach hinten."
+    // en step 15 (whip-finish): A small, neat head; varnish it.
+    step 15 "Ein kleiner, sauberer Kopf; lackiere ihn."
+}

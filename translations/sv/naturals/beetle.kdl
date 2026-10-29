@@ -1,0 +1,22 @@
+id beetle
+status draft
+
+// en name: Beetle
+name "Skalbagge"
+
+// en description: A stout, round beetle with hard wing cases. The garden chafer has chestnut-brown cases and a shiny dark green head and thorax; it lands on the water with a plop and floats low.
+description "En kraftig, rund skalbagge med hårda täckvingar. Trädgårdsborren har kastanjebruna täckvingar och glänsande mörkgrönt huvud och halssköld; den landar på vattnet med ett plums och flyter lågt."
+
+// en examples: garden chafer (Phyllopertha horticola)
+examples "trädgårdsborre (Phyllopertha horticola)"
+
+hatches {
+    // en southern-sweden note: Estimate.
+    southern-sweden note="Uppskattning."
+    // en british-isles note: Many in June (Wikipedia); the Coch-y-Bonddu is best in June.
+    british-isles note="Många i juni (Wikipedia); Coch-y-Bonddu är som bäst i juni."
+    // en central-europe note: Estimate.
+    central-europe note="Uppskattning."
+    // en northern-usa note: Beetles from mid-July on the Madison (Montana Angler); the end is an estimate.
+    northern-usa note="Skalbaggar från mitten av juli på Madison (Montana Angler); slutet är uppskattat."
+}

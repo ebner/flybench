@@ -1,0 +1,26 @@
+id mayfly-emerger
+status draft
+
+// en name: Mayfly emerger
+name "Eintagsfliege, schlüpfend (Emerger)"
+
+// en description: The moment of hatching: the nymph splits its skin in the surface film and the dun struggles out, its crumpled wings half raised, the old shuck still trailing below.
+description "Der Moment des Schlüpfens: Die Nymphe sprengt im Oberflächenfilm ihre Haut, und die Subimago kämpft sich heraus, die zerknitterten Flügel halb aufgerichtet; die alte Nymphenhülle hängt noch unter ihr."
+
+// en examples: olives, blue-winged olive, the mayfly
+examples "Olives, Blue Winged Olive, die Maifliege"
+
+hatches {
+    // en southern-sweden time: midday
+    // en southern-sweden note: Baetis: two generations, spring and autumn (Dalarna 2013).
+    southern-sweden time="mittags" note="Baetis: zwei Generationen, im Frühjahr und im Herbst (Dalarna 2013)."
+    // en northern-scandinavia note: Estimate: one generation in the mountains.
+    northern-scandinavia note="Schätzung: im Gebirge eine Generation."
+    // en british-isles time: midday
+    // en british-isles note: Large dark olive peaks March–April and late autumn (First Nature).
+    british-isles time="mittags" note="Large Dark Olive: Höhepunkte März–April und im Spätherbst (First Nature)."
+    // en central-europe note: Serratella mostly June–September; above 1000 m July–September (Wikipedia de).
+    central-europe note="Serratella meist Juni–September; oberhalb von 1000 m Juli–September (Wikipedia de)."
+    // en northern-usa note: Blue-winged olives in spring and autumn (Montana Angler).
+    northern-usa note="Blue Winged Olives im Frühjahr und im Herbst (Montana Angler)."
+}

@@ -1,0 +1,26 @@
+id mayfly-spinner
+status draft
+
+// en name: Mayfly spinner
+name "Eintagsfliege, Imago (Spinner)"
+
+// en description: The mature mayfly: clear glassy wings, long tails and a shiny body. After mating the females lay their eggs and fall spent on the water, wings flat out.
+description "Die geschlechtsreife Eintagsfliege: klare, gläserne Flügel, lange Schwanzfäden und ein glänzender Körper. Nach der Paarung legen die Weibchen ihre Eier ab und fallen sterbend aufs Wasser, die Flügel flach ausgebreitet."
+
+// en examples: sherry spinner (Serratella), red spinner (Baetis), the mayfly
+examples "Sherry Spinner (Serratella), Red Spinner (Baetis), die Maifliege"
+
+hatches {
+    // en southern-sweden time: evening
+    // en southern-sweden note: Baetis: two generations, spring and autumn (Dalarna 2013).
+    southern-sweden time="abends" note="Baetis: zwei Generationen, im Frühjahr und im Herbst (Dalarna 2013)."
+    // en northern-scandinavia note: Estimate: one generation in the mountains.
+    northern-scandinavia note="Schätzung: im Gebirge eine Generation."
+    // en british-isles time: evening
+    // en british-isles note: Large dark olive peaks March–April and late autumn (First Nature).
+    british-isles time="abends" note="Large Dark Olive: Höhepunkte März–April und im Spätherbst (First Nature)."
+    // en central-europe note: Serratella mostly June–September; above 1000 m July–September (Wikipedia de).
+    central-europe note="Serratella meist Juni–September; oberhalb von 1000 m Juli–September (Wikipedia de)."
+    // en northern-usa note: Blue-winged olives in spring and autumn (Montana Angler).
+    northern-usa note="Blue Winged Olives im Frühjahr und im Herbst (Montana Angler)."
+}

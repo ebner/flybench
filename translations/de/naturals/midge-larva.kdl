@@ -1,0 +1,25 @@
+id midge-larva
+status draft
+
+// en name: Midge larva
+name "Zuckmücke, Larve"
+
+// en description: A slender, segmented worm living in tubes in the mud of lakes and slow rivers; bloodworms are bright red with haemoglobin. It swims, when it must, by lashing from side to side.
+description "Eine schlanke, segmentierte, wurmförmige Larve, die in Röhren im Schlamm von Seen und langsamen Flüssen lebt; Rote Mückenlarven färbt das Hämoglobin leuchtend rot. Muss sie schwimmen, schlägt sie heftig von einer Seite zur anderen."
+
+// en examples: bloodworms (Chironomus)
+examples "Rote Mückenlarven (Chironomus)"
+
+hatches {
+    // en southern-sweden note: Estimate: peak May–June.
+    southern-sweden note="Schätzung: Höhepunkt Mai–Juni."
+    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
+    northern-scandinavia note="Dunkle Zuckmücken schwärmen an warmen Junitagen (Visit Dalarna); sonst eine Schätzung."
+    // en british-isles time: morning, evening
+    // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
+    british-isles time="morgens und abends" note="Auf Stillgewässern das ganze Jahr, im November und Dezember spärlich; große Buzzer März–April, Höhepunkt Mai–Juni, dann wieder September–Oktober (The Essential Fly)."
+    // en central-europe note: Estimate, as in Britain.
+    central-europe note="Schätzung, wie auf den Britischen Inseln."
+    // en northern-usa note: Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure).
+    northern-usa note="Immer wenn das Wasser eisfrei ist; an Seen Höhepunkt Ende Mai bis Mitte Juni (BC Adventure)."
+}

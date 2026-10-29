@@ -1,0 +1,25 @@
+id midge-adult
+status draft
+
+// en name: Midge adult
+name "Fjädermygga, fullbildad"
+
+// en description: A small, slender fly with one pair of wings held back over its body, long legs and, in the males, feathery antennae. Mating clusters drift on the surface on calm evenings.
+description "En liten, smal mygga med ett vingpar som den håller bakåt över kroppen, långa ben och, hos hanarna, fjäderlika antenner. Parande klungor driver på ytan stilla kvällar."
+
+// en examples: non-biting midges (Chironomidae)
+examples "fjädermyggor (Chironomidae)"
+
+hatches {
+    // en southern-sweden note: Estimate: peak May–June.
+    southern-sweden note="Uppskattning: flest i maj–juni."
+    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
+    northern-scandinavia note="Mörka fjädermyggor svärmar varma junidagar (Visit Dalarna); annars en uppskattning."
+    // en british-isles time: morning, evening
+    // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
+    british-isles time="morgon och kväll" note="I stillastående vatten hela året, fåtaliga i november–december; stora buzzers i mars–april, flest i maj–juni och igen i september–oktober (The Essential Fly)."
+    // en central-europe note: Estimate, as in Britain.
+    central-europe note="Uppskattning, som i Storbritannien."
+    // en northern-usa note: Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure).
+    northern-usa note="Så länge vattnet är isfritt; i sjöarna flest från slutet av maj till mitten av juni (BC Adventure)."
+}

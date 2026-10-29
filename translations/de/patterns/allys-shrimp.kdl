@@ -1,0 +1,51 @@
+id allys-shrimp
+status draft
+
+// en description: A long hot-orange bucktail tail, a red and black floss body ribbed with oval silver, grey squirrel above and below, a golden pheasant tippet overwing and a long orange collar hackle.
+description "Ein langer Schwanz aus leuchtend orangefarbenem Bucktail, ein Körper aus rotem und schwarzem Floss mit einer Rippung aus ovalem Silbertinsel, graues Eichhörnchen oben und unten, ein Oberflügel aus Goldfasan-Tippet und eine lange orangefarbene Kragenhechel."
+
+// en history: Alastair "Ally" Gowans took the idea from the prawns that came up when he went out on an inshore trawler after Norway lobster off the Scottish west coast: long, slim, quick and half translucent, with an orange-pink tinge and a dark gut. He dates the first fly to about 1980; Fieldsports Channel says 1979 and Fly Fisherman the early 1980s. Gowans placed the trawl near Loch Linnhe, Trout and Salmon in the Minch. The fly was first published in Trout and Salmon in August 1988, and readers of three British fishing magazines later voted it Salmon Fly of the Millennium. In Gowans' account each part stands for something: the bucktail for feelers, the tippets for eyes and shell, the black front of the body for the gut, the long collar for legs.
+history """
+    Die Idee kam Alastair „Ally“ Gowans durch die Garnelen, die mit an Bord kamen, als er vor der schottischen Westküste auf einem Küstenkutter beim Fang von Kaisergranat mitfuhr: lang, schlank, flink und halb durchscheinend, mit einem orange-rosa Schimmer und einem dunklen Darm. Er selbst datiert die erste Fliege auf etwa 1980; der Fieldsports Channel nennt 1979, Fly Fisherman die frühen 1980er-Jahre. Gowans verortet die Fangfahrt bei Loch Linnhe, Trout and Salmon im Minch. Zuerst veröffentlicht wurde die Fliege im August 1988 in Trout and Salmon, und die Leser dreier britischer Angelzeitschriften wählten sie später zur „Lachsfliege des Jahrtausends“. Nach Gowans steht jeder Teil für etwas: das Bucktail für die Fühler, die Tippets für Augen und Panzer, der schwarze vordere Körperteil für den Darm, der lange Kragen für die Beine.
+    """
+
+// en fishing: Gowans mostly fishes it on an ordinary swing, with the line chosen for the conditions, and has found the depth matters little: it takes fish inches under the surface on a floater and scraped along the bottom. Small, light ones suit low, warm summer water; heavy tubes and Waddingtons on sinking lines suit high, cold water early in the season. Besides the orange original he ties red and purple versions, and it is tied on singles, doubles, trebles and tubes.
+fishing """
+    Gowans fischt sie meist ganz gewöhnlich im Bogen über den Strom, mit der Schnur, die zu den Bedingungen passt, und hat festgestellt, dass die Tiefe wenig ausmacht: Sie fängt knapp unter der Oberfläche an der Schwimmschnur ebenso wie über den Grund geschleift. Kleine, leichte Fliegen passen zu niedrigem, warmem Sommerwasser, schwere Tuben und Waddingtons an sinkenden Schnüren zu hohem, kaltem Wasser früh in der Saison. Neben dem orangefarbenen Original bindet er rote und violette Versionen, und gebunden wird sie auf Einzel-, Doppel- und Drillingshaken sowie auf Tuben.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Feines ovales Silbertinsel"
+    // en tail: Hot orange bucktail
+    tail "Leuchtend orangefarbenes Bucktail"
+    // en beard: Natural grey squirrel tail
+    beard "Naturgrauer Eichhörnchenschwanz"
+    // en underwing: Natural grey squirrel tail
+    underwing "Naturgrauer Eichhörnchenschwanz"
+    // en collar: Hot orange cock hackle, long and soft
+    collar "Leuchtend orangefarbene Hahnenhechel, lang und weich"
+}
+
+notes {
+    // en step 2 (wrap-thread): To a point above the hook point.
+    step 2 "Bis über die Hakenspitze."
+    // en step 7 (tie-in tail): Slim and long; lock it with a few fibres folded back, and bind the butts along the shank.
+    step 7 "Schlank und lang; sichere es mit ein paar zurückgeklappten Haaren und binde die Enden am Hakenschenkel entlang fest."
+    // en step 9 (tie-in tail-flash): Optional.
+    step 9 "Nach Belieben."
+    // en step 13 (wind rear): Half the body: back to the tail and forward again.
+    step 13 "Die halbe Körperlänge: zurück bis zum Schwanz und wieder nach vorn."
+    // en step 19 (wind rib): Six turns, spread evenly over both halves.
+    step 19 "Sechs Windungen, gleichmäßig über beide Hälften verteilt."
+    // en step 21 (tie-in beard): A sparse bunch under the shank; turn the hook over to tie it in.
+    step 21 "Ein spärliches Büschel unter dem Hakenschenkel; dreh zum Einbinden den Haken um."
+    // en step 23 (tie-in underwing): Low over the body.
+    step 23 "Flach über dem Körper."
+    // en step 25 (tie-in overwing): Tippet fibres, or a whole tippet feather tied flat.
+    step 25 "Tippetfibern oder eine ganze Tippetfeder, flach eingebunden."
+    // en step 28 (wind collar): Touching turns, stroking the fibres back each time.
+    step 28 "Windung an Windung; streich die Fibern dabei jedes Mal nach hinten."
+    // en step 30 (whip-finish): A small tapered head, varnished red.
+    step 30 "Ein kleiner, konischer Kopf, rot lackiert."
+}

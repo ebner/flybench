@@ -1,0 +1,37 @@
+id clouser-minnow
+status draft
+
+// en description: Painted dumbbell eyes a third of the way back, a sparse white bucktail belly over them, pearl flash, and a chartreuse bucktail back on the hook-point side.
+description "Bemalte Bleiaugen ein Drittel der Schenkellänge hinter dem Öhr, darüber ein spärlicher Bauch aus weißem Bucktail, perlmuttfarbenes Flash und ein Rücken aus chartreuse Bucktail auf der Seite der Hakenspitze."
+
+// en history: Bob Clouser, a fly-shop owner and guide, made it in 1987 for smallmouth bass on the Susquehanna. Lefty Kreh named it in a 1989 Fly Fisherman article and later said he had caught more than eighty species on it; in 1994 he called it the most important underwater fly of the previous twenty years. The first ones were white and brown with gold flash, or white and grey with silver.
+history """
+    Bob Clouser, Fliegenhändler und Guide, entwickelte sie 1987 für Schwarzbarsche (Smallmouth Bass) am Susquehanna. Lefty Kreh gab ihr 1989 in einem Artikel in Fly Fisherman ihren Namen und sagte später, er habe über achtzig Arten damit gefangen; 1994 nannte er sie die wichtigste Unterwasserfliege der vergangenen zwanzig Jahre. Die ersten waren weiß und braun mit goldenem Flash oder weiß und grau mit silbernem.
+    """
+
+// en fishing: Strip it in with pauses: on each pull the heavy eyes lift it and it darts forward, and on each pause it dips again. It rides point up, which makes it hard to snag. Clouser made it to fish deep for river smallmouth; in salt water it is cast on the flats, in the surf and into rips, with eyes as heavy as the depth needs.
+fishing """
+    Zieh sie mit Pausen ein: Bei jedem Zug heben die schweren Augen sie an und sie schießt nach vorn, in jeder Pause taucht sie wieder ab. Sie läuft mit der Hakenspitze nach oben und hängt deshalb selten fest. Clouser entwickelte sie, um im Fluss tief auf Schwarzbarsch zu fischen; im Salzwasser wirft man sie auf den Flats, in der Brandung und in Strömungskanten, mit Augen so schwer, wie es die Tiefe verlangt.
+    """
+
+labels {
+    // en eyes: Lead dumbbell eyes, painted red
+    eyes "Bleiaugen, rot bemalt"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, with crossing turns; post under them and glue.
+    step 2 "Oben, mit gekreuzten Windungen; dann ein paar waagerechte Windungen unter ihnen herum und verkleben."
+    // en step 3 (wrap-thread): Between the hook eye and the dumbbell.
+    step 3 "Zwischen Hakenöhr und Bleiaugen."
+    // en step 4 (tie-in belly): Keep it sparse, about as thick as a big toothpick. Pull it back between the eyes and bind it lightly behind them.
+    step 4 "Halte es spärlich, etwa so dick wie ein großer Zahnstocher. Zieh es zwischen den Augen nach hinten und binde es dahinter locker fest."
+    // en step 6 (tie-in flash): Turn the hook over; fold the strands round the thread, a little longer than the belly.
+    step 6 "Dreh den Haken um; falte die Stränge um den Bindefaden, etwas länger als der Bauch."
+    // en step 7 (tie-in back): Slightly more hair than the belly, the same length.
+    step 7 "Etwas mehr Haar als für den Bauch, gleich lang."
+    // en step 8 (trim back): At an angle, to taper the head.
+    step 8 "Schräg, damit sich der Kopf verjüngt."
+    // en step 9 (whip-finish): A small, smooth head, coated with epoxy or resin.
+    step 9 "Ein kleiner, glatter Kopf, mit Epoxid oder Harz überzogen."
+}

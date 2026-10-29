@@ -473,7 +473,7 @@ function PatternView({
           <nav className="variants" aria-label={t.pattern.versions}>
             {family.map((p) => (
               <a key={p.recipe.id} href={href.fly(p.recipe.id)} aria-current={p.recipe.id === recipe.id ? "page" : undefined}>
-                {p.recipe.variant ?? t.pattern.standard}
+                {inPageLanguage(p.recipe).variant ?? t.pattern.standard}
               </a>
             ))}
           </nav>

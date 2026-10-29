@@ -1,0 +1,35 @@
+id montana-nymph
+status draft
+
+// en description: A black tail and chenille body, a yellow chenille thorax with a black hackle wound through it, and a black chenille wing case.
+description "Ein schwarzer Schwanz und ein Körper aus schwarzer Chenille, ein Thorax aus gelber Chenille mit einer durchgewundenen schwarzen Hechel und eine Flügelscheide aus schwarzer Chenille."
+
+// en history: An old American pattern meant to imitate large stonefly nymphs. Ahrex, Peter Driver and JustGone.Fishing say it was first tied by Lew Oatman of New York, but none gives a date or a primary source. The dressing has changed over time and is tied in many colours; black and yellow is the classic. Today it is also widely fished on stillwaters for rainbow trout, and in Scandinavia it is fished in lakes as a damsel and dragonfly nymph.
+history """
+    Ein altes amerikanisches Muster, das große Steinfliegennymphen imitieren soll. Laut Ahrex, Peter Driver und JustGone.Fishing hat Lew Oatman aus New York sie als Erster gebunden, doch keiner von ihnen nennt ein Datum oder eine Primärquelle. Die Bindeweise hat sich mit der Zeit verändert, und gebunden wird sie in vielen Farben; Schwarz und Gelb ist der Klassiker. Heute fischt man sie auch viel an Stillgewässern auf Regenbogenforellen, und in Skandinavien wird sie in Seen als Nymphe von Klein- und Großlibellen gefischt.
+    """
+
+// en fishing: In rivers, dead drift it as a stonefly nymph, or cast it across heavy water on the point and let the current swing it down into calmer water. On lakes, fish it on a sinking line with a very slow retrieve, or on an intermediate line along the shore. It is also a searching pattern, and Guideline rates it for late evening and night fishing.
+fishing """
+    Im Fluss lässt du sie als Steinfliegennymphe frei treiben, oder du fischst sie als Endfliege, wirfst sie quer über starke Strömung und lässt sie von der Strömung ins ruhigere Wasser hinunterschwingen. Am See fischst du sie an der Sinkschnur und holst sie sehr langsam ein, oder an der Intermediate-Schnur entlang des Ufers. Sie ist auch eine Suchfliege, und Guideline schätzt sie für das Fischen am späten Abend und in der Nacht.
+    """
+
+labels {
+    // en tail: Black hackle fibres
+    tail "Schwarze Hechelfibern"
+    // en case: Black chenille (wing case)
+    case "Schwarze Chenille (Flügelscheide)"
+}
+
+notes {
+    // en step 6 (wind body): A little more than half the shank.
+    step 6 "Etwas mehr als die Hälfte des Hakenschenkels."
+    // en step 8 (tie-in case): On top, lying back over the body.
+    step 8 "Oben, nach hinten über den Körper gelegt."
+    // en step 9 (tie-in hackle): Soft hackle, curved side down, tight against the body.
+    step 9 "Weiche Hechel, Wölbung nach unten, dicht am Körper."
+    // en step 14 (wind hackle): Open turns through the thorax, fibres sloping back.
+    step 14 "Offene Windungen durch den Thorax, die Fibern nach hinten geneigt."
+    // en step 16 (pull-over case): Over the top of the thorax, pushing the hackle down to the sides.
+    step 16 "Über den Thorax; dabei drückt sie die Hechel zu den Seiten hinunter."
+}

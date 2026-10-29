@@ -1,0 +1,35 @@
+id gammarus
+status draft
+
+// en description: A plump olive dubbed body on a curved hook, a tan shellback and a gold wire rib, with the dubbing brushed out underneath for legs.
+description "En fyllig olivgrön dubbad kropp på böjd krok, en ljusbrun ryggsköld och en ribb av guldtråd, med dubbingen utborstad undertill som ben."
+
+// en history: Not one pattern but a family: imitations of the freshwater shrimps (Gammarus and other amphipods) that trout and grayling eat all year. This is the plain dubbed, shellbacked and ribbed scud; Oliver Edwards' Deep Diving Shrimp and Nick Thomas' Shwimp are well-known relatives. Orange and pink versions are fished for sea trout on Scandinavian coasts.
+history """
+    Inte ett mönster utan en familj: imitationer av de sötvattensmärlor (Gammarus och andra märlkräftor) som öring och harr äter året runt. Det här är den enkla märlan med dubbad kropp, ryggsköld och ribb; Oliver Edwards Deep Diving Shrimp och Nick Thomas Shwimp är välkända släktingar. Orange och rosa versioner fiskas efter havsöring längs de skandinaviska kusterna.
+    """
+
+// en fishing: Fish it near the bottom, where the naturals live among weed, gravel and stones; the tyer in Orvis's Simple Scud video finds trout will take a scud in most places, above all on overcast days. Nick Thomas fishes his weighted Shwimp on a dropper for winter grayling on big rivers, and on its own in plunge pools on small streams. Weight decides the depth: the Simple Scud has none, the Deep Diving Shrimp has lead-free foil, the Shwimp a tungsten bead.
+fishing """
+    Fiska den nära botten, där de levande märlorna håller till bland växter, grus och sten; bindaren i Orvis video Simple Scud menar att öringen tar en märla på de flesta ställen, framför allt mulna dagar. Nick Thomas fiskar sin förtyngda Shwimp på en dropper efter harr på vintern i stora älvar, och ensam i höljorna under små fall i mindre bäckar. Vikten avgör djupet: Simple Scud har ingen, Deep Diving Shrimp har blyfri folie och Shwimp en tungstenkula.
+    """
+
+labels {
+    // en antennae: Olive fibres (antennae)
+    antennae "Olivgröna fibrer (antenner)"
+    // en body: Smoky olive scud dubbing
+    body "Gammarusdubbing i smoky olive"
+}
+
+notes {
+    // en step 3 (tie-in antennae): A thin wisp, trimmed short.
+    step 3 "En tunn liten tofs, kortklippt."
+    // en step 5 (tie-in back): Wrapped back into the bend, centred on top.
+    step 5 "Bunden bakåt ner i krokböjen, mitt ovanpå."
+    // en step 6 (dub body): A plump body tapering at both ends, stopping short of the eye.
+    step 6 "En fyllig kropp som smalnar av i båda ändar; sluta en bit före krokögat."
+    // en step 8 (wind rib): Open turns over shell and body; firmer pressure gives deeper segments.
+    step 8 "Glesa varv över ryggsköld och kropp; ju hårdare du drar, desto djupare segment."
+    // en step 10 (whip-finish): Brush out the dubbing underneath for legs about a gape long.
+    step 10 "Borsta ut dubbingen undertill till ben ungefär ett krokgap långa."
+}

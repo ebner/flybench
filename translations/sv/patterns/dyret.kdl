@@ -1,0 +1,30 @@
+id dyret
+status draft
+
+// en description: A clump of deer hair bound along the shank, its tips a tuft behind and its butts a square stub in front, with a dubbed body and a long palmered hackle trimmed underneath.
+description "En bunt hjorthår bunden längs krokskaftet, med topparna som en tofs bakom och rotändarna som en tvärt avklippt stump framför, en dubbad kropp och ett långt kroppshackel som klipps undertill."
+
+// en history: Gunnar Bingen, who lives by the Rena, designed it around 1991 (his design sheet is dated that year) as a mix of the Superpuppan and the Devil Bug: in his words the Superpuppan "lacked" something in some situations, and the Devil Bug was efficient but fragile. Thomas Züllich notes that, though meant as a caddis emerger, it has earned its place in many other situations too. Torben Meldgaard captioned his photo of it "extremely ugly but highly efficient".
+history """
+    Gunnar Bingen, som bor vid Rena, konstruerade den omkring 1991 (hans skiss är daterad det året) som en blandning av Superpuppan och Devil Bug: med hans egna ord ”saknade” Superpuppan något i vissa situationer, och Devil Bug var effektiv men ömtålig. Thomas Züllich påpekar att den, fast den var tänkt som en kläckande nattslända, har förtjänat sin plats i många andra situationer också. Torben Meldgaard skrev under sitt foto av den: ”extremt ful men mycket effektiv”.
+    """
+
+// en fishing: Bingen likes best to fish dry late in the evening, when big trout move in along the bank to feed on caddis. Many tyers, Bingen among them, clip the hackle underneath; Thomas Züllich leaves it full. Popular with trout and grayling anglers across Scandinavia, and Markus Hoffman calls his version a killer for northern grayling.
+fishing """
+    Själv fiskar Bingen helst torrt sent på kvällen, när stor öring går in längs stranden för att äta nattsländor. Många bindare, Bingen själv bland dem, klipper hacklet undertill; Thomas Züllich låter det vara helt. Populär bland öring- och harrfiskare i hela Skandinavien, och Markus Hoffman kallar sin version en riktig killer på harren i norr.
+    """
+
+notes {
+    // en step 2 (tie-in hair): A small stacked clump on top, tips back, bound down along the whole shank as an underbody.
+    step 2 "En liten bunt jämnat hår ovanpå, med topparna bakåt, nedbunden längs hela krokskaftet som underkropp."
+    // en step 4 (tie-in hackle): By the stripped stem, at the bend.
+    step 4 "I den rensade stammen, vid krokböjen."
+    // en step 5 (dub body): Over the bound-down hair, to just behind the eye.
+    step 5 "Över det nedbundna håret, fram till strax bakom krokögat."
+    // en step 6 (wind hackle): Open turns, a long hackle.
+    step 6 "Glesa varv, ett långt hackel."
+    // en step 8 (whip-finish): Behind the deer-hair butts.
+    step 8 "Bakom hjorthårets rotändar."
+    // en step 9 (trim hair): Straight across, leaving a short square stub in front of the eye.
+    step 9 "Rakt av, så att en kort, tvär stump står kvar framför krokögat."
+}

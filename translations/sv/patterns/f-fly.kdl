@@ -1,0 +1,29 @@
+id f-fly
+status draft
+
+// en description: A body of tying thread and a wing of natural dun CDC, cut to length.
+description "En kropp av bindtråd och en vinge av naturgrå CDC, klippt i längd."
+
+// en history: Designed by Marjan Fratnik, born in 1919 at Most na Soči in Slovenia's Soča valley, as a caddis imitation: in 1980 according to Hans Weilenmann, or from a CDC fly the Swiss tyer Jules Rindlisbacher gave him in 1983 according to his obituary in Forelle & Äsche. The original had no body material at all, just silk thread. Tomaž Modic, who knew Fratnik, explains that the wing was cut to length because the cut end is stiff, so the fly dries quickly in the cast and rides high.
+history """
+    Konstruerad som nattsländeimitation av Marjan Fratnik, född 1919 i Most na Soči i Sočadalen i Slovenien: 1980 enligt Hans Weilenmann, eller utifrån en CDC-fluga som den schweiziske flugbindaren Jules Rindlisbacher gav honom 1983, enligt hans dödsruna i Forelle & Äsche. Originalet hade inget kroppsmaterial alls, bara silkestråd. Tomaž Modic, som kände Fratnik, förklarar att vingen klipptes i längd eftersom den klippta änden är styv, så att flugan torkar snabbt i kastet och flyter högt.
+    """
+
+// en fishing: Modic points out that the body lies in the film with only the wing above it, so the fly is really an emerger; fish it during midge, caddis or mayfly hatches, or as a general pattern. After a fish, dry the CDC with amadou and a few false casts: Weilenmann warns that paste or liquid floatant collapses the feather, and finds that drying powders last only a fish.
+fishing """
+    Modic påpekar att kroppen ligger i ytfilmen och bara vingen sticker upp, så flugan är egentligen en kläckare; fiska den under kläckningar av fjädermyggor, nattsländor eller dagsländor, eller som allroundfluga. Torka CDC:n med amadou och några luftkast efter varje fisk: Weilenmann varnar för att flytpasta och flytande flytmedel får fjädern att klappa ihop, och tycker att torkpulver bara räcker en fisk.
+    """
+
+labels {
+    // en wing: Natural dun CDC feathers, two stacked
+    wing "Naturgrå CDC-fjädrar, två lagda på varandra"
+}
+
+notes {
+    // en step 3 (wrap-thread): A thin, even thread body: the original has no other body material.
+    step 3 "En tunn, jämn kropp av bindtråd: originalet har inget annat kroppsmaterial."
+    // en step 4 (tie-in wing): Stacked with tips and curves matched; pinch-wrapped on top just behind the eye.
+    step 4 "Lagda på varandra med spetsar och böjar matchade; fästa ovanpå med nypgrepp, strax bakom krokögat."
+    // en step 5 (whip-finish): Trim the butts short, then cut the wing to length.
+    step 5 "Klipp rotändarna korta och klipp sedan vingen i längd."
+}

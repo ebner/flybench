@@ -1,0 +1,45 @@
+id peeping-caddis
+status draft
+
+// en description: A burnt-tipped chartreuse chenille larva peeping out behind a bushy hare's ear case, with a partridge collar where they meet and a tungsten bead at the eye, on a jig hook.
+description "En larv av fluorescerande chartreuse chenille med bränd spets som tittar fram bakom ett yvigt hus av haröra, med en krage av rapphöna där de möts och en tungstenkula vid krokögat, på jiggkrok."
+
+// en history: A cased caddis larva with its head and legs out of the case. Ralph D'Andrea counts it an old, familiar pattern, and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's Peeping Caddis has the larva at the front, as it is in nature; the jig version here has the larva sticking out at the back and the weight at the eye. Hans van Klinken's LeadHead, another cased caddis, is weighted with a split shot that also turns the hook point up.
+history """
+    En husmasklarv med huvud och ben utanför huset. Ralph D'Andrea räknar den som ett
+    gammalt, välbekant mönster, och ingen finns nedtecknad som dess upphovsman. Oliver
+    Edwards och Graydon Bells Peeping Caddis har larven framtill, som i naturen;
+    jiggversionen här har larven stickande ut baktill och tyngden vid krokögat. Hans van
+    Klinkens LeadHead, en annan husmask, är förtyngd med ett blyhagel som också vänder
+    krokspetsen uppåt.
+    """
+
+// en fishing: A heavy point fly that gets down fast, dead-drifted along the bottom while caddis larvae are drifting, with a lighter nymph above it. It fishes all year, best when the water is cold and the fish lie deep, and is a standby for grayling in winter. On a jig hook it rides point up.
+fishing """
+    En tung spetsfluga som snabbt kommer ner, fiskad fritt drivande längs botten när
+    husmasklarverna driver, med en lättare nymf ovanför. Den fiskar året runt, bäst när
+    vattnet är kallt och fisken står djupt, och är ett säkert kort för harr vintertid. På
+    jiggkrok går den med krokspetsen uppåt.
+    """
+
+labels {
+    // en larva: Fluorescent chartreuse chenille
+    larva "Fluorescerande chartreuse chenille"
+    // en rib: Black wire
+    rib "Svart metalltråd"
+    // en larva-case: Hare's mask dubbing with plenty of guard hair
+    larva-case "Dubbing av harmask med gott om täckhår"
+}
+
+notes {
+    // en step 4 (tie-in larva): Burn the end black with a lighter first; tie it in on top with the burnt end pointing back.
+    step 4 "Bränn först änden svart med en tändare; bind in den ovanpå med den brända änden bakåt."
+    // en step 5 (tie-in legs): A small partridge feather, stripped to about ten fibres a side, tied in by the tip.
+    step 5 "En liten rapphönsfjäder, rensad till ungefär tio fibrer per sida, inbunden i spetsen."
+    // en step 7 (wind legs): One or two turns as a collar, stroked back over the larva.
+    step 7 "Ett eller två varv som en krage, strukna bakåt över larven."
+    // en step 10 (dub larva-case): Bushy, and an even cylinder rather than tapered: it is a case.
+    step 10 "Yvigt och jämntjockt som en cylinder, inte avsmalnande: det är ett hus."
+    // en step 13 (whip-finish): Behind the bead; brush the case to pull out the guard hairs.
+    step 13 "Bakom kulan; borsta huset så att täckhåren dras ut."
+}

@@ -1,0 +1,54 @@
+id royal-wulff
+status draft
+
+// en description: A moose hair tail, a body of peacock herl with a red floss band, divided white calf-hair wings and a heavy brown hackle.
+description "En stjärt av älghår, en kropp av påfågelherl med ett band av rött flossilke, delade vingar av vit kalvsvans och ett kraftigt brunt hackel."
+
+// en history: Lee Wulff tied his first three hair-winged dries in 1929–30, because the slim Catskill flies of the day would not stay up on fast water. Rusty Dunn places this on New York's Ausable; Wikipedia's article on the Wulff series has him fishing the Esopus and other Catskill rivers. One of the three, the Bucktail Coachman, became the Royal Wulff when Dan Bailey suggested new names for them, and from 1938 Bailey promoted the series to western anglers from his shop in Livingston, Montana.
+//    
+//    At about the same time Quackenbush, a member of the Beaverkill Trout Club, arrived at a nearly identical hair-winged Royal Coachman, which Rube Cross tied commercially as the "Quack Coachman". The two seem to have been independent. Many writers credit Wulff alone, but Quackenbush is often named as the creator, and Wikipedia lists them both.
+history """
+    Lee Wulff band sina tre första hårvingade torrflugor 1929–30, eftersom tidens smala
+    Catskillflugor inte höll sig flytande i strömt vatten. Rusty Dunn förlägger detta till
+    Ausable i delstaten New York; Wikipedias artikel om Wulffserien låter honom fiska i
+    Esopus och andra floder i Catskills. En av de tre, Bucktail Coachman, blev Royal Wulff
+    när Dan Bailey föreslog nya namn på dem, och från 1938 marknadsförde Bailey serien bland
+    flugfiskare i västra USA från sin butik i Livingston, Montana.
+
+    Ungefär samtidigt kom Quackenbush, medlem i Beaverkill Trout Club, fram till en nästan
+    identisk hårvingad Royal Coachman, som Rube Cross band kommersiellt som ”Quack
+    Coachman”. De två tycks ha kommit på den oberoende av varandra. Många skribenter ger
+    Wulff ensam äran, men Quackenbush nämns ofta som skaparen, och Wikipedia tar upp dem
+    båda.
+    """
+
+// en fishing: A high-floating attractor for fast, broken water. It imitates nothing in particular, so try it when no hatch dominates, or when trout ignore everything else. Fish it on a dead drift. Wulff flies are fished for Atlantic salmon as well as trout.
+fishing """
+    En högflytande attraktionsfluga för snabbt, brutet vatten. Den imiterar inget särskilt,
+    så prova den när ingen kläckning dominerar, eller när öringen struntar i allt annat. Låt
+    den driva fritt. Wulff-flugor fiskas efter lax såväl som öring.
+    """
+
+labels {
+    // en tail: Moose body hair
+    tail "Kroppshår från älg"
+    // en hackle: Coachman brown cock hackle
+    hackle "Tupphackel, coachman brown"
+}
+
+notes {
+    // en step 3 (tie-in wings): Stacked, tied in tips forward, stood up and divided with figure-of-eight turns.
+    step 3 "Jämnat, inbundet med spetsarna framåt, rest och delat med åttor."
+    // en step 4 (trim wings): Cut the butts at a slant behind the wings and bind them down.
+    step 4 "Klipp rotändarna snett bakom vingarna och bind ner dem."
+    // en step 7 (trim tail): Trim the butts so they meet the wing butts, for a level underbody.
+    step 7 "Klipp rotändarna så att de möter vingens rotändar, för en jämn underkropp."
+    // en step 10 (wind butt): The rear third of the body.
+    step 10 "Den bakre tredjedelen av kroppen."
+    // en step 14 (wind band): A smooth red middle band.
+    step 14 "Ett jämnt rött band i mitten."
+    // en step 18 (wind front): Up to just behind the wings.
+    step 18 "Fram till strax bakom vingarna."
+    // en step 22 (wind hackle): Three or four turns behind the wings and three or four in front.
+    step 22 "Tre eller fyra varv bakom vingarna och tre eller fyra framför."
+}

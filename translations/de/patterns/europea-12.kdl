@@ -1,0 +1,20 @@
+id europea-12
+status draft
+
+// en description: A hare's ear body ribbed with yellow thread, a hen mallard breast feather lying over it as a wing, and a red game hackle in front.
+description "Ein Körper aus Hasenohr mit gelber Fadenrippung, darüber flach als Flügel eine Brustfeder der Stockentenhenne und vorn eine Red-Game-Hechel."
+
+// en history: A French fly. Ahrex and GlobalFlyFisher attribute it to André Ragot, following the Danish author Preben Torp Jacobsen, who had published it by 1976; Ahrex guesses it is from the 1960s. The Swedish shop Guideline instead credits the French firm Mouches Ragot, dates it before the Second World War, and explains the name as number 12 in the firm's Europe series. In Sweden, where it is most popular, Lennart Bergqvist's 1989 book spread a version without the tail. Dressings still vary in the details: the body material, whether there is a tail, and whether the wing is one feather or two.
+history """
+    Eine französische Fliege. Ahrex und GlobalFlyFisher schreiben sie André Ragot zu und folgen damit dem dänischen Autor Preben Torp Jacobsen, der sie spätestens 1976 veröffentlicht hatte; Ahrex vermutet, dass sie aus den 1960er-Jahren stammt. Der schwedische Händler Guideline nennt dagegen die französische Firma Mouches Ragot, datiert sie vor den Zweiten Weltkrieg und erklärt den Namen als Nummer 12 der Europa-Serie der Firma. In Schweden, wo sie am beliebtesten ist, verbreitete Lennart Bergqvists Buch von 1989 eine Version ohne Schwanz. In den Einzelheiten unterscheiden sich die Bindeweisen bis heute: im Körpermaterial, ob es einen Schwanz gibt und ob der Flügel aus einer oder zwei Federn besteht.
+    """
+
+// en fishing: A sedge for trout and grayling, useful to the end of the dry-fly season in autumn. Fish it to rising fish or blind, dead drift or skated. The full hackle keeps it afloat in faster water; for calm water some tyers clip it flat underneath, which helps the fly land the right way up and stops it spinning the tippet.
+fishing """
+    Eine Köcherfliege (Sedge) für Forelle und Äsche, brauchbar bis zum Ende der Trockenfliegensaison im Herbst. Fische sie auf steigende Fische oder blind, dragfrei treibend oder geskatet. Die volle Hechel hält sie in schnellerem Wasser oben; für ruhiges Wasser stutzen manche Binder sie unten flach, so landet die Fliege leichter richtig herum und verdrallt die Vorfachspitze nicht.
+    """
+
+notes {
+    // en step 7 (tie-in wing): Tie the feather in by the stem, flat over the body, convex side up.
+    step 7 "Binde die Feder am Kiel ein, flach über dem Körper, die gewölbte Seite nach oben."
+}

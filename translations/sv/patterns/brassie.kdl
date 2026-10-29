@@ -1,0 +1,28 @@
+id brassie
+status draft
+
+// en description: A body of copper wire in touching turns and a small peacock herl head.
+description "En kropp av koppartråd i täta varv och ett litet huvud av påfågelherl."
+
+// en history: From the South Platte in Colorado in the 1960s. Rusty Dunn credits Gene Lynch of Colorado Springs, with Ken Chandler and Tug Davenport refining it: Lynch had wrapped bare hooks with copper wire as underbodies for weighted nymphs, and when he fished one as a weight ahead of a nymph, the fish took the bare wire hook instead. Pierre Joubert reports only a claim that an electronics hobbyist created it. It is named after the brass-plated copper wire of the originals, which had heads of black heat-shrink tubing.
+history """
+    Från South Platte i Colorado på 1960-talet. Rusty Dunn tillskriver den Gene Lynch från Colorado Springs, medan Ken Chandler och Tug Davenport förfinade den: Lynch hade lindat koppartråd på nakna krokar som underkropp till förtyngda nymfer, och när han fiskade en sådan som sänke framför en nymf tog fisken den nakna trådkroken i stället. Pierre Joubert återger bara ett påstående om att en elektronikhobbyist skulle ha skapat den. Namnet kommer av den mässingspläterade koppartråden i originalen, som hade huvud av svart krympslang.
+    """
+
+// en fishing: A heavy, slim fly that sinks quickly, suggesting midge and caddis larvae. In rivers, fish it deep in a nymph rig or below a dry fly; on lakes it can be fished like a buzzer, behind other flies with a figure-of-eight retrieve. Plain copper is the usual wire, with red and green close behind, and many tie it with a bead.
+fishing """
+    En tung, smal fluga som sjunker snabbt och påminner om fjädermygglarver och nattsländelarver. I strömmande vatten fiskar du den djupt i ett nymftackel eller under en torrfluga; i sjöar kan den fiskas som en buzzer, bakom andra flugor och med handtvinning. Blank koppar är det vanliga, med rött och grönt tätt efter, och många binder den med kula.
+    """
+
+notes {
+    // en step 1 (attach-thread): Leave room for the head.
+    step 1 "Lämna plats för huvudet."
+    // en step 2 (wrap-thread): Binding the wire along the near side, for a smooth underbody.
+    step 2 "Bind fast koppartråden längs krokskaftets sida närmast dig, så att underkroppen blir slät."
+    // en step 5 (wind body): Tight, touching turns, by hand; nudge them together.
+    step 5 "Hårt dragna, täta varv, för hand; tryck ihop dem."
+    // en step 6 (tie-off body): Break the wire off by flexing it.
+    step 6 "Bryt av koppartråden genom att böja den fram och tillbaka."
+    // en step 9 (wind head): A short, fat herl head.
+    step 9 "Ett kort, tjockt huvud av herl."
+}

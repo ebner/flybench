@@ -8,6 +8,7 @@ import { useRenders, useSwatches } from "./renders";
 import { swatchName } from "../catalog/swatch";
 import { href } from "./router";
 import { t } from "../i18n/ui";
+import { inPageLanguage } from "../i18n/prose";
 import { linkTo } from "./linkTo";
 import { coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "../catalog/variation";
 import { FlyScene } from "../render/FlyScene";
@@ -131,7 +132,7 @@ export function FlyBox() {
                     render={renders?.[v.entry.recipe.id]}
                     picture={pictures[v.value]}
                     link={href.fly(v.recipe.id, undefined, undefined, v.colours)}
-                    note={`${v.recipe.variant ? `${v.recipe.variant}. ` : ""}${v.text}`}
+                    note={`${inPageLanguage(v.recipe).variant ? `${inPageLanguage(v.recipe).variant}. ` : ""}${v.text}`}
                     action={
                       <button
                         className="link-button plate-remove"

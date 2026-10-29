@@ -1,0 +1,37 @@
+id peeping-caddis
+status draft
+
+// en description: A burnt-tipped chartreuse chenille larva peeping out behind a bushy hare's ear case, with a partridge collar where they meet and a tungsten bead at the eye, on a jig hook.
+description "Eine Larve aus Chartreuse-Chenille mit angesengter Spitze schaut hinter einem buschigen Köcher aus Hasenohr hervor, mit einem Rebhuhnkragen, wo beide sich treffen, und einer Tungstenperle am Öhr, auf einem Jighaken."
+
+// en history: A cased caddis larva with its head and legs out of the case. Ralph D'Andrea counts it an old, familiar pattern, and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's Peeping Caddis has the larva at the front, as it is in nature; the jig version here has the larva sticking out at the back and the weight at the eye. Hans van Klinken's LeadHead, another cased caddis, is weighted with a split shot that also turns the hook point up.
+history """
+    Eine Köcherfliegenlarve, deren Kopf und Beine aus dem Köcher ragen. Ralph D’Andrea zählt sie zu den alten, vertrauten Mustern, und ein Urheber ist nicht überliefert. Bei der Peeping Caddis von Oliver Edwards und Graydon Bell sitzt die Larve vorn, wie in der Natur; bei der Jig-Version hier ragt die Larve hinten heraus, und das Gewicht sitzt am Öhr. Hans van Klinkens LeadHead, eine weitere Köcherlarve, ist mit einem Klemmblei beschwert, das zugleich die Hakenspitze nach oben dreht.
+    """
+
+// en fishing: A heavy point fly that gets down fast, dead-drifted along the bottom while caddis larvae are drifting, with a lighter nymph above it. It fishes all year, best when the water is cold and the fish lie deep, and is a standby for grayling in winter. On a jig hook it rides point up.
+fishing """
+    Eine schwere Endfliege, die schnell absinkt, frei treibend am Grund gefischt, wenn Köcherfliegenlarven driften, mit einer leichteren Nymphe darüber. Sie fängt das ganze Jahr, am besten bei kaltem Wasser, wenn die Fische tief stehen, und im Winter ist sie auf Äschen eine sichere Bank. Am Jighaken läuft sie mit der Spitze nach oben.
+    """
+
+labels {
+    // en larva: Fluorescent chartreuse chenille
+    larva "Fluoreszierende Chartreuse-Chenille"
+    // en rib: Black wire
+    rib "Schwarzer Draht"
+    // en larva-case: Hare's mask dubbing with plenty of guard hair
+    larva-case "Hasenmaskendubbing mit reichlich Grannenhaar"
+}
+
+notes {
+    // en step 4 (tie-in larva): Burn the end black with a lighter first; tie it in on top with the burnt end pointing back.
+    step 4 "Brenne das Ende vorher mit einem Feuerzeug schwarz an; binde die Chenille oben ein, das angesengte Ende nach hinten."
+    // en step 5 (tie-in legs): A small partridge feather, stripped to about ten fibres a side, tied in by the tip.
+    step 5 "Eine kleine Rebhuhnfeder, auf etwa zehn Fibern pro Seite abgestreift, an der Spitze eingebunden."
+    // en step 7 (wind legs): One or two turns as a collar, stroked back over the larva.
+    step 7 "Ein oder zwei Windungen als Kragen, nach hinten über die Larve gestrichen."
+    // en step 10 (dub larva-case): Bushy, and an even cylinder rather than tapered: it is a case.
+    step 10 "Buschig und ein gleichmäßiger Zylinder statt verjüngt: Es ist ein Köcher."
+    // en step 13 (whip-finish): Behind the bead; brush the case to pull out the guard hairs.
+    step 13 "Hinter der Perle; bürste den Köcher aus, damit die Grannenhaare herausstehen."
+}

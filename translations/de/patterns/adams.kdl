@@ -1,0 +1,45 @@
+id adams
+status draft
+
+// en description: Mixed brown and grizzly tail, a grey dubbed body, upright grizzly hackle-tip wings and a collar of brown and grizzly hackle.
+description "Ein gemischter Schwanz aus braunen und Grizzly-Fibern, ein grau gedubbter Körper, aufrechte Flügel aus Grizzly-Hechelspitzen und ein Hechelkragen aus brauner und Grizzly-Hechel."
+
+// en history: Leonard Halladay, an innkeeper and tyer at Mayfield, Michigan, created the Adams in 1922 and named it after his friend Charles F. Adams, an Ohio attorney. Accounts of how it came about differ: Wikipedia has Adams first fishing it on the Boardman River near Traverse City, Rusty Dunn has him bringing Halladay an insect to copy, and a MidCurrent video has the two of them fishing the Mayfield pond. The original had a golden pheasant tippet tail and hackle-tip wings, which Dunn describes as set three-quarters spent.
+//
+//    The upright-winged, hackle-fibre-tailed Catskill dressing tied today appeared in the 1930s.
+history """
+    Leonard Halladay, Gastwirt und Fliegenbinder in Mayfield, Michigan, schuf die Adams 1922 und benannte sie nach seinem Freund Charles F. Adams, einem Anwalt aus Ohio. Wie es dazu kam, wird unterschiedlich erzählt: Bei Wikipedia fischt Adams sie zuerst am Boardman River bei Traverse City, bei Rusty Dunn bringt er Halladay ein Insekt, das dieser nachbinden soll, und in einem Video von MidCurrent fischen die beiden zusammen am Teich von Mayfield. Das Original hatte einen Schwanz aus Goldfasan-Tippet und Flügel aus Hechelspitzen, die laut Dunn zu drei Vierteln gespreizt („three-quarters spent“) eingebunden waren.
+
+    Die heute gebundene Catskill-Version mit aufrechten Flügeln und einem Schwanz aus Hechelfibern kam in den 1930er-Jahren auf.
+    """
+
+// en fishing: A searching dry for when nothing in particular is hatching: it copies no one insect, and its grey passes for mayflies, caddis and midges alike. Fish it on a dead drift. Sizes 12 to 18 are the usual range.
+fishing """
+    Eine Trockenfliege zum Absuchen, wenn nichts Bestimmtes schlüpft: Sie ahmt kein einzelnes Insekt nach, und ihr Grau geht für Eintagsfliegen, Köcherfliegen und Zuckmücken gleichermaßen durch. Lass sie dragfrei treiben. Üblich sind die Größen 12 bis 18.
+    """
+
+labels {
+    // en wings: Grizzly hen hackle tips
+    wings "Grizzly-Hennenhechelspitzen"
+    // en tail-brown: Brown cock hackle fibres
+    tail-brown "Braune Hahnenhechelfibern"
+    // en tail-grizzly: Grizzly cock hackle fibres
+    tail-grizzly "Grizzly-Hahnenhechelfibern"
+    // en body: Adams grey dubbing (muskrat)
+    body "Adams-graues Dubbing (Bisam)"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave one eye-length bare behind the eye.
+    step 1 "Lass hinter dem Öhr eine Öhrlänge frei."
+    // en step 3 (tie-in wings): Tie the tips in pointing over the eye, then stand them up with turns in front.
+    step 3 "Binde die Spitzen nach vorn über das Öhr zeigend ein und richte sie dann mit Windungen davor auf."
+    // en step 5 (tie-in tail-brown): The tail is about as long as the shank.
+    step 5 "Der Schwanz ist etwa so lang wie der Hakenschenkel."
+    // en step 7 (dub body): Thin and slightly tapered, stopping just behind the wings.
+    step 7 "Dünn und leicht konisch, bis knapp hinter die Flügel."
+    // en step 11 (wind hackle-brown): Two turns behind the wings, two in front.
+    step 11 "Zwei Windungen hinter den Flügeln, zwei davor."
+    // en step 13 (wind hackle-grizzly): Wind it through the brown without trapping its barbs.
+    step 13 "Winde sie durch die braune Hechel, ohne deren Fibern einzuklemmen."
+}

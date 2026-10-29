@@ -1,0 +1,37 @@
+id klinkhamer-special
+status draft
+
+// en description: A slim tan abdomen round the curve of the hook, a peacock herl thorax, a white post and a long parachute hackle.
+description "En smal ljusbrun bakkropp runt krokböjen, en thorax av påfågelherl, en vit post och ett långt parachutehackel."
+
+// en history: Hans van Klinken, a Dutch army instructor, first fished it on 27 June 1984 on the Glomma in Norway. He called it the LT Caddis, one fly of an LT series he developed in Scandinavia; Hans de Groot and Ton Lindhout, his colleagues on a magazine's editorial staff, renamed it the Klinkhåmer Special. It grew from Kenneth Boström's Rackelhanen: van Klinken's copies sometimes landed wing-flat, so he wound a hackle round the wing, as he had seen in a book by Eric Leiser, and a few months later added the herl thorax. He points out that others had the same idea: Tomas Olsen in Sweden a year earlier, Roy Richardson in the United States in 1986, and Mike Monroe, whose Paratilt was published in 1979.
+history """
+    Hans van Klinken, instruktör i den nederländska armén, fiskade den första gången den 27 juni 1984 i Glomma i Norge. Han kallade den LT Caddis, en fluga i en LT-serie som han utvecklade i Skandinavien; Hans de Groot och Ton Lindhout, hans kolleger på en tidningsredaktion, döpte om den till Klinkhåmer Special. Den växte fram ur Kenneth Boströms Rackelhanen: van Klinkens kopior landade ibland med vingen platt mot vattnet, så han lindade ett hackel runt vingen, som han hade sett i en bok av Eric Leiser, och några månader senare lade han till thoraxen av herl. Han påpekar att andra hade haft samma idé: Tomas Olsen i Sverige ett år tidigare, Roy Richardson i USA 1986 och Mike Monroe, vars Paratilt publicerades 1979.
+    """
+
+// en fishing: The abdomen hangs below the surface like a hatching insect while the parachute holds the fly up; van Klinken says it suggests all kinds of emerging mayflies and caddis. He designed it for grayling, which tend to push high-floating flies aside as they take, and finds it hooks them well. It stays upright in riffles and strong currents, and the white post shows the takes of fish that sip it down without a ring. Treat the post and hackle with floatant but not the body, which has to break through the film.
+fishing """
+    Bakkroppen hänger under ytan som en kläckande insekt medan parachutehacklet håller flugan uppe; enligt van Klinken påminner den om alla slags kläckande dagsländor och nattsländor. Han konstruerade den för harr, som gärna knuffar undan högt flytande flugor när de tar, och tycker att den krokar harren bra. Den står upprätt i strömsträckor och stark ström, och den vita posten visar hugg från fisk som sörplar i sig den utan att det blir någon ring. Behandla posten och hacklet med flytmedel men inte kroppen, som ska bryta igenom ytfilmen.
+    """
+
+labels {
+    // en abdomen: Light tan poly dubbing
+    abdomen "Ljusbeige polydubbing"
+}
+
+notes {
+    // en step 1 (attach-thread): Spiral the thread over the whole shank and well round the bend first.
+    step 1 "Linda först tråden i spiral över hela krokskaftet och en bra bit runt böjen."
+    // en step 3 (tie-in post): Angle-cut so the underbody stays slim; stand it up with posting turns.
+    step 3 "Snett avklippt så att underkroppen förblir smal; res den med några varv runt basen."
+    // en step 4 (tie-in hackle): Stem posted up the yarn.
+    step 4 "Stammen bunden uppåt längs garnet."
+    // en step 6 (dub abdomen): Slim and tapered, from as far round the bend as possible to the post.
+    step 6 "Smal och avsmalnande, från så långt runt böjen som möjligt fram till posten."
+    // en step 7 (tie-in thorax): Three herls by their tips, right behind the post.
+    step 7 "Tre herl i spetsarna, alldeles bakom posten."
+    // en step 9 (wind thorax): A robust thorax, in front of and round the base of the post.
+    step 9 "En kraftig thorax, framför och runt postens bas."
+    // en step 11 (wind hackle): From the top of the post downwards; it is hard to over-hackle.
+    step 11 "Från toppen av posten och nedåt; det är svårt att ta för mycket hackel."
+}

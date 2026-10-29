@@ -1,0 +1,37 @@
+id cdc-and-elk
+status draft
+
+// en description: A single CDC feather wound from the tip to make body and soft hackle, and a fine deer hair wing whose square-cut butts form the head.
+description "Eine einzelne CDC-Feder, von der Spitze an gewunden, bildet Körper und weiche Hechel; dazu ein Flügel aus feinem Rehhaar, dessen gerade abgeschnittene Enden den Kopf formen."
+
+// en history: The Dutch tyer Hans Weilenmann designed it in 1992 as a reworking of Al Troth's Elk Hair Caddis, which had been one of his most reliable dry flies since a trip to Montana in 1982. Looking for a fly that floated better and moved more, he replaced the dubbed body and palmered hackle with one whole CDC feather, stem and all. Despite the name, he ties the wing with fine-tipped deer hair.
+history """
+    Der niederländische Binder Hans Weilenmann entwarf sie 1992 als Neufassung von Al Troths Elk Hair Caddis, die seit einer Reise nach Montana 1982 eine seiner verlässlichsten Trockenfliegen gewesen war. Auf der Suche nach einer Fliege, die besser schwimmt und mehr Leben hat, ersetzte er den gedubbten Körper und die gepalmerte Hechel durch eine ganze CDC-Feder samt Kiel. Trotz des Namens bindet er den Flügel aus feinspitzigem Rehhaar.
+    """
+
+// en fishing: A low-riding caddis that Weilenmann also uses during many mayfly hatches, as a searching fly when nothing is hatching, as an emerger, and even wet. Greased with floatant it rides higher; left untreated, the CDC soaks up water and it fishes as an emerger or cripple. Use less hair in the wing for smooth water and more for broken water.
+fishing """
+    Eine flach im Film liegende Köcherfliege, die Weilenmann auch bei vielen Eintagsfliegenschlüpfen fischt, als Suchfliege, wenn nichts schlüpft, als Emerger und sogar nass. Mit Schwimmmittel behandelt schwimmt sie höher; unbehandelt saugt sich das CDC voll, und sie fischt als Emerger oder Krüppel. Nimm für glattes Wasser weniger Haar in den Flügel, für bewegtes Wasser mehr.
+    """
+
+labels {
+    // en body: Natural dun CDC feather (one, wound)
+    body "Naturfarbene Dun-CDC-Feder (eine, gewunden)"
+    // en wing: Fine-tipped deer hair
+    wing "Feinspitziges Rehhaar"
+}
+
+notes {
+    // en step 3 (tie-in body): By its tip, the tip barbs stroked together.
+    step 3 "An ihrer Spitze, die Fibern der Spitze zusammengestrichen."
+    // en step 4 (wrap-thread): Then one turn back.
+    step 4 "Dann eine Windung zurück."
+    // en step 5 (wind body): Touching turns, stroking the barbs back after each; the rear turns make the body, the front ones a soft collar.
+    step 5 "Windung an Windung, nach jeder die Fibern nach hinten streichen; die hinteren Windungen bilden den Körper, die vorderen einen weichen Kragen."
+    // en step 7 (tie-in wing): Stacked; butts trimmed square first so they end just behind the eye.
+    step 7 "Im Stacker ausgerichtet; die Enden vorher gerade abschneiden, so dass sie knapp hinter dem Öhr enden."
+    // en step 8 (trim wing): Short flared stubs make the head.
+    step 8 "Kurze, abgespreizte Stummel bilden den Kopf."
+    // en step 9 (whip-finish): In front of the butts, under the stubs.
+    step 9 "Vor den Haarenden, unter den Stummeln."
+}

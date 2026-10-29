@@ -1,0 +1,26 @@
+id mayfly-emerger
+status draft
+
+// en name: Mayfly emerger
+name "Dagslända, kläckande"
+
+// en description: The moment of hatching: the nymph splits its skin in the surface film and the dun struggles out, its crumpled wings half raised, the old shuck still trailing below.
+description "Själva kläckningen: nymfen spräcker sitt skinn i ytfilmen och subimagon kämpar sig ut, med de skrynkliga vingarna halvt resta och det gamla nymfskinnet kvar efter sig under ytan."
+
+// en examples: olives, blue-winged olive, the mayfly
+examples "ådagsländor, blue-winged olive, sanddagsländor"
+
+hatches {
+    // en southern-sweden time: midday
+    // en southern-sweden note: Baetis: two generations, spring and autumn (Dalarna 2013).
+    southern-sweden time="mitt på dagen" note="Baetis: två generationer, vår och höst (Dalarna 2013)."
+    // en northern-scandinavia note: Estimate: one generation in the mountains.
+    northern-scandinavia note="Uppskattning: en generation i fjällen."
+    // en british-isles time: midday
+    // en british-isles note: Large dark olive peaks March–April and late autumn (First Nature).
+    british-isles time="mitt på dagen" note="Large dark olive: flest i mars–april och på senhösten (First Nature)."
+    // en central-europe note: Serratella mostly June–September; above 1000 m July–September (Wikipedia de).
+    central-europe note="Serratella mest i juni–september; över 1 000 m i juli–september (tyska Wikipedia)."
+    // en northern-usa note: Blue-winged olives in spring and autumn (Montana Angler).
+    northern-usa note="Blue-winged olive på våren och hösten (Montana Angler)."
+}

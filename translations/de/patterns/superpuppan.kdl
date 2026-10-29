@@ -1,0 +1,37 @@
+id superpuppan
+status draft
+
+// en description: A sparse yellow body and short brown thorax with a dun hackle palmered over them, trimmed top and bottom so only the side fibres remain.
+description "Ein spärlicher gelber Körper und ein kurzer brauner Thorax, darüber eine Dun-Hechel als Körperhechel, oben und unten abgeschnitten, sodass nur die Fibern an den Seiten stehen bleiben."
+
+// en history: Lennart Bergqvist began developing it in 1977 on the Norwegian river Rena, studying hatching caddis with Kenneth Boström, Jan Sekander and Preben Torp Jacobsen. Early versions had wing buds and legs; by the early 1980s it had reached its simple form. Bergqvist called it the Floating Caddis Pupa; his friend Bengt Öste named it Superpuppan.
+history """
+    Lennart Bergqvist begann 1977 an der norwegischen Rena mit der Entwicklung, als er mit Kenneth Boström, Jan Sekander und Preben Torp Jacobsen schlüpfende Köcherfliegen studierte. Frühe Versionen hatten Flügelansätze und Beine; Anfang der 1980er Jahre hatte sie ihre einfache Form erreicht. Bergqvist nannte sie Floating Caddis Pupa; sein Freund Bengt Öste gab ihr den Namen Superpuppan.
+    """
+
+// en fishing: Imitates a caddis pupa swimming in the surface towards the bank to hatch. Fish it dead drift first; then twitch it, or swing it so it ploughs towards the bank. The two rows of fibres keep it high and make a wake. A searching fly for grayling, which rise to it from deep water. Guideline calls it a must on the Rena and Glomma in July and August.
+fishing """
+    Sie imitiert eine Köcherfliegenpuppe, die in der Oberfläche zum Ufer schwimmt, um dort zu schlüpfen. Fische sie zuerst frei treibend; dann zupf sie an oder lass sie quer zur Strömung schwingen, sodass sie zum Ufer hin pflügt. Die beiden Fibernreihen halten sie hoch und ziehen eine Bugwelle. Eine Suchfliege für Äschen, die aus tiefem Wasser zu ihr aufsteigen. Guideline nennt sie ein Muss an Rena und Glomma im Juli und August.
+    """
+
+labels {
+    // en hackle: Dark dun cock hackle
+    hackle "Dunkle Dun-Hahnenhechel"
+    // en abdomen: Golden yellow dry fly dubbing
+    abdomen "Goldgelbes Trockenfliegendubbing"
+}
+
+notes {
+    // en step 3 (tie-in hackle): One size too large, by the stripped stem, pointing back.
+    step 3 "Eine Nummer zu groß, am abgestreiften Kiel eingebunden, nach hinten zeigend."
+    // en step 4 (dub abdomen): Sparse and slim.
+    step 4 "Spärlich und schlank."
+    // en step 5 (dub thorax): Short and dark.
+    step 5 "Kurz und dunkel."
+    // en step 6 (wind hackle): Four or five open turns over the whole body.
+    step 6 "Vier oder fünf offene Windungen über den ganzen Körper."
+    // en step 8 (whip-finish): A very small head.
+    step 8 "Ein sehr kleiner Kopf."
+    // en step 9 (trim hackle): The two rows of fibres make it float, and wake when it is pulled.
+    step 9 "Die beiden Fibernreihen lassen sie schwimmen und ziehen eine Bugwelle, wenn sie gezogen wird."
+}

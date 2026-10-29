@@ -1,0 +1,24 @@
+id prawn
+status draft
+
+// en name: Prawn
+name "Räka"
+
+// en description: A long, slim, half-translucent prawn with a pink-orange tinge, long antennae and a fan tail. The prawn the salmon flies suggest.
+description "En lång, smal, halvt genomskinlig räka med rosaorange skimmer, långa antenner och solfjäderformad stjärt. Det är den räkan laxflugorna efterliknar."
+
+// en examples: Palaemon (rockpool and common prawns)
+examples "Palaemon (tångräkor)"
+
+hatches {
+    // en southern-sweden note: Fished in the salmon and sea-trout seasons.
+    southern-sweden note="Fiskas under lax- och havsöringssäsongerna."
+    // en northern-scandinavia note: Fished in the salmon and sea-trout seasons.
+    northern-scandinavia note="Fiskas under lax- och havsöringssäsongerna."
+    // en british-isles note: Fished in the salmon and sea-trout seasons.
+    british-isles note="Fiskas under lax- och havsöringssäsongerna."
+    // en central-europe note: Fished in the salmon and sea-trout seasons.
+    central-europe note="Fiskas under lax- och havsöringssäsongerna."
+    // en northern-usa note: Fished in the salmon and sea-trout seasons.
+    northern-usa note="Fiskas under lax- och havsöringssäsongerna."
+}

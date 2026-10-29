@@ -1,0 +1,37 @@
+id cats-whisker
+status draft
+
+// en description: A white marabou tail and wing, a fluorescent lime chenille body with a silver wire rib, and silver bead-chain eyes behind the eye.
+description "Stjärt och vinge av vit marabou, en kropp av fluorescerande limegrön chenille med ribb av silvertråd och silverfärgade kulkedjeögon bakom krokögat."
+
+// en history: David Train's lure from the 1980s; Funky Fly Tying says the early 1980s, the GlobalFlyFisher video about 1985. The first version had no eyes, and to keep the marabou from fouling round the hook Train tied in four white whiskers his cat had shed. Adding bead-chain eyes, to make it sink and swim level, did away with the whiskers, but not the name. Train sent some to Bob Church, who won competitions with them, and it became one of the best known British stillwater lures.
+history """
+    David Trains streamer från 1980-talet; Funky Fly Tying säger början av 1980-talet, GlobalFlyFishers video omkring 1985. Den första versionen hade inga ögon, och för att maraboun inte skulle trassla sig runt kroken band Train in fyra vita morrhår som hans katt hade fällt. När han lade till kulkedjeögon, för att flugan skulle sjunka och simma plant, behövdes morrhåren inte längre, men namnet blev kvar. Train skickade några till Bob Church, som vann tävlingar med dem, och den blev en av de mest kända brittiska sjöstreamrarna.
+    """
+
+// en fishing: A weighted stillwater lure, fished on whatever line puts it at the trout's depth, from floating to fast-sinking. Strip it in long, uneven pulls and break the rhythm now and then with a pause and a few quick, short jerks. When it stops, the eyes tip its head down; when it moves, it darts up again like a fleeing fry, and the marabou keeps moving throughout. It fishes all year. The English Fly Fishing Shop rates it highest in autumn, when trout feed on the year's fry; Funky Fly Tying prefers it in cold water, from late October to April.
+fishing """
+    En förtyngd sjöstreamer som fiskas på den lina som når det djup där öringen står, från flytlina till snabbsjunkande. Dra in den i långa, ojämna drag och bryt rytmen då och då med en paus och några snabba, korta ryck. När den stannar tippar ögonen huvudet nedåt; när den rör sig rusar den upp igen som ett flyende yngel, och maraboun är i rörelse hela tiden. Den fiskar året runt. The English Fly Fishing Shop sätter den högst på hösten, när öringen äter årets yngel; Funky Fly Tying föredrar den i kallt vatten, från slutet av oktober till april.
+    """
+
+labels {
+    // en body: Fluorescent lime chenille
+    body "Fluorescerande limegrön chenille"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, just behind the eye, with figure-of-eight turns.
+    step 2 "Ovanpå, strax bakom krokögat, med några åttor."
+    // en step 4 (tie-in tail): A large pinch; tear it to length, never cut it.
+    step 4 "En stor nypa; riv av den i rätt längd, klipp den aldrig."
+    // en step 6 (tie-in body): Above the wire.
+    step 6 "Ovanför silvertråden."
+    // en step 8 (wind body): Touching turns, stopping short of the eyes.
+    step 8 "Täta varv; sluta en bit före ögonen."
+    // en step 12 (tie-in wing): A second large pinch, reaching about the tail tip.
+    step 12 "En andra stor nypa, som når ungefär till stjärtspetsen."
+    // en step 13 (wrap-thread): Past the eyes, crossing between them.
+    step 13 "Förbi ögonen, med tråden i kryss mellan dem."
+    // en step 14 (whip-finish): A small head in front of the eyes, varnished.
+    step 14 "Ett litet huvud framför ögonen, lackat."
+}

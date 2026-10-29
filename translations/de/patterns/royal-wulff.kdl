@@ -1,0 +1,43 @@
+id royal-wulff
+status draft
+
+// en description: A moose hair tail, a body of peacock herl with a red floss band, divided white calf-hair wings and a heavy brown hackle.
+description "Ein Schwanz aus Elchhaar, ein Körper aus Pfauengras mit einem roten Floss-Band, geteilte Flügel aus weißem Kalbsschwanz und eine dichte braune Hechel."
+
+// en history: Lee Wulff tied his first three hair-winged dries in 1929–30, because the slim Catskill flies of the day would not stay up on fast water. Rusty Dunn places this on New York's Ausable; Wikipedia's article on the Wulff series has him fishing the Esopus and other Catskill rivers. One of the three, the Bucktail Coachman, became the Royal Wulff when Dan Bailey suggested new names for them, and from 1938 Bailey promoted the series to western anglers from his shop in Livingston, Montana.
+//    
+//    At about the same time Quackenbush, a member of the Beaverkill Trout Club, arrived at a nearly identical hair-winged Royal Coachman, which Rube Cross tied commercially as the "Quack Coachman". The two seem to have been independent. Many writers credit Wulff alone, but Quackenbush is often named as the creator, and Wikipedia lists them both.
+history """
+    Lee Wulff band 1929–30 seine ersten drei Trockenfliegen mit Haarflügeln, weil die schlanken Catskill-Fliegen jener Zeit sich auf schnellem Wasser nicht oben hielten. Rusty Dunn verortet das am Ausable im Staat New York; im Wikipedia-Artikel über die Wulff-Serie fischt er den Esopus und andere Flüsse der Catskills. Eine der drei, die Bucktail Coachman, wurde zur Royal Wulff, als Dan Bailey neue Namen für sie vorschlug, und ab 1938 bewarb Bailey die Serie von seinem Laden in Livingston, Montana, aus bei den Anglern im Westen.
+
+    Etwa zur selben Zeit kam Quackenbush, ein Mitglied des Beaverkill Trout Club, auf eine fast identische Royal Coachman mit Haarflügeln, die Rube Cross gewerblich als „Quack Coachman“ band. Die beiden scheinen unabhängig voneinander darauf gekommen zu sein. Viele Autoren nennen allein Wulff, doch Quackenbush wird oft als Schöpfer genannt, und Wikipedia führt beide auf.
+    """
+
+// en fishing: A high-floating attractor for fast, broken water. It imitates nothing in particular, so try it when no hatch dominates, or when trout ignore everything else. Fish it on a dead drift. Wulff flies are fished for Atlantic salmon as well as trout.
+fishing """
+    Eine hoch schwimmende Reizfliege für schnelles, gebrochenes Wasser. Sie imitiert nichts Bestimmtes; probier sie also, wenn kein Schlupf vorherrscht oder wenn die Forellen alles andere verschmähen. Lass sie frei treiben. Wulff-Fliegen werden auf Atlantischen Lachs ebenso gefischt wie auf Forelle.
+    """
+
+labels {
+    // en tail: Moose body hair
+    tail "Elchkörperhaar"
+    // en hackle: Coachman brown cock hackle
+    hackle "Hahnenhechel in Coachman-Braun"
+}
+
+notes {
+    // en step 3 (tie-in wings): Stacked, tied in tips forward, stood up and divided with figure-of-eight turns.
+    step 3 "Ausgeglichen, mit den Spitzen nach vorn eingebunden, aufgerichtet und mit Achterwicklungen geteilt."
+    // en step 4 (trim wings): Cut the butts at a slant behind the wings and bind them down.
+    step 4 "Schneide die Enden hinter den Flügeln schräg ab und überwickle sie."
+    // en step 7 (trim tail): Trim the butts so they meet the wing butts, for a level underbody.
+    step 7 "Kürze die Enden so, dass sie an die Enden der Flügel anschließen, für einen ebenen Unterbau."
+    // en step 10 (wind butt): The rear third of the body.
+    step 10 "Das hintere Drittel des Körpers."
+    // en step 14 (wind band): A smooth red middle band.
+    step 14 "Ein glattes rotes Mittelband."
+    // en step 18 (wind front): Up to just behind the wings.
+    step 18 "Bis knapp hinter die Flügel."
+    // en step 22 (wind hackle): Three or four turns behind the wings and three or four in front.
+    step 22 "Drei oder vier Windungen hinter den Flügeln und drei oder vier davor."
+}

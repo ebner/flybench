@@ -1,0 +1,36 @@
+id streaking-caddis
+status draft
+
+// en description: A brown dubbed body under a dense deer hair wing; the butts of the same clump are spun round the shank and trimmed to a head.
+description "En brun dubbad kropp under en tät vinge av hjorthår; rotändarna av samma bunt spinns runt krokskaftet och klipps till ett huvud."
+
+// en history: Created by Lennart Bergqvist, who also tied the Superpuppan, to imitate Phryganea grandis, the great red sedge: up to five centimetres long, one of the largest caddis there are, and found in Scandinavia. According to GlobalFlyFisher the style began with Poul Jorgensen, whose smaller fly had only a deer-hair head; Bergqvist added the body and tied it bigger. No date is documented.
+history """
+    Skapad av Lennart Bergqvist, som också band Superpuppan, för att imitera Phryganea
+    grandis (great red sedge): upp till fem centimeter lång, en av de största nattsländor
+    som finns, och förekommer i Skandinavien. Enligt GlobalFlyFisher började stilen med Poul
+    Jorgensen, vars mindre fluga bara hade ett huvud av hjorthår; Bergqvist lade till
+    kroppen och band den större. Inget årtal finns dokumenterat.
+    """
+
+// en fishing: A sedge for fast water: with that much deer hair it stays afloat in rough, broken currents. It was designed to skate, and skates well; Peter Butler skates it during the October caddis hatch and otherwise fishes it dead drift. A summer fly for trout when the big Phryganea sedges hatch.
+fishing """
+    En nattslända för strömt vatten: med så mycket hjorthår håller den sig flytande även i
+    oroligt, brutet vatten. Den gjordes för att dras skrinnande över ytan, och gör det bra;
+    Peter Butler drar den över ytan under kläckningen av October caddis och fiskar den
+    annars fritt drivande. En sommarfluga för öring när de stora Phryganea-sländorna
+    kläcker.
+    """
+
+notes {
+    // en step 3 (dub body): Slim, leaving the front third bare: hair only spins on a bare shank.
+    step 3 "Smal, och lämna den främre tredjedelen bar: hår spinner bara på ett bart krokskaft."
+    // en step 4 (tie-in wing): A bigger bunch than for a wing alone, tips stacked and pointing back.
+    step 4 "En större bunt än för bara en vinge, med spetsarna jämnade och riktade bakåt."
+    // en step 5 (wrap-thread): Tight turns forward through the butts make them flare and spin.
+    step 5 "Hårt dragna varv framåt genom rotändarna får dem att resa sig och spinna."
+    // en step 6 (whip-finish): Push the hair back and whip finish at the eye.
+    step 6 "Tryck håret bakåt och avsluta med whipfinish vid krokögat."
+    // en step 7 (trim wing): Trim the butts to a dense, rounded head, smallest at the eye; clear the gape underneath.
+    step 7 "Klipp rotändarna till ett tätt, rundat huvud, minst vid krokögat; klipp fritt krokgapet undertill."
+}

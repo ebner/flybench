@@ -1,0 +1,33 @@
+id coch-y-bonddu
+status draft
+
+// en description: A flat gold tag, a plump body of bronze peacock herl ribbed with gold wire, and a red-and-black coch-y-bonddu hackle.
+description "Ein Tag aus goldfarbenem Flachtinsel, ein praller Körper aus bronzefarbenem Pfauengras mit Golddrahtrippung und eine rot-schwarze Coch-y-Bonddu-Hechel."
+
+// en history: A traditional Welsh fly imitating a small beetle, which Mary Orvis Marbury says is sometimes called the bracken clock; Rusty Dunn names it as the garden chafer. Charles Bowlker's Art of Angling (1792 edition) has it as the Shorn Fly: a red cock's hackle "with a black list up the middle" and a peacock herl body. The 1854 edition adds that it is much used in Wales and better known there as Coch-a-bonddu, "red with a black body", after the hackle. Fred Klein traces peacock soft hackles back to Dennys's Secrets of Angling (1613); that is unverified.
+history """
+    Eine traditionelle walisische Fliege, die einen kleinen Käfer nachahmt; nach Mary Orvis Marbury wird er manchmal bracken clock genannt, Rusty Dunn bestimmt ihn als Gartenlaubkäfer. In Charles Bowlkers Art of Angling (Ausgabe von 1792) steht sie als Shorn Fly: eine rote Hahnenhechel „mit einem schwarzen Streifen in der Mitte“ und ein Körper aus Pfauengras. Die Ausgabe von 1854 ergänzt, sie werde in Wales viel gefischt und sei dort besser als Coch-a-bonddu bekannt, „rot mit schwarzem Körper“, nach der Hechel. Fred Klein führt Soft-Hackle-Fliegen mit Pfauengras bis auf Dennys' Secrets of Angling (1613) zurück; das ist nicht überprüft.
+    """
+
+// en fishing: Bowlker's 1854 edition has it at its best in June but useful all season, and says many anglers always have one on as a dropper. Fish it dry in summer, when beetles are blown onto the water on windy days; tied wet with a soft hen hackle it is a good general wet fly. Courtney Williams, as quoted by Dunn: "Wet or dry, and at any time of the season, it is always a good pattern to try on a strange river."
+fishing """
+    Nach Bowlkers Ausgabe von 1854 ist sie im Juni am besten, aber die ganze Saison über brauchbar, und viele Angler haben sie stets als Springer am Vorfach. Fische sie im Sommer trocken, wenn an windigen Tagen Käfer aufs Wasser geweht werden; nass gebunden, mit weicher Hennenhechel, ist sie eine gute Allround-Nassfliege. Courtney Williams, wie Dunn ihn zitiert: „Ob nass oder trocken und zu jeder Zeit der Saison: An einem fremden Fluss ist sie immer einen Versuch wert.“
+    """
+
+labels {
+    // en body: Bronze peacock herl
+    body "Bronzefarbenes Pfauengras"
+    // en hackle: Coch-y-bonddu (or furnace) cock hackle
+    hackle "Coch-y-Bonddu- (oder Furnace-)Hahnenhechel"
+}
+
+notes {
+    // en step 5 (wind tag): Three or four touching turns at the start of the bend.
+    step 5 "Drei oder vier Windungen dicht an dicht am Beginn des Hakenbogens."
+    // en step 8 (tie-in body): Twist the herls into a rope for strength.
+    step 8 "Verdrill die Stränge zu einer Kordel, damit sie haltbarer werden."
+    // en step 10 (wind body): Touching turns, a plump acorn-shaped body.
+    step 10 "Windung an Windung, ein praller, eichelförmiger Körper."
+    // en step 12 (wind rib): Through the herl.
+    step 12 "Durch das Pfauengras."
+}

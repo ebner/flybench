@@ -1,0 +1,31 @@
+id kobberbassen
+status draft
+
+// en description: A short Krystal Flash tail and a shaggy, teased-out copper dubbing body with a copper wire rib, on a short-shank, wide-gape hook.
+description "En kort stjärt av Krystal Flash och en lurvig, uppruggad kropp av kopparfärgad dubbing med ribb av koppartråd, på en krok med kort skaft och brett gap."
+
+// en history: Frank Jensen's fly from 1996. GlobalFlyFisher sees it as two strains run together: Jensen's Kobberbassen and Morten Kristiansen's Kobberlusen, the Copper Louse, which began as a somewhat more complex fly. Both share the copper dubbed body, and the names now cover much the same fly. Tyers add tails, shellbacks, legs and ribs, but in GlobalFlyFisher's words "essentially all you need is copper dubbing of some kind".
+history """
+    Frank Jensens fluga från 1996. GlobalFlyFisher ser den som två linjer som har flutit samman: Jensens Kobberbassen och Morten Kristiansens Kobberlusen, ”kopparlusen”, som började som en något mer komplicerad fluga. Båda har den dubbade kopparkroppen, och i dag står namnen för ungefär samma fluga. Bindare lägger till stjärtar, ryggsköldar, ben och ribbar, men med GlobalFlyFishers ord är ”egentligen allt du behöver någon sorts kopparfärgad dubbing”.
+    """
+
+// en fishing: A sea-trout fly for clear, shallow coastal water where gammarids are about, often fished as a small dropper ahead of a bigger point fly. Retrieve it in short pulls with stops, or with a steady hand-twist, to copy the darting and gliding of the naturals. Tied small it also serves in fresh water as a scud or cress bug.
+fishing """
+    En havsöringsfluga för klart, grunt kustvatten där det finns märlor, ofta fiskad som en liten dropper framför en större spetsfluga. Ta hem den med korta drag och stopp, eller med jämn handtvinning, så att den rycker och glider som de levande djuren. Bunden liten fungerar den också i sötvatten, som gammarus eller vattengråsugga.
+    """
+
+labels {
+    // en body: Copper Lite Brite or Angel Hair
+    body "Lite Brite eller Angel Hair i koppar"
+}
+
+notes {
+    // en step 3 (tie-in tail): A few strands, trimmed short.
+    step 3 "Några strån, kortklippta."
+    // en step 5 (dub body): A loose noodle, fuller in the middle and front like a scud's back.
+    step 5 "Ett löst rep, fylligare på mitten och framtill, som en märlas rygg."
+    // en step 6 (wind rib): Open turns; tease the dubbing out underneath first.
+    step 6 "Glesa varv; rugga först upp dubbingen undertill."
+    // en step 8 (whip-finish): Tease again so the fibres stream back and down.
+    step 8 "Rugga upp igen så att fibrerna strömmar bakåt och nedåt."
+}

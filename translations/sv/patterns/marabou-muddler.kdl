@@ -1,0 +1,35 @@
+id marabou-muddler
+status draft
+
+// en description: A red hackle-fibre tail, a silver tinsel body, a full white marabou wing topped with peacock herl, and a spun deer-hair collar and clipped head.
+description "En röd stjärt av hackelfibrer, en kropp av silvertinsel, en fyllig vinge av vit marabou med påfågelherl överst, och en krage och ett klippt huvud av spunnet hjorthår."
+
+// en history: Dan Bailey, the Livingston fly-shop owner credited with the Muddler's dense clipped head, swapped its turkey wing for marabou to imitate river minnows. Wikipedia's article on Bailey dates it to the 1940s; the other sources give no date. Bailey preferred white; brown, yellow and black are also popular in the West.
+history """
+    Dan Bailey, flugbutiksägaren i Livingston som tillskrivs Muddlerns täta klippta huvud, bytte ut kalkonvingen mot marabou för att efterlikna småfisk i floderna. Wikipedias artikel om Bailey daterar den till 1940-talet; övriga källor anger inget årtal. Bailey föredrog vitt; brunt, gult och svart är också populära i den amerikanska västern.
+    """
+
+// en fishing: Tied light, the deer-hair head keeps it near the top: it suspends, and stripped it wakes on the surface. Weighted and fished on a sinking line, it bobs up and down on the retrieve.
+fishing """
+    Bunden lätt håller hjorthårshuvudet den nära ytan: den svävar i vattnet, och när du drar in den plöjer den en svallvåg i ytan. Förtyngd och fiskad på sjunklina guppar den upp och ner under intagningen.
+    """
+
+labels {
+    // en tail: Red hackle fibres
+    tail "Röda hackelfibrer"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave the front quarter bare for the hair.
+    step 1 "Lämna den främre fjärdedelen bar för håret."
+    // en step 6 (wind body): Touching turns.
+    step 6 "Täta varv."
+    // en step 8 (tie-in wing): Tied full: one or two plumes, stripped from the quill.
+    step 8 "Bunden fyllig: en eller två plymer, avrivna från stammen."
+    // en step 9 (tie-in topping): About six strands over the wing.
+    step 9 "Omkring sex strån över vingen."
+    // en step 10 (spin head): Tips back to about the hook point, then butts-only clumps packed tight.
+    step 10 "Topparna bakåt till ungefär krokspetsen, sedan buntar av bara rotändar, hårt packade."
+    // en step 12 (trim head): A cone, wide at the back; flat underneath to keep the gape clear. Leave the collar.
+    step 12 "En kon, bred baktill; plan undertill så att krokgapet hålls fritt. Lämna kragen."
+}

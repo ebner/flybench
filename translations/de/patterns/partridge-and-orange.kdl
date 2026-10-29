@@ -1,0 +1,35 @@
+id partridge-and-orange
+status draft
+
+// en description: A short, slim body of orange silk, optionally ribbed with gold wire, and one or two turns of mottled brown partridge.
+description "Ein kurzer, schlanker Körper aus orangefarbener Seide, wahlweise mit Golddraht gerippt, und ein bis zwei Windungen gesprenkelter brauner Rebhuhnhechel."
+
+// en history: A North Country spider from the Yorkshire Dales. The earliest dressing found is Pritt's "Orange Partridge" in Yorkshire Trout Flies (1885), a body of orange silk and a well dappled feather from a partridge's back; Pritt fished it from April to September on warm days. Wikipedia says the style was first described by Joseph Wells in 1842, but gives no source. Edmonds and Lee (1916) ask for a mottled, not barred, feather. Sylvester Nemes' The Soft-Hackled Fly (1975) popularised soft-hackled flies like it in America.
+history """
+    Ein North-Country-Spider aus den Yorkshire Dales. Die früheste gefundene Bindeanleitung ist Pritts „Orange Partridge“ in Yorkshire Trout Flies (1885): ein Körper aus orangefarbener Seide und eine gut gesprenkelte Feder vom Rücken eines Rebhuhns; Pritt fischte die Fliege von April bis September an warmen Tagen. Laut Wikipedia hat Joseph Wells den Stil 1842 als Erster beschrieben, eine Quelle nennt Wikipedia dafür aber nicht. Edmonds und Lee (1916) verlangen eine gesprenkelte, keine gebänderte Feder. Sylvester Nemes’ The Soft-Hackled Fly (1975) machte Soft-Hackle-Fliegen wie diese in Amerika populär.
+    """
+
+// en fishing: Fished across and down on a team of two or three spiders, or upstream on a short line, just under the surface: the soft partridge fibres move with the slightest current and suggest a hatching nymph or pupa.
+fishing """
+    Quer und stromab gefischt, im Team mit zwei oder drei Spidern, oder stromauf an kurzer Schnur, knapp unter der Oberfläche: Die weichen Rebhuhnfibern bewegen sich schon in der leisesten Strömung und erinnern an eine schlüpfende Nymphe oder Puppe.
+    """
+
+labels {
+    // en hackle: Brown partridge (back or neck feather)
+    hackle "Braune Rebhuhnfeder (vom Rücken oder Nacken)"
+}
+
+notes {
+    // en step 2 (wrap-thread): Touching turns, to above the hook point.
+    step 2 "Windung an Windung bis über die Hakenspitze."
+    // en step 3 (tie-in rib): Optional; the classic dressing has none.
+    step 3 "Optional; die klassische Bindeweise kommt ohne aus."
+    // en step 4 (wrap-thread): A slim, single-layer silk body; don't build a taper.
+    step 4 "Ein schlanker Seidenkörper in einer einzigen Lage; baue keine Verjüngung auf."
+    // en step 7 (tie-in hackle): By the tip, just behind the eye, fluff stripped and barbs stroked out.
+    step 7 "An der Spitze eingebunden, direkt hinter dem Öhr, der Flaum entfernt und die Fibern gegen den Strich aufgestellt."
+    // en step 9 (wind hackle): One or two turns, stroking the barbs back after each.
+    step 9 "Ein oder zwei Windungen; streiche die Fibern nach jeder Windung nach hinten."
+    // en step 11 (whip-finish): A small orange head.
+    step 11 "Ein kleiner orangefarbener Kopf."
+}

@@ -1,0 +1,37 @@
+id klinkhamer-special
+status draft
+
+// en description: A slim tan abdomen round the curve of the hook, a peacock herl thorax, a white post and a long parachute hackle.
+description "Ein schlankes hellbraunes Abdomen, das um die Biegung des Hakens reicht, ein Thorax aus Pfauengras, ein weißer Post und eine lange Parachute-Hechel."
+
+// en history: Hans van Klinken, a Dutch army instructor, first fished it on 27 June 1984 on the Glomma in Norway. He called it the LT Caddis, one fly of an LT series he developed in Scandinavia; Hans de Groot and Ton Lindhout, his colleagues on a magazine's editorial staff, renamed it the Klinkhåmer Special. It grew from Kenneth Boström's Rackelhanen: van Klinken's copies sometimes landed wing-flat, so he wound a hackle round the wing, as he had seen in a book by Eric Leiser, and a few months later added the herl thorax. He points out that others had the same idea: Tomas Olsen in Sweden a year earlier, Roy Richardson in the United States in 1986, and Mike Monroe, whose Paratilt was published in 1979.
+history """
+    Hans van Klinken, ein niederländischer Ausbilder beim Militär, fischte sie zum ersten Mal am 27. Juni 1984 an der Glomma in Norwegen. Er nannte sie LT Caddis, eine Fliege aus einer LT-Serie, die er in Skandinavien entwickelte; Hans de Groot und Ton Lindhout, seine Kollegen in der Redaktion einer Zeitschrift, tauften sie in Klinkhåmer Special um. Sie ging aus Kenneth Boströms Rackelhanen hervor: Van Klinkens Nachbindungen landeten manchmal flach auf dem Flügel, also wand er eine Hechel um den Flügel, wie er es in einem Buch von Eric Leiser gesehen hatte, und ergänzte ein paar Monate später den Thorax aus Pfauengras. Er weist darauf hin, dass andere dieselbe Idee hatten: Tomas Olsen in Schweden ein Jahr früher, Roy Richardson in den USA 1986 und Mike Monroe, dessen Paratilt 1979 veröffentlicht wurde.
+    """
+
+// en fishing: The abdomen hangs below the surface like a hatching insect while the parachute holds the fly up; van Klinken says it suggests all kinds of emerging mayflies and caddis. He designed it for grayling, which tend to push high-floating flies aside as they take, and finds it hooks them well. It stays upright in riffles and strong currents, and the white post shows the takes of fish that sip it down without a ring. Treat the post and hackle with floatant but not the body, which has to break through the film.
+fishing """
+    Das Abdomen hängt wie ein schlüpfendes Insekt unter der Oberfläche, während die Parachute-Hechel die Fliege oben hält; nach van Klinken deutet sie alle Arten schlüpfender Eintagsfliegen und Köcherfliegen an. Er entwarf sie für Äschen, die hoch schwimmende Fliegen beim Nehmen gern beiseiteschieben, und findet, dass sie bei ihnen gut hakt. In flachen Schnellen und starker Strömung bleibt sie aufrecht, und der weiße Post zeigt die Bisse von Fischen, die sie ohne Ringe einsaugen. Behandle Post und Hechel mit Schwimmmittel, aber nicht den Körper, der durch den Film brechen muss.
+    """
+
+labels {
+    // en abdomen: Light tan poly dubbing
+    abdomen "Hellbeiges Poly-Dubbing"
+}
+
+notes {
+    // en step 1 (attach-thread): Spiral the thread over the whole shank and well round the bend first.
+    step 1 "Führe den Faden zuerst in offenen Windungen über den ganzen Hakenschenkel und weit in den Hakenbogen."
+    // en step 3 (tie-in post): Angle-cut so the underbody stays slim; stand it up with posting turns.
+    step 3 "Schräg angeschnitten, damit der Unterkörper schlank bleibt; mit Windungen um den Ansatz aufrichten."
+    // en step 4 (tie-in hackle): Stem posted up the yarn.
+    step 4 "Den Kiel am Polystrang entlang nach oben festgebunden."
+    // en step 6 (dub abdomen): Slim and tapered, from as far round the bend as possible to the post.
+    step 6 "Schlank und konisch, von so weit hinten im Hakenbogen wie möglich bis zum Post."
+    // en step 7 (tie-in thorax): Three herls by their tips, right behind the post.
+    step 7 "Drei Stränge Pfauengras an ihren Spitzen, direkt hinter dem Post."
+    // en step 9 (wind thorax): A robust thorax, in front of and round the base of the post.
+    step 9 "Ein kräftiger Thorax, vor dem Post und um seinen Ansatz."
+    // en step 11 (wind hackle): From the top of the post downwards; it is hard to over-hackle.
+    step 11 "Von oben am Post nach unten; zu viel Hechel gibt es hier kaum."
+}

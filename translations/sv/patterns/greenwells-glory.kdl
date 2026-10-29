@@ -1,0 +1,37 @@
+id greenwells-glory
+status draft
+
+// en description: A body of waxed yellow silk ribbed with fine gold wire, a coch-y-bonddu hen hackle and a dark blackbird or starling quill wing.
+description "En kropp av vaxat gult silke med ribb av fin guldtråd, ett hönshackel i coch-y-bonddu och en mörk vinge av koltrast- eller starvingpenna."
+
+// en history: In May 1854 Canon William Greenwell of Durham had a blank day on the Tweed while the trout fed on a dun. He took one of the naturals to James Wright, the fly dresser at Sprouston near Kelso, who tied imitations; the Canon did so well with them the next day that the fly was named over a celebration at Wright's. The tellings differ in detail, and the 1854 date rests on later accounts. Late in life the Canon gave R. B. Marston of the Fishing Gazette his own dressing: "the wings, inside of a blackbird wing; body, red and black hackle; tied with yellow silk". Courtney Williams quotes another letter allowing gold thread "if wished", and by 1903 E. M. Tod ribbed the body with fine gold wire.
+history """
+    I maj 1854 fick kaniken William Greenwell från Durham inte en enda fisk i Tweed, trots att öringen åt nykläckta dagsländor (duns). Han tog med sig en av insekterna till James Wright, flugbindaren i Sprouston nära Kelso, som band imitationer; dagen därpå lyckades kaniken så väl med dem att flugan fick sitt namn under ett firande hemma hos Wright. Berättelserna skiljer sig i detaljerna, och årtalet 1854 vilar på senare redogörelser. Sent i livet gav kaniken R. B. Marston på Fishing Gazette sin egen dressing: ”vingarna, insidan av en koltrastvinge; kropp, rött och svart hackel; bunden med gult silke”. Courtney Williams citerar ett annat brev som tillåter guldtråd ”om så önskas”, och 1903 ribbade E. M. Tod kroppen med fin guldtråd.
+    """
+
+// en fishing: A wet fly for the olives. Edmonds and Lee give it March to early May and again September, and keep it going through the summer months between with a lighter wing, body and hackle. On Scottish lochs it is one of the traditional flies for a cast of three or four fished from a drifting boat, and Alastair Gowans lists it among the wet flies for autumn grayling.
+fishing """
+    En våtfluga för de olivfärgade dagsländorna (olives). Edmonds och Lee anger mars till början av maj och sedan september igen, och fiskar den även under sommarmånaderna däremellan med ljusare vinge, kropp och hackel. På de skotska locharna är den en av de traditionella flugorna i ett tackel med tre eller fyra flugor som fiskas från en drivande båt, och Alastair Gowans räknar den till våtflugorna för harr på hösten.
+    """
+
+labels {
+    // en hackle: Coch-y-bonddu or furnace hen hackle
+    hackle "Hönshackel i coch-y-bonddu eller furnace"
+    // en wing: Blackbird or starling quill slips
+    wing "Sektioner av koltrast- eller starvingpenna"
+}
+
+notes {
+    // en step 4 (wrap-thread): Close, even turns of the waxed silk make the body.
+    step 4 "Täta, jämna varv av det vaxade silket blir kroppen."
+    // en step 5 (wind rib): Four open turns (Edmonds & Lee).
+    step 5 "Fyra glesa varv (Edmonds & Lee)."
+    // en step 7 (tie-in hackle): Hen hackle, shiny side forward.
+    step 7 "Hönshackel, blanka sidan framåt."
+    // en step 9 (wind hackle): Sparse; stroke the fibres down and back.
+    step 9 "Glest; stryk fibrerna nedåt och bakåt."
+    // en step 11 (tie-in wing): Matching left and right slips, concave sides together, sloping back over the body.
+    step 11 "En vänster- och en högersektion som matchar varandra, med de konkava sidorna mot varandra, lutande bakåt över kroppen."
+    // en step 12 (whip-finish): A small head of the same silk.
+    step 12 "Ett litet huvud av samma silke."
+}

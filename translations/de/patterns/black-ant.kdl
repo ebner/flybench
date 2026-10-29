@@ -1,0 +1,39 @@
+id black-ant
+status draft
+
+// en description: Two balls of black dubbing, the rear one larger, with a thin waist and a sparse black hackle trimmed top and bottom.
+description "Zwei Kugeln aus schwarzem Dubbing, die hintere größer, dazwischen eine schmale Taille und eine spärliche schwarze Hechel, oben und unten gestutzt."
+
+// en history: A generic pattern with no single inventor. Charles Cotton described an artificial ant in 1676; Michael Theakston gave it the two bulbs and thin waist of the natural in 1853. Early ants were usually winged. Vincent Marinaro, who called the ant his favourite terrestrial, brought ants and other terrestrials into the mainstream in 1950.
+history """
+    Ein allgemeines Muster ohne einen einzelnen Erfinder. Charles Cotton beschrieb 1676 eine künstliche Ameise; Michael Theakston gab ihr 1853 die zwei Verdickungen und die schmale Taille des natürlichen Vorbilds. Frühe Ameisen waren meist geflügelt. Vincent Marinaro, der die Ameise sein liebstes Landinsekt nannte, machte Ameisen und andere Landinsekten 1950 allgemein gebräuchlich.
+    """
+
+// en fishing: Real ants float half sunk in the surface film, so dead-drift it in the film near grassy banks, bushes and trees, especially on warm, windy days that blow ants onto the water. Flying-ant swarms in mid to late summer are rare but can bring excellent dry-fly fishing. If fish refuse it, cut away the hackle underneath so it sits lower, then try a size smaller.
+fishing """
+    Echte Ameisen treiben halb eingesunken im Oberflächenfilm. Lass sie deshalb dragfrei im Film treiben, nahe an grasigen Ufern, Büschen und Bäumen, besonders an warmen, windigen Tagen, an denen Ameisen aufs Wasser geweht werden. Schwärme von Flugameisen im Hoch- bis Spätsommer sind selten, können aber hervorragendes Trockenfliegenfischen bringen. Verweigern die Fische sie, schneide die Hechel unten weg, damit sie tiefer liegt, und versuch es dann eine Nummer kleiner.
+    """
+
+labels {
+    // en head: Black dry fly dubbing (head)
+    head "Schwarzes Trockenfliegendubbing (Kopf)"
+}
+
+notes {
+    // en step 3 (dub abdomen): A thin noodle.
+    step 3 "Eine dünne Dubbingrolle."
+    // en step 5 (dub abdomen): Back and forward again, each pass shorter: a round ball, fattest in the middle.
+    step 5 "Zurück und wieder nach vorn, jeder Durchgang etwas kürzer: eine runde Kugel, in der Mitte am dicksten."
+    // en step 8 (wrap-thread): Over bare shank: a thin waist.
+    step 8 "Über den blanken Hakenschenkel: eine schmale Taille."
+    // en step 9 (tie-in hackle): Stripped stem, shiny side forward.
+    step 9 "Den Kiel unten von Fibern befreit, die glänzende Seite nach vorn."
+    // en step 11 (wind hackle): Short and sparse.
+    step 11 "Kurz und spärlich."
+    // en step 13 (dub head): A slightly smaller ball.
+    step 13 "Eine etwas kleinere Kugel."
+    // en step 18 (whip-finish): Behind the eye.
+    step 18 "Hinter dem Öhr."
+    // en step 19 (trim hackle): Optional: cut the fibres top and bottom so it sits low in the film.
+    step 19 "Nach Belieben: Schneide die Fibern oben und unten weg, damit sie tief im Film sitzt."
+}

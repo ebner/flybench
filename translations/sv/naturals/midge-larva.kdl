@@ -1,0 +1,25 @@
+id midge-larva
+status draft
+
+// en name: Midge larva
+name "Fjädermygglarv"
+
+// en description: A slender, segmented worm living in tubes in the mud of lakes and slow rivers; bloodworms are bright red with haemoglobin. It swims, when it must, by lashing from side to side.
+description "En smal, segmenterad mask som lever i rör i bottenslammet i sjöar och lugna vattendrag; blodmaskarna är klarröda av hemoglobin. När den måste simma gör den det genom att slå med kroppen från sida till sida."
+
+// en examples: bloodworms (Chironomus)
+examples "blodmaskar (Chironomus)"
+
+hatches {
+    // en southern-sweden note: Estimate: peak May–June.
+    southern-sweden note="Uppskattning: flest i maj–juni."
+    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
+    northern-scandinavia note="Mörka fjädermyggor svärmar varma junidagar (Visit Dalarna); annars en uppskattning."
+    // en british-isles time: morning, evening
+    // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
+    british-isles time="morgon och kväll" note="I stillastående vatten hela året, fåtaliga i november–december; stora buzzers i mars–april, flest i maj–juni och igen i september–oktober (The Essential Fly)."
+    // en central-europe note: Estimate, as in Britain.
+    central-europe note="Uppskattning, som i Storbritannien."
+    // en northern-usa note: Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure).
+    northern-usa note="Så länge vattnet är isfritt; i sjöarna flest från slutet av maj till mitten av juni (BC Adventure)."
+}

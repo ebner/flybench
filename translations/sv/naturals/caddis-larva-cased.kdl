@@ -1,0 +1,24 @@
+id caddis-larva-cased
+status draft
+
+// en name: Caddis larva, cased
+name "Husmask"
+
+// en description: A soft, pale larva living in a portable case of sand grains, stones or plant pieces, crawling over the bottom with its dark head and legs out of the front. Trout eat them case and all.
+description "En mjuk, blek larv som bor i ett hus den bär med sig, byggt av sandkorn, småsten eller växtdelar, och kryper över botten med det mörka huvudet och benen ute ur husets främre öppning. Öringen äter dem med hus och allt."
+
+// en examples: Sericostoma, Lepidostoma, grannom (Brachycentrus), limnephilids
+examples "Sericostoma, Lepidostoma, grannom (Brachycentrus), husmasknattsländor"
+
+hatches {
+    // en southern-sweden note: In the water all year; drifting larvae are taken spring to autumn.
+    southern-sweden note="I vattnet hela året; drivande larver tas från vår till höst."
+    // en northern-scandinavia note: In the water all year; drifting larvae are taken spring to autumn.
+    northern-scandinavia note="I vattnet hela året; drivande larver tas från vår till höst."
+    // en british-isles note: In the water all year; drifting larvae are taken spring to autumn.
+    british-isles note="I vattnet hela året; drivande larver tas från vår till höst."
+    // en central-europe note: In the water all year; drifting larvae are taken spring to autumn.
+    central-europe note="I vattnet hela året; drivande larver tas från vår till höst."
+    // en northern-usa note: In the water all year; drifting larvae are taken spring to autumn.
+    northern-usa note="I vattnet hela året; drivande larver tas från vår till höst."
+}

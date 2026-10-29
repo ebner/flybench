@@ -1,0 +1,31 @@
+id griffiths-gnat
+status draft
+
+// en description: A peacock herl body with an undersized grizzly hackle palmered over it; no tail, no wing.
+description "En kropp av påfågelherl med ett kortfibrigt grizzlyhackel lindat över som kroppshackel; ingen stjärt, ingen vinge."
+
+// en history: Usually credited to George Griffith (1901–1998) of the Au Sable River in Michigan, at whose home Trout Unlimited was founded in 1959. Its origin is not well documented: Sexyloops reports that some credit a Walt Shaw with the fly and Griffith with making it known, and that it seems to go back at least to the 1930s.
+history """
+    Tillskrivs oftast George Griffith (1901–1998) vid Au Sable River i Michigan, i vars hem Trout Unlimited grundades 1959. Ursprunget är dåligt dokumenterat: Sexyloops uppger att en del tillskriver en viss Walt Shaw flugan och Griffith äran av att ha gjort den känd, och att den verkar gå tillbaka åtminstone till 1930-talet.
+    """
+
+// en fishing: Imitates a cluster of mating midges, or a single adult in the smallest sizes. A fly for gentle, sipping rises on smooth water. Rusty Dunn suggests clipping the hackle off underneath so it rides lower, like a stillborn or crippled midge, or hanging a small pupa just under the surface behind it. It is also fished behind a larger, more visible dry.
+fishing """
+    Imiterar en klump parande fjädermyggor, eller i de minsta storlekarna en enskild fullbildad mygga. En fluga för försiktiga, sörplande vak i lugnt vatten. Rusty Dunn föreslår att du klipper bort hacklet undertill så att den ligger lägre, som en mygga som fastnat i kläckningen eller skadats, eller att du hänger en liten puppa strax under ytan bakom den. Den fiskas också bakom en större torrfluga som syns bättre.
+    """
+
+labels {
+    // en hackle: Grizzly cock (saddle) hackle
+    hackle "Grizzly tupphackel (sadelhackel)"
+}
+
+notes {
+    // en step 3 (tie-in hackle): By the butt, at the bend; deliberately undersized.
+    step 3 "I rotänden, vid krokböjen; medvetet kortfibrigt."
+    // en step 4 (tie-in body): Fine herls from near the eye of the quill.
+    step 4 "Fina herl från strax under påfågelfjäderns öga."
+    // en step 6 (wind body): Touching turns; twisting the herl round the thread makes it tougher.
+    step 6 "Täta varv; tvinna herlet runt tråden så blir det tåligare."
+    // en step 8 (wind hackle): Five evenly spaced turns.
+    step 8 "Fem jämnt fördelade varv."
+}

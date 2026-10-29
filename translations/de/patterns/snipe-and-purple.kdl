@@ -1,0 +1,33 @@
+id snipe-and-purple
+status draft
+
+// en description: A short body of purple silk and one or two turns of a dark grey snipe covert feather.
+description "Ein kurzer Körper aus violetter Seide und ein oder zwei Windungen einer dunkelgrauen Deckfeder der Schnepfe."
+
+// en history: A Yorkshire and Lancashire Dales spider. Pritt gave it as the "Dark Snipe" in Yorkshire Trout Flies (1885), a killer "on very cold days in the early part of the season, and a favourite on the Ribble". The earliest source found that calls it Snipe and Purple is Edmonds and Lee's Brook and River Trouting (1916), as "Dark Snipe or Snipe and Purple", hackled with a dark marginal covert from a snipe's wing.
+history """
+    Ein Spider aus den Dales von Yorkshire und Lancashire. Pritt führte ihn in Yorkshire Trout Flies (1885) als „Dark Snipe“, eine fängige Fliege „on very cold days in the early part of the season, and a favourite on the Ribble“. Die früheste gefundene Quelle, die ihn Snipe and Purple nennt, ist Edmonds und Lees Brook and River Trouting (1916), als „Dark Snipe or Snipe and Purple“, gehechelt mit einer dunklen Randdeckfeder vom Flügel einer Schnepfe.
+    """
+
+// en fishing: An early and late season spider for cold days, usually taken for the iron blue; in smaller sizes it also passes for midges and other small dark flies. Fish it just under the surface, across and down or upstream, often on a team with the Partridge & Orange and Waterhen Bloa.
+fishing """
+    Ein Spider für kalte Tage früh und spät in der Saison, meist für eine Iron Blue gehalten; in kleineren Größen geht er auch als Zuckmücke oder andere kleine dunkle Fliege durch. Fische ihn knapp unter der Oberfläche, quer und stromab oder stromauf, oft im Team mit Partridge & Orange und Waterhen Bloa.
+    """
+
+labels {
+    // en hackle: Dark snipe covert (marginal covert of the wing)
+    hackle "Dunkle Schnepfen-Deckfeder (Randdeckfeder des Flügels)"
+}
+
+notes {
+    // en step 2 (wrap-thread): To roughly above the hook point: spiders have short bodies.
+    step 2 "Bis etwa über die Hakenspitze: Spider haben kurze Körper."
+    // en step 3 (wrap-thread): A thin, even, single layer of silk.
+    step 3 "Eine einzige dünne, gleichmäßige Lage Seide."
+    // en step 4 (tie-in hackle): By the tip, paler side up, barbs reaching just past the bend.
+    step 4 "An der Spitze, die hellere Seite nach oben; die Fibern reichen knapp über den Hakenbogen."
+    // en step 6 (wind hackle): Barbs flared evenly all round, so they catch the current.
+    step 6 "Die Fibern stehen gleichmäßig rundum ab, damit sie die Strömung fangen."
+    // en step 8 (whip-finish): A small purple head.
+    step 8 "Ein kleiner violetter Kopf."
+}

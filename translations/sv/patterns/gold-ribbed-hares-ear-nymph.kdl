@@ -1,0 +1,43 @@
+id gold-ribbed-hares-ear-nymph
+status draft
+
+// en description: A hare's mask guard-hair tail, a tapered hare's ear abdomen ribbed with gold wire, a mottled turkey wing case and a rough, picked-out thorax.
+description "Stjärt av täckhår från harmask, en avsmalnande bakkropp av haröra med ribb av guldtråd, en vingsäck av spräcklig kalkon och en grov, uppruggad thorax."
+
+// en history: Hare's ear fur was in flies by Cotton's time, and Samuel Taylor gave a fly called the Hare's Ear in 1800; Halford listed a dry Gold-Ribbed Hare's Ear in 1886, and Skues fished the wet one as a nymph. As late as 1935 Preston Jennings was using a trimmed wet fly as a nymph; Jim Quick, in 1957, is the first author Tom Travis found listing the Hare's Ear as a nymph pattern. Nobody is recorded as the inventor of the nymph as tied today, with a tail, a wing case and a picked-out thorax. By 1986 Randall Kaufmann called it the most popular nymph in the world.
+history """
+    Hår från harens öron användes i flugor redan på Cottons tid, och Samuel Taylor beskrev en fluga kallad Hare's Ear 1800; Halford tog upp en torr Gold-Ribbed Hare's Ear 1886, och Skues fiskade den våta som nymf. Så sent som 1935 använde Preston Jennings en tillklippt våtfluga som nymf; Jim Quick, 1957, är den förste författare Tom Travis har hittat som tar upp Hare's Ear som nymfmönster. Ingen finns omnämnd som upphovsman till nymfen som den binds i dag, med stjärt, vingsäck och uppruggad thorax. Redan 1986 kallade Randall Kaufmann den världens populäraste nymf.
+    """
+
+// en fishing: A searching nymph that suggests many things and copies none. In streams, get it down near the bottom, adding shot and an indicator when the water calls for it; on stillwater, bring it back slowly. Once wet, the rough fur looks like kicking legs, and it passes for mayfly nymphs, caddis larvae and scuds and, tied big, for stoneflies.
+fishing """
+    En nymf att leta fisk med, som påminner om mycket men efterliknar inget. I strömmande vatten ska den ner nära botten, med hagel och indikator när vattnet kräver det; i sjöar tar du hem den långsamt. När den väl är blöt ser den grova pälsen ut som sprattlande ben, och den går för dagsländenymfer, nattsländelarver och märlor och, bunden stor, för bäcksländor.
+    """
+
+labels {
+    // en case: Mottled turkey tail slip
+    case "Sektion av spräcklig kalkonstjärtpenna"
+    // en thorax: Hare's mask dubbing with plenty of guard hair
+    thorax "Harmaskdubbing med mycket täckhår"
+}
+
+notes {
+    // en step 1 (weight weight): Optional: a few turns under the thorax.
+    step 1 "Valfritt: några varv under thoraxen."
+    // en step 4 (tie-in tail): A small bunch on top; bind the butts along the shank.
+    step 4 "En liten bunt ovanpå; bind ner rotändarna längs krokskaftet."
+    // en step 6 (dub abdomen): A thin noodle, tapering thicker toward the front, over the rear two thirds.
+    step 6 "Ett tunt rep som blir tjockare framåt, över de bakre två tredjedelarna."
+    // en step 7 (wind rib): Open turns.
+    step 7 "Glesa varv."
+    // en step 9 (tie-in case): A slip about as wide as the gape, shiny side up, tip back over the abdomen.
+    step 9 "En sektion ungefär lika bred som krokgapet, blanka sidan uppåt, med spetsen bakåt över bakkroppen."
+    // en step 10 (dub thorax): Rougher fur, with more guard hair; leave an eye length for the head.
+    step 10 "Grövre päls, med mer täckhår; lämna plats för huvudet, ungefär lika långt som krokögat."
+    // en step 12 (dub thorax): A second layer makes the thorax clearly fatter than the abdomen.
+    step 12 "Ett andra lager gör thoraxen tydligt tjockare än bakkroppen."
+    // en step 13 (pull-over case): Four or five firm turns behind the eye.
+    step 13 "Fyra eller fem hårda varv bakom krokögat."
+    // en step 14 (whip-finish): Pick out the thorax fur at the sides and underneath for legs.
+    step 14 "Rugga upp pälsen i thoraxen på sidorna och undertill till ben."
+}

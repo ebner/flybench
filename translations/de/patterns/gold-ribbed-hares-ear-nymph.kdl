@@ -1,0 +1,43 @@
+id gold-ribbed-hares-ear-nymph
+status draft
+
+// en description: A hare's mask guard-hair tail, a tapered hare's ear abdomen ribbed with gold wire, a mottled turkey wing case and a rough, picked-out thorax.
+description "Ein Schwanz aus Hasengrannen, ein konisches Abdomen aus Hasenohr mit Golddrahtrippung, eine gesprenkelte Flügelscheide aus Truthahn und ein struppiger, aufgezupfter Thorax."
+
+// en history: Hare's ear fur was in flies by Cotton's time, and Samuel Taylor gave a fly called the Hare's Ear in 1800; Halford listed a dry Gold-Ribbed Hare's Ear in 1886, and Skues fished the wet one as a nymph. As late as 1935 Preston Jennings was using a trimmed wet fly as a nymph; Jim Quick, in 1957, is the first author Tom Travis found listing the Hare's Ear as a nymph pattern. Nobody is recorded as the inventor of the nymph as tied today, with a tail, a wing case and a picked-out thorax. By 1986 Randall Kaufmann called it the most popular nymph in the world.
+history """
+    Hasenohrfell steckte schon zu Cottons Zeit in Fliegen, und Samuel Taylor nannte 1800 eine Fliege namens Hare's Ear; Halford führte 1886 eine trockene Gold-Ribbed Hare's Ear auf, und Skues fischte die nasse als Nymphe. Noch 1935 benutzte Preston Jennings eine gestutzte Nassfliege als Nymphe; Jim Quick ist 1957 der erste Autor, bei dem Tom Travis die Hare's Ear als Nymphenmuster aufgeführt fand. Wer die Nymphe in ihrer heutigen Form mit Schwanz, Flügelscheide und aufgezupftem Thorax erfunden hat, ist nicht überliefert. Schon 1986 nannte Randall Kaufmann sie die beliebteste Nymphe der Welt.
+    """
+
+// en fishing: A searching nymph that suggests many things and copies none. In streams, get it down near the bottom, adding shot and an indicator when the water calls for it; on stillwater, bring it back slowly. Once wet, the rough fur looks like kicking legs, and it passes for mayfly nymphs, caddis larvae and scuds and, tied big, for stoneflies.
+fishing """
+    Eine Suchnymphe, die an vieles erinnert und nichts kopiert. Im Fließwasser bring sie in Grundnähe, mit Schrot und Bissanzeiger, wenn das Wasser es verlangt; im Stillwasser hol sie langsam ein. Nass sieht das struppige Fell wie strampelnde Beine aus, und sie geht für Eintagsfliegennymphen, Köcherfliegenlarven und Flohkrebse durch und, groß gebunden, für Steinfliegen.
+    """
+
+labels {
+    // en case: Mottled turkey tail slip
+    case "Gesprenkeltes Segment einer Truthahn-Schwanzfeder"
+    // en thorax: Hare's mask dubbing with plenty of guard hair
+    thorax "Hasenmaskendubbing mit reichlich Grannen"
+}
+
+notes {
+    // en step 1 (weight weight): Optional: a few turns under the thorax.
+    step 1 "Nach Belieben: ein paar Windungen unter dem Thorax."
+    // en step 4 (tie-in tail): A small bunch on top; bind the butts along the shank.
+    step 4 "Ein kleines Büschel oben; binde die Enden am Hakenschenkel entlang fest."
+    // en step 6 (dub abdomen): A thin noodle, tapering thicker toward the front, over the rear two thirds.
+    step 6 "Eine dünne Dubbingrolle, nach vorn dicker werdend, über die hinteren zwei Drittel."
+    // en step 7 (wind rib): Open turns.
+    step 7 "Offene Windungen."
+    // en step 9 (tie-in case): A slip about as wide as the gape, shiny side up, tip back over the abdomen.
+    step 9 "Ein Segment etwa so breit wie die Bogenweite, glänzende Seite nach oben, die Spitze nach hinten über das Abdomen."
+    // en step 10 (dub thorax): Rougher fur, with more guard hair; leave an eye length for the head.
+    step 10 "Gröberes Fell mit mehr Grannen; lass eine Öhrlänge für den Kopf frei."
+    // en step 12 (dub thorax): A second layer makes the thorax clearly fatter than the abdomen.
+    step 12 "Eine zweite Lage macht den Thorax deutlich dicker als das Abdomen."
+    // en step 13 (pull-over case): Four or five firm turns behind the eye.
+    step 13 "Vier oder fünf feste Windungen hinter dem Öhr."
+    // en step 14 (whip-finish): Pick out the thorax fur at the sides and underneath for legs.
+    step 14 "Zupf das Thoraxfell an den Seiten und unten als Beine heraus."
+}

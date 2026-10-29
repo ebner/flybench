@@ -1,0 +1,39 @@
+id crazy-charlie
+status draft
+
+// en description: Bead-chain eyes near the eye, a pearl body under clear ribbing, and a white calf tail wing with a little pearl flash on the hook-point side.
+description "Kettenaugen nahe am Öhr, ein perlmuttfarbener Körper unter transparenter Rippung und ein Flügel aus weißem Kalbsschwanz mit etwas perlmuttfarbenem Flash auf der Seite der Hakenspitze."
+
+// en history: Usually credited to Bob Nauheim, who tied the first ones in 1977 on a trip with the Andros guide Charlie Smith and gave them bead-chain eyes to suggest glass minnows. Smith is said to have called it "nasty", so they were first Nasty Charlies; when Leigh Perkins of Orvis put it in the Orvis catalogue he disliked the name, and it was changed with Smith's permission. Other accounts, among them that of Smith's son Prescott, say Charlie Smith made the first ones himself, with beads from military tags and a chicken-feather body. It was the first bonefish fly with bead-chain eyes, whose weight turns it point up.
+history """
+    Meist wird sie Bob Nauheim zugeschrieben, der die ersten 1977 auf einer Reise mit dem Guide Charlie Smith auf Andros band und ihnen Kettenaugen gab, um Glass Minnows anzudeuten. Smith soll sie „nasty“ (fies) genannt haben, also hießen sie zuerst Nasty Charlies; als Leigh Perkins von Orvis die Fliege in den Orvis-Katalog aufnahm, gefiel ihm der Name nicht, und mit Smiths Erlaubnis wurde er geändert. Andere Darstellungen, darunter die von Smiths Sohn Prescott, besagen, Charlie Smith habe die ersten selbst gebunden, mit Perlen von militärischen Erkennungsmarken und einem Körper aus Hühnerfeder. Sie war die erste Bonefish-Fliege mit Kettenaugen, deren Gewicht sie mit der Hakenspitze nach oben dreht.
+    """
+
+// en fishing: Cast a rod length or two ahead of a bonefish and let the fly sink to the bottom. When the fish comes close, give it one or two short strips, so it moves away like a small fish or a shrimp escaping. Riding point up, it seldom catches the bottom. Choose bead chain, or heavier dumbbell eyes, for the depth.
+fishing """
+    Wirf ein oder zwei Rutenlängen vor einen Bonefish und lass die Fliege bis zum Grund sinken. Kommt der Fisch nahe heran, gib ihr ein oder zwei kurze Züge, damit sie davonhuscht wie ein flüchtender kleiner Fisch oder eine Garnele. Da sie mit der Spitze nach oben läuft, bleibt sie selten am Grund hängen. Wähle je nach Tiefe Kettenaugen oder schwerere Bleiaugen.
+    """
+
+labels {
+    // en rib: Clear V-Rib or D-Rib
+    rib "Transparentes V-Rib oder D-Rib"
+    // en body: Pearl Krystal Flash or flat pearl tinsel
+    body "Perlmuttfarbenes Krystal Flash oder perlmuttfarbenes Flachtinsel"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, with figure-of-eight turns.
+    step 2 "Oben, mit Achterwicklungen."
+    // en step 7 (wind body): A slight taper; figure-of-eight it round the eyes.
+    step 7 "Leicht konisch; führ es in Achterwicklungen um die Augen."
+    // en step 9 (wind rib): Touching turns over the flash, for a segmented, translucent body.
+    step 9 "Windung an Windung über das Flash, für einen segmentierten, durchscheinenden Körper."
+    // en step 11 (wrap-thread): In front of the eyes; turn the hook over.
+    step 11 "Vor die Augen; dreh den Haken um."
+    // en step 12 (tie-in flash): Two strands folded over: four ends.
+    step 12 "Zwei umgefaltete Stränge: vier Enden."
+    // en step 13 (tie-in wing): An unstacked clump of calf tail.
+    step 13 "Ein Büschel Kalbsschwanz, nicht im Stacker ausgerichtet."
+    // en step 15 (whip-finish): A small head between the wing and the eye, coated.
+    step 15 "Ein kleiner Kopf zwischen Flügel und Öhr, lackiert."
+}

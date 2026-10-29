@@ -1,0 +1,52 @@
+id muddler-minnow
+status draft
+
+// en description: Turkey quill tail, a flat gold tinsel body, a squirrel tail underwing under matched turkey slips, and a spun deer-hair collar and clipped head.
+description "Stjärt av kalkonvingpenna, kropp av platt guldtinsel, undervinge av ekorrsvans under matchade sektioner av kalkon, och en krage och ett klippt huvud av spunnet hjorthår."
+
+// en history: Don Gapen of Anoka, Minnesota, made it on the Nipigon River in Ontario in 1936 or 1937 to imitate the sculpins the big brook trout fed on, after watching First Nations guides catch them. His head and collar were one sparse, ragged clump of deer hair. The dense, neatly clipped head most tyers make today was Dan Bailey's, of Livingston, Montana, around 1950, and Joe Brooks made the fly famous in Field & Stream.
+history """
+    Don Gapen från Anoka i Minnesota skapade den vid Nipigon River i Ontario 1936 eller
+    1937, för att imitera simporna som de stora bäckrödingarna åt, sedan han sett guider ur
+    ursprungsbefolkningen fånga dem. Hans huvud och krage var en enda gles och rufsig bunt
+    hjorthår. Det täta, prydligt klippta huvud som de flesta binder i dag kom från Dan
+    Bailey i Livingston, Montana, omkring 1950, och Joe Brooks gjorde flugan berömd i Field
+    & Stream.
+    """
+
+// en fishing: As a sculpin it is fished slowly along the bottom, with an occasional fast strip. Unweighted, the deer-hair head floats it: stripped, it wakes on the surface, or it drifts like a hopper. For salmon it is swung like a wet fly or waked in the film; for sea trout at night it is fished in the surface, where it makes a commotion. Before recasting, let it hang and wobble in the current for a moment.
+fishing """
+    Som simpa fiskas den långsamt längs botten, med en och annan snabb indragning. Oförtyngd
+    håller hjorthårshuvudet den flytande: drar du in den plöjer den i ytan, annars driver
+    den som en gräshoppa. Efter lax fiskas den tvärs nedströms som en våtfluga eller
+    plöjande i ytfilmen; efter havsöring på natten fiskas den i ytan, där den rör upp
+    vattnet ordentligt. Låt den hänga och vicka i strömmen en stund innan du kastar om.
+    """
+
+labels {
+    // en tail: Mottled turkey quill slips
+    tail "Sektioner av spräcklig kalkonvingpenna"
+    // en underwing: Grey squirrel tail
+    underwing "Grå ekorrsvans"
+    // en wing: Mottled turkey quill slips
+    wing "Sektioner av spräcklig kalkonvingpenna"
+}
+
+notes {
+    // en step 1 (attach-thread): A quarter of the shank behind the eye: the front is kept bare for the hair.
+    step 1 "En fjärdedel av krokskaftet bakom krokögat: den främre delen lämnas bar för håret."
+    // en step 3 (tie-in tail): Matched slips, concave sides together, on top with a pinch wrap.
+    step 3 "Matchade sektioner med de konkava sidorna mot varandra, ovanpå, fästa med nypgrepp."
+    // en step 6 (wind body): Touching turns.
+    step 6 "Täta varv."
+    // en step 8 (tie-in underwing): A sparse, cleaned bunch, about a shank long.
+    step 8 "En gles, rensad bunt, ungefär ett krokskaft lång."
+    // en step 9 (trim underwing): Trim the butts short, so the deer hair can be spun over them.
+    step 9 "Klipp rotändarna korta, så att hjorthåret kan spinnas över dem."
+    // en step 10 (tie-in wing): One slip each side, concave in, the tips reaching the end of the tail.
+    step 10 "En sektion på var sida, konkava sidan inåt, med spetsarna ut till stjärtens ände."
+    // en step 11 (spin head): A large stacked clump, tips back, then butts-only clumps packed hard in front.
+    step 11 "En stor, jämnad bunt med spetsarna bakåt, sedan buntar med bara rotändar, hårt packade framför."
+    // en step 13 (trim head): Clip the butts to a cone tapering to the eye; leave the tips as a collar.
+    step 13 "Klipp rotändarna till en kon som smalnar av mot krokögat; lämna spetsarna som en krage."
+}

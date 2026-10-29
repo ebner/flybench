@@ -1,0 +1,24 @@
+id caddis-larva-cased
+status draft
+
+// en name: Caddis larva, cased
+name "Köcherfliege, Larve mit Köcher"
+
+// en description: A soft, pale larva living in a portable case of sand grains, stones or plant pieces, crawling over the bottom with its dark head and legs out of the front. Trout eat them case and all.
+description "Eine weiche, blasse Larve, die in einem tragbaren Köcher aus Sandkörnern, Steinchen oder Pflanzenteilen lebt und über den Grund kriecht, den dunklen Kopf und die Beine vorn herausgestreckt. Forellen fressen sie mitsamt dem Köcher."
+
+// en examples: Sericostoma, Lepidostoma, grannom (Brachycentrus), limnephilids
+examples "Sericostoma, Lepidostoma, Grannom (Brachycentrus), Limnephiliden"
+
+hatches {
+    // en southern-sweden note: In the water all year; drifting larvae are taken spring to autumn.
+    southern-sweden note="Das ganze Jahr im Wasser; driftende Larven werden vom Frühjahr bis in den Herbst gefressen."
+    // en northern-scandinavia note: In the water all year; drifting larvae are taken spring to autumn.
+    northern-scandinavia note="Das ganze Jahr im Wasser; driftende Larven werden vom Frühjahr bis in den Herbst gefressen."
+    // en british-isles note: In the water all year; drifting larvae are taken spring to autumn.
+    british-isles note="Das ganze Jahr im Wasser; driftende Larven werden vom Frühjahr bis in den Herbst gefressen."
+    // en central-europe note: In the water all year; drifting larvae are taken spring to autumn.
+    central-europe note="Das ganze Jahr im Wasser; driftende Larven werden vom Frühjahr bis in den Herbst gefressen."
+    // en northern-usa note: In the water all year; drifting larvae are taken spring to autumn.
+    northern-usa note="Das ganze Jahr im Wasser; driftende Larven werden vom Frühjahr bis in den Herbst gefressen."
+}
