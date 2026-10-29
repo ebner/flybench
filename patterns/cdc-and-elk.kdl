@@ -42,8 +42,10 @@ hook dry-standard size=14
 thread brown size="8/0"
 
 materials {
-    // Assumption: the longest barbs drawn at 0.6 gape; Weilenmann picks a feather with barbs up to 2× the shank.
-    body cdc label="Natural dun CDC feather (one, wound)"
+    // Weilenmann picks a feather whose longest barbs are about twice the shank (GFF; Rogue).
+    // In the reference photos the front barbs trail back along and under the body to about a
+    // gape past the bend, sparse and wispy: about 2.5 gapes long, leaning well back.
+    body cdc label="Natural dun CDC feather (one, wound)" fibre=2.5 sweep=70
     wing deer-hair label="Fine-tipped deer hair"
 }
 
@@ -54,8 +56,9 @@ steps {
     wrap-thread to=0.78 note="Then one turn back."
     wind body to=0.78 turns=7 note="Touching turns, stroking the barbs back after each; the rear turns make the body, the front ones a soft collar."
     tie-off body
-    // Sources: wing tips to the outside of the bend.
-    tie-in wing length=2.15 angle=12 spread=70 note="Stacked; butts trimmed square first so they end just behind the eye."
+    // Sources: wing tips to the outside of the bend. The reference photos show it rising
+    // steeply, about 30° (the reviewer's choice, 2026-10-29).
+    tie-in wing length=2.15 angle=30 spread=70 note="Stacked; butts trimmed square first so they end just behind the eye."
     trim wing leave=0.15 note="Short flared stubs make the head."
     whip-finish note="In front of the butts, under the stubs."
 }

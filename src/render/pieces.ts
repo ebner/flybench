@@ -191,7 +191,8 @@ const WOUND_FIBRES = {
   herl: { perTurn: 320, radius: 0.006, tip: 0.25, wave: 0.15 },
   dubbing: { perTurn: 260, radius: 0.005, tip: 0.3, wave: 0.35 },
   chenille: { perTurn: 240, radius: 0.006, tip: 0.6, wave: 0 },
-  cdc: { perTurn: 160, radius: 0.003, tip: 0.3, wave: 0.2 },
+  // Assumption: a CDC feather has few, wispy barbs: about 45 to a turn (photos of the CDC & Elk).
+  cdc: { perTurn: 45, radius: 0.003, tip: 0.3, wave: 0.2 },
   fibres: { perTurn: 90, radius: 0.003, tip: 0.4, wave: 0 },
 } as const;
 

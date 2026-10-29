@@ -30,6 +30,7 @@ sources {
     "GlobalFlyFisher: The Pink Pig, Pattegrisen (Kasper Mühlbach)" url="https://globalflyfisher.com/patterns/pink-pig-pattegrisen"
     "Ahrex: Pattegrisen, a fairytale and a birthday (Michael Jensen)" url="https://ahrexhooks.com/2016/11/11/pattegrisen-a-fairytale-and-a-birthday/"
     "GlobalFlyFisher: Pattegrisen (Ahrex video, Jesper Lindquist Andersen)" url="https://globalflyfisher.com/video/pattegrisen"
+    "ADH Fishing: Partridge CS54S Sea Shrimp" url="https://www.adh-fishing.com/partridge-cs54s-sea-shrimp-limited-red"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
@@ -37,9 +38,11 @@ references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/dsc_7116.jpg" page="https://globalflyfisher.com/patterns/pink-pig-pattegrisen" author="Kasper Mühlbach" license="All rights reserved; reference only" note="Side view in the vise"
 }
 
-// Assumption: a straight saltwater hook, like the Ahrex NS122 stinger in the Ahrex video;
-// the GFF recipe's Partridge CS54 is a curved shrimp hook.
-// Assumption: colours read from the GFF photos: a coral body and back, pale pink Spey hackles.
+// A straight hook, as most dressings have it: the GFF recipe's Partridge CS54 "Sea Shrimp",
+// a straight-eyed streamer hook sold for this fly (ADH), or the Ahrex NS122 stinger in the
+// Ahrex video; Michael Jensen's 2016 version alone is on the curved NS150. Accepted by the
+// reviewer (2026-10-29), as are the colours, read from the GFF photos within the dressing's
+// shrimp/shell pink: a coral body and back, pale pink Spey hackles.
 hook saltwater-straight size=6
 thread pink size="8/0"
 
@@ -68,13 +71,14 @@ steps {
     tie-in antennae length=2.8 angle=5 spread=15
     tie-in eyes note="Angled slightly outwards."
     tie-in rib
-    // Assumption: the shellback is tied in here and pulled forward; the GFF steps tie it in at the eye and take it back to the bend.
-    tie-in back
     tie-in legs
     dub body to=0.86 note="Tapered: thickest at the bend, slimmer toward the eye."
     wind legs to=0.86 turns=6 note="Fibres down and back."
     tie-off legs
-    pull-over back to=0.86 note="Over the top, stretched."
+    // As in the GFF steps: tied in at the eye, taken back over the top to the bend and held
+    // there by the rib.
+    tie-in back note="One or two strands, at the eye."
+    pull-over back to=0.05 note="Back over the top to the bend, stretched; the rib's first turn holds it just behind the eyes."
     wind rib to=0.86 turns=8 note="Over the shellback, the turns closer together toward the eye."
     tie-off rib
     whip-finish note="Brush out the underside, trim, and varnish the head and a little of the back."

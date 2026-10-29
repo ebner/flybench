@@ -36,8 +36,9 @@ thread tan size="8/0"
 materials {
     rib    gold-wire
     body   dry-fly-dubbing color=tan
-    // Assumption: fibres as in the parent pattern; the FFI says Troth liked them 1½ × the gape.
-    hackle cock-hackle color=brown fibre=0.8
+    // The FFI says Troth liked the fibres 1½ × the gape, longer than modern dressings' (the
+    // standard pattern's 0.8); the reviewer chose Troth's length for his version (2026-10-29).
+    hackle cock-hackle color=brown fibre=1.5
     wing   elk-hair color=bleached
 }
 

@@ -188,7 +188,7 @@ function reach(tipX: number, bendEnd: number, mount: Mount): Reach | null {
 
 /** What the simulation knows about a step that the text needs. */
 export interface StepContext {
-  /** wind: winding back towards the bend (palmering); dub: dubbing back towards it. */
+  /** wind: winding back towards the bend (palmering); dub: dubbing back towards it; pull-over: laid back from the eye. */
   rear?: boolean;
   /** wind: the palmered material this wind secures. */
   through?: string;
@@ -231,6 +231,7 @@ export type Said =
   | { kind: "wind-through"; m: string; to: Place; turns: number; counter: boolean; through: string }
   | { kind: "wind"; m: string; to: Place; turns: number; counter: boolean }
   | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean }
+  | { kind: "lay-back"; m: string; to: Place }
   | { kind: "spin"; m: string; to: Place }
   | { kind: "dub"; m: string; to: Place; rear: boolean }
   | { kind: "tie-off"; m: string }
@@ -304,6 +305,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "wind", m: step.material, to, turns: step.turns, counter };
     }
     case "pull-over":
+      if (ctx.rear) return { kind: "lay-back", m: step.material, to: at(step.to) };
       return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to) };
@@ -465,6 +467,8 @@ function englishText(said: Said, recipe: Recipe): string {
       return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")}${counter(said.counter)}.`;
     case "pull-over":
       return `Pull the ${mat(said.m)} forward over the top of the body and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
+    case "lay-back":
+      return `Lay the ${mat(said.m)} back over the top of the body to ${at(said.to)}. The next winding holds it there.`;
     case "spin":
       return `Spin clumps of ${mat(said.m)} round ${body}, packing each one back against the last, up to ${at(said.to)}.`;
     case "dub":

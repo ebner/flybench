@@ -28,6 +28,7 @@ sources {
     "GlobalFlyFisher: Stoat's Tail long wing (Ivar's Fly Workshop)" url="https://globalflyfisher.com/video/stoats-tail-long-wing"
     "Fish4Flies: Stoat's Tail" url="https://www.fish4flies.com/Salmon-Atlantic/Big-Mouth-Doubles/Stoats-Tail"
     "Sea Trout Nights: Flies and Fly Tying" url="https://seatrout-fishing.com/sea-trout-nights/flies-and-fly-tying/"
+    "GlobalFlyFisher: Anatomy of a Salmon Fly (Steve Schweitzer)" url="https://globalflyfisher.com/node/13548"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
@@ -55,7 +56,8 @@ steps {
     wrap-thread to=0.06
     wind tag to=0.06 turns=4 note="A few close turns at the start of the bend."
     tie-off tag
-    // Assumption: about one and a half gapes, curving up, as usual on salmon flies.
+    // About one and a half gapes, curving up: "Length is 1-1/2 of the hook gape" (Schweitzer,
+    // Anatomy of a Salmon Fly).
     tie-in tail length=1.5 angle=14 spread=8
     tie-in rib
     tie-in body

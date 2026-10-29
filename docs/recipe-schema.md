@@ -208,7 +208,7 @@ how it is drawn and which extra properties it takes:
 | fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `coq-de-leon` | `count` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | |
-| cdc        | `cdc` | (can be wound: barbs lengthen from tip to butt) |
+| cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
 | flash      | `krystal-flash`, `flashabou` | `count` |
 | feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill` (slip) | |
 | foam       | `foam`, `scud-back` | |
@@ -257,7 +257,7 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 | `dub`           | `dub <material> to=<pos> [turns=<n>]`             | Spin dubbing onto the thread and wrap it to `to`; the thread ends there. |
 | `wind`          | `wind <material> to=<pos> turns=<n> [counter=#true]` | Wind the material from its tie-in point to `to`. Forward: it ends at the thread. Rearward (palmering): it ends away from the thread and must be secured (see below). `counter=#true` winds it the opposite way round to what is under it (a counter-wound rib). |
 | `wind` (parachute) | `wind <hackle> around=<post> turns=<n>`        | Wind a hackle horizontally round the base of an upright post; tie it off next. |
-| `pull-over`     | `pull-over <material> to=<pos>`                   | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. |
+| `pull-over`     | `pull-over <material> to=<pos>`                   | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. With `to` behind where it is tied in, lay it back instead (a shellback tied in at the eye and taken back to the bend): its end is held by the next step, a winding forward over it, as a palmered tip is. |
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess. |
 | `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
@@ -285,7 +285,8 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
 - `trim` needs something to trim; `leave` only applies to hair butts, spun hair and foam backs.
 - A parachute hackle needs a post: a bunch tied in upright (`angle` of 60° or more), not a
   feather pair, an extended body or strands tied across.
-- `pull-over` needs the material tied in and unused, and the thread at `to`.
+- `pull-over` needs the material tied in and unused, and, pulled forward, the thread at `to`;
+  laid back, the very next step winds another material forward from at or behind its end.
 - Only hair is spun, only wire weights, only beads are slid on.
 - `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), and every recipe has one.
 - Materials have unique ids, and steps refer only to defined materials. Every listed
