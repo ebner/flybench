@@ -727,8 +727,8 @@ steps {
         note "German tyers say 'Kopfknoten' (or 'Abschlussknoten', or the English 'Whip Finish')."
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 3 (\"(7) Kopfknoten / Abschluss\")" url="https://www.fliegenfischer-forum.de/fliegenbinden3.html"
     }
-    phrase palmer "Palmern" {
-        note "Winding a hackle back over the body in open turns."
+    phrase palmer "Über den Körper winden" {
+        note "Winding a hackle back over the body in open turns. Decided by the reviewer (2026-10-29): said in plain German rather than the loanword 'palmern', which tyers use (source below); the technique keeps 'Palmern' in brackets."
         source "Fliegenfischer-Forum: Thread 'Wooly Bugger!' (\"um den Körper palmern\")" url="https://www.fliegenfischer-forum.de/flyfishing/viewtopic.php?f=26227&t=258919"
     }
 }

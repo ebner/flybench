@@ -22,6 +22,7 @@ export const sv: Messages = {
     naturals: "Förebilder",
     box: "Flugask",
     materials: "Material",
+    build: "Egen fluga",
     theme: "Tema",
     themes: { system: "System", light: "Ljust", dark: "Mörkt" },
     themeLabel: (now: string, next: string) => `Tema: ${now.toLowerCase()}. Byt till ${next.toLowerCase()}`,

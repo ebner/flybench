@@ -80,6 +80,9 @@ export function Header({ theme, onTheme, route }: { theme: ThemeChoice; onTheme:
           <a href={href.materials()} aria-current={current(["materials"])}>
             {t.header.materials}
           </a>
+          <a href={href.build()} aria-current={current(["build"])}>
+            {t.header.build}
+          </a>
         </nav>
         <nav className="menu-language" aria-label={t.header.language}>
           {LANGS.map((l) => (

@@ -2,7 +2,7 @@ id elk-hair-caddis
 status draft
 
 // en description: A buoyant searching caddis: a slim dubbed body, a palmered hackle held down by a gold wire rib, and a flared elk hair wing.
-description "Eine gut schwimmende Köcherfliege zum Absuchen: ein schlanker gedubbter Körper, eine gepalmerte Hechel, von einer Golddrahtrippung gehalten, und ein abgespreizter Flügel aus Elchhaar."
+description "Eine gut schwimmende Köcherfliege zum Absuchen: ein schlanker gedubbter Körper, eine in offenen Windungen über den Körper gewundene Hechel, von einer Golddrahtrippung gehalten, und ein abgespreizter Flügel aus Elchhaar."
 
 // en history: Al Troth tied the first Elk Hair Caddis in 1957 for the green caddis on his home streams in Pennsylvania, and first fished it on Loyalsock Creek; he moved to Montana in 1973. He set out to make a wet fly, but it floated so well that he fished it dry. He used bleached elk hair so that the wing would be easier to see. The neatly trimmed head that most tyers now give it was added by others; see the Troth variant for his own way.
 history """
@@ -11,7 +11,7 @@ history """
 
 // en fishing: A searching pattern for any water where caddis hatch, riffles and runs included: the hair wing and palmered hackle float it high. It is mostly fished on a dead drift; skating it, or pulling it through the film like a caddis hatching, works too.
 fishing """
-    Ein Suchmuster für jedes Wasser, in dem Köcherfliegen schlüpfen, flache Schnellen und Rinnen eingeschlossen: Haarflügel und gepalmerte Hechel lassen sie hoch schwimmen. Meist wird sie dragfrei gefischt; geskatet oder wie eine schlüpfende Köcherfliege durch den Film gezogen, fängt sie ebenfalls.
+    Ein Suchmuster für jedes Wasser, in dem Köcherfliegen schlüpfen, flache Schnellen und Rinnen eingeschlossen: Haarflügel und Körperhechel lassen sie hoch schwimmen. Meist wird sie dragfrei gefischt; geskatet oder wie eine schlüpfende Köcherfliege durch den Film gezogen, fängt sie ebenfalls.
     """
 
 notes {
