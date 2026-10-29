@@ -3,10 +3,11 @@ import { SPECIES_LABELS } from "../catalog/describe";
 import { coverage, missingKinds } from "../catalog/inventory";
 import { REGION_LABELS } from "../catalog/naturals";
 import { sizesText, suggestBox, WATER_LABELS, type Species, type Suggestion, type Water } from "../catalog/trip";
-import { NATURALS } from "../naturals";
+import { localNaturals } from "../naturals";
 import { PATTERNS } from "../patterns";
 import { REGIONS } from "../recipe/natural";
-import { MONTHS, SPECIES } from "../recipe/schema";
+import { SPECIES } from "../recipe/schema";
+import { MONTH_NAMES } from "../i18n/months";
 import type { Region } from "../catalog/naturals";
 import { useRegion } from "./Naturals";
 import { BenchNav } from "./Personal";
@@ -16,7 +17,7 @@ import { t } from "../i18n/ui";
 import { linkTo } from "./linkTo";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 
-const MONTH_NAMES = MONTHS.map((m) => m.charAt(0).toUpperCase() + m.slice(1));
+
 const WATERS = Object.keys(WATER_LABELS) as Water[];
 /** How many flies make the box; the rest are listed under it. */
 const BOX_SIZE = 12;
@@ -70,7 +71,7 @@ export function Trip({ query }: { query: string }) {
     else setTrip(readQuery(query));
   }, [query]);
   const suggestions = useMemo(
-    () => (region ? suggestBox(PATTERNS.map((p) => p.recipe), NATURALS, { region, ...trip }) : []),
+    () => (region ? suggestBox(PATTERNS.map((p) => p.recipe), localNaturals(), { region, ...trip }) : []),
     [region, trip],
   );
   const chosen = suggestions.slice(0, BOX_SIZE);

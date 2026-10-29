@@ -282,7 +282,7 @@ export const sv: Messages = {
     ],
     natural: "Förebild",
     allYear: "Finns hela året: ",
-    monthIn: (month: string, region: string) => `${month} i ${region}`,
+    monthIn: (month: string, region: string) => `${month.charAt(0).toUpperCase()}${month.slice(1)} i ${region}`,
     quiet: "Inte mycket kläcks den här månaden; nymfer, märlor och småfisk finns hela året.",
     choose: "Välj ditt område för att se vad som kläcks när.",
     all: "Alla förebilder",

@@ -28,6 +28,12 @@ a trip (`/trip/`) suggests a dozen patterns and their sizes for a region, month,
 fish, from the hatch calendar. The built site installs as an app and works offline after
 the first visit.
 
+The site is in English, Swedish (`/sv/`) and German (`/de/`), every page prerendered in each.
+The step texts and the dressing are generated in each language from a glossary of tying words
+with their grammatical forms (`glossary/`), the prose people wrote is translated beside the
+patterns (`translations/`); the Swedish and German texts are drafts until reviewed. See
+[docs/translating.md](docs/translating.md) and [docs/glossary.md](docs/glossary.md).
+
 Product decisions and the milestone plan: [docs/product-plan.md](docs/product-plan.md).
 
 ## Run
@@ -93,12 +99,15 @@ of the published site.
 ```
 patterns/          fly recipes (KDL)
 naturals/          the insects, shrimps and fish the flies imitate (KDL), with hatch months
-docs/              the recipe schema, how to research and write a pattern, the product plan
+glossary/          Swedish and German tying words with their grammatical forms (KDL)
+translations/      translated prose of patterns and naturals (KDL), per language
+docs/              the recipe schema, how to research and write a pattern, translating, the product plan
 src/recipe/        KDL → object mapping, Zod schema, materials catalog,
                    semantic and catalog-level validation
 src/tying/         hook models and the tying simulation: recipe → timeline of
                    geometry pieces (plain data, no three.js)
 src/render/        three.js scene built from the timeline
+src/i18n/          languages: the interface's words, the glossary and grammar, prose translations
 src/catalog/       catalog search and wording, and the site's pages with their titles,
                    descriptions and text for the build (plain logic, tested in Node)
 src/ui/            React UI: gallery, pattern page, viewer, theme, routing

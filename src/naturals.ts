@@ -1,5 +1,7 @@
 import { formatError } from "./recipe/errors";
 import { loadNatural, type Natural } from "./recipe/natural";
+import { lang } from "./i18n/lang";
+import { naturalInPageLanguage } from "./i18n/prose";
 
 const sources = import.meta.glob("../naturals/*.kdl", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 
@@ -18,6 +20,13 @@ for (const [path, text] of Object.entries(sources)) {
 
 export const NATURALS: Natural[] = loaded.sort((a, b) => a.name.localeCompare(b.name));
 
+/** The naturals with their names and descriptions in the page's language, by name. */
+export function localNaturals(): Natural[] {
+  return NATURALS.map((n) => naturalInPageLanguage(n)).sort((a, b) => a.name.localeCompare(b.name, lang()));
+}
+
+/** A natural, its prose in the page's language. */
 export function findNatural(id: string): Natural | undefined {
-  return NATURALS.find((n) => n.id === id);
+  const n = NATURALS.find((x) => x.id === id);
+  return n && naturalInPageLanguage(n);
 }

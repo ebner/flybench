@@ -1,0 +1,714 @@
+// The Swedish glossary: the words the site's own Swedish texts are made of (see docs/glossary.md).
+// Notes are in English, for the reviewer; sources are pages that were opened and read.
+language sv
+// "draft" until a native speaker who ties flies has reviewed it; then "reviewed".
+status draft
+
+materials {
+    noun wool "ullgarn" gender=ett definite="ullgarnet" mass=#true {
+        note "Chosen: 'ullgarn' (wool yarn), what Swedish dressings list for a Red Tag tag or tail ('Stjärt: Rött ullgarn'). 'Ull' alone is also used ('röd ull för svansen') and would do; 'yllegarn' is a shop's name for the same thing. Rejected 'garn' alone: that is any yarn, poly yarn included."
+        source "Min Bas Flugask (flugbindningflugfiske.blogspot.com, dressings: 'Stjärt: Rött ullgarn')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+        source "Rackelhanen: Kaninhårsstreamer ('Tag: Rött ullgarn')" url="https://www.rackelhane.se/swe/1280.htm"
+        source "Kings Meadow: Red Tag Wet Fly ('röd ull för svansen')" url="https://www.kingsmeadow.se/product/red-tag-wet-fly/"
+    }
+    noun poly-yarn "polygarn" gender=ett definite="polygarnet" mass=#true {
+        note "The usual Swedish shop and dressing word ('Vinge: Grå Tiemco Polygarn')."
+        source "Flugbindning.com: Garn & Yarn ('produkter som Polygarn, Antron Yarn, Floss')" url="https://flugbindning.com/130-garn-yarn"
+        source "Min Bas Flugask ('Vinge: Grå Tiemco Polygarn')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+    noun peacock-herl "påfågelherl" gender=ett definite="påfågelherlet" plural="påfågelherl" plural-definite="påfågelherlen" {
+        note "'Påfågelherl', one word, as shops and Flugfiske i Norden write it. Neuter: 'Ta ett påfågelherl', 'Linda herlet framåt'. Some write 'påfågel herl' or 'påfågelsherl'; rejected as less common."
+        source "Flugbindning.com: Påfågel (product 'Påfågelherl')" url="https://flugbindning.com/400052-pafagel"
+        source "Flugfiske i Norden: Rödingfluga Black & Orange PT Nymf-Variant ('Ta ett påfågelherl och fäst in')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
+        source "Flugfiske i Norden: Griffith's Gnat ('Kropp: Påfågelherl')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+    }
+    noun cock-hackle "tupphackel" gender=ett definite="tupphacklet" plural="tupphackel" plural-definite="tupphacklen" {
+        note "Standard Swedish. Shops sell the cape as 'tuppnacke' and the saddle as 'tuppsadel'; the feather wound on the fly is 'tupphackel'. Plural: 'hackel' (some write 'hackler'); 'hackel' chosen."
+        source "Bojdaspon: Hackel nackar ('Tupphackel används främst till torrflugor')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
+        source "Fiske.se: Fjädrar & Nackar ('Tupphackel är ofta lite styvare')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
+        source "Rackelhanen: Royalflugor ('Hackel: Brunt tupphackel')" url="https://www.rackelhane.se/swe/1649.htm"
+    }
+    noun hen-hackle "hönshackel" gender=ett definite="hönshacklet" plural="hönshackel" plural-definite="hönshacklen" {
+        source "Bojdaspon: Hackel nackar ('Hönshackel har mjukare och mer följsamma fibrer')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
+        source "Fiske.se: Fjädrar & Nackar ('Hönshackel är betydligt mjukare')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
+        source "Fiskejournalen: The Marabou Fly ('Fäst in ett svart hönshackel')" url="https://nyheter.fiskejournalen.se/reportage/the-marabou-fly-fangar-alla-rovfiskar-sa-binder-du-den/1518375"
+    }
+    noun saddle-hackle "sadelhackel" gender=ett definite="sadelhacklet" plural="sadelhackel" plural-definite="sadelhacklen" {
+        note "Built like tupphackel/hönshackel from 'sadel', the word shops and Swedish Wikipedia use for the skin ('Indisk tuppsadel', 'hackelfjäder som återfinns på nacken eller sadeln'). I did not find 'sadelhackel' written as one word on a page I opened; shops mostly write 'saddle' in English product names. Reviewer: is 'sadelhackel' what you say, or 'saddlehackel'?"
+        source "Svenska Wikipedia: Flugbindning ('en hackelfjäder som återfinns på nacken eller sadeln till en tupp eller en höna')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+        source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
+        source "laxflugor.nu: Flugbindningsmaterial ('leta efter en sadel (inte nacke)')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+    }
+    noun partridge-hackle "rapphönshackel" gender=ett definite="rapphönshacklet" plural="rapphönshackel" plural-definite="rapphönshacklen" {
+        note "The bird is 'rapphöna'; shops sell 'Rapphöna nackfjäder' and speak of 'rapphönefjädrar' for 'glesa hackel'. Compound with -s ('rapphönshackel') chosen over 'rapphönehackel'; both occur. The dressings simply write 'Hackel: Rapphöna'."
+        source "Flugbindning.com: Rapphöna ('Rapphönefjädrar är ett klassiskt flugbindningsmaterial för spiders', product 'Rapphöna nackfjäder')" url="https://flugbindning.com/400054-rapphona"
+    }
+    noun snipe-hackle "beckasinhackel" gender=ett definite="beckasinhacklet" plural="beckasinhackel" plural-definite="beckasinhacklen" {
+        note "Snipe is 'beckasin' (enkelbeckasin); the shop calls it material for 'mjuka hackel'. The pattern keeps its English name (Snipe & Purple)."
+        source "Flugbindning.com: Beckasin ('Beckasin, Snipe på engelska, ger små fjädrar för spiders, mjuka hackel')" url="https://flugbindning.com/400183-beckasin"
+    }
+    noun hares-ear-dubbing "haröredubbing" gender=en definite="haröredubbingen" mass=#true {
+        note "Swedish tyers call the fly 'Haröra' and the dubbing 'haröredubbing'; shops sell the skin as 'Harmask'. Rejected 'harmaskdubbing' (rare) and 'hare's ear-dubbing' (English)."
+        source "Flugfiske i Norden: Kopparribbat Haröra ('Kropp: Haröredubbing')" url="https://flugfiskeinorden.se/kopparribbat-harora/"
+        source "Min Bas Flugask ('Thorax: Haröredubbing')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+        source "Flugbindning.com: Dubbing (product 'Harmask')" url="https://flugbindning.com/30-dubbing"
+    }
+    noun dry-fly-dubbing "torrflugedubbing" gender=en definite="torrflugedubbingen" mass=#true {
+        note "A descriptive compound like 'torrflugekrok'; shops name the products by brand (Fly Rite, Super Fine, 'Beaver dry fly dubbing') and describe fine dubbing for 'små torrflugekroppar'. No page I opened writes 'torrflugedubbing' as one word. Reviewer: alternatively 'fin dubbing'."
+        source "Flugbindning.com: Dubbing ('Fin bäverdubbing passar små torrflugekroppar', 'Natures Spirit Beaver dry fly dubbing')" url="https://flugbindning.com/30-dubbing"
+    }
+    noun rabbit-dubbing "kanindubbing" gender=en definite="kanindubbingen" mass=#true {
+        source "Flugbindning.com: Dubbing (product 'Kanindubbing')" url="https://flugbindning.com/30-dubbing"
+    }
+    noun seals-fur "sälhår" gender=ett definite="sälhåret" mass=#true {
+        note "Chosen 'sälhår', the word in the shop and in Swedish dressings (Gimåpuppan, Superpuppan). 'Sälpäls' is a literal translation of seal's fur and also heard; rejected as less usual for the dubbing. Most is a substitute today ('Seals Fur Substitute')."
+        source "Flugbindning.com: Dubbing ('Seals Fur Substitute', listed as 'Sälhår')" url="https://flugbindning.com/30-dubbing"
+        source "Flugfiske i Norden: Gimåpuppan ('en egen dubbing av rävhår, muskrat, opossum och sälhår')" url="https://flugfiskeinorden.se/gimapuppan/"
+    }
+    noun dubbing "dubbing" gender=en definite="dubbingen" mass=#true {
+        note "The English word is the Swedish one ('en orangegulfärgad dubbing', 'dubbingen'); the verb is 'dubba'."
+        source "Flugbindning.com: Dubbing ('Dubbing används för att forma kroppar och thorax')" url="https://flugbindning.com/30-dubbing"
+        source "Flugfiske i Norden: Kopparribbat Haröra ('Vaxa bindtråden och dubba tråden')" url="https://flugfiskeinorden.se/kopparribbat-harora/"
+    }
+    noun gold-wire "guldtråd" gender=en definite="guldtråden" plural="guldtrådar" plural-definite="guldtrådarna" {
+        note "'Tråd' is the Swedish word for metal wire in tying ('koppartråd', 'blytråd'); 'wire' (English) is also written ('Kopparwire', 'Guldwire'). Chosen 'guldtråd'; it is also what gives 'Guldribbat Haröra' its name."
+        source "Min Bas Flugask ('Ribb: Tunn guldtråd')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+        source "Rackelhanen: Kaninhårsstreamer etc. ('Ribbing: Guldwire', the alternative)" url="https://www.rackelhane.se/swe/1280.htm"
+    }
+    noun copper-wire "koppartråd" gender=en definite="koppartråden" plural="koppartrådar" plural-definite="koppartrådarna" {
+        source "Flugfiske i Norden: Kopparribbat Haröra ('Förträngning/ribb: Tunn koppartråd')" url="https://flugfiskeinorden.se/kopparribbat-harora/"
+        source "Flugbindning.com: Tinsel (product 'Koppartråd')" url="https://flugbindning.com/140-tinsel"
+        source "Rackelhanen: Pheasant Tail Nymph ('Ribbing: Koppartråd')" url="https://www.rackelhane.se/swe/1213.htm"
+    }
+    noun silver-wire "silvertråd" gender=en definite="silvertråden" plural="silvertrådar" plural-definite="silvertrådarna" {
+        note "Formed like guldtråd and koppartråd. The dressing I found writes 'Silver metalltråd'; I did not see 'silvertråd' as one word on a page I opened."
+        source "Min Bas Flugask ('Ribb: Silver metalltråd')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+    noun lead-free-wire "blyfri tråd" gender=en definite="blyfria tråden" plural="blyfria trådar" plural-definite="blyfria trådarna" article=#true {
+        note "Two words, as Swedish dressings write it ('Blyfri tråd eller blytråd'). The definite form is given without its article ('den blyfria tråden' needs 'den' in front): the grammar code has to add it, as for a noun with a colour. 'Blyfri wire' is also written."
+        source "Allt om flugfiske: Bind husmaskimitationen Evil Eye ('Förtyngning: Blyfri tråd eller blytråd')" url="https://www.alltomflugfiske.se/flugbindning/bind-husmaskimitationen-evil-eye/194857"
+        source "Flugbindning.com: Förtyngning ('Nu mer finns även blyfria tunga trådar som kan ersätta blytråden')" url="https://flugbindning.com/50-fortyngning"
+    }
+    noun rib-thread "tråd" gender=en definite="tråden" plural="trådar" plural-definite="trådarna" {
+        note "Thread used as a rib. Dressings write 'Ribbing: Rödbrun tråd' or 'Ribb: dubbel bindtråd'; 'tråd' chosen so it isn't confused with the tying thread ('bindtråd')."
+        source "Fiskeflugor.se: Bindbeskrivning, Rocken ('Ribbing: Rödbrun tråd')" url="https://fiskeflugor.se/pages.php/page/21_flugmonster_bindbeskrivning"
+        source "Min Bas Flugask ('Ribb: Brun dubbel bindtråd eller spöbyggartråd')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+    noun silk-floss "flossilke" gender=ett definite="flossilket" mass=#true {
+        note "Chosen 'flossilke', the word of classic Swedish dressings ('Kropp: Rött flossilke'). Shops also write 'floss' and 'silkesfloss' (for real silk as opposed to rayon). 'Floss' alone would cover synthetic floss as well; the catalog kind is silk floss."
+        source "Rackelhanen: Royalflugor ('Påfågel - rött flossilke - påfågel')" url="https://www.rackelhane.se/swe/1649.htm"
+        source "Rackelhanen: The Golden Parson ('Tag: Silvertinsel och malvafärgat flossilke')" url="https://www.rackelhane.se/swe/1362.htm"
+        source "Bojdaspon: Floss till flugbindning ('Silkesfloss ger en djup, naturlig glans')" url="https://www.bojdaspon.se/flugbindning/floss-till-flugbindning"
+    }
+    noun monofilament "nylonlina" gender=en definite="nylonlinan" plural="nylonlinor" plural-definite="nylonlinorna" {
+        note "Chosen 'nylonlina' ('Ribbing: Tunn transparent nylonlina'). Also used: 'mono', 'tafsmaterial' (leader material), 'monofil'. Rejected 'monofil' as rarer in tying texts."
+        source "Rackelhanen: Tjeckisk djupnymf ('Ribbing: Tunn transparent nylonlina')" url="https://www.rackelhane.se/swe/1280.htm"
+        source "Min Bas Flugask ('Ribb: Tunt tafsmaterial', the alternative)" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+    noun flat-tinsel "platt tinsel" gender=en definite="platta tinseln" mass=#true article=#true {
+        note "Tyers disagree on the gender: 'en tinsel' ('smal oval silvertinsel', 'Flat guldtinsel') and 'ett tinsel' ('Ett ovalt tinsel') both occur; common gender chosen as the more frequent in the dressings I read. 'Flat' (from English) is as common as 'platt'; 'platt' chosen as the Swedish word (Wikipedia, Flugbindning.com). The definite form lacks its article, as for blyfri tråd."
+        source "Flugbindning.com: Tinsel ('Finns både som platt, oval och rund', 'Används som kroppsmaterial och som ribb')" url="https://flugbindning.com/140-tinsel"
+        source "Svenska Wikipedia: Flugbindning ('en platt metallglänsande tråd(tinsel)')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+        source "Rackelhanen: Muddlerfamiljen ('Flat guldtinsel utan rib')" url="https://www.rackelhane.se/swe/1032.htm"
+    }
+    noun oval-tinsel "oval tinsel" gender=en definite="ovala tinseln" mass=#true article=#true {
+        note "See flat-tinsel for the gender. Dressings often fold the colour in ('Ovalt guldtinsel', 'oval silvertinsel'); here the colour is an adjective in front ('guldfärgad oval tinsel')."
+        source "Flugfiske i Norden: John Atherton ('ribbad med smal oval guldtinsel')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+        source "Fiskesnack: Börja binda flugor? ('Guld och silver i både oval och flat är bra att ha')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/55609-b%C3%B6rja-binda-flugor-k%C3%B6p-inte-f%C3%A4rdig-sats"
+    }
+    noun chenille "chenille" gender=en definite="chenillen" mass=#true {
+        source "Fiskesnack: Börja binda flugor? ('Chenille: Användbart till både streamers, nymfer och skalbaggar')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/55609-b%C3%B6rja-binda-flugor-k%C3%B6p-inte-f%C3%A4rdig-sats"
+        source "Flugbindning.com: Syntetmaterial (category 'Chenille')" url="https://flugbindning.com/400243-flugbindning"
+    }
+    noun elk-hair "elkhår" gender=ett definite="elkhåret" mass=#true {
+        note "Elk (wapiti) is not 'älg' (moose), as Rackelhanen points out; Swedish tyers keep 'elk': 'elkhår', 'Elk Kroppshår'. 'Wapitihår' is correct but not what tyers say."
+        source "Rackelhanen: Hjorthårsflugor av Rådjur, Elk och Antilop ('elkhår', elk 'har alltså ingenting med vår europeiska älg att göra')" url="https://www.rackelhane.se/swe/1050.htm"
+        source "Flugbindning.com: Hjort/Elk (product 'Elk Kroppshår')" url="https://flugbindning.com/400255-hjortelk"
+    }
+    noun deer-hair "hjorthår" gender=ett definite="hjorthåret" mass=#true {
+        note "The shops' word for deer body hair. Rackelhanen also distinguishes 'rådjurshår' (roe deer); 'hjorthår' is the general term."
+        source "Sportfiskeprylar: Hjorthår ('Hjorthår är ett tätfibrigt material')" url="https://www.sportfiskeprylar.se/sv/krok-smaplock/flugbindningsmaterial/flugbindningsmaterial-2/har/hjorthar"
+        source "Flugfiske i Norden: Rat Faced McDougall ('Kropp: Hjorthår')" url="https://flugfiskeinorden.se/rat-faced-mcdougall/"
+    }
+    noun calf-tail "kalvsvans" gender=en definite="kalvsvansen" plural="kalvsvansar" plural-definite="kalvsvansarna" {
+        source "Flugbindning.com: Kalv (product 'Kalvsvans')" url="https://flugbindning.com/400261-kalv"
+        source "Flugfiske i Norden: Fran Betters Ausable Wulff ('Vinge: Vit kalvsvans')" url="https://flugfiskeinorden.se/fran-betters-ausable-wulff/"
+    }
+    noun bucktail "bucktail" gender=en definite="bucktailen" mass=#true {
+        note "Kept in English, as Swedish shops and dressings do ('Naturlig brun Bucktail'); no Swedish word is in use ('rådjurssvans' would be literal)."
+        source "laxflugor.nu: Flugbindningsmaterial ('Bucktail är ett flugbindningsmaterial')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+        source "Sportfiskeprylar: Flugbindningsmaterial (category 'Bucktails')" url="https://www.sportfiskeprylar.se/sv/krok-smaplock/flugbindningsmaterial"
+    }
+    noun squirrel-tail "ekorrsvans" gender=en definite="ekorrsvansen" plural="ekorrsvansar" plural-definite="ekorrsvansarna" {
+        source "Flugbindning.com: Ekorre (product 'Ekorrsvans')" url="https://flugbindning.com/400260-ekorre"
+        source "Rackelhanen: Muddlerfamiljen ('Undervinge av grå ekorre')" url="https://www.rackelhane.se/swe/1032.htm"
+    }
+    noun moose-mane "älgman" gender=en definite="älgmanen" mass=#true {
+        source "Flugbindning.com: Älg (product 'Moose mane (Älgman)')" url="https://flugbindning.com/400262-alg"
+    }
+    noun pheasant-tail "fasanstjärtfibrer" gender=en definite="fasanstjärtfibrerna" plural="fasanstjärtfibrer" plural-definite="fasanstjärtfibrerna" {
+        note "A plural, like the English 'pheasant tail fibres': the base form is the plural and 'definite' is the plural definite. The grammar code would need to know a material is plural (adjective in the plural, 'de' not 'den'). Written with or without linking s ('fasanstjärtfibrer', 'fasanstjärtsfibrer'); Rackelhanen's form chosen. Dressings also just write 'Fasantupp' or 'Pheasant Tail'."
+        source "Rackelhanen: Pheasant Tail Nymph ('Stjärt: Fasanstjärtfibrer', 'Kropp: Fasanstjärtfibrer')" url="https://www.rackelhane.se/swe/1213.htm"
+        source "Flugfiske i Norden: Landinsekter ('Ben: knutna fasanstjärtsfibrer')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    noun hackle-fibres "hackelfibrer" gender=en definite="hackelfibrerna" plural="hackelfibrer" plural-definite="hackelfibrerna" {
+        note "Plural, as pheasant-tail. 'Hackelfibrer' is the shops' and Allt om flugfiske's word; dressings write 'Stjärt: Tupphackel' or 'tupphackel-fibrer'."
+        source "Allt om flugfiske: Så binder du in ett torrflugehackel ('Dra bort hackelfibrerna som inte ska användas')" url="https://www.alltomflugfiske.se/sa-binder-du-in-ett-torrflugehackel/"
+        source "Flugfiske i Norden: John Atherton ('långa raka tupphackel-fibrer till stjärten')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+    }
+    noun golden-pheasant-tippet "guldfasantippet" gender=en definite="guldfasantippeten" mass=#true {
+        note "Swedish keeps 'tippet' ('tippetfjädrarna kommer från hannens halskrage'); dressings write 'Guldfasantippets' or 'tippetfibrer'. Treated as a mass noun ('en bunt guldfasantippet'). Reviewer: the definite 'guldfasantippeten' may sound odd; 'tippetfibrerna' is the alternative."
+        source "Flugbindning.com: Guldfasan ('de orange-svarta tippetfjädrarna', product 'Guldfasan Tippets')" url="https://flugbindning.com/400048-guldfasan"
+        source "Rackelhanen: Royalflugor ('Stjärt: Guldfasantippets')" url="https://www.rackelhane.se/swe/1649.htm"
+    }
+    noun golden-pheasant-crest "guldfasantopping" gender=en definite="guldfasantoppingen" plural="guldfasantoppingar" plural-definite="guldfasantoppingarna" {
+        note "Shops write both 'crest' and 'topping'; salmon-fly dressings say 'topping' ('två toppingar', 'guldfasantoppingar'). Chosen 'guldfasantopping'."
+        source "Flugbindning.com: Guldfasan ('kallas crest', product 'Guldfasan Topping')" url="https://flugbindning.com/400048-guldfasan"
+        source "Rackelhanen: The Golden Parson ('Stjärt: Två toppingar', 'guldfasantoppingar')" url="https://www.rackelhane.se/swe/1362.htm"
+    }
+    noun hares-mask-guard-hairs "täckhår från harmask" gender=ett definite="täckhåret från harmask" plural="täckhår från harmask" plural-definite="täckhåren från harmask" {
+        note "'Täckhår' (guard hairs) against 'underull', as the shop describes the hare's mask; 'hår' is the same in singular and plural. 'Stickelhår' is also used; rejected as rarer. Some dressings just write 'Stjärt: Harmask'."
+        source "Flugbindning.com: Harmask ('Du kan också välja ut längre täckhår till korta stjärtar på nymfer')" url="https://flugbindning.com/dubbing/1700038-harmask.html"
+    }
+    noun synthetic-hair "syntethår" gender=ett definite="syntethåret" mass=#true {
+        source "Bojdaspon: Polar Fiber ('Polar Fiber är ett mjukt syntethår')" url="https://www.bojdaspon.se/flugbindning/flash-fiber/fiber/polar-fiber-49384"
+    }
+    noun coq-de-leon "coq de León-fibrer" gender=en definite="coq de León-fibrerna" plural="coq de León-fibrer" plural-definite="coq de León-fibrerna" {
+        note "Plural, as pheasant-tail. The name stays Spanish; Swedish dressings write 'Coq de Leon' without the accent ('Stjärt: Coq de Leon, Pardo'). Accent kept to match the English catalog."
+        source "Min Bas Flugask ('Stjärt & ben: Coq de Leon Pardofärg')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+    noun goose-biot "gåsbiot" gender=en definite="gåsbioten" plural="gåsbiots" plural-definite="gåsbiotsen" {
+        note "Shops write the plural with English -s ('Gåsbiots', 'Kalkonbiots'); I kept it. Reviewer: 'gåsbiotsen' as the definite plural is my construction; is 'biotarna' or just 'biotsen' what you'd write?"
+        source "Flugbindning.com: Gås ('Gåsbiots är de korta, spetsiga fibrerna från vingpennans smala framkant')" url="https://flugbindning.com/400102-gas"
+    }
+    noun marabou "marabou" gender=en definite="maraboun" mass=#true {
+        source "Rackelhanen: Muddlerfamiljen ('vinge av marabou')" url="https://www.rackelhane.se/swe/1032.htm"
+        source "Flugfiskaren i Småland: Bindbeskrivning ('Bind in maraboufjädern, fäst in vid krokböjen')" url="https://blogg.fisheco.se/flugfiskaren/category/bindbeskrivning/"
+    }
+    noun cdc "CDC" gender=en definite="CDC:n" mass=#true {
+        note "Swedish uses the abbreviation ('CDC-fjädrar', 'Vinge: CDC'). Definite with a colon, as Swedish writes abbreviations ('CDC:n'); I did not see the definite form on a page."
+        source "Flugbindning.com: CDC ('CDC står för Cul de Canard', 'CDC används till vingar, hackel och kroppar')" url="https://flugbindning.com/400100-cdc"
+        source "Flugfiske i Norden: Landinsekter ('Vinge: CDC')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    noun krystal-flash "Krystal Flash" gender=en definite="Krystal Flash-en" mass=#true {
+        note "Brand name kept. Definite with a hyphen, as Swedish does for a multi-word name; dressings usually avoid it ('Några strån Crystal Flash')."
+        source "laxflugor.nu: Flugbindningsmaterial ('Krystal Flash – En väldigt vacker flash som är ganska styv')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+        source "Flugbindning.com: Flash ('skruvade som Krystal Flash')" url="https://flugbindning.com/60-flash"
+    }
+    noun flashabou "Flashabou" gender=en definite="Flashaboun" mass=#true {
+        note "Brand name kept; definite like 'maraboun'."
+        source "Flugbindning.com: Flash ('Det finns platta flasher typ Flashabou')" url="https://flugbindning.com/60-flash"
+    }
+    noun mallard-breast "bröstfjäder från gräsandhona" gender=en definite="bröstfjädern från gräsandhona" plural="bröstfjädrar från gräsandhona" plural-definite="bröstfjädrarna från gräsandhona" {
+        note "Mallard is 'gräsand'; the shop sells 'Gräsand Hona Bröstfjäder'. A phrase rather than a long compound ('gräsandhonebröstfjäder')."
+        source "Flugbindning.com: Gräsand (product 'Gräsand Hona Bröstfjäder')" url="https://flugbindning.com/400049-grasand"
+    }
+    noun teal-flank "sidfjäder från krickand" gender=en definite="sidfjädern från krickand" plural="sidfjädrar från krickand" plural-definite="sidfjädrarna från krickand" {
+        note "Teal is 'krickand'; shops write 'Krickand sidfjädrar (teal)' and also keep 'Teal Flank'. 'Flankfjäder' is also used; 'sidfjäder' chosen."
+        source "Flugbindning.com: Krickand ('Mest använda är sidfjädrarna, Teal Flank', product 'Krickand sidfjädrar (teal)')" url="https://flugbindning.com/400050-krickand-teal"
+    }
+    noun hackle-tips "hackelspetsar" gender=en definite="hackelspetsarna" plural="hackelspetsar" plural-definite="hackelspetsarna" {
+        note "Plural, as pheasant-tail."
+        source "Flugfiske i Norden: John Atherton ('Vingar: Hackelspetsar, ljus dun')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+    }
+    noun duck-quill "sektioner av andvingpenna" gender=en definite="sektionerna av andvingpenna" plural="sektioner av andvingpenna" plural-definite="sektionerna av andvingpenna" {
+        note "Plural, as the English 'slips'. Shops sell 'Anka vingpennor' and 'Gräsand Vingpennor'; Swedish dressings call the slips 'sektioner' ('sektioner av brunspräcklig kalkon'). 'Andvingpenna' is my compound of the two."
+        source "Flugbindning.com: Övriga fjädrar ('Vingpennor från exempelvis anka ... till traditionella vingar av fjädersektioner', product 'Veniard Anka vingpennor')" url="https://flugbindning.com/400099-ovriga-fjadrar"
+        source "Rackelhanen: Muddlerfamiljen ('sektioner av brunspräcklig kalkon')" url="https://www.rackelhane.se/swe/1032.htm"
+    }
+    noun starling-quill "sektioner av starvingpenna" gender=en definite="sektionerna av starvingpenna" plural="sektioner av starvingpenna" plural-definite="sektionerna av starvingpenna" {
+        note "Starling is 'stare'; plural as duck-quill."
+        source "Flugbindning.com: Övriga fjädrar ('Stare och rörhöna är exempel på material som förekommer i traditionell våtfluge- och spiderbindning')" url="https://flugbindning.com/400099-ovriga-fjadrar"
+    }
+    noun turkey-quill "sektion av kalkonvingpenna" gender=en definite="sektionen av kalkonvingpenna" plural="sektioner av kalkonvingpenna" plural-definite="sektionerna av kalkonvingpenna" {
+        note "Singular, as the English 'turkey quill slip'. Shops sell 'Kalkon Färgade Vingpennor' and speak of 'quill slips'; Rackelhanen writes 'Sektion av brunspräcklig kalkonvinge'."
+        source "Flugbindning.com: Kalkon ('Kalkonens stora fjädrar ger sammanhållna fibersektioner, så kallade quill slips')" url="https://flugbindning.com/400046-kalkon"
+        source "Rackelhanen: Muddlerfamiljen ('Sektion av brunspräcklig kalkonvinge')" url="https://www.rackelhane.se/swe/1032.htm"
+    }
+    noun saddle-feathers "sadelfjädrar" gender=en definite="sadelfjädrarna" plural="sadelfjädrar" plural-definite="sadelfjädrarna" {
+        note "Plural, as pheasant-tail: whole saddle hackles tied in as a streamer tail or wing. See saddle-hackle for 'sadel'."
+        source "Svenska Wikipedia: Flugbindning ('nacken eller sadeln till en tupp eller en höna')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+        source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
+    }
+    noun foam "foam" gender=en definite="foamen" mass=#true {
+        note "Swedish tyers say 'foam' ('Skal: Foam', 'foamremsan'). The gender wavers ('foamen', 'foamet'); common gender chosen, after 'remsan'. Reviewer: which do you say?"
+        source "Flugbindning.com: Foam & Popper ('Foam är användbart på många olika flugtyper')" url="https://flugbindning.com/400184-foam"
+        source "Flugfiske i Norden: Landinsekter ('Skal: Foam', 'klipp ut en remsa foam')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    noun scud-back "scud back" gender=en definite="scud backen" mass=#true {
+        note "Product name kept, as the shop does; it describes it as 'ryggsköldsmaterial'. 'Ryggsköld' is the Swedish name of the part, used for the role ('back' → 'rygg')."
+        source "Antispinn: Sow-Scud Back 1/8 Wapsi ('Sow-Scud Back är framför allt känt som ryggsköldsmaterial till scuds, märlor och olika nymfer')" url="https://www.antispinn.se/flugbindning/syntetiskt-material-kropp-vinge-ben/sow-scud-back-18-wapsi"
+    }
+    noun brass-bead "mässingskula" gender=en definite="mässingskulan" plural="mässingskulor" plural-definite="mässingskulorna" {
+        note "Chosen 'kula' (Fiskejournalen: 'trä på kulan'). Very common alternatives: 'skalle', 'guldskalle' (any gold bead), 'bead'. 'Guldskalle' rejected because it names the colour, not the metal."
+        source "Antispinn: Tungsten Beads 3,8 mm ('än traditionella mässingskulor')" url="https://www.antispinn.se/flugbindning/fortyngning/90-tungsten/classic-colored-tungsten-beads-38-mm"
+        source "Fiskejournalen: The Marabou Fly ('Smält ena änden på tuben och trä på kulan')" url="https://nyheter.fiskejournalen.se/reportage/the-marabou-fly-fangar-alla-rovfiskar-sa-binder-du-den/1518375"
+    }
+    noun tungsten-bead "tungstenkula" gender=en definite="tungstenkulan" plural="tungstenkulor" plural-definite="tungstenkulorna" {
+        note "Tyers say 'tungsten' rather than 'volfram' ('tungsten (volfram)'); 'tungstenskalle' is also common."
+        source "Antispinn: Tungsten Beads 3,8 mm ('högkvalitativa färgade tungstenkulor utvecklade för flugbindare')" url="https://www.antispinn.se/flugbindning/fortyngning/90-tungsten/classic-colored-tungsten-beads-38-mm"
+    }
+    noun brass-cone "mässingskon" gender=en definite="mässingskonen" plural="mässingskoner" plural-definite="mässingskonerna" {
+        note "'Kon' (plural 'koner'), as laxflugor.nu and the shops write it ('tungstenkoner', 'Mässing Turbokoner'); 'conehead' and 'konhuvud' are alternatives."
+        source "laxflugor.nu: Flugbindningsmaterial ('Koner är ett väldigt bra sätt att addera tyngd')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+        source "Sportfiskeprylar: Flugbindningsmaterial (products 'Frödin FITS Mässing Turbokoner', 'Frödin FITS tungstenkoner')" url="https://www.sportfiskeprylar.se/sv/krok-smaplock/flugbindningsmaterial"
+    }
+    noun tungsten-cone "tungstenkon" gender=en definite="tungstenkonen" plural="tungstenkoner" plural-definite="tungstenkonerna" {
+        source "Sportfiskeprylar: Flugbindningsmaterial (product 'Frödin FITS tungstenkoner - XS')" url="https://www.sportfiskeprylar.se/sv/krok-smaplock/flugbindningsmaterial"
+    }
+    noun dumbbell-eyes "hantelögon" gender=ett definite="hantelögonen" plural="hantelögon" plural-definite="hantelögonen" {
+        note "Plural, as pheasant-tail ('ögon', plural of 'öga'). 'Hantelögon' is the shops' word; 'blyögon' and 'dumbbell eyes' also occur."
+        source "Fiskeflugor.se: Huvud Cone/Bead/Hantel ('coneheads, beadheads, hantelögon mm')" url="https://fiskeflugor.se/flugbindning-huvud-conebeadhantel-c-10_89.html"
+        source "Rackelhanen: Samlade flugbindartips ('egna hantelögon')" url="http://www.rackelhane.se/swe/1606.htm"
+    }
+    noun bead-chain-eyes "kulkedjeögon" gender=ett definite="kulkedjeögonen" plural="kulkedjeögon" plural-definite="kulkedjeögonen" {
+        note "Plural. The shop sells the chain as 'Kulkedja'; 'kulkedjeögon' (eyes cut from it) is my compound on the model of 'hantelögon'. 'Bead chain eyes' in English is what other shops write."
+        source "Flugbindning.com: Huvud/Konor/Ögon (product 'Kulkedja')" url="https://flugbindning.com/80-huvudkonoroegon"
+    }
+    noun mono-eyes "nylonögon" gender=ett definite="nylonögonen" plural="nylonögon" plural-definite="nylonögonen" {
+        note "Plural. Swedish shrimp dressings say 'ögon av bränd nylonlina'; 'nylonögon' is the short form, matching 'nylonlina' for monofilament. 'Monoögon' rejected: not found."
+        source "Spinnstopp: Flugor ('Bränner lite 0,50 nylonlina i ändarna och använder som ögon', 'med ögon av bränd nylonlina')" url="http://www.spinnstopp.se/Hjemmelavet/Flugor/indexflugor.htm"
+    }
+    noun rubber-legs "gummiben" gender=ett definite="gummibenen" plural="gummiben" plural-definite="gummibenen" {
+        note "Plural ('ben' is the same in both numbers). The catalog's 'round rubber legs' is 'runda gummiben' in the shop; 'runda' left out, as in most dressings."
+        source "Fiske.se: Runda Gummiben ('Gummiben tillför mycket liv och rörelse till flugan')" url="https://www.fiske.se/round-rubber"
+    }
+    noun silicone-legs "silikonben" gender=ett definite="silikonbenen" plural="silikonben" plural-definite="silikonbenen" {
+        note "Plural. Shops write 'Sili Legs' (brand) or 'silikonben'."
+        source "Antispinn: Upavon Leg Knotting Tool ('knutar på gummiben, silikonben och andra benmaterial')" url="https://www.antispinn.se/flugbindning/verktyg/upavon-leg-knotting-tool"
+    }
+}
+
+colours {
+    adjective black "svart" neuter="svart" plural="svarta"
+    adjective white "vit" neuter="vitt" plural="vita"
+    adjective cream "krämfärgad" neuter="krämfärgat" plural="krämfärgade" {
+        note "Shops leave it in English ('Cream'); 'krämfärgad' is the Swedish word."
+    }
+    adjective red "röd" neuter="rött" plural="röda"
+    adjective fluo-red "fluorescerande röd" neuter="fluorescerande rött" plural="fluorescerande röda" {
+        note "Tyers often write 'fluo röd', 'Fl red' or 'Rosa fluo'. 'Fluorescerande' is the full word and inflects cleanly; 'fluo' is shorter if the reviewer prefers it."
+    }
+    adjective brown "brun" neuter="brunt" plural="bruna"
+    adjective red-brown "rödbrun" neuter="rödbrunt" plural="rödbruna" {
+        source "Rackelhanen: Pheasant Tail Nymph ('Bindtråd: Rödbrun')" url="https://www.rackelhane.se/swe/1213.htm"
+    }
+    adjective red-game "red game" compound=#true {
+        note "A hackle shade kept in English, as Swedish tyers keep grizzly and badger."
+    }
+    adjective ginger "ginger" compound=#true {
+        note "Kept in English ('Hackel: Ginger tupp'); 'ingefärsfärgad' isn't used."
+        source "Flugfiske i Norden: Rat Faced McDougall ('Hackel: Ginger tupp')" url="https://flugfiskeinorden.se/rat-faced-mcdougall/"
+    }
+    adjective tan "ljusbrun" neuter="ljusbrunt" plural="ljusbruna" {
+        note "Shops keep 'Tan' and dressings 'tanfärgad' ('tanfärgad flyrite'). 'Ljusbrun' chosen as plain Swedish; 'tanfärgad' is the tyers' alternative."
+        source "Rackelhanen: Uppströmsnymf ('Olive, brun eller tanfärgad flyrite')" url="https://www.rackelhane.se/swe/1280.htm"
+    }
+    adjective grizzly "grizzly" compound=#true {
+        source "Flugfiske i Norden: Griffith's Gnat ('Hackel: Grizzly tupp')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+    }
+    adjective olive "olivgrön" neuter="olivgrönt" plural="olivgröna" {
+        note "Tyers also write 'olive' and 'olivefärgat' ('Kropp: Olivefärgat garn'); 'olivgrön' is the Swedish adjective."
+        source "Flugfiske i Norden: Gimåpuppan ('Bind in det två olivgröna fjädrarna')" url="https://flugfiskeinorden.se/gimapuppan/"
+    }
+    adjective grey "grå" neuter="grått" plural="grå" {
+        note "Plural 'grå' (standard); 'gråa' is colloquial."
+    }
+    adjective dun "dun" compound=#true {
+        note "Kept in English as tyers do ('ljus dun', 'Mörk dun tupp'). Caution: Swedish 'dun' also means down (feathers); joined with a hyphen ('dun-hönshackel') it reads as the shade."
+        source "Flugfiske i Norden: John Atherton ('Stjärt: Tupphackel, ljus dun')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+    }
+    adjective yellow "gul" neuter="gult" plural="gula"
+    adjective green "grön" neuter="grönt" plural="gröna"
+    adjective gold "guldfärgad" neuter="guldfärgat" plural="guldfärgade" {
+        note "Dressings fold the metal into the noun ('guldtinsel', 'guldskalle'); as a separate colour word 'guldfärgad'."
+    }
+    adjective silver "silverfärgad" neuter="silverfärgat" plural="silverfärgade"
+    adjective copper "kopparfärgad" neuter="kopparfärgat" plural="kopparfärgade"
+    adjective bleached "blekt" neuter="blekt" plural="blekta" {
+        source "Sportfiskeprylar: Hjorthår (product 'Elk Body Hair - Blekt Has')" url="https://www.sportfiskeprylar.se/sv/krok-smaplock/flugbindningsmaterial/flugbindningsmaterial-2/har/hjorthar"
+    }
+    adjective elk "elk" compound=#true {
+        note "The natural colour of elk hair; 'naturfärgad' is what a dressing would say."
+    }
+    adjective hares-ear "haröra" compound=#true
+    adjective mallard "gräsand" compound=#true
+    adjective pheasant-tail "fasanstjärt" compound=#true
+    adjective partridge "rapphöna" compound=#true
+    adjective snipe "beckasin" compound=#true
+    adjective lead "blygrå" neuter="blygrått" plural="blygrå" {
+        note "The grey of lead and lead-free wire; a real adjective, so not a compound."
+    }
+    adjective deer "hjort" compound=#true
+    adjective squirrel "ekorre" compound=#true
+    adjective moose "älg" compound=#true
+    adjective tippet "tippet" compound=#true
+    adjective crest "crest" compound=#true {
+        note "Shops keep 'crest' for the golden pheasant's head feathers."
+    }
+    adjective pearl "pärlemorfärgad" neuter="pärlemorfärgat" plural="pärlemorfärgade" {
+        note "Shops keep 'Pearl'; 'pärlemor' is the Swedish word ('pärlemoglittrande plaststrip')."
+    }
+    adjective teal "krickand" compound=#true {
+        note "The barred black and white of teal flank, not the blue-green colour 'teal'."
+    }
+    adjective turkey "kalkon" compound=#true
+    adjective badger "badger" compound=#true {
+        source "Bojdaspon: Hackel nackar (product 'Tupphackel – Badger')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
+    }
+    adjective blue-dun "blue dun" compound=#true {
+        source "Min Bas Flugask ('Hackel: Blue dun Whiting tupp')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+    adjective purple "lila" invariable=#true
+    adjective orange "orange" invariable=#true {
+        note "'Orange' is uninflected in standard Swedish ('ett orange hackel'); 'orangea' in the plural also occurs ('Orangea räkan')."
+    }
+    adjective pink "rosa" invariable=#true
+    adjective claret "vinröd" neuter="vinrött" plural="vinröda" {
+        note "Shops keep 'Claret'; 'vinröd' is the Swedish colour word. Reviewer: tyers may prefer 'claret'."
+    }
+    adjective chartreuse "chartreuse" invariable=#true
+    adjective coch "coch-y-bonddu" compound=#true {
+        note "The Welsh name, as the pattern and English shops call the shade."
+    }
+    adjective muskrat "bisam" compound=#true {
+        note "Muskrat is 'bisam' ('Bisam/Mink/Opossum' in the shop); some Swedish dressings keep 'muskrat'."
+        source "Flugbindning.com: Hår (category 'Bisam/Mink/Opossum')" url="https://flugbindning.com/400243-flugbindning"
+    }
+    adjective clear "genomskinlig" neuter="genomskinligt" plural="genomskinliga" {
+        note "Alternative 'transparent' ('Tunn transparent nylonlina')."
+    }
+    adjective blue-black "blåsvart" neuter="blåsvart" plural="blåsvarta"
+    adjective blue "blå" neuter="blått" plural="blå"
+    adjective pardo "pardo" compound=#true {
+        source "Min Bas Flugask ('Coq de Leon, Pardo', 'Pardofärg')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+    }
+}
+
+parts {
+    noun larva-case "hus" gender=ett definite="huset" plural="hus" plural-definite="husen" {
+        note "The case a caddis larva builds round itself (Peeping Caddis); not the wing case (vingsäck), which a part named only \"case\" is."
+    }
+    noun tail-flash "stjärtflash" gender=en definite="stjärtflashen" plural="stjärtflasher" plural-definite="stjärtflasherna" {
+        note "Flash in the tail, one word in Swedish."
+    }
+    noun abdomen "bakkropp" gender=en definite="bakkroppen" plural="bakkroppar" plural-definite="bakkropparna" {
+        source "Rackelhanen: Superpuppan ('Bakkropp', 'Framkropp')" url="https://www.rackelhane.se/swe/1350.htm"
+    }
+    noun antennae "antenner" gender=en definite="antennerna" plural="antenner" plural-definite="antennerna" {
+        note "A plural part: the base form is the plural, for the label."
+    }
+    noun back "rygg" gender=en definite="ryggen" plural="ryggar" plural-definite="ryggarna" {
+        source "Rackelhanen: Tjeckisk djupnymf ('Rygg: Plastfilm')" url="https://www.rackelhane.se/swe/1280.htm"
+    }
+    noun band "band" gender=ett definite="bandet" plural="band" plural-definite="banden" {
+        note "The red floss band in a Royal Wulff body; Swedish dressings just list the floss in the body ('Påfågel - rött flossilke - påfågel')."
+    }
+    noun bead "kula" gender=en definite="kulan" plural="kulor" plural-definite="kulorna" {
+        note "Dressings often label it 'Skalle' or 'Guldskalle'; 'Kula' chosen to match the tying word."
+    }
+    noun beard "skägg" gender=ett definite="skägget" plural="skägg" plural-definite="skäggen" {
+        note "Also 'falskt hackel' (Rackelhanen)."
+    }
+    noun belly "buk" gender=en definite="buken" plural="bukar" plural-definite="bukarna" {
+        note "The lower wing of a Clouser; 'undersida' is the alternative."
+    }
+    noun body "kropp" gender=en definite="kroppen" plural="kroppar" plural-definite="kropparna"
+    noun butt "butt" gender=en definite="butten" plural="buttar" plural-definite="buttarna" {
+        note "The English salmon-fly word is kept in Swedish dressings."
+    }
+    noun case "vingsäck" gender=en definite="vingsäcken" plural="vingsäckar" plural-definite="vingsäckarna" {
+        note "Chosen 'vingsäck', the word in Swedish nymph dressings. Rejected 'vingkåpa' and 'vingfodral' (not found in Swedish tying texts); 'vinganlag' also occurs. Caution: two recipes (peeping-caddis, peeping-caddis-edwards) use 'case' for the caddis larva's case, which in Swedish is 'hus' (husmask): those would be mislabelled 'Vingsäck'."
+        source "Rackelhanen: Pheasant Tail Nymph ('Vingsäck: Fasanstjärtfibrer')" url="https://www.rackelhane.se/swe/1213.htm"
+        source "Flugfiske i Norden: Rödingfluga PT Nymf-Variant ('Vik över vingsäcken, fäst och klipp')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
+    }
+    noun collar "krage" gender=en definite="kragen" plural="kragar" plural-definite="kragarna" {
+        note "As in 'hackelkrage'."
+    }
+    noun cone "kon" gender=en definite="konen" plural="koner" plural-definite="konerna"
+    noun eyes "ögon" gender=ett definite="ögonen" plural="ögon" plural-definite="ögonen" {
+        note "A plural part (öga, ögon)."
+    }
+    noun feelers "spröt" gender=ett definite="sprötet" plural="spröt" plural-definite="spröten" {
+        note "'Spröt' as in 'stjärtspröt'; distinct from 'antenner'."
+    }
+    noun fibres "fibrer" gender=en definite="fibrerna" plural="fibrer" plural-definite="fibrerna" {
+        note "A plural part."
+    }
+    noun flash "flash" gender=en definite="flashen" plural="flasher" plural-definite="flasherna"
+    adjective front "främre" invariable=#true {
+        note "On its own a label 'Främre' (the front hackle); with a noun 'Främre ben', 'Främre kropp'. Dressings would also write 'Framkropp', 'Fronthackel'."
+    }
+    noun hackle "hackel" gender=ett definite="hacklet" plural="hackel" plural-definite="hacklen"
+    noun hair "hår" gender=ett definite="håret" plural="hår" plural-definite="håren"
+    noun head "huvud" gender=ett definite="huvudet" plural="huvuden" plural-definite="huvudena"
+    noun horns "horn" gender=ett definite="hornet" plural="horn" plural-definite="hornen" {
+        source "Rackelhanen: The Golden Parson ('Horn: Blå arapapegoja')" url="https://www.rackelhane.se/swe/1362.htm"
+    }
+    noun hotspot "hotspot" gender=en definite="hotspoten" plural="hotspots" plural-definite="hotspotsen"
+    noun hump "puckel" gender=en definite="puckeln" plural="pucklar" plural-definite="pucklarna"
+    noun larva "larv" gender=en definite="larven" plural="larver" plural-definite="larverna"
+    noun legs "ben" gender=ett definite="benet" plural="ben" plural-definite="benen" {
+        source "Flugfiske i Norden: Landinsekter ('Ben: knutna fasanstjärtsfibrer')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    adjective lower "undre" invariable=#true
+    adjective middle "mellersta" invariable=#true
+    noun mouth "mun" gender=en definite="munnen" plural="munnar" plural-definite="munnarna"
+    adjective over "övre" invariable=#true {
+        note "In 'over-rib': the rib over the back, 'övre ribb'."
+    }
+    noun overwing "övervinge" gender=en definite="övervingen" plural="övervingar" plural-definite="övervingarna" {
+        source "laxflugor.nu: Flugbindningsmaterial ('lämpar sig väldigt bra till övervinge på laxflugor')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+    }
+    noun palmer "kroppshackel" gender=ett definite="kroppshacklet" plural="kroppshackel" plural-definite="kroppshacklen" {
+        note "A hackle palmered over the body is a 'kroppshackel' in Swedish dressings; 'palmer' as a part name isn't used."
+        source "Min Bas Flugask ('Hackel: Blue dun Whiting tupp som kroppshackel')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+        source "Rackelhanen: The Golden Parson ('Kroppshackel', 'Fronthackel')" url="https://www.rackelhane.se/swe/1362.htm"
+    }
+    noun post "post" gender=en definite="posten" plural="poster" plural-definite="posterna" {
+        note "The wing post of a parachute; tyers also call it the wing ('vinge') or 'vingpost'."
+    }
+    adjective rear "bakre" invariable=#true
+    noun rib "ribb" gender=en definite="ribben" plural="ribbar" plural-definite="ribbarna" {
+        note "'Ribb' and 'ribbing' are both used as labels; 'ribb' is the Swedish form ('Bind in ribben'). 'Ribbning' rejected: not found as a label."
+        source "Flugfiske i Norden: John Atherton ('Bind in ribben och linda tråden')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+        source "Svenska Wikipedia: Flugbindning ('kompletteras vanligtvis med en s.k. ribb')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+    }
+    noun sighter "markör" gender=en definite="markören" plural="markörer" plural-definite="markörerna" {
+        note "The bright tuft that makes a low-riding fly visible. No settled Swedish word found; 'synlighetstofs' or 'indikator' are alternatives. Reviewer: please choose."
+    }
+    noun tag "tag" gender=en definite="tagen" plural="tagar" plural-definite="tagarna" {
+        note "Swedish dressings keep 'Tag'; 'tagg' (a Swedish word for a spike) is also seen and rejected."
+        source "Rackelhanen: The Golden Parson ('Tag: Silvertinsel och malvafärgat flossilke')" url="https://www.rackelhane.se/swe/1362.htm"
+    }
+    noun tail "stjärt" gender=en definite="stjärten" plural="stjärtar" plural-definite="stjärtarna" {
+        note "'Stjärt' is the dressing label; 'svans' is also heard."
+        source "Svenska Wikipedia: Flugbindning ('stjärt, kropp, hackel och vinge')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+    }
+    noun tails "stjärtspröt" gender=ett definite="stjärtsprötet" plural="stjärtspröt" plural-definite="stjärtspröten" {
+        note "Two rubber tails (Pat's Rubber Legs); 'stjärtspröt' is the nymph dressings' word for split tails."
+        source "Fiskeflugor.se: Bindbeskrivning, Rocken ('Stjärtspröt: Pheasent tail fasan 3 st spröt')" url="https://fiskeflugor.se/pages.php/page/21_flugmonster_bindbeskrivning"
+    }
+    noun thorax "thorax" gender=en definite="thoraxen" plural="thoraxar" plural-definite="thoraxarna" {
+        source "Flugfiske i Norden: Rödingfluga PT Nymf-Variant ('Thorax: Påfågelherl')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
+    }
+    noun throat "skägg" gender=ett definite="skägget" plural="skägg" plural-definite="skäggen" {
+        note "Throat and beard are both 'skägg' in Swedish dressings; 'strupe' (literal) rejected, 'falskt hackel' is the alternative."
+    }
+    noun topping "topping" gender=en definite="toppingen" plural="toppingar" plural-definite="toppingarna"
+    adjective under "undre" invariable=#true {
+        note "In 'under-rib': 'undre ribb'."
+    }
+    noun underwing "undervinge" gender=en definite="undervingen" plural="undervingar" plural-definite="undervingarna" {
+        source "Rackelhanen: Muddlerfamiljen ('Undervinge av grå ekorre')" url="https://www.rackelhane.se/swe/1032.htm"
+    }
+    adjective upper "övre" invariable=#true
+    noun weight "förtyngning" gender=en definite="förtyngningen" plural="förtyngningar" plural-definite="förtyngningarna" {
+        source "Rackelhanen: Pheasant Tail Nymph ('Förtyngning: Koppartråd eller blytråd')" url="https://www.rackelhane.se/swe/1213.htm"
+    }
+    noun wing "vinge" gender=en definite="vingen" plural="vingar" plural-definite="vingarna"
+    noun wings "vingar" gender=en definite="vingarna" plural="vingar" plural-definite="vingarna" {
+        note "A plural part."
+    }
+}
+
+words {
+    noun hook "krok" gender=en definite="kroken" plural="krokar" plural-definite="krokarna" {
+        source "Svenska Wikipedia: Fiskekrok" url="https://sv.wikipedia.org/wiki/Fiskekrok"
+    }
+    noun thread "bindtråd" gender=en definite="bindtråden" plural="bindtrådar" plural-definite="bindtrådarna" {
+        note "'Bindtråd' is the tying thread; 'bindsilke' is older. Plain 'tråd' is used once the context is clear."
+        source "Svenska Wikipedia: Flugbindning ('Sedan fäster man en bindtråd på kroken')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+        source "Flugfiske i Norden: Griffith's Gnat ('Linda bindtråden bak mot krokböjen')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+    }
+    noun shank "krokskaft" gender=ett definite="krokskaftet" plural="krokskaft" plural-definite="krokskaften" {
+        note "'Krokskaft' in tying texts; 'skaft' alone also ('rak med kort skaft'). The compound chosen so it parallels krokböj and kroköga."
+        source "Flugfiske i Norden: Fran Betters Ausable Wulff ('krokskaftets längd från krokögat')" url="https://flugfiskeinorden.se/fran-betters-ausable-wulff/"
+        source "Allt om flugfiske: Så binder du in ett torrflugehackel ('runt krokskaftet')" url="https://www.alltomflugfiske.se/sa-binder-du-in-ett-torrflugehackel/"
+    }
+    noun bend "krokböj" gender=en definite="krokböjen" plural="krokböjar" plural-definite="krokböjarna" {
+        source "Flugfiske i Norden: Griffith's Gnat ('Linda bindtråden bak mot krokböjen')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+        source "Rackelhanen: Goddard's Caddis ('krokskaftet från krokböjen och framåt')" url="https://www.rackelhane.se/swe/1400.htm"
+    }
+    noun eye "kroköga" gender=ett definite="krokögat" plural="krokögon" plural-definite="krokögonen" {
+        note "Tyers say 'krokögat' (the hook's eye). Swedish Wikipedia's fishing-hook article says 'ögla'; rejected, as tying texts don't use it."
+        source "Flugfiske i Norden: Griffith's Gnat ('binder in det vid krokögat')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+        source "Flugfiske i Norden: Gimåpuppan ('till ca 3mm bakom krokögat')" url="https://flugfiskeinorden.se/gimapuppan/"
+    }
+    noun gape "krokgap" gender=ett definite="krokgapet" plural="krokgap" plural-definite="krokgapen" {
+        note "Proportions are given in 'krokgapet' ('1,5 ggr krokgapet', 'mellan en och en halv och två gånger krokgapet'). Swedish writes the multiple with 'gånger' and the definite; the generated texts' 'två krokgap' / 'ett halvt krokgap' are understandable but the reviewer may prefer 'två gånger krokgapet' / 'halva krokgapet'."
+        source "Flugfiske i Norden: Rat Faced McDougall ('1,5 ggr krokgapet')" url="https://flugfiskeinorden.se/rat-faced-mcdougall/"
+        source "Flugfiske i Norden: John Atherton ('mellan en och en halv och två gånger krokgapet')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+    }
+    noun point "krokspets" gender=en definite="krokspetsen" plural="krokspetsar" plural-definite="krokspetsarna" {
+        source "Antispinn: Wide Jig Sprite ('fiskar med krokspetsen uppåt')" url="https://www.antispinn.se/flugbindning/krok/hullinglos-krok/65-sprite/sprite-wide-jig-50-pack"
+    }
+    noun tube "tub" gender=en definite="tuben" plural="tuber" plural-definite="tuberna" {
+        source "laxflugor.nu: Flugbindningsmaterial ('Tuber har blivit allt mer populärt')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+        source "Fiskejournalen: The Marabou Fly ('Smält ena änden på tuben och trä på kulan')" url="https://nyheter.fiskejournalen.se/reportage/the-marabou-fly-fangar-alla-rovfiskar-sa-binder-du-den/1518375"
+    }
+    noun bead "kula" gender=en definite="kulan" plural="kulor" plural-definite="kulorna" {
+        note "See brass-bead: 'skalle' is the common alternative ('strax bakom skallen')."
+        source "Fiskejournalen: The Marabou Fly ('Fäst tråden precis framför kulan')" url="https://nyheter.fiskejournalen.se/reportage/the-marabou-fly-fangar-alla-rovfiskar-sa-binder-du-den/1518375"
+        source "Flugfiskaren i Småland: Bindbeskrivning ('strax bakom skallen på flugan', the alternative)" url="https://blogg.fisheco.se/flugfiskaren/category/bindbeskrivning/"
+    }
+    noun cone "kon" gender=en definite="konen" plural="koner" plural-definite="konerna" {
+        source "laxflugor.nu: Flugbindningsmaterial ('Dom vanligaste är koner med en konisk form')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+    }
+    noun head "huvud" gender=ett definite="huvudet" plural="huvuden" plural-definite="huvudena" {
+        source "Flugfiske i Norden: Landinsekter ('göra ett litet huvud av bindtråden')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    noun turn "varv" gender=ett definite="varvet" plural="varv" plural-definite="varven" {
+        note "'Täta varv' (touching turns), 'glesa varv' (open turns), 'trådvarv' (thread turns)."
+        source "Flugfiske i Norden: Kopparribbat Haröra ('i täta varv ända fram till bakom krokögat')" url="https://flugfiskeinorden.se/kopparribbat-harora/"
+        source "Svenska Wikipedia: Flugbindning ('lindas i glesa varv över hårkroppen')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+    }
+    noun tag-end "ände" gender=en definite="änden" plural="ändar" plural-definite="ändarna" {
+        note "The loose end of thread after attaching it: 'den lösa änden'. 'Ände' alone reads naturally after 'Fäst bindtråden … och klipp av änden'; 'trådände' would also do."
+        source "Rackelhanen: Samlade flugbindartips ('läggs ett par bindtrådsvarv över den lösa änden')" url="http://www.rackelhane.se/swe/1606.htm"
+    }
+    noun butt "rotände" gender=en definite="rotänden" plural="rotändar" plural-definite="rotändarna" {
+        source "Flugfiske i Norden: Fran Betters Ausable Wulff ('Klipp av rotändarna på stjärten')" url="https://flugfiskeinorden.se/fran-betters-ausable-wulff/"
+        source "Fiskejournalen: Välj rätt flugor för höstharren ('klipp sedan av de bakåtriktade rotändarna')" url="https://nyheter.fiskejournalen.se/reportage/valj-ratt-flugor-for-hostharren/1437808"
+    }
+    noun tip "spets" gender=en definite="spetsen" plural="spetsar" plural-definite="spetsarna" {
+        note "'Spetsarna' for feather and fibre tips ('med spetsarna över krokögat'); for hair 'topparna' is also used ('så att topparna är lika långa'). 'Spets' chosen because it also fits a hackle's tip."
+        source "Fiskejournalen: Välj rätt flugor för höstharren ('fäst dem som en hel bunt med spetsarna över krokögat')" url="https://nyheter.fiskejournalen.se/reportage/valj-ratt-flugor-for-hostharren/1437808"
+        source "Flugfiske i Norden: Rat Faced McDougall ('så att topparna är lika långa', the alternative)" url="https://flugfiskeinorden.se/rat-faced-mcdougall/"
+    }
+    noun fibre "fiber" gender=en definite="fibern" plural="fibrer" plural-definite="fibrerna" {
+        source "Fiskejournalen: Välj rätt flugor för höstharren ('Klipp av fibrerna från två stora CdC-fjädrar')" url="https://nyheter.fiskejournalen.se/reportage/valj-ratt-flugor-for-hostharren/1437808"
+    }
+    noun strand "strå" gender=ett definite="strået" plural="strån" plural-definite="stråna" {
+        note "'Några strån Crystal Flash'. For peacock herl Swedish dressings also count 'två herl' ('Två påfågelherl'); 'strå' kept for all."
+        source "Min Bas Flugask ('Stjärt: Några få strån av small Crystal Flash Pearl')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
+        source "Rackelhanen: Tjeckisk djupnymf ('Några korta strån pearlfärgad lureflash')" url="https://www.rackelhane.se/swe/1280.htm"
+    }
+    noun bunch "bunt" gender=en definite="bunten" plural="buntar" plural-definite="buntarna" {
+        source "Rackelhanen: Muddlerfamiljen ('lägger på en bunt hjorthår')" url="https://www.rackelhane.se/swe/1032.htm"
+        source "Fiskejournalen: Välj rätt flugor för höstharren ('Dela sedan vingen till två likvärdiga buntar')" url="https://nyheter.fiskejournalen.se/reportage/valj-ratt-flugor-for-hostharren/1437808"
+    }
+    noun clump "bunt" gender=en definite="bunten" plural="buntar" plural-definite="buntarna" {
+        note "Swedish texts spin 'buntar' of deer hair too; 'tuss' (tuft) is possible but I found it only for CDC ('en liten tufs')."
+        source "Flugfiske i Norden: Rat Faced McDougall ('den första bunten hjortår', 'då jag spinner hjorthår')" url="https://flugfiskeinorden.se/rat-faced-mcdougall/"
+    }
+    noun noodle "rep" gender=ett definite="repet" plural="rep" plural-definite="repen" {
+        note "'Ett litet rep av dubbing' (Gimåpuppan). Rejected 'korv' (sausage), which is also heard but more colloquial."
+        source "Flugfiske i Norden: Gimåpuppan ('snurra därefter trådrullehållaren för att forma ett litet rep av dubbing')" url="https://flugfiskeinorden.se/gimapuppan/"
+    }
+    noun body "kropp" gender=en definite="kroppen" plural="kroppar" plural-definite="kropparna" {
+        source "Svenska Wikipedia: Flugbindning ('stjärt, kropp, hackel och vinge')" url="https://sv.wikipedia.org/wiki/Flugbindning"
+    }
+    noun excess "överskott" gender=ett definite="överskottet" plural="överskott" plural-definite="överskotten" {
+        source "Flugfiske i Norden: Griffith's Gnat ('klipp av överskottet baktill')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+    }
+    noun stub "stump" gender=en definite="stumpen" plural="stumpar" plural-definite="stumparna" {
+        source "Flugfiske i Norden: Bind en Red Tag MT ('bind fast den på en liten stump nylonlina')" url="https://flugfiskeinorden.se/bind-en-red-tag-mt-efter-barnkalaset/"
+    }
+    noun tie-down "infästning" gender=en definite="infästningen" plural="infästningar" plural-definite="infästningarna" {
+        note "'Jäms med infästningen'. A plain Swedish word for where something is fastened; I did not find it in a tying text I could open (one I could not open uses 'infästningspunkt')."
+        source "Svenska Wiktionary: infästning ('sätt varpå något är fäst; ställe där något är fäst')" url="https://sv.wiktionary.org/wiki/inf%C3%A4stning"
+    }
+    noun whip-finish "whipfinishknut" gender=en definite="whipfinishknuten" plural="whipfinishknutar" plural-definite="whipfinishknutarna" {
+        note "Tyers say 'whip finish' and write the knot 'whipfinishknut' (also 'whip finish-knut'). 'Avslutningsknut' (Flugfiske i Norden) is the Swedish alternative; rejected because the English term is what everyone uses at the vise."
+        source "Fiskejournalen: Välj rätt flugor för höstharren ('avsluta med en whipfinishknut')" url="https://nyheter.fiskejournalen.se/reportage/valj-ratt-flugor-for-hostharren/1437808"
+        source "Rackelhanen: Superpuppan ('avslutar med två whipfinishknutar')" url="https://www.rackelhane.se/swe/1350.htm"
+        source "Flugfiske i Norden: Landinsekter ('gör en avslutningsknut', the alternative)" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    noun figure-of-eight "åtta" gender=en definite="åttan" plural="åttor" plural-definite="åttorna" {
+        note "'Linda några åttor' (figure-of-eight turns). 'Kryssvarv' is the alternative."
+        source "Flugfiske i Norden: Fran Betters Ausable Wulff ('linda några åttor över kroken')" url="https://flugfiskeinorden.se/fran-betters-ausable-wulff/"
+    }
+    noun lighter "tändare" gender=en definite="tändaren" plural="tändare" plural-definite="tändarna" {
+        source "Svenska Wikipedia: Tändare ('Tändaren är en liten handhållen anordning för att skapa eld')" url="https://sv.wikipedia.org/wiki/T%C3%A4ndare"
+    }
+    noun base "bas" gender=en definite="basen" plural="baser" plural-definite="baserna" {
+        source "Fiskesnack: Binda Klinkhammers med foam stav vinge ('binda in hacklet vid ving basen')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/68348-binda-klinkhammers-med-foam-stav-vinge"
+    }
+    noun side "sida" gender=en definite="sidan" plural="sidor" plural-definite="sidorna" {
+        source "Rackelhanen: Superpuppan ('Flugan ska ha hackel enbart åt sidorna')" url="https://www.rackelhane.se/swe/1350.htm"
+    }
+    noun row "rad" gender=en definite="raden" plural="rader" plural-definite="raderna" {
+        source "Svenska Wiktionary: rad" url="https://sv.wiktionary.org/wiki/rad"
+    }
+    noun biot "biot" gender=en definite="bioten" plural="biots" plural-definite="biotsen" {
+        note "See goose-biot for the plural."
+        source "Flugbindning.com: Kalkon ('Biots från kalkon är vanligen längre än gåsbiots')" url="https://flugbindning.com/400046-kalkon"
+    }
+    noun hair "hår" gender=ett definite="håret" plural="hår" plural-definite="håren" {
+        note "Counted as 'sex hår' ('hår' is the same in the plural); 'hårstrå' is the alternative."
+        source "Svenska Wiktionary: hår" url="https://sv.wiktionary.org/wiki/h%C3%A5r"
+    }
+}
+
+hooks {
+    phrase dry-standard "Torrflugekrok, normallångt skaft" {
+        source "Flugfiske i Norden: John Atherton ('annan standard torrflugekrok')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
+    }
+    phrase wet-standard "Våtflugekrok, normallångt skaft, kraftig tråd"
+    phrase nymph-2xl "Nymfkrok, 2x långt skaft" {
+        source "Rackelhanen: Muddlerfamiljen ('med 3X förlängt krokskaft')" url="https://www.rackelhane.se/swe/1032.htm"
+    }
+    phrase dry-3xl-curved "Torrflugekrok, 3x långt skaft, böjt"
+    phrase streamer-4xl "Streamerkrok, 4x långt skaft" {
+        source "Rackelhanen: Kaninhårsstreamer ('Krok: Streamerkrok 8-10')" url="https://www.rackelhane.se/swe/1280.htm"
+    }
+    phrase emerger-curved "Böjd kläckarkrok" {
+        note "Emergers are 'kläckare' in Swedish."
+    }
+    phrase scud-curved "Böjd gammarus- och puppkrok"
+    phrase salmon-up-eye "Laxkrok, uppåtböjt öga"
+    phrase salmon-double "Dubbel laxkrok, uppåtböjt öga" {
+        source "laxflugor.nu: Flugbindningsmaterial ('binda på dubbelkrok istället för enkelkrok')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+    }
+    phrase salmon-treble "Trekrok, långt skaft, uppåtböjt öga"
+    phrase jig "Jiggkrok, 60° böjt öga" {
+        source "Antispinn: Wide Jig Sprite ('hullinglös jiggkrok')" url="https://www.antispinn.se/flugbindning/krok/hullinglos-krok/65-sprite/sprite-wide-jig-50-pack"
+    }
+    phrase saltwater-straight "Saltvattenskrok, rakt öga"
+    phrase tube-plastic "Plasttub"
+    phrase tube-aluminium "Aluminiumtub"
+    phrase tube-copper "Koppartub"
+    phrase tube-brass "Mässingstub"
+    phrase tube-needle "Nåltub"
+    phrase waddington "Waddingtonskaft"
+    phrase treble "Trekrok" {
+        source "laxflugor.nu: Flugbindningsmaterial ('Riktigt fina trekrokar')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+    }
+}
+
+steps {
+    phrase slide-bead "Trä på" {
+        source "Fiskejournalen: The Marabou Fly ('trä på kulan')" url="https://nyheter.fiskejournalen.se/reportage/the-marabou-fly-fangar-alla-rovfiskar-sa-binder-du-den/1518375"
+    }
+    phrase weight "Förtyng" {
+        source "Flugfiske i Norden: Rödingfluga PT Nymf-Variant ('Bind in förtyngningen och säkra tråden')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
+    }
+    phrase pull-over "Dra över" {
+        note "'Vik över' (fold over) is what nymph texts say of a wing case ('Vik över vingsäcken'); 'Dra över' fits foam backs and wing cases alike."
+    }
+    phrase spin "Spinn"
+    phrase attach-thread "Fäst tråden" {
+        source "Superpuppan.se: SBS ('Fäst bindtråden')" url="https://superpuppan.se/superpuppansbs"
+    }
+    phrase wrap-thread "Linda tråden"
+    phrase tie-in "Bind in" {
+        source "Flugfiske i Norden: Landinsekter ('Bind in vingen av CDC')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
+    }
+    phrase wind "Linda" {
+        note "'Linda' is the usual verb ('Linda hacklet', 'Linda koppartråden fram'); 'vira' is also used."
+    }
+    phrase dub "Dubba"
+    phrase tie-off "Fäst och klipp" {
+        note "English 'tie off'. Swedish texts say 'fäst och klipp (av)' ('Vik över vingsäcken, fäst och klipp'); 'Bind av' rejected, not used in tying texts."
+        source "Flugfiske i Norden: Rödingfluga PT Nymf-Variant ('fäst och klipp')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
+    }
+    phrase trim "Klipp"
+    phrase whip-finish "Avsluta med whipfinish" {
+        note "Swedish texts say 'avsluta med en whipfinishknut'; shortened for a title."
+    }
+    phrase palmer "Linda bakåt" {
+        note "Winding a hackle back towards the bend. 'Palmera' exists as a verb but Swedish texts mostly write 'linda hacklet bakåt'; the step texts (describe-sv.ts) say 'Palmera … tillbaka', which the reviewer may want to align."
+        source "Flugfiske i Norden: Griffith's Gnat ('linda hackler bakåt mot krokböjen')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"
+    }
+}

@@ -12,10 +12,10 @@ import {
   STAGE_LABELS,
   type Region,
 } from "../catalog/naturals";
-import { NATURALS, findNatural } from "../naturals";
+import { findNatural, localNaturals } from "../naturals";
 import { CATALOG, PATTERNS } from "../patterns";
 import { NATURAL_GROUPS, REGIONS, type Natural } from "../recipe/natural";
-import { MONTHS } from "../recipe/schema";
+import { MONTH_NAMES } from "../i18n/months";
 import { FlyScene } from "../render/FlyScene";
 import { Plate } from "./Gallery";
 import { NotFound } from "./NotFound";
@@ -27,7 +27,7 @@ import { REGION_KEY, useStoredSet } from "./storage";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-const MONTH_NAMES = MONTHS.map(capitalize);
+
 
 /** The natural turning in 3D, on its own. */
 export function NaturalViewer({ natural }: { natural: Natural }) {
@@ -81,12 +81,13 @@ export function NaturalsIndex() {
   useEffect(() => {
     document.title = t.site.titled(t.naturals.title);
   }, []);
-  const now = region ? activeIn(NATURALS, region, month) : [];
+  const naturals = localNaturals();
+  const now = region ? activeIn(naturals, region, month) : [];
   // Naturals about all year (shrimps, fish, larvae) are listed apart, so the calendar shows the hatches.
   const hatchFor = (n: Natural) => n.hatches.find((h) => h.region === region);
   const allYear = (n: Natural) => hatchMonths(hatchFor(n)!).length === 12;
-  const withHatch = region ? NATURALS.filter((n) => hatchFor(n) && !allYear(n)) : [];
-  const yearRound = region ? NATURALS.filter((n) => hatchFor(n) && allYear(n)) : [];
+  const withHatch = region ? naturals.filter((n) => hatchFor(n) && !allYear(n)) : [];
+  const yearRound = region ? naturals.filter((n) => hatchFor(n) && allYear(n)) : [];
 
   return (
     <main className="reading naturals-page">
@@ -112,7 +113,7 @@ export function NaturalsIndex() {
                   <th scope="col">{t.naturals.natural}</th>
                   {MONTH_NAMES.map((m, i) => (
                     <th key={m} scope="col" className={i === month ? "current" : undefined} title={m} aria-label={m}>
-                      <span aria-hidden="true">{m.charAt(0)}</span>
+                      <span aria-hidden="true">{m.charAt(0).toUpperCase()}</span>
                     </th>
                   ))}
                 </tr>
@@ -183,13 +184,13 @@ export function NaturalsIndex() {
       )}
 
       {NATURAL_GROUPS.map((g) => {
-        const naturals = NATURALS.filter((n) => n.group === g);
-        if (naturals.length === 0) return null;
+        const inGroup = naturals.filter((n) => n.group === g);
+        if (inGroup.length === 0) return null;
         return (
           <section key={g}>
             <h2>{GROUP_LABELS[g]}</h2>
             <ul className="natural-cards">
-              {naturals.map((n) => (
+              {inGroup.map((n) => (
                 <NaturalCard key={n.id} natural={n} picture={pictures?.[n.id]} />
               ))}
             </ul>

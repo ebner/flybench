@@ -1,47 +1,63 @@
 import type { Natural, NATURAL_GROUPS, REGIONS, STAGES } from "../recipe/natural";
 import { MONTHS, type Recipe } from "../recipe/schema";
 import { gapeMm, HOOK_MODELS, unitMm, hookModel } from "../tying/hook";
+import { lang } from "../i18n/lang";
+import { localized } from "../i18n/localized";
+import { MONTH_NAMES } from "../i18n/months";
 
 export type Region = (typeof REGIONS)[number];
 
-export const REGION_LABELS: Record<Region, string> = {
-  "southern-sweden": "Southern Sweden",
-  "northern-scandinavia": "Northern Scandinavia",
-  "british-isles": "British Isles",
-  "central-europe": "Central Europe",
-  "northern-usa": "Northern USA",
-};
+export const REGION_LABELS = localized<Record<Region, string>>({
+  en: {
+    "southern-sweden": "Southern Sweden", "northern-scandinavia": "Northern Scandinavia", "british-isles": "British Isles",
+    "central-europe": "Central Europe", "northern-usa": "Northern USA",
+  },
+  sv: {
+    "southern-sweden": "Södra Sverige", "northern-scandinavia": "Norra Skandinavien", "british-isles": "Brittiska öarna",
+    "central-europe": "Centraleuropa", "northern-usa": "Norra USA",
+  },
+  de: {
+    "southern-sweden": "Südschweden", "northern-scandinavia": "Nordskandinavien", "british-isles": "Britische Inseln",
+    "central-europe": "Mitteleuropa", "northern-usa": "Nördliche USA",
+  },
+});
 
-export const GROUP_LABELS: Record<(typeof NATURAL_GROUPS)[number], string> = {
-  mayfly: "Mayflies",
-  caddis: "Caddis",
-  stonefly: "Stoneflies",
-  chironomid: "Midges",
-  damselfly: "Damselflies",
-  terrestrial: "Land insects",
-  baitfish: "Small fish",
-  crustacean: "Shrimps and prawns",
-  leech: "Leeches",
-};
+export const GROUP_LABELS = localized<Record<(typeof NATURAL_GROUPS)[number], string>>({
+  en: {
+    mayfly: "Mayflies", caddis: "Caddis", stonefly: "Stoneflies", chironomid: "Midges", damselfly: "Damselflies",
+    terrestrial: "Land insects", baitfish: "Small fish", crustacean: "Shrimps and prawns", leech: "Leeches",
+  },
+  sv: {
+    mayfly: "Dagsländor", caddis: "Nattsländor", stonefly: "Bäcksländor", chironomid: "Fjädermyggor", damselfly: "Flicksländor",
+    terrestrial: "Landinsekter", baitfish: "Småfisk", crustacean: "Märlor och räkor", leech: "Iglar",
+  },
+  de: {
+    mayfly: "Eintagsfliegen", caddis: "Köcherfliegen", stonefly: "Steinfliegen", chironomid: "Zuckmücken", damselfly: "Kleinlibellen",
+    terrestrial: "Landinsekten", baitfish: "Kleinfische", crustacean: "Bachflohkrebse und Garnelen", leech: "Egel",
+  },
+});
 
-export const STAGE_LABELS: Record<(typeof STAGES)[number], string> = {
-  nymph: "nymph",
-  larva: "larva",
-  pupa: "pupa",
-  emerger: "emerger",
-  dun: "dun",
-  spinner: "spinner",
-  adult: "adult",
-  juvenile: "young",
-};
+/** A stage as it is named in a sentence ("nymph"); German nouns keep their capital. */
+export const STAGE_LABELS = localized<Record<(typeof STAGES)[number], string>>({
+  en: { nymph: "nymph", larva: "larva", pupa: "pupa", emerger: "emerger", dun: "dun", spinner: "spinner", adult: "adult", juvenile: "young" },
+  sv: { nymph: "nymf", larva: "larv", pupa: "puppa", emerger: "kläckande", dun: "subimago", spinner: "imago", adult: "fullbildad", juvenile: "ungfisk" },
+  de: { nymph: "Nymphe", larva: "Larve", pupa: "Puppe", emerger: "Schlüpfend", dun: "Subimago", spinner: "Imago", adult: "Adult", juvenile: "Jungfisch" },
+});
 
-export const RIDES_TEXT: Record<Natural["rides"], string> = {
-  "on-surface": "Rides on the surface.",
-  "in-film": "Floats low, in the surface film.",
-  drifting: "Drifts with the current.",
-  swimming: "Swims.",
-  crawling: "Crawls on the bottom.",
-};
+export const RIDES_TEXT = localized<Record<Natural["rides"], string>>({
+  en: {
+    "on-surface": "Rides on the surface.", "in-film": "Floats low, in the surface film.", drifting: "Drifts with the current.",
+    swimming: "Swims.", crawling: "Crawls on the bottom.",
+  },
+  sv: {
+    "on-surface": "Sitter på ytan.", "in-film": "Flyter lågt, i ytfilmen.", drifting: "Driver med strömmen.", swimming: "Simmar.",
+    crawling: "Kryper på botten.",
+  },
+  de: {
+    "on-surface": "Sitzt auf der Oberfläche.", "in-film": "Treibt tief im Oberflächenfilm.", drifting: "Treibt mit der Strömung.",
+    swimming: "Schwimmt.", crawling: "Krabbelt am Grund.",
+  },
+});
 
 /** Month numbers (0 = January) a hatch covers; a range may run over the new year. */
 export function hatchMonths(h: Natural["hatches"][number]): number[] {
@@ -104,8 +120,9 @@ export function naturalLengthFor(n: Natural, recipe: Recipe): number {
 
 /** "April to October", or "All year". */
 export function hatchText(h: Natural["hatches"][number]): string {
-  const month = (m: string) => m.charAt(0).toUpperCase() + m.slice(1);
-  return hatchMonths(h).length === 12 ? "All year" : `${month(h.from)} to ${month(h.to)}`;
+  const name = (m: string) => MONTH_NAMES[MONTHS.indexOf(m as (typeof MONTHS)[number])]!;
+  const words = { en: ["All year", "to"], sv: ["Hela året", "till"], de: ["Das ganze Jahr", "bis"] }[lang()];
+  return hatchMonths(h).length === 12 ? words[0]! : `${name(h.from)} ${words[1]} ${name(h.to)}`;
 }
 
 /** "6–11 mm" */

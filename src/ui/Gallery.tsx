@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, 
 import { DIFFICULTY_LABELS, factsLine, IMITATES_LABELS, originLine, SPECIES_LABELS, TYPE_LABELS } from "../catalog/describe";
 import { learningPath } from "../catalog/techniques";
 import { filtersFromQuery, filtersToQuery, versionMatches, type CatalogEntry, type Filters } from "../catalog/search";
-import { CATALOG, SEARCH } from "../patterns";
+import { CATALOG, catalogSearch } from "../patterns";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/schema";
 import { bestCoverage, colorWord, missingKinds, type Need } from "../catalog/inventory";
@@ -10,6 +10,8 @@ import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
 import { href, replaceUrl } from "./router";
 import { t } from "../i18n/ui";
+import { lang } from "../i18n/lang";
+import { MONTH_NAMES } from "../i18n/months";
 import { linkTo } from "./linkTo";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -24,7 +26,8 @@ export function Gallery({ query }: { query: string }) {
   }, [query]);
   const renders = useRenders();
   const owned = useStoredSet(INVENTORY_KEY);
-  const found = useMemo(() => SEARCH.search(filters), [filters]);
+  const language = lang();
+  const found = useMemo(() => catalogSearch().search(filters), [filters, language]);
   // A family counts as tieable, or one material short, by its member closest to tieable,
   // among the versions that meet the filters (search matched the family on one of those).
   const family = (e: CatalogEntry) => {
@@ -47,7 +50,7 @@ export function Gallery({ query }: { query: string }) {
   const toggle = <K extends keyof Filters>(key: K, value: Filters[K]) =>
     setFilters({ ...filters, [key]: filters[key] === value ? undefined : value });
 
-  const typeCounts = SEARCH.facetCounts("type", FLY_TYPES, filters);
+  const typeCounts = catalogSearch().facetCounts("type", FLY_TYPES, filters);
   const usedTypes = FLY_TYPES.filter((t) => CATALOG.some((e) => e.recipe.type === t));
   // The first fly on the learning path.
   const beginner = useMemo(() => {
@@ -192,9 +195,9 @@ function MoreFilters({
     .filter((m) => CATALOG.some((e) => e.materials.has(m)))
     .sort((a, b) => MATERIALS[a].name.localeCompare(MATERIALS[b].name));
   const chosen = filters.materials ?? [];
-  const imitatesCounts = SEARCH.facetCounts("imitates", imitates, filters);
-  const difficultyCounts = SEARCH.facetCounts("difficulty", DIFFICULTIES, filters);
-  const speciesCounts = SEARCH.facetCounts("species", species, filters);
+  const imitatesCounts = catalogSearch().facetCounts("imitates", imitates, filters);
+  const difficultyCounts = catalogSearch().facetCounts("difficulty", DIFFICULTIES, filters);
+  const speciesCounts = catalogSearch().facetCounts("species", species, filters);
 
   const chipGroup = <K extends "imitates" | "difficulty" | "species">(
     key: K,
@@ -230,9 +233,9 @@ function MoreFilters({
         <legend>{t.gallery.season}</legend>
         <select value={filters.month ?? ""} onChange={(e) => setFilters({ ...filters, month: (e.target.value || undefined) as Filters["month"] })}>
           <option value="">{t.gallery.anyMonth}</option>
-          {MONTHS.map((m) => (
+          {MONTHS.map((m, i) => (
             <option key={m} value={m}>
-              {capitalize(m)}
+              {MONTH_NAMES[i]}
             </option>
           ))}
         </select>

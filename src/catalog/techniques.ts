@@ -1,6 +1,9 @@
 import { ridesPointUp } from "../tying/hook";
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import type { Recipe } from "../recipe/schema";
+import { lang, type Lang } from "../i18n/lang";
+import { TECHNIQUES_DE } from "./techniques-de";
+import { TECHNIQUES_SV } from "./techniques-sv";
 
 /**
  * Techniques: the things a tyer learns, recognised from recipe steps. Each technique
@@ -220,8 +223,20 @@ A drop of head cement or varnish makes it permanent.`,
 
 const BY_ID = new Map(TECHNIQUES.map((t) => [t.id, t]));
 
+/** Technique texts in other languages, by technique id; a draft until reviewed. What they leave out is English. */
+export type TechniqueTexts = Record<string, Omit<Technique, "id">>;
+const TRANSLATED: Partial<Record<Lang, TechniqueTexts>> = { sv: TECHNIQUES_SV, de: TECHNIQUES_DE };
+
+/** A technique, in the page's language. */
 export function technique(id: string): Technique | undefined {
-  return BY_ID.get(id);
+  const english = BY_ID.get(id);
+  const own = TRANSLATED[lang()]?.[id];
+  return english && (own ? { id, ...own } : english);
+}
+
+/** Every technique, in the page's language. */
+export function localTechniques(): Technique[] {
+  return TECHNIQUES.map((t) => technique(t.id)!);
 }
 
 /** The technique a recipe step uses, or null for steps that teach nothing on their own. */
