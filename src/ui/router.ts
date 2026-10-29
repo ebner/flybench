@@ -11,7 +11,8 @@ import { useEffect, useState } from "react";
  *   /learn/                the learning path
  *   /about/                what Flybench is
  *   /box/                  the user's fly box; /materials/ their materials inventory;
- *                          /log/ their tying log
+ *                          /log/ their tying log; /trip/?month=6&water=river&species=trout
+ *                          a fly box for a trip
  * Older hash links (#/fly/<id>/<step>, #/<id>, #/?type=dry) are redirected (see `legacyRoute`).
  */
 export type Route =
@@ -24,13 +25,14 @@ export type Route =
   | { page: "box" }
   | { page: "materials" }
   | { page: "log" }
+  | { page: "trip" }
   | { page: "naturals" }
   | { page: "natural"; id: string }
   | { page: "not-found"; path: string };
 
 const BASE = import.meta.env.BASE_URL;
 
-const SINGLE = ["techniques", "learn", "about", "box", "materials", "log", "naturals"] as const;
+const SINGLE = ["techniques", "learn", "about", "box", "materials", "log", "trip", "naturals"] as const;
 
 /** Parses a path relative to the site's base, with its query: "fly/red-tag/?step=4". */
 export function parseRoute(relative: string): Route {
@@ -93,6 +95,7 @@ export const href = {
   box: () => `${BASE}box/`,
   materials: () => `${BASE}materials/`,
   log: () => `${BASE}log/`,
+  trip: (query = "") => `${BASE}trip/${query ? `?${query}` : ""}`,
   naturals: () => `${BASE}naturals/`,
   natural: (id: string) => `${BASE}natural/${encodeURIComponent(id)}/`,
 };

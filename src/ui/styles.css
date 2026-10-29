@@ -2249,3 +2249,64 @@ select {
   font-weight: 600;
   text-decoration: none;
 }
+
+/* A fly box for a trip. */
+.trip-selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin: 0.8rem 0 0;
+}
+
+.trip-selects select {
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+}
+
+.trip-flies {
+  list-style: none;
+  padding: 0;
+}
+
+.trip-fly {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr auto;
+  gap: 0 1rem;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.trip-picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.trip-name {
+  font-size: var(--step-1);
+}
+
+.trip-why {
+  margin: 0.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.trip-more summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+@media (max-width: 40rem) {
+  .trip-fly {
+    grid-template-columns: 5rem 1fr;
+  }
+
+  .trip-fly > button {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
