@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { inLang, langPrefix, setLang, splitLang, type Lang } from "../i18n/lang";
 
 /**
  * Real paths under the site's base, so every page has its own address for sharing and
@@ -31,6 +32,8 @@ export type Route =
   | { page: "not-found"; path: string };
 
 const BASE = import.meta.env.BASE_URL;
+/** Where the current language's pages start: the base, then "sv/" for Swedish. */
+const root = () => BASE + langPrefix();
 
 const SINGLE = ["techniques", "learn", "about", "box", "materials", "log", "naturals"] as const;
 
@@ -80,7 +83,7 @@ export function legacyRoute(hash: string): Route | null {
 }
 
 export const href = {
-  gallery: (query = "") => (query ? `${BASE}?${query}` : BASE),
+  gallery: (query = "") => (query ? `${root()}?${query}` : root()),
   fly: (id: string, step?: number, size?: number, colours?: string) => {
     // The colours ("body:yellow,tail:red") are written as they are, readable in a shared link.
     const query = [
@@ -89,18 +92,18 @@ export const href = {
     ]
       .filter(Boolean)
       .join("&");
-    return `${BASE}fly/${encodeURIComponent(id)}/${query ? `?${query}` : ""}`;
+    return `${root()}fly/${encodeURIComponent(id)}/${query ? `?${query}` : ""}`;
   },
-  techniques: () => `${BASE}techniques/`,
-  technique: (id: string) => `${BASE}technique/${encodeURIComponent(id)}/`,
-  learn: () => `${BASE}learn/`,
-  about: () => `${BASE}about/`,
-  box: () => `${BASE}box/`,
-  materials: () => `${BASE}materials/`,
-  log: () => `${BASE}log/`,
-  trip: (query = "") => `${BASE}trip/${query ? `?${query}` : ""}`,
-  naturals: () => `${BASE}naturals/`,
-  natural: (id: string) => `${BASE}natural/${encodeURIComponent(id)}/`,
+  techniques: () => `${root()}techniques/`,
+  technique: (id: string) => `${root()}technique/${encodeURIComponent(id)}/`,
+  learn: () => `${root()}learn/`,
+  about: () => `${root()}about/`,
+  box: () => `${root()}box/`,
+  materials: () => `${root()}materials/`,
+  log: () => `${root()}log/`,
+  trip: (query = "") => `${root()}trip/${query ? `?${query}` : ""}`,
+  naturals: () => `${root()}naturals/`,
+  natural: (id: string) => `${root()}natural/${encodeURIComponent(id)}/`,
 };
 
 /** The address of a page. */
@@ -117,17 +120,22 @@ export function routeHref(route: Route): string {
     case "trip":
       return href.trip(route.query);
     case "not-found":
-      return BASE + route.path;
+      return root() + route.path;
     default:
       return href[route.page]();
   }
 }
 
-/** The current address relative to the base, as `parseRoute` reads it. */
+/** The current address relative to the base and the language, as `parseRoute` reads it; sets the language. */
 function currentRelative(): string {
   const path = location.pathname.startsWith(BASE) ? location.pathname.slice(BASE.length) : location.pathname;
-  return path + location.search;
+  const [l, rest] = splitLang(path + location.search);
+  setLang(l);
+  return rest;
 }
+
+/** The address of a page in another language. */
+export const routeHrefIn = (l: Lang, route: Route) => inLang(l, () => routeHref(route));
 
 const NAVIGATE = "flybench:navigate";
 

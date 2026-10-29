@@ -5,6 +5,7 @@
  * when it starts. Kept free of React and three.js so it runs in Node.
  */
 import type { Recipe } from "../recipe/schema";
+import { LANGS, langPrefix, type Lang } from "../i18n/lang";
 import { materialsList } from "../tying/describe";
 import { simulate } from "../tying/simulate";
 import { DIFFICULTY_LABELS, factsLine, factsSentence, originLine } from "./describe";
@@ -191,16 +192,26 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
   return pages;
 }
 
-/** The page's HTML file: the app's index.html with this page's head and content. */
-export function pageHtml(template: string, page: Page, site: { url?: string; base: string; image?: string }): string {
+/**
+ * The page's HTML file: the app's index.html with this page's head and content, in `lang`
+ * (its path is under that language's prefix), linking the same page in the other languages.
+ */
+export function pageHtml(template: string, page: Page, site: { url?: string; base: string; image?: string; lang?: Lang }): string {
+  const lang = site.lang ?? "en";
   const absolute = (path: string) => (site.url ? site.url.replace(/\/$/, "") + site.base + path : undefined);
-  const url = absolute(page.path);
+  const url = absolute(langPrefix(lang) + page.path);
   const image = site.image && absolute(site.image);
+  // Every language's version of the page, by address (absolute when the site's address is known).
+  const version = (l: Lang) => absolute(langPrefix(l) + page.path) ?? site.base + langPrefix(l) + page.path;
+  const alternates = page.path.endsWith(".html")
+    ? []
+    : [...LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${escape(version(l))}" />`), `<link rel="alternate" hreflang="x-default" href="${escape(version("en"))}" />`];
   const head = [
     `<title>${escape(page.title)}</title>`,
     `<meta name="description" content="${escape(page.description)}" />`,
     page.noindex ? `<meta name="robots" content="noindex" />` : "",
     url ? `<link rel="canonical" href="${escape(url)}" />` : "",
+    ...alternates,
     `<meta property="og:site_name" content="${SITE_NAME}" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:title" content="${escape(page.title)}" />`,
@@ -216,5 +227,7 @@ export function pageHtml(template: string, page: Page, site: { url?: string; bas
     .replace(/\s*<meta name="description"[^>]*>/, "")
     .replace(/<title>[^<]*<\/title>/, () => head);
   if (withHead === template) throw new Error("index.html has no <title> to replace");
-  return withHead.replace('<div id="root"></div>', () => `<div id="root">${page.body}</div>`);
+  return withHead
+    .replace(/<html(\s[^>]*)?>/, `<html lang="${lang}">`)
+    .replace('<div id="root"></div>', () => `<div id="root">${page.body}</div>`);
 }

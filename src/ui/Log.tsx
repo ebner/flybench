@@ -4,7 +4,9 @@ import { technique } from "../catalog/techniques";
 import { PATTERNS } from "../patterns";
 import { href } from "./router";
 import { LOG_KEY, useStoredList } from "./storage";
-import { BenchNav, STORED_NOTE } from "./Personal";
+import { BenchNav, storedNote } from "./Personal";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
 
@@ -12,16 +14,16 @@ export function useLog() {
   return useStoredList<LogEntry>(LOG_KEY, isLogEntry);
 }
 
-/** "29 October 2026" */
+/** "29 October 2026", in the page's language. */
 function dateText(date: string): string {
   const [y, m, d] = date.split("-").map(Number);
-  return new Date(y!, m! - 1, d!).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  return new Date(y!, m! - 1, d!).toLocaleDateString(t.log.locale, { day: "numeric", month: "long", year: "numeric" });
 }
 
 export function Log() {
   const log = useLog();
   useEffect(() => {
-    document.title = "Your tying log, Flybench";
+    document.title = t.site.titled(t.log.title);
   }, []);
   const all = recipes();
   const p = useMemo(() => progress(log.items, all), [log.items]);
@@ -34,32 +36,29 @@ export function Log() {
   return (
     <main className="reading log-page">
       <BenchNav current="log" />
-      <h1>Your tying log</h1>
-      <p className="lede">The flies you have tied. On a pattern's page, “I tied this” adds them here.</p>
-      <p className="stored-note">{STORED_NOTE}</p>
+      <h1>{t.log.heading}</h1>
+      <p className="lede">{t.log.intro}</p>
+      <p className="stored-note">{storedNote()}</p>
       {log.items.length === 0 ? (
-        <p>
-          Nothing logged yet. <a href={href.learn()}>The learning path</a> is a good place to start.
-        </p>
+        <p>{t.log.empty(linkTo(href.learn()))}</p>
       ) : (
         <>
-          <p className="summary">
-            {flies} {flies === 1 ? "fly" : "flies"} of {counts.size} {counts.size === 1 ? "pattern" : "patterns"}.
-          </p>
+          <p className="summary">{t.log.summary(flies, counts.size)}</p>
 
-          <h2>Progress</h2>
+          <h2>{t.log.progress}</h2>
           <p>
-            <a href={href.learn()}>Learning path</a>: {tiedOnPath} of {p.path.length} flies tied
-            {nextOnPath ? (
-              <>
-                ; next is the <a href={href.fly(nextOnPath.recipe.id)}>{nextOnPath.recipe.name}</a>.
-              </>
-            ) : (
-              ", the whole path."
-            )}
+            <a href={href.learn()}>{t.log.path}</a>
+            {t.log.pathTied(tiedOnPath, p.path.length)}
+            {nextOnPath
+              ? t.log.next(
+                  <a key="next" href={href.fly(nextOnPath.recipe.id)}>
+                    {nextOnPath.recipe.name}
+                  </a>,
+                )
+              : t.log.whole}
           </p>
           <p>
-            Techniques practised: {p.practised.size} of {p.techniques}
+            {t.log.practised(p.practised.size, p.techniques)}
             {practised.length > 0 && (
               <>
                 {" "}
@@ -76,7 +75,7 @@ export function Log() {
             .
           </p>
 
-          <h2>Flies tied</h2>
+          <h2>{t.log.flies}</h2>
           <ul className="log-entries">
             {newestFirst(log.items).map((e) => {
               const recipe = all.find((r) => r.id === e.id);
@@ -86,16 +85,16 @@ export function Log() {
                   <span className="log-date">{dateText(e.date)}</span>
                   <span className="log-fly">
                     {e.count} × {recipe ? <a href={href.fly(e.id, undefined, e.size, e.colours)}>{name}</a> : name}
-                    {e.size !== undefined && <>, size {e.size}</>}
-                    {e.colours && <>, in your colours</>}
+                    {e.size !== undefined && t.log.size(e.size)}
+                    {e.colours && t.log.yourColours}
                   </span>
                   {e.note && <span className="log-note">{e.note}</span>}
                   <button
                     className="link-button"
                     onClick={() => log.save(log.items.filter((x) => x.key !== e.key))}
-                    aria-label={`Remove ${e.count} ${name} from ${dateText(e.date)}`}
+                    aria-label={t.log.removeLabel(e.count, name, dateText(e.date))}
                   >
-                    Remove
+                    {t.log.remove}
                   </button>
                 </li>
               );
@@ -147,12 +146,12 @@ export function LogForm({
       }}
     >
       <label>
-        How many
+        {t.log.howMany}
         <input type="number" min={1} max={999} value={count} onChange={(e) => setCount(e.target.value)} autoFocus />
       </label>
       {sizes.length > 0 && (
         <label>
-          Hook size
+          {t.log.hookSize}
           <select value={chosenSize} onChange={(e) => setChosenSize(Number(e.target.value))}>
             {sizes.map((s) => (
               <option key={s} value={s}>
@@ -163,19 +162,19 @@ export function LogForm({
         </label>
       )}
       <label>
-        Day
+        {t.log.day}
         <input type="date" value={date} max={today()} onChange={(e) => setDate(e.target.value)} />
       </label>
       <label className="log-form-note">
-        Note
-        <input type="text" value={note} maxLength={200} onChange={(e) => setNote(e.target.value)} placeholder="What went well, what to try next time" />
+        {t.log.note}
+        <input type="text" value={note} maxLength={200} onChange={(e) => setNote(e.target.value)} placeholder={t.log.notePlaceholder} />
       </label>
       <div className="log-form-buttons">
         <button type="submit" className="box-toggle">
-          Add to your tying log
+          {t.log.add}
         </button>
         <button type="button" className="link-button" onClick={() => onClose(false)}>
-          Cancel
+          {t.log.cancel}
         </button>
       </div>
     </form>

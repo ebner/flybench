@@ -48,6 +48,17 @@ describe("site pages", () => {
     expect(html).toMatch(/<div id="root"><main class="reading"><h1>Adams<\/h1>/);
   });
 
+  it("write a page in another language under its prefix, linking every language's version", () => {
+    const adams = pages.find((p) => p.path === "fly/adams/")!;
+    const html = pageHtml(TEMPLATE, adams, { url: "https://ebner.github.io", base: "/flybench/", image: "og/adams.jpg", lang: "sv" });
+    expect(html).toContain('<link rel="canonical" href="https://ebner.github.io/flybench/sv/fly/adams/" />');
+    expect(html).toContain('<link rel="alternate" hreflang="de" href="https://ebner.github.io/flybench/de/fly/adams/" />');
+    expect(html).toContain('<link rel="alternate" hreflang="x-default" href="https://ebner.github.io/flybench/fly/adams/" />');
+    // The preview picture is the site's, not under the language.
+    expect(html).toContain('content="https://ebner.github.io/flybench/og/adams.jpg"');
+    expect(html).toMatch(/<html lang="sv">/);
+  });
+
   it("leave out absolute links when the site's address is unknown, and keep personal pages out of search", () => {
     const box = pages.find((p) => p.path === "box/")!;
     const html = pageHtml(TEMPLATE, box, { base: "/" });

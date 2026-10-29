@@ -9,6 +9,8 @@ import { bestCoverage, colorWord, missingKinds, type Need } from "../catalog/inv
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
 import { href, replaceUrl } from "./router";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -58,26 +60,23 @@ export function Gallery({ query }: { query: string }) {
     <main className="gallery">
       <section className="intro">
         <div className="intro-text">
-          <h1>Fly patterns to tie, step by step, in 3D</h1>
-          <p>
-            Every pattern can be turned, paused and replayed one step at a time, with its materials, its history and how to
-            fish it.
-          </p>
+          <h1>{t.gallery.heading}</h1>
+          <p>{t.gallery.intro}</p>
           <p className="intro-actions">
             {beginner && (
               <a className="primary-link" href={href.fly(beginner.recipe.id)}>
-                New to tying? Start with the {beginner.recipe.name}
+                {t.gallery.beginner(beginner.recipe.name)}
               </a>
             )}
-            <a href={href.learn()}>Follow the learning path</a>
+            <a href={href.learn()}>{t.gallery.path}</a>
           </p>
         </div>
         {renders && <FlyOfTheDay renders={renders} />}
       </section>
 
-      <section className={moreOpen ? "finder more-open" : "finder"} aria-label="Find a pattern">
+      <section className={moreOpen ? "finder more-open" : "finder"} aria-label={t.gallery.finder}>
         <label className="search">
-          <span className="visually-hidden">Search patterns</span>
+          <span className="visually-hidden">{t.gallery.search}</span>
           <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
             <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
             <path d="M15.5 15.5 21 21" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -86,15 +85,15 @@ export function Gallery({ query }: { query: string }) {
             type="search"
             value={filters.q ?? ""}
             onChange={(e) => setFilters({ ...filters, q: e.target.value || undefined })}
-            placeholder="Name, insect or material"
+            placeholder={t.gallery.placeholder}
             autoComplete="off"
           />
         </label>
 
         {/* On a phone the types are among the "more" filters, unless one is chosen. */}
-        <div className={filters.type ? "chips types chosen" : "chips types"} role="group" aria-label="Type">
+        <div className={filters.type ? "chips types chosen" : "chips types"} role="group" aria-label={t.gallery.type}>
           <button className={filters.type ? "" : "on"} aria-pressed={!filters.type} onClick={() => setFilters({ ...filters, type: undefined })}>
-            All types
+            {t.gallery.allTypes}
           </button>
           {usedTypes.map((t) => (
             <button
@@ -114,43 +113,41 @@ export function Gallery({ query }: { query: string }) {
             className={filters.have ? "on" : ""}
             aria-pressed={Boolean(filters.have)}
             onClick={() => setFilters({ ...filters, have: filters.have ? undefined : "1" })}
-            title={owned.values.size === 0 ? "Tick your materials first, on the Materials page" : undefined}
+            title={owned.values.size === 0 ? t.gallery.haveFirst : undefined}
           >
-            Tie with what I have
+            {t.gallery.have}
           </button>
           {filters.have && owned.values.size === 0 && (
-            <span className="hint">
-              Nothing ticked yet: <a href={href.materials()}>tell Flybench what you have</a>.
-            </span>
+            <span className="hint">{t.gallery.nothingTicked(linkTo(href.materials()))}</span>
           )}
         </div>
 
         <button className="more-toggle" aria-expanded={moreOpen} onClick={() => setMoreOpen(!moreOpen)}>
-          {moreOpen ? "Fewer filters" : "More filters"}
+          {moreOpen ? t.gallery.fewer : t.gallery.more}
         </button>
         {moreOpen && <MoreFilters filters={filters} setFilters={setFilters} toggle={toggle} />}
       </section>
 
       <div className="result-bar" aria-live="polite">
         <span>
-          {filtered ? `${results.length} of ${CATALOG.length} patterns` : `${CATALOG.length} patterns`}
+          {t.gallery.count(results.length, CATALOG.length, filtered)}
         </span>
         {filtered && (
           <button className="link-button" onClick={() => setFilters({})}>
-            Clear filters
+            {t.gallery.clear}
           </button>
         )}
       </div>
 
       {results.length === 0 && filters.have ? (
         <div className="empty-results">
-          <p>Nothing here can be tied with your materials yet{oneShort.length > 0 ? ", but some are one material away" : ""}.</p>
+          <p>{t.gallery.noneTieable(oneShort.length > 0)}</p>
         </div>
       ) : results.length === 0 ? (
         <div className="empty-results">
-          <p>No pattern matches all of these filters.</p>
+          <p>{t.gallery.noMatch}</p>
           <button className="link-button" onClick={() => setFilters({ q: filters.q })}>
-            Keep the search, drop the filters
+            {t.gallery.keepSearch}
           </button>
         </div>
       ) : (
@@ -164,7 +161,7 @@ export function Gallery({ query }: { query: string }) {
 
       {oneShort.length > 0 && (
         <section className="one-short">
-          <h2>One material short</h2>
+          <h2>{t.gallery.oneShort}</h2>
           <ul className="plates">
             {oneShort.map(({ entry, missing, open }) => (
               <Plate key={entry.recipe.id} entry={entry} render={renders?.[entry.recipe.id]} missing={missing} open={open} />
@@ -226,13 +223,13 @@ function MoreFilters({
 
   return (
     <div className="more-filters">
-      {chipGroup("imitates", "Imitates", imitates, IMITATES_LABELS, imitatesCounts)}
-      {chipGroup("difficulty", "Difficulty", DIFFICULTIES, DIFFICULTY_LABELS, difficultyCounts)}
-      {chipGroup("species", "Fish", species, SPECIES_LABELS, speciesCounts)}
+      {chipGroup("imitates", t.gallery.imitates, imitates, IMITATES_LABELS, imitatesCounts)}
+      {chipGroup("difficulty", t.gallery.difficulty, DIFFICULTIES, DIFFICULTY_LABELS, difficultyCounts)}
+      {chipGroup("species", t.gallery.fish, species, SPECIES_LABELS, speciesCounts)}
       <fieldset className="facet">
-        <legend>In season</legend>
+        <legend>{t.gallery.season}</legend>
         <select value={filters.month ?? ""} onChange={(e) => setFilters({ ...filters, month: (e.target.value || undefined) as Filters["month"] })}>
-          <option value="">Any month</option>
+          <option value="">{t.gallery.anyMonth}</option>
           {MONTHS.map((m) => (
             <option key={m} value={m}>
               {capitalize(m)}
@@ -241,12 +238,12 @@ function MoreFilters({
         </select>
       </fieldset>
       <fieldset className="facet">
-        <legend>Uses all of these materials</legend>
+        <legend>{t.gallery.materials}</legend>
         <div className="chips">
           {chosen.map((m) => (
             <button key={m} className="on removable" onClick={() => setFilters({ ...filters, materials: chosen.filter((x) => x !== m) })}>
               {capitalize(MATERIALS[m].name)}
-              <span className="visually-hidden">, remove</span>
+              <span className="visually-hidden">{t.gallery.remove}</span>
               <svg aria-hidden="true" viewBox="0 0 12 12" width="10" height="10">
                 <path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" strokeWidth="1.6" />
               </svg>
@@ -254,10 +251,10 @@ function MoreFilters({
           ))}
           <select
             value=""
-            aria-label="Add a material"
+            aria-label={t.gallery.addMaterial}
             onChange={(e) => e.target.value && setFilters({ ...filters, materials: [...chosen, e.target.value as MaterialKind] })}
           >
-            <option value="">Add a material…</option>
+            <option value="">{t.gallery.addMaterialOption}</option>
             {usedMaterials
               .filter((m) => !chosen.includes(m))
               .map((m) => (
@@ -315,7 +312,7 @@ function FeaturedFly({ id, name, info, urls }: { id: string; name: string; info:
         <img src={urls.card} alt="" width={600} height={400} />
       </div>
       <p>
-        Fly of the day: <strong>{name}</strong>
+        {t.gallery.flyOfTheDay} <strong>{name}</strong>
       </p>
     </a>
   );
@@ -364,7 +361,7 @@ export function Plate({
               <img src={urls.card} alt="" loading="lazy" width={600} height={400} />
             </>
           ) : (
-            <span className="plate-missing">Not rendered yet</span>
+            <span className="plate-missing">{t.gallery.notRendered}</span>
           )}
         </div>
         <h2>{r.name}</h2>
@@ -373,16 +370,13 @@ export function Plate({
           {origin && <span>{origin}</span>}
           <span>{DIFFICULTY_LABELS[r.difficulty]}</span>
           {entry.variants.length > 0 && (
-            <span>
-              {entry.variants.length + 1} versions
-            </span>
+            <span>{t.gallery.versions(entry.variants.length + 1)}</span>
           )}
         </p>
         {note && <p className="plate-note">{note}</p>}
         {missing && (
           <p className="plate-missing-material">
-            Needs {colorWord(missing.color, missing.kind) === "natural" ? "" : `${colorWord(missing.color, missing.kind)} `}
-            {MATERIALS[missing.kind].name}
+            {t.gallery.needs(`${colorWord(missing.color, missing.kind) === "natural" ? "" : `${colorWord(missing.color, missing.kind)} `}${MATERIALS[missing.kind].name}`)}
           </p>
         )}
       </a>

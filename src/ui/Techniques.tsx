@@ -5,46 +5,43 @@ import { Clip } from "./Clip";
 import { NotFound } from "./NotFound";
 import { Paragraphs } from "./Paragraphs";
 import { href } from "./router";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
 
 export function TechniquesIndex() {
   useEffect(() => {
-    document.title = "Techniques, Flybench";
+    document.title = t.site.titled(t.techniques.title);
   }, []);
   const used = TECHNIQUES.filter((t) => patternsUsing(recipes(), t.id).length > 0);
   return (
     <main className="reading">
-      <h1>Techniques</h1>
-      <p className="lede">
-        The handful of things every fly is made of. Each one is shown on a real pattern; the steps of every pattern
-        link back here.
-      </p>
+      <h1>{t.techniques.heading}</h1>
+      <p className="lede">{t.techniques.intro}</p>
       <ul className="technique-list">
-        {used.map((t) => (
-          <li key={t.id}>
-            <a href={href.technique(t.id)}>{t.name}</a>
-            <span>{t.summary}</span>
+        {used.map((tech) => (
+          <li key={tech.id}>
+            <a href={href.technique(tech.id)}>{tech.name}</a>
+            <span>{tech.summary}</span>
           </li>
         ))}
       </ul>
-      <p>
-        Not sure where to start? Follow the <a href={href.learn()}>learning path</a>.
-      </p>
+      <p>{t.techniques.start(linkTo(href.learn()))}</p>
     </main>
   );
 }
 
 export function TechniquePage({ id }: { id: string }) {
-  const t = technique(id);
+  const tech = technique(id);
   useEffect(() => {
-    if (t) document.title = `${t.name}, Flybench`;
-  }, [t]);
-  if (!t) {
+    if (tech) document.title = t.site.titled(tech.name);
+  }, [tech]);
+  if (!tech) {
     return (
-      <NotFound className="reading" heading={<>No technique called “{id}”</>}>
+      <NotFound className="reading" heading={t.notFound.technique(id)}>
         <p>
-          <a href={href.techniques()}>See all techniques</a>
+          <a href={href.techniques()}>{t.notFound.allTechniques}</a>
         </p>
       </NotFound>
     );
@@ -54,22 +51,22 @@ export function TechniquePage({ id }: { id: string }) {
   return (
     <main className="reading technique">
       <a className="back" href={href.techniques()}>
-        All techniques
+        {t.techniques.all}
       </a>
-      <h1>{t.name}</h1>
-      <p className="lede">{t.summary}</p>
+      <h1>{tech.name}</h1>
+      <p className="lede">{tech.summary}</p>
       {example && <Clip key={`${example.recipe.id}:${example.step}`} recipe={example.recipe} step={example.step} />}
-      <h2>How to do it</h2>
-      <Paragraphs text={t.how} />
-      <h2>Common mistakes</h2>
+      <h2>{t.techniques.how}</h2>
+      <Paragraphs text={tech.how} />
+      <h2>{t.techniques.mistakes}</h2>
       <ul>
-        {t.mistakes.map((m) => (
+        {tech.mistakes.map((m) => (
           <li key={m}>{m}</li>
         ))}
       </ul>
       {using.length > 0 && (
         <>
-          <h2>Patterns that use it</h2>
+          <h2>{t.techniques.using}</h2>
           <ul className="uses">
             {using.map((r) => {
               const step = r.steps.findIndex((_, i) => stepTechnique(r, i) === id);

@@ -20,6 +20,8 @@ import { PrintCard } from "./PrintCard";
 import { useNaturalPictures } from "./renders";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 import { boxEntry, coloursSpec, DYE_COLORS, parseColours, recolor, tiedColour, type Colours } from "../catalog/variation";
 import { LogForm, useLog } from "./Log";
 import { tiedCounts } from "../catalog/log";
@@ -29,10 +31,8 @@ export function PatternPage({ id, step, size, colours }: { id: string; step?: nu
   const pattern = findPattern(id);
   if (!pattern) {
     return (
-      <NotFound heading={<>No pattern called “{id}”</>}>
-        <p>
-          It may have been renamed. <a href={href.gallery()}>Browse all patterns</a> or search for it there.
-        </p>
+      <NotFound heading={t.notFound.pattern(id)}>
+        <p>{t.notFound.patternHint(linkTo(href.gallery()))}</p>
       </NotFound>
     );
   }
@@ -48,11 +48,11 @@ const Icon = {
   more: <path d="M5 10.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm7 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm7 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Z" />,
 };
 
-const SPEEDS: [number, string][] = [
-  [0.5, "Half speed"],
-  [1, "Normal speed"],
-  [2, "Double speed"],
-];
+const SPEEDS = [
+  [0.5, "half"],
+  [1, "normal"],
+  [2, "double"],
+] as const;
 
 function TransportIcon({ name }: { name: keyof typeof Icon }) {
   return (
@@ -167,7 +167,7 @@ function PatternView({
   const [showMistakes, setShowMistakes] = useState(false);
   const inUse = "material" in recipeStep ? recipeStep.material : "thread";
   const inUseMaterial = recipe.materials.find((m) => m.id === inUse);
-  const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : "Thread";
+  const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : t.pattern.thread;
   const showInDressing = () => {
     setFlash(inUse);
     document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -175,7 +175,7 @@ function PatternView({
   };
 
   useEffect(() => {
-    document.title = `${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}, Flybench`;
+    document.title = t.site.titled(`${recipe.name}${recipe.variant ? ` (${recipe.variant})` : ""}`);
   }, [recipe]);
 
   // The step this page last wrote into the address (null: none yet). The address reaches
@@ -322,7 +322,7 @@ function PatternView({
 
   return (
     <div className={vise ? "pattern vise" : "pattern"}>
-      <section className="stage" aria-label="3D tying sequence">
+      <section className="stage" aria-label={t.pattern.stage}>
         <Viewer
           build={build}
           time={player.time}
@@ -348,15 +348,13 @@ function PatternView({
         >
           {inWater ? (
             <>
-              <p className="now-index">The finished fly</p>
-              <h2>In the water</h2>
+              <p className="now-index">{t.pattern.finished}</p>
+              <h2>{t.pattern.inTheWater}</h2>
               <p className="now-text">{fishingText(fishingFor)}</p>
             </>
           ) : (
             <>
-              <p className="now-index">
-                Step {current + 1} of {build.steps.length}
-              </p>
+              <p className="now-index">{t.pattern.stepOf(current + 1, build.steps.length)}</p>
               <h2>{step.title}</h2>
               <p className="now-text">{step.text}</p>
             </>
@@ -376,7 +374,7 @@ function PatternView({
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <summary>Common mistakes</summary>
+              <summary>{t.pattern.mistakes}</summary>
               <ul>
                 {mistakes.map((m) => (
                   <li key={m}>{m}</li>
@@ -384,7 +382,7 @@ function PatternView({
               </ul>
             </details>
           )}
-          {vise && <p className="vise-hint">Tap here to play the next step. Esc or “Leave vise mode” to go back.</p>}
+          {vise && <p className="vise-hint">{t.pattern.viseHint}</p>}
         </div>
         <div className="transport">
           <StepBar
@@ -415,43 +413,43 @@ function PatternView({
               else playStep(current - 1);
             }}
             disabled={current === 0}
-            aria-label="Previous step"
-            title="Previous step (hold for step 1)"
+            aria-label={t.pattern.previous}
+            title={t.pattern.previousTitle}
           >
             <TransportIcon name="previous" />
           </button>
-          <button className="play" onClick={() => (player.playing ? player.pause() : play())} aria-label={player.playing ? "Pause" : "Play"}>
+          <button className="play" onClick={() => (player.playing ? player.pause() : play())} aria-label={player.playing ? t.pattern.pause : t.pattern.play}>
             <TransportIcon name={player.playing ? "pause" : "play"} />
           </button>
-          <button onClick={() => playStep(current)} aria-label="Replay this step">
+          <button onClick={() => playStep(current)} aria-label={t.pattern.replay}>
             <TransportIcon name="replay" />
           </button>
-          <button onClick={() => playStep(current + 1)} disabled={current === build.steps.length - 1} aria-label="Next step">
+          <button onClick={() => playStep(current + 1)} disabled={current === build.steps.length - 1} aria-label={t.pattern.next}>
             <TransportIcon name="next" />
           </button>
           <button className="vise-toggle" aria-pressed={vise} onClick={toggleVise}>
-            {vise ? "Leave vise mode" : "Vise mode"}
+            {vise ? t.pattern.leaveVise : t.pattern.vise}
           </button>
-          <select value={player.speed} onChange={(e) => player.setSpeed(Number(e.target.value))} aria-label="Speed">
-            {SPEEDS.map(([v, name]) => (
+          <select value={player.speed} onChange={(e) => player.setSpeed(Number(e.target.value))} aria-label={t.pattern.speed}>
+            {SPEEDS.map(([v, speed]) => (
               <option key={v} value={v}>
-                {name}
+                {t.pattern.speeds[speed]}
               </option>
             ))}
           </select>
           {/* On a narrow stage, vise mode and speed are behind a "more" button. */}
           <div className="more">
-            <button className="more-toggle" aria-expanded={moreOpen} aria-label="More" onClick={() => setMoreOpen(!moreOpen)}>
+            <button className="more-toggle" aria-expanded={moreOpen} aria-label={t.pattern.more} onClick={() => setMoreOpen(!moreOpen)}>
               <TransportIcon name="more" />
             </button>
             {moreOpen && (
               <div className="more-menu" onClick={() => setMoreOpen(false)}>
                 <button aria-pressed={vise} onClick={toggleVise}>
-                  {vise ? "Leave vise mode" : "Vise mode"}
+                  {vise ? t.pattern.leaveVise : t.pattern.vise}
                 </button>
-                {SPEEDS.map(([v, name]) => (
+                {SPEEDS.map(([v, speed]) => (
                   <button key={v} aria-pressed={player.speed === v} onClick={() => player.setSpeed(v)}>
-                    {name}
+                    {t.pattern.speeds[speed]}
                   </button>
                 ))}
               </div>
@@ -463,15 +461,15 @@ function PatternView({
 
       <aside className="notes">
         <a className="back" href={href.gallery()}>
-          All patterns
+          {t.pattern.allPatterns}
         </a>
         <h1>{recipe.name}</h1>
-        {recipe.aliases.length > 0 && <p className="aliases">Also called {recipe.aliases.join(", ")}</p>}
+        {recipe.aliases.length > 0 && <p className="aliases">{t.pattern.alsoCalled(recipe.aliases.join(", "))}</p>}
         {family.length > 1 && (
-          <nav className="variants" aria-label="Versions of this pattern">
+          <nav className="variants" aria-label={t.pattern.versions}>
             {family.map((p) => (
               <a key={p.recipe.id} href={href.fly(p.recipe.id)} aria-current={p.recipe.id === recipe.id ? "page" : undefined}>
-                {p.recipe.variant ?? "Standard"}
+                {p.recipe.variant ?? t.pattern.standard}
               </a>
             ))}
           </nav>
@@ -480,10 +478,10 @@ function PatternView({
           {factsSentence(recipe)} {DIFFICULTY_LABELS[recipe.difficulty]}.
         </p>
         {recipe.description && <p className="description">{recipe.description}</p>}
-        {origin && <p className="origin">First tied by {origin}.</p>}
+        {origin && <p className="origin">{t.pattern.firstTied(origin)}</p>}
         <div className="pattern-actions">
           <button className="box-toggle" aria-pressed={box.has(mainId)} onClick={() => box.toggle(mainId)}>
-            {box.has(mainId) ? "In your fly box" : "Add to fly box"}
+            {box.has(mainId) ? t.pattern.inBox : t.pattern.addToBox}
           </button>
           <button
             className="box-toggle print-toggle"
@@ -494,7 +492,7 @@ function PatternView({
             }}
             aria-busy={preparing}
           >
-            {preparing ? "Preparing the card…" : "Print recipe card"}
+            {preparing ? t.pattern.preparing : t.pattern.print}
           </button>
         </div>
         {(() => {
@@ -503,21 +501,21 @@ function PatternView({
             <>
               <p className="tied">
                 {/* Always there, so a screen reader hears what changes in it. */}
-                <span aria-live="polite">{logging === "done" ? "Added to your tying log. " : ""}</span>
+                <span aria-live="polite">{logging === "done" ? t.pattern.added : ""}</span>
                 {tied > 0 && (
                   <>
-                    You have tied {tied} of {tied === 1 ? "this fly" : "these"}.{" "}
+                    {t.pattern.tied(tied)}
                   </>
                 )}
                 {logging !== "form" && (
                   <button ref={tiedButton} className="link-button" onClick={() => setLogging("form")}>
-                    I tied this
+                    {t.pattern.iTied}
                   </button>
                 )}
                 {tied > 0 && (
                   <>
                     {" "}
-                    <a href={href.log()}>Your tying log</a>
+                    <a href={href.log()}>{t.pattern.yourLog}</a>
                   </>
                 )}
               </p>
@@ -541,7 +539,7 @@ function PatternView({
 
         {naturals.length > 0 && (
           <section className="imitates">
-            <h3>What it imitates</h3>
+            <h3>{t.pattern.imitates}</h3>
             <ul>
               {naturals.map((n) => (
                 <li key={n.id}>
@@ -557,7 +555,7 @@ function PatternView({
                         aria-pressed={compare?.id === n.id && compare.at === at}
                         onClick={() => showNatural(compare?.id === n.id && compare.at === at ? null : { id: n.id, at })}
                       >
-                        {at === "beside" ? "Beside the fly" : "Over the fly"}
+                        {at === "beside" ? t.pattern.beside : t.pattern.over}
                       </button>
                     ))}
                   </span>
@@ -567,12 +565,9 @@ function PatternView({
           </section>
         )}
 
-        <h3>Dressing</h3>
+        <h3>{t.pattern.dressing}</h3>
         {spec && (
-          <p className="variation-note">
-            In your colours. The description above, and step notes about other parts than the one changed, are of the pattern
-            as tied.
-          </p>
+          <p className="variation-note">{t.pattern.inYourColours}</p>
         )}
         <dl className="dressing">
           {materialsList(recipe).map((m) => (
@@ -586,12 +581,12 @@ function PatternView({
                 {m.name}
                 {m.id === "hook" && tiedSize !== undefined ? (
                   <label className="detail hook-size">
-                    , size{" "}
-                    <select value={size} onChange={(e) => changeSize(Number(e.target.value))} aria-label="Hook size">
+                    {t.pattern.size}
+                    <select value={size} onChange={(e) => changeSize(Number(e.target.value))} aria-label={t.pattern.hookSize}>
                       {hookSizes(tiedSize).map((s) => (
                         <option key={s} value={s}>
                           {s}
-                          {s === tiedSize ? " (as tied)" : ""}
+                          {s === tiedSize ? t.pattern.asTied : ""}
                         </option>
                       ))}
                     </select>
@@ -602,11 +597,11 @@ function PatternView({
                 {(() => {
                   const o = ownership(m.id);
                   return o === "have" ? (
-                    <span className="owned">You have this</span>
+                    <span className="owned">{t.pattern.have}</span>
                   ) : o === "substitute" ? (
-                    <span className="owned substitute">You have it in another colour</span>
+                    <span className="owned substitute">{t.pattern.substitute}</span>
                   ) : o === "missing" ? (
-                    <span className="owned missing">Not in your materials</span>
+                    <span className="owned missing">{t.pattern.missing}</span>
                   ) : null;
                 })()}
               </dd>
@@ -622,7 +617,7 @@ function PatternView({
           onSave={() => box.toggle(boxEntry(recipe.id, spec))}
         />
 
-        <h3>Steps</h3>
+        <h3>{t.pattern.steps}</h3>
         <ol className="steps">
           {build.steps.map((s) => (
             <li key={s.index} className={s.index === current ? "active" : s.index < current ? "done" : ""}>
@@ -631,10 +626,10 @@ function PatternView({
                 <span>{s.text}</span>
               </button>
               {(() => {
-                const t = technique(stepTechnique(original, s.index) ?? "");
-                return t ? (
-                  <a className="how-to" href={href.technique(t.id)}>
-                    How to: {t.name.toLowerCase()}
+                const how = technique(stepTechnique(original, s.index) ?? "");
+                return how ? (
+                  <a className="how-to" href={href.technique(how.id)}>
+                    {t.pattern.howTo(how.name)}
                   </a>
                 ) : null;
               })()}
@@ -644,19 +639,19 @@ function PatternView({
 
         {recipe.history && (
           <section>
-            <h3>History</h3>
+            <h3>{t.pattern.history}</h3>
             <Paragraphs text={recipe.history} />
           </section>
         )}
         {recipe.fishing && (
           <section>
-            <h3>Fishing it</h3>
+            <h3>{t.pattern.fishing}</h3>
             <Paragraphs text={recipe.fishing} />
           </section>
         )}
         {recipe.sources.length > 0 && (
           <section>
-            <h3>Sources</h3>
+            <h3>{t.pattern.sources}</h3>
             <ul className="sources">
               {recipe.sources.map((s) => (
                 <li key={s.title}>
@@ -700,8 +695,8 @@ function ColourPlayground({
   };
   return (
     <details className="playground" open={changed || undefined}>
-      <summary>Try other colours</summary>
-      <p>Choose a colour for any part: the fly, the steps and the dressing follow.</p>
+      <summary>{t.playground.summary}</summary>
+      <p>{t.playground.intro}</p>
       <div className="playground-parts">
         {parts.map((p) => {
           const tied = asTied(p.id);
@@ -719,7 +714,7 @@ function ColourPlayground({
                   onChange(next);
                 }}
               >
-                <option value="">As tied ({colorWord(tied, original.materials.find((m) => m.id === p.id)?.kind)})</option>
+                <option value="">{t.playground.asTied(colorWord(tied, original.materials.find((m) => m.id === p.id)?.kind))}</option>
                 {DYE_COLORS.filter((c) => c !== tiedColour(original, p.id)).map((c) => (
                   <option key={c} value={c}>
                     {c.replace(/-/g, " ")}
@@ -733,10 +728,10 @@ function ColourPlayground({
       {changed && (
         <div className="pattern-actions">
           <button className="box-toggle" aria-pressed={saved} onClick={onSave}>
-            {saved ? "These colours are in your fly box" : "Save these colours to your fly box"}
+            {saved ? t.playground.saved : t.playground.save}
           </button>
           <button className="link-button" onClick={() => onChange({})}>
-            Back to the pattern's colours
+            {t.playground.reset}
           </button>
         </div>
       )}

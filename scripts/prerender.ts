@@ -13,6 +13,7 @@ import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
+import { LANGS, langPrefix, setLang } from "../src/i18n/lang";
 import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
 import { loadNatural, type Natural } from "../src/recipe/natural";
@@ -79,8 +80,14 @@ async function loadNaturals(): Promise<Natural[]> {
 }
 
 const recipes = await loadPatterns();
+const naturals = await loadNaturals();
 const template = await readFile(`${DIST}/index.html`, "utf8");
-const pages = sitePages(recipes, BASE, await loadNaturals());
+// Every page in every language: the pages' words follow the language set while they are made.
+const pages = LANGS.flatMap((l) => {
+  setLang(l);
+  return sitePages(recipes, BASE + langPrefix(l), naturals).map((page) => ({ ...page, lang: l }));
+});
+setLang("en");
 const rendered = (id?: string) => (id && existsSync(card(id)) ? id : undefined);
 
 await mkdir(`${DIST}/og`, { recursive: true });
@@ -93,9 +100,10 @@ for (const id of images) await writeFile(`${DIST}/og/${id}.jpg`, await patternIm
 
 for (const page of pages) {
   const id = rendered(page.image);
-  const html = pageHtml(template, page, { url: SITE_URL, base: BASE, image: id ? `og/${id}.jpg` : "og/site.jpg" });
-  await mkdir(`${DIST}/${page.path}`, { recursive: true });
-  await writeFile(`${DIST}/${page.path}index.html`, html);
+  const html = pageHtml(template, page, { url: SITE_URL, base: BASE, image: id ? `og/${id}.jpg` : "og/site.jpg", lang: page.lang });
+  const dir = `${DIST}/${langPrefix(page.lang)}${page.path}`;
+  await mkdir(dir, { recursive: true });
+  await writeFile(`${dir}index.html`, html);
 }
 
 // The final word on reference photos: none of their addresses may be in the built bundle,
@@ -137,7 +145,7 @@ await writeFile(
 );
 
 if (SITE_URL) {
-  const urls = pages.filter((p) => !p.noindex).map((p) => `  <url><loc>${SITE_URL}${BASE}${p.path}</loc></url>`);
+  const urls = pages.filter((p) => !p.noindex).map((p) => `  <url><loc>${SITE_URL}${BASE}${langPrefix(p.lang)}${p.path}</loc></url>`);
   await writeFile(`${DIST}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
   // Crawlers only read robots.txt at the root of a host; under a project path it would be ignored.
   if (BASE === "/") await writeFile(`${DIST}/robots.txt`, `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);

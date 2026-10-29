@@ -21,6 +21,8 @@ import { Plate } from "./Gallery";
 import { NotFound } from "./NotFound";
 import { useNaturalPictures, useRenders } from "./renders";
 import { href } from "./router";
+import { t } from "../i18n/ui";
+import { linkTo } from "./linkTo";
 import { REGION_KEY, useStoredSet } from "./storage";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
@@ -43,7 +45,7 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
     scene.setView("default");
     return () => scene.dispose();
   }, [natural]);
-  if (unavailable) return <p className="viewer-unavailable">The 3D view needs WebGL, which this browser has turned off.</p>;
+  if (unavailable) return <p className="viewer-unavailable">{t.naturals.noWebgl}</p>;
   return <div className="natural-viewer" ref={container} />;
 }
 
@@ -77,7 +79,7 @@ export function NaturalsIndex() {
   const [region, chooseRegion] = useRegion();
   const month = new Date().getMonth();
   useEffect(() => {
-    document.title = "Naturals and hatches, Flybench";
+    document.title = t.site.titled(t.naturals.title);
   }, []);
   const now = region ? activeIn(NATURALS, region, month) : [];
   // Naturals about all year (shrimps, fish, larvae) are listed apart, so the calendar shows the hatches.
@@ -88,15 +90,12 @@ export function NaturalsIndex() {
 
   return (
     <main className="reading naturals-page">
-      <h1>Naturals and hatches</h1>
-      <p className="lede">
-        What the flies imitate: the insects, shrimps and small fish trout and salmon feed on, each at the stage the flies
-        copy, and when they hatch where you fish.
-      </p>
+      <h1>{t.naturals.heading}</h1>
+      <p className="lede">{t.naturals.intro}</p>
 
-      <h2>Hatch calendar</h2>
+      <h2>{t.naturals.calendar}</h2>
       <fieldset className="chips region-choice">
-        <legend>Where do you fish?</legend>
+        <legend>{t.naturals.where}</legend>
         {REGIONS.map((r) => (
           <button key={r} className={region === r ? "on" : ""} aria-pressed={region === r} onClick={() => chooseRegion(r)}>
             {REGION_LABELS[r]}
@@ -105,15 +104,12 @@ export function NaturalsIndex() {
       </fieldset>
       {region ? (
         <>
-          <p className="stored-note">
-            Your region is saved in this browser. Months are when each natural hatches or is most about; dates move with
-            altitude, water temperature and the year. <a href={href.trip()}>Plan a fly box for a trip</a> from it.
-          </p>
+          <p className="stored-note">{t.naturals.stored(linkTo(href.trip()))}</p>
           <div className="hatch-scroll">
             <table className="hatch-calendar">
               <thead>
                 <tr>
-                  <th scope="col">Natural</th>
+                  <th scope="col">{t.naturals.natural}</th>
                   {MONTH_NAMES.map((m, i) => (
                     <th key={m} scope="col" className={i === month ? "current" : undefined} title={m} aria-label={m}>
                       <span aria-hidden="true">{m.charAt(0)}</span>
@@ -143,7 +139,7 @@ export function NaturalsIndex() {
           </div>
           {yearRound.length > 0 && (
             <p className="year-round">
-              About all year:{" "}
+              {t.naturals.allYear}
               {yearRound.map((n, i) => (
                 <span key={n.id}>
                   {i > 0 && ", "}
@@ -154,11 +150,9 @@ export function NaturalsIndex() {
             </p>
           )}
 
-          <h2>
-            {MONTH_NAMES[month]} in {REGION_LABELS[region]}
-          </h2>
+          <h2>{t.naturals.monthIn(MONTH_NAMES[month]!, REGION_LABELS[region])}</h2>
           {now.length === 0 ? (
-            <p>Nothing much hatches this month; nymphs, shrimps and small fish are about all year.</p>
+            <p>{t.naturals.quiet}</p>
           ) : (
             <ul className="this-month">
               {now.map(({ natural, hatch }) => {
@@ -185,7 +179,7 @@ export function NaturalsIndex() {
           )}
         </>
       ) : (
-        <p>Choose your region to see what hatches when.</p>
+        <p>{t.naturals.choose}</p>
       )}
 
       {NATURAL_GROUPS.map((g) => {
@@ -210,13 +204,13 @@ export function NaturalPage({ id }: { id: string }) {
   const natural = findNatural(id);
   const renders = useRenders();
   useEffect(() => {
-    if (natural) document.title = `${natural.name}, Flybench`;
+    if (natural) document.title = t.site.titled(natural.name);
   }, [natural]);
   if (!natural) {
     return (
-      <NotFound className="reading" heading={<>No natural called “{id}”</>}>
+      <NotFound className="reading" heading={t.notFound.natural(id)}>
         <p>
-          <a href={href.naturals()}>See all naturals</a>
+          <a href={href.naturals()}>{t.notFound.allNaturals}</a>
         </p>
       </NotFound>
     );
@@ -226,40 +220,40 @@ export function NaturalPage({ id }: { id: string }) {
   return (
     <main className="reading natural-page">
       <a className="back" href={href.naturals()}>
-        All naturals
+        {t.naturals.all}
       </a>
       <h1>{natural.name}</h1>
       <p className="lede">{natural.description}</p>
       <NaturalViewer natural={natural} />
       <dl className="natural-facts">
         <div>
-          <dt>Group</dt>
+          <dt>{t.naturals.group}</dt>
           <dd>
             {GROUP_LABELS[natural.group]}, {STAGE_LABELS[natural.stage]}
           </dd>
         </div>
         {natural.examples && (
           <div>
-            <dt>For example</dt>
+            <dt>{t.naturals.examples}</dt>
             <dd>{capitalize(natural.examples)}</dd>
           </div>
         )}
         <div>
-          <dt>Size</dt>
+          <dt>{t.naturals.size}</dt>
           <dd>
             {sizeText(natural)}
-            {sizes.length > 0 && `, about the shank of a standard hook in sizes ${sizes[sizes.length - 1]}–${sizes[0]}`}
+            {sizes.length > 0 && t.naturals.sizes(sizes[sizes.length - 1]!, sizes[0]!)}
           </dd>
         </div>
         <div>
-          <dt>In the water</dt>
+          <dt>{t.naturals.inTheWater}</dt>
           <dd>{RIDES_TEXT[natural.rides]}</dd>
         </div>
       </dl>
 
       {natural.hatches.length > 0 && (
         <>
-          <h2>When it hatches</h2>
+          <h2>{t.naturals.hatches}</h2>
           <table className="hatch-table">
             <tbody>
               {natural.hatches.map((h) => (
@@ -277,9 +271,9 @@ export function NaturalPage({ id }: { id: string }) {
         </>
       )}
 
-      <h2>Flies that imitate it</h2>
+      <h2>{t.naturals.flies}</h2>
       {flies.length === 0 ? (
-        <p>No pattern in Flybench imitates it yet.</p>
+        <p>{t.naturals.noFly}</p>
       ) : (
         <ul className="plates">
           {flies.map((r) => {
@@ -289,7 +283,7 @@ export function NaturalPage({ id }: { id: string }) {
         </ul>
       )}
 
-      <h2>Sources</h2>
+      <h2>{t.naturals.sources}</h2>
       <ul className="sources">
         {natural.sources.map((s) => (
           <li key={s.title}>{s.url ? <a href={s.url}>{s.title}</a> : s.title}</li>

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { stepAt, stepEnd, stepProgress, type Build } from "../tying/simulate";
+import { t } from "../i18n/ui";
 
 /**
  * The steps as a row of segments, one per step, filled as far as the fly has got. A tap on a
@@ -27,11 +28,11 @@ export function StepBar({ build, time, onSeek }: { build: Build; time: number; o
         className="step-segments"
         role="slider"
         tabIndex={0}
-        aria-label="Steps"
+        aria-label={t.stepBar.label}
         aria-valuemin={1}
         aria-valuemax={steps.length}
         aria-valuenow={current + 1}
-        aria-valuetext={`Step ${current + 1} of ${steps.length}: ${steps[current]!.title}`}
+        aria-valuetext={t.stepBar.value(current + 1, steps.length, steps[current]!.title)}
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
           drag.current = { x: e.clientX, moved: false };
