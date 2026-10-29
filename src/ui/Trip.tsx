@@ -7,6 +7,7 @@ import { NATURALS } from "../naturals";
 import { PATTERNS } from "../patterns";
 import { REGIONS } from "../recipe/natural";
 import { MONTHS, SPECIES } from "../recipe/schema";
+import type { Region } from "../catalog/naturals";
 import { useRegion } from "./Naturals";
 import { BenchNav } from "./Personal";
 import { renderUrls, useRenders } from "./renders";
@@ -18,24 +19,36 @@ const WATERS = Object.keys(WATER_LABELS) as Water[];
 /** How many flies make the box; the rest are listed under it. */
 const BOX_SIZE = 12;
 
-/** The trip as the address has it: ?month=6&water=river&species=trout (month 1-based). */
-function readQuery(query: string): { month: number; water: Water; species: Species } {
+/**
+ * The trip as the address has it: ?region=british-isles&month=6&water=river&species=trout
+ * (month 1-based). A shared link names its region; without one, the visitor's own is used.
+ */
+function readQuery(query: string): { region?: Region; month: number; water: Water; species: Species } {
   const q = new URLSearchParams(query);
+  const region = q.get("region");
   const month = Number(q.get("month"));
   const water = q.get("water");
   const species = q.get("species");
   return {
+    ...(REGIONS.includes(region as Region) ? { region: region as Region } : {}),
     month: Number.isInteger(month) && month >= 1 && month <= 12 ? month - 1 : new Date().getMonth(),
     water: WATERS.includes(water as Water) ? (water as Water) : "river",
     species: SPECIES.includes(species as Species) ? (species as Species) : "trout",
   };
 }
 
-const writeQuery = (t: ReturnType<typeof readQuery>) => `month=${t.month + 1}&water=${t.water}&species=${t.species}`;
+const writeQuery = (t: ReturnType<typeof readQuery>, region: Region | null) =>
+  `${region ? `region=${region}&` : ""}month=${t.month + 1}&water=${t.water}&species=${t.species}`;
 
 export function Trip({ query }: { query: string }) {
-  const [region, chooseRegion] = useRegion();
+  const [stored, storeRegion] = useRegion();
   const [trip, setTrip] = useState(() => readQuery(query));
+  // A linked trip's region is shown without changing the visitor's own; choosing one keeps it.
+  const region = trip.region ?? stored;
+  const chooseRegion = (r: Region) => {
+    storeRegion(r);
+    setTrip({ ...trip, region: r });
+  };
   const box = useStoredSet(FLY_BOX_KEY);
   const owned = useStoredSet(INVENTORY_KEY);
   const renders = useRenders();
@@ -45,9 +58,9 @@ export function Trip({ query }: { query: string }) {
   // The choices go into the address; an address changed from outside (Back, a link) changes them.
   const written = useRef<string | null>(null);
   useEffect(() => {
-    written.current = writeQuery(trip);
+    written.current = writeQuery(trip, region);
     replaceUrl(href.trip(written.current));
-  }, [trip]);
+  }, [trip, region]);
   useEffect(() => {
     if (written.current === null || query === written.current) return;
     // "Plan a trip" from the page itself keeps the choices.
@@ -95,7 +108,7 @@ export function Trip({ query }: { query: string }) {
         <button
           className="link-button"
           aria-pressed={box.has(s.recipe.id)}
-          aria-label={`${s.recipe.name}: in your fly box`}
+          aria-label={`${s.recipe.name}: ${box.has(s.recipe.id) ? "In your fly box" : "Add to fly box"}`}
           onClick={() => box.toggle(s.recipe.id)}
         >
           {box.has(s.recipe.id) ? "In your fly box" : "Add to fly box"}

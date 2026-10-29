@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
  *   /learn/                the learning path
  *   /about/                what Flybench is
  *   /box/                  the user's fly box; /materials/ their materials inventory;
- *                          /log/ their tying log; /trip/?month=6&water=river&species=trout
+ *                          /log/ their tying log; /trip/?region=…&month=6&water=river&species=trout
  *                          a fly box for a trip
  * Older hash links (#/fly/<id>/<step>, #/<id>, #/?type=dry) are redirected (see `legacyRoute`).
  */
@@ -75,7 +75,7 @@ export function legacyRoute(hash: string): Route | null {
   const raw = hash.slice(2);
   const parts = (raw.split("?")[0] ?? "").split("/").filter(Boolean);
   // #/<id> was the first form of a pattern link.
-  const single = parts.length === 1 && !SINGLE.some((p) => p === parts[0]);
+  const single = parts.length === 1 && !SINGLE.some((p) => p === parts[0]) && parts[0] !== "trip";
   return parseRoute(single ? `fly/${raw}` : raw);
 }
 
