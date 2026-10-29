@@ -5,7 +5,8 @@
  * needed so the eye points right.
  *
  *   pnpm refcheck elk-hair-caddis [more ids…]
- *   pnpm refcheck                    all patterns with references
+ *   pnpm refcheck mayfly-dun         a natural: on a grid in tenths of its body length
+ *   pnpm refcheck                    all patterns and naturals with references
  *
  * Output: .cache/refcheck/<id>.png. Photos are cached in .cache/references/ and are
  * never committed or published; most are copyrighted.
@@ -15,10 +16,11 @@
  */
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import sharp from "sharp";
 import { formatError } from "../src/recipe/errors";
 import { loadRecipe } from "../src/recipe/load";
+import { loadNatural, type Natural } from "../src/recipe/natural";
 import type { Recipe } from "../src/recipe/schema";
 import { materialName } from "../src/tying/describe";
 import { hookModel } from "../src/tying/hook";
@@ -49,6 +51,32 @@ async function fetchReference(id: string, index: number, url: string): Promise<s
   await mkdir(`.cache/references/${id}`, { recursive: true });
   await writeFile(path, Buffer.from(await response.arrayBuffer()));
   return path;
+}
+
+async function loadNaturalFile(id: string): Promise<Natural> {
+  const result = loadNatural(await readFile(`naturals/${id}.kdl`, "utf8"));
+  if (!result.ok) throw new Error(`${id}.kdl:\n${result.errors.map(formatError).join("\n")}`);
+  return result.natural;
+}
+
+/** A natural's proportions, in tenths of its body length as on the grid. */
+export function naturalProportions(n: Natural): string[] {
+  const t = (f: number) => +(f * 10).toFixed(2);
+  const lines = [n.name, `${n.size.min}–${n.size.max} mm; grid in tenths of the body length, x = 0 the rear end`, ""];
+  let at = 0;
+  for (const s of n.body) {
+    const heights = s.top !== undefined || s.bottom !== undefined ? `, back ${t(s.top ?? s.radius)}, belly ${t(s.bottom ?? s.radius)}` : "";
+    lines.push(`${s.section}: ${t(at)}–${t(at + s.length)}, radius ${t(s.radius)}${s.taper !== 1 ? ` tapering to ${t(s.radius * s.taper)}` : ""}${heights}${s.segments ? `, ${s.segments} segments` : ""}`);
+    at += s.length;
+  }
+  lines.push("");
+  for (const p of n.parts) {
+    const bits = Object.entries(p)
+      .filter(([k, v]) => k !== "part" && k !== "color" && v !== undefined && v !== false && !(typeof v === "number" && v === 0))
+      .map(([k, v]) => `${k} ${typeof v === "number" && ["length", "width", "size", "base", "height"].includes(k) ? t(v) : v}`);
+    lines.push(`${p.part}: ${bits.join(", ")}`);
+  }
+  return lines;
 }
 
 /** The proportions the recipe states, in the units a reviewer reads off the grid. */
@@ -121,10 +149,10 @@ function textImage(lines: string[], width: number, height: number, size = 22): B
   );
 }
 
-async function contactSheet(id: string, recipe: Recipe, renderPath: string, photos: string[]): Promise<string> {
+async function contactSheet(id: string, recipe: { references: Recipe["references"] }, lines: string[], renderPath: string, photos: string[]): Promise<string> {
   const render = await sharp(renderPath).resize({ width: RENDER_WIDTH }).png().toBuffer();
   const renderHeight = (await sharp(render).metadata()).height!;
-  const panel = textImage(wrap(proportions(recipe), PANEL_CHARS), PANEL_WIDTH, renderHeight);
+  const panel = textImage(wrap(lines, PANEL_CHARS), PANEL_WIDTH, renderHeight);
 
   const tiles: { input: Buffer; left: number; top: number }[] = [
     { input: render, left: 0, top: 0 },
@@ -153,10 +181,33 @@ async function contactSheet(id: string, recipe: Recipe, renderPath: string, phot
 }
 
 const requested = process.argv.slice(2);
-const ids = requested.length > 0 ? requested : await patternIds();
+const naturalIds = (await readdir("naturals")).filter((f) => f.endsWith(".kdl")).map((f) => f.replace(/\.kdl$/, "")).sort();
+const ids = requested.length > 0 ? requested : [...(await patternIds()), ...naturalIds];
 const renderer = await Renderer.start();
 try {
   for (const id of ids) {
+    if (!existsSync(`patterns/${id}.kdl`) && existsSync(`naturals/${id}.kdl`)) {
+      const natural = await loadNaturalFile(id);
+      if (natural.references.length === 0) {
+        if (requested.length > 0) console.warn(`${id}: no references in the natural`);
+        continue;
+      }
+      // From the side and from above (gills, spent wings and legs show from above).
+      const side = `.cache/renders/naturals/${id}/side-grid.png`;
+      const top = `.cache/renders/naturals/${id}/top-grid.png`;
+      await renderer.render({ pattern: "", natural: id, view: "side", grid: true, out: side });
+      await renderer.render({ pattern: "", natural: id, view: "top", grid: true, out: top });
+      const [a, b] = await Promise.all([side, top].map((f) => sharp(f).png().toBuffer()));
+      const { width, height } = await sharp(a).metadata();
+      const renderPath = `.cache/renders/naturals/${id}/both-grid.png`;
+      await sharp({ create: { width: width!, height: height! * 2, channels: 3, background: "#ffffff" } })
+        .composite([{ input: a, top: 0, left: 0 }, { input: b, top: height!, left: 0 }])
+        .png()
+        .toFile(renderPath);
+      const photos = await Promise.all(natural.references.map((r, i) => fetchReference(id, i, r.image)));
+      console.log(await contactSheet(id, natural, naturalProportions(natural), renderPath, photos));
+      continue;
+    }
     const recipe = await loadPattern(id);
     if (recipe.references.length === 0) {
       if (requested.length > 0) console.warn(`${id}: no references in the recipe`);
@@ -165,7 +216,7 @@ try {
     const renderPath = `.cache/renders/${id}/side-grid.png`;
     await renderer.render({ pattern: id, view: "side", grid: true, out: renderPath });
     const photos = await Promise.all(recipe.references.map((r, i) => fetchReference(id, i, r.image)));
-    console.log(await contactSheet(id, recipe, renderPath, photos));
+    console.log(await contactSheet(id, recipe, proportions(recipe), renderPath, photos));
   }
 } finally {
   await renderer.stop();

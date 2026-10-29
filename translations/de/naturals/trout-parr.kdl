@@ -1,0 +1,24 @@
+id trout-parr
+status draft
+
+// en name: Trout fry and parr
+name "Forellenbrut und Parr"
+
+// en description: Young brown trout and sea trout in their first years in the stream, before the sea trout go to sea as silvery smolts: an olive-brown back, a row of dark oval parr marks along the sides that fades with age, black and red spots, and often a red edge to the small adipose fin.
+description "Junge Bach- und Meerforellen in ihren ersten Jahren im Bach, bevor die Meerforellen als silbrige Smolts ins Meer ziehen: olivbrauner Rücken, eine Reihe dunkler ovaler Flecken an den Seiten (die Parr-Zeichnung), die mit dem Alter verblasst, schwarze und rote Punkte und oft ein roter Saum an der kleinen Fettflosse."
+
+// en examples: brown trout and sea trout (Salmo trutta) fry and parr
+examples "Brut und Parr von Bach- und Meerforelle (Salmo trutta)"
+
+hatches {
+    // en southern-sweden note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    southern-sweden note="Schätzung: das ganze Jahr im Bach; die neue Brut kommt im Frühjahr aus dem Kies."
+    // en northern-scandinavia note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    northern-scandinavia note="Schätzung: das ganze Jahr im Bach; die neue Brut kommt im Frühjahr aus dem Kies."
+    // en british-isles note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    british-isles note="Schätzung: das ganze Jahr im Bach; die neue Brut kommt im Frühjahr aus dem Kies."
+    // en central-europe note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    central-europe note="Schätzung: das ganze Jahr im Bach; die neue Brut kommt im Frühjahr aus dem Kies."
+    // en northern-usa note: Estimate: where brown trout were introduced (Wikipedia); in the stream all year, the new fry up from the gravel in spring.
+    northern-usa note="Schätzung: wo Bachforellen eingeführt wurden (Wikipedia); das ganze Jahr im Bach, die neue Brut im Frühjahr aus dem Kies."
+}

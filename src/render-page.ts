@@ -18,7 +18,8 @@ import { simulate } from "./tying/simulate";
  *     &fit=sphere       same framing from every angle (turntables)
  *     &pose=pictured    as flies are usually pictured: point-up flies point up, others as tied
  *   render.html?swatch=<kind>:<colour>&…   a material on a bare hook, framed close (Materials page)
- *   render.html?natural=<id>&…               a natural on its own
+ *   render.html?natural=<id>&…               a natural on its own; with grid=1 ten units long, so
+ *                     the grid is in tenths of its body length (refcheck)
  *   render.html?water=<angler|below>&pattern=<id> (or &natural=<id>)&samples=<n>
  *                     the finished fly (or the natural) in the realistic water, path traced with
  *                     n samples (scripts/render-water.ts); &assets=site uses the site's own
@@ -58,8 +59,10 @@ if (waterView === "angler" || waterView === "below") {
   const transparent = params.get("transparent") === "1";
   if (transparent) document.documentElement.style.background = document.body.style.background = "transparent";
   const scene = new FlyScene(document.getElementById("stage")!, { fov: Number(params.get("fov") ?? 8), background: transparent ? null : "#f4f1ea" });
-  scene.setNatural(natural);
+  const grid = params.get("grid") === "1";
+  scene.setNatural(natural, grid ? 10 : undefined);
   scene.setView(view, 0, fit);
+  if (grid) scene.setGrid(true);
   window.turnTo = async (degrees) => {
     scene.setView(view, degrees, fit);
     scene.renderNow();

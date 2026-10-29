@@ -11,8 +11,9 @@ rides crawling
 body {
     // Narrow, cylindrical, yellowish light brown (Wikipedia de: Ephemera danica). The nymph already carries dark
     // markings on the abdomen like the adult's (Naturschutzbund); E. danica's are elongated and solid on segments
-    // 7 to 9 (First Nature). Assumption: drawn as a dark stripe along the back.
-    abdomen length=0.62 radius=0.06 taper=0.5 segments=10 color="#cdbb86" belly="#e0d4aa" marks=stripe ink="#6a5230"
+    // 7 to 9, less distinct further forward (First Nature): drawn as the marks below.
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.62 radius=0.035 taper=1.7 segments=10 color="#cdbb86" belly="#e0d4aa"
     thorax length=0.25 radius=0.07 taper=0.95 color="#b8a470"
     head length=0.13 radius=0.055 taper=0.7 color="#a8925e"
 }
@@ -23,7 +24,8 @@ parts {
     // Seven pairs of deeply split gills with fringed edges (Naturschutzbund), each two-branched with fine
     // filaments, held over the back over the first half of the abdomen (DCRT); forked, lanceolate and fringed
     // on segments 2–7, giving a fluffy look from above (macroinvertebrates.org).
-    gills count=7 length=0.12 color="#d8c898" shape=feather
+    // Assumption: each about a seventh of the body long (photos).
+    gills count=7 length=0.14 color="#d8c898" shape=feather
     // Slender, slightly curved, tusk-like mandibles for digging (Naturschutzbund), projecting forward, visible
     // from above and curving upward seen from the side (macroinvertebrates.org). Assumption: about as long as
     // the head.
@@ -32,9 +34,15 @@ parts {
     // Short, sturdy legs (Wikipedia de: Ephemera danica) used as digging shovels (Naturschutzbund); fore tibiae
     // widened for burrowing (macroinvertebrates.org); mayfly nymphs' legs are often clad in bristles and hairs
     // (Wikipedia: Mayfly). Assumption: femur and tibia about equal, a short foot, well haired.
-    legs count=6 length=0.4 color="#b8a470" femur=0.4 tibia=0.36 hairs=0.5
+    // Assumption: the foot a single joint (one claw: DELTA); the fore legs about half again as thick.
+    legs count=6 length=0.4 color="#b8a470" femur=0.4 tibia=0.36 hairs=0.5 tarsi=1
+    legs pair=fore count=2 length=0.4 color="#b8a470" femur=0.4 tibia=0.36 hairs=0.5 tarsi=1 thick=1.5
     antennae length=0.2 color="#a8925e"
     eyes size=0.022 color=black
+    // E. danica's dark marks: a pair of solid streaks on the back of segments 7–9, fainter ones in front (First
+    // Nature), already on the nymph (Naturschutzbund). Assumption: the fainter ones on segments 2–6.
+    mark section=abdomen kind=streaks segments="7-9" side=top color="#4a3820"
+    mark section=abdomen kind=streaks segments="2-6" side=top color="#9a8458"
 }
 hatches {
     southern-sweden from=may to=june note="E. vulgata in May; Scandinavian peak usually the first week of June (Ahrex)."
@@ -54,4 +62,10 @@ sources {
     "Ahrex (Lars Chr. Bentsen) 2024: It's that time of year again" url="https://ahrexhooks.com/2024/05/17/its-that-time-of-year-again/"
     "Troutnut: Genus Ephemera" url="https://www.troutnut.com/hatch/52/Mayfly-Ephemera-Brown-Drakes"
     "Dick Talleur, Fly Fisherman: Meeting the Beaverkill Hatches" url="https://www.flyfisherman.com/editorial/meeting-beaverkill-hatches/461963"
+    "DELTA, British Insects: the orders, Ephemeroptera" url="https://www.delta-intkey.com/britin/ord/www/ephemero.htm"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/d/de/Vulgatanymfe.jpg" page="https://commons.wikimedia.org/wiki/File:Vulgatanymfe.jpg" author="Joachim Nirmaier" license="CC BY-SA 3.0" flip=#true note="Ephemera vulgata nymph on gravel, from the side and above: gills over the back"
+    "https://upload.wikimedia.org/wikipedia/commons/3/31/FMIB_47899_Mayflies-_Ephemera_viria_Etn_1_Lateral_view_of_the_nymph_Note_the_latero-dorsal_breathing_organs_or_gills_on_the_abdominal.jpeg" page="https://commons.wikimedia.org/wiki/File:FMIB_47899_Mayflies-_Ephemera_viria_Etn_1_Lateral_view_of_the_nymph_Note_the_latero-dorsal_breathing_organs_or_gills_on_the_abdominal.jpeg" author="Louis Hippolyte Joutel" license="Public domain" flip=#true note="Plate: Ephemera varia nymph, lateral (bottom) and dorsal views, with adults"
+    "https://upload.wikimedia.org/wikipedia/commons/0/04/Ephemera_guttulata_larva.jpg" page="https://commons.wikimedia.org/wiki/File:Ephemera_guttulata_larva.jpg" author="Hannah Cave Stout" license="CC BY-SA 4.0" note="Ephemera guttulata nymph from above: tusks, gills"
 }

@@ -11,26 +11,40 @@ rides swimming
 body {
     // Drawn after the Atlantic silverside: mostly translucent, with a silver stripe the length of
     // the body along the lateral line and brown speckling on the head and upper back; rounder
-    // and less compressed than its relatives (Wikipedia). Lengths leave out the tail fin.
-    // Assumption: from the drawing on Wikipedia's Atlantic silverside page, the head about 0.22
-    // of the length, the body about a sixth as deep as long, the tail's narrow end about 0.06.
-    tail length=0.28 radius=0.055 taper=0.45 color="#7a8a6a" belly="#e8eef0" flatten=1.6 translucency=0.35 marks=stripe ink="#dfe6ea"
-    trunk length=0.5 radius=0.068 taper=0.95 color="#7a8a6a" belly="#eef2f4" flatten=1.4 translucency=0.35 marks=stripe ink="#dfe6ea"
-    head length=0.22 radius=0.066 taper=0.45 color="#6a7a5a" belly="#e8eef0" flatten=1.4 translucency=0.2 round=0.6
+    // and less compressed than its relatives (Wikipedia). An elongated body (FishBase). Lengths
+    // leave out the tail fin.
+    // Assumption: from the references, the head about 0.24 of the length, the body deepest
+    // ahead of the first dorsal fin at about a sixth of the length, the caudal peduncle about
+    // 0.07 deep.
+    tail length=0.28 radius=0.034 taper=1.85 color="#7a8a6a" belly="#e8eef0" flatten=1.3 translucency=0.35 marks=stripe ink="#dfe6ea" top=0.035 bottom=0.033
+    trunk length=0.48 radius=0.062 taper=1.1 color="#7a8a6a" belly="#eef2f4" flatten=1.3 translucency=0.35 marks=stripe ink="#dfe6ea" top=0.072 bottom=0.066
+    head length=0.24 radius=0.064 taper=0.5 color="#6a7a5a" belly="#e8eef0" flatten=1.3 translucency=0.2 top=0.08 bottom=0.072
 }
 parts {
-    // Two dorsal fins, a spiny one and a soft one behind it (Wikipedia: Atlantic
-    // silverside); a forked tail, as the sand eel's (Wikipedia: Lesser sand eel).
-    // Assumption: positions and sizes read off the drawing: the first dorsal fin starting just
-    // behind the middle, over the start of the long anal fin; the pelvic fins well ahead of
-    // them; the pectoral fins high behind the head.
-    fin kind=caudal at=0 size=0.18 color="#b8c0b8"
-    fin kind=dorsal at=0.46 size=0.08 color="#b8c0b8"
-    fin kind=dorsal at=0.32 size=0.1 color="#b8c0b8"
-    fin kind=anal at=0.44 size=0.14 color="#b8c0b8"
-    fin kind=pelvic at=0.63 size=0.07 color="#b8c0b8"
-    fin kind=pectoral at=0.76 size=0.1 color="#b8c0b8"
-    eyes size=0.032 color="#1a1a14"
+    // One spiny and one soft dorsal fin, the first set far back (Wikipedia: Atlantic
+    // silverside); 23–26 anal rays (FishBase); a forked tail, as the sand eel's (Wikipedia:
+    // Lesser sand eel).
+    // Assumption: positions and sizes read off the references: the small spiny dorsal fin just
+    // behind the middle, over the front of the long anal fin; the soft dorsal behind it; the
+    // pelvic fins well ahead of them; the pectoral fins high behind the head.
+    fin kind=caudal at=0 base=0.07 height=0.2 shape=forked color="#b8c0b8" clarity=0.55
+    fin kind=dorsal at=0.42 base=0.06 height=0.07 spines=5 rays=5 shape=pointed color="#b8c0b8" clarity=0.6
+    fin kind=dorsal at=0.32 base=0.1 height=0.09 rays=9 shape=pointed color="#b8c0b8" clarity=0.55
+    fin kind=anal at=0.44 base=0.23 height=0.07 rays=24 shape=pointed color="#c8d0c8" clarity=0.6
+    fin kind=pelvic at=0.61 base=0.03 height=0.07 rays=6 shape=rounded color="#c8d0c8" clarity=0.6
+    fin kind=pectoral at=0.76 base=0.03 height=0.1 rays=14 shape=pointed color="#c8d0c8" clarity=0.6
+    // Assumption: a large eye, about a quarter of the head across, silver round the pupil; a
+    // large terminal mouth (Wikipedia: "large compared to other Menidia").
+    eyes size=0.03 color="#1a1a14" iris="#d8dcd8" pupil="#0a0a08"
+    mouth position=terminal size=0.06
+    gill-cover at=0.77
+    // Assumption: fairly large scales, about 45 along the side, with a silvery shine.
+    scales size=0.022 shine=0.55
+    // The silver band next to the lateral line (Wikipedia).
+    lateral-line height=0.05 color="#e8eef2"
+    // Brown speckling on the top of the head, the scales of the back and near the jaw (Wikipedia).
+    mark section=trunk kind=spots side=top color="#6a5638"
+    mark section=head kind=spots side=top color="#6a5638"
 }
 hatches {
     southern-sweden from=january to=december note="Estimate."
@@ -41,5 +55,12 @@ hatches {
 }
 sources {
     "Wikipedia: Atlantic silverside" url="https://en.wikipedia.org/wiki/Atlantic_silverside"
+    "FishBase: Menidia menidia" url="https://www.fishbase.se/summary/Menidia-menidia.html"
     "Wikipedia: Lesser sand eel" url="https://en.wikipedia.org/wiki/Lesser_sand_eel"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/8/84/Atlantic_Silverside_%28Menidia_menidia%29_Art_Patrick_J._Lynch_CC-BY.jpg" page="https://commons.wikimedia.org/wiki/File:Atlantic_Silverside_(Menidia_menidia)_Art_Patrick_J._Lynch_CC-BY.jpg" author="Patrick J. Lynch" license="CC BY 4.0" flip=#true note="Drawing, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/b/ba/Menidia_menidia_RR_08-11-19_0545_%2848555459552%29.jpg" page="https://commons.wikimedia.org/wiki/File:Menidia_menidia_RR_08-11-19_0545_(48555459552).jpg" author="Smithsonian Environmental Research Center" license="CC BY 2.0" flip=#true note="Side view"
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/Atherina_presbyter_103372383.jpg" page="https://commons.wikimedia.org/wiki/File:Atherina_presbyter_103372383.jpg" author="Klaus Kevin Kristensen" license="CC BY 4.0" flip=#true note="Sand smelt, the European silverside, in Danish water"
 }

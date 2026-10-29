@@ -11,14 +11,14 @@ description "En platt, kraftig nymf med två stjärtspröt, långa antenner och 
 examples "Perla, Diura, Isoperla; salmonfly och golden stone (Nordamerika)"
 
 hatches {
-    // en southern-sweden note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
-    southern-sweden note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
-    // en northern-scandinavia note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
-    northern-scandinavia note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
-    // en british-isles note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
-    british-isles note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
-    // en central-europe note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
-    central-europe note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
-    // en northern-usa note: In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013).
-    northern-usa note="I vattnet hela året: ett till tre år som nymf (tyska Wikipedia; Dalarna 2013)."
+    // en southern-sweden note: In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de).
+    southern-sweden note="I vattnet hela året: ett till två år som nymf (Dalarna 2013), upp till tre hos Perla marginata (tyska Wikipedia)."
+    // en northern-scandinavia note: In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de).
+    northern-scandinavia note="I vattnet hela året: ett till två år som nymf (Dalarna 2013), upp till tre hos Perla marginata (tyska Wikipedia)."
+    // en british-isles note: In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de).
+    british-isles note="I vattnet hela året: ett till två år som nymf (Dalarna 2013), upp till tre hos Perla marginata (tyska Wikipedia)."
+    // en central-europe note: In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de).
+    central-europe note="I vattnet hela året: ett till två år som nymf (Dalarna 2013), upp till tre hos Perla marginata (tyska Wikipedia)."
+    // en northern-usa note: In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de).
+    northern-usa note="I vattnet hela året: ett till två år som nymf (Dalarna 2013), upp till tre hos Perla marginata (tyska Wikipedia)."
 }

@@ -7,17 +7,31 @@ description "A soft, pale larva living in a portable case of sand grains, stones
 size min=13 max=25
 rides crawling
 body {
-    abdomen length=0.66 radius=0.08 taper=0.8 segments=9 color="#e4dcc0"
-    thorax length=0.22 radius=0.07 taper=0.85 color="#6a4a28"
-    // Head, back plates and legs hard and brown, the head characteristically white-dotted in Lepidostoma (Dalarna 2013).
-    head length=0.12 radius=0.055 taper=0.8 color="#3a2614" marks=spots ink="#c8b88e"
+    // A soft abdomen and a hard head (Wikipedia: Caddisfly); thickset head and thorax (Wikipedia: Limnephilidae).
+    // The first abdominal segment with one to three humps to hold the case (Wikipedia de: Köcherfliegen).
+    // Assumption: the abdomen pale cream, its thread gills (Dalarna 2013) too fine to draw.
+    abdomen length=0.66 radius=0.065 taper=1.2 segments=9 color="#e4dcc0" belly="#ece6d0" round=0.3
+    // Head, back plates and legs hard and brown (Lepidostoma); head and pronotum red-brown in Ecclisopteryx (Dalarna 2013).
+    // Assumption: the rear of the thorax soft and pale under small plates, as in the limnephilid photo.
+    thorax length=0.22 radius=0.072 taper=0.85 segments=3 color="#8a6a40" belly="#d8c8a0"
+    // The head characteristically white-dotted in Lepidostoma (Dalarna 2013).
+    head length=0.12 radius=0.06 taper=0.75 color="#5a3818" marks=spots ink="#c8b88e" round=0.6
 }
 parts {
-    // A sand case about 18 mm on a 12 mm larva (Sericostoma, Dalarna 2013).
-    case material=sand length=0.76 radius=0.13 color="#9a8a6a"
-    // Short legs (Lepidostoma, Dalarna 2013).
-    // Assumption: the hind pair a third longer than the front, thigh, shin and foot about equal (photos).
-    legs count=6 length=0.22 hind=1.3 femur=0.36 tibia=0.32 color="#5a3c20"
+    // A sand case about 18 mm on a 12 mm larva (Sericostoma, Dalarna 2013), conical and slightly curved; the case reaches
+    // well behind the larva, which the drawing cannot show (the case is drawn from the larva's rear end).
+    // Assumption: the case about a quarter of the larva long across (photos).
+    case material=sand length=0.76 radius=0.12 color="#857a60"
+    // Assumption: the hard plate on the first thoracic segment (pronotum), as in the photos.
+    pronotum length=0.08 width=0.13 color="#4a3018"
+    // Legs with a single foot joint (Wikipedia: Caddisfly); short in Lepidostoma (Dalarna 2013).
+    // Assumption, from the photos: stout, the front pair the shortest (0.13 of the larva), the hind pair the longest (0.24).
+    legs count=6 length=0.2 femur=0.36 tibia=0.3 tarsi=1 thick=1.5 color="#9a7436"
+    legs pair=fore count=2 length=0.13 femur=0.38 tibia=0.28 tarsi=1 thick=1.8 color="#8a6430"
+    legs pair=hind count=2 length=0.24 femur=0.36 tibia=0.3 tarsi=1 thick=1.4 color="#9a7436"
+    // Claws at the rear end to hold on, in every caddis larva (Wikipedia de: Köcherfliegen); a pair of hooks for
+    // grappling (Wikipedia: Caddisfly). Inside the case. Assumption: short.
+    prolegs count=1 where=rear length=0.03 hooks=#true color="#c8b48a"
 }
 hatches {
     southern-sweden from=january to=december note="In the water all year; drifting larvae are taken spring to autumn."
@@ -32,4 +46,10 @@ sources {
     "Missouri Department of Conservation: Caddisflies" url="https://mdc.mo.gov/discover-nature/field-guide/caddisflies"
     "Troutnut: Order Trichoptera" url="https://www.troutnut.com/hatch/12/Insect-Trichoptera-Caddisflies"
     "Wikipedia (de): Köcherfliegen" url="https://de.wikipedia.org/wiki/Köcherfliegen"
+    "Wikipedia: Limnephilidae" url="https://en.wikipedia.org/wiki/Limnephilidae"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/c/ce/Sericostoma_personatum_larva.jpg" page="https://commons.wikimedia.org/wiki/File:Sericostoma_personatum_larva.jpg" author="Hallvard Elven, Naturhistorisk museum, Universitetet i Oslo" license="CC BY 4.0" flip=#true note="Sericostoma personatum in its sand case, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/8/8a/L6_Dragovi%C5%A1tica_3_Sericostoma.jpeg" page="https://commons.wikimedia.org/wiki/File:L6_Dragovi%C5%A1tica_3_Sericostoma.jpeg" author="Wlodzimierz" license="CC BY-SA 4.0" note="Sericostoma in its case, from the side and above; 2 mm scale bar"
+    "https://upload.wikimedia.org/wikipedia/commons/f/ff/L7_Suvoljubatska_reka_7_Limnephilidae.jpeg" page="https://commons.wikimedia.org/wiki/File:L7_Suvoljubatska_reka_7_Limnephilidae.jpeg" author="Wlodzimierz" license="CC BY-SA 4.0" flip=#true note="A limnephilid larva out of its case, side view, curled"
 }

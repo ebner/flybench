@@ -14,14 +14,16 @@ body {
     // Amphipoda; Gammarus pulex). Numerous bristles (Wikipedia de).
     // Assumption: from the photo on Wikipedia's Gammarus pulex page, the body with its side
     // plates about a fifth as deep as long and half as wide as deep.
-    abdomen length=0.34 radius=0.07 taper=0.6 segments=6 color="#8a8a68" belly="#a8a888" flatten=2 translucency=0.4
+    abdomen length=0.34 radius=0.045 taper=1.6 segments=6 color="#8a8a68" belly="#a8a888" flatten=2 translucency=0.4
     thorax length=0.54 radius=0.08 taper=1.0 segments=7 color="#7e7e5c" belly="#a0a080" flatten=2.1 translucency=0.4
     head length=0.12 radius=0.07 taper=0.7 color="#7a7a58" flatten=1.8 translucency=0.4
 }
 parts {
-    // Seven pairs of thoracic legs, two pairs of antennae (Wikipedia: Gammarus pulex).
-    // Assumption: from the photo, the hind legs reach about 0.28 of the body and are bristly.
-    legs count=14 length=0.28 color="#9a9a78" hairs=0.4
+    // Seven pairs of thoracic legs, two pairs of antennae (Wikipedia: Gammarus pulex); the first two pairs (gnathopods)
+    // for feeding and mating (Wikipedia: Gammarus pulex); four pairs directed forwards and the last three backwards
+    // (Wikipedia: Amphipoda), drawn trailing back as it swims.
+    // Assumption: from the photos, about 0.38 of the body long and bristly.
+    legs count=14 length=0.38 color="#9a9a78" hairs=0.4
     // Three pairs of swimming legs (pleopods) under the front of the abdomen (Wikipedia:
     // Amphipoda). Assumption: short, fringed with bristles.
     legs count=6 length=0.1 color="#a0a080" at=abdomen hairs=0.7
@@ -42,6 +44,11 @@ hatches {
 sources {
     "Wikipedia: Gammarus pulex" url="https://en.wikipedia.org/wiki/Gammarus_pulex"
     "Wikipedia: Amphipoda" url="https://en.wikipedia.org/wiki/Amphipoda"
-    "Wikipedia (de): Bachflohkrebs" url="https://de.wikipedia.org/wiki/Bachflohkrebs"
+    "Wikipedia (de): Bachflohkrebs (Gammarus fossarum)" url="https://de.wikipedia.org/wiki/Bachflohkrebs"
     "Ahrex (Michael Jensen) 2017: Gammarus, small but important" url="https://ahrexhooks.com/2017/11/23/gammarus-small-but-important/"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/3/3a/Gammarus_pulex_14875940_%28cropped%29.jpg" page="https://commons.wikimedia.org/wiki/File:Gammarus_pulex_14875940_(cropped).jpg" author="Nicola Simoncini" license="CC BY 4.0" note="Gammarus pulex, side view, curled"
+    "https://upload.wikimedia.org/wikipedia/commons/3/3f/Gammarus_roeselii.jpg" page="https://commons.wikimedia.org/wiki/File:Gammarus_roeselii.jpg" author="Michal Maňas" license="CC BY 2.5" flip=#true note="Gammarus roeselii, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/4/4c/Gemeiner_Flohkrebs.png" page="https://commons.wikimedia.org/wiki/File:Gemeiner_Flohkrebs.png" author="Eduard Oscar Schmidt" license="Public domain" note="Gammarus pulex, side view (19th-century drawing)"
 }

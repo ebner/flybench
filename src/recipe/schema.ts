@@ -293,8 +293,8 @@ export const Source = z.strictObject({
   url: WebUrl.optional(),
 });
 
-/** A photo of the finished fly, used to check proportions while authoring. Never published. */
-const Reference = z.strictObject({
+/** A photo of the finished fly (or the natural), used to check proportions while authoring. Never published. */
+export const Reference = z.strictObject({
   /** Direct link to the image file. */
   image: WebUrl,
   /** The page the image is shown on, for attribution. */

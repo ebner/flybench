@@ -8,7 +8,7 @@ size min=8 max=20
 rides on-surface
 body {
     // Body and wings clothed with long silky hairs (NC State). Assumption: thickest on the thorax and head, the abdomen thinly haired (photos).
-    abdomen length=0.6 radius=0.06 taper=0.6 segments=8 color="#6a6a40" belly="#8a8a5a" hairs=0.15
+    abdomen length=0.6 radius=0.042 taper=1.45 segments=8 color="#6a6a40" belly="#8a8a5a" hairs=0.15
     thorax length=0.28 radius=0.07 taper=0.9 color="#4a3e28" hairs=0.5
     head length=0.12 radius=0.055 taper=0.75 color="#3a3020" hairs=0.5
 }
@@ -16,15 +16,21 @@ parts {
     // Hairy wings roof-like over the body (Wikipedia; First Nature; NC State), the fore wings often spotted or patterned,
     // longer than the hind wings, which are broader (Wikipedia de); faintly spotted in Hydropsyche (Dalarna 2013).
     // Phryganea grandis: body 20 mm, 33 mm with the wings (Gardensafari), so the fore wing about 1.4 body lengths from its root.
-    // Assumption: hind wings 0.85 of the fore wing's length.
-    wings count=4 shape=tent length=1.35 width=0.35 color="#8a7556" clarity=0.08 veins=#true hind=0.85 hairs=0.7 mottle="#4a3a26"
+    // Assumption: 1.2 for the smaller sedges in the photos (Hydropsyche, Limnephilus), whose wing tips reach less far past the
+    // abdomen; hind wings 0.85 of the fore wing's length; the roof about 0.3 of the wing's length deep (photos).
+    wings count=4 shape=tent length=1.2 width=0.42 color="#8a7556" clarity=0.08 veins=#true hind=0.85 hairs=0.7 mottle="#4a3a26"
     // Antennae about as long as the body, often longer (MDC; First Nature); as long as the fore wing in Hydropsyche,
     // shorter in Sericostoma, longer in Lepidostoma (Dalarna 2013).
     antennae length=1.1 color="#5a4a32"
-    // Long, slender legs (Wikipedia de) with five-jointed feet (Wikipedia).
-    // Assumption: the hind legs about a body length, the feet a third of the leg (photos).
-    legs count=6 length=0.75 hind=1.3 femur=0.3 tibia=0.36 color="#7a6a48"
-    eyes size=0.03 color=black
+    // Long, slender legs (Wikipedia de) with five-jointed feet (Wikipedia); long spurs on the shins (Wikipedia de).
+    // Assumption, from the photos: the front legs the shortest (about 0.55 of the body), the hind legs the longest
+    // (0.85), the feet about a third of the leg, held bent so the body sits low.
+    legs count=6 length=0.7 femur=0.3 tibia=0.36 tarsi=5 color="#7a6a48"
+    legs pair=fore count=2 length=0.55 femur=0.32 tibia=0.32 tarsi=5 color="#7a6a48"
+    legs pair=hind count=2 length=0.85 femur=0.28 tibia=0.38 tarsi=5 color="#7a6a48"
+    // Large compound eyes and two or three simple eyes (ocelli) (Lucid); ocelli are missing in some families, such
+    // as the Hydropsychidae (assumption from the keys' use of them, not checked per family).
+    eyes size=0.03 color=black ocelli=#true
 }
 hatches {
     southern-sweden from=may to=october time="evening" note="From May (Sericostoma, Hydropsyche; Dalarna 2013) into autumn (Rhyacophila to November; Gullefors 2015); July and August the main months (Gullefors 2014)."
@@ -44,4 +50,10 @@ sources {
     "First Nature: Grannom" url="https://www.first-nature.com/insects/t-brachycentrus-subnubilis.php"
     "Gullefors 2015: Sveriges nattsländor (Trichoptera), utbredning, vanlighetsgrad, habitat och flygtider. Entomologisk Tidskrift 136" url="https://www.sef.nu/"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+    "Lucid: Factsheet Trichoptera" url="https://keyserver.lucidcentral.org/key-server/data/05060b08-0f0e-4d04-8c01-070203010505/media/Html/Trichoptera.htm"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/1/19/Hydropsyche_angustipennis_m.jpg" page="https://commons.wikimedia.org/wiki/File:Hydropsyche_angustipennis_m.jpg" author="Hallvard Elven, Naturhistorisk museum, Universitetet i Oslo" license="CC BY 4.0" note="Hydropsyche angustipennis male, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/9/90/Limnephilus_lunatus_%2837962264116%29.jpg" page="https://commons.wikimedia.org/wiki/File:Limnephilus_lunatus_(37962264116).jpg" author="AJC1 from UK" license="CC BY-SA 2.0" flip=#true note="Limnephilus lunatus, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/e/e4/Caddisfly_Limnephilus_lunatus_%2851705547432%29.jpg" page="https://commons.wikimedia.org/wiki/File:Caddisfly_Limnephilus_lunatus_(51705547432).jpg" author="gailhampshire" license="CC BY 2.0" flip=#true note="Limnephilus lunatus, side view from a little above"
 }

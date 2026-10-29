@@ -9,19 +9,28 @@ rides in-film
 body {
     // The chestnut-brown wing cases, covered with long upright hairs, cover the back; head,
     // thorax and legs shiny dark green or bluish, the underside green too (Wikipedia).
-    // Assumption: from the photo on Wikipedia's page, the wing cases about 0.58 of the length,
-    // the thorax 0.27 and the head 0.15; long pale hairs at the sides and under the thorax.
-    abdomen length=0.58 radius=0.21 taper=0.8 color="#7a4a22" belly="#1e2a1e" flatten=0.75 round=1 hairs=0.35
-    thorax length=0.27 radius=0.19 taper=0.8 color="#1e3024" belly="#1e2a1e" flatten=0.75 round=0.7 hairs=0.5
-    head length=0.15 radius=0.12 taper=0.8 color="#1a2a20" flatten=0.75 round=1 hairs=0.15
+    // Assumption, from the side views: the wing cases about 0.62 of the length, nearly a third as deep, flat on top and
+    // rounded only at the rear; the pronotum 0.22 and the head 0.16, held low; long pale hairs at the sides and under the
+    // thorax, the hairs on the wing cases fine and short-looking.
+    abdomen length=0.62 radius=0.2 taper=0.85 color="#7a4a22" belly="#1e2a1e" flatten=0.78 round=0.45 hairs=0.12
+    thorax length=0.22 radius=0.17 taper=0.85 color="#1e3024" belly="#1e2a1e" flatten=0.8 round=0.5 hairs=0.3
+    head length=0.16 radius=0.1 taper=0.75 color="#1a2a20" flatten=0.8 round=0.8 hairs=0.08
 }
 parts {
-    // Assumption: from the photo, the legs reach a little under half the body length out, with
-    // long jointed feet ending in claws.
-    legs count=6 length=0.45 color="#1e3024" femur=0.34 tibia=0.32 hairs=0.15
-    // Short antennae ending in a club of three leaves (Wikipedia); about 0.15 in the photo.
-    antennae length=0.15 color="#2a2a1e"
-    eyes size=0.03 color=black
+    // Six rows of small dots along each wing case (Wikipedia; Wikipedia de: Gartenlaubkäfer).
+    mark section=abdomen kind=rows color="#4a2812"
+    // Head and thorax finely granulated, shiny dark green or bluish (Wikipedia). Assumption: the pronotum about as wide as
+    // the wing cases' front (photos).
+    pronotum length=0.2 width=0.34 color="#1e3a2c"
+    // Assumption, from the photos: the front legs about 0.45 of the body and the hind legs 0.6, with stout shins and long
+    // five-jointed feet ending in claws.
+    legs count=6 length=0.52 color="#1e3024" femur=0.32 tibia=0.32 tarsi=5 thick=1.3 hairs=0.15
+    legs pair=fore count=2 length=0.45 color="#1e3024" femur=0.32 tibia=0.3 tarsi=5 thick=1.4 hairs=0.15
+    legs pair=hind count=2 length=0.6 color="#1e3024" femur=0.32 tibia=0.32 tarsi=5 thick=1.3 hairs=0.15
+    // Very short antennae ending in a fan of three leaves (Wikipedia); about 0.15 in the photos.
+    // Assumption: nine segments.
+    antennae length=0.15 color="#2a2a1e" shape=clubbed segments=9
+    eyes size=0.025 color=black
 }
 hatches {
     southern-sweden from=june to=june note="Estimate."
@@ -31,5 +40,11 @@ hatches {
 }
 sources {
     "Wikipedia: Phyllopertha horticola" url="https://en.wikipedia.org/wiki/Phyllopertha_horticola"
+    "Wikipedia (de): Gartenlaubkäfer" url="https://de.wikipedia.org/wiki/Gartenlaubkäfer"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/0/06/Garden_chafer_beetle_%28Phyllopertha_horticola%29.jpg" page="https://commons.wikimedia.org/wiki/File:Garden_chafer_beetle_(Phyllopertha_horticola).jpg" author="Charles J. Sharp" license="CC BY-SA 4.0" flip=#true note="Side view from a little above"
+    "https://upload.wikimedia.org/wikipedia/commons/9/98/Phyllopertha_horticola_139030187.jpg" page="https://commons.wikimedia.org/wiki/File:Phyllopertha_horticola_139030187.jpg" author="Paul Braun" license="CC0" flip=#true note="Side view on a snail shell"
+    "https://upload.wikimedia.org/wikipedia/commons/f/fe/Phyllopertha_horticola_138582479.png" page="https://commons.wikimedia.org/wiki/File:Phyllopertha_horticola_138582479.png" author="Uffe Harboe Nygaard" license="CC BY 4.0" note="Three-quarter view on a flower"
 }

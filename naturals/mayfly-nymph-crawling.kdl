@@ -9,14 +9,16 @@ rides crawling
 body {
     // Ephemerella aurivillii dark with clear white markings; Heptagenia sulphurea mottled white and dark brown
     // (Dalarna 2013). Serratella's abdomen carries paired dorsal tubercles (First Nature; Wikipedia de).
-    abdomen length=0.58 radius=0.07 taper=0.45 segments=10 color="#4e3d28" belly="#9a8a62" flatten=0.65 marks=mottle ink="#b4a27a"
-    thorax length=0.28 radius=0.085 taper=0.95 color="#43331f" belly="#8a7a55" flatten=0.7
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.58 radius=0.032 taper=2.2 segments=10 color="#4e3d28" belly="#9a8a62" flatten=0.65 marks=mottle ink="#b4a27a"
+    // Assumption: the thorax about a quarter of the body wide (photos).
+    thorax length=0.28 radius=0.095 taper=0.95 color="#43331f" belly="#8a7a55" flatten=0.7
     head length=0.14 radius=0.07 taper=0.75 color="#3a2c1c" flatten=0.6
 }
 parts {
-    // Tails banded (DCRT; Dalarna 2013: E. aurivillii, Heptagenia), the bands not drawn; clingers have long tails
-    // (DCRT). Assumption: a sparse fringe of hairs.
-    tails count=3 length=0.7 spread=50 color="#6a5636" hairs=0.2
+    // Serratella's tails "distinctly striped" (DCRT), banded also in E. aurivillii and Heptagenia (Dalarna 2013);
+    // clingers have long tails (DCRT). Assumption: a sparse fringe of hairs; about 0.6 of the body (photos).
+    tails count=3 length=0.6 spread=50 color="#6a5636" hairs=0.2 banded=#true
     // Ephemerellidae: four pairs of plate-like gills held over the back of the abdomen (DCRT), on segments 3 or 4
     // to 7, an oval top plate over a lobed lower layer, lying in paired hollows on the back (macroinvertebrates.org).
     gills count=4 length=0.07 color="#7a6a48" shape=plate
@@ -24,7 +26,8 @@ parts {
     // Serratella's legs ringed yellow-brown (Wikipedia de; DCRT: "distinctly striped"); Heptageniid femora broad
     // and flattened (DCRT; Dalarna 2013); one claw per leg (macroinvertebrates.org). Assumption: the femur the
     // longest segment, the foot (tarsus and claw) a little shorter than the tibia, a few bristles.
-    legs count=6 length=0.55 color="#7a6640" femur=0.42 tibia=0.32 hairs=0.25 banded=#true
+    // Assumption: the foot a single joint.
+    legs count=6 length=0.55 color="#7a6640" femur=0.42 tibia=0.32 hairs=0.25 banded=#true tarsi=1
     antennae length=0.25 color="#6a5636"
     eyes size=0.025 color=black
 }
@@ -43,4 +46,9 @@ sources {
     "First Nature: Blue-winged Olive" url="https://www.first-nature.com/insects/e-serratella-ignita.php"
     "Dick Talleur, Fly Fisherman: Meeting the Beaverkill Hatches" url="https://www.flyfisherman.com/editorial/meeting-beaverkill-hatches/461963"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/6/6f/Spiny_crawler_mayfly%2C_Ephemerella_subvaria_%2813157772543%29.jpg" page="https://commons.wikimedia.org/wiki/File:Spiny_crawler_mayfly,_Ephemerella_subvaria_(13157772543).jpg" author="Bob Henricks" license="CC BY-SA 2.0" note="Ephemerella subvaria (Hendrickson) nymph from above, head lower right: banded legs and tails"
+    "https://upload.wikimedia.org/wikipedia/commons/a/a5/Spiny_crawler_mayfly%2C_Ephemerella_dorothea_%287174302797%29.jpg" page="https://commons.wikimedia.org/wiki/File:Spiny_crawler_mayfly,_Ephemerella_dorothea_(7174302797).jpg" author="Bob Henricks" license="CC BY-SA 2.0" flip=#true note="Ephemerella dorothea nymph from above"
+    "https://upload.wikimedia.org/wikipedia/commons/1/19/Spiny_crawler_mayfly%2C_Ephemerella_dorothea_%287150567955%29.jpg" page="https://commons.wikimedia.org/wiki/File:Spiny_crawler_mayfly,_Ephemerella_dorothea_(7150567955).jpg" author="Bob Henricks" license="CC BY-SA 2.0" flip=#true note="Ephemerella dorothea nymph from above and the side"
 }

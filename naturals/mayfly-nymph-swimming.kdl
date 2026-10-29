@@ -9,21 +9,23 @@ rides swimming
 body {
     // Pale olive-brown, translucent (First Nature); B. rhodani yellow-grey with a "characteristic body pattern"
     // (Dalarna 2013). Assumption: the pattern drawn as paler spots on each segment.
-    abdomen length=0.6 radius=0.06 taper=0.45 segments=10 color="#7a6a45" belly="#b0a27a" translucency=0.3 marks=spots ink="#b8a87c"
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.6 radius=0.03 taper=2.0 segments=10 color="#7a6a45" belly="#b0a27a" translucency=0.3 marks=spots ink="#b8a87c"
     thorax length=0.28 radius=0.075 taper=0.9 color="#55462c" belly="#8a7a55"
     head length=0.12 radius=0.06 taper=0.7 color="#4a3c26"
 }
 parts {
-    // Three tails, the middle one shorter in Baetis (DCRT; First Nature); "fairly long" (Dalarna 2013).
+    // Three tails, the middle one shorter in Baetis (DCRT); "fairly long" (Dalarna 2013).
     // Swimming nymphs' tails are densely haired at the sides (Wikipedia de: Eintagsfliegen).
-    tails count=3 length=0.5 spread=40 color="#6a5a3a" hairs=0.7
+    // Assumption: the outer tails a little over half the body, the middle one about 0.7 of them (photos).
+    tails count=3 length=0.55 spread=40 color="#6a5a3a" hairs=0.7 middle=0.7
     // Seven pairs of small gills from the sides (First Nature; DCRT), oval or heart-shaped plates
     // (macroinvertebrates.org), held straight out from the body at rest (Dalarna 2013).
     gills count=7 length=0.06 color="#c8b88a" shape=plate
     wingpads length=0.2 color="#2e2618"
-    // "Slender legs" (Dalarna 2013), one claw each (macroinvertebrates.org). Assumption: the femur the longest
-    // segment, a row of short bristles.
-    legs count=6 length=0.42 color="#6a5a3a" femur=0.4 tibia=0.32 hairs=0.2
+    // "Slender legs" (Dalarna 2013), one claw each (macroinvertebrates.org; DELTA). Assumption: the femur the
+    // longest segment, a row of short bristles, the foot a single joint.
+    legs count=6 length=0.45 color="#6a5a3a" femur=0.4 tibia=0.32 hairs=0.2 tarsi=1
     // Baetid antennae at least two or three times the head's width (macroinvertebrates.org): the head here is
     // 0.12 of the body wide.
     antennae length=0.3 color="#6a5a3a"
@@ -44,4 +46,10 @@ sources {
     "Wikipedia: Mayfly" url="https://en.wikipedia.org/wiki/Mayfly"
     "Wikipedia (de): Eintagsfliegen" url="https://de.wikipedia.org/wiki/Eintagsfliegen"
     "Macroinvertebrates.org: Baetidae (larva)" url="https://www.macroinvertebrates.org/taxa-info/ephemeroptera-larva/baetidae"
+    "DELTA, British Insects: the orders, Ephemeroptera" url="https://www.delta-intkey.com/britin/ord/www/ephemero.htm"
+}
+references {
+    "https://inaturalist-open-data.s3.amazonaws.com/photos/97039019/large.jpeg" page="https://www.inaturalist.org/observations/60676400" author="nmacelko2 (iNaturalist)" license="CC0" note="Baetis flavistriga nymph, from above and the side"
+    "https://inaturalist-open-data.s3.amazonaws.com/photos/305870614/large.jpg" page="https://www.inaturalist.org/observations/175968971" author="Cam Miller (iNaturalist)" license="CC BY-NC 4.0" flip=#true note="Baetis nymph from the side and above: gills, fringed tails"
+    "https://inaturalist-open-data.s3.amazonaws.com/photos/466076908/large.jpg" page="https://www.inaturalist.org/observations/259617968" author="night-heron (iNaturalist)" license="CC BY-NC 4.0" note="Baetis nymph on a stone, from above"
 }

@@ -9,23 +9,27 @@ rides in-film
 curve 45
 body {
     // A nine-segmented abdomen behind the cephalothorax (Naturalis). Assumption: paler rings at the segment joints (photos).
-    abdomen length=0.68 radius=0.045 taper=0.55 segments=9 color="#1e1e1e" belly="#2e2a24" marks=bands ink="#4a4438"
-    thorax length=0.24 radius=0.09 taper=0.85 color="#2a2620"
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.68 radius=0.032 taper=1.55 segments=9 color="#1e1e1e" belly="#2e2a24" marks=bands ink="#4a4438"
+    // Assumption: the thorax bulbous, about a fifth of the body deep (photos).
+    thorax length=0.24 radius=0.1 taper=0.85 color="#2a2620" round=0.7
     head length=0.08 radius=0.06 taper=0.7 color="#2a2620"
 }
 parts {
-    // Head and wing case a quarter to a third of the length, white feathery gills at the head (BC Adventure): the thoracic
-    // horns, in Chironomini usually a dense tuft (Naturalis). Assumption: the gills drawn as two short white filaments.
-    antennae length=0.14 color="#f0f0ea"
+    // Head and wing case a quarter to a third of the length, white feathery gills at the head (BC Adventure): the
+    // thoracic horns, breathing organs on the prothorax (Wikipedia de: Zuckmücken), in Chironomini usually a dense
+    // tuft (Naturalis).
+    horns length=0.12 color="#f0f0ea"
     wingpads length=0.18 color="#14120e"
     eyes size=0.022 color="#3a1a10"
-    // A pair of flattened anal lobes, often with a fringe of long hairs (Naturalis): its swimming fan (Wikipedia de).
+    // A pair of flattened anal lobes, often with a fringe of long hairs (Naturalis): its swimming fan, a fan of hairs
+    // on the last segment (Wikipedia de).
     // Assumption: a twelfth of the body long, pale and see-through.
     tails count=2 length=0.08 spread=40 color="#bdb6a4" leaf=#true hairs=0.8
 }
 hatches {
     southern-sweden from=april to=october note="Estimate: peak May–June."
-    northern-scandinavia from=june to=september note="Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate."
+    northern-scandinavia from=june to=september note="Estimate."
     british-isles from=january to=december time="morning, evening" note="On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly)."
     central-europe from=april to=october note="Estimate, as in Britain."
     northern-usa from=january to=december note="Whenever the water is ice-free; lake peak late May to mid-June (BC Adventure)."
@@ -36,4 +40,9 @@ sources {
     "The Essential Fly: Midge hatches" url="https://www.theessentialfly.com/blog/midgehatches.html"
     "Wikipedia (de): Zuckmücken" url="https://de.wikipedia.org/wiki/Zuckmücken"
     "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
+}
+references {
+    "https://inaturalist-open-data.s3.amazonaws.com/photos/470095061/large.jpeg" page="https://www.inaturalist.org/observations/261644323" author="Mike Palmer (iNaturalist: cosmopterix)" license="CC0" note="Chironomid pupa from a beaver pond, from the side, curled"
+    "https://inaturalist-open-data.s3.amazonaws.com/photos/73469657/large.jpeg" page="https://www.inaturalist.org/observations/46324023" author="kneubaue (iNaturalist)" license="CC BY-NC 4.0" note="Red chironomid pupa, curled: white tufts of the thoracic horns"
+    "https://upload.wikimedia.org/wikipedia/commons/7/74/Psectrocladius_nevalis_%2810.3897-BDJ.12.e121952%29_Figure_3.jpg" page="https://commons.wikimedia.org/wiki/File:Psectrocladius_nevalis_(10.3897-BDJ.12.e121952)_Figure_3.jpg" author="Ge et al. (2024)" license="CC BY 4.0" note="Psectrocladius pupa from above, head up (panel A): thorax, abdomen and haired anal lobes"
 }

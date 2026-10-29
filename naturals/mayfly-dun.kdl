@@ -6,33 +6,50 @@ name "Mayfly dun"
 group mayfly
 stage dun
 examples "olives (Baetis), blue-winged olive (Serratella), iron blue (Alainites), mayfly (Ephemera)"
+// Sizes for the small olives the natural is drawn as; the mayfly (Ephemera) is much larger.
 description "The newly hatched mayfly: upright smoky wings, a slim curved body and two or three long tails. It drifts on the surface while its wings dry, then flies to the bank."
-// Iron blue 5–7 mm, olives and BWO 6–11 mm (Dalarna 2013); Ephemera danica up to about 22 mm (Dalarna 2013; Wikipedia).
+// Iron blue and olives 5–11 mm (Dalarna 2013); blue-winged olive 6–10 mm (Wikipedia de: Serratella ignita).
 size min=5 max=11
 rides on-surface
 // Assumption: the abdomen curves up a little towards the tail.
 curve -14
 body {
-    abdomen length=0.62 radius=0.055 taper=0.55 segments=10 color="#6b6a34" belly="#c9c39a"
-    thorax length=0.27 radius=0.075 taper=0.9 color="#5c5a32" belly=olive
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.62 radius=0.035 taper=1.6 segments=10 color="#6b6a34" belly="#c9c39a"
+    // The second thoracic segment is enlarged for the flight muscles (Wikipedia: Mayfly). Assumption: the thorax
+    // about a fifth of the body deep, humped (photos).
+    thorax length=0.27 radius=0.09 taper=0.85 color="#5c5a32" belly=olive round=0.5
     head length=0.11 radius=0.055 taper=0.7 color="#4a4428"
 }
 parts {
-    // Two or three tails, about the body's length in the dun (Wikipedia: Mayfly; Dalarna 2013); two in Baetis
-    // (Hackston 2021), grey and shorter than the spinner's (Dalarna 2013).
-    tails count=2 length=1.0 spread=35 color=dun
+    // Two or three tails (Wikipedia: Mayfly), two in Baetis (Hackston 2021), grey and shorter in the
+    // dun than the spinner's (Dalarna 2013).
+    // Assumption: a little over the body's length, as in the photos.
+    tails count=2 length=1.1 spread=35 color=dun
     // Forewing about the body length, upright and together at rest (Dalarna 2013; Baetis body 5.2 mm, forewing
     // 5.1 mm: Tiunova 2024). Baetis hind wings "very small" (Dalarna 2013), "very much reduced, with only two or
     // three major veins" or absent (Hackston 2021); in most other mayflies the hind wing is a quarter to a third
     // of the forewing, in Ephemera a third to a half (Troutnut key). The dun's wings are cloudy, finely
-    // haired and fringed at the hind edge (Wikipedia de: Eintagsfliegen; Wikipedia: Mayfly).
-    // Assumption: drawn as an olive (Baetis), the hind wing about an eighth of the forewing.
-    wings count=2 shape=upright length=0.95 width=0.5 color=dun clarity=0.25 veins=#true hind=0.12 hairs=0.1
-    // A male Baetis spinner's foreleg is femur 1.2, tibia 1.7, tarsus 2.0 mm on a 5.2 mm body (Tiunova 2024);
-    // the dun's forelegs are shorter (Dalarna 2013). Assumption: the six legs drawn alike, about half the body
-    // long, with femur and tibia about equal and a shorter foot.
-    legs count=6 length=0.55 color="#6a6040" femur=0.36 tibia=0.36
-    eyes size=0.035 color=black
+    // haired and fringed at the hind edge (Wikipedia de: Eintagsfliegen; Wikipedia: Mayfly; DELTA).
+    // Assumption: drawn as an olive (Baetis), the hind wing about an eighth of the forewing; the forewing about
+    // half as broad as long (photos).
+    // Assumption: leaning back about 40° from upright, as in the reference photos.
+    wings count=2 shape=upright length=1.0 width=0.5 color=dun clarity=0.25 veins=#true hind=0.12 hairs=0.1 angle=40
+    // Drawn as a male. The males' front legs are "unusually long" (Wikipedia: Mayfly): a male Baetis imago's is
+    // femur 1.2, tibia 1.7 and four foot joints 0.7, 0.7, 0.4, 0.2 mm on a 5.2 mm body (Tiunova 2024); the dun's
+    // appendages are shorter than the spinner's (Wikipedia: Mayfly; First Nature: Mayfly). Held forward, off
+    // the water. Assumption: the dun's foreleg about 0.7 of the body, the foot relatively shorter than the
+    // spinner's.
+    legs pair=fore count=2 length=0.7 color="#6a6040" femur=0.3 tibia=0.36 tarsi=4 pose=forward
+    // Baetidae: the hind foot has only three separate joints, two of the five being fused to the tibia (Hackston
+    // 2021); adults' feet otherwise (3–)5-jointed (DELTA). Assumption: the middle legs as the hind, about half
+    // the body long, the femur the longest part (photos).
+    legs count=6 length=0.5 color="#6a6040" femur=0.4 tibia=0.34 tarsi=3
+    // "Short, flexible antennae" (Wikipedia: Mayfly). Assumption: under a tenth of the body (photos).
+    antennae length=0.08 color="#4a4428"
+    // A male Baetis has raised "turbinate" upper eyes, their faceted tops orange-brown, besides the lower
+    // eyes, and three ocelli (Tiunova 2024; Wikipedia: Mayfly); a female's eyes are small and set apart.
+    eyes size=0.045 color="#2a2a22" turbinate="#a0582a" ocelli=#true
 }
 hatches {
     southern-sweden from=april to=october time="midday" note="Baetis: two generations, spring and autumn (Dalarna 2013)."
@@ -51,4 +68,11 @@ sources {
     "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
     "Wikipedia (de): Serratella ignita" url="https://de.wikipedia.org/wiki/Serratella_ignita"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+    "First Nature: Mayfly (Ephemera danica)" url="https://www.first-nature.com/insects/e-ephemera-danica.php"
+    "DELTA, British Insects: the orders, Ephemeroptera" url="https://www.delta-intkey.com/britin/ord/www/ephemero.htm"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/6/6a/Baetis_rhodani_%2852612973900%29.jpg" page="https://commons.wikimedia.org/wiki/File:Baetis_rhodani_(52612973900).jpg" author="Ben Sale" license="CC BY 2.0" note="Baetis rhodani dun, side view; small eyes, so likely a female"
+    "https://upload.wikimedia.org/wikipedia/commons/9/9e/Baetis_tricaudatus_male_subimago_crop.jpg" page="https://commons.wikimedia.org/wiki/File:Baetis_tricaudatus_male_subimago_crop.jpg" author="JerryFriedman" license="CC BY-SA 3.0" note="Male Baetis dun from above and the side: turbinate eyes, long forelegs"
+    "https://upload.wikimedia.org/wikipedia/commons/d/d9/Cloeon_dipterum_%28Baetidae%29_-_%28male_subimago%29%2C_Elst_%28Gld%29%2C_the_Netherlands_-_2.jpg" page="https://commons.wikimedia.org/wiki/File:Cloeon_dipterum_(Baetidae)_-_(male_subimago),_Elst_(Gld),_the_Netherlands_-_2.jpg" author="B. Schoenmakers (waarneming.nl)" license="CC BY 3.0" flip=#true note="Male Cloeon dun (Baetidae), turbinate eyes"
 }

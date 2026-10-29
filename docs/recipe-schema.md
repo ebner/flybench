@@ -336,25 +336,38 @@ Body sections take `length` and `radius` (fractions of the body length), `taper`
 radius relative to the start's), `segments` (rings), `color` and `belly`, `flatten` (height
 over width: below 1 flat like a stonefly nymph, above 1 narrow like a fish or a shrimp),
 `translucency` (0–1), `round` (0 a straight taper, 1 egg-shaped), `hairs` (0 smooth – 1 furry)
-and `marks` (`bands`, `spots`, `mottle`, `stripe`) drawn in an `ink` colour. All lengths in
-`parts` are fractions of the body length:
+and `marks` (`bands`, `spots`, `mottle`, `stripe`) drawn in an `ink` colour. A fish's sections
+can give `top` and `bottom` instead: half heights above and below the centre line, for an arched
+back over a flatter belly. All lengths in `parts` are fractions of the body length:
 
 | Part | Properties |
 |---|---|
-| `tails` | `count` 1–3, `length`, `spread` (degrees between the outer ones), `color`, `leaf=#true` for flat tail gills, `hairs` (0–1, fringes) |
-| `wings` | `count` 2 or 4, `shape` (`upright`, `tent`, `flat`, `spent`, `back`), `length`, `width`, `color`, `clarity` (0 opaque – 1 clear), `veins`, `hind` (hind wing length as a fraction of the fore wing's; 0 none), `hairs` (0–1, a caddis's haired wings), `mottle` (colour of darker flecks) |
-| `legs` | `count`, `length`, `color`, `at` (the body section; default the thorax), `hind` (the last pair's length relative to the rest), `femur` and `tibia` (fractions of the leg; the foot is the rest; defaults 0.38 and 0.34), `hairs` (0–1, swimming fringes), `banded=#true` |
-| `antennae` | `length`, `color`, `swept=#true` to lay them back along the body |
-| `gills` | `count` (pairs along the abdomen), `length`, `color`, `shape` (`plate`, `feather`, `tuft`) |
+| `tails` | `count` 1–3, `length`, `spread` (degrees between the outer ones), `color`, `leaf=#true` for flat tail gills, `hairs` (0–1, fringes), `middle` (with three, the middle one's length relative to the outer two), `banded` |
+| `wings` | `count` 2 or 4, `shape` (`upright`, `tent`, `flat`, `spent`, `back`), `length`, `width`, `color`, `clarity` (0 opaque – 1 clear), `veins`, `hind` (hind wing length as a fraction of the fore wing's; 0 none), `hairs` (0–1, a caddis's haired wings), `mottle` (colour of darker flecks), `angle` (an upright wing's lean back from straight up; a tent's or flat wing's slope from level) |
+| `legs` | `count` (default 6), `length`, `color`, `at` (the body section; default the thorax), `hind` (the last pair's length relative to the rest), `femur` and `tibia` (fractions of the leg; the foot is the rest; defaults 0.38 and 0.34), `hairs` (0–1, swimming fringes), `banded=#true`, `tarsi` (foot segments, 1–5), `claws` (default on), `pose` (`stand`, `forward`, `raised`, `sprawl`, `folded`, `rowing`, `trailing`, `jumping`; default from where the natural is found), `thick`. With `pair` (`fore`, `mid`, `hind`) an entry is one pair of two legs, replacing that pair of an all-pairs entry |
+| `antennae` | `length`, `color`, `swept=#true` to lay them back along the body, `shape` (`thread`, `elbowed`, `clubbed`, `plumed`), `segments`, `banded` |
+| `gills` | `count` (pairs along the abdomen), `length`, `color`, `shape` (`plate`, `feather`, `tuft`), `banded` |
 | `tusks` | `length`, `color` (a burrowing mayfly nymph's mandibles) |
 | `wingpads` | `length`, `color` |
 | `case` | `material` (`sand`, `gravel`, `plant`), `length`, `radius`, `color` |
 | `shuck` | `length`, `color` (an emerger's trailing skin) |
-| `eyes` | `size`, `color` |
-| `fin` | `kind` (`dorsal`, `caudal`, `pectoral`, `pelvic`, `anal`, `adipose`), `at` (0 rear – 1 front), `size`, `color` |
+| `eyes` | `size`, `color`; a fish's `iris` and `pupil`; `turbinate` (the colour of a male Baetis's raised upper eyes); `ocelli=#true` |
+| `fin` | `kind` (`dorsal`, `caudal`, `pectoral`, `pelvic`, `anal`, `adipose`), `at` (its front end, 0 rear – 1 front), `base` (along the body; a tail fin's root depth) and `height` (out from the body; a tail fin's length), or `size` for both, `rays`, `spines` (the stiff front rays), `shape` (`rounded`, `pointed`, `forked`, `truncate`, `emarginate`), `clarity` (0 opaque – 1 clear between the rays), `spread` (paired fins: degrees out from lying back along the body), `color` |
+| `pronotum` | `length`, `width`, `color` (the plate over the front of the thorax) |
+| `prolegs` | `count` (pairs), `at` (section; default the abdomen), `where` (`along`, `front`, `rear`), `length`, `hooks=#true` (a caddis larva's anal claws), `color` |
+| `mark` | `section`, `kind` (`bands`, `spots`, `streaks`, `rows`, `ring`, `stripe`, `mottle`, `patch`, `bars`), `segments` (`all`, `7` or `7-9`, counted from the section's front), `side` (`top`, `sides`, `under`, `all`), `count` (repeats over the range instead of one a segment, for a fish's marks), `at` (one mark centred there, 0 rear – 1 front of the section), `offset` (shifted by this fraction of its repeat: spots between bars), `color`; as many as needed |
+| `horns` | `length`, `color` (a pupa's breathing horns on the thorax) |
+| `scales` | `size` (fraction of the body length), `shine` (0 matt – 1 mirror) |
+| `lateral-line` | `height` (−1 belly – 1 back), `color` |
+| `gill-cover` | `at` (its rear edge), `color` |
+| `mouth` | `position` (`terminal`, `superior`, `inferior`), `size` |
 
 `hatches` gives, per region (`southern-sweden`, `northern-scandinavia`, `british-isles`,
 `central-europe`, `northern-usa`), the months a natural hatches or is most about (`from`,
 `to`; January to December for all year), with an optional `time` of day and `note`. Mark
 months that are an estimate rather than a source's in the note ("Estimate: …").
+
+`references` lists photos of the real animal for checking proportions, as for patterns:
+`pnpm refcheck <natural>` renders it from the side on a grid in tenths of its body length beside
+them. They are never committed and are left out of the build.
 

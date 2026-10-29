@@ -6,22 +6,37 @@ examples "Rhyacophila, Hydropsyche"
 description "A larva without a case: green or olive, slightly flattened, with tufts of gills along the sides, a dark head and thorax plates, and hooks at the tail to hold on in fast water."
 size min=14 max=25
 rides drifting
-curve 15
+// Assumption: curled to a deep arc when adrift, as in the photos (Elven's three larvae).
+curve 75
 body {
     // Flattened from above, greenish or grey-pink (Rhyacophila); the abdomen soft and paler (Hydropsyche) (Dalarna 2013).
-    // Assumption: a sparse coat of short hairs, as on Hydropsyche (photos).
-    abdomen length=0.68 radius=0.075 taper=0.55 segments=9 color="#6f8a42" belly="#9ab062" flatten=0.8 hairs=0.15
-    // Three hard brown and yellow plates on the thorax in Hydropsyche (Dalarna 2013).
-    thorax length=0.2 radius=0.065 taper=0.9 segments=3 color="#5a3e22" belly="#7a5a32"
+    // Large, curved bodies (Wikipedia: Hydropsychidae).
+    // Assumption, from the photos: the abdomen about a seventh of the length deep and thick to its last two segments,
+    // a sparse coat of bristles.
+    abdomen length=0.7 radius=0.065 taper=1.25 segments=9 color="#5e6a38" belly="#c4c09a" flatten=0.85 round=0.4 hairs=0.2
+    // The back fully covered in hard plates (Wikipedia: Hydropsychidae): three hard brown and yellow plates on the
+    // thorax in Hydropsyche (Dalarna 2013). Assumption: the thorax 0.18 and the head 0.12 of the length (photos).
+    thorax length=0.18 radius=0.07 taper=0.92 segments=3 color="#5a3e22" belly="#d8cca8"
     // A horseshoe pattern on Hydropsyche's head (Dalarna 2013).
-    head length=0.12 radius=0.05 taper=0.8 color="#3a2614" marks=mottle ink="#a88a52"
+    head length=0.12 radius=0.055 taper=0.75 color="#3a2614" marks=mottle ink="#a88a52" round=0.5
 }
 parts {
     // A row of pink to red, sausage-like gill tufts along the sides of the abdomen (Rhyacophila); white tufts underneath
-    // in Hydropsyche (Dalarna 2013). Assumption: seven pairs, on the first seven abdominal segments.
-    gills count=7 length=0.05 color="#dcc0b4" shape=tuft
-    // Assumption: thigh, shin and foot about equal, the hind legs a little longer (photos).
-    legs count=6 length=0.25 hind=1.15 femur=0.36 tibia=0.32 color="#5a3e22"
+    // in Hydropsyche (Dalarna 2013); branched gills along the underside (Wikipedia: Hydropsychidae).
+    // Assumption: seven pairs, on the first seven abdominal segments.
+    gills count=7 length=0.05 color="#e0d4c4" shape=tuft
+    // Legs with a single foot joint (Wikipedia: Caddisfly).
+    // Assumption, from the photos: short and stout, the front pair the shortest (about 0.13 of the body) and the
+    // hind pair the longest (0.19), the foot with its claw about a third of the leg.
+    legs count=6 length=0.17 femur=0.36 tibia=0.3 tarsi=1 thick=1.6 color="#8a6232"
+    legs pair=fore count=2 length=0.13 femur=0.38 tibia=0.28 tarsi=1 thick=1.8 color="#7a5428"
+    legs pair=hind count=2 length=0.19 femur=0.36 tibia=0.3 tarsi=1 thick=1.5 color="#8a6232"
+    // A pair of hooked "legs" at the rear end to hold on in strong current (Dalarna 2013: Rhyacophila, Hydropsyche);
+    // large anal prolegs with hooks (Wikipedia: Hydropsychidae). Assumption: about 0.09 of the body (photos).
+    prolegs count=1 where=rear length=0.09 hooks=#true color="#9a7038"
+    // Assumption: the first thoracic plate (the pronotum) the largest and darkest, as in the photos; in Rhyacophila
+    // it is the only hard one, the rest of the thorax soft (photo #2).
+    pronotum length=0.07 width=0.13 color="#3e2814"
 }
 hatches {
     southern-sweden from=january to=december note="In the water all year; larvae drift often (Troutnut)."
@@ -35,4 +50,11 @@ sources {
     "Troutnut: Genus Hydropsyche" url="https://www.troutnut.com/hatch/1916/Caddisfly-Hydropsyche-Spotted-Sedges"
     "Troutnut: Order Trichoptera" url="https://www.troutnut.com/hatch/12/Insect-Trichoptera-Caddisflies"
     "Wikipedia (de): Köcherfliegen" url="https://de.wikipedia.org/wiki/Köcherfliegen"
+    "Wikipedia: Hydropsychidae" url="https://en.wikipedia.org/wiki/Hydropsychidae"
+    "Wikipedia: Caddisfly" url="https://en.wikipedia.org/wiki/Caddisfly"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/a/a4/Hydropsyche_siltalai_larva.png" page="https://commons.wikimedia.org/wiki/File:Hydropsyche_siltalai_larva.png" author="Hallvard Elven, Naturhistorisk museum, Universitetet i Oslo" license="CC BY 3.0" note="Hydropsyche siltalai, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/6/68/Rhyacophila_nubila_larva.jpg" page="https://commons.wikimedia.org/wiki/File:Rhyacophila_nubila_larva.jpg" author="Hallvard Elven, Naturhistorisk museum, Universitetet i Oslo" license="CC BY 4.0" flip=#true note="Rhyacophila nubila, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/1/1c/Hydropsyche_pellucidula_larva.jpg" page="https://commons.wikimedia.org/wiki/File:Hydropsyche_pellucidula_larva.jpg" author="Hallvard Elven, Naturhistorisk museum, Universitetet i Oslo" license="CC BY 4.0" flip=#true note="Hydropsyche pellucidula, side view, curled"
 }

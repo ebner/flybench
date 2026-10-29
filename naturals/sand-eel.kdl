@@ -1,0 +1,69 @@
+// Lesser sand eel up to 20 cm, mature at 11–15 cm (FishBase); greater sand eel up to 35–40 cm
+// (Wikipedia; Wikipedia sv: Kungstobis).
+
+id sand-eel
+name "Sand eel"
+group baitfish
+stage adult
+examples "lesser sand eel (Ammodytes tobianus), greater sand eel (Hyperoplus lanceolatus)"
+description "A long, slender, silvery fish of sandy coasts: a greenish back, a pointed head with a jutting lower jaw and a long low fin down the back. Shoals swim over the sand and dive into it when alarmed; sea trout hunt them in the shallows from late spring."
+// Assumption: from the young of the year to grown lesser sand eels; the greater sand eel
+// grows larger still.
+size min=60 max=200
+rides swimming
+body {
+    // An elongated body, round in cross-section, the head also long and pointed (Wikipedia;
+    // FishBase). The back greenish yellow to sandy brown, the upper sides yellowish, the lower
+    // sides and the belly brilliant silver (Wikipedia; FishBase). Lengths leave out the tail fin.
+    // Assumption: from the references, the head about a fifth of the length, the body about a
+    // fourteenth as deep as long and nearly as wide as deep, the caudal peduncle about 0.03 deep.
+    tail length=0.3 radius=0.016 taper=2.0 color="#7a8a50" belly="#e6eaea" flatten=1.15 top=0.016 bottom=0.015
+    trunk length=0.5 radius=0.032 taper=1.08 color="#7a8a50" belly="#eef0f0" flatten=1.15 top=0.035 bottom=0.033
+    head length=0.2 radius=0.034 taper=0.3 color="#6e7c48" belly="#e6eaea" flatten=1.1 top=0.036 bottom=0.034
+}
+parts {
+    // A long, ribbon-like dorsal fin of 49–58 rays, an anal fin of 24–32; small, low-set pectoral
+    // fins, no pelvic fins; a forked tail (Wikipedia; FishBase). Assumption: straight-edged, the
+    // rays about equal (photos).
+    // Assumption: positions and sizes read off the references: the dorsal fin from just behind
+    // the pectoral fins nearly to the tail, the anal fin along the rear third.
+    fin kind=caudal at=0 base=0.035 height=0.1 rays=15 shape=forked color="#a8b0a0" clarity=0.5
+    fin kind=dorsal at=0.74 base=0.68 height=0.025 rays=54 shape=truncate color="#b8c0a8" clarity=0.6
+    fin kind=anal at=0.36 base=0.31 height=0.025 rays=28 shape=truncate color="#d0d6d0" clarity=0.65
+    fin kind=pectoral at=0.79 base=0.015 height=0.05 rays=12 shape=pointed color="#c8d0c8" clarity=0.6
+    // The sharp lower jaw projects beyond the upper (Wikipedia).
+    mouth position=superior size=0.07
+    // Assumption: an eye about a sixth of the head across, silvery, high on the head.
+    eyes size=0.014 color="#1a1a14" iris="#c8ccc4" pupil="#0a0a08"
+    gill-cover at=0.81
+    // The belly's scales in chevrons (Wikipedia); a skin ridge along each side (Wikipedia:
+    // Greater sand eel). Assumption: tiny scales, a mirror-like shine on the lower sides; the
+    // lateral line high on the flank, near the dorsal fin's base.
+    scales size=0.007 shine=0.7
+    lateral-line height=0.6 color="#c8ccb8"
+}
+hatches {
+    // Inshore over clean sand from mid-tide to about 30 m (Wikipedia); buried in the sand in
+    // winter (FishBase); on the coast in late spring and early summer, when the water is warm
+    // enough (ADH Fishing: Flatwing), and fished from spring to autumn (ADH Fishing: Sandeel).
+    southern-sweden from=april to=october note="Estimate: on the west coast and in the southern Baltic, from late spring, when the water warms, into autumn; buried in the sand through winter."
+    northern-scandinavia from=may to=september note="Estimate: along the Norwegian coast, not in the northern Baltic; from late spring into early autumn."
+    british-isles from=april to=october note="Estimate: all round the coasts, from late spring into autumn; buried in the sand through winter."
+    central-europe from=april to=october note="Estimate: on the North Sea and Baltic coasts, from late spring into autumn."
+}
+sources {
+    "Wikipedia: Lesser sand eel" url="https://en.wikipedia.org/wiki/Lesser_sand_eel"
+    "FishBase: Ammodytes tobianus" url="https://www.fishbase.se/summary/Ammodytes-tobianus.html"
+    "Wikipedia: Greater sand eel" url="https://en.wikipedia.org/wiki/Greater_sand_eel"
+    "Wikipedia (sv): Kusttobis" url="https://sv.wikipedia.org/wiki/Kusttobis"
+    "Wikipedia (sv): Kungstobis" url="https://sv.wikipedia.org/wiki/Kungstobis"
+    "Wikipedia (de): Tobiasfisch" url="https://de.wikipedia.org/wiki/Tobiasfisch"
+    "ADH Fishing: Guideline Sea Trout Fly Flatwing" url="https://www.adh-fishing.com/guideline-sea-trout-fly-flatwing"
+    "ADH Fishing: Sea Trout Fly Sandeel by Johannes Radtke" url="https://www.adh-fishing.com/adh-fishing-sea-trout-fly-sandeel-by-johannes-radtke"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/6/6d/Tobiasz.JPG" page="https://commons.wikimedia.org/wiki/File:Tobiasz.JPG" author="TomiUSM" license="Public domain" note="Lesser sand eel on the sand, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/4/46/Ammodytes_tobianus_Northumbs.jpg" page="https://commons.wikimedia.org/wiki/File:Ammodytes_tobianus_Northumbs.jpg" author="MPF" license="CC BY-SA 3.0" flip=#true note="Lesser sand eel, Northumberland"
+    "https://upload.wikimedia.org/wikipedia/commons/c/ca/Hyperoplus_lanceolatus.jpg" page="https://commons.wikimedia.org/wiki/File:Hyperoplus_lanceolatus.jpg" author="Gervais et Boulart" license="Public domain" flip=#true note="Greater sand eel, drawing"
+}

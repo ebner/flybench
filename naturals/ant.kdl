@@ -19,11 +19,14 @@ body {
 }
 parts {
     // Six legs and the wings on the mesosoma, legs ending in a hooked claw (Wikipedia: Ant).
-    // Assumption: from the photo, the legs reach about two thirds of the body length out, long
-    // thin thighs and shins and a long five-jointed foot.
-    legs count=6 length=0.65 color="#1e1e1e" femur=0.36 tibia=0.32 hairs=0.1
-    // Elbowed antennae (Wikipedia: Ant), drawn as one strand. Assumption: about 0.45 of the body.
-    antennae length=0.45 color="#1e1e1e"
+    // Assumption, from the side views: long thin legs, the front pair about 0.55 of the body and the hind pair 0.72,
+    // with long five-jointed feet.
+    legs count=6 length=0.62 color="#1e1e1e" femur=0.34 tibia=0.32 tarsi=5 hairs=0.1
+    legs pair=fore count=2 length=0.55 color="#1e1e1e" femur=0.34 tibia=0.3 tarsi=5 hairs=0.1
+    legs pair=hind count=2 length=0.72 color="#1e1e1e" femur=0.34 tibia=0.32 tarsi=5 hairs=0.1
+    // Elbowed antennae (Wikipedia: Ant). Assumption: about 0.45 of the body, the first segment (the scape) nearly half of it,
+    // in twelve segments (side views).
+    antennae length=0.45 color="#1e1e1e" shape=elbowed segments=12
     eyes size=0.03 color="#2a2a2a"
 }
 hatches {
@@ -38,4 +41,9 @@ sources {
     "Wikipedia (de): Schwarze Wegameise" url="https://de.wikipedia.org/wiki/Schwarze_Wegameise"
     "Wikipedia: Ant" url="https://en.wikipedia.org/wiki/Ant"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/7/72/Black_garden_ant_%2851503768140%29.jpg" page="https://commons.wikimedia.org/wiki/File:Black_garden_ant_(51503768140).jpg" author="Carlos Eduardo Joos" license="CC BY 2.0" flip=#true note="Lasius niger worker with aphids, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/4/41/Arbeidar_av_kystjordmaur_%28Lasius_meridionalis%29_fr%C3%A5_sida.jpg" page="https://commons.wikimedia.org/wiki/File:Arbeidar_av_kystjordmaur_(Lasius_meridionalis)_fr%C3%A5_sida.jpg" author="Arnstein Staverløkk/Norsk institutt for naturforskning" license="CC BY-SA 4.0" flip=#true note="Lasius meridionalis worker, side view (a pale Lasius; same build)"
+    "https://upload.wikimedia.org/wikipedia/commons/b/b4/Arbeidar_av_gul_jordmaur_%28Lasius_flavus%29_sett_fr%C3%A5_sida.jpg" page="https://commons.wikimedia.org/wiki/File:Arbeidar_av_gul_jordmaur_(Lasius_flavus)_sett_fr%C3%A5_sida.jpg" author="Arnstein Staverløkk/Norsk institutt for naturforsking" license="CC BY-SA 4.0" flip=#true note="Lasius flavus worker, side view (pale)"
 }

@@ -31,7 +31,7 @@ export const WATER_LABELS = localized<Record<Water, string>>({
   de: { river: "Fluss", lake: "See", coast: "Meeresküste" },
 });
 
-const COASTAL_NATURALS = new Set(["prawn", "marine-baitfish"]);
+const COASTAL_NATURALS = new Set(["prawn", "marine-baitfish", "sand-eel", "herring-fry"]);
 const FRESHWATER: Species[] = ["trout", "grayling", "salmon", "char", "bass", "panfish", "pike"];
 
 /**

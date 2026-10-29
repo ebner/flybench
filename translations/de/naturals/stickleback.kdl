@@ -1,0 +1,24 @@
+id stickleback
+status draft
+
+// en name: Stickleback
+name "Stichling"
+
+// en description: A small, armoured fish of weedy ditches, ponds, slow rivers and sheltered coasts: olive or silvery green, mottled darker on the back, with bony plates instead of scales, free spines in front of the dorsal fin and a spine for each pelvic fin. In spring the male's throat and belly turn red.
+description "Ein kleiner gepanzerter Fisch verkrauteter Gräben, Teiche, langsamer Flüsse und geschützter Küstenbuchten: oliv- oder silbergrün, auf dem Rücken dunkler marmoriert, mit Knochenplatten statt Schuppen, freistehenden Stacheln vor der Rückenflosse und einem Stachel an jeder Bauchflosse. Im Frühjahr färben sich Kehle und Bauch des Männchens rot."
+
+// en examples: three-spined stickleback (Gasterosteus aculeatus), nine-spined stickleback (Pungitius pungitius)
+examples "Dreistachliger Stichling (Gasterosteus aculeatus), Neunstachliger Stichling (Pungitius pungitius)"
+
+hatches {
+    // en southern-sweden note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    southern-sweden note="Schätzung: fast das ganze Jahr; ab Ende April sammeln sie sich zum Laichen im Flachwasser (Wikipedia)."
+    // en northern-scandinavia note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    northern-scandinavia note="Schätzung: fast das ganze Jahr; ab Ende April sammeln sie sich zum Laichen im Flachwasser (Wikipedia)."
+    // en british-isles note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    british-isles note="Schätzung: fast das ganze Jahr; ab Ende April sammeln sie sich zum Laichen im Flachwasser (Wikipedia)."
+    // en central-europe note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    central-europe note="Schätzung: fast das ganze Jahr; ab Ende April sammeln sie sich zum Laichen im Flachwasser (Wikipedia)."
+    // en northern-usa note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    northern-usa note="Schätzung: fast das ganze Jahr; ab Ende April sammeln sie sich zum Laichen im Flachwasser (Wikipedia)."
+}

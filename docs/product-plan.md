@@ -195,5 +195,44 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       (Poly Haven, compressed, served by the site); two stills per pattern and natural, the
       angler's view and the trout's.)
 
+14. Fish and insects drawn true to life (decided 2026-10-29). Everything in the natural recipes,
+    with sources, as before; values read off photos marked as assumptions.
+    - Fish anatomy: body outlines with their own back and belly heights per section; fins with
+      base length, height, ray and spine counts, shape (rounded, pointed, forked, truncate) and
+      clear membranes; scale size, the lateral line, gill cover and mouth (terminal, upturned,
+      underslung); eyes with iris and pupil. Drawn with scale and ray textures and a proper head.
+    - New fish: trout and salmon parr, sand eel (tobis), stickleback, herring and sprat fry,
+      with hatch months by region, linked to the patterns whose sources say they imitate them
+      (sand eel, herring fry; none yet for parr and stickleback).
+    - Insects: legs per pair (fore, middle, hind: length, segment proportions, tarsal segments,
+      claws and pose, e.g. a male mayfly's long forelegs, a midge's raised ones); each tail its
+      own length (Baetis's short middle tail), banded tails, gills and legs; antennae threadlike,
+      elbowed (ants), clubbed (beetles) or plumed (male midges), with segments; head and thorax
+      plates (pronotum), compound eye size and the turbinate eyes of male Baetis, ocelli; larval
+      prolegs and anal hooks (caddis, midge larvae); marks per segment (streaks on segments 7–9,
+      rows of dots, rings) as their own entries.
+    - Checking: naturals get `references` like patterns (linked, never committed, left out of
+      the build) and `pnpm refcheck <natural>` puts the render beside the photos on a grid in body
+      lengths; every natural is compared and corrected.
+    - Re-rendered: catalog pictures and water stills; translations of the new naturals' prose.
+15. The studio for naturals, with a visual editor. The dev-only studio edits naturals as well as
+    patterns: KDL text with live errors, a live 3D preview on the bench and in the realistic
+    river, a grid in gapes or body lengths, the reference photos beside it. A form beside the
+    text, built from the schema, edits every field with sliders, numbers, menus and colour
+    pickers, and writes back into the KDL text without disturbing its comments; the text stays
+    the source of truth.
+16. A public fly editor ("Build a fly"). Visitors build their own fly, from scratch or as a copy
+    of a pattern: hook and size, thread, materials from the catalog with colours, tying steps
+    from a menu with their settings, the 3D fly and the generated steps (in the page's language)
+    following as they go, with the tying rules' warnings. Saved only in the browser (a new
+    flybench.* key, listed in the Privacy section), shareable as a link that carries the recipe
+    itself, and downloadable as a KDL file to contribute to the project.
+    Decided 2026-10-29: the link carries the recipe compressed after `#` (never sent to a
+    server); the tying rules' messages are translated (sv/de drafts); own flies go in the fly
+    box (with its shopping list and trip box), the tying log and a "Your flies" row in the
+    gallery, all in this browser only. Milestone 15's form patches the KDL text in place,
+    keeping comments and formatting. Milestones 14–16 in that order, each reviewed (Fable and
+    Codex), rendered and pushed without stopping.
+
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.
