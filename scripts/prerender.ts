@@ -32,6 +32,12 @@ const SITE_URL = process.env.SITE_URL?.replace(/\/$/, "");
 const PAPER = "#e9e7dd";
 const OG = { width: 1200, height: 630 };
 
+// Naturals carry reference photos too: none may be published, however a block was hidden.
+for (const f of (await readdir("naturals")).filter((f) => f.endsWith(".kdl"))) {
+  const leak = withoutReferences(await readFile(`naturals/${f}`, "utf8")).match(IMAGE_URL);
+  if (leak) throw new Error(`naturals/${f}: an image address would be published (${leak[0]}); remove it or put it under references`);
+}
+
 async function loadPatterns(): Promise<Recipe[]> {
   const files = (await readdir("patterns")).filter((f) => f.endsWith(".kdl")).sort();
   return Promise.all(
@@ -115,12 +121,16 @@ for (const page of pages) {
 // The final word on reference photos: none of their addresses may be in the built bundle,
 // whatever form a block took or whatever happens to the build plugin that strips them.
 const photos = (
-  await Promise.all(
-    (await readdir("patterns")).filter((f) => f.endsWith(".kdl")).map(async (f) => {
+  await Promise.all([
+    ...(await readdir("patterns")).filter((f) => f.endsWith(".kdl")).map(async (f) => {
       const raw = loadRecipe(await readFile(`patterns/${f}`, "utf8"));
       return raw.ok ? raw.recipe.references.map((r) => r.image) : [];
     }),
-  )
+    ...(await readdir("naturals")).filter((f) => f.endsWith(".kdl")).map(async (f) => {
+      const raw = loadNatural(await readFile(`naturals/${f}`, "utf8"));
+      return raw.ok ? raw.natural.references.map((r) => r.image) : [];
+    }),
+  ])
 ).flat();
 for (const f of (await readdir(`${DIST}/assets`)).filter((f) => f.endsWith(".js"))) {
   const js = await readFile(`${DIST}/assets/${f}`, "utf8");

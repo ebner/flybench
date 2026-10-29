@@ -8,21 +8,32 @@ size min=2 max=10
 rides on-surface
 body {
     // Lighter bands between the abdominal segments (Wikipedia de: Chironomus plumosus).
-    abdomen length=0.62 radius=0.05 taper=0.65 segments=8 color="#2a2a26" marks=bands ink="#5e5c4a"
-    // A high-arched thorax (Wikipedia de).
-    thorax length=0.26 radius=0.075 taper=0.85 color="#24221e" round=0.6
-    head length=0.12 radius=0.05 taper=0.7 color="#24221e"
+    // Assumption: the male's abdomen long and slender, about 0.72 of the body and a sixteenth of it deep, a little
+    // narrower at the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.72 radius=0.028 taper=1.15 segments=8 color="#2a2a26" marks=bands ink="#5e5c4a"
+    // A high-arched thorax (Wikipedia de). Assumption: about a fifth of the body long and as deep, the head small
+    // and tucked under it (photos).
+    thorax length=0.2 radius=0.1 taper=0.8 color="#24221e" round=0.7
+    head length=0.08 radius=0.045 taper=0.7 color="#24221e"
 }
 parts {
     // One pair of long, narrow wings (MDC), roof-like at rest (Wikipedia de); 6–8 mm on a 9–13 mm Chironomus plumosus
-    // (Wikipedia de: Chironomus plumosus). Assumption: a wing about a quarter as wide as it is long.
-    wings count=2 shape=back length=0.65 width=0.17 color="#d0d4d4" clarity=0.75 veins=#true
-    // Antennae with whorls of hairs (Wikipedia de), feathery in the males (MDC).
-    antennae length=0.4 color="#3a3a30"
-    // Long, skinny legs, the front pair held forward and up, their feet very long in many midges (MDC); in C. plumosus
-    // the fore thigh and shin about equal and the first foot joint longer than the shin (chironomidae.net).
-    // Assumption: over all three pairs, the foot a little under half the leg.
-    legs count=6 length=0.8 femur=0.28 tibia=0.28 color="#3a3a30"
+    // (Wikipedia de: Chironomus plumosus). Assumption: a wing about a quarter as wide as it is long, reaching
+    // about two thirds down the abdomen (photos).
+    wings count=2 shape=back length=0.6 width=0.17 color="#d0d4d4" clarity=0.75 veins=#true
+    // Drawn as a male: males have plumose antennae (Wikipedia: Chironomidae; MDC), in whorls of hairs (Wikipedia
+    // de). Assumption: the plume about a fifth of the body long (photos).
+    antennae length=0.2 color="#3a3a30" shape=plumed
+    // Long, skinny legs, the front pair held forward and up, their feet very long in many midges (MDC); at rest the
+    // forelegs reach freely forward, twitching (Wikipedia de); drawn forward and a little up, as in the photos. A
+    // male C. plumosus's legs, femur, tibia and first foot joint in mm: fore 1.73–2.02, 1.83–2.07, 2.12–2.61; mid
+    // 1.83–2.29, 1.93–2.32, 1.10–1.29; hind 2.29–2.71, 2.34–2.76, 1.56–1.85 (chironomidae.net), on a 9–13 mm body
+    // (Wikipedia de: Chironomus plumosus). Assumption: five foot joints, as in flies generally, the
+    // other four together as long as the first, which makes the foreleg about 0.8 of the body, the middle 0.6 and the
+    // hind 0.75; thin, under half the usual thickness (photos).
+    legs pair=fore count=2 length=0.8 femur=0.22 tibia=0.23 tarsi=5 pose=forward color="#3a3a30" thick=0.4
+    legs pair=mid count=2 length=0.6 femur=0.31 tibia=0.32 tarsi=5 color="#3a3a30" thick=0.4
+    legs pair=hind count=2 length=0.75 femur=0.3 tibia=0.3 tarsi=5 color="#3a3a30" thick=0.4
     eyes size=0.028 color=black
 }
 hatches {
@@ -39,4 +50,9 @@ sources {
     "Wikipedia (de): Chironomus plumosus" url="https://de.wikipedia.org/wiki/Chironomus_plumosus"
     "Martin, chironomidae.net: Chironomus species in the Nearctic (C. plumosus)" url="https://chironomidae.net/Martin/NACytfiles/Spp.html"
     "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/a/af/Chironomus_plumosus%2C_Deeside%2C_North_Wales%2C_April_2015_2_-_Flickr_-_janetgraham84.jpg" page="https://commons.wikimedia.org/wiki/File:Chironomus_plumosus,_Deeside,_North_Wales,_April_2015_2_-_Flickr_-_janetgraham84.jpg" author="Janet Graham" license="CC BY 2.0" flip=#true note="Male Chironomus plumosus, side view: plumed antennae, long legs"
+    "https://upload.wikimedia.org/wikipedia/commons/f/fe/Chironomus_plumosus_-_male_%282007-06-08%29.jpg" page="https://commons.wikimedia.org/wiki/File:Chironomus_plumosus_-_male_(2007-06-08).jpg" author="Entomart" license="Attribution" note="Male Chironomus plumosus from above and the side"
+    "https://upload.wikimedia.org/wikipedia/commons/e/ea/Chironomidae_sp._%288701978130%29.jpg" page="https://commons.wikimedia.org/wiki/File:Chironomidae_sp._(8701978130).jpg" author="Donald Hobern" license="CC BY 2.0" note="Male chironomid, side view, forelegs raised"
 }

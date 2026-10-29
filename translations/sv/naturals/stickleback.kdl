@@ -1,0 +1,24 @@
+id stickleback
+status draft
+
+// en name: Stickleback
+name "Spigg"
+
+// en description: A small, armoured fish of weedy ditches, ponds, slow rivers and sheltered coasts: olive or silvery green, mottled darker on the back, with bony plates instead of scales, free spines in front of the dorsal fin and a spine for each pelvic fin. In spring the male's throat and belly turn red.
+description "En liten pansrad fisk i igenvuxna diken, dammar, lugna åar och skyddade kustvikar: olivgrön eller silvergrön, mörkare marmorerad på ryggen, med benplåtar i stället för fjäll, fristående taggar framför ryggfenan och en tagg i varje bukfena. På våren blir hanens strupe och buk röda."
+
+// en examples: three-spined stickleback (Gasterosteus aculeatus), nine-spined stickleback (Pungitius pungitius)
+examples "storspigg (Gasterosteus aculeatus), småspigg (Pungitius pungitius)"
+
+hatches {
+    // en southern-sweden note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    southern-sweden note="Uppskattning: i stort sett året runt; från slutet av april samlas de på grunt vatten för att leka (Wikipedia)."
+    // en northern-scandinavia note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    northern-scandinavia note="Uppskattning: i stort sett året runt; från slutet av april samlas de på grunt vatten för att leka (Wikipedia)."
+    // en british-isles note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    british-isles note="Uppskattning: i stort sett året runt; från slutet av april samlas de på grunt vatten för att leka (Wikipedia)."
+    // en central-europe note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    central-europe note="Uppskattning: i stort sett året runt; från slutet av april samlas de på grunt vatten för att leka (Wikipedia)."
+    // en northern-usa note: Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia).
+    northern-usa note="Uppskattning: i stort sett året runt; från slutet av april samlas de på grunt vatten för att leka (Wikipedia)."
+}

@@ -13,8 +13,8 @@ examples "buzzers (Chironomus med släktingar)"
 hatches {
     // en southern-sweden note: Estimate: peak May–June.
     southern-sweden note="Uppskattning: flest i maj–juni."
-    // en northern-scandinavia note: Dark midges swarm on warm June days (Visit Dalarna); otherwise an estimate.
-    northern-scandinavia note="Mörka fjädermyggor svärmar varma junidagar (Visit Dalarna); annars en uppskattning."
+    // en northern-scandinavia note: Estimate.
+    northern-scandinavia note="Uppskattning."
     // en british-isles time: morning, evening
     // en british-isles note: On stillwaters all year, sparse in November–December; big buzzers March–April, peak May–June, again September–October (The Essential Fly).
     british-isles time="morgon och kväll" note="I stillastående vatten hela året, fåtaliga i november–december; stora buzzers i mars–april, flest i maj–juni och igen i september–oktober (The Essential Fly)."

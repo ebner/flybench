@@ -1,0 +1,69 @@
+// Three-spined stickleback: about 3–4 cm (Wikipedia), 5 cm common (FishBase), in total length.
+
+id stickleback
+name "Stickleback"
+group baitfish
+stage adult
+examples "three-spined stickleback (Gasterosteus aculeatus), nine-spined stickleback (Pungitius pungitius)"
+description "A small, armoured fish of weedy ditches, ponds, slow rivers and sheltered coasts: olive or silvery green, mottled darker on the back, with bony plates instead of scales, free spines in front of the dorsal fin and a spine for each pelvic fin. In spring the male's throat and belly turn red."
+// Wikipedia: mature adults commonly 3–4 cm, occasionally up to 8 cm; FishBase: 5.1 cm common,
+// 11 cm the largest, both total lengths. Assumption: the body without the tail fin about 0.87
+// of the total length (the Wikipedia drawing), so mostly 30–60 mm.
+size min=30 max=60
+rides swimming
+body {
+    // Laterally compressed with a slender tail stalk (Wikipedia). Drab olive or silvery green
+    // above, sometimes mottled brown, silvery flanks and belly (Wikipedia; FishBase: freshwater
+    // fish mottled brown or greenish). Bony plates along the flanks: about 30–40 (Wikipedia; FishBase 29–35, up to 37) in fully plated
+    // (mostly marine and anadromous) fish, none to 12 in many freshwater ones (Wikipedia;
+    // FishBase). They are left out: segments would give the body an insect's ringed plates.
+    // Assumption: from the drawing on Wikipedia's page (flipped), in body lengths without the tail
+    // fin: the head 0.31; the body 0.25 deep from 0.4 to 0.65 of the length from the snout, 0.23
+    // at 0.7 and 0.14 at 0.8; a slender tail stalk 0.04 deep at the fin; back and belly about
+    // equally curved.
+    stalk length=0.15 radius=0.02 taper=1.8 color="#4e5434" belly="#cfd0bc" flatten=4 marks=mottle ink="#2a2a18" top=0.021 bottom=0.02
+    rear length=0.25 radius=0.05 taper=2.2 color="#4e5434" belly="#d6d7c6" flatten=3 marks=mottle ink="#2a2a18" top=0.045 bottom=0.045
+    trunk length=0.29 radius=0.1 taper=0.92 color="#4e5434" belly="#d6d7c6" flatten=3 round=0.3 marks=mottle ink="#2a2a18" top=0.12 bottom=0.125
+    head length=0.31 radius=0.09 taper=0.2 color="#4a5032" belly="#d0d0c0" flatten=2.5 top=0.11 bottom=0.11
+}
+parts {
+    // Usually three dorsal spines (two to four), each standing free on its own short membrane, the
+    // third much shorter than the first two; 10–14 soft dorsal rays (Wikipedia; FishBase). Drawn as
+    // one spiny fin whose membrane is all but clear.
+    // Assumption: from the drawing, the spines stand at 0.37, 0.51 and 0.66 of the length from the
+    // snout, 0.10, 0.12 and 0.04 tall; the soft dorsal from 0.70 to 0.91, 0.1 tall.
+    fin kind=dorsal at=0.63 base=0.28 height=0.11 rays=3 spines=3 shape=pointed clarity=1 color="#4a4a34"
+    fin kind=dorsal at=0.3 base=0.21 height=0.1 rays=12 shape=pointed clarity=0.5 color="#6a6a4c"
+    // One anal spine and 7–11 soft rays (FishBase; Wikipedia gives 8–11 rays and no spine).
+    // Assumption: under the soft dorsal, a little shorter.
+    fin kind=anal at=0.27 base=0.16 height=0.09 rays=10 spines=1 shape=pointed clarity=0.5 color="#7a7a5c"
+    // Each pelvic fin is one spine and one ray (Wikipedia). Assumption: the spine under the second
+    // dorsal spine, about 0.15 long, laid back along the belly.
+    fin kind=pelvic at=0.52 base=0.03 height=0.15 rays=2 spines=1 clarity=0.9 color="#4a4a34"
+    // Large pectoral fins of 10 rays; 12 caudal rays (Wikipedia). Assumption: the pectoral 0.2 long,
+    // the tail fin 0.14 long and squared off, as in the photos.
+    fin kind=pectoral at=0.62 base=0.06 height=0.2 rays=10 shape=rounded clarity=0.6 color="#8a8a6a"
+    fin kind=caudal at=0 base=0.045 height=0.14 rays=12 shape=truncate clarity=0.4 color="#8a8458"
+    // Assumption: the gill cover's edge at the end of the head; a small, slightly upturned mouth; a
+    // large eye, about 0.07 of the length across, silvery gold (blue in a breeding male, Wikipedia).
+    gill-cover at=0.69
+    mouth position=terminal size=0.06
+    eyes size=0.034 color="#1a1a14" iris="#c0b88a" pupil="#0a0a08"
+}
+hatches {
+    southern-sweden from=january to=december note="Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia)."
+    northern-scandinavia from=january to=december note="Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia)."
+    british-isles from=january to=december note="Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia)."
+    central-europe from=january to=december note="Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia)."
+    northern-usa from=january to=december note="Estimate: about all year; they gather in the shallows to breed from late April (Wikipedia)."
+}
+sources {
+    "Wikipedia: Three-spined stickleback" url="https://en.wikipedia.org/wiki/Three-spined_stickleback"
+    "FishBase: Gasterosteus aculeatus" url="https://www.fishbase.se/summary/Gasterosteus-aculeatus.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/e/ec/Gasterosteus_aculeatus_aculeatus.jpg" page="https://commons.wikimedia.org/wiki/File:Gasterosteus_aculeatus_aculeatus.jpg" author="Unknown" license="Public domain" flip=#true note="Side view drawing, fully plated, spines raised"
+    "https://upload.wikimedia.org/wikipedia/commons/5/5b/Three-Spined_Stickleback.jpg" page="https://commons.wikimedia.org/wiki/File:Three-Spined_Stickleback.jpg" author="Lorenz Seebauer" license="CC BY-SA 4.0" note="Male (top, red throat) and female, side view, spines folded"
+    "https://upload.wikimedia.org/wikipedia/commons/9/9b/Dreistachliger_Stichling_unterwasser.jpg" page="https://commons.wikimedia.org/wiki/File:Dreistachliger_Stichling_unterwasser.jpg" author="Lorenz Seebauer" license="CC BY-SA 4.0" note="Under water, three-quarter view, mottled young fish"
+}

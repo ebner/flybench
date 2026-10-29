@@ -1,0 +1,22 @@
+id salmon-parr
+status draft
+
+// en name: Salmon parr
+name "Laxstirr"
+
+// en description: Young Atlantic salmon in their first years in the river, holding in fast, stony riffles: slimmer than trout parr, with a deeply forked tail, long pectoral fins, a short jaw, a row of bluish parr marks along the sides with small red spots between them, and no red on the adipose fin. In spring they turn silver and go to sea as smolts.
+description "Unga laxar under sina första år i älven, där de står i strida, steniga strömsträckor: smalare än öringstirr, med djupt kluven stjärtfena, långa bröstfenor, kort käke, en rad blåaktiga stirrfläckar längs sidorna med små röda prickar emellan och inget rött på fettfenan. På våren blir de silverblanka och vandrar ut i havet som smolt."
+
+// en examples: Atlantic salmon (Salmo salar) fry and parr
+examples "yngel och stirr av lax (Salmo salar)"
+
+hatches {
+    // en southern-sweden note: Estimate: in the river all year, one to four years; the smolts go to sea mostly from March to June (Wikipedia).
+    southern-sweden note="Uppskattning: i älven året runt, ett till fyra år; smolten vandrar ut i havet mest från mars till juni (Wikipedia)."
+    // en northern-scandinavia note: Estimate: in the river all year, up to five or six years in the far north (FishBase); the smolts go to sea mostly from March to June (Wikipedia).
+    northern-scandinavia note="Uppskattning: i älven året runt, längst i norr upp till fem eller sex år (FishBase); smolten vandrar ut i havet mest från mars till juni (Wikipedia)."
+    // en british-isles note: Estimate: in the river all year, one to four years; the smolts go to sea mostly from March to June (Wikipedia).
+    british-isles note="Uppskattning: i älven året runt, ett till fyra år; smolten vandrar ut i havet mest från mars till juni (Wikipedia)."
+    // en northern-usa note: Estimate: only in a few rivers in Maine (the USFWS photos are from the Machias River).
+    northern-usa note="Uppskattning: bara i några få älvar i Maine (USFWS-bilderna är från Machias River)."
+}

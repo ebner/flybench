@@ -1,0 +1,24 @@
+id herring-fry
+status draft
+
+// en name: Herring and sprat fry
+name "Herings- und Sprottenbrut"
+
+// en description: The young of herring and sprats, the whitebait of the coasts: slim, half-translucent fish with a blue-green back, mirror-silver flanks and big eyes, in dense shoals near the surface. Sea trout, bass and mackerel slash through them in the shallows.
+description "Die Jungfische von Hering und Sprotte an den Küsten (englisch Whitebait): schlanke, halb durchsichtige Fische mit blaugrünem Rücken, spiegelnd silbernen Flanken und großen Augen, in dichten Schwärmen nahe der Oberfläche. Meerforellen, Wolfsbarsche und Makrelen fahren im Flachwasser in die Schwärme."
+
+// en examples: Atlantic herring (Clupea harengus), sprat (Sprattus sprattus)
+examples "Hering (Clupea harengus), Sprotte (Sprattus sprattus)"
+
+hatches {
+    // en southern-sweden note: Estimate: the spring-spawned fry reach fly size, 3–5 cm, from midsummer into autumn, on the west coast and in the Baltic.
+    southern-sweden note="Schätzung: die Brut der Frühjahrslaicher erreicht von Mittsommer bis in den Herbst Fliegengröße, 3–5 cm, an der Westküste und in der Ostsee."
+    // en northern-scandinavia note: Estimate: herring fry along the Norwegian coast and in the Gulf of Bothnia from midsummer into autumn.
+    northern-scandinavia note="Schätzung: Heringsbrut entlang der norwegischen Küste und im Bottnischen Meerbusen von Mittsommer bis in den Herbst."
+    // en british-isles note: Estimate: whitebait in estuaries and along the shore from early summer into autumn.
+    british-isles note="Schätzung: Jungfische (Whitebait) in Flussmündungen und an der Küste vom Frühsommer bis in den Herbst."
+    // en central-europe note: Estimate: on the North Sea and Baltic coasts from early summer into autumn.
+    central-europe note="Schätzung: an Nord- und Ostseeküste vom Frühsommer bis in den Herbst."
+    // en northern-usa note: Estimate: Atlantic herring only, on the coast of New England and the Gulf of Maine; no sprats there.
+    northern-usa note="Schätzung: nur Atlantischer Hering, an der Küste Neuenglands und im Golf von Maine; dort keine Sprotten."
+}

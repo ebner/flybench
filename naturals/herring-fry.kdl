@@ -1,0 +1,71 @@
+// Young herring about an inch and a half long at five months (Bickerdyke); whitebait, the fry
+// of herring and sprats, typically 25–50 mm (Wikipedia: Whitebait).
+
+id herring-fry
+name "Herring and sprat fry"
+group baitfish
+stage juvenile
+examples "Atlantic herring (Clupea harengus), sprat (Sprattus sprattus)"
+description "The young of herring and sprats, the whitebait of the coasts: slim, half-translucent fish with a blue-green back, mirror-silver flanks and big eyes, in dense shoals near the surface. Sea trout, bass and mackerel slash through them in the shallows."
+// Assumption: from fry of a few months to the year-old juveniles that shoal close inshore.
+size min=30 max=90
+rides swimming
+body {
+    // Fusiform and compressed, the belly rounded with scutes along it, a strong keel only in the
+    // sprat (FishBase: "scutes without prominent keel" in the herring); blue to greenish-blue on
+    // the back and silvery below, without dark spots (FishBase: Clupea harengus; Sprattus
+    // sprattus). Herring larvae are transparent but for the eyes (Wikipedia: Atlantic herring).
+    // Lengths leave out the tail fin.
+    // Assumption: from the references, the head about 0.22 of the length, the body about a
+    // sixth as deep as long (slimmer than the grown fish's quarter) and half as wide as deep,
+    // the caudal peduncle about 0.05 deep; the fry still half translucent.
+    tail length=0.3 radius=0.026 taper=2.5 color="#4a6a78" belly="#e8eef2" flatten=2.2 translucency=0.3 top=0.026 bottom=0.025
+    trunk length=0.48 radius=0.06 taper=1.2 color="#4a6a78" belly="#f0f4f6" flatten=2.2 translucency=0.3 top=0.07 bottom=0.066
+    head length=0.22 radius=0.064 taper=0.45 color="#40606c" belly="#e8eef2" flatten=1.8 translucency=0.2 top=0.084 bottom=0.078
+}
+parts {
+    // One dorsal fin of 13–21 soft rays and an anal fin of 12–23, no spines (FishBase); the
+    // sprat's pelvic fins below or in front of the dorsal fin's origin (Wikipedia: European
+    // sprat).
+    // Assumption: positions and sizes read off the references: the dorsal fin at the middle of
+    // the body, the low anal fin well back, the pectoral fins low behind the gill cover, the
+    // tail fin deeply forked, about a fifth of the length.
+    fin kind=caudal at=0 base=0.07 height=0.21 rays=19 shape=forked color="#a8b4b8" clarity=0.55
+    fin kind=dorsal at=0.52 base=0.12 height=0.12 rays=17 shape=pointed color="#90a4ac" clarity=0.55
+    fin kind=anal at=0.25 base=0.13 height=0.045 rays=18 shape=truncate color="#c8d0d4" clarity=0.6
+    fin kind=pelvic at=0.46 base=0.025 height=0.06 rays=7 shape=pointed color="#c8d0d4" clarity=0.6
+    fin kind=pectoral at=0.77 base=0.03 height=0.1 rays=16 shape=pointed color="#c8d0d4" clarity=0.6
+    // The lower jaw projecting slightly (FishBase: Sprattus sprattus).
+    // Assumption: a big eye, about 0.07 of the length across, silver round the pupil.
+    eyes size=0.035 color="#1a1a14" iris="#dfe4e6" pupil="#0a0a08"
+    mouth position=superior size=0.05
+    // The gill opening's rear edge evenly rounded (FishBase: Clupea harengus).
+    gill-cover at=0.79
+    // Large, delicate scales that are easily rubbed off (Wikipedia: Atlantic herring).
+    // Assumption: about 50 along the side, mirror-silver.
+    scales size=0.02 shine=0.85
+}
+hatches {
+    // Juveniles shoal close inshore until about two years old (FishBase); herring spawn in
+    // spring (most Baltic herring) or late summer and autumn (the North Sea's) (Wikipedia);
+    // sprats spawn mainly in spring and summer (FishBase).
+    southern-sweden from=june to=november note="Estimate: the spring-spawned fry reach fly size, 3–5 cm, from midsummer into autumn, on the west coast and in the Baltic."
+    northern-scandinavia from=july to=october note="Estimate: herring fry along the Norwegian coast and in the Gulf of Bothnia from midsummer into autumn."
+    british-isles from=june to=november note="Estimate: whitebait in estuaries and along the shore from early summer into autumn."
+    central-europe from=june to=november note="Estimate: on the North Sea and Baltic coasts from early summer into autumn."
+    northern-usa from=june to=november note="Estimate: Atlantic herring only, on the coast of New England and the Gulf of Maine; no sprats there."
+}
+sources {
+    "FishBase: Clupea harengus" url="https://www.fishbase.se/summary/Clupea-harengus.html"
+    "FishBase: Sprattus sprattus" url="https://www.fishbase.se/summary/Sprattus-sprattus.html"
+    "Wikipedia: Atlantic herring" url="https://en.wikipedia.org/wiki/Atlantic_herring"
+    "Wikipedia: European sprat" url="https://en.wikipedia.org/wiki/European_sprat"
+    "Wikipedia: Whitebait" url="https://en.wikipedia.org/wiki/Whitebait"
+    "John Bickerdyke: Sea Fishing, chapter V, Fly Fishing in the Sea" url="https://bookdome.com/outdoors/fishing/Sea-Fishing/Chapter-V-Fly-Fishing-In-The-Sea.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/0/01/Herringjuvenilekils.jpg" page="https://commons.wikimedia.org/wiki/File:Herringjuvenilekils.jpg" author="Uwe Kils" license="CC BY-SA 3.0" note="Juvenile herring, side view, still translucent"
+    "https://upload.wikimedia.org/wikipedia/commons/1/12/Sprattus_sprattus_England.jpg" page="https://commons.wikimedia.org/wiki/File:Sprattus_sprattus_England.jpg" author="andyjordan" license="CC BY 4.0" flip=#true note="A young sprat in the hand"
+    "https://upload.wikimedia.org/wikipedia/commons/a/a6/Clupea_harengus_Gervais.jpg" page="https://commons.wikimedia.org/wiki/File:Clupea_harengus_Gervais.jpg" author="Gervais et Boulart" license="Public domain" note="Grown herring, drawing: fin positions"
+}

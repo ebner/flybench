@@ -9,25 +9,40 @@ description "Small fish of rivers and lake shores: olive-brown or greenish backs
 size min=30 max=70
 rides swimming
 body {
-    // The minnow: a brownish-green back over a whitish-grey belly, divided by a row of
-    // upright dark blotches along the lateral line, a third to half the body deep, often run
-    // together into a stripe (Wikipedia; FishBase). Lengths here leave out the tail fin.
-    // Assumption: from the photo on Wikipedia's Phoxinus phoxinus page, the head about a quarter
-    // of the length, the body a fifth as deep as long, the tail's narrow end about 0.07.
-    tail length=0.28 radius=0.055 taper=0.45 color="#5a6a3a" belly="#d8dcd0" flatten=2.2 marks=stripe ink="#2e3420"
-    trunk length=0.48 radius=0.075 taper=0.95 color="#5a6a3a" belly="#e8eae0" flatten=1.8 marks=stripe ink="#2e3420"
-    head length=0.24 radius=0.072 taper=0.5 color="#4a5a32" belly="#e0e2d8" flatten=1.5 round=0.6
+    // Drawn after the minnow: an elongated body (FishBase), a brownish-green back over a
+    // whitish-grey belly (Wikipedia). Lengths here leave out the tail fin.
+    // Assumption: from the reference photos and drawing, the head about a quarter of the
+    // length, the body deepest just ahead of the dorsal fin at about a fifth of the length and
+    // half as wide as deep, the caudal peduncle about 0.085 deep.
+    tail length=0.28 radius=0.04 taper=1.8 color="#5a6438" belly="#d8dcd0" flatten=2.2 top=0.042 bottom=0.04 marks=stripe ink="#2e3420"
+    trunk length=0.48 radius=0.07 taper=1.15 color="#5a6438" belly="#e8eae0" flatten=2.0 top=0.088 bottom=0.08 marks=stripe ink="#2e3420"
+    head length=0.24 radius=0.068 taper=0.45 color="#4a5430" belly="#e0e2d8" flatten=1.6 top=0.096 bottom=0.086
 }
 parts {
-    // The anal fin begins in front of the end of the dorsal fin's base (Wikipedia; FishBase).
-    // Assumption: positions and sizes read off the photo: the dorsal fin starting a little behind
-    // the middle, the pelvic fins just ahead of it, the tail fin about a fifth of the length.
-    fin kind=caudal at=0 size=0.2 color="#8a8a6a"
-    fin kind=dorsal at=0.42 size=0.13 color="#8a8a6a"
-    fin kind=anal at=0.3 size=0.1 color="#8a8a6a"
-    fin kind=pelvic at=0.46 size=0.09 color="#8a8a6a"
-    fin kind=pectoral at=0.75 size=0.11 color="#8a8a6a"
-    eyes size=0.03 color="#1a1a14"
+    // Dorsal and anal fins each of 3 spines and 6–8 soft rays; the anal fin begins in front of
+    // the base of the last dorsal ray; a tail fin of 19 rays (Wikipedia; FishBase).
+    // Assumption: positions and sizes read off the references: the dorsal fin starting a
+    // little behind the middle, the pelvic fins just ahead of it, the pectoral fins low behind
+    // the gill cover; the tail fin moderately forked, about a fifth of the length.
+    fin kind=caudal at=0 base=0.085 height=0.2 rays=19 shape=forked color="#9a9a7a" clarity=0.5
+    fin kind=dorsal at=0.45 base=0.11 height=0.14 rays=10 spines=3 shape=pointed color="#8a8a6a" clarity=0.5
+    fin kind=anal at=0.35 base=0.1 height=0.11 rays=10 spines=3 shape=pointed color="#a0a088" clarity=0.55
+    fin kind=pelvic at=0.48 base=0.04 height=0.1 rays=8 shape=rounded color="#b0ae98" clarity=0.55
+    fin kind=pectoral at=0.75 base=0.04 height=0.13 rays=15 shape=rounded color="#b0ae98" clarity=0.55
+    // The snout 1.1–1.4 times the eye's diameter and 29–34% of the head (Wikipedia), so the eye
+    // is about a quarter of the head across. Assumption: a golden iris, as on the photos.
+    eyes size=0.03 color="#1a1a14" iris="#c8b070" pupil="#0a0a08"
+    // Assumption: a small terminal mouth; the gill cover ending a little over a fifth of the
+    // length back.
+    mouth position=terminal size=0.05
+    gill-cover at=0.78
+    // The lateral line usually reaching beyond the anal fin (Wikipedia; FishBase).
+    // Assumption: small scales, about 85 along the side, with a soft shine.
+    scales size=0.012 shine=0.45
+    lateral-line height=0.0 color="#3e4628"
+    // A row of upright dark blotches along the lateral line, a third to half the body deep,
+    // often run together into a stripe (FishBase): drawn as the stripe (the sections' marks),
+    // since blotches (`bars`) go one to a segment and segments ring the body like an insect's.
 }
 hatches {
     southern-sweden from=january to=december note="Most in late summer and autumn, when trout chase the year's fry (Cat's Whisker; Teal Blue and Silver)."
@@ -40,4 +55,10 @@ sources {
     "Wikipedia: Phoxinus phoxinus" url="https://en.wikipedia.org/wiki/Phoxinus_phoxinus"
     "FishBase: Phoxinus phoxinus" url="https://www.fishbase.se/summary/Phoxinus-phoxinus.html"
     "Wikipedia: Three-spined stickleback" url="https://en.wikipedia.org/wiki/Three-spined_stickleback"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/6/6d/Phoxinus_phoxinus_f%C3%BCrge_cselle.jpg" page="https://commons.wikimedia.org/wiki/File:Phoxinus_phoxinus_f%C3%BCrge_cselle.jpg" author="Zsoldos Márton" license="CC BY-SA 3.0" flip=#true note="Drawing, side view; a male in breeding colours"
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Vairon_WIKI800px_%28cropped%29.JPG" page="https://commons.wikimedia.org/wiki/File:Vairon_WIKI800px_(cropped).JPG" author="Adrien Pinot" license="CC BY-SA 3.0" flip=#true note="Side view"
+    "https://upload.wikimedia.org/wikipedia/commons/9/96/Phoxinus_phoxinus_img_33486.jpg" page="https://commons.wikimedia.org/wiki/File:Phoxinus_phoxinus_img_33486.jpg" author="Pmau" license="CC BY-SA 4.0" flip=#true note="Two in an aquarium, side view"
 }

@@ -738,7 +738,12 @@ export class FlyScene {
       this.grid = null;
     }
     if (!on) return;
-    this.grid = measuringGrid(this.finished.isEmpty() ? new THREE.Box3(new THREE.Vector3(-1, -1, 0), new THREE.Vector3(3, 1, 0)) : this.finished, color);
+    // Around the fly, or a natural shown on its own.
+    const around = !this.finished.isEmpty() ? this.finished : this.natural ? this.naturalBounds() : new THREE.Box3(new THREE.Vector3(-1, -1, 0), new THREE.Vector3(3, 1, 0));
+    // Seen from above, the grid lies flat under the fly (or natural) instead of standing behind it.
+    const flat = this.view === "top";
+    this.grid = measuringGrid(flat ? new THREE.Box3(new THREE.Vector3(around.min.x, around.min.z, 0), new THREE.Vector3(around.max.x, around.max.z, 0)) : around, color);
+    if (flat) this.grid.rotation.x = Math.PI / 2;
     this.scene.add(this.grid);
     if (reframe) this.resetCamera();
   }

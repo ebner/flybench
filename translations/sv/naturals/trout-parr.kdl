@@ -1,0 +1,24 @@
+id trout-parr
+status draft
+
+// en name: Trout fry and parr
+name "Öringyngel och stirr"
+
+// en description: Young brown trout and sea trout in their first years in the stream, before the sea trout go to sea as silvery smolts: an olive-brown back, a row of dark oval parr marks along the sides that fades with age, black and red spots, and often a red edge to the small adipose fin.
+description "Unga öringar och havsöringar under sina första år i bäcken, innan havsöringarna vandrar ut i havet som silverblanka smolt: olivbrun rygg, en rad mörka ovala fläckar längs sidorna (stirrfläckar, engelska parr marks) som bleknar med åren, svarta och röda prickar och ofta en röd kant på den lilla fettfenan."
+
+// en examples: brown trout and sea trout (Salmo trutta) fry and parr
+examples "yngel och stirr av öring och havsöring (Salmo trutta)"
+
+hatches {
+    // en southern-sweden note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    southern-sweden note="Uppskattning: i bäcken året runt; årets yngel kommer upp ur gruset på våren."
+    // en northern-scandinavia note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    northern-scandinavia note="Uppskattning: i bäcken året runt; årets yngel kommer upp ur gruset på våren."
+    // en british-isles note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    british-isles note="Uppskattning: i bäcken året runt; årets yngel kommer upp ur gruset på våren."
+    // en central-europe note: Estimate: in the stream all year; the new fry come up from the gravel in spring.
+    central-europe note="Uppskattning: i bäcken året runt; årets yngel kommer upp ur gruset på våren."
+    // en northern-usa note: Estimate: where brown trout were introduced (Wikipedia); in the stream all year, the new fry up from the gravel in spring.
+    northern-usa note="Uppskattning: där öring har planterats in (Wikipedia); i bäcken året runt, årets yngel upp ur gruset på våren."
+}

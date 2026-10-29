@@ -15,10 +15,11 @@ body {
     // red-brown, shaded by unpigmented spots (Wikipedia). The horse leech is brownish-black,
     // sometimes with streaks and spots (Wikipedia: Haemopis sanguisuga).
     // Assumption: stretched out while swimming, about a tenth as wide as long and widest in the
-    // rear half, narrowing over the front third to a small head.
-    sucker length=0.05 radius=0.035 taper=1.1 color="#1e1e1a" belly="#3a3a30" flatten=0.6
-    body length=0.65 radius=0.04 taper=0.9 segments=20 color="#1e1e1a" belly="#3a3a30" flatten=0.55 marks=spots ink="#6a6040"
-    front length=0.3 radius=0.036 taper=0.4 segments=10 color="#1e1e1a" belly="#3a3a30" flatten=0.8 marks=spots ink="#6a6040"
+    // rear half, narrowing over the front third to a small head (photos). The spots fine and scattered rather than in rows
+    // (photos of Erpobdella), so drawn as a mottle.
+    sucker length=0.05 radius=0.035 taper=1.1 color="#2a2218" belly="#3a3a30" flatten=0.6
+    body length=0.65 radius=0.04 taper=0.9 segments=20 color="#2a2218" belly="#3a3a30" flatten=0.55 marks=mottle ink="#5a4a2a"
+    front length=0.3 radius=0.036 taper=0.4 segments=10 color="#2a2218" belly="#3a3a30" flatten=0.8 marks=mottle ink="#5a4a2a"
 }
 parts {
 }
@@ -35,4 +36,9 @@ sources {
     "Wikipedia (de): Rollegel" url="https://de.wikipedia.org/wiki/Rollegel"
     "Wikipedia: Haemopis sanguisuga" url="https://en.wikipedia.org/wiki/Haemopis_sanguisuga"
     "Wikipedia: Nephelopsis" url="https://en.wikipedia.org/wiki/Nephelopsis"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/a/af/Acht%C3%A4ugiger_Roll_Egel.jpg" page="https://commons.wikimedia.org/wiki/File:Acht%C3%A4ugiger_Roll_Egel.jpg" author="Ulrich Kutschera" license="CC BY-SA 3.0 de" note="Erpobdella octoculata, from above, curved"
+    "https://upload.wikimedia.org/wikipedia/commons/b/bf/ErpobdellaOctoculata_wwalas_01.JPG" page="https://commons.wikimedia.org/wiki/File:ErpobdellaOctoculata_wwalas_01.JPG" author="WWalas" license="CC BY-SA 3.0" note="Erpobdella octoculata, from above"
+    "https://upload.wikimedia.org/wikipedia/commons/c/ce/Pferdeegel_Haemopis_sanguisuga.jpg" page="https://commons.wikimedia.org/wiki/File:Pferdeegel_Haemopis_sanguisuga.jpg" author="Holger Krisp" license="CC BY 4.0" note="Horse leech stretched out, from above"
 }

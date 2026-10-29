@@ -21,8 +21,9 @@ const natural = (id: string) => naturals.find((n) => n.id === id)!;
 
 describe("naturals in the catalog", () => {
   it("every natural is imitated by a pattern, but for the ones no pattern covers yet", () => {
-    // The burrowing mayfly nymph is in the hatch calendar; no pattern here imitates it directly.
-    const yet = ["mayfly-nymph-burrowing"];
+    // The burrowing mayfly nymph is in the hatch calendar; no pattern here imitates it directly,
+    // nor (by their sources) parr or sticklebacks, which streamers may suggest.
+    const yet = ["mayfly-nymph-burrowing", "trout-parr", "salmon-parr", "stickleback"];
     for (const n of naturals) expect(imitatedBy(recipes, n.id).length > 0, n.id).toBe(!yet.includes(n.id));
   });
 

@@ -8,21 +8,24 @@ description "A slender nymph of weedy lakes and slow water with three leaf-like 
 size min=18 max=26
 rides swimming
 body {
-    abdomen length=0.64 radius=0.035 taper=0.75 segments=10 color="#6a7a3a" belly="#9aa868"
-    thorax length=0.22 radius=0.05 taper=0.95 color="#5a6a30"
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.64 radius=0.03 taper=1.6 segments=10 color="#6a7a3a" belly="#9aa868"
+    // Assumption: thorax and head widths read from the photos (head about a sixth of the body across the eyes).
+    thorax length=0.22 radius=0.058 taper=0.95 color="#5a6a30"
     // Head wider than the thorax and abdomen (macroinvertebrates.org); Coenagrion puella's head "with prominent
     // spots" (DELTA), Enallagma's without.
-    head length=0.14 radius=0.055 taper=0.8 color="#5a6a30" flatten=0.7 marks=spots ink="#3a4420"
+    head length=0.14 radius=0.065 taper=0.8 color="#5a6a30" flatten=0.7 marks=spots ink="#3a4420"
 }
 parts {
     // Three leaf-like caudal gills (MDC; Wikipedia), pointed (DELTA). In Enallagma the median gill is around
     // 4.5 mm on a body of about 11 mm and more (aquaticinsects.org), so roughly a third of the body. C. puella's
-    // are clear, Enallagma's usually with one to three narrow dark bands (DELTA); bands not drawn.
-    tails count=3 length=0.32 spread=25 color="#8a9a5a" leaf=#true
+    // are clear, Enallagma's usually with one to three narrow dark bands (DELTA); drawn as C. puella's. In the
+    // C. puella photos they are nearly 0.4 of the body.
+    tails count=3 length=0.38 spread=25 color="#8a9a5a" leaf=#true
     wingpads length=0.15 color="#4a5426"
     // "Six thin legs" (MDC), two claws each (macroinvertebrates.org). Assumption: femur and tibia long and
-    // about equal, a short three-segmented foot.
-    legs count=6 length=0.5 color="#6a7a3a" femur=0.4 tibia=0.38
+    // about equal, a short three-segmented foot, thinner than the usual leg (photos).
+    legs count=6 length=0.5 color="#6a7a3a" femur=0.4 tibia=0.38 tarsi=3 thick=0.6
     // Seven-segmented antennae (DELTA). Assumption: about an eighth of the body.
     antennae length=0.12 color="#5a6a30"
     eyes size=0.04 color="#2a3014"
@@ -42,4 +45,9 @@ sources {
     "DELTA British Odonata: Enallagma cyathigerum" url="https://www.delta-intkey.com/britin/odo/www/cyathige.htm"
     "Macroinvertebrates.org: Coenagrionidae (larva)" url="https://www.macroinvertebrates.org/taxa-info/odonata-larva/coenagrionidae"
     "Aquatic Insects of Central Virginia: key to Enallagma larvae" url="https://aquaticinsects.org/Keys/Odonata/id_oom_coenagrionidae_enallagma.html"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/c/c0/Coenagrion_puella_larva2.jpg" page="https://commons.wikimedia.org/wiki/File:Coenagrion_puella_larva2.jpg" author="Siga" license="CC BY-SA 3.0" note="Coenagrion puella nymph from above"
+    "https://upload.wikimedia.org/wikipedia/commons/6/6a/Coenagrion_puella_larva1.jpg" page="https://commons.wikimedia.org/wiki/File:Coenagrion_puella_larva1.jpg" author="Siga" license="CC BY-SA 3.0" note="Coenagrion puella nymph on a stone, from the side and above"
+    "https://upload.wikimedia.org/wikipedia/commons/0/04/Pyrrhosoma_nymphula_%28Coenagrionidae%29_%28Large_Red_Damselfly%29_-_%28larva_-_nimf%29%2C_Buren_%28Gld.%29%2C_the_Netherlands.jpg" page="https://commons.wikimedia.org/wiki/File:Pyrrhosoma_nymphula_(Coenagrionidae)_(Large_Red_Damselfly)_-_(larva_-_nimf),_Buren_(Gld.),_the_Netherlands.jpg" author="Wim Rubers (waarneming.nl)" license="CC BY 3.0" flip=#true note="Pyrrhosoma nymphula nymph (Coenagrionidae) from above"
 }

@@ -8,8 +8,10 @@ size min=6 max=11
 rides in-film
 curve 35
 body {
-    abdomen length=0.6 radius=0.058 taper=0.5 segments=10 color="#6e5e3c" belly="#a8986e" translucency=0.25
-    thorax length=0.28 radius=0.075 taper=0.9 color="#5c5a32"
+    // Assumption: the abdomen widest at the front, tapering to the tip (photos); radius at the rear, taper forward.
+    abdomen length=0.6 radius=0.032 taper=1.8 segments=10 color="#6e5e3c" belly="#a8986e" translucency=0.25
+    // The dun's humped thorax, out of the split nymphal skin first (Wikipedia: Mayfly). Assumption: as on the dun.
+    thorax length=0.28 radius=0.085 taper=0.85 color="#5c5a32" round=0.5
     head length=0.12 radius=0.055 taper=0.7 color="#4a4428"
 }
 parts {
@@ -19,7 +21,10 @@ parts {
     // Baetis (Dalarna 2013; Hackston 2021). Assumption: hind wing an eighth of the forewing, as on the dun.
     wings count=2 shape=upright length=0.55 width=0.35 color=dun clarity=0.15 hind=0.12 hairs=0.1
     // Assumption: as on the dun, femur and tibia about equal and a shorter foot.
-    legs count=6 length=0.45 color="#6a6040" femur=0.36 tibia=0.36
+    // Adults' feet are (3–)5-jointed (DELTA), the Baetid hind foot three-jointed (Hackston 2021).
+    legs count=6 length=0.45 color="#6a6040" femur=0.36 tibia=0.36 tarsi=3
+    // Short antennae (Wikipedia: Mayfly). Assumption: under a tenth of the body.
+    antennae length=0.08 color="#4a4428"
     eyes size=0.032 color=black
 }
 hatches {
@@ -36,4 +41,11 @@ sources {
     "Hackston 2021: Key to UK families and genera of adult Ephemeroptera (after Elliott & Humpesch 1983, Kimmins 1950)" url="https://quelestcetanimal-lagalerie.com/wp-content/uploads/2022/02/Order-Ephemeroptera-key-to-British-families-adults.pdf"
     "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
     "First Nature: Large Dark Olive" url="https://first-nature.com/insects/e-baetis-rhodani.php"
+    "DELTA, British Insects: the orders, Ephemeroptera" url="https://www.delta-intkey.com/britin/ord/www/ephemero.htm"
+}
+references {
+    // No side views of a mayfly hatching in the film were found under an open licence; these show an Isonychia
+    // dun leaving its nymphal skin on a rock at the water's edge, which it does instead of hatching in the film.
+    "https://i.troutnut.com/im_article/pic_99_800.jpg" page="https://www.troutnut.com/article/39/isonychia-nymph-emerging-pictures" author="Jason Neuswanger (Troutnut)" license="All rights reserved; reference only" flip=#true note="Isonychia dun halfway out of the nymphal skin, wings crumpled"
+    "https://i.troutnut.com/im_article/pic_97_800.jpg" page="https://www.troutnut.com/article/39/isonychia-nymph-emerging-pictures" author="Jason Neuswanger (Troutnut)" license="All rights reserved; reference only" flip=#true note="Isonychia dun emerging, earlier: thorax out, wings still folded"
 }

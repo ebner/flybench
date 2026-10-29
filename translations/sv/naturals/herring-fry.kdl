@@ -1,0 +1,24 @@
+id herring-fry
+status draft
+
+// en name: Herring and sprat fry
+name "Sill- och skarpsillsyngel"
+
+// en description: The young of herring and sprats, the whitebait of the coasts: slim, half-translucent fish with a blue-green back, mirror-silver flanks and big eyes, in dense shoals near the surface. Sea trout, bass and mackerel slash through them in the shallows.
+description "Ungarna av sill och skarpsill längs kusterna (engelskans whitebait): smala, halvgenomskinliga fiskar med blågrön rygg, spegelblanka silversidor och stora ögon, i täta stim nära ytan. Havsöring, havsabborre och makrill slår in i stimmen på grunt vatten."
+
+// en examples: Atlantic herring (Clupea harengus), sprat (Sprattus sprattus)
+examples "sill (Clupea harengus), skarpsill (Sprattus sprattus)"
+
+hatches {
+    // en southern-sweden note: Estimate: the spring-spawned fry reach fly size, 3–5 cm, from midsummer into autumn, on the west coast and in the Baltic.
+    southern-sweden note="Uppskattning: ynglen från vårlekande sill når flugstorlek, 3–5 cm, från midsommar in på hösten, på västkusten och i Östersjön."
+    // en northern-scandinavia note: Estimate: herring fry along the Norwegian coast and in the Gulf of Bothnia from midsummer into autumn.
+    northern-scandinavia note="Uppskattning: sillyngel längs norska kusten och i Bottniska viken från midsommar in på hösten."
+    // en british-isles note: Estimate: whitebait in estuaries and along the shore from early summer into autumn.
+    british-isles note="Uppskattning: yngel (whitebait) i flodmynningar och längs stränderna från försommaren in på hösten."
+    // en central-europe note: Estimate: on the North Sea and Baltic coasts from early summer into autumn.
+    central-europe note="Uppskattning: på Nordsjö- och Östersjökusten från försommaren in på hösten."
+    // en northern-usa note: Estimate: Atlantic herring only, on the coast of New England and the Gulf of Maine; no sprats there.
+    northern-usa note="Uppskattning: bara atlantisk sill, längs New Englands kust och i Mainebukten; ingen skarpsill där."
+}

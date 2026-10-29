@@ -15,7 +15,7 @@ body {
     // across the abdomen (MarLIN); pinkish brown with reddish patterns (Wikipedia).
     // Assumption: from the photo on Wikipedia's Palaemon serratus page, the abdomen about half
     // the length, the carapace 0.3 and the rostrum with the eyes 0.2.
-    abdomen length=0.5 radius=0.07 taper=0.55 segments=6 color="#d8a090" belly="#e8c0b0" flatten=1.3 translucency=0.5 marks=bands ink="#7a3a2a"
+    abdomen length=0.5 radius=0.04 taper=1.9 segments=6 color="#d8a090" belly="#e8c0b0" flatten=1.3 translucency=0.5 marks=bands ink="#7a3a2a"
     thorax length=0.3 radius=0.08 taper=0.9 color="#d09888" flatten=1.4 translucency=0.5 marks=stripe ink="#7a3a2a"
     head length=0.2 radius=0.06 taper=0.25 color="#c88878" flatten=1.4 translucency=0.5
 }
@@ -26,8 +26,8 @@ parts {
     // Assumption: about 1.5 times the body, from the photo.
     antennae length=1.5 color="#c08070"
     // Five pairs of walking legs (Wikipedia: Shrimp), the first two clawed, with yellow and
-    // red-brown bands (MarLIN). Assumption: about a third of the body long, from the photo.
-    legs count=10 length=0.32 color="#d8a898" banded=#true
+    // red-brown bands (MarLIN). Assumption: about 0.4 of the body long, from the photos.
+    legs count=10 length=0.4 color="#d8a898" banded=#true
     // Five pairs of paddle-shaped swimmerets under the abdomen (Wikipedia: Shrimp).
     // Assumption: short and fringed with bristles.
     legs count=10 length=0.12 color="#e0b8a8" at=abdomen hairs=0.6
@@ -44,4 +44,9 @@ sources {
     "Wikipedia: Palaemon serratus" url="https://en.wikipedia.org/wiki/Palaemon_serratus"
     "MarLIN: Common prawn (Palaemon serratus)" url="https://www.marlin.ac.uk/species/detail/2033"
     "Wikipedia: Shrimp" url="https://en.wikipedia.org/wiki/Shrimp"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/0/0f/Palaemon_elegans%2C_Estonia.jpg" page="https://commons.wikimedia.org/wiki/File:Palaemon_elegans,_Estonia.jpg" author="Kaido Haagen" license="CC BY-SA 3.0" note="Palaemon elegans, side view (a female with eggs)"
+    "https://upload.wikimedia.org/wikipedia/commons/a/a7/S%C3%A4gegarnele_Palaemon_serratus_1.jpg" page="https://commons.wikimedia.org/wiki/File:S%C3%A4gegarnele_Palaemon_serratus_1.jpg" author="Holger Krisp" license="CC BY 4.0" note="Palaemon serratus, side view, half in the weed"
+    "https://upload.wikimedia.org/wikipedia/commons/b/b9/Palaemon_serratus_Croazia.jpg" page="https://commons.wikimedia.org/wiki/File:Palaemon_serratus_Croazia.jpg" author="Etrusko25" license="Public domain" flip=#true note="Palaemon serratus, side view"
 }

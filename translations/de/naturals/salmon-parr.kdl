@@ -1,0 +1,22 @@
+id salmon-parr
+status draft
+
+// en name: Salmon parr
+name "Lachs-Parr (Junglachs)"
+
+// en description: Young Atlantic salmon in their first years in the river, holding in fast, stony riffles: slimmer than trout parr, with a deeply forked tail, long pectoral fins, a short jaw, a row of bluish parr marks along the sides with small red spots between them, and no red on the adipose fin. In spring they turn silver and go to sea as smolts.
+description "Junge Atlantische Lachse in ihren ersten Jahren im Fluss, wo sie in schnellen, steinigen Rauschen stehen: schlanker als junge Forellen, mit tief gegabelter Schwanzflosse, langen Brustflossen, kurzem Kiefer, einer Reihe bläulicher Parr-Flecken an den Seiten mit kleinen roten Punkten dazwischen und ohne Rot an der Fettflosse. Im Frühjahr werden sie silbern und ziehen als Smolts ins Meer."
+
+// en examples: Atlantic salmon (Salmo salar) fry and parr
+examples "Brut und Parr des Atlantischen Lachses (Salmo salar)"
+
+hatches {
+    // en southern-sweden note: Estimate: in the river all year, one to four years; the smolts go to sea mostly from March to June (Wikipedia).
+    southern-sweden note="Schätzung: das ganze Jahr im Fluss, ein bis vier Jahre; die Smolts ziehen meist von März bis Juni ins Meer (Wikipedia)."
+    // en northern-scandinavia note: Estimate: in the river all year, up to five or six years in the far north (FishBase); the smolts go to sea mostly from March to June (Wikipedia).
+    northern-scandinavia note="Schätzung: das ganze Jahr im Fluss, im hohen Norden bis zu fünf oder sechs Jahre (FishBase); die Smolts ziehen meist von März bis Juni ins Meer (Wikipedia)."
+    // en british-isles note: Estimate: in the river all year, one to four years; the smolts go to sea mostly from March to June (Wikipedia).
+    british-isles note="Schätzung: das ganze Jahr im Fluss, ein bis vier Jahre; die Smolts ziehen meist von März bis Juni ins Meer (Wikipedia)."
+    // en northern-usa note: Estimate: only in a few rivers in Maine (the USFWS photos are from the Machias River).
+    northern-usa note="Schätzung: nur in wenigen Flüssen in Maine (die USFWS-Fotos stammen vom Machias River)."
+}

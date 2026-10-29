@@ -10,13 +10,19 @@ rides swimming
 curve 70
 body {
     // Slender and worm-like: a head capsule, three thoracic and nine abdominal segments (Wikipedia de).
-    // Assumption: the head capsule narrower than the body and brown, about a twentieth of its length (photos).
-    abdomen length=0.75 radius=0.04 taper=1.1 segments=9 color="#a02424" belly="#c04040" translucency=0.25
-    thorax length=0.19 radius=0.044 taper=0.95 segments=3 color="#a02424" belly="#c04040" translucency=0.25
-    head length=0.06 radius=0.03 taper=0.8 color="#6a3418" round=0.6
+    // Assumption: the head capsule narrower than the body and brown, about a twentieth of its length; the body
+    // about a sixteenth of its length thick (photos).
+    abdomen length=0.75 radius=0.032 taper=1.05 segments=9 color="#a02424" belly="#c04040" translucency=0.25
+    thorax length=0.19 radius=0.034 taper=0.95 segments=3 color="#a02424" belly="#c04040" translucency=0.25
+    head length=0.06 radius=0.026 taper=0.8 color="#6a3418" round=0.6
 }
 parts {
     eyes size=0.012 color="#2a0a0a"
+    // A pair of stumpy legs on the first thoracic segment and a pair of rear prolegs (Nachschieber) on the last
+    // segment (Wikipedia de: Zuckmücken), both crowned with small claws. Assumption: each about a twenty-fifth of
+    // the body long (photos).
+    prolegs count=1 at=thorax where=front length=0.04 hooks=#true color="#b03030"
+    prolegs count=1 at=abdomen where=rear length=0.045 hooks=#true color="#b03030"
 }
 hatches {
     southern-sweden from=april to=october note="Estimate: peak May–June."
@@ -30,4 +36,9 @@ sources {
     "Wikipedia: Chironomidae" url="https://en.wikipedia.org/wiki/Chironomidae"
     "Wikipedia (de): Zuckmücken" url="https://de.wikipedia.org/wiki/Zuckmücken"
     "First Nature: Chironomids, buzzer midges" url="https://mail.first-nature.com/insects/d-chironomus-plumosus.php"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/f/fe/Chironomus_spec._%28Chironomidae%29_-_%28larva%29%2C_Elst_%28Gld%29%2C_the_Netherlands.jpg" page="https://commons.wikimedia.org/wiki/File:Chironomus_spec._(Chironomidae)_-_(larva),_Elst_(Gld),_the_Netherlands.jpg" author="B. Schoenmakers (waarneming.nl)" license="CC BY 3.0" note="Chironomus bloodworm, curled, head top right"
+    "https://upload.wikimedia.org/wikipedia/commons/e/ed/Single_Bloodworm.jpg" page="https://commons.wikimedia.org/wiki/File:Single_Bloodworm.jpg" author="Bill Kasman" license="CC0" note="Bloodworm, head right"
+    "https://upload.wikimedia.org/wikipedia/commons/d/d7/Mikrofoto.de-Zuckmueckenlarve3.jpg" page="https://commons.wikimedia.org/wiki/File:Mikrofoto.de-Zuckmueckenlarve3.jpg" author="Frank Fox" license="CC BY-SA 3.0 de" note="Chironomid larva under the microscope: head capsule, front and rear prolegs"
 }

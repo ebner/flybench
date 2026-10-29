@@ -7,24 +7,33 @@ description "A long, flat insect with its four wings folded flat over its back, 
 size min=10 max=25
 rides on-surface
 body {
-    abdomen length=0.58 radius=0.06 taper=0.6 segments=10 color="#6a5a3a" belly="#a08a52" flatten=0.8
+    abdomen length=0.58 radius=0.04 taper=1.6 segments=10 color="#6a5a3a" belly="#a08a52" flatten=0.8
     thorax length=0.3 radius=0.07 taper=0.9 color="#5a4a30" flatten=0.8
     head length=0.12 radius=0.06 taper=0.8 color="#4a3a26" flatten=0.8
 }
 parts {
     // Wings flat over the back, the forewings over the hindwings (MDC; Wikipedia); the hind wings as long or slightly
     // shorter, much broader, their fan folded at rest (Wikipedia de). Fore wings often longer than the abdomen (Lucid).
-    // Assumption: the wing tips about a quarter of the body past the abdomen (photos).
-    wings count=4 shape=flat length=1.0 width=0.24 color="#8a7a5a" clarity=0.3 veins=#true hind=0.95
+    // Clear or brownish (Wikipedia de). Assumption: the wing tips about a quarter of the body past the abdomen (photos).
+    wings count=4 shape=flat length=1.0 width=0.24 color="#8a7a5a" clarity=0.18 veins=#true hind=0.95
     // Long antennae (MDC), to about half the body length (Wikipedia de), as long as the body in Taeniopteryx (Dalarna 2013).
-    antennae length=0.7 color="#5a4a30"
+    // Assumption: 0.8 of the body, between the photos (Isoperla's reach about the body length).
+    antennae length=0.8 color="#5a4a30" segments=40
     // Short cerci in Isoperla (Dalarna 2013); long in Perla, showing past the wings (Wikipedia de: Perla marginata).
     // Assumption: just reaching out from under the wing tips.
     tails count=2 length=0.3 spread=40 color="#5a4a30"
     // Robust legs ending in two claws (Wikipedia), three-jointed feet, the hind legs usually longer than the rest (Wikipedia de);
-    // legs about as long as the body in Taeniopteryx (Dalarna 2013). Assumption: short feet, a fifth of the leg (photos).
-    legs count=6 length=0.7 hind=1.25 femur=0.42 tibia=0.38 color="#6a5a3a"
-    eyes size=0.025 color=black
+    // legs about as long as the body in Taeniopteryx (Dalarna 2013).
+    // Assumption, from the photos: the front legs about half the body, the hind legs 0.7, short feet, the body held low.
+    legs count=6 length=0.56 femur=0.4 tibia=0.36 tarsi=3 color="#6a5a3a"
+    legs pair=fore count=2 length=0.5 femur=0.4 tibia=0.36 tarsi=3 color="#6a5a3a"
+    legs pair=hind count=2 length=0.7 femur=0.4 tibia=0.38 tarsi=3 color="#6a5a3a"
+    // The front of the thorax (prothorax) flat on top with a marked edge, sometimes broadened (Wikipedia de); yellowish with
+    // dark side and middle stripes in Perla marginata (Wikipedia de: Perla marginata).
+    // Assumption: about as wide as the head and a third of the thorax long (photos).
+    pronotum length=0.1 width=0.13 color="#7a6a42"
+    // Large compound eyes and almost always three simple eyes (ocelli) (Wikipedia de).
+    eyes size=0.025 color=black ocelli=#true
 }
 hatches {
     southern-sweden from=march to=august note="February red March onwards, yellow sally May–July, Diura May–August (Dalarna 2013)."
@@ -45,4 +54,9 @@ sources {
     "First Nature: Yellow Sally" url="https://www.first-nature.com/insects/p-isoperla-grammatica.php"
     "Troutnut: Pteronarcys californica" url="https://www.troutnut.com/hatch/973/Stonefly-Pteronarcys-californica-Giant-Salmonfly"
     "Montana Angler: Madison River hatch chart" url="https://www.montanaangler.com/montana-fly-fishing-rivers/madison-river-hatch-chart-fishing"
+}
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/8/80/Isoperla_cf._oxylepis_%28LerM%27b%27g%29_%2837174035904%29.jpg" page="https://commons.wikimedia.org/wiki/File:Isoperla_cf._oxylepis_(LerM%27b%27g)_(37174035904).jpg" author="David Short from Windsor, UK" license="CC BY 2.0" note="Isoperla, side view"
+    "https://upload.wikimedia.org/wikipedia/commons/f/f5/Perla_marginata_T69.jpg" page="https://commons.wikimedia.org/wiki/File:Perla_marginata_T69.jpg" author="Jerzy Opioła" license="CC BY-SA 4.0" note="Perla marginata, from the side and above"
+    "https://i.troutnut.com/im_regspec/pic_4935_800.jpg" page="https://www.troutnut.com/specimen/1129" author="Jason Neuswanger" license="All rights reserved; reference only" flip=#true note="Isoperla female, side view"
 }

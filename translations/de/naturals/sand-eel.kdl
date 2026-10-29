@@ -1,0 +1,22 @@
+id sand-eel
+status draft
+
+// en name: Sand eel
+name "Sandaal"
+
+// en description: A long, slender, silvery fish of sandy coasts: a greenish back, a pointed head with a jutting lower jaw and a long low fin down the back. Shoals swim over the sand and dive into it when alarmed; sea trout hunt them in the shallows from late spring.
+description "Ein langer, schlanker, silbriger Fisch sandiger Küsten: grünlicher Rücken, ein spitzer Kopf mit vorstehendem Unterkiefer und eine lange, niedrige Rückenflosse. Die Schwärme ziehen über den Sand und graben sich bei Gefahr darin ein; ab dem späten Frühjahr jagen Meerforellen sie im Flachwasser."
+
+// en examples: lesser sand eel (Ammodytes tobianus), greater sand eel (Hyperoplus lanceolatus)
+examples "Tobiasfisch (Ammodytes tobianus), Großer Sandaal (Hyperoplus lanceolatus)"
+
+hatches {
+    // en southern-sweden note: Estimate: on the west coast and in the southern Baltic, from late spring, when the water warms, into autumn; buried in the sand through winter.
+    southern-sweden note="Schätzung: an der Westküste und in der südlichen Ostsee, vom späten Frühjahr, wenn sich das Wasser erwärmt, bis in den Herbst; im Winter im Sand eingegraben."
+    // en northern-scandinavia note: Estimate: along the Norwegian coast, not in the northern Baltic; from late spring into early autumn.
+    northern-scandinavia note="Schätzung: entlang der norwegischen Küste, nicht in der nördlichen Ostsee; vom späten Frühjahr bis in den Frühherbst."
+    // en british-isles note: Estimate: all round the coasts, from late spring into autumn; buried in the sand through winter.
+    british-isles note="Schätzung: an allen Küsten, vom späten Frühjahr bis in den Herbst; im Winter im Sand eingegraben."
+    // en central-europe note: Estimate: on the North Sea and Baltic coasts, from late spring into autumn.
+    central-europe note="Schätzung: an Nord- und Ostseeküste, vom späten Frühjahr bis in den Herbst."
+}

@@ -10,31 +10,45 @@ size min=15 max=34
 rides crawling
 body {
     // Perla marginata: a black zigzag band and a yellow star on the head, dark stripes on the pronotum, often a Y on the
-    // mesothorax (Wikipedia de). Assumption: pale rear edges on the abdominal plates (photos).
-    abdomen length=0.55 radius=0.07 taper=0.5 segments=10 color="#4a3626" belly="#b08a4a" flatten=0.55 marks=bands ink="#9a7a46"
-    thorax length=0.33 radius=0.085 taper=0.95 color="#3e2e20" belly="#a07a40" flatten=0.55 marks=mottle ink="#a88648"
-    head length=0.12 radius=0.07 taper=0.8 color="#3a2a1c" flatten=0.6 marks=mottle ink="#b8944c"
+    // mesothorax (Wikipedia de). Larvae flattened (Wikipedia de: Steinfliegen).
+    // Assumption, from the photos from above: the abdomen about 0.48 of the length and a fifth as wide, the thorax with
+    // its wing pads 0.37 and a quarter as wide, the head 0.15 and nearly as wide; half as deep as wide; pale rear edges on
+    // the abdominal plates.
+    abdomen length=0.48 radius=0.05 taper=2.2 segments=10 color="#4a3626" belly="#b08a4a" flatten=0.5 marks=bands ink="#9a7a46"
+    thorax length=0.37 radius=0.125 taper=0.95 segments=3 color="#3e2e20" belly="#a07a40" flatten=0.5 marks=mottle ink="#a88648"
+    head length=0.15 radius=0.115 taper=0.8 color="#3a2a1c" flatten=0.55 marks=mottle ink="#b8944c" round=0.5
 }
 parts {
-    // Two long tails and antennae (MDC; Wikipedia: Plecoptera), the tails densely fringed on the inner side in
-    // Perla marginata (Wikipedia de).
-    tails count=2 length=0.5 spread=45 color="#5a4430" hairs=0.4
-    antennae length=0.5 color="#5a4430"
-    wingpads length=0.28 color="#2a1e14"
+    // Two long tails and antennae (MDC; Wikipedia: Plecoptera), the tails yellowish brown and densely fringed on the inner
+    // side in Perla marginata (Wikipedia de). Assumption: the tails 0.7 and the antennae 0.6 of the body (photos).
+    tails count=2 length=0.7 spread=45 color="#8a6a40" hairs=0.4
+    antennae length=0.6 color="#7a5a36" segments=50
+    // Two pairs of wing pads standing out from the thorax or lying along it (Wikipedia de), edged by a dark line in Perla
+    // marginata (Wikipedia de: Perla marginata).
+    wingpads length=0.26 color="#2a1e14"
+    // Assumption: a flat plate over the front of the thorax with a marked edge, as the adult's
+    // (Wikipedia de: Steinfliegen describes the adult) and as the photos show the nymph's.
+    // Assumption: the pronotum about as wide as the head and a quarter of the thorax long (photos).
+    pronotum length=0.09 width=0.24 color="#4a3624"
     // Tufted gills at the bases of the legs, under the body (MDC; Wikipedia de); a white thread-like gill in every
     // "armpit" in Taeniopteryx (Dalarna 2013). Not every genus has them (Wikipedia de).
     gills count=3 length=0.06 color="#d8d0bc" shape=tuft
-    // Six sprawling legs with two claws (MDC); long swimming bristles and a dark spot on each thigh in Perla marginata
-    // (Wikipedia de). Assumption: broad thighs, short three-jointed feet, the hind legs a little longer (photos).
-    legs count=6 length=0.6 hind=1.15 femur=0.42 tibia=0.36 hairs=0.4 color="#6a5236"
-    eyes size=0.022 color=black
+    // Six sprawling legs with two claws (MDC); three-jointed feet (Wikipedia de: Steinfliegen, of the
+    // adult; assumed alike in the nymph); long swimming bristles and
+    // a dark spot on each thigh in Perla marginata (Wikipedia de).
+    // Assumption, from the photos: broad, flat thighs; the front legs about 0.42 of the body, the hind legs 0.56.
+    legs count=6 length=0.48 femur=0.42 tibia=0.36 tarsi=3 thick=1.4 hairs=0.4 color="#7a5c3a"
+    legs pair=fore count=2 length=0.42 femur=0.42 tibia=0.36 tarsi=3 thick=1.4 hairs=0.4 color="#7a5c3a"
+    legs pair=hind count=2 length=0.56 femur=0.42 tibia=0.36 tarsi=3 thick=1.4 hairs=0.4 color="#7a5c3a"
+    // Usually three simple eyes (ocelli); in Perla marginata the dark band between the eyes carries two of them (Wikipedia de).
+    eyes size=0.025 color=black ocelli=#true
 }
 hatches {
-    southern-sweden from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
-    northern-scandinavia from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
-    british-isles from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
-    central-europe from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
-    northern-usa from=january to=december note="In the water all year: one to three years as a nymph (Wikipedia de; Dalarna 2013)."
+    southern-sweden from=january to=december note="In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de)."
+    northern-scandinavia from=january to=december note="In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de)."
+    british-isles from=january to=december note="In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de)."
+    central-europe from=january to=december note="In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de)."
+    northern-usa from=january to=december note="In the water all year: one to two years as a nymph (Dalarna 2013), up to three in Perla marginata (Wikipedia de)."
 }
 sources {
     "Missouri Department of Conservation: Stoneflies" url="https://mdc.mo.gov/discover-nature/field-guide/stoneflies"
@@ -44,4 +58,9 @@ sources {
     "Lingdell & Engblom 2013: Fakta om småkryp i Dalarnas vattendrag (Länsstyrelsen Dalarna, rapport 2013:06)" url="https://catalog.lansstyrelsen.se/store/26/resource/2013_06"
     "Troutnut: Order Plecoptera" url="https://www.troutnut.com/hatch/13/Insect-Plecoptera-Stoneflies"
     "Troutnut: Pteronarcys californica" url="https://www.troutnut.com/hatch/973/Stonefly-Pteronarcys-californica-Giant-Salmonfly"
+}
+references {
+    "https://i.troutnut.com/im_regspec/pic_6531_800.jpg" page="https://www.troutnut.com/specimen/1320" author="Jason Neuswanger" license="All rights reserved; reference only" note="Calineuria californica (Perlidae), side view, abdomen raised"
+    "https://upload.wikimedia.org/wikipedia/commons/6/6b/Perla_marginata_nymph.jpg" page="https://commons.wikimedia.org/wiki/File:Perla_marginata_nymph.jpg" author="Zoologische Staatssammlung Muenchen" license="CC BY-SA 3.0" note="Perla marginata, from above"
+    "https://upload.wikimedia.org/wikipedia/commons/4/42/Dinocras_cephalotes_Lisinska1.jpg" page="https://commons.wikimedia.org/wiki/File:Dinocras_cephalotes_Lisinska1.jpg" author="Wlodzimierz" license="CC BY-SA 4.0" flip=#true note="Dinocras cephalotes, from above"
 }
