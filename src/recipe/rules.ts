@@ -63,6 +63,7 @@ export const RULES = {
   neverUsedAfterTieIn: (p: { m: string }) => `"${p.m}" is tied in but never wound or pulled over`,
   neverUsed: (p: { m: string }) => `"${p.m}" is listed but never used`,
   endWithWhipFinish: () => "the fly must end with a whip finish",
+  sitsFloats: () => "sits only applies to a fly that floats (a dry fly, terrestrial or emerger, or one that fishes on the surface or in the film)",
   // Not a tying rule: the fly builder's bound on the work of drawing a fly (src/edit/own.ts).
   tooMuchToDraw: () => "more turns than the 3D view draws; the steps from here on aren't shown",
 } as const;

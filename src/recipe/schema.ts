@@ -338,6 +338,8 @@ export const RecipeSchema = z.strictObject({
   rides: z.enum(["point-down", "point-up"]).optional(),
   /** Where it fishes, when its type and materials don't say it (see src/tying/fishing.ts). */
   fishes: z.enum(["surface", "film", "below", "deep"]).optional(),
+  /** How a floating fly sits on the film once fished a while (see src/tying/fishing.ts). */
+  sits: z.enum(["hackle", "body", "half"]).optional(),
   hook: Hook,
   thread: Thread,
   // Bounds well beyond any pattern, so a recipe from a link can't ask for endless drawing.

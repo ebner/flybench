@@ -40,6 +40,8 @@ references {
     "https://www.czechnymph.com/data/web/gallery/tying/f-fly/f-fly-12.jpg" page="https://www.czechnymph.com/en/fly-fishing-picture-gallery/fly-tying/32-fly-tying-f-fly" license="All rights reserved; reference only" note="Side view in the vise"
 }
 
+// Assumption: Fratnik: its body in the water film and only the wing on the surface.
+sits body
 hook dry-standard size=16
 thread black size="8/0"
 

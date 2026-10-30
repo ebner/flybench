@@ -35,6 +35,9 @@ references {
     "https://upload.wikimedia.org/wikipedia/commons/c/c3/Black_fur_ant.jpg" page="https://commons.wikimedia.org/wiki/File:Black_fur_ant.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
 }
 
+// Assumption: Ants float in, not on, the water, half awash (SWTU); photos of natural ants on
+// the water.
+sits half
 hook dry-standard size=16
 thread black size="8/0"
 

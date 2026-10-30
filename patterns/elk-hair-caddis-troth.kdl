@@ -30,6 +30,9 @@ sources {
     "Rocky River Trout Unlimited: Troth Elk Hair Caddis FFI" url="http://www.rockyrivertu.org/troth-elk-hair-caddis-ffi.html"
 }
 
+// Assumption: As the Elk Hair Caddis: damp, the body in the film under the wing; judged from
+// the dressing.
+sits body
 hook dry-standard size=14
 thread tan size="8/0"
 

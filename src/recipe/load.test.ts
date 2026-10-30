@@ -303,6 +303,14 @@ materials {
     expect(errorsOf(run(steps(0.2), h)).join("\n")).toMatch(/must be secured by winding another material forward over its tip/);
   });
 
+  it("says how a fly sits only for one that floats", () => {
+    const steps = "    attach-thread at=0.1\n    tie-in case\n    wrap-thread to=0.9\n    pull-over case to=0.9\n    tie-in wing length=1\n    whip-finish";
+    const sits = (h: string) => h.replace("hook dry", "sits body\nhook dry");
+    expect(errorsOf(run(steps, sits(head))).join("\n")).toMatch(/sits only applies to a fly that floats/);
+    expect(run(steps, sits(head.replace("type nymph", "type dry"))).ok).toBe(true);
+    expect(run(steps, sits(head).replace("sits body", "fishes film\nsits half")).ok).toBe(true);
+  });
+
   it("needs a whip finish even when the thread was never attached", () => {
     const h = head.replace("    case turkey-quill\n", "    case turkey-quill\n    lead lead-free-wire\n");
     expect(errorsOf(run("    weight lead from=0.3 to=0.6", h)).join("\n")).toMatch(/must end with a whip finish/);

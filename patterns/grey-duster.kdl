@@ -41,6 +41,9 @@ references {
 }
 
 // Assumption: a down-eye dry hook; the traditional British choice is an up-eye Captain Hamilton.
+// Assumption: Without a tail it cants tail down, riding on its front hackle with the rear of
+// the body in the film (Sadil).
+sits hackle
 hook dry-standard size=14
 thread brown size="8/0"
 

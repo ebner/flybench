@@ -72,8 +72,9 @@ with a picture of each. "In the water" shows the finished fly in a river where i
 the surface, in the film, just under or deep), from above as the angler sees it or from below
 as a trout does: first a path-traced picture, then, with "Explore in 3D", the live river with
 reflections, refraction, Snell's window and a photoscanned gravel bed. The fly is tied on a
-tippet with an improved clinch knot, rests on its hackle and tail tips (a sunk one hangs on the
-tippet), looks wet, and dents the film, over a glide some 25 cm deep (a fly fished deep shadows
+tippet with an improved clinch knot, sits as that pattern does once fished a while (on its
+hackle with the lower fibres through the film, its body in the film, or half under: `sits`; a
+sunk one hangs on the tippet), looks wet, and dents the film, over a glide some 25 cm deep (a fly fished deep shadows
 the stones near it, with the dents' bright-rimmed spots); capillary ripples, sun glints and
 drifting specks make the surface read as water. A slow
 device, a data saver or reduced motion gets the drawn water instead, from the side or from

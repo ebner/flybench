@@ -159,6 +159,11 @@ update recipe-schema.md (see AGENTS.md).
 5. Look at the render as a whole, too: something can be within the numbers and still
    look wrong (a wing too dense, a body too smooth). Report that rather than tuning the
    renderer for one fly.
+6. For a fly that floats, find photos of it (or one tied the same way) on the water, side
+   views that show where it meets the film, and choose `sits` from them: on its hackle,
+   its body in the film, or half under. Add them to `scripts/water-references.json` under
+   the pattern's id (URLs only), render its water stills (`pnpm render:water <id>`) and
+   compare with `pnpm watercheck <id>`.
 
 The studio (`pnpm studio`) is handy for this loop: it shows the fly on the gape grid
 step by step as you edit.

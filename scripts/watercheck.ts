@@ -3,7 +3,7 @@
  * and insects on and under the water (scripts/water-references.json), to judge the realistic
  * water: contact with the film, dimples and their shadows, wetness, the tippet and knot.
  *
- *   pnpm watercheck adams            a pattern: its stills and the groups for how it is fished
+ *   pnpm watercheck adams            a pattern: its stills, its own photos and the groups for how it is fished
  *   pnpm watercheck mayfly-dun       a natural: its stills and its own group
  *   pnpm watercheck adams knot       the stills beside one or more chosen groups
  *
@@ -43,7 +43,9 @@ if (groups.length === 0) {
     const r = loadRecipe(await readFile(`patterns/${id}.kdl`, "utf8"));
     if (!r.ok) throw new Error(`${id}.kdl does not load`);
     const depth = fishing(r.recipe).depth;
-    groups = depth === "surface" || depth === "film" ? ["dry-above", "dry-below", "tippet-film", "knot"] : ["wet-under", "knot"];
+    // Its own photos on the water first, when it has some.
+    const own = id in references ? [id] : [];
+    groups = [...own, ...(depth === "surface" || depth === "film" ? ["dry-above", "dry-below", "tippet-film", "knot"] : ["wet-under", "knot"])];
   } else {
     groups = [id in references ? id : "contact-macro", "contact-macro"];
   }

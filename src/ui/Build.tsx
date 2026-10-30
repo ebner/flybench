@@ -16,6 +16,7 @@ import {
   settingStart,
   threadAt,
   unpackFly,
+  withType,
   type OwnFly,
 } from "../edit/own";
 import type { Field } from "../edit/schemaForm";
@@ -418,7 +419,7 @@ export function Build({ query }: { query: string }) {
           <Labelled label={t.build.name}>{(id) => <input id={id} value={draft.name} maxLength={80} onChange={(e) => edit((d) => ({ ...d, name: e.target.value }))} />}</Labelled>
           <Labelled label={t.build.type}>
             {(id) => (
-              <select id={id} value={draft.type} onChange={(e) => edit((d) => ({ ...d, type: e.target.value as Recipe["type"] }))}>
+              <select id={id} value={draft.type} onChange={(e) => edit((d) => withType(d, e.target.value as Recipe["type"]))}>
                 {FLY_TYPES.map((v) => (
                   <option key={v} value={v}>
                     {TYPE_LABELS[v]}
@@ -464,6 +465,8 @@ export function Build({ query }: { query: string }) {
           ))}
         </fieldset>
         <Problems problems={under(check.problems, "name")} />
+        {/* From a link or file: how it sits, for a fly that doesn't float; changing its type clears it. */}
+        <Problems problems={under(check.problems, "sits")} />
 
         <h3>{t.build.hook}</h3>
         <HookFields hook={draft.hook} onChange={(hook) => edit((d) => ({ ...d, hook }))} />

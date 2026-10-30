@@ -12,8 +12,12 @@ export interface Fishing {
   motion: "drift" | "swim" | "swing";
   /** Degrees it hangs tail down from the front of its shank (an emerger in the film). */
   hang: number;
-  /** A natural on the surface: what rests on the film (see the natural recipes' `sits`). */
-  sits?: "feet" | "body" | "spent";
+  /**
+   * What rests on the film, for a floating fly or a natural on the surface: a fly rides on its
+   * hackle, lies with its body in the film or floats half under; a natural stands on its feet,
+   * rests its body on the film or lies spent in it. See the recipes' `sits`.
+   */
+  sits?: "hackle" | "body" | "half" | "feet" | "spent";
 }
 
 /**
@@ -26,8 +30,22 @@ export interface Fishing {
 export function fishing(recipe: Recipe): Fishing {
   const motion = recipe.type === "salmon" ? "swing" : recipe.type === "streamer" || recipe.type === "saltwater" ? "swim" : "drift";
   const depth = recipe.fishes ?? depthFor(recipe);
-  // Assumption: an emerger hangs about 35° tail down from the film; other flies lie level.
-  return { depth, motion, hang: depth === "film" && recipe.type === "emerger" ? 35 : 0 };
+  // Assumption: an emerger hangs about 35° tail down from the film unless its recipe says how it
+  // sits; other flies lie level.
+  const hang = depth === "film" && recipe.type === "emerger" && !recipe.sits ? 35 : 0;
+  return { depth, motion, hang, ...(floats(depth, hang) && { sits: recipe.sits ?? sitsFor(recipe, depth) }) };
+}
+
+function floats(depth: Depth, hang: number): boolean {
+  return depth === "surface" || (depth === "film" && hang === 0);
+}
+
+// Assumption: once fished a while, a hackled dry fly rides on its hackle and tail with the lower
+// fibres through the film, a terrestrial lies with its body in the film, and a fly that fishes in
+// the film floats half under.
+function sitsFor(recipe: Recipe, depth: Depth): "hackle" | "body" | "half" {
+  if (depth === "film") return "half";
+  return recipe.type === "terrestrial" ? "body" : "hackle";
 }
 
 function depthFor(recipe: Recipe): Depth {
@@ -58,15 +76,17 @@ export const WET_SPREAD = 0.85;
 // Assumption: the usual way each kind of fly is fished, not the only one.
 export function fishingText(f: Fishing): string {
   const w = FISHING_WORDS[lang()];
-  const where = f.depth === "film" ? (f.hang > 0 ? w.filmHangs : w.filmLow) : w[f.depth];
+  const where =
+    f.sits === "body" ? w.bodyFilm : f.sits === "half" ? w.filmLow : f.depth === "film" ? (f.hang > 0 ? w.filmHangs : w.filmLow) : w[f.depth];
   const how =
     f.motion === "swim" ? w.swim : f.motion === "swing" ? w.swing : f.depth === "surface" || f.depth === "film" ? w.driftTop : w.driftUnder;
   return `${where} ${how}`;
 }
 
-const FISHING_WORDS: Record<Lang, Record<"surface" | "filmHangs" | "filmLow" | "below" | "deep" | "swim" | "swing" | "driftTop" | "driftUnder", string>> = {
+const FISHING_WORDS: Record<Lang, Record<"surface" | "bodyFilm" | "filmHangs" | "filmLow" | "below" | "deep" | "swim" | "swing" | "driftTop" | "driftUnder", string>> = {
   en: {
     surface: "It floats on the surface, the bend of the hook hanging through the film. From below, a trout sees the dents it makes in the film before the fly itself comes into view.",
+    bodyFilm: "It floats low, its body lying in the surface film and the bend of the hook hanging through it.",
     filmHangs: "It hangs in the surface film like an insect hatching: its body down in the water, its wing or post above it.",
     filmLow: "It floats low, half sunk in the surface film.",
     below: "It fishes just under the surface, where its soft fibres move with the water.",
@@ -78,6 +98,7 @@ const FISHING_WORDS: Record<Lang, Record<"surface" | "filmHangs" | "filmLow" | "
   },
   sv: {
     surface: "Den flyter på ytan med krokböjen hängande genom ytfilmen. Underifrån ser öringen intrycken den gör i ytfilmen innan själva flugan syns.",
+    bodyFilm: "Den flyter lågt, med kroppen liggande i ytfilmen och krokböjen hängande genom den.",
     filmHangs: "Den hänger i ytfilmen som en insekt som kläcks: kroppen nere i vattnet, vingen eller posten ovanför.",
     filmLow: "Den flyter lågt, halvt nedsjunken i ytfilmen.",
     below: "Den fiskar strax under ytan, där de mjuka fibrerna rör sig med vattnet.",
@@ -89,6 +110,7 @@ const FISHING_WORDS: Record<Lang, Record<"surface" | "filmHangs" | "filmLow" | "
   },
   de: {
     surface: "Sie schwimmt auf der Oberfläche, der Hakenbogen hängt durch den Oberflächenfilm. Von unten sieht die Forelle die Dellen, die sie in den Film drückt, bevor die Fliege selbst ins Blickfeld kommt.",
+    bodyFilm: "Sie liegt tief, der Körper im Oberflächenfilm, der Hakenbogen hängt hindurch.",
     filmHangs: "Sie hängt im Oberflächenfilm wie ein schlüpfendes Insekt: der Körper unten im Wasser, Flügel oder Post darüber.",
     filmLow: "Sie liegt tief, halb eingesunken im Oberflächenfilm.",
     below: "Sie fischt knapp unter der Oberfläche, wo sich ihre weichen Fibern mit dem Wasser bewegen.",

@@ -32,6 +32,9 @@ references {
     "https://files.osgnetworks.tv/16/files/2012/03/Parachute-Adams.jpg" page="https://www.flyfisherman.com/editorial/parachute-adams/152452" license="All rights reserved; reference only" note="Side view in the vise"
 }
 
+// Assumption: The body lies in the film under the flat parachute hackle, the tail on the film
+// (photos of parachutes on the water after fishing).
+sits body
 hook dry-standard size=14
 thread grey size="8/0"
 

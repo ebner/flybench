@@ -5,7 +5,7 @@ import { RULES, type RuleKey } from "../recipe/rules";
 import { simulate } from "../tying/simulate";
 import { ARCHETYPE_PROPS, MATERIALS, type CatalogMaterial, type MaterialKind } from "../recipe/materials";
 import { Color, HOOK_MODEL_IDS, MAX_STEPS, RecipeSchema, THREAD_SIZES, TUBE_MODEL_IDS, type Material, type Op, type Recipe, type Step } from "../recipe/schema";
-import { validateSemantics } from "../recipe/validate";
+import { floats, validateSemantics } from "../recipe/validate";
 import { formSections, type Field } from "./schemaForm";
 import { writeKdl } from "./write";
 
@@ -325,6 +325,7 @@ export function copyOf(recipe: Recipe, name: string): Recipe {
     sources: recipe.sources,
     ...(recipe.rides && { rides: recipe.rides }),
     ...(recipe.fishes && { fishes: recipe.fishes }),
+    ...(recipe.sits && { sits: recipe.sits }),
     hook: recipe.hook,
     thread: recipe.thread,
     materials: recipe.materials,
@@ -456,6 +457,12 @@ export function newStep(op: Op, draft: Recipe, index: number, catalog: Recipe[])
     }
   }
   return step as Step;
+}
+
+/** The fly as another type; how a floating fly sits goes when it no longer floats (the builder doesn't show it). */
+export function withType(draft: Recipe, type: Recipe["type"]): Recipe {
+  const { sits, ...rest } = { ...draft, type };
+  return sits && floats(rest) ? { ...rest, sits } : rest;
 }
 
 /** The fly with a material's id changed, and the steps that use it following. */

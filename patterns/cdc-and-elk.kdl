@@ -38,6 +38,9 @@ references {
     "https://rogueflyfishers.org/wp-content/uploads/2026/03/cdcelk.jpg" page="https://rogueflyfishers.org/?p=494" license="All rights reserved; reference only" note="Side view in the vise"
 }
 
+// Assumption: The CDC body lies in the film, its fibres spread on the surface (Weilenmann's
+// photo on the water).
+sits body
 hook dry-standard size=14
 thread brown size="8/0"
 

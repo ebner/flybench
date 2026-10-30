@@ -41,6 +41,9 @@ references {
     "https://upload.wikimedia.org/wikipedia/commons/8/8f/Royal_Wulff_Dry_Fly_01.jpg" page="https://commons.wikimedia.org/wiki/File:Royal_Wulff_Dry_Fly_01.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view in the vise"
 }
 
+// Assumption: Damp, the lower hackle fibres through the film, the body just clear of it and the
+// tail on the film (photos of Wulffs and Catskill dries on the water).
+sits hackle
 hook dry-standard size=12
 thread black size="8/0"
 

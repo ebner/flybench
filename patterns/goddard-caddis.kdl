@@ -40,6 +40,9 @@ references {
     "https://www.fish4flies.com/img/flies/Large/1497-1497%202.jpg" page="https://www.fish4flies.com/Dry/Sedge/Deer-Hair-Sedge" license="All rights reserved; reference only" flip=#true note="Side view"
 }
 
+// Assumption: The deer-hair body, trimmed flat underneath, rests its underside on the film
+// (FAOL, Orvis); judged from the dressing.
+sits body
 hook dry-standard size=12
 thread brown size="8/0"
 

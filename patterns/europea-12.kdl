@@ -37,6 +37,9 @@ references {
     "https://ahrexhooks.com/wp-content/uploads/2019/09/E12_2_blog.jpg" page="https://ahrexhooks.com/2019/09/16/europea-12/" license="All rights reserved; reference only" note="Side view"
 }
 
+// Assumption: Ideally the wing and body lie over and in the film with the hook point under
+// (Joergensen, GFF).
+sits body
 hook dry-standard size=12
 thread yellow size="8/0"
 
