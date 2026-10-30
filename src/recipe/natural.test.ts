@@ -76,6 +76,11 @@ describe("loading a natural", () => {
     expect(errors(base.replace(legs, `${legs}\n    fin kind=dorsal at=0.5 size=0 color=olive`)).join("\n")).toMatch(/fin|size/);
   });
 
+  it("says how it sits only when it rides on the surface", () => {
+    expect(errors(base.replace("rides on-surface", "rides on-surface\nsits spent"))).toEqual([]);
+    expect(errors(base.replace("rides on-surface", "rides swimming\nsits body")).join("\n")).toMatch(/sits only applies/);
+  });
+
   it("needs a size range the right way round", () => {
     expect(errors(base.replace("size min=5 max=11", "size min=11 max=5")).join("\n")).toMatch(/min is larger than max/);
   });

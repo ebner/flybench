@@ -55,6 +55,9 @@ export function buildHook(hook: HookModel): THREE.Group {
   const a = Math.atan2(eye.t.y, eye.t.x) - (hook.eyeAngle * Math.PI) / 180;
   const ring = new THREE.Mesh(new THREE.TorusGeometry(ringRadius, w, 10, 40), metal);
   ring.position.set(eye.p.x + ringRadius * Math.cos(a), eye.p.y + ringRadius * Math.sin(a), 0);
+  // Named, with what a knot needs: the ring's radius, its wire, and the way out of the eye.
+  ring.name = "eye";
+  ring.userData = { ringRadius, wire: w, outward: new THREE.Vector3(Math.cos(a), Math.sin(a), 0) };
   group.add(ring);
 
   return group;
@@ -98,6 +101,9 @@ function buildTube(hook: HookModel): THREE.Group {
     const a = (-hook.eyeAngle * Math.PI) / 180;
     const eye = new THREE.Mesh(new THREE.TorusGeometry(ringRadius, wire, 10, 40), body);
     eye.position.set(L + ringRadius * Math.cos(a), ringRadius * Math.sin(a), 0);
+    // The line is tied to this eye, as to a hook's.
+    eye.name = "eye";
+    eye.userData = { ringRadius, wire, outward: new THREE.Vector3(Math.cos(a), Math.sin(a), 0) };
     group.add(eye);
     const loop = new THREE.Mesh(new THREE.TorusGeometry(0.12, wire, 10, 32), body);
     loop.position.set(-0.1, 0, 0);
@@ -106,6 +112,15 @@ function buildTube(hook: HookModel): THREE.Group {
 
   // The treble, its eye just behind the tube or through the loop, scaled to its real gape.
   const treble = buildHook(TREBLE);
+  // Not the eye the line is tied to: on a tube that knot is hidden in the sleeve.
+  treble.getObjectByName("eye")!.name = "treble-eye";
+  if (tube.kind === "tube") {
+    // Where the line comes out of the tube's front.
+    const exit = new THREE.Object3D();
+    exit.name = "line-exit";
+    exit.position.set(L, 0, 0);
+    group.add(exit);
+  }
   const s = tube.trebleScale;
   treble.scale.setScalar(s);
   treble.position.set(-0.22 - (TREBLE.shankLength + TREBLE.eyeRadius * 2) * s, 0, 0);

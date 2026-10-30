@@ -20,7 +20,7 @@ import { simulate } from "./tying/simulate";
  *   render.html?swatch=<kind>:<colour>&…   a material on a bare hook, framed close (Materials page)
  *   render.html?natural=<id>&…               a natural on its own; with grid=1 ten units long, so
  *                     the grid is in tenths of its body length (refcheck)
- *   render.html?water=<angler|below>&pattern=<id> (or &natural=<id>)&samples=<n>
+ *   render.html?water=<angler|below>&pattern=<id> (or &natural=<id>)&samples=<n> (&live=1: not traced)
  *                     the finished fly (or the natural) in the realistic water, path traced with
  *                     n samples (scripts/render-water.ts); &assets=site uses the site's own
  *                     copies of the panorama and gravel instead of the sharper ones in .cache/env
@@ -112,6 +112,11 @@ async function renderInWater(view: "angler" | "below") {
     scene.setWater({ fishing: fishing(pattern.recipe), view, still: true, look: WATER_LOOKS.light, real, detailed: true });
   }
   await nextFrame();
+  // &live=1: the live view as it is, not traced (for comparing the two renderers).
+  if (params.get("live")) {
+    document.body.dataset.ready = "1";
+    return;
+  }
   const { pathTrace } = await import("./render/real/trace");
   const { seconds, image } = await pathTrace(scene.forTracing(), Number(params.get("samples") ?? 300), nextFrame);
   window.waterStill = image;

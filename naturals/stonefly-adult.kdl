@@ -6,6 +6,8 @@ examples "yellow sally (Isoperla), Perlodes, Diura; salmonfly and golden stone (
 description "A long, flat insect with its four wings folded flat over its back, long antennae and two short tails. Females flutter over the water dropping their eggs, and spent ones collect in the eddies."
 size min=10 max=25
 rides on-surface
+// Assumption: its long flat body lies on the film (photos of spent and egg-laying stoneflies).
+sits body
 body {
     abdomen length=0.58 radius=0.04 taper=1.6 segments=10 color="#6a5a3a" belly="#a08a52" flatten=0.8
     thorax length=0.3 radius=0.07 taper=0.9 color="#5a4a30" flatten=0.8

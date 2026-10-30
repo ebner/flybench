@@ -17,6 +17,7 @@ export const STAGES = ["nymph", "larva", "pupa", "emerger", "dun", "spinner", "a
 
 /** Where and how a natural is found in the water, for the water view. */
 export const RIDES = ["on-surface", "in-film", "drifting", "swimming", "crawling"] as const;
+export const SITS = ["feet", "body", "spent"] as const;
 
 /** Markings on a body section, drawn in its `ink`. */
 export const MARKS = ["none", "bands", "spots", "mottle", "stripe"] as const;
@@ -260,6 +261,11 @@ export const NaturalSchema = z.strictObject({
   /** Body length in millimetres, tails and antennae excluded. */
   size: z.strictObject({ min: z.number().positive(), max: z.number().positive() }),
   rides: z.enum(RIDES),
+  /**
+   * On the surface: what rests on the film. Its feet (a mayfly dun, a midge: the body held
+   * above), its body (a caddis, a stonefly, a grasshopper), or all of it spent flat (a spinner).
+   */
+  sits: z.enum(SITS).optional(),
   /** How far the body curls along its length, in degrees (a shrimp, a pupa). */
   curve: z.number().min(-180).max(180).default(0),
   body: z.array(Section).min(1),
@@ -282,6 +288,7 @@ export const NATURAL_SECTIONS: Record<string, Shape> = {
   description: { kind: "scalar" },
   size: { kind: "record", arg: null },
   rides: { kind: "scalar" },
+  sits: { kind: "scalar" },
   curve: { kind: "scalar" },
   body: { kind: "list", nameKey: "section", arg: null },
   parts: { kind: "list", nameKey: "part", arg: null },
@@ -312,6 +319,7 @@ export function loadNatural(text: string): NaturalResult {
   const errors: RecipeError[] = [];
   const err = (message: string, path: (string | number)[]) => errors.push(withLocation({ message, path }, mapped.locations));
   if (n.size.min > n.size.max) err("size min is larger than max", ["size", "min"]);
+  if (n.sits && n.rides !== "on-surface") err("sits only applies to naturals that ride on the surface", ["sits"]);
   n.body.forEach((b, i) => {
     if (b.marks !== "none" && !b.ink) err(`"${b.section}" has marks but no ink colour`, ["body", i, "marks"]);
   });

@@ -57,6 +57,7 @@ pnpm render:catalog  # gallery images and material swatches into public/renders/
 pnpm render:water  # path-traced stills of every fly and natural in the river into public/renders/water/ (commit them)
 pnpm render        # render finished flies to .cache/renders/ (headless Chromium)
 pnpm refcheck      # contact sheets: render on a gape grid next to reference photos
+pnpm watercheck    # water stills next to photos of real flies and insects on and under water
 pnpm icons         # app icon PNGs from public/icons/*.svg
 ```
 
@@ -70,9 +71,13 @@ grid and each part's measurements; "Print recipe card" prints the dressing and t
 with a picture of each. "In the water" shows the finished fly in a river where it fishes (on
 the surface, in the film, just under or deep), from above as the angler sees it or from below
 as a trout does: first a path-traced picture, then, with "Explore in 3D", the live river with
-reflections, refraction, Snell's window and a photoscanned gravel bed. A slow device, a data
-saver or reduced motion gets the drawn water instead, from the side or from below. "Still
-water" stops the motion. The naturals' pages show each natural in the river the same way.
+reflections, refraction, Snell's window and a photoscanned gravel bed. The fly is tied on a
+tippet with an improved clinch knot, rests on its hackle and tail tips (a sunk one hangs on the
+tippet), looks wet, and dents the film; the dents and its shadow show on the stones, and
+capillary ripples, sun glints and drifting specks make the surface read as water. A slow
+device, a data saver or reduced motion gets the drawn water instead, from the side or from
+below. "Still water" stops the motion. The naturals' pages show each natural in the river the
+same way, standing on its feet, resting its body on the film or spent in it (`sits`).
 Stepping or playing goes back to the vise. A link keeps the step and the hook size (`?step=7&size=16`).
 
 Rendering uses the GPU through Vulkan in headless Chromium when there is one, and

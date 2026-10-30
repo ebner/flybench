@@ -16,7 +16,10 @@ export function buildNatural(n: Natural): THREE.Group {
   group.userData.head = spine.point(1);
   group.userData.rear = spine.point(0);
   const random = mulberry32(hash(n.id));
-  group.add(bodyMesh(n, spine, random));
+  const body = bodyMesh(n, spine, random);
+  // Named, so the water can rest a body on the film.
+  body.name = "body";
+  group.add(body);
   const hairs = bodyHairs(n, spine, random);
   if (hairs) group.add(hairs);
   for (const part of n.parts) {
@@ -46,7 +49,7 @@ export function disposeNatural(group: THREE.Object3D) {
 const color = (c: string) => new THREE.Color(resolveColor(c));
 
 /** How the legs are held, from where the natural is found and its stage (or as a legs part says). */
-type Pose = "stand" | "crawl" | "drift" | "fold" | "forward" | "raised" | "rowing" | "jumping";
+type Pose = "stand" | "crawl" | "spread" | "drift" | "fold" | "forward" | "raised" | "rowing" | "jumping";
 
 const POSES: Record<NonNullable<Extract<NaturalPart, { part: "legs" }>["pose"]>, Pose> = {
   stand: "stand",
@@ -61,7 +64,8 @@ const POSES: Record<NonNullable<Extract<NaturalPart, { part: "legs" }>["pose"]>,
 
 function poseOf(n: Natural): Pose {
   if (n.stage === "pupa") return "fold";
-  if (n.rides === "on-surface") return "stand";
+  // On its feet it stands; resting its body on the film, or spent, its legs lie spread on it.
+  if (n.rides === "on-surface") return n.sits === "body" || n.sits === "spent" ? "spread" : "stand";
   if (n.rides === "in-film") return n.stage === "emerger" ? "drift" : "stand";
   if (n.rides === "crawling") return "crawl";
   return "drift";
@@ -856,9 +860,18 @@ function leg(part: Extract<NaturalPart, { part: "legs" }>, n: Natural, pose: Pos
     dt = v(0.8, -0.55, 0.08);
     ds = v(-0.85, -0.25, 0.3);
   } else if (pose === "stand") {
-    df = v(lean * 0.45, 0.5, 0.85);
-    dt = v(lean * 0.45, -1, 0.45);
-    ds = v(lean * 0.8, -0.18, 0.55);
+    // Standing on the film: thighs out to the sides, shins angled down, feet flat on it, so the
+    // body stays low over the water.
+    // Assumption: from photos of duns and midges on the water.
+    df = v(lean * 0.45, 0.15, 0.95);
+    dt = v(lean * 0.45, -0.7, 0.65);
+    ds = v(lean * 0.8, -0.08, 0.6);
+  } else if (pose === "spread") {
+    // Its body on the film, the legs lie spread out on it, the feet about level with the belly.
+    // Assumption: from photos of caddis, stoneflies and spent spinners on the water.
+    df = v(lean * 0.5, 0.05, 1);
+    dt = v(lean * 0.6, -0.15, 0.95);
+    ds = v(lean * 0.8, -0.04, 0.6);
   } else if (pose === "crawl") {
     df = v(lean * 0.55, 0.12, 1);
     dt = v(lean * 0.6, -0.45, 0.75);

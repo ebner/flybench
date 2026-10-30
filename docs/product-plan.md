@@ -234,5 +234,24 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     keeping comments and formatting. Milestones 14–16 in that order, each reviewed (Fable and
     Codex), rendered and pushed without stopping.
 
+17. ✅ Water that reads as water (decided 2026-10-29, after the reviewer found the realistic water
+    hard to believe: the surface practically invisible, the flies dry-looking and wiggling, insects
+    hovering). All four parts, built together and then shown:
+    - Contact: menisci and dents the size real ones are (a capillary length across), with the
+      fly's shadow and the dents' light-ringed spots on the bed; flies resting on their hackle and
+      tail tips (the hook bend may hang below); naturals sit as they do (`sits`: on their feet, the
+      body on the film, or spent flat in it).
+    - Tippet, knot and calm motion: a visible tippet tied on with an improved clinch knot (coils and
+      a trimmed tag), lying in the film with its own meniscus, or running up to the surface from a
+      sunk fly; a floating fly follows only the slow swell averaged over its length, a sunk one hangs
+      on the tippet with little sway.
+    - Wet materials: a fished fly is wet all over (darker, glossier, fibres clumped), soaked where
+      it is under water, with air shining silver on underwater dubbing and CDC; insects stay
+      water-repellent.
+    - Surface detail: fine capillary ripples, sun glints and stronger reflections, drifting specks,
+      a deeper, slightly tinted bed so the surface carries the picture.
+    - Checked against reference photos of real flies and insects on and under water (URLs only, in
+      scripts/water-references.json; never the photos), side by side with the stills.
+
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.
