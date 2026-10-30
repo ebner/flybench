@@ -6,6 +6,8 @@ examples "small sedges, grannom, great red sedge"
 description "A moth-like insect with hairy wings folded like a roof over its back and long thread-like antennae. It skitters and flutters on the water when it hatches and when it lays its eggs."
 size min=8 max=20
 rides on-surface
+// Assumption: on the water it sits with its body on the film, wings roofed over it (photos).
+sits body
 body {
     // Body and wings clothed with long silky hairs (NC State). Assumption: thickest on the thorax and head, the abdomen thinly haired (photos).
     abdomen length=0.6 radius=0.042 taper=1.45 segments=8 color="#6a6a40" belly="#8a8a5a" hairs=0.15

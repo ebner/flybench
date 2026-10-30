@@ -16,7 +16,10 @@ import { mulberry32 } from "./random";
 import type { RealAssets } from "./real/assets";
 import { RealWater } from "./real/RealWater";
 import { realMaterials } from "./real/upgrade";
-import { MAX_DIMPLES, type Dimple } from "./real/waves";
+import { MAX_DIMPLES, rippleHeight, type Dimple } from "./real/waves";
+import { clinchKnot, tippetDimples, tippetGeometry, tippetMesh, tippetPath } from "./real/tippet";
+import { wetFly } from "./real/wet";
+import { bedShadows } from "./real/shadows";
 
 const REST_DIRECTIONS = {
   "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
@@ -39,6 +42,11 @@ const VIEWS = {
   "water-side": new THREE.Vector3(0, 0.07, 1).normalize(),
   /** In the water, a trout's view: from below and in front, looking up at the fly against the surface. */
   "water-below": new THREE.Vector3(0.25, -1, 0.75).normalize(),
+  /**
+   * In the realistic water, a trout's view: steeply enough (about 25° from straight up) that the
+   * fly sits in Snell's window, the bright circle of sky, as in photos taken from under the water.
+   */
+  "water-trout": new THREE.Vector3(0.15, -1, 0.42).normalize(),
   /** In the realistic water, the angler's view: from above and in front, looking down onto the water. */
   "water-angler": new THREE.Vector3(0.55, 0.5, 1).normalize(),
   /** In the realistic water, a trout's view of something deep or on the bottom: level with it, a little above the stones. */
@@ -48,6 +56,15 @@ const VIEWS = {
 };
 
 export type ViewName = keyof typeof VIEWS;
+
+/** The tippet in the realistic water: the knot on the fly, the line from it (in the fly's frame), its mesh. */
+interface WaterLine {
+  knot: THREE.Group;
+  start: THREE.Vector3;
+  direction: THREE.Vector3;
+  mesh: THREE.Mesh;
+  floating: boolean;
+}
 export const VIEW_NAMES = Object.keys(VIEWS) as ViewName[];
 
 /** The finished fly (or, in the realistic water, a natural on its own) shown in water. */
@@ -76,7 +93,7 @@ export function naturalAlone(n: Natural): number {
 export function naturalFishing(n: Natural): Fishing {
   switch (n.rides) {
     case "on-surface":
-      return { depth: "surface", motion: "drift", hang: 0 };
+      return { depth: "surface", motion: "drift", hang: 0, sits: n.sits ?? "feet" };
     case "in-film":
       // Assumption: an emerger hangs tail down in the film, as an emerger pattern does.
       return { depth: "film", motion: "drift", hang: n.stage === "emerger" ? 35 : 0 };
@@ -167,6 +184,8 @@ export class FlyScene {
     bubbles: THREE.InstancedMesh | null;
     /** Soft fibres under water, drawn closer to the shank. */
     soft: THREE.Object3D[];
+    /** The realistic water's tippet: the knot on the fly, the line from it (redrawn as the fly moves). */
+    line: WaterLine | null;
   } | null = null;
   /** Seconds of water motion shown, kept apart from the tying timeline. */
   private waterTime = 0;
@@ -389,6 +408,15 @@ export class FlyScene {
         this.fly.remove(this.water.bubbles);
       }
       for (const o of this.water.soft) o.scale.set(1, 1, 1);
+      if (this.water.line) {
+        this.fly.remove(this.water.line.knot);
+        this.water.line.knot.traverse((o) => {
+          if (o instanceof THREE.Mesh) {
+            o.geometry.dispose();
+            (o.material as THREE.Material).dispose();
+          }
+        });
+      }
       this.water.restore?.();
       // Back where it was, without the water's motion.
       if (this.water.subject === "natural" && this.natural) {
@@ -409,22 +437,75 @@ export class FlyScene {
     }
     let level: number;
     let subject: THREE.Box3;
+    // Undoes the fly's wetness (the realistic water's).
+    let wet = () => {};
     const home = new THREE.Matrix4();
     if (this.build) {
       this.setTime(this.build.duration);
       subject = this.finished;
       // Deep in the realistic water: room for the camera above the fly, under the surface.
-      level = setting.real && setting.fishing.depth === "deep" ? subject.max.y + deepWater(subject) : waterLevel(setting.fishing.depth, subject);
       // Tail down from the front of the shank, for an emerger in the film.
       const front = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.85 * this.build.hook.shankLength, 0, 0)));
       this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
+      const settle = () => {
+        // A floating fly comes to rest on its fibre tips, tilted until front and rear both bear.
+        this.rig.matrix.identity();
+        this.rig.updateMatrixWorld(true);
+        const rest = this.restingPose();
+        this.rig.matrix.copy(rotationAbout(rest.about, rest.angle));
+        this.rig.updateMatrixWorld(true);
+        return rest.level;
+      };
+      const floats = setting.real && setting.fishing.depth === "surface";
+      if (floats) level = settle();
+      else level = setting.real && setting.fishing.depth === "deep" ? subject.max.y + deepWater(subject) : waterLevel(setting.fishing.depth, subject);
+      if (setting.real) {
+        // A fished fly is wet all over, soaked where it is under the water. Wet fibres clump, so
+        // a floating fly settles again on them before its contacts are worked out.
+        const sunkFly = setting.fishing.depth === "below" || setting.fishing.depth === "deep";
+        wet = wetFly(
+          this.build.steps.flatMap((step, i) =>
+            step.pieces.map((p, j) => {
+              const object = this.stepViews[i]![j]!.piece.object;
+              const under = sunkFly || new THREE.Box3().setFromObject(object).max.y < level;
+              return { object, look: p.look, wet: under ? ("soaked" as const) : ("damp" as const) };
+            }),
+          ),
+        );
+        if (floats) level = settle();
+      }
     } else {
       // The natural moves into the rig (still at rest), so the water carries it as it does a fly.
       this.natural!.updateMatrix();
       home.copy(this.natural!.matrix);
       this.fly.attach(this.natural!);
       subject = this.naturalBounds();
-      level = naturalLevel(setting.fishing.depth, subject);
+      const body = this.natural!.getObjectByName("body");
+      level = naturalLevel(setting.fishing, subject, body ? new THREE.Box3().setFromObject(body) : subject);
+      if (setting.fishing.sits === "feet" && body) {
+        // Standing, it settles until four of its feet bear on the film, not only the lowest one.
+        // A foot is what reaches below the belly; claws and segments close together are one foot.
+        const belly = new THREE.Box3().setFromObject(body).min.y;
+        const reach = 0.08 * (subject.max.x - subject.min.x);
+        const feet: THREE.Vector3[] = [];
+        const v = new THREE.Vector3();
+        this.natural!.updateMatrixWorld(true);
+        this.natural!.traverseVisible((o) => {
+          if (!(o instanceof THREE.Mesh) || o instanceof THREE.InstancedMesh || o === body) return;
+          const pos = o.geometry.getAttribute("position");
+          let low: THREE.Vector3 | null = null;
+          for (let i = 0; i < pos.count; i++) {
+            v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
+            if (!low || v.y < low.y) low = v.clone();
+          }
+          if (!low || low.y >= belly) return;
+          const near = feet.find((f) => Math.hypot(f.x - low!.x, f.z - low!.z) < reach);
+          if (!near) feet.push(low);
+          else if (low.y < near.y) near.copy(low);
+        });
+        feet.sort((a, b) => a.y - b.y);
+        if (feet.length >= 4) level = feet[3]!.y + 0.02;
+      }
       const front = new THREE.Vector3(subject.max.x - 0.15 * (subject.max.x - subject.min.x), subject.getCenter(new THREE.Vector3()).y, 0);
       this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
     }
@@ -434,17 +515,47 @@ export class FlyScene {
     const touches = setting.fishing.depth === "surface" || setting.fishing.depth === "film";
     let view: Water | RealWater;
     let restore: (() => void) | null = null;
+    let line: WaterLine | null = null;
     if (setting.real) {
       const real = setting.real;
       const crawling = !this.build && setting.fishing.depth === "deep";
-      // Assumption: a shallow glide, the gravel some 4 cm under a floating fly; a natural that
-      // crawls sits on the stones.
+      // Assumption: the shallow margin of a glide, the gravel some 2 cm under a floating fly,
+      // where its shadow and the dents' dark spots show on the stones (as in the photos of
+      // insects on shallow water); 4 cm under a sunk fly; a natural that crawls sits on the stones.
       // From below the camera goes some gapes under the fly: the bed lies deeper then.
-      const bed = crawling ? bounds.min.y + 0.1 : Math.min(level - (setting.view === "below" ? 14 : 8), bounds.min.y - 1.5);
+      const bed = crawling ? bounds.min.y + 0.1 : Math.min(level - (setting.view === "below" ? 14 : touches ? 4 : 8), bounds.min.y - 1.5);
       // The panorama's sun behind the angler's shoulder, a little to the left.
       const angler = VIEWS["water-angler"];
-      const skyRotation = Math.atan2(angler.x, angler.z) + 0.6 - real.sunAzimuth;
-      view = new RealWater({ assets: real, level, centre: pivot, bed, dimples: touches ? this.contactDimples(level) : [], skyRotation, detailed: setting.detailed });
+      const sunAzimuth = Math.atan2(angler.x, angler.z) + 0.6;
+      const skyRotation = sunAzimuth - real.sunAzimuth;
+      const sun = new THREE.Vector3(Math.cos(real.sunElevation) * Math.sin(sunAzimuth), Math.sin(real.sunElevation), Math.cos(real.sunElevation) * Math.cos(sunAzimuth));
+      const dimples = touches ? this.contactDimples(level) : [];
+      // A fly is fished on a tippet, tied to its eye; through a tube, it comes out of the tube's
+      // front (the knot is hidden in the sleeve behind).
+      const eye = this.build ? this.fly.getObjectByName("eye") : undefined;
+      const exit = this.build && !eye ? this.fly.getObjectByName("line-exit") : undefined;
+      if (eye || exit) {
+        const knot = eye
+          ? clinchKnot(eye)
+          : { object: new THREE.Group(), start: exit!.getWorldPosition(new THREE.Vector3()), direction: new THREE.Vector3(1, 0, 0).transformDirection(exit!.matrixWorld) };
+        const floating = touches;
+        const path = tippetPath(knot.start, knot.direction, level, floating);
+        dimples.push(...tippetDimples(path, level, MAX_DIMPLES - dimples.length));
+        this.fly.attach(knot.object);
+        const toFly = this.fly.matrixWorld.clone().invert();
+        line = { knot: knot.object, start: knot.start.clone().applyMatrix4(toFly), direction: knot.direction.clone().transformDirection(toFly), mesh: tippetMesh(path), floating };
+      }
+      view = new RealWater({ assets: real, level, centre: pivot, bed, dimples, skyRotation, sun, detailed: setting.detailed });
+      if (line) view.group.add(line.mesh);
+      // In the sun the fly (and its tippet) shadow the stones, and the dents in the film show there.
+      if (!crawling) {
+        // Assumption: shadows cast by a summer day's sun at least 65° high, from the panorama's
+        // sun's side: its own (a low evening sun) would throw them out of the picture.
+        const high = Math.max(real.sunElevation, THREE.MathUtils.degToRad(65));
+        const caster = new THREE.Vector3(Math.cos(high) * Math.sin(sunAzimuth), Math.sin(high), Math.cos(high) * Math.cos(sunAzimuth));
+        const shadows = bedShadows({ assets: real, casters: line ? [this.fly, line.mesh] : [this.fly], dimples, level, bed, centre: pivot, bedSegments: setting.detailed ? 360 : 240, sun: caster });
+        if (shadows) view.group.add(shadows);
+      }
       const environment = this.scene.environment;
       const background = this.scene.background;
       const intensity = this.scene.environmentIntensity;
@@ -460,9 +571,11 @@ export class FlyScene {
       this.camera.far = 900;
       this.camera.updateProjectionMatrix();
       for (const light of this.lights) light.visible = false;
+      // Insects shed water: they keep their dry sheen.
       const materials = realMaterials(this.fly);
       restore = () => {
         materials();
+        wet();
         this.scene.environment = environment;
         this.scene.background = background;
         this.scene.environmentRotation.set(0, 0, 0);
@@ -509,12 +622,13 @@ export class FlyScene {
       hang: this.rig.matrix.clone(),
       bubbles: this.build ? this.bubbles(level) : null,
       soft,
+      line,
     };
     // Stilling the water holds it where it is.
     this.setWaterTime(this.waterTime);
     // Deep down, a trout sees the fly level with it rather than against the surface.
     const deep = setting.real && setting.fishing.depth === "deep";
-    if (!sameView) this.setView(setting.view === "side" ? "water-side" : setting.view === "angler" ? (deep ? "water-angler-deep" : "water-angler") : deep ? "water-bed" : "water-below");
+    if (!sameView) this.setView(setting.view === "side" ? "water-side" : setting.view === "angler" ? (deep ? "water-angler-deep" : "water-angler") : deep ? "water-bed" : setting.real ? "water-trout" : "water-below");
   }
 
   /** The water and the fly in it at `t` seconds of water time. */
@@ -525,8 +639,9 @@ export class FlyScene {
     w.view.setTime(t);
     const { depth, motion } = w.setting.fishing;
     const view = w.view;
-    const height = (x: number, z: number) => (view instanceof RealWater ? view.height(x, z) : waveHeight(x, z, t));
     const c = w.pivot;
+    // On a tippet in the realistic water the fly is steadier than in the drawn water's tank.
+    const real = view instanceof RealWater;
     let lift = 0;
     let pitch = 0;
     let roll = 0;
@@ -539,27 +654,43 @@ export class FlyScene {
       const glide = f < 0.3 ? 0 : (f - 0.3) / 0.7;
       lift = 0.06 * pull - 0.08 * glide;
       pitch = 0.05 * pull - 0.07 * glide;
-      roll = 0.03 * Math.sin(1.3 * t);
+      roll = (real ? 0.015 : 0.03) * Math.sin(1.3 * t);
       // Soft fibres pressed in by the pull, opening out again in the pause.
       const spread = WET_SPREAD * (1 - 0.12 * pull + 0.08 * Math.sin(Math.PI * glide));
       for (const o of w.soft) o.scale.set(1, spread, spread);
     } else if (motion === "swing") {
-      // Held against the current, swaying a little, its fibres working in the flow.
-      lift = 0.02 * Math.sin(1.1 * t);
-      pitch = 0.03 * Math.sin(0.8 * t);
-      roll = 0.08 * Math.sin(0.9 * t);
+      // Held against the current on the tippet, swaying a little, its fibres working in the flow.
+      lift = (real ? 0.015 : 0.02) * Math.sin(1.1 * t);
+      pitch = (real ? 0.02 : 0.03) * Math.sin(0.8 * t);
+      roll = (real ? 0.025 : 0.08) * Math.sin(0.9 * t);
       const spread = WET_SPREAD * (1 + 0.05 * Math.sin(3 * t));
       for (const o of w.soft) o.scale.set(1, spread, spread);
     } else if (depth === "surface" || depth === "film") {
-      // Rides the waves.
-      lift = height(c.x, c.z);
-      pitch = 6 * (height(c.x + 0.5, c.z) - height(c.x - 0.5, c.z));
-      roll = 6 * (height(c.x, c.z + 0.5) - height(c.x, c.z - 0.5));
+      // Rides the swell, held by the film and the tippet lying in it: it follows the surface
+      // averaged over its length and width, not the slope under any one point.
+      const half = Math.max(1, (w.bounds.max.x - w.bounds.min.x) / 2);
+      const side = Math.max(0.6, (w.bounds.max.z - w.bounds.min.z) / 2);
+      if (!real) {
+        // The drawn water's waves, as they were: the slope under the fly.
+        const height = (x: number, z: number) => waveHeight(x, z, t);
+        lift = height(c.x, c.z);
+        pitch = 6 * (height(c.x + 0.5, c.z) - height(c.x - 0.5, c.z));
+        roll = 6 * (height(c.x, c.z + 0.5) - height(c.x, c.z - 0.5));
+      } else {
+        const swell = (x: number, z: number) => rippleHeight(x, z, t);
+        let sum = 0;
+        for (const dx of [-half, 0, half]) for (const dz of [-side, 0, side]) sum += swell(c.x + dx, c.z + dz);
+        lift = sum / 9;
+        pitch = (swell(c.x + half, c.z) - swell(c.x - half, c.z)) / (2 * half);
+        // The tippet in the film steadies it against rolling.
+        roll = (0.5 * (swell(c.x, c.z + side) - swell(c.x, c.z - side))) / (2 * side);
+      }
     } else {
-      // Tumbles slowly in the current.
-      lift = 0.05 * Math.sin(0.5 * t);
-      pitch = 0.1 * Math.sin(0.31 * t);
-      roll = 0.18 * Math.sin(0.43 * t + 1);
+      // Sunk, it hangs on the tippet in the current: a slow, small sway (in the drawn water it
+      // tumbles as it did).
+      lift = (real ? 0.02 : 0.05) * Math.sin(0.5 * t);
+      pitch = (real ? 0.03 : 0.1) * Math.sin(0.31 * t);
+      roll = (real ? 0.03 : 0.18) * Math.sin(0.43 * t + 1);
     }
     const turn = new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(roll, 0, pitch));
     this.rig.matrix
@@ -568,6 +699,91 @@ export class FlyScene {
       .multiply(new THREE.Matrix4().makeTranslation(-c.x, -c.y, -c.z))
       .multiply(w.hang);
     this.rig.updateMatrixWorld(true);
+    // The tippet follows the eye as the fly moves.
+    // The tippet follows the eye and lies on the ripples as they pass.
+    if (w.line) {
+      const start = w.line.start.clone().applyMatrix4(this.fly.matrixWorld);
+      const direction = w.line.direction.clone().transformDirection(this.fly.matrixWorld);
+      const old = w.line.mesh.geometry;
+      w.line.mesh.geometry = tippetGeometry(tippetPath(start, direction, w.level, w.line.floating, (x, z) => rippleHeight(x, z, t)));
+      old.dispose();
+    }
+  }
+
+  /**
+   * How a floating fly rests on a flat film in the realistic water: on the tips of its fibres
+   * (hackle, tail) and, where they don't reach, its hook, tilted about its weight (the hook's,
+   * towards the bend) until it bears both in front of that and behind it. The surface's level
+   * is where the lowest of them dent it.
+   */
+  private restingPose(): { about: THREE.Vector3; angle: number; level: number } {
+    // What bears on the film is the dressing; the hook's bend hangs through it. The hook counts
+    // only for a half the dressing doesn't reach (a bare shank).
+    const points: THREE.Vector3[] = [];
+    const hookPoints: THREE.Vector3[] = [];
+    const m = new THREE.Matrix4();
+    this.fly.updateMatrixWorld(true);
+    const inHook = new Set<THREE.Object3D>();
+    this.hook?.traverse((o) => inHook.add(o));
+    this.fly.traverseVisible((o) => {
+      if (!(o instanceof THREE.Mesh)) return;
+      if (inHook.has(o)) {
+        const pos = o.geometry.getAttribute("position");
+        const stride = Math.max(1, Math.floor(pos.count / 4000));
+        for (let i = 0; i < pos.count; i += stride) hookPoints.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
+        return;
+      }
+      if (o instanceof THREE.InstancedMesh) {
+        // Each instance is one fibre along its own y axis: its ends.
+        o.geometry.computeBoundingBox();
+        const { min, max } = o.geometry.boundingBox!;
+        for (let i = 0; i < o.count; i++) {
+          o.getMatrixAt(i, m).premultiply(o.matrixWorld);
+          points.push(new THREE.Vector3(0, min.y, 0).applyMatrix4(m), new THREE.Vector3(0, max.y, 0).applyMatrix4(m));
+        }
+        return;
+      }
+      const pos = o.geometry.getAttribute("position");
+      const stride = Math.max(1, Math.floor(pos.count / 4000));
+      for (let i = 0; i < pos.count; i += stride) points.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
+    });
+    // Assumption: the hook's weight sits about a third of the way along the shank from the bend.
+    const about = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.3 * this.build!.hook.shankLength, 0, 0)));
+    // The third lowest, so one stray fibre doesn't carry the fly.
+    const low = (ys: number[]) => ys.sort((a, b) => a - b)[Math.min(2, ys.length - 1)] ?? 0;
+    const turned = (angle: number) => {
+      const c = Math.cos(angle);
+      const s = Math.sin(angle);
+      const halves = (list: THREE.Vector3[]) => {
+        const front: number[] = [];
+        const rear: number[] = [];
+        for (const p of list) {
+          const x = p.x - about.x;
+          const y = p.y - about.y;
+          (c * x - s * y > 0 ? front : rear).push(about.y + s * x + c * y);
+        }
+        return { front, rear };
+      };
+      const dressing = halves(points);
+      const hook = halves(hookPoints);
+      return {
+        front: low(dressing.front.length ? dressing.front : hook.front),
+        rear: low(dressing.rear.length ? dressing.rear : hook.rear),
+      };
+    };
+    // Nose up raises the front: find the tilt at which front and rear bear alike.
+    let a = -0.6;
+    let b = 0.6;
+    for (let k = 0; k < 30; k++) {
+      const mid = (a + b) / 2;
+      const t = turned(mid);
+      if (t.front < t.rear) a = mid;
+      else b = mid;
+    }
+    const angle = (a + b) / 2;
+    const t = turned(angle);
+    // Assumption: the tips press about a fiftieth of a gape into the film.
+    return { about, angle, level: Math.min(t.front, t.rear) + 0.02 };
   }
 
   /**
@@ -598,8 +814,9 @@ export class FlyScene {
       }
     });
     const all = [...cells.values()].sort((a, b) => a.y - b.y);
-    // Assumption: a dent about a sixth of a gape across (under a millimetre), deeper where it presses harder.
-    return all.slice(0, MAX_DIMPLES).map((c) => ({ x: c.x, z: c.z, r: 0.12, d: Math.min(0.05, 0.02 + 0.15 * Math.max(0, level - c.y)) }));
+    // Assumption: the meniscus round a fibre tip or foot spreads about a millimetre (a fifth of a
+    // gape on a #12), a fraction of the capillary length; deeper where it presses harder.
+    return all.slice(0, MAX_DIMPLES - 20).map((c) => ({ x: c.x, z: c.z, r: 0.18, d: Math.min(0.03, 0.012 + 0.1 * Math.max(0, level - c.y)) }));
   }
 
   /** Where the fly dents the surface film: the fibres (hackle, tail, legs) that reach through it. */
@@ -1239,18 +1456,23 @@ function deepWater(body: THREE.Box3): number {
   return Math.max(6, 0.75 * (body.max.x - body.min.x));
 }
 
-/** The level of the water for a natural on its own, from where it is found. */
-function naturalLevel(depth: Fishing["depth"], body: THREE.Box3): number {
-  switch (depth) {
-    case "surface":
-      // Standing on the film: its feet just dent it.
-      return body.min.y + 0.04;
+/** The level of the water for a natural on its own (`all` of it, its `body`), from where it is found. */
+function naturalLevel(fishing: Fishing, all: THREE.Box3, body: THREE.Box3): number {
+  switch (fishing.depth) {
+    case "surface": {
+      const h = body.max.y - body.min.y;
+      // Assumption: its body resting on the film sinks a fifth of its depth into it; spent, it
+      // lies half in it; standing, its feet just dent it.
+      if (fishing.sits === "body") return body.min.y + 0.2 * h;
+      if (fishing.sits === "spent") return body.min.y + 0.5 * h;
+      return all.min.y + 0.04;
+    }
     case "film":
       return body.getCenter(new THREE.Vector3()).y;
     case "below":
-      return body.max.y + 1;
+      return all.max.y + 1;
     case "deep":
-      return body.max.y + deepWater(body);
+      return all.max.y + deepWater(all);
   }
 }
 

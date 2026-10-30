@@ -29,6 +29,7 @@ pnpm render:catalog  # gallery images and material swatches into public/renders/
 pnpm render:water  # path-traced stills of flies and naturals in the river (public/renders/water/, commit them)
 pnpm render        # finished flies to .cache/renders/ via headless Chromium
 pnpm refcheck      # proportion contact sheets against reference photos
+pnpm watercheck    # water stills beside photos of real flies and insects on the water (scripts/water-references.json)
 pnpm icons         # app icon PNGs from public/icons/*.svg (after logo changes)
 ```
 
@@ -56,8 +57,10 @@ src/i18n/       lang.ts (the page's language, from the address), localized.ts, u
                 glossary.ts, grammar.ts, prose.ts
 src/render/     three.js: FlyScene (scene = pure function of time), pieces, loose ends, naturals,
                 water (the drawn in-the-water view: its own clock, also a pure function of time),
-                real/ (the realistic river: RealWater, gravel, panorama assets; trace.ts path
-                traces the build-time stills and is only imported by render-page.ts)
+                real/ (the realistic river: RealWater, gravel, panorama assets; capillary.ts the
+                finest ripples; tippet.ts the tippet and its knot; wet.ts a fished fly's wetness;
+                shadows.ts the shadows and meniscus spots on the bed; trace.ts path traces the
+                build-time stills and is only imported by render-page.ts)
 src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook, for its picture),
                 pages.ts (every page's title, description and
                 static HTML for the build; no React; tested in Node)

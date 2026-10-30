@@ -36,7 +36,7 @@ export interface Dimple {
 }
 
 /** Up to this many dimples; the shader's array has this size. */
-export const MAX_DIMPLES = 32;
+export const MAX_DIMPLES = 64;
 
 /** Height of the surface at (x, z) and time t, relative to its level. */
 export function rippleHeight(x: number, z: number, t: number, dimples: Dimple[] = []): number {
@@ -55,9 +55,8 @@ export function dimpleHeight(dx: number, dz: number, d: Dimple): number {
 
 /** The same in GLSL, for the water shader (expects `uniform vec4 dimples[MAX_DIMPLES]` and `uniform int dimpleCount`). */
 export const RIPPLE_GLSL = /* glsl */ `
-float rippleHeight(vec2 p, float t) {
+float dimplesHeight(vec2 p) {
   float h = 0.0;
-  ${RIPPLES.map((r) => `h += ${r.a.toFixed(4)} * sin(${r.k.toFixed(4)} * dot(p, vec2(${r.dx.toFixed(4)}, ${r.dz.toFixed(4)})) - ${r.w.toFixed(4)} * t + ${r.phase.toFixed(4)});`).join("\n  ")}
   for (int i = 0; i < ${MAX_DIMPLES}; i++) {
     if (i >= dimpleCount) break;
     vec4 d = dimples[i];
@@ -65,4 +64,13 @@ float rippleHeight(vec2 p, float t) {
     if (q < 4.0) h += -d.w * exp(-q * q) + 0.25 * d.w * exp(-(q - 1.8) * (q - 1.8));
   }
   return h;
-}`;
+}
+float ripplesOnly(vec2 p, float t) {
+  float h = 0.0;
+  ${RIPPLES.map((r) => `h += ${r.a.toFixed(4)} * sin(${r.k.toFixed(4)} * dot(p, vec2(${r.dx.toFixed(4)}, ${r.dz.toFixed(4)})) - ${r.w.toFixed(4)} * t + ${r.phase.toFixed(4)});`).join("\n  ")}
+  return h;
+}
+float rippleHeight(vec2 p, float t) {
+  return ripplesOnly(p, t) + dimplesHeight(p);
+}
+`;

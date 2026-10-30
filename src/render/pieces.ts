@@ -116,7 +116,7 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
   const s = new THREE.Vector3();
   const c = new THREE.Color();
 
-  const addPart = (geometry: THREE.BufferGeometry, list: { u: number; base: THREE.Vector3; dir: THREE.Vector3; length: number; radius: number; shade: number }[]) => {
+  const addPart = (geometry: THREE.BufferGeometry, list: { u: number; base: THREE.Vector3; dir: THREE.Vector3; length: number; radius: number; shade: number }[], segment?: number) => {
     if (list.length === 0) {
       geometry.dispose();
       return;
@@ -130,6 +130,8 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
     });
     mesh.instanceMatrix.needsUpdate = true;
     mesh.frustumCulled = false;
+    // A curved fibre's pieces share its index across the segment meshes (the wet view clumps them together).
+    if (segment !== undefined) mesh.userData.segment = segment;
     object.add(mesh);
     parts.push({ mesh, us: list.map((f) => f.u) });
   };
@@ -156,6 +158,7 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
         const length = d.length() * 1.06;
         return { u: f.u, base: a, dir: d.normalize(), length, radius: f.radius, shade: f.shade ?? 1 };
       }),
+      k,
     );
   }
 

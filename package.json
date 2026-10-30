@@ -19,7 +19,8 @@
     "refcheck": "tsx scripts/refcheck.ts",
     "render:catalog": "tsx scripts/render-catalog.ts",
     "render:water": "tsx scripts/render-water.ts",
-    "icons": "tsx scripts/icons.ts"
+    "icons": "tsx scripts/icons.ts",
+    "watercheck": "tsx scripts/watercheck.ts"
   },
   "dependencies": {
     "@bgotink/kdl": "^0.4.1",

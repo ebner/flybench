@@ -331,6 +331,7 @@ examples "olives (Baetis), blue-winged olive (Serratella)"
 description "The newly hatched mayfly: …"
 size min=6 max=11            // body length in mm, tails and antennae left out
 rides on-surface             // on-surface in-film drifting swimming crawling
+sits feet                    // on the surface: feet (the default; body held above), body (on the film), spent (flat in it)
 curve -14                    // degrees the body bends along its length (a shrimp's C: 110)
 body {
     // Rear to front; lengths are fractions of the body length and add up to 1.

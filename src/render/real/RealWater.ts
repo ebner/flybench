@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import type { RealAssets } from "./assets";
 import { riverbed } from "./riverbed";
+import { mulberry32 } from "../random";
+import { CAPILLARY_TILE, capillaryNormals } from "./capillary";
 import { MAX_DIMPLES, RIPPLE_GLSL, rippleHeight, type Dimple } from "./waves";
 
 export interface RealWaterOptions {
@@ -13,6 +15,8 @@ export interface RealWaterOptions {
   dimples: Dimple[];
   /** The panorama's turn about +y, so its sun lights the subject as wanted. */
   skyRotation: number;
+  /** Towards the sun (world), for its glints on the ripples. */
+  sun: THREE.Vector3;
   /** A finer riverbed, for the path tracer's stills. */
   detailed?: boolean;
 }
@@ -37,11 +41,14 @@ function surfaceGeometry(centre: THREE.Vector3, level: number, height: ((x: numb
   const coords = gridCoordinates(fine, step, 420);
   const n = coords.length;
   const positions = new Float32Array(n * n * 3);
+  // The capillary ripples' normal map repeats every tile (the path tracer's surface uses it).
+  const uvs = new Float32Array(n * n * 2);
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       const x = centre.x + coords[j]!;
       const z = centre.z + coords[i]!;
       positions.set([x, level + (height ? height(x, z) : 0), z], (i * n + j) * 3);
+      uvs.set([x / CAPILLARY_TILE, -z / CAPILLARY_TILE], (i * n + j) * 2);
     }
   }
   const indices: number[] = [];
@@ -53,6 +60,7 @@ function surfaceGeometry(centre: THREE.Vector3, level: number, height: ((x: numb
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  g.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
   g.setIndex(indices);
   g.computeVertexNormals();
   return g;
@@ -71,10 +79,11 @@ ${RIPPLE_GLSL}
 void main() {
   vec3 p = (modelMatrix * vec4(position, 1.0)).xyz;
   float e = 0.04;
-  float h = rippleHeight(p.xz, time);
-  float hx = rippleHeight(p.xz + vec2(e, 0.0), time);
-  float hz = rippleHeight(p.xz + vec2(0.0, e), time);
-  p.y = level + h;
+  // The ripples' slope here; the dents' slopes are worked out per fragment.
+  float h = ripplesOnly(p.xz, time);
+  float hx = ripplesOnly(p.xz + vec2(e, 0.0), time);
+  float hz = ripplesOnly(p.xz + vec2(0.0, e), time);
+  p.y = level + h + dimplesHeight(p.xz);
   vNormal = normalize(vec3(h - hx, e, h - hz));
   vWorld = p;
   vMirror = textureMatrix * vec4(p, 1.0);
@@ -94,6 +103,13 @@ uniform float far;
 uniform float above;
 uniform vec3 waterColour;
 uniform float attenuation;
+uniform sampler2D capillary;
+uniform float capillaryTile;
+uniform float time;
+uniform vec3 sun;
+uniform vec4 dimples[${MAX_DIMPLES}];
+uniform int dimpleCount;
+uniform vec3 dimpleBounds;
 varying vec3 vWorld;
 varying vec3 vNormal;
 varying vec4 vMirror;
@@ -108,9 +124,29 @@ float linearDepth(float z) {
   float ndc = z * 2.0 - 1.0;
   return 2.0 * near * far / (far + near - ndc * (far - near));
 }
+vec3 capillaryTilt(vec2 p) {
+  vec3 c = texture2D(capillary, p).xyz * 2.0 - 1.0;
+  return vec3(c.x, 0.0, -c.y);
+}
 void main() {
   vec3 v = normalize(cameraPosition - vWorld);
-  vec3 n = normalize(vNormal);
+  // The finest ripples, two layers drifting at different speeds, tilt the surface's normal.
+  vec2 q = vWorld.xz / capillaryTile;
+  vec3 tilt = capillaryTilt(q + vec2(0.021, 0.013) * time) + capillaryTilt(q * 1.37 + vec2(-0.017, 0.026) * time);
+  // The dents round the subject's contacts, too small for the grid: their slopes, here.
+  vec2 slope = vec2(0.0);
+  // Only near them: outside the circle they lie in, nothing to add.
+  for (int i = 0; i < ${MAX_DIMPLES}; i++) {
+    if (i >= dimpleCount || distance(vWorld.xz, dimpleBounds.xy) > dimpleBounds.z) break;
+    vec4 d = dimples[i];
+    vec2 r = vWorld.xz - d.xy;
+    float k = length(r) / d.z;
+    if (k > 4.0 || k < 1e-4) continue;
+    // d/dq of -w exp(-q²) + w/4 exp(-(q-1.8)²), along r.
+    float dh = d.w * (2.0 * k * exp(-k * k) - 0.5 * (k - 1.8) * exp(-(k - 1.8) * (k - 1.8))) / d.z;
+    slope += dh * r / (k * d.z);
+  }
+  vec3 n = normalize(normalize(vNormal) + vec3(-slope.x, 0.0, -slope.y) + 0.5 * tilt);
   if (above < 0.5) n = -n;
   vec2 screen = gl_FragCoord.xy / resolution;
   vec2 bend = n.xz * 0.12;
@@ -119,6 +155,8 @@ void main() {
   if (above > 0.5) {
     float fresnel = 0.02 + 0.98 * pow(1.0 - max(dot(n, v), 0.0), 5.0);
     vec3 reflected = mix(skyColour(reflect(-v, n)), mirrored.rgb, mirrored.a);
+    // The sun's glints on the ripples, brighter than the panorama's blurred sun can give.
+    reflected += vec3(1.0, 0.96, 0.88) * 24.0 * pow(max(dot(reflect(-v, n), sun), 0.0), 1400.0);
     // Bent by the ripples, more so the more water the light crosses.
     float through = max(linearDepth(texture2D(depthMap, screen).x) - linearDepth(gl_FragCoord.z), 0.0);
     vec2 uv = screen + n.xz * min(through, 20.0) * 0.012;
@@ -165,6 +203,8 @@ export class RealWater {
   private plane = new THREE.Plane();
   private size = new THREE.Vector2();
   private time = 0;
+  private capillary = capillaryNormals();
+  private specks: Speck[] = [];
 
   constructor(private o: RealWaterOptions) {
     this.reflection = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType });
@@ -180,6 +220,7 @@ export class RealWater {
         level: { value: o.level },
         dimples: { value: dimples },
         dimpleCount: { value: Math.min(MAX_DIMPLES, o.dimples.length) },
+        dimpleBounds: { value: dimpleBounds(o.dimples.slice(0, MAX_DIMPLES)) },
         textureMatrix: { value: this.textureMatrix },
         reflectionMap: { value: this.reflection.texture },
         refractionMap: { value: this.refraction.texture },
@@ -191,6 +232,9 @@ export class RealWater {
         far: { value: 500 },
         above: { value: 1 },
         waterColour: { value: new THREE.Color("#4a5648") },
+        capillary: { value: this.capillary },
+        capillaryTile: { value: CAPILLARY_TILE },
+        sun: { value: o.sun.clone().normalize() },
         // Assumption: clear stream water, tinted to its own colour over about 45 gapes (20 cm).
         attenuation: { value: 45 },
       },
@@ -201,6 +245,9 @@ export class RealWater {
     this.surface.frustumCulled = false;
     this.group.add(this.surface);
     this.group.add(riverbed(o.assets, o.centre, o.bed, 120, o.detailed ? 360 : 240));
+    this.specks = floatingSpecks(o.centre);
+    for (const s of this.specks) this.group.add(s.mesh);
+    this.setTime(0);
   }
 
   /** Height of the surface above its level at (x, z), now. */
@@ -211,6 +258,14 @@ export class RealWater {
   setTime(t: number) {
     this.time = t;
     this.material.uniforms.time!.value = t;
+    // Specks drift downstream on the surface, riding its ripples.
+    for (const s of this.specks) {
+      let x = s.x - SPECK_DRIFT * t - this.o.centre.x;
+      x = ((((x + SPECK_AREA) % (2 * SPECK_AREA)) + 2 * SPECK_AREA) % (2 * SPECK_AREA)) - SPECK_AREA + this.o.centre.x;
+      const m = s.mesh.matrix.makeRotationY(s.turn);
+      for (const i of [0, 1, 2, 4, 5, 6, 8, 9, 10]) m.elements[i]! *= s.size;
+      m.setPosition(x, this.o.level + rippleHeight(x, s.z, t) + s.lift * s.size, s.z);
+    }
   }
 
   /** Renders the scene through the water: the mirror and refraction passes, then the frame. */
@@ -265,10 +320,12 @@ export class RealWater {
 
   /** The surface at the current time as plain geometry with a glass-like water material, for the path tracer. */
   traceable(): THREE.Mesh {
-    const g = surfaceGeometry(this.o.centre, this.o.level, (x, z) => this.height(x, z), 0.12, 26);
+    // Fine near the subject, so the menisci round its contacts (a fifth of a gape) take shape.
+    const g = surfaceGeometry(this.o.centre, this.o.level, (x, z) => this.height(x, z), 0.05, 9);
     const m = new THREE.MeshPhysicalMaterial({
       color: 0xffffff,
       roughness: 0.02,
+      normalMap: this.capillary,
       transmission: 1,
       ior: 1.333,
       thickness: 6,
@@ -301,8 +358,72 @@ export class RealWater {
         m.dispose();
       }
     });
+    this.capillary.dispose();
     this.reflection.dispose();
     this.refraction.depthTexture?.dispose();
     this.refraction.dispose();
   }
+}
+
+interface Speck {
+  mesh: THREE.Mesh;
+  /** Where it starts (x drifts), its turn, its size and how far it sits above the level (in its sizes). */
+  x: number;
+  z: number;
+  turn: number;
+  size: number;
+  lift: number;
+}
+
+/** Half the width of the square the specks drift through, and their speed (gapes a second). */
+const SPECK_AREA = 12;
+const SPECK_DRIFT = 0.35;
+
+// Assumption: what floats on a summer river, a few dozen bits in a hand's breadth: pollen grains,
+// wisps of seed fluff, specks of leaf and bark, tiny air bubbles. Sizes in gapes (0.1–0.6 mm).
+const SPECKS = [
+  { count: 26, size: [0.025, 0.05], colour: "#d8c070", kind: "disc", lift: 0 },
+  { count: 8, size: [0.08, 0.16], colour: "#ece8de", kind: "fluff", lift: 0.1 },
+  { count: 12, size: [0.05, 0.12], colour: "#5e4a30", kind: "flake", lift: 0 },
+  { count: 14, size: [0.02, 0.05], colour: "#ffffff", kind: "bubble", lift: 0 },
+] as const;
+
+/** The specks on the surface round `centre`: each its own small mesh (the path tracer draws them too). */
+function floatingSpecks(centre: THREE.Vector3): Speck[] {
+  const random = mulberry32(31);
+  const shapes = {
+    disc: new THREE.CircleGeometry(1, 10).rotateX(-Math.PI / 2),
+    flake: new THREE.CircleGeometry(1, 5).rotateX(-Math.PI / 2).scale(1, 1, 0.55),
+    fluff: new THREE.CircleGeometry(1, 7).rotateX(-Math.PI / 2).scale(1, 1, 0.3),
+    bubble: new THREE.SphereGeometry(1, 12, 6, 0, Math.PI * 2, 0, Math.PI / 2),
+  };
+  const specks: Speck[] = [];
+  for (const kind of SPECKS) {
+    const material =
+      kind.kind === "bubble"
+        ? new THREE.MeshPhysicalMaterial({ color: kind.colour, roughness: 0.05, clearcoat: 1, transparent: true, opacity: 0.35 })
+        : new THREE.MeshStandardMaterial({ color: kind.colour, roughness: 0.8, transparent: kind.kind === "fluff", opacity: kind.kind === "fluff" ? 0.7 : 1 });
+    for (let i = 0; i < kind.count; i++) {
+      const mesh = new THREE.Mesh(shapes[kind.kind], material);
+      mesh.matrixAutoUpdate = false;
+      specks.push({
+        mesh,
+        x: centre.x + (random() * 2 - 1) * SPECK_AREA,
+        z: centre.z + (random() * 2 - 1) * SPECK_AREA,
+        turn: random() * Math.PI * 2,
+        size: kind.size[0] + random() * (kind.size[1] - kind.size[0]),
+        lift: kind.lift,
+      });
+    }
+  }
+  return specks;
+}
+
+/** The circle the dents lie in (centre x, z and radius, their reach included), for skipping them elsewhere. */
+function dimpleBounds(dimples: Dimple[]): THREE.Vector3 {
+  if (dimples.length === 0) return new THREE.Vector3(0, 0, -1);
+  const x = dimples.reduce((s, d) => s + d.x, 0) / dimples.length;
+  const z = dimples.reduce((s, d) => s + d.z, 0) / dimples.length;
+  const r = Math.max(...dimples.map((d) => Math.hypot(d.x - x, d.z - z) + 4 * d.r));
+  return new THREE.Vector3(x, z, r);
 }

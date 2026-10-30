@@ -6,6 +6,8 @@ examples "field and meadow grasshoppers (Chorthippus)"
 description "A long-bodied insect with big jumping hind legs, folded wings and short antennae. Blown or jumping onto the water, it lands with a splash and kicks."
 size min=15 max=25
 rides on-surface
+// Assumption: fallen on the water it lies in the film, body and legs on the surface (photos).
+sits body
 body {
     // Field grasshopper: brownish, in striped and mottled forms; the underside distinctly hairy
     // (ORS). The pronotum 3.1 mm in males, 3.9 mm in females (Tarasova et al.): about a fifth of

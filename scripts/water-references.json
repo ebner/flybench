@@ -1,0 +1,624 @@
+{
+  "dry-above": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0196/1360/files/floatanttest2_large.jpg?v=1488053183",
+      "page": "https://www.murraysflyshop.com/pages/which-dry-fly-floatant-works-the-best-a-comparison-test",
+      "author": "Murray's Fly Shop",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "Mr. Rapidan Parachute (#16) floating on still water, seen from above: hackle spread flat in the film, tail and body lying on the surface, dimples under the hackle tips.",
+      "compare": "How much of the body and tail lie on the film; hackle fibre spread and their dimples; parachute post seen end-on; colour of the fly against the water."
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0196/1360/files/floatanttest1_large.jpg?v=1488053177",
+      "page": "https://www.murraysflyshop.com/pages/which-dry-fly-floatant-works-the-best-a-comparison-test",
+      "author": "Murray's Fly Shop",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "The same #16 parachute floating, low side view with its mirror reflection: hackle and tail rest on the film, body almost touching it, post upright.",
+      "compare": "Body height above the film (about zero); hook bend hangs below the surface; reflection strength and the meniscus line where hackle meets water."
+    },
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/pff1.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Foam hopper with poly wing and rubber legs floating in about 15 mm of water in a grey dish; reflection, leg dimples and the shadow on the dish bottom.",
+      "compare": "Foam body sitting in, not on, the film; dimples where the rubber legs touch; shadow and bright caustic rims on the shallow bottom."
+    },
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Poly-yarn sedge floating, low angle, with the tippet leading away across the surface; the wing tent sits on the film, a bright meniscus runs along the tippet.",
+      "compare": "Caddis wing lying on the water vs held above it; body in the film; tippet meniscus near the eye (a highlight line, not a dark line)."
+    },
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/1202b760-d5b2-4fb1-a0c2-f6c9c5a95f0d_1000x667.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Hackled, winged dry fly on still water at eye level with its reflection of sky and wing; hackle and tail resting on the film.",
+      "compare": "Hackle-tip contact points and their tiny dimples; how high the body rides; hook bend and point below the surface."
+    }
+  ],
+  "dry-below": [
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/b/bdba6bd24de4cb18dcc119af048af5adbaffb02c.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\" series, FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Hackled dry fly photographed from under the surface at a low angle: hackle and tail tips pressing silvery dimples into the film, hook bend hanging into the water, the underside of the surface acting as a mirror.",
+      "compare": "Dimple size relative to the hackle length; bright silver rims of the dimples; how the mirror reflects the parts below the film; hook and body silhouette."
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/4/4bcd48cfedfb61c42b5abdeeef82bd75ee4041e9.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\" series, FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "The same kind of fly seen from more directly below: dark silhouette of body and hook, hackle fibres radiating, tail dimple a round bright-rimmed disc.",
+      "compare": "Silhouette darkness against the sky; diameter of the tail and hackle dimples relative to the gape; hackle fibres above the film blurred vs those in it."
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/7/7c9223fbfe02d25c619da0a1fcc457a3ce5a573f.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\" series, FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Dry fly at the edge of the window seen from below: the part above the surface is refracted and stretched upward, dimples flash silver, bottom-coloured mirror below the window edge.",
+      "compare": "Snell's window edge (bright above, mirror below); vertical stretching of the hackle above the film; dimple highlights."
+    },
+    {
+      "image": "https://content.osgnetworks.tv/flyfisherman/content/photos/HowTroutSee2-1200x800.jpg",
+      "page": "https://www.flyfisherman.com/editorial/how-trout-see/454967",
+      "author": "Gordon Byrnes (Fly Fisherman)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Photos 1A-1D: a standard dry fly photographed from underwater (black and white), sharp as a human sees it and defocused to approximate trout vision at 1 ft, 6 in and 3 in.",
+      "compare": "Overall silhouette from below and which parts (hackle, tail, body) read at a distance; blur at range."
+    }
+  ],
+  "wet-under": [
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/tfv1.jpg",
+      "page": "https://globalflyfisher.com/fish-better/fishs-view",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Nymph on tippet photographed under water in a small tank: dubbing and fibres studded with air bubbles, bead and tippet visible, black background.",
+      "compare": "Air bubbles clinging to dubbing and fibre tips (size and count); wet dubbing translucency; fibres splayed, not collapsed."
+    },
+    {
+      "image": "https://www.flymphforum.com/download/file.php?id=45",
+      "page": "https://www.flymphforum.com/viewtopic.php?p=88",
+      "author": "Ray Tucker (Flymph Forum, 2009)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Soft-hackle wet fly (flymph) on tippet under water: soft hackle fibres separated and swept back, peacock thorax and dubbed body, small air bubbles along the fibres.",
+      "compare": "Hackle fibres spread vs clumped underwater; body colour darkening when wet; bubbles on hackle; hook and tippet angle."
+    },
+    {
+      "image": "https://www.flymphforum.com/download/file.php?id=46",
+      "page": "https://www.flymphforum.com/viewtopic.php?p=88",
+      "author": "Ray Tucker (Flymph Forum, 2009)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "The same flymph under water seen further away, with the water surface and its underside reflection in the background.",
+      "compare": "Hackle sweep and fly attitude on a slack tippet; underside of the surface seen from below."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/62/Nymph.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Nymph.png",
+      "author": "Alex Voerman (aviper2k7)",
+      "license": "CC BY 2.5",
+      "view": "side",
+      "shows": "Bead-head nymph (Prince-style, white biot wings, brown tails) photographed under water from above and in front, tippet at the eye.",
+      "compare": "Bead brightness under water; biot wings and tails keep their shape; dubbing/peacock body darkness when wet."
+    },
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/tfv4.jpg",
+      "page": "https://globalflyfisher.com/fish-better/fishs-view",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "\"Fluffy and collapsed\": the same orange dubbed nymph dry (fluffy) and wet (dubbing fibres collapsed against the body). Out of the water.",
+      "compare": "How far dubbing fibres stand out dry vs wet; colour darkening when wet."
+    }
+  ],
+  "mayfly-dun": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/11885940/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/8845113",
+      "author": "Jeremy Collison",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Jeremy Collison, some rights reserved (CC BY-NC))",
+      "view": "side",
+      "shows": "Hexagenia: large mayfly (subimago, wings upright, yellow-veined) floating on a pond, low side view with reflection.",
+      "compare": "Body resting on the film vs held above it; wings upright; tails held up; leg contact and reflection."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/525141878/large.jpg",
+      "page": "https://www.inaturalist.org/observations/291853720",
+      "author": "aledwards",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) aledwards, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Hexagenia bilineata: dun on open water seen obliquely from above, wings upright, long tails trailing on the surface.",
+      "compare": "Size of the fly vs any dimples; wing silhouette; tails touching the water."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/265608603/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/153761156",
+      "author": "Liam Sanders",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Liam Sanders, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Baetidae: small dun on the water over a stony bottom, wings upright.",
+      "compare": "Legs standing on the film; shadow on the bottom; wing angle."
+    },
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/7bc0e061-073a-4dd2-8f97-926c88c6b890_4032x3024.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "Pale mayfly standing on very shallow water over sand: its feet and body press dimples whose shadows on the bottom form a dark clover with bright rims.",
+      "compare": "Shadow-of-dimple size vs the insect; foot dimples vs body contact; shadow offset from the insect (sun angle)."
+    },
+    {
+      "image": "https://i.troutnut.com/im_uwphoto/pic_193_800.jpg",
+      "page": "https://www.troutnut.com/underwater-pictures/of-invertebrates",
+      "author": "Jason Neuswanger (Troutnut)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Stillborn Ephemerella subvaria dun drifting on the surface seen from below, among Brachycentrus pupal shucks; window edge in a corner.",
+      "compare": "Silhouette of a dun from below; wing seen through the film; shucks in the film."
+    },
+    {
+      "image": "https://i.troutnut.com/im_uwphoto/pic_194_800.jpg",
+      "page": "https://www.troutnut.com/underwater-pictures/of-invertebrates",
+      "author": "Jason Neuswanger (Troutnut)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Close-up from under water of a stillborn Ephemerella subvaria female dun trapped in the film, wing flat, body hanging below.",
+      "compare": "Wing lying in the film from below; body and legs below the surface; colour under daylight."
+    },
+    {
+      "image": "https://content.osgnetworks.tv/flyfisherman/content/photos/HowTroutSee3-1200x800.jpg",
+      "page": "https://www.flyfisherman.com/editorial/how-trout-see/454967",
+      "author": "Carl Richards (Fly Fisherman)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Photos 2A-2B: a mayfly dun seen from underwater, defocused to approximate trout vision at 6 in and 3 in.",
+      "compare": "Dun silhouette from below; wing and tail visibility."
+    }
+  ],
+  "mayfly-spinner": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/76698076/large.jpg",
+      "page": "https://www.inaturalist.org/observations/48341916",
+      "author": "Chris Motherwell",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Chris Motherwell, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Ephemeroptera: spinner trapped on the water, both wings flat in the film, abdomen and tails on the surface.",
+      "compare": "Spent wings flat on the film (glassy, outlined by meniscus); body lying in the film; reflection of the wing edges."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/93314520/large.jpg",
+      "page": "https://www.inaturalist.org/observations/58447540",
+      "author": "Allan Allred",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Allan Allred, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Callibaetis: spinner spent on the water, wings outspread flat, tails trailing.",
+      "compare": "Wing span vs body length; wing transparency on dark water."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/325716669/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/186385647",
+      "author": "Gary Delise",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Gary Delise, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Tricorythodes: Trico spinner fall: spinner lying on shallow water with its shadow on the bottom.",
+      "compare": "Shadow of the spent wings on the bottom; wing meniscus highlights."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/40426365/large.jpg",
+      "page": "https://www.inaturalist.org/observations/26056598",
+      "author": "njnltrapp",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) njnltrapp, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Heptageniidae: freshly hatched mayfly floating with wings flat (spent posture) over a red rock.",
+      "compare": "Wing outline and venation on the film; body sitting in the surface."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/689971621/large.jpg",
+      "page": "https://www.inaturalist.org/observations/377315137",
+      "author": "josephrlee",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) josephrlee, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Callibaetis pictus: Callibaetis spinner floating dead, wings flat, over a weedy pond bottom.",
+      "compare": "Spent posture; body colour against the water."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Adult_Mayfly_at_Seedskadee_National_Wildlife_Refuge_%2849867214933%29.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Adult_Mayfly_at_Seedskadee_National_Wildlife_Refuge_(49867214933).jpg",
+      "author": "USFWS Mountain Prairie",
+      "license": "Public domain",
+      "view": "above",
+      "shows": "Small mayfly on the Green River with one wing raised and one flat on the water (half-spent/crippled), next to a floating nymphal shuck.",
+      "compare": "Flat wing in the film vs raised wing; shuck in the surface; bubbles and their size relative to the fly."
+    }
+  ],
+  "caddis-adult": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/57089683/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/36138672",
+      "author": "Denis Doucet",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Denis Doucet, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Agrypnia: large caddis adult on still water, wings tented, long antennae, reflection.",
+      "compare": "Tented wing sitting on the film; legs and antenna contact; body height above the film."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/209864236/large.jpg",
+      "page": "https://www.inaturalist.org/observations/123854922",
+      "author": "Marilynn Miller",
+      "license": "CC BY 4.0 (iNaturalist; (c) Marilynn Miller, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Leptoceridae: long-horned caddis floating dead on a creek, wings partly spread, very long antennae.",
+      "compare": "Wings lying in the film; antenna length."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/464852588/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/259014175",
+      "author": "Skyler Principe",
+      "license": "CC BY 4.0 (iNaturalist; (c) Skyler Principe, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Trichoptera: small caddis floating on pond water.",
+      "compare": "Overall size and posture on the film."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/350074825/large.jpg",
+      "page": "https://www.inaturalist.org/observations/198600424",
+      "author": "rudi-diesel",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) rudi-diesel, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Trichoptera: caddis skating over the water surface over gravel (motion blur, wake).",
+      "compare": "Skating caddis disturbance on the surface."
+    },
+    {
+      "image": "https://i.troutnut.com/im_uwphoto/pic_191_800.jpg",
+      "page": "https://www.troutnut.com/underwater-pictures/of-invertebrates",
+      "author": "Jason Neuswanger (Troutnut)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Brachycentrus caddis pupa struggling out of its shuck in the surface film, photographed from directly below (flash used, shuck looks brighter than in reality). Emerger, not a full adult.",
+      "compare": "Emerging caddis seen from below: wings and legs at the film, trapped air in the shuck."
+    }
+  ],
+  "stonefly-adult": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/257165266/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/149256587",
+      "author": "augochlora",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) augochlora, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Allocapnia: small winter stonefly standing on the water surface in a tree hole; each foot presses a visible dimple.",
+      "compare": "Foot dimple size vs the insect; body clear of the film; wings folded flat on the back."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/628646597/large.jpg",
+      "page": "https://www.inaturalist.org/observations/344989036",
+      "author": "Susan Mott",
+      "license": "CC BY-SA 4.0 (iNaturalist; (c) Susan Mott, some rights reserved (CC BY-SA))",
+      "view": "above",
+      "shows": "Capniidae: small winter stonefly gliding on a shallow surface, its dimples and body casting shadows on the bottom.",
+      "compare": "Shadows of the foot dimples (dark disks with bright rims) offset from the insect."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/116797430/large.jpg",
+      "page": "https://www.inaturalist.org/observations/71713054",
+      "author": "jmole",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) jmole, some rights reserved (CC BY-NC))",
+      "view": "side",
+      "shows": "Taeniopterygidae: stonefly landing on a pond, wings raised, legs on the film, reflection.",
+      "compare": "Legs on the film; wing posture; reflection."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/474618988/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/264139483",
+      "author": "Adam Leigh",
+      "license": "CC BY 4.0 (iNaturalist; (c) Adam Leigh, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Protonemura meyeri: Protonemura stonefly floating on the surface of a river.",
+      "compare": "Body lying in the film; wing outline."
+    }
+  ],
+  "grasshopper": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/115318562/large.jpg",
+      "page": "https://www.inaturalist.org/observations/70885131",
+      "author": "Peter Swart",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Peter Swart, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Phymateus leprosus: large locust floating on the water after jumping in, legs spread on the surface, ripples around it.",
+      "compare": "Body floating in, not on, the film; leg spread; surface disturbance."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/56144593/large.png",
+      "page": "https://www.inaturalist.org/observations/35594891",
+      "author": "cjackson",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) cjackson, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Melanoplus differentialis: Melanoplus grasshopper floating in pond water.",
+      "compare": "How low the body sits; leg position on the film."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/624266586/large.jpg",
+      "page": "https://www.inaturalist.org/observations/342777161",
+      "author": "fork_tailed_drongo",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) fork_tailed_drongo, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Acrididae: small grasshopper floating on open water (\"floating on the top of water quite happily\").",
+      "compare": "Size vs surface ripples; body in the film."
+    }
+  ],
+  "ant": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/703307720/large.jpg",
+      "page": "https://www.inaturalist.org/observations/384222814",
+      "author": "Matt Pelikan",
+      "license": "CC BY 4.0 (iNaturalist; (c) Matt Pelikan, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Solenopsis carolinensis: winged fire-ant alate floating in a bird bath, wings spread on the water.",
+      "compare": "Wings flat on the film; body half submerged."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/435872332/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/244365133",
+      "author": "Benny Albro",
+      "license": "CC BY 4.0 (iNaturalist; (c) Benny Albro, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Lasius claviger: winged Lasius ant floating dead at the shore, air bubbles around it.",
+      "compare": "Body in the film; wing flat; bubble sizes."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Fire_Ants_on_water.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fire_Ants_on_water.jpg",
+      "author": "Turnbull FL",
+      "license": "CC BY-SA 3.0",
+      "view": "above",
+      "shows": "Raft of fire ants floating on flood water.",
+      "compare": "Ant raft texture; individual ant scale against the surface."
+    }
+  ],
+  "beetle": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/198179458/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/117353501",
+      "author": "Elizabeth Fantham",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Elizabeth Fantham, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Carabus granulatus: ground beetle floating in water with strong meniscus rings around body and legs.",
+      "compare": "Meniscus ring width around the body; legs breaking the film; how high the body floats."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/223931439/large.jpg",
+      "page": "https://www.inaturalist.org/observations/131579629",
+      "author": "Mary Krieger",
+      "license": "CC BY 4.0 (iNaturalist; (c) Mary Krieger, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Donacia hirticollis: leaf beetle on the water surface (it ran across the surface).",
+      "compare": "Legs standing on the film; body above it."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/177240072/large.jpg",
+      "page": "https://www.inaturalist.org/observations/105612327",
+      "author": "Kathryn Wells",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Kathryn Wells, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Harmonia axyridis: ladybird trapped in the surface water, ringed by a meniscus.",
+      "compare": "Meniscus halo around a round beetle."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/656901002/large.jpg",
+      "page": "https://www.inaturalist.org/observations/360015490",
+      "author": "molanic",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) molanic, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Dineutus: whirligig beetle on the surface with its meniscus and small ripples.",
+      "compare": "Body half in the film; ripple rings."
+    }
+  ],
+  "midge-adult": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/271090026/large.jpg",
+      "page": "https://www.inaturalist.org/observations/156756035",
+      "author": "bitsnbirds",
+      "license": "CC BY 4.0 (iNaturalist; (c) bitsnbirds, some rights reserved (CC BY))",
+      "view": "above",
+      "shows": "Chironomidae: midge standing on the water of a rock pool, its shadow and foot-dimple shadows on the bottom.",
+      "compare": "Shadow of the legs and dimples vs the insect; legs splayed on the film."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/262154509/large.jpg",
+      "page": "https://www.inaturalist.org/observations/151895041",
+      "author": "jmole",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) jmole, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Chironomidae: midge on the surface of a puddle, wings spread.",
+      "compare": "Wing and leg contact with the film."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/640817066/large.jpg",
+      "page": "https://www.inaturalist.org/observations/351178126",
+      "author": "Michael Warner",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Michael Warner, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Chironomidae: dead midge trapped on a water trough, wings flat in the film with water drops/meniscus rings on them.",
+      "compare": "Meniscus rings on the wings; trapped posture."
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/98974431/large.jpg",
+      "page": "https://www.inaturalist.org/observations/61823000",
+      "author": "Mike Lusk",
+      "license": "CC BY-NC 4.0 (iNaturalist; (c) Mike Lusk, some rights reserved (CC BY-NC))",
+      "view": "above",
+      "shows": "Chironomidae: midge trapped in the water surface of a stock trough.",
+      "compare": "Trapped posture and scale."
+    }
+  ],
+  "contact-macro": [
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Water_Striders_and_their_shadows.JPG",
+      "page": "https://commons.wikimedia.org/wiki/File:Water_Striders_and_their_shadows.JPG",
+      "author": "Brocken Inaglory",
+      "license": "CC BY-SA 3.0",
+      "view": "above",
+      "shows": "Water striders on a shallow pond; each foot dimple casts a large dark round shadow with a bright rim on the bottom, far bigger than the feet.",
+      "compare": "Dimple-shadow diameter vs leg length; shadow offset from the insect; bright caustic rims."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Surface_waves_and_water_striders.JPG",
+      "page": "https://commons.wikimedia.org/wiki/File:Surface_waves_and_water_striders.JPG",
+      "author": "Brocken Inaglory",
+      "license": "CC BY-SA 3.0",
+      "view": "above",
+      "shows": "Mating water striders with ripple rings and their dimple shadows on the bottom.",
+      "compare": "Shadow shape (dark disks, bright rims); ripple caustics on the bottom."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Shadows_of_Water_Strider_Enfield_Gorge_at_Robert_Treman_State_Park%2C_Ithaca_NY_2603.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Shadows_of_Water_Strider_Enfield_Gorge_at_Robert_Treman_State_Park,_Ithaca_NY_2603.jpg",
+      "author": "bobistraveling",
+      "license": "CC BY 2.0",
+      "view": "above",
+      "shows": "Water strider on a shallow stream over sand, with the dimple shadows and ripple caustics on the bottom.",
+      "compare": "Shadow vs insect size in moving water; caustic bands."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/10/Water_Walking_%286711382069%29.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Water_Walking_(6711382069).jpg",
+      "author": "Charles Lam from Hong Kong, China",
+      "license": "CC BY-SA 2.0",
+      "view": "above",
+      "shows": "Water strider (Aquarius paludum) close up: each foot sits in a clear dimple with a bright highlight.",
+      "compare": "Dimple diameter vs leg thickness; highlight on the dimple rim."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/4/41/Polistes_dominula_auf_Wasser-20260526-RM-125135.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Polistes_dominula_auf_Wasser-20260526-RM-125135.jpg",
+      "author": "Reinhold Möller Ermell",
+      "license": "CC BY-SA 4.0",
+      "view": "above",
+      "shows": "Paper wasp standing on water over a tiled bottom; its foot dimples cast dark round shadows with bright rims beside its body shadow.",
+      "compare": "Clear analogue for a hackled fly: dimple shadows vs the body shadow on a shallow, light bottom."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/79/Paperclip_floating_on_water_%28with_%27contour_lines%27%29.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Paperclip_floating_on_water_(with_%27contour_lines%27).jpg",
+      "author": "© Robert D. Anderson",
+      "license": "CC BY-SA 3.0",
+      "view": "above",
+      "shows": "Steel paperclip floating; a grid reflected in the surface shows the meniscus as bent contour lines around the wire.",
+      "compare": "Width of the meniscus around a thin wire (analogue for tippet and hook in the film)."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Surface_Tension_01.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Surface_Tension_01.jpg",
+      "author": "Kuebi Armin Kübelbeck",
+      "license": "CC BY-SA 3.0",
+      "view": "side",
+      "shows": "Copper-plated steel paperclip floating in a glass of water, seen from the side: the surface bends down around the wire.",
+      "compare": "Depth and width of the depression around a thin object."
+    },
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/43568cdc-be17-4472-a337-ad790ea6afc9_2560x1707.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "Paperclip floating in a white teacup, its meniscus casting a dark rounded shadow with bright edges on the cup bottom: \"the paperclip creates an umbra and bright spots on the bottom of the teacup\".",
+      "compare": "Shadow (umbra) and bright caustic rim cast by a meniscus on a shallow bottom."
+    }
+  ],
+  "tippet-film": [
+    {
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTFTEUsyrxpqntzRM4yTLKYkDXNaiuzzknhztsowsoDL6t3yIYoAN8FA6d0eba32PUSYcZCeGsXSOveu07Bi119zbNV0xpNMgwDGEcfGoiVSjdztTHH5SCie_IpkX-NqYGxLlQz75yI9NDDUSRJIw5q5rFoGRYr61zHA52NGwIYQya2sbu5cpfGVg67kDl/w640-h360/20250924_112205.jpg",
+      "page": "https://jims-wanderings.blogspot.com/2025/09/i-stand-corrected-somewhat.html",
+      "author": "Jim (Jim's Wanderings blog)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "6X tippet lying on a shallow, clear river: the tippet itself is nearly invisible but its film depressions cast a snaking dotted shadow line on the gravel.",
+      "compare": "Tippet visibility on the surface vs its shadow on the bottom; shadow is beaded (dots), not a continuous line."
+    },
+    {
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWInOV2KIUXt6ea8M1ccznuwp6FMfYaifZ4BOlb2lqmQCA3qhJ41KaRK30vCuxqY8cQUhO9XxU_cH3ZlthSJmXSXkw8op-b2KJ2GFEgCpcY7ICRWpBvKpyIMJHUM6x5EHcvsALSFolRedfs7zGo-WqjAheoXPc847h2-HFaTPEk7QCucv9KuPanWLlpk26/w640-h360/20250924_112127.jpg",
+      "page": "https://jims-wanderings.blogspot.com/2025/09/i-stand-corrected-somewhat.html",
+      "author": "Jim (Jim's Wanderings blog)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "Leader/tippet shadow on the bottom, straighter with a curve, next to the angler's shadow; small rise rings nearby.",
+      "compare": "Shadow width and spacing of the beads vs tippet diameter; shadow contrast in sun."
+    },
+    {
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO77lG6E_KbqHmnWxESGHktg-jE-4ZU_PUt-9sRgzryC-QYmvI9XXi9doWJWXBZ6C95fhMewLlNpJD4x_kZVEblYXvFWM_1Z4qV2KdT7PqgxXZty_vl5emHD4AV7lkzirIQvMAFf-PX9LUUhN-LH1JXyg_C0zGU4P09YZ88CWQ955eoQ2neyfWg22pWzbm/w640-h360/20250924_112201.jpg",
+      "page": "https://jims-wanderings.blogspot.com/2025/09/i-stand-corrected-somewhat.html",
+      "author": "Jim (Jim's Wanderings blog)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "Tippet lying on the surface (the line visible as a bright thread near the rod) with its dotted shadow on the bottom.",
+      "compare": "Tippet highlight on the surface vs its shadow."
+    },
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Tippet running from a floating sedge across the water; the meniscus along the tippet shows as a bright line close to the fly.",
+      "compare": "Meniscus highlight width along the tippet; where the tippet leaves the film."
+    }
+  ],
+  "knot": [
+    {
+      "image": "https://www.outdoorlife.com/wp-content/uploads/2024/06/clinch_knot_opener.jpg?quality=85&w=1337",
+      "page": "https://www.outdoorlife.com/fishing/how-to-tie-improved-clinch-knot/",
+      "author": "Joe Cermele (Outdoor Life)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Close-up of a finished improved clinch knot (green line) snugged against a hook eye; wraps and tag end visible.",
+      "compare": "Knot length vs eye diameter (about 2-3 eye widths); wrap count and spiral; tag end trimmed short. Note: bait hook and heavy line, scale differs from a fly on fine tippet."
+    },
+    {
+      "image": "https://flyfisherpro.com/wp-content/uploads/2021/06/Improved-Clinch-Knot.jpg",
+      "page": "https://flyfisherpro.com/knots/improved-clinch-knot/",
+      "author": "Fly Fisher Pro (article by Jamie Melvin; photo not separately credited)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Improved clinch knot in yellow line tied to a hook eye, close-up on dark background.",
+      "compare": "Barrel of wraps behind the eye; how the knot sits against the eye; tag end."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Barb._02_Verbesserter_Clinchknoten.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Barb._02_Verbesserter_Clinchknoten.jpg",
+      "author": "Der Barbar",
+      "license": "CC BY-SA 4.0",
+      "view": "above",
+      "shows": "Rope model of the improved clinch knot (loose) on a metal eye, showing the path: turns around the standing part, tag back through the loop at the eye and through the big loop.",
+      "compare": "Topology of the wraps and tag path (model, not to scale)."
+    },
+    {
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/KlammerknotenLose.JPG",
+      "page": "https://commons.wikimedia.org/wiki/File:KlammerknotenLose.JPG",
+      "author": "StromBer 17:02, 6. Apr. 2008 (CEST)",
+      "license": "CC BY-SA 2.0 de",
+      "view": "above",
+      "shows": "Rope model of the clinch knot (loose) on a hook eye, against blue.",
+      "compare": "Wrap direction and tag through the loop at the eye (model, not to scale)."
+    }
+  ]
+}

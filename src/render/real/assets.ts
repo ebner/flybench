@@ -15,6 +15,8 @@ export interface RealAssets {
   sky: THREE.DataTexture;
   /** Where the panorama's sun is, around +y from +z towards +x (radians). */
   sunAzimuth: number;
+  /** How high the panorama's sun stands above the horizon (radians). */
+  sunElevation: number;
   gravel: {
     color: THREE.Texture;
     normal: THREE.Texture;
@@ -60,15 +62,17 @@ async function load(urls: RealAssetUrls): Promise<RealAssets> {
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.anisotropy = 8;
   }
-  return { sky, sunAzimuth: sunAzimuth(sky), gravel: { color, normal, height: heights(height.image as HTMLImageElement | ImageBitmap) } };
+  const sun = findSun(sky);
+  return { sky, sunAzimuth: sun.azimuth, sunElevation: sun.elevation, gravel: { color, normal, height: heights(height.image as HTMLImageElement | ImageBitmap) } };
 }
 
-/** The azimuth of the brightest point in the upper half of an equirectangular panorama. */
-function sunAzimuth(hdr: THREE.DataTexture): number {
+/** Where the brightest point in the upper half of an equirectangular panorama is: its azimuth and elevation. */
+function findSun(hdr: THREE.DataTexture): { azimuth: number; elevation: number } {
   const { data, width, height } = hdr.image as { data: ArrayLike<number>; width: number; height: number };
   const value = data instanceof Uint16Array ? THREE.DataUtils.fromHalfFloat : (v: number) => v;
   let best = -1;
   let bestU = 0;
+  let bestV = 0;
   for (let y = 0; y < height / 2; y++) {
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
@@ -76,12 +80,14 @@ function sunAzimuth(hdr: THREE.DataTexture): number {
       if (l > best) {
         best = l;
         bestU = x / width;
+        bestV = (y + 0.5) / height;
       }
     }
   }
   // three's equirectangular mapping: u = atan(dir.z, dir.x) / 2π + 0.5.
   const phi = (bestU - 0.5) * 2 * Math.PI;
-  return Math.atan2(Math.cos(phi), Math.sin(phi));
+  // Rows run from straight up (the first) to straight down.
+  return { azimuth: Math.atan2(Math.cos(phi), Math.sin(phi)), elevation: (0.5 - bestV) * Math.PI };
 }
 
 /** Bilinear samples of a greyscale height map, wrapping at the edges. */

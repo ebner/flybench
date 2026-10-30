@@ -38,5 +38,14 @@ export function riverbed(assets: RealAssets, centre: THREE.Vector3, y: number, s
   return group;
 }
 
+/** The bed's surface height at (x, z), for a bed built by riverbed() with the same centre, top and size. */
+export function bedHeight(assets: RealAssets, centre: THREE.Vector3, y: number, x: number, z: number, size = 120): number {
+  const scale = size / TILE;
+  // As PlaneGeometry lays out its uvs, turned flat: u along +x, v along -z.
+  const u = (x - centre.x + size / 2) / size;
+  const v = (size / 2 - (z - centre.z)) / size;
+  return y - RELIEF + RELIEF * assets.gravel.height(u * scale, v * scale);
+}
+
 /** The height of the bed's top above `y - RELIEF`, as a fraction of its relief, is 0–1: the gravel's highest stones reach `y`. */
 export const BED_RELIEF = RELIEF;

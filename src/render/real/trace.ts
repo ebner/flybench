@@ -14,6 +14,7 @@ export async function pathTrace(
   onFrame: () => Promise<void>,
 ): Promise<{ seconds: number; image: string }> {
   o.water?.setTraceable(true);
+  reverseRows(o.scene);
   expandInstances(o.scene);
   sameAttributes(o.scene);
   // The tracer can't draw shader materials (the drawn water's) or lines.
@@ -46,6 +47,22 @@ export async function pathTrace(
   tracer.renderSample();
   const image = o.renderer.domElement.toDataURL("image/png");
   return { seconds: (performance.now() - started) / 1000, image };
+}
+
+/** Data textures drawn for both renderers (the bed's shadows): the tracer takes their rows the other way up. */
+function reverseRows(scene: THREE.Scene) {
+  scene.traverse((x) => {
+    if (!(x instanceof THREE.Mesh)) return;
+    const map = (x.material as THREE.MeshStandardMaterial).map;
+    if (!(map instanceof THREE.DataTexture) || !map.userData.rowsReversedForTracer) return;
+    const { data, width, height } = map.image as { data: Uint8Array; width: number; height: number };
+    const row = width * 4;
+    const flipped = new Uint8Array(data.length);
+    for (let y = 0; y < height; y++) flipped.set(data.subarray((height - 1 - y) * row, (height - y) * row), y * row);
+    map.image = { data: flipped, width, height };
+    map.userData.rowsReversedForTracer = false;
+    map.needsUpdate = true;
+  });
 }
 
 /** Instanced meshes (fibres) become plain merged meshes: the tracer draws only the first instance. */

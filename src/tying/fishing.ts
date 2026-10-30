@@ -12,6 +12,8 @@ export interface Fishing {
   motion: "drift" | "swim" | "swing";
   /** Degrees it hangs tail down from the front of its shank (an emerger in the film). */
   hang: number;
+  /** A natural on the surface: what rests on the film (see the natural recipes' `sits`). */
+  sits?: "feet" | "body" | "spent";
 }
 
 /**
