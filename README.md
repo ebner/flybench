@@ -73,8 +73,9 @@ the surface, in the film, just under or deep), from above as the angler sees it 
 as a trout does: first a path-traced picture, then, with "Explore in 3D", the live river with
 reflections, refraction, Snell's window and a photoscanned gravel bed. The fly is tied on a
 tippet with an improved clinch knot, rests on its hackle and tail tips (a sunk one hangs on the
-tippet), looks wet, and dents the film; the dents and its shadow show on the stones, and
-capillary ripples, sun glints and drifting specks make the surface read as water. A slow
+tippet), looks wet, and dents the film, over a glide some 25 cm deep (a fly fished deep shadows
+the stones near it, with the dents' bright-rimmed spots); capillary ripples, sun glints and
+drifting specks make the surface read as water. A slow
 device, a data saver or reduced motion gets the drawn water instead, from the side or from
 below. "Still water" stops the motion. The naturals' pages show each natural in the river the
 same way, standing on its feet, resting its body on the film or spent in it (`sits`).
