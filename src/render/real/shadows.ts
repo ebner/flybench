@@ -107,6 +107,9 @@ export function bedShadows(o: ShadowOptions): THREE.Mesh | null {
 
   // Softened by the water it crosses: the sun's disc and the light scattered on the way.
   const depth = o.level - floor;
+  // Assumption: through more than a few centimetres of water the shadow and the spots fade,
+  // filled in by the light scattered on the way (about half as strong at 6 cm, 12 gapes).
+  const fade = Math.min(1, 12 / Math.max(depth, 1));
   const soft = document.createElement("canvas");
   soft.width = soft.height = PIXELS;
   const s = soft.getContext("2d")!;
@@ -125,8 +128,9 @@ export function bedShadows(o: ShadowOptions): THREE.Mesh | null {
   const r = rims.getContext("2d")!;
   for (const d of o.dimples) {
     const [x, y] = toPixel(shadowOf(a.set(d.x, o.level, d.z), b));
-    // Assumption: a spot about one and a half times the dent's radius (several times the foot or fibre).
-    const radius = d.r * 1.5 * perGape * Math.min(1, d.d / 0.02);
+    // Assumption: a spot about one and a half times the dent's radius (several times the foot or
+    // fibre), growing with the depth as the dent's lens spreads it.
+    const radius = d.r * (1.5 + depth / 20) * perGape * Math.min(1, d.d / 0.02);
     const dark = sp.createRadialGradient(x, y, 0, x, y, radius);
     dark.addColorStop(0, "rgba(0,0,0,1)");
     dark.addColorStop(0.75, "rgba(0,0,0,0.95)");
@@ -154,7 +158,7 @@ export function bedShadows(o: ShadowOptions): THREE.Mesh | null {
   for (let row = 0; row < PIXELS; row++) {
     for (let col = 0; col < PIXELS; col++) {
       const i = (PIXELS - 1 - row) * PIXELS + col;
-      const v = (bright[i * 4 + 3]! / 255) * RIM - Math.max((dark[i * 4 + 3]! / 255) * SHADOW, (spot[i * 4 + 3]! / 255) * SPOT);
+      const v = fade * ((bright[i * 4 + 3]! / 255) * RIM - Math.max((dark[i * 4 + 3]! / 255) * SHADOW, (spot[i * 4 + 3]! / 255) * SPOT));
       const k = v > 0 ? 255 : 0;
       out.set([k, k, k, Math.round(Math.min(1, Math.abs(v)) * 255)], (row * PIXELS + col) * 4);
     }

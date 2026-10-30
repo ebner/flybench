@@ -231,12 +231,14 @@ export class RealWater {
         near: { value: 0.05 },
         far: { value: 500 },
         above: { value: 1 },
-        waterColour: { value: new THREE.Color("#4a5648") },
+        // As deep water looks from above in the stills: a dark green-brown.
+        waterColour: { value: new THREE.Color("#2c362c") },
         capillary: { value: this.capillary },
         capillaryTile: { value: CAPILLARY_TILE },
         sun: { value: o.sun.clone().normalize() },
-        // Assumption: clear stream water, tinted to its own colour over about 45 gapes (20 cm).
-        attenuation: { value: 45 },
+        // Assumption: clear stream water, tinted to its own colour over about 80 gapes (40 cm), as
+        // the path tracer's water is.
+        attenuation: { value: 80 },
       },
       vertexShader,
       fragmentShader,
@@ -330,7 +332,8 @@ export class RealWater {
       ior: 1.333,
       thickness: 6,
       attenuationColor: new THREE.Color("#a3ad84"),
-      attenuationDistance: 30,
+      // Assumption: a clear stream: the gravel 25 cm down still faintly seen, tinted green-brown.
+      attenuationDistance: 80,
       side: THREE.DoubleSide,
     });
     return new THREE.Mesh(g, m);

@@ -250,6 +250,11 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       water-repellent.
     - Surface detail: fine capillary ripples, sun glints and stronger reflections, drifting specks,
       a deeper, slightly tinted bed so the surface carries the picture.
+    - Decided 2026-10-30: a realistic glide some 25 cm deep under floating and just-sunk flies (the
+      bed out of focus, its shadows lost in the water; a fly fished deep still shadows the stones),
+      shadows from a sun at least 65° high, flies damp all over, an improved clinch on every fly,
+      the specks and the faint tippet kept, the live view matched to the stills where it is cheap;
+      the physical assumptions accepted.
     - Checked against reference photos of real flies and insects on and under water (URLs only, in
       scripts/water-references.json; never the photos), side by side with the stills.
 

@@ -48,7 +48,7 @@ const VIEWS = {
    */
   "water-trout": new THREE.Vector3(0.15, -1, 0.42).normalize(),
   /** In the realistic water, the angler's view: from above and in front, looking down onto the water. */
-  "water-angler": new THREE.Vector3(0.55, 0.5, 1).normalize(),
+  "water-angler": new THREE.Vector3(0.55, 0.4, 1).normalize(),
   /** In the realistic water, a trout's view of something deep or on the bottom: level with it, a little above the stones. */
   "water-bed": new THREE.Vector3(0.45, 0.5, 1).normalize(),
   /** In the realistic water, the angler looking steeply down on something deep (the water bends a shallow look away). */
@@ -519,11 +519,10 @@ export class FlyScene {
     if (setting.real) {
       const real = setting.real;
       const crawling = !this.build && setting.fishing.depth === "deep";
-      // Assumption: the shallow margin of a glide, the gravel some 2 cm under a floating fly,
-      // where its shadow and the dents' dark spots show on the stones (as in the photos of
-      // insects on shallow water); 4 cm under a sunk fly; a natural that crawls sits on the stones.
-      // From below the camera goes some gapes under the fly: the bed lies deeper then.
-      const bed = crawling ? bounds.min.y + 0.1 : Math.min(level - (setting.view === "below" ? 14 : touches ? 4 : 8), bounds.min.y - 1.5);
+      // Assumption: a glide where trout feed, the gravel some 25 cm under the surface (50 gapes on
+      // a #12), out of focus and darkened by the water, so the surface carries the picture (the
+      // reviewer's choice, 2026-10-30); a fly fished deep and a natural that crawls are near the stones.
+      const bed = crawling ? bounds.min.y + 0.1 : setting.fishing.depth === "deep" ? Math.min(level - 8, bounds.min.y - 1.5) : level - 50;
       // The panorama's sun behind the angler's shoulder, a little to the left.
       const angler = VIEWS["water-angler"];
       const sunAzimuth = Math.atan2(angler.x, angler.z) + 0.6;
@@ -547,8 +546,9 @@ export class FlyScene {
       }
       view = new RealWater({ assets: real, level, centre: pivot, bed, dimples, skyRotation, sun, detailed: setting.detailed });
       if (line) view.group.add(line.mesh);
-      // In the sun the fly (and its tippet) shadow the stones, and the dents in the film show there.
-      if (!crawling) {
+      // In the sun the fly (and its tippet) shadow the stones, and the dents in the film show there;
+      // through more than about 10 cm of water (20 gapes) they are lost in the light scattered on the way.
+      if (!crawling && level - bed < 20) {
         // Assumption: shadows cast by a summer day's sun at least 65° high, from the panorama's
         // sun's side: its own (a low evening sun) would throw them out of the picture.
         const high = Math.max(real.sunElevation, THREE.MathUtils.degToRad(65));
