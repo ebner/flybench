@@ -16,6 +16,9 @@ sources {
     "Ahrex: Europea 12 (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2019/09/16/europea-12/"
 }
 
+// Assumption: As the Europea 12: the body and wing lie along the film; judged from the
+// dressing.
+sits body
 hook dry-standard size=12
 thread yellow size="8/0"
 

@@ -257,6 +257,10 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       the physical assumptions accepted.
     - Checked against reference photos of real flies and insects on and under water (URLs only, in
       scripts/water-references.json; never the photos), side by side with the stills.
+    - Decided 2026-10-30, after the reviewer saw only the Adams's bend touch the water: each
+      floating pattern says how it sits once fished a while (`sits`: on its hackle with the lower
+      fibres through the film, its body in the film, or half under), researched per pattern from
+      sources and photos of it, or flies tied the same way, on the water.
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

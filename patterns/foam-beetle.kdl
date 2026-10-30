@@ -34,6 +34,9 @@ references {
     "https://upload.wikimedia.org/wikipedia/commons/7/77/Foam_beetle.jpg" page="https://commons.wikimedia.org/wiki/File:Foam_beetle.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view"
 }
 
+// Assumption: It floats well but low, the body and the lower part of the foam in and under the
+// film (Orvis; photos of foam terrestrials on the water).
+sits half
 hook dry-standard size=12
 thread black size="6/0"
 

@@ -45,6 +45,7 @@ export const PATTERN_SECTIONS: Record<string, Shape> = {
   references: { kind: "list", nameKey: "image", arg: null },
   rides: { kind: "scalar" },
   fishes: { kind: "scalar" },
+  sits: { kind: "scalar" },
   hook: { kind: "record", arg: "model" },
   thread: { kind: "record", arg: "color" },
   materials: { kind: "list", nameKey: "id", arg: "kind" },

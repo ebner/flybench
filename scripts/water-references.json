@@ -620,5 +620,396 @@
       "shows": "Rope model of the clinch knot (loose) on a hook eye, against blue.",
       "compare": "Wrap direction and tag through the loop at the eye (model, not to scale)."
     }
+  ],
+  "adams": [
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/1202b760-d5b2-4fb1-a0c2-f6c9c5a95f0d_1000x667.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A Greenwell's-type winged, collar-hackled dry with a long tail on still water at eye level (same style as the Adams, not an Adams). The body rides about a third of a gape above the film. The tail tips touch it. The lower hackle fibres press into the film with bright menisci, and the hook bend and point go through the surface. Upright slip wings.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/4/4bcd48cfedfb61c42b5abdeeef82bd75ee4041e9.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Hackled winged dry (peacock body, pale wings; a Royal Coachman-type, not an Adams) seen from directly below: dark body and hook silhouette, hackle fibres radiating, the tail resting in a round dimple, hook bend below the film.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/b/bdba6bd24de4cb18dcc119af048af5adbaffb02c.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Similar hackled dry from below at a low angle: hackle and tail tips pressing silvery dimples into the film, the hook bend hanging in the water.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "cdc-and-elk": [
+    {
+      "image": "https://globalflyfisher.com/sites/default/files/imported_pictures/cdc_opening_shot.jpg",
+      "page": "https://globalflyfisher.com/tie-better/tying-cdc",
+      "author": "Hans Weilenmann (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "CDC & Elk (the exact pattern, tied by its originator) on rippled water, low three-quarter view, eye right: the CDC body and its fibres lie in the film, the hook bend hangs just below the surface, the deer-hair wing lies back low over the body with its tips trailing at or near the water, the square-cut butts stand up at the head, the tippet leaves the eye along the surface.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://web.archive.org/web/20190818223148im_/https://wiflyfisher.com/images/underwater/on-top-of-water-CDC-elk-royal-trude.jpg",
+      "page": "https://www.wiflyfisher.com/Trouts-Window-of-Vision.asp",
+      "author": "WiFlyFisher.com (no photographer named)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "A CDC & Elk and a Royal Trude floating in a glass tank, seen from above. The images are 404 on the live page now; the URLs are Wayback copies of the files the live page still references.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://web.archive.org/web/20190818224638im_/https://wiflyfisher.com/images/underwater/underwater-refraction-CDC-elk-royal-trude.jpg",
+      "page": "https://www.wiflyfisher.com/Trouts-Window-of-Vision.asp",
+      "author": "WiFlyFisher.com (no photographer named)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Underwater, at an angle: the CDC & Elk in the window with the note that its wing slants back over the body (refraction makes it look upright); the Royal Trude outside the window shows only its underside in the mirror. Wayback copy (live file 404).",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "coch-y-bonddu": [
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/4/4bcd48cfedfb61c42b5abdeeef82bd75ee4041e9.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Closest style only: a peacock-bodied hackled dry from below. Herl body and hook silhouette, hackle fibres dimpling the film, the bend below the surface.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/1202b760-d5b2-4fb1-a0c2-f6c9c5a95f0d_1000x667.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Closest style only: a collar-hackled dry on still water showing the lower hackle fibres through the film and the bend below. The Coch-y-bonddu, without a tail, sits lower at the rear.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "elk-hair-caddis": [
+    {
+      "image": "https://live.staticflickr.com/4120/34874819994_4abc35a545_z.jpg",
+      "page": "https://www.flickr.com/photos/35758965@N05/34874819994/",
+      "author": "dataminer007 (Flickr)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A Stimulator (yellow abdomen, orange thorax, grizzly front hackle, elk wing and tail) on calm blue water at eye level, eye left, tippet lying on the surface: the fly stands on its palmered and front hackle, the abdomen clear of the film, the hook bend reaching down to the surface, wing raised low over the back. Looks freshly dressed (high). Closest style: the Stimulator is the Elk Hair Caddis's palmered-body, elk-wing relative (but has a tail and longer shank).",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://web.archive.org/web/20190818223157im_/https://wiflyfisher.com/images/underwater/overhead-CDC-elk-royal-trude.jpg",
+      "page": "https://www.wiflyfisher.com/Trouts-Window-of-Vision.asp",
+      "author": "WiFlyFisher.com (no photographer named)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "The same two flies seen from almost straight underneath: the CDC & Elk's whole underside (body, CDC fibres and the spread hair wing) pressed into the film; the Royal Trude (collar hackle, hair down-wing) shows its body and hackle points dimpling the film. Wayback copy (live file 404). Closest style: Royal Trude (hackle, hair down-wing) and CDC & Elk from below; brackets the EHC between a hackle-supported and a body-in-film caddis.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "elk-hair-caddis-troth": [
+    {
+      "image": "https://live.staticflickr.com/4120/34874819994_4abc35a545_z.jpg",
+      "page": "https://www.flickr.com/photos/35758965@N05/34874819994/",
+      "author": "dataminer007 (Flickr)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A Stimulator (yellow abdomen, orange thorax, grizzly front hackle, elk wing and tail) on calm blue water at eye level, eye left, tippet lying on the surface: the fly stands on its palmered and front hackle, the abdomen clear of the film, the hook bend reaching down to the surface, wing raised low over the back. Looks freshly dressed (high). Closest style: palmered-body, elk-wing relative.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://web.archive.org/web/20190818223157im_/https://wiflyfisher.com/images/underwater/overhead-CDC-elk-royal-trude.jpg",
+      "page": "https://www.wiflyfisher.com/Trouts-Window-of-Vision.asp",
+      "author": "WiFlyFisher.com (no photographer named)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "The same two flies seen from almost straight underneath: the CDC & Elk's whole underside (body, CDC fibres and the spread hair wing) pressed into the film; the Royal Trude (collar hackle, hair down-wing) shows its body and hackle points dimpling the film. Wayback copy (live file 404). Closest style: Royal Trude and CDC & Elk from below.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "europea-12": [
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A poly-yarn sedge floating in a dish, low side view, eye left: the down-wing lies on the film and the body sits in it, the tippet meniscus leads away from the eye. Not this pattern. Closest style: a down-wing sedge with the wing and body lying on the film. No photo of a Europea 12 on water was found (GFF, Ahrex and shop photos all show it on wood, a reel or a vise).",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "europea-12-tailed": [
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A poly-yarn sedge floating in a dish, low side view, eye left: the down-wing lies on the film and the body sits in it, the tippet meniscus leads away from the eye. Not this pattern. Closest style: a down-wing sedge lying on the film.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "foam-beetle": [
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/pff1.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Closest style (a foam-bodied hopper with rubber legs, not a beetle): the black foam body sits in the film, not on it, about half under, with dimples where the legs touch and a shadow on the dish bottom.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/198179458/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/117353501",
+      "author": "Elizabeth Fantham (iNaturalist)",
+      "license": "CC BY-NC 4.0",
+      "view": "above",
+      "shows": "Natural, not a fly: a ground beetle floating, with strong meniscus rings round the body and the legs; shows how low a beetle lies.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "goddard-caddis": [
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A poly-yarn sedge floating in a dish, low side view, eye left: the down-wing lies on the film and the body sits in it, the tippet meniscus leads away from the eye. Not this pattern. Closest style: a down-wing sedge lying on the film; the Goddard's clipped hair body takes the place of its wing.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "griffiths-gnat": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0196/1360/files/floatanttest2_large.jpg?v=1488053183",
+      "page": "https://www.murraysflyshop.com/pages/which-dry-fly-floatant-works-the-best-a-comparison-test",
+      "author": "Murray's Fly Shop",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "Closest style only: a parachute dry from above, its body lying on the surface with hackle fibres spread in the film and dimples at their tips. The Gnat's palmered fibres meet the film the same way, all along the body.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/b/bdba6bd24de4cb18dcc119af048af5adbaffb02c.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Closest style only: a hackled dry from below at a low angle, hackle tips pressing silvery dimples into the film and the hook bend in the water.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "parachute-adams": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0196/1360/files/floatanttest1_large.jpg?v=1488053177",
+      "page": "https://www.murraysflyshop.com/pages/which-dry-fly-floatant-works-the-best-a-comparison-test",
+      "author": "Murray's Fly Shop",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "#16 Mr. Rapidan Parachute (same construction as the Parachute Adams) after the floatant test, low side view with its reflection. The hackle disc lies on the film, the body is flush with the surface, the tail fibres lie on the water and the post is upright.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0196/1360/files/floatanttest2_large.jpg?v=1488053183",
+      "page": "https://www.murraysflyshop.com/pages/which-dry-fly-floatant-works-the-best-a-comparison-test",
+      "author": "Murray's Fly Shop",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "The same parachute seen from above: the hackle spread flat in a disc on the film, the body and tail lying on the surface, small dimples and droplets at the fibre tips.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "rackelhanen": [
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Closest style (a poly-yarn sedge, not the Rackelhanen itself): low side view, the shaggy yarn wing over a dark head, the body in the film, a dark reflection under the whole fly, the tippet's bright meniscus leading off to the left.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "red-tag": [
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/1202b760-d5b2-4fb1-a0c2-f6c9c5a95f0d_1000x667.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Closest style only: a collar-hackled dry on still water (this one has a long tail, which the Red Tag lacks). It shows how the lower hackle fibres pierce the film and the bend hangs below. Without a tail the rear would sit lower.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/4/4bcd48cfedfb61c42b5abdeeef82bd75ee4041e9.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Closest style only: a peacock-bodied hackled dry from below. Dark herl body and hook silhouette, hackle dimples, hook bend below the surface.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "royal-wulff": [
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/6/649a6a24d662962f52de274b5c79143b4fc3d09e.jpeg",
+      "page": "https://www.flyanglersonline.com/t/royal-wulff-floating-on-its-tippy-toes/53445",
+      "author": "Scientific Anglers magazine advertisement (photographer not named); scanned and posted by oldster",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Royal Wulff on water in a Scientific Anglers advertisement (likely staged): riding on the hackle and tail, the body clear of the film, the tail fibres on the surface, the hook bend just at the film with its reflection, the white wings upright, the tippet leading off the eye.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/4/4bcd48cfedfb61c42b5abdeeef82bd75ee4041e9.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Peacock-bodied, pale-winged hackled dry (Royal Coachman type, closest style to the Royal Wulff) from below: hackle fibres radiating and dimpling the film, the tail in a round dimple, the hook bend below the surface.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/1202b760-d5b2-4fb1-a0c2-f6c9c5a95f0d_1000x667.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Hackled winged dry on still water (same style, not a Wulff). The body is clear of the film, the lower hackle and tail tips are in it and the bend goes through the surface.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "stimulator": [
+    {
+      "image": "https://live.staticflickr.com/4120/34874819994_4abc35a545_z.jpg",
+      "page": "https://www.flickr.com/photos/35758965@N05/34874819994/",
+      "author": "dataminer007 (Flickr)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A Stimulator (yellow abdomen, orange thorax, grizzly front hackle, elk wing and tail) on calm blue water at eye level, eye left, tippet lying on the surface: the fly stands on its palmered and front hackle, the abdomen clear of the film, the hook bend reaching down to the surface, wing raised low over the back. Looks freshly dressed (high).",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://web.archive.org/web/20190818223157im_/https://wiflyfisher.com/images/underwater/overhead-CDC-elk-royal-trude.jpg",
+      "page": "https://www.wiflyfisher.com/Trouts-Window-of-Vision.asp",
+      "author": "WiFlyFisher.com (no photographer named)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "The same two flies seen from almost straight underneath: the CDC & Elk's whole underside (body, CDC fibres and the spread hair wing) pressed into the film; the Royal Trude (collar hackle, hair down-wing) shows its body and hackle points dimpling the film. Wayback copy (live file 404). Closest style: Royal Trude (Trude-family ancestor of the Stimulator) from below: hackle points dimpling the film.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "streaking-caddis": [
+    {
+      "image": "https://globalflyfisher.com/sites/default/files/imported_pictures/cdc_opening_shot.jpg",
+      "page": "https://globalflyfisher.com/tie-better/tying-cdc",
+      "author": "Hans Weilenmann (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "CDC & Elk (the exact pattern, tied by its originator) on rippled water, low three-quarter view, eye right: the CDC body and its fibres lie in the film, the hook bend hangs just below the surface, the deer-hair wing lies back low over the body with its tips trailing at or near the water, the square-cut butts stand up at the head, the tippet leaves the eye along the surface. Closest style: a hackle-less deer-hair-wing caddis with square-cut hair butts at the head; the Streaking Caddis's head is spun and much denser.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/ppf8.jpg",
+      "page": "https://globalflyfisher.com/gallery/photographing-floating-flies",
+      "author": "Nick Thomas (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "A poly-yarn sedge floating in a dish, low side view, eye left: the down-wing lies on the film and the body sits in it, the tippet meniscus leads away from the eye. Not this pattern. Closest style: a big down-wing sedge lying on the film.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "black-ant": [
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/435872332/large.jpeg",
+      "page": "https://www.inaturalist.org/observations/244365133",
+      "author": "Benny Albro (iNaturalist)",
+      "license": "CC BY 4.0",
+      "view": "above",
+      "shows": "Natural, not a fly: a winged Lasius ant floating dead at the shore, lying in the film with air bubbles round it.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://inaturalist-open-data.s3.amazonaws.com/photos/703307720/large.jpg",
+      "page": "https://www.inaturalist.org/observations/384222814",
+      "author": "Matt Pelikan (iNaturalist)",
+      "license": "CC BY 4.0",
+      "view": "above",
+      "shows": "Natural, not a fly: a winged fire-ant alate floating in a bird bath, wings spread on the water, body in the film.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "f-fly": [
+    {
+      "image": "https://globalflyfisher.com/sites/default/files/imported_pictures/cdc_opening_shot.jpg",
+      "page": "https://globalflyfisher.com/tie-better/tying-cdc",
+      "author": "Hans Weilenmann (The Global FlyFisher)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Closest style (a CDC & Elk, not an F-fly): CDC & Elk (the exact pattern, tied by its originator) on rippled water, low three-quarter view, eye right: the CDC body and its fibres lie in the film, the hook bend hangs just below the surface, the deer-hair wing lies back low over the body with its tips trailing at or near the water, the square-cut butts stand up at the head, the tippet leaves the eye along the surface.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "grey-duster": [
+    {
+      "image": "https://substack-post-media.s3.amazonaws.com/public/images/1202b760-d5b2-4fb1-a0c2-f6c9c5a95f0d_1000x667.jpeg",
+      "page": "https://cosmicjohn.substack.com/p/aspects-of-a-dry-fly",
+      "author": "CosmicJohn (Box of Rain, Substack)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Closest style only: a collar-hackled dry on still water. This one has a tail and so rides level, with the body clear. The Duster lacks the tail and drops its rear into the film.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.flyanglersonline.com/uploads/default/original/2X/b/bdba6bd24de4cb18dcc119af048af5adbaffb02c.jpeg",
+      "page": "https://www.flyanglersonline.com/t/do-we-fishermen-fly-tiers-rely-too-much-on-horizontal-views-of-our-flies/53338/23",
+      "author": "J. Castwell (\"Flies Only\", FlyAnglers Online; posted by Bruce_Norikane)",
+      "license": "All rights reserved; reference only",
+      "view": "below",
+      "shows": "Closest style only: a hackled dry from below at a low angle. Hackle tips dimple the film and the hook bend hangs in the water.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
+  ],
+  "klinkhamer-special": [
+    {
+      "image": "https://www.tomsutcliffe.co.za/newsletters/Klinkhamer_Secial_in_the_water_1.jpg",
+      "page": "https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html",
+      "author": "Hans van Klinken (Tom Sutcliffe's site)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Dark Klinkhamer seen through the side of a glass at the surface: hackle flat in the film, thorax just under it, abdomen curving down at about 30° (chord) to the bend, bend and point fully submerged; mirror reflection above.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.tomsutcliffe.co.za/newsletters/Kopie_van_klink02.jpg",
+      "page": "https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html",
+      "author": "Hans van Klinken (Tom Sutcliffe's site)",
+      "license": "All rights reserved; reference only",
+      "view": "side",
+      "shows": "Tan Klinkhamer half-and-half view (captioned 'A highly visible wing is invaluable'): white post upright above the surface, hackle fibres spread on the film, thorax hanging just below, abdomen hanging steeply (about 50°) with the bend straight down.",
+      "compare": "how it sits: what is in, through and above the film"
+    },
+    {
+      "image": "https://www.tomsutcliffe.co.za/newsletters/Klinkhamer_Special_in_the_water_5.jpg",
+      "page": "https://www.tomsutcliffe.co.za/fly-fishing/fly-tying/item/248-hans-van-klinken-on-his-klinkhamer-special.html",
+      "author": "Hans van Klinken (Tom Sutcliffe's site)",
+      "license": "All rights reserved; reference only",
+      "view": "above",
+      "shows": "From above, low angle: each hackle fibre lies in the film with a long bright meniscus and a dimple at the tip; the thorax dark at the centre, the abdomen seen foreshortened going down and away under water.",
+      "compare": "how it sits: what is in, through and above the film"
+    }
   ]
 }

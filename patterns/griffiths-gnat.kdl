@@ -38,6 +38,8 @@ references {
     "https://www.fish4flies.com/img/flies/Large/1586-1586.jpg" page="https://www.fish4flies.com/Dry/Hackled/Griffiths-Gnat" license="All rights reserved; reference only" flip=#true note="Side view"
 }
 
+// Assumption: Tied with undersized hackle to sit low: the herl body lies in the film (Craven).
+sits body
 hook dry-standard size=18
 thread black size="8/0"
 

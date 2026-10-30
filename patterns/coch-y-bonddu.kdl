@@ -41,6 +41,9 @@ references {
 }
 
 // Assumption: a down-eye dry hook; the traditional British choice is an up-eye Captain Hamilton.
+// Assumption: tailless, it cants tail down on its front hackle, the plump body's rear in the
+// film, as Sadil describes the Grey Duster; no photo of it on the water found.
+sits hackle
 hook dry-standard size=12
 thread black size="8/0"
 

@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
-import { blankFly, checkDraft, draftOf, isOwnFly, newMaterial, newStep, ownId, ownRecipe, packFly, PATTERN_FORM, recipeText, renameMaterial, unpackFly } from "./own";
+import { blankFly, checkDraft, draftOf, isOwnFly, newMaterial, newStep, ownId, ownRecipe, packFly, PATTERN_FORM, recipeText, renameMaterial, unpackFly, withType } from "./own";
 
 const woolly = (() => {
   const r = loadRecipe(readFileSync(new URL("../../patterns/woolly-bugger.kdl", import.meta.url), "utf8"));
@@ -35,6 +35,15 @@ describe("own flies", () => {
 });
 
 describe("a fly being built", () => {
+  it("drops how a floating fly sits when it becomes a fly that sinks", () => {
+    const r = loadRecipe(readFileSync(new URL("../../patterns/adams.kdl", import.meta.url), "utf8"));
+    if (!r.ok) throw new Error("adams");
+    expect(r.recipe.sits).toBe("hackle");
+    expect(withType(r.recipe, "wet").sits).toBeUndefined();
+    expect(checkDraft(withType(r.recipe, "wet")).problems).toEqual([]);
+    expect(withType(r.recipe, "terrestrial").sits).toBe("hackle");
+  });
+
   it("shows every step and has nothing to do when finished", () => {
     const c = checkDraft(woolly);
     expect(c.recipe).toEqual(woolly);

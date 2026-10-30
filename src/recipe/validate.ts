@@ -317,5 +317,11 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     if (!used.has(m.id)) rule("neverUsed", { m: m.id }, ["materials", i, "id"]);
   });
   if (!finished) rule("endWithWhipFinish", {}, ["steps"]);
+  if (recipe.sits && !floats(recipe)) rule("sitsFloats", {}, ["sits"]);
   return errors;
+}
+
+/** Whether a fly floats, as src/tying/fishing.ts derives where it fishes: dry flies, terrestrials and emergers do. */
+export function floats(recipe: Pick<Recipe, "type" | "fishes">): boolean {
+  return recipe.fishes ? recipe.fishes === "surface" || recipe.fishes === "film" : ["dry", "terrestrial", "emerger"].includes(recipe.type);
 }

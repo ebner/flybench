@@ -33,6 +33,9 @@ references {
     "https://upload.wikimedia.org/wikipedia/commons/0/06/Elk_Hair_Caddis2.jpg" page="https://commons.wikimedia.org/wiki/File:Elk_Hair_Caddis2.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
 }
 
+// Assumption: Damp, the dubbed body rides in the film under the elk wing, whose tips rest on
+// the water (Akl); judged from the dressing and photos of hair-wing sedges on the water.
+sits body
 hook dry-standard size=14
 thread tan size="8/0"
 

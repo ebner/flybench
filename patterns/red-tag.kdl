@@ -35,6 +35,9 @@ references {
     "https://upload.wikimedia.org/wikipedia/commons/6/6e/Red_Tag_Trout_Fly_Dry.jpg" page="https://commons.wikimedia.org/wiki/File:Red_Tag_Trout_Fly_Dry.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Seen from slightly above; a generous tag"
 }
 
+// Assumption: tailless, it cants tail down on its front hackle with the rear of the body and
+// the tag in the film, as Sadil describes the Grey Duster; no photo of it on the water found.
+sits hackle
 hook dry-standard size=14
 thread black size="8/0"
 

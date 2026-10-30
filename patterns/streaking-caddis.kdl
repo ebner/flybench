@@ -35,6 +35,9 @@ references {
     "https://img.youtube.com/vi/Zni7K_gob8I/maxresdefault.jpg" page="https://globalflyfisher.com/video/streaking-caddis-0" license="All rights reserved; reference only" note="Side view, video thumbnail"
 }
 
+// Assumption: No hackle under it: the body lies in the film under the hair wing, the head's
+// flat underside on it (Boström and Bergqvist); judged from the dressing.
+sits body
 hook dry-standard size=10
 // GSP thread, strong enough to spin the hair.
 thread black size="6/0"

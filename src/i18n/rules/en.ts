@@ -73,5 +73,6 @@ export const RULES_EN: RuleCatalog = {
   neverUsedAfterTieIn: (p) => `“${p.m}” is tied in but never wound or pulled over.`,
   neverUsed: (p) => `“${p.m}” is listed but never used.`,
   endWithWhipFinish: () => "The fly ends with a whip finish.",
+  sitsFloats: () => "How a fly sits on the water only applies to a fly that floats.",
   tooMuchToDraw: () => "From this step on there are more turns than the 3D view can draw: use fewer turns or fewer steps.",
 };

@@ -41,6 +41,9 @@ references {
     "https://upload.wikimedia.org/wikipedia/commons/7/77/Crystal_Stimulator_Lime_Green.jpg" page="https://commons.wikimedia.org/wiki/File:Crystal_Stimulator_Lime_Green.jpg" author="Mike Cline" license="CC BY-SA 4.0" flip=#true note="Side view, Crystal variant"
 }
 
+// Assumption: It stands on its palmered and front hackles with the abdomen just clear of the
+// film and the tail tips on it (Rosenbauer; photos on the water).
+sits hackle
 hook dry-3xl-curved size=10
 thread orange size="6/0"
 

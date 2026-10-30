@@ -38,6 +38,10 @@ references {
     "https://www.swtu.org/wp-content/uploads/2023/12/Adams2-975.jpg" page="https://www.swtu.org/2023/12/04/adams/" author="Rusty Dunn" license="All rights reserved; reference only" note="Side view, wide wings"
 }
 
+// Assumption: Damp, it rides on its hackle and tail with the lower collar fibres through the
+// film and the body just clear of it (Flick and Peper on FAOL; photos of Catskill dries on the
+// water).
+sits hackle
 hook dry-standard size=14
 thread black size="8/0"
 

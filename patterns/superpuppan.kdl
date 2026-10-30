@@ -37,6 +37,9 @@ references {
     "https://globalflyfisher.com/sites/default/files/imported_pictures/original_24_2.jpg" page="https://globalflyfisher.com/patterns/super-pupa" author="Martin Joergensen" license="All rights reserved; reference only" note="Top view, eye up"
 }
 
+// Assumption: A pupa risen to the surface: the slim body lies in the film between the two rows
+// of side fibres; judged from the dressing, no photo of it on the water found.
+sits body
 hook dry-standard size=12
 thread black size="8/0"
 

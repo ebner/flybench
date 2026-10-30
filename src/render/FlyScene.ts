@@ -447,17 +447,18 @@ export class FlyScene {
       // Tail down from the front of the shank, for an emerger in the film.
       const front = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.85 * this.build.hook.shankLength, 0, 0)));
       this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
-      const settle = () => {
-        // A floating fly comes to rest on its fibre tips, tilted until front and rear both bear.
+      const sits = setting.fishing.sits;
+      const floats = setting.real && (sits === "hackle" || sits === "body" || sits === "half") ? sits : null;
+      const settle = (how: "hackle" | "body" | "half") => {
+        // A floating fly comes to rest as it sits, tilted until front and rear both bear.
         this.rig.matrix.identity();
         this.rig.updateMatrixWorld(true);
-        const rest = this.restingPose();
+        const rest = this.restingPose(how);
         this.rig.matrix.copy(rotationAbout(rest.about, rest.angle));
         this.rig.updateMatrixWorld(true);
         return rest.level;
       };
-      const floats = setting.real && setting.fishing.depth === "surface";
-      if (floats) level = settle();
+      if (floats) level = settle(floats);
       else level = setting.real && setting.fishing.depth === "deep" ? subject.max.y + deepWater(subject) : waterLevel(setting.fishing.depth, subject);
       if (setting.real) {
         // A fished fly is wet all over, soaked where it is under the water. Wet fibres clump, so
@@ -472,7 +473,7 @@ export class FlyScene {
             }),
           ),
         );
-        if (floats) level = settle();
+        if (floats) level = settle(floats);
       }
     } else {
       // The natural moves into the rig (still at rest), so the water carries it as it does a fly.
@@ -699,7 +700,6 @@ export class FlyScene {
       .multiply(new THREE.Matrix4().makeTranslation(-c.x, -c.y, -c.z))
       .multiply(w.hang);
     this.rig.updateMatrixWorld(true);
-    // The tippet follows the eye as the fly moves.
     // The tippet follows the eye and lies on the ripples as they pass.
     if (w.line) {
       const start = w.line.start.clone().applyMatrix4(this.fly.matrixWorld);
@@ -711,60 +711,86 @@ export class FlyScene {
   }
 
   /**
-   * How a floating fly rests on a flat film in the realistic water: on the tips of its fibres
-   * (hackle, tail) and, where they don't reach, its hook, tilted about its weight (the hook's,
-   * towards the bend) until it bears both in front of that and behind it. The surface's level
-   * is where the lowest of them dent it.
+   * How a floating fly rests on a flat film in the realistic water, once fished a while. Riding
+   * on its hackle, it bears on the tips of its fibres (hackle, tail) and, where they don't reach,
+   * its hook, tilted about its weight (the hook's, towards the bend) until it bears both in front
+   * of that and behind it; damp, it settles until its body all but touches the film. Lying with
+   * its body in the film or half under, it is tilted until its body bears alike front and rear,
+   * and sinks to that depth. The tips stay at or under the film.
    */
-  private restingPose(): { about: THREE.Vector3; angle: number; level: number } {
-    // What bears on the film is the dressing; the hook's bend hangs through it. The hook counts
-    // only for a half the dressing doesn't reach (a bare shank).
+  private restingPose(sits: "hackle" | "body" | "half"): { about: THREE.Vector3; angle: number; level: number } {
+    // The dressing bears on the film; the hook's bend hangs through it. The hook counts only for
+    // a half the dressing doesn't reach (a bare shank). The body is the dressing that isn't fibres.
     const points: THREE.Vector3[] = [];
+    const core: THREE.Vector3[] = [];
     const hookPoints: THREE.Vector3[] = [];
     const m = new THREE.Matrix4();
     this.fly.updateMatrixWorld(true);
     const inHook = new Set<THREE.Object3D>();
     this.hook?.traverse((o) => inHook.add(o));
+    const sample = (o: THREE.Mesh, into: THREE.Vector3[][]) => {
+      const pos = o.geometry.getAttribute("position");
+      const stride = Math.max(1, Math.floor(pos.count / 4000));
+      for (let i = 0; i < pos.count; i += stride) {
+        const p = new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
+        for (const list of into) list.push(p);
+      }
+    };
+    // The body: wraps (thread, floss, dubbing, herl, a hackle's stem), covers and extended bodies,
+    // and spun hair, a body made of fibres; not wings, posts, legs, eyes or beads.
+    const bodies = new Set<THREE.Object3D>();
+    const spun = new Set<THREE.Object3D>();
+    this.build!.steps.forEach((step, i) =>
+      step.pieces.forEach((p, j) => {
+        const into = p.type === "wraps" || p.type === "cover" || p.type === "extension" ? bodies : p.type === "bundle" && p.span !== undefined ? spun : null;
+        this.stepViews[i]![j]!.piece.object.traverse((o) => into?.add(o));
+      }),
+    );
     this.fly.traverseVisible((o) => {
       if (!(o instanceof THREE.Mesh)) return;
-      if (inHook.has(o)) {
-        const pos = o.geometry.getAttribute("position");
-        const stride = Math.max(1, Math.floor(pos.count / 4000));
-        for (let i = 0; i < pos.count; i += stride) hookPoints.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
-        return;
-      }
+      if (inHook.has(o)) return sample(o, [hookPoints]);
       if (o instanceof THREE.InstancedMesh) {
         // Each instance is one fibre along its own y axis: its ends.
         o.geometry.computeBoundingBox();
         const { min, max } = o.geometry.boundingBox!;
         for (let i = 0; i < o.count; i++) {
           o.getMatrixAt(i, m).premultiply(o.matrixWorld);
-          points.push(new THREE.Vector3(0, min.y, 0).applyMatrix4(m), new THREE.Vector3(0, max.y, 0).applyMatrix4(m));
+          const ends = [new THREE.Vector3(0, min.y, 0).applyMatrix4(m), new THREE.Vector3(0, max.y, 0).applyMatrix4(m)];
+          points.push(...ends);
+          if (spun.has(o)) core.push(...ends);
         }
         return;
       }
-      const pos = o.geometry.getAttribute("position");
-      const stride = Math.max(1, Math.floor(pos.count / 4000));
-      for (let i = 0; i < pos.count; i += stride) points.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
+      sample(o, bodies.has(o) ? [points, core] : [points]);
     });
+    const shank = this.build!.hook.shankLength;
+    const at = (x: number) => this.fly.localToWorld(this.space!.point(new THREE.Vector3(x * shank, 0, 0)));
     // Assumption: the hook's weight sits about a third of the way along the shank from the bend.
-    const about = this.fly.localToWorld(this.space!.point(new THREE.Vector3(0.3 * this.build!.hook.shankLength, 0, 0)));
+    const about = at(0.3);
+    const bend = at(0);
+    const eye = at(1);
+    // Along the middle of the shank: not the head or the tag.
+    const span = (p: THREE.Vector3) => {
+      const u = (p.x - bend.x) / (eye.x - bend.x);
+      return u > 0.1 && u < 0.85;
+    };
+    const body = core.filter(span);
+    if (body.length === 0) body.push(...hookPoints.filter(span));
+    // A bare tube has no vertices along its middle: its axis, then.
+    if (body.length === 0) for (let u = 0.15; u < 0.85; u += 0.1) body.push(at(u));
+    const c = (angle: number) => Math.cos(angle);
+    const s = (angle: number) => Math.sin(angle);
+    const lifted = (p: THREE.Vector3, angle: number) => about.y + s(angle) * (p.x - about.x) + c(angle) * (p.y - about.y);
     // The third lowest, so one stray fibre doesn't carry the fly.
     const low = (ys: number[]) => ys.sort((a, b) => a - b)[Math.min(2, ys.length - 1)] ?? 0;
-    const turned = (angle: number) => {
-      const c = Math.cos(angle);
-      const s = Math.sin(angle);
+    const turned = (angle: number, bearing: THREE.Vector3[]) => {
       const halves = (list: THREE.Vector3[]) => {
         const front: number[] = [];
         const rear: number[] = [];
-        for (const p of list) {
-          const x = p.x - about.x;
-          const y = p.y - about.y;
-          (c * x - s * y > 0 ? front : rear).push(about.y + s * x + c * y);
-        }
+        for (const p of list) (c(angle) * (p.x - about.x) - s(angle) * (p.y - about.y) > 0 ? front : rear).push(lifted(p, angle));
         return { front, rear };
       };
-      const dressing = halves(points);
+      const dressing = halves(bearing);
       const hook = halves(hookPoints);
       return {
         front: low(dressing.front.length ? dressing.front : hook.front),
@@ -772,18 +798,33 @@ export class FlyScene {
       };
     };
     // Nose up raises the front: find the tilt at which front and rear bear alike.
+    const bearing = sits === "hackle" ? points : body;
     let a = -0.6;
     let b = 0.6;
     for (let k = 0; k < 30; k++) {
       const mid = (a + b) / 2;
-      const t = turned(mid);
+      const t = turned(mid, bearing);
       if (t.front < t.rear) a = mid;
       else b = mid;
     }
     const angle = (a + b) / 2;
-    const t = turned(angle);
+    const t = turned(angle, points);
     // Assumption: the tips press about a fiftieth of a gape into the film.
-    return { about, angle, level: Math.min(t.front, t.rear) + 0.02 };
+    const tips = Math.min(t.front, t.rear) + 0.02;
+    // The body's underside, and the shank above it.
+    const under = body.reduce((lowest, p) => (lifted(p, angle) < lifted(lowest, angle) ? p : lowest));
+    const bottom = low(body.map((p) => lifted(p, angle)));
+    const u = THREE.MathUtils.clamp((under.x - bend.x) / (eye.x - bend.x), 0, 1);
+    const axis = lifted(bend, angle) + u * (lifted(eye, angle) - lifted(bend, angle));
+    const depth = Math.max(0, axis - bottom);
+    // Its top: the third highest, as for the underside.
+    const top = -low(body.map((p) => -lifted(p, angle)));
+    // Assumption: fished a while, a hackled fly's body rides about a twentieth of a gape over the
+    // film (its lower hackle fibres through it); a body in the film sinks a fifth of its depth
+    // below the shank into it, as a natural's does; a fly that floats half under (foam, a foam
+    // back) has the film halfway up its body.
+    const level = sits === "hackle" ? bottom - 0.05 : sits === "body" ? bottom + 0.4 * depth : (bottom + top) / 2;
+    return { about, angle, level: Math.max(tips, level) };
   }
 
   /**

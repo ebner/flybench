@@ -41,6 +41,9 @@ references {
     "https://globalflyfisher.com/sites/default/files/article_pictures/4_5.jpg" page="https://globalflyfisher.com/picture/dyret" author="Torben Meldgaard" license="All rights reserved; reference only" note="Side view in the vise"
 }
 
+// Assumption: With the hackle trimmed underneath, the body lies in the film on the side fibres;
+// judged from the dressing, no photo of it on the water found.
+sits body
 hook dry-standard size=12
 thread brown size="8/0"
 
