@@ -474,6 +474,14 @@ export class FlyScene {
           ),
         );
         if (floats) level = settle(floats);
+        if (floats === "body" || floats === "half") {
+          const lay = this.layWings(level);
+          const before = wet;
+          wet = () => {
+            lay();
+            before();
+          };
+        }
       }
     } else {
       // The natural moves into the rig (still at rest), so the water carries it as it does a fly.
@@ -708,6 +716,70 @@ export class FlyScene {
       w.line.mesh.geometry = tippetGeometry(tippetPath(start, direction, w.level, w.line.floating, (x, z) => rippleHeight(x, z, t)));
       old.dispose();
     }
+  }
+
+  /**
+   * A fly lying low in the film, fished a while: its wings laid back over it come down until their
+   * tips rest on the water (no lower than along the shank). Returns what puts them back.
+   */
+  // Assumption: damp hair, CDC and feather wings that slope back over a low-floating fly sink until
+  // their tips lie on the film, as in photos of CDC & Elks and hair-wing sedges on the water;
+  // upright wings stay up.
+  private layWings(level: number): () => void {
+    const undo: (() => void)[] = [];
+    const m = new THREE.Matrix4();
+    const tips = (object: THREE.Object3D) => {
+      object.updateMatrixWorld(true);
+      const ys: number[] = [];
+      object.traverseVisible((o) => {
+        if (o instanceof THREE.InstancedMesh) {
+          o.geometry.computeBoundingBox();
+          const end = o.geometry.boundingBox!.max.y;
+          for (let i = 0; i < o.count; i++) ys.push(new THREE.Vector3(0, end, 0).applyMatrix4(o.getMatrixAt(i, m).premultiply(o.matrixWorld)).y);
+        } else if (o instanceof THREE.Mesh) {
+          const pos = o.geometry.getAttribute("position");
+          const v = new THREE.Vector3();
+          for (let i = 0; i < pos.count; i++) ys.push(v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld).y);
+        }
+      });
+      // The third lowest, so one stray fibre doesn't hold the wing up.
+      return ys.sort((a, b) => a - b)[Math.min(2, ys.length - 1)] ?? Infinity;
+    };
+    this.build!.steps.forEach((step, i) =>
+      step.pieces.forEach((p, j) => {
+        const laidBack = (p.type === "bundle" && p.direction === "back") || p.type === "feather";
+        if (!laidBack || p.side !== "top" || p.angle <= 0 || p.angle >= THREE.MathUtils.degToRad(60)) return;
+        const object = this.stepViews[i]![j]!.piece.object;
+        object.updateMatrix();
+        const home = object.matrix.clone();
+        const root = this.space!.point(new THREE.Vector3(p.x, p.radius, 0));
+        // Turning it about its root, across the shank: a positive turn brings the tips down.
+        const turn = (angle: number) => {
+          object.matrix.copy(rotationAbout(root, angle)).multiply(home);
+          object.matrix.decompose(object.position, object.quaternion, object.scale);
+        };
+        // Assumption: the tips press about a fiftieth of a gape into the film.
+        const film = level - 0.02;
+        if (tips(object) <= film) return;
+        let a = 0;
+        let b = p.angle;
+        turn(b);
+        if (tips(object) < film) {
+          for (let k = 0; k < 24; k++) {
+            const mid = (a + b) / 2;
+            turn(mid);
+            if (tips(object) > film) a = mid;
+            else b = mid;
+          }
+          turn(b);
+        }
+        undo.push(() => {
+          object.matrix.copy(home);
+          object.matrix.decompose(object.position, object.quaternion, object.scale);
+        });
+      }),
+    );
+    return () => undo.forEach((u) => u());
   }
 
   /**
