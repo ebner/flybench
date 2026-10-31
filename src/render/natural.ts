@@ -8,7 +8,11 @@ import { mulberry32 } from "./random";
  * Units: the body length is 1, the head points to +x, the back to +y; the rear end is at x = 0.
  * The caller scales it (to gapes, to show it beside a fly at its real size).
  */
-export function buildNatural(n: Natural): THREE.Group {
+/**
+ * A natural's 3D model, its body one unit long. `film`: on the water, the height of the surface
+ * in the model's own units, which holds its legs, antennae and tails up: no joint goes below it.
+ */
+export function buildNatural(n: Natural, film?: number): THREE.Group {
   const group = new THREE.Group();
   group.name = n.id;
   const spine = new Spine(n);
@@ -23,8 +27,12 @@ export function buildNatural(n: Natural): THREE.Group {
   const hairs = bodyHairs(n, spine, random);
   if (hairs) group.add(hairs);
   for (const part of n.parts) {
-    const object = partObject(part, n, spine, random);
-    if (object) group.add(object);
+    const object = partObject(part, n, spine, random, film);
+    if (!object) continue;
+    // Tagged, so the water can tell its bulk from its legs and feelers.
+    object.userData.part = part.part;
+    if (part.part === "wings") object.userData.shape = part.shape;
+    group.add(object);
   }
   return group;
 }
@@ -66,7 +74,8 @@ function poseOf(n: Natural): Pose {
   if (n.stage === "pupa") return "fold";
   // On its feet it stands; resting its body on the film, or spent, its legs lie spread on it.
   if (n.rides === "on-surface") return n.sits === "body" || n.sits === "spent" ? "spread" : "stand";
-  if (n.rides === "in-film") return n.stage === "emerger" ? "drift" : "stand";
+  // Fallen in (an ant, a beetle), it lies awash with its legs spread on the film.
+  if (n.rides === "in-film") return n.stage === "emerger" ? "drift" : n.stage === "adult" ? "spread" : "stand";
   if (n.rides === "crawling") return "crawl";
   return "drift";
 }
@@ -829,11 +838,12 @@ function blade(l: number, w: number, c: string, opacity: number, kind: "leaf" | 
  * One leg from its base: thigh (femur), shin (tibia) and foot (tarsus), held as the pose says.
  * `lean` runs from −1 (the hind pair, reaching back) to 1 (the front pair, reaching forward).
  */
-function leg(part: Extract<NaturalPart, { part: "legs" }>, n: Natural, pose: Pose, base: THREE.Vector3, side: number, L: number, lean: number, front: boolean, hind: boolean, random: () => number): THREE.Object3D {
+function leg(part: Extract<NaturalPart, { part: "legs" }>, n: Natural, pose: Pose, base: THREE.Vector3, side: number, L: number, lean: number, front: boolean, hind: boolean, random: () => number, film?: number): THREE.Object3D {
   const lf = L * part.femur;
   const lt = L * part.tibia;
   const ls = L * Math.max(0.1, 1 - part.femur - part.tibia);
-  const jumping = pose === "jumping" || (hind && !part.pose && (part.hind ?? 1) > 1.4);
+  // On the water a grasshopper's hind legs lie spread with the others, not folded to jump.
+  const jumping = pose === "jumping" || (pose !== "spread" && hind && !part.pose && (part.hind ?? 1) > 1.4);
   const v = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z * side).normalize();
   let df: THREE.Vector3;
   let dt: THREE.Vector3;
@@ -860,12 +870,13 @@ function leg(part: Extract<NaturalPart, { part: "legs" }>, n: Natural, pose: Pos
     dt = v(0.8, -0.55, 0.08);
     ds = v(-0.85, -0.25, 0.3);
   } else if (pose === "stand") {
-    // Standing on the film: thighs out to the sides, shins angled down, feet flat on it, so the
-    // body stays low over the water.
-    // Assumption: from photos of duns and midges on the water.
-    df = v(lean * 0.45, 0.15, 0.95);
-    dt = v(lean * 0.45, -0.7, 0.65);
-    ds = v(lean * 0.8, -0.08, 0.6);
+    // Standing on the film: thighs out to the sides, shins splayed out and down, feet flat on
+    // it, so the body rides close to the water.
+    // Assumption: from photos of duns and midges on the water (a dun's belly a leg's width or
+    // two over the film).
+    df = v(lean * 0.45, 0.1, 0.95);
+    dt = v(lean * 0.45, -0.42, 0.8);
+    ds = v(lean * 0.8, -0.06, 0.6);
   } else if (pose === "spread") {
     // Its body on the film, the legs lie spread out on it, the feet about level with the belly.
     // Assumption: from photos of caddis, stoneflies and spent spinners on the water.
@@ -897,15 +908,16 @@ function leg(part: Extract<NaturalPart, { part: "legs" }>, n: Natural, pose: Pos
   const jitter = () => (random() - 0.5) * 0.12;
   df.add(new THREE.Vector3(jitter(), jitter(), jitter())).normalize();
   dt.add(new THREE.Vector3(jitter(), jitter(), jitter())).normalize();
-  const knee = base.clone().addScaledVector(df, lf);
-  const ankle = knee.clone().addScaledVector(dt, lt);
-  const foot = ankle.clone().addScaledVector(ds, ls);
-  const { path, at } = jointed([base, knee, ankle, foot]);
-  const kf = part.femur;
-  const kt = part.femur + part.tibia;
   // Assumption: thigh about a twelfth of the leg's length across (a grasshopper's jumping thigh twice that).
   // A long leg is no stouter than a short one: capped at a usual leg's length.
   const thick = Math.min(part.length, 0.6) * 0.04 * (jumping ? 2 : 1) * part.thick;
+  const knee = base.clone().addScaledVector(df, lf);
+  const ankle = knee.clone().addScaledVector(dt, lt);
+  const foot = ankle.clone().addScaledVector(ds, ls);
+  onFilm([base, knee, ankle, foot], film, thick * 0.5);
+  const { path, at } = jointed([base, knee, ankle, foot]);
+  const kf = part.femur;
+  const kt = part.femur + part.tibia;
   const light = color(part.color);
   const dark = light.clone().multiplyScalar(0.22);
   const mesh = tube(
@@ -1109,7 +1121,13 @@ function conform(fin: THREE.Object3D, rise: (x: number) => number) {
   });
 }
 
-function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => number): THREE.Object3D | null {
+/** Points of a leg, antenna or tail lifted onto the film (by `r`, their thickness), the root left where it grows. */
+function onFilm(points: THREE.Vector3[], film: number | undefined, r: number) {
+  if (film === undefined) return;
+  for (const p of points.slice(1)) p.y = Math.max(p.y, film + r);
+}
+
+function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => number, film?: number): THREE.Object3D | null {
   const thorax = spine.named("thorax", 0.7);
   const head = spine.named("head", 0.95);
   const abdomen = spine.named("abdomen", 0.3);
@@ -1135,6 +1153,7 @@ function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => n
         const pts = [0, 0.33, 0.66, 1].map((f) =>
           base.clone().addScaledVector(dir, length * f).add(new THREE.Vector3(0, 0.08 * length * f * f, 0)),
         );
+        onFilm(pts, film, 0.006);
         g.add(strand(pts, 0.006, part.color, 0.3, part.banded ? 9 : 0));
         if (part.hairs > 0) list.push(...fringe(smooth(pts, 30), part.hairs, length * 0.12, color(part.color), random, new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), spread)));
       }
@@ -1163,6 +1182,7 @@ function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => n
           );
         }
         // Assumption: a club the last quarter, three times as thick.
+        onFilm(pts, film, 0.004);
         g.add(strand(pts, 0.004, part.color, 0.3, rings, part.shape === "clubbed" ? 0.25 : 0));
         // A male midge's feathery plumes: whorls of long hairs all along.
         if (part.shape === "plumed") list.push(...fringe(smooth(pts, 40), 1, part.length * 0.3, color(part.color), random, new THREE.Vector3(0, 1, 0)), ...fringe(smooth(pts, 40), 1, part.length * 0.3, color(part.color), random, new THREE.Vector3(0, 0, 1)));
@@ -1189,7 +1209,7 @@ function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => n
         const lean = pairs === 1 ? 0 : THREE.MathUtils.lerp(-1, 1, i / (pairs - 1));
         for (const side of [-1, 1]) {
           const base = spine.surface(u, side * Math.PI * 0.62, 0.92);
-          g.add(leg(part, n, pose, base, side, L, lean, i === pairs - 1 && pairs >= 3, hind, random));
+          g.add(leg(part, n, pose, base, side, L, lean, i === pairs - 1 && pairs >= 3, hind, random, film));
         }
       }
       return g;

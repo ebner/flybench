@@ -18,7 +18,7 @@ import { RealWater } from "./real/RealWater";
 import { realMaterials } from "./real/upgrade";
 import { MAX_DIMPLES, rippleHeight, type Dimple } from "./real/waves";
 import { clinchKnot, tippetDimples, tippetGeometry, tippetMesh, tippetPath } from "./real/tippet";
-import { wetFly } from "./real/wet";
+import { CLINGS, wetFly } from "./real/wet";
 import { bedShadows } from "./real/shadows";
 
 const REST_DIRECTIONS = {
@@ -96,7 +96,8 @@ export function naturalFishing(n: Natural): Fishing {
       return { depth: "surface", motion: "drift", hang: 0, sits: n.sits ?? "feet" };
     case "in-film":
       // Assumption: an emerger hangs tail down in the film, as an emerger pattern does.
-      return { depth: "film", motion: "drift", hang: n.stage === "emerger" ? 35 : 0 };
+      // An adult that has fallen in (an ant, a beetle) lies awash, half under.
+      return { depth: "film", motion: "drift", hang: n.stage === "emerger" ? 35 : 0, ...(n.stage === "adult" && { sits: "half" as const }) };
     case "swimming":
       return { depth: "below", motion: "swim", hang: 0 };
     case "crawling":
@@ -164,6 +165,8 @@ export class FlyScene {
   private guideView = false;
   /** A natural (insect, shrimp, fish) shown beside or over the fly, or on its own. */
   private natural: THREE.Group | null = null;
+  /** What the natural was built from, to build it again on the water. */
+  private naturalData: Natural | null = null;
   /** The time last shown, so re-measuring can come back to it. */
   private time = 0;
   private water: {
@@ -468,8 +471,10 @@ export class FlyScene {
           this.build.steps.flatMap((step, i) =>
             step.pieces.map((p, j) => {
               const object = this.stepViews[i]![j]!.piece.object;
-              const under = sunkFly || new THREE.Box3().setFromObject(object).max.y < level;
-              return { object, look: p.look, wet: under ? ("soaked" as const) : ("damp" as const) };
+              const box = new THREE.Box3().setFromObject(object);
+              // Soaked where it is under: a body (not fibres) that is partly under carries water through.
+              const soaked = sunkFly || box.getCenter(new THREE.Vector3()).y < level || (box.min.y < level && !CLINGS.has(p.look));
+              return { object, look: p.look, wet: soaked ? ("soaked" as const) : ("damp" as const), under: sunkFly || box.max.y < level };
             }),
           ),
         );
@@ -490,7 +495,13 @@ export class FlyScene {
       this.fly.attach(this.natural!);
       subject = this.naturalBounds();
       const body = this.natural!.getObjectByName("body");
-      level = naturalLevel(setting.fishing, subject, body ? new THREE.Box3().setFromObject(body) : subject);
+      // Its bulk: the body, the pronotum and wings folded over its back (a beetle's wing cases).
+      const bulk = new THREE.Box3();
+      if (body) bulk.expandByObject(body);
+      for (const o of this.natural!.children) {
+        if (o.userData.part === "pronotum" || (o.userData.part === "wings" && o.userData.shape === "back")) bulk.expandByObject(o);
+      }
+      level = naturalLevel(setting.fishing, subject, bulk.isEmpty() ? subject : bulk);
       if (setting.fishing.sits === "feet" && body) {
         // Standing, it settles until four of its feet bear on the film, not only the lowest one.
         // A foot is what reaches below the belly; claws and segments close together are one foot.
@@ -514,6 +525,27 @@ export class FlyScene {
         });
         feet.sort((a, b) => a.y - b.y);
         if (feet.length >= 4) level = feet[3]!.y + 0.02;
+        // Assumption: its legs splay on the film until its belly rides just over it, about a tenth
+        // of its depth (as a Hexagenia dun's in photos); the film holds the legs (restOnFilm).
+        if (!bulk.isEmpty()) level = Math.max(level, bulk.min.y - 0.1 * (bulk.max.y - bulk.min.y));
+      }
+      // On the surface or awash, its legs, feelers and tails rest on the film, not through it:
+      // built again with the film holding them up.
+      if (this.naturalData && (setting.fishing.depth === "surface" || (setting.fishing.depth === "film" && setting.fishing.hang === 0))) {
+        const dry = this.natural!;
+        dry.updateMatrixWorld(true);
+        const onWater = buildNatural(this.naturalData, dry.worldToLocal(new THREE.Vector3(0, level, 0)).y);
+        onWater.matrix.copy(dry.matrix);
+        onWater.matrix.decompose(onWater.position, onWater.quaternion, onWater.scale);
+        this.fly.remove(dry);
+        this.fly.add(onWater);
+        this.natural = onWater;
+        wet = () => {
+          this.fly.remove(onWater);
+          disposeNatural(onWater);
+          this.fly.add(dry);
+          this.natural = dry;
+        };
       }
       const front = new THREE.Vector3(subject.max.x - 0.15 * (subject.max.x - subject.min.x), subject.getCenter(new THREE.Vector3()).y, 0);
       this.rig.matrix.copy(rotationAbout(front, THREE.MathUtils.degToRad(setting.fishing.hang)));
@@ -891,11 +923,11 @@ export class FlyScene {
     const depth = Math.max(0, axis - bottom);
     // Its top: the third highest, as for the underside.
     const top = -low(body.map((p) => -lifted(p, angle)));
-    // Assumption: fished a while, a hackled fly's body rides about a twentieth of a gape over the
-    // film (its lower hackle fibres through it); a body in the film sinks a fifth of its depth
-    // below the shank into it, as a natural's does; a fly that floats half under (foam, a foam
-    // back) has the film halfway up its body.
-    const level = sits === "hackle" ? bottom - 0.05 : sits === "body" ? bottom + 0.4 * depth : (bottom + top) / 2;
+    // Assumption: fished for a few minutes a fly is no longer dry: its body carries water. A
+    // hackled fly rides with its belly in the film (its lower third under, the lower hackle
+    // fibres through it); a body in the film is half under, to the shank; a fly that floats
+    // half under (a foam body or back) has six tenths of its depth under.
+    const level = sits === "hackle" ? bottom + 0.6 * depth : sits === "body" ? axis : bottom + 0.6 * (top - bottom);
     return { about, angle, level: Math.max(tips, level) };
   }
 
@@ -1179,6 +1211,7 @@ export class FlyScene {
       return;
     }
     const g = buildNatural(n);
+    this.naturalData = n;
     g.scale.setScalar(length);
     if (this.build && !this.finished.isEmpty()) {
       const fly = this.finished;
@@ -1574,13 +1607,15 @@ function naturalLevel(fishing: Fishing, all: THREE.Box3, body: THREE.Box3): numb
   switch (fishing.depth) {
     case "surface": {
       const h = body.max.y - body.min.y;
-      // Assumption: its body resting on the film sinks a fifth of its depth into it; spent, it
-      // lies half in it; standing, its feet just dent it.
-      if (fishing.sits === "body") return body.min.y + 0.2 * h;
-      if (fishing.sits === "spent") return body.min.y + 0.5 * h;
+      // Assumption: its body resting on the film sinks two fifths of its depth into it (wings and
+      // back above); spent, it lies more than half in it; standing, its feet just dent it.
+      if (fishing.sits === "body") return body.min.y + 0.4 * h;
+      if (fishing.sits === "spent") return body.min.y + 0.6 * h;
       return all.min.y + 0.04;
     }
     case "film":
+      // Assumption: an ant or beetle that has fallen in lies awash, six tenths of its body under.
+      if (fishing.sits === "half") return body.min.y + 0.6 * (body.max.y - body.min.y);
       return body.getCenter(new THREE.Vector3()).y;
     case "below":
       return all.max.y + 1;
