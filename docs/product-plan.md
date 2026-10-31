@@ -271,5 +271,23 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       "inherently difficult", perhaps to return to; a natural's page shows it turning in 3D on the
       same paper as a tied fly. The code, stills and tools stay.
 
+18. A fly builder made of parts (decided 2026-10-31, after the reviewer found the form builder too
+    complicated: "I don't understand all the step definitions and it takes a long time"). The
+    visitor builds a fly as they see it, not as it is tied: parts (tail, tag, body, rib, thorax,
+    hackle, wing, bead, legs, eyes, flash…) chosen from a picture palette, materials from swatches,
+    colours from chips, lengths and positions dragged on the 3D fly with the gape grid and snapped
+    to the proportions the patterns use (short / classic / long presets, exact numbers on request);
+    every setting of a part in plain words in its "More" drawer. Flybench writes the tying steps,
+    their order, the thread moves and the securing turns itself, so the fly is always valid; adding
+    a part plays its tying animation; a read-only Steps view shows the generated steps. Every
+    technique is a part's option (dubbed, wound, spun and clipped or extended body; collar,
+    palmered, parachute or beard hackle; shellback). A fly starts from a style (dry fly, parachute,
+    caddis, nymph, wet fly, streamer, emerger, terrestrial, salmon), a copy of any pattern (its
+    steps read back into parts; every pattern must round-trip to the same fly) or a bare hook.
+    Touch first (a bottom sheet on phones), undo and redo. It replaces the form builder at /build/;
+    saved flies, links and files open in it; the form editor stays in the studio. Paced as a
+    prototype first (layout, palette, swatches, dragging, the dry-fly style end to end) for the
+    reviewer to try, then the full builder, reviewed with Fable and Codex.
+
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.
