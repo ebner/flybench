@@ -26,7 +26,7 @@ pnpm test          # Vitest: recipe parsing/validation, simulation
 pnpm typecheck
 pnpm build         # typecheck + production build into dist/
 pnpm render:catalog  # gallery images and material swatches into public/renders/ (commit them)
-pnpm render:water  # path-traced stills of flies and naturals in the river (public/renders/water/, commit them)
+pnpm render:water  # path-traced stills of flies and naturals in the river (public/renders/water/; the water views are off, src/ui/features.ts)
 pnpm render        # finished flies to .cache/renders/ via headless Chromium
 pnpm refcheck      # proportion contact sheets against reference photos
 pnpm watercheck    # water stills beside photos of real flies and insects on the water (scripts/water-references.json)
@@ -68,7 +68,8 @@ src/edit/       editing recipes (no React): kdlEdit.ts edits KDL text in place (
                 schemaForm.ts describes a form from the Zod schemas, write.ts writes a recipe as KDL,
                 own.ts the visitors' own flies (fly builder: drafts, starting values, share links)
 src/studio/     the authoring studio (dev server only), on src/edit
-src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder, about)
+src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder, about;
+                features.ts switches off features kept for later: the water views)
 scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
 public/renders/ generated gallery images, material swatches (materials/) and water stills
                 (water/), committed; regenerate after recipe/renderer changes

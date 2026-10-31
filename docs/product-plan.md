@@ -267,6 +267,9 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       midge's belly just over the film, caddis, stoneflies and hoppers two fifths in it, ants and
       beetles awash, the film holding their legs, feelers and tails. If this can't be made right,
       the reviewer would rather turn the water views off.
+    - Decided 2026-10-31: the water views are switched off (`WATER_VIEWS` in src/ui/features.ts),
+      "inherently difficult", perhaps to return to; a natural's page shows it turning in 3D on the
+      same paper as a tied fly. The code, stills and tools stay.
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

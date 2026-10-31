@@ -70,12 +70,12 @@ const POSES: Record<NonNullable<Extract<NaturalPart, { part: "legs" }>["pose"]>,
   jumping: "jumping",
 };
 
-function poseOf(n: Natural): Pose {
+function poseOf(n: Natural, onWater: boolean): Pose {
   if (n.stage === "pupa") return "fold";
   // On its feet it stands; resting its body on the film, or spent, its legs lie spread on it.
   if (n.rides === "on-surface") return n.sits === "body" || n.sits === "spent" ? "spread" : "stand";
-  // Fallen in (an ant, a beetle), it lies awash with its legs spread on the film.
-  if (n.rides === "in-film") return n.stage === "emerger" ? "drift" : n.stage === "adult" ? "spread" : "stand";
+  // Fallen in (an ant, a beetle), it lies awash on the water with its legs spread on the film.
+  if (n.rides === "in-film") return n.stage === "emerger" ? "drift" : n.stage === "adult" && onWater ? "spread" : "stand";
   if (n.rides === "crawling") return "crawl";
   return "drift";
 }
@@ -1199,7 +1199,7 @@ function partObject(part: NaturalPart, n: Natural, spine: Spine, random: () => n
       const pairs = part.pair ? 3 : Math.max(1, Math.round((part.count ?? 6) / 2));
       const own = new Set(n.parts.flatMap((p) => (p.part === "legs" && p.pair && (p.at ?? "thorax") === (part.at ?? "thorax") ? [p.pair] : [])));
       const names = ["hind", "mid", "fore"] as const;
-      const pose = part.pose ? POSES[part.pose] : poseOf(n);
+      const pose = part.pose ? POSES[part.pose] : poseOf(n, film !== undefined);
       for (let i = 0; i < pairs; i++) {
         if (part.pair ? names[i] !== part.pair : pairs === 3 && own.has(names[i]!)) continue;
         const u = THREE.MathUtils.lerp(where.start + 0.15 * (where.end - where.start), where.end - 0.1 * (where.end - where.start), pairs === 1 ? 0.5 : i / (pairs - 1));

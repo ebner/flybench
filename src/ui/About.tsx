@@ -4,6 +4,7 @@ import { href } from "./router";
 import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
 import { linkTo } from "./linkTo";
+import { WATER_VIEWS } from "./features";
 
 export const REPO_URL = "https://github.com/ebner/flybench";
 export const AUTHOR = { name: "Hannes Ebner", url: "https://github.com/ebner" };
@@ -54,7 +55,7 @@ export function About() {
 
       <h2>{t.about.licenceHeading}</h2>
       <p>{t.about.licence(linkTo("https://creativecommons.org/licenses/by-sa/4.0/"), linkTo(`${REPO_URL}/blob/main/LICENSE`))}</p>
-      <p>{t.about.photoscans(linkTo("https://polyhaven.com/"))}</p>
+      {WATER_VIEWS && <p>{t.about.photoscans(linkTo("https://polyhaven.com/"))}</p>}
     </main>
   );
 }

@@ -20,6 +20,7 @@ import { naturalLengthFor } from "../catalog/naturals";
 import { findNatural } from "../naturals";
 import { PrintCard } from "./PrintCard";
 import { useNaturalPictures, useWaterStills } from "./renders";
+import { WATER_VIEWS } from "./features";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
 import { t } from "../i18n/ui";
@@ -352,7 +353,7 @@ function PatternView({
           onCalloutClick={showInDressing}
           pointUp={ridesPointUp(recipe)}
           guide
-          water={fishingFor}
+          water={WATER_VIEWS ? fishingFor : undefined}
           waterOpen={inWater}
           onWater={(on) => {
             setInWater(on);

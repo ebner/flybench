@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { WATER_VIEWS } from "./features";
 
 /** What scripts/render-catalog.ts writes to public/renders/manifest.json. */
 export type RenderInfo = { hash: string; frames: number; width: number; height: number };
@@ -66,14 +67,21 @@ export type WaterStills = { angler: string; below: string };
 
 let waterManifest: Promise<WaterManifest> | null = null;
 
+/** The stills there are: none while the water views are switched off (src/ui/features.ts). */
+function loadWaterManifest(): Promise<WaterManifest> {
+  waterManifest ??= WATER_VIEWS
+    ? fetch(`${import.meta.env.BASE_URL}renders/water/manifest.json`)
+        .then((r) => (r.ok ? r.json() : { patterns: {}, naturals: {} }))
+        .catch(() => ({ patterns: {}, naturals: {} }))
+    : Promise.resolve({ patterns: {}, naturals: {} });
+  return waterManifest;
+}
+
 /** The stills of a pattern or natural, from above and from below; null when it has none, undefined while loading. */
 export function useWaterStills(kind: "patterns" | "naturals", id: string): WaterStills | null | undefined {
   const [m, setM] = useState<WaterManifest | null>(null);
   useEffect(() => {
-    waterManifest ??= fetch(`${import.meta.env.BASE_URL}renders/water/manifest.json`)
-      .then((r) => (r.ok ? r.json() : { patterns: {}, naturals: {} }))
-      .catch(() => ({ patterns: {}, naturals: {} }));
-    waterManifest.then(setM);
+    loadWaterManifest().then(setM);
   }, []);
   if (!m) return undefined;
   const hash = m[kind]?.[id];
@@ -86,10 +94,7 @@ export function useWaterStills(kind: "patterns" | "naturals", id: string): Water
 export function useNaturalStills(): Record<string, WaterStills> | null {
   const [m, setM] = useState<WaterManifest | null>(null);
   useEffect(() => {
-    waterManifest ??= fetch(`${import.meta.env.BASE_URL}renders/water/manifest.json`)
-      .then((r) => (r.ok ? r.json() : { patterns: {}, naturals: {} }))
-      .catch(() => ({ patterns: {}, naturals: {} }));
-    waterManifest.then(setM);
+    loadWaterManifest().then(setM);
   }, []);
   if (!m) return null;
   return Object.fromEntries(

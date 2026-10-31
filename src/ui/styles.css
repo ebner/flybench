@@ -2123,12 +2123,16 @@ select {
 
 /* Naturals and the hatch calendar */
 
+/* On the paper, as a tied fly is in its viewer. */
 .natural-viewer {
   position: relative;
   aspect-ratio: 3 / 2;
   margin: 1rem 0 1.5rem;
-  background: var(--paper-raised);
   touch-action: pan-y;
+}
+
+.natural-viewer.in-water {
+  background: var(--paper-raised);
 }
 
 .natural-canvas {
