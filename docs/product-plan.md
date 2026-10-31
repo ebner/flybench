@@ -261,6 +261,12 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       floating pattern says how it sits once fished a while (`sits`: on its hackle with the lower
       fibres through the film, its body in the film, or half under), researched per pattern from
       sources and photos of it, or flies tied the same way, on the water.
+    - Decided 2026-10-31 ("as soon as they have been fished for a few minutes they are not dry
+      anymore"): flies carry water and sit deeper (a hackled dry with its belly in the film, a fly
+      lying in the film half under, its sloping wing's tips on the water); naturals too: a dun's or
+      midge's belly just over the film, caddis, stoneflies and hoppers two fifths in it, ants and
+      beetles awash, the film holding their legs, feelers and tails. If this can't be made right,
+      the reviewer would rather turn the water views off.
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

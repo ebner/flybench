@@ -11,7 +11,7 @@ import type { Look } from "../../tying/simulate";
 export type Wetness = "damp" | "soaked";
 
 /** Fibres that cling together when wet (rubber legs, springy, keep their spread). */
-const CLINGS = new Set<Look>(["hackle", "fibres", "hair", "marabou", "cdc", "herl", "flash", "biot"]);
+export const CLINGS = new Set<Look>(["hackle", "fibres", "hair", "marabou", "cdc", "herl", "flash", "biot"]);
 /** Fur, CDC and herl trap air under water (marabou and chenille soak through at once). */
 const HOLDS_AIR = new Set<Look>(["dubbing", "cdc", "herl"]);
 
@@ -22,7 +22,7 @@ const LOOK: Record<Wetness, { darken: number; saturate: number; roughness: numbe
   soaked: { darken: 0.62, saturate: 1.2, roughness: 0.4, clearcoat: 0.5, clump: 0.7 },
 };
 
-function wetMaterial(s: THREE.MeshStandardMaterial, wet: Wetness, look: Look): THREE.MeshPhysicalMaterial {
+function wetMaterial(s: THREE.MeshStandardMaterial, wet: Wetness, look: Look, air: boolean): THREE.MeshPhysicalMaterial {
   const p = new THREE.MeshPhysicalMaterial();
   if (s instanceof THREE.MeshPhysicalMaterial) {
     // Keeping what makes it physical: herl's and flash's iridescence shows best wet.
@@ -41,7 +41,7 @@ function wetMaterial(s: THREE.MeshStandardMaterial, wet: Wetness, look: Look): T
   }
   p.clearcoat = w.clearcoat;
   p.clearcoatRoughness = 0.3;
-  if (wet === "soaked" && HOLDS_AIR.has(look)) {
+  if (air && HOLDS_AIR.has(look)) {
     // Assumption: the trapped air shows as a faint silvery sheen at grazing angles.
     p.sheen = 0.45;
     p.sheenRoughness = 0.3;
@@ -112,20 +112,24 @@ function fibreSets(object: THREE.Object3D): THREE.InstancedMesh[][] {
   return sets;
 }
 
-/** Wets the pieces of a fly (each with its look and how wet). Returns what puts them back. */
-export function wetFly(pieces: { object: THREE.Object3D; look: Look; wet: Wetness }[]): () => void {
+/**
+ * Wets the pieces of a fly (each with its look, how wet, and whether it is all under the water,
+ * where fur holds air). Returns what puts them back.
+ */
+export function wetFly(pieces: { object: THREE.Object3D; look: Look; wet: Wetness; under?: boolean }[]): () => void {
   const undo: (() => void)[] = [];
   const made = new Map<string, THREE.MeshPhysicalMaterial>();
   const ids = new Map<THREE.Material, number>();
-  for (const { object, look, wet } of pieces) {
+  for (const { object, look, wet, under = false } of pieces) {
     object.traverse((o) => {
       if (!(o instanceof THREE.Mesh) || Array.isArray(o.material)) return;
       const s = o.material;
       if (!(s instanceof THREE.MeshStandardMaterial)) return;
       if (!ids.has(s)) ids.set(s, ids.size);
-      const key = `${ids.get(s)}:${wet}:${look}`;
+      const air = wet === "soaked" && under;
+      const key = `${ids.get(s)}:${wet}:${look}:${air}`;
       let p = made.get(key);
-      if (!p) made.set(key, (p = wetMaterial(s, wet, look)));
+      if (!p) made.set(key, (p = wetMaterial(s, wet, look, air)));
       o.material = p;
       undo.push(() => (o.material = s));
     });

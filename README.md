@@ -80,7 +80,10 @@ the stones near it, with the dents' bright-rimmed spots); capillary ripples, sun
 drifting specks make the surface read as water. A slow
 device, a data saver or reduced motion gets the drawn water instead, from the side or from
 below. "Still water" stops the motion. The naturals' pages show each natural in the river the
-same way, standing on its feet, resting its body on the film or spent in it (`sits`).
+same way, standing on its feet with its belly just over the film, resting its body in the film or
+spent in it (`sits`), or awash, as an ant or a beetle that has fallen in; the film holds their legs,
+feelers and tails, which rest on it and never pierce it. A fly that has been fished a while carries
+water: a hackled dry rides with its belly in the film, a fly that lies in it is half under.
 Stepping or playing goes back to the vise. A link keeps the step and the hook size (`?step=7&size=16`).
 
 Rendering uses the GPU through Vulkan in headless Chromium when there is one, and

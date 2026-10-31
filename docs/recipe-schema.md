@@ -87,7 +87,7 @@ the closing `"""` is removed. A blank line starts a new paragraph.
 | `imitates`    | any of `mayfly caddis stonefly chironomid damselfly terrestrial baitfish crustacean attractor` | no |
 | `naturals`    | ids of the naturals it imitates (`naturals/*.kdl`), the main one first, e.g. `naturals mayfly-dun caddis-adult`; leave out for attractors | no |
 | `fishes`      | `surface`, `film`, `below` or `deep`: where the fly fishes, for the water view. Leave out to derive it: dry flies and terrestrials float, emergers hang in the film (tail down), weighted flies (a bead, eyes other than mono, weighting, a copper or brass tube) go deep, others fish just under the surface. Streamers and saltwater flies are stripped, salmon flies swung across the current, the rest drift | no |
-| `sits`        | `hackle`, `body` or `half`: how a floating fly sits on the film once fished a while, for the realistic water. `hackle`: on its hackle and tail, the lower fibres through the film and the body just clear of it; `body`: its body lying in the film, a wing or tail sloping back over it laid down until its tips rest on the water; `half`: half under (a foam body or foam back), sloping wings laid down the same way. Leave out for the default: dry flies ride on their hackle, terrestrials lie with their body in the film, flies that fish in the film float half under. Only for a fly that floats; an emerger given `sits` lies level instead of hanging tail down. Choose it from photos of the fly on the water | no |
+| `sits`        | `hackle`, `body` or `half`: how a floating fly sits on the film once fished a while, for the realistic water. `hackle`: on its hackle and tail with its belly in the film (a fished fly carries water), the lower fibres through it; `body`: its body half under, in the film, a wing or tail sloping back over it laid down until its tips rest on the water; `half`: six tenths under (a foam body or foam back), sloping wings laid down the same way. Leave out for the default: dry flies ride on their hackle, terrestrials lie with their body in the film, flies that fish in the film float half under. Only for a fly that floats; an emerger given `sits` lies level instead of hanging tail down. Choose it from photos of the fly on the water | no |
 | `difficulty`  | `beginner`, `intermediate` or `advanced`          | yes      |
 | `species`     | any of `trout grayling sea-trout salmon char bass panfish pike striped-bass bonefish` | no |
 | `season`      | month names, `january` … `december`              | no       |
@@ -332,7 +332,7 @@ examples "olives (Baetis), blue-winged olive (Serratella)"
 description "The newly hatched mayfly: …"
 size min=6 max=11            // body length in mm, tails and antennae left out
 rides on-surface             // on-surface in-film drifting swimming crawling
-sits feet                    // on the surface: feet (the default; body held above), body (on the film), spent (flat in it)
+sits feet                    // on the surface: feet (the default; belly just over the film), body (two fifths in it), spent (flat in it); legs rest on the film
 curve -14                    // degrees the body bends along its length (a shrimp's C: 110)
 body {
     // Rear to front; lengths are fractions of the body length and add up to 1.
