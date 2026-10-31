@@ -68,22 +68,17 @@ page-turner pedal or presentation clicker. The step bar under the view has a seg
 it, drag along it to scrub. Click a step in the list to play just that step. On a touch screen
 one finger scrolls the page and two fingers turn and zoom the fly. "Proportions" shows the gape
 grid and each part's measurements; "Print recipe card" prints the dressing and the steps
-with a picture of each. "In the water" shows the finished fly in a river where it fishes (on
-the surface, in the film, just under or deep), from above as the angler sees it or from below
-as a trout does: first a path-traced picture, then, with "Explore in 3D", the live river with
-reflections, refraction, Snell's window and a photoscanned gravel bed. The fly is tied on a
-tippet with an improved clinch knot, sits as that pattern does once fished a while (on its
-hackle with the lower fibres through the film, its body in the film with a sloping wing's tips
-on the water, or half under: `sits`; a
-sunk one hangs on the tippet), looks wet, and dents the film, over a glide some 25 cm deep (a fly fished deep shadows
-the stones near it, with the dents' bright-rimmed spots); capillary ripples, sun glints and
-drifting specks make the surface read as water. A slow
-device, a data saver or reduced motion gets the drawn water instead, from the side or from
-below. "Still water" stops the motion. The naturals' pages show each natural in the river the
-same way, standing on its feet with its belly just over the film, resting its body in the film or
-spent in it (`sits`), or awash, as an ant or a beetle that has fallen in; the film holds their legs,
-feelers and tails, which rest on it and never pierce it. A fly that has been fished a while carries
-water: a hackled dry rides with its belly in the film, a fly that lies in it is half under.
+with a picture of each. The naturals' pages show each natural turning in 3D on the same paper as a
+tied fly.
+
+"In the water" is switched off for now (`WATER_VIEWS` in `src/ui/features.ts`): flies and insects
+on the water never looked real enough. Its code stays to come back to: the finished fly in a river
+where it fishes (on the surface, in the film, just under or deep), from above or from below as a
+trout sees it, as a path-traced picture or the live river with refraction, Snell's window and a
+photoscanned gravel bed; the fly tied on a tippet with an improved clinch, sitting as that pattern
+does once fished a while (`sits`), wet, denting the film; the naturals on the water likewise, with
+the film holding their legs; and a drawn water for slow devices. Switched on, a pattern's page gets
+the "In the water" button and a natural's page the pictures in the river.
 Stepping or playing goes back to the vise. A link keeps the step and the hook size (`?step=7&size=16`).
 
 Rendering uses the GPU through Vulkan in headless Chromium when there is one, and
