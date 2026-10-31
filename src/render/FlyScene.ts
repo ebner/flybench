@@ -211,6 +211,8 @@ export class FlyScene {
   onFollowChange?: (follow: boolean) => void;
   /** Called every frame with the screen position (CSS pixels) of the current step's anchor. */
   onAnchor?: (point: { x: number; y: number } | null) => void;
+  /** After each frame is drawn: for overlays that follow the fly (the builder's handles). */
+  onDraw?: () => void;
 
   constructor(
     private container: HTMLElement,
@@ -274,11 +276,13 @@ export class FlyScene {
       this.controls.update();
       this.draw();
       this.reportAnchor();
+      this.onDraw?.();
     };
     this.frame = requestAnimationFrame(loop);
   }
 
-  setBuild(build: Build) {
+  /** Shows a fly; `keepCamera` leaves the view as it is (the builder, while a part is being dragged). */
+  setBuild(build: Build, keepCamera = false) {
     this.clearFly();
     this.build = build;
     this.space = new ShankSpace(build.hook);
@@ -298,8 +302,8 @@ export class FlyScene {
     this.bobbin = new BobbinView(build.threadRadius, build.threadColor, this.surfaces);
     this.fly.add(this.bobbin.object);
     this.time = 0;
-    this.measure();
-    if (this.grid) this.setGrid(true);
+    this.measure(keepCamera);
+    if (this.grid) this.setGrid(true, undefined, !keepCamera);
     if (this.guide) this.setProportions(true);
   }
 
@@ -372,7 +376,7 @@ export class FlyScene {
   }
 
   /** Bounds of each step and of the finished fly, for framing; then back to the current time. */
-  private measure() {
+  private measure(keepCamera = false) {
     const build = this.build!;
     const time = this.time;
     // Measured where the fly is tied, not where the water has carried it.
@@ -387,7 +391,7 @@ export class FlyScene {
     this.finished = this.visibleBounds();
     this.hookBounds = this.visibleBounds([this.hook!]);
     this.followFresh = true;
-    this.resetCamera();
+    if (!keepCamera) this.resetCamera();
     this.setTime(time);
     if (water) this.setWater(water);
   }
@@ -1146,6 +1150,52 @@ export class FlyScene {
     const d = offset.length() + (distance - offset.length()) * k;
     this.allowDistance(distance);
     this.camera.position.copy(this.controls.target).addScaledVector(direction, d);
+  }
+
+  /**
+   * Where a point on the shank's plane (x along the shank from the start of the bend, y up, in
+   * gapes) is on the canvas, in CSS pixels from its top left; null when it is out of view.
+   */
+  screenOf(x: number, y: number): { x: number; y: number } | null {
+    if (!this.space) return null;
+    const p = this.fly.localToWorld(this.space.point(new THREE.Vector3(x, y, 0))).project(this.camera);
+    if (p.z > 1) return null;
+    const { clientWidth: w, clientHeight: h } = this.container;
+    return { x: ((p.x + 1) / 2) * w, y: ((1 - p.y) / 2) * h };
+  }
+
+  /** The point on the shank's plane (x, y in gapes, as screenOf takes) under a canvas point in CSS pixels; null if the plane is edge on. */
+  shankPointAt(px: number, py: number): { x: number; y: number } | null {
+    const { clientWidth: w, clientHeight: h } = this.container;
+    const ray = new THREE.Raycaster();
+    ray.setFromCamera(new THREE.Vector2((px / w) * 2 - 1, 1 - (py / h) * 2), this.camera);
+    this.fly.updateMatrixWorld(true);
+    // The fly's own plane through the shank (a straight shank's space is the fly's).
+    const normal = new THREE.Vector3(0, 0, 1).transformDirection(this.fly.matrixWorld);
+    const plane = new THREE.Plane().setFromNormalAndCoplanarPoint(normal, this.fly.localToWorld(new THREE.Vector3()));
+    if (Math.abs(ray.ray.direction.dot(normal)) < 0.05) return null;
+    const hit = ray.ray.intersectPlane(plane, new THREE.Vector3());
+    if (!hit) return null;
+    const local = this.fly.worldToLocal(hit);
+    return { x: local.x, y: local.y };
+  }
+
+  /** The step whose piece is under a canvas point (CSS pixels), or null: what the visitor tapped. */
+  pickStep(px: number, py: number): number | null {
+    const { clientWidth: w, clientHeight: h } = this.container;
+    const ray = new THREE.Raycaster();
+    ray.setFromCamera(new THREE.Vector2((px / w) * 2 - 1, 1 - (py / h) * 2), this.camera);
+    // Thin fibres are hard to hit exactly: a little slack.
+    ray.params.Line = { threshold: 0.05 };
+    let best: { distance: number; step: number } | null = null;
+    this.stepViews.forEach((views, i) => {
+      for (const v of views) {
+        if (!v.piece.object.visible) continue;
+        const hit = ray.intersectObject(v.piece.object, true).find((x) => x.object.visible);
+        if (hit && (!best || hit.distance < best.distance)) best = { distance: hit.distance, step: i };
+      }
+    });
+    return (best as { step: number } | null)?.step ?? null;
   }
 
   private reportAnchor() {

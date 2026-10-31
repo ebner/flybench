@@ -2718,3 +2718,443 @@ select {
   align-items: center;
   gap: 0.3rem;
 }
+
+/* The fly builder made of parts (milestone 18): the fly on the paper with handles to drag, and
+   beside it (below it on a phone) the parts and the chosen part's panel. */
+
+.workbench {
+  max-width: var(--page);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(26rem, 40vw);
+  align-items: start;
+}
+
+.wb-stage {
+  position: sticky;
+  top: var(--header);
+  height: calc(100dvh - var(--header));
+  border-right: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.wb-canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+}
+
+.wb-canvas canvas {
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
+}
+
+.wb-handles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* A finger-sized target round a small dot. */
+.wb-handle {
+  position: absolute;
+  top: -1.375rem;
+  left: -1.375rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: grab;
+}
+
+.wb-handle::after {
+  content: "";
+  position: absolute;
+  inset: 0.95rem;
+  border-radius: 50%;
+  background: var(--paper-raised);
+  border: 2px solid var(--ink-faint);
+  box-shadow: 0 1px 3px var(--specimen-shadow);
+  transition: transform 0.12s, border-color 0.12s;
+}
+
+.wb-handle.on::after {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.wb-handle:hover::after,
+.wb-handle:focus-visible::after,
+.wb-handle.dragging::after {
+  transform: scale(1.35);
+}
+
+.wb-handle.dragging {
+  cursor: grabbing;
+}
+
+.wb-toolbar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.wb-hint {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+.wb-side {
+  padding: 1.5rem var(--gutter) 4rem;
+}
+
+.wb-side h1 {
+  margin: 0;
+  font-size: clamp(var(--step-3), 4vw, var(--step-4));
+}
+
+.wb-prototype {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.wb-heading {
+  margin: 1.25rem 0 0.5rem;
+  font-family: var(--text);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.wb-rail,
+.wb-swatches,
+.wb-colours,
+.wb-palette {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wb-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 0.5rem;
+}
+
+.wb-part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+  background: var(--paper-raised);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.wb-part.on {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.wb-part-name {
+  font-weight: 600;
+}
+
+.wb-part-material {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.wb-dot {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+.wb-add {
+  justify-content: center;
+  align-items: center;
+  border-style: dashed;
+  background: transparent;
+}
+
+.wb-plus {
+  font-size: var(--step-3);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.wb-icon {
+  width: 3rem;
+  height: 2.4rem;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.wb-icon.large {
+  width: 5rem;
+  height: 4rem;
+}
+
+.wb-icon-hook {
+  stroke: var(--ink-faint);
+}
+
+.wb-icon-part {
+  stroke: var(--accent);
+}
+
+.wb-panel {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.wb-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.wb-panel-head h2 {
+  margin: 0;
+}
+
+.wb-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.5rem;
+}
+
+.wb-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.3rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step--1);
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wb-swatch img,
+.wb-swatch-blank {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.wb-swatch.on {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.wb-colours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.wb-colour {
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--rule);
+  cursor: pointer;
+}
+
+.wb-colour.on {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+}
+
+.wb-presets {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.wb-presets button {
+  flex: 1;
+}
+
+.wb-presets button.on {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+.wb-more {
+  margin-top: 1.25rem;
+}
+
+.wb-more summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.wb-fields {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.wb-field {
+  display: grid;
+  grid-template-columns: 1fr 6rem minmax(4.5rem, auto);
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wb-unit {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.wb-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wb-remove {
+  display: block;
+  margin-top: 1.5rem;
+  color: var(--danger);
+}
+
+.wb-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(20 15 10 / 0.35);
+}
+
+.wb-sheet {
+  width: min(40rem, calc(100vw - 2rem));
+  max-height: 80dvh;
+  overflow: auto;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-radius: 0.6rem;
+  background: var(--paper);
+  box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 0.3);
+}
+
+.wb-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.wb-palette button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wb-palette button:hover {
+  border-color: var(--accent);
+}
+
+.wb-palette-hint {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.wb-steps {
+  padding-left: 1.5rem;
+}
+
+.wb-steps li {
+  margin: 0.4rem 0;
+}
+
+/* One column: the fly on top, the parts below it; sheets come up from the bottom. */
+@media (max-width: 52rem) {
+  .workbench {
+    display: block;
+  }
+
+  .wb-stage {
+    position: sticky;
+    top: var(--header);
+    z-index: 2;
+    height: 46dvh;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  .wb-side h1 {
+    display: none;
+  }
+
+  .wb-rail {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .wb-rail li {
+    flex: none;
+    width: 7.5rem;
+  }
+
+  .wb-sheet-backdrop {
+    align-items: flex-end;
+  }
+
+  .wb-sheet {
+    width: 100%;
+    border-radius: 0.8rem 0.8rem 0 0;
+  }
+}

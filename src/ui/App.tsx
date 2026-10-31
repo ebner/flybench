@@ -7,6 +7,7 @@ import { Header } from "./Header";
 import { Learn } from "./Learn";
 import { Log } from "./Log";
 import { Trip } from "./Trip";
+import { Workbench } from "./Workbench";
 import { Build } from "./Build";
 import { NaturalPage, NaturalsIndex } from "./Naturals";
 import { NotFound } from "./NotFound";
@@ -89,7 +90,7 @@ export function App() {
             {route.page === "materials" && <Materials />}
             {route.page === "log" && <Log />}
             {route.page === "trip" && <Trip query={route.query} />}
-            {route.page === "build" && <Build query={route.query} />}
+            {route.page === "build" && (new URLSearchParams(route.query).has("next") ? <Workbench /> : <Build query={route.query} />)}
             {route.page === "about" && <About />}
             {route.page === "naturals" && <NaturalsIndex />}
             {route.page === "natural" && <NaturalPage id={route.id} />}
