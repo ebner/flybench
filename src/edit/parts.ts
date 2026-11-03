@@ -84,8 +84,12 @@ export interface Part {
   collar?: number;
   /** A bunch's fibres wound on afterwards as a body to here (a Pheasant Tail's tail). */
   windTo?: number;
+  /** Pulled over loose: gapes of air under its middle (a CDC pupa's bubble). */
+  bubble?: number;
+  /** Laid back from the eye and tied down there by the thread (a foam balloon), not held by the next winding. */
+  tiedBack?: boolean;
   /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep). */
-  trim?: { leave?: number; shape?: "round" | "wedge"; keep?: "sides" | "top" | "under" };
+  trim?: { leave?: number; shape?: "round" | "wedge" | "cigar"; keep?: "sides" | "top" | "under" };
   /** The visitor's notes on its steps, by action (0 the first). */
   notes?: Record<number, string>;
   mistakes?: Record<number, string>;
@@ -470,9 +474,10 @@ export function compile(fly: PartsFly): Compiled {
         if (i === 0) tieIns(p.at ?? 0, bunch);
         else if (i === 1) {
           const end = p.to ?? 0.9;
-          // Laid back from the eye, the next winding holds it; folded forward, the thread ties it down.
-          if (end > (p.at ?? 0)) to(end, p.id);
-          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(k === 0 ? n : {}) }, p.id));
+          // Laid back from the eye, the next winding holds it, or the thread ties it down there;
+          // folded forward, the thread ties it down.
+          if (end > (p.at ?? 0) || p.tiedBack) to(end, p.id);
+          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(k === 0 ? n : {}) }, p.id));
         } else trim();
         break;
     }
@@ -653,7 +658,8 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       part = { id, how: "bunch", mats: [mat], at, ...bunchOf(tieIn), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && /^tie-in pull-over( trim)?$/.test(ops)) {
       const po = g[1]!.s as Extract<Step, { op: "pull-over" }>;
-      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
+      const tiedBack = po.to < (at ?? 0) - POSITION_TOLERANCE && g[1]!.thread != null && Math.abs(g[1]!.thread - po.to) <= POSITION_TOLERANCE;
+      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.bubble !== undefined && { bubble: po.bubble }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && /^tie-in wind tie-off( trim)?$/.test(ops)) {
       const w = g[1]!.s as Extract<Step, { op: "wind" }>;
       mat.turns = w.turns;
@@ -935,8 +941,10 @@ function constrained(fly: PartsFly): PartsFly {
   const ribs = fly.parts.filter((p) => p.role === "rib" && p.how === "wound");
   const parts = fly.parts.map((p) => {
     const start = p.at ?? p.from;
-    // (A thread body may run back and forth: its passes are left as they are.)
-    if ((p.how === "wound" || p.how === "dubbed" || p.how === "spun") && start !== undefined && p.to !== undefined && p.to < start + 0.05) {
+    // (A thread body may run back and forth: its passes are left as they are. Dubbing may be
+    // wound back from the eye, ending at the rear of a thorax.)
+    const rearward = p.how === "dubbed" && start !== undefined && p.to !== undefined && p.to <= start - 0.05;
+    if (!rearward && (p.how === "wound" || p.how === "dubbed" || p.how === "spun") && start !== undefined && p.to !== undefined && p.to < start + 0.05) {
       // At the eye, its start moves back instead.
       const key = p.at !== undefined ? "at" : "from";
       return start + 0.05 <= 1 ? { ...p, to: start + 0.05 } : { ...p, [key]: 0.95, to: 1 };

@@ -202,6 +202,8 @@ export interface StepContext {
   cover?: boolean;
   /** pull-over: a later step trims the excess, so it is left for now. */
   trimmedLater?: boolean;
+  /** pull-over laid back: tied down there by the thread rather than held by the next winding. */
+  tiedBack?: boolean;
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
@@ -230,13 +232,13 @@ export type Said =
   | { kind: "palmer"; m: string; to: Place; turns: number; counter: boolean }
   | { kind: "wind-through"; m: string; to: Place; turns: number; counter: boolean; through: string }
   | { kind: "wind"; m: string; to: Place; turns: number; counter: boolean }
-  | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean }
-  | { kind: "lay-back"; m: string; to: Place }
+  | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean }
+  | { kind: "lay-back"; m: string; to: Place; tied?: boolean }
   | { kind: "spin"; m: string; to: Place }
   | { kind: "dub"; m: string; to: Place; rear: boolean }
   | { kind: "tie-off"; m: string }
   | { kind: "trim-keep"; m: string; keep: "top" | "under" | "sides" }
-  | { kind: "trim-spun"; m: string; leave: Length }
+  | { kind: "trim-spun"; m: string; leave: Length; cigar?: boolean }
   | { kind: "trim-tip"; m: string }
   | { kind: "trim-cover"; m: string; leave?: Length }
   | { kind: "trim-butts"; m: string; leave?: Length }
@@ -305,8 +307,8 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "wind", m: step.material, to, turns: step.turns, counter };
     }
     case "pull-over":
-      if (ctx.rear) return { kind: "lay-back", m: step.material, to: at(step.to) };
-      return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater) };
+      if (ctx.rear) return { kind: "lay-back", m: step.material, to: at(step.to), ...(ctx.tiedBack ? { tied: true } : {}) };
+      return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to) };
     case "dub":
@@ -315,7 +317,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "tie-off", m: step.material };
     case "trim":
       if (ctx.keep) return { kind: "trim-keep", m: step.material, keep: step.keep === "top" ? "top" : step.keep === "under" ? "under" : "sides" };
-      if (ctx.spun) return { kind: "trim-spun", m: step.material, leave: len(step.leave ?? 0.4) };
+      if (ctx.spun) return { kind: "trim-spun", m: step.material, leave: len(step.leave ?? 0.4), ...(step.shape === "cigar" ? { cigar: true } : {}) };
       if (ctx.tip) return { kind: "trim-tip", m: step.material };
       if (ctx.cover) return { kind: "trim-cover", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
       return { kind: "trim-butts", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
@@ -466,9 +468,12 @@ function englishText(said: Said, recipe: Recipe): string {
     case "wind":
       return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")}${counter(said.counter)}.`;
     case "pull-over":
+      if (said.bubble) return `Fold the ${mat(said.m)} forward over the body as a loose bubble and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
       return `Pull the ${mat(said.m)} forward over the top of the body and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
     case "lay-back":
-      return `Lay the ${mat(said.m)} back over the top of the body to ${at(said.to)}. The next winding holds it there.`;
+      return said.tied
+        ? `Fold the ${mat(said.m)} back over the top of the body and tie it down at ${at(said.to)}.`
+        : `Lay the ${mat(said.m)} back over the top of the body to ${at(said.to)}. The next winding holds it there.`;
     case "spin":
       return `Spin clumps of ${mat(said.m)} round ${body}, packing each one back against the last, up to ${at(said.to)}.`;
     case "dub":
@@ -482,7 +487,9 @@ function englishText(said: Said, recipe: Recipe): string {
           ? `Clip the fibres of the ${mat(said.m)} on top close to the body, leaving a flat seat for the wing.`
           : `Cut away the fibres of the ${mat(said.m)} on top and underneath, leaving two flat rows sticking out at the sides.`;
     case "trim-spun":
-      return `Trim the spun ${mat(said.m)} to shape, leaving a head about ${len(said.leave)} thick on each side.`;
+      return said.cigar
+        ? `Trim the spun ${mat(said.m)} into a cigar about ${len(said.leave)} thick on each side, fullest in the middle and rounded at both ends.`
+        : `Trim the spun ${mat(said.m)} to shape, leaving a head about ${len(said.leave)} thick on each side.`;
     case "trim-tip":
       return `Trim the tip of the ${mat(said.m)} close to the body.`;
     case "trim-cover":

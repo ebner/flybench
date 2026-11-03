@@ -1,0 +1,56 @@
+id arthofer
+status draft
+
+// en description: A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both.
+description "En grå stjärt, en kropp av gråbeige strutsherl över bly, en thorax av koppartråd och ett klippt pärlhönshackel, med en vingkåpa av fasanstjärt vikt framåt över dem."
+
+// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024; it was tied in numbers in a workshop in Fischamend, Lower Austria, and the Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. Sources differ on the details: Karwath ties a grey-beige ostrich body with a grey tail, the etheonTV dressing black ostrich with a pheasant-tail tail. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax.
+history """
+    Alois Arthofer i Wien, född 1932, gjorde nymfen, enligt Swissflies och hans son, som
+    skrev till Ingo Karwath 2024; den bands i stora mängder i en verkstad i Fischamend i
+    Niederösterreich, och Wienhandlaren Norbert Eipeltauer sålde den i stor skala. Karwath
+    hade först sett Eipeltauer som åtminstone medgrundare, men Eipeltauer skrev att han inte
+    hade något med uppfinnandet att göra. Den blev berömd efter Ritznymferna, på 1960- och
+    70-talen, som en tung fluga i storlek 6 och 8. Källorna skiljer sig i detaljerna: Karwath
+    binder en gråbeige strutskropp med grå stjärt, etheonTV svart struts med stjärt av
+    fasanstjärt. Två saker är desamma: hacklet "måste vara pärlhöna" och klipps till sist, och
+    vingkåpan viks framåt från 2–3 mm bakom thoraxen.
+    """
+
+// en fishing: Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it so it swings in, and then work it like a streamer. The lead and copper take it deep in fast water, and in big sizes it passes for a stonefly nymph or a shrimp as much as anything.
+fishing """
+    Den fiskas inte uppströms som de fina nymferna före den utan nedströms: låt den sjunka,
+    stoppa den så att den svänger in, och för den sedan som en streamer. Blyet och kopparn tar
+    den djupt i strömt vatten, och i stora storlekar går den lika gärna för en bäcksländenymf
+    eller en märla som något annat.
+    """
+
+labels {
+    // en weight: Lead or lead-free wire
+    weight "Bly- eller blyfri tråd"
+    // en tail: Grey-beige fibres
+    tail "Gråbeige fibrer"
+    // en body: Grey-beige ostrich herl
+    body "Gråbeige strutsherl"
+    // en case: Pheasant tail slip
+    case "Fasanstjärtsfibrer"
+    // en hackle: Guinea fowl
+    hackle "Pärlhöna"
+}
+
+notes {
+    // en step 1 (weight weight): Karwath: most Arthofer carry lead under the body; the copper is only the icing.
+    step 1 "Karwath: de flesta Arthofer har bly under kroppen; kopparn är bara grädden på moset."
+    // en step 7 (wind body): Over the rear half.
+    step 7 "Över den bakre halvan."
+    // en step 9 (tie-in case): On top, tips back, 2 to 3 mm behind where the thorax will start: the Arthofer's mark.
+    step 9 "Ovanpå, med topparna bakåt, 2–3 mm bakom där thoraxen börjar: Arthoferns kännetecken."
+    // en step 13 (wind thorax): Touching turns, a heavy, shiny thorax.
+    step 13 "Varv intill varv, en tung, blank thorax."
+    // en step 15 (tie-in hackle): Leave plenty of room in front for it.
+    step 15 "Lämna gott om plats framför den."
+    // en step 19 (pull-over case): Fold it forward over the thorax and the hackle, tie it down and cut it.
+    step 19 "Vik den framåt över thoraxen och hacklet, bind ner den och klipp av den."
+    // en step 20 (whip-finish): A black head; then trim the hackle short.
+    step 20 "Ett svart huvud; klipp sedan hacklet kort."
+}

@@ -1,5 +1,6 @@
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import { resolveColor, type Material, type Recipe, type Step } from "../recipe/schema";
+import { POSITION_TOLERANCE } from "../recipe/validate";
 import { stepText, stepTitle, type StepContext } from "./describe";
 import { hookModel, threadDiameter, unitMm, type HookModel } from "./hook";
 import { Profile } from "./profile";
@@ -97,8 +98,8 @@ export interface BundlePiece extends PieceBase {
   count: number;
   /** Trimmed: cut square, all the same length. */
   cut?: boolean;
-  /** Trimmed spun hair: a round head, or a wedge flat underneath and deepest at the rear. */
-  trimShape?: "round" | "wedge";
+  /** Trimmed spun hair: a round head, a wedge flat underneath and deepest at the rear, or a cigar. */
+  trimShape?: "round" | "wedge" | "cigar";
   /** Upright and divided: two tufts turned out to either side by this many radians. */
   pair?: number;
   /** Bands along each fibre (tippet bars, barred fibres). */
@@ -160,6 +161,8 @@ export interface CoverPiece extends PieceBase {
   dents: number[];
   /** Length left standing in front of the tie-down when the excess is trimmed (a foam head). */
   stub: number;
+  /** Left loose: gapes of air under its middle, arching up between the tie-downs. */
+  bubble?: number;
   /** 0 = plain, 1 = strongly barred or mottled (turkey). */
   barring: number;
 }
@@ -210,7 +213,7 @@ export type FreeEndPose = {
   strandRadius: number;
   fibreLength?: number;
 } & (
-  | { kind: "rest"; x: number; radius: number; direction: "back-down" | "back-up" | "back-flat" | "out"; hideAfter?: number }
+  | { kind: "rest"; x: number; radius: number; direction: "back-down" | "back-up" | "back-flat" | "forward-flat" | "out"; hideAfter?: number }
   | { kind: "follow"; piece: number }
 );
 
@@ -307,7 +310,7 @@ const deg = (d: number) => (d * Math.PI) / 180;
 const UNTRIMMED = 0.8;
 
 /** Colours whose feathers and hackles are barred or mottled. */
-const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6 };
+const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6, guinea: 0.9 };
 
 // Assumption: a golden pheasant tippet fibre is orange with a black bar about three quarters
 // of the way out and a black tip.
@@ -702,7 +705,7 @@ export function simulate(recipe: Recipe): Build {
           const next = nextUse(step.material, index);
           const end: FreeEndPose = {
             ...freeEnd(step.material, l), kind: "rest", x, radius,
-            direction: next === "pull-over" ? "back-flat" : l.look === "hackle" ? "back-up" : "back-down",
+            direction: next === "pull-over" ? (step.forward ? "forward-flat" : "back-flat") : l.look === "hackle" ? "back-up" : "back-down",
           };
           freeEnds.set(step.material, end);
           ends = restingEnds();
@@ -788,9 +791,13 @@ export function simulate(recipe: Recipe): Build {
         const tied = tiedAt.get(step.material)!;
         const end = Math.min(step.to * span, frontLimit);
         // Pulled forward and tied down at the thread, or laid back from where it is tied in (a
-        // shellback tied in at the eye), its end held by the next winding.
+        // shellback tied in at the eye), its end held by the next winding, or tied down there by
+        // the thread when it is waiting there (a foam balloon folded back over the thorax).
         const back = end < tied;
+        // In recipe positions, as the validator decides it.
+        const tiedBack = back && threadX !== null && Math.abs(threadAt - step.to) <= POSITION_TOLERANCE;
         ctx.rear = back;
+        if (tiedBack) ctx.tiedBack = true;
         const [from, to] = back ? [end, tied] : [tied, end];
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
@@ -799,7 +806,9 @@ export function simulate(recipe: Recipe): Build {
         ctx.trimmedLater = trimmedLater;
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
-          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          // A loose bubble wraps further round the sides of what it covers.
+          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          ...(step.bubble ? { bubble: step.bubble } : {}),
           // A strip trimmed later sticks out over the eye until then.
           dents: [], stub: trimmedLater && !back ? UNTRIMMED : 0,
           barring: l.barring,
@@ -810,6 +819,8 @@ export function simulate(recipe: Recipe): Build {
         // Fibres on top of what it covers, wound or dubbed, are pressed flat: from this step on,
         // those wraps are replaced by copies without them, so earlier moments still show them.
         const press = (w: WrapsPiece): WrapsPiece | null => {
+          // A loose bubble leaves the fibres under it standing.
+          if (step.bubble) return null;
           if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) return null;
           w.until = time;
           const pressed: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, covered: [from, to, cover.halfAngle], window: [0, 0.0001], until: undefined };
@@ -826,7 +837,7 @@ export function simulate(recipe: Recipe): Build {
         });
         freeEnds.delete(step.material);
         ends = restingEnds();
-        if (!back) {
+        if (!back || tiedBack) {
           const wraps = inPlace(threadX!, 5, [0.6, 1]);
           pieces.push(wraps);
           thread = { kind: "follow", piece: wraps.id };

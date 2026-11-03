@@ -61,6 +61,7 @@ export const MATERIALS = {
 
   // Herls
   "peacock-herl": { name: "peacock herl", archetype: "herl", defaultColor: "#26341a" },
+  "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e" },
 
   // Hackles
   "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7 },
@@ -69,6 +70,8 @@ export const MATERIALS = {
   // Soft game-bird hackles sweep well back over the body (reference photos of spiders).
   "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 65 },
   "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65 },
+  // Assumption: guinea-fowl body feathers are soft, between a hen hackle and partridge.
+  "guinea-fowl-hackle": { name: "guinea fowl hackle", archetype: "hackle", defaultColor: "guinea", sweep: 45 },
 
   // Dubbing
   // Assumption: hare's mask and seal's fur are the roughest common dubbings, rabbit in between

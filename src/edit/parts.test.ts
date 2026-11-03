@@ -249,6 +249,26 @@ describe("a fly built of parts", () => {
     expect(JSON.stringify(fly.parts.find((p) => p.how === "thread"))).toBe(before);
   });
 
+  it("keeps a thorax dubbed back from the eye when other parts change", () => {
+    let fly = startFrom(byId("balloon-caddis"))!;
+    const thorax = () => fly.parts.find((p) => p.role === "thorax")!;
+    const before = { from: thorax().from, to: thorax().to };
+    fly = setPart(fly, fly.parts.find((p) => p.role === "wing")!.id, { length: 1.8 });
+    expect({ from: thorax().from, to: thorax().to }).toEqual(before);
+    expect(before.to!).toBeLessThan(before.from!);
+  });
+
+  it("ties a strip folded back from the eye down with the thread, wherever the thread waits for it", () => {
+    const recipe = byId("balloon-caddis");
+    const at = recipe.steps.findIndex((s) => s.op === "pull-over");
+    const steps = recipe.steps.map((s) => (s.op === "pull-over" ? { ...s, to: 0.6 } : s));
+    steps.splice(at, 0, { op: "wrap-thread", to: 0.6 });
+    const moved = { ...recipe, steps };
+    const { recipe: again, problems } = compile(partsOf(moved)!);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    expect(pieces(again)).toEqual(pieces(moved));
+  });
+
   it("names a mix of two-word colours by position, so it reads back", () => {
     let fly = startFrom(byId("grey-duster"))!;
     const hackle = fly.parts.find((p) => p.role === "hackle")!;

@@ -1,0 +1,53 @@
+id gimapuppan
+status draft
+
+// en description: A body of olive CDC twisted into a rope, under a loose bubble of sand-coloured CDC, and a spiky thorax of mixed fur.
+description "Ein Körper aus olivgrünen CDC-Federn, zu einem Seil verdrillt, unter einer lockeren Blase aus sandfarbenem CDC, und ein stacheliger Thorax aus gemischtem Fell."
+
+// en history: Published in Flugfiske i Norden in 2015 by its author, very likely David Stenström, whose initials are on the photos. Fishing the Gimån every summer when the caddis hatch is at its height, he found the Hjorthårspuppan floated too low to see, took a pattern called the Pite-puppan, simplified and changed it, and named the result after the river. It has been tried with success elsewhere in Sweden and in the Catskills. He does not claim the idea as new: many pupae use a bubble of CDC the same way.
+history """
+    2015 in Flugfiske i Norden von seinem Urheber veröffentlicht, sehr wahrscheinlich David
+    Stenström, dessen Initialen auf den Fotos stehen. Als er jeden Sommer zur Zeit des
+    stärksten Köcherfliegenschlupfs an der Gimån fischte, fand er, dass die Hjorthårspuppan zu
+    tief schwamm, um sie zu sehen; er nahm ein Muster namens Pite-puppan, vereinfachte und
+    veränderte es und benannte das Ergebnis nach dem Fluss. Sie hat sich auch anderswo in
+    Schweden und in den Catskills bewährt. Er hält die Idee nicht für neu: Viele Puppen
+    verwenden eine CDC-Blase auf dieselbe Weise.
+    """
+
+// en fishing: A caddis pupa floating high in the film, easy to see in poor light. Fish it dead drift, or pull it under and let it rise again like a hatching pupa. Treat it with CDC oil or a shake floatant, rinse and dry it with amadou after every fish, and switch to a deer-hair pupa after dark or in the thickest of the hatch, when there is no time to look after it.
+fishing """
+    Eine Köcherfliegenpuppe, die hoch im Film schwimmt und bei schwachem Licht gut zu sehen
+    ist. Fische sie frei treibend, oder zieh sie unter die Oberfläche und lass sie wieder
+    aufsteigen wie eine schlüpfende Puppe. Behandle sie mit CDC-Öl oder Pulver-Schwimmmittel,
+    spüle und trockne sie nach jedem Fisch mit Amadou und wechsle nach Einbruch der Dunkelheit
+    oder im dichtesten Schlupf zu einer Rehhaarpuppe, wenn keine Zeit für die Pflege bleibt.
+    """
+
+labels {
+    // en back: Sand CDC, two feathers
+    back "Sandfarbenes CDC, zwei Federn"
+    // en body: Olive CDC, two feathers
+    body "Olivgrünes CDC, zwei Federn"
+    // en thorax: Fox, muskrat, opossum and seal, mixed
+    thorax "Fuchs, Bisam, Opossum und Seehund, gemischt"
+}
+
+notes {
+    // en step 1 (attach-thread at=0.9): Wrap back a little way into the bend, then forward to about the point.
+    step 1 "Wickle ein Stück in den Bogen hinein, dann nach vorn bis etwa zur Hakenspitze."
+    // en step 3 (tie-in back): Tips matched and pointing forward, tied in low on the feathers; pull them back until the tie-in nears the tips, then lock them.
+    step 3 "Spitzen gleich lang und nach vorn zeigend, tief an den Federn eingebunden; zieh sie nach hinten, bis die Einbindestelle nahe an den Spitzen liegt, und sichere sie."
+    // en step 4 (tie-in body): The same way.
+    step 4 "Genauso."
+    // en step 5 (wrap-thread to=0.68): To about 3 mm behind the eye.
+    step 5 "Bis etwa 3 mm hinter das Öhr."
+    // en step 6 (wind body): Twist the feathers into a rope first, with hackle pliers or the fingers.
+    step 6 "Verdrille die Federn zuerst zu einem Seil, mit der Hechelklemme oder den Fingern."
+    // en step 8 (pull-over back): Make it big first, then shrink it to size by pulling the ends, a dubbing needle inside it as a stop; lock it with hard turns.
+    step 8 "Mach sie erst groß und verkleinere sie dann durch Ziehen an den Enden, mit einer Dubbingnadel darin als Anschlag; sichere sie mit festen Windungen."
+    // en step 9 (dub thorax): Split the thread, put a little loose dubbing in, and twist 2 to 3 cm of it lightly, so it stays spiky.
+    step 9 "Spalte den Faden, leg etwas lockeres Dubbing hinein und verdrille 2 bis 3 cm davon leicht, so dass es stachelig bleibt."
+    // en step 10 (whip-finish): A drop of thin lacquer.
+    step 10 "Ein Tropfen dünner Lack."
+}

@@ -1,0 +1,60 @@
+// Hjorthårspuppan: Mats Hagberg's caddis pupa from the Pite älv, a cigar of spun and clipped deer hair with a shaggy thorax.
+
+id hjortharspuppan
+name "Hjorthårspuppan"
+aliases "Hjortpuppan" "Mullbänken" "Deer Hair Pupa"
+type emerger
+imitates caddis
+naturals caddis-pupa
+difficulty intermediate
+species grayling trout
+season june july august september
+origin originator="Mats Hagberg" region="Pite älv, Norrbotten, Sweden"
+description "A fat cigar of spun, clipped and singed olive deer hair, a short shaggy thorax of dark brown dubbing and a small orange head."
+history """
+    Mats Hagberg of Luleå fished it on the Pite älv with Gunnar Westrin, who wrote it up in
+    Vildmarksnytt; the two made a television film about the fishing in the 1990s. Hagberg and
+    his friends called it Hjortpuppan, and on the Gimån in Jämtland, where it became the fly
+    of the caddis evenings, it is also known as Mullbänken. The dressing here is Niklas
+    Dahlin's (Flugfiske i Norden, 2014), with a fuller body and thorax than the original and
+    an orange head; others tie it in natural deer hair with a light, spiky thorax.
+    """
+fishing """
+    A caddis pupa in the surface film for grayling and trout, often late in the evening or at
+    night during the hatch. Dahlin doesn't grease it, so it soaks up a little water and sits
+    in the film rather than on it, and he gives it small twitches now and then, as a swimming
+    pupa moves. Others fish it dry, where the packed hair floats it like a cork.
+    """
+sources {
+    "Flugfiske i Norden: Hjorthårspuppan (Niklas Dahlin)" url="https://flugfiskeinorden.se/hjortharspuppan-niklas-dahlin/"
+    "Rumpekrafs: Flugbindning (Hjorthårspuppa)" url="http://rumpekrafs.blogspot.com/p/flugbindning.html"
+    "Antispinn: Hjorthårspuppa" url="https://www.antispinn.se/hullingfria-flugor/puppornymfer/hjortharspuppa"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://flugfiskeinorden.se/wp-content/uploads/2014/11/Hjortpuppa_11_web.jpg" page="https://flugfiskeinorden.se/hjortharspuppan-niklas-dahlin/" author="Niklas Dahlin" license="All rights reserved; reference only" note="Dahlin's finished fly, side view in the vise"
+}
+
+// Dahlin: unfished it soaks up a little water and sits in the film.
+sits body
+// Dahlin's Partridge Patriot SLD is a standard dry-fly hook.
+hook dry-standard size=14
+// Assumption: one orange thread throughout, for the orange head; Dahlin spins the hair with a
+// stronger thread and finishes the head in a contrasting colour.
+thread orange size="8/0"
+
+materials {
+    body deer-hair color=olive label="Olive deer hair"
+    thorax dubbing color="#4a3426" shaggy=0.7 label="Dark brown Squirrel SLF"
+}
+
+steps {
+    attach-thread at=0.0 note="Where the shank meets the bend."
+    spin body to=0.72 note="Three or four bunches on a #14, each spun and packed back hard against the last."
+    // Dahlin: "en kraftig cigarr"; about 0.8 gape thick in his photo.
+    trim body leave=0.4 shape=cigar note="Rough-trim to a thick cigar, singe it lightly with a lighter, and brush it out."
+    // Assumption: wound forward from the body; Dahlin whip-finishes the body, starts the thread
+    // again behind the eye and winds the thorax back to the body.
+    dub thorax to=0.92 note="Compact, about 5 to 6 cm of dubbed thread, as thick as the body."
+    whip-finish note="A small, distinct head; lacquer it."
+}

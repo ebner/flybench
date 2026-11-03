@@ -16,6 +16,10 @@ materials {
         source "Flugbindning.com: Garn & Yarn ('produkter som Polygarn, Antron Yarn, Floss')" url="https://flugbindning.com/130-garn-yarn"
         source "Min Bas Flugask ('Vinge: Grå Tiemco Polygarn')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
     }
+    noun ostrich-herl "strutsherl" gender=ett definite="strutsherlet" plural="strutsherl" plural-definite="strutsherlen" {
+        note "Formed like 'påfågelherl'. Swedish dressings often write just 'struts' ('Butt: Struts, svart')."
+        source "Rackelhanen: Em Silver ('Butt: Struts, svart')" url="https://www.rackelhane.se/swe/1029.htm"
+    }
     noun peacock-herl "påfågelherl" gender=ett definite="påfågelherlet" plural="påfågelherl" plural-definite="påfågelherlen" {
         note "'Påfågelherl', one word, as shops and Flugfiske i Norden write it. Neuter: 'Ta ett påfågelherl', 'Linda herlet framåt'. Some write 'påfågel herl' or 'påfågelsherl'; rejected as less common."
         source "Flugbindning.com: Påfågel (product 'Påfågelherl')" url="https://flugbindning.com/400052-pafagel"
@@ -38,6 +42,10 @@ materials {
         source "Svenska Wikipedia: Flugbindning ('en hackelfjäder som återfinns på nacken eller sadeln till en tupp eller en höna')" url="https://sv.wikipedia.org/wiki/Flugbindning"
         source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
         source "laxflugor.nu: Flugbindningsmaterial ('leta efter en sadel (inte nacke)')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
+    }
+    noun guinea-fowl-hackle "pärlhönshackel" gender=ett definite="pärlhönshacklet" plural="pärlhönshackel" plural-definite="pärlhönshacklen" {
+        note "Formed like 'rapphönshackel' from 'pärlhöns' (guinea fowl)."
+        source "Wikipedia: Pärlhöns" url="https://sv.wikipedia.org/wiki/P%C3%A4rlh%C3%B6ns"
     }
     noun partridge-hackle "rapphönshackel" gender=ett definite="rapphönshacklet" plural="rapphönshackel" plural-definite="rapphönshacklen" {
         note "The bird is 'rapphöna'; shops sell 'Rapphöna nackfjäder' and speak of 'rapphönefjädrar' for 'glesa hackel'. Compound with -s ('rapphönshackel') chosen over 'rapphönehackel'; both occur. The dressings simply write 'Hackel: Rapphöna'."
@@ -312,6 +320,10 @@ colours {
     adjective tan "ljusbrun" neuter="ljusbrunt" plural="ljusbruna" {
         note "Shops keep 'Tan' and dressings 'tanfärgad' ('tanfärgad flyrite'). 'Ljusbrun' chosen as plain Swedish; 'tanfärgad' is the tyers' alternative."
         source "Rackelhanen: Uppströmsnymf ('Olive, brun eller tanfärgad flyrite')" url="https://www.rackelhane.se/swe/1280.htm"
+    }
+    adjective guinea "pärlhöna" compound=#true {
+        note "Guinea fowl, the bird's speckled feathers. The family is 'pärlhöns'; the joining form goes before the noun ('pärlhönshackel')."
+        source "Wikipedia: Pärlhöns" url="https://sv.wikipedia.org/wiki/P%C3%A4rlh%C3%B6ns"
     }
     adjective grizzly "grizzly" compound=#true {
         source "Flugfiske i Norden: Griffith's Gnat ('Hackel: Grizzly tupp')" url="https://flugfiskeinorden.se/griffiths-gnat-en-fluga-for-hostfisket/"

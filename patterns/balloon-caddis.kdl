@@ -1,0 +1,65 @@
+// Balloon Caddis: Roman Moser's emerging sedge from the Traun, with a yellow foam balloon folded back over the thorax.
+
+id balloon-caddis
+name "Balloon Caddis"
+aliases "Moser Balloon Caddis" "Roman Moser's Balloon Caddis"
+type emerger
+imitates caddis
+naturals caddis-pupa caddis-adult
+difficulty intermediate
+species trout grayling
+season june july august september
+origin originator="Roman Moser" region="River Traun, Austria"
+description "A slim dubbed body, a sparse elk-hair wing past the bend, and a balloon of yellow foam folded back over a dubbed thorax."
+history """
+    Roman Moser, the Austrian tyer and guide on the Traun, designed it to suggest a caddis
+    breaking through the film; it is credited to him by Mike Weaver, Jason Klass and Davie
+    McPhail, though no date or text of Moser's own turned up. The foam is tied in at the eye
+    pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps
+    the front of the fly up while the body hangs in the film. Moser's foam was yellow, also
+    the angler's sighter; the body is dubbed to match the sedges, olive, grey or brown.
+    """
+fishing """
+    Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on
+    a summer evening, cast across and downstream and skate it back in short jerks. It is hard
+    for trout to resist when dragged, and the yellow balloon stays easy to see in poor light
+    and can carry a small nymph as a dropper.
+    """
+sources {
+    "Fly Tying Chronicles: Balloon Caddis" url="https://flytyingchronicles.blogspot.com/2008/03/balloon-caddis.html"
+    "Tenkara Talk: The Balloon Caddis (Jason Klass)" url="https://www.tenkaratalk.com/2010/04/the-balloon-caddis/"
+    "CFFC 7th Winter Fly Swap: Balloon Caddis (Mike Weaver)" url="https://www.fly-fishing-club.co.uk/2005_balloon_caddis.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikDhIL6v3yCGm2i5NpmrWkSvFo_7Hknz2kYcCj6UxnKq-2z0IshyphenhyphenK-gIrrxsRGqc9yPxHXG20Nk2Lac1g6Pi-dTDpdtzcDCOTtqJtKtHt-VCNfrIt3cf080IOc85bRzVioXKq0dWAoqIJ_/s1600/15-Skipper-Caddis.jpg" page="https://flytyingchronicles.blogspot.com/2008/03/balloon-caddis.html" license="All rights reserved; reference only" note="Side view in the vise; the foam tag left standing"
+    "https://www.fly-fishing-club.co.uk/2005_balloon_caddis.jpg" page="https://www.fly-fishing-club.co.uk/2005_balloon_caddis.html" author="Mike Weaver" license="All rights reserved; reference only" note="Side view"
+}
+
+hook dry-standard size=14
+thread olive size="8/0"
+
+materials {
+    case foam color=yellow label="Yellow closed-cell foam"
+    body dry-fly-dubbing color=olive label="Olive caddis dubbing"
+    wing elk-hair
+    thorax dry-fly-dubbing color=olive label="Olive caddis dubbing"
+}
+
+steps {
+    attach-thread at=0.9
+    tie-in case forward=#true note="A strip about as wide as the gape, sticking out forward over the eye."
+    wrap-thread to=0.0
+    dub body to=0.5 note="Slim, over the rear half."
+    // flytyingchronicles: no part more than two gapes past the bend; the photos show about one.
+    tie-in wing length=2.0 angle=8 spread=35 note="A sparse, stacked bunch, the tips past the bend."
+    trim wing note="Trim the butts and cover them with thread, for an even base for the thorax."
+    wrap-thread to=0.88
+    dub thorax to=0.55 note="Back from the eye, ending at the back of the thorax."
+    // Assumption: a second layer, so the thorax is round enough to dome the foam as in the photos.
+    wrap-thread to=0.85
+    dub thorax to=0.55 note="A second layer, for a round thorax."
+    pull-over case to=0.55 note="Fold it back over the thorax, leaving it loose and rounded, and tie it down behind the thorax."
+    trim case note="Clip the tag close behind the tie-down."
+    whip-finish note="Behind the balloon, over the front of the wing."
+}

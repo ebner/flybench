@@ -1,0 +1,58 @@
+// Gimåpuppan: a high-floating CDC caddis pupa from the Gimån in Jämtland, an olive CDC body under a loose bubble of sand CDC.
+
+id gimapuppan
+name "Gimåpuppan"
+aliases "Gimå Pupa"
+type emerger
+imitates caddis
+naturals caddis-pupa
+difficulty intermediate
+species grayling trout
+season june july august
+origin region="Gimån, Jämtland, Sweden"
+description "A body of olive CDC twisted into a rope, under a loose bubble of sand-coloured CDC, and a spiky thorax of mixed fur."
+history """
+    Published in Flugfiske i Norden in 2015 by its author, very likely David Stenström,
+    whose initials are on the photos. Fishing the Gimån every summer when the caddis hatch
+    is at its height, he found the Hjorthårspuppan floated too low to see, took a pattern
+    called the Pite-puppan, simplified and changed it, and named the result after the river.
+    It has been tried with success elsewhere in Sweden and in the Catskills. He does not claim
+    the idea as new: many pupae use a bubble of CDC the same way.
+    """
+fishing """
+    A caddis pupa floating high in the film, easy to see in poor light. Fish it dead drift,
+    or pull it under and let it rise again like a hatching pupa. Treat it with CDC oil or a
+    shake floatant, rinse and dry it with amadou after every fish, and switch to a deer-hair
+    pupa after dark or in the thickest of the hatch, when there is no time to look after it.
+    """
+sources {
+    "Flugfiske i Norden: Gimåpuppan" url="https://flugfiskeinorden.se/gimapuppan/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://flugfiskeinorden.se/wp-content/uploads/2015/06/Puppa-SBS-101.jpg" page="https://flugfiskeinorden.se/gimapuppan/" license="All rights reserved; reference only" note="The finished fly, side view in the vise"
+}
+
+// The author: a TMC 100BL dry-fly hook, or a pupa hook.
+hook dry-standard size=14
+thread black size="8/0"
+
+materials {
+    back cdc color="#c2a878" label="Sand CDC, two feathers"
+    body cdc color=olive fibre=0.5 sweep=55 label="Olive CDC, two feathers"
+    thorax dubbing color="#5a4a3a" shaggy=0.75 label="Fox, muskrat, opossum and seal, mixed"
+}
+
+steps {
+    attach-thread at=0.9 note="Wrap back a little way into the bend, then forward to about the point."
+    wrap-thread to=0.0
+    tie-in back note="Tips matched and pointing forward, tied in low on the feathers; pull them back until the tie-in nears the tips, then lock them."
+    tie-in body note="The same way."
+    wrap-thread to=0.68 note="To about 3 mm behind the eye."
+    wind body to=0.68 turns=6 note="Twist the feathers into a rope first, with hackle pliers or the fingers."
+    tie-off body
+    // Read from the photo: the bubble stands about a third of a gape clear of the body.
+    pull-over back to=0.68 bubble=0.3 note="Make it big first, then shrink it to size by pulling the ends, a dubbing needle inside it as a stop; lock it with hard turns."
+    dub thorax to=0.92 note="Split the thread, put a little loose dubbing in, and twist 2 to 3 cm of it lightly, so it stays spiky."
+    whip-finish note="A drop of thin lacquer."
+}

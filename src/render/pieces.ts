@@ -589,6 +589,9 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         length *= 0.3 + 0.7 * (1 - f);
         if (dir.y < -0.05) length = Math.min(length, 0.1 / -dir.y);
         if (Math.abs(dir.z) > 0.6) length *= 0.75;
+      } else if (piece.trimShape === "cigar") {
+        // Fullest in the middle, rounded off at both ends.
+        length *= 0.3 + 0.7 * Math.sqrt(Math.max(0, 1 - (2 * f - 1) ** 2));
       } else {
         // A round head, shaped like a bullet: fullest at the back, tapering to the eye.
         length *= 1 - 0.75 * Math.pow(f, 1.2);
@@ -905,7 +908,9 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     let thick = piece.thickness * Math.max(0.12, pinch);
     // Rib turns press it in.
     for (const d of piece.dents) thick *= 1 - 0.45 * Math.exp(-(((x - d) / 0.025) ** 2));
-    const under = bodyRadius(Math.min(x, piece.x1), Math.min(1, pinch * 1.4)) + piece.lift * Math.max(0.15, Math.min(1, pinch * 1.4));
+    // A loose bubble arches up between its tie-downs, highest in the middle.
+    const arch = piece.bubble ? piece.bubble * Math.sin(Math.PI * Math.min(1, Math.max(0, (x - piece.x0) / (piece.x1 - piece.x0)))) : 0;
+    const under = bodyRadius(Math.min(x, piece.x1), Math.min(1, pinch * 1.4)) + piece.lift * Math.max(0.15, Math.min(1, pinch * 1.4)) + arch;
     // It drapes round the circle turns lie on there, raised over what is tied on top.
     const centre = piece.base.ringAt(Math.min(x, piece.x1)).centre;
     for (let side = 0; side < 2; side++) {
@@ -936,7 +941,8 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   if (feather) geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
   geometry.setIndex(index);
   geometry.computeVertexNormals();
-  const look = piece.look === "foam" ? "foam" : feather ? "feather" : "fibres";
+  // A CDC bubble is matte down, not a smooth slip.
+  const look = piece.look === "foam" ? "foam" : feather ? "feather" : piece.look === "cdc" || piece.look === "marabou" ? "cdc" : "fibres";
   const material = surfaces.get(look, piece.color, feather).clone();
   material.side = THREE.DoubleSide;
   const mesh = new THREE.Mesh(geometry, material);

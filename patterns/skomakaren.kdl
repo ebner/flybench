@@ -1,0 +1,73 @@
+// Skomakaren: the first of the Hede flies, Oskar Fick's wet flies from Härjedalen, Sweden's first fly series.
+
+id skomakaren
+name "Skomakaren"
+aliases "The Shoemaker" "Hedeflugan no. 1"
+type wet
+imitates caddis mayfly
+naturals caddis-pupa mayfly-emerger
+difficulty beginner
+species grayling trout
+season june july august september
+origin originator="Oskar Fick" year=1918 region="Hede, Härjedalen, Sweden"
+description "A slim black wool body ribbed with copper wire, a long light brown hen hackle and grey mallard quill wings, with no tail."
+history """
+    Oskar Fick, a shoemaker in Hede on the Ljusnan, was dissatisfied with the English flies
+    he could buy and in 1918 tied his first own fly, modelled on the insects of the river.
+    His series grew to 34; the first 24 were named in 1938–39 by the game warden Bengt
+    Belander and the angler Nils Färnström, and Skomakaren, the shoemaker, is number one. His
+    daughter Alma Nordlund tied them for decades by hand, without a vise, twelve an hour. The
+    Hede flies are called Sweden's first fly series. Many shop Skomakaren have a yellow tail,
+    added over time; the early original has none, and with the tail it is the series' Svarta
+    Lisa. Gunnar Johnson took the dressings from Färnström's book Fisketur (1955); they give
+    colours rather than materials, and he suggests ordinary wool yarn and hen hackle.
+    """
+fishing """
+    Cast down and across and let it sweep over the fish's lie; cast a little upstream when
+    the fish lie deep, to give it time to sink. A fly for grayling and trout in the Ljusnan and
+    the rivers of Härjedalen, fished on its own or in a team of Hede flies.
+    """
+sources {
+    "Flugfiskemagasinet Rackelhanen: Hedeflugorna (Gunnar Johnson, 1982)" url="http://www.rackelhane.se/swe/1502.htm"
+    "Flugfiskemagasinet Rackelhanen: Hedeflugan (Horst Kuehne)" url="https://www.rackelhane.se/swe/1504.htm"
+    "Fiske i Hede: Hedeflugan" url="https://fiskeihede.se/Hedeflugan.htm"
+    "Långåfisket: Hedeflugan, Sveriges första flugserie (Helge Jonsson)" url="https://www.langafisket.se/fiskenyheter/hedeflugan-sveriges-forsta-flugserie/"
+    "Lapponicus: Skomakaren" url="https://shop.lapponicus.se/flugor-vatnymf/skomakaren"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "http://www.rackelhane.se/images13/5249.jpg" page="http://www.rackelhane.se/swe/1502.htm" license="All rights reserved; reference only" note="Illustration 'Hedeflugan Skomakaren', side view"
+}
+
+// Kuehne: the old Mustad hooks ran from today's #16–18 to #6–8.
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    rib copper-wire
+    body wool color=black label="Black wool yarn"
+    // Assumption: light brown, as in Johnson's list and the illustration.
+    hackle hen-hackle color="#a8743c" fibre=1.3 sweep=40 label="Light brown hen hackle"
+    // Kuehne: mallard wing quills; "grey-mottled" in Johnson's list.
+    wing duck-quill color=grey label="Grey mallard quill slips"
+}
+
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.84
+    // Read from the illustration: a slim body to about 0.85 of the shank.
+    wind body to=0.84 turns=18 note="Thin, even, touching turns; a sparse fly."
+    tie-off body
+    wind rib to=0.84 turns=5 note="Five open turns."
+    tie-off rib
+    tie-in hackle
+    wrap-thread to=0.88
+    wind hackle to=0.88 turns=2 note="Two turns, sparse; stroke the fibres back and down."
+    tie-off hackle
+    // Read from the illustration: the tips well past the bend, set fairly high.
+    tie-in wing length=2.4 angle=34 spread=12 width=0.55 note="Matching slips from a left and a right quill, sloping back over the body."
+    whip-finish note="A small black head."
+}

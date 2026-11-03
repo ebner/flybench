@@ -1,0 +1,45 @@
+id hjortharspuppan
+status draft
+
+// en description: A fat cigar of spun, clipped and singed olive deer hair, a short shaggy thorax of dark brown dubbing and a small orange head.
+description "Eine dicke Zigarre aus gesponnenem, geschnittenem und abgeflämmtem olivfarbenem Rehhaar, ein kurzer, struppiger Thorax aus dunkelbraunem Dubbing und ein kleiner orangefarbener Kopf."
+
+// en history: Mats Hagberg of Luleå fished it on the Pite älv with Gunnar Westrin, who wrote it up in Vildmarksnytt; the two made a television film about the fishing in the 1990s. Hagberg and his friends called it Hjortpuppan, and on the Gimån in Jämtland, where it became the fly of the caddis evenings, it is also known as Mullbänken. The dressing here is Niklas Dahlin's (Flugfiske i Norden, 2014), with a fuller body and thorax than the original and an orange head; others tie it in natural deer hair with a light, spiky thorax.
+history """
+    Mats Hagberg aus Luleå fischte sie am Pite älv zusammen mit Gunnar Westrin, der in
+    Vildmarksnytt über sie schrieb; die beiden drehten in den 1990er Jahren einen Fernsehfilm
+    über das Fischen dort. Hagberg und seine Freunde nannten sie Hjortpuppan, und an der Gimån
+    in Jämtland, wo sie die Fliege der Köcherfliegenabende wurde, heißt sie auch Mullbänken.
+    Die Bindeweise hier ist die von Niklas Dahlin (Flugfiske i Norden, 2014), mit vollerem
+    Körper und Thorax als das Original und einem orangefarbenen Kopf; andere binden sie aus
+    naturfarbenem Rehhaar mit einem hellen, stacheligen Thorax.
+    """
+
+// en fishing: A caddis pupa in the surface film for grayling and trout, often late in the evening or at night during the hatch. Dahlin doesn't grease it, so it soaks up a little water and sits in the film rather than on it, and he gives it small twitches now and then, as a swimming pupa moves. Others fish it dry, where the packed hair floats it like a cork.
+fishing """
+    Eine Köcherfliegenpuppe im Oberflächenfilm für Äsche und Forelle, oft spät am Abend oder
+    nachts während des Schlupfs. Dahlin fettet sie nicht ein, so dass sie etwas Wasser
+    aufnimmt und im Film liegt statt darauf, und er gibt ihr ab und zu kleine Zupfer, wie sich
+    eine schwimmende Puppe bewegt. Andere fischen sie trocken; dann trägt das dicht gepackte
+    Haar sie wie ein Korken.
+    """
+
+labels {
+    // en body: Olive deer hair
+    body "Olivfarbenes Rehhaar"
+    // en thorax: Dark brown Squirrel SLF
+    thorax "Squirrel SLF, dunkelbraun"
+}
+
+notes {
+    // en step 1 (attach-thread): Where the shank meets the bend.
+    step 1 "Dort, wo der Schenkel in den Bogen übergeht."
+    // en step 2 (spin body): Three or four bunches on a #14, each spun and packed back hard against the last.
+    step 2 "Drei oder vier Büschel auf einem #14, jedes gesponnen und fest nach hinten gegen das vorige gepackt."
+    // en step 3 (trim body): Rough-trim to a thick cigar, singe it lightly with a lighter, and brush it out.
+    step 3 "Grob zu einer dicken Zigarre schneiden, mit einem Feuerzeug leicht abflämmen und ausbürsten."
+    // en step 4 (dub thorax): Compact, about 5 to 6 cm of dubbed thread, as thick as the body.
+    step 4 "Kompakt, etwa 5 bis 6 cm gedubbter Faden, so dick wie der Körper."
+    // en step 5 (whip-finish): A small, distinct head; lacquer it.
+    step 5 "Ein kleiner, deutlicher Kopf; lackiere ihn."
+}

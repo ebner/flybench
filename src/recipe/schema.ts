@@ -36,6 +36,8 @@ export const NAMED_COLORS = {
   "pheasant-tail": "#74381a",
   partridge: "#8a7558",
   snipe: "#6f6a64",
+  // Guinea fowl: slate grey with white spots, drawn speckled like grizzly.
+  guinea: "#8c8f97",
   lead: "#6b6e72",
   deer: "#6e5a48",
   squirrel: "#7e6e5e",
@@ -240,7 +242,15 @@ const Step = z.discriminatedUnion("op", [
     note: Note, mistake: Note,
   }),
   /** Fold a material tied in at the rear forward over the top of the body and tie it down at the thread. */
-  z.strictObject({ op: z.literal("pull-over"), material: MaterialRef, to: Position, note: Note, mistake: Note }),
+  z.strictObject({
+    op: z.literal("pull-over"),
+    material: MaterialRef,
+    to: Position,
+    /** Left loose as a bubble over the body, this many gapes of air under its middle (a CDC pupa's bubble). */
+    bubble: z.number().min(0).max(1).optional(),
+    note: Note,
+    mistake: Note,
+  }),
   /** Spin hair round the shank in clumps from the thread forward to `to`; the thread ends there. */
   z.strictObject({
     op: z.literal("spin"),
@@ -265,10 +275,11 @@ const Step = z.discriminatedUnion("op", [
     /** Length left standing, in gapes (hair butts). Default: flush. */
     leave: z.number().min(0).max(2).optional(),
     /**
-     * Spun hair or hair butts: trim into a round head (Muddler) or a wedge, flat underneath
-     * and rising towards the rear (G&H Sedge). Butts trimmed to a shape are spun round the shank.
+     * Spun hair or hair butts: trim into a round head (Muddler), a wedge, flat underneath
+     * and rising towards the rear (G&H Sedge), or a cigar, fullest in the middle and rounded at
+     * both ends (a deer-hair pupa's body). Butts trimmed to a shape are spun round the shank.
      */
-    shape: z.enum(["round", "wedge"]).optional(),
+    shape: z.enum(["round", "wedge", "cigar"]).optional(),
     /**
      * A wound hackle: "sides" cuts away the fibres on top and underneath (Superpuppan);
      * "top" cuts away only those underneath, so the fly sits low (Dyret).
