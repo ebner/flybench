@@ -216,6 +216,8 @@ how it is drawn and which extra properties it takes:
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads), `split-shot` (crimped behind the eye, painted with eyes) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
 | legs       | `rubber-legs`, `silicone-legs` | `count` (strands) |
+| strip      | `rabbit-strip` (a zonker strip: fur on the hide) | `fibre` (the fur's length, gapes; default 18 mm), `mm` (the strip's width, as sold; default 3) |
+| tubing     | `mylar-tubing` (braided, slid over the body) | |
 
 The archetype decides how a material behaves and is drawn:
 
@@ -223,6 +225,14 @@ The archetype decides how a material behaves and is drawn:
 - **beads** go on with `slide-bead` before the thread; **eyes** are tied in without a length.
 - **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Hair
   can also be spun (`spin`) and trimmed into a head.
+- **strips** (fur on the hide) tied in with a `length` stick out as a flat strip with the fur
+  on top leaning back towards its end (a Zonker's or a Bunny Leech's tail); the rest of the strip
+  can then be pulled over the back with `pull-over` and tied down in front, lying taut on top of
+  the body between the two tie-downs, its fur standing over the back. A strip is trimmed after it
+  is tied down, like foam.
+- **tubing** is never tied in: it is slid over the eye and along the body with `sleeve`, tied
+  down at the thread, and its other end tied down later with `tie-off`. It is drawn as a braided
+  tube stretched over what is under it, pressing flat the fibres of what it covers.
 - **legs** (and strands of hair, fibres, biots or flash) can be tied **across** the shank
   with `side=across`: each strand is bound at its middle and sticks out `length` on both
   sides, leaning back by `angle`. `count` is the number of strands, so the legs per side.
@@ -258,11 +268,12 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 | `dub`           | `dub <material> to=<pos> [turns=<n>]`             | Spin dubbing onto the thread and wrap it to `to`; the thread ends there. |
 | `wind`          | `wind <material> to=<pos> turns=<n> [counter=#true]` | Wind the material from its tie-in point to `to`. Forward: it ends at the thread. Rearward (palmering): it ends away from the thread and must be secured (see below). `counter=#true` winds it the opposite way round to what is under it (a counter-wound rib). |
 | `wind` (parachute) | `wind <hackle> around=<post> turns=<n>`        | Wind a hackle horizontally round the base of an upright post; tie it off next. |
-| `pull-over`     | `pull-over <material> to=<pos> [bubble=<gapes>] [wing=<gapes>]` | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. `bubble` leaves it loose, arching that many gapes over the middle of what it covers (a CDC pupa's bubble). `wing` stands the tips of hair pulled forward up in front of the tie-down as a divided wing that long (a Humpy's hump and wings from one bunch). With `to` behind where it is tied in, lay it back instead (a shellback tied in at the eye and taken back to the bend): its end is held by the next step, a winding forward over it, as a palmered tip is; or, when the thread is waiting at `to`, the thread ties it down there (a foam balloon folded back over the thorax). |
+| `pull-over`     | `pull-over <material> to=<pos> [bubble=<gapes>] [wing=<gapes>]` | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. `bubble` leaves it loose, arching that many gapes over the middle of what it covers (a CDC pupa's bubble). `wing` stands the tips of hair pulled forward up in front of the tie-down as a divided wing that long (a Humpy's hump and wings from one bunch). A fur strip tied in with a `length` keeps that much behind as its tail while the rest is pulled over (a Zonker). With `to` behind where it is tied in, lay it back instead (a shellback tied in at the eye and taken back to the bend): its end is held by the next step, a winding forward over it, as a palmered tip is; or, when the thread is waiting at `to`, the thread ties it down there (a foam balloon folded back over the thorax). |
+| `sleeve`        | `sleeve <tubing> to=<pos> [fray=<gapes>]`         | Slide braided tubing over the eye and along the body, so it reaches from the thread to `to`, and tie it down at the thread; its other end is tied down later with `tie-off <tubing>`, with the thread there. `fray` picks its rear end apart into loose strands that long, a short flash tail (a Zonker's). |
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
-| `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess. |
+| `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess; or tie down a sleeve's other end. |
 | `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge\|cigar\|cone] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it, `cigar` makes it fullest in the middle and rounded at both ends, for a body, `cone` slim at the tail and full at the front). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
-| `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. |
+| `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. Part-way through, followed by `attach-thread` elsewhere, it finishes what is tied so far there (a Zonker's rear, finished at the bend before the thread is started again behind the eye). |
 
 A `turns` is at most 100, a recipe has at most 150 steps and 40 materials: far beyond any
 pattern, they bound the work of drawing a recipe that arrives in a link. The fly builder
@@ -272,7 +283,9 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
 ### Tying rules (semantic validation)
 
 - Beads go on before the thread and before any weighting; nothing else but weighting may
-  come before `attach-thread`, which occurs once.
+  come before `attach-thread`. The thread is attached again only after a whip finish.
+- Only tubing is slid on with `sleeve`, never tied in; a sleeve reaches from the thread to
+  another place, and its other end is tied down (`tie-off`) where the thread is.
 - A material is tied in once and wound at most once. Dubbing is only used with `dub`.
 - Hair, feathers, biots, marabou, flash and legs need a `length`; feathers point back (no `forward`). `angle` needs a `length`. `spread` only applies
   to material tied in with a length (tags, tails, wings; for feathers it makes a pair);
@@ -283,13 +296,14 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
 - A rearward-wound (palmered) material must be secured in the very next step, by winding
   another material forward from at or behind its tip, and its tip must be trimmed (before
   or after the whip finish).
-- `trim` needs something to trim; `leave` only applies to hair butts, spun hair and foam backs.
+- `trim` needs something to trim; `leave` only applies to hair butts, spun hair, foam backs and fur strips.
 - A parachute hackle needs a post: a bunch tied in upright (`angle` of 60° or more), not a
-  feather pair, an extended body or strands tied across.
+  feather pair, an extended body, a fur strip or strands tied across.
 - `pull-over` needs the material tied in and unused, and, pulled forward, the thread at `to`;
   laid back, the very next step winds another material forward from at or behind its end.
 - Only hair is spun, only wire weights, only beads are slid on.
-- `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), and every recipe has one.
+- `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), or `attach-thread` to
+  carry on with the thread started again, and every recipe ends with one.
 - Materials have unique ids, and steps refer only to defined materials. Every listed
   material is used, and one tied in without a length is wound or pulled over (otherwise
   it would be left hanging).
@@ -297,14 +311,16 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
 Each rule has a key in `src/recipe/rules.ts` (with its English wording for authors); its
 error carries the key and its values, so the fly builder says it to visitors in the page's
 language (`src/i18n/rules/`). A new rule needs its message in every language there. The
-rules about what is left to do (`neverTiedOff`, `trimTip`, `neverUsedAfterTieIn`,
+rules about what is left to do (`neverTiedOff`, `sleeveOpen`, `trimTip`, `neverUsedAfterTieIn`,
 `neverUsed`, `endWithWhipFinish`) mark a fly as unfinished rather than wrong.
 
 ### Visitors' own flies
 
 The fly builder (`/build/`) writes the same recipes, kept in the visitor's browser and
 shared as links. Their ids start with `my-`, and their materials' ids are parts the patterns
-already use, which the glossaries name in every language. A fly the builder can't show
+already use, which the glossaries name in every language. The builder keeps a pattern's whip
+finish part-way and the thread started again (a Zonker's), and a sleeve as a part slid over the
+body. A fly the builder can't show
 (an unknown material, colour, hook or step) is refused when it is opened from a link or a
 file.
 

@@ -69,9 +69,9 @@ export interface WrapsPiece extends PieceBase {
   post?: { x: number; y0: number; y1: number; radius: number };
   /** Trimmed hackle: only the fibres at the sides are left, those on top and at the sides, or those underneath and at the sides. */
   keep?: "sides" | "top" | "under";
-  /** Where a wing case or back was pulled over these wraps, pressing down the fibres on top,
-   *  and how far round each side of the top it reaches (radians). */
-  covered?: [number, number, number];
+  /** Where wing cases, backs or sleeves were pulled over these wraps, pressing down the fibres on
+   *  top: each from–to, and how far round each side of the top it reaches (radians). */
+  covered?: [number, number, number][];
 }
 
 /** A bunch of fibres or hair sticking out from its tie-in point (tag, tail, wing, beard, butts, spun hair). */
@@ -171,8 +171,28 @@ export interface CoverPiece extends PieceBase {
   side?: "under";
   /** A sparse, translucent veil (sparkle yarn) rather than a solid strip. */
   veil?: boolean;
+  /** A fur strip's hide: the fur on top this long (gapes), leaning back. */
+  fur?: number;
   /** 0 = plain, 1 = strongly barred or mottled (turkey). */
   barring: number;
+}
+
+/**
+ * Braided tubing slid over the body as a sleeve (Mylar tubing), tied down at the thread and,
+ * once `open` is gone, at its other end too; its rear end may be frayed into a short tail.
+ */
+export interface SleevePiece extends PieceBase {
+  type: "sleeve";
+  x0: number;
+  x1: number;
+  /** What it is stretched over. */
+  base: Profile;
+  /** The braid's wall. */
+  thickness: number;
+  /** The end not yet tied down, a little loose. */
+  open?: "front" | "rear";
+  /** Length of the loose strands of the frayed rear end. */
+  fray?: number;
 }
 
 /** Chenille, yarn or foam sticking out from the tie-in as one solid piece: an extended body or larva. */
@@ -191,6 +211,10 @@ export interface ExtensionPiece extends PieceBase {
   fuzz?: number;
   /** Lies forward towards the eye instead of sticking out behind. */
   forward?: boolean;
+  /** A flat strip this wide (a fur strip's hide); `thickness` is then half its thickness. */
+  width?: number;
+  /** Fur on the strip's top face this long, leaning back towards its end. */
+  fur?: number;
 }
 
 /** Strands tied across the shank at their middles, sticking out on both sides: legs. */
@@ -207,7 +231,7 @@ export interface LegsPiece extends PieceBase {
   strandRadius: number;
 }
 
-export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece;
+export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece | SleevePiece;
 
 export type ThreadPose =
   | { kind: "rest"; x: number; radius: number }
@@ -423,6 +447,17 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
         ...base, strandRadius: mm(m.kind === "silicone-legs" ? 0.45 : 0.6) / 2, count: m.count ?? 2,
         tieInThickness: 0.02, layerThickness: () => 0.02,
       };
+    case "strip": {
+      // A strip of hide with its fur: half its width as its "strand", the fur as its fibres.
+      const strip = cat as { furMm?: number; widthMm?: number };
+      return {
+        ...base, strandRadius: mm(m.mm ?? strip.widthMm ?? 3) / 2, fibreLength: m.fibre ?? mm(strip.furMm ?? 18), freeLength: 2.5,
+        tieInThickness: 0.05, layerThickness: () => STRIP_HIDE,
+      };
+    }
+    case "tubing":
+      // Assumption: the braid's wall is about 0.2 mm, two layers of fine Mylar strands.
+      return { ...base, strandRadius: mm(0.2), tieInThickness: mm(0.2), layerThickness: () => mm(0.2) };
   }
 }
 
@@ -434,6 +469,7 @@ const DURATION = {
   whip: 3.5,
   bead: 2,
   pullOver: 2.5,
+  sleeve: 3,
   spin: 3.5,
   perThreadTurn: 0.05,
   perMaterialTurn: 0.45,
@@ -453,6 +489,8 @@ const BUTTS = { length: 0.55, angle: deg(35) };
 const allRound = (spread: number) => Math.min(1, Math.max(0, (spread - deg(60)) / deg(90)));
 // Assumption: a CDC feather's stem is about as thick as a hackle's, 0.024 gape across.
 const CDC_STEM = 0.012;
+// Assumption: a rabbit hide is about 0.3 mm thick, a thirtieth of a #4's gape.
+const STRIP_HIDE = 0.03;
 
 /** Feather width as a fraction of length, by shape. */
 const FEATHER_WIDTH = { breast: 0.5, tip: 0.28, slip: 0.32 };
@@ -485,6 +523,8 @@ export function simulate(recipe: Recipe): Build {
   /** Wound pieces by material, so a hackle can be trimmed after winding. */
   const wound = new Map<string, WrapsPiece>();
   const covers = new Map<string, CoverPiece>();
+  /** Sleeves with an end still to tie down, by material. */
+  const sleeves = new Map<string, SleevePiece>();
   /** Strips tied in underneath, to be pulled over the belly rather than the back. */
   const underneath = new Set<string>();
   /** Upright posts, for parachute hackles. */
@@ -502,6 +542,28 @@ export function simulate(recipe: Recipe): Build {
   const fluffy: { x0: number; x1: number; height: number }[] = [];
   /** Every pass of dubbing, which a wing case or back later lies over. */
   const dubbed: WrapsPiece[] = [];
+  /**
+   * Fibres on what a strip or sleeve now covers, wound or dubbed, pressed flat (`halfAngle` round
+   * each side of the top): from this step on, those wraps are replaced by copies without them,
+   * so earlier moments still show them.
+   */
+  const pressUnder = (pieces: Piece[], from: number, to: number, halfAngle: number) => {
+    const press = (w: WrapsPiece): WrapsPiece | null => {
+      if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) return null;
+      w.until = time;
+      const pressed: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, covered: [...(w.covered ?? []), [from, to, halfAngle]], window: [0, 0.0001], until: undefined };
+      pieces.push(pressed);
+      return pressed;
+    };
+    for (const [id, w] of wound) {
+      const pressed = press(w);
+      if (pressed) wound.set(id, pressed);
+    }
+    dubbed.forEach((w, k) => {
+      const pressed = press(w);
+      if (pressed) dubbed[k] = pressed;
+    });
+  };
   const fluffUnder = (a: number, b: number) =>
     Math.max(0, ...fluffy.filter((f) => Math.min(f.x0, f.x1) < b && Math.max(f.x0, f.x1) > a).map((f) => f.height));
 
@@ -573,6 +635,8 @@ export function simulate(recipe: Recipe): Build {
         break;
       }
       case "attach-thread": {
+        // Started again after a whip finish part-way (the front of a Zonker).
+        if (steps.some((s) => recipe.steps[s.index]!.op === "whip-finish")) ctx.again = true;
         threadX = Math.min(step.at * span, frontLimit);
         threadAt = step.at;
         const piece = inPlace(threadX, 6);
@@ -664,16 +728,23 @@ export function simulate(recipe: Recipe): Build {
           ctx.tipX = x - step.length * Math.cos(angle);
           ctx.bendEnd = bendEndX(hook);
         }
-        if (step.extended && step.length) {
+        if ((step.extended || l.look === "strip") && step.length) {
           const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
           // Assumption: chenille keeps its own thickness; yarn is twisted into a rope; foam is a cut cylinder.
-          const thickness = l.look === "chenille" ? l.strandRadius * 0.85 : l.look === "foam" ? Math.max(0.08, cat.thickness ?? 0.09) : 0.11;
+          const thickness = l.look === "strip" ? STRIP_HIDE / 2 : l.look === "chenille" ? l.strandRadius * 0.85 : l.look === "foam" ? Math.max(0.08, cat.thickness ?? 0.09) : 0.11;
           pieces.push({
             type: "extension", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.35],
             x, radius, length: step.length, angle, side, thickness,
             tip: step.tip === undefined ? undefined : resolveColor(step.tip), fuzz: l.look === "chenille" ? l.fibreLength : undefined,
             forward: step.forward,
+            // A fur strip sticks out as its hide, the fur on top (a Zonker's or a Bunny Leech's tail).
+            ...(l.look === "strip" ? { width: l.strandRadius * 2, fur: l.fibreLength } : {}),
           });
+          // The rest of the strip waits, folded back over the tail, to be pulled over the body.
+          if (l.look === "strip" && nextUse(step.material, index) === "pull-over") {
+            freeEnds.set(step.material, { ...freeEnd(step.material, l), kind: "rest", x, radius, direction: "back-flat" });
+            ends = restingEnds();
+          }
         } else if (across && step.length) {
           pieces.push({
             type: "legs", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.35],
@@ -815,7 +886,10 @@ export function simulate(recipe: Recipe): Build {
         const [from, to] = back ? [end, tied] : [tied, end];
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
-        const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
+        const strip = l.look === "strip";
+        const thickness = strip ? STRIP_HIDE : cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
+        // A fur strip reaches round the body as far as its width does.
+        const stripAngle = strip ? Math.min(1.6, Math.max(0.35, l.strandRadius / Math.max(0.05, profile.radiusAt((from + to) / 2)))) : 0;
         const laterTrim = recipe.steps.slice(index + 1).find((s) => s.op === "trim" && s.material === step.material) as Extract<Step, { op: "trim" }> | undefined;
         const trimmedLater = laterTrim !== undefined;
         // What sticks out until it is cut is longer than what is left.
@@ -824,7 +898,8 @@ export function simulate(recipe: Recipe): Build {
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           // A loose bubble wraps further round the sides of what it covers.
-          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: strip ? stripAngle : deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          ...(strip ? { fur: l.fibreLength } : {}),
           ...(step.bubble ? { bubble: step.bubble } : {}),
           ...(underneath.has(step.material) ? { side: "under" as const } : {}),
           ...(l.veil ? { veil: true } : {}),
@@ -842,25 +917,8 @@ export function simulate(recipe: Recipe): Build {
           profile = profile.withLayer(from + q, to - q, step.bubble * 0.5, q, false, coverSide);
         }
         if (coverSide === "under") ctx.under = true;
-        // Fibres on top of what it covers, wound or dubbed, are pressed flat: from this step on,
-        // those wraps are replaced by copies without them, so earlier moments still show them.
-        const press = (w: WrapsPiece): WrapsPiece | null => {
-          // A loose bubble leaves the fibres under it standing.
-          if (step.bubble || underneath.has(step.material)) return null;
-          if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) return null;
-          w.until = time;
-          const pressed: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, covered: [from, to, cover.halfAngle], window: [0, 0.0001], until: undefined };
-          pieces.push(pressed);
-          return pressed;
-        };
-        for (const [id, w] of wound) {
-          const pressed = press(w);
-          if (pressed) wound.set(id, pressed);
-        }
-        dubbed.forEach((w, k) => {
-          const pressed = press(w);
-          if (pressed) dubbed[k] = pressed;
-        });
+        // Fibres on top of what it covers are pressed flat; a loose bubble leaves them standing.
+        if (!step.bubble && !underneath.has(step.material)) pressUnder(pieces, from, to, cover.halfAngle);
         freeEnds.delete(step.material);
         ends = restingEnds();
         // A bunch tied in pointing back (a Humpy's hair) is folded over now: it no longer sticks out.
@@ -886,6 +944,20 @@ export function simulate(recipe: Recipe): Build {
       case "tie-off": {
         const l = looks.get(step.material)!;
         const x = threadX!;
+        const sleeve = sleeves.get(step.material);
+        if (sleeve) {
+          // The sleeve's other end tied down: stretched tight over the body from here on.
+          ctx.sleeve = sleeve.open;
+          sleeves.delete(step.material);
+          sleeve.until = time + DURATION.tieOff * 0.3;
+          pieces.push({ ...sleeve, id: nextId++, seed: sleeve.seed ?? sleeve.id, open: undefined, window: [0.3, 0.3001], until: undefined });
+          profile = profile.withLayer(x - 2 * pitch, x + 6 * pitch, l.tieInThickness, 0.04);
+          const wraps = inPlace(x, 8);
+          pieces.push(wraps);
+          thread = { kind: "follow", piece: wraps.id };
+          duration = DURATION.tieOff;
+          break;
+        }
         ends = [
           ...restingEnds(),
           { ...freeEnd(step.material, l), length: 0.6, kind: "rest", x, radius: profile.radiusAt(x), direction: "out", hideAfter: 0.7 },
@@ -952,7 +1024,31 @@ export function simulate(recipe: Recipe): Build {
         }
         break;
       }
+      case "sleeve": {
+        const l = looks.get(step.material)!;
+        const x = threadX!;
+        const end = Math.min(step.to * span, frontLimit);
+        const [x0, x1] = end > x ? [x, end] : [end, x];
+        const piece: SleevePiece = {
+          type: "sleeve", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
+          x0, x1, base: profile, thickness: l.strandRadius, open: end > x ? "front" : "rear", ...(step.fray ? { fray: step.fray } : {}),
+        };
+        pieces.push(piece);
+        sleeves.set(step.material, piece);
+        // Stretched over it, the sleeve flattens the fluff of what is under it all round.
+        pressUnder(pieces, x0, x1, Math.PI - 0.2);
+        ctx.rear = end > x;
+        ctx.from = threadAt;
+        profile = profile.withLayer(x0, x1, l.layerThickness(1), 0.02);
+        const wraps = inPlace(x, 8, [0.6, 1]);
+        pieces.push(wraps);
+        thread = { kind: "follow", piece: wraps.id };
+        duration = DURATION.sleeve;
+        break;
+      }
       case "whip-finish": {
+        // Part-way: the thread is started again later (a Zonker's rear, finished at the bend).
+        if (recipe.steps.slice(index + 1).some((s) => s.op === "attach-thread")) ctx.midway = true;
         // The head is built up in layers between the thread and the eye (or bead).
         const piece = inPlace(threadX!, 3 * step.turns, undefined, frontLimit);
         pieces.push(piece);

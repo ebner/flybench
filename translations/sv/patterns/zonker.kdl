@@ -1,0 +1,58 @@
+id zonker
+status draft
+
+// en description: A natural rabbit strip lying over a pearl Mylar tubing body, tied down only at the bend and behind the eye, its rear a long fur tail over a short frayed flash tail, with a red throat.
+description "En naturfärgad kaninremsa över en kropp av pärlemorfärgad mylarslang, nedbunden bara vid kroken och bakom öglan, med en lång pälsstjärt baktill över en kort uppriven glitterstjärt, och ett rött skägg."
+
+// en history: Dan Byford tied the first Zonker in 1975 at Steamboat Springs, Colorado: so his obituary in Fly Fisherman and Fly Fishing the Sierra, while Perrault's and Hellickson's books, as Martin Joergensen cites them, say the mid-1970s. It had a body of Mylar tubing and a wing of dyed rabbit skin, tied down only at the rear and behind the eye. Rabbit-strip flies were older in New Zealand, and Fly Fishing the Sierra counts the Zonker among the American rabbit patterns taken from them. The name now stands for the style too: a strip of fur on the hide tied down at both ends.
+history """
+    Dan Byford band den första Zonkern 1975 i Steamboat Springs i Colorado: så säger hans
+    dödsruna i Fly Fisherman och Fly Fishing the Sierra, medan Perraults och Hellicksons böcker,
+    som Martin Joergensen citerar dem, säger mitten av 1970-talet. Den hade en kropp av
+    mylarslang och en vinge av färgat kaninskinn, nedbunden bara baktill och bakom öglan. Flugor
+    med kaninremsor fanns tidigare på Nya Zeeland, och Fly Fishing the Sierra räknar Zonkern
+    till de amerikanska kaninmönster som togs efter dem. Namnet står numera också för stilen: en
+    pälsremsa på skinnet, nedbunden i båda ändar.
+    """
+
+// en fishing: A streamer for big trout in rivers and lakes, and for steelhead, sea-run trout, bass and pike: a baitfish or a leech. It is stripped or swung on a sinking line, the weight under the body taking it down, and the rabbit fur moves in the water even when the fly hangs still.
+fishing """
+    En streamer för stora öringar i strömmande vatten och sjöar, och för steelhead, havsöring,
+    bass och gädda: en betesfisk eller en igel. Den strippas eller svingas på sjunklina, och
+    vikten under kroppen tar ner den; kaninpälsen rör sig i vattnet även när flugan hänger
+    stilla.
+    """
+
+labels {
+    // en underbody: Pearl Lite Brite
+    underbody "Pärlemorfärgad Lite Brite"
+    // en body: Medium pearl Mylar tubing
+    body "Medium pärlemorfärgad mylarslang"
+    // en wing: Natural rabbit zonker strip
+    wing "Naturfärgad zonkerremsa av kanin"
+    // en throat: Red marabou
+    throat "Röd marabou"
+}
+
+notes {
+    // en step 1 (weight weight): About 15 touching turns, a little forward of the middle.
+    step 1 "Ungefär 15 täta varv, en bit framför mitten."
+    // en step 3 (wrap-thread): Over the wire, locking it in place.
+    step 3 "Över vajern, så att den låses fast."
+    // en step 4 (dub underbody): A thin, even underbody, a little fuller over the wire.
+    step 4 "En tunn, jämn underkropp, lite fylligare över vajern."
+    // en step 6 (sleeve body): Cut it about one and a half shanks long and pull out its core; pull it back as you wrap, so it stretches tight.
+    step 6 "Klipp den ungefär ett och ett halvt krokskaft lång och dra ut kärnan; dra den bakåt medan du lindar, så att den sträcks."
+    // en step 7 (tie-in wing): Fur up, the hide on top, over the tubing's turns; fold the rest of the strip back out of the way.
+    step 7 "Pälsen uppåt, skinnet ovanpå, över slangens varv; vik resten av remsan bakåt så att den inte är i vägen."
+    // en step 8 (whip-finish): Glue the turns.
+    step 8 "Limma varven."
+    // en step 10 (tie-off body): Keep it short of the eye: the strip and the head go on top.
+    step 10 "Håll den kort om öglan: remsan och huvudet ska ovanpå."
+    // en step 12 (pull-over wing): As tight as it goes, the hide flat along the top of the body.
+    step 12 "Så hårt det går, med skinnet plant längs kroppens ovansida."
+    // en step 13 (trim wing): Cut it at an angle.
+    step 13 "Klipp den snett."
+    // en step 14 (whip-finish): Varnish the head.
+    step 14 "Lacka huvudet."
+}

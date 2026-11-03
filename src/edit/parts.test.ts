@@ -313,5 +313,28 @@ describe("a fly built of parts", () => {
     expect(compile(caddis).problems.map((p) => p.message)).toEqual([]);
     expect(caddis.parts.every((p) => [p.at, p.from, p.to].every((x) => x === undefined || (x >= 0 && x <= 1)))).toBe(true);
   });
-});
 
+  it("keeps a Zonker's tubing as a sleeve, its strip pulled over with its tail, and its rear finished part-way", () => {
+    const fly = partsOf(byId("zonker"))!;
+    expect(fly.parts.find((p) => p.id === "body")).toMatchObject({ how: "sleeve", at: 0.04, to: 0.9, fray: 1 });
+    expect(fly.parts.find((p) => p.id === "wing")).toMatchObject({ how: "pulled", length: 3.8, to: 0.9 });
+    expect(fly.restarts).toEqual([expect.objectContaining({ turns: 3, at: 0.9 })]);
+    // A part added still ties, and the rear is still finished before the thread is started again.
+    const more = addPart(fly, "rib", "silver-wire").fly;
+    const { recipe, problems } = compile(more);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    expect(recipe.steps.filter((s) => s.op === "whip-finish")).toHaveLength(2);
+    expect(recipe.steps.filter((s) => s.op === "attach-thread")).toHaveLength(2);
+  });
+
+  it("slides a sleeve on over a body wound under it", () => {
+    let fly: PartsFly = bareHook({ ...meta, type: "streamer", hook: { model: "streamer-4xl", size: 4 } });
+    fly = addPart(fly, "body", "chenille", "white").fly;
+    fly = addPart(fly, "body", "mylar-tubing").fly;
+    const { recipe, problems } = compile(fly);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    const ops = recipe.steps.map((s) => `${s.op}${"material" in s ? ` ${s.material}` : ""}`);
+    const sleeve = ops.findIndex((o) => o.startsWith("sleeve"));
+    expect(sleeve).toBeGreaterThan(ops.indexOf("tie-off body"));
+  });
+});

@@ -7,7 +7,7 @@ import { MATERIALS, type MaterialKind } from "./materials";
  */
 export const RULES = {
   duplicateMaterial: (p: { m: string }) => `material "${p.m}" is defined more than once`,
-  afterWhipFinish: () => "nothing but trimming can follow the whip finish",
+  afterWhipFinish: () => "nothing but trimming, or starting the thread again, can follow the whip finish",
   unknownMaterial: (p: { m: string }) => `unknown material "${p.m}"`,
   tieOffNext: (p: { m: string }) => `"${p.m}" was just wound and must be tied off before anything else`,
   securePalmer: (p: { m: string }) => `"${p.m}" was palmered back and must be secured by winding another material forward over its tip`,
@@ -22,6 +22,9 @@ export const RULES = {
   threadThere: () => "the thread is already there",
   onlyDubbing: (p: { m: string }) => `only dubbing can be dubbed; tie in "${p.m}" instead`,
   onlyHairSpun: (p: { m: string }) => `only hair can be spun, not "${p.m}"`,
+  onlyTubing: (p: { m: string }) => `only tubing is slid over the body as a sleeve, not "${p.m}"`,
+  tubingSleeve: () => `tubing is slid over the body with "sleeve", not tied in`,
+  sleeveFromThread: () => "the sleeve must reach from the thread to another place along the shank",
   spinForward: () => "spin the hair forward from the thread",
   dubNotTie: () => `dubbing is applied to the thread with "dub", not tied in`,
   beadSlides: () => `beads go on with "slide-bead" before the thread`,
@@ -59,6 +62,7 @@ export const RULES = {
   leaveOnly: () => "leave only applies to hair butts, spun hair and foam backs",
   shapeOnly: () => "shape only applies to trimming spun hair or hair butts",
   neverTiedOff: (p: { m: string; rear: boolean }) => `"${p.m}" is wound but never ${p.rear ? "secured" : "tied off"}`,
+  sleeveOpen: (p: { m: string }) => `"${p.m}" is tied down at one end only; tie off its other end`,
   trimTip: (p: { m: string }) => `the tip of "${p.m}" is still hanging at the bend; trim it`,
   neverUsedAfterTieIn: (p: { m: string }) => `"${p.m}" is tied in but never wound or pulled over`,
   neverUsed: (p: { m: string }) => `"${p.m}" is listed but never used`,

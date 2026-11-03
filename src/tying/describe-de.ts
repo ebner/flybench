@@ -141,7 +141,7 @@ function writerFor(recipe: Recipe) {
       case "weight":
         return `Wickle ${mat(said.m, "acc")} in dichten ${many("turn", "dat")} ${place(said.from).from} ${place(said.to).to}.`;
       case "attach-thread":
-        return `Lege ${thread} ${place(said.at).at} mit ein paar ${many("turn", "dat")} an und schneide ${the("tag-end", "acc")} ab.`;
+        return `Lege ${thread} ${place(said.at).at}${said.again ? " erneut" : ""} mit ein paar ${many("turn", "dat")} an und schneide ${the("tag-end", "acc")} ab.`;
       case "wrap-thread":
         return said.turns
           ? `Führe ${thread} in ${turns(said.turns, true)} ${place(said.to).to}.`
@@ -205,6 +205,14 @@ function writerFor(recipe: Recipe) {
         const each = { m: "jeden gegen den vorigen", f: "jede gegen die vorige", n: "jedes gegen das vorige" }[clump.gender as Gender];
         return `Spinne ${many("clump", "acc")} aus ${mat(said.m, "dat", "none")} um ${the(alongId, "acc")} und drücke ${each} zurück, ${place(said.to).to}.`;
       }
+      case "sleeve": {
+        const fray = said.fray ? ` Zupfe das Geflecht hinter der hinteren Abbindung zu losen ${many("strand", "dat")} auf, etwa ${length(said.fray)} lang.` : "";
+        return `Ziehe ${mat(said.m, "acc")} über ${the("eye", "acc")} und am Körper entlang, so dass ${pronoun(noun(said.m)).nom} ${place(said.from).from} ${place(said.to).to} ${verb(noun(said.m), "reicht", "reichen")}, und binde das ${said.rear ? "hintere" : "vordere"} Ende ${place(said.from).at} mit festen ${many("turn", "dat")} ab.${fray}`;
+      }
+      case "tie-off-sleeve":
+        return said.end === "front"
+          ? `Ziehe ${mat(said.m, "acc")} straff über ${the("body", "acc")}, binde das vordere Ende mit festen ${many("turn", "dat")} ab und schneide ${excess} ab.`
+          : `Ziehe ${mat(said.m, "acc")} straff über ${the("body", "acc")} und binde das hintere Ende mit festen ${many("turn", "dat")} ab.`;
       case "dub": {
         const noodle = word("noodle");
         return `Zwirble ${a("noodle", "acc", "dünn")} aus ${mat(said.m, "dat", "none")} auf ${thread} und wickle ${pronoun(noodle).acc} ${said.rear ? "zurück" : "nach vorn"} ${place(said.to).to}.`;
@@ -234,6 +242,7 @@ function writerFor(recipe: Recipe) {
           ? `Schneide ${the("butt", "acc", true)} ${mat(said.m, "gen")} ab und lass ${a("head", "acc", "kurz")} stehen, ${pronoun(word("head")).rel} ${length(said.leave)} lang ist.`
           : `Schneide ${the("butt", "acc", true)} ${mat(said.m, "gen")} bündig ab.`;
       case "whip-finish":
+        if (said.midway) return `Mache hier ${a("whip-finish", "acc")} mit ${turns(said.turns)} und schneide ${thread} ab.`;
         return `Forme ${a("head", "acc", "klein")}, mache ${a("whip-finish", "acc")} mit ${turns(said.turns)} und schneide ${thread} ab.`;
     }
   };

@@ -38,6 +38,8 @@ export type How =
   | "pulled"
   /** Sticking out as one solid piece (an extended body or larva). */
   | "extended"
+  /** Tubing slid over the body as a sleeve, tied down where it starts and later at its other end. */
+  | "sleeve"
   /** The thread itself wound as the body. */
   | "thread";
 
@@ -90,6 +92,8 @@ export interface Part {
   tipWing?: number;
   /** Laid back from the eye and tied down there by the thread (a foam balloon), not held by the next winding. */
   tiedBack?: boolean;
+  /** A sleeve's rear end frayed into loose strands this long (gapes). */
+  fray?: number;
   /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep). */
   trim?: { leave?: number; shape?: "round" | "wedge" | "cigar" | "cone"; keep?: "sides" | "top" | "under" };
   /** The visitor's notes on its steps, by action (0 the first). */
@@ -110,6 +114,21 @@ export interface PartsFly {
   attachNote?: { note?: string; mistake?: string };
   /** The whip finish: its turns, its order key (trims may come after it), its note. */
   finish: { turns: number; key: number; note?: string; mistake?: string; at?: number; move?: { note?: string; mistake?: string } };
+  /**
+   * Whip finishes part-way, each at its order key, the thread then started again at `at` (a
+   * Zonker's rear finished at the bend, its front tied with the thread started behind the eye).
+   */
+  restarts?: Restart[];
+}
+
+export interface Restart {
+  key: number;
+  turns: number;
+  at: number;
+  note?: string;
+  mistake?: string;
+  /** The note on attaching the thread again. */
+  attach?: { note?: string; mistake?: string };
 }
 
 const arch = (kind: MaterialKind): Archetype => MATERIALS[kind].archetype;
@@ -132,7 +151,7 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
   eyes: ["bead-chain-eyes", "dumbbell-eyes", "mono-eyes"],
   tag: ["oval-tinsel", "flat-tinsel", "silk-floss", "wool", "gold-wire", "silver-wire"],
   tail: [
-    "hackle-fibres", "golden-pheasant-tippet", "golden-pheasant-crest", "pheasant-tail", "coq-de-leon", "hares-mask-guard-hairs",
+    "rabbit-strip", "hackle-fibres", "golden-pheasant-tippet", "golden-pheasant-crest", "pheasant-tail", "coq-de-leon", "hares-mask-guard-hairs",
     "marabou", "krystal-flash", "hackle-tips", "duck-quill", "turkey-quill", "saddle-feathers", "goose-biot",
     "elk-hair", "moose-mane", "bucktail", "calf-tail", "wool", "silicone-legs",
   ],
@@ -140,10 +159,10 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
   rib: ["gold-wire", "silver-wire", "copper-wire", "oval-tinsel", "flat-tinsel", "monofilament", "rib-thread"],
   body: [
     "dry-fly-dubbing", "dubbing", "hares-ear-dubbing", "seals-fur", "rabbit-dubbing", "peacock-herl", "silk-floss",
-    "flat-tinsel", "oval-tinsel", "copper-wire", "gold-wire", "silver-wire", "chenille", "wool", "cdc", "deer-hair", "pheasant-tail",
+    "flat-tinsel", "oval-tinsel", "copper-wire", "gold-wire", "silver-wire", "chenille", "wool", "cdc", "deer-hair", "pheasant-tail", "mylar-tubing",
   ],
   thorax: ["peacock-herl", "dry-fly-dubbing", "dubbing", "hares-ear-dubbing", "seals-fur", "chenille"],
-  back: ["foam", "scud-back", "turkey-quill", "pheasant-tail", "poly-yarn", "chenille"],
+  back: ["foam", "scud-back", "turkey-quill", "pheasant-tail", "poly-yarn", "chenille", "rabbit-strip"],
   wing: [
     "hackle-tips", "mallard-breast", "teal-flank", "duck-quill", "starling-quill", "turkey-quill", "cdc", "poly-yarn",
     "elk-hair", "deer-hair", "calf-tail", "squirrel-tail", "bucktail", "marabou", "golden-pheasant-tippet", "krystal-flash", "goose-biot",
@@ -166,6 +185,7 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
   if (role === "weight") return ["weight"];
   if (a === "dubbing") return ["dubbed"];
   if (a === "eyes") return ["bunch"];
+  if (a === "tubing") return ["sleeve"];
   switch (role) {
     case "tail":
     case "wing":
@@ -211,6 +231,8 @@ export function actionCount(p: Part): number {
       return p.trim ? 2 : 1;
     case "pulled":
       return 2 + (p.trim ? 1 : 0);
+    case "sleeve":
+      return 2;
   }
 }
 
@@ -245,6 +267,8 @@ export function phaseOf(p: Part, action: number): number {
     case "back":
       return front ? [48, 55, 56][action]! : [31, 47, 47.5][action]!;
     case "body":
+      // A sleeve goes on over whatever is wound or dubbed under it.
+      if (p.how === "sleeve") return 40.8 + action * 0.1;
       return p.how === "dubbed" || p.how === "spun" || p.how === "thread" ? 40 + action * 0.1 : [35, 40, 40.5][action]!;
     case "thorax":
       return 50 + action * 0.1;
@@ -271,10 +295,12 @@ export function renumbered(fly: PartsFly): PartsFly {
   const all: { key: number; set: (k: number) => void }[] = [];
   const parts = fly.parts.map((p) => ({ ...p, keys: [...p.keys] }));
   const finish = { ...fly.finish };
+  const restarts = fly.restarts?.map((r) => ({ ...r }));
   for (const p of parts) p.keys.forEach((k, i) => all.push({ key: k, set: (v) => (p.keys[i] = v) }));
   all.push({ key: finish.key, set: (v) => (finish.key = v) });
+  for (const r of restarts ?? []) all.push({ key: r.key, set: (v) => (r.key = v) });
   all.sort((x, y) => x.key - y.key).forEach((x, i) => x.set((i + 1) * 10));
-  return { ...fly, parts, finish };
+  return { ...fly, parts, finish, ...(restarts && { restarts }) };
 }
 
 /**
@@ -339,11 +365,14 @@ export function compile(fly: PartsFly): Compiled {
   };
   /** The note for the thread's next move (the action under way's). */
   let threadNote: { note?: string; mistake?: string } | undefined;
+  /** Where the thread is attached next: at the start, or again after a whip finish part-way. */
+  let attachAt = fly.attach;
+  let attachNote = fly.attachNote;
   const to = (x: number, part: string | null) => {
     const at = round(x);
     if (thread === null) {
-      push({ op: "attach-thread", at: round(fly.attach), ...fly.attachNote }, null);
-      thread = round(fly.attach);
+      push({ op: "attach-thread", at: round(attachAt), ...attachNote }, null);
+      thread = round(attachAt);
     }
     // Closer than the rules tell apart, the thread is already there.
     if (Math.abs(thread - at) < POSITION_TOLERANCE) return;
@@ -361,9 +390,10 @@ export function compile(fly: PartsFly): Compiled {
     ...(p.mistakes?.[action] && { mistake: p.mistakes[action] }),
   });
 
-  type Action = { key: number; part: Part; index: number };
+  type Action = { key: number; part: Part; index: number; restart?: Restart };
   const actions: Action[] = fly.parts.flatMap((part) => part.keys.slice(0, actionCount(part)).map((key, index) => ({ key, part, index })));
   actions.push({ key: fly.finish.key, part: null as unknown as Part, index: -1 });
+  for (const r of fly.restarts ?? []) actions.push({ key: r.key, part: null as unknown as Part, index: -1, restart: r });
   // Before the thread: beads, then weighting, whatever their keys.
   actions.sort((a, b) => {
     const pre = (x: Action) => (x.part?.how === "slide" ? 0 : x.part?.how === "weight" ? 1 : 2);
@@ -382,9 +412,19 @@ export function compile(fly: PartsFly): Compiled {
     actions.splice(actions.indexOf(a) + 1, 0, rib!);
   }
 
-  for (const { part: p, index: i } of actions) {
+  for (const { part: p, index: i, restart } of actions) {
+    if (restart) {
+      // Finished here (where the thread is) and started again later; nothing to finish before the thread.
+      if (thread !== null) {
+        push({ op: "whip-finish", turns: restart.turns, ...(restart.note && { note: restart.note }), ...(restart.mistake && { mistake: restart.mistake }) }, null);
+        thread = null;
+      }
+      attachAt = restart.at;
+      attachNote = restart.attach;
+      continue;
+    }
     if (!p) {
-      if (thread === null) to(fly.attach, null);
+      if (thread === null) to(attachAt, null);
       threadNote = fly.finish.move;
       if (fly.finish.at !== undefined) to(fly.finish.at, null);
       push({ op: "whip-finish", turns: fly.finish.turns, ...(fly.finish.note && { note: fly.finish.note }), ...(fly.finish.mistake && { mistake: fly.finish.mistake }) }, null);
@@ -472,6 +512,15 @@ export function compile(fly: PartsFly): Compiled {
           thread = round(p.to ?? 0.7);
         } else trim();
         break;
+      case "sleeve":
+        if (i === 0) {
+          to(p.at ?? 0, p.id);
+          p.mats.forEach((m, k) => push({ op: "sleeve", material: m.id, to: round(p.to ?? 0.7), ...(p.fray !== undefined && { fray: p.fray }), ...(k === 0 ? n : matNote(m, i)) }, p.id));
+        } else {
+          to(p.to ?? 0.7, p.id);
+          p.mats.forEach((m, k) => push({ op: "tie-off", material: m.id, ...(k === 0 ? n : matNote(m, i)) }, p.id));
+        }
+        break;
       case "pulled":
         if (i === 0) tieIns(p.at ?? 0, bunch);
         else if (i === 1) {
@@ -555,12 +604,25 @@ export function partsOf(recipe: Recipe): PartsFly | null {
   let thread: number | null = null;
   let attach: number | null = null;
   let finish: PartsFly["finish"] | null = null;
+  const restarts: Restart[] = [];
   const threadParts: Part[] = [];
 
   for (let i = 0; i < steps.length; i++) {
     const s = steps[i]!;
     if (s.op === "attach-thread") {
-      if (attach !== null) return null;
+      if (attach !== null) {
+        // Started again after a whip finish part-way: that finish is a restart. (Not after a
+        // move of the thread to finish elsewhere: the builder finishes part-way where it is.)
+        if (!finish || finish.at !== undefined || finish.move) return null;
+        const attachAgain = annotation(s);
+        restarts.push({
+          key: finish.key, turns: finish.turns, at: s.at,
+          ...(finish.note && { note: finish.note }), ...(finish.mistake && { mistake: finish.mistake }), ...(attachAgain && { attach: attachAgain }),
+        });
+        finish = null;
+        thread = s.at;
+        continue;
+      }
       attach = thread = s.at;
       attachNote = annotation(s);
       continue;
@@ -626,7 +688,8 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     const mistakes: Record<number, string> = {};
     // A tie-off's note under its winding's action and a half (they are one action).
     const noted = (action: number, s: Step) => {
-      const key = s.op === "tie-off" ? action + 0.5 : action;
+      // (A sleeve's tie-off is an action of its own.)
+      const key = s.op === "tie-off" && part?.how !== "sleeve" ? action + 0.5 : action;
       if (s.note) notes[key] = s.note;
       if (s.mistake) mistakes[key] = s.mistake;
     };
@@ -646,6 +709,10 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     };
     const at = g[0]!.thread ?? 0;
     if (ops === "slide-bead") part = { id, how: "slide", mats: [mat], keys: [g[0]!.i] };
+    else if (ops === "sleeve tie-off") {
+      const sl = g[0]!.s as Extract<Step, { op: "sleeve" }>;
+      part = { id, how: "sleeve", mats: [mat], at, to: sl.to, ...(sl.fray !== undefined && { fray: sl.fray }), keys: g.map((x) => x.i) };
+    }
     else if (ops === "weight") {
       const w = g[0]!.s as Extract<Step, { op: "weight" }>;
       part = { id, how: "weight", mats: [mat], from: w.from, to: w.to, keys: [g[0]!.i] };
@@ -706,7 +773,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
   const all = [...merged, ...threadParts];
   // A parachute's post by its part's id.
   for (const p of all) if (p.post) p.post = all.find((x) => x.mats.some((m) => m.id === p.post))?.id ?? p.post;
-  return { meta, parts: all, attach: attach ?? 0.85, ...(attachNote && { attachNote }), finish };
+  return { meta, parts: all, attach: attach ?? 0.85, ...(attachNote && { attachNote }), finish, ...(restarts.length && { restarts }) };
 }
 
 /** Two materials tied in one after the other and handled alike, as one part's mix. */
@@ -832,15 +899,16 @@ export function unavailable(fly: PartsFly, part: Part, how: How): "needsRib" | "
 
 /** An upright bunch a parachute hackle can be wound round. */
 export const isPost = (p: Part) =>
-  p.how === "bunch" && (p.angle ?? 0) >= UPRIGHT && p.side !== "across" && p.mats.every((m) => arch(m.kind) !== "feather");
+  p.how === "bunch" && (p.angle ?? 0) >= UPRIGHT && p.side !== "across" && p.mats.every((m) => arch(m.kind) !== "feather" && arch(m.kind) !== "strip");
 
 /** The part tied another way, its measurements made to suit, re-ordered as convention ties it. */
 export function withHow(fly: PartsFly, part: Part, how: How): Part {
   const body = fly.parts.find((p) => p.role === "body" && p.id !== part.id);
-  const [bodyFrom, bodyTo] = body ? extentOf(body) : [0, 0.7];
+  // (An extended body sticks out behind: it covers no shank to wind along.)
+  const [bodyFrom, bodyTo] = body && body.how !== "extended" ? extentOf(body) : [0, 0.7];
   const c = CLASSIC[part.role];
   const next: Omit<Part, "keys"> & { keys?: number[] } = { ...part, how };
-  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter"] as const) delete next[k];
+  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray"] as const) delete next[k];
   switch (how) {
     case "bunch":
       if (part.mats.some((m) => arch(m.kind) === "eyes")) Object.assign(next, { at: c.at ?? 0.85 });
@@ -869,6 +937,9 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
       break;
     case "pulled":
       Object.assign(next, { at: c.at ?? 0, to: c.to ?? 0.88 });
+      break;
+    case "sleeve":
+      Object.assign(next, { at: c.at ?? c.from ?? 0, to: c.to ?? 0.7 });
       break;
     case "extended":
       Object.assign(next, { at: 0, length: 1 });
@@ -951,6 +1022,10 @@ function constrained(fly: PartsFly): PartsFly {
       // At the eye, its start moves back instead.
       const key = p.at !== undefined ? "at" : "from";
       return start + 0.05 <= 1 ? { ...p, to: start + 0.05 } : { ...p, [key]: 0.95, to: 1 };
+    }
+    // A sleeve reaches from where it is tied down to somewhere else.
+    if (p.how === "sleeve" && p.at !== undefined && p.to !== undefined && Math.abs(p.to - p.at) < 0.05) {
+      return p.at + 0.05 <= 1 ? { ...p, to: p.at + 0.05 } : { ...p, to: p.at - 0.05 };
     }
     if (p.how === "palmered" && ribs.length) {
       // Tied in far enough from the bend to wind back over something, its tip on the shank.
@@ -1037,7 +1112,7 @@ function trimFor(p: Part, mats: PartMaterial[]): Part["trim"] {
     case "bunch":
       return any("hair") ? (p.trim ?? {}) : undefined;
     case "pulled":
-      return all("foam") ? p.trim : undefined;
+      return all("foam") || all("strip") ? p.trim : undefined;
     case "wound":
     case "palmered":
       return p.trim?.keep && all("hackle") ? { keep: p.trim.keep } : p.how === "palmered" ? {} : undefined;
@@ -1128,6 +1203,7 @@ export function startFrom(recipe: Recipe, keepNotes = false): PartsFly | null {
     ...fly,
     parts: fly.parts.map(({ notes: _n, mistakes: _m, ...p }) => p as Part),
     finish: { turns: fly.finish.turns, key: fly.finish.key },
+    ...(fly.restarts && { restarts: fly.restarts.map(({ key, turns, at }) => ({ key, turns, at })) }),
   };
 }
 

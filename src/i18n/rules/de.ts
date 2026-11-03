@@ -21,7 +21,7 @@ const kind = (k: MaterialKind) => inLang("de", () => kindName(k));
 
 export const RULES_DE: RuleCatalog = {
   duplicateMaterial: (p) => `Das Material „${p.m}“ ist mehr als einmal angegeben.`,
-  afterWhipFinish: () => "Nach dem Kopfknoten kann nur noch geschnitten werden.",
+  afterWhipFinish: () => "Nach dem Kopfknoten kann nur noch geschnitten oder der Faden neu angelegt werden.",
   unknownMaterial: (p) => `Es gibt kein Material namens „${p.m}“.`,
   tieOffNext: (p) => `„${p.m}“ wurde gerade gewunden und muss abgebunden werden, bevor es weitergeht.`,
   securePalmer: (p) => `„${p.m}“ wurde in offenen Windungen nach hinten gewunden. Sichere die Spitze, indem du ein anderes Material darüber nach vorn windest.`,
@@ -36,6 +36,9 @@ export const RULES_DE: RuleCatalog = {
   threadThere: () => "Der Bindefaden ist schon dort.",
   onlyDubbing: (p) => `Nur Dubbing lässt sich dubben. Binde „${p.m}“ stattdessen ein.`,
   onlyHairSpun: (p) => `Nur Haar lässt sich aufspinnen, nicht „${p.m}“.`,
+  onlyTubing: (p) => `Nur Schlauch wird als Hülle über den Körper gezogen, nicht „${p.m}“.`,
+  tubingSleeve: () => "Schlauch wird als Hülle über den Körper gezogen, nicht eingebunden.",
+  sleeveFromThread: () => "Der Schlauch muss vom Faden bis zu einer anderen Stelle am Hakenschenkel reichen.",
   spinForward: () => "Spinne das Haar vom Bindefaden aus nach vorn auf.",
   dubNotTie: () => "Dubbing wird nicht eingebunden, sondern auf den Bindefaden gedubbt.",
   beadSlides: () => "Eine Perle wird nicht eingebunden: Schiebe sie auf, bevor du den Bindefaden anlegst.",
@@ -73,6 +76,7 @@ export const RULES_DE: RuleCatalog = {
   leaveOnly: () => "Eine Länge stehen lassen geht nur bei Haarenden, aufgesponnenem Haar und Rücken aus Foam.",
   shapeOnly: () => "In Form schneiden lässt sich nur aufgesponnenes Haar oder Haarenden.",
   neverTiedOff: (p) => `„${p.m}“ ist gewunden, wird aber nie ${p.rear ? "gesichert" : "abgebunden"}.`,
+  sleeveOpen: (p) => `„${p.m}“ ist nur an einem Ende abgebunden: binde auch das andere ab.`,
   trimTip: (p) => `Die Spitze von „${p.m}“ hängt noch am Hakenbogen. Schneide sie ab.`,
   neverUsedAfterTieIn: (p) => `„${p.m}“ ist eingebunden, wird aber nie gewunden oder nach vorn geklappt.`,
   neverUsed: (p) => `„${p.m}“ steht in der Liste, wird aber nie verwendet.`,

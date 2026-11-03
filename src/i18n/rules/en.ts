@@ -17,7 +17,7 @@ const kind = (k: MaterialKind) => inLang("en", () => kindName(k));
 
 export const RULES_EN: RuleCatalog = {
   duplicateMaterial: (p) => `The material “${p.m}” is listed more than once.`,
-  afterWhipFinish: () => "After the whip finish you can only trim.",
+  afterWhipFinish: () => "After the whip finish you can only trim, or start the thread again.",
   unknownMaterial: (p) => `There is no material called “${p.m}”.`,
   tieOffNext: (p) => `You have just wound “${p.m}”. Tie it off before anything else.`,
   securePalmer: (p) => `You wound “${p.m}” back towards the bend. Secure it by winding another material forward over its tip.`,
@@ -32,6 +32,9 @@ export const RULES_EN: RuleCatalog = {
   threadThere: () => "The thread is already there.",
   onlyDubbing: (p) => `Only dubbing can be dubbed. Tie in “${p.m}” instead.`,
   onlyHairSpun: (p) => `Only hair can be spun, not “${p.m}”.`,
+  onlyTubing: (p) => `Only tubing is slid over the body as a sleeve, not “${p.m}”.`,
+  tubingSleeve: () => "Tubing is slid over the body as a sleeve, not tied in.",
+  sleeveFromThread: () => "The sleeve has to reach from the thread to another place along the shank.",
   spinForward: () => "Spin the hair forward from the thread.",
   dubNotTie: () => "Dubbing isn't tied in: dub it onto the thread instead.",
   beadSlides: () => "A bead isn't tied in: slide it on before you attach the thread.",
@@ -69,6 +72,7 @@ export const RULES_EN: RuleCatalog = {
   leaveOnly: () => "A length can only be left standing on hair butts, spun hair and foam backs.",
   shapeOnly: () => "Only spun hair or hair butts can be trimmed to a shape.",
   neverTiedOff: (p) => `“${p.m}” is wound but never ${p.rear ? "secured" : "tied off"}.`,
+  sleeveOpen: (p) => `“${p.m}” is tied down at one end only: tie down its other end.`,
   trimTip: (p) => `The tip of “${p.m}” still hangs at the bend. Trim it.`,
   neverUsedAfterTieIn: (p) => `“${p.m}” is tied in but never wound or pulled over.`,
   neverUsed: (p) => `“${p.m}” is listed but never used.`,

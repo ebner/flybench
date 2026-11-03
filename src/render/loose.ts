@@ -66,9 +66,28 @@ export class LooseEndView {
 
   constructor(end: FreeEndPose, surfaces: Surfaces) {
     const len = end.length;
-    const stem = new THREE.CylinderGeometry(end.strandRadius * 0.6, end.strandRadius, len, 8).translate(0, len / 2, 0);
+    // A fur strip waits as a flat strip of hide, its fur on one face.
+    const strip = end.look === "strip";
+    const stem = strip
+      ? new THREE.BoxGeometry(0.03, len, end.strandRadius * 2).translate(0, len / 2, 0)
+      : new THREE.CylinderGeometry(end.strandRadius * 0.6, end.strandRadius, len, 8).translate(0, len / 2, 0);
     this.geometries.push(stem);
     this.object.add(new THREE.Mesh(stem, surfaces.get(end.look === "hackle" ? "stem" : end.look, end.color)));
+    if (strip && end.fibreLength) {
+      const rand = mulberry32(end.material.length * 37 + 5);
+      const fibres: Fibre[] = [];
+      for (let i = 0; i < Math.round(len * 500); i++) {
+        // Lying flat, the fur on its upper face points along it, back towards its end.
+        const dir = new THREE.Vector3(0.25 + 0.3 * rand(), -1, (rand() - 0.5) * 0.5).normalize();
+        fibres.push({
+          u: 0, base: new THREE.Vector3(0.015, rand() * len, (rand() * 2 - 1) * end.strandRadius), dir,
+          length: end.fibreLength * (0.6 + 0.4 * rand()), radius: 0.0042, shade: 0.75 + 0.35 * rand(),
+        });
+      }
+      const mesh = fibreMesh(fibres, surfaces.get("strip", end.color, true), 0.3, 0.8);
+      this.disposers.push(() => mesh.dispose());
+      this.object.add(mesh.object);
+    }
 
     if (end.fibreLength && (end.look === "hackle" || end.look === "herl")) {
       const rand = mulberry32(end.material.length * 31 + 17);

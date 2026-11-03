@@ -88,5 +88,13 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
     case "legs":
       // Rubber and silicone: a soft sheen.
       return new THREE.MeshStandardMaterial({ color, roughness: 0.45, ...fibres });
+    case "strip":
+      // Fur and its hide: soft, with a little sheen on the guard hairs.
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.75, side: THREE.DoubleSide, ...fibres });
+    case "tubing":
+      // Braided Mylar: bright metallic strands with a pearly play of colour.
+      return new THREE.MeshPhysicalMaterial({
+        color, roughness: 0.28, metalness: 0.8, iridescence: 0.7, iridescenceIOR: 1.5, side: THREE.DoubleSide, ...fibres,
+      });
   }
 }

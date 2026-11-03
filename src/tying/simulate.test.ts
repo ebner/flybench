@@ -43,7 +43,8 @@ describe("simulate", () => {
             coverStep.set(p.material, i);
             firstStub.set(p.material, p.stub);
           }
-          // Fibres pressed flat by a wing case, and rib dents in it, never show before they happen.
+          if (p.type === "sleeve" && !coverStep.has(p.material)) coverStep.set(p.material, i);
+          // Fibres pressed flat by a wing case or a sleeve, and rib dents in it, never show before they happen.
           if (p.type === "wraps" && p.covered) expect(i, file).toBeGreaterThanOrEqual(Math.min(...coverStep.values()));
           if (p.type === "cover" && p.dents.length > 0) expect(i, file).toBeGreaterThan(coverStep.get(p.material)!);
           // Trimming changes what sticks out past the tie-down, never before it happens.
@@ -210,5 +211,63 @@ describe("instruction text", () => {
   it("describes tag length in gape fractions", () => {
     expect(text("europea-12-tailed.kdl", "Tie in: pheasant")).toMatch(/0\.9× the gape sticking out behind/);
     expect(text("red-tag.kdl", "Tie in: red wool")).toMatch(/leaving the gape sticking out behind/);
+  });
+});
+
+describe("a Zonker: a sleeve, a fur strip and the thread started again", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/zonker.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("zonker.kdl does not load");
+  const build = simulate(result.recipe);
+  const all = build.steps.flatMap((s, i) => s.pieces.map((p) => ({ p, i, step: s })));
+
+  it("slides the tubing on loose at the front, frayed at the rear, and replaces it tied down at both ends", () => {
+    const sleeves = all.filter(({ p }) => p.type === "sleeve");
+    expect(sleeves).toHaveLength(2);
+    const [open, tied] = sleeves.map(({ p }) => p as Extract<typeof p, { type: "sleeve" }>);
+    expect(open!.open).toBe("front");
+    expect(open!.fray).toBe(1);
+    expect(tied!.open).toBeUndefined();
+    expect(open!.until).toBeDefined();
+    expect(tied!.x0).toBeCloseTo(open!.x0);
+    expect(tied!.x1).toBeCloseTo(open!.x1);
+  });
+
+  it("leaves the strip's tail sticking out as a furred hide, and lays the rest over the back, furred", () => {
+    const tail = all.find(({ p }) => p.type === "extension")!.p as Extract<(typeof all)[number]["p"], { type: "extension" }>;
+    expect(tail.length).toBeCloseTo(3.8);
+    expect(tail.width).toBeGreaterThan(0.3);
+    expect(tail.fur).toBeGreaterThan(1);
+    // Still there after the pull-over: the tail stays.
+    expect(tail.until).toBeUndefined();
+    const back = all.find(({ p }) => p.type === "cover")!.p as Extract<(typeof all)[number]["p"], { type: "cover" }>;
+    expect(back.fur).toBeCloseTo(tail.fur!);
+    expect(back.x1 - back.x0).toBeGreaterThan(3);
+  });
+
+  it("keeps the underbody pressed flat all round under the tubing when the strip is pulled over it", () => {
+    const pull = result.recipe.steps.findIndex((s) => s.op === "pull-over");
+    const underbody = build.steps[pull]!.pieces.filter((p) => p.type === "wraps" && p.material === "underbody") as WrapsPiece[];
+    expect(underbody.length).toBeGreaterThan(0);
+    for (const w of underbody) {
+      // The sleeve's mask, all round, and the strip's on top.
+      expect(w.covered!.length).toBe(2);
+      expect(w.covered![0]![2]).toBeGreaterThan(2.9);
+    }
+  });
+
+  it("says where the sleeve reaches from and to, and that it is tied down at the thread", () => {
+    expect(build.steps.find((s) => s.title.startsWith("Slide on sleeve"))!.text).toMatch(
+      /reaches from 4% of the way along the shank to 90% of the way along the shank, and tie its rear end down at 4% of the way/,
+    );
+  });
+
+  it("finishes the rear part-way and says so, then starts the thread again", () => {
+    const texts = build.steps.map((s) => s.text);
+    expect(texts.find((t) => t.startsWith("Whip finish here"))).toBeDefined();
+    expect(texts.find((t) => t.startsWith("Attach the thread again"))).toBeDefined();
+    expect(texts.find((t) => t.startsWith("Stretch the"))).toMatch(/front end down/);
+    // The step after the finish part-way starts the thread again, with turns of its own.
+    const mid = build.steps.findIndex((s) => s.text.startsWith("Whip finish here"));
+    expect(build.steps[mid + 1]!.thread?.kind).toBe("follow");
   });
 });
