@@ -271,6 +271,7 @@ export function Build({ query }: { query: string }) {
         if (e.shiftKey) redo();
         else undo();
       }
+      if (e.key === "Escape" && selected.length && !document.querySelector(".wb-sheet")) choose(null);
       // Delete takes out the chosen part when the fly or the parts have the focus, not a field or a menu.
       const onFly = target === document.body || !!target.closest(".wb-rail, .wb-stage");
       if (onFly && (e.key === "Delete" || e.key === "Backspace") && primary && primary !== "hook" && primary !== "thread") {
@@ -310,9 +311,11 @@ export function Build({ query }: { query: string }) {
 
   const primary = selected.at(-1) ?? null;
   const part = fly?.parts.find((p) => p.id === primary) ?? null;
-  const choose = (id: string, add: boolean) => {
-    setWhole(false);
-    setSelected((s) => (add ? (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]) : [id]));
+  /** Chooses a part (with `add`, one more); the chosen part again, or nothing, shows the whole fly. */
+  const choose = (id: string | null, add = false) => {
+    const next = id === null ? [] : add ? (selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id]) : selected.length === 1 && selected[0] === id ? [] : [id];
+    setSelected(next);
+    setWhole(next.length === 0);
   };
   // The hook is always shown in full; the thread when it is chosen (Stage keeps its wraps).
   const focus = whole || !selected.length ? null : new Set(selected.filter((id) => id !== "hook"));
@@ -469,6 +472,7 @@ export function Build({ query }: { query: string }) {
         onDrag={(id, patch, first) => change((f) => setPart(f, id, patch), !first)}
         onDragEnd={() => {}}
         framing={`${opened}:${fly.meta.hook.model}:${fly.meta.hook.size ?? fly.meta.hook.length}`}
+        focused={focus !== null}
         tools={
           <>
             <button onClick={undo} disabled={!past.length}>
@@ -476,9 +480,6 @@ export function Build({ query }: { query: string }) {
             </button>
             <button onClick={redo} disabled={!future.length}>
               {w.redo}
-            </button>
-            <button aria-pressed={whole} onClick={() => setWhole(!whole)}>
-              {w.wholeFly}
             </button>
             <button aria-pressed={guide} onClick={() => setGuide(!guide)}>
               {w.guide}

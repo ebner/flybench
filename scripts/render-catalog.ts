@@ -130,13 +130,13 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
           );
           await mkdir(`${OUT}/${job.id}`, { recursive: true });
           await sharp(frames[0]).webp({ quality: 85, alphaQuality: 90 }).toFile(`${OUT}/${job.id}/card.webp`);
-          const half = { width: FRAME.width / 2, height: FRAME.height / 2 };
-          const tiles = await Promise.all(frames.map((f) => sharp(f).resize(half).png().toBuffer()));
-          await sharp({ create: { width: half.width * FRAMES, height: half.height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-            .composite(tiles.map((input, i) => ({ input, left: i * half.width, top: 0 })))
-            .webp({ quality: 75, alphaQuality: 80 })
+          // At the card's own size, so the fly stays as sharp while it turns (a strip under webp's 16383 px).
+          const tiles = await Promise.all(frames.map((f) => sharp(f).png().toBuffer()));
+          await sharp({ create: { width: FRAME.width * FRAMES, height: FRAME.height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+            .composite(tiles.map((input, i) => ({ input, left: i * FRAME.width, top: 0 })))
+            .webp({ quality: 80, alphaQuality: 85 })
             .toFile(`${OUT}/${job.id}/spin.webp`);
-          manifest[job.id] = { hash: job.hash, frames: FRAMES, ...half };
+          manifest[job.id] = { hash: job.hash, frames: FRAMES, ...FRAME };
           console.log(`${OUT}/${job.id}`);
         }
       }),

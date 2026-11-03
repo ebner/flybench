@@ -89,6 +89,7 @@ export function Stage({
   onDrag,
   onDragEnd,
   tools,
+  focused,
   framing,
 }: {
   build: Built | null;
@@ -101,10 +102,13 @@ export function Stage({
   guide: boolean;
   watching: boolean;
   player: Player;
-  onSelect: (id: string, add: boolean) => void;
+  /** A part tapped on the fly (null: empty space, for the whole fly). */
+  onSelect: (id: string | null, add: boolean) => void;
   onDrag: (id: string, patch: Partial<Part>, first: boolean) => void;
   onDragEnd: () => void;
   tools: React.ReactNode;
+  /** Parts are chosen and the rest is faint: the stage offers the whole fly. */
+  focused: boolean;
   /** What the camera frames: a new value (another fly, another hook) frames the fly afresh; edits keep the view. */
   framing: string;
 }) {
@@ -235,7 +239,7 @@ export function Stage({
           const box = container.current!.getBoundingClientRect();
           const i = scene.current?.pickStep(e.clientX - box.left, e.clientY - box.top);
           const id = i === null || i === undefined ? null : owner(compiled, i);
-          if (id) onSelect(id, e.shiftKey);
+          onSelect(id, e.shiftKey);
         }}
       />
       <div className="wb-handles">
@@ -294,7 +298,14 @@ export function Stage({
           </div>
         </div>
       ) : (
-        <p className="wb-hint">{part ? t.workbench.dragHint : t.workbench.focusHint}</p>
+        <div className="wb-hint">
+          {focused ? (
+            <button className="wb-whole" onClick={() => onSelect(null, false)}>
+              {t.workbench.showWhole}
+            </button>
+          ) : null}
+          <p>{part ? t.workbench.dragHint : t.workbench.focusHint}</p>
+        </div>
       )}
     </section>
   );
