@@ -1,0 +1,51 @@
+id black-peacock-spider
+status draft
+
+// en description: A short, fat body of bronze peacock herl over floss, ribbed with the tying thread, and a long black hen hackle.
+description "En kort, tjock kropp av bronsfärgat påfågelherl över floss, ribbad med bindtråden, och ett långt svart hönshackel."
+
+// en history: The best known of the original nymphs Tom Ivens published in Still Water Fly-Fishing (1952), the book that taught a generation to fish the new English reservoirs: slow "deceivers" rather than bright lures. Ivens's own dressing builds a floss underbody under bronze peacock herl, ribbed with the tying thread for strength, with a long-fibred black hen collar. Most tyers today leave out the floss and add a gold wire rib; some give it a red tag or a bead. A shop credits it to Robin Elwes, and one video confuses it with the old Tweed Black Spider; neither holds up.
+history """
+    Den mest kända av de ursprungliga nymfer som Tom Ivens publicerade i Still Water Fly-Fishing
+    (1952), boken som lärde en generation att fiska de nya engelska dammsjöarna: långsamma
+    ”deceivers” i stället för grälla lockflugor. Ivens egen bindning bygger en underkropp av
+    floss under bronsfärgat påfågelherl, ribbat med bindtråden för hållbarhetens skull, med en
+    krage av långfibrigt svart hönshackel. De flesta binder i dag utan floss och med en ribbning
+    av guldtråd; en del ger den en röd tag eller en skalle. En butik tillskriver den Robin
+    Elwes, och en video blandar ihop den med den gamla Tweed Black Spider; inget av det håller.
+    """
+
+// en fishing: A stillwater fly, fished slowly on a long leader from the bank or a drifting boat, inched back near the bottom or in the weed. It passes for a snail, a beetle or a midge pupa, and is one of the flies that catches when nothing else will.
+fishing """
+    En fluga för stillastående vatten, fiskad långsamt på lång tafs från land eller drivande
+    båt, sakta inhalad nära botten eller i vegetationen. Den går för en snäcka, en skalbagge
+    eller en fjädermyggpuppa och är en av de flugor som fångar när inget annat gör det.
+    """
+
+labels {
+    // en underbody: Black floss
+    underbody "Svart floss"
+    // en rib: Tying thread
+    rib "Bindtråd"
+    // en body: Bronze peacock herl
+    body "Bronsfärgat påfågelherl"
+    // en hackle: Long-fibred black hen hackle
+    hackle "Långfibrigt svart hönshackel"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave a little room behind the eye.
+    step 1 "Lämna lite plats bakom öglan."
+    // en step 5 (tie-in body): By their tips.
+    step 5 "I topparna."
+    // en step 7 (wind underbody): Back and forth, fattest in the middle and front.
+    step 7 "Fram och tillbaka, tjockast på mitten och framtill."
+    // en step 9 (wind body): Touching turns of herl; twisting it first makes it stronger.
+    step 9 "Herlet varv intill varv; tvinnat först blir det starkare."
+    // en step 11 (wind rib): Through the herl, for strength.
+    step 11 "Genom herlet, för hållbarheten."
+    // en step 15 (wind hackle): Two turns only, sweeping back over the body.
+    step 15 "Bara två varv, svepande bakåt över kroppen."
+    // en step 17 (whip-finish): Clear varnish on the head.
+    step 17 "Klarlack på huvudet."
+}

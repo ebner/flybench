@@ -1,0 +1,48 @@
+id grey-wulff
+status draft
+
+// en description: Upright, divided wings and a tail of brown bucktail, a grey muskrat body and a heavy blue dun hackle.
+description "Upprätta delade vingar och en stjärt av brun bucktail, en grå kropp av bisam och ett kraftigt blågrått hackel."
+
+// en history: Lee Wulff tied the first of his series in 1929 or 1930, for the big grey drakes of New York's Ausable, and called it the Ausable Gray; Wikipedia gives the Esopus and other Catskill rivers. Dan Bailey insisted on Wulff's name, and the Ausable Gray, the Coffin May and the Bucktail Coachman became the Grey, White and Royal Wulff. They were the first dry flies to use bucktail for wings and tail, so they floated high in rough water. Wulff's body was grey angora wool; muskrat is usual today. It is also a classic dry fly for Atlantic salmon.
+history """
+    Lee Wulff band den första i sin serie 1929 eller 1930, för de stora gråa dagsländorna i
+    Ausable i delstaten New York, och kallade den Ausable Gray; Wikipedia anger Esopus och andra
+    floder i Catskills. Dan Bailey insisterade på Wulffs namn, och Ausable Gray, Coffin May och
+    Bucktail Coachman blev Grey, White och Royal Wulff. De var de första torrflugorna med vingar
+    och stjärt av bucktail, så de flöt högt i strömt vatten. Wulffs kropp var av grå angoraull;
+    i dag är bisam vanligast. Den är också en klassisk torrfluga för lax.
+    """
+
+// en fishing: A high-floating, easy-to-see dry for rough water: dead drift during the grey and slate drake hatches, or as an attractor between them. In summer, cast it to a deep pool and twitch it now and then. Tied on a salmon hook, it is a classic for Atlantic salmon.
+fishing """
+    En högt flytande, lättsedd torrfluga för strömt vatten: fritt drivande under kläckningarna
+    av de stora grå dagsländorna, eller som lockfluga mellan dem. På sommaren kan man kasta den
+    i en djup höljä och rycka den då och då. Bunden på en laxkrok är den en klassiker för lax.
+    """
+
+labels {
+    // en wings: Natural brown bucktail
+    wings "Naturbrun bucktail"
+    // en tail: Natural brown bucktail
+    tail "Naturbrun bucktail"
+    // en body: Grey muskrat fur
+    body "Grå bisampäls"
+    // en hackle: Medium blue dun cock hackle
+    hackle "Tupphackel, mellanblågrått"
+}
+
+notes {
+    // en step 3 (tie-in wings): A generous stacked clump, tips forward; stand it up and divide it with figure-of-eight turns.
+    step 3 "En rejäl, jämnad knippe, topparna framåt; res den och dela den med åttor."
+    // en step 4 (trim wings): Cut the butts at a shallow slant and bind them down to the bend.
+    step 4 "Klipp rotändarna i en svag vinkel och bind ner dem till böjen."
+    // en step 6 (tie-in tail): About a quarter as much hair as the wing.
+    step 6 "Ungefär en fjärdedel så mycket hår som i vingen."
+    // en step 7 (trim tail): Square, the step smoothed with thread.
+    step 7 "Rakt, steget utjämnat med tråd."
+    // en step 8 (dub body): Lightly tapered, leaving room behind the wings for the hackle.
+    step 8 "Lätt avsmalnande, med plats bakom vingarna för hacklet."
+    // en step 11 (wind hackle): A heavy collar, behind the wings and in front.
+    step 11 "En kraftig krage, bakom vingarna och framför."
+}

@@ -1,0 +1,42 @@
+id woolly-worm
+status draft
+
+// en description: A short tuft of red wool, a black chenille body and a grizzly hackle palmered from the tail to the head.
+description "En kort tofs av rött ullgarn, en kropp av svart chenille och ett grizzlyhackel lindat som kroppshackel från stjärten till huvudet."
+
+// en history: A palmer fly from England by way of the Ozarks of Missouri and Arkansas, where it was a bass and crappie fly in the 1920s; nobody is recorded as its inventor. Don Martinez of West Yellowstone got one from a friend in Arkansas and sold his versions as Woolly Worms: in a 1940 letter to Preston Jennings he called it a horrible-looking grub, murderous all season, and said he sold more of them than of all his other flies together. Wikipedia and Orvis put this in the 1950s, which his letter and his death in 1955 rule out. Martinez's first ones had a grizzly tail or none; the red wool tag came later. In 1967 Russell Blessing gave it a marabou tail, and it became the Woolly Bugger.
+history """
+    En palmerfluga från England som via Ozarks i Missouri och Arkansas kom att bli en bass- och
+    crappiefluga på 1920-talet; ingen är känd som upphovsman. Don Martinez i West Yellowstone
+    fick en av en vän i Arkansas och sålde sina versioner som Woolly Worms: i ett brev till
+    Preston Jennings 1940 kallade han den en förskräcklig larv, mordisk hela säsongen, och skrev
+    att han sålt fler av dem än av alla sina andra flugor tillsammans. Wikipedia och Orvis
+    lägger detta på 1950-talet, vilket hans brev och hans död 1955 utesluter. Martinez första
+    hade en grizzlystjärt eller ingen; tofsen av rött ullgarn kom senare. 1967 gav Russell
+    Blessing den en stjärt av marabou, och den blev Woolly Bugger.
+    """
+
+// en fishing: A big general nymph or caterpillar for still and slow water. Martinez fished it deep and twitched it with the left hand: the moving hackle is what does it. Weighted, it searches the bottom of rivers for trout; unweighted, it was first fished on the surface for bass and bluegill.
+fishing """
+    En stor allmän nymf eller larv för stilla och lugnt vatten. Martinez fiskade den djupt och
+    ryckte den med vänsterhanden: det är det rörliga hacklet som gör det. Förtyngd avsöker den
+    älvarnas botten efter öring; oförtyngd fiskades den först i ytan efter bass och solabborre.
+    """
+
+labels {
+    // en tail: Red wool
+    tail "Rött ullgarn"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short tuft, on top; bind the yarn along the shank for an even underbody.
+    step 3 "En kort tofs ovanpå; bind ner garnet längs skaftet för en jämn underkropp."
+    // en step 4 (tie-in body): By its stripped core.
+    step 4 "I den rensade kärnan."
+    // en step 5 (tie-in hackle): At the bend, by the butt, dull side forward (Martinez).
+    step 5 "Vid böjen, i stjälken, matta sidan framåt (Martinez)."
+    // en step 7 (wind body): Touching turns, an eye-length behind the eye.
+    step 7 "Varv intill varv, en ögonlängd bakom öglan."
+    // en step 9 (wind hackle): Even open turns forward over the chenille.
+    step 9 "Jämna, glesa varv framåt över chenillen."
+}

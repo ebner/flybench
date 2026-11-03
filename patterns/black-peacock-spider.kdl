@@ -1,0 +1,72 @@
+// Black & Peacock Spider: Tom Ivens's stillwater nymph of 1952, a fat peacock body and a long black hen hackle.
+
+id black-peacock-spider
+name "Black & Peacock Spider"
+aliases "Black and Peacock Spider" "Black Peacock Spider"
+type wet
+imitates attractor
+naturals midge-pupa beetle
+difficulty beginner
+species trout
+season april may june july august september october
+origin originator="Tom Ivens" year=1952 region="England"
+description "A short, fat body of bronze peacock herl over floss, ribbed with the tying thread, and a long black hen hackle."
+history """
+    The best known of the original nymphs Tom Ivens published in Still Water Fly-Fishing
+    (1952), the book that taught a generation to fish the new English reservoirs: slow
+    "deceivers" rather than bright lures. Ivens's own dressing builds a floss underbody under
+    bronze peacock herl, ribbed with the tying thread for strength, with a long-fibred black
+    hen collar. Most tyers today leave out the floss and add a gold wire rib; some give it a
+    red tag or a bead. A shop credits it to Robin Elwes, and one video confuses it with the
+    old Tweed Black Spider; neither holds up.
+    """
+fishing """
+    A stillwater fly, fished slowly on a long leader from the bank or a drifting boat, inched
+    back near the bottom or in the weed. It passes for a snail, a beetle or a midge pupa, and is
+    one of the flies that catches when nothing else will.
+    """
+sources {
+    "Wikipedia: T C Ivens" url="https://en.wikipedia.org/wiki/T_C_Ivens"
+    "T C Ivens (Adrian V. W. Freer): Original series of fly patterns" url="https://webdatauk.wixsite.com/t-c-ivens/original-series-of-fly-patterns"
+    "Global FlyFisher: Black and Peacock Spider (Michael Jensen)" url="https://globalflyfisher.com/video/black-and-peacock-spider"
+    "Fishtec: Fly Tying for Beginners, the Black Peacock Spider (Dom Garnett, archived)" url="https://web.archive.org/web/20200805160958/https://blog.fishtec.co.uk/fly-tying-for-beginners-part-1-the-black-peacock-spider"
+    "Diptera: Black Peacock Spider (archived)" url="https://web.archive.org/web/20260208231925/https://www.diptera.co.uk/patterns/b/black_peacock_spider_ti.html"
+    "Fly Dressers' Guild: Dressings database" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://static.wixstatic.com/media/77d39a_db16893228234cc8b99f42c02e194ef4~mv2.jpg" page="https://webdatauk.wixsite.com/t-c-ivens/original-series-of-fly-patterns" author="Adrian V. W. Freer" license="All rights reserved; reference only" note="Ivens's proportions, side view (small in the frame)"
+    "https://www.farlows.co.uk/media/catalog/product/2/0/204.1_10.jpg" page="https://www.farlows.co.uk/hackled-wet-black-and-peacock-spider.html" license="All rights reserved; reference only" note="Side view"
+}
+
+hook wet-standard size=10
+thread black size="8/0"
+
+materials {
+    underbody silk-floss color=black label="Black floss"
+    rib rib-thread color=black label="Tying thread"
+    body peacock-herl strands=5 label="Bronze peacock herl"
+    // Jensen: about twice the gape; Garnett: two to three times.
+    hackle hen-hackle color=black fibre=1.6 sweep=45 label="Long-fibred black hen hackle"
+}
+
+steps {
+    attach-thread at=0.88 note="Leave a little room behind the eye."
+    wrap-thread to=0.0
+    tie-in underbody
+    tie-in rib
+    tie-in body note="By their tips."
+    wrap-thread to=0.82
+    // Assumption: Ivens gives only "floss underbody"; Jensen calls the body short and fat.
+    wind underbody to=0.82 turns=16 note="Back and forth, fattest in the middle and front."
+    tie-off underbody
+    wind body to=0.82 turns=11 note="Touching turns of herl; twisting it first makes it stronger."
+    tie-off body
+    wind rib to=0.82 turns=5 note="Through the herl, for strength."
+    tie-off rib
+    tie-in hackle
+    wrap-thread to=0.88
+    wind hackle to=0.88 turns=2 note="Two turns only, sweeping back over the body."
+    tie-off hackle
+    whip-finish note="Clear varnish on the head."
+}

@@ -1,0 +1,52 @@
+id black-peacock-spider
+status draft
+
+// en description: A short, fat body of bronze peacock herl over floss, ribbed with the tying thread, and a long black hen hackle.
+description "Ein kurzer, dicker Körper aus bronzefarbenem Pfauengras über Floss, mit dem Bindefaden gerippt, und eine lange schwarze Hennenhechel."
+
+// en history: The best known of the original nymphs Tom Ivens published in Still Water Fly-Fishing (1952), the book that taught a generation to fish the new English reservoirs: slow "deceivers" rather than bright lures. Ivens's own dressing builds a floss underbody under bronze peacock herl, ribbed with the tying thread for strength, with a long-fibred black hen collar. Most tyers today leave out the floss and add a gold wire rib; some give it a red tag or a bead. A shop credits it to Robin Elwes, and one video confuses it with the old Tweed Black Spider; neither holds up.
+history """
+    Die bekannteste der ursprünglichen Nymphen, die Tom Ivens in Still Water Fly-Fishing (1952)
+    veröffentlichte, dem Buch, das eine Generation das Fischen an den neuen englischen Stauseen
+    lehrte: langsame „Deceivers“ statt greller Streamer. Ivens' eigene Bindeweise baut unter dem
+    bronzefarbenen Pfauengras einen Unterkörper aus Floss auf, mit dem Bindefaden zur Festigkeit
+    gerippt, mit einem Kragen aus langfibriger schwarzer Hennenhechel. Die meisten lassen heute
+    die Floss weg und rippen mit Golddraht; manche geben ihr einen roten Tag oder eine Perle.
+    Ein Händler schreibt sie Robin Elwes zu, und ein Video verwechselt sie mit der alten Tweed
+    Black Spider; beides hält nicht.
+    """
+
+// en fishing: A stillwater fly, fished slowly on a long leader from the bank or a drifting boat, inched back near the bottom or in the weed. It passes for a snail, a beetle or a midge pupa, and is one of the flies that catches when nothing else will.
+fishing """
+    Eine Fliege für stehendes Wasser, langsam an langem Vorfach vom Ufer oder treibenden Boot
+    gefischt, nahe am Grund oder im Kraut eingeholt. Sie geht als Schnecke, Käfer oder
+    Zuckmückenpuppe durch und gehört zu den Fliegen, die fangen, wenn nichts anderes fängt.
+    """
+
+labels {
+    // en underbody: Black floss
+    underbody "Schwarze Floss"
+    // en rib: Tying thread
+    rib "Bindefaden"
+    // en body: Bronze peacock herl
+    body "Bronzefarbenes Pfauengras"
+    // en hackle: Long-fibred black hen hackle
+    hackle "Langfibrige schwarze Hennenhechel"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave a little room behind the eye.
+    step 1 "Lass etwas Platz hinter dem Öhr."
+    // en step 5 (tie-in body): By their tips.
+    step 5 "An den Spitzen."
+    // en step 7 (wind underbody): Back and forth, fattest in the middle and front.
+    step 7 "Hin und her, in der Mitte und vorn am dicksten."
+    // en step 9 (wind body): Touching turns of herl; twisting it first makes it stronger.
+    step 9 "Das Pfauengras Windung an Windung; vorher verdrillt wird es fester."
+    // en step 11 (wind rib): Through the herl, for strength.
+    step 11 "Durch das Pfauengras, zur Festigkeit."
+    // en step 15 (wind hackle): Two turns only, sweeping back over the body.
+    step 15 "Nur zwei Windungen, nach hinten über den Körper streichend."
+    // en step 17 (whip-finish): Clear varnish on the head.
+    step 17 "Klarlack auf den Kopf."
+}

@@ -1,0 +1,53 @@
+id soldier-palmer
+status draft
+
+// en description: A short red wool tail, a red seal's fur body ribbed with gold wire, a red game hackle palmered its whole length and a longer collar in front.
+description "En kort stjärt av rött ullgarn, en kropp av rött sälhår ribbad med guldtråd, ett red game-hackel lindat över hela längden och en längre krage framtill."
+
+// en history: One of the oldest flies on record. Walton (1653) has Barker's palmer flies, "some with red, and a red hackle", and Bowlker (1758) the Red Palmer of reddish mohair ribbed with gold twist under a red hackle: already the Soldier Palmer's materials. By 1892 Niven and Marbury print the name, Marbury explaining it by the red coat of the British soldier, and saying a red body with the hackle at the head only is a Red Hackle. The red tail that tells it from the Red Palmer came later and is usual in Britain today; Marbury's American fly has none. Bodies are wool or seal's fur, hackles red game or ginger, one or two of them.
+history """
+    En av de äldsta flugor som finns nedtecknade. Walton (1653) har Barkers palmerflugor, ”some
+    with red, and a red hackle”, och Bowlker (1758) Red Palmer av rödaktig mohair ribbad med
+    guldtråd under ett rött hackel: redan Soldier Palmers material. År 1892 trycker Niven och
+    Marbury namnet, och Marbury förklarar det med den brittiske soldatens röda rock och skriver
+    att en röd kropp med hacklet bara vid huvudet är en Red Hackle. Den röda stjärten som
+    skiljer den från Red Palmer kom senare och är vanlig i Storbritannien i dag; Marburys
+    amerikanska fluga saknar den. Kropparna är av ull eller sälhår, hacklen red game eller
+    ginger, ett eller två.
+    """
+
+// en fishing: The bob fly: on the top dropper of a team of wet flies, dibbled through the wave tops from a drifting boat on lochs and lakes, where the bushy palmer leaves a wake. It suggests nothing in particular, or a big red buzzer in early summer, and takes trout, sea trout and char; it can be fished dry too.
+fishing """
+    Topflugan: på den översta hängaren i en tafs med våtflugor, dragen genom vågtopparna från en
+    drivande båt på sjöar, där det yviga kroppshacklet lämnar ett svall. Den liknar inget
+    särskilt, eller en stor röd fjädermygga tidigt på sommaren, och tar öring, havsöring och
+    röding; den kan också fiskas torr.
+    """
+
+labels {
+    // en tail: Red wool
+    tail "Rött ullgarn"
+    // en body: Red seal's fur
+    body "Rött sälhår"
+    // en hackle: Red game cock hackle
+    hackle "Tupphackel, red game"
+    // en collar: Red game hen hackle
+    collar "Hönshackel, red game"
+}
+
+notes {
+    // en step 3 (tie-in tail): Short, on top.
+    step 3 "Kort, ovanpå."
+    // en step 5 (dub body): Leave room for the hackle and the head.
+    step 5 "Lämna plats för hacklet och huvudet."
+    // en step 6 (tie-in hackle): By the stalk, at the front of the body.
+    step 6 "I stjälken, vid kroppens framände."
+    // en step 7 (wind hackle): Two or three turns at the front, then open turns back to the tail.
+    step 7 "Två eller tre varv framtill, sedan glesa varv bakåt till stjärten."
+    // en step 8 (wind rib): Forward through the hackle, wiggled so it traps no fibres.
+    step 8 "Framåt genom hacklet, vickad så att den inte fångar några fibrer."
+    // en step 10 (trim hackle): Cut the hackle tip away at the tail.
+    step 10 "Klipp bort hackelspetsen vid stjärten."
+    // en step 13 (wind collar): Two or three turns, longer than the body hackle.
+    step 13 "Två eller tre varv, längre än kroppshacklet."
+}

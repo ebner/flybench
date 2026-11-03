@@ -1,0 +1,46 @@
+id royal-coachman
+status draft
+
+// en description: A golden pheasant tippet tail, a body of peacock herl with a red floss band, upright white duck quill wings and a brown hackle.
+description "Ein Schwanz aus Goldfasanen-Tippet, ein Körper aus Pfauengras mit einem Band aus roter Floss, aufrechte Flügel aus weißer Entenschwinge und eine braune Hechel."
+
+// en history: The Coachman, a wet fly with a peacock body and white wings, is credited to Tom Bosworth, coachman to the British court in the 1830s. In 1878 John Haily, a professional tyer in New York, was asked for sturdier ones: he bound a band of red silk round the middle of the herl to stop it fraying and gave the fly a barred wood duck tail. Mary Orvis Marbury tells how her uncle L. C. Orvis, seeing how finely it was dressed, named it the Royal Coachman. It was first a wet fly and is mostly fished dry today, with a tippet tail; Theodore Gordon gave it fan wings, and in 1930 the hair-winged Quack Coachman led to the Royal Wulff. The name is also spelled Hailey; Ahrex reports an English origin from Collier.
+history """
+    Die Coachman, eine Nassfliege mit Pfauenkörper und weißen Flügeln, wird Tom Bosworth
+    zugeschrieben, Kutscher am britischen Hof in den 1830er Jahren. 1878 wurde John Haily, ein
+    Berufsbinder in New York, um haltbarere gebeten: Er band ein Band aus roter Seide um die
+    Mitte des Pfauengrases, damit es nicht ausfranste, und gab der Fliege einen Schwanz aus
+    gebänderter Brautente. Mary Orvis Marbury erzählt, wie ihr Onkel L. C. Orvis sie, als er
+    sah, wie fein sie gebunden war, Royal Coachman nannte. Sie war zuerst eine Nassfliege und
+    wird heute meist trocken gefischt, mit einem Schwanz aus Tippet; Theodore Gordon gab ihr
+    Fächerflügel, und 1930 führte die haargeflügelte Quack Coachman zur Royal Wulff. Der Name
+    wird auch Hailey geschrieben; Ahrex gibt Colliers Angabe einer englischen Herkunft wieder.
+    """
+
+// en fishing: An attractor, fished dead drift as an ordinary dry when trout are not feeding on anything in particular, and the classic brook trout fly. The white wings make it easy to follow on the water. Quill wings split after a few fish, which is why many anglers carry the Royal Wulff instead.
+fishing """
+    Eine Reizfliege, frei treibend gefischt wie eine gewöhnliche Trockenfliege, wenn die
+    Forellen nichts Bestimmtes nehmen, und die klassische Fliege für Bachsaiblinge. Die weißen
+    Flügel machen sie auf dem Wasser leicht zu verfolgen. Flügel aus Schwingensegmenten spalten
+    sich nach ein paar Fischen, und deshalb tragen viele Fischer stattdessen die Royal Wulff.
+    """
+
+labels {
+    // en wings: White duck quill slips
+    wings "Segmente weißer Entenschwinge"
+    // en hackle: Coachman brown cock hackle
+    hackle "Hahnenhechel, Coachman-braun"
+}
+
+notes {
+    // en step 3 (tie-in wings): A slip a gape wide from a left and a right quill, curves out, tips forward; stood up and divided later.
+    step 3 "Ein Segment so breit wie der Hakenbogen aus einer linken und einer rechten Schwinge, Wölbungen nach außen, Spitzen nach vorn; später aufgerichtet und geteilt."
+    // en step 5 (tie-in tail): Six to eight tippet barbs, tips level.
+    step 5 "Sechs bis acht Tippetfibern, die Spitzen gleich."
+    // en step 8 (wind butt): Four or five turns.
+    step 8 "Vier oder fünf Windungen."
+    // en step 12 (wind band): A smooth red band, a little narrower than the herl sections in many flies.
+    step 12 "Ein glattes rotes Band, bei vielen Fliegen etwas schmaler als die Pfauenteile."
+    // en step 20 (wind hackle): Behind the wings, then the wings pulled back and the rest in front.
+    step 20 "Hinter den Flügeln, dann die Flügel nach hinten ziehen und den Rest davor winden."
+}

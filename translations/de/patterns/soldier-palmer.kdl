@@ -1,0 +1,53 @@
+id soldier-palmer
+status draft
+
+// en description: A short red wool tail, a red seal's fur body ribbed with gold wire, a red game hackle palmered its whole length and a longer collar in front.
+description "Ein kurzer Schwanz aus roter Wolle, ein Körper aus rotem Seehund mit Golddrahtrippung, eine Red-Game-Hechel über die ganze Länge gewunden und ein längerer Kragen vorn."
+
+// en history: One of the oldest flies on record. Walton (1653) has Barker's palmer flies, "some with red, and a red hackle", and Bowlker (1758) the Red Palmer of reddish mohair ribbed with gold twist under a red hackle: already the Soldier Palmer's materials. By 1892 Niven and Marbury print the name, Marbury explaining it by the red coat of the British soldier, and saying a red body with the hackle at the head only is a Red Hackle. The red tail that tells it from the Red Palmer came later and is usual in Britain today; Marbury's American fly has none. Bodies are wool or seal's fur, hackles red game or ginger, one or two of them.
+history """
+    Eine der ältesten überlieferten Fliegen. Walton (1653) kennt Barkers Palmerfliegen, „some
+    with red, and a red hackle“, und Bowlker (1758) die Red Palmer aus rötlichem Mohair mit
+    Goldtwist gerippt unter einer roten Hechel: schon die Materialien der Soldier Palmer. 1892
+    drucken Niven und Marbury den Namen, Marbury erklärt ihn mit dem roten Rock des britischen
+    Soldaten und schreibt, ein roter Körper mit der Hechel nur am Kopf sei eine Red Hackle. Der
+    rote Schwanz, der sie von der Red Palmer unterscheidet, kam später und ist heute in
+    Großbritannien üblich; Marburys amerikanische Fliege hat keinen. Die Körper sind aus Wolle
+    oder Seehund, die Hecheln Red Game oder Ginger, eine oder zwei.
+    """
+
+// en fishing: The bob fly: on the top dropper of a team of wet flies, dibbled through the wave tops from a drifting boat on lochs and lakes, where the bushy palmer leaves a wake. It suggests nothing in particular, or a big red buzzer in early summer, and takes trout, sea trout and char; it can be fished dry too.
+fishing """
+    Die Bob-Fliege: am obersten Springer eines Vorfachs mit Nassfliegen, vom treibenden Boot
+    durch die Wellenkämme gezogen, wo die buschige Körperhechel eine Bugwelle zieht. Sie ahmt
+    nichts Bestimmtes nach, oder im Frühsommer eine große rote Zuckmücke, und fängt Forellen,
+    Meerforellen und Saiblinge; sie lässt sich auch trocken fischen.
+    """
+
+labels {
+    // en tail: Red wool
+    tail "Rote Wolle"
+    // en body: Red seal's fur
+    body "Roter Seehund"
+    // en hackle: Red game cock hackle
+    hackle "Hahnenhechel, Red Game"
+    // en collar: Red game hen hackle
+    collar "Hennenhechel, Red Game"
+}
+
+notes {
+    // en step 3 (tie-in tail): Short, on top.
+    step 3 "Kurz, oben auf."
+    // en step 5 (dub body): Leave room for the hackle and the head.
+    step 5 "Lass Platz für die Hechel und den Kopf."
+    // en step 6 (tie-in hackle): By the stalk, at the front of the body.
+    step 6 "Am Kiel, am vorderen Ende des Körpers."
+    // en step 7 (wind hackle): Two or three turns at the front, then open turns back to the tail.
+    step 7 "Zwei oder drei Windungen vorn, dann offene Windungen zurück bis zum Schwanz."
+    // en step 8 (wind rib): Forward through the hackle, wiggled so it traps no fibres.
+    step 8 "Nach vorn durch die Hechel, hin und her bewegt, damit sie keine Fibern einklemmt."
+    // en step 10 (trim hackle): Cut the hackle tip away at the tail.
+    step 10 "Schneide die Hechelspitze am Schwanz ab."
+    // en step 13 (wind collar): Two or three turns, longer than the body hackle.
+    step 13 "Zwei oder drei Windungen, länger als die Körperhechel."
+}

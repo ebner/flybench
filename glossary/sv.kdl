@@ -436,6 +436,9 @@ parts {
         note "The lower wing of a Clouser; 'undersida' is the alternative."
     }
     noun body "kropp" gender=en definite="kroppen" plural="kroppar" plural-definite="kropparna"
+    noun underbody "underkropp" gender=en definite="underkroppen" plural="underkroppar" plural-definite="underkropparna" {
+        note "What a body is built up on (floss under the Black & Peacock Spider's herl)."
+    }
     noun butt "butt" gender=en definite="butten" plural="buttar" plural-definite="buttarna" {
         note "The English salmon-fly word is kept in Swedish dressings."
     }

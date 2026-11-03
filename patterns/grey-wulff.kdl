@@ -1,0 +1,69 @@
+// Grey Wulff: the first of Lee Wulff's hair-winged dries, the Ausable Gray, with brown bucktail wings and tail and a grey body.
+
+id grey-wulff
+name "Grey Wulff"
+aliases "Gray Wulff" "Ausable Gray"
+type dry
+imitates mayfly attractor
+naturals mayfly-dun
+difficulty intermediate
+species trout salmon
+season june july august september
+origin originator="Lee Wulff" year=1929 region="Ausable River, New York, USA"
+description "Upright, divided wings and a tail of brown bucktail, a grey muskrat body and a heavy blue dun hackle."
+history """
+    Lee Wulff tied the first of his series in 1929 or 1930, for the big grey drakes of New
+    York's Ausable, and called it the Ausable Gray; Wikipedia gives the Esopus and other
+    Catskill rivers. Dan Bailey insisted on Wulff's name, and the Ausable Gray, the Coffin May
+    and the Bucktail Coachman became the Grey, White and Royal Wulff. They were the first dry
+    flies to use bucktail for wings and tail, so they floated high in rough water. Wulff's
+    body was grey angora wool; muskrat is usual today. It is also a classic dry fly for
+    Atlantic salmon.
+    """
+fishing """
+    A high-floating, easy-to-see dry for rough water: dead drift during the grey and slate
+    drake hatches, or as an attractor between them. In summer, cast it to a deep pool and
+    twitch it now and then. Tied on a salmon hook, it is a classic for Atlantic salmon.
+    """
+sources {
+    "Wikipedia: Wulff series of dry flies" url="https://en.wikipedia.org/wiki/Wulff_series_of_dry_flies"
+    "SWTU: Gray Wulff (Rusty Dunn)" url="https://www.swtu.org/2019/12/04/gray-wulff/"
+    "MidCurrent: How to Tie a Gray Wulff (Tim Flagler)" url="https://midcurrent.com/?p=45474"
+    "Fly Anglers Online: Gray Wulff (Tom Deschaine)" url="https://www.flyanglersonline.com/t/gray-wulff-fly-pattern/7549"
+    "Fish4Flies: Grey Wulff" url="https://www.fish4flies.com/Dry/Wulffs/Grey-Wulff"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://i0.wp.com/www.swtu.org/wp-content/uploads/2019/12/Gray-Wulff3-975.jpeg?resize=975%2C668&ssl=1" page="https://www.swtu.org/2019/12/04/gray-wulff/" author="Rusty Dunn" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://upload.wikimedia.org/wikipedia/commons/d/d1/Grey_Wulff_dry_fly.jpg" page="https://commons.wikimedia.org/wiki/File:Grey_Wulff_dry_fly.jpg" author="DeliciousDunder" license="CC0" flip=#true note="Side view"
+    "https://www.fish4flies.com/img/flies/Original/2535-2535%20Grey%20Wulff.jpg" page="https://www.fish4flies.com/Dry/Wulffs/Grey-Wulff" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+sits hackle
+hook dry-standard size=12
+thread black size="8/0"
+
+materials {
+    wings bucktail color="#9a7c5c" label="Natural brown bucktail"
+    tail bucktail color="#9a7c5c" label="Natural brown bucktail"
+    body dubbing color=muskrat label="Grey muskrat fur"
+    hackle cock-hackle color=blue-dun fibre=1.4 label="Medium blue dun cock hackle"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.7
+    // Flagler: a shank plus an eye-length; the photos show about 1.8 gapes.
+    tie-in wings length=1.9 angle=90 spread=34 note="A generous stacked clump, tips forward; stand it up and divide it with figure-of-eight turns."
+    trim wings note="Cut the butts at a shallow slant and bind them down to the bend."
+    wrap-thread to=0.0
+    // Flagler: one shank and a quarter of the wing's bulk; the photos show about 1.5 gapes.
+    tie-in tail length=1.5 spread=40 note="About a quarter as much hair as the wing."
+    trim tail note="Square, the step smoothed with thread."
+    dub body to=0.66 note="Lightly tapered, leaving room behind the wings for the hackle."
+    tie-in hackle
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=7 note="A heavy collar, behind the wings and in front."
+    tie-off hackle
+    whip-finish
+}

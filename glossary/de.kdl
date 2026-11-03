@@ -438,6 +438,9 @@ parts {
     }
     noun belly "Bauch" gender=m plural="Bäuche" genitive="Bauchs"
     noun body "Körper" gender=m plural="Körper"
+    noun underbody "Unterkörper" gender=m plural="Unterkörper" {
+        note "What a body is built up on (floss under the Black & Peacock Spider's herl)."
+    }
     noun butt "Butt" gender=m plural="Butts" {
         note "Kept from English salmon-fly use, as Karwath does (\"Die Farben von Butt, Körper, Rippung ...\"). Gender is an assumption."
         source "Der-FliegenBinder: Lachsfliege des Monats 11" url="https://der-fliegenbinder.de/lachsfliege-des-monats-11"
