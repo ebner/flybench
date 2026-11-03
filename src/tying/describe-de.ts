@@ -213,6 +213,12 @@ function writerFor(recipe: Recipe) {
         return said.end === "front"
           ? `Ziehe ${mat(said.m, "acc")} straff über ${the("body", "acc")}, binde das vordere Ende mit festen ${many("turn", "dat")} ab und schneide ${excess} ab.`
           : `Ziehe ${mat(said.m, "acc")} straff über ${the("body", "acc")} und binde das hintere Ende mit festen ${many("turn", "dat")} ab.`;
+      case "weave": {
+        const how = `Führe bei jeder Kreuzung ${mat(said.m, "acc")} nur über die Oberseite hin und her und ${mat(said.under, "acc")} darüber und ganz um die Unterseite ${along} herum, sodass ${mat(said.m, "nom")} oben und ${mat(said.under, "nom")} unten liegt und sich beide an jeder Seite in einer Linie treffen. Ziehe beide gleich fest an, damit die Linie gerade bleibt, und halte die Enden dort fest.`;
+        return said.parked
+          ? `Sichere ${thread} mit einem halben Schlag und lass ${pronoun(word("thread")).acc} ${place(said.to).at} hängen; webe dann ${mat(said.m, "acc")} und ${mat(said.under, "acc")} bis dorthin nach vorn. ${how}`
+          : `Webe ${mat(said.m, "acc")} und ${mat(said.under, "acc")} ohne ${thread} am ${word("hook").text} ${place(said.to).to} nach vorn. ${how}`;
+      }
       case "dub": {
         const noodle = word("noodle");
         return `Zwirble ${a("noodle", "acc", "dünn")} aus ${mat(said.m, "dat", "none")} auf ${thread} und wickle ${pronoun(noodle).acc} ${said.rear ? "zurück" : "nach vorn"} ${place(said.to).to}.`;

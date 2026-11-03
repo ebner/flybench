@@ -72,6 +72,11 @@ export interface WrapsPiece extends PieceBase {
   /** Where wing cases, backs or sleeves were pulled over these wraps, pressing down the fibres on
    *  top: each from–to, and how far round each side of the top it reaches (radians). */
   covered?: [number, number, number][];
+  /**
+   * Two strands woven (a Bitch Creek's abdomen): the piece's own colour over the top, this one
+   * round underneath, meeting along each side in short teeth of the top colour.
+   */
+  woven?: { under: Pick<WrapsPiece, "look" | "color" | "fibreLength" | "sweep" | "barred" | "shaggy"> };
 }
 
 /** A bunch of fibres or hair sticking out from its tie-in point (tag, tail, wing, beard, butts, spun hair). */
@@ -246,7 +251,8 @@ export type FreeEndPose = {
   fibreLength?: number;
 } & (
   | { kind: "rest"; x: number; radius: number; direction: "back-down" | "back-up" | "back-flat" | "under-flat" | "forward-flat" | "out"; hideAfter?: number }
-  | { kind: "follow"; piece: number }
+  /** `far`: the other strand of a weave, leaving the turns on the far side (mirrored), crossing the first. */
+  | { kind: "follow"; piece: number; far?: boolean }
 );
 
 export interface SimStep {
@@ -470,6 +476,7 @@ const DURATION = {
   bead: 2,
   pullOver: 2.5,
   sleeve: 3,
+  perWeaveCrossing: 0.7,
   spin: 3.5,
   perThreadTurn: 0.05,
   perMaterialTurn: 0.45,
@@ -958,6 +965,8 @@ export function simulate(recipe: Recipe): Build {
           duration = DURATION.tieOff;
           break;
         }
+        // (A woven strand's end was held there until now.)
+        freeEnds.delete(step.material);
         ends = [
           ...restingEnds(),
           { ...freeEnd(step.material, l), length: 0.6, kind: "rest", x, radius: profile.radiusAt(x), direction: "out", hideAfter: 0.7 },
@@ -1044,6 +1053,40 @@ export function simulate(recipe: Recipe): Build {
         pieces.push(wraps);
         thread = { kind: "follow", piece: wraps.id };
         duration = DURATION.sleeve;
+        break;
+      }
+      case "weave": {
+        const l = looks.get(step.material)!;
+        const lu = looks.get(step.under)!;
+        const from = Math.min(tiedAt.get(step.material)!, tiedAt.get(step.under)!);
+        const to = Math.min(step.to * span, frontLimit);
+        // Assumption: one crossing per strand width, as tyers weave chenille, each strand pulled
+        // snug against the last.
+        const turns = step.turns ?? Math.max(2, Math.round((to - from) / (l.strandRadius + lu.strandRadius)));
+        // Assumption: the belly's strand passing over the top's at each side makes the body deeper
+        // than one strand wound on, about a third again (read from photos of the Bitch Creek).
+        const piece: WrapsPiece = { ...materialWraps(step.material, l, from, to, turns), strandRadius: Math.max(l.strandRadius, lu.strandRadius) * 1.3,
+          woven: { under: { look: lu.look, color: lu.color, fibreLength: lu.fibreLength, sweep: lu.sweep, barred: lu.barred, shaggy: lu.shaggy } },
+        };
+        const coverage = (turns * (l.strandRadius + lu.strandRadius)) / Math.max(to - from, 0.01);
+        // Assumption: as thick as the strands wound in touching turns.
+        profile = profile.withLayer(from, to, Math.max(l.layerThickness(coverage), lu.layerThickness(coverage)));
+        pieces.push(piece);
+        wound.set(step.material, piece);
+        const fibres = Math.max(l.fibreLength ?? 0, lu.fibreLength ?? 0);
+        if (fibres) fluffy.push({ x0: from, x1: to, height: Math.min(0.1, fibres * 0.4) });
+        // Both ends are held at the front, standing out, until they are tied off there.
+        for (const [id, look] of [[step.material, l], [step.under, lu]] as const) {
+          freeEnds.set(id, { ...freeEnd(id, look), length: look.freeLength * 0.5, kind: "rest", x: to, radius: profile.radiusAt(to), direction: "out" });
+        }
+        ends = [
+          ...restingEnds().filter((e) => e.material !== step.material && e.material !== step.under),
+          { ...freeEnd(step.material, l), kind: "follow", piece: piece.id },
+          { ...freeEnd(step.under, lu), kind: "follow", piece: piece.id, far: true },
+        ];
+        // With the thread cut (as Kreft weaves) or parked where the weave ends.
+        if (threadX !== null) ctx.parked = true;
+        duration = Math.max(3, turns * DURATION.perWeaveCrossing);
         break;
       }
       case "whip-finish": {

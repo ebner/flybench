@@ -126,7 +126,7 @@ function checkValues(draft: Recipe): DraftCheck {
     const semantic = before ? validateSemantics(before) : [];
     const stepProblems = semantic.filter((e) => !e.rule || !UNFINISHED.has(e.rule as RuleKey));
     // A material the later steps use isn't unused, though the steps checked stop before them.
-    const used = new Set(draft.steps.flatMap((s) => [("material" in s && s.material) || [], ("around" in s && s.around) || []].flat()));
+    const used = new Set(draft.steps.flatMap((s) => [("material" in s && s.material) || [], ("around" in s && s.around) || [], ("under" in s && s.under) || []].flat()));
     return {
       recipe: null,
       preview: before && previewOf(before, stepProblems),
@@ -256,7 +256,7 @@ function usable(d: Recipe, parts: ReadonlySet<string>): boolean {
     d.steps.every(
       (s) =>
         typeof s === "object" && ops.has(s.op) && (!("tip" in s) || colour(s.tip)) &&
-        (["material", "around"] as const).every((k) => !(k in s) || s[k as keyof typeof s] === undefined || typeof s[k as keyof typeof s] === "string"),
+        (["material", "around", "under"] as const).every((k) => !(k in s) || s[k as keyof typeof s] === undefined || typeof s[k as keyof typeof s] === "string"),
     )
   );
 }
@@ -475,6 +475,7 @@ export function renameMaterial(draft: Recipe, from: string, to: string): Recipe 
       const next = { ...s } as Record<string, unknown>;
       if ("material" in s) next.material = swap(s.material);
       if ("around" in s && s.around) next.around = swap(s.around);
+      if ("under" in s && s.under) next.under = swap(s.under);
       return next as Step;
     }),
   };

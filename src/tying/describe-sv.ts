@@ -197,6 +197,12 @@ function writerFor(recipe: Recipe) {
         return said.end === "front"
           ? `Sträck ${mat(said.m)} hårt över ${def("body")}, bind ner den främre änden med hårda ${svNoun(word("turn"), "plural")} och klipp bort ${excess}.`
           : `Sträck ${mat(said.m)} hårt över ${def("body")} och bind ner den bakre änden med hårda ${svNoun(word("turn"), "plural")}.`;
+      case "weave": {
+        const how = `för vid varje korsning ${mat(said.m)} fram och tillbaka bara över ovansidan och ${mat(said.under)} över ${pronoun(noun(said.m)).object} och runt under ${along}, så att ${mat(said.m)} ligger överst och ${mat(said.under)} underst och de möts i en linje längs varje sida. Dra båda lika hårt så att linjen blir rak, och håll ändarna där.`;
+        return said.parked
+          ? `Slå ett halvslag på ${thread} och låt ${pronoun(word("thread")).object} hänga ${place(said.to).at}, och väv sedan ${mat(said.m)} och ${mat(said.under)} framåt fram till ${pronoun(word("thread")).object}: ${how}`
+          : `Väv ${mat(said.m)} och ${mat(said.under)} framåt ${place(said.to).to}, utan ${thread} på ${def("hook")}: ${how}`;
+      }
       case "dub": {
         const noodle = word("noodle");
         return `Snurra ${article(noodle)} ${noodle.gender === "ett" ? "tunt" : "tunn"} ${noodle.text} av ${mat(said.m, "indefinite")} på ${thread} och linda ${pronoun(noodle).object} ${said.rear ? "bakåt" : "framåt"} ${place(said.to).to}.`;

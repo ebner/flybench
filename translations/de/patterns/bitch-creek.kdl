@@ -1,0 +1,54 @@
+id bitch-creek
+status draft
+
+// en description: A weighted abdomen woven of black chenille over the back and orange underneath, a black chenille thorax with a brown hackle wound through it, and white rubber legs as tails and antennae.
+description "Ein beschwerter Hinterleib, gewebt aus schwarzer Chenille über dem Rücken und orangefarbener darunter, ein Thorax aus schwarzer Chenille mit einer braunen Hechel durchgewunden, und weiße Gummibeine als Schwänze und Antennen."
+
+// en history: A stonefly nymph of the American West, tied big and heavy for the large stonefly nymphs of its rivers. The sources here don't say who first tied it, or when. Its mark is the abdomen of two chenilles woven so that one colour makes the back and the other the belly, meeting in a toothed line along each side: black over orange in John Kreft's dressing, black over yellow in Ruben Martin's, black over ginger and black variegated chenille in Charlie Craven's, who adds a copper rib and a black hen hackle.
+history """
+    Eine Steinfliegennymphe aus dem amerikanischen Westen, groß und schwer gebunden für die
+    großen Steinfliegennymphen seiner Flüsse. Die Quellen hier sagen nicht, wer sie zuerst
+    gebunden hat, oder wann. Ihr Kennzeichen ist der Hinterleib aus zwei Chenillesträngen, so
+    gewebt, dass die eine Farbe den Rücken und die andere den Bauch bildet; sie treffen sich an
+    jeder Seite in einer gezahnten Linie: Schwarz über Orange in John Krefts Variante, Schwarz
+    über Gelb bei Ruben Martin, Schwarz über ingwerfarbener und schwarz melierter Chenille bei
+    Charlie Craven, der eine Rippung aus Kupferdraht und eine schwarze Hennenhechel hinzufügt.
+    """
+
+// en fishing: A big, weighted nymph for rivers where large stoneflies live, fished deep, along the bottom where the naturals crawl among the stones.
+fishing """
+    Eine große, beschwerte Nymphe für Flüsse, in denen große Steinfliegen leben, tief gefischt,
+    am Grund, wo die Nymphen zwischen den Steinen kriechen.
+    """
+
+labels {
+    // en weight: Lead or lead-free wire, 0.025 inch
+    weight "Blei- oder bleifreier Draht, 0,025 Zoll"
+    // en tails: White round rubber legs (tails)
+    tails "Weiße runde Gummibeine (Schwänze)"
+    // en back: Fine black chenille
+    back "Feine schwarze Chenille"
+    // en belly: Fine orange chenille
+    belly "Feine orangefarbene Chenille"
+    // en thorax: Medium black chenille
+    thorax "Mittlere schwarze Chenille"
+    // en antennae: White round rubber legs (antennae)
+    antennae "Weiße runde Gummibeine (Antennen)"
+}
+
+notes {
+    // en step 3 (wrap-thread): Over the wire, binding it down.
+    step 3 "Über den Draht, um ihn festzubinden."
+    // en step 4 (tie-in tails): One strand doubled, or two strands.
+    step 4 "Ein doppelt gelegter Strang oder zwei Stränge."
+    // en step 5 (tie-in back): On the near side of the shank.
+    step 5 "Auf der dir zugewandten Seite des Hakenschenkels."
+    // en step 6 (tie-in belly): On the far side of the shank.
+    step 6 "Auf der abgewandten Seite des Hakenschenkels."
+    // en step 10 (attach-thread): Hold both strands crossed over the top while you start the thread.
+    step 10 "Halte beide Stränge über der Oberseite gekreuzt, während du den Faden anlegst."
+    // en step 14 (tie-in hackle): By its butt.
+    step 14 "Am Kielende."
+    // en step 18 (wind hackle): Through the chenille, one turn behind it.
+    step 18 "Durch die Chenille, mit einer Windung dahinter."
+}

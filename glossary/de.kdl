@@ -762,6 +762,9 @@ steps {
     phrase sleeve "Schlauch aufziehen" {
         note "Sliding braided tubing over the body as a sleeve. The verb is my assumption."
     }
+    phrase weave "Weben" {
+        note "Weaving two strands of chenille into a two-coloured body (a Bitch Creek). The plain verb 'weben'; I found no German tying text on woven bodies, so this is my assumption."
+    }
     phrase spin "Aufspinnen" {
         note "Spinning deer hair. The verb is my assumption; no page I could open used it for deer hair (one has 'Dubbing anspinnen')."
     }

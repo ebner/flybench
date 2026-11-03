@@ -1610,13 +1610,14 @@ export class FlyScene {
   }
 
   /** Where thread or material leaves a wraps piece at step progress p, in world space. */
-  private followed(id: number, p: number) {
+  private followed(id: number, p: number, far = false) {
     const piece = this.wraps.get(id)!;
     const [a, b] = piece.window;
     const u = clamp01((p - a) / (b - a));
     const w = wrapPoint(piece, u);
-    const point = this.space!.point(new THREE.Vector3(...w.point));
-    const leave = this.space!.direction(w.x, new THREE.Vector3(...w.leave).normalize());
+    const side = far ? -1 : 1;
+    const point = this.space!.point(new THREE.Vector3(w.point[0], w.point[1], side * w.point[2]));
+    const leave = this.space!.direction(w.x, new THREE.Vector3(w.leave[0], w.leave[1], side * w.leave[2]).normalize());
     return { u, point, leave };
   }
 
@@ -1652,7 +1653,7 @@ export class FlyScene {
         const base = this.space!.point(new THREE.Vector3(end.x, local.y * end.radius, local.z * end.radius));
         view.setPose(base, this.space!.direction(end.x, local.clone()), 1);
       } else {
-        const { point, leave, u } = this.followed(end.piece, p);
+        const { point, leave, u } = this.followed(end.piece, p, end.far);
         view.setPose(point, leave, 1 - 0.6 * u);
       }
     }

@@ -762,6 +762,9 @@ steps {
     phrase sleeve "Trä på slang" {
         note "Sliding braided tubing over the body as a sleeve, as 'trä på' a bead."
     }
+    phrase weave "Väv" {
+        note "Weaving two strands of chenille into a two-coloured body (a Bitch Creek). The plain verb 'väva'; I found no Swedish tying text on woven bodies, so this is my assumption."
+    }
     phrase attach-thread "Fäst tråden" {
         source "Superpuppan.se: SBS ('Fäst bindtråden')" url="https://superpuppan.se/superpuppansbs"
     }

@@ -45,7 +45,7 @@ export const WORDS = {
 
 /** The step titles: each op, and "palmer" (a wind back towards the bend). */
 export const STEP_TITLES = [
-  "slide-bead", "weight", "pull-over", "sleeve", "spin", "attach-thread", "wrap-thread", "tie-in", "wind", "dub", "tie-off", "trim",
+  "slide-bead", "weight", "pull-over", "sleeve", "weave", "spin", "attach-thread", "wrap-thread", "tie-in", "wind", "dub", "tie-off", "trim",
   "whip-finish", "palmer",
 ] as const;
 

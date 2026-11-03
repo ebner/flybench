@@ -44,7 +44,7 @@ function handlesOf(p: Part): Handle[] {
       },
     });
   }
-  const span = ["wound", "dubbed", "spun", "thread", "pulled", "palmered", "weight", "sleeve"].includes(p.how);
+  const span = ["wound", "dubbed", "spun", "thread", "pulled", "palmered", "weight", "sleeve", "woven"].includes(p.how);
   if (span) {
     const k = startKey(p);
     out.push({ key: `${p.id}:from`, part: p.id, what: "from", label: h.from, at: (L) => ({ x: (p[k] ?? 0) * L, y: -0.18 }) });

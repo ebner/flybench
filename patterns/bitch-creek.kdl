@@ -1,0 +1,89 @@
+// Bitch Creek: the Western stonefly nymph with a woven abdomen, black over orange, white rubber legs and a palmered chenille thorax.
+
+id bitch-creek
+name "Bitch Creek"
+aliases "Bitch Creek Nymph"
+type nymph
+// Fished deep, along the bottom (see fishing).
+fishes deep
+imitates stonefly
+naturals stonefly-nymph
+difficulty intermediate
+species trout
+// Assumption: stonefly nymphs live in the rivers all year, so it is fished all year (as Pat's Rubber Legs).
+season january february march april may june july august september october november december
+description "A weighted abdomen woven of black chenille over the back and orange underneath, a black chenille thorax with a brown hackle wound through it, and white rubber legs as tails and antennae."
+history """
+    A stonefly nymph of the American West, tied big and heavy for the large stonefly nymphs of
+    its rivers. The sources here don't say who first tied it, or when. Its mark is the abdomen
+    of two chenilles woven so that one colour makes the back and the other the belly, meeting
+    in a toothed line along each side: black over orange in John Kreft's dressing, black over
+    yellow in Ruben Martin's, black over ginger and black variegated chenille in Charlie
+    Craven's, who adds a copper rib and a black hen hackle.
+    """
+fishing """
+    A big, weighted nymph for rivers where large stoneflies live, fished deep, along the bottom
+    where the naturals crawl among the stones.
+    """
+sources {
+    "John Kreft (RiverKeeper Flies): Bitch Creek Nymph" url="https://www.johnkreft.com/stonefly-fly-patterns/bitch-creek-nymph/"
+    "Charlie Craven: Bitch Creek fly tying instructions (video)" url="https://www.youtube.com/watch?v=rbCsxmTes0A"
+    "Global FlyFisher: Bitch Creek (Charlie Craven's video)" url="https://globalflyfisher.com/video/bitch-creek"
+    "Martyn White: Bitch Creek Nymph (video)" url="https://www.youtube.com/watch?v=ZW6fcKw-XJc"
+    "Ruben Martin: Bitch Creek (video)" url="https://www.youtube.com/watch?v=dbMEG4g91wI"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.johnkreft.com/wp-content/uploads/2019/10/Bitch-Creek-Nymph.jpg" page="https://www.johnkreft.com/stonefly-fly-patterns/bitch-creek-nymph/" author="John Kreft" license="All rights reserved; reference only" note="Side view in the vise, eye to the right"
+    "https://www.fish4flies.com/img/flies/Original/T5120Bitch%20Creek%20Nymph.jpg" page="https://www.fish4flies.com/Nymphs/Damsel-and-Stoneflies/Bitch-Creek-Nymph" license="All rights reserved; reference only" note="Side view, eye to the right: the weave's black teeth along the side"
+    "https://north40.com/media/magefan_blog/2018/05/bitch-creek_nymph_pattern.jpg" page="https://north40.com/blog/fly-of-the-week-bitch-creek-nymph" license="All rights reserved; reference only" note="Side view on white, eye to the left; a sparse ginger hackle" flip=#true
+    "https://bigyflyco.com/cdn/shop/products/Bitch_Creek_Orange_e77f1472-4f7b-4964-8eaf-9fcdae10ee05.jpg?v=1684932416&width=800" page="https://bigyflyco.com/collections/stonefly-nymphs/products/bitch-creek" license="All rights reserved; reference only" note="Side view in the vise, eye to the right"
+}
+
+// Craven: TMC 5262 (2X long); Kreft and White a 3X-long TMC 5263, sizes 2–10 between them.
+hook nymph-2xl size=8
+thread black size="6/0"
+
+materials {
+    // Kreft: .025" lead on a #8 (Craven also .025").
+    weight lead-free-wire mm=0.64 label="Lead or lead-free wire, 0.025 inch"
+    // Kreft, White and Martin: white round rubber; Craven white Flex Floss.
+    tails rubber-legs color=white count=2 label="White round rubber legs (tails)"
+    // Kreft: fine chenille for the weave.
+    back chenille color=black label="Fine black chenille"
+    belly chenille color=orange label="Fine orange chenille"
+    thorax chenille color=black label="Medium black chenille"
+    // Kreft: a brown cock or saddle hackle; fibres about 1.4 gapes in the photos.
+    hackle cock-hackle color=brown fibre=1.4
+    antennae rubber-legs color=white count=2 label="White round rubber legs (antennae)"
+}
+
+steps {
+    // Kreft: from above the hook point to two eye lengths behind the eye.
+    weight weight from=0.12 to=0.88
+    attach-thread at=0.9
+    wrap-thread to=0.0 note="Over the wire, binding it down."
+    // Read from the photos: the tails about two gapes long, splayed.
+    tie-in tails length=2.2 spread=25 note="One strand doubled, or two strands."
+    tie-in back note="On the near side of the shank."
+    tie-in belly note="On the far side of the shank."
+    wrap-thread to=0.9
+    // Kreft ties the thread off: the weave can't be done with it hanging on the hook.
+    whip-finish turns=3
+    // Kreft weaves to half the shank; about 0.55 in the photos, with seven to nine crossings.
+    weave back under=belly to=0.55 turns=8
+    attach-thread at=0.55 note="Hold both strands crossed over the top while you start the thread."
+    tie-off back
+    tie-off belly
+    tie-in thorax
+    tie-in hackle note="By its butt."
+    wrap-thread to=0.9
+    wind thorax to=0.9 turns=6
+    tie-off thorax
+    // Kreft: three or four turns through the thorax.
+    wind hackle to=0.9 turns=4 note="Through the chenille, one turn behind it."
+    tie-off hackle
+    // Read from the photos: the antennae a little longer than the tails, splayed.
+    tie-in antennae length=2.6 forward=#true spread=25 angle=10
+    whip-finish
+}

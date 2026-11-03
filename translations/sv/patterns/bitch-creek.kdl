@@ -1,0 +1,54 @@
+id bitch-creek
+status draft
+
+// en description: A weighted abdomen woven of black chenille over the back and orange underneath, a black chenille thorax with a brown hackle wound through it, and white rubber legs as tails and antennae.
+description "En förtyngd bakkropp vävd av svart chenille över ryggen och orange under, en mellankropp av svart chenille med ett brunt hackel lindat genom den, och vita gummiben som stjärtspröt och antenner."
+
+// en history: A stonefly nymph of the American West, tied big and heavy for the large stonefly nymphs of its rivers. The sources here don't say who first tied it, or when. Its mark is the abdomen of two chenilles woven so that one colour makes the back and the other the belly, meeting in a toothed line along each side: black over orange in John Kreft's dressing, black over yellow in Ruben Martin's, black over ginger and black variegated chenille in Charlie Craven's, who adds a copper rib and a black hen hackle.
+history """
+    En bäcksländenymf från den amerikanska västern, bunden stor och tung efter de stora
+    bäcksländenymferna i dess älvar. Källorna här säger inte vem som band den först, eller när.
+    Dess kännetecken är bakkroppen av två chenilletrådar som vävs så att den ena färgen blir
+    rygg och den andra buk, och de möts i en tandad linje längs varje sida: svart över orange i
+    John Krefts variant, svart över gult hos Ruben Martin, svart över ingefärsfärgad och
+    svartmelerad chenille hos Charlie Craven, som lägger till en ribbning av koppartråd och ett
+    svart hönshackel.
+    """
+
+// en fishing: A big, weighted nymph for rivers where large stoneflies live, fished deep, along the bottom where the naturals crawl among the stones.
+fishing """
+    En stor, förtyngd nymf för älvar där det finns stora bäcksländor, fiskad djupt längs botten
+    där nymferna kryper bland stenarna.
+    """
+
+labels {
+    // en weight: Lead or lead-free wire, 0.025 inch
+    weight "Bly- eller blyfri tråd, 0,025 tum"
+    // en tails: White round rubber legs (tails)
+    tails "Vita runda gummiben (stjärtspröt)"
+    // en back: Fine black chenille
+    back "Fin svart chenille"
+    // en belly: Fine orange chenille
+    belly "Fin orange chenille"
+    // en thorax: Medium black chenille
+    thorax "Medium svart chenille"
+    // en antennae: White round rubber legs (antennae)
+    antennae "Vita runda gummiben (antenner)"
+}
+
+notes {
+    // en step 3 (wrap-thread): Over the wire, binding it down.
+    step 3 "Över tråden, så att den binds fast."
+    // en step 4 (tie-in tails): One strand doubled, or two strands.
+    step 4 "Ett strå vikt dubbelt, eller två strån."
+    // en step 5 (tie-in back): On the near side of the shank.
+    step 5 "På den närmre sidan av krokskaftet."
+    // en step 6 (tie-in belly): On the far side of the shank.
+    step 6 "På den bortre sidan av krokskaftet."
+    // en step 10 (attach-thread): Hold both strands crossed over the top while you start the thread.
+    step 10 "Håll båda trådarna i kors över ovansidan medan du fäster tråden."
+    // en step 14 (tie-in hackle): By its butt.
+    step 14 "I rotänden."
+    // en step 18 (wind hackle): Through the chenille, one turn behind it.
+    step 18 "Genom chenillen, med ett varv bakom den."
+}
