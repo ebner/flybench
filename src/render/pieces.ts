@@ -425,7 +425,10 @@ function threadCore(piece: WrapsPiece, space: ShankSpace): { geometry: THREE.Buf
   const to = Math.max(piece.x0, piece.x1);
   const along = 24;
   const round = 16;
-  const rings = Array.from({ length: along + 1 }, (_, i) => piece.base.ringAt(from + ((to - from) * i) / along));
+  const rings = Array.from({ length: along + 1 }, (_, i) => {
+    const x = from + ((to - from) * i) / along;
+    return piece.base.ringAt(piece.bindsTo !== undefined ? Math.max(x, piece.bindsTo) : x);
+  });
   const span = travel ? to - from : 2 * piece.width;
   if (to - from < 1e-3 || span / Math.max(1, piece.turns) > 4 * piece.strandRadius) return null;
   const positions: number[] = [];

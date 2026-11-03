@@ -1,0 +1,43 @@
+id graraven
+status draft
+
+// en description: A long tail of black fox hair and a rough, shaggy body of grey fox fur, behind a gold bead.
+description "Ein langer Schwanz aus schwarzem Fuchshaar und ein rauer, struppiger Körper aus grauem Fuchsfell, hinter einer Goldperle."
+
+// en history: John Kärki gave it in Svenskt Fiske in 2023 as one of his three flies for fishing in the mountains, a simple fly of nothing but grey and black fox hair with a gold bead in front to weight it. His one sentence and his photograph are all there is to go on: no originator, hook or tying order is given, and no other source describing it was found. The dressing here follows the photo: a long black tail, the body of grey fox fur dubbed rough to the bead.
+history """
+    John Kärki stellte sie 2023 in Svenskt Fiske als eine seiner drei Fliegen für das Fischen im
+    Fjäll vor, eine einfache Fliege aus nichts als grauem und schwarzem Fuchshaar mit einer
+    Goldperle vorn als Gewicht. Sein einer Satz und sein Foto sind alles, woran man sich halten
+    kann: Weder Erfinder noch Haken oder Bindefolge werden genannt, und eine andere Quelle, die
+    sie beschreibt, wurde nicht gefunden. Die Bindeweise hier folgt dem Foto: ein langer
+    schwarzer Schwanz, der Körper aus grauem Fuchsfell rau bis an die Perle gedubbt.
+    """
+
+// en fishing: Cast upstream, let it sink and mend upstream; strike when the line stops or tightens. Takes also come at the end of the drift, as the line straightens and the nymph rises like a larva or pupa heading for the surface. Kärki has done well with it on summer nights in Norrland.
+fishing """
+    Wirf stromauf, lass sie sinken und menden stromauf; schlag an, wenn die Schnur stehen bleibt
+    oder sich strafft. Bisse kommen auch am Ende der Drift, wenn sich die Schnur streckt und die
+    Nymphe aufsteigt wie eine Larve oder Puppe auf dem Weg zur Oberfläche. Kärki hat in
+    Sommernächten in Norrland gut mit ihr gefangen.
+    """
+
+labels {
+    // en tail: Black fox hair
+    tail "Schwarzes Fuchshaar"
+    // en body: Grey fox fur with its guard hairs
+    body "Graues Fuchsfell mit Grannenhaaren"
+}
+
+notes {
+    // en step 4 (tie-in tail): A generous bunch on top, the underfur combed out.
+    step 4 "Ein ordentliches Büschel oben auf, die Unterwolle ausgekämmt."
+    // en step 5 (trim tail): Cut the butts at an angle and bind them down, for an even underbody.
+    step 5 "Schneide die Enden schräg ab und binde sie fest, für einen gleichmäßigen Unterkörper."
+    // en step 6 (dub body): Fur and guard hairs together, rough and thin.
+    step 6 "Unterwolle und Grannenhaare zusammen, rau und dünn."
+    // en step 8 (dub body): A second layer over the front half, so the body is fuller toward the bead.
+    step 8 "Eine zweite Lage über die vordere Hälfte, sodass der Körper zur Perle hin voller wird."
+    // en step 9 (whip-finish): Behind the bead; pick the fur out all round, so long hairs stand out.
+    step 9 "Hinter der Perle; zupfe das Fell rundum aus, sodass lange Haare abstehen."
+}

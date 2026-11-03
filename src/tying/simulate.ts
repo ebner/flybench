@@ -40,6 +40,11 @@ export interface WrapsPiece extends PieceBase {
    * and back. "post": round an upright parachute post (see `post`).
    */
   path: "travel" | "in-place" | "post";
+  /**
+   * In-place turns crowded back over the body by the eye or a bead: they bind down what is
+   * under them, lying as high as it is at this x (their front) rather than on top of it.
+   */
+  bindsTo?: number;
   x0: number;
   x1: number;
   width: number;
@@ -242,7 +247,7 @@ export function wrapAt(p: WrapsPiece, u: number): { x: number; radius: number; c
     return { x, radius: ring.radius + p.strandRadius, centre: ring.centre, angle };
   }
   const x = p.x0 + p.width * Math.sin(Math.PI * u);
-  const ring = p.base.ringAt(x);
+  const ring = p.base.ringAt(p.bindsTo !== undefined ? Math.max(x, p.bindsTo) : x);
   // Turns going back lie over the ones going out, mostly in between them.
   return { x, radius: ring.radius + p.strandRadius * (1 + 0.6 * u), centre: ring.centre, angle };
 }
@@ -503,7 +508,7 @@ export function simulate(recipe: Recipe): Build {
     const span = Math.max(pitch, (turns * pitch) / 2);
     const x1 = Math.max(x + pitch * 0.5, Math.min(maxX, x + span));
     const x0 = Math.min(x, x1 - span);
-    const piece = threadWraps("in-place", x0, x1, turns, window);
+    const piece: WrapsPiece = { ...threadWraps("in-place", x0, x1, turns, window), bindsTo: x0 < x - 1e-6 ? x1 : undefined };
     // Thinner towards its ends, so a head built of several of them tapers into the body.
     profile = profile.withLayer(x0, x1, td * 0.6, Math.min(0.05, (x1 - x0) / 3), true);
     return piece;

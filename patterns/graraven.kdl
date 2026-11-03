@@ -1,0 +1,63 @@
+// Gråräven: John Kärki's bead-head nymph of grey and black fox hair, for fishing in the Swedish mountains.
+
+id graraven
+name "Gråräven"
+aliases "Grey Fox" "Gråräv"
+type nymph
+// Assumption: Kärki says only that it passes for a larva or pupa rising to the surface.
+imitates caddis mayfly
+naturals caddis-pupa mayfly-nymph-swimming
+difficulty beginner
+species trout grayling
+season june july august september
+origin region="Swedish mountains (fjällen)"
+description "A long tail of black fox hair and a rough, shaggy body of grey fox fur, behind a gold bead."
+history """
+    John Kärki gave it in Svenskt Fiske in 2023 as one of his three flies for fishing in the
+    mountains, a simple fly of nothing but grey and black fox hair with a gold bead in front to
+    weight it. His one sentence and his photograph are all there is to go on: no originator,
+    hook or tying order is given, and no other source describing it was found. The dressing
+    here follows the photo: a long black tail, the body of grey fox fur dubbed rough to the bead.
+    """
+fishing """
+    Cast upstream, let it sink and mend upstream; strike when the line stops or tightens. Takes
+    also come at the end of the drift, as the line straightens and the nymph rises like a larva or
+    pupa heading for the surface. Kärki has done well with it on summer nights in Norrland.
+    """
+sources {
+    "Svenskt Fiske: Tre flugor för fjällfisket (John Kärki)" url="https://svensktfiske.se/tre-flugor-for-fjallfisket/"
+    "Oregon Fly Fishing Blog: Hook size to bead size" url="https://oregonflyfishingblog.com/2010/05/26/hook-size-to-bead-size/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://cdn.svensktfiske.se/wp-content/uploads/2023/06/nymf_graraven_12-1536x1009.jpeg" page="https://svensktfiske.se/tre-flugor-for-fjallfisket/" author="Svenskt Fiske (John Kärki)" license="All rights reserved; reference only" note="Kärki's own fly, three-quarter view from the front: lengths along the fly are foreshortened"
+}
+
+// Assumption: a standard wet-fly or nymph hook; Kärki gives only the size, and the shank in his
+// photo is about two gapes.
+hook wet-standard size=12
+// Assumption: black, hidden under the fur.
+thread black size="8/0"
+
+materials {
+    // Assumption: 2.8 mm (7/64"), which the Oregon Fly Fishing Blog's chart puts on #12–16; the
+    // bead in Kärki's photo is a little under half the gape across.
+    bead brass-bead mm=2.8
+    tail fox-hair color=black count=60 label="Black fox hair"
+    body fox-dubbing color="#b9bdc3" label="Grey fox fur with its guard hairs"
+}
+
+steps {
+    slide-bead bead
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Read from Kärki's photo: about one and a half times the body, dense at the root and cocked
+    // up a little.
+    tie-in tail length=3.0 angle=12 spread=25 note="A generous bunch on top, the underfur combed out."
+    trim tail note="Cut the butts at an angle and bind them down, for an even underbody."
+    dub body to=0.97 note="Fur and guard hairs together, rough and thin."
+    // Read from Kärki's photo: slim at the tail, fuller over the front half.
+    wrap-thread to=0.45
+    dub body to=0.97 note="A second layer over the front half, so the body is fuller toward the bead."
+    whip-finish note="Behind the bead; pick the fur out all round, so long hairs stand out."
+}
