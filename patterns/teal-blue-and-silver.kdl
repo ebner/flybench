@@ -1,4 +1,4 @@
-// Teal Blue & Silver: the Scottish sea-trout and loch fly from the Teal series.
+// Teal Blue & Silver: the sea-trout and loch fly, one of the Teal flies.
 
 id teal-blue-and-silver
 name "Teal Blue & Silver"
@@ -9,11 +9,10 @@ naturals fry-minnow marine-baitfish herring-fry
 difficulty intermediate
 species sea-trout trout
 season june july august september october
-origin region="Scotland"
 description "A golden pheasant tippet tail, a flat silver body with a wire rib, a blue hackle throat and a barred teal flank wing."
 history """
-    One of the Teal series of Scottish loch and sea-trout flies, which share the barred teal
-    wing and vary the body and hackle. No originator or date is recorded. Tom Stewart saw it as
+    One of the Teal flies, which share a barred teal wing and vary the body and hackle: Teal
+    and Green, Teal and Red, Teal and Black. No originator or date is recorded. Tom Stewart saw it as
     a pared-down Silver Doctor. R. C. Bridgett's 1929 ranking of the ten most
     popular Scottish sea-trout flies includes a "Teal & Silver", which may or may not have had
     the blue hackle.
@@ -21,8 +20,7 @@ history """
 fishing """
     Above all a sea-trout fly. Stewart rated it highly for sea trout, and for salmon in
     brackish water, where it passes for fry or sprats; small sizes take brown trout at night in
-    high summer. On lochs and rivers it shows up well in coloured water, and it does best in
-    September and October, when trout are chasing fry.
+    high summer. On lochs it is fished in larger sizes, 8 or 10.
     """
 sources {
     "Fly Anglers Online: Teal Blue Variant, quoting Tom Stewart (Alan the Highlander, archived)" url="https://web.archive.org/web/20180122082705/http://flyanglersonline.com/features/worldwide/europe/part2.php"
@@ -30,6 +28,8 @@ sources {
     "Fish4Flies: Teal Blue and Silver, sea-trout single" url="https://www.fish4flies.com/Sea-Trout/Singles/Teal-Blue-and-Silver"
     "GlobalFlyFisher: Teal Blue and Silver (Ivar's Fly Workshop)" url="https://globalflyfisher.com/node/71347"
     "Sea Trout Nights: Flies and Fly Tying" url="https://seatrout-fishing.com/sea-trout-nights/flies-and-fly-tying/"
+    "Total Fishing: Teal, Blue and Silver" url="https://www.total-fishing.com/?p=21977"
+    "Trout & Salmon Fishing: Sea Trout Flies (John Gray)" url="https://www.trout-salmon-fishing.com/seatrout-flies.htm"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

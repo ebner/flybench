@@ -4,26 +4,26 @@ id willie-gunn
 name "Willie Gunn"
 type salmon
 difficulty beginner
-species salmon sea-trout
+species salmon
 season february march april may june july august september
 origin region="Brora, Sutherland, Scotland"
 description "An oval gold tag and rib over a black floss body, a short orange throat, and a long wing of yellow, orange and black bucktail."
 history """
     Named after Willie Gunn, who worked for the Sutherland Estates as keeper and gillie, and
-    linked in every account to Rob Wilson's tackle shop in Brora. Who designed it is disputed. The
-    best-known story, told on GlobalFlyFisher and by John Gray, credits Flight Lieutenant "Dusty" Miller, who tied
-    flies for Wilson; Gray dates it to the 1940s. Ross Macdonald gives the account of Gunn's nephew,
-    Jim MacKenzie, who says he tied the first ones, with a blended wing, in March 1968. Gray
-    describes the colours as those of the Thunder & Lightning. Fish4Flies says the first were tied
-    on Waddington shanks, while Macdonald's telling of the Miller story speaks of tubes. Macdonald
-    also thinks the gold-bodied version may now be more popular than the black.
+    linked in most accounts to Rob Wilson's tackle shop in Brora. Who designed it is disputed. The
+    best-known story, told on GlobalFlyFisher and by John Gray, credits Flight Lieutenant "Dusty"
+    Miller, who tied flies for Wilson; Gray dates it to the 1940s. Ross Macdonald gives the account
+    of Gunn's nephew, Jim MacKenzie, who says he tied the first ones, with a blended wing, in March
+    1968, on shanks he made himself, and that Gunn had them copied on heavier shanks or tubes at
+    Wilson's shop; Macdonald's telling of the Miller story speaks of tubes. Gray describes the
+    colours as those of the Thunder & Lightning. Macdonald also thinks the gold-bodied version may
+    now be more popular than the black.
     """
 fishing """
     To Ross Macdonald it stands for spring fishing in Scotland, and it is tied in every size from
-    small summer flies to the biggest tubes. Big Waddingtons and heavy tubes are for the cold, high
-    water of early spring, fished deep; small, lightly dressed singles and doubles for low summer
-    water. Swing it across and down. Changing the share of each colour suits it to dark or clear
-    rivers.
+    a tiny summer fly to the biggest tubes. Big Waddingtons and heavy tubes are for the cold, high
+    water of early spring, fished deep; small singles and doubles for summer. Swing it across and
+    down. Changing the share of each colour suits it to dark or clear rivers.
     """
 sources {
     "GlobalFlyFisher: Streamers365 #22-2013, Willie Gunn (Dan Despres)" url="https://globalflyfisher.com/node/67405"
@@ -33,6 +33,8 @@ sources {
     "Fish4Flies: Willie Gunn tube" url="https://www.fish4flies.com/Salmon-Atlantic/Tubes/Bottle-Brass/Willie-Gunn-Tube"
     "Fish4Flies: Willie Gunn Waddington" url="https://www.fish4flies.com/Salmon-Atlantic/Waddingtons/Willie-Gunn-Waddington"
     "Guide Fly Fishing: Caledonia Willie Gunn Nordic Single" url="https://guideflyfishing.co.uk/product/caledonia-willie-gunn-nordic-single"
+    "Trout & Salmon Fishing: Spring salmon tube flies (John Gray)" url="https://trout-salmon-fishing.com/spring-tube-flies.htm"
+    "Orvis Learning Center: Quartering downstream" url="https://howtoflyfish.orvis.com/video-lessons/the-basics-of-fly-fishing/308-quartering-downstream"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

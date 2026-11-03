@@ -16,7 +16,9 @@ history """
     Usually credited to George Griffith (1901–1998) of the Au Sable River in Michigan, at
     whose home Trout Unlimited was founded in 1959. Its origin is not well documented:
     Sexyloops reports that some credit a Walt Shaw with the fly and Griffith with making it
-    known, and that it seems to go back at least to the 1930s.
+    known, and Fly Fishing the Sierra quotes Griffith's friend Bob Summers: Griffith told
+    him more than once that he did not invent it, and that Walt Shaw showed it to him in
+    1939.
     """
 fishing """
     Imitates a cluster of mating midges, or a single adult in the smallest sizes. A fly for
@@ -29,6 +31,7 @@ sources {
     "Charlie's Fly Box: Griffith's Gnat (Charlie Craven)" url="https://charliesflybox.com/blogs/step-by-step-tutorials/griffith-s-gnat"
     "SWTU: Griffith's Gnat (Rusty Dunn)" url="https://www.swtu.org/2023/01/02/griffiths-gnat/"
     "Rogue Fly Fishers: Griffith's Gnat (Dan Kellogg)" url="https://rogueflyfishers.org/griffiths-gnat/"
+    "Fly Fishing the Sierra: Griffith's Gnat" url="https://flyfishingthesierra.com/?p=20412"
     "Sexyloops: Griffith's Gnat" url="https://www.sexyloops.com/index.php/ps/griffiths-gnat"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.

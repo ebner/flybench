@@ -14,10 +14,10 @@ origin originator="Bob Clouser" year=1987 region="Susquehanna River, Pennsylvani
 description "Painted dumbbell eyes a third of the way back, a sparse white bucktail belly over them, pearl flash, and a chartreuse bucktail back on the hook-point side."
 history """
     Bob Clouser, a fly-shop owner and guide, made it in 1987 for smallmouth bass on the
-    Susquehanna. Lefty Kreh named it in a 1989 Fly Fisherman article and later said he had
-    caught more than eighty species on it; in 1994 he called it the most important underwater
-    fly of the previous twenty years. The first ones were white and brown with gold flash, or
-    white and grey with silver.
+    Susquehanna. Lefty Kreh named it in a 1989 Fly Fisherman article, where he called it the
+    best underwater pattern he had fished in decades, and later said he had caught more than
+    eighty species on it. Kreh's article gave four colours: a Silver Shiner, a Golden Shiner, a
+    Chartreuse and a Sculpin, each with Krystal Flash between two bunches of bucktail.
     """
 fishing """
     Strip it in with pauses: on each pull the heavy eyes lift it and it darts forward, and on each
@@ -31,6 +31,7 @@ sources {
     "GlobalFlyFisher: Clouser Deep Minnow (Martin Joergensen)" url="https://globalflyfisher.com/patterns/clouser-deep-minnow"
     "FlyLife: Flies without borders, the Clouser (Skip Clement)" url="https://flylifemagazine.com/flies-without-borders-clousers-bucktail-krystal-flash-lead-eyes-perched-atop/"
     "MidCurrent: How to tie the Clouser Minnow" url="https://midcurrent.com/v2/how-to-tie-the-clouser-minnow-a-versatile-saltwater-fly-for-any-species/"
+    "Fly Fisherman: Clouser's Deep Minnow (Lefty Kreh, 1989)" url="https://flyfisherman.com/editorial/clousers-deep-minnow/468351"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

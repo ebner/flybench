@@ -4,23 +4,26 @@ status draft
 // en description: A short tuft of red wool, a black chenille body and a grizzly hackle palmered from the tail to the head.
 description "En kort tofs av rött ullgarn, en kropp av svart chenille och ett grizzlyhackel lindat som kroppshackel från stjärten till huvudet."
 
-// en history: A palmer fly from England by way of the Ozarks of Missouri and Arkansas, where it was a bass and crappie fly in the 1920s; nobody is recorded as its inventor. Don Martinez of West Yellowstone got one from a friend in Arkansas and sold his versions as Woolly Worms: in a 1940 letter to Preston Jennings he called it a horrible-looking grub, murderous all season, and said he sold more of them than of all his other flies together. Wikipedia and Orvis put this in the 1950s, which his letter and his death in 1955 rule out. Martinez's first ones had a grizzly tail or none; the red wool tag came later. In 1967 Russell Blessing gave it a marabou tail, and it became the Woolly Bugger.
+// en history: A palmer, the old British fly that Walton already knew, which became a bass fly in America. Don Martinez, who tied flies in West Yellowstone in the summers from about 1932 to 1943, told Ray Bergman (in Trout) that his Woolly Worms were not his own idea but came from a very old Missouri bass fly; he was only the first to sell them as a trout fly. Nobody is recorded as the inventor of the bass fly. Wikipedia, citing Gary Soucie, and Orvis put Martinez's Woolly Worm in the 1950s, later than his West Yellowstone years. The best-known dressing, which George Grant takes for the original, is a thick black chenille body palmered with grizzly; he writes that the short red tag was always counted part of it, though modern tyers often leave it out. In 1967 Russell Blessing gave it a marabou tail, and it became the Woolly Bugger.
 history """
-    En palmerfluga från England som via Ozarks i Missouri och Arkansas kom att bli en bass- och
-    crappiefluga på 1920-talet; ingen är känd som upphovsman. Don Martinez i West Yellowstone
-    fick en av en vän i Arkansas och sålde sina versioner som Woolly Worms: i ett brev till
-    Preston Jennings 1940 kallade han den en förskräcklig larv, mordisk hela säsongen, och skrev
-    att han sålt fler av dem än av alla sina andra flugor tillsammans. Wikipedia och Orvis
-    lägger detta på 1950-talet, vilket hans brev och hans död 1955 utesluter. Martinez första
-    hade en grizzlystjärt eller ingen; tofsen av rött ullgarn kom senare. 1967 gav Russell
-    Blessing den en stjärt av marabou, och den blev Woolly Bugger.
+    En palmerfluga, den gamla brittiska fluga som redan Walton kände, som i Amerika blev en
+    bassfluga. Don Martinez, som band flugor i West Yellowstone på somrarna från omkring 1932
+    till 1943, berättade för Ray Bergman (i Trout) att hans Woolly Worms inte var hans egen
+    idé utan kom från en mycket gammal bassfluga från Missouri; han var bara den förste som
+    sålde dem som öringfluga. Ingen är känd som upphovsman till bassflugan. Wikipedia, med
+    hänvisning till Gary Soucie, och Orvis lägger Martinez Woolly Worm på 1950-talet, senare än
+    hans år i West Yellowstone. Den mest kända bindningen, som George Grant håller för
+    originalet, är en tjock kropp av svart chenille med ett grizzlyhackel lindat som
+    kroppshackel; han skriver att den korta röda tofsen alltid räknats till den, även om
+    dagens bindare ofta utelämnar den. 1967 gav Russell Blessing den en stjärt av marabou, och den blev Woolly Bugger.
     """
 
-// en fishing: A big general nymph or caterpillar for still and slow water. Martinez fished it deep and twitched it with the left hand: the moving hackle is what does it. Weighted, it searches the bottom of rivers for trout; unweighted, it was first fished on the surface for bass and bluegill.
+// en fishing: A big general nymph or caterpillar. Steve Hudson describes it as an all-purpose nymph: weighted to get down near the bottom, under an indicator, or as a dropper below a dry fly or a popper. Soft hackle gives it the most life in the water. Smaller ones also pass for emergers.
 fishing """
-    En stor allmän nymf eller larv för stilla och lugnt vatten. Martinez fiskade den djupt och
-    ryckte den med vänsterhanden: det är det rörliga hacklet som gör det. Förtyngd avsöker den
-    älvarnas botten efter öring; oförtyngd fiskades den först i ytan efter bass och solabborre.
+    En stor allmän nymf eller larv. Steve Hudson beskriver den som en allroundnymf: förtyngd
+    för att komma ner nära botten, under en indikator, eller som hängande nymf under en
+    torrfluga eller en popper. Mjukt hackel ger den mest liv i vattnet. Mindre exemplar går
+    också för kläckare.
     """
 
 labels {

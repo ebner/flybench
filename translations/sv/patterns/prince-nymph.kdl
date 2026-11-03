@@ -4,23 +4,24 @@ status draft
 // en description: A forked brown biot tail, a peacock herl body ribbed with gold, a brown hen collar and two white biot horns, behind a gold bead.
 description "En kluven stjärt av bruna biots, en kropp av påfågelherl ribbad med guld, en krage av brunt hönshackel och två vita horn av biots, bakom en guldskalle."
 
-// en history: Its forerunner, the Brown Forked Tail, is credited (Wikipedia, citing Ken McCoy among others) to the brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s, with a black ostrich herl body and white biot wings curving up. Doug Prince of Oakland, California, gave it a peacock body and turned the wings down. He took up tying in 1943, by Dennis Bitton's account, though Trout Unlimited has him first tying the fly in the 1930s. Prince tied for his friend Buz Buszek, who, rushing out his catalogue, forgot what Prince called the fly and listed it as the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead and lead came later.
+// en history: Its forerunner, the Brown Forked Tail, is credited by Wikipedia, Rusty Dunn and Orvis to the brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s; its white biot wings curved away from the body. Doug Prince, born in Oakland, California, gave it a peacock body, with the wings standing out in a V. He took up tying in 1943, by Dennis Bitton's account, though Trout Unlimited has him first tying the fly in the 1930s. Prince tied for his friend Buz Buszek, who, rushing out his catalogue, forgot what Prince called the fly and listed it as the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead, the lead and the turned-down wings came later.
 history """
-    Dess föregångare, Brown Forked Tail, tillskrivs (av Wikipedia, som bland andra hänvisar
-    till Ken McCoy) bröderna Don och Dick Olson från Bemidji i Minnesota på 1930-talet, med
-    en kropp av svart strutsherl och vita vingar av biots som böjde sig uppåt. Doug Prince
-    från Oakland i Kalifornien gav den en kropp av påfågel och vände vingarna nedåt. Enligt
+    Dess föregångare, Brown Forked Tail, tillskrivs av Wikipedia, Rusty Dunn och Orvis
+    bröderna Don och Dick Olson från Bemidji i Minnesota på 1930-talet; dess vita vingar av
+    biots böjde sig bort från kroppen. Doug Prince, född i Oakland i Kalifornien, gav den en
+    kropp av påfågel, med vingarna utspärrade i ett V. Enligt
     Dennis Bitton började han binda 1943, men enligt Trout Unlimited band han flugan första
     gången redan på 1930-talet. Prince band åt sin vän Buz Buszek, som i brådskan med att få
     ut sin katalog glömde vad Prince kallade flugan och listade den som Prince Nymph.
-    Princes egen bindning, publicerad 1966, har ingen skalle; skallen och blyet kom senare.
+    Princes egen bindning, publicerad 1966, har ingen skalle; skallen, blyet och de nedåtvända
+    vingarna kom senare.
     """
 
-// en fishing: A searching nymph, fished at or near the bottom, or as the dropper below a dry fly. In big sizes it reads as a stonefly nymph, in middling ones as a caddis. Once the drift is done, a few strips back, wet-fly fashion, can still bring a take.
+// en fishing: A nymph fished at or near the bottom, or as the dropper below a dry fly. It passes for a caddis larva or a small stonefly nymph, or serves simply as a searching fly. Once the drift is done, a few strips back, wet-fly fashion, can still bring a take.
 fishing """
-    En avsökande nymf som fiskas vid eller nära botten, eller som hängande nymf under en
-    torrfluga. I stora storlekar uppfattas den som en bäcksländenymf, i mellanstorlekar som
-    en nattslända. När driften är slut kan några indragningar, som med en våtfluga, ändå ge
+    En nymf som fiskas vid eller nära botten, eller som hängande nymf under en torrfluga. Den
+    går för en nattsländelarv eller en liten bäcksländenymf, eller tjänar helt enkelt som
+    avsökande fluga. När driften är slut kan några indragningar, som med en våtfluga, ändå ge
     ett hugg.
     """
 

@@ -4,24 +4,23 @@ status draft
 // en description: A moose hair tail, a yellow thread belly under a hump of elk hair whose tips stand up as divided wings, and a brown and grizzly hackle.
 description "En stjärt av älghår, en buk av gul bindtråd under en puckel av elkhår vars toppar står upp som delade vingar, och ett brunt och grizzly hackel."
 
-// en history: Jack Horner of San Francisco tied it for California's swift rivers in the 1940s, early or late by different accounts, from the Tom Thumb's two clumps of deer hair over a thread body. Pat Barnes of West Yellowstone found two of them in a trout's jaw on Cliff Lake in 1947, by Rusty Dunn's account (1943 in another), and his wife Sig copied them; as the Goofus Bug it became a Yellowstone staple, and around Jackson Hole it got the name Humpy. Its trick is the single bunch of hair: tied in pointing back, bound down over the thread belly, folded forward as the hump, its tips stood up as the wings. Flagler's shortcut uses two bunches, and Craven makes the hump from the butts of the wing.
+// en history: Jack Horner of San Francisco tied it for California's swift rivers in the early 1940s. Pat Barnes of West Yellowstone found two of them in a trout's jaw on Cliff Lake in 1947, by Rusty Dunn's account, and his wife Sig copied them; as the Goofus Bug it became a Yellowstone staple, and around Jackson Hole it got the name Humpy. Its trick is the single bunch of hair: tied in pointing back, bound down over the thread belly, folded forward as the hump, its tips stood up as the wings. Flagler's shortcut uses two bunches, and Craven makes the hump from the butts of the wing.
 history """
-    Jack Horner i San Francisco band den för Kaliforniens strida älvar på 1940-talet, tidigt
-    eller sent beroende på källa, efter Tom Thumbs två buntar hjorthår över en trådkropp. Pat
-    Barnes i West Yellowstone hittade två av dem i en öringkäft i Cliff Lake 1947, enligt Rusty
-    Dunn (1943 enligt en annan källa), och hans fru Sig kopierade dem; som Goofus Bug blev den
-    en klassiker kring Yellowstone, och kring Jackson Hole fick den namnet Humpy. Dess knep är
-    den enda hårbunten: inbunden pekande bakåt, nerbunden över trådbuken, vikt framåt som puckel
-    och med topparna resta som vingar. Flaglers genväg använder två buntar, och Craven gör
-    puckeln av vingens rotändar.
+    Jack Horner i San Francisco band den för Kaliforniens strida älvar i början av 1940-talet.
+    Pat Barnes i West Yellowstone hittade två av dem i en öringkäft i Cliff Lake 1947, enligt
+    Rusty Dunn, och hans fru Sig kopierade dem; som Goofus Bug blev den en klassiker kring
+    Yellowstone, och kring Jackson Hole fick den namnet Humpy. Dess knep är den enda hårbunten:
+    inbunden pekande bakåt, nerbunden över trådbuken, vikt framåt som puckel och med topparna
+    resta som vingar. Flaglers genväg använder två buntar, och Craven gör puckeln av vingens
+    rotändar.
     """
 
-// en fishing: A big, buoyant attractor for fast, broken water on western rivers, where the hollow hair hump keeps it up through riffles and pocket water. Fish it dead drift; the yellow belly suggests a stonefly or a hatching caddis as much as a mayfly.
+// en fishing: A big, buoyant attractor for fast, broken water on western rivers, where the hollow hair hump keeps it up through riffles and pocket water. Fish it dead drift; Kathy Buchner writes that it can suggest a mayfly, a caddis or an adult stonefly, and that it can be fished wet as an emerging caddis.
 fishing """
     En stor, flytkraftig lockfluga för strömt, brutet vatten i västra USA:s älvar, där den
     ihåliga hårpuckeln håller den uppe genom forsnackar och fickvatten. Fiska den fritt
-    drivande; den gula buken liknar lika gärna en bäckslända eller en kläckande nattslända som
-    en dagslända.
+    drivande; Kathy Buchner skriver att den kan påminna om en dagslända, en nattslända eller
+    en fullbildad bäckslända, och att den kan fiskas våt som en kläckande nattslända.
     """
 
 labels {

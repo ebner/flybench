@@ -14,12 +14,11 @@ history """
     skallen.
     """
 
-// en fishing: Cast upstream, let it sink and mend upstream; strike when the line stops or tightens. Takes also come at the end of the drift, as the line straightens and the nymph rises like a larva or pupa heading for the surface. Kärki has done well with it on summer nights in Norrland.
+// en fishing: Cast upstream, let it sink and mend upstream; strike when the line tightens. Takes also come at the end of the drift, as the line straightens and the nymph rises like a larva or pupa heading for the surface. Kärki has done well with it on light summer nights in Norrland.
 fishing """
-    Kasta uppströms, låt den sjunka och laga linan uppströms; mothugg när linan stannar eller
-    sträcks. Hugg kommer också i slutet av driften, när linan sträcks ut och nymfen stiger som
-    en larv eller puppa på väg mot ytan. Kärki har lyckats bra med den under sommarnätter i
-    Norrland.
+    Kasta uppströms, låt den sjunka och laga linan uppströms; mothugg när linan sträcks. Hugg
+    kommer också i slutet av driften, när linan sträcks ut och nymfen stiger som en larv eller
+    puppa på väg mot ytan. Kärki har lyckats bra med den under ljusa sommarnätter i Norrland.
     """
 
 labels {

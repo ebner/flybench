@@ -4,24 +4,23 @@ status draft
 // en description: A slim olive body under a clipped, palmered dun hackle, a wood duck underwing, a low wing of grey mallard quill, and a peacock thorax with a dun hackle wound through it.
 description "Ein schlanker olivgrüner Körper unter einer gestutzten, gepalmerten dunfarbenen Hechel, ein Unterflügel aus Brautentenflanke, ein flacher Flügel aus grauer Stockentenschwinge und ein Thorax aus Pfauengras mit einer hindurchgewundenen dunfarbenen Hechel."
 
-// en history: Mike Lawson, who co-founded Henry's Fork Anglers at Last Chance, Idaho, tied it in the early 1970s for his friend Jack Hemingway, Ernest's son, who found the Henryville Special too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by one source and to the 1930s by others. Lawson usually sets the quill wing flat, two segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks it with wire, the Sierra version palmers it forward without.
+// en history: Mike Lawson, who opened Henry's Fork Anglers with his wife Sheralee in 1976, tied it for his friend Jack Hemingway, Ernest's son, who found the Henryville Special too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by one source and to the 1930s by another. Lawson usually sets the quill wing flat, two segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks it with wire, the Sierra version palmers it forward without.
 history """
-    Mike Lawson, Mitgründer von Henry's Fork Anglers in Last Chance, Idaho, band sie Anfang der
-    1970er Jahre für seinen Freund Jack Hemingway, Ernests Sohn, dem die Henryville Special für
-    die dunklen Köcherfliegen des Henry's Fork zu braun war; Lawson nennt sie eines seiner
-    Muster, und Umpqua verkauft sie als seine. Die Henryville, von Hiram Brobst aus
-    Pennsylvania, wird von einer Quelle auf 1920, von anderen auf die 1930er Jahre datiert.
-    Lawson setzt den Schwingenflügel meist flach, zwei Segmente überlappend; andere binden ihn
-    dachförmig. Kreft windet die Körperhechel nach hinten und sichert sie mit Draht, die Sierra-
-    Fassung palmert sie ohne Draht nach vorn.
+    Mike Lawson, der 1976 mit seiner Frau Sheralee Henry's Fork Anglers eröffnete, band sie für
+    seinen Freund Jack Hemingway, Ernests Sohn, dem die Henryville Special für die dunklen
+    Köcherfliegen des Henry's Fork zu braun war; Lawson nennt sie eines seiner Muster, und
+    Umpqua verkauft sie als seine. Die Henryville, von Hiram Brobst aus Pennsylvania, wird von
+    einer Quelle auf 1920, von einer anderen auf die 1930er Jahre datiert. Lawson setzt den
+    Schwingenflügel meist flach, zwei Segmente überlappend; andere binden ihn dachförmig. Kreft
+    windet die Körperhechel nach hinten und sichert sie mit Draht, die Sierra-Fassung palmert
+    sie ohne Draht nach vorn.
     """
 
-// en fishing: For the caddis hatches of western spring creeks and rivers. The slim quill wing gives a natural profile to selective trout, and the dense front hackle floats it high: fish it dead drift, or twitch and skate it when the sedges are egg-laying.
+// en fishing: For caddis hatches on spring creeks and slow rivers. The quill wing gives a caddis outline and the front hackle floats it: fish it dead drift, or, as Lawson does, as a dropper behind another dry.
 fishing """
-    Für die Köcherfliegenschlüpfe an Quellbächen und Flüssen des amerikanischen Westens. Der
-    schmale Schwingenflügel gibt wählerischen Forellen ein natürliches Profil, und die dichte
-    vordere Hechel lässt sie hoch schwimmen: frei treibend fischen, oder zupfen und skaten, wenn
-    die Köcherfliegen Eier ablegen.
+    Für Köcherfliegenschlüpfe an Quellbächen und ruhigen Flüssen. Der Schwingenflügel gibt den
+    Umriss einer Köcherfliege, und die vordere Hechel hält sie oben: frei treibend fischen,
+    oder, wie Lawson, als Springer hinter einer anderen Trockenfliege.
     """
 
 labels {

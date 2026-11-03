@@ -4,22 +4,22 @@ status draft
 // en description: A slim olive body under a clipped, palmered dun hackle, a wood duck underwing, a low wing of grey mallard quill, and a peacock thorax with a dun hackle wound through it.
 description "En smal olivgrön kropp under ett klippt, glest lindat dunfärgat hackel, en undervinge av brudandsflank, en låg vinge av grå gräsandspenna och en thorax av påfågelherl med ett dunfärgat hackel lindat genom den."
 
-// en history: Mike Lawson, who co-founded Henry's Fork Anglers at Last Chance, Idaho, tied it in the early 1970s for his friend Jack Hemingway, Ernest's son, who found the Henryville Special too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by one source and to the 1930s by others. Lawson usually sets the quill wing flat, two segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks it with wire, the Sierra version palmers it forward without.
+// en history: Mike Lawson, who opened Henry's Fork Anglers with his wife Sheralee in 1976, tied it for his friend Jack Hemingway, Ernest's son, who found the Henryville Special too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by one source and to the 1930s by another. Lawson usually sets the quill wing flat, two segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks it with wire, the Sierra version palmers it forward without.
 history """
-    Mike Lawson, som var med och grundade Henry's Fork Anglers vid Last Chance i Idaho, band den
-    i början av 1970-talet åt sin vän Jack Hemingway, Ernests son, som tyckte att Henryville
-    Special var för brun för Henry's Forks mörka nattsländor; Lawson kallar den ett av sina
-    mönster, och Umpqua säljer den som hans. Henryville, av Hiram Brobst i Pennsylvania, dateras
-    till 1920 av en källa och till 1930-talet av andra. Lawson sätter vanligen vingen platt, två
-    sektioner överlappande; andra binder den som ett tak. Kreft lindar kroppshacklet bakåt och
-    låser det med tråd, Sierra-versionen lindar det framåt utan.
+    Mike Lawson, som öppnade Henry's Fork Anglers med sin fru Sheralee 1976, band den åt sin vän
+    Jack Hemingway, Ernests son, som tyckte att Henryville Special var för brun för Henry's
+    Forks mörka nattsländor; Lawson kallar den ett av sina mönster, och Umpqua säljer den som
+    hans. Henryville, av Hiram Brobst i Pennsylvania, dateras till 1920 av en källa och till
+    1930-talet av en annan. Lawson sätter vanligen vingen platt, två sektioner överlappande;
+    andra binder den som ett tak. Kreft lindar kroppshacklet bakåt och låser det med tråd,
+    Sierra-versionen lindar det framåt utan.
     """
 
-// en fishing: For the caddis hatches of western spring creeks and rivers. The slim quill wing gives a natural profile to selective trout, and the dense front hackle floats it high: fish it dead drift, or twitch and skate it when the sedges are egg-laying.
+// en fishing: For caddis hatches on spring creeks and slow rivers. The quill wing gives a caddis outline and the front hackle floats it: fish it dead drift, or, as Lawson does, as a dropper behind another dry.
 fishing """
-    För nattsländekläckningar i västra USA:s källflöden och älvar. Den smala vingen av penna ger
-    kräsna öringar en naturlig siluett, och det täta främre hacklet får den att flyta högt:
-    fiska den fritt drivande, eller ryck och skumma den när nattsländorna lägger ägg.
+    För nattsländekläckningar i källflöden och lugna älvar. Vingen av penna ger en nattsländas
+    siluett och det främre hacklet håller den flytande: fiska den fritt drivande, eller, som
+    Lawson gör, som hängare bakom en annan torrfluga.
     """
 
 labels {

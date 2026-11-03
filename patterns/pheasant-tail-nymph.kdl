@@ -2,7 +2,7 @@
 
 id pheasant-tail-nymph
 name "Pheasant Tail Nymph"
-aliases "PTN" "Sawyer's Pheasant Tail" "Sawyer Nymph"
+aliases "PTN" "PT Nymph" "Sawyer's Pheasant Tail"
 type nymph
 imitates mayfly
 naturals mayfly-nymph-swimming
@@ -15,11 +15,8 @@ history """
     Frank Sawyer was a river keeper on the Wiltshire Avon from 1925 until he died on its banks at
     Netheravon in 1980, from 1928 for the Officers' (later Services Dry Fly) Fishing
     Association. He saw that olive nymphs swim with their legs tucked in, so his nymph has no
-    hackle, and he tied it with fine copper wire in place of silk, which also gives it weight;
-    Sporting Road says the wire came from a relay coil. The fly was published in Nymphs and the
-    Trout in 1958; when he first tied it is less certain: Sporting Road dates the method to the
-    1930s, Fly Fishing the Sierra the fly to the 1950s. He often tied it on the river bank,
-    without a vise.
+    hackle, and he tied it with fine copper wire in place of silk, which also gives it weight.
+    The fly was published in Nymphs and the Trout in 1958.
     """
 fishing """
     Made for clear chalk streams, where the trout can be seen: cast well upstream of the fish,

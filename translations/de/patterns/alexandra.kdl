@@ -4,25 +4,29 @@ status draft
 // en description: A red goose tail, a flat silver body ribbed with fine oval silver, a black hen throat and a wing of peacock sword fibres with a thin red slip along each side.
 description "Ein Schwanz aus roter Gans, ein Körper aus flachem Silberlahn mit feinem ovalem Silberlahn gerippt, ein Bart aus schwarzer Hennenhechel und ein Flügel aus Pfauenschwertfibern mit einem dünnen roten Segment an jeder Seite."
 
-// en history: A fly of the 1860s, first called the Lady of the Lake and renamed after Alexandra, Princess of Wales; W. G. Turle is usually credited with the name, but by 1880 Marston wrote that Turle only believed he had invented it, and Brunton, "Old Fly", Hobbs and Kelson all made claims. Its dazzling silver and peacock made it a famous lake and sea-trout fly, so deadly that it was banned on some waters. The dressing tied in Britain today is the one Courtney Williams gave in 1949: red tail and cheeks, once of ibis and now of goose, a silver body, black hackle and a sword wing. American dressings use a peacock tail and a red or claret hackle.
+// en history: A fly of the 1860s or earlier, named after Alexandra, Princess of Wales from 1863. Courtney Williams wrote in 1932 that it was first called the Lady of the Lake, but gave no source. The earliest dated claim is a letter from "Old Fly", who said he first made and used it in May 1863. W. G. Turle is usually credited with the name. The claims were argued over by 1880: Marston wrote that Turle believed he had invented it, which he thought quite likely, and that Dr Brunton said he had, which he thought quite possible. Hobbs and Kelson made claims too. Its silver and peacock made it a well-known lake and sea-trout fly. Courtney Williams wrote that it had once been barred from some waters for being too deadly, but gave no source for that either. The dressing tied in Britain today is the one he gave in 1949: red tail and cheeks, once of ibis and now of goose, a silver body, black hackle and a sword wing. Ray Bergman's American dressing has a peacock sword tail and a red or claret hackle.
 history """
-    Eine Fliege der 1860er Jahre, zuerst Lady of the Lake genannt und nach Alexandra, Prinzessin
-    von Wales, umbenannt; W. G. Turle gilt meist als Namensgeber, doch 1880 schrieb Marston,
-    Turle glaube nur, sie erfunden zu haben, und Brunton, „Old Fly“, Hobbs und Kelson erhoben
-    alle Ansprüche. Ihr blendendes Silber und Pfauengrün machten sie zu einer berühmten See- und
-    Meerforellenfliege, so fängig, dass sie an manchen Gewässern verboten wurde. Die heute in
-    Großbritannien gebundene Fassung ist die von Courtney Williams aus dem Jahr 1949: roter
-    Schwanz und rote Wangen, einst aus Ibis, heute aus Gans, ein Silberkörper, schwarze Hechel
-    und ein Pfauenschwertflügel. Amerikanische Bindeweisen haben einen Pfauenschwanz und eine
-    rote oder weinrote Hechel.
+    Eine Fliege der 1860er Jahre oder früher, benannt nach Alexandra, ab 1863 Prinzessin von
+    Wales. Courtney Williams schrieb 1932, sie habe zuerst Lady of the Lake geheißen, nannte
+    dafür aber keine Quelle. Der früheste datierte Anspruch ist ein Brief von „Old Fly“, der
+    schrieb, er habe sie im Mai 1863 zum ersten Mal gebunden und gefischt. W. G. Turle gilt
+    meist als Namensgeber. Um 1880 wurde über die Ansprüche bereits gestritten: Marston schrieb,
+    Turle glaube, sie erfunden zu haben, was er für recht wahrscheinlich hielt, und Dr. Brunton
+    sage, er habe es getan, was er für gut möglich hielt. Auch Hobbs und Kelson erhoben
+    Ansprüche. Ihr Silber und Pfauengrün machten sie zu einer bekannten See- und
+    Meerforellenfliege. Courtney Williams schrieb, sie sei einst an manchen Gewässern verboten
+    worden, weil sie zu fängig war, nannte aber auch dafür keine Quelle. Die heute in
+    Großbritannien gebundene Fassung ist die, die er 1949 gab: roter Schwanz und rote Wangen,
+    einst aus Ibis, heute aus Gans, ein Silberkörper, schwarze Hechel und ein
+    Pfauenschwertflügel. Ray Bergmans amerikanische Bindeweise hat einen Schwanz aus
+    Pfauenschwert und eine rote oder weinrote Hechel.
     """
 
-// en fishing: A lake and loch fly, fished on the point of a team or stripped back from the boat, when trout are chasing fry; on rivers a sea-trout fly at dusk. The silver and peacock flash like a small fish, and it can be deadly for brown trout feeding on sticklebacks.
+// en fishing: A lake and loch fly, usually fished on the point of a team, often slowly on a sinking line, when trout are chasing fry; on rivers it is also a sea-trout fly. The silver and peacock flash like a small fish, perhaps a stickleback.
 fishing """
-    Eine Seefliege, als Spitzenfliege eines Vorfachs gefischt oder vom Boot eingestrippt, wenn
-    die Forellen Brut jagen; am Fluss eine Meerforellenfliege in der Dämmerung. Silber und Pfau
-    blitzen wie ein kleiner Fisch, und sie kann für Bachforellen, die Stichlinge fressen,
-    tödlich sein.
+    Eine Seefliege, meist als Spitzenfliege eines Vorfachs gefischt, oft langsam an der
+    Sinkschnur, wenn die Forellen Brut jagen; am Fluss ist sie auch eine Meerforellenfliege.
+    Silber und Pfau blitzen wie ein kleiner Fisch, vielleicht ein Stichling.
     """
 
 labels {

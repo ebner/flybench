@@ -4,14 +4,13 @@ status draft
 // en description: A burnt-tipped chartreuse chenille larva peeping out behind a bushy hare's ear case, with a partridge collar where they meet and a tungsten bead at the eye, on a jig hook.
 description "En larv av fluorescerande chartreuse chenille med bränd spets som tittar fram bakom ett yvigt hus av haröra, med en krage av rapphöna där de möts och en tungstenskalle vid krokögat, på jiggkrok."
 
-// en history: A cased caddis larva with its head and legs out of the case. Ralph D'Andrea counts it an old, familiar pattern, and nobody is recorded as its originator. Oliver Edwards and Graydon Bell's Peeping Caddis has the larva at the front, as it is in nature; the jig version here has the larva sticking out at the back and the weight at the eye. Hans van Klinken's LeadHead, another cased caddis, is weighted with a split shot that also turns the hook point up.
+// en history: A cased caddis larva with its head and legs out of the case. Ralph D'Andrea calls it a well-known pattern that has been around a long time, and doesn't know who first tied it. Oliver Edwards' Peeping Caddis has the larva at the front, as it is in nature; the jig version here has the larva sticking out at the back and the weight at the eye. Hans van Klinken's LeadHead, another cased caddis, is weighted with a split shot that also turns the hook point up.
 history """
-    En husmasklarv med huvud och ben utanför huset. Ralph D'Andrea räknar den som ett
-    gammalt, välbekant mönster, och ingen finns nedtecknad som dess upphovsman. Oliver
-    Edwards och Graydon Bells Peeping Caddis har larven framtill, som i naturen;
-    jiggversionen här har larven stickande ut baktill och tyngden vid krokögat. Hans van
-    Klinkens LeadHead, en annan husmask, är förtyngd med ett blyhagel som också vänder
-    krokspetsen uppåt.
+    En husmasklarv med huvud och ben utanför huset. Ralph D'Andrea kallar den ett
+    välkänt mönster som har funnits länge, och vet inte vem som band den först. Oliver
+    Edwards Peeping Caddis har larven framtill, som i naturen; jiggversionen här har
+    larven stickande ut baktill och tyngden vid krokögat. Hans van Klinkens LeadHead, en
+    annan husmask, är förtyngd med ett blyhagel som också vänder krokspetsen uppåt.
     """
 
 // en fishing: A heavy point fly that gets down fast, dead-drifted along the bottom while caddis larvae are drifting, with a lighter nymph above it. It fishes all year, best when the water is cold and the fish lie deep, and is a standby for grayling in winter. On a jig hook it rides point up.

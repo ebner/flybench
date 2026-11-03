@@ -4,26 +4,26 @@ status draft
 // en description: A slim black wool body ribbed with copper wire, a long light brown hen hackle and grey mallard quill wings, with no tail.
 description "Ein schlanker Körper aus schwarzem Wollgarn mit Kupferdrahtrippung, eine lange hellbraune Hennenhechel und Flügel aus grauen Stockentenschwingen, ohne Schwanz."
 
-// en history: Oskar Fick, a shoemaker in Hede on the Ljusnan, was dissatisfied with the English flies he could buy and in 1918 tied his first own fly, modelled on the insects of the river. His series grew to 34; the first 24 were named in 1938–39 by the game warden Bengt Belander and the angler Nils Färnström, and Skomakaren, the shoemaker, is number one. His daughter Alma Nordlund tied them for decades by hand, without a vise, twelve an hour. The Hede flies are called Sweden's first fly series. Many shop Skomakaren have a yellow tail, added over time; the early original has none, and with the tail it is the series' Svarta Lisa. Gunnar Johnson took the dressings from Färnström's book Fisketur (1955); they give colours rather than materials, and he suggests ordinary wool yarn and hen hackle.
+// en history: Oskar Fick, a shoemaker in Hede on the Ljusnan, was dissatisfied with the English flies he could buy and in 1918 tied his first own fly, modelled on the insects of the river. His series grew to 34; the first 24 were named in 1938–39 by the forester Bengt Belander and the angler Nils Färnström, and Skomakaren, the shoemaker, is number one. His daughter Alma Nordlund, his helper from the age of fifteen, carried on the series; she tied by hand, without a vise, twelve an hour. The Hede flies are called Sweden's first fly series. The original has no tail; Svarta Lisa, number three in the series, is much the same fly with a yellow tail. Gunnar Johnson took the dressings from Färnström's book Fisketur (1955); they give colours rather than materials, and he suggests ordinary wool yarn and hen hackle.
 history """
     Oskar Fick, Schuhmacher in Hede am Ljusnan, war mit den englischen Fliegen, die er kaufen
     konnte, unzufrieden und band 1918 seine erste eigene Fliege, nach dem Vorbild der Insekten
     des Flusses. Seine Serie wuchs auf 34; die ersten 24 bekamen ihre Namen 1938–39 vom
-    Fischereiaufseher Bengt Belander und dem Sportfischer Nils Färnström, und Skomakaren, der
-    Schuhmacher, ist die Nummer eins. Seine Tochter Alma Nordlund band sie jahrzehntelang von
-    Hand, ohne Bindestock, zwölf in der Stunde. Die Hede-Fliegen gelten als Schwedens erste
-    Fliegenserie. Viele Skomakaren im Handel haben einen gelben Schwanz, der mit der Zeit
-    hinzukam; das frühe Original hat keinen, und mit Schwanz ist es die Svarta Lisa der Serie.
+    Forstmeister Bengt Belander und dem Sportfischer Nils Färnström, und Skomakaren, der
+    Schuhmacher, ist die Nummer eins. Seine Tochter Alma Nordlund, seine Gehilfin seit ihrem
+    fünfzehnten Lebensjahr, führte die Serie fort; sie band von Hand, ohne Bindestock, zwölf in
+    der Stunde. Die Hede-Fliegen gelten als Schwedens erste Fliegenserie. Das Original hat
+    keinen Schwanz; Svarta Lisa, die Nummer drei der Serie, ist fast dieselbe Fliege mit gelbem
+    Schwanz.
     Gunnar Johnson übernahm die Bindeweisen aus Färnströms Buch Fisketur (1955); sie nennen
     eher Farben als Materialien, und er schlägt gewöhnliches Wollgarn und Hennenhechel vor.
     """
 
-// en fishing: Cast down and across and let it sweep over the fish's lie; cast a little upstream when the fish lie deep, to give it time to sink. A fly for grayling and trout in the Ljusnan and the rivers of Härjedalen, fished on its own or in a team of Hede flies.
+// en fishing: Cast down and across and let it sweep over the fish's lie; cast a little upstream when the fish lie deep, to give it time to sink. A fly for grayling and trout, made on the Ljusnan at Hede.
 fishing """
     Wirf schräg stromab und lass sie über den Standplatz des Fisches schwingen; wirf etwas
     stromauf, wenn die Fische tief stehen, damit sie Zeit zum Sinken hat. Eine Fliege für
-    Äsche und Forelle im Ljusnan und den Flüssen Härjedalens, allein gefischt oder in einem
-    Vorfach mit mehreren Hede-Fliegen.
+    Äsche und Forelle, entstanden am Ljusnan bei Hede.
     """
 
 labels {

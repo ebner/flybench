@@ -4,25 +4,24 @@ status draft
 // en description: A golden pheasant tippet tail, a body of peacock herl with a red floss band, upright white duck quill wings and a brown hackle.
 description "En stjärt av guldfasanens tippet, en kropp av påfågelherl med ett band av rött floss, upprätta vingar av vit andpenna och ett brunt hackel."
 
-// en history: The Coachman, a wet fly with a peacock body and white wings, is credited to Tom Bosworth, coachman to the British court in the 1830s. In 1878 John Haily, a professional tyer in New York, was asked for sturdier ones: he bound a band of red silk round the middle of the herl to stop it fraying and gave the fly a barred wood duck tail. Mary Orvis Marbury tells how her uncle L. C. Orvis, seeing how finely it was dressed, named it the Royal Coachman. It was first a wet fly and is mostly fished dry today, with a tippet tail; Theodore Gordon gave it fan wings, and in 1930 the hair-winged Quack Coachman led to the Royal Wulff. The name is also spelled Hailey; Ahrex reports an English origin from Collier.
+// en history: The Coachman, a wet fly with a peacock body and white wings, is credited to Tom Bosworth, coachman to George IV, William IV and Queen Victoria, in the 1830s. In 1878 John Haily, a professional tyer in New York, was asked for sturdier ones: he bound a band of red silk round the middle of the herl to stop it fraying and gave the fly a barred wood duck tail. Mary Orvis Marbury tells how her uncle L. C. Orvis, seeing how finely it was dressed, named it the Royal Coachman. It was first a wet fly and is mostly fished dry today, with a tippet tail; Theodore Gordon gave it fan wings, and about 1930 Lee Wulff and Quackenbush each gave it a hair wing, which led to the Royal Wulff. Ahrex reports an English origin from David Collier's Fly Dressing I.
 history """
-    Coachman, en våtfluga med påfågelkropp och vita vingar, tillskrivs Tom Bosworth, kusk vid
-    det brittiska hovet på 1830-talet. 1878 ombads John Haily, yrkesbindare i New York, om
+    Coachman, en våtfluga med påfågelkropp och vita vingar, tillskrivs Tom Bosworth, kusk åt
+    Georg IV, Vilhelm IV och drottning Viktoria, på 1830-talet. 1878 ombads John Haily, yrkesbindare i New York, om
     tåligare exemplar: han band ett band av rött silke runt mitten av herlet så att det inte
     skulle slitas sönder och gav flugan en stjärt av tvärrandig brudand. Mary Orvis Marbury
     berättar hur hennes farbror L. C. Orvis, när han såg hur fint den var bunden, döpte den till
     Royal Coachman. Den var först en våtfluga och fiskas i dag mest torr, med stjärt av tippet;
-    Theodore Gordon gav den solfjädersvingar, och 1930 ledde den hårvingade Quack Coachman till
-    Royal Wulff. Namnet stavas också Hailey; Ahrex återger Colliers uppgift om ett engelskt
-    ursprung.
+    Theodore Gordon gav den solfjädersvingar, och omkring 1930 gav Lee Wulff och Quackenbush
+    den var för sig en hårvinge, vilket ledde till Royal Wulff. Ahrex återger uppgiften i David
+    Colliers Fly Dressing I om ett engelskt ursprung.
     """
 
-// en fishing: An attractor, fished dead drift as an ordinary dry when trout are not feeding on anything in particular, and the classic brook trout fly. The white wings make it easy to follow on the water. Quill wings split after a few fish, which is why many anglers carry the Royal Wulff instead.
+// en fishing: An attractor, fished dead drift as an ordinary dry when trout are not feeding on anything in particular. Duck quill wings are fragile; the hair-winged Royal Wulff was made because the fan-winged version did not hold up on rough water.
 fishing """
     En lockfluga, fiskad fritt drivande som en vanlig torrfluga när öringen inte tar något
-    särskilt, och den klassiska flugan för bäckröding. De vita vingarna gör den lätt att följa
-    på vattnet. Vingar av penna spricker efter några fiskar, och därför bär många fiskare Royal
-    Wulff i stället.
+    särskilt. Vingar av andpenna är ömtåliga; den hårvingade Royal Wulff kom till eftersom
+    versionen med solfjädersvingar inte höll i strömt, brutet vatten.
     """
 
 labels {

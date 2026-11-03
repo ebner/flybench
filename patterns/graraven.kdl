@@ -2,7 +2,6 @@
 
 id graraven
 name "Gråräven"
-aliases "Grey Fox" "Gråräv"
 type nymph
 // Assumption: Kärki says only that it passes for a larva or pupa rising to the surface.
 imitates caddis mayfly
@@ -10,7 +9,6 @@ naturals caddis-pupa mayfly-nymph-swimming
 difficulty beginner
 species trout grayling
 season june july august september
-origin region="Swedish mountains (fjällen)"
 description "A long tail of black fox hair and a rough, shaggy body of grey fox fur, behind a gold bead."
 history """
     John Kärki gave it in Svenskt Fiske in 2023 as one of his three flies for fishing in the
@@ -20,9 +18,9 @@ history """
     here follows the photo: a long black tail, the body of grey fox fur dubbed rough to the bead.
     """
 fishing """
-    Cast upstream, let it sink and mend upstream; strike when the line stops or tightens. Takes
-    also come at the end of the drift, as the line straightens and the nymph rises like a larva or
-    pupa heading for the surface. Kärki has done well with it on summer nights in Norrland.
+    Cast upstream, let it sink and mend upstream; strike when the line tightens. Takes also come
+    at the end of the drift, as the line straightens and the nymph rises like a larva or pupa
+    heading for the surface. Kärki has done well with it on light summer nights in Norrland.
     """
 sources {
     "Svenskt Fiske: Tre flugor för fjällfisket (John Kärki)" url="https://svensktfiske.se/tre-flugor-for-fjallfisket/"
@@ -43,7 +41,9 @@ materials {
     // Assumption: 2.8 mm (7/64"), which the Oregon Fly Fishing Blog's chart puts on #12–16; the
     // bead in Kärki's photo is a little under half the gape across.
     bead brass-bead mm=2.8
-    tail fox-hair color=black count=60 label="Black fox hair"
+    // Read from Kärki's photo: a full bunch, dense at the root, so no count (sixty hairs, the most
+    // a count gives, is too thin).
+    tail fox-hair color=black label="Black fox hair"
     body fox-dubbing color="#b9bdc3" label="Grey fox fur with its guard hairs"
 }
 

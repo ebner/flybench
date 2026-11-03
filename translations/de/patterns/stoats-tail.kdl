@@ -4,14 +4,14 @@ status draft
 // en description: An oval silver tag, a golden pheasant crest tail, a black floss body ribbed with oval silver, a black throat hackle and a low black hair wing.
 description "Ein Tag aus ovalem Silbertinsel, ein Schwanz aus Goldfasan-Topping, ein Körper aus schwarzem Floss mit ovaler Silberrippung, ein schwarzer Bart und ein flach anliegender schwarzer Haarflügel."
 
-// en history: Who tied it first is not documented; John Gray says only that it has been around a long time, though GlobalFlyFisher's video page gives James Wright as the pattern's author. The wing was originally hair from a stoat's tail; dyed black squirrel is the usual substitute. Hugh Falkus, as Gray quotes him, rated it "one of the best we have" for summer fishing with a floating line, and Sea Trout Nights counts it among the most popular sea-trout flies of modern times.
+// en history: Who tied it first is not documented; John Gray says only that it has been around a long time. The wing was originally hair from a stoat's tail; dyed black squirrel is often used instead. Hugh Falkus, as Gray quotes him, rated it "one of the best we have" for summer fishing with a floating line, and Sea Trout Nights counts it among the most popular sea-trout flies of modern times.
 history """
-    Wer sie zuerst gebunden hat, ist nicht belegt; John Gray sagt nur, dass es sie schon lange gibt, während die Videoseite von GlobalFlyFisher James Wright als Urheber des Musters nennt. Der Flügel bestand ursprünglich aus Haar vom Schwanz eines Hermelins; gefärbtes schwarzes Eichhörnchen ist der übliche Ersatz. Hugh Falkus hielt sie, wie Gray ihn zitiert, für „eine der besten, die wir haben“ („one of the best we have“), wenn man im Sommer mit Schwimmschnur fischt, und Sea Trout Nights zählt sie zu den beliebtesten Meerforellenfliegen der Neuzeit.
+    Wer sie zuerst gebunden hat, ist nicht belegt; John Gray sagt nur, dass es sie schon lange gibt. Der Flügel bestand ursprünglich aus Haar vom Schwanz eines Hermelins; oft wird stattdessen schwarz gefärbtes Eichhörnchen verwendet. Hugh Falkus hielt sie, wie Gray ihn zitiert, für „eine der besten, die wir haben“ („one of the best we have“), wenn man im Sommer mit Schwimmschnur fischt, und Sea Trout Nights zählt sie zu den beliebtesten Meerforellenfliegen der Neuzeit.
     """
 
-// en fishing: A summer fly for a floating line, at its best in low, clear water and in the evening or other low light, and a good fly for grilse and for sea trout at night on rivers. It is tied on singles, doubles, trebles and tubes.
+// en fishing: A summer fly for a floating line, and a good fly for sea trout at night on rivers. It is tied on singles, doubles, trebles and tubes.
 fishing """
-    Eine Sommerfliege für die Schwimmschnur, am besten bei niedrigem, klarem Wasser und am Abend oder bei anderem schwachem Licht, und eine gute Fliege für Grilse und für Meerforellen nachts im Fluss. Gebunden wird sie auf Einzelhaken, Doppelhaken, Drillinge und Tuben.
+    Eine Sommerfliege für die Schwimmschnur und eine gute Fliege für Meerforellen nachts im Fluss. Gebunden wird sie auf Einzelhaken, Doppelhaken, Drillinge und Tuben.
     """
 
 labels {

@@ -7,7 +7,7 @@ type wet
 imitates attractor
 naturals midge-pupa
 difficulty intermediate
-species trout sea-trout grayling char
+species trout grayling
 season april may june july august september
 origin region="Britain"
 description "A short red wool tail, a red seal's fur body ribbed with gold wire, a red game hackle palmered its whole length and a longer collar in front."
@@ -15,22 +15,26 @@ history """
     One of the oldest flies on record. Walton (1653) has Barker's palmer flies, "some with red,
     and a red hackle", and Bowlker (1758) the Red Palmer of reddish mohair ribbed with gold
     twist under a red hackle: already the Soldier Palmer's materials. By 1892 Niven and Marbury
-    print the name, Marbury explaining it by the red coat of the British soldier, and saying a
-    red body with the hackle at the head only is a Red Hackle. The red tail that tells it from
+    print the name, Marbury saying the fly's red coat suggested it, and that a red body with the
+    hackle at the head only is a Red Hackle. The red tail that tells it from
     the Red Palmer came later and is usual in Britain today; Marbury's American fly has none.
     Bodies are wool or seal's fur, hackles red game or ginger, one or two of them.
     """
 fishing """
-    The bob fly: on the top dropper of a team of wet flies, dibbled through the wave tops from a
-    drifting boat on lochs and lakes, where the bushy palmer leaves a wake. It suggests nothing
-    in particular, or a big red buzzer in early summer, and takes trout, sea trout and char; it
-    can be fished dry too.
+    The bob fly: on the top dropper of a team of wet flies on lochs and lakes, where the bushy
+    palmer leaves a wake in the wave. It suggests nothing in particular, or a large red buzzer;
+    it can be fished dry too.
     """
 sources {
     "Project Gutenberg: The Compleat Angler (Izaak Walton)" url="https://www.gutenberg.org/cache/epub/683/pg683.txt"
+    "Internet Archive: The Compleat Angler, facsimile of the 1653 first edition" url="https://archive.org/details/b24875454"
     "Internet Archive: The Art of Angling Improved (Richard Bowlker, 1758)" url="https://archive.org/details/bim_eighteenth-century_the-art-of-angling-impro_bowlker-richard_1758"
     "Internet Archive: Favorite Flies and Their Histories (Mary Orvis Marbury, 1892)" url="https://archive.org/details/favoritefliesthe00marb"
+    "Internet Archive: The British Angler's Lexicon (Niven, 1892)" url="https://archive.org/details/britishanglersle00niverich"
     "Ludlow Fly-Tying Club: Soldier Palmer (Derek Young)" url="https://ludlowflytying.org.uk/wp-content/uploads/pdf/Soldier-Palmer.pdf"
+    "Trout & Salmon Fishing: Trout Flies (John Gray)" url="https://www.trout-salmon-fishing.com/trout-flies.htm"
+    "Sportfish: Soldier Palmer" url="https://www.sportfish.co.uk/hackled-wet-soldier-palmer.html"
+    "Troutflies: Soldier Palmer" url="https://www.troutflies.co.uk/soldier-palmer-wet-fly"
     "Diptera: Soldier Palmer (archived)" url="https://web.archive.org/web/20251110154805/https://www.diptera.co.uk/patterns/s/soldier_palmer_ti.html"
     "Global FlyFisher: Soldier Palmer (Davie McPhail)" url="https://globalflyfisher.com/video/soldier-palmer"
     "SoftHackles: Soldier Palmer" url="https://softhackles.blog/2020/01/10/soldier-palmer/"

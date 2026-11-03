@@ -1,4 +1,4 @@
-// Ullsocken on a treble, one of the forms most tied on the Mörrum today.
+// Ullsocken on a treble, one of the hooks Ahrex's notes suggest carrying.
 
 id ullsocken-treble
 name "Ullsocken"
@@ -7,19 +7,17 @@ variant "On a treble"
 aliases "Ullsock" "Woolly Sock"
 type salmon
 difficulty beginner
-naturals prawn
 species salmon sea-trout
 season may june july august september
 origin region="River Mörrum, Sweden"
 description "A red wool butt, two black wool body segments and three stiff brown cock hackles: at the rear, in the middle and at the front."
 history """
-    A Mörrum fly whose name is Swedish for "the wool sock". Its origins are unclear: Ahrex's video
-    notes credit Alf Jansson in the 1960s and name the old Irish shrimp flies as its model, while
-    Viking Lars dates it to the 1950s and says nobody knows who first tied it. Jan Grünwald recalls
+    A Mörrum fly whose name is Swedish for "the wool sock". Who first tied it is not recorded;
+    Viking Lars dates it to the 1950s and says its origins are lost in time. Jan Grünwald recalls
     it as one of the two flies that took most of the Mörrum's May and June salmon in the early
     1980s. Viking Lars gives the original as a red wool butt, black wool bodies and stiff brown cock
-    hackles, with no tail. Newer dressings from Mörrum add a red rear hackle and red flash, and
-    Ahrex's notes suggest doubles, trebles and tubes as the ones to carry.
+    hackles, with no tail. Ahrex's newer dressings add a red rear hackle and red flash, and
+    suggest doubles, trebles and tubes as the ones to carry.
     """
 fishing """
     Fished like any wet fly for salmon, across and down. Viking Lars catches late-summer and

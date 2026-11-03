@@ -12,12 +12,10 @@ season january february march april may june july august september october novem
 origin originator="David Train" region="England, 1980s"
 description "A white marabou tail and wing, a fluorescent lime chenille body with a silver wire rib, and silver bead-chain eyes behind the eye."
 history """
-    David Train's lure from the 1980s; Funky Fly Tying says the early 1980s, the GlobalFlyFisher
-    video about 1985. The first version had no eyes, and to keep the marabou from fouling round
-    the hook Train tied in four white whiskers his cat had shed. Adding bead-chain eyes, to make
-    it sink and swim level, did away with the whiskers, but not the name. Train sent some to
-    Bob Church, who won competitions with them, and it became one of the best known British
-    stillwater lures.
+    David Train's lure from the 1980s; Funky Fly Tying says the early 1980s, and Ian James, in
+    his book Fumbling With A Flyrod, 1985. To keep the marabou from fouling round the hook,
+    Train tied in whiskers from his cat. They were soon left out, but not the name. It became
+    one of the best known British stillwater lures.
     """
 fishing """
     A weighted stillwater lure, fished on whatever line puts it at the trout's depth, from
@@ -31,9 +29,9 @@ fishing """
 sources {
     "English Fly Fishing Shop: White and Orange Cats Whisker Streamer (Craig Moore)" url="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandpink.htm"
     "English Fly Fishing Shop: The White and Green Cat's Whisker (Craig Moore)" url="http://english-fly-fishing-flies.s3-website-eu-west-1.amazonaws.com/catswhisker-whiteandgreen.htm"
-    "Troutflies UK Blog: Cats Whisker (Wendy)" url="https://www.troutflies.co.uk/blog/useful-tying-patterns/cats-whisker/"
     "Funky Fly Tying: The Cat's Whisker, step by step" url="https://funkyflytying.com/?p=62048"
     "GlobalFlyFisher: Cat's Whisker (video, Ívar's Fly Workshop)" url="https://globalflyfisher.com/video/cats-whisker"
+    "All About Fly Fishing: Cats Whiskers (quoting Ian James)" url="https://about-flyfishing.com/?p=980"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

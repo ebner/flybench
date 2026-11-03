@@ -7,14 +7,13 @@ variant "Amerikansk (Troth)"
 // en description: Pheasant tail tail and abdomen with a counter-wound copper rib, a weighted peacock herl thorax, a pheasant tail wing case and legs.
 description "Stjärt och bakkropp av fasanstjärt med en motlindad ribb av koppartråd, en förtyngd thorax av påfågelherl, och vingsäck och ben av fasanstjärt."
 
-// en history: Al Troth, the Montana tyer behind the Elk Hair Caddis, wanted a heavier-looking nymph than Sawyer's, with legs that show, and weighted it with lead wire. His version has a peacock herl thorax; Dave Hughes lists it as the Pheasant Tail Peacock Thorax, and in the United States it is known as the Pheasant Tail Nymph, American version. Ben Spinks, though, credits the idea of the peacock thorax to John Gierach's Good Flies (2000). The gold bead (Theo Bakelaar, 1988) and the flashback (Andre Puyans) came later.
+// en history: Al Troth, the Montana tyer behind the Elk Hair Caddis, wanted a heavier-looking nymph than Sawyer's, with legs that show, and weighted it with lead wire. His version has a peacock herl thorax; Dave Hughes lists it as the Pheasant Tail Peacock Thorax, and in the United States it is known as the Pheasant Tail Nymph, American version. A gold bead and a flashback came later.
 history """
     Al Troth, bindaren från Montana bakom Elk Hair Caddis, ville ha en nymf som såg tyngre
     ut än Sawyers, med ben som syns, och förtyngde den med blytråd. Hans version har en
     thorax av påfågelherl; Dave Hughes listar den som Pheasant Tail Peacock Thorax, och i
-    USA är den känd som Pheasant Tail Nymph, American version. Ben Spinks tillskriver dock
-    idén med påfågelthoraxen John Gierachs Good Flies (2000). Guldskallen (Theo Bakelaar,
-    1988) och flashbacken (Andre Puyans) kom senare.
+    USA är den känd som Pheasant Tail Nymph, American version. Guldskalle och flashback
+    kom senare.
     """
 
 // en fishing: A staple searching nymph, tied in the size of whatever mayfly nymphs are about; Orvis presents it as a Baetis imitation. Rogue Fly Fishers rate it for winter trout in western streams, and on lakes it does well when Callibaetis are hatching.

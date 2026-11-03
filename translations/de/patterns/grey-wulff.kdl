@@ -4,23 +4,23 @@ status draft
 // en description: Upright, divided wings and a tail of brown bucktail, a grey muskrat body and a heavy blue dun hackle.
 description "Aufrechte, geteilte Flügel und ein Schwanz aus braunem Bucktail, ein grauer Körper aus Bisam und eine dichte blaugraue Hechel."
 
-// en history: Lee Wulff tied the first of his series in 1929 or 1930, for the big grey drakes of New York's Ausable, and called it the Ausable Gray; Wikipedia gives the Esopus and other Catskill rivers. Dan Bailey insisted on Wulff's name, and the Ausable Gray, the Coffin May and the Bucktail Coachman became the Grey, White and Royal Wulff. They were the first dry flies to use bucktail for wings and tail, so they floated high in rough water. Wulff's body was grey angora wool; muskrat is usual today. It is also a classic dry fly for Atlantic salmon.
+// en history: Lee Wulff tied the first of his series in 1929 or 1930, for the big grey drakes of New York's Ausable, and called it the Ausable Gray; Wikipedia gives the Esopus and other Catskill rivers. Dan Bailey insisted on Wulff's name, and the Ausable Gray, the Coffin May and the Bucktail Coachman became the Grey, White and Royal Wulff. Wulff wrote that his bucktail was the first use of animal hair on dry flies, and it let them float high in rough water. Wulff's body was grey angora wool; muskrat is usual today. Wulff flies also take Atlantic salmon.
 history """
     Lee Wulff band die erste seiner Serie 1929 oder 1930, für die großen grauen Eintagsfliegen
     des Ausable im Staat New York, und nannte sie Ausable Gray; Wikipedia nennt den Esopus und
     andere Flüsse der Catskills. Dan Bailey bestand auf Wulffs Namen, und aus Ausable Gray,
-    Coffin May und Bucktail Coachman wurden Grey, White und Royal Wulff. Sie waren die ersten
-    Trockenfliegen mit Flügeln und Schwanz aus Bucktail und schwammen daher hoch in rauem
-    Wasser. Wulffs Körper war aus grauer Angorawolle; heute ist Bisam üblich. Sie ist auch eine
-    klassische Trockenfliege für Lachs.
+    Coffin May und Bucktail Coachman wurden Grey, White und Royal Wulff. Wulff schrieb, sein
+    Bucktail sei das erste Tierhaar an Trockenfliegen gewesen, und es ließ sie hoch in rauem
+    Wasser schwimmen. Wulffs Körper war aus grauer Angorawolle; heute ist Bisam üblich.
+    Wulff-Fliegen fangen auch Lachs.
     """
 
-// en fishing: A high-floating, easy-to-see dry for rough water: dead drift during the grey and slate drake hatches, or as an attractor between them. In summer, cast it to a deep pool and twitch it now and then. Tied on a salmon hook, it is a classic for Atlantic salmon.
+// en fishing: A high-floating, easy-to-see dry for rough water: dead drift during the grey and slate drake hatches, or as an attractor between them. In summer, cast it to a deep pool and twitch it now and then. Tied on a salmon hook, it also takes Atlantic salmon.
 fishing """
     Eine hoch schwimmende, gut sichtbare Trockenfliege für raues Wasser: frei treibend während
     der Schlüpfe der großen grauen Eintagsfliegen, oder als Reizfliege dazwischen. Im Sommer
-    wirf sie in einen tiefen Gumpen und zupfe sie ab und zu. Auf einen Lachshaken gebunden ist
-    sie ein Klassiker für Lachs.
+    wirf sie in einen tiefen Gumpen und zupfe sie ab und zu. Auf einen Lachshaken gebunden
+    fängt sie auch Lachs.
     """
 
 labels {

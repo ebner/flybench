@@ -2,7 +2,6 @@
 
 id europea-12
 name "Europea 12"
-aliases "E-12"
 type dry
 imitates caddis
 naturals caddis-adult
@@ -12,19 +11,16 @@ season may june july august september
 origin originator="André Ragot" region="France"
 description "A hare's ear body ribbed with yellow thread, a hen mallard breast feather lying over it as a wing, and a red game hackle in front."
 history """
-    A French fly. Ahrex and GlobalFlyFisher attribute it to André Ragot, following the Danish
-    author Preben Torp Jacobsen, who had published it by 1976; Ahrex guesses it is from the
-    1960s. The Swedish shop Guideline instead credits the French firm Mouches Ragot, dates it
-    before the Second World War, and explains the name as number 12 in the firm's Europe
-    series. In Sweden, where it is most popular, Lennart Bergqvist's 1989 book spread a
-    version without the tail. Dressings still vary in the details: the body material,
-    whether there is a tail, and whether the wing is one feather or two.
+    A French fly. Ahrex, following the Danish author Preben Torp Jacobsen, who had published it
+    by 1976, attributes it to André Ragot, and guesses it is from the 1960s. In Sweden, where it
+    is most popular, Lennart Bergqvist's 1989 book spread a version without the tail. Dressings
+    still vary in the details: the body material, whether there is a tail, and whether the wing
+    is one feather or two.
     """
 fishing """
-    A sedge for trout and grayling, useful to the end of the dry-fly season in autumn. Fish
-    it to rising fish or blind, dead drift or skated. The full hackle keeps it afloat in
-    faster water; for calm water some tyers clip it flat underneath, which helps the fly land
-    the right way up and stops it spinning the tippet.
+    A sedge for trout and grayling, useful to the end of the dry-fly season in autumn. Fish it
+    dead drift, or skate it. The full hackle keeps it afloat in faster water; for calm water
+    some tyers clip it flat underneath, so that it twists the tippet less.
     """
 sources {
     "GlobalFlyFisher: Europea 12 (Ahrex video, Håkan Karsnäser)" url="https://globalflyfisher.com/node/69429"

@@ -4,11 +4,11 @@ status draft
 // en description: A tail of peacock sword fibres, a cigar-shaped peacock herl body ribbed with oval silver, soft brown hen legs and a short wing case of wood duck flank, clipped square.
 description "Ein Schwanz aus Pfauenschwertfibern, ein zigarrenförmiger Körper aus Pfauengras mit ovalem Silberlahn gerippt, weiche Beine aus brauner Hennenhechel und eine kurze Flügelscheide aus Brautentenflanke, gerade abgeschnitten."
 
-// en history: Cliff Zug of West Lawn, Pennsylvania, tied it in the 1930s, and it made its name on the streams of the Catskills; in the 1940s Arnold Gingrich spread it through his books after it did well in Yellowstone and the Sierra. A link to the older Kemp Bug is suggested but not shown. The original wing case was lemon wood duck flank, tied in at the head lying flat and clipped short; mallard flank, natural or dyed, is the usual stand-in. Sources differ on the tail, from a gape to a shank long, and on how long the wing case is left.
+// en history: Cliff Zug of West Lawn, Pennsylvania, tied it in the 1930s, and it made its name on the streams of the Catskills; in the 1940s Arnold Gingrich fished it with success in Yellowstone and the Sierra, and his praise in print carried it west. A link to the older Kemp Bug is suggested but not shown. The original wing case was lemon wood duck flank, tied in at the head lying flat and clipped short; mallard flank, natural or dyed, is the usual stand-in. Sources differ on the tail, from a gape to a shank long, and on how long the wing case is left.
 history """
     Cliff Zug aus West Lawn, Pennsylvania, band sie in den 1930er Jahren, und sie machte sich an
-    den Bächen der Catskills einen Namen; in den 1940er Jahren verbreitete Arnold Gingrich sie
-    in seinen Büchern, nachdem sie im Yellowstone und in der Sierra gut gefangen hatte. Eine
+    den Bächen der Catskills einen Namen; in den 1940er Jahren fischte Arnold Gingrich sie mit
+    Erfolg im Yellowstone und in der Sierra, und sein gedrucktes Lob trug sie in den Westen. Eine
     Verbindung zum älteren Kemp Bug wird vermutet, ist aber nicht belegt. Die ursprüngliche
     Flügelscheide war zitronengelbe Brautentenflanke, am Kopf flach liegend eingebunden und kurz
     geschnitten; Stockentenflanke, natur oder gefärbt, ist der übliche Ersatz. Die Quellen
@@ -16,12 +16,11 @@ history """
     wie lang die Flügelscheide bleibt.
     """
 
-// en fishing: A peacock nymph that suggests caddis larvae, mayfly nymphs and much else: dead drift near the bottom in slow water, swing it or twitch it, alone or with a second nymph. On lakes it is fished slowly, as a dropper behind a leech.
+// en fishing: A peacock nymph that suggests caddis larvae, mayfly nymphs and much else: dead drift near the bottom in slow water, swing it or twitch it, alone or with a second nymph. On lakes it is fished as a dropper behind a leech.
 fishing """
     Eine Pfauennymphe, die an Köcherfliegenlarven, Eintagsfliegennymphen und vieles andere
     erinnert: frei treibend nahe am Grund in ruhigem Wasser, geschwungen oder gezupft, allein
-    oder mit einer zweiten Nymphe. Im See wird sie langsam gefischt, als Springer hinter einem
-    Egel.
+    oder mit einer zweiten Nymphe. Im See wird sie als Springer hinter einem Egel gefischt.
     """
 
 labels {

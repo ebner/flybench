@@ -4,14 +4,15 @@ status draft
 // en description: A fat cigar of spun, clipped and singed olive deer hair, a short shaggy thorax of dark brown dubbing and a small orange head.
 description "En kraftig cigarr av spunnet, klippt och bränt olivfärgat hjorthår, en kort, raggig thorax av mörkbrun dubbing och ett litet orange huvud."
 
-// en history: Mats Hagberg of Luleå fished it on the Pite älv with Gunnar Westrin, who wrote it up in Vildmarksnytt; the two made a television film about the fishing in the 1990s. Hagberg and his friends called it Hjortpuppan, and on the Gimån in Jämtland, where it became the fly of the caddis evenings, it is also known as Mullbänken. The dressing here is Niklas Dahlin's (Flugfiske i Norden, 2014), with a fuller body and thorax than the original and an orange head; others tie it in natural deer hair with a light, spiky thorax.
+// en history: Mats Hagberg of Luleå and his friends fished it for grayling on the Pite älv, and Gunnar Westrin wrote it up in Vildmarksnytt; Hagberg and Westrin made a television film about fishing in the 1990s. Hagberg and his friends called it Hjortpuppan. Many who fish the Gimån in Jämtland use it, and some of Dahlin's friends call it Mullbänken. The dressing here is Niklas Dahlin's (Flugfiske i Norden, 2014), with a fuller body and thorax than the original and a contrasting head; others tie it in natural deer hair with a light, spiky thorax.
 history """
-    Mats Hagberg från Luleå fiskade den i Pite älv tillsammans med Gunnar Westrin, som skrev
-    om den i Vildmarksnytt; de två gjorde en tv-film om fisket på 1990-talet. Hagberg och hans
-    vänner kallade den Hjortpuppan, och i Gimån i Jämtland, där den blev nattsländekvällarnas
-    fluga, kallas den också Mullbänken. Bindningen här är Niklas Dahlins (Flugfiske i Norden,
-    2014), med fylligare kropp och thorax än originalet och ett orange huvud; andra binder den
-    i naturfärgat hjorthår med en ljus, spretig thorax.
+    Mats Hagberg från Luleå och hans vänner fiskade harr med den i Pite älv, och Gunnar
+    Westrin skrev om den i Vildmarksnytt; Hagberg och Westrin gjorde en tv-film om fiske på
+    1990-talet. Hagberg och hans vänner kallade den Hjortpuppan. Många som fiskar i Gimån i
+    Jämtland använder den, och några av Dahlins kamrater kallar den Mullbänken. Bindningen här
+    är Niklas Dahlins (Flugfiske i Norden, 2014), med fylligare kropp och thorax än originalet
+    och ett avvikande huvud; andra binder den i naturfärgat hjorthår med en ljus, spretig
+    thorax.
     """
 
 // en fishing: A caddis pupa in the surface film for grayling and trout, often late in the evening or at night during the hatch. Dahlin doesn't grease it, so it soaks up a little water and sits in the film rather than on it, and he gives it small twitches now and then, as a swimming pupa moves. Others fish it dry, where the packed hair floats it like a cork.

@@ -1,4 +1,4 @@
-// Dog Nobbler: Trevor Housby's leaded marabou lure for reservoir trout, a painted split shot behind the eye.
+// Dog Nobbler: the leaded marabou lure for reservoir trout credited to Trevor Housby, a painted split shot behind the eye.
 
 id dog-nobbler
 name "Dog Nobbler"
@@ -12,20 +12,19 @@ season march april may june september october november
 origin originator="Trevor Housby" region="England"
 description "A painted split shot with an eye on each side crimped behind the hook's eye, a long black marabou tail with pearl flash and a black chenille body ribbed with silver wire."
 history """
-    Trevor Housby, the British angling writer, made it in the late 1970s or around 1980, by
-    Michael Jensen's account after American anglers' small jigs, which he turned into a fly
-    for the big stocked rainbows of the reservoirs. A professional tyer, Sid Knight of
-    Bridgnorth, patented the name and dressing in 1984, by a quotation of John Roberts on a
-    forum, and shops still credit it to him; an obituary of Fred J. Taylor says he too had a
-    hand in it. The classic head is a coarse split shot crimped on and glued, painted with a
-    yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins.
-    It was controversial, and banned on some waters.
+    Trevor Housby, a British all-round angler, made it for the big stocked rainbows of the
+    reservoirs. Michael Jensen writes that it was in the 1970s, inspired by the small jigs
+    American spin anglers used on ultralight tackle. Barry Ord Clarke credits Sid Knight, a
+    professional tyer of Bridgnorth, instead. Keith Elliott's obituary of Fred J. Taylor says Taylor too
+    played a key role in inventing it. The classic head is a coarse split shot crimped on and
+    glued, painted with a yellow eye and a black pupil each side; beads, cones and dumbbell eyes
+    are modern stand-ins.
     """
 fishing """
-    A stillwater lure for stocked rainbows, best in cold early-season water. On a floating line
-    and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded
-    head dives and the marabou rises, so it jigs through the water. Cast it with an open loop:
-    the shot makes it heavy.
+    A stillwater lure for stocked rainbows, best early in the season. On a floating line and
+    long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded head
+    dives and the marabou rises, so it jigs through the water. Cast it with an open loop: the
+    shot makes it heavy.
     """
 sources {
     "Global FlyFisher: Dog Nobbler heads (Michael Jensen)" url="https://globalflyfisher.com/node/71163"
@@ -33,8 +32,9 @@ sources {
     "Global FlyFisher: Nobbler fly tying tutorial (Ívar's Fly Workshop)" url="https://globalflyfisher.com/video/nobbler-fly-tying-tutorial-ivars-fly-workshop"
     "Sexyloops: Dog Nobbler" url="https://www.sexyloops.com/glossary/dognobbler.shtml"
     "Fish4Flies: Palmered Eyed Dog Nobbler" url="https://www.fish4flies.com/Lures/Nobblers-and-Leadheads/Palmered-Eyed-Dog-Nobbler-Black"
-    "Fish4Flies: Sid Knight" url="https://www.fish4flies.com/People/Sid-Knight"
     "Caught by the River: Caught by the Reaper, Fred J. Taylor (Keith Elliott)" url="https://www.caughtbytheriver.net/2008/05/caught-by-the-reaper-8/"
+    "The Feather Bender: The Dog Nobbler (Barry Ord Clarke)" url="https://thefeatherbender.com/the-dog-nobbler/"
+    "Troutflies UK: Dog Nobbler" url="https://www.troutflies.co.uk/trout-fishing-flies/Lure-streamer-trout-flies/dog-nobbler-fishing-flies"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

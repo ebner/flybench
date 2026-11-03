@@ -16,8 +16,8 @@ history """
     Usually credited to Martyn Flynn of Worcestershire in the 1850s, who tied it as a dry
     fly for grayling and called it the Worcestershire Gem; it was also known as the
     Worcestershire Wonder. It later reached Australia, where it became a standard brown trout
-    fly, above all in Tasmania. The date and originator are repeated widely but rest on
-    secondary accounts.
+    fly, above all in Tasmania. The date and originator go back to Martin Joergensen's account
+    on GlobalFlyFisher, which others repeat.
     """
 fishing """
     It suggests nothing in particular; at most, Martin Joergensen thinks, a small beetle. Fish
@@ -29,6 +29,7 @@ sources {
     "FlyLife: A modernized 170 year old trout fly" url="https://flylifemagazine.com/a-modernized-170-year-old-trout-fly-is-still-simple-and-deadly-red-tag/"
     "GlobalFlyFisher: Red Tag (Martin Joergensen)" url="https://globalflyfisher.com/patterns/red-tag"
     "Let's Fly Fish: Grayling fly fishing (Alastair Gowans)" url="https://letsflyfish.com/graylingpage.htm"
+    "Trout Tales Tasmania: The best trout flies in Tasmania (Matt Stone)" url="https://www.trouttalestasmania.com.au/blog/the-best-trout-flies-in-tasmania-patterns-and-tips"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

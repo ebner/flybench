@@ -2,7 +2,6 @@
 
 id gimapuppan
 name "Gimåpuppan"
-aliases "Gimå Pupa"
 type emerger
 imitates caddis
 naturals caddis-pupa
@@ -12,12 +11,12 @@ season june july august
 origin region="Gimån, Jämtland, Sweden"
 description "A body of olive CDC twisted into a rope, under a loose bubble of sand-coloured CDC, and a spiky thorax of mixed fur."
 history """
-    Published in Flugfiske i Norden in 2015 by its author, very likely David Stenström,
-    whose initials are on the photos. Fishing the Gimån every summer when the caddis hatch
-    is at its height, he found the Hjorthårspuppan floated too low to see, took a pattern
-    called the Pite-puppan, simplified and changed it, and named the result after the river.
-    It has been tried with success elsewhere in Sweden and in the Catskills. He does not claim
-    the idea as new: many pupae use a bubble of CDC the same way.
+    Published on Flugfiske i Norden in 2015, without a byline. Fishing the Gimån for a week
+    every summer after midsummer, when the caddis are hatching in earnest, the author found
+    the Hjorthårspuppan floated too low to see, took a pattern called the Pite-puppan,
+    simplified and changed it, and named the result after the river. It has been tried with
+    success elsewhere in Sweden and in the Catskills. The author does not claim the idea as
+    new: many pupae use a bubble of CDC the same way.
     """
 fishing """
     A caddis pupa floating high in the film, easy to see in poor light. Fish it dead drift,

@@ -4,20 +4,18 @@ status draft
 // en description: An oval silver tag, a golden pheasant crest tail, a black floss body ribbed with oval silver, a black throat hackle and a low black hair wing.
 description "En tag av oval silvertinsel, en stjärt av guldfasantopping, en kropp av svart flossilke ribbad med oval silvertinsel, ett svart skägghackel och en låg vinge av svart hår."
 
-// en history: Who tied it first is not documented; John Gray says only that it has been around a long time, though GlobalFlyFisher's video page gives James Wright as the pattern's author. The wing was originally hair from a stoat's tail; dyed black squirrel is the usual substitute. Hugh Falkus, as Gray quotes him, rated it "one of the best we have" for summer fishing with a floating line, and Sea Trout Nights counts it among the most popular sea-trout flies of modern times.
+// en history: Who tied it first is not documented; John Gray says only that it has been around a long time. The wing was originally hair from a stoat's tail; dyed black squirrel is often used instead. Hugh Falkus, as Gray quotes him, rated it "one of the best we have" for summer fishing with a floating line, and Sea Trout Nights counts it among the most popular sea-trout flies of modern times.
 history """
     Vem som band den först finns inte dokumenterat; John Gray säger bara att den har funnits
-    länge, men GlobalFlyFishers videosida anger James Wright som mönstrets upphovsman.
-    Vingen var ursprungligen hår från en hermelins svans; svartfärgad ekorre är den vanliga
-    ersättningen. Hugh Falkus, som Gray citerar honom, räknade den som ”en av de bästa vi
+    länge. Vingen var ursprungligen hår från en hermelins svans; svartfärgad ekorre används
+    ofta i stället. Hugh Falkus, som Gray citerar honom, räknade den som ”en av de bästa vi
     har” (”one of the best we have”) för sommarfiske med flytlina, och Sea Trout Nights räknar den till den moderna
     tidens populäraste havsöringsflugor.
     """
 
-// en fishing: A summer fly for a floating line, at its best in low, clear water and in the evening or other low light, and a good fly for grilse and for sea trout at night on rivers. It is tied on singles, doubles, trebles and tubes.
+// en fishing: A summer fly for a floating line, and a good fly for sea trout at night on rivers. It is tied on singles, doubles, trebles and tubes.
 fishing """
-    En sommarfluga för flytlina, som bäst i lågt, klart vatten och på kvällen eller i annat
-    svagt ljus, och en bra fluga för smålax och för havsöring på natten i älvarna. Den binds
+    En sommarfluga för flytlina, och en bra fluga för havsöring på natten i älvarna. Den binds
     på enkelkrok, dubbelkrok, trekrok och tub.
     """
 

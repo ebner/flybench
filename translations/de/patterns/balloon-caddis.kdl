@@ -4,25 +4,22 @@ status draft
 // en description: A slim dubbed body, a sparse elk-hair wing past the bend, and a balloon of yellow foam folded back over a dubbed thorax.
 description "Ein schlanker gedubbter Körper, ein spärlicher Flügel aus Elchhaar über den Bogen hinaus und ein Ballon aus gelbem Schaum, über einen gedubbten Thorax nach hinten geklappt."
 
-// en history: Roman Moser, the Austrian tyer and guide on the Traun, designed it to suggest a caddis breaking through the film; it is credited to him by Mike Weaver, Jason Klass and Davie McPhail, though no date or text of Moser's own turned up. The foam is tied in at the eye pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps the front of the fly up while the body hangs in the film. Moser's foam was yellow, also the angler's sighter; the body is dubbed to match the sedges, olive, grey or brown.
+// en history: Roman Moser, the Austrian tyer and teacher whose home river is the Traun, designed it to suggest a caddis breaking through the film; it is credited to him by Mike Weaver and Jason Klass, though no date or text of Moser's own turned up. The foam is tied in at the eye pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps the front of the fly up while the body hangs in the film. Moser's foam was yellow; the body is dubbed to match the sedges, olive, grey or brown.
 history """
-    Roman Moser, der österreichische Fliegenbinder und Guide an der Traun, entwarf sie als
-    Köcherfliege, die durch den Oberflächenfilm bricht; Mike Weaver, Jason Klass und Davie
-    McPhail schreiben sie ihm zu, doch weder ein Jahr noch ein Text von Moser selbst ließ
-    sich finden. Der Schaum wird am Öhr nach vorn zeigend eingebunden und über den Thorax
-    nach hinten geklappt, so dass er einen hohlen Ballon bildet, der den vorderen Teil der
-    Fliege oben hält, während der Körper im Film hängt. Mosers Schaum war gelb, zugleich als
-    Sichthilfe für den Fischer; der Körper wird in den Farben der Köcherfliegen gedubbt,
-    oliv, grau oder braun.
+    Roman Moser, der österreichische Fliegenbinder und Lehrer, dessen Hausfluss die Traun ist,
+    entwarf sie als Köcherfliege, die durch den Oberflächenfilm bricht; Mike Weaver und Jason
+    Klass schreiben sie ihm zu, doch weder ein Jahr noch ein Text von Moser selbst ließ sich
+    finden. Der Schaum wird am Öhr nach vorn zeigend eingebunden und über den Thorax nach hinten
+    geklappt, so dass er einen hohlen Ballon bildet, der den vorderen Teil der Fliege oben hält,
+    während der Körper im Film hängt. Mosers Schaum war gelb; der Körper wird in den Farben der
+    Köcherfliegen gedubbt, oliv, grau oder braun.
     """
 
-// en fishing: Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on a summer evening, cast across and downstream and skate it back in short jerks. It is hard for trout to resist when dragged, and the yellow balloon stays easy to see in poor light and can carry a small nymph as a dropper.
+// en fishing: Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on a summer evening, cast across and downstream and skate it back in short jerks. It floats well enough to carry a small nymph as a dropper.
 fishing """
     Fische sie frei treibend wie eine Elk Hair Caddis, oder, wenn die Forellen an einem
-    Sommerabend schlüpfenden Köcherfliegen nachjagen, wirf schräg stromab und zieh sie in
-    kurzen Rucken zurück. Gezogen ist sie für Forellen kaum zu widerstehen, und der gelbe
-    Ballon bleibt bei schwachem Licht gut sichtbar und kann eine kleine Nymphe als Springer
-    tragen.
+    Sommerabend schlüpfenden Köcherfliegen nachjagen, wirf schräg stromab und zieh sie in kurzen
+    Rucken zurück. Sie schwimmt gut genug, um eine kleine Nymphe als Springer zu tragen.
     """
 
 labels {

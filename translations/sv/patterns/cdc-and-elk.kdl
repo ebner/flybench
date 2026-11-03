@@ -9,9 +9,9 @@ history """
     Den holländske flugbindaren Hans Weilenmann konstruerade den 1992 som en omarbetning av Al Troths Elk Hair Caddis, som sedan en resa till Montana 1982 hade varit en av hans pålitligaste torrflugor. Han ville ha en fluga som flöt bättre och levde mer, och ersatte därför den dubbade kroppen och kroppshacklet med en enda hel CDC-fjäder, stam och allt. Trots namnet binder han vingen av hjorthår med fina spetsar.
     """
 
-// en fishing: A low-riding caddis that Weilenmann also uses during many mayfly hatches, as a searching fly when nothing is hatching, as an emerger, and even wet. Greased with floatant it rides higher; left untreated, the CDC soaks up water and it fishes as an emerger or cripple. Use less hair in the wing for smooth water and more for broken water.
+// en fishing: A low-riding caddis that Weilenmann also uses during many mayfly hatches, as a searching fly when nothing is hatching, as an emerger, and even wet.
 fishing """
-    En lågt flytande nattslända som Weilenmann också använder under många dagsländekläckningar, som sökfluga när inget kläcker, som kläckare och till och med våt. Insmord med flytmedel flyter den högre; obehandlad suger CDC:n upp vatten, och då fiskar den som kläckare eller cripple. Ta mindre hår i vingen för lugnt vatten och mer för strömt, oroligt vatten.
+    En lågt flytande nattslända som Weilenmann också använder under många dagsländekläckningar, som sökfluga när inget kläcker, som kläckare och till och med våt.
     """
 
 labels {

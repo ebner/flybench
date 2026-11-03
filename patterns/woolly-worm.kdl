@@ -1,4 +1,4 @@
-// Woolly Worm: the old palmered caterpillar of the Ozarks, made famous by Don Martinez; the Woolly Bugger's parent.
+// Woolly Worm: the old palmered caterpillar of Missouri, made famous by Don Martinez; the Woolly Bugger's parent.
 
 id woolly-worm
 name "Woolly Worm"
@@ -9,23 +9,25 @@ naturals stonefly-nymph damselfly-nymph caddis-larva-free
 difficulty beginner
 species trout bass panfish
 season march april may june july august september october
-origin region="Ozarks, USA"
+origin region="Missouri, USA"
 description "A short tuft of red wool, a black chenille body and a grizzly hackle palmered from the tail to the head."
 history """
-    A palmer fly from England by way of the Ozarks of Missouri and Arkansas, where it was a
-    bass and crappie fly in the 1920s; nobody is recorded as its inventor. Don Martinez of
-    West Yellowstone got one from a friend in Arkansas and sold his versions as Woolly Worms:
-    in a 1940 letter to Preston Jennings he called it a horrible-looking grub, murderous all
-    season, and said he sold more of them than of all his other flies together. Wikipedia and
-    Orvis put this in the 1950s, which his letter and his death in 1955 rule out. Martinez's
-    first ones had a grizzly tail or none; the red wool tag came later. In 1967 Russell Blessing
-    gave it a marabou tail, and it became the Woolly Bugger.
+    A palmer, the old British fly that Walton already knew, which became a bass fly in America.
+    Don Martinez, who tied flies in West Yellowstone in the summers from about 1932 to 1943,
+    told Ray Bergman (in Trout) that his Woolly Worms were not his own idea but came from a very
+    old Missouri bass fly; he was only the first to sell them as a trout fly. Nobody is recorded
+    as the inventor of the bass fly. Wikipedia, citing Gary Soucie, and Orvis put Martinez's
+    Woolly Worm in the 1950s, later than his West Yellowstone years. The best-known dressing,
+    which George Grant takes for the original, is a thick black chenille body palmered with
+    grizzly; he writes that the short red tag was always counted part of it, though modern
+    tyers often leave it out. In 1967 Russell Blessing gave it a marabou tail, and it became the Woolly
+    Bugger.
     """
 fishing """
-    A big general nymph or caterpillar for still and slow water. Martinez fished it deep and
-    twitched it with the left hand: the moving hackle is what does it. Weighted, it searches
-    the bottom of rivers for trout; unweighted, it was first fished on the surface for bass
-    and bluegill.
+    A big general nymph or caterpillar. Steve Hudson describes it as an all-purpose nymph:
+    weighted to get down near the bottom, under an indicator, or as a dropper below a dry fly or
+    a popper. Soft hackle gives it the most life in the water. Smaller ones also pass for
+    emergers.
     """
 sources {
     "Wikipedia: Woolly Worm" url="https://en.wikipedia.org/wiki/Woolly_Worm_(imitation)"
@@ -34,6 +36,7 @@ sources {
     "Orvis News: How to Tie the Woolly Worm (Phil Monahan, Tim Flagler)" url="https://news.orvis.com/fly-fishing/video-how-to-tie-the-woolly-worm"
     "Fly Life: Beginner Fly Tying #10, the Woolly Worm (Steve Hudson)" url="https://flylifemagazine.com/beginner-fly-tying-10-the-woolly-worm/"
     "Santa Cruz Fly Fishing: Woolly Worm (Elaine Cook)" url="https://www.santacruzflyfishing.org/2026/05/woolly-worm/"
+    "The American Fly Fisher: Don Martinez, Western Dry Fly Master (George Grant, 1982)" url="https://web.archive.org/web/20141129021150/http://www.amff.com/assets/images/archived-journals/1982-Vol09-No2web.pdf"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

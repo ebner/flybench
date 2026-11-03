@@ -9,18 +9,13 @@ naturals prawn
 difficulty beginner
 species salmon sea-trout
 season april may june july august september
-origin originator="Rolf Vilhelmsson" year=1942 region="River Mörrum, Sweden"
+origin originator="Rolf Vilhelmson" year=1942 region="River Mörrum, Sweden"
 description "Orange hackle-tip tail, a slim orange body ribbed with oval gold, an orange palmer hackle and a slightly longer orange front hackle."
 history """
-    Tied by Rolf Vilhelmsson (Ahrex and Michael Jensen spell it Vilhelmson) at the Valhalla inn
-    by the Mörrum: in 1942 according to Ahrex, in the early 1940s according to a reader's account
-    on GlobalFlyFisher. That account has Olle
-    Törnblom and Sven Hallman there to see it, and Törnblom refining it later; Michael Jensen names
-    all three as its makers. Vilhelmsson chose a strong colour because the river, clear as it is,
-    is always tinged brown. The name stories are anecdote: one says it was meant to name the colour
-    of a shrimp and came out as pidgin English after a whisky or two, with the spelling fixed by a
-    hard-to-read last letter in the fishing journal. ABU brought out a version with Optic eyes
-    in 1969, by which time the plain fly was famous on the Mörrum.
+    Tied by Rolf Vilhelmson at the Valhalla inn by the Mörrum in 1942, according to Ahrex.
+    Michael Jensen names Olle Törnblom and Sven Hallman with him as its makers. Vilhelmson chose
+    a strong colour because the river, clear as it is, is always tinged brown. ABU brought out a
+    version with Optic eyes in 1969, by which time the plain fly was famous on the Mörrum.
     """
 fishing """
     A salmon and sea-trout fly, fished like any wet fly for salmon. Ahrex also ties it on doubles.
@@ -29,7 +24,7 @@ fishing """
     """
 sources {
     "Ahrex: Chillimps (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2021/11/26/chillimps/"
-    "GlobalFlyFisher: Chillimps (Martin Joergensen, with a reader's note on its origin)" url="https://globalflyfisher.com/patterns/chillimps"
+    "GlobalFlyFisher: Chillimps (Martin Joergensen)" url="https://globalflyfisher.com/patterns/chillimps"
     "GlobalFlyFisher: ABU Optic Chillimps (Michael Jensen)" url="https://globalflyfisher.com/video/abu-optic-chillimps"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.

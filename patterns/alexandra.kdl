@@ -12,27 +12,32 @@ season april may june july august september
 origin region="England, 1860s"
 description "A red goose tail, a flat silver body ribbed with fine oval silver, a black hen throat and a wing of peacock sword fibres with a thin red slip along each side."
 history """
-    A fly of the 1860s, first called the Lady of the Lake and renamed after Alexandra,
-    Princess of Wales; W. G. Turle is usually credited with the name, but by 1880 Marston
-    wrote that Turle only believed he had invented it, and Brunton, "Old Fly", Hobbs and
-    Kelson all made claims. Its dazzling silver and peacock made it a famous lake and sea-trout
-    fly, so deadly that it was banned on some waters. The dressing tied in Britain today is the
-    one Courtney Williams gave in 1949: red tail and cheeks, once of ibis and now of goose, a
-    silver body, black hackle and a sword wing. American dressings use a peacock tail and a red
-    or claret hackle.
+    A fly of the 1860s or earlier, named after Alexandra, Princess of Wales from 1863. Courtney
+    Williams wrote in 1932 that it was first called the Lady of the Lake, but gave no source.
+    The earliest dated claim is a letter from "Old Fly", who said he first made and used it in
+    May 1863. W. G. Turle is usually credited with the name. The claims were argued over by
+    1880: Marston wrote that Turle believed he had invented it, which he thought quite likely,
+    and that Dr Brunton said he had, which he thought quite possible. Hobbs and Kelson made
+    claims too. Its silver and peacock made it a well-known lake and sea-trout fly. Courtney
+    Williams wrote that it had once been barred from some waters for being too deadly, but gave
+    no source for that either. The dressing tied in Britain today is the one he gave in 1949:
+    red tail and cheeks, once of ibis and now of goose, a silver body, black hackle and a sword
+    wing. Ray Bergman's American dressing has a peacock sword tail and a red or claret hackle.
     """
 fishing """
-    A lake and loch fly, fished on the point of a team or stripped back from the boat, when
-    trout are chasing fry; on rivers a sea-trout fly at dusk. The silver and peacock flash like a
-    small fish, and it can be deadly for brown trout feeding on sticklebacks.
+    A lake and loch fly, usually fished on the point of a team, often slowly on a sinking line,
+    when trout are chasing fry; on rivers it is also a sea-trout fly. The silver and peacock
+    flash like a small fish, perhaps a stickleback.
     """
 sources {
     "Wikipedia: Alexandra (wet fly)" url="https://en.wikipedia.org/wiki/Alexandra_(wet_fly)"
-    "Ahrex Hooks: Old wets (Håkan Karsnäser)" url="https://ahrexhooks.com/2022/02/18/old-wets/"
+    "Ahrex Hooks: Old wets (Lars Chr. Bentsen, flies by Håkan Karsnäser)" url="https://ahrexhooks.com/2022/02/18/old-wets/"
     "Flies Step by Step: Alexandra (Krystian Niemy)" url="https://www.flies-stepbystep.com/en/flies/wet-flies/alexandra-2/"
     "Puckerbrush Flies: The Alexandra" url="https://puckerbrushflies.com/2013/11/15/the-alexandra/"
     "Current Seams: The Alexandra winged wet (Steve Culton)" url="https://currentseams.com/2013/09/25/the-alexandra-winged-wet/"
     "Rackelhanen: Alexandra (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
+    "The Fishing Museum: The Alexandra (Andrew Herd)" url="https://fishingmuseum.org.uk.medlarpress.com/alexandra.html"
+    "Caurnie Angling Club: The Alexandra" url="https://www.caurnieangling.club/the-alexandra"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

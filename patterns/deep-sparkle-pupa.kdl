@@ -1,4 +1,4 @@
-// Deep Sparkle Pupa: Gary LaFontaine's caddis pupa of 1974, a dubbed body inside a loose, glittering veil of sparkle yarn.
+// Deep Sparkle Pupa: Gary LaFontaine's caddis pupa from Caddisflies (1981), a dubbed body inside a loose, glittering veil of sparkle yarn.
 
 id deep-sparkle-pupa
 name "Deep Sparkle Pupa"
@@ -9,22 +9,21 @@ naturals caddis-pupa
 difficulty advanced
 species trout grayling
 season may june july august september
-origin originator="Gary LaFontaine" year=1974 region="Big Hole River, Montana, USA"
+origin originator="Gary LaFontaine"
 description "A ginger underbody of sparkle yarn and fur inside a loose, translucent sheath of sparkle yarn drawn over the top and the bottom, wood duck legs at the sides and a brown ostrich herl head."
 history """
-    Gary LaFontaine developed it around 1974 after three seasons watching caddis pupae on the
-    Big Hole with scuba gear, and published it in Caddisflies (1981). He found that the air
-    bubbles round a rising pupa make it glitter, and that the new Antron yarn, which he called
-    sparkle yarn, holds air the same way. One sparse strand is tied in on top and one underneath,
-    and after the body is dubbed each is drawn forward loosely so that it stands off the body as
-    a veil the colour shows through. The Deep has no wing or trailing shuck; those belong to the
-    Emergent Sparkle Pupa. Sources differ on the sheath (one piece, side hanks or three) and on
-    the legs and the head.
+    Gary LaFontaine developed it after years of watching caddis pupae and trout underwater with
+    scuba gear, and published it in Caddisflies (1981). He found that the air bubbles round a
+    rising pupa make it glitter, and that Antron yarn, which he called sparkle yarn, holds air
+    the same way. One sparse strand is tied in on top and one underneath, and after the body is
+    dubbed each is drawn forward loosely so that it stands off the body as a veil the colour
+    shows through. The Deep has no wing or trailing shuck; those belong to the Emergent Sparkle
+    Pupa. Sources differ on the sheath (one piece, side hanks or three) and on the legs and the
+    head.
     """
 fishing """
     For a caddis hatch, fished dead drift near the bottom, where pupae drift while they fill
-    their sheath with gas, and let swing up at the end of the drift as a rising pupa. The sheath
-    wears away after a few fish.
+    their sheath with gas, and let swing up at the end of the drift as a rising pupa.
     """
 sources {
     "Fly Fishing the Sierra: Deep Sparkle Pupa" url="https://flyfishingthesierra.com/?p=20854"

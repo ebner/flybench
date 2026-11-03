@@ -4,14 +4,14 @@ status draft
 // en description: A black foam shell folded over a peacock herl body, moose hair legs at the sides and a small orange sighter on top.
 description "Ett svart skal av foam vikt över en kropp av påfågelherl, ben av älghår på sidorna och en liten orange markör ovanpå."
 
-// en history: The sources credit no one with it. It is the foam descendant of the folded deer-hair Crowe Beetle, developed and popularised by John Crowe of Johnstown, Pennsylvania. Deer hair wears out quickly, often after a fish or two, while a foam beetle can last through a dozen. None of the sources says when foam took over from deer hair.
+// en history: The sources credit no one with it. Like the older deer-hair Crowe Beetle, which John Crowe of Johnstown, Pennsylvania, described in his 1947 book The Book of Trout Lore, it has a back folded over the body. Folded deer hair wears out quickly, often after a fish or two, while a foam beetle can last through a dozen. None of the sources says when foam took over from deer hair.
 history """
-    Källorna tillskriver den ingen. Den är en ättling i foam till Crowe Beetle, en skalbagge av vikt hjorthår som togs fram och gjordes populär av John Crowe från Johnstown i Pennsylvania. Hjorthår slits fort, ofta efter en fisk eller två, medan en skalbagge av foam kan hålla för ett dussin. Ingen av källorna säger när foam tog över efter hjorthåret.
+    Källorna tillskriver den ingen. Liksom den äldre Crowe Beetle av hjorthår, som John Crowe från Johnstown i Pennsylvania beskrev i sin bok The Book of Trout Lore från 1947, har den en rygg som viks över kroppen. Vikt hjorthår slits fort, ofta efter en fisk eller två, medan en skalbagge av foam kan hålla för ett dussin. Ingen av källorna säger när foam tog över efter hjorthåret.
     """
 
-// en fishing: Fish it close to the banks in summer, when beetles fall in. Let it land with a plop: George Daniel points out that trout lying deep under an undercut bank may feel the impact before they see the fly. The foam keeps it afloat, and the sighter makes the low-riding black fly easier to follow. Beetles are also a standby for panfish.
+// en fishing: Fish it from early summer to the end of the season, along grassy banks and under overhanging trees, where beetles fall or are blown in. Let it land with a plop: George Daniel points out that trout lying deep under an undercut bank may feel the impact before they see the fly. The foam keeps it afloat, and the sighter makes the low-riding black fly easier to follow.
 fishing """
-    Fiska den nära stränderna på sommaren, när skalbaggar ramlar i. Låt den landa med ett plopp: George Daniel påpekar att öring som står djupt in under en urholkad strandkant kan känna nedslaget innan den ser flugan. Foamen håller den flytande, och markören gör den lågt flytande svarta flugan lättare att följa. Skalbaggar är också en självklar fluga för panfish.
+    Fiska den från försommaren till säsongens slut, längs gräsbevuxna stränder och under överhängande träd, där skalbaggar ramlar eller blåser i. Låt den landa med ett plopp: George Daniel påpekar att öring som står djupt in under en urholkad strandkant kan känna nedslaget innan den ser flugan. Foamen håller den flytande, och markören gör den lågt flytande svarta flugan lättare att följa.
     """
 
 labels {

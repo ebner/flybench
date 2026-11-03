@@ -4,24 +4,23 @@ status draft
 // en description: A painted split shot with an eye on each side crimped behind the hook's eye, a long black marabou tail with pearl flash and a black chenille body ribbed with silver wire.
 description "Ett målat hagel med ett öga på varje sida fastklämt bakom öglan, en lång stjärt av svart marabou med pärlemorflash och en kropp av svart chenille ribbad med silvertråd."
 
-// en history: Trevor Housby, the British angling writer, made it in the late 1970s or around 1980, by Michael Jensen's account after American anglers' small jigs, which he turned into a fly for the big stocked rainbows of the reservoirs. A professional tyer, Sid Knight of Bridgnorth, patented the name and dressing in 1984, by a quotation of John Roberts on a forum, and shops still credit it to him; an obituary of Fred J. Taylor says he too had a hand in it. The classic head is a coarse split shot crimped on and glued, painted with a yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins. It was controversial, and banned on some waters.
+// en history: Trevor Housby, a British all-round angler, made it for the big stocked rainbows of the reservoirs. Michael Jensen writes that it was in the 1970s, inspired by the small jigs American spin anglers used on ultralight tackle. Barry Ord Clarke credits Sid Knight, a professional tyer of Bridgnorth, instead. Keith Elliott's obituary of Fred J. Taylor says Taylor too played a key role in inventing it. The classic head is a coarse split shot crimped on and glued, painted with a yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins.
 history """
-    Trevor Housby, den brittiske fiskeskribenten, gjorde den i slutet av 1970-talet eller runt
-    1980, enligt Michael Jensen efter amerikanska fiskares små jiggar, som han gjorde om till en
-    fluga för dammsjöarnas stora utsatta regnbågar. En yrkesbindare, Sid Knight i Bridgnorth,
-    patenterade namnet och bindningen 1984, enligt ett citat av John Roberts på ett forum, och
-    butiker tillskriver den fortfarande honom; en dödsruna över Fred J. Taylor säger att även
-    han hade ett finger med i spelet. Det klassiska huvudet är ett grovt kluvet hagel som kläms
-    fast och limmas, målat med ett gult öga och en svart pupill på varje sida; skallar, koner
-    och hantelögon är moderna ersättare. Den var omstridd och förbjöds i en del vatten.
+    Trevor Housby, en brittisk allroundfiskare, gjorde den för dammsjöarnas stora utsatta
+    regnbågar. Michael Jensen skriver att det var på 1970-talet, inspirerat av de små jiggar som
+    amerikanska spinnfiskare använde på ultralätt utrustning. Barry Ord Clarke tillskriver den
+    i stället Sid Knight, en yrkesbindare i Bridgnorth. Keith Elliotts dödsruna över
+    Fred J. Taylor säger att även Taylor hade en nyckelroll när den kom till. Det klassiska
+    huvudet är ett grovt kluvet hagel som kläms fast och limmas, målat med ett gult öga och en
+    svart pupill på varje sida; skallar, koner och hantelögon är moderna ersättare.
     """
 
-// en fishing: A stillwater lure for stocked rainbows, best in cold early-season water. On a floating line and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded head dives and the marabou rises, so it jigs through the water. Cast it with an open loop: the shot makes it heavy.
+// en fishing: A stillwater lure for stocked rainbows, best early in the season. On a floating line and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded head dives and the marabou rises, so it jigs through the water. Cast it with an open loop: the shot makes it heavy.
 fishing """
-    En sjöfluga för utsatt regnbåge, bäst i kallt vatten tidigt på säsongen. På flytlina och
-    lång tafs, eller sjunklina, med långsamma drag och pauser: vid varje paus dyker det blytunga
-    huvudet och maraboun reser sig, så att den jiggar genom vattnet. Kasta den med öppen ögla:
-    haglet gör den tung.
+    En sjöfluga för utsatt regnbåge, bäst tidigt på säsongen. På flytlina och lång tafs, eller
+    sjunklina, med långsamma drag och pauser: vid varje paus dyker det blytunga huvudet och
+    maraboun reser sig, så att den jiggar genom vattnet. Kasta den med öppen ögla: haglet gör
+    den tung.
     """
 
 labels {

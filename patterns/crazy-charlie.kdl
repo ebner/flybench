@@ -14,12 +14,12 @@ origin originator="Bob Nauheim" year=1977 region="Andros Island, Bahamas"
 description "Bead-chain eyes near the eye, a pearl body under clear ribbing, and a white calf tail wing with a little pearl flash on the hook-point side."
 history """
     Usually credited to Bob Nauheim, who tied the first ones in 1977 on a trip with the Andros
-    guide Charlie Smith and gave them bead-chain eyes to suggest glass minnows. Smith is said to
-    have called it "nasty", so they were first Nasty Charlies; when Leigh Perkins of Orvis put it
-    in the Orvis catalogue he disliked the name, and it was changed with Smith's permission.
-    Other accounts, among them that of Smith's son Prescott, say Charlie Smith made the first
-    ones himself, with beads from military tags and a chicken-feather body. It was the first
-    bonefish fly with bead-chain eyes, whose weight turns it point up.
+    guide Charlie Smith and gave them bead-chain eyes to suggest glass minnows. Smith himself
+    said he first called it the Nasty Charlie; the name was changed to Crazy Charlie when Orvis
+    took the fly up, and Smith agreed to it in writing. Other accounts, among them that of
+    Smith's son Prescott, say Charlie Smith made the first ones himself, with beads from
+    military tags and a chicken-feather body. Its bead-chain eyes are heavy enough to turn it
+    point up.
     """
 fishing """
     Cast a rod length or two ahead of a bonefish and let the fly sink to the bottom. When the
@@ -32,6 +32,8 @@ sources {
     "FlyLife: The Crazy Charlie, a fly with a long history (Skip Clement and Don Reed)" url="https://flylifemagazine.com/fly-tying-tie-the-crazy-charlie-a-fly-with-a-long-history/"
     "Charlie's Fly Box: Crazy Charlie" url="https://charliesflybox.com/blogs/step-by-step-tutorials/crazy-charlie"
     "Into Fly Fishing: How to tie a Crazy Charlie (Pierre Joubert)" url="https://intoflyfishing.com/how-to-tie-a-crazy-charlie/"
+    "FlyLife: 'Crazy' Charlie Smith, as told to John O'Connor (Financial Times Magazine)" url="https://flylifemagazine.com/?p=30180"
+    "Texas Saltwater Fishing: Fly of the Month, Crazy Charlie (Casey Smartt)" url="https://www.texassaltwaterfishingmagazine.com/fishing/by-type/fly-fishing/fly-month-crazy-charlie"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
