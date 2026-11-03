@@ -18,7 +18,7 @@ const kind = (k: MaterialKind) => inLang("sv", () => kindName(k));
 
 export const RULES_SV: RuleCatalog = {
   duplicateMaterial: (p) => `Materialet ”${p.m}” finns med mer än en gång.`,
-  afterWhipFinish: () => "Efter whipfinishknuten kan du bara klippa.",
+  afterWhipFinish: () => "Efter whipfinishknuten kan du bara klippa, eller fästa tråden på nytt.",
   unknownMaterial: (p) => `Det finns inget material som heter ”${p.m}”.`,
   tieOffNext: (p) => `Du har just lindat ”${p.m}”. Fäst och klipp det innan du gör något annat.`,
   securePalmer: (p) => `Du lindade ”${p.m}” bakåt. Lås det genom att linda ett annat material framåt över dess spets.`,
@@ -33,6 +33,9 @@ export const RULES_SV: RuleCatalog = {
   threadThere: () => "Bindtråden är redan där.",
   onlyDubbing: (p) => `Bara dubbing kan dubbas. Bind in ”${p.m}” i stället.`,
   onlyHairSpun: (p) => `Bara hår kan spinnas, inte ”${p.m}”.`,
+  onlyTubing: (p) => `Bara slang träs över kroppen som ett hölje, inte ”${p.m}”.`,
+  tubingSleeve: () => "Slang träs över kroppen som ett hölje; den binds inte in.",
+  sleeveFromThread: () => "Slangen ska nå från tråden till ett annat ställe på krokskaftet.",
   spinForward: () => "Spinn håret framåt från bindtråden.",
   dubNotTie: () => "Dubbing binds inte in: dubba den på bindtråden i stället.",
   beadSlides: () => "En skalle binds inte in: trä på den innan du fäster bindtråden.",
@@ -70,6 +73,7 @@ export const RULES_SV: RuleCatalog = {
   leaveOnly: () => "Att lämna en längd kvar går bara för rotändar av hår, spunnet hår och ryggar av foam.",
   shapeOnly: () => "Att klippa till en form går bara för spunnet hår eller rotändar av hår.",
   neverTiedOff: (p) => `”${p.m}” är lindat men blir aldrig ${p.rear ? "låst" : "fäst"}.`,
+  sleeveOpen: (p) => `”${p.m}” är bara fastbunden i ena änden: bind ner den andra också.`,
   trimTip: (p) => `Spetsen av ”${p.m}” hänger fortfarande vid krokböjen. Klipp bort den.`,
   neverUsedAfterTieIn: (p) => `”${p.m}” är inbundet men lindas aldrig och dras aldrig över.`,
   neverUsed: (p) => `”${p.m}” finns i listan men används aldrig.`,

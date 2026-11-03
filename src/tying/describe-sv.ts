@@ -129,7 +129,7 @@ function writerFor(recipe: Recipe) {
       case "weight":
         return `Linda ${mat(said.m)} i täta ${svNoun(word("turn"), "plural")} ${place(said.from).from} ${place(said.to).to}.`;
       case "attach-thread":
-        return `Fäst ${thread} ${place(said.at).at} med några ${svNoun(word("turn"), "plural")} och klipp av ${def("tag-end")}.`;
+        return `Fäst ${thread}${said.again ? " igen" : ""} ${place(said.at).at} med några ${svNoun(word("turn"), "plural")} och klipp av ${def("tag-end")}.`;
       case "wrap-thread":
         return said.turns
           ? `Linda ${thread} ${place(said.to).to} i ${turns(said.turns, true)}.`
@@ -189,6 +189,14 @@ function writerFor(recipe: Recipe) {
         return `Lägg ${mat(said.m)} bakåt över ${genitive(def("body"))} ovansida ${place(said.to).to}. Nästa lindning håller ${pronoun(noun(said.m)).object} där.`;
       case "spin":
         return `Spinn ${svNoun(word("clump"), "plural")} av ${mat(said.m, "indefinite")} runt ${along} och packa var och en bakåt mot den förra, ${place(said.to).to}.`;
+      case "sleeve": {
+        const fray = said.fray ? ` Repa upp flätan bakom den bakre inbindningen till lösa ${svNoun(word("strand"), "plural")}, ungefär ${length(said.fray)} långa.` : "";
+        return `Trä ${mat(said.m)} över ${def("eye")} och längs ${def("body")} så att ${pronoun(noun(said.m)).subject} når ${place(said.from).from} ${place(said.to).to}, och bind ner den ${said.rear ? "bakre" : "främre"} änden ${place(said.from).at} med hårda ${svNoun(word("turn"), "plural")}.${fray}`;
+      }
+      case "tie-off-sleeve":
+        return said.end === "front"
+          ? `Sträck ${mat(said.m)} hårt över ${def("body")}, bind ner den främre änden med hårda ${svNoun(word("turn"), "plural")} och klipp bort ${excess}.`
+          : `Sträck ${mat(said.m)} hårt över ${def("body")} och bind ner den bakre änden med hårda ${svNoun(word("turn"), "plural")}.`;
       case "dub": {
         const noodle = word("noodle");
         return `Snurra ${article(noodle)} ${noodle.gender === "ett" ? "tunt" : "tunn"} ${noodle.text} av ${mat(said.m, "indefinite")} på ${thread} och linda ${pronoun(noodle).object} ${said.rear ? "bakåt" : "framåt"} ${place(said.to).to}.`;
@@ -218,6 +226,7 @@ function writerFor(recipe: Recipe) {
           ? `Klipp ${svNoun(word("butt"), "plural-definite")} på ${mat(said.m)} och lämna ${article(word("head"))} kort ${word("head").text} på ${length(said.leave)}.`
           : `Klipp ${svNoun(word("butt"), "plural-definite")} på ${mat(said.m)} jäms.`;
       case "whip-finish":
+        if (said.midway) return `Gör ${article(word("whip-finish"))} ${word("whip-finish").text} här med ${turns(said.turns)} och klipp av ${thread}.`;
         return `Forma ${article(word("head"))} ${word("head").gender === "ett" ? "litet" : "liten"} ${word("head").text}, gör ${article(word("whip-finish"))} ${word("whip-finish").text} med ${turns(said.turns)} och klipp av ${thread}.`;
     }
   };

@@ -31,7 +31,7 @@ terrestrial, salmon fly), a copy of any pattern or a bare hook, choose the hook 
 pictures, add parts (tail, tag, body, rib, thorax, back, wing, hackle, legs, eyes, bead,
 weighting…) from a palette, their materials from swatches (yours first) and colours from chips
 or any shade, mix two or three materials in a part, choose how it is tied (wound, palmered, round
-a post, dubbed, spun, pulled over…), and drag its ends and tips on the 3D fly, snapping to the
+a post, dubbed, spun, pulled over, slid over the body as a sleeve…), and drag its ends and tips on the 3D fly, snapping to the
 classic proportions. The chosen parts show in full and the rest faintly; "Watch it tied" plays
 every step. Flybench writes the tying order, the thread's moves and the tie-offs
 (`src/edit/parts.ts`), so the fly always ties; every pattern reads back into parts and ties the

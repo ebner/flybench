@@ -1,0 +1,79 @@
+// Zonker: Dan Byford's streamer, a rabbit strip tied down at the bend and behind the eye over a Mylar tubing body.
+
+id zonker
+name "Zonker"
+aliases "Natural Zonker" "Pearl Zonker"
+type streamer
+imitates baitfish
+naturals fry-minnow sculpin leech
+difficulty intermediate
+species trout sea-trout bass pike
+season april may june september october november
+origin originator="Dan Byford" year=1975 region="Steamboat Springs, Colorado, USA"
+description "A natural rabbit strip lying over a pearl Mylar tubing body, tied down only at the bend and behind the eye, its rear a long fur tail over a short frayed flash tail, with a red throat."
+history """
+    Dan Byford tied the first Zonker in 1975 at Steamboat Springs, Colorado: so his obituary in
+    Fly Fisherman and Fly Fishing the Sierra, while Perrault's and Hellickson's books, as Martin
+    Joergensen cites them, say the mid-1970s. It had a body of Mylar tubing and a wing of dyed
+    rabbit skin, tied down only at the rear and behind the eye. Rabbit-strip flies were older in
+    New Zealand, and Fly Fishing the Sierra counts the Zonker among the American rabbit patterns
+    taken from them. The name now stands for the style too: a strip of fur on the hide tied
+    down at both ends.
+    """
+fishing """
+    A streamer for big trout in rivers and lakes, and for steelhead, sea-run trout, bass and
+    pike: a baitfish or a leech. It is stripped or swung on a sinking line, the weight under
+    the body taking it down, and the rabbit fur moves in the water even when the fly hangs
+    still.
+    """
+sources {
+    "Fly Fisherman: Dan Byford Dies (2011)" url="https://www.flyfisherman.com/editorial/dan-byford-dies/152818"
+    "Fly Fishing the Sierra: Zonker" url="https://flyfishingthesierra.com/streamers/zonker"
+    "Global FlyFisher: Zonker tying (Martin Joergensen)" url="https://globalflyfisher.com/node/14642"
+    "Global FlyFisher: Old school zonkers (Bob Petti)" url="https://globalflyfisher.com/patterns/old-school-zonkers"
+    "Orvis Learning Center: Pearl Zonker" url="https://howtoflyfish.orvis.com/fly-tying-videos/salt-bass-streamer-flies/756-pearl_zonker"
+    "Alaska Fly Fishing Online: Zonker (Brad Hanson)" url="https://alaskaflyfishingonline.com/afb/zonker.html"
+    "Ahrex: Zonkers (Michael Jensen)" url="https://ahrexhooks.com/?p=1763"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/zonkervar7.jpg" page="https://flyfishingthesierra.com/streamers/zonker" license="All rights reserved; reference only" note="Black Zonker with a bead, pearl piping and a red throat, side view in the vise"
+    "https://globalflyfisher.com/sites/default/files/imported_pictures/mink-zonker.jpg" page="https://globalflyfisher.com/node/14642" author="Martin Joergensen" license="All rights reserved; reference only" note="Classical style: a mink strip over pink pearl tubing, the frayed end at the rear tie-down"
+    "https://globalflyfisher.com/sites/default/files/article_pictures/zonkers-4.jpg" page="https://globalflyfisher.com/patterns/old-school-zonkers" author="Bob Petti" license="All rights reserved; reference only" note="Grey rabbit over a white body, red throat"
+}
+
+// Sources: 3XL–4XL streamer hooks, #2–8 (Daiichi 2220, Mustad 9674).
+hook streamer-4xl size=4
+// Heavy thread grips the slippery tubing; Orvis starts red at the rear and black at the head.
+thread black size="3/0"
+
+materials {
+    // Assumption: .025" lead-free wire; the sources give lead tape or lead-free wire, not its size.
+    weight lead-free-wire mm=0.64
+    // Fly Fishing the Sierra: Lite Brite under the piping; others build it of lead tape, thread or yarn.
+    underbody dubbing color=pearl shaggy=0.1 label="Pearl Lite Brite"
+    body mylar-tubing label="Medium pearl Mylar tubing"
+    // Assumption: a strip about 4 mm wide (sources: 1/8", shops sell 3–6 mm).
+    wing rabbit-strip color="#8b8078" mm=4 label="Natural rabbit zonker strip"
+    throat marabou color=red label="Red marabou"
+}
+
+steps {
+    weight weight from=0.35 to=0.75 note="About 15 touching turns, a little forward of the middle."
+    attach-thread at=0.8
+    wrap-thread to=0.06 note="Over the wire, locking it in place."
+    dub underbody to=0.85 note="A thin, even underbody, a little fuller over the wire."
+    wrap-thread to=0.04
+    // Sources: the tubing frayed about 1/4" past the tie-down; about a gape in the photos.
+    sleeve body to=0.9 fray=1 note="Cut it about one and a half shanks long and pull out its core; pull it back as you wrap, so it stretches tight."
+    // Read from the photos: the tail about 1.4 shanks past the rear tie-down.
+    tie-in wing length=3.8 note="Fur up, the hide on top, over the tubing's turns; fold the rest of the strip back out of the way."
+    whip-finish turns=3 note="Glue the turns."
+    attach-thread at=0.9
+    tie-off body note="Keep it short of the eye: the strip and the head go on top."
+    // Fly Fishing the Sierra: red marabou, short of the hook point (Petti: red hen fibres); about 1.4 gapes in the photos.
+    tie-in throat length=1.4 angle=15 side=under
+    pull-over wing to=0.9 note="As tight as it goes, the hide flat along the top of the body."
+    trim wing note="Cut it at an angle."
+    whip-finish note="Varnish the head."
+}

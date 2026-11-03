@@ -384,7 +384,7 @@ export const de: Messages = {
     tiedAs: "Gebunden als",
     way: {
       slide: "Aufgefädelt", weight: "Bleidraht", bunch: "Ein Büschel", wound: "Gewunden", palmered: "Über den Körper gewunden",
-      parachute: "Um den Post", dubbed: "Gedubbt", spun: "Gesponnen und geschnitten", pulled: "Darübergelegt", extended: "Abstehend", thread: "Nur der Faden",
+      parachute: "Um den Post", dubbed: "Gedubbt", spun: "Gesponnen und geschnitten", pulled: "Darübergelegt", extended: "Abstehend", sleeve: "Über den Körper gezogen", thread: "Nur der Faden",
     },
     unavailable: { needsRib: "Braucht eine Rippung, die sie hält", needsPost: "Braucht einen aufrechten Flügel als Post", oneMaterial: "Nur ein Material lässt sich über den Körper zurückwinden" },
     proportions: "Proportionen",
@@ -418,7 +418,7 @@ export const de: Messages = {
     field: {
       length: "Länge", angle: "Winkel über dem Schenkel", spread: "Spreizung zu jeder Seite", width: "Breite", at: "Eingebunden bei", from: "Beginnt bei", to: "Endet bei",
       turns: "Windungen", counter: "In Gegenrichtung gewunden", side: "Wo", sides: { top: "Oben", under: "Unten", across: "Quer über den Schenkel" },
-      forward: "Nach vorn zeigend", tip: "Farbe des Endes", collar: "Länge des Kragens", windTo: "Als Körper gewunden bis",
+      forward: "Nach vorn zeigend", tip: "Farbe des Endes", collar: "Länge des Kragens", windTo: "Als Körper gewunden bis", fray: "Aufgezupfter Schwanz",
       leave: "Stehen gelassen", shape: "Geschnitten zu", shapes: { round: "Einem runden Kopf", wedge: "Einem Keil, unten flach", cigar: "Einer Zigarre, an beiden Enden gerundet", cone: "Einem Kegel, vorn am dicksten" },
       keep: "Behaltene Fibern", keeps: { sides: "An den Seiten", top: "Oben und an den Seiten", under: "Unten und an den Seiten" }, none: "Wie gebunden",
       label: "Dein eigener Name dafür", note: "Deine Notiz, wie man es bindet", fibre: "Fiberlänge", count: "Wie viele", mm: "Größe",
@@ -549,6 +549,7 @@ export const de: Messages = {
         leave: "Stehen lassen (× Bogenweite)",
         bubble: "Locker, eine Blase so hoch (× Bogenweite)",
         wing: "Die Spitzen ein Flügel so lang (× Bogenweite)",
+        fray: "Hinteres Ende so lang aufgezupft (× Bogenweite)",
         shape: "Form",
         keep: "Behalten",
         note: "Deine Notiz",

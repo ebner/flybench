@@ -162,6 +162,14 @@ Hela fjädrar binds in i stjälken; skala först bort fjunet vid basen.`,
 Gör en whipfinishknut och klipp sedan huvudet till form med en vass sax eller ett rakblad.`,
     mistakes: ["Buntar som är för stora för att spinna.", "Att inte packa buntarna, så att huvudet blir löst."],
   },
+  "tubing-body": {
+    name: "Kroppar av mylarslang",
+    summary: "Flätad mylarslang som träs över ögat och längs kroppen som ett hölje och binds ner i båda ändar.",
+    how: `Klipp slangen lite längre än kroppen och dra ut bomullskärnan. Trä den över ögat och bakåt över underkroppen, och bind ner ena änden med hårda varv av stark tråd; dra i slangen medan du lindar, så att den sträcks och följer underkroppen.
+
+Bind ner den andra änden på samma sätt, klipp bort överskottet och limma varven. En uppriven ände blir en kort glitterstjärt: repa upp flätan med en nål.`,
+    mistakes: ["Lösa varv: den hala flätan glider ur dem.", "En slang som är för vid för kroppen, så att den påsar sig i stället för att ligga tätt."],
+  },
   "tie-off": {
     name: "Fästa och klippa",
     summary: "Att fästa ett lindat material framtill med fasta trådvarv och klippa bort överskottet.",

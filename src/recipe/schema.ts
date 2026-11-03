@@ -149,7 +149,7 @@ const Material = z
     label: z.string().min(1).optional(),
     /** herl: number of strands wound together. */
     strands: z.number().int().min(1).max(6).optional(),
-    /** hackle, CDC: fibre (barb) length in gapes; for wound CDC, the longest barbs (near the butt). */
+    /** hackle, CDC: fibre (barb) length in gapes; for wound CDC, the longest barbs (near the butt); fur strips: the fur's length. */
     fibre: GapeLength.optional(),
     /** floss: thread size. */
     size: z.enum(THREAD_SIZES).optional(),
@@ -159,7 +159,7 @@ const Material = z
     sweep: z.number().min(0).max(80).optional(),
     /** dubbing: how rough, from 0 (fine and tight) to 1 (picked out, long guard hairs); overrides the catalog. */
     shaggy: z.number().min(0).max(1).optional(),
-    /** beads, eyes and wire: diameter in millimetres, as they are sold. */
+    /** beads, eyes and wire: diameter in millimetres, as they are sold; fur strips: their width. */
     mm: z.number().min(0.05).max(12).optional(),
   })
   .superRefine((m, ctx) => {
@@ -253,6 +253,19 @@ const Step = z.discriminatedUnion("op", [
     bubble: z.number().min(0).max(1).optional(),
     /** Hair pulled forward: the tips past the tie-down stand up as a divided wing this long (a Humpy). */
     wing: z.number().min(0.3).max(4).optional(),
+    note: Note,
+    mistake: Note,
+  }),
+  /**
+   * Slide braided tubing over the eye and along the body as a sleeve, from the thread to `to`,
+   * and tie it down at the thread; its other end is tied down later with `tie-off`.
+   */
+  z.strictObject({
+    op: z.literal("sleeve"),
+    material: MaterialRef,
+    to: Position,
+    /** The rear end frayed into a short tail of loose strands this long (gapes). */
+    fray: z.number().positive().max(3).optional(),
     note: Note,
     mistake: Note,
   }),

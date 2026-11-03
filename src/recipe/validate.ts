@@ -26,6 +26,10 @@ const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
  * tied off in the next step. A material wound rearward (palmered) ends away from the
  * thread; the next step must wind another material forward over its end to secure it
  * (the classic wire rib through a palmered hackle), and its tip is trimmed later.
+ *
+ * A whip finish part-way through, followed by the thread attached again elsewhere, is allowed
+ * (the rear of a Zonker finished at the bend, the front tied with the thread started again at
+ * the eye); materials waiting to be pulled over or tied down wait across it.
  */
 export function validateSemantics(recipe: Recipe): RecipeError[] {
   const errors: RecipeError[] = [];
@@ -38,7 +42,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     archetypes.set(m.id, MATERIALS[m.kind].archetype);
   });
 
-  type State = "tied-in" | "wound" | "wound-rear" | "secured" | "laid-back" | "done";
+  // `sleeved`: tubing tied down at one end, its other end (`at`) still to be tied off.
+  type State = "tied-in" | "wound" | "wound-rear" | "secured" | "laid-back" | "sleeved" | "done";
   // `wound`: wound round the hook or a post (not pulled over); `kept`: already trimmed with keep;
   // `hanging`: the step that tied it in without a length, so it waits to be wound or pulled over.
   const materials = new Map<
@@ -53,8 +58,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
 
   recipe.steps.forEach((step, i) => {
     const path = ["steps", i];
-    // Trimming after the whip finish is common (heads, hackles); nothing else is.
-    if (finished && step.op !== "trim") {
+    // Trimming after the whip finish is common (heads, hackles), or the thread is started again.
+    if (finished && step.op !== "trim" && step.op !== "attach-thread") {
       rule("afterWhipFinish", {}, path);
       return;
     }
@@ -104,8 +109,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       return;
     }
     if (step.op === "attach-thread") {
-      if (thread !== null) rule("threadAttached", {}, path);
+      if (thread !== null && !finished) rule("threadAttached", {}, path);
       thread = step.at;
+      finished = false;
       return;
     }
     if (thread === null) {
@@ -141,6 +147,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         }
         if (archetype === "bead") {
           rule("beadSlides", {}, [...path, "material"]);
+          break;
+        }
+        if (archetype === "tubing") {
+          rule("tubingSleeve", {}, [...path, "material"]);
           break;
         }
         if (step.forward && archetype === "feather") rule("featherBack", {}, [...path, "forward"]);
@@ -185,11 +195,12 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
             butts: archetype === "hair" && step.side !== "across",
             hanging: step.length === undefined ? i : undefined,
             // Only an upright bunch makes a post a hackle can be wound round: not a feather
-            // pair, an extended body or strands tied across.
+            // pair, an extended body, a fur strip (it sticks out as one piece) or strands tied across.
             post:
               step.length !== undefined &&
               (step.angle ?? 0) >= 60 &&
               archetype !== "feather" &&
+              archetype !== "strip" &&
               !step.extended &&
               step.side !== "across",
           });
@@ -271,13 +282,26 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           }
           m.state = "done";
         }
-        // Foam is cut after it is tied down, flush or leaving a head; other strips are trimmed at once.
-        m.butts = archetype === "foam";
+        // Foam and fur strips are cut after they are tied down (flush, or leaving a head); other
+        // strips are trimmed at once.
+        m.butts = archetype === "foam" || archetype === "strip";
+        break;
+      }
+      case "sleeve": {
+        if (archetype !== "tubing") rule("onlyTubing", { m: step.material }, [...path, "material"]);
+        else if (Math.abs(step.to - thread) <= POSITION_TOLERANCE) rule("sleeveFromThread", {}, [...path, "to"]);
+        else if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, [...path, "material"]);
+        // Tied down at the thread; the end at `to` waits to be tied off.
+        else materials.set(step.material, { state: "sleeved", at: step.to, butts: false });
         break;
       }
       case "tie-off": {
         const m = materials.get(step.material);
-        if (!m || m.state !== "wound") rule("windBeforeTieOff", { m: step.material }, [...path, "material"]);
+        if (m?.state === "sleeved") {
+          // The sleeve's other end, tied down where the thread is.
+          if (Math.abs(m.at - thread) > POSITION_TOLERANCE) rule("threadForPull", { thread, to: m.at }, [...path, "material"]);
+          m.state = "done";
+        } else if (!m || m.state !== "wound") rule("windBeforeTieOff", { m: step.material }, [...path, "material"]);
         else m.state = "done";
         break;
       }
@@ -296,7 +320,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         } else {
           rule("nothingToTrim", { m: step.material }, [...path, "material"]);
         }
-        if (step.leave !== undefined && archetype !== "hair" && archetype !== "foam") {
+        if (step.leave !== undefined && archetype !== "hair" && archetype !== "foam" && archetype !== "strip") {
           rule("leaveOnly", {}, [...path, "leave"]);
         }
         if (step.shape !== undefined && archetype !== "hair") {
@@ -317,6 +341,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   }
   for (const [id, m] of materials) {
     if (m.state === "secured") rule("trimTip", { m: id }, ["steps"]);
+    if (m.state === "sleeved") rule("sleeveOpen", { m: id }, ["steps"]);
     if (m.state === "tied-in" && m.hanging !== undefined) {
       rule("neverUsedAfterTieIn", { m: id }, ["steps", m.hanging, "material"]);
     }

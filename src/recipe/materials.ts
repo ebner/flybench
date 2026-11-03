@@ -23,11 +23,13 @@
  *   bead      beads and cone heads slid onto the hook
  *   eyes      dumbbell and bead-chain eyes
  *   legs      rubber and silicone legs (tied across the shank, or as tails and antennae)
+ *   strip     fur on the hide, cut in strips (zonker strips): a tail, and pulled over the back
+ *   tubing    braided tubing slid over the body as a sleeve (Mylar tubing)
  */
 
 export const ARCHETYPES = [
   "yarn", "herl", "hackle", "dubbing", "wire", "floss", "tinsel", "chenille", "hair",
-  "fibres", "biot", "marabou", "cdc", "flash", "feather", "foam", "bead", "eyes", "legs",
+  "fibres", "biot", "marabou", "cdc", "flash", "feather", "foam", "bead", "eyes", "legs", "strip", "tubing",
 ] as const;
 export type Archetype = (typeof ARCHETYPES)[number];
 
@@ -58,6 +60,10 @@ export interface CatalogMaterial {
   cone?: boolean;
   /** A split shot: crimped onto the shank behind the eye rather than slid on, its eyes painted. */
   shot?: boolean;
+  /** Fur strips: how long the fur on the hide is, in mm (a recipe's `fibre` overrides it, in gapes). */
+  furMm?: number;
+  /** Fur strips: how wide the strip is cut, in mm (a recipe's `mm` overrides it). */
+  widthMm?: number;
 }
 
 export const MATERIALS = {
@@ -172,6 +178,12 @@ export const MATERIALS = {
   // Legs
   "rubber-legs": { name: "round rubber legs", archetype: "legs" },
   "silicone-legs": { name: "silicone legs", archetype: "legs" },
+
+  // Strips and tubing
+  // Assumption: a zonker strip of rabbit is cut about 3 mm wide (Fly Fishing the Sierra: 1/8"), its
+  // fur about 18 mm long (read from photos: it stands a gape or more over the back of a #4).
+  "rabbit-strip": { name: "rabbit zonker strip", archetype: "strip", furMm: 18, widthMm: 3 },
+  "mylar-tubing": { name: "Mylar tubing", archetype: "tubing", defaultColor: "pearl" },
 } satisfies Record<string, CatalogMaterial>;
 
 export type MaterialKind = keyof typeof MATERIALS;
@@ -202,6 +214,8 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   bead: ["mm"],
   eyes: ["mm"],
   legs: ["count"],
+  strip: ["fibre", "mm"],
+  tubing: [],
 };
 
 /** Materials that are wound or applied to the shank rather than sticking out. */

@@ -162,6 +162,14 @@ Ganze Federn werden am Kiel eingebunden; streife vorher den Flaum am Ansatz ab.`
 Mache den Kopfknoten und schneide den Kopf dann mit einer scharfen Schere oder einer Rasierklinge in Form.`,
     mistakes: ["Zu große Büschel, die sich nicht aufspinnen lassen.", "Die Büschel nicht dicht zusammenschieben, sodass der Kopf locker bleibt."],
   },
+  "tubing-body": {
+    name: "Körper aus Mylarschlauch",
+    summary: "Geflochtener Mylarschlauch, über das Öhr und den Körper entlang gezogen und an beiden Enden abgebunden.",
+    how: `Schneide den Schlauch etwas länger als den Körper und ziehe den Baumwollkern heraus. Ziehe ihn über das Öhr und über den Unterkörper zurück und binde ein Ende mit festen Windungen eines starken Fadens ab; zieh beim Wickeln am Schlauch, damit er sich spannt und dem Unterkörper folgt.
+
+Binde das andere Ende genauso ab, schneide den Rest ab und klebe die Windungen. Ein aufgezupftes Ende ergibt einen kurzen Glitzerschwanz: zupfe das Geflecht mit einer Nadel auf.`,
+    mistakes: ["Lockere Windungen: das glatte Geflecht rutscht darunter heraus.", "Ein zu weiter Schlauch, der Falten wirft, statt straff anzuliegen."],
+  },
   "tie-off": {
     name: "Abbinden",
     summary: "Ein gewundenes Material vorn mit festen Fadenwindungen sichern und den Rest abschneiden.",

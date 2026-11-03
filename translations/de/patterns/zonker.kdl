@@ -1,0 +1,59 @@
+id zonker
+status draft
+
+// en description: A natural rabbit strip lying over a pearl Mylar tubing body, tied down only at the bend and behind the eye, its rear a long fur tail over a short frayed flash tail, with a red throat.
+description "Ein naturfarbener Kaninchenstreifen über einem Körper aus perlmuttfarbenem Mylarschlauch, nur am Hakenbogen und hinter dem Öhr abgebunden, hinten ein langer Fellschwanz über einem kurzen aufgezupften Glitzerschwanz, dazu ein roter Bart."
+
+// en history: Dan Byford tied the first Zonker in 1975 at Steamboat Springs, Colorado: so his obituary in Fly Fisherman and Fly Fishing the Sierra, while Perrault's and Hellickson's books, as Martin Joergensen cites them, say the mid-1970s. It had a body of Mylar tubing and a wing of dyed rabbit skin, tied down only at the rear and behind the eye. Rabbit-strip flies were older in New Zealand, and Fly Fishing the Sierra counts the Zonker among the American rabbit patterns taken from them. The name now stands for the style too: a strip of fur on the hide tied down at both ends.
+history """
+    Dan Byford band den ersten Zonker 1975 in Steamboat Springs, Colorado: so sein Nachruf in
+    Fly Fisherman und Fly Fishing the Sierra, während die Bücher von Perrault und Hellickson,
+    wie Martin Joergensen sie zitiert, die Mitte der 1970er nennen. Er hatte einen Körper aus
+    Mylarschlauch und einen Flügel aus gefärbtem Kaninchenfell, nur hinten und hinter dem Öhr
+    abgebunden. Fliegen mit Kaninchenstreifen gab es in Neuseeland schon früher, und Fly Fishing
+    the Sierra zählt den Zonker zu den amerikanischen Kaninchenmustern, die von ihnen übernommen
+    wurden. Der Name steht heute auch für den Stil: ein Fellstreifen auf der Haut, an beiden
+    Enden abgebunden.
+    """
+
+// en fishing: A streamer for big trout in rivers and lakes, and for steelhead, sea-run trout, bass and pike: a baitfish or a leech. It is stripped or swung on a sinking line, the weight under the body taking it down, and the rabbit fur moves in the water even when the fly hangs still.
+fishing """
+    Ein Streamer für große Forellen in Flüssen und Seen, und für Steelhead, Meerforelle,
+    Schwarzbarsch und Hecht: ein Futterfisch oder ein Egel. Er wird an der Sinkschnur
+    eingestrippt oder quer geschwungen; das Gewicht unter dem Körper bringt ihn nach unten, und
+    das Kaninchenfell bewegt sich im Wasser auch dann, wenn die Fliege still steht.
+    """
+
+labels {
+    // en underbody: Pearl Lite Brite
+    underbody "Perlmuttfarbenes Lite Brite"
+    // en body: Medium pearl Mylar tubing
+    body "Mittlerer perlmuttfarbener Mylarschlauch"
+    // en wing: Natural rabbit zonker strip
+    wing "Naturfarbener Zonkerstrip aus Kaninchen"
+    // en throat: Red marabou
+    throat "Rotes Marabou"
+}
+
+notes {
+    // en step 1 (weight weight): About 15 touching turns, a little forward of the middle.
+    step 1 "Etwa 15 dichte Windungen, etwas vor der Mitte."
+    // en step 3 (wrap-thread): Over the wire, locking it in place.
+    step 3 "Über den Draht, damit er festsitzt."
+    // en step 4 (dub underbody): A thin, even underbody, a little fuller over the wire.
+    step 4 "Ein dünner, gleichmäßiger Unterkörper, über dem Draht etwas voller."
+    // en step 6 (sleeve body): Cut it about one and a half shanks long and pull out its core; pull it back as you wrap, so it stretches tight.
+    step 6 "Etwa anderthalb Schenkellängen lang abschneiden und den Kern herausziehen; beim Wickeln nach hinten ziehen, damit er sich spannt."
+    // en step 7 (tie-in wing): Fur up, the hide on top, over the tubing's turns; fold the rest of the strip back out of the way.
+    step 7 "Fell nach oben, die Haut obenauf, über den Windungen des Schlauchs; den Rest des Streifens nach hinten aus dem Weg klappen."
+    // en step 8 (whip-finish): Glue the turns.
+    step 8 "Die Windungen kleben."
+    // en step 10 (tie-off body): Keep it short of the eye: the strip and the head go on top.
+    step 10 "Kurz vor dem Öhr halten: Streifen und Kopf kommen obendrauf."
+    // en step 12 (pull-over wing): As tight as it goes, the hide flat along the top of the body.
+    step 12 "So straff wie möglich, die Haut flach auf der Oberseite des Körpers."
+    // en step 13 (trim wing): Cut it at an angle.
+    step 13 "Schräg abschneiden."
+    // en step 14 (whip-finish): Varnish the head.
+    step 14 "Den Kopf lackieren."
+}

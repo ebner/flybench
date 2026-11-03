@@ -325,7 +325,7 @@ function MoreFields({ part, mat, onChange, onMaterial }: { part: Part; mat: numb
   const f = t.workbench.field;
   const m = part.mats[mat];
   // A setting the part has keeps a value: emptying its field leaves it as it was.
-  const num = (key: "length" | "angle" | "spread" | "width" | "collar" | "windTo", unit: string, step: number, lo: number, hi: number) =>
+  const num = (key: "length" | "angle" | "spread" | "width" | "collar" | "windTo" | "fray", unit: string, step: number, lo: number, hi: number) =>
     part[key] !== undefined && <Num key={key} label={f[key]} value={part[key]} unit={unit} step={step} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v, lo, hi) })} />;
   const shankNum = (key: "at" | "from" | "to", label: FieldKey) =>
     part[key] !== undefined && (
@@ -343,6 +343,7 @@ function MoreFields({ part, mat, onChange, onMaterial }: { part: Part; mat: numb
       {num("spread", deg, 1, 0, 180)}
       {num("width", g, 0.05, 0.05, 3)}
       {num("collar", g, 0.1, 0, 4)}
+      {num("fray", g, 0.1, 0.1, 3)}
       {part.side !== undefined && (
         <label className="wb-field">
           <span>{f.side}</span>

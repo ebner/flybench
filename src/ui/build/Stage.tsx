@@ -29,7 +29,8 @@ const rootOf = (p: Part, L: number) => ({ x: (p.at ?? 0) * L, y: p.side === "und
 function handlesOf(p: Part): Handle[] {
   const out: Handle[] = [];
   const h = t.workbench.handle;
-  if ((p.how === "bunch" || p.how === "extended") && p.length !== undefined && p.side !== "across") {
+  // (A fur strip pulled over the body has its tail, too.)
+  if ((p.how === "bunch" || p.how === "extended" || p.how === "pulled") && p.length !== undefined && p.side !== "across") {
     out.push({
       key: `${p.id}:tip`,
       part: p.id,
@@ -43,7 +44,7 @@ function handlesOf(p: Part): Handle[] {
       },
     });
   }
-  const span = ["wound", "dubbed", "spun", "thread", "pulled", "palmered", "weight"].includes(p.how);
+  const span = ["wound", "dubbed", "spun", "thread", "pulled", "palmered", "weight", "sleeve"].includes(p.how);
   if (span) {
     const k = startKey(p);
     out.push({ key: `${p.id}:from`, part: p.id, what: "from", label: h.from, at: (L) => ({ x: (p[k] ?? 0) * L, y: -0.18 }) });

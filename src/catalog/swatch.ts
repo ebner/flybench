@@ -13,6 +13,8 @@ export function swatchText(kind: MaterialKind, color: string): string {
     color === "natural" ? "" : ` color="${color}"`,
     archetype === "hackle" ? " fibre=1.1" : "",
     archetype === "bead" || archetype === "eyes" ? " mm=3" : "",
+    // A fur strip's fur is long for a small hook: a picture of it, not to scale.
+    archetype === "strip" ? " fibre=1" : "",
   ].join("");
   // A bunch tied in by the middle of the shank, sticking out behind.
   const bunch = ["attach-thread at=0.55", "tie-in m length=1.4 angle=12", ...(archetype === "hair" ? ["trim m leave=0.1"] : [])];
@@ -38,6 +40,8 @@ export function swatchText(kind: MaterialKind, color: string): string {
     foam: ["attach-thread at=0.2", "tie-in m", "wrap-thread to=0.8", "pull-over m to=0.8"],
     bead: ["slide-bead m", "attach-thread at=0.85"],
     eyes: ["attach-thread at=0.8", "tie-in m"],
+    strip: ["attach-thread at=0.25", "tie-in m length=1.2", "wrap-thread to=0.8", "pull-over m to=0.8", "trim m"],
+    tubing: ["attach-thread at=0.15", "sleeve m to=0.85 fray=0.4", "wrap-thread to=0.85", "tie-off m"],
   };
   return [
     `id swatch`,

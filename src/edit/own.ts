@@ -60,7 +60,7 @@ export function ownId(taken: ReadonlySet<string>): string {
 }
 
 /** The rules that say what is still to do rather than what is wrong: an unfinished fly breaks them. */
-export const UNFINISHED: ReadonlySet<RuleKey> = new Set(["neverTiedOff", "trimTip", "neverUsedAfterTieIn", "neverUsed", "endWithWhipFinish"]);
+export const UNFINISHED: ReadonlySet<RuleKey> = new Set(["neverTiedOff", "sleeveOpen", "trimTip", "neverUsedAfterTieIn", "neverUsed", "endWithWhipFinish"]);
 
 export interface DraftCheck {
   /** The fly as it loads, when its values are all in order (it may still be unfinished). */

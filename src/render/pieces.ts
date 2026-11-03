@@ -11,6 +11,7 @@ import {
   type FibreMarks,
   type LegsPiece,
   type Piece,
+  type SleevePiece,
   type WrapsPiece,
 } from "../tying/simulate";
 import type { Surfaces } from "./materials";
@@ -273,7 +274,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) ||
       (piece.keep === "top" && Math.sin(spin) < -0.35) ||
       (piece.keep === "under" && Math.sin(spin) > 0.35) ||
-      (piece.covered !== undefined && px > piece.covered[0] && px < piece.covered[1] && Math.sin(spin) > Math.cos(piece.covered[2] + 0.2));
+      (piece.covered?.some(([from, to, half]) => px > from && px < to && Math.sin(spin) > Math.cos(half + 0.2)) ?? false);
     let dir: THREE.Vector3;
     if (onPost) {
       // Parachute: barbs stand out flat round the post, drooping a little.
@@ -919,12 +920,14 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     const bridged = 0.5 * (sum / 9) + 0.5 * max;
     return min + (bridged - min) * pinch;
   };
-  for (let i = 0; i <= segX; i++) {
-    const x = piece.x0 + ((xEnd - piece.x0) * i) / segX;
+  // Pulled over the belly, the same shape mirrored below the ring's centre.
+  const flip = piece.side === "under" ? -1 : 1;
+  /** The strip's cross-section at x: how high its underside lies, how thick it is, how tightly it is pinched. */
+  const section = (x: number, last = false) => {
     // Pinched down by the thread at the rear tie-in and at the tie-down; a trimmed stub
     // springs back up in front of the tie-down, and the far end is cut.
     let pinch = Math.min(smooth(x - piece.x0, 0, 0.14), smooth(piece.x1 - x, -0.02, 0.1));
-    if (x > piece.x1) pinch = Math.min(smooth(x - piece.x1, 0, 0.08) * 0.9, i === segX ? 0 : 1);
+    if (x > piece.x1) pinch = Math.min(smooth(x - piece.x1, 0, 0.08) * 0.9, last ? 0 : 1);
     let thick = piece.thickness * Math.max(0.12, pinch);
     // Rib turns press it in.
     for (const d of piece.dents) thick *= 1 - 0.45 * Math.exp(-(((x - d) / 0.025) ** 2));
@@ -933,21 +936,54 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     const under = bodyRadius(Math.min(x, piece.x1), Math.min(1, pinch * 1.4)) + piece.lift * Math.max(0.15, Math.min(1, pinch * 1.4)) + arch;
     // It drapes round the circle turns lie on there, raised over what is tied on top.
     const centre = piece.base.ringAt(Math.min(x, piece.x1)).centre;
+    return { under, thick, centre, pinch };
+  };
+  /** A point on its top (or underside) at x, `t` from one edge (-1) to the other (1), in shank-local coordinates. */
+  const surface = (out: THREE.Vector3, x: number, s: ReturnType<typeof section>, t: number, top: boolean) => {
+    const phi = t * piece.halfAngle;
+    const dome = 0.55 + 0.45 * Math.cos((t * Math.PI) / 2);
+    const r = (top ? s.under + s.thick * dome : s.under + s.thick * 0.05) - flip * s.centre;
+    return out.set(x, s.centre + flip * r * Math.cos(phi), r * Math.sin(phi));
+  };
+  for (let i = 0; i <= segX; i++) {
+    const x = piece.x0 + ((xEnd - piece.x0) * i) / segX;
+    const s = section(x, i === segX);
     for (let side = 0; side < 2; side++) {
       for (let j = 0; j <= segT; j++) {
         // Top surface from one edge to the other, then the underside back again.
         const t = side === 0 ? -1 + (2 * j) / segT : 1 - (2 * j) / segT;
-        const phi = t * piece.halfAngle;
-        const dome = 0.55 + 0.45 * Math.cos((t * Math.PI) / 2);
-        // Pulled over the belly, the same shape mirrored below the ring's centre.
-        const flip = piece.side === "under" ? -1 : 1;
-        const r = (side === 0 ? under + thick * dome : under + thick * 0.05) - flip * centre;
-        space.point(v.set(x, centre + flip * r * Math.cos(phi), r * Math.sin(phi)));
+        space.point(surface(v, x, s, t, side === 0));
         positions.push(v.x, v.y, v.z);
-        const shade = feather ? featherShade(x, phi * r) : 1;
+        const r = (side === 0 ? s.under + s.thick * (0.55 + 0.45 * Math.cos((t * Math.PI) / 2)) : s.under + s.thick * 0.05) - flip * s.centre;
+        const shade = feather ? featherShade(x, t * piece.halfAngle * r) : 1;
         colors.push(shade, shade, shade);
       }
     }
+  }
+  // A fur strip's fur stands on its hide, leaning back, thick enough to hide it from the side.
+  let fur: ReturnType<typeof fibreMesh> | null = null;
+  if (piece.fur) {
+    const list: Fibre[] = [];
+    // The fur between the tie-downs and on the excess past the front one are drawn from random
+    // numbers of their own, so trimming the excess leaves the rest of the coat where it was.
+    const coat = (a: number, b: number, salt: number) => {
+      const rand = mulberry32((piece.seed ?? piece.id) * 5039 + salt);
+      const n = Math.round((b - a) * FUR_PER_GAPE);
+      for (let k = 0; k < n; k++) {
+        const x = a + (b - a) * rand();
+        const s = section(x);
+        // Under the thread at the tie-downs the fur is bound flat.
+        if (s.pinch < 0.35) continue;
+        const t = (rand() * 2 - 1) * 0.9;
+        const base = surface(new THREE.Vector3(), x, s, t, true);
+        const phi = t * piece.halfAngle;
+        const outward = new THREE.Vector3(0, flip * Math.cos(phi), Math.sin(phi));
+        list.push(furFibre(rand, (x - piece.x0) / (xEnd - piece.x0), base, BACK, outward, piece.fur!));
+      }
+    };
+    coat(piece.x0, piece.x1, 11);
+    if (xEnd > piece.x1) coat(piece.x1, xEnd, 13);
+    fur = fibreMesh(placeFibres(list, space), surfaces.get("strip", piece.color, true), 0.3, 0.7);
   }
   for (let i = 0; i < segX; i++) {
     for (let j = 0; j < ring; j++) {
@@ -975,16 +1011,42 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     if ("roughness" in material) (material as THREE.MeshStandardMaterial).roughness = 0.35;
   }
   const mesh = new THREE.Mesh(geometry, material);
+  const object = fur ? new THREE.Group().add(mesh, fur.object) : mesh;
   return {
-    object: mesh,
+    object,
     setProgress(u) {
-      mesh.visible = u > 0;
+      object.visible = u > 0;
       geometry.setDrawRange(0, Math.ceil(u * segX) * ring * 6);
+      fur?.setProgress(u);
     },
     dispose() {
       geometry.dispose();
       material.dispose();
+      fur?.dispose();
     },
+  };
+}
+
+// Assumption: rabbit fur is dense: about 700 hairs drawn per gape of strip.
+const FUR_PER_GAPE = 700;
+
+/**
+ * One hair of a fur strip at progress `u`: from `base` on the hide, leaning towards `back` (the
+ * strip's end) and up off the hide along `outward`, curving a little as fur does.
+ */
+function furFibre(rand: () => number, u: number, base: THREE.Vector3, back: THREE.Vector3, outward: THREE.Vector3, fur: number): Fibre {
+  // Assumption: rabbit fur lies back at 15–55° off the hide (photos of Zonkers).
+  const lean = (15 + 40 * rand()) * (Math.PI / 180);
+  const dir = back
+    .clone()
+    .multiplyScalar(Math.cos(lean))
+    .addScaledVector(outward, Math.sin(lean))
+    .add(new THREE.Vector3(0, (rand() - 0.5) * 0.25, (rand() - 0.5) * 0.25))
+    .normalize();
+  const bend = 0.08 + 0.22 * rand();
+  return {
+    u, base, dir, length: fur * (0.55 + 0.55 * rand()), radius: 0.0042, shade: 0.6 + 0.5 * rand(),
+    bend, bendDir: perpendicular(dir, outward.clone().negate(), rand),
   };
 }
 
@@ -1006,7 +1068,93 @@ export function pieceView(piece: Piece, surfaces: Surfaces, space: ShankSpace): 
       return extensionView(piece, surfaces, space);
     case "legs":
       return legsView(piece, surfaces, space);
+    case "sleeve":
+      return sleeveView(piece, surfaces, space);
   }
+}
+
+// Assumption: medium Mylar tubing's braid crosses about every 0.12 gape along a #4, in 16
+// strands each way round.
+const BRAID = { pitch: 0.12, strands: 16 };
+
+/**
+ * Braided tubing over the body: a tube stretched over what is under it, in a diamond weave of
+ * metallic strands, its open end a little loose, its frayed rear end a tuft of loose strands.
+ */
+function sleeveView(piece: SleevePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  const segX = Math.max(60, Math.round((piece.x1 - piece.x0) * 120));
+  const segR = 96;
+  const positions: number[] = [];
+  const colors: number[] = [];
+  const index: number[] = [];
+  const v = new THREE.Vector3();
+  const smooth = THREE.MathUtils.smoothstep;
+  const len = piece.x1 - piece.x0;
+  // Drawn from the eye back, as it is slid on.
+  for (let i = 0; i <= segX; i++) {
+    const x = piece.x1 - (len * i) / segX;
+    const ring = piece.base.ringAt(x);
+    // A loose end stands off what is under it until it is tied down.
+    const fromOpen = piece.open === "front" ? piece.x1 - x : piece.open === "rear" ? x - piece.x0 : Infinity;
+    const loose = 0.035 * (1 - smooth(fromOpen, 0, 0.2));
+    for (let j = 0; j <= segR; j++) {
+      const a = (j / segR) * 2 * Math.PI;
+      const u1 = x / BRAID.pitch + (BRAID.strands * a) / (2 * Math.PI);
+      const u2 = x / BRAID.pitch - (BRAID.strands * a) / (2 * Math.PI);
+      // The grooves between the strands of the two crossing helices.
+      const g = Math.min(Math.abs(Math.sin(Math.PI * u1)), Math.abs(Math.sin(Math.PI * u2)));
+      const ridge = smooth(g, 0, 0.4);
+      const r = ring.radius + piece.thickness * (0.5 + 0.5 * ridge) + loose;
+      space.point(v.set(x, ring.centre + r * Math.cos(a), r * Math.sin(a)));
+      positions.push(v.x, v.y, v.z);
+      const shade = 0.5 + 0.5 * ridge;
+      colors.push(shade, shade, shade);
+    }
+  }
+  for (let i = 0; i < segX; i++) {
+    for (let j = 0; j < segR; j++) {
+      const a = i * (segR + 1) + j;
+      const b = a + segR + 1;
+      index.push(a, b, a + 1, b, b + 1, a + 1);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+  geometry.setIndex(index);
+  geometry.computeVertexNormals();
+  const material = surfaces.get("tubing", piece.color, true);
+  const mesh = new THREE.Mesh(geometry, material);
+  const object = new THREE.Group().add(mesh);
+  let fray: ReturnType<typeof fibreMesh> | null = null;
+  if (piece.fray) {
+    const rand = mulberry32((piece.seed ?? piece.id) * 6131 + 7);
+    const ring = piece.base.ringAt(piece.x0);
+    const list: Fibre[] = [];
+    for (let k = 0; k < 80; k++) {
+      const a = rand() * 2 * Math.PI;
+      const outward = new THREE.Vector3(0, Math.cos(a), Math.sin(a));
+      const r = ring.radius + piece.thickness;
+      const base = new THREE.Vector3(piece.x0 + 0.01, ring.centre + r * Math.cos(a), r * Math.sin(a));
+      const dir = BACK.clone().addScaledVector(outward, 0.15 + 0.35 * rand()).add(new THREE.Vector3(0, (rand() - 0.5) * 0.2, (rand() - 0.5) * 0.2)).normalize();
+      const bend = 0.05 + 0.15 * rand();
+      list.push({ u: 0.95, base, dir, length: piece.fray * (0.55 + 0.5 * rand()), radius: 0.005, shade: 0.8 + 0.3 * rand(), bend, bendDir: perpendicular(dir, outward, rand) });
+    }
+    fray = fibreMesh(placeFibres(list, space), material, 0.9, 1);
+    object.add(fray.object);
+  }
+  return {
+    object,
+    setProgress(u) {
+      object.visible = u > 0;
+      geometry.setDrawRange(0, Math.ceil(u * segX) * segR * 6);
+      fray?.setProgress(u);
+    },
+    dispose() {
+      geometry.dispose();
+      fray?.dispose();
+    },
+  };
 }
 
 /**
@@ -1021,15 +1169,19 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
   const R = piece.thickness;
   // Centre line in shank-local coordinates: back (and up by angle) from the tie-in, sagging slightly.
   const towards = piece.forward ? 1 : -1;
+  // A flat strip (a fur strip's hide) lies on top of what it is tied to; a rope is bound along the
+  // shank, so its centre sits just above the hook wire.
+  const flat = piece.width !== undefined;
   const centre = (t: number) =>
     new THREE.Vector3(
       piece.x + towards * L * t * Math.cos(piece.angle),
-      // It is bound along the shank, so its centre sits just above the hook wire.
-      flip * (piece.radius * 0.4 + R * 0.55 + L * t * Math.sin(piece.angle) - 0.06 * L * t * t),
+      flip * ((flat ? piece.radius + R : piece.radius * 0.4 + R * 0.55) + L * t * Math.sin(piece.angle) - 0.06 * L * t * t),
       0,
     );
   // Full thickness, rounding off over the last part; the very start tucks under the wraps.
   const radiusAt = (t: number) => R * Math.min(1, 0.6 + t * 8) * (t < 0.85 ? 1 : Math.sqrt(Math.max(0, 1 - ((t - 0.85) / 0.15) ** 2)) * 0.9 + 0.1);
+  // Assumption: a strip's end is cut to a point over its last fifth.
+  const halfWidth = (t: number) => (piece.width ?? 0) / 2 * Math.max(0.12, Math.min(1, (1 - t) / 0.2));
   const body = new THREE.Color(piece.color);
   const tip = piece.tip ? new THREE.Color(piece.tip) : body;
   const positions: number[] = [];
@@ -1047,7 +1199,8 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
     const color = body.clone().lerp(tip, mix);
     for (let j = 0; j <= segR; j++) {
       const a = (j / segR) * Math.PI * 2;
-      v.copy(c).addScaledVector(binormal, r * Math.cos(a)).addScaledVector(normal, r * Math.sin(a));
+      // Flat: as thick as it is up and down, as wide as the strip across.
+      v.copy(c).addScaledVector(binormal, (flat ? R : r) * Math.cos(a)).addScaledVector(normal, (flat ? halfWidth(t) : r) * Math.sin(a));
       space.point(v);
       positions.push(v.x, v.y, v.z);
       colors.push(color.r, color.g, color.b);
@@ -1070,7 +1223,27 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
   group.add(new THREE.Mesh(geometry, material));
 
   let fuzz: ReturnType<typeof fibreMesh> | null = null;
-  if (piece.fuzz) {
+  if (piece.fur) {
+    // The fur on a strip's top face, leaning back towards its end; hairs at the edges fall to the
+    // sides and below, so from the side the tail is a plume.
+    const rand = mulberry32((piece.seed ?? piece.id) * 4127 + 3);
+    const list: Fibre[] = [];
+    const n = Math.round(L * FUR_PER_GAPE);
+    for (let k = 0; k < n; k++) {
+      const t = 0.02 + 0.96 * rand();
+      const c = centre(t);
+      const ahead = centre(Math.min(1, t + 0.01)).sub(centre(Math.max(0, t - 0.01))).normalize();
+      const up = Y_AXIS.clone().addScaledVector(ahead, -ahead.y).normalize();
+      const s = rand() * 2 - 1;
+      const phi = s * (Math.PI / 180) * 110;
+      const outward = up.clone().multiplyScalar(Math.cos(phi) * flip).add(new THREE.Vector3(0, 0, Math.sin(phi)));
+      const base = c.clone().addScaledVector(up, R * flip).add(new THREE.Vector3(0, 0, s * halfWidth(t)));
+      // Shorter towards the end, so the tail tapers to a point.
+      list.push(furFibre(rand, t, base, ahead, outward, piece.fur * (1 - 0.5 * t)));
+    }
+    fuzz = fibreMesh(placeFibres(list, space), surfaces.get("strip", piece.color, true), 0.3, 0.7);
+    group.add(fuzz.object);
+  } else if (piece.fuzz) {
     const rand = mulberry32((piece.seed ?? piece.id) * 4111 + 9);
     const list: Fibre[] = [];
     const n = Math.round(L * 900);

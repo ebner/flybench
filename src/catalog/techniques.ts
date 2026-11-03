@@ -174,6 +174,15 @@ Whole feathers are tied in by the stem; strip the fluff from the base first.`,
     mistakes: ["A wing case that slips to one side.", "Pulling so hard the strip splits."],
   },
   {
+    id: "tubing-body",
+    name: "Tubing bodies",
+    summary: "Braided Mylar tubing slid over the eye and along the body as a sleeve, tied down at both ends.",
+    how: `Cut the tubing a little longer than the body and pull out its cotton core. Slide it over the eye and back over the underbody, and tie one end down with tight turns of strong thread; pull the tubing as you wrap, so it stretches tight and follows the underbody.
+
+Tie the other end down the same way, trim the excess and glue the wraps. A frayed end makes a short flash tail: pick the braid apart with a needle.`,
+    mistakes: ["Loose turns: the slippery braid slides out from under them.", "A tube too wide for the body, so it bags instead of lying tight."],
+  },
+  {
     id: "bead-head",
     name: "Bead heads",
     summary: "A metal bead slid onto the hook before the thread, for weight and flash.",
@@ -261,10 +270,13 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       return "spinning-hair";
     case "pull-over":
       return "wing-case";
+    case "sleeve":
+      return "tubing-body";
     case "whip-finish":
       return "whip-finish";
     case "tie-off":
-      return "tie-off";
+      // The other end of a sleeve is part of making the tubing body.
+      return recipe.steps.some((s) => s.op === "sleeve" && s.material === step.material) ? "tubing-body" : "tie-off";
     case "trim": {
       // Spun hair, or hair butts flared round the shank and trimmed to a shape (a head).
       const spun = recipe.steps.some((s) => s.op === "spin" && s.material === step.material);

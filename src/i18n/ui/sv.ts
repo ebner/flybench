@@ -384,7 +384,7 @@ export const sv: Messages = {
     tiedAs: "Bunden som",
     way: {
       slide: "Påträdd", weight: "Vikttråd", bunch: "En tofs", wound: "Lindad", palmered: "Lindad över kroppen",
-      parachute: "Runt posten", dubbed: "Dubbad", spun: "Spunnen och klippt", pulled: "Dragen över", extended: "Utstickande", thread: "Bara tråden",
+      parachute: "Runt posten", dubbed: "Dubbad", spun: "Spunnen och klippt", pulled: "Dragen över", extended: "Utstickande", sleeve: "Trädd över kroppen", thread: "Bara tråden",
     },
     unavailable: { needsRib: "Behöver en ribbning som håller den", needsPost: "Behöver en upprätt vinge som post", oneMaterial: "Bara ett material kan lindas bakåt över kroppen" },
     proportions: "Proportioner",
@@ -418,7 +418,7 @@ export const sv: Messages = {
     field: {
       length: "Längd", angle: "Vinkel över skaftet", spread: "Spridning åt varje sida", width: "Bredd", at: "Inbunden vid", from: "Börjar vid", to: "Slutar vid",
       turns: "Varv", counter: "Lindad åt andra hållet", side: "Var", sides: { top: "Ovanpå", under: "Under", across: "Tvärs över skaftet" },
-      forward: "Pekar framåt", tip: "Färg på änden", collar: "Kragens längd", windTo: "Lindad som kropp till",
+      forward: "Pekar framåt", tip: "Färg på änden", collar: "Kragens längd", windTo: "Lindad som kropp till", fray: "Uppriven stjärt",
       leave: "Lämnas kvar", shape: "Klippt till", shapes: { round: "Ett runt huvud", wedge: "En kil, platt undertill", cigar: "En cigarr, rundad i båda ändar", cone: "En kon, tjockast framtill" },
       keep: "Fibrer kvar", keeps: { sides: "På sidorna", top: "Ovanpå och på sidorna", under: "Under och på sidorna" }, none: "Som bunden",
       label: "Ditt eget namn på den", note: "Din anteckning om hur den binds", fibre: "Fiberlängd", count: "Hur många", mm: "Storlek",
@@ -549,6 +549,7 @@ export const sv: Messages = {
         leave: "Lämna kvar (× krokgap)",
         bubble: "Lös, en bubbla så här hög (× krokgap)",
         wing: "Topparna en vinge så här lång (× krokgap)",
+        fray: "Bakre änden uppriven så här lång (× krokgap)",
         shape: "Form",
         keep: "Behåll",
         note: "Din anteckning",

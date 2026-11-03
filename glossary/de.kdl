@@ -277,6 +277,14 @@ materials {
         source "Rudi Heger: Körpermaterial, Dubbing & Flügel (\"Scud Back\")" url="https://www.rudiheger.eu/zubehoer/fliegenbinden-werkzeuge/koerpermaterial-dubbing-fluegel.html"
         source "Fliegenfischer-Forum: Fliegen-Swap No.38, Kleinkrebse (\"Rückenpanzer: Folie\")" url="https://www.fliegenfischer-forum.de/monspe92.html"
     }
+    noun rabbit-strip "Zonkerstrip" gender=m plural="Zonkerstrips" {
+        note "Tyers keep the English word ('Schwanz: Zonker Strip'); shops also write 'Kaninchenstreifen'. Masculine, as 'der Strip'."
+        source "Barsch-Alarm: Step by Step – Zonker (\"Ein wenig vom Zonkerstrip als Schwänzchen einbinden\")" url="https://www.barsch-alarm.de/community/threads/step-by-step-%E2%80%93-zonker.34051/latest"
+    }
+    noun mylar-tubing "Mylarschlauch" gender=m plural="Mylarschläuche" {
+        note "Braided Mylar tubing slid over a body (the Zonker)."
+        source "Anglerboard: Myelar-Schlauch (\"Den Mylarschlauch kann man ganz einfach mit Daumen und Zeigefinger zusammenquetschen\")" url="https://www.anglerboard.de/threads/myelar-schlauch.49047/"
+    }
     noun split-shot "Schrotblei" gender=n plural="Schrotbleie" {
         note "A split shot crimped on as a head (the Dog Nobbler); shops sell slit 'Bleischrot' as 'Schrotblei'."
         source "eBay: Balzer Schrotblei zum Angeln Sortiment (\"Geschlitztes Bleischrot\")" url="https://www.ebay.de/p/1704664988"
@@ -750,6 +758,9 @@ steps {
     phrase weight "Beschweren"
     phrase pull-over "Nach vorne klappen" {
         source "Fliegenfischer-Forum: Bindeanleitung 02 Maxima Stony (\"Die Körperabdeckung nach vorne klappen und fest einbinden.\")" url="https://www.fliegenfischer-forum.de/fliegen/pleninge.pdf"
+    }
+    phrase sleeve "Schlauch aufziehen" {
+        note "Sliding braided tubing over the body as a sleeve. The verb is my assumption."
     }
     phrase spin "Aufspinnen" {
         note "Spinning deer hair. The verb is my assumption; no page I could open used it for deer hair (one has 'Dubbing anspinnen')."

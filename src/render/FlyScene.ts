@@ -884,7 +884,7 @@ export class FlyScene {
     const spun = new Set<THREE.Object3D>();
     this.build!.steps.forEach((step, i) =>
       step.pieces.forEach((p, j) => {
-        const into = p.type === "wraps" || p.type === "cover" || p.type === "extension" ? bodies : p.type === "bundle" && p.span !== undefined ? spun : null;
+        const into = p.type === "wraps" || p.type === "cover" || p.type === "extension" || p.type === "sleeve" ? bodies : p.type === "bundle" && p.span !== undefined ? spun : null;
         this.stepViews[i]![j]!.piece.object.traverse((o) => into?.add(o));
       }),
     );

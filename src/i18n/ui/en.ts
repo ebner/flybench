@@ -389,7 +389,7 @@ export const en = {
     tiedAs: "Tied as",
     way: {
       slide: "Slid on", weight: "Weighting wire", bunch: "A bunch", wound: "Wound on", palmered: "Palmered over the body",
-      parachute: "Round the post", dubbed: "Dubbed", spun: "Spun and clipped", pulled: "Pulled over", extended: "Sticking out", thread: "The thread only",
+      parachute: "Round the post", dubbed: "Dubbed", spun: "Spun and clipped", pulled: "Pulled over", extended: "Sticking out", sleeve: "Slid over the body", thread: "The thread only",
     },
     unavailable: { needsRib: "Needs a rib to hold it", needsPost: "Needs an upright wing as its post", oneMaterial: "Only one material can be wound back over the body" },
     proportions: "Proportions",
@@ -423,7 +423,7 @@ export const en = {
     field: {
       length: "Length", angle: "Angle above the shank", spread: "Spread to each side", width: "Width", at: "Tied in at", from: "Starts at", to: "Ends at",
       turns: "Turns", counter: "Wound the other way round", side: "Where", sides: { top: "On top", under: "Underneath", across: "Across the shank" },
-      forward: "Pointing forward", tip: "Colour of the end", collar: "Collar length", windTo: "Wound on as the body to",
+      forward: "Pointing forward", tip: "Colour of the end", collar: "Collar length", windTo: "Wound on as the body to", fray: "Frayed tail",
       leave: "Left standing", shape: "Clipped to", shapes: { round: "A round head", wedge: "A wedge, flat underneath", cigar: "A cigar, rounded at both ends", cone: "A cone, full at the front" },
       keep: "Fibres kept", keeps: { sides: "At the sides", top: "On top and at the sides", under: "Underneath and at the sides" }, none: "As tied",
       label: "Your own name for it", note: "Your note on how to tie it", fibre: "Fibre length", count: "How many", mm: "Size",
@@ -554,6 +554,7 @@ export const en = {
         leave: "Leave standing (× gape)",
         bubble: "Loose, a bubble this high (× gape)",
         wing: "Its tips a wing this long (× gape)",
+        fray: "Rear end frayed this long (× gape)",
         shape: "Shape",
         keep: "Keep",
         note: "Your note",

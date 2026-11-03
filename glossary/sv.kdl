@@ -274,6 +274,15 @@ materials {
         note "Product name kept, as the shop does; it describes it as 'ryggsköldsmaterial'. 'Ryggsköld' is the Swedish name of the part, used for the role ('back' → 'rygg')."
         source "Antispinn: Sow-Scud Back 1/8 Wapsi ('Sow-Scud Back är framför allt känt som ryggsköldsmaterial till scuds, märlor och olika nymfer')" url="https://www.antispinn.se/flugbindning/syntetiskt-material-kropp-vinge-ben/sow-scud-back-18-wapsi"
     }
+    noun rabbit-strip "zonkerremsa" gender=en definite="zonkerremsan" plural="zonkerremsor" plural-definite="zonkerremsorna" {
+        note "A strip of rabbit fur on the hide (a zonker strip). Some write 'kaninstrips', but the post found with it was Norwegian."
+        source "Fiskesnack: Flugbindningsmatrial (yoxler: 'kropp av mylarslang och en zonkerremsa ovanpå')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/12461-flugbindningsmatrial"
+    }
+    noun mylar-tubing "mylarslang" gender=en definite="mylarslangen" plural="mylarslangar" plural-definite="mylarslangarna" {
+        note "Braided Mylar tubing slid over a body (the Zonker)."
+        source "Fiskesnack: Flugbindningsmatrial ('kropp av mylarslang')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/12461-flugbindningsmatrial"
+        source "Fiskesnack: Favorit Zonker ('Kroppen ska vara av mylarslang som glittrar')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/10964-favorit-zonker"
+    }
     noun split-shot "hagel" gender=ett definite="haglet" plural="hagel" plural-definite="haglen" {
         note "A split shot crimped on as a head (the Dog Nobbler); anglers' shops sell 'kluvna hagel'."
         source "Sportfish Tackle: IFISH Kluvna hagel Blyfri" url="https://www.sportfishtackle.dk/dk/artiklar/ifish-kluvna-hagel-blyfri.html"
@@ -750,6 +759,9 @@ steps {
         note "'Vik över' (fold over) is what nymph texts say of a wing case ('Vik över vingsäcken'); 'Dra över' fits foam backs and wing cases alike."
     }
     phrase spin "Spinn"
+    phrase sleeve "Trä på slang" {
+        note "Sliding braided tubing over the body as a sleeve, as 'trä på' a bead."
+    }
     phrase attach-thread "Fäst tråden" {
         source "Superpuppan.se: SBS ('Fäst bindtråden')" url="https://superpuppan.se/superpuppansbs"
     }

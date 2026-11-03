@@ -392,7 +392,7 @@ describe("semantic validation", () => {
     ["wind nowhere", VALID_STEPS.replace("to=0.7 turns=8", "to=0.0 turns=8"), /wind it forward or back from there/],
     ["wind past the thread", VALID_STEPS.replace("to=0.7 turns=8", "to=0.9 turns=8"), /the thread is at 0.7/],
     ["tie off straight after winding", VALID_STEPS.replace("tie-off herl", "wrap-thread to=0.8\n tie-off herl"), /must be tied off before anything else/],
-    ["whip finish last", VALID_STEPS + "\n wrap-thread to=0.5", /nothing but trimming can follow the whip finish/],
+    ["whip finish last", VALID_STEPS + "\n wrap-thread to=0.5", /nothing but trimming, or starting the thread again, can follow the whip finish/],
     ["whip finish required", VALID_STEPS.replace("whip-finish", ""), /must end with a whip finish/],
     ["dubbing is not tied in", VALID_STEPS.replace("tie-in herl", "tie-in fur"), /dubbing is applied to the thread/],
     ["only dubbing is dubbed", PALMER_STEPS.replace("dub fur", "dub herl"), /only dubbing can be dubbed/],
@@ -526,6 +526,58 @@ materials {
     it(name, () => {
       const h = name === "beads need a size" ? header.replace("tungsten-bead mm=3.3", "tungsten-bead") : header;
       expect(errorsOf(load(s, h)).join("\n")).toMatch(pattern);
+    });
+  }
+});
+
+describe("sleeves, fur strips and the thread started again", () => {
+  const header = `
+id test
+name "Test"
+type streamer
+difficulty beginner
+hook streamer-4xl size=4
+thread black size="3/0"
+materials {
+    body mylar-tubing
+    wing rabbit-strip color=grey
+    fur hares-ear-dubbing
+    hackle cock-hackle color=brown fibre=1.0
+}
+`;
+  // A Zonker's order: the rear tied and finished at the bend, the front with the thread started again.
+  const steps = `
+    attach-thread at=0.8
+    wrap-thread to=0.04
+    sleeve body to=0.9 fray=1
+    tie-in wing length=3.5
+    whip-finish turns=3
+    attach-thread at=0.9
+    tie-off body
+    pull-over wing to=0.9
+    trim wing
+    whip-finish
+`;
+  const run = (s: string) => load(s, header);
+
+  it("accepts a sleeve tied down at both ends, a strip with a tail pulled over, and a whip finish part-way", () => {
+    const recipe = recipeOf(run(steps));
+    expect(recipe.steps.find((s) => s.op === "sleeve")).toMatchObject({ material: "body", to: 0.9, fray: 1 });
+  });
+
+  const cases: [string, string, RegExp][] = [
+    ["only tubing is slid on", steps.replace("sleeve body", "sleeve wing").replace("tie-in wing length=3.5", "").replace("tie-off body", "tie-off wing").replace("pull-over wing to=0.9\n    trim wing", ""), /only tubing is slid over the body/],
+    ["tubing is not tied in", steps.replace("sleeve body to=0.9 fray=1", "tie-in body"), /tubing is slid over the body with "sleeve"/],
+    ["a sleeve reaches somewhere", steps.replace("sleeve body to=0.9", "sleeve body to=0.05"), /must reach from the thread/],
+    ["its other end is tied down where the thread is", steps.replace("attach-thread at=0.9", "attach-thread at=0.6").replace("pull-over wing to=0.9", "pull-over wing to=0.6"), /the thread is at 0.6; move it to 0.9/],
+    ["its other end is tied down", steps.replace("tie-off body\n", ""), /"body" is tied down at one end only/],
+    ["the thread is attached once at a time", steps.replace("whip-finish turns=3\n", ""), /the thread is already attached/],
+    ["a fur strip is no post", steps.replace("tie-in wing length=3.5", "tie-in wing length=3.5 angle=80\n    tie-in hackle\n    wind hackle around=wing turns=4\n    tie-off hackle"), /must be a bunch tied in upright/],
+    ["nothing but the thread again after a whip finish", steps.replace("attach-thread at=0.9", "tie-in fur"), /nothing but trimming, or starting the thread again/],
+  ];
+  for (const [name, s, pattern] of cases) {
+    it(name, () => {
+      expect(errorsOf(run(s)).join("\n")).toMatch(pattern);
     });
   }
 });

@@ -209,6 +209,14 @@ export interface StepContext {
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
+  /** attach-thread: started again after a whip finish part-way. */
+  again?: boolean;
+  /** whip-finish: part-way, the thread started again later. */
+  midway?: boolean;
+  /** tie-off: tying down a sleeve's other end, its front or its rear. */
+  sleeve?: "front" | "rear";
+  /** sleeve: where the thread is, the end tied down now. */
+  from?: number;
 }
 
 /** What a tie-in takes: a material, a bunch of it, or strands of herl. */
@@ -218,7 +226,7 @@ export type What = { kind: "the"; m: string } | { kind: "bunch"; m: string } | {
 export type Said =
   | { kind: "slide-bead"; m: string; mount: Mount; shot?: boolean }
   | { kind: "weight"; m: string; from: Place; to: Place }
-  | { kind: "attach-thread"; at: Place }
+  | { kind: "attach-thread"; at: Place; again?: boolean }
   | { kind: "wrap-thread"; to: Place; turns?: number }
   | { kind: "tie-in-eyes"; m: string; under: boolean }
   | { kind: "tie-in-extended"; m: string; length: Length; forward: boolean; tip?: string }
@@ -237,6 +245,9 @@ export type Said =
   | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean; wing?: Length; under?: boolean }
   | { kind: "lay-back"; m: string; to: Place; tied?: boolean }
   | { kind: "spin"; m: string; to: Place }
+  /** Tubing slid on as a sleeve from the thread (`from`) to `to`, tied down at the thread: its rear end (`rear`) or its front. */
+  | { kind: "sleeve"; m: string; from: Place; to: Place; rear: boolean; fray?: Length }
+  | { kind: "tie-off-sleeve"; m: string; end: "front" | "rear" }
   | { kind: "dub"; m: string; to: Place; rear: boolean }
   | { kind: "tie-off"; m: string }
   | { kind: "trim-keep"; m: string; keep: "top" | "under" | "sides" }
@@ -244,7 +255,7 @@ export type Said =
   | { kind: "trim-tip"; m: string }
   | { kind: "trim-cover"; m: string; leave?: Length }
   | { kind: "trim-butts"; m: string; leave?: Length }
-  | { kind: "whip-finish"; turns: number };
+  | { kind: "whip-finish"; turns: number; midway?: boolean };
 
 /** The step analysed: what it says, in no language yet. */
 export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said {
@@ -263,7 +274,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
     case "weight":
       return { kind: "weight", m: step.material, from: at(step.from), to: at(step.to) };
     case "attach-thread":
-      return { kind: "attach-thread", at: at(step.at) };
+      return { kind: "attach-thread", at: at(step.at), ...(ctx.again ? { again: true } : {}) };
     case "wrap-thread":
       return { kind: "wrap-thread", to: at(step.to), ...(step.turns ? { turns: step.turns } : {}) };
     case "tie-in": {
@@ -313,9 +324,12 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}), ...(ctx.under ? { under: true } : {}) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to) };
+    case "sleeve":
+      return { kind: "sleeve", m: step.material, from: at(ctx.from ?? 0), to: at(step.to), rear: Boolean(ctx.rear), ...(step.fray ? { fray: len(step.fray) } : {}) };
     case "dub":
       return { kind: "dub", m: step.material, to: at(step.to), rear: Boolean(ctx.rear) };
     case "tie-off":
+      if (ctx.sleeve) return { kind: "tie-off-sleeve", m: step.material, end: ctx.sleeve };
       return { kind: "tie-off", m: step.material };
     case "trim":
       if (ctx.keep) return { kind: "trim-keep", m: step.material, keep: step.keep === "top" ? "top" : step.keep === "under" ? "under" : "sides" };
@@ -324,7 +338,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       if (ctx.cover) return { kind: "trim-cover", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
       return { kind: "trim-butts", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
     case "whip-finish":
-      return { kind: "whip-finish", turns: step.turns };
+      return { kind: "whip-finish", turns: step.turns, ...(ctx.midway ? { midway: true } : {}) };
   }
 }
 
@@ -437,7 +451,7 @@ function englishText(said: Said, recipe: Recipe): string {
     case "weight":
       return `Wrap the ${mat(said.m)} in touching turns from ${at(said.from)} to ${at(said.to)}.`;
     case "attach-thread":
-      return `Attach the thread at ${at(said.at)} with a few turns and trim the tag end.`;
+      return `Attach the thread${said.again ? " again" : ""} at ${at(said.at)} with a few turns and trim the tag end.`;
     case "wrap-thread":
       return said.turns ? `Wrap the thread to ${at(said.to)} in ${countText(said.turns, "open turns")}.` : `Wrap the thread to ${at(said.to)} in touching turns.`;
     case "tie-in-eyes":
@@ -481,6 +495,14 @@ function englishText(said: Said, recipe: Recipe): string {
         : `Lay the ${mat(said.m)} back over the top of the body to ${at(said.to)}. The next winding holds it there.`;
     case "spin":
       return `Spin clumps of ${mat(said.m)} round ${body}, packing each one back against the last, up to ${at(said.to)}.`;
+    case "sleeve": {
+      const fray = said.fray ? ` Pick the braid behind the rear tie-down apart into loose strands, about ${len(said.fray)} long.` : "";
+      return `Slide the ${mat(said.m)} over the eye and along the body so it reaches from ${at(said.from)} to ${at(said.to)}, and tie its ${said.rear ? "rear" : "front"} end down at ${at(said.from)} with tight turns.${fray}`;
+    }
+    case "tie-off-sleeve":
+      return said.end === "front"
+        ? `Stretch the ${mat(said.m)} tight over the body, tie its front end down with tight turns and trim the excess.`
+        : `Stretch the ${mat(said.m)} tight over the body and tie its rear end down with tight turns.`;
     case "dub":
       return `Twist a thin noodle of ${mat(said.m)} onto the thread and wrap it ${said.rear ? "back" : "forward"} to ${at(said.to)}.`;
     case "tie-off":
@@ -505,6 +527,7 @@ function englishText(said: Said, recipe: Recipe): string {
     case "trim-butts":
       return said.leave ? `Trim the butts of the ${mat(said.m)}, leaving a short head ${len(said.leave)} long.` : `Trim the butts of the ${mat(said.m)} flush.`;
     case "whip-finish":
+      if (said.midway) return `Whip finish here with ${countText(said.turns, "turns")} and cut the thread.`;
       return `Form a small head, whip finish with ${countText(said.turns, "turns")} and cut the thread.`;
   }
 }
@@ -513,6 +536,7 @@ const OP_TITLES: Record<Step["op"], string> = {
   "slide-bead": "Slide on bead",
   weight: "Add weight",
   "pull-over": "Pull over",
+  sleeve: "Slide on sleeve",
   spin: "Spin",
   "attach-thread": "Attach thread",
   "wrap-thread": "Wrap thread",
