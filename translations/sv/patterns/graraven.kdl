@@ -1,0 +1,43 @@
+id graraven
+status draft
+
+// en description: A long tail of black fox hair and a rough, shaggy body of grey fox fur, behind a gold bead.
+description "En lång stjärt av svart rävhår och en ruggig, raggig kropp av grått rävhår, bakom en guldskalle."
+
+// en history: John Kärki gave it in Svenskt Fiske in 2023 as one of his three flies for fishing in the mountains, a simple fly of nothing but grey and black fox hair with a gold bead in front to weight it. His one sentence and his photograph are all there is to go on: no originator, hook or tying order is given, and no other source describing it was found. The dressing here follows the photo: a long black tail, the body of grey fox fur dubbed rough to the bead.
+history """
+    John Kärki tog med den i Svenskt Fiske 2023 som en av sina tre flugor för fjällfisket, en
+    enkel fluga av bara grått och svart rävhår med en guldskalle framtill som tyngd. Hans
+    enda mening och hans foto är allt som finns att gå på: varken upphovsman, krok eller
+    bindordning anges, och ingen annan källa som beskriver den har hittats. Bindningen här
+    följer fotot: en lång svart stjärt och en kropp av grått rävhår, dubbad ruggigt fram till
+    skallen.
+    """
+
+// en fishing: Cast upstream, let it sink and mend upstream; strike when the line stops or tightens. Takes also come at the end of the drift, as the line straightens and the nymph rises like a larva or pupa heading for the surface. Kärki has done well with it on summer nights in Norrland.
+fishing """
+    Kasta uppströms, låt den sjunka och laga linan uppströms; mothugg när linan stannar eller
+    sträcks. Hugg kommer också i slutet av driften, när linan sträcks ut och nymfen stiger som
+    en larv eller puppa på väg mot ytan. Kärki har lyckats bra med den under sommarnätter i
+    Norrland.
+    """
+
+labels {
+    // en tail: Black fox hair
+    tail "Svart rävhår"
+    // en body: Grey fox fur with its guard hairs
+    body "Grått rävhår med täckhåren kvar"
+}
+
+notes {
+    // en step 4 (tie-in tail): A generous bunch on top, the underfur combed out.
+    step 4 "En rejäl knippe ovanpå, med underullen utkammad."
+    // en step 5 (trim tail): Cut the butts at an angle and bind them down, for an even underbody.
+    step 5 "Klipp rotändarna snett och bind ner dem, för en jämn underkropp."
+    // en step 6 (dub body): Fur and guard hairs together, rough and thin.
+    step 6 "Underull och täckhår tillsammans, ruggigt och tunt."
+    // en step 8 (dub body): A second layer over the front half, so the body is fuller toward the bead.
+    step 8 "Ett andra lager över den främre halvan, så att kroppen blir fylligare mot skallen."
+    // en step 9 (whip-finish): Behind the bead; pick the fur out all round, so long hairs stand out.
+    step 9 "Bakom skallen; rugga upp håret runt om, så att långa hår sticker ut."
+}

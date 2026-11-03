@@ -60,6 +60,11 @@ materials {
     noun rabbit-dubbing "kanindubbing" gender=en definite="kanindubbingen" mass=#true {
         source "Flugbindning.com: Dubbing (product 'Kanindubbing')" url="https://flugbindning.com/30-dubbing"
     }
+    noun fox-dubbing "rävdubbing" gender=en definite="rävdubbingen" mass=#true {
+        note "Fox body fur used as dubbing; formed like 'kanindubbing'. Kärki writes only 'rävhår' for both the tail and the body of his Gråräven; 'rävdubbing' keeps the two materials apart (fox-hair is 'rävhår')."
+        source "Flugbindning.com: Gråräv kroppshår ('kan användas både som vingar eller som dubbing')" url="https://flugbindning.com/ravhar/900006-grey-fox.html"
+        source "Flugfiske i Norden: Gimåpuppan ('en egen dubbing av rävhår')" url="https://flugfiskeinorden.se/gimapuppan/"
+    }
     noun seals-fur "sälhår" gender=ett definite="sälhåret" mass=#true {
         note "Chosen 'sälhår', the word in the shop and in Swedish dressings (Gimåpuppan, Superpuppan). 'Sälpäls' is a literal translation of seal's fur and also heard; rejected as less usual for the dubbing. Most is a substitute today ('Seals Fur Substitute')."
         source "Flugbindning.com: Dubbing ('Seals Fur Substitute', listed as 'Sälhår')" url="https://flugbindning.com/30-dubbing"
@@ -172,6 +177,10 @@ materials {
     }
     noun synthetic-hair "syntethår" gender=ett definite="syntethåret" mass=#true {
         source "Bojdaspon: Polar Fiber ('Polar Fiber är ett mjukt syntethår')" url="https://www.bojdaspon.se/flugbindning/flash-fiber/fiber/polar-fiber-49384"
+    }
+    noun fox-hair "rävhår" gender=ett definite="rävhåret" mass=#true {
+        source "Flugbindning.com: Rävhår (the shop's category for fox hair)" url="https://flugbindning.com/400252-ravhar"
+        source "Svenskt Fiske: Tre flugor för fjällfisket ('grått- och svart rävhår', John Kärki)" url="https://svensktfiske.se/tre-flugor-for-fjallfisket/"
     }
     noun coq-de-leon "coq de León-fibrer" gender=en definite="coq de León-fibrerna" plural="coq de León-fibrer" plural-definite="coq de León-fibrerna" {
         note "Plural, as pheasant-tail. The name stays Spanish; Swedish dressings write 'Coq de Leon' without the accent ('Stjärt: Coq de Leon, Pardo'). Accent kept to match the English catalog."

@@ -77,6 +77,9 @@ export const MATERIALS = {
   "dry-fly-dubbing": { name: "dry fly dubbing", archetype: "dubbing", shaggy: 0.15 },
   "rabbit-dubbing": { name: "rabbit dubbing", archetype: "dubbing", shaggy: 0.5 },
   "seals-fur": { name: "seal's fur", archetype: "dubbing", shaggy: 0.6 },
+  // Assumption: fox body fur dubbed with its guard hairs in is the roughest of all, long hairs
+  // standing out all round (Kärki's Gråräven).
+  "fox-dubbing": { name: "fox fur dubbing", archetype: "dubbing", defaultColor: "grey", shaggy: 1 },
   dubbing: { name: "dubbing", archetype: "dubbing" },
 
   // Wire
@@ -105,6 +108,8 @@ export const MATERIALS = {
   bucktail: { name: "bucktail", archetype: "hair", fibreWidth: 1.5 },
   "squirrel-tail": { name: "squirrel tail", archetype: "hair", defaultColor: "squirrel" },
   "moose-mane": { name: "moose mane", archetype: "hair", defaultColor: "moose" },
+  // Assumption: fox guard hair is about half as thick as elk or deer hair.
+  "fox-hair": { name: "fox hair", archetype: "hair", fibreWidth: 0.5 },
 
   // Fibres
   "pheasant-tail": { name: "pheasant tail fibres", archetype: "fibres", defaultColor: "pheasant-tail" },

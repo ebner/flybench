@@ -60,6 +60,10 @@ materials {
     noun dry-fly-dubbing "Trockenfliegendubbing" gender=n mass=#true {
         source "AOS: Super Fine Trockenfliegen Dubbing" url="https://www.aos.cc/de/super-fine-trockenfliegen-dubbing.html"
     }
+    noun fox-dubbing "Fuchsdubbing" gender=n mass=#true {
+        note "Fox body fur as dubbing, formed like 'Kaninchendubbing' and 'Seehunddubbing'. No German shop or text naming fox dubbing was found; the Grundlagen page lists fox among the furs tyers use. Kept apart from fox-hair ('Fuchshaar')."
+        source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Fuchsschwanz\" among the natural hairs)" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
+    }
     noun rabbit-dubbing "Kaninchendubbing" gender=n mass=#true {
         note "'Kaninchen' (rabbit), not 'Hase' (hare), which is the hare's ear and mask."
         source "Fliegenfischer-Forum: Fly-Swap No.66, Fasan (\"Körper: Kaninchen Dubbing (Tan)\")" url="https://www.fliegenfischer-forum.de/flyswap66.html"
@@ -171,6 +175,10 @@ materials {
     noun hares-mask-guard-hairs "Hasengranne" gender=f plural="Hasengrannen" {
         note "'Granne' is the guard hair, so these are 'Hasengrannen'. Nearly always plural."
         source "Fliegenfischer-Forum: 10 Bestseller-Nymphen (\"Schwänzchen: Hasengranen\", \"Thorax: ... Hasengranen\")" url="https://www.fliegenfischer-forum.de/monspe22.html"
+    }
+    noun fox-hair "Fuchshaar" gender=n mass=#true {
+        note "The plain compound. The Grundlagen page names 'Fuchsschwanz' and 'Polarfuchs, ein feines Haar' among tying hairs."
+        source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Fuchsschwanz\", \"Gefärbter Polarfuchs, ein feines Haar\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
     noun synthetic-hair "Kunsthaar" gender=n mass=#true {
         note "Rejected: 'Synthetikhaar', which shops also use. 'Kunsthaar' is the plain word."
