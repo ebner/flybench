@@ -122,6 +122,7 @@ function writerFor(recipe: Recipe) {
   return (said: Said): string => {
     switch (said.kind) {
       case "slide-bead":
+        if (said.shot) return `Kläm fast ${mat(said.m)} på skaftet strax bakom ${def("eye")} och limma den; måla den, med ett öga på varje sida.`;
         return said.mount === "tube"
           ? `Trä ${mat(said.m)} på ${genitive(def("tube"))} främre ände.`
           : `Trä ${mat(said.m)} ${said.mount === "hook" ? `runt ${def("bend")} och ` : ""}upp till ${def("eye")}, med det lilla hålet först.`;
@@ -180,6 +181,7 @@ function writerFor(recipe: Recipe) {
         return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)}.`;
       case "pull-over":
         if (said.wing) return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}; res sedan topparna framför inbindningen som en vinge på ungefär ${length(said.wing)} och dela den.`;
+        if (said.under) return `${said.bubble ? "Vik" : "Dra"} ${mat(said.m)} framåt under ${def("body")}${said.bubble ? " som en lös bubbla" : ""} och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         if (said.bubble) return `Vik ${mat(said.m)} framåt över ${def("body")} som en lös bubbla och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
       case "lay-back":

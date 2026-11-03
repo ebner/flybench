@@ -19,6 +19,10 @@ materials {
         source "Fliegenfischer-Forum: Fly-Swap No.35, Einsteigerfliegen (\"grüne Wolle als Tag\")" url="https://www.fliegenfischer-forum.de/monspe87.html"
         source "Fliegenfischer-Forum: 10 Bestseller-Nymphen von Fabian Bastuck (\"Schwänzchen: Rote Wolle\")" url="https://www.fliegenfischer-forum.de/monspe22.html"
     }
+    noun sparkle-yarn "Antronstrang" gender=m plural="Antronstränge" {
+        note "LaFontaine's 'sparkle yarn' is Antron; dressings write 'Antron Strang' or 'Antron Yarn', formed like 'Polystrang'."
+        source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020 (\"Antron Strang rosa\", \"das Antron Yarn einbinden\")" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
+    }
     noun poly-yarn "Polystrang" gender=m plural="Polystränge" {
         note "Chosen: 'Polystrang' (a hank of poly yarn), as in German dressings. Shops keep the English 'Poly Yarn' (AOS: \"Poly Yarn, Flügelmaterial\"); 'Polygarn' turned up only in search snippets, not on a page I could check, so it is not used."
         source "Fliegenfischer-Forum: Alte Klassiker (Rakelhanen: \"Körper: Polystrang\", \"Flügel: Polystrang\")" url="https://www.fliegenfischer-forum.de/klassike.html"
@@ -273,6 +277,10 @@ materials {
         source "Rudi Heger: Körpermaterial, Dubbing & Flügel (\"Scud Back\")" url="https://www.rudiheger.eu/zubehoer/fliegenbinden-werkzeuge/koerpermaterial-dubbing-fluegel.html"
         source "Fliegenfischer-Forum: Fliegen-Swap No.38, Kleinkrebse (\"Rückenpanzer: Folie\")" url="https://www.fliegenfischer-forum.de/monspe92.html"
     }
+    noun split-shot "Schrotblei" gender=n plural="Schrotbleie" {
+        note "A split shot crimped on as a head (the Dog Nobbler); shops sell slit 'Bleischrot' as 'Schrotblei'."
+        source "eBay: Balzer Schrotblei zum Angeln Sortiment (\"Geschlitztes Bleischrot\")" url="https://www.ebay.de/p/1704664988"
+    }
     noun brass-bead "Messingperle" gender=f plural="Messingperlen" {
         note "A gold brass bead is also called 'Goldkopfperle' or 'Goldkopf', but the colour is given separately here."
         source "Fliegenfischer-Forum: Fly-Swap No.66, Fasan (\"Messingperle 2,5 mm\")" url="https://www.fliegenfischer-forum.de/flyswap66.html"
@@ -455,6 +463,12 @@ parts {
     noun body "Körper" gender=m plural="Körper"
     noun cheeks "Wangen" gender=f plural="Wangen" {
         note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
+    }
+    noun sheath "Hülle" gender=f plural="Hüllen" {
+        note "The loose veil of sparkle yarn round a sparkle pupa's body."
+    }
+    noun shell "Schale" gender=f plural="Schalen" {
+        note "A foam strip pulled over the top of the body (the Gurgler)."
     }
     noun underbody "Unterkörper" gender=m plural="Unterkörper" {
         note "What a body is built up on (floss under the Black & Peacock Spider's herl)."

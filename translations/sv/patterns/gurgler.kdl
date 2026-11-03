@@ -1,0 +1,54 @@
+id gurgler
+status draft
+
+// en description: A sparse white bucktail tail with pearl flash, a pearl chenille body under a palmered white saddle hackle, and a white foam shell pulled over the top and left as a lip over the eye.
+description "En gles stjärt av vit bucktail med pärlemorflash, en kropp av pärlemorfärgad crystal chenille under ett vitt sadelhackel lindat över den, och ett skal av vitt skum draget över ovansidan och lämnat som en läpp över öglan."
+
+// en history: Jack Gartside, the Boston tyer and writer, made it on a trip to the Bahamas in 1988 as a topwater fly for jacks, tarpon and snook, from his foam Bass Bug. In his own dressing the same strip of foam does twice: its front part is cupped round the shank and bound into five segments as the body, with a saddle hackle palmered in the grooves, and the rest is pulled forward over it as the shell, the end left sticking out over the eye as a lip. Most tyers today put a chenille or braid body under the shell instead, as here, and some glue a scrap of foam behind the lip to hold it up.
+history """
+    Jack Gartside, flugbindaren och skribenten från Boston, gjorde den på en resa till Bahamas
+    1988 som ytfluga för jacks, tarpon och snook, utifrån sin Bass Bug av skum. I hans egen
+    bindning gör samma skumremsa dubbel tjänst: den främre delen formas runt skaftet och binds i
+    fem segment som kropp, med ett sadelhackel lindat i fårorna, och resten dras framåt över den
+    som skal, med änden kvar som en läpp över öglan. De flesta binder i dag en kropp av chenille
+    eller braid under skalet i stället, som här, och en del limmar en skumbit bakom läppen för
+    att hålla den uppe.
+    """
+
+// en fishing: Stripped in short, sharp pulls the lip digs in and throws water; long, slow pulls wake it, and it can be left still between them. A fly for stripers, blues and albies at dawn and dusk, snook and tarpon round structure, and bass and pike over the weed. It floats on its foam with the body and tail hanging in the film.
+fishing """
+    Dragen med korta, skarpa ryck gräver läppen ner och kastar vatten; långa, långsamma drag får
+    den att lämna ett svall, och den kan få ligga still mellan dem. En fluga för stripers, blues
+    och albies i gryning och skymning, snook och tarpon vid strukturer, och bass och gädda över
+    vegetationen. Den flyter på sitt skum med kroppen och stjärten hängande i ytfilmen.
+    """
+
+labels {
+    // en tail: Sparse white bucktail
+    tail "Gles vit bucktail"
+    // en flash: Pearl Glimmer or Krystal Flash
+    flash "Pärlemorfärgad Glimmer eller Krystal Flash"
+    // en shell: White closed-cell foam, 3 mm
+    shell "Vitt cellskum, 3 mm"
+    // en body: Pearl crystal chenille
+    body "Pärlemorfärgad crystal chenille"
+    // en hackle: White saddle hackle
+    hackle "Vitt sadelhackel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A very sparse bunch.
+    step 3 "En mycket gles knippe."
+    // en step 4 (tie-in flash): Five or six strands on top of the tail.
+    step 4 "Fem eller sex strån ovanpå stjärten."
+    // en step 5 (tie-in shell): A strip about half an inch wide, its end tapered, trailing back over the tail.
+    step 5 "En remsa ungefär en centimeter bred, änden tillspetsad, bakåt över stjärten."
+    // en step 7 (tie-in hackle): By the tip, one side stripped.
+    step 7 "I spetsen, med ena sidan rensad."
+    // en step 11 (wind hackle): Palmered forward over the body.
+    step 11 "Lindat framåt över kroppen."
+    // en step 13 (pull-over shell): Forward over the top, cupping the sides, and tied down snugly behind the eye.
+    step 13 "Framåt över ovansidan, formad runt sidorna, och fast nerbunden bakom öglan."
+    // en step 14 (trim shell): Leave the lip sticking out over the eye, cut straight across or rounded.
+    step 14 "Lämna läppen utstickande över öglan, rakt avklippt eller rundad."
+}

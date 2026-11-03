@@ -136,6 +136,8 @@ export interface BeadPiece extends PieceBase {
   radius: number;
   /** A cone head: its length along the shank (radius is at its wide back end). */
   cone?: number;
+  /** A split shot with an eye painted on each side. */
+  painted?: boolean;
 }
 
 export interface EyesPiece extends PieceBase {
@@ -165,6 +167,10 @@ export interface CoverPiece extends PieceBase {
   stub: number;
   /** Left loose: gapes of air under its middle, arching up between the tie-downs. */
   bubble?: number;
+  /** Pulled over the belly instead of the back. */
+  side?: "under";
+  /** A sparse, translucent veil (sparkle yarn) rather than a solid strip. */
+  veil?: boolean;
   /** 0 = plain, 1 = strongly barred or mottled (turkey). */
   barring: number;
 }
@@ -215,7 +221,7 @@ export type FreeEndPose = {
   strandRadius: number;
   fibreLength?: number;
 } & (
-  | { kind: "rest"; x: number; radius: number; direction: "back-down" | "back-up" | "back-flat" | "forward-flat" | "out"; hideAfter?: number }
+  | { kind: "rest"; x: number; radius: number; direction: "back-down" | "back-up" | "back-flat" | "under-flat" | "forward-flat" | "out"; hideAfter?: number }
   | { kind: "follow"; piece: number }
 );
 
@@ -303,6 +309,7 @@ interface MaterialLook {
   marks?: FibreMarks;
   fibreWidth?: number;
   flue?: boolean;
+  veil?: boolean;
   shaggy?: number;
 }
 
@@ -333,12 +340,12 @@ function barMarks(barring: number): FibreMarks {
 
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   const barring = BARRED[colorName] ?? 0;
   const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, shaggy: m.shaggy ?? cat.shaggy };
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
@@ -478,6 +485,8 @@ export function simulate(recipe: Recipe): Build {
   /** Wound pieces by material, so a hackle can be trimmed after winding. */
   const wound = new Map<string, WrapsPiece>();
   const covers = new Map<string, CoverPiece>();
+  /** Strips tied in underneath, to be pulled over the belly rather than the back. */
+  const underneath = new Set<string>();
   /** Upright posts, for parachute hackles. */
   const posts = new Map<string, { x: number; baseY: number; height: number; radius: number }>();
   /** A palmered material whose tip the next forward wind secures. */
@@ -545,7 +554,8 @@ export function simulate(recipe: Recipe): Build {
         const cone = (MATERIALS[kinds.get(step.material)!.kind] as { cone?: boolean }).cone ? l.strandRadius * 2.3 : undefined;
         const half = cone ? cone / 2 : l.strandRadius * 0.95;
         const x = L - (cone ? cone * 0.45 : l.strandRadius * 0.9);
-        pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius, cone });
+        const shot = (MATERIALS[kinds.get(step.material)!.kind] as { shot?: boolean }).shot;
+        pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius, cone, ...(shot ? { painted: true } : {}) });
         frontLimit = Math.min(frontLimit, x - half);
         span = Math.min(span, frontLimit / 0.97);
         duration = DURATION.bead;
@@ -639,6 +649,7 @@ export function simulate(recipe: Recipe): Build {
         const l = looks.get(step.material)!;
         tiedAt.set(step.material, x);
         tiedAtPosition.set(step.material, threadAt);
+        if (step.side === "under" && step.length === undefined) underneath.add(step.material);
         const side: Side = step.side === "under" ? "under" : "top";
         // On its side of what is already there; its bases spread round the circle turns lie on.
         const radius = side === "under" ? profile.underAt(x) : profile.radiusAt(x);
@@ -708,7 +719,7 @@ export function simulate(recipe: Recipe): Build {
           const next = nextUse(step.material, index);
           const end: FreeEndPose = {
             ...freeEnd(step.material, l), kind: "rest", x, radius,
-            direction: next === "pull-over" ? (step.forward ? "forward-flat" : "back-flat") : l.look === "hackle" ? "back-up" : "back-down",
+            direction: next === "pull-over" ? (step.forward ? "forward-flat" : step.side === "under" ? "under-flat" : "back-flat") : l.look === "hackle" ? "back-up" : "back-down",
           };
           freeEnds.set(step.material, end);
           ends = restingEnds();
@@ -805,25 +816,37 @@ export function simulate(recipe: Recipe): Build {
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
         const thickness = cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
-        const trimmedLater = recipe.steps.slice(index + 1).some((s) => s.op === "trim" && s.material === step.material);
+        const laterTrim = recipe.steps.slice(index + 1).find((s) => s.op === "trim" && s.material === step.material) as Extract<Step, { op: "trim" }> | undefined;
+        const trimmedLater = laterTrim !== undefined;
+        // What sticks out until it is cut is longer than what is left.
+        const untrimmed = Math.max(UNTRIMMED, (laterTrim?.leave ?? 0) + 0.4);
         ctx.trimmedLater = trimmedLater;
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           // A loose bubble wraps further round the sides of what it covers.
           x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
           ...(step.bubble ? { bubble: step.bubble } : {}),
+          ...(underneath.has(step.material) ? { side: "under" as const } : {}),
+          ...(l.veil ? { veil: true } : {}),
           // A strip trimmed later sticks out over the eye until then.
-          dents: [], stub: trimmedLater && !back ? UNTRIMMED : 0,
+          dents: [], stub: trimmedLater && !back ? untrimmed : 0,
           barring: l.barring,
         };
         pieces.push(cover);
         covers.set(step.material, cover);
-        profile = profile.withLayer(from, to, thickness * 0.8, 0.03, false, "top");
+        const coverSide = underneath.has(step.material) ? "under" : "top";
+        profile = profile.withLayer(from, to, thickness * 0.8, 0.03, false, coverSide);
+        // A loose bubble stands off the body in the middle only: nothing at its tie-downs.
+        if (step.bubble) {
+          const q = (to - from) / 4;
+          profile = profile.withLayer(from + q, to - q, step.bubble * 0.5, q, false, coverSide);
+        }
+        if (coverSide === "under") ctx.under = true;
         // Fibres on top of what it covers, wound or dubbed, are pressed flat: from this step on,
         // those wraps are replaced by copies without them, so earlier moments still show them.
         const press = (w: WrapsPiece): WrapsPiece | null => {
           // A loose bubble leaves the fibres under it standing.
-          if (step.bubble) return null;
+          if (step.bubble || underneath.has(step.material)) return null;
           if (!w.fibreLength || w.path !== "travel" || Math.min(w.x0, w.x1) >= to || Math.max(w.x0, w.x1) <= from) return null;
           w.until = time;
           const pressed: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, covered: [from, to, cover.halfAngle], window: [0, 0.0001], until: undefined };

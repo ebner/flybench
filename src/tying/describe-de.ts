@@ -134,6 +134,7 @@ function writerFor(recipe: Recipe) {
   return (said: Said): string => {
     switch (said.kind) {
       case "slide-bead":
+        if (said.shot) return `Klemme ${mat(said.m, "acc")} direkt hinter ${the("eye", "dat")} auf den Schenkel und klebe ${pronoun(noun(said.m)).acc} fest; bemale ${pronoun(noun(said.m)).acc}, mit einem Auge auf jeder Seite.`;
         return said.mount === "tube"
           ? `Schiebe ${mat(said.m, "acc")} auf das vordere Ende ${the("tube", "gen")}.`
           : `Schiebe ${mat(said.m, "acc")} ${said.mount === "hook" ? `um ${the("bend", "acc")} ` : ""}bis zu ${the("eye", "dat")}, das kleine Loch zuerst.`;
@@ -193,6 +194,7 @@ function writerFor(recipe: Recipe) {
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
         if (said.wing) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab; richte dann die Spitzen vor der Abbindung als etwa ${length(said.wing)} hohen Flügel auf und teile ihn.`;
+        if (said.under) return `${said.bubble ? "Klappe" : "Ziehe"} ${mat(said.m, "acc")} ${said.bubble ? "als lockere Blase " : ""}unter ${the("body", "dat")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         if (said.bubble) return `Klappe ${mat(said.m, "acc")} als lockere Blase über ${the("body", "acc")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
       case "lay-back":

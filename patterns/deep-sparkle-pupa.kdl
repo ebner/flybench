@@ -1,0 +1,69 @@
+// Deep Sparkle Pupa: Gary LaFontaine's caddis pupa of 1974, a dubbed body inside a loose, glittering veil of sparkle yarn.
+
+id deep-sparkle-pupa
+name "Deep Sparkle Pupa"
+aliases "LaFontaine Deep Sparkle Pupa" "Sparkle Pupa"
+type nymph
+imitates caddis
+naturals caddis-pupa
+difficulty advanced
+species trout grayling
+season may june july august september
+origin originator="Gary LaFontaine" year=1974 region="Big Hole River, Montana, USA"
+description "A ginger underbody of sparkle yarn and fur inside a loose, translucent sheath of sparkle yarn drawn over the top and the bottom, wood duck legs at the sides and a brown ostrich herl head."
+history """
+    Gary LaFontaine developed it around 1974 after three seasons watching caddis pupae on the
+    Big Hole with scuba gear, and published it in Caddisflies (1981). He found that the air
+    bubbles round a rising pupa make it glitter, and that the new Antron yarn, which he called
+    sparkle yarn, holds air the same way. One sparse strand is tied in on top and one underneath,
+    and after the body is dubbed each is drawn forward loosely so that it stands off the body as
+    a veil the colour shows through. The Deep has no wing or trailing shuck; those belong to the
+    Emergent Sparkle Pupa. Sources differ on the sheath (one piece, side hanks or three) and on
+    the legs and the head.
+    """
+fishing """
+    For a caddis hatch, fished dead drift near the bottom, where pupae drift while they fill
+    their sheath with gas, and let swing up at the end of the drift as a rising pupa. The sheath
+    wears away after a few fish.
+    """
+sources {
+    "Fly Fishing the Sierra: Deep Sparkle Pupa" url="https://flyfishingthesierra.com/?p=20854"
+    "Rocky River TU: Deep Sparkle Caddis Pupa (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/deep-sparkle-caddis-pupa.html"
+    "Mid Hudson TU: LaFontaine's Sparkle Emerger and Deep Sparkle Pupa" url="https://www.midhudsontroutunlimited.org/lafontaines-sparkle-emerger-and-deep-sparkle-pupa"
+    "Orvis Learning Center: Sparkle pupa body" url="https://howtoflyfish.orvis.com/fly-tying-videos/techniques/1269-sparkle_pupa_body"
+    "John Kreft: LaFontaine Sparkle Pupa" url="https://www.johnkreft.com/caddis-fly-patterns/lafontaine-sparkle-pupa/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://images.squarespace-cdn.com/content/v1/57d30061197aea6d03f8b8a5/1483130237692-S7Y7S2B9E61I93QP6062/490_LaFontaine_Deep_Sparkle_Pupa.JPG" page="https://www.midhudsontroutunlimited.org/lafontaines-sparkle-emerger-and-deep-sparkle-pupa" author="Frank Thompson, photo Hans Weilenmann" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/sparpupa.jpg" page="https://flyfishingthesierra.com/?p=20854" license="All rights reserved; reference only" note="Side view, ginger"
+}
+
+hook wet-standard size=14
+thread brown size="8/0"
+
+materials {
+    sheath sparkle-yarn color=cream label="Cream sparkle yarn, one sparse ply"
+    sheath-lower sparkle-yarn color=cream label="Cream sparkle yarn, one sparse ply"
+    body dubbing color=ginger shaggy=0.6 label="Ginger sparkle yarn and fur, chopped and blended"
+    legs wood-duck-flank count=8 label="Lemon wood duck fibres"
+    head ostrich-herl color=brown strands=1
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in sheath note="Combed out sparse, on top, bound down from mid-shank to the bend."
+    tie-in sheath-lower side=under note="The same underneath."
+    // Rocky River TU: to about two-thirds of the shank.
+    dub body to=0.7 note="A tapered cigar."
+    // Rocky River TU: standing off the body by about half its thickness.
+    pull-over sheath to=0.7 bubble=0.2 note="Forward loosely over the top half, two or three loose turns; pick it out with a bodkin into a bubble."
+    pull-over sheath-lower to=0.7 bubble=0.2 note="The same underneath, then tie both off firmly."
+    tie-in legs length=1.4 angle=18 spread=50 side=under note="Three or four fibres a side, low along the flanks to the end of the body."
+    tie-in head
+    wrap-thread to=0.92
+    wind head to=0.92 turns=5
+    tie-off head
+    whip-finish
+}

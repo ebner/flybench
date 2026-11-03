@@ -159,7 +159,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.width !== undefined && archetype !== "feather") {
           rule("widthOnly", {}, [...path, "width"]);
         }
-        if (step.side !== undefined && step.length === undefined && archetype !== "eyes") {
+        // Without a length, side=under only for a strip pulled over the belly later.
+        const pulledLater = recipe.steps.slice(i + 1).some((s) => s.op === "pull-over" && s.material === step.material);
+        if (step.side !== undefined && step.length === undefined && archetype !== "eyes" && !(step.side === "under" && pulledLater)) {
           rule("sideOnly", {}, [...path, "side"]);
         }
         if (step.side === "across" && !ACROSS.includes(archetype!)) {

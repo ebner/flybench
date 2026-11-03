@@ -1,0 +1,73 @@
+// Dog Nobbler: Trevor Housby's leaded marabou lure for reservoir trout, a painted split shot behind the eye.
+
+id dog-nobbler
+name "Dog Nobbler"
+aliases "Nobbler"
+type streamer
+imitates baitfish attractor
+naturals fry-minnow
+difficulty beginner
+species trout
+season march april may june september october november
+origin originator="Trevor Housby" region="England"
+description "A painted split shot with an eye on each side crimped behind the hook's eye, a long black marabou tail with pearl flash and a black chenille body ribbed with silver wire."
+history """
+    Trevor Housby, the British angling writer, made it in the late 1970s or around 1980, by
+    Michael Jensen's account after American anglers' small jigs, which he turned into a fly
+    for the big stocked rainbows of the reservoirs. A professional tyer, Sid Knight of
+    Bridgnorth, patented the name and dressing in 1984, by a quotation of John Roberts on a
+    forum, and shops still credit it to him; an obituary of Fred J. Taylor says he too had a
+    hand in it. The classic head is a coarse split shot crimped on and glued, painted with a
+    yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins.
+    It was controversial, and banned on some waters.
+    """
+fishing """
+    A stillwater lure for stocked rainbows, best in cold early-season water. On a floating line
+    and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded
+    head dives and the marabou rises, so it jigs through the water. Cast it with an open loop:
+    the shot makes it heavy.
+    """
+sources {
+    "Global FlyFisher: Dog Nobbler heads (Michael Jensen)" url="https://globalflyfisher.com/node/71163"
+    "Global FlyFisher: Caramel Tiger Dog Nobbler (Michael Jensen)" url="https://globalflyfisher.com/node/71316"
+    "Global FlyFisher: Nobbler fly tying tutorial (Ívar's Fly Workshop)" url="https://globalflyfisher.com/video/nobbler-fly-tying-tutorial-ivars-fly-workshop"
+    "Sexyloops: Dog Nobbler" url="https://www.sexyloops.com/glossary/dognobbler.shtml"
+    "Fish4Flies: Palmered Eyed Dog Nobbler" url="https://www.fish4flies.com/Lures/Nobblers-and-Leadheads/Palmered-Eyed-Dog-Nobbler-Black"
+    "Fish4Flies: Sid Knight" url="https://www.fish4flies.com/People/Sid-Knight"
+    "Caught by the River: Caught by the Reaper, Fred J. Taylor (Keith Elliott)" url="https://www.caughtbytheriver.net/2008/05/caught-by-the-reaper-8/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/1612-1612_1.jpg" page="https://www.fish4flies.com/Lures/Nobblers-and-Leadheads/Palmered-Eyed-Dog-Nobbler-Black" license="All rights reserved; reference only" flip=#true note="The palmered variant, side view"
+    "https://www.troutflies.co.uk/image/cache/wp/gj/%20ALL%20NEW%20PICS/BOX%205/Dog%20nobbler%20Black-550x550w.webp" page="https://www.troutflies.co.uk/trout-fishing-flies/Lure-streamer-trout-flies/dog-nobbler-fishing-flies" license="All rights reserved; reference only" flip=#true note="Side view"
+}
+
+// Assumption: a long-shank lure hook; the photos show a shank of about three gapes.
+hook nymph-2xl size=10
+thread black size="6/0"
+
+materials {
+    // Assumption: an SSG or AAA shot, a little under a gape across.
+    head split-shot color=black mm=4 label="Split shot, painted black"
+    tail marabou color=black
+    flash krystal-flash count=4 label="Pearl flash"
+    rib silver-wire
+    body chenille color=black
+}
+
+steps {
+    slide-bead head note="Squeeze it on with pliers and glue it; many paint a batch of heads first."
+    attach-thread at=0.82
+    wrap-thread to=0.0
+    // Read from the photos: a little over a shank past the bend.
+    tie-in tail length=3.2 angle=8 spread=40 note="A long, full plume."
+    tie-in flash length=3.0 note="Two strands each side."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.82
+    wind body to=0.82 turns=14 note="Up to the shot."
+    tie-off body
+    wind rib to=0.82 turns=5
+    tie-off rib
+    whip-finish note="Behind the shot."
+}
