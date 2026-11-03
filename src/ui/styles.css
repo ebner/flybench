@@ -790,39 +790,24 @@ select {
   will-change: transform;
 }
 
+/* The label sits clear of the fly (Viewer.tsx places it), a leader line running to its point. */
 .callout span {
+  display: block;
   animation: callout-in 0.35s ease-out;
-  position: absolute;
-  left: 2.2rem;
-  bottom: 1.6rem;
-  /* One line where there is room; Viewer.tsx limits the width, and a long label wraps upwards. */
-  width: max-content;
-  padding: 0 0.35rem;
+  max-width: 16rem;
+  padding: 0.05rem 0.4rem;
   background: color-mix(in srgb, var(--paper) 82%, transparent);
 }
 
-.callout::before {
-  content: "";
+.callout-line {
   position: absolute;
+  top: 0;
   left: 0;
-  bottom: 0;
-  width: 2.4rem;
+  height: 0;
   border-top: 1px solid var(--ink-soft);
   transform-origin: 0 0;
-  transform: rotate(-36deg);
-}
-
-/* Near the right edge the label goes up and to the left instead. */
-.callout.flip span {
-  left: auto;
-  right: 2.2rem;
-}
-
-.callout.flip::before {
-  left: auto;
-  right: 0;
-  transform-origin: 100% 0;
-  transform: rotate(36deg);
+  pointer-events: none;
+  will-change: transform, width;
 }
 
 .viewer-hint {
@@ -846,21 +831,8 @@ select {
   }
 }
 
-/* Below the point instead, where above would run into the view buttons. */
-.callout.below span {
-  bottom: auto;
-  top: 1.6rem;
-}
-
-.callout.below::before {
-  transform: rotate(36deg);
-}
-
-.callout.flip.below::before {
-  transform: rotate(-36deg);
-}
-
-.callout[hidden] {
+.callout[hidden],
+.callout-line[hidden] {
   display: none;
 }
 
@@ -2810,12 +2782,27 @@ select {
   bottom: 0.5rem;
   left: 0;
   right: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0 1rem;
   text-align: center;
   font-size: var(--step--1);
   color: var(--ink-faint);
   pointer-events: none;
+}
+
+.wb-hint p {
+  margin: 0;
+}
+
+/* While parts are chosen, the way back to the whole fly stands out. */
+.wb-whole {
+  pointer-events: auto;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
 }
 
 /* Watching it tied: the step's words and the player over the bottom of the stage. */

@@ -97,6 +97,9 @@ export function Viewer({
   const [unavailable, setUnavailable] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
+  const leader = useRef<HTMLDivElement>(null);
+  /** Which side of the fly the label is on, kept while it fits so it doesn't jump about. */
+  const side = useRef<"above" | "below" | "right" | "left" | "top">("above");
   const toolsRef = useRef<HTMLDivElement>(null);
   const [proportions, setProportions] = useState(false);
   // In the theme's ink, and again when the theme changes.
@@ -132,39 +135,47 @@ export function Viewer({
     }
     s.onFollowChange = (on) => followChange.current(on);
     // Positioned directly each frame, without re-rendering React.
-    s.onAnchor = (point) => {
+    s.onAnchor = (point, fly) => {
       const el = label.current;
-      if (!el) return;
-      el.style.visibility = point ? "" : "hidden";
+      const line = leader.current;
+      if (!el || !line) return;
+      el.style.visibility = line.style.visibility = point ? "" : "hidden";
       if (!point) return;
-      el.style.transform = `translate(${Math.round(point.x)}px, ${Math.round(point.y)}px)`;
-      const text = el.firstElementChild as HTMLElement | null;
-      if (!text) return;
-      // The label's width on one line, measured again whenever it changes.
-      if (text.dataset.for !== text.textContent) {
-        text.style.maxWidth = "none";
-        text.dataset.width = String(text.offsetWidth);
-        text.dataset.for = text.textContent ?? "";
-      }
-      const width = Number(text.dataset.width);
-      // It sits about 3rem to one side of the point. It moves to the other side only when it
-      // doesn't fit where it is and the other side is clearly roomier, so it doesn't jump about
-      // as the thread moves; where it still doesn't fit, it wraps upwards.
-      const right = container.current!.clientWidth - point.x - 48;
-      const left = point.x - 48;
-      const flipped = el.classList.contains("flip");
-      const [here, there] = flipped ? [left, right] : [right, left];
-      const flip = width > here && there > here + 24 ? !flipped : flipped;
-      el.classList.toggle("flip", flip);
-      text.style.maxWidth = `${Math.max(96, flip ? left : right)}px`;
-      // Above the point it would run into a view button over it: put it below.
-      const box = container.current!.getBoundingClientRect();
-      const span = Math.min(width, Math.max(96, flip ? left : right));
-      const [from, to] = flip ? [point.x - 48 - span, point.x - 48] : [point.x + 48, point.x + 48 + span];
-      const buttons = [...(toolsRef.current?.children ?? [])].map((b) => b.getBoundingClientRect());
-      const over = buttons.filter((b) => b.right - box.left > from && b.left - box.left < to);
-      const below = over.some((b) => point.y - 30 - text.offsetHeight < b.bottom - box.top + 4);
-      el.classList.toggle("below", below);
+      // Clear of the fly as tied so far: above it or below it, on the side nearer the point (and
+      // on the side it was, while it fits there), never over the fly; beside the point only
+      // where neither has room. A leader runs from the point to the label.
+      const stage = container.current!.getBoundingClientRect();
+      const W = stage.width;
+      const H = stage.height;
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const margin = 8;
+      const gap = 16;
+      const tools = Math.max(0, ...[...(toolsRef.current?.children ?? [])].map((b) => b.getBoundingClientRect().bottom - stage.top));
+      const clampX = (v: number) => Math.min(W - w - margin, Math.max(margin, v));
+      const clampY = (v: number) => Math.min(H - h - margin, Math.max(tools + margin, v));
+      // Each place it can go, and whether it fits there clear of the fly.
+      const places = {
+        above: fly && { x: clampX(point.x - w / 2), y: fly.top - gap - h, fits: fly.top - gap - h >= tools + margin },
+        below: fly && { x: clampX(point.x - w / 2), y: fly.bottom + gap, fits: fly.bottom + gap + h <= H - margin },
+        right: fly && { x: fly.right + gap, y: clampY(point.y - h / 2), fits: fly.right + gap + w <= W - margin },
+        left: fly && { x: fly.left - gap - w, y: clampY(point.y - h / 2), fits: fly.left - gap - w >= margin },
+        // The fly fills the view (following the action): the band under the buttons.
+        top: { x: clampX(point.x - w / 2), y: tools + margin, fits: true },
+      };
+      const nearer = !fly || point.y <= (fly.top + fly.bottom) / 2 ? "above" : "below";
+      // The band under the buttons is only a last resort: not kept once there is room by the fly again.
+      const order = [...(side.current === "top" ? [] : [side.current]), nearer, nearer === "above" ? "below" : "above", point.x >= (fly ? (fly.left + fly.right) / 2 : W / 2) ? "right" : "left", "right", "left", "top"] as const;
+      side.current = order.find((k) => places[k]?.fits) ?? "top";
+      const { x, y } = places[side.current]!;
+      el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+      // The leader: from the point to the nearest edge of the label.
+      const tx = Math.min(x + w, Math.max(x, point.x));
+      const ty = Math.min(y + h, Math.max(y, point.y));
+      const dx = tx - point.x;
+      const dy = ty - point.y;
+      line.style.width = `${Math.max(0, Math.hypot(dx, dy) - 3)}px`;
+      line.style.transform = `translate(${point.x}px, ${point.y}px) rotate(${Math.atan2(dy, dx)}rad)`;
     };
     scene.current = s;
     return () => {
@@ -285,6 +296,7 @@ export function Viewer({
           )}
         </figure>
       )}
+      <div ref={leader} className="callout-line" style={{ visibility: "hidden" }} hidden={!callout || still !== null} aria-hidden="true" />
       <button
         ref={label}
         className="callout"

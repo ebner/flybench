@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { pieceProgress, stepAt, stepEnd, stepProgress, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
+import { pieceProgress, stepAt, stepEnd, stepProgress, wrapAt, wrapPoint, type Build, type FreeEndPose, type WrapsPiece } from "../tying/simulate";
 import { buildHook } from "./hook";
 import { buildNatural, disposeNatural } from "./natural";
 import type { Natural } from "../recipe/natural";
@@ -210,7 +210,11 @@ export class FlyScene {
   /** Called when the user takes over the camera, which stops following. */
   onFollowChange?: (follow: boolean) => void;
   /** Called every frame with the screen position (CSS pixels) of the current step's anchor. */
-  onAnchor?: (point: { x: number; y: number } | null) => void;
+  /**
+   * Where the step's label points, and the screen box of the fly as tied so far (so the label
+   * can sit clear of it), in CSS pixels; null when there is nothing to label.
+   */
+  onAnchor?: (point: { x: number; y: number } | null, fly?: { left: number; top: number; right: number; bottom: number }) => void;
   /** The builder's focus (the steps shown in full), the meshes made faint and their own materials, the faint copies. */
   private focus: ReadonlySet<number> | null = null;
   private fainted = new Map<THREE.Mesh, THREE.Material>();
@@ -1290,7 +1294,24 @@ export class FlyScene {
       return;
     }
     const { clientWidth: w, clientHeight: h } = this.container;
-    this.onAnchor({ x: ((p.x + 1) / 2) * w, y: ((1 - p.y) / 2) * h });
+    // The fly as far as it is tied, on the screen.
+    const tied = this.stepBounds.slice(0, this.currentStep + 1).reduce((all, b) => all.union(b), this.hookBounds.clone());
+    let box: { left: number; top: number; right: number; bottom: number } | undefined;
+    if (!tied.isEmpty()) {
+      box = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
+      for (const x of [tied.min.x, tied.max.x])
+        for (const y of [tied.min.y, tied.max.y])
+          for (const z of [tied.min.z, tied.max.z]) {
+            const c = new THREE.Vector3(x, y, z).project(this.camera);
+            const sx = ((c.x + 1) / 2) * w;
+            const sy = ((1 - c.y) / 2) * h;
+            box.left = Math.min(box.left, sx);
+            box.right = Math.max(box.right, sx);
+            box.top = Math.min(box.top, sy);
+            box.bottom = Math.max(box.bottom, sy);
+          }
+    }
+    this.onAnchor({ x: ((p.x + 1) / 2) * w, y: ((1 - p.y) / 2) * h }, box);
   }
 
   /** World-space bounds of the visible fly (or of `only` these objects), without the bobbin and loose ends. */
@@ -1491,9 +1512,9 @@ export class FlyScene {
     const p = stepProgress(current, t);
     this.poseThread(current.thread, p);
     this.poseLooseEnds(current.freeEnds, p);
-    // The label's point is where the step leaves its material or thread, for the whole step:
-    // following the tip round each turn would swing the label about while it plays.
-    this.anchor.copy(this.anchorFor(current, 1));
+    // The label points where the step is working: along the shank as the material or thread
+    // goes, on the side facing the viewer, not round each turn, which would swing it about.
+    this.anchor.copy(this.anchorFor(current, p));
     this.showGuide();
   }
 
@@ -1502,14 +1523,32 @@ export class FlyScene {
     // Points on the fly are in its own frame; it may be turned over ("As it swims").
     const world = (v: THREE.Vector3) => this.fly.localToWorld(v);
     const following = step.freeEnds.find((e) => e.kind === "follow");
-    if (following && following.kind === "follow") return world(this.followed(following.piece, p).point);
+    if (following && following.kind === "follow") return world(this.along(following.piece, p));
+    // A material being wound: where the winding has got to.
+    const wound = step.pieces.find((piece) => piece.type === "wraps" && piece.material !== "thread");
+    if (wound) return world(this.along(wound.id, p));
     const box = this.stepBounds[step.index];
     if (step.pieces.some((piece) => piece.type !== "wraps" || piece.material !== "thread") && box && !box.isEmpty()) {
       return box.getCenter(new THREE.Vector3());
     }
-    if (step.thread?.kind === "follow") return world(this.followed(step.thread.piece, p).point);
+    if (step.thread?.kind === "follow") return world(this.along(step.thread.piece, p));
     if (step.thread?.kind === "rest") return world(this.space!.around(step.thread.x, step.thread.radius, 0));
     return this.finished.getCenter(new THREE.Vector3());
+  }
+
+  /** How far along the shank a wraps piece has got at step progress p, on its side facing the viewer. */
+  private along(id: number, p: number): THREE.Vector3 {
+    const piece = this.wraps.get(id);
+    if (!piece) return this.finished.getCenter(new THREE.Vector3());
+    const [a, b] = piece.window;
+    const u = clamp01((p - a) / (b - a));
+    // Round a parachute's post: down the post as the hackle goes, on its side facing the viewer.
+    if (piece.path === "post" && piece.post) {
+      const y = piece.post.y0 + (piece.post.y1 - piece.post.y0) * u;
+      return this.space!.point(new THREE.Vector3(piece.post.x, y, piece.post.radius + piece.strandRadius));
+    }
+    const at = wrapAt(piece, u);
+    return this.space!.around(at.x, at.radius, 0);
   }
 
   /** Where thread or material leaves a wraps piece at step progress p, in world space. */
