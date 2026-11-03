@@ -170,6 +170,15 @@ materials {
         source "Fliegenfischer-Forum: Alte Klassiker (\"Schwanz: graue Hechelfibern\")" url="https://www.fliegenfischer-forum.de/klassike.html"
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Hechelfibern\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
+    noun peacock-sword "Pfauenschwert" gender=n mass=#true {
+        note "The sword feather's fibres ('die Fibern vom Pfauenschwert'); shops sell 'Pfauenschwerter'."
+        source "Rudi Heger: Pfauenschwerter (\"für die Herstellung der berühmten Alexandra Nassfliege\")" url="https://www.rudiheger.eu/pfauenschwerter.html"
+        source "Fliegenfischer-Forum: Fliegenbinde-Swap Klassische Nassfliegen (\"die Fibern vom Pfauenschwert\")" url="https://www.fliegenfischer-forum.de/monspe48.html"
+    }
+    noun wood-duck-flank "Brautentenflanke" gender=f mass=#true {
+        note "Wood duck (Aix sponsa) is 'Brautente'; tyers also keep 'Wood Duck'. 'Brautentenflanke' is formed like the mallard 'Flankenfedern'."
+        source "Fliegenfischer-Forum: Wood Duck (\"Wood Duck (Aix Sponsa, Brautente)\")" url="https://www.fliegenfischer-forum.de/flyfishing/viewtopic.php?f=26227&t=265901"
+    }
     noun golden-pheasant-tippet "Goldfasan-Tippet" gender=n plural="Goldfasan-Tippets" {
         note "Loanword 'Tippet', kept by German tyers; the plural 'Tippets' is the usual form."
         source "Royal Flyfishing: Goldfasan Tippets Mix (\"Goldfasan-Tippets in verschiedenen Längen\")" url="https://www.royalflyfishing-shop.de/fliegenbindematerial/federn/fasanenfedern/goldfasan-tippets-mix.html"
@@ -240,6 +249,10 @@ materials {
     noun starling-quill "Starflügelsegment" gender=n plural="Starflügelsegmente" {
         note "Built like duck-quill. The starling is 'Star' (\"Hechel: Star vom Balg\")."
         source "Fliegenfischer-Forum: Fliegenbinde-Swap #18 und kleiner mit Flügel (\"Starenfedern\", \"Beide Segmente\")" url="https://www.fliegenfischer-forum.de/monsp137.html"
+    }
+    noun hen-pheasant-quill "Fasanenflügelsegment" gender=n plural="Fasanenflügelsegmente" {
+        note "Built like duck-quill; the March Brown swap writes \"Schwinge: Fasanenfeder paarig\" for the hen pheasant quill."
+        source "Fliegenfischer-Forum: Märzbraune (\"Schwinge: Fasanenfeder paarig\")" url="https://www.fliegenfischer-forum.de/monsp111.html"
     }
     noun turkey-quill "Truthahnfedersegment" gender=n plural="Truthahnfedersegmente" {
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Klassische Nassfliegen (\"Aus einem Truthahnfederpaar je ein Segment entnehmen\")" url="https://www.fliegenfischer-forum.de/monspe48.html"
@@ -374,6 +387,8 @@ colours {
         note "The joining form ('Krickenten-'), as it goes before a noun."
     }
     adjective turkey "Truthahn" compound=#true
+    adjective hen-pheasant "Fasanenhennen" compound=#true
+    adjective wood-duck "Brautenten" compound=#true
     adjective badger "Badger" compound=#true {
         note "Hackle shade name, kept in English (\"Hechel: Badger\")."
         source "Der-FliegenBinder: Lachsfliege des Monats 8" url="https://der-fliegenbinder.de/lachsfliege-des-monats-4"
@@ -438,6 +453,9 @@ parts {
     }
     noun belly "Bauch" gender=m plural="Bäuche" genitive="Bauchs"
     noun body "Körper" gender=m plural="Körper"
+    noun cheeks "Wangen" gender=f plural="Wangen" {
+        note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
+    }
     noun underbody "Unterkörper" gender=m plural="Unterkörper" {
         note "What a body is built up on (floss under the Black & Peacock Spider's herl)."
     }

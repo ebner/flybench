@@ -1,0 +1,73 @@
+// Zug Bug: Cliff Zug's peacock nymph of the 1930s, with a sword tail, a silver rib and a short wood duck wing case.
+
+id zug-bug
+name "Zug Bug"
+type nymph
+imitates caddis mayfly attractor
+naturals caddis-larva-free mayfly-nymph-crawling
+difficulty intermediate
+species trout grayling
+season april may june july august september october
+origin originator="Cliff Zug" region="West Lawn, Pennsylvania, USA"
+description "A tail of peacock sword fibres, a cigar-shaped peacock herl body ribbed with oval silver, soft brown hen legs and a short wing case of wood duck flank, clipped square."
+history """
+    Cliff Zug of West Lawn, Pennsylvania, tied it in the 1930s, and it made its name on the
+    streams of the Catskills; in the 1940s Arnold Gingrich spread it through his books after it
+    did well in Yellowstone and the Sierra. A link to the older Kemp Bug is suggested but not
+    shown. The original wing case was lemon wood duck flank, tied in at the head lying flat and
+    clipped short; mallard flank, natural or dyed, is the usual stand-in. Sources differ on the
+    tail, from a gape to a shank long, and on how long the wing case is left.
+    """
+fishing """
+    A peacock nymph that suggests caddis larvae, mayfly nymphs and much else: dead drift near
+    the bottom in slow water, swing it or twitch it, alone or with a second nymph. On lakes it
+    is fished slowly, as a dropper behind a leech.
+    """
+sources {
+    "Orvis Learning Center: Zug Bug" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/658-zug_bug"
+    "SWTU: Zug Bug (Rusty Dunn)" url="https://www.swtu.org/2024/12/03/zug-bug/"
+    "California Fly Fisher: The Zug Bug (Scott Sadil)" url="https://calflyfisher.com/tips-and-techniques/the-zug-bug/"
+    "Rocky River TU: Zug Bug" url="http://www.rockyrivertu.org/zug-bug.html"
+    "Fly Fishing the Sierra: Zug Bug" url="https://flyfishingthesierra.com/zug-bug/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/zug.jpg" page="https://flyfishingthesierra.com/zug-bug/" license="All rights reserved; reference only" note="Side view in the vise"
+    "http://www.rockyrivertu.org/uploads/2/2/6/4/22648242/editor/zug-bug-fotm-09-2107_5.jpg" page="http://www.rockyrivertu.org/zug-bug.html" license="All rights reserved; reference only" note="Side view in the vise; the short wood duck wing case clear"
+}
+
+hook nymph-2xl size=12
+thread black size="8/0"
+
+materials {
+    weight lead-free-wire
+    tail peacock-sword count=8 label="Peacock sword fibres"
+    rib oval-tinsel color=silver label="Small oval silver tinsel"
+    body peacock-herl strands=4
+    // Sadil: fibres about half the shank.
+    hackle hen-hackle color=brown fibre=1.3 sweep=55 label="Soft brown hen hackle"
+    case wood-duck-flank count=30 label="Lemon wood duck flank (or mallard)"
+}
+
+steps {
+    weight weight from=0.25 to=0.8 note="Optional: ten to fifteen turns over two-thirds of the shank."
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Sadil and the Sierra: about half a shank past the bend.
+    tie-in tail length=1.4 angle=8 spread=20 note="Four or five fibres, on top, curving up."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.86
+    wind body to=0.86 turns=9 note="Twisted into a rope; a cigar, fuller in the middle and front."
+    tie-off body
+    wind rib to=0.86 turns=4 counter=#true note="Four or five open turns."
+    tie-off rib
+    tie-in hackle
+    wrap-thread to=0.88
+    wind hackle to=0.88 turns=2 note="Sparse; sweep the fibres back and down as legs."
+    tie-off hackle
+    trim hackle keep=under note="Trim the fibres on top, leaving them at the sides and underneath."
+    // Sadil: clipped to about a third of the body; SWTU: a third to a half.
+    tie-in case length=0.9 angle=10 spread=30 note="Fluff stripped, tied in by the stem at the head, flat on top; clip it square."
+    whip-finish
+}

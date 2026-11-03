@@ -1,0 +1,37 @@
+id march-brown-spider
+status draft
+
+// en description: A slim hare's ear body ribbed with gold wire under a collar of brown partridge, with an orange silk head.
+description "Ein schlanker Körper aus Hasenohr mit Golddrahtrippung unter einem Kragen aus braunem Rebhuhn, mit einem Kopf aus orange Seide."
+
+// en history: The hackled March Brown is as old as the winged one: Pritt (1885) gives one hackled with a woodcock feather, "very useful on cold, rough days". The spider tied today, in Sylvester Nemes's The Soft-Hackled Fly (1975) and Andrew Overend's list of North Country spiders, has no wing or tail: hare's face fur ribbed with narrow gold, a brown partridge hackle and orange silk.
+history """
+    Die gehechelte March Brown ist so alt wie die geflügelte: Pritt (1885) gibt eine mit einer
+    Waldschnepfenfeder gehechelte, „sehr nützlich an kalten, rauen Tagen“. Die heute gebundene
+    Spider, in Sylvester Nemes' The Soft-Hackled Fly (1975) und Andrew Overends Liste der North-
+    Country-Spiders, hat weder Flügel noch Schwanz: Fell vom Hasengesicht mit feinem Gold
+    gerippt, eine braune Rebhuhnhechel und orange Seide.
+    """
+
+// en fishing: Upstream or across on a short line, in the film or just under it, during the March Brown hatch and through the spring; the soft partridge breathes in the current like the legs of a hatching dun. Often fished in a team with other spiders.
+fishing """
+    Stromauf oder quer an kurzer Schnur, im Film oder knapp darunter, während des Schlupfs der
+    Märzbraunen und durch das Frühjahr; die weiche Rebhuhnhechel atmet in der Strömung wie die
+    Beine einer schlüpfenden Eintagsfliege. Oft in einem Vorfach mit anderen Spiders gefischt.
+    """
+
+labels {
+    // en hackle: Brown partridge back feather
+    hackle "Rückenfeder vom braunen Rebhuhn"
+}
+
+notes {
+    // en step 4 (dub body): Thin and sparse.
+    step 4 "Dünn und spärlich."
+    // en step 7 (tie-in hackle): By the tip, fluff stripped.
+    step 7 "An der Spitze, die Daunen entfernt."
+    // en step 9 (wind hackle): One or two turns, stroking the barbs back.
+    step 9 "Eine oder zwei Windungen, die Fibern nach hinten streichen."
+    // en step 11 (whip-finish): A small orange head.
+    step 11 "Ein kleiner oranger Kopf."
+}

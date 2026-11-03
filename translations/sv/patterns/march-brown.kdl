@@ -1,0 +1,51 @@
+id march-brown
+status draft
+
+// en description: A partridge tail, a hare's ear body ribbed with gold wire, a brown partridge throat and a low wing of hen pheasant quill.
+description "En stjärt av rapphönsfibrer, en kropp av haröra ribbad med guldtråd, ett skägg av brun rapphöna och en låg vinge av fasanhönspenna."
+
+// en history: One of the oldest trout flies. Berners' "donne flye" of 1496 has a body of dun wool and partridge wings, Chetham printed a "Moorish Brown" in 1681, and Bowlker gave a March Brown of hare's ear ribbed with yellow silk under partridge or pheasant wings. The dressing tied today is close to T. E. Pritt's in Yorkshire Trout Flies (1885): a forked partridge tail, hare's ear and a little yellow mohair ribbed with yellow silk, partridge legs and a hen pheasant wing, "indispensable on fair days through March and April". Shops now rib it with gold; Pritt's hackled version, without a wing, is the March Brown Spider. It copies Rhithrogena in Europe; in America the name went to another mayfly.
+history """
+    En av de äldsta öringflugorna. Berners ”donne flye” från 1496 har en kropp av brun ull och
+    vingar av rapphöna, Chetham tryckte en ”Moorish Brown” 1681, och Bowlker gav en March Brown
+    av haröra ribbad med gult silke under vingar av rapphöna eller fasan. Bindningen i dag
+    ligger nära T. E. Pritts i Yorkshire Trout Flies (1885): en kluven stjärt av rapphöna,
+    haröra och lite gul mohair ribbad med gult silke, ben av rapphöna och en vinge av fasanhöna,
+    ”oumbärlig på vackra dagar genom mars och april”. Butikerna ribbar den nu med guld; Pritts
+    hacklade version utan vinge är March Brown Spider. Den efterliknar Rhithrogena i Europa; i
+    Amerika gick namnet till en annan dagslända.
+    """
+
+// en fishing: Fished across and down, or upstream on a short line, during the March Brown hatch in spring, when the duns are drowned or struggling in the film; through the season it is a general searching wet fly, a hare's ear with a wing. Pritt fished it on Yorkshire rivers and on Loch Leven.
+fishing """
+    Fiskas snett nedströms, eller uppströms på kort lina, under March Brown-kläckningen på
+    våren, när dagsländorna drunknar eller kämpar i ytfilmen; under säsongen är den en allmän
+    avsökande våtfluga, en haröra med vinge. Pritt fiskade den i Yorkshires älvar och på Loch
+    Leven.
+    """
+
+labels {
+    // en tail: Partridge tail fibres
+    tail "Fibrer från rapphönans stjärt"
+    // en hackle: Brown partridge back feather
+    hackle "Ryggfjäder från brun rapphöna"
+    // en wings: Hen pheasant quill slips
+    wings "Sektioner av fasanhönsvingpenna"
+}
+
+notes {
+    // en step 3 (tie-in tail): A few fibres; Pritt forks two.
+    step 3 "Några få fibrer; Pritt klyver två."
+    // en step 5 (dub body): Sparse and slightly tapered, leaving room for the hackle, wing and head.
+    step 5 "Glest och lätt avsmalnande, med plats för hackel, vinge och huvud."
+    // en step 6 (wind rib): Four or five open turns.
+    step 6 "Fyra eller fem glesa varv."
+    // en step 8 (tie-in hackle): By the tip, curved side forward.
+    step 8 "I spetsen, den välvda sidan framåt."
+    // en step 10 (wind hackle): One or two turns.
+    step 10 "Ett eller två varv."
+    // en step 12 (trim hackle): Pull the fibres down and back under the shank as a throat, and bind them there.
+    step 12 "Dra fibrerna ner och bakåt under skaftet som ett skägg och bind fast dem där."
+    // en step 13 (tie-in wings): Matched slips from a left and a right quill, low over the body, with a pinch and loop.
+    step 13 "Två lika sektioner från en vänster- och en högerpenna, lågt över kroppen, med en lös loop."
+}

@@ -269,6 +269,17 @@ describe("a fly built of parts", () => {
     expect(pieces(again)).toEqual(pieces(moved));
   });
 
+  it("keeps a Humpy's hump pulled over, with its tip wing, when its colour changes", () => {
+    let fly = startFrom(byId("humpy"))!;
+    const hump = fly.parts.find((p) => p.how === "pulled")!;
+    expect(hump.tipWing).toBe(2);
+    fly = setMaterial(fly, hump.id, 0, { color: "brown" });
+    const after = fly.parts.find((p) => p.id === hump.id)!;
+    expect(after.how).toBe("pulled");
+    expect(after.tipWing).toBe(2);
+    expect(compile(fly).problems.map((p) => p.message)).toEqual([]);
+  });
+
   it("names a mix of two-word colours by position, so it reads back", () => {
     let fly = startFrom(byId("grey-duster"))!;
     const hackle = fly.parts.find((p) => p.role === "hackle")!;

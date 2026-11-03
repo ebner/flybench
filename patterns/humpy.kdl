@@ -1,0 +1,75 @@
+// Humpy: Jack Horner's deer-hair dry, also the Goofus Bug: one bunch of hair makes the hump over a thread belly and the wings.
+
+id humpy
+name "Humpy"
+aliases "Yellow Humpy" "Goofus Bug" "Horner Deer Hair"
+type dry
+imitates attractor mayfly caddis
+naturals mayfly-dun caddis-adult
+difficulty advanced
+species trout
+season june july august september
+origin originator="Jack Horner" region="California, USA"
+description "A moose hair tail, a yellow thread belly under a hump of elk hair whose tips stand up as divided wings, and a brown and grizzly hackle."
+history """
+    Jack Horner of San Francisco tied it for California's swift rivers in the 1940s, early or
+    late by different accounts, from the Tom Thumb's two clumps of deer hair over a thread
+    body. Pat Barnes of West Yellowstone found two of them in a trout's jaw on Cliff Lake in
+    1947, by Rusty Dunn's account (1943 in another), and his wife Sig copied them; as the Goofus
+    Bug it became a Yellowstone staple, and around Jackson Hole it got the name Humpy. Its trick
+    is the single bunch of hair: tied in pointing back, bound down over the thread belly,
+    folded forward as the hump, its tips stood up as the wings. Flagler's shortcut uses two
+    bunches, and Craven makes the hump from the butts of the wing.
+    """
+fishing """
+    A big, buoyant attractor for fast, broken water on western rivers, where the hollow hair
+    hump keeps it up through riffles and pocket water. Fish it dead drift; the yellow belly
+    suggests a stonefly or a hatching caddis as much as a mayfly.
+    """
+sources {
+    "Fly Fisherman: Fly Tier's Bench, the Humpy (Kathy Buchner, 1999)" url="https://www.flyfisherman.com/editorial/fly-tiers-bench-humpy/463293"
+    "Orvis Learning Center: Yellow Humpy (Matt Grobert)" url="https://howtoflyfish.orvis.com/fly-tying-videos/dry-flies/704-yellow_humpy"
+    "Fly Fisherman: Fly Tying the Humpy (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-humpy/151877"
+    "Fly Anglers Online: The Humpy, Fly of the Week #120 (Skip Morris)" url="https://www.flyanglersonline.com/t/the-humpy-fly-of-the-week-120/3770"
+    "SWTU: Horner Deer Hair, Goofus Bug, Humpy (Rusty Dunn)" url="https://www.swtu.org/2018/01/04/horner-deer-hair-goofus-bug-humpy/"
+    "Wikipedia: Humpy fly" url="https://en.wikipedia.org/wiki/Humpy_fly"
+    "Fly Fishing the Sierra: Humpy" url="https://flyfishingthesierra.com/humpy/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://i0.wp.com/www.swtu.org/wp-content/uploads/2018/01/Humpy3-975.jpg?resize=975%2C709&ssl=1" page="https://www.swtu.org/2018/01/04/horner-deer-hair-goofus-bug-humpy/" author="Rusty Dunn" license="All rights reserved; reference only" note="Side view in the vise; the yellow belly and the hump clear"
+    "https://upload.wikimedia.org/wikipedia/commons/f/ff/Humpy_fly.jpg" page="https://commons.wikimedia.org/wiki/File:Humpy_fly.jpg" author="Mike Cline" license="CC BY-SA 4.0" note="Side view in the vise"
+    "https://content.osgnetworks.tv/flyfisherman/content/photos/TyingHumpy-HERO-1200x800.jpg" page="https://www.flyfisherman.com/editorial/fly-tying-humpy/151877" author="Charlie Craven" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+sits hackle
+hook dry-standard size=12
+// The thread is the belly that shows under the hump.
+thread yellow size="6/0"
+
+materials {
+    tail moose-mane label="Moose body hair"
+    hump elk-hair label="Elk body hair"
+    hackle-brown cock-hackle color=brown fibre=1.6
+    hackle-grizzly cock-hackle color=grizzly fibre=1.6
+}
+
+steps {
+    attach-thread at=0.5
+    wrap-thread to=0.0
+    // Sources: a shank beyond the bend; the photos show about 1.8 gapes.
+    tie-in tail length=1.8 spread=20 note="A small stacked clump on top."
+    trim tail note="Trim the butts just past the middle of the shank and bind them: the base of the hump."
+    tie-in hump length=3.6 angle=3 spread=40 note="Measured from the tail tips to the eye; butts at mid-shank, tips back, bound down to the tail."
+    wrap-thread to=0.55 note="Back and forth over the hair: the yellow thread is the belly."
+    // Sources: the wings about a shank tall; the hump about half a gape high in the photos.
+    pull-over hump to=0.55 bubble=0.3 wing=2.0 note="Fold the hair forward over the top, tight and even, and bind it with a short band; stand the tips up and divide them."
+    tie-in hackle-brown
+    tie-in hackle-grizzly
+    wrap-thread to=0.92
+    wind hackle-brown to=0.9 turns=5 note="Two or three turns behind the wings, the rest in front."
+    tie-off hackle-brown
+    wind hackle-grizzly to=0.9 turns=5 note="Through the brown, the same way."
+    tie-off hackle-grizzly
+    whip-finish
+}

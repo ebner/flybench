@@ -1,0 +1,62 @@
+// March Brown Spider: the wingless March Brown, hare's ear and gold under a turn of brown partridge, North Country style.
+
+id march-brown-spider
+name "March Brown"
+variant-of march-brown
+variant "Spider"
+aliases "March Brown Spider"
+type wet
+imitates mayfly
+naturals mayfly-emerger mayfly-nymph-crawling
+difficulty beginner
+species trout grayling
+season march april may june
+origin region="Northern England"
+description "A slim hare's ear body ribbed with gold wire under a collar of brown partridge, with an orange silk head."
+history """
+    The hackled March Brown is as old as the winged one: Pritt (1885) gives one hackled with a
+    woodcock feather, "very useful on cold, rough days". The spider tied today, in Sylvester
+    Nemes's The Soft-Hackled Fly (1975) and Andrew Overend's list of North Country spiders, has
+    no wing or tail: hare's face fur ribbed with narrow gold, a brown partridge hackle and
+    orange silk.
+    """
+fishing """
+    Upstream or across on a short line, in the film or just under it, during the March Brown
+    hatch and through the spring; the soft partridge breathes in the current like the legs of a
+    hatching dun. Often fished in a team with other spiders.
+    """
+sources {
+    "The Soft-Hackle Pattern Book: March Brown Spider, Nymph or Flymph" url="http://softhacklepatternbook.blogspot.com/2014/03/march-brown-spider-nymph-or-flymph-and.html"
+    "Hawker-Overend: How to tie and fish North Country spider flies (Andrew Overend)" url="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/"
+    "Internet Archive: Yorkshire Trout Flies (T. E. Pritt, 1885)" url="https://archive.org/details/yorkshiretroutfl00pritrich"
+    "The Fly Tier's Page: March Brown Spider (Philip Bailey)" url="https://www.flytierspage.com/pbailey/march_brown_spider.htm"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://hawker-overend.com/wp-content/uploads/2020/09/March-brown-spider-1.jpg" page="https://hawker-overend.com/how-to-tie-and-fish-north-country-spider-flies/" author="Andrew Overend" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://www.flytierspage.com/pbailey/march_brown_spider.jpg" page="https://www.flytierspage.com/pbailey/march_brown_spider.htm" author="Philip Bailey" license="All rights reserved; reference only" note="Side view; a herl body, for the hackle only"
+}
+
+hook wet-standard size=14
+thread orange size="8/0"
+
+materials {
+    rib gold-wire
+    body hares-ear-dubbing
+    hackle partridge-hackle fibre=1.7 sweep=40 label="Brown partridge back feather"
+}
+
+steps {
+    attach-thread at=0.88
+    // Read from the photos: the body starts about above the point.
+    wrap-thread to=0.15
+    tie-in rib
+    dub body to=0.85 note="Thin and sparse."
+    wind rib to=0.85 turns=4
+    tie-off rib
+    tie-in hackle note="By the tip, fluff stripped."
+    wrap-thread to=0.92
+    wind hackle to=0.92 turns=2 note="One or two turns, stroking the barbs back."
+    tie-off hackle
+    whip-finish note="A small orange head."
+}

@@ -98,14 +98,16 @@ export interface BundlePiece extends PieceBase {
   count: number;
   /** Trimmed: cut square, all the same length. */
   cut?: boolean;
-  /** Trimmed spun hair: a round head, a wedge flat underneath and deepest at the rear, or a cigar. */
-  trimShape?: "round" | "wedge" | "cigar";
+  /** Trimmed spun hair: a round head, a wedge flat underneath and deepest at the rear, a cigar or a cone. */
+  trimShape?: "round" | "wedge" | "cigar" | "cone";
   /** Upright and divided: two tufts turned out to either side by this many radians. */
   pair?: number;
   /** Bands along each fibre (tippet bars, barred fibres). */
   marks?: FibreMarks;
   /** Fibres broader than usual, as a multiple of the usual width. */
   fibreWidth?: number;
+  /** Fibres with flue along them (peacock sword). */
+  flue?: boolean;
 }
 
 /** Bands along a fibre, as fractions of its length from base to tip, drawn at `shade` of its colour. */
@@ -300,6 +302,7 @@ interface MaterialLook {
   band?: boolean;
   marks?: FibreMarks;
   fibreWidth?: number;
+  flue?: boolean;
   shaggy?: number;
 }
 
@@ -310,7 +313,7 @@ const deg = (d: number) => (d * Math.PI) / 180;
 const UNTRIMMED = 0.8;
 
 /** Colours whose feathers and hackles are barred or mottled. */
-const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6, guinea: 0.9 };
+const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6, guinea: 0.9, "hen-pheasant": 0.5, "wood-duck": 0.6 };
 
 // Assumption: a golden pheasant tippet fibre is orange with a black bar about three quarters
 // of the way out and a black tip.
@@ -330,12 +333,12 @@ function barMarks(barring: number): FibreMarks {
 
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   const barring = BARRED[colorName] ?? 0;
   const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, shaggy: m.shaggy ?? cat.shaggy };
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, shaggy: m.shaggy ?? cat.shaggy };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
@@ -687,7 +690,7 @@ export function simulate(recipe: Recipe): Build {
             window: [0, 0.35], x, radius, centre, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             // A long hair wing is a bigger clump: it stays dense as it fans out.
             bundleRadius: l.strandRadius, count: l.look === "hair" ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
-            pair, marks: l.marks, fibreWidth: l.fibreWidth,
+            pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
           });
           if (upright) {
             posts.set(step.material, { x, baseY: radius, height: step.length, radius: l.strandRadius * 0.45 });
@@ -837,6 +840,18 @@ export function simulate(recipe: Recipe): Build {
         });
         freeEnds.delete(step.material);
         ends = restingEnds();
+        // A bunch tied in pointing back (a Humpy's hair) is folded over now: it no longer sticks out.
+        for (const s of steps) for (const p of s.pieces) if (p.type === "bundle" && p.material === step.material && p.until === undefined) p.until = time;
+        // The tips that pass the tie-down stand up in front of it as a divided wing (a Humpy).
+        if (step.wing && !back) {
+          pieces.push({
+            type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0.6, 1],
+            x: to + pitch, radius: profile.radiusAt(to + pitch), length: step.wing, angle: deg(88), direction: "back", side: "top",
+            spread: deg(22), pair: deg(22), bundleRadius: l.strandRadius,
+            count: l.look === "hair" ? Math.round(l.count * Math.min(2.5, Math.max(1, step.wing / 1.5))) : l.count,
+            marks: l.marks, fibreWidth: l.fibreWidth,
+          });
+        }
         if (!back || tiedBack) {
           const wraps = inPlace(threadX!, 5, [0.6, 1]);
           pieces.push(wraps);

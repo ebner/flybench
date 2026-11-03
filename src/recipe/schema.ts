@@ -47,6 +47,9 @@ export const NAMED_COLORS = {
   pearl: "#e6e2ea",
   teal: "#cfcac0",
   turkey: "#8a6a48",
+  "hen-pheasant": "#7d6044",
+  // Wood duck flank: lemon brown, finely barred.
+  "wood-duck": "#b08a52",
   badger: "#d9cdb4",
   "blue-dun": "#6e7480",
   purple: "#4b2a6b",
@@ -248,6 +251,8 @@ const Step = z.discriminatedUnion("op", [
     to: Position,
     /** Left loose as a bubble over the body, this many gapes of air under its middle (a CDC pupa's bubble). */
     bubble: z.number().min(0).max(1).optional(),
+    /** Hair pulled forward: the tips past the tie-down stand up as a divided wing this long (a Humpy). */
+    wing: z.number().min(0.3).max(4).optional(),
     note: Note,
     mistake: Note,
   }),
@@ -276,10 +281,11 @@ const Step = z.discriminatedUnion("op", [
     leave: z.number().min(0).max(2).optional(),
     /**
      * Spun hair or hair butts: trim into a round head (Muddler), a wedge, flat underneath
-     * and rising towards the rear (G&H Sedge), or a cigar, fullest in the middle and rounded at
-     * both ends (a deer-hair pupa's body). Butts trimmed to a shape are spun round the shank.
+     * and rising towards the rear (G&H Sedge), a cigar, fullest in the middle and rounded at
+     * both ends (a deer-hair pupa's body), or a cone, slim at the tail and full at the front
+     * (an Irresistible's body). Butts trimmed to a shape are spun round the shank.
      */
-    shape: z.enum(["round", "wedge", "cigar"]).optional(),
+    shape: z.enum(["round", "wedge", "cigar", "cone"]).optional(),
     /**
      * A wound hackle: "sides" cuts away the fibres on top and underneath (Superpuppan);
      * "top" cuts away only those underneath, so the fly sits low (Dyret).

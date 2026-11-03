@@ -1,0 +1,37 @@
+id march-brown-spider
+status draft
+
+// en description: A slim hare's ear body ribbed with gold wire under a collar of brown partridge, with an orange silk head.
+description "En smal kropp av haröra ribbad med guldtråd under en krage av brun rapphöna, med ett huvud av orange silke."
+
+// en history: The hackled March Brown is as old as the winged one: Pritt (1885) gives one hackled with a woodcock feather, "very useful on cold, rough days". The spider tied today, in Sylvester Nemes's The Soft-Hackled Fly (1975) and Andrew Overend's list of North Country spiders, has no wing or tail: hare's face fur ribbed with narrow gold, a brown partridge hackle and orange silk.
+history """
+    Den hacklade March Brown är lika gammal som den vingade: Pritt (1885) ger en hacklad med en
+    morkullefjäder, ”mycket användbar på kalla, blåsiga dagar”. Spidern som binds i dag, i
+    Sylvester Nemes The Soft-Hackled Fly (1975) och Andrew Overends lista över North Country-
+    spiders, har varken vinge eller stjärt: päls från harens ansikte ribbad med smalt guld, ett
+    brunt rapphönshackel och orange silke.
+    """
+
+// en fishing: Upstream or across on a short line, in the film or just under it, during the March Brown hatch and through the spring; the soft partridge breathes in the current like the legs of a hatching dun. Often fished in a team with other spiders.
+fishing """
+    Uppströms eller tvärs på kort lina, i ytfilmen eller strax under den, under March Brown-
+    kläckningen och genom våren; det mjuka rapphönshacklet andas i strömmen som benen på en
+    kläckande dagslända. Ofta fiskad i en tafs med andra spiders.
+    """
+
+labels {
+    // en hackle: Brown partridge back feather
+    hackle "Ryggfjäder från brun rapphöna"
+}
+
+notes {
+    // en step 4 (dub body): Thin and sparse.
+    step 4 "Tunn och gles."
+    // en step 7 (tie-in hackle): By the tip, fluff stripped.
+    step 7 "I spetsen, med dunet rensat."
+    // en step 9 (wind hackle): One or two turns, stroking the barbs back.
+    step 9 "Ett eller två varv, stryk fibrerna bakåt."
+    // en step 11 (whip-finish): A small orange head.
+    step 11 "Ett litet orange huvud."
+}

@@ -1,0 +1,50 @@
+id humpy
+status draft
+
+// en description: A moose hair tail, a yellow thread belly under a hump of elk hair whose tips stand up as divided wings, and a brown and grizzly hackle.
+description "Ein Schwanz aus Elchkörperhaar, ein Bauch aus gelbem Bindefaden unter einem Buckel aus Elchhaar, dessen Spitzen als geteilte Flügel aufstehen, und eine braune und eine Grizzlyhechel."
+
+// en history: Jack Horner of San Francisco tied it for California's swift rivers in the 1940s, early or late by different accounts, from the Tom Thumb's two clumps of deer hair over a thread body. Pat Barnes of West Yellowstone found two of them in a trout's jaw on Cliff Lake in 1947, by Rusty Dunn's account (1943 in another), and his wife Sig copied them; as the Goofus Bug it became a Yellowstone staple, and around Jackson Hole it got the name Humpy. Its trick is the single bunch of hair: tied in pointing back, bound down over the thread belly, folded forward as the hump, its tips stood up as the wings. Flagler's shortcut uses two bunches, and Craven makes the hump from the butts of the wing.
+history """
+    Jack Horner aus San Francisco band sie in den 1940er Jahren für Kaliforniens reißende
+    Flüsse, früh oder spät je nach Quelle, nach den zwei Rehhaarbüscheln der Tom Thumb über
+    einem Fadenkörper. Pat Barnes aus West Yellowstone fand 1947 auf dem Cliff Lake zwei davon
+    im Maul einer Forelle, nach Rusty Dunn (1943 nach einer anderen Quelle), und seine Frau Sig
+    band sie nach; als Goofus Bug wurde sie ein Klassiker um den Yellowstone, und um Jackson
+    Hole bekam sie den Namen Humpy. Ihr Kniff ist das eine Haarbüschel: nach hinten zeigend
+    eingebunden, über dem Fadenbauch festgebunden, als Buckel nach vorn geklappt und die Spitzen
+    als Flügel aufgerichtet. Flaglers Abkürzung nimmt zwei Büschel, und Craven macht den Buckel
+    aus den Enden des Flügels.
+    """
+
+// en fishing: A big, buoyant attractor for fast, broken water on western rivers, where the hollow hair hump keeps it up through riffles and pocket water. Fish it dead drift; the yellow belly suggests a stonefly or a hatching caddis as much as a mayfly.
+fishing """
+    Eine große, schwimmfreudige Reizfliege für schnelles, gebrochenes Wasser an den Flüssen des
+    amerikanischen Westens, wo der hohle Haarbuckel sie durch Rauschen und Taschenwasser oben
+    hält. Fische sie frei treibend; der gelbe Bauch erinnert ebenso an eine Steinfliege oder
+    schlüpfende Köcherfliege wie an eine Eintagsfliege.
+    """
+
+labels {
+    // en tail: Moose body hair
+    tail "Elchkörperhaar"
+    // en hump: Elk body hair
+    hump "Elchhaar"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small stacked clump on top.
+    step 3 "Ein kleines, ausgeglichenes Büschel oben auf."
+    // en step 4 (trim tail): Trim the butts just past the middle of the shank and bind them: the base of the hump.
+    step 4 "Schneide die Enden knapp hinter der Schenkelmitte ab und binde sie fest: die Basis des Buckels."
+    // en step 5 (tie-in hump): Measured from the tail tips to the eye; butts at mid-shank, tips back, bound down to the tail.
+    step 5 "Von den Schwanzspitzen bis zum Öhr gemessen; Enden in der Schenkelmitte, Spitzen nach hinten, bis zum Schwanz festgebunden."
+    // en step 6 (wrap-thread): Back and forth over the hair: the yellow thread is the belly.
+    step 6 "Hin und her über das Haar: der gelbe Faden ist der Bauch."
+    // en step 7 (pull-over hump): Fold the hair forward over the top, tight and even, and bind it with a short band; stand the tips up and divide them.
+    step 7 "Klappe das Haar straff und gleichmäßig über die Oberseite nach vorn und binde es mit einem kurzen Band ab; richte die Spitzen auf und teile sie."
+    // en step 11 (wind hackle-brown): Two or three turns behind the wings, the rest in front.
+    step 11 "Zwei oder drei Windungen hinter den Flügeln, der Rest davor."
+    // en step 13 (wind hackle-grizzly): Through the brown, the same way.
+    step 13 "Durch die braune, genauso."
+}

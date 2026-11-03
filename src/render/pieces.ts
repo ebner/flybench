@@ -589,6 +589,9 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         length *= 0.3 + 0.7 * (1 - f);
         if (dir.y < -0.05) length = Math.min(length, 0.1 / -dir.y);
         if (Math.abs(dir.z) > 0.6) length *= 0.75;
+      } else if (piece.trimShape === "cone") {
+        // Slim at the tail, swelling to full towards the front, squared off there.
+        length *= 0.4 + 0.6 * Math.sqrt(Math.min(1, f / 0.92));
       } else if (piece.trimShape === "cigar") {
         // Fullest in the middle, rounded off at both ends.
         length *= 0.3 + 0.7 * Math.sqrt(Math.max(0, 1 - (2 * f - 1) ** 2));
@@ -612,10 +615,11 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       bend, bendDir: bend > 0 ? perpendicular(dir, toward, rand) : undefined,
     });
   }
-  if (piece.look === "cdc" || piece.look === "marabou") {
-    // Barbules: short, fine fibres all along each barb, which give CDC and marabou their fluff.
+  if (piece.look === "cdc" || piece.look === "marabou" || piece.flue) {
+    // Barbules: short, fine fibres all along each barb, which give CDC and marabou their fluff
+    // and peacock sword its herl-like flue.
     const barbs = list.slice();
-    const perBarb = piece.look === "cdc" ? 6 : 4;
+    const perBarb = piece.look === "cdc" ? 6 : piece.flue ? 16 : 4;
     for (const f of barbs) {
       for (let k = 0; k < perBarb; k++) {
         const t = 0.2 + 0.8 * rand();
@@ -624,11 +628,12 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
           .clone()
           .add(new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5).multiplyScalar(1.6))
           .normalize();
-        // Marabou's barbules are long and soft enough to fill the plume out into a cloud.
+        // Marabou's barbules are long and soft enough to fill the plume out into a cloud; a
+        // peacock sword fibre's flue makes it a broad, glittering frond.
         const fluff = piece.look === "marabou";
         list.push({
-          u: f.u, base, dir, length: fluff ? 0.1 + 0.2 * rand() : 0.05 + 0.06 * rand(),
-          radius: fluff ? 0.004 : 0.0018, shade: f.shade,
+          u: f.u, base, dir, length: fluff ? 0.1 + 0.2 * rand() : piece.flue ? 0.08 + 0.1 * rand() : 0.05 + 0.06 * rand(),
+          radius: fluff ? 0.004 : piece.flue ? 0.0035 : 0.0018, shade: f.shade,
         });
       }
     }

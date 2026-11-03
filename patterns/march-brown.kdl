@@ -1,0 +1,75 @@
+// March Brown: the winged wet fly of the early mayfly, in T. E. Pritt's dressing with a hen pheasant wing.
+
+id march-brown
+name "March Brown"
+type wet
+imitates mayfly
+naturals mayfly-emerger mayfly-nymph-crawling
+difficulty intermediate
+species trout sea-trout grayling
+season march april may june
+origin region="Britain"
+description "A partridge tail, a hare's ear body ribbed with gold wire, a brown partridge throat and a low wing of hen pheasant quill."
+history """
+    One of the oldest trout flies. Berners' "donne flye" of 1496 has a body of dun wool and
+    partridge wings, Chetham printed a "Moorish Brown" in 1681, and Bowlker gave a March Brown
+    of hare's ear ribbed with yellow silk under partridge or pheasant wings. The dressing tied
+    today is close to T. E. Pritt's in Yorkshire Trout Flies (1885): a forked partridge tail,
+    hare's ear and a little yellow mohair ribbed with yellow silk, partridge legs and a hen
+    pheasant wing, "indispensable on fair days through March and April". Shops now rib it with
+    gold; Pritt's hackled version, without a wing, is the March Brown Spider. It copies
+    Rhithrogena in Europe; in America the name went to another mayfly.
+    """
+fishing """
+    Fished across and down, or upstream on a short line, during the March Brown hatch in spring,
+    when the duns are drowned or struggling in the film; through the season it is a general
+    searching wet fly, a hare's ear with a wing. Pritt fished it on Yorkshire rivers and on Loch
+    Leven.
+    """
+sources {
+    "Internet Archive: Yorkshire Trout Flies (T. E. Pritt, 1885)" url="https://archive.org/details/yorkshiretroutfl00pritrich"
+    "Global FlyFisher: March Brown Legacy (Martin Joergensen)" url="https://globalflyfisher.com/patterns/march-brown-legacy"
+    "Global FlyFisher: March Brown Odyssey (Martin Joergensen)" url="https://globalflyfisher.com/patterns/march-brown-odyssey"
+    "Sexyloops: March Brown (Ben Spinks)" url="https://www.sexyloops.com/flytying/marchbrown.shtml"
+    "Fly Fisherman: March Browns (Ernest Schwiebert)" url="https://www.flyfisherman.com/editorial/march-browns/494642"
+    "Rackelhanen: March Brown (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
+    "Fish4Flies: March Brown" url="https://www.fish4flies.com/Wet/Winged/March-Brown"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.sexyloops.com/flytying/marchbrown/MB9.jpg" page="https://www.sexyloops.com/flytying/marchbrown.shtml" author="Ben Spinks" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://www.fish4flies.com/img/flies/Large/1385-1385.jpg" page="https://www.fish4flies.com/Wet/Winged/March-Brown" license="All rights reserved; reference only" flip=#true note="Side view"
+    "https://globalflyfisher.com/image.php?size=w756&file=/var/www/html/sites/default/files/article_pictures/march-brown-wet-feather.jpg" page="https://globalflyfisher.com/patterns/march-brown-odyssey" author="Martin Joergensen" license="All rights reserved; reference only" note="Side view, a longer tail"
+}
+
+hook wet-standard size=12
+thread brown size="8/0"
+
+materials {
+    tail hackle-fibres color=partridge count=6 label="Partridge tail fibres"
+    // Pritt and Joergensen: yellow silk; shops: gold wire.
+    rib gold-wire
+    body hares-ear-dubbing
+    // Spinks: barbs just past the hook point.
+    hackle partridge-hackle fibre=1.2 label="Brown partridge back feather"
+    wings hen-pheasant-quill label="Hen pheasant quill slips"
+}
+
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Joergensen: a shank long; the photos show 1.0 to 1.6 gapes.
+    tie-in tail length=1.4 spread=25 note="A few fibres; Pritt forks two."
+    tie-in rib
+    dub body to=0.82 note="Sparse and slightly tapered, leaving room for the hackle, wing and head."
+    wind rib to=0.82 turns=5 note="Four or five open turns."
+    tie-off rib
+    tie-in hackle note="By the tip, curved side forward."
+    wrap-thread to=0.86
+    wind hackle to=0.86 turns=2 note="One or two turns."
+    tie-off hackle
+    trim hackle keep=under note="Pull the fibres down and back under the shank as a throat, and bind them there."
+    // Spinks: 1.25 to 1.5 shanks, no higher than 45°; the photos show about 20°.
+    tie-in wings length=2.6 angle=18 spread=10 width=0.5 note="Matched slips from a left and a right quill, low over the body, with a pinch and loop."
+    whip-finish
+}
