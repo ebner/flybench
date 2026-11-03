@@ -1,4 +1,4 @@
-// Bloody Mary: a bead-head attractor nymph of red floss and peacock with a partridge collar, a put-and-take favourite in Scandinavia.
+// Bloody Mary: a bead-head attractor nymph of red floss and peacock with a partridge collar, sold with a gold bead in Sweden.
 
 id bloody-mary
 name "Bloody Mary"
@@ -8,23 +8,21 @@ imitates attractor caddis mayfly
 naturals caddis-larva-free mayfly-nymph-swimming
 difficulty beginner
 species trout grayling
+// Assumption: a nymph for spring and autumn, when trout and grayling feed below the surface.
 season march april may june september october
-origin region="Pacific Northwest, USA"
 description "A forked tail of brown goose biots, a red floss body ribbed with peacock herl, a short peacock thorax and a brown partridge collar behind a gold bead."
 history """
-    An American attractor nymph, the Prince Nymph's close cousin, said to have been proven on
-    trout for decades. The only originator anyone names is Darryl Smoot of Yakima, Washington,
-    on the word of one blog citing a forum gallery; Tim Cammisa, credited on Global FlyFisher,
-    only filmed a tutorial of a fly he calls traditional. In Scandinavia it is sold as the
-    Bloody Mary Goldhead, in red and in green. Other flies share the name: Max Christensen's
-    Tasmanian stonefly wet fly, a Danish wet fly with a tippet tail, and Davie McPhail's
-    streamer.
+    An attractor nymph of red floss and peacock herl, sold by American fly shops as a fly that
+    suggests no insect in particular. No reliable source names its originator. Tim Cammisa, who
+    ties it in a Global FlyFisher video, calls its look traditional. Swedish shops sell it with
+    a gold bead, in red and in green, as the Bloody Mary Goldhead. Other flies share the name:
+    Max Christensen's wet fly from Tasmania, made in 1956 with large stoneflies in mind, and
+    Davie McPhail's streamer.
     """
 fishing """
     A searching nymph that suggests no insect in particular. In rivers, dead drift it like a
-    Pheasant Tail, or swing it like a wet fly; many fish it as a dropper, or as the heavy fly in
-    a team. In Scandinavian put-and-take lakes it is a rainbow trout fly, best early in spring
-    and late in the season, on a long leader with a very slow retrieve.
+    Pheasant Tail, or swing it like a wet fly. It is often fished as a dropper, under a hopper
+    or another nymph, and Tim Cammisa uses it as the anchor fly when European nymphing.
     """
 sources {
     "SwittersB: Bloody Mary Nymph, dropper pattern" url="https://swittersb.com/2009/02/10/booldy-mary-nymph-dropper-pattern/"
@@ -34,10 +32,13 @@ sources {
     "Flugor.se: Bloody Mary Goldhead" url="https://www.flugor.se/flugor/goldheads/bloody-mary-goldhead-4384"
     "Flugspecialisten: Bloody Mary röd" url="https://flugspecialisten.se/sv/products/bloody-mary-rod"
     "RiverFly: The giant stonefly and Max Christensen's Bloody Mary" url="https://riverfly.com.au/the-giant-stonefly-and-max-christensens-bloody-mary/"
+    "Trout and Feather: Stonefly nymphs (Tim Cammisa)" url="https://www.troutandfeather.com/stonefly-nymphs-a"
+    "Fly Anglers Online: Bloody Mary, Champion All-Purpose Fly (Alan Shepherd, archived)" url="http://web.archive.org/web/20181229105119/http://flyanglersonline.com:80/features/oldflies/part245.php"
+    "GlobalFlyFisher: Bloody Mary Streamer (Davie McPhail)" url="https://globalflyfisher.com/streamers365/240-bloody-mary-streamer"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {
-    "https://www.flugor.se/bild_arkiv/big_4384.jpg" page="https://www.flugor.se/flugor/goldheads/bloody-mary-goldhead-4384" license="All rights reserved; reference only" note="The Scandinavian goldhead, side view in the vise"
+    "https://www.flugor.se/bild_arkiv/big_4384.jpg" page="https://www.flugor.se/flugor/goldheads/bloody-mary-goldhead-4384" license="All rights reserved; reference only" note="The goldhead sold in Sweden, side view in the vise"
     "https://nycdn.nyehandel.se/store_aff57705-333a-43f2-9d70-277b22ad640b/images/VyK8wknsFGcHpIY1662500174.jpeg" page="https://flugspecialisten.se/sv/products/bloody-mary-rod" license="All rights reserved; reference only" flip=#true note="Side view in the vise"
     "https://swittersb.com/wp-content/uploads/2009/02/img_9738a.jpg" page="https://swittersb.com/2009/02/10/booldy-mary-nymph-dropper-pattern/" license="All rights reserved; reference only" flip=#true note="Side view, the US fly"
 }

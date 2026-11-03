@@ -4,12 +4,12 @@ status draft
 // en description: A ginger underbody of sparkle yarn and fur inside a loose, translucent sheath of sparkle yarn drawn over the top and the bottom, wood duck legs at the sides and a brown ostrich herl head.
 description "Ein gingerfarbener Unterkörper aus Antron und Fell in einer lockeren, durchscheinenden Hülle aus Antronstrang, über Ober- und Unterseite gezogen, Beine aus Brautente an den Seiten und ein Kopf aus braunem Straußengras."
 
-// en history: Gary LaFontaine developed it around 1974 after three seasons watching caddis pupae on the Big Hole with scuba gear, and published it in Caddisflies (1981). He found that the air bubbles round a rising pupa make it glitter, and that the new Antron yarn, which he called sparkle yarn, holds air the same way. One sparse strand is tied in on top and one underneath, and after the body is dubbed each is drawn forward loosely so that it stands off the body as a veil the colour shows through. The Deep has no wing or trailing shuck; those belong to the Emergent Sparkle Pupa. Sources differ on the sheath (one piece, side hanks or three) and on the legs and the head.
+// en history: Gary LaFontaine developed it after years of watching caddis pupae and trout underwater with scuba gear, and published it in Caddisflies (1981). He found that the air bubbles round a rising pupa make it glitter, and that Antron yarn, which he called sparkle yarn, holds air the same way. One sparse strand is tied in on top and one underneath, and after the body is dubbed each is drawn forward loosely so that it stands off the body as a veil the colour shows through. The Deep has no wing or trailing shuck; those belong to the Emergent Sparkle Pupa. Sources differ on the sheath (one piece, side hanks or three) and on the legs and the head.
 history """
-    Gary LaFontaine entwickelte sie um 1974, nachdem er drei Saisons lang am Big Hole mit
-    Tauchausrüstung Köcherfliegenpuppen beobachtet hatte, und veröffentlichte sie in Caddisflies
-    (1981). Er fand, dass die Luftbläschen um eine aufsteigende Puppe sie glitzern lassen und
-    dass das neue Antron, das er sparkle yarn nannte, Luft auf dieselbe Weise hält. Ein
+    Gary LaFontaine entwickelte sie, nachdem er jahrelang mit Tauchausrüstung
+    Köcherfliegenpuppen und Forellen unter Wasser beobachtet hatte, und veröffentlichte sie in
+    Caddisflies (1981). Er fand, dass die Luftbläschen um eine aufsteigende Puppe sie glitzern
+    lassen und dass Antron, das er sparkle yarn nannte, Luft auf dieselbe Weise hält. Ein
     spärlicher Strang wird oben und einer unten eingebunden, und wenn der Körper gedubbt ist,
     wird jeder locker nach vorn gezogen, sodass er als Schleier vom Körper absteht, durch den
     die Farbe scheint. Die Deep hat weder Flügel noch nachschleppende Hülle; die gehören zur
@@ -17,11 +17,11 @@ history """
     Stränge oder drei) und bei Beinen und Kopf.
     """
 
-// en fishing: For a caddis hatch, fished dead drift near the bottom, where pupae drift while they fill their sheath with gas, and let swing up at the end of the drift as a rising pupa. The sheath wears away after a few fish.
+// en fishing: For a caddis hatch, fished dead drift near the bottom, where pupae drift while they fill their sheath with gas, and let swing up at the end of the drift as a rising pupa.
 fishing """
     Während eines Köcherfliegenschlupfs nahe am Grund frei treibend gefischt, wo die Puppen
     treiben, während sie ihre Hülle mit Gas füllen, und am Ende der Drift als aufsteigende Puppe
-    einschwingen lassen. Die Hülle nutzt sich nach ein paar Fischen ab.
+    einschwingen lassen.
     """
 
 labels {

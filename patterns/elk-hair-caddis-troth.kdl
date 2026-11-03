@@ -1,5 +1,5 @@
 // Elk Hair Caddis after Al Troth's 1978 article: the hair butts left untrimmed
-// (sources disagree on the butts and on the wire; see history).
+// (sources disagree on the head; see history).
 
 id elk-hair-caddis-troth
 name "Elk Hair Caddis"
@@ -14,20 +14,21 @@ season may june july august september
 origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
 description "The Elk Hair Caddis after Troth's 1978 article: the hair butts left long instead of trimmed into a neat head."
 history """
-    Troth described the fly in Fly Tyer in 1978 (the Fall issue; some give November). Fly
-    Tyer's own reprint of his dressing, the Federation of Fly Fishers' 1998 Fly of the Month
-    and the Fly Fishers International (FFI) skills award version give a fine gold wire rib,
-    which this variant follows; the Golden Fly Shop's account of the article has fine copper
-    wire instead. Fly Tyer notes that the article
-    does not mention the clipped-hair head, which other tyers added. The FFI version, meant
-    to be as close to Troth's original as possible, still clips the butts, but at an angle
-    in line with the wing rather than square.
+    Troth described the fly in the Fall 1978 issue of Fly Tyer; Rusty Dunn notes it had already
+    appeared in Terry Hellekson's Popular Fly Patterns in 1976. Fly Tyer's own reprint of his
+    dressing, the Federation of Fly Fishers' 1998 Fly of the Month and the Fly Fishers
+    International (FFI) skills award version give a fine gold wire rib, which this variant
+    follows. Fly Tyer notes that the article does not mention the clipped-hair head, which other
+    tyers added; Rusty Dunn, on the other hand, has Troth trimming the butts into a head, and
+    the 1998 Fly of the Month gives Al Troth's Elk Hair Caddis a squared-off trimmed head. The
+    FFI version, meant to be as close to Troth's original as possible, still clips the butts,
+    but at an angle in line with the wing rather than square.
     """
 sources {
-    "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-shop-blog/famous-fly-history-elk-hair-caddis"
     "Fly Tyer: Elk-Hair Caddis" url="https://www.flytyer.com/elk-hair-caddis/"
     "Federation of Fly Fishers: Fly of the Month, Al Troth's Elk Hair Caddis (Jim Abbs)" url="https://www.flyfishersinternational.org/LinkClick.aspx?fileticket=oxRpfYt7i4I%3D&tabid=237&portalid=0&mid=1006"
     "Rocky River Trout Unlimited: Troth Elk Hair Caddis FFI" url="http://www.rockyrivertu.org/troth-elk-hair-caddis-ffi.html"
+    "SWTU: Elk Hair Caddis (Rusty Dunn)" url="https://swtu.org/?p=422"
 }
 
 // Assumption: As the Elk Hair Caddis: damp, the body in the film under the wing; judged from

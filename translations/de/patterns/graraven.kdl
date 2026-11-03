@@ -14,12 +14,12 @@ history """
     schwarzer Schwanz, der Körper aus grauem Fuchsfell rau bis an die Perle gedubbt.
     """
 
-// en fishing: Cast upstream, let it sink and mend upstream; strike when the line stops or tightens. Takes also come at the end of the drift, as the line straightens and the nymph rises like a larva or pupa heading for the surface. Kärki has done well with it on summer nights in Norrland.
+// en fishing: Cast upstream, let it sink and mend upstream; strike when the line tightens. Takes also come at the end of the drift, as the line straightens and the nymph rises like a larva or pupa heading for the surface. Kärki has done well with it on light summer nights in Norrland.
 fishing """
-    Wirf stromauf, lass sie sinken und menden stromauf; schlag an, wenn die Schnur stehen bleibt
-    oder sich strafft. Bisse kommen auch am Ende der Drift, wenn sich die Schnur streckt und die
-    Nymphe aufsteigt wie eine Larve oder Puppe auf dem Weg zur Oberfläche. Kärki hat in
-    Sommernächten in Norrland gut mit ihr gefangen.
+    Wirf stromauf, lass sie sinken und menden stromauf; schlag an, wenn sich die Schnur strafft.
+    Bisse kommen auch am Ende der Drift, wenn sich die Schnur streckt und die Nymphe aufsteigt
+    wie eine Larve oder Puppe auf dem Weg zur Oberfläche. Kärki hat in hellen Sommernächten in
+    Norrland gut mit ihr gefangen.
     """
 
 labels {

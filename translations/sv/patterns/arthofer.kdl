@@ -4,25 +4,25 @@ status draft
 // en description: A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both.
 description "En grå stjärt, en kropp av gråbeige strutsherl över bly, en thorax av koppartråd och ett klippt pärlhönshackel, med en vingkåpa av fasanstjärt vikt framåt över dem."
 
-// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024; it was tied in numbers in a workshop in Fischamend, Lower Austria, and the Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. Sources differ on the details: Karwath ties a grey-beige ostrich body with a grey tail, the etheonTV dressing black ostrich with a pheasant-tail tail. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax.
+// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying workshop in Fischamend, Lower Austria, where flies were apparently tied professionally. The Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but later saw an article, now mislaid, in which Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be anything from white-beige through grey to brown, and the colour of the wing case is free. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax.
 history """
-    Alois Arthofer i Wien, född 1932, gjorde nymfen, enligt Swissflies och hans son, som
-    skrev till Ingo Karwath 2024; den bands i stora mängder i en verkstad i Fischamend i
-    Niederösterreich, och Wienhandlaren Norbert Eipeltauer sålde den i stor skala. Karwath
-    hade först sett Eipeltauer som åtminstone medgrundare, men Eipeltauer skrev att han inte
-    hade något med uppfinnandet att göra. Den blev berömd efter Ritznymferna, på 1960- och
-    70-talen, som en tung fluga i storlek 6 och 8. Källorna skiljer sig i detaljerna: Karwath
-    binder en gråbeige strutskropp med grå stjärt, etheonTV svart struts med stjärt av
-    fasanstjärt. Två saker är desamma: hacklet "måste vara pärlhöna" och klipps till sist, och
-    vingkåpan viks framåt från 2–3 mm bakom thoraxen.
+    Alois Arthofer i Wien, född 1932, gjorde nymfen, enligt Swissflies och hans son, som skrev
+    till Ingo Karwath 2024. Sonen minns att han följde med fadern till en flugbinderiverkstad i
+    Fischamend i Niederösterreich, där man tydligen band flugor yrkesmässigt. Wienhandlaren
+    Norbert Eipeltauer sålde den i stor skala. Karwath hade först sett Eipeltauer som åtminstone
+    medgrundare, men såg senare en artikel, som han sedan har tappat bort, där Eipeltauer skrev
+    att han inte hade något med uppfinnandet att göra. Den blev berömd efter Ritznymferna, på
+    1960- och 70-talen, som en tung fluga i storlek 6 och 8. Detaljerna varierar: enligt Karwath
+    kan strutsen vara allt från vitbeige via grå till brun, och vingkåpans färg är fri. Två
+    saker är desamma: hacklet "måste vara pärlhöna" och klipps till sist, och vingkåpan viks
+    framåt från 2–3 mm bakom thoraxen.
     """
 
-// en fishing: Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it so it swings in, and then work it like a streamer. The lead and copper take it deep in fast water, and in big sizes it passes for a stonefly nymph or a shrimp as much as anything.
+// en fishing: Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it so it swings in, and then work it like a streamer. The lead and copper take it down quickly.
 fishing """
     Den fiskas inte uppströms som de fina nymferna före den utan nedströms: låt den sjunka,
     stoppa den så att den svänger in, och för den sedan som en streamer. Blyet och kopparn tar
-    den djupt i strömt vatten, och i stora storlekar går den lika gärna för en bäcksländenymf
-    eller en märla som något annat.
+    snabbt ner den.
     """
 
 labels {

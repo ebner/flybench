@@ -12,21 +12,25 @@ season may june july august september
 origin originator="Al Troth" year=1957 region="Pennsylvania, USA"
 description "A buoyant searching caddis: a slim dubbed body, a palmered hackle held down by a gold wire rib, and a flared elk hair wing."
 history """
-    Al Troth tied the first Elk Hair Caddis in 1957 for the green caddis on his home streams
-    in Pennsylvania, and first fished it on Loyalsock Creek; he moved to Montana in 1973. He
-    set out to make a wet fly, but it floated so well that he fished it dry. He used bleached
-    elk hair so that the wing would be easier to see. The neatly trimmed head that most
-    tyers now give it was added by others; see the Troth variant for his own way.
+    Al Troth tied the first Elk Hair Caddis in 1957 for the green caddis on his home streams in
+    Pennsylvania, and first fished it on Loyalsock Creek; he moved to Montana in 1973. He set
+    out to make a wet fly, but it floated so well that he fished it dry. He used bleached elk
+    hair so that the wing would be easier to see. Accounts of the head differ: Rusty Dunn has
+    Troth flaring and trimming the butts into a head, while Fly Tyer says his 1978 article does
+    not mention one and that other tyers added it; see the Troth variant.
     """
 fishing """
-    A searching pattern for any water where caddis hatch, riffles and runs included: the hair
-    wing and palmered hackle float it high. It is mostly fished on a dead drift; skating it,
-    or pulling it through the film like a caddis hatching, works too.
+    A searching pattern for any water where caddis hatch: the hair wing and palmered hackle
+    float it high. Fish it on a dead drift, skate it, or pull it through the film like a caddis
+    hatching.
     """
 sources {
     "Wikipedia: Elk Hair Caddis" url="https://en.wikipedia.org/wiki/Elk_Hair_Caddis"
     "Golden Fly Shop: Famous fly history, Elk Hair Caddis" url="https://www.goldenflyshop.com/blogs/golden-fly-shop-blog/famous-fly-history-elk-hair-caddis"
     "Rocky River Trout Unlimited: Troth Elk Hair Caddis FFI (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/troth-elk-hair-caddis-ffi.html"
+    "SWTU: Elk Hair Caddis (Rusty Dunn)" url="https://swtu.org/?p=422"
+    "Fly Tyer: Elk-Hair Caddis" url="https://www.flytyer.com/elk-hair-caddis/"
+    "Wikipedia: Al Troth" url="https://en.wikipedia.org/wiki/Al_Troth"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

@@ -4,25 +4,24 @@ status draft
 // en description: A moose hair tail, a yellow thread belly under a hump of elk hair whose tips stand up as divided wings, and a brown and grizzly hackle.
 description "Ein Schwanz aus Elchkörperhaar, ein Bauch aus gelbem Bindefaden unter einem Buckel aus Elchhaar, dessen Spitzen als geteilte Flügel aufstehen, und eine braune und eine Grizzlyhechel."
 
-// en history: Jack Horner of San Francisco tied it for California's swift rivers in the 1940s, early or late by different accounts, from the Tom Thumb's two clumps of deer hair over a thread body. Pat Barnes of West Yellowstone found two of them in a trout's jaw on Cliff Lake in 1947, by Rusty Dunn's account (1943 in another), and his wife Sig copied them; as the Goofus Bug it became a Yellowstone staple, and around Jackson Hole it got the name Humpy. Its trick is the single bunch of hair: tied in pointing back, bound down over the thread belly, folded forward as the hump, its tips stood up as the wings. Flagler's shortcut uses two bunches, and Craven makes the hump from the butts of the wing.
+// en history: Jack Horner of San Francisco tied it for California's swift rivers in the early 1940s. Pat Barnes of West Yellowstone found two of them in a trout's jaw on Cliff Lake in 1947, by Rusty Dunn's account, and his wife Sig copied them; as the Goofus Bug it became a Yellowstone staple, and around Jackson Hole it got the name Humpy. Its trick is the single bunch of hair: tied in pointing back, bound down over the thread belly, folded forward as the hump, its tips stood up as the wings. Flagler's shortcut uses two bunches, and Craven makes the hump from the butts of the wing.
 history """
-    Jack Horner aus San Francisco band sie in den 1940er Jahren für Kaliforniens reißende
-    Flüsse, früh oder spät je nach Quelle, nach den zwei Rehhaarbüscheln der Tom Thumb über
-    einem Fadenkörper. Pat Barnes aus West Yellowstone fand 1947 auf dem Cliff Lake zwei davon
-    im Maul einer Forelle, nach Rusty Dunn (1943 nach einer anderen Quelle), und seine Frau Sig
-    band sie nach; als Goofus Bug wurde sie ein Klassiker um den Yellowstone, und um Jackson
-    Hole bekam sie den Namen Humpy. Ihr Kniff ist das eine Haarbüschel: nach hinten zeigend
-    eingebunden, über dem Fadenbauch festgebunden, als Buckel nach vorn geklappt und die Spitzen
-    als Flügel aufgerichtet. Flaglers Abkürzung nimmt zwei Büschel, und Craven macht den Buckel
-    aus den Enden des Flügels.
+    Jack Horner aus San Francisco band sie Anfang der 1940er Jahre für Kaliforniens reißende
+    Flüsse. Pat Barnes aus West Yellowstone fand 1947 auf dem Cliff Lake zwei davon im Maul
+    einer Forelle, nach Rusty Dunn, und seine Frau Sig band sie nach; als Goofus Bug wurde sie
+    ein Klassiker um den Yellowstone, und um Jackson Hole bekam sie den Namen Humpy. Ihr Kniff
+    ist das eine Haarbüschel: nach hinten zeigend eingebunden, über dem Fadenbauch festgebunden,
+    als Buckel nach vorn geklappt und die Spitzen als Flügel aufgerichtet. Flaglers Abkürzung
+    nimmt zwei Büschel, und Craven macht den Buckel aus den Enden des Flügels.
     """
 
-// en fishing: A big, buoyant attractor for fast, broken water on western rivers, where the hollow hair hump keeps it up through riffles and pocket water. Fish it dead drift; the yellow belly suggests a stonefly or a hatching caddis as much as a mayfly.
+// en fishing: A big, buoyant attractor for fast, broken water on western rivers, where the hollow hair hump keeps it up through riffles and pocket water. Fish it dead drift; Kathy Buchner writes that it can suggest a mayfly, a caddis or an adult stonefly, and that it can be fished wet as an emerging caddis.
 fishing """
     Eine große, schwimmfreudige Reizfliege für schnelles, gebrochenes Wasser an den Flüssen des
     amerikanischen Westens, wo der hohle Haarbuckel sie durch Rauschen und Taschenwasser oben
-    hält. Fische sie frei treibend; der gelbe Bauch erinnert ebenso an eine Steinfliege oder
-    schlüpfende Köcherfliege wie an eine Eintagsfliege.
+    hält. Fische sie frei treibend; Kathy Buchner schreibt, dass sie an eine Eintagsfliege,
+    eine Köcherfliege oder eine erwachsene Steinfliege erinnern kann und dass man sie nass als
+    schlüpfende Köcherfliege fischen kann.
     """
 
 labels {

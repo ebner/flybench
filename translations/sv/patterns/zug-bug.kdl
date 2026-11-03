@@ -4,22 +4,22 @@ status draft
 // en description: A tail of peacock sword fibres, a cigar-shaped peacock herl body ribbed with oval silver, soft brown hen legs and a short wing case of wood duck flank, clipped square.
 description "En stjärt av påfågelsvärd, en cigarrformad kropp av påfågelherl ribbad med oval silvertinsel, mjuka ben av brunt hönshackel och en kort vingsäck av brudandsflank, rakt avklippt."
 
-// en history: Cliff Zug of West Lawn, Pennsylvania, tied it in the 1930s, and it made its name on the streams of the Catskills; in the 1940s Arnold Gingrich spread it through his books after it did well in Yellowstone and the Sierra. A link to the older Kemp Bug is suggested but not shown. The original wing case was lemon wood duck flank, tied in at the head lying flat and clipped short; mallard flank, natural or dyed, is the usual stand-in. Sources differ on the tail, from a gape to a shank long, and on how long the wing case is left.
+// en history: Cliff Zug of West Lawn, Pennsylvania, tied it in the 1930s, and it made its name on the streams of the Catskills; in the 1940s Arnold Gingrich fished it with success in Yellowstone and the Sierra, and his praise in print carried it west. A link to the older Kemp Bug is suggested but not shown. The original wing case was lemon wood duck flank, tied in at the head lying flat and clipped short; mallard flank, natural or dyed, is the usual stand-in. Sources differ on the tail, from a gape to a shank long, and on how long the wing case is left.
 history """
     Cliff Zug i West Lawn i Pennsylvania band den på 1930-talet, och den gjorde sig ett namn i
-    Catskills bäckar; på 1940-talet spred Arnold Gingrich den genom sina böcker sedan den fiskat
-    bra i Yellowstone och Sierra Nevada. En koppling till den äldre Kemp Bug har antytts men
+    Catskills bäckar; på 1940-talet fiskade Arnold Gingrich framgångsrikt med den i Yellowstone
+    och Sierra Nevada, och hans lovord i tryck spred den västerut. En koppling till den äldre Kemp Bug har antytts men
     inte visats. Den ursprungliga vingsäcken var citrongul brudandsflank, inbunden vid huvudet
     liggande platt och kortklippt; gräsandsflank, naturell eller färgad, är den vanliga
     ersättningen. Källorna skiljer sig om stjärten, från ett krokgap till ett skaft lång, och om
     hur lång vingsäcken lämnas.
     """
 
-// en fishing: A peacock nymph that suggests caddis larvae, mayfly nymphs and much else: dead drift near the bottom in slow water, swing it or twitch it, alone or with a second nymph. On lakes it is fished slowly, as a dropper behind a leech.
+// en fishing: A peacock nymph that suggests caddis larvae, mayfly nymphs and much else: dead drift near the bottom in slow water, swing it or twitch it, alone or with a second nymph. On lakes it is fished as a dropper behind a leech.
 fishing """
     En påfågelnymf som liknar nattsländelarver, dagsländenymfer och mycket annat: fritt drivande
     nära botten i lugnt vatten, svept eller ryckt, ensam eller med en andra nymf. I sjöar fiskas
-    den långsamt, som hängare bakom en igelfluga.
+    den som hängare bakom en igelfluga.
     """
 
 labels {

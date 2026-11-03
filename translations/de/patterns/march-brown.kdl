@@ -4,25 +4,25 @@ status draft
 // en description: A partridge tail, a hare's ear body ribbed with gold wire, a brown partridge throat and a low wing of hen pheasant quill.
 description "Ein Schwanz aus Rebhuhnfibern, ein Körper aus Hasenohr mit Golddrahtrippung, ein Bart aus braunem Rebhuhn und ein niedriger Flügel aus Fasanenhennenschwinge."
 
-// en history: One of the oldest trout flies. Berners' "donne flye" of 1496 has a body of dun wool and partridge wings, Chetham printed a "Moorish Brown" in 1681, and Bowlker gave a March Brown of hare's ear ribbed with yellow silk under partridge or pheasant wings. The dressing tied today is close to T. E. Pritt's in Yorkshire Trout Flies (1885): a forked partridge tail, hare's ear and a little yellow mohair ribbed with yellow silk, partridge legs and a hen pheasant wing, "indispensable on fair days through March and April". Shops now rib it with gold; Pritt's hackled version, without a wing, is the March Brown Spider. It copies Rhithrogena in Europe; in America the name went to another mayfly.
+// en history: One of the oldest trout flies. Berners' "donne flye" of 1496 has a body of dun wool and partridge wings, by 1700 Chetham gave a "Moorish Brown" with partridge wings, and Bowlker gave a March Brown of hare's ear ribbed with yellow silk under partridge or pheasant wings. The dressing tied today is close to T. E. Pritt's in Yorkshire Trout Flies (1885): a forked partridge tail, hare's ear and a little yellow mohair ribbed with yellow silk, partridge legs and a hen pheasant wing, "indispensable on fair days through March and April". Shops now rib it with gold; Pritt's hackled version, without a wing, is the March Brown Spider. It copies Rhithrogena in Europe; in America the name went to another mayfly.
 history """
     Eine der ältesten Forellenfliegen. Berners' „donne flye“ von 1496 hat einen Körper aus
-    brauner Wolle und Flügel vom Rebhuhn, Chetham druckte 1681 eine „Moorish Brown“, und Bowlker
-    gab eine March Brown aus Hasenohr mit gelber Seide gerippt unter Flügeln von Rebhuhn oder
-    Fasan. Die heutige Bindeweise folgt eng T. E. Pritts Yorkshire Trout Flies (1885): ein
-    gespaltener Schwanz vom Rebhuhn, Hasenohr mit etwas gelbem Mohair, mit gelber Seide gerippt,
-    Beine vom Rebhuhn und ein Flügel von der Fasanenhenne, „unentbehrlich an schönen Tagen im
-    März und April“. Händler rippen sie heute mit Gold; Pritts gehechelte Version ohne Flügel
-    ist die March Brown Spider. In Europa ahmt sie Rhithrogena nach; in Amerika ging der Name
-    auf eine andere Eintagsfliege über.
+    brauner Wolle und Flügel vom Rebhuhn, 1700 gab Chetham eine „Moorish Brown“ mit
+    Rebhuhnflügeln an, und Bowlker gab eine March Brown aus Hasenohr mit gelber Seide gerippt
+    unter Flügeln von Rebhuhn oder Fasan. Die heutige Bindeweise folgt eng T. E. Pritts
+    Yorkshire Trout Flies (1885): ein gespaltener Schwanz vom Rebhuhn, Hasenohr mit etwas gelbem
+    Mohair, mit gelber Seide gerippt, Beine vom Rebhuhn und ein Flügel von der Fasanenhenne,
+    „unentbehrlich an schönen Tagen im März und April“. Händler rippen sie heute mit Gold;
+    Pritts gehechelte Version ohne Flügel ist die March Brown Spider. In Europa ahmt sie
+    Rhithrogena nach; in Amerika ging der Name auf eine andere Eintagsfliege über.
     """
 
-// en fishing: Fished across and down, or upstream on a short line, during the March Brown hatch in spring, when the duns are drowned or struggling in the film; through the season it is a general searching wet fly, a hare's ear with a wing. Pritt fished it on Yorkshire rivers and on Loch Leven.
+// en fishing: Fished across and down, or upstream on a short line, during the March Brown hatch in spring, when the duns are drowned or struggling in the film; through the season it is a general searching wet fly, a hare's ear with a wing. Pritt proved his partridge-winged version on the Yorkshire rivers and on Loch Leven.
 fishing """
     Schräg stromab oder an kurzer Schnur stromauf gefischt, während des Schlupfs der Märzbraunen
     im Frühjahr, wenn die Subimagines ertrinken oder im Film zappeln; über die Saison ist sie
-    eine allgemeine Suchnassfliege, ein Hasenohr mit Flügel. Pritt fischte sie an den Flüssen
-    Yorkshires und auf dem Loch Leven.
+    eine allgemeine Suchnassfliege, ein Hasenohr mit Flügel. Pritt bewährte seine Version mit
+    Rebhuhnflügel an den Flüssen Yorkshires und auf dem Loch Leven.
     """
 
 labels {

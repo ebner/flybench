@@ -4,23 +4,21 @@ status draft
 // en description: A slim dubbed body, a sparse elk-hair wing past the bend, and a balloon of yellow foam folded back over a dubbed thorax.
 description "En smal dubbad kropp, en gles vinge av älghår bakom böjen och en ballong av gult skum vikt bakåt över en dubbad thorax."
 
-// en history: Roman Moser, the Austrian tyer and guide on the Traun, designed it to suggest a caddis breaking through the film; it is credited to him by Mike Weaver, Jason Klass and Davie McPhail, though no date or text of Moser's own turned up. The foam is tied in at the eye pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps the front of the fly up while the body hangs in the film. Moser's foam was yellow, also the angler's sighter; the body is dubbed to match the sedges, olive, grey or brown.
+// en history: Roman Moser, the Austrian tyer and teacher whose home river is the Traun, designed it to suggest a caddis breaking through the film; it is credited to him by Mike Weaver and Jason Klass, though no date or text of Moser's own turned up. The foam is tied in at the eye pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps the front of the fly up while the body hangs in the film. Moser's foam was yellow; the body is dubbed to match the sedges, olive, grey or brown.
 history """
-    Roman Moser, den österrikiske flugbindaren och guiden vid Traun, skapade den för att
-    efterlikna en nattslända som bryter igenom ytfilmen; Mike Weaver, Jason Klass och Davie
-    McPhail tillskriver honom den, men varken årtal eller någon text av Moser själv har
-    hittats. Skummet binds in vid öglan pekande framåt och viks bakåt över thoraxen, så att
-    det bildar en ihålig ballong som håller uppe flugans framdel medan kroppen hänger i filmen.
-    Mosers skum var gult, också som markering för fiskaren; kroppen dubbas i nattsländornas
-    färger, oliv, grå eller brun.
+    Roman Moser, den österrikiske flugbindaren och instruktören med Traun som hemmaälv, skapade
+    den för att efterlikna en nattslända som bryter igenom ytfilmen; Mike Weaver och Jason Klass
+    tillskriver honom den, men varken årtal eller någon text av Moser själv har hittats. Skummet
+    binds in vid öglan pekande framåt och viks bakåt över thoraxen, så att det bildar en ihålig
+    ballong som håller uppe flugans framdel medan kroppen hänger i filmen. Mosers skum var gult;
+    kroppen dubbas i nattsländornas färger, oliv, grå eller brun.
     """
 
-// en fishing: Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on a summer evening, cast across and downstream and skate it back in short jerks. It is hard for trout to resist when dragged, and the yellow balloon stays easy to see in poor light and can carry a small nymph as a dropper.
+// en fishing: Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on a summer evening, cast across and downstream and skate it back in short jerks. It floats well enough to carry a small nymph as a dropper.
 fishing """
     Fiska den fritt drivande som en Elk Hair Caddis, eller, när öringen jagar kläckande
-    nattsländor en sommarkväll, kasta snett nedströms och dra den tillbaka i korta ryck. Dragen
-    är den svår för öringen att motstå, och den gula ballongen syns bra i dåligt ljus och kan
-    bära en liten nymf som hängare.
+    nattsländor en sommarkväll, kasta snett nedströms och dra den tillbaka i korta ryck. Den
+    flyter tillräckligt bra för att bära en liten nymf som hängare.
     """
 
 labels {

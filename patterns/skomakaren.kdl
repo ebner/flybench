@@ -14,25 +14,24 @@ description "A slim black wool body ribbed with copper wire, a long light brown 
 history """
     Oskar Fick, a shoemaker in Hede on the Ljusnan, was dissatisfied with the English flies
     he could buy and in 1918 tied his first own fly, modelled on the insects of the river.
-    His series grew to 34; the first 24 were named in 1938–39 by the game warden Bengt
-    Belander and the angler Nils Färnström, and Skomakaren, the shoemaker, is number one. His
-    daughter Alma Nordlund tied them for decades by hand, without a vise, twelve an hour. The
-    Hede flies are called Sweden's first fly series. Many shop Skomakaren have a yellow tail,
-    added over time; the early original has none, and with the tail it is the series' Svarta
-    Lisa. Gunnar Johnson took the dressings from Färnström's book Fisketur (1955); they give
+    His series grew to 34; the first 24 were named in 1938–39 by the forester Bengt Belander
+    and the angler Nils Färnström, and Skomakaren, the shoemaker, is number one. His daughter
+    Alma Nordlund, his helper from the age of fifteen, carried on the series; she tied by hand,
+    without a vise, twelve an hour. The Hede flies are called Sweden's first fly series. The
+    original has no tail; Svarta Lisa, number three in the series, is much the same fly with a
+    yellow tail. Gunnar Johnson took the dressings from Färnström's book Fisketur (1955); they give
     colours rather than materials, and he suggests ordinary wool yarn and hen hackle.
     """
 fishing """
     Cast down and across and let it sweep over the fish's lie; cast a little upstream when
-    the fish lie deep, to give it time to sink. A fly for grayling and trout in the Ljusnan and
-    the rivers of Härjedalen, fished on its own or in a team of Hede flies.
+    the fish lie deep, to give it time to sink. A fly for grayling and trout, made on the
+    Ljusnan at Hede.
     """
 sources {
     "Flugfiskemagasinet Rackelhanen: Hedeflugorna (Gunnar Johnson, 1982)" url="http://www.rackelhane.se/swe/1502.htm"
     "Flugfiskemagasinet Rackelhanen: Hedeflugan (Horst Kuehne)" url="https://www.rackelhane.se/swe/1504.htm"
     "Fiske i Hede: Hedeflugan" url="https://fiskeihede.se/Hedeflugan.htm"
     "Långåfisket: Hedeflugan, Sveriges första flugserie (Helge Jonsson)" url="https://www.langafisket.se/fiskenyheter/hedeflugan-sveriges-forsta-flugserie/"
-    "Lapponicus: Skomakaren" url="https://shop.lapponicus.se/flugor-vatnymf/skomakaren"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

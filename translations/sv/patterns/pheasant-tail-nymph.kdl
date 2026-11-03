@@ -4,16 +4,13 @@ status draft
 // en description: Four pheasant tail fibres and fine copper wire, with no thread: a short tail, a slim body, a wire thorax hump and a double wing case.
 description "Fyra fasanstjärtfibrer och tunn koppartråd, ingen bindtråd: en kort stjärt, en smal kropp, en thoraxpuckel av koppartråd och en dubbel vingsäck."
 
-// en history: Frank Sawyer was a river keeper on the Wiltshire Avon from 1925 until he died on its banks at Netheravon in 1980, from 1928 for the Officers' (later Services Dry Fly) Fishing Association. He saw that olive nymphs swim with their legs tucked in, so his nymph has no hackle, and he tied it with fine copper wire in place of silk, which also gives it weight; Sporting Road says the wire came from a relay coil. The fly was published in Nymphs and the Trout in 1958; when he first tied it is less certain: Sporting Road dates the method to the 1930s, Fly Fishing the Sierra the fly to the 1950s. He often tied it on the river bank, without a vise.
+// en history: Frank Sawyer was a river keeper on the Wiltshire Avon from 1925 until he died on its banks at Netheravon in 1980, from 1928 for the Officers' (later Services Dry Fly) Fishing Association. He saw that olive nymphs swim with their legs tucked in, so his nymph has no hackle, and he tied it with fine copper wire in place of silk, which also gives it weight. The fly was published in Nymphs and the Trout in 1958.
 history """
     Frank Sawyer var fiskevårdare vid Wiltshire Avon från 1925 tills han dog vid dess strand
     i Netheravon 1980, från 1928 för Officers' (senare Services Dry Fly) Fishing
     Association. Han såg att olivdagsländornas nymfer simmar med benen indragna, så hans
     nymf har inget hackel, och han band den med tunn koppartråd i stället för silke, vilket
-    också ger den tyngd; enligt Sporting Road kom tråden från en reläspole. Flugan
-    publicerades i Nymphs and the Trout 1958; när han först band den är mindre säkert:
-    Sporting Road daterar metoden till 1930-talet, Fly Fishing the Sierra flugan till
-    1950-talet. Han band den ofta på flodstranden, utan bindstäd.
+    också ger den tyngd. Flugan publicerades i Nymphs and the Trout 1958.
     """
 
 // en fishing: Made for clear chalk streams, where the trout can be seen: cast well upstream of the fish, let the nymph sink to its depth, and as it comes near, lift the rod gently so the nymph swims up in front of it: Sawyer's induced take. It also catches fish on lakes, worked slowly below the surface.

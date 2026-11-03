@@ -12,23 +12,23 @@ season june july august september
 origin originator="Roman Moser" region="River Traun, Austria"
 description "A slim dubbed body, a sparse elk-hair wing past the bend, and a balloon of yellow foam folded back over a dubbed thorax."
 history """
-    Roman Moser, the Austrian tyer and guide on the Traun, designed it to suggest a caddis
-    breaking through the film; it is credited to him by Mike Weaver, Jason Klass and Davie
-    McPhail, though no date or text of Moser's own turned up. The foam is tied in at the eye
+    Roman Moser, the Austrian tyer and teacher whose home river is the Traun, designed it to
+    suggest a caddis breaking through the film; it is credited to him by Mike Weaver and Jason
+    Klass, though no date or text of Moser's own turned up. The foam is tied in at the eye
     pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps
-    the front of the fly up while the body hangs in the film. Moser's foam was yellow, also
-    the angler's sighter; the body is dubbed to match the sedges, olive, grey or brown.
+    the front of the fly up while the body hangs in the film. Moser's foam was yellow; the body
+    is dubbed to match the sedges, olive, grey or brown.
     """
 fishing """
-    Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on
-    a summer evening, cast across and downstream and skate it back in short jerks. It is hard
-    for trout to resist when dragged, and the yellow balloon stays easy to see in poor light
-    and can carry a small nymph as a dropper.
+    Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on a
+    summer evening, cast across and downstream and skate it back in short jerks. It floats well
+    enough to carry a small nymph as a dropper.
     """
 sources {
     "Fly Tying Chronicles: Balloon Caddis" url="https://flytyingchronicles.blogspot.com/2008/03/balloon-caddis.html"
     "Tenkara Talk: The Balloon Caddis (Jason Klass)" url="https://www.tenkaratalk.com/2010/04/the-balloon-caddis/"
     "CFFC 7th Winter Fly Swap: Balloon Caddis (Mike Weaver)" url="https://www.fly-fishing-club.co.uk/2005_balloon_caddis.html"
+    "Global FlyFisher: Roman Moser (Martin Joergensen)" url="https://globalflyfisher.com/comment/5142"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

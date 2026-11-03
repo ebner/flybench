@@ -2,7 +2,7 @@
 
 id coch-y-bonddu
 name "Coch-y-Bonddu"
-aliases "Coch-y-Bondhu" "Shorn Fly" "Marlow Buzz" "Bracken Clock"
+aliases "Coch-y-Bondhu" "Shorn Fly" "Marlow Buzz"
 type dry
 imitates terrestrial
 naturals beetle
@@ -12,13 +12,12 @@ season may june july august
 origin region="Wales"
 description "A flat gold tag, a plump body of bronze peacock herl ribbed with gold wire, and a red-and-black coch-y-bonddu hackle."
 history """
-    A traditional Welsh fly imitating a small beetle, which Mary Orvis Marbury says is
-    sometimes called the bracken clock; Rusty Dunn names it as the garden chafer. Charles
-    Bowlker's Art of Angling (1792 edition) has it as the Shorn Fly: a red cock's hackle
-    "with a black list up the middle" and a peacock herl body. The 1854 edition adds that it
-    is much used in Wales and better known there as Coch-a-bonddu, "red with a black body",
-    after the hackle. Fred Klein traces peacock soft hackles back to Dennys's Secrets of
-    Angling (1613); that is unverified.
+    A traditional Welsh fly imitating a small beetle, which Mary Orvis Marbury says is sometimes
+    called the bracken clock; Rusty Dunn names Phyllopertha horticola, the garden chafer.
+    Charles Bowlker's Art of Angling (1792 edition) has it as the Shorn Fly: a red cock's hackle
+    "with a black list up the middle" and a peacock herl body. The 1854 edition adds that it is
+    much used in Wales and better known there as Coch-a-bonddu, "red with a black body", after
+    the hackle.
     """
 fishing """
     Bowlker's 1854 edition has it at its best in June but useful all season, and says many
@@ -33,6 +32,7 @@ sources {
     "SWTU: Coch-y-Bonddu (Rusty Dunn)" url="https://www.swtu.org/2020/03/05/coch-y-bonddu/"
     "Midcurrent: A Fly Fishing Chronicle: The Coch-y-Bonddu (Fred Klein)" url="https://midcurrent.com/flies/a-fly-fishing-chronicle-the-coch-y-bonddu/"
     "Fish4Flies: Coch-y-Bondhu" url="https://www.fish4flies.co.uk/Dry/Terrestrials/Coch-y-bondhu"
+    "Marbury: Favorite Flies and Their Histories (1892)" url="https://archive.org/details/favoritefliesthe00marb"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

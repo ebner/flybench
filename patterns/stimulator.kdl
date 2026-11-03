@@ -19,7 +19,7 @@ history """
     article): Kaufmann phoned him about his "Fluttering Stonefly" of the late 1970s, said
     he had slimmed the wing and shortened the front hackle, and agreed to the name
     Slattery suggested. Neither account has been independently confirmed.
-    Kaufmann published it in Tying Dry Flies (1991), with the fly on the cover. He also
+    Kaufmann published it in Tying Dry Flies (1991). He also
     says the style was not new: he mixed the Improved Sofa Pillow and the Royal Trude.
     """
 fishing """
@@ -32,6 +32,7 @@ sources {
     "SWTU: Jim Slattery's Original Stimulator (Rusty Dunn)" url="https://www.swtu.org/2023/03/07/jim-slatterys-original-stimulator/"
     "Fly Fisherman: A Classic American Fly: The Stimulator (Tom Rosenbauer)" url="https://www.flyfisherman.com/editorial/classic-american-fly-stimulator/455993"
     "Fly Fisherman: How to tie the Stimulator Fly (Charlie Craven)" url="https://www.flyfisherman.com/editorial/fly-tying-stimulator-fly/151967"
+    "Wikipedia: Stimulator (dry fly)" url="https://en.wikipedia.org/wiki/Stimulator_(dry_fly)"
     "Wikipedia: Artificial fly (attractor patterns)" url="https://en.wikipedia.org/wiki/Artificial_fly"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.

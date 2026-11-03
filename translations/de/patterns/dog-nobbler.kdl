@@ -4,25 +4,24 @@ status draft
 // en description: A painted split shot with an eye on each side crimped behind the hook's eye, a long black marabou tail with pearl flash and a black chenille body ribbed with silver wire.
 description "Ein bemaltes Schrotblei mit einem Auge auf jeder Seite hinter dem Öhr festgeklemmt, ein langer Schwanz aus schwarzem Marabou mit Perlmuttflash und ein Körper aus schwarzer Chenille mit Silberdrahtrippung."
 
-// en history: Trevor Housby, the British angling writer, made it in the late 1970s or around 1980, by Michael Jensen's account after American anglers' small jigs, which he turned into a fly for the big stocked rainbows of the reservoirs. A professional tyer, Sid Knight of Bridgnorth, patented the name and dressing in 1984, by a quotation of John Roberts on a forum, and shops still credit it to him; an obituary of Fred J. Taylor says he too had a hand in it. The classic head is a coarse split shot crimped on and glued, painted with a yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins. It was controversial, and banned on some waters.
+// en history: Trevor Housby, a British all-round angler, made it for the big stocked rainbows of the reservoirs. Michael Jensen writes that it was in the 1970s, inspired by the small jigs American spin anglers used on ultralight tackle. Barry Ord Clarke credits Sid Knight, a professional tyer of Bridgnorth, instead. Keith Elliott's obituary of Fred J. Taylor says Taylor too played a key role in inventing it. The classic head is a coarse split shot crimped on and glued, painted with a yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins.
 history """
-    Trevor Housby, der britische Angelautor, schuf sie Ende der 1970er Jahre oder um 1980, nach
-    Michael Jensen nach den kleinen Jigs amerikanischer Angler, die er zu einer Fliege für die
-    großen Besatzregenbogenforellen der Stauseen umbaute. Ein Berufsbinder, Sid Knight aus
-    Bridgnorth, ließ Name und Bindeweise 1984 patentieren, nach einem Zitat von John Roberts in
-    einem Forum, und Händler schreiben sie noch ihm zu; ein Nachruf auf Fred J. Taylor sagt,
-    auch er habe dabei mitgewirkt. Der klassische Kopf ist ein grobes geschlitztes Schrotblei,
-    festgeklemmt und verklebt, auf jeder Seite mit einem gelben Auge und schwarzer Pupille
-    bemalt; Perlen, Konen und Hantelaugen sind moderne Ersatzlösungen. Sie war umstritten und an
-    manchen Gewässern verboten.
+    Trevor Housby, ein britischer Allround-Angler, schuf sie für die großen
+    Besatzregenbogenforellen der Stauseen. Michael Jensen schreibt, es sei in den 1970er Jahren
+    gewesen, angeregt von den kleinen Jigs, die amerikanische Spinnfischer an ultraleichtem
+    Gerät fischten. Barry Ord Clarke schreibt sie dagegen Sid Knight zu, einem Berufsbinder aus
+    Bridgnorth. Keith Elliotts Nachruf auf Fred J. Taylor sagt, auch Taylor habe bei
+    ihrer Erfindung eine Schlüsselrolle gespielt. Der klassische Kopf ist ein grobes
+    geschlitztes Schrotblei, festgeklemmt und verklebt, auf jeder Seite mit einem gelben Auge
+    und schwarzer Pupille bemalt; Perlen, Konen und Hantelaugen sind moderne Ersatzlösungen.
     """
 
-// en fishing: A stillwater lure for stocked rainbows, best in cold early-season water. On a floating line and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded head dives and the marabou rises, so it jigs through the water. Cast it with an open loop: the shot makes it heavy.
+// en fishing: A stillwater lure for stocked rainbows, best early in the season. On a floating line and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded head dives and the marabou rises, so it jigs through the water. Cast it with an open loop: the shot makes it heavy.
 fishing """
-    Ein Stillwasserstreamer für Besatzregenbogenforellen, am besten im kalten Wasser der frühen
-    Saison. An schwimmender Schnur mit langem Vorfach oder an sinkender Schnur in langsamen
-    Zügen mit Pausen: In jeder Pause taucht der bleischwere Kopf ab und das Marabou hebt sich,
-    sodass sie durchs Wasser jiggt. Wirf sie mit offener Schlaufe: Das Blei macht sie schwer.
+    Ein Stillwasserstreamer für Besatzregenbogenforellen, am besten in der frühen Saison. An
+    schwimmender Schnur mit langem Vorfach oder an sinkender Schnur in langsamen Zügen mit
+    Pausen: In jeder Pause taucht der bleischwere Kopf ab und das Marabou hebt sich, sodass sie
+    durchs Wasser jiggt. Wirf sie mit offener Schlaufe: Das Blei macht sie schwer.
     """
 
 labels {

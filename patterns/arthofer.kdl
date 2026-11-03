@@ -13,20 +13,19 @@ origin originator="Alois Arthofer" region="Vienna, Austria"
 description "A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both."
 history """
     Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his
-    son, who wrote to Ingo Karwath in 2024; it was tied in numbers in a workshop in Fischamend,
-    Lower Austria, and the Viennese dealer Norbert Eipeltauer sold it widely. Karwath had
-    first thought Eipeltauer at least a co-founder, but Eipeltauer wrote that he had nothing
-    to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as
-    a heavy fly in sizes 6 and 8. Sources differ on the details: Karwath ties a grey-beige
-    ostrich body with a grey tail, the etheonTV dressing black ostrich with a pheasant-tail
-    tail. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and
-    the wing case is folded forward from 2 to 3 mm behind the thorax.
+    son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying
+    workshop in Fischamend, Lower Austria, where flies were apparently tied professionally. The
+    Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at
+    least a co-founder, but later saw an article, now mislaid, in which Eipeltauer wrote that he
+    had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s
+    and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be
+    anything from white-beige through grey to brown, and the colour of the wing case is free.
+    Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing
+    case is folded forward from 2 to 3 mm behind the thorax.
     """
 fishing """
-    Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop
-    it so it swings in, and then work it like a streamer. The lead and copper take it deep in
-    fast water, and in big sizes it passes for a stonefly nymph or a shrimp as much as
-    anything.
+    Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it
+    so it swings in, and then work it like a streamer. The lead and copper take it down quickly.
     """
 sources {
     "Der-FliegenBinder: Die „Arthofer“ (Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
@@ -45,7 +44,7 @@ thread black size="6/0"
 
 materials {
     weight lead-free-wire label="Lead or lead-free wire"
-    // Karwath's photos: grey fibres; the etheonTV dressing: pheasant tail.
+    // Karwath's photos: grey fibres.
     tail hackle-fibres color="#b7aa98" count=30 label="Grey-beige fibres"
     body ostrich-herl strands=3 label="Grey-beige ostrich herl"
     case pheasant-tail count=10 label="Pheasant tail slip"

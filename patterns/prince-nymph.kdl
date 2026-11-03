@@ -12,19 +12,19 @@ season january february march april may june july august september october novem
 origin originator="Doug Prince" region="California, USA, 1940s"
 description "A forked brown biot tail, a peacock herl body ribbed with gold, a brown hen collar and two white biot horns, behind a gold bead."
 history """
-    Its forerunner, the Brown Forked Tail, is credited (Wikipedia, citing Ken McCoy among others)
-    to the brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s, with a black ostrich
-    herl body and white biot wings curving up. Doug Prince of Oakland, California, gave it a
-    peacock body and turned the wings down. He took up tying in 1943, by Dennis Bitton's account,
+    Its forerunner, the Brown Forked Tail, is credited by Wikipedia, Rusty Dunn and Orvis to the
+    brothers Don and Dick Olson of Bemidji, Minnesota, in the 1930s; its white biot wings curved
+    away from the body. Doug Prince, born in Oakland, California, gave it a peacock body, with the
+    wings standing out in a V. He took up tying in 1943, by Dennis Bitton's account,
     though Trout Unlimited has him first tying the fly in the 1930s. Prince tied for his friend
     Buz Buszek, who, rushing out his catalogue, forgot what Prince called the fly and listed it as
-    the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead and lead
-    came later.
+    the Prince Nymph. Prince's own dressing, published in 1966, has no bead; the bead, the lead
+    and the turned-down wings came later.
     """
 fishing """
-    A searching nymph, fished at or near the bottom, or as the dropper below a dry fly. In big
-    sizes it reads as a stonefly nymph, in middling ones as a caddis. Once the drift is done, a
-    few strips back, wet-fly fashion, can still bring a take.
+    A nymph fished at or near the bottom, or as the dropper below a dry fly. It passes for a
+    caddis larva or a small stonefly nymph, or serves simply as a searching fly. Once the drift is
+    done, a few strips back, wet-fly fashion, can still bring a take.
     """
 sources {
     "Fly Fishers International: Doug Prince, Buszek Award 1981 (Dennis Bitton)" url="https://flyfishersinternational.org/Portals/0/FlyTyingGroup/FTGDocuments/Buszek/1981_DougPrince.pdf"
@@ -33,7 +33,7 @@ sources {
     "Orvis Learning Center: Prince Nymph" url="https://howtoflyfish.orvis.com/fly-tying-videos/nymph-flies/666-prince-nymph"
     "Orvis News: Tying the Prince Nymph (Eric Rickstad)" url="https://news.orvis.com/fly-fishing/Tying-the-Prince-Nymph"
     "Trout Unlimited: Spring Fly Showdown: The Prince Nymph vs. the RS2 (Chris Hunt)" url="https://www.tu.org/magazine/community/spring-fly-showdown-the-prince-nymph-vs-the-rs2/"
-    "Brit + Co Guides: How to tie a bead head Prince's nymph for fly fishing" url="https://guides.brit.co/guides/tie-a-bead-head-princes-nymph-for-fly-fishing"
+    "SWTU: Fountains of Youth: Prince Nymph (Rusty Dunn)" url="https://www.swtu.org/2017/06/09/prince-nymph/"
     "Oregon Fly Fishing Blog: Hook size to bead size" url="https://oregonflyfishingblog.com/2010/05/26/hook-size-to-bead-size/"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.

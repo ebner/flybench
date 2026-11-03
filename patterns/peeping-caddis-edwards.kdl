@@ -1,4 +1,4 @@
-// Peeping Caddis as Oliver Edwards and Graydon Bell tie it: the larva at the front, as in nature.
+// Oliver Edwards' Peeping Caddis as Graydon Bell ties it: the larva at the front, as in nature.
 
 id peeping-caddis-edwards
 name "Peeping Caddis"
@@ -10,7 +10,7 @@ naturals caddis-larva-cased
 difficulty intermediate
 species grayling trout
 season january february march april may june july august september october november december
-origin originator="Oliver Edwards and Graydon Bell" region="England"
+origin originator="Oliver Edwards" region="England"
 description "A lead-weighted hare's mask case over the rear two thirds of a long-shank hook, with a white larva lying forward to a dark head at the eye and its legs underneath."
 history """
     Oliver Edwards' realistic cased caddis, here as Graydon Bell ties it: the grub comes out of

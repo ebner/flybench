@@ -4,24 +4,23 @@ status draft
 // en description: A short red wool tail, a red seal's fur body ribbed with gold wire, a red game hackle palmered its whole length and a longer collar in front.
 description "Ein kurzer Schwanz aus roter Wolle, ein Körper aus rotem Seehund mit Golddrahtrippung, eine Red-Game-Hechel über die ganze Länge gewunden und ein längerer Kragen vorn."
 
-// en history: One of the oldest flies on record. Walton (1653) has Barker's palmer flies, "some with red, and a red hackle", and Bowlker (1758) the Red Palmer of reddish mohair ribbed with gold twist under a red hackle: already the Soldier Palmer's materials. By 1892 Niven and Marbury print the name, Marbury explaining it by the red coat of the British soldier, and saying a red body with the hackle at the head only is a Red Hackle. The red tail that tells it from the Red Palmer came later and is usual in Britain today; Marbury's American fly has none. Bodies are wool or seal's fur, hackles red game or ginger, one or two of them.
+// en history: One of the oldest flies on record. Walton (1653) has Barker's palmer flies, "some with red, and a red hackle", and Bowlker (1758) the Red Palmer of reddish mohair ribbed with gold twist under a red hackle: already the Soldier Palmer's materials. By 1892 Niven and Marbury print the name, Marbury saying the fly's red coat suggested it, and that a red body with the hackle at the head only is a Red Hackle. The red tail that tells it from the Red Palmer came later and is usual in Britain today; Marbury's American fly has none. Bodies are wool or seal's fur, hackles red game or ginger, one or two of them.
 history """
     Eine der ältesten überlieferten Fliegen. Walton (1653) kennt Barkers Palmerfliegen, „some
     with red, and a red hackle“, und Bowlker (1758) die Red Palmer aus rötlichem Mohair mit
     Goldtwist gerippt unter einer roten Hechel: schon die Materialien der Soldier Palmer. 1892
-    drucken Niven und Marbury den Namen, Marbury erklärt ihn mit dem roten Rock des britischen
-    Soldaten und schreibt, ein roter Körper mit der Hechel nur am Kopf sei eine Red Hackle. Der
+    drucken Niven und Marbury den Namen, Marbury schreibt, der rote Rock der Fliege habe ihn
+    nahegelegt, und ein roter Körper mit der Hechel nur am Kopf sei eine Red Hackle. Der
     rote Schwanz, der sie von der Red Palmer unterscheidet, kam später und ist heute in
     Großbritannien üblich; Marburys amerikanische Fliege hat keinen. Die Körper sind aus Wolle
     oder Seehund, die Hecheln Red Game oder Ginger, eine oder zwei.
     """
 
-// en fishing: The bob fly: on the top dropper of a team of wet flies, dibbled through the wave tops from a drifting boat on lochs and lakes, where the bushy palmer leaves a wake. It suggests nothing in particular, or a big red buzzer in early summer, and takes trout, sea trout and char; it can be fished dry too.
+// en fishing: The bob fly: on the top dropper of a team of wet flies on lochs and lakes, where the bushy palmer leaves a wake in the wave. It suggests nothing in particular, or a large red buzzer; it can be fished dry too.
 fishing """
-    Die Bob-Fliege: am obersten Springer eines Vorfachs mit Nassfliegen, vom treibenden Boot
-    durch die Wellenkämme gezogen, wo die buschige Körperhechel eine Bugwelle zieht. Sie ahmt
-    nichts Bestimmtes nach, oder im Frühsommer eine große rote Zuckmücke, und fängt Forellen,
-    Meerforellen und Saiblinge; sie lässt sich auch trocken fischen.
+    Die Bob-Fliege: am obersten Springer eines Vorfachs mit Nassfliegen an Lochs und Seen, wo
+    die buschige Körperhechel in der Welle eine Bugwelle zieht. Sie ahmt nichts Bestimmtes
+    nach, oder eine große rote Zuckmücke; sie lässt sich auch trocken fischen.
     """
 
 labels {

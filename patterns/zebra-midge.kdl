@@ -12,9 +12,8 @@ origin originator="Ted Welling" region="Lees Ferry, Arizona, USA"
 description "A slim tapered black thread body with a silver wire rib, behind a silver bead, on a short curved hook."
 history """
     Created by Ted Welling, a guide at Lees Ferry on the Colorado River in Arizona, a
-    tailwater full of midges at the head of the Grand Canyon. Ralph Scherder dates it to
-    about 1996 and sees it as a variation of Kelly Davidson's Ice Cream Cone, a 1992
-    chironomid for British Columbia lakes; other sources give no date or ancestor.
+    tailwater full of midges at the head of the Grand Canyon. Ralph Scherder and a club
+    handout by Joe Sprys date it to the mid-1990s.
     """
 fishing """
     Imitates a midge pupa that sinks quickly; McFly Angler argues the silver bead makes it
@@ -29,6 +28,7 @@ sources {
     "Dark Skies Fly Fishing: Small but mighty, fishing the Zebra Midge (Ralph Scherder)" url="https://darkskiesflyfishing.com/post/small-but-mighty-fishing-the-zebra-midge/"
     "gbflycasters.org: Zebra Midge" url="https://gbflycasters.org/fly_tying/patterns/Zebra_Midge/Zebra_Midge.htm"
     "GlobalFlyFisher: Zebra Midge and variations (McFly Angler)" url="https://globalflyfisher.com/video/zebra-midge-and-variations"
+    "Joe Sprys: Midge patterns (club handout)" url="https://mffc.org/wp-content/uploads/2024/04/Joe-Sprys-Midge-Patterns.docx"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

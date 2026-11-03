@@ -12,26 +12,27 @@ origin originator="John Haily" year=1878 region="New York, USA"
 description "A golden pheasant tippet tail, a body of peacock herl with a red floss band, upright white duck quill wings and a brown hackle."
 history """
     The Coachman, a wet fly with a peacock body and white wings, is credited to Tom Bosworth,
-    coachman to the British court in the 1830s. In 1878 John Haily, a professional tyer in New
-    York, was asked for sturdier ones: he bound a band of red silk round the middle of the herl
+    coachman to George IV, William IV and Queen Victoria, in the 1830s. In 1878 John Haily, a
+    professional tyer in New York, was asked for sturdier ones: he bound a band of red silk round the middle of the herl
     to stop it fraying and gave the fly a barred wood duck tail. Mary Orvis Marbury tells how
     her uncle L. C. Orvis, seeing how finely it was dressed, named it the Royal Coachman. It was
     first a wet fly and is mostly fished dry today, with a tippet tail; Theodore Gordon gave it
-    fan wings, and in 1930 the hair-winged Quack Coachman led to the Royal Wulff. The name is
-    also spelled Hailey; Ahrex reports an English origin from Collier.
+    fan wings, and about 1930 Lee Wulff and Quackenbush each gave it a hair wing, which led to
+    the Royal Wulff. Ahrex reports an English origin from David Collier's Fly Dressing I.
     """
 fishing """
     An attractor, fished dead drift as an ordinary dry when trout are not feeding on anything in
-    particular, and the classic brook trout fly. The white wings make it easy to follow on the
-    water. Quill wings split after a few fish, which is why many anglers carry the Royal Wulff
-    instead.
+    particular. Duck quill wings are fragile; the hair-winged Royal Wulff was made because the
+    fan-winged version did not hold up on rough water.
     """
 sources {
     "Wikipedia: Royal Coachman" url="https://en.wikipedia.org/wiki/Royal_Coachman"
+    "Mary Orvis Marbury: Favorite Flies and Their Histories (1892)" url="https://archive.org/details/favoritefliesthe00marb"
+    "Wikipedia: Royal Wulff" url="https://en.wikipedia.org/wiki/Royal_Wulff"
     "MidCurrent: The Royal Coachman (Ian Whitelaw)" url="https://midcurrent.com/?p=24126"
     "Fly Fishers International: Fly of the Month, the Coachman (Jim Abbs, 2000)" url="https://www.flyfishersinternational.org/Portals/0/FlyoftheMonth/PreviousIssues/2000-09%20Sept%20-%20Coachman.pdf?ver=2012-03-12-215818-573"
     "Fly Tying Guide: Royal Coachman Dry (archived)" url="http://web.archive.org/web/20250819001112/https://www.flytying.guide/patterns/royal-coachman-dry"
-    "Ahrex Hooks: The Royal Coachman (Håkan Karsnäser)" url="https://ahrexhooks.com/2021/01/08/the-royal-coachman/"
+    "Ahrex Hooks: The Royal Coachman (Lars Chr. Bentsen; tied by Håkan Karsnäser)" url="https://ahrexhooks.com/2021/01/08/the-royal-coachman/"
 }
 // Photos for checking proportions while authoring (pnpm refcheck); never published.
 references {

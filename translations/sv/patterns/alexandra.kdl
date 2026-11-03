@@ -4,23 +4,27 @@ status draft
 // en description: A red goose tail, a flat silver body ribbed with fine oval silver, a black hen throat and a wing of peacock sword fibres with a thin red slip along each side.
 description "En stjärt av röd gås, en kropp av platt silvertinsel ribbad med smal oval silvertinsel, ett skägg av svart hönshackel och en vinge av påfågelsvärd med en tunn röd sektion längs varje sida."
 
-// en history: A fly of the 1860s, first called the Lady of the Lake and renamed after Alexandra, Princess of Wales; W. G. Turle is usually credited with the name, but by 1880 Marston wrote that Turle only believed he had invented it, and Brunton, "Old Fly", Hobbs and Kelson all made claims. Its dazzling silver and peacock made it a famous lake and sea-trout fly, so deadly that it was banned on some waters. The dressing tied in Britain today is the one Courtney Williams gave in 1949: red tail and cheeks, once of ibis and now of goose, a silver body, black hackle and a sword wing. American dressings use a peacock tail and a red or claret hackle.
+// en history: A fly of the 1860s or earlier, named after Alexandra, Princess of Wales from 1863. Courtney Williams wrote in 1932 that it was first called the Lady of the Lake, but gave no source. The earliest dated claim is a letter from "Old Fly", who said he first made and used it in May 1863. W. G. Turle is usually credited with the name. The claims were argued over by 1880: Marston wrote that Turle believed he had invented it, which he thought quite likely, and that Dr Brunton said he had, which he thought quite possible. Hobbs and Kelson made claims too. Its silver and peacock made it a well-known lake and sea-trout fly. Courtney Williams wrote that it had once been barred from some waters for being too deadly, but gave no source for that either. The dressing tied in Britain today is the one he gave in 1949: red tail and cheeks, once of ibis and now of goose, a silver body, black hackle and a sword wing. Ray Bergman's American dressing has a peacock sword tail and a red or claret hackle.
 history """
-    En fluga från 1860-talet, först kallad Lady of the Lake och omdöpt efter Alexandra,
-    prinsessa av Wales; W. G. Turle brukar få äran för namnet, men 1880 skrev Marston att Turle
-    bara trodde att han hade uppfunnit den, och Brunton, ”Old Fly”, Hobbs och Kelson gjorde alla
-    anspråk. Dess bländande silver och påfågel gjorde den till en berömd sjö- och
-    havsöringsfluga, så fångstrik att den förbjöds i en del vatten. Bindningen i Storbritannien
-    i dag är den som Courtney Williams gav 1949: röd stjärt och kinder, förr av ibis och nu av
-    gås, silverkropp, svart hackel och vinge av påfågelsvärd. Amerikanska bindningar har en
-    påfågelstjärt och ett rött eller vinrött hackel.
+    En fluga från 1860-talet eller tidigare, uppkallad efter Alexandra, prinsessa av Wales från
+    1863. Courtney Williams skrev 1932 att den först hette Lady of the Lake, men angav ingen
+    källa. Det tidigaste daterade anspråket är ett brev från ”Old Fly”, som skrev att han först
+    band och fiskade med den i maj 1863. W. G. Turle brukar få äran för namnet. Redan 1880 var
+    anspråken omstridda: Marston skrev att Turle trodde att han hade uppfunnit den, vilket han
+    fann mycket troligt, och att doktor Brunton sa att han hade gjort det, vilket han fann fullt
+    möjligt. Även Hobbs och Kelson gjorde anspråk. Dess silver och påfågel gjorde den till en
+    välkänd sjö- och havsöringsfluga. Courtney Williams skrev att den en gång förbjöds i en del
+    vatten för att den var för fångstrik, men angav ingen källa för det heller. Bindningen i
+    Storbritannien i dag är den som han gav 1949: röd stjärt och kinder, förr av ibis och nu av
+    gås, silverkropp, svart hackel och vinge av påfågelsvärd. Ray Bergmans amerikanska bindning
+    har en stjärt av påfågelsvärd och ett rött eller vinrött hackel.
     """
 
-// en fishing: A lake and loch fly, fished on the point of a team or stripped back from the boat, when trout are chasing fry; on rivers a sea-trout fly at dusk. The silver and peacock flash like a small fish, and it can be deadly for brown trout feeding on sticklebacks.
+// en fishing: A lake and loch fly, usually fished on the point of a team, often slowly on a sinking line, when trout are chasing fry; on rivers it is also a sea-trout fly. The silver and peacock flash like a small fish, perhaps a stickleback.
 fishing """
-    En sjöfluga, fiskad som spetsfluga i en tafs eller dragen tillbaka från båten när öringen
-    jagar yngel; i älvar en havsöringsfluga i skymningen. Silvret och påfågeln blänker som en
-    liten fisk, och den kan vara dödlig för öring som äter spigg.
+    En sjöfluga, oftast fiskad som spetsfluga i en tafs, ofta långsamt på sjunklina, när öringen
+    jagar yngel; i älvar är den också en havsöringsfluga. Silvret och påfågeln blänker som en
+    liten fisk, kanske en spigg.
     """
 
 labels {

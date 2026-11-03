@@ -10,20 +10,21 @@ imitates attractor
 difficulty beginner
 species trout sea-trout
 season april may june july august september
-origin region="Scotland, by 1882"
+origin region="Britain, by 1882"
 description "A short red wool tail, a black seal's fur body ribbed with fine oval silver, a black cock hackle palmered from tail to head, and a bright blue hen front hackle."
 history """
-    Nobody knows who tied the first. By 1882 "Black Palmer" could already list "black spiders
-    with red tips, commonly called Zulus" among the flies for a fortnight on remote Scottish
-    lochs, and in 1892 Niven's lexicon described it as "made like a palmer, black hackle, black
-    body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking
-    Lars reports it, gives it a silver tag and hen hackles. Two modern sources say it was once
-    banned, from competitions or in some waters, for catching too well; neither gives details.
+    Nobody knows who tied the first. By 1882 "Black Palmer", in Scotch Loch-Fishing, could
+    already list "black spiders with red tips, commonly called Zulus" among the flies for a
+    fortnight's sport in an out-of-the-way place, and in 1892 Niven's lexicon described it as
+    "made like a palmer, black hackle, black body, ribbed silver tinsel, with red wool tag for tail". Walbran's 1889 catalogue, as Viking
+    Lars reports it, gives it a silver tag and hen hackles. These records are of the Zulu; no source
+    here dates the blue-hackled version.
     """
 fishing """
-    A loch fly, at its best on the bob: the top dropper of a team of three or four, worked
-    through the wave tops from a drifting boat. Dark, windy days suit it. Alan the Highlander
-    rates the blue-hackled version above all as a sea-trout fly; it takes brown trout as well.
+    A loch fly, at its best on the bob: the top dropper of a loch team, worked through the wave
+    tops from a drifting boat. Dark, windy days suit it. Alan the Highlander calls the
+    blue-hackled version one of the deadliest patterns for sea trout; it takes brown trout as
+    well.
     """
 sources {
     "Internet Archive: Scotch Loch-Fishing (Black Palmer, 1882)" url="https://archive.org/details/scotchloch-fishi00senirich"

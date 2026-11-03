@@ -2,7 +2,6 @@
 
 id f-fly
 name "F-Fly"
-aliases "Fratnik Fly"
 type dry
 // The body lies in the film with only the wing above it (see fishing).
 fishes film
@@ -11,7 +10,7 @@ naturals caddis-adult midge-adult mayfly-emerger
 difficulty beginner
 species trout grayling
 season may june july august september
-origin originator="Marjan Fratnik" year=1980 region="Soča, Slovenia"
+origin originator="Marjan Fratnik" region="Slovenia"
 description "A body of tying thread and a wing of natural dun CDC, cut to length."
 history """
     Designed by Marjan Fratnik, born in 1919 at Most na Soči in Slovenia's Soča valley, as a
