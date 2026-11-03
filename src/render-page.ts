@@ -1,4 +1,5 @@
-import { swatchRecipe } from "./catalog/swatch";
+import { hookRecipe, swatchRecipe } from "./catalog/swatch";
+import type { Recipe } from "./recipe/schema";
 import { findNatural } from "./naturals";
 import { findPattern } from "./patterns";
 import type { MaterialKind } from "./recipe/materials";
@@ -50,7 +51,8 @@ const HIRES: RealAssetUrls = {
 };
 
 const swatch = params.get("swatch")?.match(/^([a-z-]+):(.+)$/);
-const pattern = swatch ? { recipe: swatchRecipe(swatch[1] as MaterialKind, swatch[2]!) } : findPattern(id);
+const hookModel = params.get("hook") as Recipe["hook"]["model"] | null;
+const pattern = swatch ? { recipe: swatchRecipe(swatch[1] as MaterialKind, swatch[2]!) } : hookModel ? { recipe: hookRecipe(hookModel) } : findPattern(id);
 const natural = params.get("natural") ? findNatural(params.get("natural")!) : undefined;
 if (waterView === "angler" || waterView === "below") {
   renderInWater(waterView).catch((e: unknown) => (document.body.dataset.error = String(e instanceof Error ? e.stack : e)));

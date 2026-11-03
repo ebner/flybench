@@ -56,6 +56,22 @@ export function useNaturalPictures(): Record<string, string> | null {
   return m;
 }
 
+let hookPictures: Promise<Record<string, string>> | null = null;
+
+/** Pictures of the bare hooks by model (public/renders/hooks/), for the builder, or null while loading. */
+export function useHookPictures(): Record<string, string> | null {
+  const [m, setM] = useState<Record<string, string> | null>(null);
+  useEffect(() => {
+    hookPictures ??= fetch(`${import.meta.env.BASE_URL}renders/hooks/manifest.json`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({}));
+    hookPictures.then((hashes: Record<string, string>) =>
+      setM(Object.fromEntries(Object.entries(hashes).map(([id, hash]) => [id, `${import.meta.env.BASE_URL}renders/hooks/${id}.webp?v=${hash}`]))),
+    );
+  }, []);
+  return m;
+}
+
 export function renderUrls(id: string, info: RenderInfo) {
   const base = `${import.meta.env.BASE_URL}renders/${encodeURIComponent(id)}`;
   return { card: `${base}/card.webp?v=${info.hash}`, spin: `${base}/spin.webp?v=${info.hash}` };

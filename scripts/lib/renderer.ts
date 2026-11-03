@@ -12,6 +12,8 @@ export interface RenderOptions {
   swatch?: string;
   /** Instead of a pattern: a natural, by id. */
   natural?: string;
+  /** Instead of a pattern: a bare hook of this model. */
+  hook?: string;
   view: View;
   grid?: boolean;
   transparent?: boolean;
@@ -72,6 +74,7 @@ export class Renderer {
       pose: options.pose ?? "tied",
       ...(options.swatch ? { swatch: options.swatch } : {}),
       ...(options.natural ? { natural: options.natural } : {}),
+      ...(options.hook ? { hook: options.hook } : {}),
     });
     await page.goto(`${this.base}render.html?${query}`);
     await page.waitForFunction(() => document.body.dataset.ready || document.body.dataset.error, null, { timeout: 60_000 });

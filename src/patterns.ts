@@ -6,7 +6,7 @@ import { NATURALS } from "./naturals";
 import { validateCatalog } from "./recipe/catalog";
 import { formatError } from "./recipe/errors";
 import { loadRecipe, locate } from "./recipe/load";
-import type { Recipe } from "./recipe/schema";
+import { NAMED_COLORS, type Recipe } from "./recipe/schema";
 
 const sources = import.meta.glob("../patterns/*.kdl", { query: "?raw", import: "default", eager: true }) as Record<
   string,
@@ -38,6 +38,16 @@ export const PATTERNS: Pattern[] = loaded.sort((a, b) => a.recipe.name.localeCom
 
 /** The part ids the patterns use: the glossaries name them in every language, so own flies use these. */
 export const KNOWN_PARTS: readonly string[] = partIds(PATTERNS.map((p) => p.recipe));
+
+const known = new Set(KNOWN_PARTS);
+/**
+ * The part ids own flies may use: the patterns' own, and ids made of their single words and
+ * named colours ("hackle-front", "tail-badger"), which the glossaries name word by word.
+ */
+export const NAMEABLE_PARTS: ReadonlySet<string> = {
+  // Own properties only: "constructor" is no colour.
+  has: (id: string) => known.has(id) || id.split("-").every((w) => known.has(w) || Object.hasOwn(NAMED_COLORS, w)),
+} as ReadonlySet<string>;
 
 export function findPattern(id: string): Pattern | undefined {
   return PATTERNS.find((p) => p.recipe.id === id);

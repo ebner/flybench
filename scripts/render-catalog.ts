@@ -21,7 +21,9 @@ import { join } from "node:path";
 import { parseArgs } from "node:util";
 import sharp from "sharp";
 import { catalogNeeds } from "../src/catalog/inventory";
-import { swatchName } from "../src/catalog/swatch";
+import { sampleColour, swatchName } from "../src/catalog/swatch";
+import { MATERIALS, type MaterialKind } from "../src/recipe/materials";
+import { HOOK_MODEL_IDS, TUBE_MODEL_IDS } from "../src/recipe/schema";
 import { loadRecipe } from "../src/recipe/load";
 import type { Recipe } from "../src/recipe/schema";
 import { patternIds, Renderer } from "./lib/renderer";
@@ -34,6 +36,8 @@ const SWATCHES = `${OUT}/materials`;
 const SWATCH_MANIFEST = `${SWATCHES}/manifest.json`;
 const SWATCH = { width: 240, height: 180 };
 const NATURALS_OUT = `${OUT}/naturals`;
+const HOOKS_OUT = `${OUT}/hooks`;
+const HOOK_MANIFEST = `${HOOKS_OUT}/manifest.json`;
 const NATURAL_MANIFEST = `${NATURALS_OUT}/manifest.json`;
 const NATURAL_FRAME = { width: 480, height: 320 };
 /** Code that affects how a finished fly looks. */
@@ -86,11 +90,20 @@ for (const id of all) {
   if (r.ok) recipes.push(r.recipe);
 }
 const swatchCode = createHash("sha256").update(codeHash).update(await readFile("src/catalog/swatch.ts")).digest("hex");
-const swatches = [...catalogNeeds(recipes)].flatMap(([kind, colors]) => colors.map((color) => ({ kind, color, name: swatchName(kind, color) })));
+const needs = catalogNeeds(recipes);
+// And every other kind in a colour of its own, for the builder's material picker.
+for (const kind of Object.keys(MATERIALS) as MaterialKind[]) if (!needs.has(kind)) needs.set(kind, [sampleColour(kind)]);
+const swatches = [...needs].flatMap(([kind, colors]) => colors.map((color) => ({ kind, color, name: swatchName(kind, color) })));
 const swatchTodo = swatches
   .map((s) => ({ ...s, hash: createHash("sha256").update(swatchCode).update(`${s.kind}:${s.color}`).digest("hex").slice(0, 16) }))
   .filter((s) => values.force || swatchManifest[s.name] !== s.hash || !existsSync(`${SWATCHES}/${s.name}.webp`));
 for (const name of Object.keys(swatchManifest)) if (!swatches.some((s) => s.name === name)) delete swatchManifest[name];
+
+// Hooks: every model, bare, for the builder's hook picker.
+const hookManifest: Record<string, string> = existsSync(HOOK_MANIFEST) ? JSON.parse(await readFile(HOOK_MANIFEST, "utf8")) : {};
+const hookTodo = [...HOOK_MODEL_IDS, ...TUBE_MODEL_IDS]
+  .map((model) => ({ model, hash: createHash("sha256").update(swatchCode).update(model).digest("hex").slice(0, 16) }))
+  .filter((h) => values.force || hookManifest[h.model] !== h.hash || !existsSync(`${HOOKS_OUT}/${h.model}.webp`));
 
 // Naturals: every naturals/*.kdl.
 const naturalManifest: Record<string, string> = existsSync(NATURAL_MANIFEST) ? JSON.parse(await readFile(NATURAL_MANIFEST, "utf8")) : {};
@@ -102,7 +115,7 @@ for (const id of naturalIds) {
 }
 for (const id of Object.keys(naturalManifest)) if (!naturalIds.includes(id)) delete naturalManifest[id];
 
-if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0) {
+if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && hookTodo.length === 0) {
   console.log("All renders are up to date.");
 } else {
   const renderer = await Renderer.start();
@@ -137,6 +150,15 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0) {
       naturalManifest[n.id] = n.hash;
       console.log(`${NATURALS_OUT}/${n.id}`);
     }
+    await mkdir(HOOKS_OUT, { recursive: true });
+    for (const h of hookTodo) {
+      const out = `${HOOKS_OUT}/${h.model}.png`;
+      await renderer.render({ pattern: "", hook: h.model, view: "side", transparent: true, fov: 20, ...SWATCH, out });
+      await sharp(out).webp({ quality: 82, alphaQuality: 90 }).toFile(`${HOOKS_OUT}/${h.model}.webp`);
+      await unlink(out);
+      hookManifest[h.model] = h.hash;
+      console.log(`${HOOKS_OUT}/${h.model}`);
+    }
     await mkdir(SWATCHES, { recursive: true });
     const swatchQueue = [...swatchTodo];
     await Promise.all(
@@ -158,3 +180,4 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0) {
 await writeFile(MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(manifest).sort()), null, 2) + "\n");
 await writeFile(NATURAL_MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(naturalManifest).sort()), null, 2) + "\n");
 await writeFile(SWATCH_MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(swatchManifest).sort()), null, 2) + "\n");
+await writeFile(HOOK_MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(hookManifest).sort()), null, 2) + "\n");

@@ -271,7 +271,7 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
       "inherently difficult", perhaps to return to; a natural's page shows it turning in 3D on the
       same paper as a tied fly. The code, stills and tools stay.
 
-18. A fly builder made of parts (decided 2026-10-31, after the reviewer found the form builder too
+18. ✅ A fly builder made of parts (decided 2026-10-31, after the reviewer found the form builder too
     complicated: "I don't understand all the step definitions and it takes a long time"). The
     visitor builds a fly as they see it, not as it is tied: parts (tail, tag, body, rib, thorax,
     hackle, wing, bead, legs, eyes, flash…) chosen from a picture palette, materials from swatches,
@@ -288,6 +288,30 @@ Agreed with the user in an interview; one milestone at a time, each stopping for
     saved flies, links and files open in it; the form editor stays in the studio. Paced as a
     prototype first (layout, palette, swatches, dragging, the dry-fly style end to end) for the
     reviewer to try, then the full builder, reviewed with Fable and Codex.
+    - The reviewer's notes on the prototype (2026-11-03), all taken into the full builder: each
+      part offers only materials it is really tied with (from the patterns, plus marked
+      additions: no wool wings); the chosen parts (several can be chosen) show in full and the
+      rest of the fly faintly, with a "Whole fly" view; a "Watch it tied" player in the builder
+      (play, scrub, the steps with their instructions) and a link to the fly's own page; hook and
+      thread chosen from pictures as tiles; a clean slate (bare hook) besides the styles and the
+      patterns; removing a part where the part is; tiles all one size; and from the old builder
+      the name, type, description, difficulty and species, labels for materials and notes on
+      parts, saving, sharing, downloading and opening recipe files.
+    - Decided with them: a part can mix two or three materials (the Adams's brown and grizzly
+      hackle, its mixed tail); banded bodies are body parts one behind the other. The materials
+      in the visitor's inventory come first in the picker, marked, and a fly built from them says
+      so; any colour (named chips with their names, grouped by family, and a picker for any
+      shade, the colour shown on the material itself); special hooks (tubes, Waddingtons,
+      doubles, trebles, jig hooks riding point up); the proportion guide while dragging; the
+      unsaved fly kept in the browser (flybench.draft, in the Privacy section) and offered next
+      time.
+19. Pages that don't jump while they load (decided 2026-11-03, best practice for a static site):
+    every page's HTML rendered at build time from the app's own components and taken over in
+    place (hydration), so the first paint is the final layout; fonts preloaded with fallback
+    metrics matched, so text doesn't shift when they arrive; space reserved for pictures and
+    late content. The 3D views start in the browser only. Checked page by page with the browser's
+    layout-shift records. Also: the logo's fly raised so its shank is level with the middle of
+    the lower-case letters (done with the decision).
 
 New storage keys these add (region, tying log, saved variations) are a visitor's own choice;
 list them in the About page's Privacy section as they come.

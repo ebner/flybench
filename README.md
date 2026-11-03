@@ -25,10 +25,17 @@ pages for following along at the bench. "Try other colours" on a pattern page ch
 part's colour: the 3D fly, the steps and the dressing follow, the colours go into the
 address (`?colours=body:yellow`), and a variation can be saved to the fly box. A fly box for
 a trip (`/trip/`) suggests a dozen patterns and their sizes for a region, month, water and
-fish, from the hatch calendar. "Build a fly" (`/build/`) makes a fly of your own, from a
-bare hook or a copy of a pattern: hook, thread, materials and steps chosen from menus, with
-the 3D fly, the written steps and the tying rules (in the page's language) following each
-change. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
+fish, from the hatch calendar. "Build a fly" (`/build/`) makes a fly of your own from its
+parts: start from a style (dry fly, parachute, caddis, nymph, wet fly, streamer, emerger,
+terrestrial, salmon fly), a copy of any pattern or a bare hook, choose the hook and thread from
+pictures, add parts (tail, tag, body, rib, thorax, back, wing, hackle, legs, eyes, bead,
+weighting…) from a palette, their materials from swatches (yours first) and colours from chips
+or any shade, mix two or three materials in a part, choose how it is tied (wound, palmered, round
+a post, dubbed, spun, pulled over…), and drag its ends and tips on the 3D fly, snapping to the
+classic proportions. The chosen parts show in full and the rest faintly; "Watch it tied" plays
+every step. Flybench writes the tying order, the thread's moves and the tie-offs
+(`src/edit/parts.ts`), so the fly always ties; every pattern reads back into parts and ties the
+same fly. The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
 log and the trip box, can be downloaded as a recipe file, and shared as a link that carries
 the whole fly after the `#`. The built site installs as an app and works offline after
 the first visit.
@@ -135,7 +142,8 @@ src/catalog/       catalog search and wording, and the site's pages with their t
                    descriptions and text for the build (plain logic, tested in Node)
 src/edit/          editing recipes, shared by the studio and the fly builder: KDL edited in
                    place, forms from the schemas, recipes written as KDL, visitors' own flies
-                   and their share links (plain logic, tested in Node)
+                   and their share links, a fly as parts and back (parts.ts; plain logic,
+                   tested in Node)
 src/ui/            React UI: gallery, pattern page, viewer, fly builder, theme, routing
 src/studio/        the authoring studio (studio.html, dev server only)
 public/renders/    rendered gallery images, material swatches and water stills (generated, committed)

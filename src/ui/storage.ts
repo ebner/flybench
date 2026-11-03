@@ -112,3 +112,5 @@ export const INVENTORY_KEY = "flybench.inventory";
 export const REGION_KEY = "flybench.region";
 export const LOG_KEY = "flybench.log";
 export const OWN_FLIES_KEY = "flybench.flies";
+/** The fly being built in the builder, not yet saved. */
+export const DRAFT_KEY = "flybench.draft";
