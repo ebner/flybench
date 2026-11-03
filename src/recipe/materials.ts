@@ -50,16 +50,22 @@ export interface CatalogMaterial {
   fibreWidth?: number;
   /** Fibres with flue along them, fluffy like herl (peacock sword). */
   flue?: boolean;
+  /** Pulled over, a sparse translucent veil the body shows through (sparkle yarn). */
+  veil?: boolean;
   /** Dubbing: how rough it is, from 0 (fine, tight) to 1 (long, spiky guard hairs). Default 0.4. */
   shaggy?: number;
   /** Beads: a cone head, wide at the back and narrow towards the eye. */
   cone?: boolean;
+  /** A split shot: crimped onto the shank behind the eye rather than slid on, its eyes painted. */
+  shot?: boolean;
 }
 
 export const MATERIALS = {
   // Yarns
   wool: { name: "wool", archetype: "yarn" },
   "poly-yarn": { name: "poly yarn", archetype: "yarn", defaultColor: "white" },
+  // Antron: glittery trilobal fibres, used sparse so the body shows through (LaFontaine's pupae).
+  "sparkle-yarn": { name: "sparkle yarn", archetype: "yarn", defaultColor: "#e8dcc0", veil: true },
 
   // Herls
   "peacock-herl": { name: "peacock herl", archetype: "herl", defaultColor: "#26341a" },
@@ -158,6 +164,7 @@ export const MATERIALS = {
   "tungsten-bead": { name: "tungsten bead", archetype: "bead", defaultColor: "gold" },
   "brass-cone": { name: "brass cone head", archetype: "bead", defaultColor: "gold", cone: true },
   "tungsten-cone": { name: "tungsten cone head", archetype: "bead", defaultColor: "gold", cone: true },
+  "split-shot": { name: "split shot", archetype: "bead", defaultColor: "black", shot: true },
   "dumbbell-eyes": { name: "dumbbell eyes", archetype: "eyes", defaultColor: "lead" },
   "bead-chain-eyes": { name: "bead chain eyes", archetype: "eyes", defaultColor: "silver" },
   "mono-eyes": { name: "burnt mono eyes", archetype: "eyes", defaultColor: "black" },

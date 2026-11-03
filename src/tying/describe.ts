@@ -204,6 +204,8 @@ export interface StepContext {
   trimmedLater?: boolean;
   /** pull-over laid back: tied down there by the thread rather than held by the next winding. */
   tiedBack?: boolean;
+  /** pull-over: over the belly rather than the back. */
+  under?: boolean;
   /** tie-in with a length: where the tips end, and where the bend ends (x in gapes). */
   tipX?: number;
   bendEnd?: number;
@@ -214,7 +216,7 @@ export type What = { kind: "the"; m: string } | { kind: "bunch"; m: string } | {
 
 /** What a step says, before it is put in words. Materials are recipe material ids. */
 export type Said =
-  | { kind: "slide-bead"; m: string; mount: Mount }
+  | { kind: "slide-bead"; m: string; mount: Mount; shot?: boolean }
   | { kind: "weight"; m: string; from: Place; to: Place }
   | { kind: "attach-thread"; at: Place }
   | { kind: "wrap-thread"; to: Place; turns?: number }
@@ -232,7 +234,7 @@ export type Said =
   | { kind: "palmer"; m: string; to: Place; turns: number; counter: boolean }
   | { kind: "wind-through"; m: string; to: Place; turns: number; counter: boolean; through: string }
   | { kind: "wind"; m: string; to: Place; turns: number; counter: boolean }
-  | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean; wing?: Length }
+  | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean; wing?: Length; under?: boolean }
   | { kind: "lay-back"; m: string; to: Place; tied?: boolean }
   | { kind: "spin"; m: string; to: Place }
   | { kind: "dub"; m: string; to: Place; rear: boolean }
@@ -257,7 +259,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
   const find = (id: string) => recipe.materials.find((m) => m.id === id);
   switch (step.op) {
     case "slide-bead":
-      return { kind: "slide-bead", m: step.material, mount };
+      return { kind: "slide-bead", m: step.material, mount, ...((MATERIALS[find(step.material)?.kind as MaterialKind] as { shot?: boolean } | undefined)?.shot ? { shot: true } : {}) };
     case "weight":
       return { kind: "weight", m: step.material, from: at(step.from), to: at(step.to) };
     case "attach-thread":
@@ -308,7 +310,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
     }
     case "pull-over":
       if (ctx.rear) return { kind: "lay-back", m: step.material, to: at(step.to), ...(ctx.tiedBack ? { tied: true } : {}) };
-      return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}) };
+      return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}), ...(ctx.under ? { under: true } : {}) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to) };
     case "dub":
@@ -428,6 +430,7 @@ function englishText(said: Said, recipe: Recipe): string {
   };
   switch (said.kind) {
     case "slide-bead":
+      if (said.shot) return `Crimp the ${mat(said.m)} onto the shank just behind the eye and glue it; paint it, with an eye on each side.`;
       return said.mount === "tube"
         ? `Slide the ${mat(said.m)} onto the front of the tube.`
         : `Slide the ${mat(said.m)} ${said.mount === "hook" ? "round the bend and " : ""}up to the eye, small hole first.`;
@@ -469,6 +472,7 @@ function englishText(said: Said, recipe: Recipe): string {
       return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")}${counter(said.counter)}.`;
     case "pull-over":
       if (said.wing) return `Pull the ${mat(said.m)} forward over the top of the body and tie it down at ${at(said.to)}, then stand the tips up in front of the tie-down as a wing about ${len(said.wing)} tall and divide it.`;
+      if (said.under) return `${said.bubble ? "Fold" : "Pull"} the ${mat(said.m)} forward under the belly${said.bubble ? " as a loose bubble" : ""} and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
       if (said.bubble) return `Fold the ${mat(said.m)} forward over the body as a loose bubble and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
       return `Pull the ${mat(said.m)} forward over the top of the body and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
     case "lay-back":

@@ -1,0 +1,50 @@
+id deep-sparkle-pupa
+status draft
+
+// en description: A ginger underbody of sparkle yarn and fur inside a loose, translucent sheath of sparkle yarn drawn over the top and the bottom, wood duck legs at the sides and a brown ostrich herl head.
+description "En gingerfärgad underkropp av antrongarn och päls inne i ett löst, genomskinligt hölje av antrongarn draget över ovansidan och undersidan, ben av brudand på sidorna och ett huvud av brunt strutsherl."
+
+// en history: Gary LaFontaine developed it around 1974 after three seasons watching caddis pupae on the Big Hole with scuba gear, and published it in Caddisflies (1981). He found that the air bubbles round a rising pupa make it glitter, and that the new Antron yarn, which he called sparkle yarn, holds air the same way. One sparse strand is tied in on top and one underneath, and after the body is dubbed each is drawn forward loosely so that it stands off the body as a veil the colour shows through. The Deep has no wing or trailing shuck; those belong to the Emergent Sparkle Pupa. Sources differ on the sheath (one piece, side hanks or three) and on the legs and the head.
+history """
+    Gary LaFontaine utvecklade den omkring 1974 efter tre säsonger då han med dykutrustning
+    studerade nattsländepuppor i Big Hole, och publicerade den i Caddisflies (1981). Han fann
+    att luftbubblorna runt en stigande puppa får den att glittra, och att det nya Antrongarnet,
+    som han kallade sparkle yarn, håller luft på samma sätt. En gles tråd binds in ovanpå och en
+    under, och när kroppen är dubbad dras var och en löst framåt så att den står ut från kroppen
+    som en slöja som färgen syns igenom. Deep har varken vinge eller släpande skinn; de hör till
+    Emergent Sparkle Pupa. Källorna skiljer sig om höljet (en bit, sidotrådar eller tre) och om
+    benen och huvudet.
+    """
+
+// en fishing: For a caddis hatch, fished dead drift near the bottom, where pupae drift while they fill their sheath with gas, and let swing up at the end of the drift as a rising pupa. The sheath wears away after a few fish.
+fishing """
+    Vid nattsländekläckning, fiskad fritt drivande nära botten, där pupporna driver medan de
+    fyller sitt skinn med gas, och låten svänga upp i slutet av driften som en stigande puppa.
+    Höljet slits bort efter några fiskar.
+    """
+
+labels {
+    // en sheath: Cream sparkle yarn, one sparse ply
+    sheath "Krämfärgat antrongarn, en gles tråd"
+    // en sheath-lower: Cream sparkle yarn, one sparse ply
+    sheath-lower "Krämfärgat antrongarn, en gles tråd"
+    // en body: Ginger sparkle yarn and fur, chopped and blended
+    body "Gingerfärgat antrongarn och päls, finhackat och blandat"
+    // en legs: Lemon wood duck fibres
+    legs "Fibrer av citrongul brudand"
+}
+
+notes {
+    // en step 3 (tie-in sheath): Combed out sparse, on top, bound down from mid-shank to the bend.
+    step 3 "Utkammat glest, ovanpå, nerbundet från skaftets mitt till böjen."
+    // en step 4 (tie-in sheath-lower): The same underneath.
+    step 4 "Detsamma undertill."
+    // en step 5 (dub body): A tapered cigar.
+    step 5 "En avsmalnande cigarr."
+    // en step 6 (pull-over sheath): Forward loosely over the top half, two or three loose turns; pick it out with a bodkin into a bubble.
+    step 6 "Löst framåt över den övre halvan, två eller tre lösa varv; rugga upp det med en nål till en bubbla."
+    // en step 7 (pull-over sheath-lower): The same underneath, then tie both off firmly.
+    step 7 "Detsamma undertill, bind sedan fast båda ordentligt."
+    // en step 8 (tie-in legs): Three or four fibres a side, low along the flanks to the end of the body.
+    step 8 "Tre eller fyra fibrer på varje sida, lågt längs sidorna till kroppens slut."
+}

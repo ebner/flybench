@@ -11,6 +11,10 @@ materials {
         source "Rackelhanen: Kaninhårsstreamer ('Tag: Rött ullgarn')" url="https://www.rackelhane.se/swe/1280.htm"
         source "Kings Meadow: Red Tag Wet Fly ('röd ull för svansen')" url="https://www.kingsmeadow.se/product/red-tag-wet-fly/"
     }
+    noun sparkle-yarn "antrongarn" gender=ett definite="antrongarnet" mass=#true {
+        note "LaFontaine's 'sparkle yarn' is Antron; shops sell it as 'Antrongarn'."
+        source "Flugbindning.com: Garn & Yarn (products 'Antrongarn Wapsi', 'Textreme Antrongarn')" url="https://flugbindning.com/130-garn-yarn"
+    }
     noun poly-yarn "polygarn" gender=ett definite="polygarnet" mass=#true {
         note "The usual Swedish shop and dressing word ('Vinge: Grå Tiemco Polygarn')."
         source "Flugbindning.com: Garn & Yarn ('produkter som Polygarn, Antron Yarn, Floss')" url="https://flugbindning.com/130-garn-yarn"
@@ -270,6 +274,10 @@ materials {
         note "Product name kept, as the shop does; it describes it as 'ryggsköldsmaterial'. 'Ryggsköld' is the Swedish name of the part, used for the role ('back' → 'rygg')."
         source "Antispinn: Sow-Scud Back 1/8 Wapsi ('Sow-Scud Back är framför allt känt som ryggsköldsmaterial till scuds, märlor och olika nymfer')" url="https://www.antispinn.se/flugbindning/syntetiskt-material-kropp-vinge-ben/sow-scud-back-18-wapsi"
     }
+    noun split-shot "hagel" gender=ett definite="haglet" plural="hagel" plural-definite="haglen" {
+        note "A split shot crimped on as a head (the Dog Nobbler); anglers' shops sell 'kluvna hagel'."
+        source "Sportfish Tackle: IFISH Kluvna hagel Blyfri" url="https://www.sportfishtackle.dk/dk/artiklar/ifish-kluvna-hagel-blyfri.html"
+    }
     noun brass-bead "mässingsskalle" gender=en definite="mässingsskallen" plural="mässingsskallar" plural-definite="mässingsskallarna" {
         note "Decided by the reviewer (2026-10-29): 'skalle', what tyers call a bead ('strax bakom skallen'). Rejected: 'kula' (Fiskejournalen: 'trä på kulan') and 'guldskalle', which names the colour, not the metal."
         source "Antispinn: Tungsten Beads 3,8 mm ('än traditionella mässingskulor')" url="https://www.antispinn.se/flugbindning/fortyngning/90-tungsten/classic-colored-tungsten-beads-38-mm"
@@ -454,6 +462,12 @@ parts {
     noun body "kropp" gender=en definite="kroppen" plural="kroppar" plural-definite="kropparna"
     noun cheeks "kinder" gender=en definite="kinderna" plural="kinder" plural-definite="kinderna" {
         note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
+    }
+    noun sheath "hölje" gender=ett definite="höljet" plural="höljen" plural-definite="höljena" {
+        note "The loose veil of sparkle yarn round a sparkle pupa's body."
+    }
+    noun shell "skal" gender=ett definite="skalet" plural="skal" plural-definite="skalen" {
+        note "A foam strip pulled over the top of the body (the Gurgler); 'rygg' is the wing case or back of a nymph."
     }
     noun underbody "underkropp" gender=en definite="underkroppen" plural="underkroppar" plural-definite="underkropparna" {
         note "What a body is built up on (floss under the Black & Peacock Spider's herl)."

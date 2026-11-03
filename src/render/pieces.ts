@@ -821,6 +821,19 @@ function beadView(piece: BeadPiece, surfaces: Surfaces, space: ShankSpace): Piec
     ? new THREE.CylinderGeometry(piece.radius * 0.45, piece.radius, piece.cone, 32, 1).rotateZ(-Math.PI / 2)
     : new THREE.SphereGeometry(piece.radius, 28, 20);
   const mesh = new THREE.Mesh(geometry, surfaces.get("bead", piece.color));
+  // A painted split shot: a yellow eye with a black pupil on each side.
+  const eyeParts: THREE.BufferGeometry[] = [];
+  if (piece.painted) {
+    for (const side of [-1, 1]) {
+      for (const [scale, color, out] of [[0.5, "#f2d23c", 0.9], [0.24, "#111111", 0.97]] as const) {
+        const g = new THREE.SphereGeometry(piece.radius * scale, 20, 12).scale(1, 1, 0.25);
+        eyeParts.push(g);
+        const eye = new THREE.Mesh(g, surfaces.get("bead", color));
+        eye.position.set(piece.radius * 0.18, piece.radius * 0.12, side * piece.radius * out);
+        mesh.add(eye);
+      }
+    }
+  }
   const start = -0.3;
   return {
     object: mesh,
@@ -832,6 +845,7 @@ function beadView(piece: BeadPiece, surfaces: Surfaces, space: ShankSpace): Piec
     },
     dispose() {
       geometry.dispose();
+      for (const g of eyeParts) g.dispose();
     },
   };
 }
@@ -896,7 +910,8 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     let min = Infinity;
     let sum = 0;
     for (let k = -4; k <= 4; k++) {
-      const r = piece.base.radiusAt(Math.min(piece.x1, Math.max(piece.x0 - reach, x + (reach * k) / 4)));
+      const at = Math.min(piece.x1, Math.max(piece.x0 - reach, x + (reach * k) / 4));
+    const r = piece.side === "under" ? piece.base.underAt(at) : piece.base.radiusAt(at);
       sum += r;
       max = Math.max(max, r);
       min = Math.min(min, r);
@@ -924,8 +939,10 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
         const t = side === 0 ? -1 + (2 * j) / segT : 1 - (2 * j) / segT;
         const phi = t * piece.halfAngle;
         const dome = 0.55 + 0.45 * Math.cos((t * Math.PI) / 2);
-        const r = (side === 0 ? under + thick * dome : under + thick * 0.05) - centre;
-        space.point(v.set(x, centre + r * Math.cos(phi), r * Math.sin(phi)));
+        // Pulled over the belly, the same shape mirrored below the ring's centre.
+        const flip = piece.side === "under" ? -1 : 1;
+        const r = (side === 0 ? under + thick * dome : under + thick * 0.05) - flip * centre;
+        space.point(v.set(x, centre + flip * r * Math.cos(phi), r * Math.sin(phi)));
         positions.push(v.x, v.y, v.z);
         const shade = feather ? featherShade(x, phi * r) : 1;
         colors.push(shade, shade, shade);
@@ -950,6 +967,13 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   const look = piece.look === "foam" ? "foam" : feather ? "feather" : piece.look === "cdc" || piece.look === "marabou" ? "cdc" : "fibres";
   const material = surfaces.get(look, piece.color, feather).clone();
   material.side = THREE.DoubleSide;
+  if (piece.veil) {
+    // Sparse sparkle yarn: the body shows through, the fibres glint.
+    material.transparent = true;
+    material.opacity = 0.45;
+    material.depthWrite = false;
+    if ("roughness" in material) (material as THREE.MeshStandardMaterial).roughness = 0.35;
+  }
   const mesh = new THREE.Mesh(geometry, material);
   return {
     object: mesh,

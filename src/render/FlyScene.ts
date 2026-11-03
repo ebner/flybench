@@ -29,6 +29,8 @@ const REST_DIRECTIONS = {
   out: new THREE.Vector3(0.25, -1, 0.35).normalize(),
   /** Lying back over the bend, waiting to be pulled over the body. */
   "back-flat": new THREE.Vector3(-1, 0.18, 0).normalize(),
+  /** Lying back under the bend, waiting to be pulled over the belly. */
+  "under-flat": new THREE.Vector3(-1, -0.18, 0).normalize(),
   /** Sticking out forward over the eye, waiting to be folded back. */
   "forward-flat": new THREE.Vector3(1, 0.18, 0).normalize(),
 };

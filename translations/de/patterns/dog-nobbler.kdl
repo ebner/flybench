@@ -1,0 +1,46 @@
+id dog-nobbler
+status draft
+
+// en description: A painted split shot with an eye on each side crimped behind the hook's eye, a long black marabou tail with pearl flash and a black chenille body ribbed with silver wire.
+description "Ein bemaltes Schrotblei mit einem Auge auf jeder Seite hinter dem Öhr festgeklemmt, ein langer Schwanz aus schwarzem Marabou mit Perlmuttflash und ein Körper aus schwarzer Chenille mit Silberdrahtrippung."
+
+// en history: Trevor Housby, the British angling writer, made it in the late 1970s or around 1980, by Michael Jensen's account after American anglers' small jigs, which he turned into a fly for the big stocked rainbows of the reservoirs. A professional tyer, Sid Knight of Bridgnorth, patented the name and dressing in 1984, by a quotation of John Roberts on a forum, and shops still credit it to him; an obituary of Fred J. Taylor says he too had a hand in it. The classic head is a coarse split shot crimped on and glued, painted with a yellow eye and a black pupil each side; beads, cones and dumbbell eyes are modern stand-ins. It was controversial, and banned on some waters.
+history """
+    Trevor Housby, der britische Angelautor, schuf sie Ende der 1970er Jahre oder um 1980, nach
+    Michael Jensen nach den kleinen Jigs amerikanischer Angler, die er zu einer Fliege für die
+    großen Besatzregenbogenforellen der Stauseen umbaute. Ein Berufsbinder, Sid Knight aus
+    Bridgnorth, ließ Name und Bindeweise 1984 patentieren, nach einem Zitat von John Roberts in
+    einem Forum, und Händler schreiben sie noch ihm zu; ein Nachruf auf Fred J. Taylor sagt,
+    auch er habe dabei mitgewirkt. Der klassische Kopf ist ein grobes geschlitztes Schrotblei,
+    festgeklemmt und verklebt, auf jeder Seite mit einem gelben Auge und schwarzer Pupille
+    bemalt; Perlen, Konen und Hantelaugen sind moderne Ersatzlösungen. Sie war umstritten und an
+    manchen Gewässern verboten.
+    """
+
+// en fishing: A stillwater lure for stocked rainbows, best in cold early-season water. On a floating line and long leader, or a sinking line, make slow pulls with pauses: on every pause the leaded head dives and the marabou rises, so it jigs through the water. Cast it with an open loop: the shot makes it heavy.
+fishing """
+    Ein Stillwasserstreamer für Besatzregenbogenforellen, am besten im kalten Wasser der frühen
+    Saison. An schwimmender Schnur mit langem Vorfach oder an sinkender Schnur in langsamen
+    Zügen mit Pausen: In jeder Pause taucht der bleischwere Kopf ab und das Marabou hebt sich,
+    sodass sie durchs Wasser jiggt. Wirf sie mit offener Schlaufe: Das Blei macht sie schwer.
+    """
+
+labels {
+    // en head: Split shot, painted black
+    head "Schrotblei, schwarz bemalt"
+    // en flash: Pearl flash
+    flash "Perlmuttflash"
+}
+
+notes {
+    // en step 1 (slide-bead head): Squeeze it on with pliers and glue it; many paint a batch of heads first.
+    step 1 "Mit einer Zange festklemmen und verkleben; viele bemalen vorher eine Reihe Köpfe."
+    // en step 4 (tie-in tail): A long, full plume.
+    step 4 "Eine lange, volle Feder."
+    // en step 5 (tie-in flash): Two strands each side.
+    step 5 "Zwei Fäden je Seite."
+    // en step 9 (wind body): Up to the shot.
+    step 9 "Bis zum Blei."
+    // en step 13 (whip-finish): Behind the shot.
+    step 13 "Hinter dem Blei."
+}
