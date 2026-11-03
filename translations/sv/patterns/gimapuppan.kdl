@@ -1,0 +1,53 @@
+id gimapuppan
+status draft
+
+// en description: A body of olive CDC twisted into a rope, under a loose bubble of sand-coloured CDC, and a spiky thorax of mixed fur.
+description "En kropp av olivgrön CDC tvinnad till ett rep, under en lös bubbla av sandfärgad CDC, och en spretig thorax av blandad päls."
+
+// en history: Published in Flugfiske i Norden in 2015 by its author, very likely David Stenström, whose initials are on the photos. Fishing the Gimån every summer when the caddis hatch is at its height, he found the Hjorthårspuppan floated too low to see, took a pattern called the Pite-puppan, simplified and changed it, and named the result after the river. It has been tried with success elsewhere in Sweden and in the Catskills. He does not claim the idea as new: many pupae use a bubble of CDC the same way.
+history """
+    Publicerad i Flugfiske i Norden 2015 av sin upphovsman, med största sannolikhet David
+    Stenström, vars initialer står på bilderna. När han fiskade Gimån varje sommar när
+    nattsländekläckningen var som störst tyckte han att Hjorthårspuppan flöt för lågt för att
+    synas, tog ett mönster som kallas Pite-puppan, förenklade och ändrade det och döpte
+    resultatet efter älven. Den har prövats med framgång på andra håll i Sverige och i
+    Catskills. Han gör inte anspråk på att idén är ny: många puppor använder en bubbla av CDC
+    på samma sätt.
+    """
+
+// en fishing: A caddis pupa floating high in the film, easy to see in poor light. Fish it dead drift, or pull it under and let it rise again like a hatching pupa. Treat it with CDC oil or a shake floatant, rinse and dry it with amadou after every fish, and switch to a deer-hair pupa after dark or in the thickest of the hatch, when there is no time to look after it.
+fishing """
+    En nattsländepuppa som flyter högt i filmen och syns bra i dåligt ljus. Fiska den
+    fritt drivande, eller dra ner den under ytan och låt den stiga igen som en kläckande
+    puppa. Behandla den med CDC-olja eller pulverflytmedel, skölj och torka den med fnöske
+    efter varje fisk, och byt till en hjorthårspuppa när det mörknar eller när kläckningen är
+    som tätast och det inte finns tid att sköta den.
+    """
+
+labels {
+    // en back: Sand CDC, two feathers
+    back "Sandfärgad CDC, två fjädrar"
+    // en body: Olive CDC, two feathers
+    body "Olivgrön CDC, två fjädrar"
+    // en thorax: Fox, muskrat, opossum and seal, mixed
+    thorax "Räv, bisam, opossum och säl, blandat"
+}
+
+notes {
+    // en step 1 (attach-thread at=0.9): Wrap back a little way into the bend, then forward to about the point.
+    step 1 "Linda en bit ner i böjen, sedan fram till ungefär krokspetsen."
+    // en step 3 (tie-in back): Tips matched and pointing forward, tied in low on the feathers; pull them back until the tie-in nears the tips, then lock them.
+    step 3 "Topparna lika långa och pekande framåt, inbundna lågt på fjädrarna; dra dem bakåt tills inbindningen närmar sig topparna och lås dem."
+    // en step 4 (tie-in body): The same way.
+    step 4 "På samma sätt."
+    // en step 5 (wrap-thread to=0.68): To about 3 mm behind the eye.
+    step 5 "Till ungefär 3 mm bakom öglan."
+    // en step 6 (wind body): Twist the feathers into a rope first, with hackle pliers or the fingers.
+    step 6 "Tvinna först fjädrarna till ett rep, med hackeltång eller fingrarna."
+    // en step 8 (pull-over back): Make it big first, then shrink it to size by pulling the ends, a dubbing needle inside it as a stop; lock it with hard turns.
+    step 8 "Gör den stor först och krymp den sedan till rätt storlek genom att dra i ändarna, med en dubbingnål inuti som stopp; lås den med hårda varv."
+    // en step 9 (dub thorax): Split the thread, put a little loose dubbing in, and twist 2 to 3 cm of it lightly, so it stays spiky.
+    step 9 "Splitta tråden, lägg i lite lös dubbing och tvinna 2–3 cm av den lätt, så att den förblir spretig."
+    // en step 10 (whip-finish): A drop of thin lacquer.
+    step 10 "En droppe tunt lack."
+}

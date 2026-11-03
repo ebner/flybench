@@ -24,6 +24,10 @@ materials {
         source "Fliegenfischer-Forum: Alte Klassiker (Rakelhanen: \"Körper: Polystrang\", \"Flügel: Polystrang\")" url="https://www.fliegenfischer-forum.de/klassike.html"
         source "AOS: Poly Yarn, Flügelmaterial" url="https://www.aos.cc/de/poly-yarn.html"
     }
+    noun ostrich-herl "Straußengras" gender=n mass=#true {
+        note "Formed like 'Pfauengras', as Karwath writes it for the Arthofer's body (\"Blei unter dem Straußengras\")."
+        source "Der-FliegenBinder: Die „Arthofer“ (Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
+    }
     noun peacock-herl "Pfauengras" gender=n mass=#true {
         note "'Pfauengras' is the standard German name; the English 'Peacock Herl' appears only in brand product names."
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"das so genannte Pfauengras\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
@@ -42,6 +46,9 @@ materials {
         note "'Sattelhechel' for the long saddle feather that is wound; 'Hahnensattel' is the whole skin."
         source "Fliegenfischer-Forum: Thread 'Wooly Bugger!' (\"ich verwende eine weiche Sattelhechel vom Hahn\")" url="https://www.fliegenfischer-forum.de/flyfishing/viewtopic.php?f=26227&t=258919"
         source "Flyfishing Europe: Sattelhecheln Strung" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
+    }
+    noun guinea-fowl-hackle "Perlhuhnhechel" gender=f plural="Perlhuhnhecheln" {
+        source "Der-FliegenBinder: Die „Arthofer“ (\"Die Hechel war stets eine Perlhuhnhechel\", Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
     }
     noun partridge-hackle "Rebhuhnhechel" gender=f plural="Rebhuhnhecheln" {
         source "Fliegenfischer-Forum: 10 Bestseller-Nymphen (\"Hechel: braune Rebhuhnhechel\")" url="https://www.fliegenfischer-forum.de/monspe22.html"
@@ -350,6 +357,7 @@ colours {
     }
     adjective pheasant-tail "Fasanenstoß" compound=#true
     adjective partridge "Rebhuhn" compound=#true
+    adjective guinea "Perlhuhn" compound=#true
     adjective snipe "Schnepfen" compound=#true {
         note "The joining form ('Schnepfen-'), as it goes before a noun."
     }

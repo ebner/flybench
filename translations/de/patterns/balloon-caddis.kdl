@@ -1,0 +1,56 @@
+id balloon-caddis
+status draft
+
+// en description: A slim dubbed body, a sparse elk-hair wing past the bend, and a balloon of yellow foam folded back over a dubbed thorax.
+description "Ein schlanker gedubbter Körper, ein spärlicher Flügel aus Elchhaar über den Bogen hinaus und ein Ballon aus gelbem Schaum, über einen gedubbten Thorax nach hinten geklappt."
+
+// en history: Roman Moser, the Austrian tyer and guide on the Traun, designed it to suggest a caddis breaking through the film; it is credited to him by Mike Weaver, Jason Klass and Davie McPhail, though no date or text of Moser's own turned up. The foam is tied in at the eye pointing forward and folded back over the thorax, so it forms a hollow balloon that keeps the front of the fly up while the body hangs in the film. Moser's foam was yellow, also the angler's sighter; the body is dubbed to match the sedges, olive, grey or brown.
+history """
+    Roman Moser, der österreichische Fliegenbinder und Guide an der Traun, entwarf sie als
+    Köcherfliege, die durch den Oberflächenfilm bricht; Mike Weaver, Jason Klass und Davie
+    McPhail schreiben sie ihm zu, doch weder ein Jahr noch ein Text von Moser selbst ließ
+    sich finden. Der Schaum wird am Öhr nach vorn zeigend eingebunden und über den Thorax
+    nach hinten geklappt, so dass er einen hohlen Ballon bildet, der den vorderen Teil der
+    Fliege oben hält, während der Körper im Film hängt. Mosers Schaum war gelb, zugleich als
+    Sichthilfe für den Fischer; der Körper wird in den Farben der Köcherfliegen gedubbt,
+    oliv, grau oder braun.
+    """
+
+// en fishing: Fish it dead drift like an Elk Hair Caddis, or, when trout are chasing hatching sedges on a summer evening, cast across and downstream and skate it back in short jerks. It is hard for trout to resist when dragged, and the yellow balloon stays easy to see in poor light and can carry a small nymph as a dropper.
+fishing """
+    Fische sie frei treibend wie eine Elk Hair Caddis, oder, wenn die Forellen an einem
+    Sommerabend schlüpfenden Köcherfliegen nachjagen, wirf schräg stromab und zieh sie in
+    kurzen Rucken zurück. Gezogen ist sie für Forellen kaum zu widerstehen, und der gelbe
+    Ballon bleibt bei schwachem Licht gut sichtbar und kann eine kleine Nymphe als Springer
+    tragen.
+    """
+
+labels {
+    // en case: Yellow closed-cell foam
+    case "Gelber Schaumstoff"
+    // en body: Olive caddis dubbing
+    body "Olivfarbenes Köcherfliegendubbing"
+    // en thorax: Olive caddis dubbing
+    thorax "Olivfarbenes Köcherfliegendubbing"
+}
+
+notes {
+    // en step 2 (tie-in case): A strip about as wide as the gape, sticking out forward over the eye.
+    step 2 "Ein Streifen etwa so breit wie der Hakenbogen, der nach vorn über das Öhr absteht."
+    // en step 4 (dub body): Slim, over the rear half.
+    step 4 "Schlank, über die hintere Hälfte."
+    // en step 5 (tie-in wing): A sparse, stacked bunch, the tips past the bend.
+    step 5 "Ein spärliches, ausgeglichenes Büschel, die Spitzen über den Bogen hinaus."
+    // en step 6 (trim wing): Trim the butts and cover them with thread, for an even base for the thorax.
+    step 6 "Schneide die Enden ab und überwickle sie mit Faden, für eine gleichmäßige Grundlage für den Thorax."
+    // en step 8 (dub thorax): Back from the eye, ending at the back of the thorax.
+    step 8 "Vom Öhr nach hinten, so dass er am hinteren Ende des Thorax endet."
+    // en step 10 (dub thorax): A second layer, for a round thorax.
+    step 10 "Eine zweite Lage, für einen runden Thorax."
+    // en step 11 (pull-over case): Fold it back over the thorax, leaving it loose and rounded, and tie it down behind the thorax.
+    step 11 "Klappe ihn über den Thorax nach hinten, locker und gerundet, und binde ihn hinter dem Thorax ab."
+    // en step 12 (trim case): Clip the tag close behind the tie-down.
+    step 12 "Schneide den Rest dicht hinter der Abbindung ab."
+    // en step 13 (whip-finish): Behind the balloon, over the front of the wing.
+    step 13 "Hinter dem Ballon, über dem vorderen Ende des Flügels."
+}

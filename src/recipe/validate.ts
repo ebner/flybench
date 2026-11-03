@@ -165,7 +165,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.side === "across" && !ACROSS.includes(archetype!)) {
           rule("acrossOnly", {}, [...path, "side"]);
         }
-        if (step.forward && step.length === undefined) rule("forwardNeedsLength", {}, [...path, "forward"]);
+        // Without a length, only a strip that waits over the eye to be folded back (a foam balloon).
+        if (step.forward && step.length === undefined && !recipe.steps.slice(i + 1).some((s) => s.op === "pull-over" && s.material === step.material)) {
+          rule("forwardNeedsLength", {}, [...path, "forward"]);
+        }
         if (step.forward && (step.angle ?? 0) >= 60) rule("forwardUpright", {}, [...path, "angle"]);
         if (step.extended && (!EXTENDABLE.includes(archetype!) || step.length === undefined)) {
           rule("extendedOnly", {}, [...path, "extended"]);
@@ -248,6 +251,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         }
         if (Math.abs(step.to - m.at) <= POSITION_TOLERANCE) {
           rule("pullForward", { m: step.material }, [...path, "to"]);
+          m.state = "done";
+        } else if (step.to < m.at && Math.abs(step.to - thread) <= POSITION_TOLERANCE) {
+          // Folded back from where it is tied in and tied down there by the thread (a foam
+          // balloon over a thorax).
           m.state = "done";
         } else if (step.to < m.at) {
           // Laid back from where it is tied in (a shellback tied in at the eye): its end is held

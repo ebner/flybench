@@ -1,0 +1,78 @@
+// Arthofer: the weighted Viennese nymph of ostrich herl, a copper-wire thorax and a guinea-fowl hackle under a folded wing case.
+
+id arthofer
+name "Arthofer"
+aliases "Arthofer-Nymphe" "Arthofer Nymph"
+type nymph
+imitates stonefly attractor
+naturals stonefly-nymph freshwater-shrimp
+difficulty intermediate
+species trout grayling
+season april may june july august september october
+origin originator="Alois Arthofer" region="Vienna, Austria"
+description "A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both."
+history """
+    Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his
+    son, who wrote to Ingo Karwath in 2024; it was tied in numbers in a workshop in Fischamend,
+    Lower Austria, and the Viennese dealer Norbert Eipeltauer sold it widely. Karwath had
+    first thought Eipeltauer at least a co-founder, but Eipeltauer wrote that he had nothing
+    to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as
+    a heavy fly in sizes 6 and 8. Sources differ on the details: Karwath ties a grey-beige
+    ostrich body with a grey tail, the etheonTV dressing black ostrich with a pheasant-tail
+    tail. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and
+    the wing case is folded forward from 2 to 3 mm behind the thorax.
+    """
+fishing """
+    Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop
+    it so it swings in, and then work it like a streamer. The lead and copper take it deep in
+    fast water, and in big sizes it passes for a stonefly nymph or a shrimp as much as
+    anything.
+    """
+sources {
+    "Der-FliegenBinder: Die „Arthofer“ (Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
+    "Der-FliegenBinder: Arthofer 2.0 (Ingo Karwath)" url="https://der-fliegenbinder.de/arthofer-2-0"
+    "Swissflies: Steinfliegen-Nymphen (Arthofer)" url="https://swissflies.ch/stnymphs.php?l=de"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://der-fliegenbinder.de/wp-content/uploads/2019/02/fullsizeoutput_302-1024x638.jpeg" page="https://der-fliegenbinder.de/die-arthofer" author="Ingo Karwath" license="All rights reserved; reference only" note="Karwath's Arthofer, side view in the vise"
+    "https://swissflies.ch/content/Swissflies/Nymphe/arthofer_gr.jpg" page="https://swissflies.ch/stnymphs.php?l=de" license="All rights reserved; reference only" note="A darker dressing with a black wing case, three-quarter view"
+}
+
+// Assumption: a 2X-long nymph hook; Karwath gives sizes (6 and 8 most popular) but no model.
+hook nymph-2xl size=8
+thread black size="6/0"
+
+materials {
+    weight lead-free-wire label="Lead or lead-free wire"
+    // Karwath's photos: grey fibres; the etheonTV dressing: pheasant tail.
+    tail hackle-fibres color="#b7aa98" count=30 label="Grey-beige fibres"
+    body ostrich-herl strands=3 label="Grey-beige ostrich herl"
+    case pheasant-tail count=10 label="Pheasant tail slip"
+    thorax copper-wire mm=0.4
+    hackle guinea-fowl-hackle fibre=1.0 label="Guinea fowl"
+}
+
+steps {
+    weight weight from=0.2 to=0.78 note="Karwath: most Arthofer carry lead under the body; the copper is only the icing."
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Read from Karwath's photo: a little more than a gape behind the bend.
+    tie-in tail length=1.2 spread=40
+    tie-in body
+    wrap-thread to=0.45
+    wind body to=0.45 turns=10 note="Over the rear half."
+    tie-off body
+    tie-in case note="On top, tips back, 2 to 3 mm behind where the thorax will start: the Arthofer's mark."
+    wrap-thread to=0.55
+    tie-in thorax
+    wrap-thread to=0.76
+    wind thorax to=0.76 turns=12 note="Touching turns, a heavy, shiny thorax."
+    tie-off thorax
+    tie-in hackle note="Leave plenty of room in front for it."
+    wrap-thread to=0.84
+    wind hackle to=0.84 turns=3
+    tie-off hackle
+    pull-over case to=0.84 note="Fold it forward over the thorax and the hackle, tie it down and cut it."
+    whip-finish note="A black head; then trim the hackle short."
+}

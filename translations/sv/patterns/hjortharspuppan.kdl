@@ -1,0 +1,43 @@
+id hjortharspuppan
+status draft
+
+// en description: A fat cigar of spun, clipped and singed olive deer hair, a short shaggy thorax of dark brown dubbing and a small orange head.
+description "En kraftig cigarr av spunnet, klippt och bränt olivfärgat hjorthår, en kort, raggig thorax av mörkbrun dubbing och ett litet orange huvud."
+
+// en history: Mats Hagberg of Luleå fished it on the Pite älv with Gunnar Westrin, who wrote it up in Vildmarksnytt; the two made a television film about the fishing in the 1990s. Hagberg and his friends called it Hjortpuppan, and on the Gimån in Jämtland, where it became the fly of the caddis evenings, it is also known as Mullbänken. The dressing here is Niklas Dahlin's (Flugfiske i Norden, 2014), with a fuller body and thorax than the original and an orange head; others tie it in natural deer hair with a light, spiky thorax.
+history """
+    Mats Hagberg från Luleå fiskade den i Pite älv tillsammans med Gunnar Westrin, som skrev
+    om den i Vildmarksnytt; de två gjorde en tv-film om fisket på 1990-talet. Hagberg och hans
+    vänner kallade den Hjortpuppan, och i Gimån i Jämtland, där den blev nattsländekvällarnas
+    fluga, kallas den också Mullbänken. Bindningen här är Niklas Dahlins (Flugfiske i Norden,
+    2014), med fylligare kropp och thorax än originalet och ett orange huvud; andra binder den
+    i naturfärgat hjorthår med en ljus, spretig thorax.
+    """
+
+// en fishing: A caddis pupa in the surface film for grayling and trout, often late in the evening or at night during the hatch. Dahlin doesn't grease it, so it soaks up a little water and sits in the film rather than on it, and he gives it small twitches now and then, as a swimming pupa moves. Others fish it dry, where the packed hair floats it like a cork.
+fishing """
+    En nattsländepuppa i ytfilmen för harr och öring, ofta sent på kvällen eller på natten
+    under kläckningen. Dahlin fettar inte in den, så den suger upp lite vatten och ligger i
+    filmen i stället för på den, och han ger den små ryck då och då, som en simmande puppa.
+    Andra fiskar den torr, och då flyter det packade håret den som en kork.
+    """
+
+labels {
+    // en body: Olive deer hair
+    body "Olivfärgat hjorthår"
+    // en thorax: Dark brown Squirrel SLF
+    thorax "Squirrel SLF, mörkbrun"
+}
+
+notes {
+    // en step 1 (attach-thread): Where the shank meets the bend.
+    step 1 "Där skaftet övergår i böjen."
+    // en step 2 (spin body): Three or four bunches on a #14, each spun and packed back hard against the last.
+    step 2 "Tre eller fyra buntar på en #14, var och en spunnen och hårt packad bakåt mot den förra."
+    // en step 3 (trim body): Rough-trim to a thick cigar, singe it lightly with a lighter, and brush it out.
+    step 3 "Grovklipp till en kraftig cigarr, bränn den lätt med en tändare och borsta ur den."
+    // en step 4 (dub thorax): Compact, about 5 to 6 cm of dubbed thread, as thick as the body.
+    step 4 "Kompakt, ungefär 5–6 cm dubbad tråd, lika tjock som kroppen."
+    // en step 5 (whip-finish): A small, distinct head; lacquer it.
+    step 5 "Ett litet, tydligt huvud; lacka det."
+}

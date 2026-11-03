@@ -192,8 +192,10 @@ function writerFor(recipe: Recipe) {
       case "wind":
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
+        if (said.bubble) return `Klappe ${mat(said.m, "acc")} als lockere Blase über ${the("body", "acc")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
       case "lay-back":
+        if (said.tied) return `Klappe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach hinten und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.`;
         return `Lege ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach hinten ${place(said.to).to}. Die nächsten Windungen halten ${pronoun(noun(said.m)).acc} dort fest.`;
       case "spin": {
         const clump = word("clump");
@@ -215,6 +217,7 @@ function writerFor(recipe: Recipe) {
             : `Schneide ${fibres} ${mat(said.m, "gen")} oben und unten weg, so dass zwei flache ${many("row", "nom")} seitlich abstehen.`;
       }
       case "trim-spun":
+        if (said.cigar) return `Schneide ${mat(said.m, "acc")} zu einer Zigarre, auf jeder Seite etwa ${length(said.leave)} dick, in der Mitte am dicksten und an beiden Enden gerundet.`;
         return `Schneide ${mat(said.m, "acc")} in Form, so dass auf jeder Seite ${a("head", "nom")} bleibt, ${pronoun(word("head")).rel} etwa ${length(said.leave)} dick ist.`;
       case "trim-tip":
         return `Schneide ${the("tip", "acc")} ${mat(said.m, "gen")} dicht an ${the("body", "dat")} ab.`;
