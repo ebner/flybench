@@ -123,6 +123,8 @@ export const en = {
     stage: "3D tying sequence",
     stepOf: (n: number, of: number) => `Step ${n} of ${of}`,
     finished: "The finished fly",
+    finishedHint: "Press play to watch it tied, step by step, from the bare hook. Turn the fly to look at it from every side.",
+    stepsCount: (n: number) => `${n} steps`,
     inTheWater: "In the water",
     mistakes: "Common mistakes",
     viseHint: "Tap here to play the next step. Esc or “Leave vise mode” to go back.",

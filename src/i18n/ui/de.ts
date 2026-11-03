@@ -118,6 +118,8 @@ export const de: Messages = {
     stage: "Bindeablauf in 3D",
     stepOf: (n: number, of: number) => `Schritt ${n} von ${of}`,
     finished: "Die fertige Fliege",
+    finishedHint: "Drück auf Abspielen, um zuzusehen, wie sie Schritt für Schritt vom leeren Haken an gebunden wird. Dreh die Fliege, um sie von allen Seiten zu sehen.",
+    stepsCount: (n: number) => `${n} Schritte`,
     inTheWater: "Im Wasser",
     mistakes: "Häufige Fehler",
     viseHint: "Hier tippen für den nächsten Schritt. Esc oder „Bindestock beenden“ führt zurück.",

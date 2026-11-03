@@ -118,6 +118,8 @@ export const sv: Messages = {
     stage: "Bindningen i 3D",
     stepOf: (n: number, of: number) => `Steg ${n} av ${of}`,
     finished: "Den färdiga flugan",
+    finishedHint: "Tryck på spela för att se den bindas, steg för steg, från den tomma kroken. Vrid flugan för att se den från alla håll.",
+    stepsCount: (n: number) => `${n} steg`,
     inTheWater: "I vattnet",
     mistakes: "Vanliga misstag",
     viseHint: "Tryck här för att spela nästa steg. Esc eller ”Lämna städläget” för att gå tillbaka.",
