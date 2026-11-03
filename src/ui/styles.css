@@ -170,6 +170,9 @@ select {
   height: 2.2rem;
   background: var(--accent);
   mask: url("/logo.svg") center / contain no-repeat;
+  /* Its shank level with the middle of the lower-case letters, not on their baseline. */
+  position: relative;
+  top: -0.09em;
 }
 
 /* On a wide screen the menu's contents sit in the header row; on a phone they drop down. */
@@ -2726,7 +2729,7 @@ select {
   max-width: var(--page);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) min(26rem, 40vw);
+  grid-template-columns: minmax(0, 1fr) min(27rem, 42vw);
   align-items: start;
 }
 
@@ -2775,15 +2778,10 @@ select {
   position: absolute;
   inset: 0.95rem;
   border-radius: 50%;
-  background: var(--paper-raised);
-  border: 2px solid var(--ink-faint);
-  box-shadow: 0 1px 3px var(--specimen-shadow);
-  transition: transform 0.12s, border-color 0.12s;
-}
-
-.wb-handle.on::after {
-  border-color: var(--accent);
   background: var(--accent);
+  border: 2px solid var(--paper-raised);
+  box-shadow: 0 1px 3px var(--specimen-shadow);
+  transition: transform 0.12s;
 }
 
 .wb-handle:hover::after,
@@ -2799,8 +2797,11 @@ select {
 .wb-toolbar {
   position: absolute;
   top: 0.75rem;
+  left: 0.75rem;
   right: 0.75rem;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.4rem;
 }
 
@@ -2810,24 +2811,52 @@ select {
   left: 0;
   right: 0;
   margin: 0;
+  padding: 0 1rem;
   text-align: center;
   font-size: var(--step--1);
   color: var(--ink-faint);
   pointer-events: none;
 }
 
+/* Watching it tied: the step's words and the player over the bottom of the stage. */
+.wb-player {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem var(--gutter) 0.5rem;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border-top: 1px solid var(--rule);
+}
+
+.wb-player .now {
+  min-height: 4.5rem;
+  padding: 0;
+}
+
 .wb-side {
-  padding: 1.5rem var(--gutter) 4rem;
+  padding: 1.25rem var(--gutter) 4rem;
 }
 
-.wb-side h1 {
-  margin: 0;
-  font-size: clamp(var(--step-3), 4vw, var(--step-4));
+.wb-name {
+  width: 100%;
+  padding: 0.1rem 0;
+  border: 0;
+  border-bottom: 1px dashed var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: clamp(var(--step-2), 3.5vw, var(--step-3));
 }
 
-.wb-prototype {
+.wb-name:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.wb-yours {
+  color: var(--accent);
   font-size: var(--step--1);
-  color: var(--ink-soft);
 }
 
 .wb-heading {
@@ -2841,26 +2870,41 @@ select {
 .wb-rail,
 .wb-swatches,
 .wb-colours,
-.wb-palette {
+.wb-palette,
+.wb-start-grid,
+.wb-start-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Tiles all one size, however long their words. */
 .wb-rail {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  grid-auto-rows: 6.75rem;
   gap: 0.5rem;
+}
+
+/* Nothing in a tile shrinks: the words are cut off at the end instead. */
+.wb-part > * {
+  flex: none;
+}
+
+.wb-tile {
+  position: relative;
+  min-width: 0;
 }
 
 .wb-part {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.15rem;
+  gap: 0.1rem;
   width: 100%;
-  min-height: 5.5rem;
-  padding: 0.5rem 0.6rem;
+  height: 100%;
+  padding: 0.45rem 0.55rem;
+  overflow: hidden;
   border: 1px solid var(--rule);
   border-radius: 0.4rem;
   background: var(--paper-raised);
@@ -2868,6 +2912,8 @@ select {
   text-align: left;
   font: inherit;
   cursor: pointer;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .wb-part.on {
@@ -2875,22 +2921,62 @@ select {
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
+.wb-part.problem {
+  border-color: var(--danger);
+}
+
 .wb-part-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-weight: 600;
 }
 
 .wb-part-material {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.3rem;
+  max-width: 100%;
   font-size: var(--step--1);
+  line-height: 1.25;
   color: var(--ink-soft);
+}
+
+.wb-part-material > span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wb-tile-remove {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.15rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: var(--step-1);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.wb-tile-remove:hover,
+.wb-tile-remove:focus-visible {
+  color: var(--danger);
+  background: var(--accent-wash);
 }
 
 .wb-dot {
   flex: none;
   width: 0.7rem;
   height: 0.7rem;
+  margin-top: 0.2rem;
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--rule);
 }
@@ -2909,8 +2995,9 @@ select {
 }
 
 .wb-icon {
-  width: 3rem;
-  height: 2.4rem;
+  flex: none;
+  width: 2.6rem;
+  height: 1.9rem;
   fill: none;
   stroke-width: 1.6;
   stroke-linecap: round;
@@ -2918,7 +3005,7 @@ select {
 
 .wb-icon.large {
   width: 5rem;
-  height: 4rem;
+  height: 3.6rem;
 }
 
 .wb-icon-hook {
@@ -2927,6 +3014,7 @@ select {
 
 .wb-icon-part {
   stroke: var(--accent);
+  color: var(--accent);
 }
 
 .wb-panel {
@@ -2938,12 +3026,46 @@ select {
 .wb-panel-head {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
 }
 
 .wb-panel-head h2 {
   margin: 0;
+  flex: 1;
+}
+
+.link.danger {
+  color: var(--danger);
+}
+
+.wb-mix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.wb-mix button {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.wb-mix button.on,
+.wb-ways button.on,
+.wb-presets button.on,
+.wb-sizes button.on {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+.wb-mix-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 0.75rem;
 }
 
 .wb-swatches {
@@ -2953,10 +3075,12 @@ select {
 }
 
 .wb-swatch {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   width: 100%;
+  height: 100%;
   padding: 0.3rem;
   border: 1px solid var(--rule);
   border-radius: 0.4rem;
@@ -2973,14 +3097,51 @@ select {
 .wb-swatch-blank {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: auto;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 0.25rem;
+  background: var(--paper);
 }
 
 .wb-swatch.on {
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.wb-owned {
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+
+.wb-colour-picker {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.wb-preview {
+  position: relative;
+  height: 7rem;
+  border-radius: 0.4rem;
+  background: var(--paper-raised);
+}
+
+.wb-preview canvas {
+  filter: drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+}
+
+.wb-colour-name {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.wb-family h4 {
+  margin: 0.25rem 0;
+  font-family: var(--text);
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--ink-faint);
 }
 
 .wb-colours {
@@ -2990,8 +3151,8 @@ select {
 }
 
 .wb-colour {
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -2999,12 +3160,27 @@ select {
   cursor: pointer;
 }
 
+/* A colour in the visitor's materials has a small ring inside. */
+.wb-colour.owned {
+  box-shadow: 0 0 0 1px var(--rule), inset 0 0 0 3px var(--paper-raised);
+}
+
 .wb-colour.on {
   box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
 }
 
-.wb-presets {
+.wb-any-colour {
   display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--step--1);
+}
+
+.wb-ways,
+.wb-presets,
+.wb-sizes {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.4rem;
 }
 
@@ -3012,17 +3188,28 @@ select {
   flex: 1;
 }
 
-.wb-presets button.on {
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-color: var(--accent);
+.wb-ways button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.wb-more {
+.wb-why {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+.wb-sizes button {
+  min-width: 2.6rem;
+}
+
+.wb-more,
+.wb-details {
   margin-top: 1.25rem;
 }
 
-.wb-more summary {
+.wb-more summary,
+.wb-details summary {
   cursor: pointer;
   color: var(--accent);
 }
@@ -3040,6 +3227,17 @@ select {
   gap: 0.5rem;
 }
 
+.wb-field.wide {
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+}
+
+.wb-field.wide input,
+.wb-field.wide textarea,
+.wb-field.wide select {
+  width: 100%;
+}
+
 .wb-unit {
   font-size: var(--step--1);
   color: var(--ink-soft);
@@ -3051,10 +3249,17 @@ select {
   gap: 0.5rem;
 }
 
-.wb-remove {
-  display: block;
-  margin-top: 1.5rem;
-  color: var(--danger);
+.wb-species {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  border: 0;
+  padding: 0;
+}
+
+.wb-species legend {
+  margin-bottom: 0.4rem;
+  color: var(--ink-soft);
 }
 
 .wb-sheet-backdrop {
@@ -3068,8 +3273,8 @@ select {
 }
 
 .wb-sheet {
-  width: min(40rem, calc(100vw - 2rem));
-  max-height: 80dvh;
+  width: min(44rem, calc(100vw - 2rem));
+  max-height: 82dvh;
   overflow: auto;
   padding: 1.25rem 1.5rem 1.5rem;
   border-radius: 0.6rem;
@@ -3079,7 +3284,8 @@ select {
 
 .wb-palette {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  grid-auto-rows: 1fr;
   gap: 0.75rem;
   margin-top: 1rem;
 }
@@ -3110,12 +3316,61 @@ select {
   color: var(--ink-soft);
 }
 
-.wb-steps {
-  padding-left: 1.5rem;
+/* Starting a fly */
+
+.wb-start h2 {
+  margin-top: 2rem;
 }
 
-.wb-steps li {
-  margin: 0.4rem 0;
+.wb-start-draft {
+  margin: 1.5rem 0;
+}
+
+.wb-start-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+
+.wb-start-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.wb-start-grid.hooks {
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+}
+
+.wb-start-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.4rem 0.4rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wb-start-tile:hover {
+  border-color: var(--accent);
+}
+
+.wb-start-tile img,
+.wb-start-tile .wb-swatch-blank {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
 }
 
 /* One column: the fly on top, the parts below it; sheets come up from the bottom. */
@@ -3134,8 +3389,13 @@ select {
     background: var(--paper);
   }
 
-  .wb-side h1 {
-    display: none;
+  .wb-stage.watching {
+    height: 62dvh;
+  }
+
+  .wb-toolbar button {
+    padding: 0.3rem 0.55rem;
+    font-size: var(--step--1);
   }
 
   .wb-rail {
@@ -3147,6 +3407,7 @@ select {
   .wb-rail li {
     flex: none;
     width: 7.5rem;
+    height: 6.75rem;
   }
 
   .wb-sheet-backdrop {

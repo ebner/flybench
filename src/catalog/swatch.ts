@@ -1,6 +1,6 @@
 import { loadRecipe } from "../recipe/load";
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
-import type { Recipe } from "../recipe/schema";
+import { isTube, type Recipe } from "../recipe/schema";
 
 /**
  * A material on a bare hook, the way it is used: the picture beside it on the Materials
@@ -65,4 +65,30 @@ export function swatchRecipe(kind: MaterialKind, color: string): Recipe {
 /** Where a swatch picture is kept: public/renders/materials/<this>.webp. */
 export function swatchName(kind: MaterialKind, color: string): string {
   return `${kind}--${color.replace(/^#/, "")}`;
+}
+
+/** A bare hook of this model, for the builder's hook picker: public/renders/hooks/<model>.webp. */
+export function hookRecipe(model: Recipe["hook"]["model"]): Recipe {
+  // Assumption: a size 12 hook or a 25 mm tube, as the builder starts them.
+  const hook = isTube(model) ? { model, length: 25 } : { model, size: 12 };
+  return {
+    id: "hook", name: "Hook", aliases: [], type: "wet", imitates: [], naturals: [], difficulty: "beginner", species: [], season: [],
+    sources: [], references: [], hook, thread: { color: "black", size: "8/0" }, materials: [], steps: [],
+  } as Recipe;
+}
+
+/**
+ * A colour to show each material in when the patterns use none of it (the builder's material
+ * picker shows every kind a part can be tied with).
+ */
+// Assumption: a common colour of each kind of material as sold.
+export function sampleColour(kind: MaterialKind): string {
+  const cat = MATERIALS[kind] as { defaultColor?: string; archetype: string };
+  if (cat.defaultColor) return cat.defaultColor;
+  const byArchetype: Record<string, string> = {
+    yarn: "red", herl: "natural", hackle: "brown", dubbing: "grey", wire: "gold", floss: "black", tinsel: "silver", chenille: "olive",
+    hair: "brown", fibres: "brown", biot: "brown", marabou: "black", cdc: "dun", flash: "pearl", feather: "grizzly", foam: "black",
+    bead: "gold", eyes: "silver", legs: "black",
+  };
+  return byArchetype[cat.archetype] ?? "black";
 }

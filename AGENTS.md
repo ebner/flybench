@@ -66,9 +66,11 @@ src/catalog/    search and catalog wording, swatch.ts (a material on a bare hook
                 static HTML for the build; no React; tested in Node)
 src/edit/       editing recipes (no React): kdlEdit.ts edits KDL text in place (format-preserving),
                 schemaForm.ts describes a form from the Zod schemas, write.ts writes a recipe as KDL,
-                own.ts the visitors' own flies (fly builder: drafts, starting values, share links)
+                own.ts the visitors' own flies (drafts, share links), parts.ts a fly as parts (the
+                builder's model: parts written as a recipe, a recipe read back into parts)
 src/studio/     the authoring studio (dev server only), on src/edit
-src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder, about;
+src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder in
+                Build.tsx and build/, about;
                 features.ts switches off features kept for later: the water views)
 scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
 public/renders/ generated gallery images, material swatches (materials/) and water stills
@@ -110,7 +112,8 @@ state of the app; keep it true, or re-evaluate:
   served by the site itself. Links out to sources are fine; loading from them is not.
 - Browser storage (`localStorage`) holds only what the visitor asks for: the theme, the
   camera-follow setting, the fly box, the materials inventory, the hatch calendar's
-  region, the tying log and the flies they build (keys `flybench.*`). A link to share
+  region, the tying log, the flies they build and the one being built (keys `flybench.*`;
+  the builder keeps its unsaved fly in `flybench.draft`). A link to share
   an own fly carries it after the `#`, which browsers don't send to a server. The
   service worker caches the site's own files for offline use.
 - No data leaves the browser; the only server is GitHub Pages, which logs IP addresses.

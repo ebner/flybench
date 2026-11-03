@@ -61,7 +61,7 @@ const SPEEDS = [
   [2, "double"],
 ] as const;
 
-function TransportIcon({ name }: { name: keyof typeof Icon }) {
+export function TransportIcon({ name }: { name: keyof typeof Icon }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
       {Icon[name]}

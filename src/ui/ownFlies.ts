@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import type { CatalogEntry } from "../catalog/search";
 import { lang } from "../i18n/lang";
 import { draftOf, isOwnFly, isOwnId, ownRecipe, type OwnFly } from "../edit/own";
-import { findPattern, KNOWN_PARTS, PATTERNS } from "../patterns";
+import { findPattern, NAMEABLE_PARTS, PATTERNS } from "../patterns";
 import type { Recipe } from "../recipe/schema";
 import { OWN_FLIES_KEY, readList, useStoredList } from "./storage";
 
 /** The visitor's own flies (the fly builder), kept in this browser. */
 
-const parts = new Set(KNOWN_PARTS);
+const parts = NAMEABLE_PARTS;
 
 export interface Own {
   fly: OwnFly;

@@ -5,6 +5,9 @@ import { setLang } from "../i18n/lang";
 import { loadRecipe } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
 import { materialsList } from "./describe";
+import { addMaterial, addPart, bareHook, compile, kindsFor, ROLES } from "../edit/parts";
+import { blankFly } from "../edit/own";
+import { NAMEABLE_PARTS } from "../patterns";
 import { simulate } from "./simulate";
 
 loadGlossaries();
@@ -24,6 +27,26 @@ describe.each(["sv", "de"] as const)("generated texts in %s", (lang) => {
       const texts = [...simulate(r).steps.flatMap((s) => [s.title, s.text]), ...materialsList(r).flatMap((m) => [m.role, m.name, m.detail ?? ""])];
       for (const t of texts) expect(t, r.id).not.toMatch(/undefined|NaN|\s{2}|\s[,.]/);
     }
+  });
+});
+
+describe.each(["sv", "de"] as const)("an own fly's parts in %s", (lang) => {
+  it("are named from the glossary's words, however many of a kind and however mixed", () => {
+    const { materials: _m, steps: _s, ...meta } = blankFly("Mine");
+    let fly = bareHook(meta);
+    for (const role of ROLES.filter((r) => r !== "other")) {
+      // Three of each kind, the last with two more materials mixed in.
+      for (let n = 0; n < 3; n++) {
+        const kind = kindsFor(role)[0]!;
+        const added = addPart(fly, role, kind);
+        fly = added.fly;
+        if (n === 2 && ["bunch", "wound"].includes(added.part.how)) fly = addMaterial(addMaterial(fly, added.part.id, kind, "badger"), added.part.id, kind, "#123456");
+      }
+    }
+    const recipe = compile(fly).recipe;
+    expect(recipe.materials.every((m) => NAMEABLE_PARTS.has(m.id))).toBe(true);
+    setLang(lang);
+    for (const t of materialsList(recipe).flatMap((m) => [m.role, m.name])) expect(t).not.toMatch(/undefined|NaN|\s{2}/);
   });
 });
 

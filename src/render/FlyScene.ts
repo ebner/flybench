@@ -211,6 +211,12 @@ export class FlyScene {
   onFollowChange?: (follow: boolean) => void;
   /** Called every frame with the screen position (CSS pixels) of the current step's anchor. */
   onAnchor?: (point: { x: number; y: number } | null) => void;
+  /** The builder's focus (the steps shown in full), the meshes made faint and their own materials, the faint copies. */
+  private focus: ReadonlySet<number> | null = null;
+  private fainted = new Map<THREE.Mesh, THREE.Material>();
+  private faintOf = new Map<THREE.Material, THREE.Material>();
+  private depthOnly: THREE.Material | null = null;
+  private focusThread = false;
   /** After each frame is drawn: for overlays that follow the fly (the builder's handles). */
   onDraw?: () => void;
 
@@ -283,6 +289,7 @@ export class FlyScene {
 
   /** Shows a fly; `keepCamera` leaves the view as it is (the builder, while a part is being dragged). */
   setBuild(build: Build, keepCamera = false) {
+    this.setFocus(null);
     this.clearFly();
     this.build = build;
     this.space = new ShankSpace(build.hook);
@@ -1177,7 +1184,80 @@ export class FlyScene {
     const hit = ray.ray.intersectPlane(plane, new THREE.Vector3());
     if (!hit) return null;
     const local = this.fly.worldToLocal(hit);
-    return { x: local.x, y: local.y };
+    // In the shank's own terms: along a curved shank, and off it.
+    return this.space ? this.space.unpoint(local.x, local.y) : { x: local.x, y: local.y };
+  }
+
+  /**
+   * The builder's focus: the pieces of these steps in full, the rest of the fly faint (null: the
+   * whole fly). Kept until the next setBuild, which draws everything in full again.
+   */
+  setFocus(steps: ReadonlySet<number> | null, thread = false) {
+    this.focus = steps;
+    this.focusThread = thread;
+    this.applyFocus();
+  }
+
+  /**
+   * Makes the unfocused steps' meshes faint (again: some pieces rebuild their meshes as time
+   * moves). A faint mesh is drawn twice: first only into the depth buffer, then faintly where it
+   * is nearest, so a dense bunch of fibres is faint once, not built up fibre over fibre.
+   */
+  private applyFocus() {
+    const restore = (o: THREE.Mesh) => {
+      o.material = this.fainted.get(o)!;
+      o.renderOrder = 0;
+      const twin = o.children.find((c) => c.userData.depthTwin);
+      if (twin) o.remove(twin);
+      this.fainted.delete(o);
+    };
+    if (!this.focus) {
+      for (const o of [...this.fainted.keys()]) restore(o);
+      for (const m of this.faintOf.values()) m.dispose();
+      this.faintOf.clear();
+      this.depthOnly?.dispose();
+      this.depthOnly = null;
+      return;
+    }
+    this.depthOnly ??= new THREE.MeshBasicMaterial({ colorWrite: false });
+    this.stepViews.forEach((views, i) => {
+      views.forEach((v, j) => {
+        // The thread in full wherever it was wound, when the thread is chosen.
+        const faint = !this.focus!.has(i) && !(this.focusThread && this.build?.steps[i]?.pieces[j]?.material === "thread");
+        v.piece.object.traverse((o) => {
+          if (!(o instanceof THREE.Mesh) || Array.isArray(o.material) || o.userData.depthTwin) return;
+          if (!faint) {
+            if (this.fainted.has(o)) restore(o);
+            return;
+          }
+          if (this.fainted.has(o)) return;
+          const own = o.material as THREE.Material;
+          let f = this.faintOf.get(own);
+          if (!f) {
+            f = own.clone();
+            f.transparent = true;
+            // Faint enough to see through to the chosen parts, still showing where the rest sits.
+            f.opacity = Math.min(own.opacity, 0.22);
+            f.depthWrite = false;
+            f.depthFunc = THREE.LessEqualDepth;
+            this.faintOf.set(own, f);
+          }
+          this.fainted.set(o, own);
+          o.material = f;
+          o.renderOrder = 2;
+          const twin =
+            o instanceof THREE.InstancedMesh ? new THREE.InstancedMesh(o.geometry, this.depthOnly!, o.count) : new THREE.Mesh(o.geometry, this.depthOnly!);
+          if (twin instanceof THREE.InstancedMesh && o instanceof THREE.InstancedMesh) {
+            twin.instanceMatrix = o.instanceMatrix;
+            twin.onBeforeRender = () => (twin.count = o.count);
+          }
+          twin.userData.depthTwin = true;
+          twin.renderOrder = 1;
+          twin.frustumCulled = false;
+          o.add(twin);
+        });
+      });
+    });
   }
 
   /** The step whose piece is under a canvas point (CSS pixels), or null: what the visitor tapped. */
@@ -1394,9 +1474,16 @@ export class FlyScene {
     const build = this.build;
     if (!build) return;
     this.time = t;
+    // A bare hook (the builder's hook pictures): nothing to show but the hook.
+    if (build.steps.length === 0) {
+      this.atEnd = true;
+      if (this.bobbin) this.bobbin.object.visible = false;
+      return;
+    }
     build.steps.forEach((step, i) => {
       for (const view of this.stepViews[i]!) view.piece.setProgress(pieceProgress(step, view, t));
     });
+    if (this.focus) this.applyFocus();
 
     this.currentStep = stepAt(build, t);
     this.atEnd = t >= stepEnd(build.steps[build.steps.length - 1]!);
@@ -1505,6 +1592,8 @@ export class FlyScene {
   }
 
   dispose() {
+    // The faint copies and the pieces' own materials put back, so each is disposed once.
+    this.setFocus(null);
     cancelAnimationFrame(this.frame);
     this.resizeObserver.disconnect();
     this.setNatural(null);
