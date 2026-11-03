@@ -362,6 +362,7 @@ function PatternView({
           onCalloutClick={showInDressing}
           pointUp={ridesPointUp(recipe)}
           guide
+          turning={finished}
           water={WATER_VIEWS ? fishingFor : undefined}
           waterOpen={inWater}
           onWater={(on) => {

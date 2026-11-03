@@ -74,7 +74,13 @@ export interface BundlePiece extends PieceBase {
   x: number;
   /** Spun hair: the bases spread forward over this length. */
   span?: number;
+  /** From the axis to where the bases lie, on top (or underneath, for side "under"). */
   radius: number;
+  /**
+   * How far the circle the bases spread round is off the axis, towards their side: what is
+   * already tied on top makes a hump there (see Profile.ringAt).
+   */
+  centre?: number;
   length: number;
   /** Radians above the shank (below, for side "under"); for "radial", how far the fibres lean back. */
   angle: number;
@@ -223,16 +229,22 @@ export interface Build {
   duration: number;
 }
 
-/** Position on a shank wraps piece at progress u (0..1). */
-export function wrapAt(p: WrapsPiece, u: number): { x: number; radius: number; angle: number } {
+/**
+ * Position on a shank wraps piece at progress u (0..1): round a circle of `radius` whose centre
+ * is `centre` above the shank's axis (the turns hug the shank underneath and go over what is
+ * tied on top).
+ */
+export function wrapAt(p: WrapsPiece, u: number): { x: number; radius: number; centre: number; angle: number } {
   const angle = (p.counter ? -1 : 1) * 2 * Math.PI * p.turns * u;
   if (p.path === "travel") {
     const x = p.x0 + (p.x1 - p.x0) * u;
-    return { x, radius: p.base.radiusAt(x) + p.strandRadius, angle };
+    const ring = p.base.ringAt(x);
+    return { x, radius: ring.radius + p.strandRadius, centre: ring.centre, angle };
   }
   const x = p.x0 + p.width * Math.sin(Math.PI * u);
+  const ring = p.base.ringAt(x);
   // Turns going back lie over the ones going out, mostly in between them.
-  return { x, radius: p.base.radiusAt(x) + p.strandRadius * (1 + 0.6 * u), angle };
+  return { x, radius: ring.radius + p.strandRadius * (1 + 0.6 * u), centre: ring.centre, angle };
 }
 
 export type V3 = [number, number, number];
@@ -255,7 +267,7 @@ export function wrapPoint(p: WrapsPiece, u: number): { point: V3; leave: V3; x: 
   const w = wrapAt(p, u);
   const way = p.counter ? -1 : 1;
   return {
-    point: [w.x, w.radius * Math.sin(w.angle), w.radius * Math.cos(w.angle)],
+    point: [w.x, w.centre + w.radius * Math.sin(w.angle), w.radius * Math.cos(w.angle)],
     leave: [0, -Math.cos(w.angle) * way, Math.sin(w.angle) * way],
     x: w.x,
   };
@@ -375,7 +387,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
       return {
         // Assumption: 0.6 gape where the recipe doesn't say.
         ...base, strandRadius: 0.06, count: 260, fibreLength: m.fibre ?? 0.6, sweep: deg(m.sweep ?? 45),
-        tieInThickness: 0.02, layerThickness: () => 0.05,
+        // Wound, only the stem and the barbs' roots lie on the body, as with a hackle.
+        tieInThickness: 0.02, layerThickness: () => 2 * CDC_STEM,
       };
     case "flash":
       return { ...base, strandRadius: 0.04, count: m.count ?? 8, tieInThickness: 0.01, layerThickness: () => 0.01 };
@@ -417,6 +430,11 @@ const DEFAULT_SPREAD: Partial<Record<Archetype, number>> = {
 
 /** Butts of a hair clump stick forward and up from the tie-in point until trimmed. */
 const BUTTS = { length: 0.55, angle: deg(35) };
+// Assumption: a bunch spread up to 60° each side lies on its side of the shank; from 150°, all round it.
+/** How much of a bunch spread `spread` radians to each side lies all round the shank. */
+const allRound = (spread: number) => Math.min(1, Math.max(0, (spread - deg(60)) / deg(90)));
+// Assumption: a CDC feather's stem is about as thick as a hackle's, 0.024 gape across.
+const CDC_STEM = 0.012;
 
 /** Feather width as a fraction of length, by shape. */
 const FEATHER_WIDTH = { breast: 0.5, tip: 0.28, slip: 0.32 };
@@ -486,7 +504,8 @@ export function simulate(recipe: Recipe): Build {
     const x1 = Math.max(x + pitch * 0.5, Math.min(maxX, x + span));
     const x0 = Math.min(x, x1 - span);
     const piece = threadWraps("in-place", x0, x1, turns, window);
-    profile = profile.withLayer(x0, x1, td * 0.6, 0.05);
+    // Thinner towards its ends, so a head built of several of them tapers into the body.
+    profile = profile.withLayer(x0, x1, td * 0.6, Math.min(0.05, (x1 - x0) / 3), true);
     return piece;
   };
   const restingEnds = () => [...freeEnds.values()];
@@ -496,13 +515,14 @@ export function simulate(recipe: Recipe): Build {
   });
   const materialWraps = (id: string, l: MaterialLook, x0: number, x1: number, turns: number): WrapsPiece => ({
     type: "wraps", id: nextId++, material: id, look: l.look, color: l.color, window: [0, 1],
-    path: "travel", x0, x1, width: 0, turns, strandRadius: l.strandRadius, base: profile,
+    // Wound CDC lies on the body as its stem; the barbs stand out from it.
+    path: "travel", x0, x1, width: 0, turns, strandRadius: l.look === "cdc" ? CDC_STEM : l.strandRadius, base: profile,
     fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band, shaggy: l.shaggy,
   });
 
   recipe.steps.forEach((step, index) => {
     const pieces: Piece[] = [];
-    let thread: ThreadPose | null = threadX === null ? null : { kind: "rest", x: threadX, radius: profile.radiusAt(threadX) };
+    let thread: ThreadPose | null = threadX === null ? null : { kind: "rest", x: threadX, radius: profile.sideAt(threadX) };
     let ends = restingEnds();
     let duration: number;
     const ctx: StepContext = {};
@@ -597,7 +617,7 @@ export function simulate(recipe: Recipe): Build {
           });
         }
         profile = profile.withLayer(from, to, 0.08);
-        thread = { kind: "rest", x: to, radius: profile.radiusAt(to) };
+        thread = { kind: "rest", x: to, radius: profile.sideAt(to) };
         threadX = to;
         threadAt = step.to;
         duration = DURATION.spin;
@@ -608,8 +628,10 @@ export function simulate(recipe: Recipe): Build {
         const l = looks.get(step.material)!;
         tiedAt.set(step.material, x);
         tiedAtPosition.set(step.material, threadAt);
-        const radius = profile.radiusAt(x);
         const side: Side = step.side === "under" ? "under" : "top";
+        // On its side of what is already there; its bases spread round the circle turns lie on.
+        const radius = side === "under" ? profile.underAt(x) : profile.radiusAt(x);
+        const centre = profile.ringAt(x).centre * (side === "under" ? -1 : 1);
         const angle = deg(step.angle ?? (l.look === "yarn" ? 5 : 3));
         const upright = step.angle !== undefined && step.angle >= 60;
         const across = step.side === "across";
@@ -654,7 +676,7 @@ export function simulate(recipe: Recipe): Build {
         } else if (step.length) {
           pieces.push({
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
-            window: [0, 0.35], x, radius, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
+            window: [0, 0.35], x, radius, centre, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             // A long hair wing is a bigger clump: it stays dense as it fans out.
             bundleRadius: l.strandRadius, count: l.look === "hair" ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
             pair, marks: l.marks, fibreWidth: l.fibreWidth,
@@ -665,7 +687,7 @@ export function simulate(recipe: Recipe): Build {
           if (l.look === "hair") {
             const b: BundlePiece = {
               type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
-              window: [0.2, 0.45], x: x + 0.12, radius, length: BUTTS.length, angle: BUTTS.angle,
+              window: [0.2, 0.45], x: x + 0.12, radius, centre, length: BUTTS.length, angle: BUTTS.angle,
               direction: "forward", side, spread, bundleRadius: l.strandRadius, count: l.count,
             };
             pieces.push(b);
@@ -680,8 +702,15 @@ export function simulate(recipe: Recipe): Build {
           freeEnds.set(step.material, end);
           ends = restingEnds();
         }
-        // The bound-down end tapers out along the shank rather than making a ridge.
-        if (l.look !== "eyes") profile = profile.withLayer(x - 2 * pitch, x + 8 * pitch, l.tieInThickness * 0.6, 0.06);
+        // The bound-down end tapers out along the shank rather than making a ridge. A bunch (a
+        // tail, a wing, a beard) lies on its side of the shank, more of it all round the wider it
+        // is spread (a hair wing spread round a tube); a strand to be wound is wrapped round with it.
+        if (l.look !== "eyes") {
+          const thickness = l.tieInThickness * 0.6;
+          const round = step.length && !across ? allRound(spread) : 1;
+          profile = profile.withLayer(x - 2 * pitch, x + 8 * pitch, thickness * round, 0.06);
+          if (round < 1) profile = profile.withLayer(x - 2 * pitch, x + 8 * pitch, thickness * (1 - round), 0.06, false, side);
+        }
         const wraps = inPlace(x, l.look === "hair" || l.look === "eyes" ? 8 : 5, [0.3, 1]);
         pieces.push(wraps);
         thread = { kind: "follow", piece: wraps.id };
@@ -772,7 +801,7 @@ export function simulate(recipe: Recipe): Build {
         };
         pieces.push(cover);
         covers.set(step.material, cover);
-        profile = profile.withLayer(from, to, thickness * 0.8);
+        profile = profile.withLayer(from, to, thickness * 0.8, 0.03, false, "top");
         // Fibres on top of what it covers, wound or dubbed, are pressed flat: from this step on,
         // those wraps are replaced by copies without them, so earlier moments still show them.
         const press = (w: WrapsPiece): WrapsPiece | null => {

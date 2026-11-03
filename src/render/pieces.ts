@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import {
+  wrapAt,
   wrapPoint,
   type BeadPiece,
   type BundlePiece,
@@ -217,8 +218,8 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     /** Lies along the wrapped strand rather than standing out from it (most dubbing fur). */
     let lie = false;
 
-    // Angle round whatever is being wound on, recovered from the point.
-    const around = onPost ? Math.atan2(px - piece.post!.x, pz) : Math.atan2(py, pz);
+    // Angle round whatever is being wound on.
+    const around = onPost ? Math.atan2(px - piece.post!.x, pz) : wrapAt(piece, u).angle;
     if (look === "hackle") {
       // Barbs stand out with the hackle's sweep; soft hackles lean well back. A palmered
       // hackle is less orderly than a collar: its barbs are pushed every which way.
@@ -369,11 +370,7 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
     ({ geometry: tube, perSegment } = bandGeometry(piece, space, halfWidth, halfThickness, tubular));
   } else {
     const tubeRadius =
-      piece.look === "dubbing" || piece.look === "chenille"
-        ? piece.strandRadius * 0.9
-        : piece.look === "cdc"
-          ? 0.012
-          : piece.strandRadius;
+      piece.look === "dubbing" || piece.look === "chenille" ? piece.strandRadius * 0.9 : piece.strandRadius;
     tube = new THREE.TubeGeometry(new WrapsCurve(piece, space), tubular, tubeRadius, radial, false);
     perSegment = radial * 6;
   }
@@ -428,7 +425,7 @@ function threadCore(piece: WrapsPiece, space: ShankSpace): { geometry: THREE.Buf
   const to = Math.max(piece.x0, piece.x1);
   const along = 24;
   const round = 16;
-  const radii = Array.from({ length: along + 1 }, (_, i) => piece.base.radiusAt(from + ((to - from) * i) / along));
+  const rings = Array.from({ length: along + 1 }, (_, i) => piece.base.ringAt(from + ((to - from) * i) / along));
   const span = travel ? to - from : 2 * piece.width;
   if (to - from < 1e-3 || span / Math.max(1, piece.turns) > 4 * piece.strandRadius) return null;
   const positions: number[] = [];
@@ -437,9 +434,9 @@ function threadCore(piece: WrapsPiece, space: ShankSpace): { geometry: THREE.Buf
   for (let i = 0; i <= along; i++) {
     const x = from + ((to - from) * i) / along;
     // Just inside the turns' centres, so the core shows only between them.
-    const r = radii[i]! + piece.strandRadius * 0.4;
+    const r = rings[i]!.radius + piece.strandRadius * 0.4;
     for (let j = 0; j <= round; j++) {
-      space.around(x, r, (j / round) * Math.PI * 2, v);
+      space.around(x, r, (j / round) * Math.PI * 2, v, rings[i]!.centre);
       positions.push(v.x, v.y, v.z);
     }
   }
@@ -449,6 +446,23 @@ function threadCore(piece: WrapsPiece, space: ShankSpace): { geometry: THREE.Buf
       const b = a + round + 1;
       // Facing outwards (the shank's surface is seen from outside).
       index.push(a, b, a + 1, a + 1, b, b + 1);
+    }
+  }
+  if (!travel) {
+    // A head's ends are closed down to the shank, so it can't be looked into from the eye. The
+    // caps have their own copy of the rim, so they are shaded flat.
+    for (const [i, facing] of [[0, -1], [along, 1]] as const) {
+      const x = from + ((to - from) * i) / along;
+      const axis = positions.length / 3;
+      space.point(v.set(x, 0, 0));
+      positions.push(v.x, v.y, v.z);
+      const rim = i * (round + 1);
+      for (let j = 0; j <= round; j++) positions.push(positions[(rim + j) * 3]!, positions[(rim + j) * 3 + 1]!, positions[(rim + j) * 3 + 2]!);
+      for (let j = 0; j < round; j++) {
+        const a = axis + 1 + j;
+        if (facing < 0) index.push(axis, a, a + 1);
+        else index.push(axis, a + 1, a);
+      }
     }
   }
   const geometry = new THREE.BufferGeometry();
@@ -462,7 +476,7 @@ function threadCore(piece: WrapsPiece, space: ShankSpace): { geometry: THREE.Buf
   return {
     geometry,
     setProgress(u) {
-      if (!travel) return geometry.setDrawRange(0, u > 0.15 ? along * perRing : 0);
+      if (!travel) return geometry.setDrawRange(0, u > 0.15 ? index.length : 0);
       const n = Math.floor(u * along);
       if (forward) geometry.setDrawRange(0, n * perRing);
       else geometry.setDrawRange((along - n) * perRing, n * perRing);
@@ -530,9 +544,11 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       : evenlySpaced && piece.count > 1
         ? -piece.spread + (2 * piece.spread * i) / (piece.count - 1)
         : (rand() * 2 - 1) * piece.spread;
-    const r = piece.radius + piece.bundleRadius * (radialHair ? 0.2 : 0.3 + 0.5 * rand()) * rand();
+    // Round the circle through the top (or bottom) that is `centre` off the axis.
+    const centre = piece.centre ?? 0;
+    const r = piece.radius - centre + piece.bundleRadius * (radialHair ? 0.2 : 0.3 + 0.5 * rand()) * rand();
     const x = piece.x + (piece.span ? rand() * piece.span : rand() * 0.04);
-    const base = new THREE.Vector3(x, r * Math.cos(theta) * flip, r * Math.sin(theta));
+    const base = new THREE.Vector3(x, (centre + r * Math.cos(theta)) * flip, r * Math.sin(theta));
     const outward = new THREE.Vector3(0, Math.cos(theta) * flip, Math.sin(theta));
     const splay = 0.6 + 0.6 * rand();
     let dir: THREE.Vector3;
@@ -887,14 +903,16 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     // Rib turns press it in.
     for (const d of piece.dents) thick *= 1 - 0.45 * Math.exp(-(((x - d) / 0.025) ** 2));
     const under = bodyRadius(Math.min(x, piece.x1), Math.min(1, pinch * 1.4)) + piece.lift * Math.max(0.15, Math.min(1, pinch * 1.4));
+    // It drapes round the circle turns lie on there, raised over what is tied on top.
+    const centre = piece.base.ringAt(Math.min(x, piece.x1)).centre;
     for (let side = 0; side < 2; side++) {
       for (let j = 0; j <= segT; j++) {
         // Top surface from one edge to the other, then the underside back again.
         const t = side === 0 ? -1 + (2 * j) / segT : 1 - (2 * j) / segT;
         const phi = t * piece.halfAngle;
         const dome = 0.55 + 0.45 * Math.cos((t * Math.PI) / 2);
-        const r = side === 0 ? under + thick * dome : under + thick * 0.05;
-        space.point(v.set(x, r * Math.cos(phi), r * Math.sin(phi)));
+        const r = (side === 0 ? under + thick * dome : under + thick * 0.05) - centre;
+        space.point(v.set(x, centre + r * Math.cos(phi), r * Math.sin(phi)));
         positions.push(v.x, v.y, v.z);
         const shade = feather ? featherShade(x, phi * r) : 1;
         colors.push(shade, shade, shade);

@@ -32,6 +32,8 @@ export interface ViewerProps {
   onWater?: (on: boolean) => void;
   /** Path-traced pictures of this fly in the realistic water, shown first (only for the fly as tied); "loading" until it is known whether there are any. */
   stills?: WaterStills | null | "loading";
+  /** Turn the fly slowly, as on a turntable (the finished fly), until the visitor turns it. */
+  turning?: boolean;
 }
 
 /** The realistic water's panorama and gravel, loaded the first time it is shown. */
@@ -68,6 +70,7 @@ export function Viewer({
   waterOpen = false,
   onWater,
   stills: stillsOrLoading = null,
+  turning = false,
 }: ViewerProps) {
   const stills = stillsOrLoading === "loading" ? null : stillsOrLoading;
   const [turned, setTurned] = useState(false);
@@ -191,6 +194,12 @@ export function Viewer({
   useEffect(() => {
     scene.current?.setFollow(follow);
   }, [follow]);
+
+  // Not for those who asked for less motion, nor in the water, which has its own camera, nor
+  // with the proportion guide, which is measured square on from the side.
+  useEffect(() => {
+    scene.current?.setTurning(turning && inWater === null && !proportions && !reducedMotion());
+  }, [turning, inWater, proportions]);
 
   // The water, in the theme's colours. Before the fly is turned, timed and given its natural, so
   // that leaving the water clears its transform first and they are placed on the fly at the vise.
