@@ -40,6 +40,8 @@ export type How =
   | "extended"
   /** Tubing slid over the body as a sleeve, tied down where it starts and later at its other end. */
   | "sleeve"
+  /** Two strands woven forward, the first over the top, the second round the belly (a Bitch Creek). */
+  | "woven"
   /** The thread itself wound as the body. */
   | "thread";
 
@@ -125,6 +127,9 @@ export interface Restart {
   key: number;
   turns: number;
   at: number;
+  /** Where the thread is brought to be finished part-way, and the note on that move. */
+  finishAt?: number;
+  move?: { note?: string; mistake?: string };
   note?: string;
   mistake?: string;
   /** The note on attaching the thread again. */
@@ -202,7 +207,7 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
     case "head":
       return a === "hair" ? ["spun"] : ["wound"];
     case "body":
-      return a === "hair" ? ["spun"] : a === "chenille" || a === "yarn" ? ["wound", "extended"] : ["wound"];
+      return a === "hair" ? ["spun"] : a === "chenille" || a === "yarn" ? ["wound", "extended", "woven"] : ["wound"];
     default:
       return ["wound"];
   }
@@ -232,6 +237,7 @@ export function actionCount(p: Part): number {
     case "pulled":
       return 2 + (p.trim ? 1 : 0);
     case "sleeve":
+    case "woven":
       return 2;
   }
 }
@@ -269,6 +275,7 @@ export function phaseOf(p: Part, action: number): number {
     case "body":
       // A sleeve goes on over whatever is wound or dubbed under it.
       if (p.how === "sleeve") return 40.8 + action * 0.1;
+      if (p.how === "woven") return [35, 40][action]!;
       return p.how === "dubbed" || p.how === "spun" || p.how === "thread" ? 40 + action * 0.1 : [35, 40, 40.5][action]!;
     case "thorax":
       return 50 + action * 0.1;
@@ -368,9 +375,12 @@ export function compile(fly: PartsFly): Compiled {
   /** Where the thread is attached next: at the start, or again after a whip finish part-way. */
   let attachAt = fly.attach;
   let attachNote = fly.attachNote;
+  /** The thread cut after a whip finish part-way, to be attached again. */
+  let cut = false;
   const to = (x: number, part: string | null) => {
     const at = round(x);
     if (thread === null) {
+      cut = false;
       push({ op: "attach-thread", at: round(attachAt), ...attachNote }, null);
       thread = round(attachAt);
     }
@@ -416,8 +426,11 @@ export function compile(fly: PartsFly): Compiled {
     if (restart) {
       // Finished here (where the thread is) and started again later; nothing to finish before the thread.
       if (thread !== null) {
+        threadNote = restart.move;
+        if (restart.finishAt !== undefined) to(restart.finishAt, null);
         push({ op: "whip-finish", turns: restart.turns, ...(restart.note && { note: restart.note }), ...(restart.mistake && { mistake: restart.mistake }) }, null);
         thread = null;
+        cut = true;
       }
       attachAt = restart.at;
       attachNote = restart.attach;
@@ -521,6 +534,23 @@ export function compile(fly: PartsFly): Compiled {
           p.mats.forEach((m, k) => push({ op: "tie-off", material: m.id, ...(k === 0 ? n : matNote(m, i)) }, p.id));
         }
         break;
+      case "woven": {
+        if (i === 0) {
+          tieIns(p.at ?? 0);
+          break;
+        }
+        const end = round(p.to ?? 0.7);
+        const [top, under] = p.mats;
+        // With the thread on the hook, it is parked where the weave ends; cut (finished part-way
+        // before), it is attached there again to tie both ends off.
+        if (!cut) to(end, p.id);
+        else attachAt = end;
+        // (Its crossings, when given, are the top strand's turns.)
+        push({ op: "weave", material: top!.id, under: (under ?? top)!.id, to: end, ...(top!.turns && { turns: top!.turns }), ...n }, p.id);
+        to(end, p.id);
+        p.mats.forEach((m, k) => push({ op: "tie-off", material: m.id, ...(k === 0 ? note(p, i + 0.5) : matNote(m, i + 0.5)) }, p.id));
+        break;
+      }
       case "pulled":
         if (i === 0) tieIns(p.at ?? 0, bunch);
         else if (i === 1) {
@@ -606,17 +636,20 @@ export function partsOf(recipe: Recipe): PartsFly | null {
   let finish: PartsFly["finish"] | null = null;
   const restarts: Restart[] = [];
   const threadParts: Part[] = [];
+  /** Strands woven round the belly, by id: read with the strand woven over the top, as one part. */
+  const wovenUnder = new Set(steps.flatMap((s) => (s.op === "weave" ? [s.under] : [])));
 
   for (let i = 0; i < steps.length; i++) {
     const s = steps[i]!;
     if (s.op === "attach-thread") {
       if (attach !== null) {
-        // Started again after a whip finish part-way: that finish is a restart. (Not after a
-        // move of the thread to finish elsewhere: the builder finishes part-way where it is.)
-        if (!finish || finish.at !== undefined || finish.move) return null;
+        // Started again after a whip finish part-way: that finish is a restart, with the thread
+        // brought to where it was finished.
+        if (!finish) return null;
         const attachAgain = annotation(s);
         restarts.push({
           key: finish.key, turns: finish.turns, at: s.at,
+          ...(finish.at !== undefined && { finishAt: finish.at }), ...(finish.move && { move: finish.move }),
           ...(finish.note && { note: finish.note }), ...(finish.mistake && { mistake: finish.mistake }), ...(attachAgain && { attach: attachAgain }),
         });
         finish = null;
@@ -677,6 +710,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
 
   const parts: Part[] = [];
   for (const id of order) {
+    if (wovenUnder.has(id)) continue;
     const g = groups.get(id)!;
     const m = kinds.get(id);
     if (!m) return null;
@@ -709,6 +743,22 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     };
     const at = g[0]!.thread ?? 0;
     if (ops === "slide-bead") part = { id, how: "slide", mats: [mat], keys: [g[0]!.i] };
+    else if (ops === "tie-in weave tie-off") {
+      // The belly's strand tied in and off right after the top's.
+      const wv = g[1]!.s as Extract<Step, { op: "weave" }>;
+      const ug = groups.get(wv.under);
+      const um = kinds.get(wv.under);
+      if (!ug || !um || ug.map((x) => x.s.op).join(" ") !== "tie-in tie-off" || ug[0]!.i !== g[0]!.i + 1 || ug[1]!.i !== g[2]!.i + 1 || tieIn?.length !== undefined) return null;
+      const under: PartMaterial = { id: wv.under, kind: um.kind, ...(um.color && { color: um.color }), ...(um.label && { label: um.label }) };
+      const { id: _i, kind: _k, color: _c, label: _l, ...uprops } = um as Material & Record<string, unknown>;
+      if (Object.keys(uprops).length) under.props = uprops as PartMaterial["props"];
+      for (const [x, action] of [[ug[0]!.s, 0], [ug[1]!.s, 1.5]] as const) {
+        if (x.note) under.notes = { ...under.notes, [action]: x.note };
+        if (x.mistake) under.mistakes = { ...under.mistakes, [action]: x.mistake };
+      }
+      if (wv.turns !== undefined) mat.turns = wv.turns;
+      part = { id, how: "woven", mats: [mat, under], at, to: wv.to, keys: [g[0]!.i, g[1]!.i] };
+    }
     else if (ops === "sleeve tie-off") {
       const sl = g[0]!.s as Extract<Step, { op: "sleeve" }>;
       part = { id, how: "sleeve", mats: [mat], at, to: sl.to, ...(sl.fray !== undefined && { fray: sl.fray }), keys: g.map((x) => x.i) };
@@ -885,7 +935,9 @@ export function fromRecipe(recipe: Recipe): PartsFly | null {
 // ——— Changing how a part is tied ———
 
 /** Why a part can't be tied this way on this fly, or null when it can. */
-export function unavailable(fly: PartsFly, part: Part, how: How): "needsRib" | "needsPost" | "oneMaterial" | null {
+export function unavailable(fly: PartsFly, part: Part, how: How): "needsRib" | "needsPost" | "oneMaterial" | "twoMaterials" | null {
+  // A top strand and a belly's.
+  if (how === "woven") return part.mats.length === 2 ? null : "twoMaterials";
   if (how === "palmered") {
     // Each material wound back is held by the next winding: only one can be.
     if (part.mats.length > 1) return "oneMaterial";
@@ -939,6 +991,7 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
       Object.assign(next, { at: c.at ?? 0, to: c.to ?? 0.88 });
       break;
     case "sleeve":
+    case "woven":
       Object.assign(next, { at: c.at ?? c.from ?? 0, to: c.to ?? 0.7 });
       break;
     case "extended":
@@ -1018,7 +1071,7 @@ function constrained(fly: PartsFly): PartsFly {
     // (A thread body may run back and forth: its passes are left as they are. Dubbing may be
     // wound back from the eye, ending at the rear of a thorax.)
     const rearward = p.how === "dubbed" && start !== undefined && p.to !== undefined && p.to <= start - 0.05;
-    if (!rearward && (p.how === "wound" || p.how === "dubbed" || p.how === "spun") && start !== undefined && p.to !== undefined && p.to < start + 0.05) {
+    if (!rearward && (p.how === "wound" || p.how === "woven" || p.how === "dubbed" || p.how === "spun") && start !== undefined && p.to !== undefined && p.to < start + 0.05) {
       // At the eye, its start moves back instead.
       const key = p.at !== undefined ? "at" : "from";
       return start + 0.05 <= 1 ? { ...p, to: start + 0.05 } : { ...p, [key]: 0.95, to: 1 };
@@ -1071,7 +1124,8 @@ export function removePart(fly: PartsFly, id: string): PartsFly {
 /** A part with another material mixed in (up to three), ids naming each by its colour. */
 export function addMaterial(fly: PartsFly, id: string, kind: MaterialKind, color?: string): PartsFly {
   const part = fly.parts.find((p) => p.id === id);
-  if (!part || part.mats.length >= 3) return fly;
+  // (Two strands are woven: a top and a belly.)
+  if (!part || part.mats.length >= (part.how === "woven" ? 2 : 3)) return fly;
   const others = { ...fly, parts: fly.parts.filter((p) => p.id !== id) };
   const props = propsFor(kind);
   const c = color ?? colourFor(kind);
@@ -1098,6 +1152,9 @@ export function removeMaterial(fly: PartsFly, id: string, index: number): PartsF
       return { ...p, mats, trim: trimFor(p, mats) };
     }),
   };
+  // One strand left of a woven body: wound.
+  const part = next.parts.find((p) => p.id === id);
+  if (part?.how === "woven" && part.mats.length < 2) return setHow(next, id, "wound");
   return rekeyed(next, id);
 }
 
@@ -1203,7 +1260,7 @@ export function startFrom(recipe: Recipe, keepNotes = false): PartsFly | null {
     ...fly,
     parts: fly.parts.map(({ notes: _n, mistakes: _m, ...p }) => p as Part),
     finish: { turns: fly.finish.turns, key: fly.finish.key },
-    ...(fly.restarts && { restarts: fly.restarts.map(({ key, turns, at }) => ({ key, turns, at })) }),
+    ...(fly.restarts && { restarts: fly.restarts.map(({ key, turns, at, finishAt }) => ({ key, turns, at, ...(finishAt !== undefined && { finishAt }) })) }),
   };
 }
 

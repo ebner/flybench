@@ -337,4 +337,32 @@ describe("a fly built of parts", () => {
     const sleeve = ops.findIndex((o) => o.startsWith("sleeve"));
     expect(sleeve).toBeGreaterThan(ops.indexOf("tie-off body"));
   });
+
+  it("keeps a Bitch Creek's woven abdomen as one part of two strands, its thread cut and attached again", () => {
+    const fly = partsOf(byId("bitch-creek"))!;
+    const back = fly.parts.find((p) => p.id === "back")!;
+    expect(back).toMatchObject({ how: "woven", role: "body", at: 0, to: 0.55 });
+    expect(back.mats.map((m) => m.id)).toEqual(["back", "belly"]);
+    expect(back.mats[1]!.notes).toEqual({ 0: "On the far side of the shank." });
+    // Finished behind the eye, the thread brought there first, and started again where the weave ends.
+    expect(fly.restarts).toEqual([expect.objectContaining({ turns: 3, at: 0.55, finishAt: 0.9 })]);
+    const { recipe, problems } = compile(addPart(fly, "rib", "copper-wire").fly);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    expect(recipe.steps.filter((s) => s.op === "weave")).toHaveLength(1);
+  });
+
+  it("weaves a body of two strands with the thread parked, and winds it again with one", () => {
+    let fly: PartsFly = bareHook({ ...meta, type: "nymph", hook: { model: "nymph-2xl", size: 8 } });
+    const added = addPart(fly, "body", "chenille", "black");
+    fly = added.fly;
+    expect(unavailable(fly, added.part, "woven")).toBe("twoMaterials");
+    fly = setHow(addMaterial(fly, added.part.id, "chenille", "orange"), added.part.id, "woven");
+    const { recipe, problems } = compile(fly);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    const ops = recipe.steps.map((s) => s.op);
+    expect(ops.slice(ops.indexOf("weave") - 1, ops.indexOf("weave") + 3)).toEqual(["wrap-thread", "weave", "tie-off", "tie-off"]);
+    // A third strand isn't woven in; one taken out leaves a wound body.
+    expect(addMaterial(fly, added.part.id, "chenille", "red").parts.find((p) => p.id === added.part.id)!.mats).toHaveLength(2);
+    expect(removeMaterial(fly, added.part.id, 1).parts.find((p) => p.id === added.part.id)!.how).toBe("wound");
+  });
 });

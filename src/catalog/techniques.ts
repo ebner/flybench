@@ -183,6 +183,15 @@ Tie the other end down the same way, trim the excess and glue the wraps. A fraye
     mistakes: ["Loose turns: the slippery braid slides out from under them.", "A tube too wide for the body, so it bags instead of lying tight."],
   },
   {
+    id: "woven-body",
+    name: "Woven bodies",
+    summary: "Two strands of chenille woven along the shank, one colour on the back and the other on the belly.",
+    how: `Tie both strands in at the bend, the dark one on the near side and the light one on the far side. Weaving needs both hands, so take the thread forward out of the way and cut it, or half-hitch it and let it hang where the body will end.
+
+At each crossing take the dark strand over the top of the shank only, from one side to the other, and the light strand over it and right round under the shank. The dark stays on top and the light underneath, meeting in a line along each side with a short tooth of the dark at every crossing. Pull both evenly tight so the line stays straight. At the front, hold both ends, attach the thread again and tie them off.`,
+    mistakes: ["Pulling one strand harder than the other, so the line along the side wanders.", "Crossings left loose, so the body twists round the shank."],
+  },
+  {
     id: "bead-head",
     name: "Bead heads",
     summary: "A metal bead slid onto the hook before the thread, for weight and flash.",
@@ -272,10 +281,13 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       return "wing-case";
     case "sleeve":
       return "tubing-body";
+    case "weave":
+      return "woven-body";
     case "whip-finish":
       return "whip-finish";
     case "tie-off":
-      // The other end of a sleeve is part of making the tubing body.
+      // The other end of a sleeve is part of making the tubing body; woven strands' ends, of the woven body.
+      if (recipe.steps.some((s) => s.op === "weave" && (s.material === step.material || s.under === step.material))) return "woven-body";
       return recipe.steps.some((s) => s.op === "sleeve" && s.material === step.material) ? "tubing-body" : "tie-off";
     case "trim": {
       // Spun hair, or hair butts flared round the shank and trimmed to a shape (a head).

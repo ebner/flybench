@@ -138,9 +138,10 @@ export function PartPanel({
               <ColourPicker kind={m.kind} color={m.color} owned={owned} onPick={(color) => onMaterial(mat, { color })} />
             </>
           )}
-          {(part.how === "bunch" || part.how === "wound" || part.how === "parachute") && (
+          {(part.how === "bunch" || part.how === "wound" || part.how === "parachute" || part.how === "woven") && (
             <div className="wb-mix-actions">
-              {part.mats.length < 3 && m && (
+              {/* (A woven body is two strands: a top and a belly.) */}
+              {part.mats.length < (part.how === "woven" ? 2 : 3) && m && (
                 <button className="link" onClick={() => onMix(m.kind, undefined)} title={w.mixHint}>
                   {w.mix}
                 </button>

@@ -170,6 +170,14 @@ Mache den Kopfknoten und schneide den Kopf dann mit einer scharfen Schere oder e
 Binde das andere Ende genauso ab, schneide den Rest ab und klebe die Windungen. Ein aufgezupftes Ende ergibt einen kurzen Glitzerschwanz: zupfe das Geflecht mit einer Nadel auf.`,
     mistakes: ["Lockere Windungen: das glatte Geflecht rutscht darunter heraus.", "Ein zu weiter Schlauch, der Falten wirft, statt straff anzuliegen."],
   },
+  "woven-body": {
+    name: "Gewebte Körper",
+    summary: "Zwei Chenillestränge, am Hakenschenkel entlang gewebt: eine Farbe auf dem Rücken, die andere am Bauch.",
+    how: `Binde beide am Hakenbogen ein, den dunklen auf der dir zugewandten Seite, den hellen auf der abgewandten. Zum Weben brauchst du beide Hände: führe den Bindefaden nach vorn aus dem Weg und schneide ihn ab, oder sichere ihn mit einem halben Schlag und lass ihn dort hängen, wo der Körper enden soll.
+
+Führe bei jeder Kreuzung den dunklen Strang nur über die Oberseite des Schenkels, von einer Seite zur anderen, und den hellen darüber und ganz um die Unterseite herum. Der dunkle bleibt oben, der helle unten, und sie treffen sich an jeder Seite in einer Linie, mit einem kurzen Zahn des dunklen an jeder Kreuzung. Ziehe beide gleich fest an, damit die Linie gerade bleibt. Halte vorn beide Enden fest, lege den Faden erneut an und binde sie ab.`,
+    mistakes: ["Einen Strang fester ziehen als den anderen, sodass die Linie an der Seite wandert.", "Lockere Kreuzungen, sodass sich der Körper um den Schenkel dreht."],
+  },
   "tie-off": {
     name: "Abbinden",
     summary: "Ein gewundenes Material vorn mit festen Fadenwindungen sichern und den Rest abschneiden.",

@@ -217,6 +217,8 @@ export interface StepContext {
   sleeve?: "front" | "rear";
   /** sleeve: where the thread is, the end tied down now. */
   from?: number;
+  /** weave: the thread is parked where the weave ends, rather than cut. */
+  parked?: boolean;
 }
 
 /** What a tie-in takes: a material, a bunch of it, or strands of herl. */
@@ -248,6 +250,8 @@ export type Said =
   /** Tubing slid on as a sleeve from the thread (`from`) to `to`, tied down at the thread: its rear end (`rear`) or its front. */
   | { kind: "sleeve"; m: string; from: Place; to: Place; rear: boolean; fray?: Length }
   | { kind: "tie-off-sleeve"; m: string; end: "front" | "rear" }
+  /** Two strands woven forward to `to`: `m` over the top, `under` round underneath; the thread parked there, or cut. */
+  | { kind: "weave"; m: string; under: string; to: Place; parked: boolean }
   | { kind: "dub"; m: string; to: Place; rear: boolean }
   | { kind: "tie-off"; m: string }
   | { kind: "trim-keep"; m: string; keep: "top" | "under" | "sides" }
@@ -326,6 +330,8 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "spin", m: step.material, to: at(step.to) };
     case "sleeve":
       return { kind: "sleeve", m: step.material, from: at(ctx.from ?? 0), to: at(step.to), rear: Boolean(ctx.rear), ...(step.fray ? { fray: len(step.fray) } : {}) };
+    case "weave":
+      return { kind: "weave", m: step.material, under: step.under, to: at(step.to), parked: Boolean(ctx.parked) };
     case "dub":
       return { kind: "dub", m: step.material, to: at(step.to), rear: Boolean(ctx.rear) };
     case "tie-off":
@@ -503,6 +509,12 @@ function englishText(said: Said, recipe: Recipe): string {
       return said.end === "front"
         ? `Stretch the ${mat(said.m)} tight over the body, tie its front end down with tight turns and trim the excess.`
         : `Stretch the ${mat(said.m)} tight over the body and tie its rear end down with tight turns.`;
+    case "weave": {
+      const how = `at each crossing take the ${mat(said.m)} back and forth over the top only and the ${mat(said.under)} over it and right round under ${body}, so the ${mat(said.m)} stays on top and the ${mat(said.under)} underneath, meeting in a line along each side. Pull both evenly tight to keep the line straight, and hold the ends there.`;
+      return said.parked
+        ? `With the thread half-hitched and hanging at ${at(said.to)}, weave the ${mat(said.m)} and the ${mat(said.under)} forward up to it: ${how}`
+        : `With the thread off the hook, weave the ${mat(said.m)} and the ${mat(said.under)} forward to ${at(said.to)}: ${how}`;
+    }
     case "dub":
       return `Twist a thin noodle of ${mat(said.m)} onto the thread and wrap it ${said.rear ? "back" : "forward"} to ${at(said.to)}.`;
     case "tie-off":
@@ -537,6 +549,7 @@ const OP_TITLES: Record<Step["op"], string> = {
   weight: "Add weight",
   "pull-over": "Pull over",
   sleeve: "Slide on sleeve",
+  weave: "Weave",
   spin: "Spin",
   "attach-thread": "Attach thread",
   "wrap-thread": "Wrap thread",

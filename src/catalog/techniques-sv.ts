@@ -170,6 +170,14 @@ Gör en whipfinishknut och klipp sedan huvudet till form med en vass sax eller e
 Bind ner den andra änden på samma sätt, klipp bort överskottet och limma varven. En uppriven ände blir en kort glitterstjärt: repa upp flätan med en nål.`,
     mistakes: ["Lösa varv: den hala flätan glider ur dem.", "En slang som är för vid för kroppen, så att den påsar sig i stället för att ligga tätt."],
   },
+  "woven-body": {
+    name: "Vävda kroppar",
+    summary: "Två chenilletrådar som vävs längs skaftet, den ena färgen på ryggen och den andra på buken.",
+    how: `Bind in båda vid krokböjen, den mörka på den närmre sidan och den ljusa på den bortre. Vävningen kräver båda händerna, så för fram bindtråden ur vägen och klipp av den, eller slå ett halvslag och låt den hänga där kroppen ska sluta.
+
+För vid varje korsning den mörka bara över skaftets ovansida, från den ena sidan till den andra, och den ljusa över den och runt under skaftet. Den mörka stannar överst och den ljusa underst, och de möts i en linje längs varje sida med en kort tand av den mörka vid varje korsning. Dra båda lika hårt så att linjen blir rak. Håll framtill båda ändarna, fäst tråden igen och fäst och klipp dem.`,
+    mistakes: ["Att dra hårdare i den ena tråden än i den andra, så att linjen längs sidan slingrar sig.", "Lösa korsningar, så att kroppen vrider sig runt skaftet."],
+  },
   "tie-off": {
     name: "Fästa och klippa",
     summary: "Att fästa ett lindat material framtill med fasta trådvarv och klippa bort överskottet.",

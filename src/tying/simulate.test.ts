@@ -271,3 +271,32 @@ describe("a Zonker: a sleeve, a fur strip and the thread started again", () => {
     expect(build.steps[mid + 1]!.thread?.kind).toBe("follow");
   });
 });
+
+describe("a Bitch Creek: two chenilles woven with the thread cut", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/bitch-creek.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("bitch-creek.kdl does not load");
+  const build = simulate(result.recipe);
+  const weave = result.recipe.steps.findIndex((s) => s.op === "weave");
+
+  it("weaves one body of the top colour with the belly's underneath, from the bend to where the weave ends", () => {
+    const woven = build.steps[weave]!.pieces.find((p) => p.type === "wraps") as WrapsPiece;
+    expect(woven.woven?.under).toMatchObject({ look: "chenille", color: "#e0731f" });
+    expect(woven.color).toBe("#141414");
+    expect(woven.x0).toBeCloseTo(0);
+    expect(woven.x1).toBeCloseTo(0.55 * 2.8);
+    expect(woven.turns).toBe(8);
+  });
+
+  it("weaves without the thread, holding both ends at the front until each is tied off", () => {
+    expect(build.steps[weave]!.thread).toBeNull();
+    // One strand each side, crossing at every turn.
+    const following = build.steps[weave]!.freeEnds.filter((e) => e.kind === "follow");
+    expect(following.map((e) => [e.material, e.kind === "follow" && e.far === true])).toEqual([["back", false], ["belly", true]]);
+    expect(build.steps[weave]!.text).toMatch(/^With the thread off the hook, weave the fine black chenille and the fine orange chenille forward to 55%/);
+    const attach = build.steps[weave + 1]!;
+    expect(attach.text).toMatch(/^Attach the thread again/);
+    expect(attach.freeEnds.filter((e) => e.kind === "rest" && (e.material === "back" || e.material === "belly"))).toHaveLength(2);
+    // Each end goes once it is tied off.
+    expect(build.steps[weave + 3]!.freeEnds.filter((e) => e.kind === "rest" && (e.material === "back" || e.material === "belly") && e.hideAfter === undefined)).toHaveLength(0);
+  });
+});

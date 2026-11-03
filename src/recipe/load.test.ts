@@ -581,3 +581,70 @@ materials {
     });
   }
 });
+
+describe("a woven body", () => {
+  const header = `
+id test
+name "Test"
+type nymph
+difficulty intermediate
+hook nymph-2xl size=8
+thread black size="6/0"
+materials {
+    back chenille color=black
+    belly chenille color=orange
+    rib copper-wire
+    wing elk-hair
+}
+`;
+  // Kreft's order: the thread cut while weaving, attached again where the weave ends.
+  const cut = `
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    tie-in back
+    tie-in belly
+    wrap-thread to=0.9
+    whip-finish turns=3
+    weave back under=belly to=0.55
+    attach-thread at=0.55
+    tie-off back
+    tie-off belly
+    whip-finish
+`;
+  // Or the thread half-hitched and parked where the weave ends.
+  const parked = `
+    attach-thread at=0.0
+    tie-in back
+    tie-in belly
+    wrap-thread to=0.55
+    weave back under=belly to=0.55 turns=8
+    tie-off belly
+    tie-off back
+    whip-finish
+`;
+  const run = (s: string) => load(s, header);
+
+  it("accepts the thread cut and attached again, or parked where the weave ends", () => {
+    expect(recipeOf(run(cut)).steps.find((s) => s.op === "weave")).toMatchObject({ material: "back", under: "belly", to: 0.55 });
+    expect(recipeOf(run(parked)).steps.find((s) => s.op === "weave")).toMatchObject({ turns: 8 });
+  });
+
+  const cases: [string, string, RegExp][] = [
+    ["only strands are woven", parked.replace("tie-in belly", "tie-in rib").replace("under=belly", "under=rib").replace("tie-off belly", "tie-off rib"), /only chenille, yarn or floss can be woven, not "rib"/],
+    ["both are tied in first", parked.replace("    tie-in belly\n", ""), /"belly" must be tied in \(and not yet used\) before it is woven/],
+    ["two different strands", parked.replace("under=belly", "under=back"), /weave two different strands/],
+    ["tied in together", parked.replace("    tie-in belly\n", "    wrap-thread to=0.3\n    tie-in belly\n"), /tie in "belly" where the strand woven over it is tied in/],
+    ["woven forward", parked.replace("wrap-thread to=0.55", "wrap-thread to=0.5").replace("to=0.55 turns=8", "to=0.0"), /weave forward from where both strands are tied in/],
+    ["the parked thread waits where the weave ends", parked.replace("wrap-thread to=0.55", "wrap-thread to=0.4"), /the thread is at 0.4; move it to 0.55/],
+    ["the thread attached again there", cut.replace("attach-thread at=0.55", "attach-thread at=0.7"), /the thread is at 0.7; move it to 0.55/],
+    ["both tied off next", parked.replace("tie-off belly", "wrap-thread to=0.7\n    tie-off belly"), /the woven strands are held at the front: tie off "back"/],
+    ["tied off at all", parked.replace("    tie-off belly\n    tie-off back\n    whip-finish\n", ""), /"back" is wound but never tied off/],
+    ["and nothing in between", parked.replace("    tie-off belly\n    tie-off back\n", ""), /the woven strands are held at the front: tie off "back"/],
+    ["an unknown strand", parked.replace("under=belly", "under=nothing"), /unknown material "nothing"/],
+  ];
+  for (const [name, s, pattern] of cases) {
+    it(name, () => {
+      expect(errorsOf(run(s)).join("\n")).toMatch(pattern);
+    });
+  }
+});

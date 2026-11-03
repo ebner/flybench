@@ -269,6 +269,22 @@ const Step = z.discriminatedUnion("op", [
     note: Note,
     mistake: Note,
   }),
+  /**
+   * Weave two strands tied in together (chenille, yarn) forward to `to`: `material` crosses
+   * back and forth over the top only, `under` over it and right round under the shank, so one
+   * colour is the back and the other the belly (a Bitch Creek's abdomen). The thread is cut or
+   * parked at `to` meanwhile; both ends are tied off there next.
+   */
+  z.strictObject({
+    op: z.literal("weave"),
+    material: MaterialRef,
+    under: MaterialRef,
+    to: Position,
+    /** Crossings; omitted, one per strand width. */
+    turns: Turns.optional(),
+    note: Note,
+    mistake: Note,
+  }),
   /** Spin hair round the shank in clumps from the thread forward to `to`; the thread ends there. */
   z.strictObject({
     op: z.literal("spin"),

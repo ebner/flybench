@@ -350,7 +350,74 @@ function bandGeometry(piece: WrapsPiece, space: ShankSpace, halfWidth: number, h
   return { geometry, perSegment: radial * 6 };
 }
 
+// Assumption, read from photos of the Bitch Creek (Fish4Flies, John Kreft): the colours of a woven
+// body meet along the side, and at each crossing the top colour reaches about half of the way
+// down to the belly in a tooth that leans back.
+const WOVEN_SEAM = 0;
+const WOVEN_TOOTH = 1.0;
+
+/** Whether a shank-local point on a woven body shows the top strand's colour. */
+function wovenTop(piece: WrapsPiece, x: number, y: number, z: number): boolean {
+  const el = Math.atan2(y - piece.base.ringAt(x).centre, Math.abs(z));
+  const below = WOVEN_SEAM - el;
+  if (below <= 0) return true;
+  if (below >= WOVEN_TOOTH) return false;
+  const period = Math.abs(piece.x1 - piece.x0) / Math.max(1, piece.turns);
+  const depth = below / WOVEN_TOOTH;
+  // One tooth a crossing, where the crossing passes the side (the near side half a turn before
+  // the far side), at the seam most of a crossing wide and narrowing to its point.
+  const phase = ((((x - Math.min(piece.x0, piece.x1)) / period + (z < 0 ? 0.5 : 0) + 0.2 * depth) % 1) + 1) % 1;
+  return Math.min(phase, 1 - phase) < 0.4 * (1 - depth);
+}
+
+/**
+ * A woven body's strands: a round tube along the turns, its faces split between the top colour
+ * and the belly's by where they lie. Each geometry draws up to `counts[i]` indices for i segments.
+ */
+function wovenTubes(piece: WrapsPiece, space: ShankSpace, radius: number, segments: number) {
+  // Finely divided round, so the teeth along the seam show.
+  const radial = 24;
+  const positions: number[] = [];
+  const local: [number, number, number][] = [];
+  const v = new THREE.Vector3();
+  for (let i = 0; i <= segments; i++) {
+    const [px, py, pz] = wrapPoint(piece, i / segments).point;
+    const len = Math.hypot(py, pz) || 1;
+    for (let j = 0; j <= radial; j++) {
+      const t = (j / radial) * Math.PI * 2;
+      const out = radius * Math.cos(t);
+      const p: [number, number, number] = [px + radius * Math.sin(t), py + (py / len) * out, pz + (pz / len) * out];
+      local.push(p);
+      space.point(v.set(...p));
+      positions.push(v.x, v.y, v.z);
+    }
+  }
+  const index = { top: [] as number[], under: [] as number[] };
+  const counts = { top: [0], under: [0] };
+  for (let i = 0; i < segments; i++) {
+    for (let j = 0; j < radial; j++) {
+      const a = i * (radial + 1) + j;
+      const b = a + radial + 1;
+      const c = [a, b, a + 1, b + 1].map((k) => local[k]!);
+      const mid = [0, 1, 2].map((d) => c.reduce((s, p) => s + p[d]!, 0) / 4) as [number, number, number];
+      // In this order the faces turn outward.
+      (wovenTop(piece, ...mid) ? index.top : index.under).push(a, a + 1, b, b, a + 1, b + 1);
+    }
+    counts.top.push(index.top.length);
+    counts.under.push(index.under.length);
+  }
+  const geometry = (idx: number[]) => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    g.setIndex(idx);
+    g.computeVertexNormals();
+    return g;
+  };
+  return { top: geometry(index.top), under: geometry(index.under), counts };
+}
+
 function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  if (piece.woven) return wovenView(piece, { ...piece, ...piece.woven.under }, surfaces, space);
   const group = new THREE.Group();
   const segmentsPerTurn = piece.look === "thread" ? 20 : 28;
   const tubular = Math.max(8, Math.min(4000, Math.round(piece.turns * segmentsPerTurn)));
@@ -412,6 +479,46 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
       tube.dispose();
       core?.geometry.dispose();
       fibres?.dispose();
+    },
+  };
+}
+
+/** Two strands woven: the top strand over the back, the other round the belly, toothed where they meet. */
+function wovenView(piece: WrapsPiece, under: WrapsPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  const group = new THREE.Group();
+  const tubular = Math.max(8, Math.min(4000, Math.round(piece.turns * 28)));
+  // The crossings are pulled snug against each other: no gaps between them.
+  const pitch = Math.abs(piece.x1 - piece.x0) / Math.max(1, piece.turns);
+  const tubes = wovenTubes(piece, space, Math.max(piece.strandRadius * 0.9, pitch * 0.6), tubular);
+  group.add(new THREE.Mesh(tubes.top, surfaces.get(piece.look, piece.color)));
+  group.add(new THREE.Mesh(tubes.under, surfaces.get(under.look, under.color)));
+  const meshes: ReturnType<typeof fibreMesh>[] = [];
+  // Each strand's fibres where that strand shows, by where a fibre's middle is.
+  const onTop = (f: Fibre) => {
+    const m = f.base.clone().addScaledVector(f.dir, f.length * 0.5);
+    return wovenTop(piece, m.x, m.y, m.z);
+  };
+  for (const [strand, top, salt] of [[piece, true, 1], [under, false, 2]] as const) {
+    if (!strand.fibreLength || !(strand.look in WOUND_FIBRES)) continue;
+    const spec = WOUND_FIBRES[strand.look as keyof typeof WOUND_FIBRES];
+    const list = woundFibres(strand, mulberry32((piece.seed ?? piece.id) * 7919 + salt)).filter((f) => onTop(f) === top);
+    const mesh = fibreMesh(placeFibres(list, space), surfaces.get(strand.look, strand.color, true), spec.tip);
+    group.add(mesh.object);
+    meshes.push(mesh);
+  }
+  return {
+    object: group,
+    setProgress(u) {
+      group.visible = u > 0;
+      const n = Math.floor(u * tubular);
+      tubes.top.setDrawRange(0, tubes.counts.top[n]!);
+      tubes.under.setDrawRange(0, tubes.counts.under[n]!);
+      for (const m of meshes) m.setProgress(u);
+    },
+    dispose() {
+      tubes.top.dispose();
+      tubes.under.dispose();
+      for (const m of meshes) m.dispose();
     },
   };
 }

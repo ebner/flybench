@@ -15,6 +15,9 @@ const ACROSS: readonly Archetype[] = ["legs", "hair", "fibres", "biot", "flash"]
 /** Materials that can stick out as one solid piece. */
 const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
 
+/** Strands that can be woven as a two-coloured body. */
+const WOVEN: readonly Archetype[] = ["chenille", "yarn", "floss"];
+
 /**
  * Checks that the step sequence is something a tyer could actually do.
  *
@@ -30,6 +33,10 @@ const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
  * A whip finish part-way through, followed by the thread attached again elsewhere, is allowed
  * (the rear of a Zonker finished at the bend, the front tied with the thread started again at
  * the eye); materials waiting to be pulled over or tied down wait across it.
+ *
+ * Two strands woven forward (a Bitch Creek's abdomen) are held at the front, where the thread
+ * waits or is attached again (weaving is done with the thread cut or parked), and both are tied
+ * off there next.
  */
 export function validateSemantics(recipe: Recipe): RecipeError[] {
   const errors: RecipeError[] = [];
@@ -55,11 +62,14 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   let finished = false;
   /** A material that the next step has to tie off or secure. */
   let pending: { material: string; rear: boolean } | null = null;
+  /** Woven strands held at `at`, each still to be tied off there. */
+  let woven: { at: number; left: string[] } | null = null;
 
   recipe.steps.forEach((step, i) => {
     const path = ["steps", i];
     // Trimming after the whip finish is common (heads, hackles), or the thread is started again.
-    if (finished && step.op !== "trim" && step.op !== "attach-thread") {
+    // (Weaving is done with the thread cut, too.)
+    if (finished && step.op !== "trim" && step.op !== "attach-thread" && step.op !== "weave") {
       rule("afterWhipFinish", {}, path);
       return;
     }
@@ -67,7 +77,25 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       rule("unknownMaterial", { m: step.material }, [...path, "material"]);
       return;
     }
+    if (step.op === "weave" && !archetypes.has(step.under)) {
+      rule("unknownMaterial", { m: step.under }, [...path, "under"]);
+      return;
+    }
     const archetype = "material" in step ? archetypes.get(step.material)! : null;
+
+    // Woven strands held at the front: the thread attached there again, if it was cut, and both tied off.
+    if (woven) {
+      const w = woven;
+      if (step.op === "attach-thread" && finished) {
+        if (Math.abs(step.at - w.at) > POSITION_TOLERANCE) rule("threadForPull", { thread: step.at, to: w.at }, [...path, "at"]);
+      } else if (step.op === "tie-off" && w.left.includes(step.material)) {
+        w.left = w.left.filter((m) => m !== step.material);
+      } else {
+        rule("tieOffWoven", { m: w.left[0]! }, path);
+        w.left = [];
+      }
+      if (w.left.length === 0) woven = null;
+    }
 
     // What was just wound comes first: nothing, not even weighting, may come in between.
     if (pending) {
@@ -287,6 +315,26 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         m.butts = archetype === "foam" || archetype === "strip";
         break;
       }
+      case "weave": {
+        const before = errors.length;
+        const strands = [[step.material, "material"], [step.under, "under"]] as const;
+        for (const [id, key] of strands) {
+          const m = materials.get(id);
+          if (!WOVEN.includes(archetypes.get(id)!)) rule("onlyWoven", { m: id }, [...path, key]);
+          else if (!m || m.state !== "tied-in" || m.hanging === undefined) rule("tieInBeforeWeave", { m: id }, [...path, key]);
+        }
+        if (step.under === step.material) rule("weaveTwo", {}, [...path, "under"]);
+        if (errors.length > before) break;
+        const top = materials.get(step.material)!;
+        const under = materials.get(step.under)!;
+        if (Math.abs(top.at - under.at) > POSITION_TOLERANCE) rule("weaveTogether", { m: step.under }, [...path, "under"]);
+        else if (step.to <= Math.max(top.at, under.at) + POSITION_TOLERANCE) rule("weaveForward", {}, [...path, "to"]);
+        // With the thread on the hook, it waits where the weave ends.
+        else if (!finished && Math.abs(step.to - thread) > POSITION_TOLERANCE) rule("threadForPull", { thread, to: step.to }, [...path, "to"]);
+        for (const m of [top, under]) Object.assign(m, { state: "wound", wound: true, at: step.to });
+        woven = { at: step.to, left: [step.material, step.under] };
+        break;
+      }
       case "sleeve": {
         if (archetype !== "tubing") rule("onlyTubing", { m: step.material }, [...path, "material"]);
         else if (Math.abs(step.to - thread) <= POSITION_TOLERANCE) rule("sleeveFromThread", {}, [...path, "to"]);
@@ -334,6 +382,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     }
   });
 
+  if (woven) rule("neverTiedOff", { m: (woven as { left: string[] }).left[0]!, rear: false }, ["steps", recipe.steps.length - 1]);
   if (pending) {
     const p = pending as { material: string; rear: boolean };
     if (materials.get(p.material)?.state === "laid-back") rule("secureLaidBack", { m: p.material }, ["steps", recipe.steps.length - 1]);
@@ -346,7 +395,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       rule("neverUsedAfterTieIn", { m: id }, ["steps", m.hanging, "material"]);
     }
   }
-  const used = new Set(recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : []].flat()));
+  const used = new Set(
+    recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : [], s.op === "weave" ? s.under : []].flat()),
+  );
   recipe.materials.forEach((m, i) => {
     if (!used.has(m.id)) rule("neverUsed", { m: m.id }, ["materials", i, "id"]);
   });
