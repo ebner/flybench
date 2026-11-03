@@ -1,0 +1,61 @@
+// Black Gnat: the old English black fly, in its modern dry dressing with grey duck quill wings.
+
+id black-gnat
+name "Black Gnat"
+type dry
+imitates terrestrial attractor
+naturals midge-adult
+difficulty intermediate
+species trout grayling
+season april may june july august september
+origin region="England"
+description "A black hackle-fibre tail, a thin black body, upright divided wings of grey duck quill and a black cock hackle."
+history """
+    One of the oldest flies there is. Cotton gave a little black fly for March in 1676 and
+    the Bowlkers a Black Gnat in the eighteenth century, usually of black ostrich herl with a
+    dark hackle and a clear wing or none. Halford made it a dry fly in Floating Flies and How
+    to Dress Them (1886), with a body of a stripped black chaffinch tail feather, pale starling
+    wings set low and a cock starling hackle, and he tied a male and a female. Skues fished a
+    wet one. The dry tied today has a hackle-fibre tail, a dubbed black body and upright duck
+    quill wings; the wet keeps a red tail and a sloping wing.
+    """
+fishing """
+    For anything small and black on the water: gnats, smuts, black dance flies and midges,
+    on rivers and lakes the whole season. Fish it dead drift to rising trout and grayling; in
+    small sizes it is the fly for fish sipping tiny black insects in the film.
+    """
+sources {
+    "Fly Fishing the Sierra: Black Gnat, one of the first wet flies" url="https://flyfishingthesierra.com/?p=20399"
+    "The Soft-Hackle Pattern Book: Black Gnat" url="https://softhacklepatternbook.blogspot.com/2014/06/black-gnat.html"
+    "Global FlyFisher: Classic Black Gnat (The Feather Bender)" url="https://globalflyfisher.com/video/classic-black-gnat"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/bgnatvar1.jpg" page="https://flyfishingthesierra.com/?p=20399" license="All rights reserved; reference only" note="The dry Black Gnat, side view"
+}
+
+hook dry-standard size=14
+thread black size="8/0"
+
+materials {
+    wings duck-quill color=grey label="Grey duck quill slips"
+    tail hackle-fibres color=black count=10 label="Black cock hackle fibres"
+    body dry-fly-dubbing color=black label="Black dry-fly dubbing"
+    hackle cock-hackle color=black fibre=1.3
+}
+
+steps {
+    attach-thread at=0.9 note="Leave an eye-length bare behind the eye."
+    wrap-thread to=0.75
+    // Read from the reference photo: wings about a shank tall, standing above the hackle.
+    tie-in wings length=2.0 angle=85 spread=24 width=0.55 note="Matched slips from a left and a right quill, tips forward, then stood up and divided with figure-of-eight turns."
+    wrap-thread to=0.0
+    // Sources: a tail about one shank long.
+    tie-in tail length=1.8 note="About as long as the shank."
+    dub body to=0.7 note="Thin, a slight taper, to just behind the wings."
+    tie-in hackle
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=4 note="Two turns behind the wings, two in front."
+    tie-off hackle
+    whip-finish
+}

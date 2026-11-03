@@ -1,0 +1,70 @@
+// Woolly Worm: the old palmered caterpillar of the Ozarks, made famous by Don Martinez; the Woolly Bugger's parent.
+
+id woolly-worm
+name "Woolly Worm"
+aliases "Wooly Worm"
+type nymph
+imitates stonefly attractor
+naturals stonefly-nymph damselfly-nymph caddis-larva-free
+difficulty beginner
+species trout bass panfish
+season march april may june july august september october
+origin region="Ozarks, USA"
+description "A short tuft of red wool, a black chenille body and a grizzly hackle palmered from the tail to the head."
+history """
+    A palmer fly from England by way of the Ozarks of Missouri and Arkansas, where it was a
+    bass and crappie fly in the 1920s; nobody is recorded as its inventor. Don Martinez of
+    West Yellowstone got one from a friend in Arkansas and sold his versions as Woolly Worms:
+    in a 1940 letter to Preston Jennings he called it a horrible-looking grub, murderous all
+    season, and said he sold more of them than of all his other flies together. Wikipedia and
+    Orvis put this in the 1950s, which his letter and his death in 1955 rule out. Martinez's
+    first ones had a grizzly tail or none; the red wool tag came later. In 1967 Russell Blessing
+    gave it a marabou tail, and it became the Woolly Bugger.
+    """
+fishing """
+    A big general nymph or caterpillar for still and slow water. Martinez fished it deep and
+    twitched it with the left hand: the moving hackle is what does it. Weighted, it searches
+    the bottom of rivers for trout; unweighted, it was first fished on the surface for bass
+    and bluegill.
+    """
+sources {
+    "Wikipedia: Woolly Worm" url="https://en.wikipedia.org/wiki/Woolly_Worm_(imitation)"
+    "Wikipedia: Don Martinez" url="https://en.wikipedia.org/wiki/Don_Martinez"
+    "Fly Fishing the Sierra: Woolly Worm" url="https://flyfishingthesierra.com/woolly-worm/"
+    "Orvis News: How to Tie the Woolly Worm (Phil Monahan, Tim Flagler)" url="https://news.orvis.com/fly-fishing/video-how-to-tie-the-woolly-worm"
+    "Fly Life: Beginner Fly Tying #10, the Woolly Worm (Steve Hudson)" url="https://flylifemagazine.com/beginner-fly-tying-10-the-woolly-worm/"
+    "Santa Cruz Fly Fishing: Woolly Worm (Elaine Cook)" url="https://www.santacruzflyfishing.org/2026/05/woolly-worm/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://upload.wikimedia.org/wikipedia/commons/7/75/YelllowAndGrizzlyWoollyWorm.jpg" page="https://commons.wikimedia.org/wiki/File:YelllowAndGrizzlyWoollyWorm.jpg" author="Mike Cline" license="Public domain" note="Yellow body, red tag, side view in the vise"
+    "https://upload.wikimedia.org/wikipedia/commons/e/ec/GrizzlyAndOliveWoollyWorm.jpg" page="https://commons.wikimedia.org/wiki/File:GrizzlyAndOliveWoollyWorm.jpg" author="Mike Cline" license="Public domain" note="Olive body, grizzly tail, side view"
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/wworm6.jpg" page="https://flyfishingthesierra.com/woolly-worm/" license="All rights reserved; reference only" note="Black, Martinez style, side view"
+}
+
+// Assumption: tied on 3X-long hooks; the 2X-long nymph hook matches the photos' proportions
+// better than the 4X-long streamer hook.
+hook nymph-2xl size=8
+thread black size="6/0"
+
+materials {
+    tail wool color=red label="Red wool"
+    body chenille color=black
+    // Fly Life: fibres one to one and a half gapes; Santa Cruz: a little longer than the gape.
+    hackle saddle-hackle color=grizzly fibre=1.2 sweep=25
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Sierra: about half a gape past the bend; Fly Life: about a gape.
+    tie-in tail length=0.7 spread=50 note="A short tuft, on top; bind the yarn along the shank for an even underbody."
+    tie-in body note="By its stripped core."
+    tie-in hackle note="At the bend, by the butt, dull side forward (Martinez)."
+    wrap-thread to=0.9
+    wind body to=0.9 turns=14 note="Touching turns, an eye-length behind the eye."
+    tie-off body
+    wind hackle to=0.9 turns=6 note="Even open turns forward over the chenille."
+    tie-off hackle
+    whip-finish
+}

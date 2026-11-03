@@ -1,0 +1,46 @@
+id black-gnat
+status draft
+
+// en description: A black hackle-fibre tail, a thin black body, upright divided wings of grey duck quill and a black cock hackle.
+description "En stjärt av svarta hackelfibrer, en tunn svart kropp, upprätta delade vingar av grå andpenna och ett svart tupphackel."
+
+// en history: One of the oldest flies there is. Cotton gave a little black fly for March in 1676 and the Bowlkers a Black Gnat in the eighteenth century, usually of black ostrich herl with a dark hackle and a clear wing or none. Halford made it a dry fly in Floating Flies and How to Dress Them (1886), with a body of a stripped black chaffinch tail feather, pale starling wings set low and a cock starling hackle, and he tied a male and a female. Skues fished a wet one. The dry tied today has a hackle-fibre tail, a dubbed black body and upright duck quill wings; the wet keeps a red tail and a sloping wing.
+history """
+    En av de äldsta flugor som finns. Cotton angav 1676 en liten svart fluga för mars och
+    bröderna Bowlker en Black Gnat på 1700-talet, oftast av svart strutsherl med ett mörkt
+    hackel och en klar vinge eller ingen alls. Halford gjorde den till torrfluga i Floating
+    Flies and How to Dress Them (1886), med en kropp av en rensad svart bofinkstjärtfjäder,
+    ljusa starvingar lågt ansatta och ett hackel av hanstare, och han band en hane och en hona.
+    Skues fiskade en våtfluga. Torrflugan som binds i dag har en stjärt av hackelfibrer, en
+    dubbad svart kropp och upprätta vingar av andpenna; våtflugan behåller en röd stjärt och en
+    lutande vinge.
+    """
+
+// en fishing: For anything small and black on the water: gnats, smuts, black dance flies and midges, on rivers and lakes the whole season. Fish it dead drift to rising trout and grayling; in small sizes it is the fly for fish sipping tiny black insects in the film.
+fishing """
+    För allt som är litet och svart på vattnet: knott, svarta dansflugor och fjädermyggor,
+    i älvar och sjöar hela säsongen. Fiska den fritt drivande till vakande öring och harr; i
+    små storlekar är den flugan för fisk som smackar i sig små svarta insekter i filmen.
+    """
+
+labels {
+    // en wings: Grey duck quill slips
+    wings "Sektioner av grå andpenna"
+    // en tail: Black cock hackle fibres
+    tail "Svarta tupphackelfibrer"
+    // en body: Black dry-fly dubbing
+    body "Svart torrflugedubbing"
+}
+
+notes {
+    // en step 1 (attach-thread): Leave an eye-length bare behind the eye.
+    step 1 "Lämna en ögonlängd fri bakom öglan."
+    // en step 3 (tie-in wings): Matched slips from a left and a right quill, tips forward, then stood up and divided with figure-of-eight turns.
+    step 3 "Två lika sektioner från en vänster- och en högerpenna, topparna framåt, sedan resta och delade med åttor."
+    // en step 5 (tie-in tail): About as long as the shank.
+    step 5 "Ungefär lika lång som skaftet."
+    // en step 6 (dub body): Thin, a slight taper, to just behind the wings.
+    step 6 "Tunn, lätt avsmalnande, till strax bakom vingarna."
+    // en step 9 (wind hackle): Two turns behind the wings, two in front.
+    step 9 "Två varv bakom vingarna, två framför."
+}

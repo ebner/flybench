@@ -29,6 +29,18 @@
     "width": 600,
     "height": 400
   },
+  "black-gnat": {
+    "hash": "0238e98c34995b9e",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "black-peacock-spider": {
+    "hash": "f4d3d2d6d3e7b09a",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
   "black-pennell": {
     "hash": "b40278ca3b94c729",
     "frames": 24,
@@ -179,6 +191,12 @@
     "width": 600,
     "height": 400
   },
+  "grey-wulff": {
+    "hash": "36ceb2d8ca7f213b",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
   "griffiths-gnat": {
     "hash": "dd6635d0b33d4398",
     "frames": 24,
@@ -305,6 +323,12 @@
     "width": 600,
     "height": 400
   },
+  "royal-coachman": {
+    "hash": "dfacd035d4f24cc5",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
   "royal-wulff": {
     "hash": "53ed51bb3f4e90af",
     "frames": 24,
@@ -319,6 +343,12 @@
   },
   "snipe-and-purple": {
     "hash": "599e6a383fda548a",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "soldier-palmer": {
+    "hash": "8702f242de3775e5",
     "frames": 24,
     "width": 600,
     "height": 400
@@ -403,6 +433,12 @@
   },
   "woolly-bugger-conehead": {
     "hash": "3fd6f6cfb53e7fe5",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "woolly-worm": {
+    "hash": "a37f4da4cfb7e032",
     "frames": 24,
     "width": 600,
     "height": 400

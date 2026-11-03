@@ -1,0 +1,44 @@
+id woolly-worm
+status draft
+
+// en description: A short tuft of red wool, a black chenille body and a grizzly hackle palmered from the tail to the head.
+description "Ein kurzer Büschel aus roter Wolle, ein Körper aus schwarzer Chenille und eine Grizzlyhechel, vom Schwanz bis zum Kopf als Körperhechel gewunden."
+
+// en history: A palmer fly from England by way of the Ozarks of Missouri and Arkansas, where it was a bass and crappie fly in the 1920s; nobody is recorded as its inventor. Don Martinez of West Yellowstone got one from a friend in Arkansas and sold his versions as Woolly Worms: in a 1940 letter to Preston Jennings he called it a horrible-looking grub, murderous all season, and said he sold more of them than of all his other flies together. Wikipedia and Orvis put this in the 1950s, which his letter and his death in 1955 rule out. Martinez's first ones had a grizzly tail or none; the red wool tag came later. In 1967 Russell Blessing gave it a marabou tail, and it became the Woolly Bugger.
+history """
+    Eine Palmerfliege aus England, die über die Ozarks in Missouri und Arkansas in den 1920er
+    Jahren zur Fliege für Schwarzbarsch und Crappie wurde; ein Erfinder ist nicht bekannt. Don
+    Martinez in West Yellowstone bekam eine von einem Freund in Arkansas und verkaufte seine
+    Versionen als Woolly Worms: In einem Brief an Preston Jennings von 1940 nannte er sie eine
+    scheußliche Made, mörderisch die ganze Saison, und schrieb, er habe mehr davon verkauft als
+    von allen seinen anderen Fliegen zusammen. Wikipedia und Orvis setzen das in die 1950er
+    Jahre, was sein Brief und sein Tod 1955 ausschließen. Martinez' erste hatten einen
+    Grizzlyschwanz oder gar keinen; der Büschel aus roter Wolle kam später. 1967 gab Russell
+    Blessing ihr einen Schwanz aus Marabou, und sie wurde zum Woolly Bugger.
+    """
+
+// en fishing: A big general nymph or caterpillar for still and slow water. Martinez fished it deep and twitched it with the left hand: the moving hackle is what does it. Weighted, it searches the bottom of rivers for trout; unweighted, it was first fished on the surface for bass and bluegill.
+fishing """
+    Eine große, allgemeine Nymphe oder Raupe für stilles und langsames Wasser. Martinez fischte
+    sie tief und zupfte sie mit der linken Hand: Die sich bewegende Hechel macht es. Beschwert
+    sucht sie den Grund von Flüssen nach Forellen ab; unbeschwert wurde sie zuerst an der
+    Oberfläche auf Schwarzbarsch und Sonnenbarsch gefischt.
+    """
+
+labels {
+    // en tail: Red wool
+    tail "Rote Wolle"
+}
+
+notes {
+    // en step 3 (tie-in tail): A short tuft, on top; bind the yarn along the shank for an even underbody.
+    step 3 "Ein kurzer Büschel oben auf; binde die Wolle entlang des Schenkels ab, für einen gleichmäßigen Unterkörper."
+    // en step 4 (tie-in body): By its stripped core.
+    step 4 "Am freigelegten Kern."
+    // en step 5 (tie-in hackle): At the bend, by the butt, dull side forward (Martinez).
+    step 5 "Am Bogen, am Kiel, die matte Seite nach vorn (Martinez)."
+    // en step 7 (wind body): Touching turns, an eye-length behind the eye.
+    step 7 "Windung an Windung, eine Öhrlänge hinter dem Öhr."
+    // en step 9 (wind hackle): Even open turns forward over the chenille.
+    step 9 "Gleichmäßige, offene Windungen nach vorn über die Chenille."
+}

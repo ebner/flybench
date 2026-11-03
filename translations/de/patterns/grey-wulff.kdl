@@ -1,0 +1,50 @@
+id grey-wulff
+status draft
+
+// en description: Upright, divided wings and a tail of brown bucktail, a grey muskrat body and a heavy blue dun hackle.
+description "Aufrechte, geteilte Flügel und ein Schwanz aus braunem Bucktail, ein grauer Körper aus Bisam und eine dichte blaugraue Hechel."
+
+// en history: Lee Wulff tied the first of his series in 1929 or 1930, for the big grey drakes of New York's Ausable, and called it the Ausable Gray; Wikipedia gives the Esopus and other Catskill rivers. Dan Bailey insisted on Wulff's name, and the Ausable Gray, the Coffin May and the Bucktail Coachman became the Grey, White and Royal Wulff. They were the first dry flies to use bucktail for wings and tail, so they floated high in rough water. Wulff's body was grey angora wool; muskrat is usual today. It is also a classic dry fly for Atlantic salmon.
+history """
+    Lee Wulff band die erste seiner Serie 1929 oder 1930, für die großen grauen Eintagsfliegen
+    des Ausable im Staat New York, und nannte sie Ausable Gray; Wikipedia nennt den Esopus und
+    andere Flüsse der Catskills. Dan Bailey bestand auf Wulffs Namen, und aus Ausable Gray,
+    Coffin May und Bucktail Coachman wurden Grey, White und Royal Wulff. Sie waren die ersten
+    Trockenfliegen mit Flügeln und Schwanz aus Bucktail und schwammen daher hoch in rauem
+    Wasser. Wulffs Körper war aus grauer Angorawolle; heute ist Bisam üblich. Sie ist auch eine
+    klassische Trockenfliege für Lachs.
+    """
+
+// en fishing: A high-floating, easy-to-see dry for rough water: dead drift during the grey and slate drake hatches, or as an attractor between them. In summer, cast it to a deep pool and twitch it now and then. Tied on a salmon hook, it is a classic for Atlantic salmon.
+fishing """
+    Eine hoch schwimmende, gut sichtbare Trockenfliege für raues Wasser: frei treibend während
+    der Schlüpfe der großen grauen Eintagsfliegen, oder als Reizfliege dazwischen. Im Sommer
+    wirf sie in einen tiefen Gumpen und zupfe sie ab und zu. Auf einen Lachshaken gebunden ist
+    sie ein Klassiker für Lachs.
+    """
+
+labels {
+    // en wings: Natural brown bucktail
+    wings "Naturbraunes Bucktail"
+    // en tail: Natural brown bucktail
+    tail "Naturbraunes Bucktail"
+    // en body: Grey muskrat fur
+    body "Graues Bisamfell"
+    // en hackle: Medium blue dun cock hackle
+    hackle "Hahnenhechel, mittel blaugrau"
+}
+
+notes {
+    // en step 3 (tie-in wings): A generous stacked clump, tips forward; stand it up and divide it with figure-of-eight turns.
+    step 3 "Ein kräftiges, ausgeglichenes Büschel, Spitzen nach vorn; aufrichten und mit Achterwindungen teilen."
+    // en step 4 (trim wings): Cut the butts at a shallow slant and bind them down to the bend.
+    step 4 "Schneide die Enden flach schräg ab und binde sie bis zum Bogen fest."
+    // en step 6 (tie-in tail): About a quarter as much hair as the wing.
+    step 6 "Etwa ein Viertel so viel Haar wie im Flügel."
+    // en step 7 (trim tail): Square, the step smoothed with thread.
+    step 7 "Gerade, die Stufe mit Faden geglättet."
+    // en step 8 (dub body): Lightly tapered, leaving room behind the wings for the hackle.
+    step 8 "Leicht verjüngt, mit Platz hinter den Flügeln für die Hechel."
+    // en step 11 (wind hackle): A heavy collar, behind the wings and in front.
+    step 11 "Ein dichter Kragen, hinter den Flügeln und davor."
+}
