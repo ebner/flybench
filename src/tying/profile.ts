@@ -1,6 +1,8 @@
 /**
- * The radius of everything wound onto the shank so far, as a function of x.
- * Each new layer of wraps sits on top of the current profile and then adds to it.
+ * What is on the shank so far, as a function of x: layers wound all the way round, and what is
+ * tied on top or underneath (a hair wing's bound butts, a wing case, a beard), which makes a hump
+ * on that side only. Turns wound over it lie on a circle round the shank underneath and over the
+ * hump on top. Each new layer of wraps sits on the current profile and then adds to it.
  */
 export class Profile {
   static readonly BINS = 400;
@@ -8,18 +10,51 @@ export class Profile {
   private constructor(
     readonly x0: number,
     readonly x1: number,
+    /** All the way round. */
     private readonly r: Float32Array,
+    /** On top only. */
+    private readonly up: Float32Array,
+    /** Underneath only. */
+    private readonly down: Float32Array,
   ) {}
 
   static bare(x0: number, x1: number, wireRadius: number): Profile {
-    return new Profile(x0, x1, new Float32Array(Profile.BINS).fill(wireRadius));
+    const empty = new Float32Array(Profile.BINS);
+    return new Profile(x0, x1, new Float32Array(Profile.BINS).fill(wireRadius), empty, empty);
   }
 
-  radiusAt(x: number): number {
+  private sample(values: Float32Array, x: number): number {
     const t = ((x - this.x0) / (this.x1 - this.x0)) * (Profile.BINS - 1);
     const i = Math.max(0, Math.min(Profile.BINS - 2, Math.floor(t)));
     const f = Math.max(0, Math.min(1, t - i));
-    return this.r[i]! * (1 - f) + this.r[i + 1]! * f;
+    return values[i]! * (1 - f) + values[i + 1]! * f;
+  }
+
+  /** How far the top of it is from the shank's axis: where what is tied on top lies. */
+  radiusAt(x: number): number {
+    return this.sample(this.r, x) + this.sample(this.up, x);
+  }
+
+  /** How far the underside is from the axis: where what is tied underneath lies. */
+  underAt(x: number): number {
+    return this.sample(this.r, x) + this.sample(this.down, x);
+  }
+
+  /**
+   * The circle turns wound at x lie on: through the top and the underside, its centre raised
+   * (or lowered) off the axis by `centre`.
+   */
+  ringAt(x: number): { radius: number; centre: number } {
+    const r = this.sample(this.r, x);
+    const up = this.sample(this.up, x);
+    const down = this.sample(this.down, x);
+    return { radius: r + (up + down) / 2, centre: (up - down) / 2 };
+  }
+
+  /** How far the ring reaches out to the sides. */
+  sideAt(x: number): number {
+    const { radius, centre } = this.ringAt(x);
+    return Math.sqrt(radius * radius - centre * centre);
   }
 
   /** Largest radius over [a, b]. */
@@ -33,18 +68,26 @@ export class Profile {
   /**
    * Returns a new profile with a layer of `thickness` over [a, b], tapering over `taper` at both
    * ends: just outside the range, or, with `within`, inside it (a dubbed noodle thins at its ends).
+   * `where`: all the way round, or only on top or underneath.
    */
-  withLayer(a: number, b: number, thickness: number, taper = 0.03, within = false): Profile {
+  withLayer(a: number, b: number, thickness: number, taper = 0.03, within = false, where: "round" | "top" | "under" = "round"): Profile {
     const lo = Math.min(a, b);
     const hi = Math.max(a, b);
-    const r = new Float32Array(this.r);
+    const source = where === "round" ? this.r : where === "top" ? this.up : this.down;
+    const values = new Float32Array(source);
     for (let i = 0; i < Profile.BINS; i++) {
       const x = this.x0 + ((this.x1 - this.x0) * i) / (Profile.BINS - 1);
       const inside = Math.min(x - lo, hi - x) - (within ? taper : 0);
       if (inside <= -taper) continue;
       const w = inside >= 0 ? 1 : 1 + inside / taper;
-      r[i] = r[i]! + thickness * w * w * (3 - 2 * w);
+      values[i] = values[i]! + thickness * w * w * (3 - 2 * w);
     }
-    return new Profile(this.x0, this.x1, r);
+    return new Profile(
+      this.x0,
+      this.x1,
+      where === "round" ? values : this.r,
+      where === "top" ? values : this.up,
+      where === "under" ? values : this.down,
+    );
   }
 }

@@ -177,6 +177,7 @@ export const de: Messages = {
   stepBar: {
     label: "Schritte",
     value: (n: number, of: number, title: string) => `Schritt ${n} von ${of}: ${title}`,
+    tip: (n: number, title: string) => `Schritt ${n}: ${title}`,
   },
   clip: {
     play: "Abspielen",

@@ -74,8 +74,11 @@ export class ShankSpace {
     return new THREE.Quaternion().setFromAxisAngle(Z_AXIS, this.straight ? 0 : this.heading(x));
   }
 
-  /** Point on the surface of whatever is wound on the shank at arc length x, radius r, wrap angle a. */
-  around(x: number, r: number, a: number, target = new THREE.Vector3()): THREE.Vector3 {
-    return this.point(target.set(x, r * Math.sin(a), r * Math.cos(a)));
+  /**
+   * Point on the surface of whatever is wound on the shank at arc length x, radius r, wrap angle a,
+   * round a circle whose centre is `centre` above the axis.
+   */
+  around(x: number, r: number, a: number, target = new THREE.Vector3(), centre = 0): THREE.Vector3 {
+    return this.point(target.set(x, centre + r * Math.sin(a), r * Math.cos(a)));
   }
 }

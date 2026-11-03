@@ -182,6 +182,7 @@ export const en = {
   stepBar: {
     label: "Steps",
     value: (n: number, of: number, title: string) => `Step ${n} of ${of}: ${title}`,
+    tip: (n: number, title: string) => `Step ${n}: ${title}`,
   },
   clip: {
     play: "Play",

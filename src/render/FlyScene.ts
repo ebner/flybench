@@ -21,6 +21,8 @@ import { clinchKnot, tippetDimples, tippetGeometry, tippetMesh, tippetPath } fro
 import { CLINGS, wetFly } from "./real/wet";
 import { bedShadows } from "./real/shadows";
 
+const Y_UP = new THREE.Vector3(0, 1, 0);
+
 const REST_DIRECTIONS = {
   "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
   "back-up": new THREE.Vector3(-0.9, 0.8, 0.2).normalize(),
@@ -150,6 +152,14 @@ export class FlyScene {
   private finished = new THREE.Box3();
   /** Once the user orbits or zooms, resizing no longer re-frames the fly. */
   private userMoved = false;
+  /** Turned or zoomed by hand since this scene was made: the slow turn stays off. */
+  private handled = false;
+  /** Seconds a turn of the slow turn takes; 0 while not turning. Turned here rather than by the
+   * controls' own auto-rotation, whose damping carries it on for a while after it stops. */
+  private turnSeconds = 0;
+  /** Which way round the camera was when the slow turn began (an angle round the vertical), to go back to after it. */
+  private turnedFrom: number | null = null;
+  private turningBack = false;
   private view: ViewName = "default";
   /** Degrees the view is turned around the vertical axis (turntables). */
   private orbit = 0;
@@ -265,6 +275,9 @@ export class FlyScene {
     this.controls.maxDistance = this.baseMaxDistance;
     this.controls.addEventListener("start", () => {
       this.userMoved = true;
+      this.handled = true;
+      this.turnSeconds = 0;
+      this.turningBack = false;
       // Turning the fly in the water leaves following as it is, for back at the vise.
       if (this.follow && !this.water) {
         this.follow = false;
@@ -283,6 +296,8 @@ export class FlyScene {
       // Following waits while the fly is in the water, and goes on when it is back at the vise.
       if (this.follow && !this.water) this.followAction(dt);
       if (this.water && !this.water.setting.still) this.setWaterTime(this.waterTime + dt);
+      if (this.turnSeconds > 0) this.turnBy((2 * Math.PI * dt) / this.turnSeconds);
+      if (this.turningBack) this.turnBack(dt);
       this.controls.update();
       this.draw();
       this.reportAnchor();
@@ -332,7 +347,11 @@ export class FlyScene {
       this.fly.remove(this.guide);
       this.guide = null;
     }
-    // Proportions are judged from the side, square to the grid.
+    // Proportions are judged from the side, square to the grid: no slow turn meanwhile.
+    if (on) {
+      this.turnSeconds = 0;
+      this.turningBack = false;
+    }
     if (on !== this.guideView) {
       this.guideView = on;
       this.setView(on ? "side" : "default", 0, this.fit);
@@ -1125,6 +1144,40 @@ export class FlyScene {
     if (reframe) this.resetCamera();
   }
 
+  /**
+   * A slow turn round the fly, as on a turntable (one turn in `seconds`), until the visitor turns
+   * or zooms it themselves.
+   */
+  setTurning(on: boolean, seconds = 40) {
+    const was = this.turnSeconds > 0;
+    this.turnSeconds = on && !this.handled ? seconds : 0;
+    const turning = this.turnSeconds > 0;
+    if (turning && !was) {
+      if (!this.turningBack) this.turnedFrom = this.azimuth();
+      this.turningBack = false;
+    }
+    // Stopped (to play the steps): back round to where it was, to watch them from that side.
+    if (!turning && was) this.turningBack = this.turnedFrom !== null;
+  }
+
+  private azimuth(): number {
+    const offset = this.camera.position.clone().sub(this.controls.target);
+    return Math.atan2(offset.x, offset.z);
+  }
+
+  /** Round the vertical through what the camera looks at. */
+  private turnBy(angle: number) {
+    const offset = this.camera.position.clone().sub(this.controls.target).applyAxisAngle(Y_UP, angle);
+    this.camera.position.copy(this.controls.target).add(offset);
+  }
+
+  private turnBack(dt: number) {
+    const delta = Math.atan2(Math.sin(this.turnedFrom! - this.azimuth()), Math.cos(this.turnedFrom! - this.azimuth()));
+    const step = Math.abs(delta) < 0.002 ? delta : delta * (1 - Math.exp(-dt * 5));
+    this.turnBy(step);
+    if (step === delta) this.turningBack = false;
+  }
+
   /** Follow the action (true) or leave the camera where the user puts it (false). */
   setFollow(on: boolean) {
     this.follow = on;
@@ -1449,6 +1502,7 @@ export class FlyScene {
   /** Points the camera at `framed` from the current view, filling the picture with a small margin. */
   private frameBox(framed: THREE.Box3) {
     this.userMoved = false;
+    this.turningBack = false;
     const target = framed.getCenter(new THREE.Vector3());
     const view = this.viewDirection(this.orbit);
     // "sphere": the distance that fits the fly from every turntable angle, so its size
@@ -1548,7 +1602,7 @@ export class FlyScene {
       return this.space!.point(new THREE.Vector3(piece.post.x, y, piece.post.radius + piece.strandRadius));
     }
     const at = wrapAt(piece, u);
-    return this.space!.around(at.x, at.radius, 0);
+    return this.space!.around(at.x, at.radius, 0, undefined, at.centre);
   }
 
   /** Where thread or material leaves a wraps piece at step progress p, in world space. */

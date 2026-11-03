@@ -177,6 +177,7 @@ export const sv: Messages = {
   stepBar: {
     label: "Steg",
     value: (n: number, of: number, title: string) => `Steg ${n} av ${of}: ${title}`,
+    tip: (n: number, title: string) => `Steg ${n}: ${title}`,
   },
   clip: {
     play: "Spela",
