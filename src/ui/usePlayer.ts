@@ -15,10 +15,10 @@ export interface Player {
 
 /**
  * Playback clock for the timeline. `stopAt`, if given, is a time to pause at
- * (used to stop at the end of the step being replayed).
+ * (used to stop at the end of the step being replayed). `start` is where it starts.
  */
-export function usePlayer(duration: number, stopAt: number | null): Player {
-  const [time, setTime] = useState(0);
+export function usePlayer(duration: number, stopAt: number | null, start = 0): Player {
+  const [time, setTime] = useState(start);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
   const state = useRef({ time, stopAt, duration, speed });

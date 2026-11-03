@@ -388,6 +388,12 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   }
   group.add(new THREE.Mesh(tube, surfaces.get(tubeLook, piece.color, mottled)));
 
+  // Thread lies flat and tight: on the bare shank or over what is bound under it (trimmed butts,
+  // tie-in bumps), a core along that layer, so no air shows between the turns and the shank.
+  // Not under open turns, where the shank or body shows between them.
+  const core = piece.look === "thread" && piece.path !== "post" ? threadCore(piece, space) : null;
+  if (core) group.add(new THREE.Mesh(core.geometry, surfaces.get("thread", piece.color)));
+
   let fibres: ReturnType<typeof fibreMesh> | null = null;
   if (piece.fibreLength && piece.look in WOUND_FIBRES) {
     const spec = WOUND_FIBRES[piece.look as keyof typeof WOUND_FIBRES];
@@ -401,11 +407,65 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
     setProgress(u) {
       group.visible = u > 0;
       tube.setDrawRange(0, Math.floor(u * tubular) * perSegment);
+      core?.setProgress(u);
       fibres?.setProgress(u);
     },
     dispose() {
       tube.dispose();
+      core?.geometry.dispose();
       fibres?.dispose();
+    },
+  };
+}
+
+/**
+ * The solid layer under thread turns: a tube following the profile they are wound on, just
+ * inside the turns, growing with them along the shank.
+ */
+function threadCore(piece: WrapsPiece, space: ShankSpace): { geometry: THREE.BufferGeometry; setProgress: (u: number) => void } | null {
+  const travel = piece.path === "travel";
+  const from = Math.min(piece.x0, piece.x1);
+  const to = Math.max(piece.x0, piece.x1);
+  const along = 24;
+  const round = 16;
+  const radii = Array.from({ length: along + 1 }, (_, i) => piece.base.radiusAt(from + ((to - from) * i) / along));
+  const span = travel ? to - from : 2 * piece.width;
+  if (to - from < 1e-3 || span / Math.max(1, piece.turns) > 4 * piece.strandRadius) return null;
+  const positions: number[] = [];
+  const index: number[] = [];
+  const v = new THREE.Vector3();
+  for (let i = 0; i <= along; i++) {
+    const x = from + ((to - from) * i) / along;
+    // Just inside the turns' centres, so the core shows only between them.
+    const r = radii[i]! + piece.strandRadius * 0.4;
+    for (let j = 0; j <= round; j++) {
+      space.around(x, r, (j / round) * Math.PI * 2, v);
+      positions.push(v.x, v.y, v.z);
+    }
+  }
+  for (let i = 0; i < along; i++) {
+    for (let j = 0; j < round; j++) {
+      const a = i * (round + 1) + j;
+      const b = a + round + 1;
+      // Facing outwards (the shank's surface is seen from outside).
+      index.push(a, b, a + 1, a + 1, b, b + 1);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(index);
+  geometry.computeVertexNormals();
+  const perRing = round * 6;
+  // Wound along, it grows from where the thread starts; wound in place (a head), it is there
+  // once the first turns are.
+  const forward = !travel || piece.x1 >= piece.x0;
+  return {
+    geometry,
+    setProgress(u) {
+      if (!travel) return geometry.setDrawRange(0, u > 0.15 ? along * perRing : 0);
+      const n = Math.floor(u * along);
+      if (forward) geometry.setDrawRange(0, n * perRing);
+      else geometry.setDrawRange((along - n) * perRing, n * perRing);
     },
   };
 }

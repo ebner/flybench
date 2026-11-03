@@ -68,7 +68,8 @@ pnpm watercheck    # water stills next to photos of real flies and insects on an
 pnpm icons         # app icon PNGs from public/icons/*.svg
 ```
 
-Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan.
+A pattern's page opens on the finished fly (a link with `?step=N` opens that step); play ties it
+from the bare hook. Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan.
 Space plays and pauses, ← and → step back and forward, Home goes back to step 1 (or hold the
 previous-step button). In vise mode Page Down and Page Up do the same as → and ←, for a
 page-turner pedal or presentation clicker. The step bar under the view has a segment per step: tap one to go to

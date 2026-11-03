@@ -8,7 +8,7 @@ import { resolveColor, type Recipe } from "../recipe/schema";
 import { colourWord, materialName, materialsList } from "../tying/describe";
 import { fishing, fishingText } from "../tying/fishing";
 import { ridesPointUp } from "../tying/hook";
-import { simulate, stepAt, stepEnd, stepProgress } from "../tying/simulate";
+import { simulate, stepAt, stepEnd, stepProgress, type Build } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
 import { match, materialColor } from "../catalog/inventory";
 import { href, replaceUrl } from "./router";
@@ -154,26 +154,34 @@ function PatternView({
     return match({ kind: m.kind, color: materialColor(m) }, owned.values);
   };
   const [stopAt, setStopAt] = useState<number | null>(null);
-  const player = usePlayer(build.duration, stopAt);
+  // Where a link opens: at its step's start, or without a step on the finished fly (play ties it
+  // from the bare hook). From the first render, so the address never shows another step first.
+  const linkedTime = (b: Build) => (linkedStep === undefined ? b.duration : b.steps[Math.min(linkedStep, b.steps.length) - 1]!.start);
+  const player = usePlayer(build.duration, stopAt, linkedTime(build));
   const current = stepAt(build, player.time);
+  // The fly as it is when finished: what a page opens on, and where playing ends.
+  const finished = !player.playing && player.time >= build.duration - 0.001;
   const step = build.steps[current]!;
 
   // Another hook size changes how long the steps take: keep the same point of the same step,
   // and a replayed step's stop, rather than the same number of seconds. Time and size change
   // in one render, so the address never shows a step in between.
-  // `toStep`: go to the start of this step instead (a link that names a size and a step).
-  const changeSize = (s: number, toStep?: number) => {
+  // `toStep`: go to the start of this step, or to the finished fly, instead (a link that names
+  // a size).
+  const changeSize = (s: number, toStep?: number | "finished") => {
     const next = simulate(sized(s));
     const same = (i: number) => next.steps[Math.min(i, next.steps.length - 1)]!;
     const progress = stepProgress(step, player.time);
     const t =
-      toStep !== undefined
-        ? same(toStep).start
-        : player.time >= build.duration - 0.001
-          ? next.duration
-          : progress >= 1
-            ? stepEnd(same(current))
-            : same(current).start + progress * same(current).duration;
+      toStep === "finished"
+        ? next.duration
+        : toStep !== undefined
+          ? same(toStep).start
+          : player.time >= build.duration - 0.001
+            ? next.duration
+            : progress >= 1
+              ? stepEnd(same(current))
+              : same(current).start + progress * same(current).duration;
     setSize(s);
     player.seek(t, next.duration);
     if (toStep !== undefined) {
@@ -209,7 +217,7 @@ function PatternView({
     setInWater(false);
     player.pause();
     setStopAt(null);
-    player.seek(build.steps[Math.min(linkedStep ?? 1, build.steps.length) - 1]!.start);
+    player.seek(linkedTime(build));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedStep]);
   // A long instruction scrolls; the next one starts at its beginning.
@@ -221,11 +229,11 @@ function PatternView({
   const writtenSize = useRef<number | undefined | null>(null);
   const writtenColours = useRef<string | null>(null);
   useEffect(() => {
-    written.current = current > 0 ? current + 1 : undefined;
+    written.current = finished ? undefined : current + 1;
     writtenSize.current = size !== tiedSize ? size : undefined;
     writtenColours.current = spec;
     replaceUrl(href.fly(recipe.id, written.current, writtenSize.current, spec || undefined));
-  }, [recipe.id, current, size, tiedSize, spec]);
+  }, [recipe.id, current, finished, size, tiedSize, spec]);
   // A link to this fly in other colours (or its own) changes them.
   useEffect(() => {
     if (writtenColours.current === null || (linkedColours ?? "") === writtenColours.current) return;
@@ -236,8 +244,8 @@ function PatternView({
   useEffect(() => {
     if (writtenSize.current === null || linkedSize === writtenSize.current || tiedSize === undefined) return;
     const target = linkedSize !== undefined && hookSizes(tiedSize).includes(linkedSize) ? linkedSize : tiedSize;
-    // The link names its step too (none means step 1), unless it is the one already shown.
-    if (target !== size) changeSize(target, linkedStep === written.current ? undefined : (linkedStep ?? 1) - 1);
+    // The link names its step too (none means the finished fly), unless it is the one already shown.
+    if (target !== size) changeSize(target, linkedStep === written.current ? undefined : linkedStep === undefined ? "finished" : linkedStep - 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedSize]);
 
@@ -256,6 +264,7 @@ function PatternView({
   // Vise mode pauses after every step: play the next one; a step paused halfway resumes.
   const playNext = () => {
     setInWater(false);
+    if (finished) return playStep(0);
     if (player.time >= step.start + step.duration - 0.05) return playStep(current + 1);
     setStopAt(stepEnd(step));
     player.play();
@@ -325,7 +334,7 @@ function PatternView({
         else playStep(player.time - step.start < 1 ? current - 1 : current);
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        playStep(current + 1);
+        playStep(finished ? 0 : current + 1);
       } else if (e.key === "Home") {
         e.preventDefault();
         toStart();
@@ -374,6 +383,12 @@ function PatternView({
               <h2>{t.pattern.inTheWater}</h2>
               <p className="now-text">{fishingText(fishingFor)}</p>
             </>
+          ) : finished ? (
+            <>
+              <p className="now-index">{t.pattern.stepsCount(build.steps.length)}</p>
+              <h2>{t.pattern.finished}</h2>
+              <p className="now-text">{t.pattern.finishedHint}</p>
+            </>
           ) : (
             <>
               <p className="now-index">{t.pattern.stepOf(current + 1, build.steps.length)}</p>
@@ -381,7 +396,7 @@ function PatternView({
               <p className="now-text">{step.text}</p>
             </>
           )}
-          {!inWater && mistakes.length > 0 && (
+          {!inWater && !finished && mistakes.length > 0 && (
             <details
               className="mistakes"
               open={showMistakes}
@@ -432,9 +447,9 @@ function PatternView({
             onContextMenu={(e) => e.preventDefault()}
             onClick={() => {
               if (hold.current.fired) hold.current.fired = false;
-              else playStep(current - 1);
+              else playStep(finished ? current : current - 1);
             }}
-            disabled={current === 0}
+            disabled={current === 0 && !finished}
             aria-label={t.pattern.previous}
             title={t.pattern.previousTitle}
           >
@@ -446,7 +461,7 @@ function PatternView({
           <button onClick={() => playStep(current)} aria-label={t.pattern.replay}>
             <TransportIcon name="replay" />
           </button>
-          <button onClick={() => playStep(current + 1)} disabled={current === build.steps.length - 1} aria-label={t.pattern.next}>
+          <button onClick={() => playStep(finished ? 0 : current + 1)} disabled={current === build.steps.length - 1 && !finished} aria-label={t.pattern.next}>
             <TransportIcon name="next" />
           </button>
           <button className="vise-toggle" aria-pressed={vise} onClick={toggleVise}>
@@ -647,7 +662,7 @@ function PatternView({
         <ol className="steps">
           {build.steps.map((s) => (
             <li key={s.index} className={s.index === current ? "active" : s.index < current ? "done" : ""}>
-              <button onClick={() => playStep(s.index)} aria-current={s.index === current ? "step" : undefined}>
+              <button onClick={() => playStep(s.index)} aria-current={!finished && s.index === current ? "step" : undefined}>
                 <strong>{s.title}</strong>
                 <span>{s.text}</span>
               </button>
