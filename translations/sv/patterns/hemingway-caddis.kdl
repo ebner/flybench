@@ -1,0 +1,61 @@
+id hemingway-caddis
+status draft
+
+// en description: A slim olive body under a clipped, palmered dun hackle, a wood duck underwing, a low wing of grey mallard quill, and a peacock thorax with a dun hackle wound through it.
+description "En smal olivgrön kropp under ett klippt, glest lindat dunfärgat hackel, en undervinge av brudandsflank, en låg vinge av grå gräsandspenna och en thorax av påfågelherl med ett dunfärgat hackel lindat genom den."
+
+// en history: Mike Lawson, who co-founded Henry's Fork Anglers at Last Chance, Idaho, tied it in the early 1970s for his friend Jack Hemingway, Ernest's son, who found the Henryville Special too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by one source and to the 1930s by others. Lawson usually sets the quill wing flat, two segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks it with wire, the Sierra version palmers it forward without.
+history """
+    Mike Lawson, som var med och grundade Henry's Fork Anglers vid Last Chance i Idaho, band den
+    i början av 1970-talet åt sin vän Jack Hemingway, Ernests son, som tyckte att Henryville
+    Special var för brun för Henry's Forks mörka nattsländor; Lawson kallar den ett av sina
+    mönster, och Umpqua säljer den som hans. Henryville, av Hiram Brobst i Pennsylvania, dateras
+    till 1920 av en källa och till 1930-talet av andra. Lawson sätter vanligen vingen platt, två
+    sektioner överlappande; andra binder den som ett tak. Kreft lindar kroppshacklet bakåt och
+    låser det med tråd, Sierra-versionen lindar det framåt utan.
+    """
+
+// en fishing: For the caddis hatches of western spring creeks and rivers. The slim quill wing gives a natural profile to selective trout, and the dense front hackle floats it high: fish it dead drift, or twitch and skate it when the sedges are egg-laying.
+fishing """
+    För nattsländekläckningar i västra USA:s källflöden och älvar. Den smala vingen av penna ger
+    kräsna öringar en naturlig siluett, och det täta främre hacklet får den att flyta högt:
+    fiska den fritt drivande, eller ryck och skumma den när nattsländorna lägger ägg.
+    """
+
+labels {
+    // en body: Olive dubbing
+    body "Olivgrön dubbing"
+    // en body-hackle: Dun cock hackle, undersized
+    body-hackle "Dunfärgat tupphackel, en storlek mindre"
+    // en underwing: Wood duck flank
+    underwing "Brudandsflank"
+    // en wing: Grey mallard quill segments
+    wing "Sektioner av grå gräsandspenna"
+    // en hackle: Medium dun cock hackle
+    hackle "Mellangrått tupphackel"
+}
+
+notes {
+    // en step 4 (dub body): Slim, slightly tapered, over the rear two-thirds.
+    step 4 "Smal, lätt avsmalnande, över de bakre två tredjedelarna."
+    // en step 5 (tie-in body-hackle): At the front of the body.
+    step 5 "Vid kroppens framände."
+    // en step 6 (wind body-hackle): Back to the barb in open turns.
+    step 6 "Bakåt till hullingen i glesa varv."
+    // en step 7 (wind rib): Forward through the hackle to lock it.
+    step 7 "Framåt genom hacklet för att låsa det."
+    // en step 9 (trim body-hackle): The tip at the bend.
+    step 9 "Spetsen vid böjen."
+    // en step 10 (trim body-hackle): Clip it flush across the top, as a seat for the wing.
+    step 10 "Klipp det plant ovanpå, som säte för vingen."
+    // en step 11 (tie-in underwing): A sparse folded bunch on top.
+    step 11 "En gles vikt knippe ovanpå."
+    // en step 12 (tie-in wing): Segments a little under a gape wide, cemented first; laid flat and overlapping, with two loose turns pulled up.
+    step 12 "Sektioner lite smalare än krokgapet, lackade först; lagda platt och överlappande, med två lösa varv som dras åt."
+    // en step 13 (tie-in hackle): Shiny side up, in front of the wing.
+    step 13 "Blanka sidan uppåt, framför vingen."
+    // en step 18 (wind hackle): Palmered forward over the herl.
+    step 18 "Lindat framåt över herlet."
+    // en step 20 (whip-finish): A small head.
+    step 20 "Ett litet huvud."
+}

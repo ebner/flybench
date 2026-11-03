@@ -1,0 +1,51 @@
+id bloody-mary
+status draft
+
+// en description: A forked tail of brown goose biots, a red floss body ribbed with peacock herl, a short peacock thorax and a brown partridge collar behind a gold bead.
+description "Ein gespaltener Schwanz aus braunen Gänsebiots, ein Körper aus roter Floss mit Pfauengrasrippung, ein kurzer Thorax aus Pfauengras und ein Kragen aus braunem Rebhuhn hinter einer Goldperle."
+
+// en history: An American attractor nymph, the Prince Nymph's close cousin, said to have been proven on trout for decades. The only originator anyone names is Darryl Smoot of Yakima, Washington, on the word of one blog citing a forum gallery; Tim Cammisa, credited on Global FlyFisher, only filmed a tutorial of a fly he calls traditional. In Scandinavia it is sold as the Bloody Mary Goldhead, in red and in green. Other flies share the name: Max Christensen's Tasmanian stonefly wet fly, a Danish wet fly with a tippet tail, and Davie McPhail's streamer.
+history """
+    Eine amerikanische Reiznymphe, der nahe Vetter der Prince Nymph, die sich seit Jahrzehnten
+    an Forellen bewährt haben soll. Der einzige genannte Erfinder ist Darryl Smoot aus Yakima,
+    Washington, auf das Wort eines Blogs, der eine Forumsgalerie zitiert; Tim Cammisa, bei
+    Global FlyFisher genannt, filmte nur eine Anleitung zu einer Fliege, die er traditionell
+    nennt. In Skandinavien wird sie als Bloody Mary Goldhead verkauft, in Rot und in Grün.
+    Andere Fliegen tragen denselben Namen: Max Christensens tasmanische Steinfliegen-Nassfliege,
+    eine dänische Nassfliege mit Tippetschwanz und Davie McPhails Streamer.
+    """
+
+// en fishing: A searching nymph that suggests no insect in particular. In rivers, dead drift it like a Pheasant Tail, or swing it like a wet fly; many fish it as a dropper, or as the heavy fly in a team. In Scandinavian put-and-take lakes it is a rainbow trout fly, best early in spring and late in the season, on a long leader with a very slow retrieve.
+fishing """
+    Eine Suchnymphe, die kein bestimmtes Insekt nachahmt. Im Fluss frei treibend gefischt wie
+    eine Pheasant Tail oder geschwungen wie eine Nassfliege; viele fischen sie als Springer oder
+    als schwere Fliege eines Vorfachs. In skandinavischen Put-and-Take-Gewässern ist sie eine
+    Regenbogenforellenfliege, am besten im zeitigen Frühjahr und spät in der Saison, an langem
+    Vorfach sehr langsam eingeholt.
+    """
+
+labels {
+    // en tail: Brown goose biots
+    tail "Braune Gänsebiots"
+    // en rib: One peacock herl
+    rib "Ein Pfauengras"
+    // en body: Red floss
+    body "Rote Floss"
+    // en hackle: Brown (Hungarian) partridge
+    hackle "Braunes (ungarisches) Rebhuhn"
+}
+
+notes {
+    // en step 4 (tie-in tail): One biot each side, curving out, so they fork.
+    step 4 "Ein Biot auf jeder Seite, nach außen gebogen, damit sie sich spreizen."
+    // en step 8 (wind body): A smooth, fairly full red body.
+    step 8 "Ein glatter, recht voller roter Körper."
+    // en step 10 (wind rib): Open turns over the floss; a coat of cement under it makes it last.
+    step 10 "Offene Windungen über die Floss; eine Lackschicht darunter macht sie haltbar."
+    // en step 14 (wind thorax): A short thorax.
+    step 14 "Ein kurzer Thorax."
+    // en step 18 (wind hackle): A couple of turns, as a soft collar.
+    step 18 "Ein paar Windungen, als weicher Kragen."
+    // en step 20 (whip-finish): Behind the bead.
+    step 20 "Hinter der Perle."
+}

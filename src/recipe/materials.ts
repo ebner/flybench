@@ -48,6 +48,8 @@ export interface CatalogMaterial {
   thickness?: number;
   /** Fibres: how many times broader each one is than a hackle fibre (tippet barbs are broad and flat). */
   fibreWidth?: number;
+  /** Fibres with flue along them, fluffy like herl (peacock sword). */
+  flue?: boolean;
   /** Dubbing: how rough it is, from 0 (fine, tight) to 1 (long, spiky guard hairs). Default 0.4. */
   shaggy?: number;
   /** Beads: a cone head, wide at the back and narrow towards the eye. */
@@ -120,6 +122,9 @@ export const MATERIALS = {
   // Assumption: tippet barbs are about two and a half times as broad as hackle fibres.
   "golden-pheasant-tippet": { name: "golden pheasant tippet", archetype: "fibres", defaultColor: "tippet", fibreWidth: 2.5 },
   "golden-pheasant-crest": { name: "golden pheasant crest", archetype: "fibres", defaultColor: "crest" },
+  // The bronze-green, fluffy fibres of the peacock's sword feather (tails, wings).
+  "peacock-sword": { name: "peacock sword", archetype: "fibres", defaultColor: "#4c5a24", flue: true },
+  "wood-duck-flank": { name: "wood duck flank", archetype: "fibres", defaultColor: "wood-duck" },
   "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear" },
   "synthetic-hair": { name: "synthetic hair", archetype: "fibres" },
   "coq-de-leon": { name: "Coq de León fibres", archetype: "fibres", defaultColor: "pardo" },
@@ -141,6 +146,7 @@ export const MATERIALS = {
   "duck-quill": { name: "duck quill slips", archetype: "feather", defaultColor: "grey", shape: "slip" },
   "starling-quill": { name: "starling quill slips", archetype: "feather", defaultColor: "dun", shape: "slip" },
   "turkey-quill": { name: "turkey quill slip", archetype: "feather", defaultColor: "turkey", shape: "slip" },
+  "hen-pheasant-quill": { name: "hen pheasant quill slips", archetype: "feather", defaultColor: "hen-pheasant", shape: "slip" },
   "saddle-feathers": { name: "saddle hackle feathers", archetype: "feather", shape: "tip" },
 
   // Foam

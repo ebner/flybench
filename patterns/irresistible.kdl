@@ -1,0 +1,76 @@
+// Irresistible: Joe Messinger's deer-hair drake of the 1930s, in the Adams Irresistible dressing: a clipped deer-hair body under Catskill wings and hackle.
+
+id irresistible
+name "Irresistible"
+aliases "Adams Irresistible" "Deer Hair Drake"
+type dry
+imitates mayfly attractor
+naturals mayfly-dun
+difficulty advanced
+species trout
+season june july august september
+origin originator="Joe Messinger Sr." region="Morgantown, West Virginia, USA"
+description "A moose hair tail, a body of grey deer hair spun and clipped to a cone, upright grizzly hackle-tip wings and a brown and grizzly hackle."
+history """
+    Joe Messinger Sr. of Morgantown, West Virginia, tied it in the 1930s as his Deer Hair
+    Drake, after an egg-laden female drake; the story goes that his friend Ken Lockwood, the
+    outdoor writer, said it looked irresistible. Messinger's own was two-tone, blue-grey deer
+    hair over white with a claret hackle, and according to the Southern Fly Fishing Hall of Fame
+    its bunches were knotted on rather than spun. The Adams Irresistible tied today, with the
+    Adams's wings and hackle, is credited to Messinger by Trident; Fly Fishing the Sierra points
+    instead to Harry Darbee's similar fly of 1939, which became the Rat Faced McDougall.
+    """
+fishing """
+    A high floater for fast, broken water: riffles, runs and the heads of pools. The packed
+    deer hair keeps it up where a feather-bodied dry would drown, and it suggests many insects
+    while staying easy to see. Fish it on a dead drift.
+    """
+sources {
+    "Rocky River TU: Irresistible (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/irresistible.html"
+    "Southern Fly Fishing Hall of Fame: Joe M. Messinger Sr." url="https://southernflyfishinghalloffame.com/hof-inductee/joe-m-messinger-sr/"
+    "Weirton Daily Times: Man carries on father's fly-tying legacy (John McCoy, AP)" url="https://www.weirtondailytimes.com/news/local-news/2020/01/man-carries-on-fathers-fly-tying-legacy/"
+    "Fly Fishing the Sierra: Adams Irresistible" url="https://flyfishingthesierra.com/?p=20459"
+    "Trident Fly Fishing: How to tie the Adams Irresistible (Stephen D'Angelo)" url="https://www.tridentflyfishing.com/blogs/all/how-to-tie-the-adams-irresistible-fly-pattern"
+    "Fish4Flies: Irresistible Adams" url="https://www.fish4flies.com/Dry/Hackled/Irresistible-Adams"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Original/T4656Irrisistible%20Adams.jpg" page="https://www.fish4flies.com/Dry/Hackled/Irresistible-Adams" license="All rights reserved; reference only" note="Side view; the cone body clear"
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/irresist.jpg" page="https://flyfishingthesierra.com/?p=20459" license="All rights reserved; reference only" note="Side view in the vise"
+    "http://www.rockyrivertu.org/uploads/2/2/6/4/22648242/published/54-light-irresistable0197.jpg?1633523904" page="http://www.rockyrivertu.org/irresistible.html" license="All rights reserved; reference only" note="Side view in the vise, a light body"
+}
+
+sits hackle
+hook dry-standard size=12
+thread black size="8/0"
+
+materials {
+    tail moose-mane label="Moose body hair"
+    body deer-hair color=grey label="Natural grey deer body hair"
+    wings hackle-tips color=grizzly label="Grizzly hen hackle tips"
+    hackle-brown cock-hackle color=brown fibre=1.5
+    hackle-grizzly cock-hackle color=grizzly fibre=1.5
+}
+
+steps {
+    attach-thread at=0.85 note="Two eye-lengths behind the eye."
+    wrap-thread to=0.0
+    // Sources: slightly shorter than to a shank; the photos show 1.1 to 1.7 gapes.
+    tie-in tail length=1.5 spread=20 note="Six to eight moose hairs, stacked; soft turns first so they don't flare."
+    trim tail
+    spin body to=0.58 note="Three or four pencil-thick bunches, underfur combed out, each pushed back hard."
+    // Read from the photos: about 0.4 gape across at the tail and 0.7 at the front.
+    trim body leave=0.35 shape=cone note="Square cuts top, bottom and sides, then angled back to the tail; square off the front as a seat for the wings. Keep the tail clear."
+    wrap-thread to=0.76
+    // Trident: about a shank long.
+    tie-in wings length=1.9 angle=90 spread=22 note="Concave sides out, stood up and divided to about 45°."
+    wrap-thread to=0.6
+    tie-in hackle-brown note="At the front of the body."
+    tie-in hackle-grizzly
+    wrap-thread to=0.92
+    wind hackle-brown to=0.9 turns=5 note="Three turns behind the wings, two or three in front."
+    tie-off hackle-brown
+    wind hackle-grizzly to=0.9 turns=5 note="Through the brown, the same way."
+    tie-off hackle-grizzly
+    whip-finish
+}

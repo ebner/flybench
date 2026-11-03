@@ -1,0 +1,51 @@
+id bloody-mary
+status draft
+
+// en description: A forked tail of brown goose biots, a red floss body ribbed with peacock herl, a short peacock thorax and a brown partridge collar behind a gold bead.
+description "En kluven stjärt av bruna gåsbiots, en kropp av rött floss ribbad med påfågelherl, en kort thorax av påfågelherl och en krage av brun rapphöna bakom en guldskalle."
+
+// en history: An American attractor nymph, the Prince Nymph's close cousin, said to have been proven on trout for decades. The only originator anyone names is Darryl Smoot of Yakima, Washington, on the word of one blog citing a forum gallery; Tim Cammisa, credited on Global FlyFisher, only filmed a tutorial of a fly he calls traditional. In Scandinavia it is sold as the Bloody Mary Goldhead, in red and in green. Other flies share the name: Max Christensen's Tasmanian stonefly wet fly, a Danish wet fly with a tippet tail, and Davie McPhail's streamer.
+history """
+    En amerikansk lockfluga, Prince Nymphs nära kusin, som sägs ha visat sig fiskande på öring i
+    årtionden. Den ende upphovsman som nämns är Darryl Smoot från Yakima i Washington, enligt en
+    blogg som hänvisar till ett forumgalleri; Tim Cammisa, som Global FlyFisher anger, filmade
+    bara en instruktion för en fluga han kallar traditionell. I Skandinavien säljs den som
+    Bloody Mary Goldhead, i rött och i grönt. Andra flugor bär samma namn: Max Christensens
+    tasmanska bäcksländevåtfluga, en dansk våtfluga med tippetstjärt och Davie McPhails
+    streamer.
+    """
+
+// en fishing: A searching nymph that suggests no insect in particular. In rivers, dead drift it like a Pheasant Tail, or swing it like a wet fly; many fish it as a dropper, or as the heavy fly in a team. In Scandinavian put-and-take lakes it is a rainbow trout fly, best early in spring and late in the season, on a long leader with a very slow retrieve.
+fishing """
+    En avsökande nymf som inte liknar någon särskild insekt. I strömmande vatten fiskas den
+    fritt drivande som en Pheasant Tail eller svept som en våtfluga; många fiskar den som
+    hängare eller som den tunga flugan i en tafs. I skandinaviska put-and-take-vatten är den en
+    regnbågsfluga, bäst tidigt på våren och sent på säsongen, på lång tafs med mycket långsam
+    inhalning.
+    """
+
+labels {
+    // en tail: Brown goose biots
+    tail "Bruna gåsbiots"
+    // en rib: One peacock herl
+    rib "Ett påfågelherl"
+    // en body: Red floss
+    body "Rött floss"
+    // en hackle: Brown (Hungarian) partridge
+    hackle "Brun (ungersk) rapphöna"
+}
+
+notes {
+    // en step 4 (tie-in tail): One biot each side, curving out, so they fork.
+    step 4 "En biot på varje sida, böjda utåt, så att de klyvs."
+    // en step 8 (wind body): A smooth, fairly full red body.
+    step 8 "En jämn, ganska fyllig röd kropp."
+    // en step 10 (wind rib): Open turns over the floss; a coat of cement under it makes it last.
+    step 10 "Glesa varv över flosset; ett lager lack under gör det hållbart."
+    // en step 14 (wind thorax): A short thorax.
+    step 14 "En kort thorax."
+    // en step 18 (wind hackle): A couple of turns, as a soft collar.
+    step 18 "Ett par varv, som en mjuk krage."
+    // en step 20 (whip-finish): Behind the bead.
+    step 20 "Bakom skallen."
+}

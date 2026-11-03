@@ -169,6 +169,15 @@ materials {
         source "Allt om flugfiske: Så binder du in ett torrflugehackel ('Dra bort hackelfibrerna som inte ska användas')" url="https://www.alltomflugfiske.se/sa-binder-du-in-ett-torrflugehackel/"
         source "Flugfiske i Norden: John Atherton ('långa raka tupphackel-fibrer till stjärten')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
     }
+    noun peacock-sword "påfågelsvärd" gender=ett definite="påfågelsvärdet" mass=#true {
+        note "The sword feather's fibres; shops sell 'Påfågelsvärd', Möllervärn writes '6–8 strålar påfågelsvärd'."
+        source "Flugbindning.com: Påfågel ('Svärdfjädrar, Peacock Swords … till stjärtar och vingdetaljer')" url="https://flugbindning.com/400052-pafagel"
+        source "Rackelhanen: March Brown (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
+    }
+    noun wood-duck-flank "brudandsflank" gender=en definite="brudandsflanken" mass=#true {
+        note "Wood duck flank fibres; shops keep 'Wood Duck' and write 'flankfjädrar' from 'brudand'. 'Brudandsflank' is my compound of the two."
+        source "Flugbindning.com: Mandarinand & Wood Duck ('brudand', 'flankfjädrar')" url="https://flugbindning.com/400053-mandarinand"
+    }
     noun golden-pheasant-tippet "guldfasantippet" gender=en definite="guldfasantippeten" mass=#true {
         note "Swedish keeps 'tippet' ('tippetfjädrarna kommer från hannens halskrage'); dressings write 'Guldfasantippets' or 'tippetfibrer'. Treated as a mass noun ('en bunt guldfasantippet'). Reviewer: the definite 'guldfasantippeten' may sound odd; 'tippetfibrerna' is the alternative."
         source "Flugbindning.com: Guldfasan ('de orange-svarta tippetfjädrarna', product 'Guldfasan Tippets')" url="https://flugbindning.com/400048-guldfasan"
@@ -236,6 +245,11 @@ materials {
     noun starling-quill "sektioner av starvingpenna" gender=en definite="sektionerna av starvingpenna" plural="sektioner av starvingpenna" plural-definite="sektionerna av starvingpenna" {
         note "Starling is 'stare'; plural as duck-quill."
         source "Flugbindning.com: Övriga fjädrar ('Stare och rörhöna är exempel på material som förekommer i traditionell våtfluge- och spiderbindning')" url="https://flugbindning.com/400099-ovriga-fjadrar"
+    }
+    noun hen-pheasant-quill "sektioner av fasanhönsvingpenna" gender=en definite="sektionerna av fasanhönsvingpenna" plural="sektioner av fasanhönsvingpenna" plural-definite="sektionerna av fasanhönsvingpenna" {
+        note "Plural, as duck-quill. Shops sell 'Fasanhöna Vingpennor'; Möllervärn writes 'fasanhönans vinge'."
+        source "Flugbindning.com: Fasanhöna Vingpennor ('för våtflugevingar, March Brown')" url="https://flugbindning.com/fasan/400008-fasanhona-vingpennor-5056304604593.html"
+        source "Rackelhanen: March Brown (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
     }
     noun turkey-quill "sektion av kalkonvingpenna" gender=en definite="sektionen av kalkonvingpenna" plural="sektioner av kalkonvingpenna" plural-definite="sektionerna av kalkonvingpenna" {
         note "Singular, as the English 'turkey quill slip'. Shops sell 'Kalkon Färgade Vingpennor' and speak of 'quill slips'; Rackelhanen writes 'Sektion av brunspräcklig kalkonvinge'."
@@ -374,6 +388,8 @@ colours {
         note "The barred black and white of teal flank, not the blue-green colour 'teal'."
     }
     adjective turkey "kalkon" compound=#true
+    adjective hen-pheasant "fasanhöna" compound=#true
+    adjective wood-duck "brudand" compound=#true
     adjective badger "badger" compound=#true {
         source "Bojdaspon: Hackel nackar (product 'Tupphackel – Badger')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
     }
@@ -436,6 +452,9 @@ parts {
         note "The lower wing of a Clouser; 'undersida' is the alternative."
     }
     noun body "kropp" gender=en definite="kroppen" plural="kroppar" plural-definite="kropparna"
+    noun cheeks "kinder" gender=en definite="kinderna" plural="kinder" plural-definite="kinderna" {
+        note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
+    }
     noun underbody "underkropp" gender=en definite="underkroppen" plural="underkroppar" plural-definite="underkropparna" {
         note "What a body is built up on (floss under the Black & Peacock Spider's herl)."
     }

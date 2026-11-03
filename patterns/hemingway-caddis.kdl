@@ -1,0 +1,79 @@
+// Hemingway Caddis: Mike Lawson's olive Henryville for the Henry's Fork, named for Jack Hemingway.
+
+id hemingway-caddis
+name "Hemingway Caddis"
+type dry
+imitates caddis
+naturals caddis-adult
+difficulty advanced
+species trout
+season may june july august september
+origin originator="Mike Lawson" region="Henry's Fork, Idaho, USA"
+description "A slim olive body under a clipped, palmered dun hackle, a wood duck underwing, a low wing of grey mallard quill, and a peacock thorax with a dun hackle wound through it."
+history """
+    Mike Lawson, who co-founded Henry's Fork Anglers at Last Chance, Idaho, tied it in the
+    early 1970s for his friend Jack Hemingway, Ernest's son, who found the Henryville Special
+    too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and
+    Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by
+    one source and to the 1930s by others. Lawson usually sets the quill wing flat, two
+    segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks
+    it with wire, the Sierra version palmers it forward without.
+    """
+fishing """
+    For the caddis hatches of western spring creeks and rivers. The slim quill wing gives a
+    natural profile to selective trout, and the dense front hackle floats it high: fish it dead
+    drift, or twitch and skate it when the sedges are egg-laying.
+    """
+sources {
+    "Wet Fly Swing: 50 years of Henry's Fork Anglers with Mike Lawson" url="https://www.wetflyswing.com/a-look-back-at-50-years-of-the-henrys-fork-anglers-with-mike-lawson/"
+    "John Kreft: Hemingway Caddis (pattern)" url="https://www.johnkreft.com/caddis-fly-patterns/hemingway-caddis/"
+    "John Kreft: Hemingway Caddis (history)" url="https://www.johnkreft.com/hemingway-caddis/"
+    "Fly Fishing the Sierra: Hemingway Caddis" url="https://flyfishingthesierra.com/hemingway-caddis/"
+    "Pike-Wayne TU: Hemingway Caddis" url="https://www.pwtu.org/hemmingway-caddis"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.johnkreft.com/wp-content/uploads/2020/11/Hemingway-Caddis-Olive.jpg" page="https://www.johnkreft.com/caddis-fly-patterns/hemingway-caddis/" author="John Kreft" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/hemingway.jpg" page="https://flyfishingthesierra.com/hemingway-caddis/" license="All rights reserved; reference only" note="Side view in the vise; Lawson's flat wing"
+    "https://images.squarespace-cdn.com/content/v1/68af42cf5ca1402650b45f94/977c3c0a-f096-4b6a-bb77-c1ff0323eefa/Hemingway-Caddis.jpg" page="https://www.pwtu.org/hemmingway-caddis" author="John Lazar" license="All rights reserved; reference only" note="Side view in the vise"
+}
+
+sits hackle
+hook dry-standard size=14
+thread olive size="8/0"
+
+materials {
+    rib gold-wire
+    body dry-fly-dubbing color=olive label="Olive dubbing"
+    // PWTU: slightly undersized.
+    body-hackle cock-hackle color=dun fibre=0.8 label="Dun cock hackle, undersized"
+    underwing wood-duck-flank count=20 label="Wood duck flank"
+    wing duck-quill color=grey label="Grey mallard quill segments"
+    thorax peacock-herl strands=1
+    hackle cock-hackle color=dun fibre=1.4 label="Medium dun cock hackle"
+}
+
+steps {
+    attach-thread at=0.5
+    wrap-thread to=0.0
+    tie-in rib
+    dub body to=0.7 note="Slim, slightly tapered, over the rear two-thirds."
+    tie-in body-hackle note="At the front of the body."
+    wind body-hackle to=0.05 turns=5 note="Back to the barb in open turns."
+    wind rib to=0.7 turns=5 note="Forward through the hackle to lock it."
+    tie-off rib
+    trim body-hackle note="The tip at the bend."
+    trim body-hackle keep=under note="Clip it flush across the top, as a seat for the wing."
+    // Kreft: about a shank long; Sierra: just past the bend.
+    tie-in underwing length=2.1 angle=12 spread=35 note="A sparse folded bunch on top."
+    // Read from the photos: the tips about two thirds of a gape past the bend.
+    tie-in wing length=2.2 angle=15 spread=14 width=0.45 note="Segments a little under a gape wide, cemented first; laid flat and overlapping, with two loose turns pulled up."
+    tie-in hackle note="Shiny side up, in front of the wing."
+    tie-in thorax
+    wrap-thread to=0.92
+    wind thorax to=0.92 turns=5
+    tie-off thorax
+    wind hackle to=0.92 turns=5 note="Palmered forward over the herl."
+    tie-off hackle
+    whip-finish note="A small head."
+}

@@ -1,0 +1,63 @@
+id hemingway-caddis
+status draft
+
+// en description: A slim olive body under a clipped, palmered dun hackle, a wood duck underwing, a low wing of grey mallard quill, and a peacock thorax with a dun hackle wound through it.
+description "Ein schlanker olivgrüner Körper unter einer gestutzten, gepalmerten dunfarbenen Hechel, ein Unterflügel aus Brautentenflanke, ein flacher Flügel aus grauer Stockentenschwinge und ein Thorax aus Pfauengras mit einer hindurchgewundenen dunfarbenen Hechel."
+
+// en history: Mike Lawson, who co-founded Henry's Fork Anglers at Last Chance, Idaho, tied it in the early 1970s for his friend Jack Hemingway, Ernest's son, who found the Henryville Special too brown for the dark caddis of the Henry's Fork; Lawson calls it one of his patterns, and Umpqua sells it as his. The Henryville, by Hiram Brobst of Pennsylvania, is dated to 1920 by one source and to the 1930s by others. Lawson usually sets the quill wing flat, two segments overlapping; others tie it tent-style. Kreft winds the body hackle back and locks it with wire, the Sierra version palmers it forward without.
+history """
+    Mike Lawson, Mitgründer von Henry's Fork Anglers in Last Chance, Idaho, band sie Anfang der
+    1970er Jahre für seinen Freund Jack Hemingway, Ernests Sohn, dem die Henryville Special für
+    die dunklen Köcherfliegen des Henry's Fork zu braun war; Lawson nennt sie eines seiner
+    Muster, und Umpqua verkauft sie als seine. Die Henryville, von Hiram Brobst aus
+    Pennsylvania, wird von einer Quelle auf 1920, von anderen auf die 1930er Jahre datiert.
+    Lawson setzt den Schwingenflügel meist flach, zwei Segmente überlappend; andere binden ihn
+    dachförmig. Kreft windet die Körperhechel nach hinten und sichert sie mit Draht, die Sierra-
+    Fassung palmert sie ohne Draht nach vorn.
+    """
+
+// en fishing: For the caddis hatches of western spring creeks and rivers. The slim quill wing gives a natural profile to selective trout, and the dense front hackle floats it high: fish it dead drift, or twitch and skate it when the sedges are egg-laying.
+fishing """
+    Für die Köcherfliegenschlüpfe an Quellbächen und Flüssen des amerikanischen Westens. Der
+    schmale Schwingenflügel gibt wählerischen Forellen ein natürliches Profil, und die dichte
+    vordere Hechel lässt sie hoch schwimmen: frei treibend fischen, oder zupfen und skaten, wenn
+    die Köcherfliegen Eier ablegen.
+    """
+
+labels {
+    // en body: Olive dubbing
+    body "Olivgrünes Dubbing"
+    // en body-hackle: Dun cock hackle, undersized
+    body-hackle "Dunfarbene Hahnenhechel, eine Nummer kleiner"
+    // en underwing: Wood duck flank
+    underwing "Brautentenflanke"
+    // en wing: Grey mallard quill segments
+    wing "Segmente grauer Stockentenschwinge"
+    // en hackle: Medium dun cock hackle
+    hackle "Mittel-dunfarbene Hahnenhechel"
+}
+
+notes {
+    // en step 4 (dub body): Slim, slightly tapered, over the rear two-thirds.
+    step 4 "Schlank, leicht verjüngt, über die hinteren zwei Drittel."
+    // en step 5 (tie-in body-hackle): At the front of the body.
+    step 5 "Am vorderen Ende des Körpers."
+    // en step 6 (wind body-hackle): Back to the barb in open turns.
+    step 6 "In offenen Windungen zurück bis zum Widerhaken."
+    // en step 7 (wind rib): Forward through the hackle to lock it.
+    step 7 "Nach vorn durch die Hechel, um sie zu sichern."
+    // en step 9 (trim body-hackle): The tip at the bend.
+    step 9 "Die Spitze am Bogen."
+    // en step 10 (trim body-hackle): Clip it flush across the top, as a seat for the wing.
+    step 10 "Oben glatt abschneiden, als Sitz für den Flügel."
+    // en step 11 (tie-in underwing): A sparse folded bunch on top.
+    step 11 "Ein spärliches gefaltetes Büschel oben auf."
+    // en step 12 (tie-in wing): Segments a little under a gape wide, cemented first; laid flat and overlapping, with two loose turns pulled up.
+    step 12 "Segmente etwas schmaler als die Bogenweite, vorher lackiert; flach und überlappend gelegt, mit zwei losen Windungen festgezogen."
+    // en step 13 (tie-in hackle): Shiny side up, in front of the wing.
+    step 13 "Glänzende Seite nach oben, vor dem Flügel."
+    // en step 18 (wind hackle): Palmered forward over the herl.
+    step 18 "Nach vorn über das Pfauengras gepalmert."
+    // en step 20 (whip-finish): A small head.
+    step 20 "Ein kleiner Kopf."
+}

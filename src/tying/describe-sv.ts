@@ -179,6 +179,7 @@ function writerFor(recipe: Recipe) {
       case "wind":
         return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)}.`;
       case "pull-over":
+        if (said.wing) return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}; res sedan topparna framför inbindningen som en vinge på ungefär ${length(said.wing)} och dela den.`;
         if (said.bubble) return `Vik ${mat(said.m)} framåt över ${def("body")} som en lös bubbla och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
       case "lay-back":
@@ -201,6 +202,7 @@ function writerFor(recipe: Recipe) {
             : `Klipp bort ${fibres} på ${mat(said.m)} upptill och undertill, så att två plana ${svNoun(word("row"), "plural")} sticker ut åt ${svNoun(word("side"), "plural-definite")}.`;
       }
       case "trim-spun":
+        if (said.cone) return `Klipp ${mat(said.m)} till en kon, smal vid stjärten och ungefär ${length(said.leave)} tjock på varje sida framtill, rakt avskuren där.`;
         if (said.cigar) return `Klipp ${mat(said.m)} till en cigarr, ungefär ${length(said.leave)} tjock på varje sida, tjockast på mitten och rundad i båda ändar.`;
         return `Klipp ${mat(said.m)} till form, så att ${article(word("head"))} ${word("head").text} på ungefär ${length(said.leave)} blir kvar på varje sida.`;
       case "trim-tip":

@@ -86,10 +86,12 @@ export interface Part {
   windTo?: number;
   /** Pulled over loose: gapes of air under its middle (a CDC pupa's bubble). */
   bubble?: number;
+  /** Hair pulled over, its tips standing up in front as a wing this long (a Humpy). */
+  tipWing?: number;
   /** Laid back from the eye and tied down there by the thread (a foam balloon), not held by the next winding. */
   tiedBack?: boolean;
   /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep). */
-  trim?: { leave?: number; shape?: "round" | "wedge" | "cigar"; keep?: "sides" | "top" | "under" };
+  trim?: { leave?: number; shape?: "round" | "wedge" | "cigar" | "cone"; keep?: "sides" | "top" | "under" };
   /** The visitor's notes on its steps, by action (0 the first). */
   notes?: Record<number, string>;
   mistakes?: Record<number, string>;
@@ -449,7 +451,7 @@ export function compile(fly: PartsFly): Compiled {
         if (i === 0) tieIns(p.at ?? 0.75);
         else if (i === 1) p.mats.forEach((m, k) => push({ op: "wind", material: m.id, to: round(p.to ?? 0.05), turns: turnsOf(p, m), ...(k === 0 ? n : {}) }, p.id));
         else if (i === 2) p.mats.forEach((m, k) => push({ op: "trim", material: m.id, ...(k === 0 ? n : {}) } as Step, p.id));
-        else p.mats.forEach((m) => push({ op: "trim", material: m.id, keep: p.trim!.keep! } as Step, p.id));
+        else p.mats.forEach((m, k) => push({ op: "trim", material: m.id, keep: p.trim!.keep!, ...(k === 0 ? n : {}) } as Step, p.id));
         break;
       case "dubbed":
       case "thread": {
@@ -477,7 +479,7 @@ export function compile(fly: PartsFly): Compiled {
           // Laid back from the eye, the next winding holds it, or the thread ties it down there;
           // folded forward, the thread ties it down.
           if (end > (p.at ?? 0) || p.tiedBack) to(end, p.id);
-          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(k === 0 ? n : {}) }, p.id));
+          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.tipWing !== undefined && { wing: p.tipWing }), ...(k === 0 ? n : {}) }, p.id));
         } else trim();
         break;
     }
@@ -515,6 +517,8 @@ function roleOf(id: string, how: How, kind: MaterialKind, step: Step | undefined
   const a = arch(kind);
   if (how === "slide") return "bead";
   if (how === "weight") return "weight";
+  // Whatever is pulled over the body is its back (a wing case, a Humpy's hump, a foam balloon).
+  if (how === "pulled") return "back";
   if (a === "eyes") return "eyes";
   // A hackle named for where it goes (a thorax hackle) is a hackle.
   if (a === "hackle" && !has("legs", "leg", "mouth")) return "hackle";
@@ -523,7 +527,7 @@ function roleOf(id: string, how: How, kind: MaterialKind, step: Step | undefined
   if (has("butt")) return "butt";
   if (has("rib")) return "rib";
   if (has("thorax")) return "thorax";
-  if (has("back", "case", "shellback")) return how === "pulled" ? "back" : how === "bunch" ? "wing" : "body";
+  if (has("back", "case", "shellback")) return how === "bunch" ? "wing" : "body";
   if (has("wing", "underwing", "overwing", "post", "topping", "sighter")) return "wing";
   if (has("hackle", "collar", "palmer", "beard", "throat", "mouth")) return "hackle";
   if (has("legs", "leg")) return "legs";
@@ -531,7 +535,6 @@ function roleOf(id: string, how: How, kind: MaterialKind, step: Step | undefined
   if (has("flash")) return "flash";
   if (has("head")) return "head";
   if (has("body", "abdomen", "larva", "fibres", "hump", "band", "hair")) return a === "hair" && how === "bunch" ? "wing" : "body";
-  if (how === "pulled") return "back";
   if (a === "hackle") return "hackle";
   if (how === "bunch") return step && "side" in step && step.side === "under" ? "hackle" : "wing";
   return "body";
@@ -659,7 +662,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     } else if (tieIn && /^tie-in pull-over( trim)?$/.test(ops)) {
       const po = g[1]!.s as Extract<Step, { op: "pull-over" }>;
       const tiedBack = po.to < (at ?? 0) - POSITION_TOLERANCE && g[1]!.thread != null && Math.abs(g[1]!.thread - po.to) <= POSITION_TOLERANCE;
-      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.bubble !== undefined && { bubble: po.bubble }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
+      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.bubble !== undefined && { bubble: po.bubble }), ...(po.wing !== undefined && { tipWing: po.wing }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && /^tie-in wind tie-off( trim)?$/.test(ops)) {
       const w = g[1]!.s as Extract<Step, { op: "wind" }>;
       mat.turns = w.turns;

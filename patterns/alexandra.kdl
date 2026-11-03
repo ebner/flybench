@@ -1,0 +1,72 @@
+// Alexandra: the Victorian lake fly named for Princess Alexandra, a silver body under a peacock sword wing with red slips.
+
+id alexandra
+name "Alexandra"
+aliases "Lady of the Lake"
+type wet
+imitates baitfish attractor
+naturals fry-minnow
+difficulty intermediate
+species trout sea-trout
+season april may june july august september
+origin region="England, 1860s"
+description "A red goose tail, a flat silver body ribbed with fine oval silver, a black hen throat and a wing of peacock sword fibres with a thin red slip along each side."
+history """
+    A fly of the 1860s, first called the Lady of the Lake and renamed after Alexandra,
+    Princess of Wales; W. G. Turle is usually credited with the name, but by 1880 Marston
+    wrote that Turle only believed he had invented it, and Brunton, "Old Fly", Hobbs and
+    Kelson all made claims. Its dazzling silver and peacock made it a famous lake and sea-trout
+    fly, so deadly that it was banned on some waters. The dressing tied in Britain today is the
+    one Courtney Williams gave in 1949: red tail and cheeks, once of ibis and now of goose, a
+    silver body, black hackle and a sword wing. American dressings use a peacock tail and a red
+    or claret hackle.
+    """
+fishing """
+    A lake and loch fly, fished on the point of a team or stripped back from the boat, when
+    trout are chasing fry; on rivers a sea-trout fly at dusk. The silver and peacock flash like a
+    small fish, and it can be deadly for brown trout feeding on sticklebacks.
+    """
+sources {
+    "Wikipedia: Alexandra (wet fly)" url="https://en.wikipedia.org/wiki/Alexandra_(wet_fly)"
+    "Ahrex Hooks: Old wets (Håkan Karsnäser)" url="https://ahrexhooks.com/2022/02/18/old-wets/"
+    "Flies Step by Step: Alexandra (Krystian Niemy)" url="https://www.flies-stepbystep.com/en/flies/wet-flies/alexandra-2/"
+    "Puckerbrush Flies: The Alexandra" url="https://puckerbrushflies.com/2013/11/15/the-alexandra/"
+    "Current Seams: The Alexandra winged wet (Steve Culton)" url="https://currentseams.com/2013/09/25/the-alexandra-winged-wet/"
+    "Rackelhanen: Alexandra (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://ahrexhooks.com/wp-content/uploads/2022/02/AlexPic12-1024x687.jpg" page="https://ahrexhooks.com/2022/02/18/old-wets/" author="Håkan Karsnäser" license="All rights reserved; reference only" flip=#true note="Side view in the vise; the British standard"
+    "https://www.flies-stepbystep.com/wp-content/uploads/2021/01/DSCF7455-800x423.jpg" page="https://www.flies-stepbystep.com/en/flies/wet-flies/alexandra-2/" author="Krystian Niemy" license="All rights reserved; reference only" note="Side view, on a longer hook"
+}
+
+hook wet-standard size=10
+thread black size="8/0"
+
+materials {
+    tail duck-quill color=red label="Red goose slip"
+    rib oval-tinsel color=silver label="Fine oval silver tinsel"
+    body flat-tinsel color=silver
+    throat hackle-fibres color=black count=30 label="Black hen hackle fibres"
+    wing peacock-sword count=60 color="#3d6e34" label="Peacock sword fibres"
+    cheeks duck-quill color=red label="Red goose slips"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Read from the photos: 1.1 to 1.7 gapes past the bend.
+    tie-in tail length=1.4 angle=8 width=0.2 note="A narrow slip, on top at the bend."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.86
+    wind body to=0.86 turns=14 note="Down and back again for a smooth double layer."
+    tie-off body
+    wind rib to=0.86 turns=5
+    tie-off rib
+    tie-in throat length=1.0 angle=35 side=under note="Reaching about to the hook point."
+    // Read from the photos: the tips half a gape to a gape past the bend.
+    tie-in wing length=2.6 angle=14 spread=30 note="Equal amounts from a left and a right sword, on top with a pinch and loop."
+    tie-in cheeks length=1.9 angle=12 spread=14 width=0.15 note="A thin red slip along each side of the wing."
+    whip-finish note="A small black head, varnished."
+}

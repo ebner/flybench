@@ -1,0 +1,82 @@
+// Bloody Mary: a bead-head attractor nymph of red floss and peacock with a partridge collar, a put-and-take favourite in Scandinavia.
+
+id bloody-mary
+name "Bloody Mary"
+aliases "Bloody Mary Goldhead" "Bloody Mary Nymph"
+type nymph
+imitates attractor caddis mayfly
+naturals caddis-larva-free mayfly-nymph-swimming
+difficulty beginner
+species trout grayling
+season march april may june september october
+origin region="Pacific Northwest, USA"
+description "A forked tail of brown goose biots, a red floss body ribbed with peacock herl, a short peacock thorax and a brown partridge collar behind a gold bead."
+history """
+    An American attractor nymph, the Prince Nymph's close cousin, said to have been proven on
+    trout for decades. The only originator anyone names is Darryl Smoot of Yakima, Washington,
+    on the word of one blog citing a forum gallery; Tim Cammisa, credited on Global FlyFisher,
+    only filmed a tutorial of a fly he calls traditional. In Scandinavia it is sold as the
+    Bloody Mary Goldhead, in red and in green. Other flies share the name: Max Christensen's
+    Tasmanian stonefly wet fly, a Danish wet fly with a tippet tail, and Davie McPhail's
+    streamer.
+    """
+fishing """
+    A searching nymph that suggests no insect in particular. In rivers, dead drift it like a
+    Pheasant Tail, or swing it like a wet fly; many fish it as a dropper, or as the heavy fly in
+    a team. In Scandinavian put-and-take lakes it is a rainbow trout fly, best early in spring
+    and late in the season, on a long leader with a very slow retrieve.
+    """
+sources {
+    "SwittersB: Bloody Mary Nymph, dropper pattern" url="https://swittersb.com/2009/02/10/booldy-mary-nymph-dropper-pattern/"
+    "Yellow Dog Flyfishing: Bloody Mary (archived)" url="https://web.archive.org/web/20250118002121/https://www.yellowdogflyfishing.com/products/bloody-mary"
+    "Global FlyFisher: Bloody Mary Nymph (Tim Cammisa, video)" url="https://globalflyfisher.com/video/bloody-mary-nymph-pattern"
+    "Orvis: TH Bloody Mary" url="https://www.orvis.com/product/th-bloody-mary/5E3G.html"
+    "Flugor.se: Bloody Mary Goldhead" url="https://www.flugor.se/flugor/goldheads/bloody-mary-goldhead-4384"
+    "Flugspecialisten: Bloody Mary röd" url="https://flugspecialisten.se/sv/products/bloody-mary-rod"
+    "RiverFly: The giant stonefly and Max Christensen's Bloody Mary" url="https://riverfly.com.au/the-giant-stonefly-and-max-christensens-bloody-mary/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.flugor.se/bild_arkiv/big_4384.jpg" page="https://www.flugor.se/flugor/goldheads/bloody-mary-goldhead-4384" license="All rights reserved; reference only" note="The Scandinavian goldhead, side view in the vise"
+    "https://nycdn.nyehandel.se/store_aff57705-333a-43f2-9d70-277b22ad640b/images/VyK8wknsFGcHpIY1662500174.jpeg" page="https://flugspecialisten.se/sv/products/bloody-mary-rod" license="All rights reserved; reference only" flip=#true note="Side view in the vise"
+    "https://swittersb.com/wp-content/uploads/2009/02/img_9738a.jpg" page="https://swittersb.com/2009/02/10/booldy-mary-nymph-dropper-pattern/" license="All rights reserved; reference only" flip=#true note="Side view, the US fly"
+}
+
+// Assumption: a standard wet-fly hook, as on the shop flies; Yellow Dog lists the 1X-long TMC 3761.
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    // Read from the photos: a little under half the gape.
+    bead brass-bead mm=2.8
+    tail goose-biot color=brown count=2 label="Brown goose biots"
+    rib peacock-herl strands=1 label="One peacock herl"
+    // Assumption: a stranded floss, about as thick as 3/0 thread, for the full body in the photos.
+    body silk-floss color=red size="3/0" label="Red floss"
+    thorax peacock-herl strands=2
+    hackle partridge-hackle fibre=1.4 sweep=45 label="Brown (Hungarian) partridge"
+}
+
+steps {
+    slide-bead bead
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Read from the photos: 1.3 to 1.8 gapes, forked about 30°.
+    tie-in tail length=1.5 spread=30 note="One biot each side, curving out, so they fork."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.68
+    wind body to=0.68 turns=16 note="A smooth, fairly full red body."
+    tie-off body
+    wind rib to=0.68 turns=4 note="Open turns over the floss; a coat of cement under it makes it last."
+    tie-off rib
+    tie-in thorax
+    wrap-thread to=0.84
+    wind thorax to=0.84 turns=4 note="A short thorax."
+    tie-off thorax
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.9 turns=2 note="A couple of turns, as a soft collar."
+    tie-off hackle
+    whip-finish note="Behind the bead."
+}

@@ -1,0 +1,51 @@
+id irresistible
+status draft
+
+// en description: A moose hair tail, a body of grey deer hair spun and clipped to a cone, upright grizzly hackle-tip wings and a brown and grizzly hackle.
+description "En stjärt av älghår, en kropp av grått hjorthår spunnet och klippt till en kon, upprätta vingar av grizzlyhackelspetsar och ett brunt och grizzly hackel."
+
+// en history: Joe Messinger Sr. of Morgantown, West Virginia, tied it in the 1930s as his Deer Hair Drake, after an egg-laden female drake; the story goes that his friend Ken Lockwood, the outdoor writer, said it looked irresistible. Messinger's own was two-tone, blue-grey deer hair over white with a claret hackle, and according to the Southern Fly Fishing Hall of Fame its bunches were knotted on rather than spun. The Adams Irresistible tied today, with the Adams's wings and hackle, is credited to Messinger by Trident; Fly Fishing the Sierra points instead to Harry Darbee's similar fly of 1939, which became the Rat Faced McDougall.
+history """
+    Joe Messinger Sr. i Morgantown i West Virginia band den på 1930-talet som sin Deer Hair
+    Drake, efter en dagsländehona med ägg; enligt historien sa hans vän Ken Lockwood,
+    utomhusskribenten, att den såg oemotståndlig ut. Messingers egen var tvåfärgad, blågrått
+    hjorthår över vitt med ett vinrött hackel, och enligt Southern Fly Fishing Hall of Fame
+    knöts dess buntar fast i stället för att spinnas. Adams Irresistible som binds i dag, med
+    Adams vingar och hackel, tillskrivs Messinger av Trident; Fly Fishing the Sierra pekar i
+    stället på Harry Darbees liknande fluga från 1939, som blev Rat Faced McDougall.
+    """
+
+// en fishing: A high floater for fast, broken water: riffles, runs and the heads of pools. The packed deer hair keeps it up where a feather-bodied dry would drown, and it suggests many insects while staying easy to see. Fish it on a dead drift.
+fishing """
+    En högflytare för strömt, brutet vatten: forsnackar, strömsträckor och höljornas inlopp. Det
+    packade hjorthåret håller den uppe där en torrfluga med fjäderkropp skulle drunkna, och den
+    liknar många insekter och är lätt att se. Fiska den fritt drivande.
+    """
+
+labels {
+    // en tail: Moose body hair
+    tail "Kroppshår från älg"
+    // en body: Natural grey deer body hair
+    body "Naturgrått hjorthår"
+    // en wings: Grizzly hen hackle tips
+    wings "Grizzlyspetsar av hönshackel"
+}
+
+notes {
+    // en step 1 (attach-thread): Two eye-lengths behind the eye.
+    step 1 "Två ögonlängder bakom öglan."
+    // en step 3 (tie-in tail): Six to eight moose hairs, stacked; soft turns first so they don't flare.
+    step 3 "Sex till åtta älghår, jämnade; mjuka varv först så att de inte reser sig."
+    // en step 5 (spin body): Three or four pencil-thick bunches, underfur combed out, each pushed back hard.
+    step 5 "Tre eller fyra blyertstjocka buntar, underullen utkammad, var och en hårt bakåtpressad."
+    // en step 6 (trim body): Square cuts top, bottom and sides, then angled back to the tail; square off the front as a seat for the wings. Keep the tail clear.
+    step 6 "Raka snitt upptill, undertill och på sidorna, sedan snett bakåt mot stjärten; klipp framänden rak som säte för vingarna. Håll stjärten undan."
+    // en step 8 (tie-in wings): Concave sides out, stood up and divided to about 45°.
+    step 8 "De konkava sidorna utåt, resta och delade till ungefär 45°."
+    // en step 10 (tie-in hackle-brown): At the front of the body.
+    step 10 "Vid kroppens framände."
+    // en step 13 (wind hackle-brown): Three turns behind the wings, two or three in front.
+    step 13 "Tre varv bakom vingarna, två eller tre framför."
+    // en step 15 (wind hackle-grizzly): Through the brown, the same way.
+    step 15 "Genom det bruna, på samma sätt."
+}

@@ -1,0 +1,52 @@
+id irresistible
+status draft
+
+// en description: A moose hair tail, a body of grey deer hair spun and clipped to a cone, upright grizzly hackle-tip wings and a brown and grizzly hackle.
+description "Ein Schwanz aus Elchkörperhaar, ein Körper aus grauem Rehhaar, gesponnen und zu einem Kegel geschnitten, aufrechte Flügel aus Grizzly-Hechelspitzen und eine braune und eine Grizzlyhechel."
+
+// en history: Joe Messinger Sr. of Morgantown, West Virginia, tied it in the 1930s as his Deer Hair Drake, after an egg-laden female drake; the story goes that his friend Ken Lockwood, the outdoor writer, said it looked irresistible. Messinger's own was two-tone, blue-grey deer hair over white with a claret hackle, and according to the Southern Fly Fishing Hall of Fame its bunches were knotted on rather than spun. The Adams Irresistible tied today, with the Adams's wings and hackle, is credited to Messinger by Trident; Fly Fishing the Sierra points instead to Harry Darbee's similar fly of 1939, which became the Rat Faced McDougall.
+history """
+    Joe Messinger Sr. aus Morgantown, West Virginia, band sie in den 1930er Jahren als seine
+    Deer Hair Drake, nach einem eierlegenden Eintagsfliegenweibchen; der Geschichte nach sagte
+    sein Freund Ken Lockwood, der Outdoor-Autor, sie sehe unwiderstehlich aus. Messingers eigene
+    war zweifarbig, blaugraues Rehhaar über weißem, mit einer weinroten Hechel, und nach der
+    Southern Fly Fishing Hall of Fame wurden ihre Büschel angeknotet statt gesponnen. Die heute
+    gebundene Adams Irresistible, mit Flügeln und Hechel der Adams, schreibt Trident Messinger
+    zu; Fly Fishing the Sierra verweist stattdessen auf Harry Darbees ähnliche Fliege von 1939,
+    aus der die Rat Faced McDougall wurde.
+    """
+
+// en fishing: A high floater for fast, broken water: riffles, runs and the heads of pools. The packed deer hair keeps it up where a feather-bodied dry would drown, and it suggests many insects while staying easy to see. Fish it on a dead drift.
+fishing """
+    Ein Hochschwimmer für schnelles, gebrochenes Wasser: Rauschen, Läufe und Gumpenköpfe. Das
+    dicht gepackte Rehhaar hält sie oben, wo eine Trockenfliege mit Federkörper ertrinken würde,
+    und sie erinnert an viele Insekten und bleibt gut sichtbar. Fische sie frei treibend.
+    """
+
+labels {
+    // en tail: Moose body hair
+    tail "Elchkörperhaar"
+    // en body: Natural grey deer body hair
+    body "Naturgraues Rehhaar"
+    // en wings: Grizzly hen hackle tips
+    wings "Grizzly-Hennenhechelspitzen"
+}
+
+notes {
+    // en step 1 (attach-thread): Two eye-lengths behind the eye.
+    step 1 "Zwei Öhrlängen hinter dem Öhr."
+    // en step 3 (tie-in tail): Six to eight moose hairs, stacked; soft turns first so they don't flare.
+    step 3 "Sechs bis acht Elchkörperhaare, ausgeglichen; erst weiche Windungen, damit sie nicht abspreizen."
+    // en step 5 (spin body): Three or four pencil-thick bunches, underfur combed out, each pushed back hard.
+    step 5 "Drei oder vier bleistiftdicke Büschel, Unterwolle ausgekämmt, jedes fest nach hinten gedrückt."
+    // en step 6 (trim body): Square cuts top, bottom and sides, then angled back to the tail; square off the front as a seat for the wings. Keep the tail clear.
+    step 6 "Gerade Schnitte oben, unten und seitlich, dann schräg nach hinten zum Schwanz; die Vorderseite gerade abschneiden als Sitz für die Flügel. Den Schwanz freihalten."
+    // en step 8 (tie-in wings): Concave sides out, stood up and divided to about 45°.
+    step 8 "Die hohlen Seiten nach außen, aufgerichtet und auf etwa 45° geteilt."
+    // en step 10 (tie-in hackle-brown): At the front of the body.
+    step 10 "Am vorderen Ende des Körpers."
+    // en step 13 (wind hackle-brown): Three turns behind the wings, two or three in front.
+    step 13 "Drei Windungen hinter den Flügeln, zwei oder drei davor."
+    // en step 15 (wind hackle-grizzly): Through the brown, the same way.
+    step 15 "Durch die braune, genauso."
+}

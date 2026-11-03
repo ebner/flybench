@@ -376,8 +376,8 @@ function MoreFields({ part, mat, onChange, onMaterial }: { part: Part; mat: numb
       {part.trim?.shape !== undefined && (
         <label className="wb-field">
           <span>{f.shape}</span>
-          <select value={part.trim.shape} onChange={(e) => onChange({ trim: { ...part.trim, shape: e.target.value as "round" | "wedge" | "cigar" } })}>
-            {(["round", "wedge", "cigar"] as const).map((s) => (
+          <select value={part.trim.shape} onChange={(e) => onChange({ trim: { ...part.trim, shape: e.target.value as "round" | "wedge" | "cigar" | "cone" } })}>
+            {(["round", "wedge", "cigar", "cone"] as const).map((s) => (
               <option key={s} value={s}>
                 {f.shapes[s]}
               </option>

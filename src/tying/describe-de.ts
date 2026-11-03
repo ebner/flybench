@@ -192,6 +192,7 @@ function writerFor(recipe: Recipe) {
       case "wind":
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
+        if (said.wing) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab; richte dann die Spitzen vor der Abbindung als etwa ${length(said.wing)} hohen Flügel auf und teile ihn.`;
         if (said.bubble) return `Klappe ${mat(said.m, "acc")} als lockere Blase über ${the("body", "acc")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
       case "lay-back":
@@ -217,6 +218,7 @@ function writerFor(recipe: Recipe) {
             : `Schneide ${fibres} ${mat(said.m, "gen")} oben und unten weg, so dass zwei flache ${many("row", "nom")} seitlich abstehen.`;
       }
       case "trim-spun":
+        if (said.cone) return `Schneide ${mat(said.m, "acc")} zu einem Kegel, am Schwanz schlank und vorn auf jeder Seite etwa ${length(said.leave)} dick, dort gerade abgeschnitten.`;
         if (said.cigar) return `Schneide ${mat(said.m, "acc")} zu einer Zigarre, auf jeder Seite etwa ${length(said.leave)} dick, in der Mitte am dicksten und an beiden Enden gerundet.`;
         return `Schneide ${mat(said.m, "acc")} in Form, so dass auf jeder Seite ${a("head", "nom")} bleibt, ${pronoun(word("head")).rel} etwa ${length(said.leave)} dick ist.`;
       case "trim-tip":
