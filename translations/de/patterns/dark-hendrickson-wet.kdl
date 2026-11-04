@@ -1,0 +1,48 @@
+id dark-hendrickson-wet
+status draft
+
+// en description: A dark dun fibre tail, a thin muskrat body, a dark dun hen hackle and a wing of lemon wood duck.
+description "Ein Schwanz aus dunkel blaugrauen Fibern, ein dünner Körper aus Bisam, eine dunkel blaugraue Hennenhechel und ein Flügel aus zitronengelber Brautente."
+
+// en history: The same materials as the dry, tied as a wet fly: the hackle soft, the wood duck wing laid back over the body rather than standing up. Steve Culton calls it a legacy American pattern that has been fooling trout for over a century. This is his dressing: a dark blue dun tail, a thin muskrat body, a dark blue dun hen hackle and a wing of lemon wood duck about as long as the bend. Tim Flagler ties it with medium dun hen fibres for the tail and the collar.
+history """
+    Dieselben Materialien wie die Trockenfliege, als Nassfliege gebunden: die Hechel weich, der
+    Flügel aus Brautente nach hinten über den Körper gelegt statt aufrecht. Steve Culton nennt
+    sie ein amerikanisches Erbmuster, das seit über hundert Jahren Forellen täuscht. Dies ist
+    seine Bindeweise: ein dunkel blaugrauer Schwanz, ein dünner Bisamkörper, eine dunkel
+    blaugraue Hennenhechel und ein Flügel aus zitronengelber Brautente, etwa so lang wie der
+    Bogen. Tim Flagler bindet sie mit mittel blaugrauen Hennenfibern für Schwanz und Kragen.
+    """
+
+// en fishing: A wet fly for the Hendrickson hatch; Phil Monahan finds it good all spring, wherever dark mayflies are about, swung, dead-drifted or twitched. Culton fishes it before the hatch shows, when the trout are stirring a foot below the surface: dead drift, on the swing or dangled, a size matching the naturals.
+fishing """
+    Eine Nassfliege für den Hendrickson-Schlupf; Phil Monahan findet sie das ganze Frühjahr gut,
+    wo dunkle Eintagsfliegen unterwegs sind, geschwungen, frei treibend oder gezupft. Culton
+    fischt sie, bevor sich der Schlupf zeigt, wenn die Forellen einen Fuß unter der Oberfläche
+    aktiv werden: frei treibend, im Schwung oder in der Strömung hängend, in einer Größe passend
+    zu den Insekten.
+    """
+
+labels {
+    // en tail: Dark blue dun hackle fibres
+    tail "Dunkel blaugraue Hechelfibern"
+    // en body: Muskrat fur
+    body "Bisamfell"
+    // en hackle: Dark blue dun hen hackle
+    hackle "Dunkel blaugraue Hennenhechel"
+    // en wing: Lemon wood duck flank fibres
+    wing "Fibern der zitronengelben Brautenten-Flankenfeder"
+}
+
+notes {
+    // en step 3 (tie-in tail): A sparse bunch, tips level.
+    step 3 "Ein spärliches Büschel, Spitzen gleich lang."
+    // en step 4 (dub body): Thin and lightly tapered.
+    step 4 "Dünn und leicht verjüngt."
+    // en step 5 (tie-in hackle): By its tip, shiny side forward.
+    step 5 "An der Spitze, glänzende Seite nach vorn."
+    // en step 7 (wind hackle): Two or three turns; stroke the fibres back and down.
+    step 7 "Zwei oder drei Windungen; streich die Fibern nach hinten und unten."
+    // en step 9 (tie-in wing): A bunch of fibres, tips even, or a strip of the feather folded, on top.
+    step 9 "Ein Büschel Fibern, Spitzen gleich lang, oder ein gefalteter Streifen der Feder, obenauf."
+}

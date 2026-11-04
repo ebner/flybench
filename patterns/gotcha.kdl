@@ -1,0 +1,82 @@
+// Gotcha: Jim McVay's bonefish fly from Andros, a frayed pearl tail and braid body, a tan craft fur wing and a pink nose; it rides hook point up.
+
+id gotcha
+name "Gotcha"
+aliases "McVay Gotcha"
+type saltwater
+imitates crustacean
+naturals prawn
+difficulty beginner
+rides point-up
+species bonefish
+season january february march april may june july august september october november december
+origin originator="Jim McVay" region="Andros Island, Bahamas"
+description "Bead-chain eyes near the eye, a frayed pearl Mylar tail, a pearl braid body, a golden tan craft fur wing with pearl flash on the hook-point side, and a pink thread nose."
+history """
+    Jim McVay tied the first ones on the way to the Andros Island Bonefish Club: he cut fibres
+    from the carpet of a taxi and tied a small bonefish fly with them, and each time a bonefish
+    took it the guide said "Gotcha". Scott Heywood, who tells the story, names the guide Rupert
+    Leadon and says Jim was travelling with his father Ted; Casey Smartt and Deneki tell it the
+    same way. They disagree on the carpet's colour, tan in Smartt's telling and yellow in
+    Heywood's. Heywood calls it really a variation on the Crazy Charlie, one with a pink nose and
+    a subtle pink undertone, and, with the Crazy Charlie, the most recognised bonefish fly there
+    is. This is Heywood's "Original Gotcha". David Klausmeyer counts it among his 101 favourite
+    saltwater flies.
+    """
+fishing """
+    Cast ahead of cruising bonefish, let it sink and strip it short, so it flees like a shrimp.
+    Choose the eyes for the depth: Heywood carries some with lead eyes for deeper water, most with
+    bead chain, and some with none for tailing fish in the shallows. It rides point up, so it
+    seldom catches the bottom; Smartt fishes it for redfish too. Tan with a pink thread is by far
+    the most popular colour, Smartt finds.
+    """
+sources {
+    "Angling Destinations: My top 5 bonefish flies, #5 the Gotcha (Scott Heywood)" url="http://scottsheywood.blogspot.com/2013/08/my-top-5-bonefish-flies-5-gotcha.html"
+    "Texas Saltwater Fishing: Fly of the Month, McVay Gotcha (Casey Smartt)" url="https://www.texassaltwaterfishingmagazine.com/fishing/by-type/fly-fishing/fly-month-mcvay-gotcha"
+    "Deneki Outdoors: Fly Tying, Gotcha (Brian Davenport)" url="https://deneki.com/2025/09/fly-tying-gotcha-2/"
+    "Wikipedia: Bonefish fly patterns" url="https://en.wikipedia.org/wiki/Bonefish_fly_patterns"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-Gu3K9282oEzpAqU6mPqD9sZB30EVXuyTocT2xCDNhIE7oLyye9kCuu7TAqkFeqFDyswndXllgjE1_r4hVzkKboawk31_i9iTSTu4PtqMO_gpQktoPLLa93pJdJtf97OSQKiPdxW5JkiR/s1600/94.jpg" page="http://scottsheywood.blogspot.com/2013/08/my-top-5-bonefish-flies-5-gotcha.html" author="Scott Heywood" license="All rights reserved; reference only" note="The Original Gotcha, point up, eye on the left" flip=#true
+    "https://deneki.com/wp-content/uploads/2024/12/Finished-Fly.jpg" page="https://deneki.com/2025/09/fly-tying-gotcha-2/" author="Brian Davenport" license="All rights reserved; reference only" note="Point up, eye on the left, a long wing" flip=#true
+    "https://s3.amazonaws.com/busites_www/tsfmag/meta/page/0607WEB_smarttfly_1486676888.jpg" page="https://www.texassaltwaterfishingmagazine.com/fishing/by-type/fly-fishing/fly-month-mcvay-gotcha" author="Casey Smartt" license="All rights reserved; reference only" note="Six steps, in orange; the last shows the finished fly"
+    "https://www.flugor.se/bild_arkiv/big_2374.jpg" page="https://www.flugor.se/flugor/tarpon-bonefish/gotcha-2374" license="All rights reserved; reference only" note="A pink Gotcha, side view in the vise"
+}
+
+// Shown as tied, point down: the wing is underneath here. It swims the other way up.
+// Heywood: Mustad 34007, TMC 811S or Gamakatsu SL11-3H, #2 to 8.
+hook saltwater-straight size=6
+// Heywood: "Gotcha pink" flat waxed nylon; Deneki ties it with pink 6/0.
+thread pink size="3/0"
+
+materials {
+    // Assumption: medium bead chain, about 4 mm (5/32").
+    eyes bead-chain-eyes mm=4
+    tail mylar-tubing label="Medium pearl Mylar tubing"
+    body flat-tinsel color=pearl label="Pearl Diamond Braid"
+    // Assumption: golden tan, as in Heywood's photo.
+    wing craft-fur color="#d2b282" count=60 label="Golden tan craft fur"
+    flash krystal-flash count=6
+}
+
+// Deneki's steps: the eyes first, then the tail and the body; Smartt ties the eyes on after the
+// body braid is tied in. Both orders are used.
+steps {
+    // Deneki: about two hook-eye widths behind the eye.
+    attach-thread at=0.85
+    tie-in eyes note="On top, with figure-of-eight turns."
+    wrap-thread to=0.0
+    // Deneki: about a shank long.
+    tie-in tail length=2.2 angle=2 spread=20 note="Or a few strands of Krystal Flash, for a sparser fly (Heywood)."
+    tie-in body
+    wrap-thread to=0.8
+    wind body to=0.8 turns=14 note="Overlapping turns; figure-of-eight it round the eyes."
+    tie-off body
+    wrap-thread to=0.92 note="In front of the eyes; turn the hook over."
+    // Deneki: the wing as long as the tail; the photos show it reaching the tail's tips or past.
+    tie-in wing length=4.4 angle=6 spread=25 side=under note="A clump of craft fur, its underfur combed out."
+    // Heywood: pearl Krystal Flash over the wing.
+    tie-in flash length=4.2 angle=7 spread=20 side=under note="Three strands folded over: six ends, over the wing."
+    whip-finish note="A tapered pink thread head, the nose; coat it."
+}

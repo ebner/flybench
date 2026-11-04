@@ -1,0 +1,52 @@
+id red-spinner
+status draft
+
+// en description: A tail of brown cock fibres, a slim red thread body ribbed with small silver tinsel, a brown hen hackle and a starling quill wing.
+description "En stjärt av bruna tuppfibrer, en smal kropp av röd bindtråd ribbad med smal silvertinsel, ett brunt hönshackel och en vinge av starvingpenna."
+
+// en history: An old British fly for the spinners, the egg-laying females, of several upwinged flies; no one is named as its originator. The Fly Dressers' Guild's dressings database gives seven Red Spinners from the books, the oldest Alfred Ronalds's of 1836: a brown silk body ribbed with gold twist, red cock hackle and whisks and a wing of dyed grey mallard. Edmonds and Lee, in Brook and River Trouting (1916), give it wet and dry, the wet with red silk dubbed with maroon wool, four turns of gold wire and a wing of grizzled blue cock fibres. This is Davie McPhail's winged wet: a body of the red tying thread, a silver rib and a starling wing. The old dressings rib it with gold, and some tyers give it a pale cream tail rather than a brown one.
+history """
+    En gammal brittisk fluga för spinnerna, de äggläggande honorna, hos flera dagsländor; ingen
+    nämns som dess upphovsman. Fly Dressers' Guilds databas över bindningar ger sju Red Spinner
+    ur böckerna, den äldsta Alfred Ronalds från 1836: en kropp av brunt silke ribbad med
+    guldtråd, rött tupphackel och stjärtspröt och en vinge av färgad grå gräsand. Edmonds och
+    Lee ger den i Brook and River Trouting (1916) både våt och torr, den våta med rött silke
+    dubbat med vinröd ull, fyra varv guldtråd och en vinge av fibrer från ett spräckligt
+    blågrått tupphackel. Det här är Davie McPhails vingade våtfluga: en kropp av den röda
+    bindtråden, en silverribb och en vinge av stare. De gamla bindningarna ribbar den med guld,
+    och en del binder den med en ljust gräddvit stjärt i stället för en brun.
+    """
+
+// en fishing: A wet fly for the red spinners on rivers. Edmonds and Lee fish their Red Spinners, wet or dry, from July to September, and find them often taken when all else fails, even in the quiet flats where the trout pick small flies off the surface all day.
+fishing """
+    En våtfluga för de röda spinnerna i strömmande vatten. Edmonds och Lee fiskar sina Red
+    Spinner, våta eller torra, från juli till september, och finner att de ofta tas när inget
+    annat fungerar, även på de lugna partierna där öringen plockar små flugor från ytan hela
+    dagen.
+    """
+
+labels {
+    // en tail: Natural brown cock hackle fibres
+    tail "Naturbruna tuppfibrer"
+    // en rib: Small flat silver tinsel
+    rib "Smal platt silvertinsel"
+    // en hackle: Natural brown hen hackle
+    hackle "Naturbrunt hönshackel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of fibres, tips level.
+    step 3 "En liten knippe fibrer, topparna jämna."
+    // en step 5 (wrap-thread): Close, flat turns of the red thread make a slim, smooth body.
+    step 5 "Täta, platta varv av den röda tråden ger en smal, slät kropp."
+    // en step 6 (wind rib): Open, evenly spaced turns.
+    step 6 "Glesa, jämnt fördelade varv."
+    // en step 8 (tie-in hackle): By its tip, shiny side forward.
+    step 8 "I spetsen, blanka sidan framåt."
+    // en step 10 (wind hackle): Two turns; stroke the fibres back and down.
+    step 10 "Två varv; stryk fibrerna bakåt och nedåt."
+    // en step 12 (tie-in wing): Matched slips from a left and a right starling quill, set low over the body.
+    step 12 "En vänster- och en högersektion av starvingpenna som matchar varandra, lågt över kroppen."
+    // en step 13 (whip-finish): A small red head, varnished.
+    step 13 "Ett litet rött huvud, lackat."
+}

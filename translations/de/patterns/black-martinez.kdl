@@ -1,0 +1,54 @@
+id black-martinez
+status draft
+
+// en description: A guinea fowl tail, a black dubbed abdomen ribbed with copper wire, a black chenille thorax under a lime Antron wing case and a soft grizzly hen hackle.
+description "Ein Schwanz vom Perlhuhn, ein schwarzer gedubbter Hinterleib mit Kupferdraht gerippt, ein schwarzer Chenille-Thorax unter einer limettengrünen Flügelscheide aus Antron und eine weiche Grizzly-Hennenhechel."
+
+// en history: Don Martinez, a professional tyer who kept a summer fly shop in West Yellowstone, Montana, from 1932 to 1943, tied it in the 1930s; Barry Ord Clarke dates it to the early 1930s and notes that it looks like a modern nymph. This is his dressing: a guinea fowl tail, a black dubbed abdomen with a copper rib, a lime Antron wing case over a black chenille thorax and a grizzly hen hackle.
+history """
+    Don Martinez, ein Berufsbinder, der von 1932 bis 1943 einen Sommer-Fliegenladen in West
+    Yellowstone in Montana führte, band sie in den 1930er Jahren; Barry Ord Clarke datiert sie
+    auf die frühen 1930er Jahre und merkt an, dass sie wie eine moderne Nymphe aussieht. Dies
+    ist seine Bindeweise: ein Schwanz vom Perlhuhn, ein schwarzer gedubbter Hinterleib mit
+    Kupferrippung, eine limettengrüne Flügelscheide aus Antron über einem schwarzen Chenille-
+    Thorax und eine Grizzly-Hennenhechel.
+    """
+
+// en fishing: A generic nymph, Ord Clarke calls it. Viking Lars finds the large sizes good stonefly nymph imitations and the small ones like mayfly nymphs, and sees it as a lake fly: at Hökensås in Sweden it took most of his trout over three days, cast to rising fish or fished blind over shallow and deep water. Keep it sparse, he advises.
+fishing """
+    Eine Allround-Nymphe, nennt Ord Clarke sie. Viking Lars findet die großen Größen gute
+    Steinfliegennymphen-Imitationen und die kleinen den Eintagsfliegennymphen ähnlich, und sieht
+    sie als Seefliege: in Hökensås in Schweden fing sie über drei Tage die meisten seiner
+    Forellen, zu steigenden Fischen geworfen oder blind über flachem und tiefem Wasser gefischt.
+    Binde sie spärlich, rät er.
+    """
+
+labels {
+    // en tail: Guinea fowl fibres
+    tail "Perlhuhnfibern"
+    // en abdomen: Black nymph dubbing
+    abdomen "Schwarzes Nymphendubbing"
+    // en case: Lime Antron yarn
+    case "Limettengrünes Antron-Garn"
+    // en thorax: Black rayon chenille
+    thorax "Schwarze Rayon-Chenille"
+    // en hackle: Grizzly hen hackle
+    hackle "Grizzly-Hennenhechel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of fibres, tips level.
+    step 3 "Ein kleines Büschel Fibern, Spitzen gleich lang."
+    // en step 5 (dub abdomen): Slim at the tail, thickening forward.
+    step 5 "Schlank am Schwanz, nach vorn dicker werdend."
+    // en step 6 (wind rib): Four or five open turns.
+    step 6 "Vier oder fünf offene Windungen."
+    // en step 8 (tie-in case): On top, lying back over the abdomen.
+    step 8 "Obenauf, nach hinten über den Hinterleib gelegt."
+    // en step 11 (wind thorax): A fat thorax.
+    step 11 "Ein kräftiger Thorax."
+    // en step 13 (pull-over case): Snug over the top of the thorax.
+    step 13 "Straff über die Oberseite des Thorax."
+    // en step 16 (wind hackle): Two turns; stroke the fibres back.
+    step 16 "Zwei Windungen; streich die Fibern nach hinten."
+}

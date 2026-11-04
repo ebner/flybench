@@ -625,7 +625,8 @@ materials {
 
   const cases: [string, string, RegExp][] = [
     ["only tubing is slid on", steps.replace("sleeve body", "sleeve wing").replace("tie-in wing length=3.5", "").replace("tie-off body", "tie-off wing").replace("pull-over wing to=0.9\n    trim wing", ""), /only tubing is slid over the body/],
-    ["tubing is not tied in", steps.replace("sleeve body to=0.9 fray=1", "tie-in body"), /tubing is slid over the body with "sleeve"/],
+    ["tubing is not tied in without a length", steps.replace("sleeve body to=0.9 fray=1", "tie-in body"), /tubing is slid over the body with "sleeve"/],
+    ["tubing tied in as a tail is not wound", steps.replace("sleeve body to=0.9 fray=1", "tie-in body length=1\n    wind body to=0.5 turns=4").replace("tie-off body\n", ""), /"body" has already been wound/],
     ["a sleeve reaches somewhere", steps.replace("sleeve body to=0.9", "sleeve body to=0.05"), /must reach from the thread/],
     ["its other end is tied down where the thread is", steps.replace("attach-thread at=0.9", "attach-thread at=0.6").replace("pull-over wing to=0.9", "pull-over wing to=0.6"), /the thread is at 0.6; move it to 0.9/],
     ["its other end is tied down", steps.replace("tie-off body\n", ""), /"body" is tied down at one end only/],

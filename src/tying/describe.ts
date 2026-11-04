@@ -276,7 +276,8 @@ export type Said =
   | { kind: "tie-in-wing-under"; what: What; length: Length }
   | { kind: "tie-in-beard"; what: What; length: Length }
   | { kind: "tie-in-reach"; what: What; width?: Length; reach: Reach; length: Length; angle?: number; flare: boolean }
-  | { kind: "tie-in-behind"; what: What; width?: Length; length: Length; angle?: number; flare: boolean }
+  /** `fray`: a piece of tubing, its core pulled out and picked apart into loose strands (a Gotcha's tail). */
+  | { kind: "tie-in-behind"; what: What; width?: Length; length: Length; angle?: number; flare: boolean; fray?: boolean }
   /** `cut`: a strip cut first to this width, `taper`ed to a point at the end tied in (a foam back), tied in on top or `under` the shank. */
   | { kind: "tie-in"; what: What; cut?: { width: Length; taper: boolean; under: boolean } }
   | { kind: "wind-around"; m: string; around: string; turns: number }
@@ -374,7 +375,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
           ...(step.angle ? { angle: step.angle } : {}),
           flare: (step.spread ?? 0) >= 60,
         };
-        return wing && r ? { kind: "tie-in-reach", reach: r, ...common } : { kind: "tie-in-behind", ...common };
+        return wing && r ? { kind: "tie-in-reach", reach: r, ...common } : { kind: "tie-in-behind", ...common, ...(archetype === "tubing" && { fray: true }) };
       }
       return { kind: "tie-in", what, ...(step.width !== undefined && { cut: { width: len(step.width), taper: Boolean(step.taper), under } }) };
     }
@@ -576,7 +577,7 @@ function englishText(said: Said, recipe: Recipe): string {
     case "tie-in-reach":
       return `${pick(said.width)}Tie in ${what(said.what)} so the tips reach ${REACH[said.reach]} (${len(said.length)} from the tie-in point)${angle(said.angle)}.${flare(said.flare)}`;
     case "tie-in-behind":
-      return `${pick(said.width)}Tie in ${what(said.what)}, leaving ${len(said.length)} sticking out behind${angle(said.angle)}.${flare(said.flare)}`;
+      return `${pick(said.width)}Tie in ${what(said.what)}, leaving ${len(said.length)} sticking out behind${angle(said.angle)}.${flare(said.flare)}${said.fray ? " Pull out its core and pick it apart into loose strands." : ""}`;
     case "tie-in":
       if (said.cut) {
         const shape = said.cut.taper ? `, tapered to a point at one end` : "";

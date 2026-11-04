@@ -1,0 +1,63 @@
+// Blue Dun, the British wet fly, in Roger Fogg's dressing: mole fur on primrose silk, a blue dun hen hackle and a starling wing.
+
+id blue-dun-wet
+name "Blue Dun"
+variant-of blue-dun
+variant "British wet"
+type wet
+imitates mayfly
+naturals mayfly-emerger mayfly-dun
+difficulty intermediate
+species trout grayling
+// Younger: April and May.
+season april may
+description "A sparse mole fur body on waxed primrose silk, a medium blue dun hen hackle and a starling quill wing."
+history """
+    The British Blue Dun, as the books give it from the nineteenth century on: a fur body dubbed
+    on yellow or primrose silk, a starling or snipe wing and a blue dun hackle. Halford dubs mole
+    or water-rat on yellow silk under a snipe or light starling wing, with a pale blue dun hackle
+    and tail; Skues gives water-rat on primrose or yellow silk, a snipe wing and a medium blue dun
+    hen hackle; Ogden a very upright dark starling wing. This is Roger Fogg's: mole fur, or mole
+    mixed with blue-grey seal's fur, dubbed sparsely on waxed primrose silk, a starling wing and a
+    medium blue hen hackle. Skues also dressed John Younger's Tweed Blue Dun as a hackled fly with
+    guinea fowl whisks and a dark blue hen hackle of not more than two turns.
+    """
+fishing """
+    A wet fly for the olives of spring on rivers. Roger Woolley calls it an imitation of the large
+    early Olive Dun, and John Younger's Tweed list gives it for April and May.
+    """
+sources {
+    "Fly Dressers' Guild: Dressings Database" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+    "Soft Hackles, Tight Lines: Blue Dun" url="https://softhacklepatternbook.blogspot.com/2016/06/blue-dun.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.rudiheger.eu/thumbnail/df/03/9f/1693945143/54-0011-08_1_blue-dun.jpg_1920x1920.jpg" page="https://www.rudiheger.eu/en/blue-dun.html" license="All rights reserved; reference only" note="Side view in the vise; tied with a tail, which Fogg's dressing has not"
+}
+
+// Assumption: a #14 wet-fly hook; the dressings give no size.
+hook wet-standard size=14
+// Fogg: waxed primrose silk; waxing darkens it to a dull yellow.
+thread "#c2b46a" size="8/0"
+
+materials {
+    body dubbing color="#4b4c52" shaggy=0.3 label="Mole fur"
+    hackle hen-hackle color=blue-dun fibre=1.3 sweep=45 label="Medium blue dun hen hackle"
+    // Assumption: a medium starling wing quill.
+    wing starling-quill color="#77767a"
+}
+
+// The usual winged-wet order, as on Greenwell's Glory: body, hackle, wing.
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Fogg: sparsely dubbed, so the silk shows through.
+    dub body to=0.84 turns=19 note="A little fur, thinly on the waxed silk, so its colour shows through."
+    tie-in hackle note="By its tip, shiny side forward."
+    wrap-thread to=0.88
+    wind hackle to=0.88 turns=2 note="Two turns; stroke the fibres back and down."
+    tie-off hackle
+    // Read from the photo: the tips well past the bend; the hackle to the hook point.
+    tie-in wing length=2.7 angle=16 spread=10 width=0.6 note="Matched slips from a left and a right starling quill, set low over the body."
+    whip-finish
+}

@@ -1,0 +1,65 @@
+// Dark Hendrickson, the American winged wet: a muskrat body, a dun hen collar and a wood duck wing laid back over the body.
+
+id dark-hendrickson-wet
+name "Dark Hendrickson"
+variant-of dark-hendrickson
+variant "Winged wet"
+type wet
+imitates mayfly
+naturals mayfly-emerger mayfly-dun
+difficulty intermediate
+species trout
+// Rocky River TU: the Hendrickson hatch; Monahan: spring.
+season april may
+description "A dark dun fibre tail, a thin muskrat body, a dark dun hen hackle and a wing of lemon wood duck."
+history """
+    The same materials as the dry, tied as a wet fly: the hackle soft, the wood duck wing laid
+    back over the body rather than standing up. Steve Culton calls it a legacy American pattern
+    that has been fooling trout for over a century. This is his dressing: a dark blue dun tail, a
+    thin muskrat body, a dark blue dun hen hackle and a wing of lemon wood duck about as long as
+    the bend. Tim Flagler ties it with medium dun hen fibres for the tail and the collar.
+    """
+fishing """
+    A wet fly for the Hendrickson hatch; Phil Monahan finds it good all spring, wherever dark
+    mayflies are about, swung, dead-drifted or twitched. Culton fishes it before the hatch shows,
+    when the trout are stirring a foot below the surface: dead drift, on the swing or dangled, a
+    size matching the naturals.
+    """
+sources {
+    "Current Seams: The Dark Hendrickson winged wet (Steve Culton)" url="https://currentseams.com/2014/03/05/the-dark-hendrickson-winged-wet/"
+    "GlobalFlyFisher: Dark Hendrickson winged wet (video, Steve Culton)" url="https://globalflyfisher.com/video/dark-hendrickson-winged-wet"
+    "Orvis News: How to tie the Dark Hendrickson wet fly (video, Tim Flagler; Phil Monahan)" url="https://news.orvis.com/fly-fishing/video-how-to-tie-thedark-hendrickson-wet-fly"
+    "Rocky River TU: Hendrickson (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/hendrickson.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://currentseams.com/wp-content/uploads/2014/03/dark-hendrickson.jpg?w=650" page="https://currentseams.com/2014/03/05/the-dark-hendrickson-winged-wet/" author="Steve Culton" license="All rights reserved; reference only" note="Side view in the vise" flip=#true
+}
+
+// Culton: a 2X-strong wet-fly hook, about a #12 for his river's naturals; Flagler a #14.
+hook wet-standard size=12
+thread grey size="8/0"
+
+materials {
+    tail hackle-fibres color="#4a4c52" count=10 label="Dark blue dun hackle fibres"
+    body dubbing color=muskrat shaggy=0.3 label="Muskrat fur"
+    // Read from Culton's fly: long, soft fibres to past the hook point.
+    hackle hen-hackle color="#4a4c52" fibre=1.4 sweep=45 label="Dark blue dun hen hackle"
+    wing wood-duck-flank count=80 label="Lemon wood duck flank fibres"
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Read from Culton's fly: about one and a half gapes.
+    tie-in tail length=1.6 angle=6 spread=12 note="A sparse bunch, tips level."
+    // Culton: thin, leaving plenty of room at the eye for the hackle, the wing and the head.
+    dub body to=0.78 turns=16 note="Thin and lightly tapered."
+    tie-in hackle note="By its tip, shiny side forward."
+    wrap-thread to=0.84
+    wind hackle to=0.84 turns=2 note="Two or three turns; stroke the fibres back and down."
+    tie-off hackle
+    // Culton: about as long as the bend; read from his fly, the tips a little past it, sloping up.
+    tie-in wing length=2.2 angle=22 spread=5 note="A bunch of fibres, tips even, or a strip of the feather folded, on top."
+    whip-finish
+}

@@ -1,0 +1,44 @@
+id blue-dun-wet
+status draft
+
+// en description: A sparse mole fur body on waxed primrose silk, a medium blue dun hen hackle and a starling quill wing.
+description "Ein spärlicher Körper aus Maulwurfsfell auf gewachster primelgelber Seide, eine mittel blaugraue Hennenhechel und ein Flügel aus Starflügelsegmenten."
+
+// en history: The British Blue Dun, as the books give it from the nineteenth century on: a fur body dubbed on yellow or primrose silk, a starling or snipe wing and a blue dun hackle. Halford dubs mole or water-rat on yellow silk under a snipe or light starling wing, with a pale blue dun hackle and tail; Skues gives water-rat on primrose or yellow silk, a snipe wing and a medium blue dun hen hackle; Ogden a very upright dark starling wing. This is Roger Fogg's: mole fur, or mole mixed with blue-grey seal's fur, dubbed sparsely on waxed primrose silk, a starling wing and a medium blue hen hackle. Skues also dressed John Younger's Tweed Blue Dun as a hackled fly with guinea fowl whisks and a dark blue hen hackle of not more than two turns.
+history """
+    Die britische Blue Dun, wie die Bücher sie vom 19. Jahrhundert an geben: ein Fellkörper auf
+    gelber oder primelgelber Seide gedubbt, ein Flügel aus Star oder Bekassine und eine
+    blaugraue Hechel. Halford dubbt Maulwurf oder Schermaus auf gelbe Seide unter einen Flügel
+    aus Bekassine oder hellem Star, mit blaugrauer Hechel und Schwanz; Skues gibt Schermaus auf
+    primelgelber oder gelber Seide, einen Bekassinenflügel und eine mittel blaugraue
+    Hennenhechel; Ogden einen sehr aufrechten dunklen Starflügel. Dies ist die von Roger Fogg:
+    Maulwurfsfell, oder Maulwurf mit blaugrauem Robbenfell gemischt, spärlich auf gewachste
+    primelgelbe Seide gedubbt, ein Starflügel und eine mittel blaue Hennenhechel. Skues band
+    John Youngers Blue Dun vom Tweed auch als Hechelfliege mit Schwanzfibern vom Perlhuhn und
+    einer dunkelblauen Hennenhechel von höchstens zwei Windungen.
+    """
+
+// en fishing: A wet fly for the olives of spring on rivers. Roger Woolley calls it an imitation of the large early Olive Dun, and John Younger's Tweed list gives it for April and May.
+fishing """
+    Eine Nassfliege für die olivfarbenen Eintagsfliegen des Frühjahrs in Fließgewässern. Roger
+    Woolley nennt sie eine Imitation der großen frühen Olive Dun, und John Youngers Liste vom
+    Tweed gibt sie für April und Mai.
+    """
+
+labels {
+    // en body: Mole fur
+    body "Maulwurfsfell"
+    // en hackle: Medium blue dun hen hackle
+    hackle "Mittel blaugraue Hennenhechel"
+}
+
+notes {
+    // en step 3 (dub body): A little fur, thinly on the waxed silk, so its colour shows through.
+    step 3 "Wenig Fell, dünn auf der gewachsten Seide, so dass ihre Farbe durchscheint."
+    // en step 4 (tie-in hackle): By its tip, shiny side forward.
+    step 4 "An der Spitze, glänzende Seite nach vorn."
+    // en step 6 (wind hackle): Two turns; stroke the fibres back and down.
+    step 6 "Zwei Windungen; streich die Fibern nach hinten und unten."
+    // en step 8 (tie-in wing): Matched slips from a left and a right starling quill, set low over the body.
+    step 8 "Passende Segmente von einer linken und einer rechten Starschwinge, flach über dem Körper."
+}

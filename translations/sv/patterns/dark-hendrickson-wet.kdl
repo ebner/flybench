@@ -1,0 +1,47 @@
+id dark-hendrickson-wet
+status draft
+
+// en description: A dark dun fibre tail, a thin muskrat body, a dark dun hen hackle and a wing of lemon wood duck.
+description "En stjärt av mörkt blågrå fibrer, en tunn kropp av bisam, ett mörkt blågrått hönshackel och en vinge av citrongul brudand."
+
+// en history: The same materials as the dry, tied as a wet fly: the hackle soft, the wood duck wing laid back over the body rather than standing up. Steve Culton calls it a legacy American pattern that has been fooling trout for over a century. This is his dressing: a dark blue dun tail, a thin muskrat body, a dark blue dun hen hackle and a wing of lemon wood duck about as long as the bend. Tim Flagler ties it with medium dun hen fibres for the tail and the collar.
+history """
+    Samma material som torrflugan, bundna som en våtfluga: hacklet mjukt, vingen av brudand lagd
+    bakåt över kroppen i stället för upprätt. Steve Culton kallar den ett amerikanskt
+    arvsmönster som har lurat öring i över hundra år. Det här är hans bindning: en mörkt blågrå
+    stjärt, en tunn bisamkropp, ett mörkt blågrått hönshackel och en vinge av citrongul brudand
+    ungefär lika lång som böjen. Tim Flagler binder den med mellanblågrå hönsfibrer till
+    stjärten och kragen.
+    """
+
+// en fishing: A wet fly for the Hendrickson hatch; Phil Monahan finds it good all spring, wherever dark mayflies are about, swung, dead-drifted or twitched. Culton fishes it before the hatch shows, when the trout are stirring a foot below the surface: dead drift, on the swing or dangled, a size matching the naturals.
+fishing """
+    En våtfluga för Hendricksonkläckningen; Phil Monahan finner den bra hela våren där mörka
+    dagsländor finns, svept, i fri drift eller ryckt. Culton fiskar den innan kläckningen syns,
+    när öringen rör sig en fot under ytan: i fri drift, på svepet eller hängande i strömmen, i
+    en storlek som matchar insekterna.
+    """
+
+labels {
+    // en tail: Dark blue dun hackle fibres
+    tail "Mörkt blågrå hackelfibrer"
+    // en body: Muskrat fur
+    body "Bisampäls"
+    // en hackle: Dark blue dun hen hackle
+    hackle "Mörkt blågrått hönshackel"
+    // en wing: Lemon wood duck flank fibres
+    wing "Fibrer av citrongul brudandsflankfjäder"
+}
+
+notes {
+    // en step 3 (tie-in tail): A sparse bunch, tips level.
+    step 3 "En gles knippe, topparna jämna."
+    // en step 4 (dub body): Thin and lightly tapered.
+    step 4 "Tunn och lätt avsmalnande."
+    // en step 5 (tie-in hackle): By its tip, shiny side forward.
+    step 5 "I spetsen, blanka sidan framåt."
+    // en step 7 (wind hackle): Two or three turns; stroke the fibres back and down.
+    step 7 "Två eller tre varv; stryk fibrerna bakåt och nedåt."
+    // en step 9 (tie-in wing): A bunch of fibres, tips even, or a strip of the feather folded, on top.
+    step 9 "En knippe fibrer, topparna jämna, eller en vikt remsa av fjädern, ovanpå."
+}

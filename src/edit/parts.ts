@@ -77,9 +77,9 @@ export interface Part {
   /** Where a winding, dubbing, spinning or pull ends, or the weighting runs from–to. */
   from?: number;
   to?: number;
-  /** Dubbing or thread passes after the first, each from–to (a thread pass in open turns, how many). */
+  /** Dubbing or thread passes after the first, each from–to (a thread pass in open turns, or the turns of dubbing, how many). */
   passes?: { from: number; to: number; turns?: number }[];
-  /** A thread body's first pass in open turns: how many (spiralled over hair bound past the bend). */
+  /** A thread body's first pass in open turns: how many (spiralled over hair bound past the bend); a dubbed body's turns, when given (fewer for a slim one). */
   turns?: number;
   length?: number;
   angle?: number;
@@ -177,7 +177,7 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
   tail: [
     "rabbit-strip", "hackle-fibres", "golden-pheasant-tippet", "golden-pheasant-crest", "pheasant-tail", "coq-de-leon", "hares-mask-guard-hairs",
     "marabou", "krystal-flash", "hackle-tips", "duck-quill", "turkey-quill", "saddle-feathers", "goose-biot",
-    "elk-hair", "moose-mane", "bucktail", "calf-tail", "wool", "silicone-legs",
+    "elk-hair", "moose-mane", "bucktail", "calf-tail", "wool", "silicone-legs", "mylar-tubing",
   ],
   butt: ["peacock-herl", "wool", "silk-floss", "chenille"],
   rib: ["gold-wire", "silver-wire", "copper-wire", "oval-tinsel", "flat-tinsel", "monofilament", "rib-thread"],
@@ -230,7 +230,8 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
   if (role === "weight") return ["weight"];
   if (a === "dubbing") return ["dubbed"];
   if (a === "eyes") return ["bunch"];
-  if (a === "tubing") return ["sleeve"];
+  // (A piece of tubing tied in as a tail is picked apart into strands: a Gotcha's.)
+  if (a === "tubing") return role === "tail" ? ["bunch"] : ["sleeve"];
   switch (role) {
     case "tail":
     case "wing":
@@ -641,7 +642,7 @@ export function compile(fly: PartsFly): Compiled {
       case "thread": {
         const pass = i === 0 ? { from: p.from ?? 0, to: p.to ?? 0.7, turns: p.turns } : p.passes![i - 1]!;
         to(pass.from, p.id);
-        if (p.how === "dubbed") push({ op: "dub", material: m0.id, to: round(pass.to), ...n }, p.id);
+        if (p.how === "dubbed") push({ op: "dub", material: m0.id, to: round(pass.to), ...(pass.turns !== undefined && { turns: pass.turns }), ...n }, p.id);
         else if (Math.abs((thread ?? 0) - pass.to) >= POSITION_TOLERANCE) {
           push({ op: "wrap-thread", to: reach(pass.to), ...(pass.turns !== undefined && { turns: pass.turns }), ...n }, p.id);
           thread = reach(pass.to);
@@ -929,8 +930,11 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       const w = g[0]!.s as Extract<Step, { op: "weight" }>;
       part = { id, how: "weight", mats: [mat], from: w.from, to: w.to, keys: [g[0]!.i] };
     } else if (/^dub( dub)*$/.test(ops)) {
-      const passes = g.map((x) => ({ from: x.thread ?? 0, to: (x.s as Extract<Step, { op: "dub" }>).to }));
-      part = { id, how: "dubbed", mats: [mat], from: passes[0]!.from, to: passes[0]!.to, passes: passes.slice(1), keys: g.map((x) => x.i) };
+      const passes = g.map((x) => {
+        const d = x.s as Extract<Step, { op: "dub" }>;
+        return { from: x.thread ?? 0, to: d.to, ...(d.turns !== undefined && { turns: d.turns }) };
+      });
+      part = { id, how: "dubbed", mats: [mat], from: passes[0]!.from, to: passes[0]!.to, ...(passes[0]!.turns !== undefined && { turns: passes[0]!.turns }), passes: passes.slice(1), keys: g.map((x) => x.i) };
     } else if (ops === "spin" || ops === "spin trim") {
       const sp = g[0]!.s as Extract<Step, { op: "spin" }>;
       part = { id, how: "spun", mats: [mat], from: at, to: sp.to, ...(sp.collar !== undefined && { collar: sp.collar }), ...(sp.length !== undefined && { length: sp.length }), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
@@ -1153,7 +1157,7 @@ export function rearLimit(fly: PartsFly, part: Part): number {
 
 /** An upright bunch a parachute hackle can be wound round. */
 export const isPost = (p: Part) =>
-  p.how === "bunch" && (p.angle ?? 0) >= UPRIGHT && p.side !== "across" && p.mats.every((m) => arch(m.kind) !== "feather" && arch(m.kind) !== "strip");
+  p.how === "bunch" && (p.angle ?? 0) >= UPRIGHT && p.side !== "across" && p.mats.every((m) => !["feather", "strip", "tubing"].includes(arch(m.kind)));
 
 /** The part tied another way, its measurements made to suit, re-ordered as convention ties it. */
 export function withHow(fly: PartsFly, part: Part, how: How): Part {
@@ -1162,7 +1166,7 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
   const [bodyFrom, bodyTo] = body && body.how !== "extended" ? extentOf(body) : [0, 0.7];
   const c = CLASSIC[part.role];
   const next: Omit<Part, "keys"> & { keys?: number[] } = { ...part, how };
-  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread", "taper", "fold"] as const) delete next[k];
+  for (const k of ["at", "from", "to", "turns", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread", "taper", "fold"] as const) delete next[k];
   switch (how) {
     case "bunch":
       if (part.mats.some((m) => arch(m.kind) === "eyes")) Object.assign(next, { at: c.at ?? 0.85 });

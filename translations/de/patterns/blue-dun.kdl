@@ -1,0 +1,51 @@
+id blue-dun
+status draft
+
+// en description: A blue dun fibre tail, a slim muskrat body, upright divided mallard quill wings and a blue dun hackle.
+description "Ein Schwanz aus blaugrauen Fibern, ein schlanker Körper aus Bisam, aufrechte, geteilte Flügel aus Stockentenschwingen und eine blaugraue Hechel."
+
+// en history: One of the oldest named flies: the Fly Dressers' Guild's dressings database lists Blue Duns from Charles Cotton (1676) and James Chetham (1681) onwards, through the Bowlkers, Ronalds, Halford and Skues to Roger Fogg. No one tyer made it; the name stands for a dun imitation with a grey body and grey wings. Most of the British dressings have a fur body on yellow or primrose silk and a starling or snipe wing, and Tod's, Skues's and Fogg's a hen hackle: a wet fly. In America it is tied as a Catskill dry, and Jerry Coviello counts it among the original Catskill dry flies with mallard wing quill sections. Barry Ord Clarke ties the body of grey thread rather than fur.
+history """
+    Eine der ältesten Fliegen mit Namen: die Datenbank der Fly Dressers' Guild führt Blue Duns
+    von Charles Cotton (1676) und James Chetham (1681) an, über die Brüder Bowlker, Ronalds,
+    Halford und Skues bis zu Roger Fogg. Kein einzelner Binder hat sie erfunden; der Name steht
+    für die Imitation einer Subimago mit grauem Körper und grauen Flügeln. Die meisten
+    britischen Bindeweisen haben einen Fellkörper auf gelber oder primelgelber Seide und einen
+    Flügel aus Star oder Bekassine, und die von Tod, Skues und Fogg eine Hennenhechel: eine
+    Nassfliege. In Amerika wird sie als Trockenfliege im Catskill-Stil gebunden, und Jerry
+    Coviello zählt sie zu den ursprünglichen Catskill-Trockenfliegen mit Flügeln aus Segmenten
+    der Stockentenschwingen. Barry Ord Clarke bindet den Körper aus grauem Faden statt aus Fell.
+    """
+
+// en fishing: Fished dead drift for the early-season duns; Mario Capovía finds it works for Blue-Winged Olives, Hendricksons, Blue Quills and Quill Gordons. Quill wings are fragile and lose their shape after a fish or two.
+fishing """
+    Frei treibend gefischt für die frühen Subimagines des Jahres; Mario Capovía findet, dass sie
+    für Blue-Winged Olive, Hendrickson, Blue Quill und Quill Gordon fängt. Flügel aus
+    Schwingensegmenten sind empfindlich und verlieren nach ein oder zwei Fischen ihre Form.
+    """
+
+labels {
+    // en wings: Mallard wing quill slips
+    wings "Segmente von Stockentenschwingen"
+    // en tail: Blue dun cock hackle fibres
+    tail "Blaugraue Hahnenhechelfibern"
+    // en body: Muskrat fur
+    body "Bisamfell"
+    // en hackle: Blue dun cock hackle
+    hackle "Blaugraue Hahnenhechel"
+}
+
+notes {
+    // en step 3 (tie-in wings): Matched slips from a left and a right quill, back to back, tied in tips forward.
+    step 3 "Passende Segmente von einer linken und einer rechten Schwinge, Rücken an Rücken, mit den Spitzen nach vorn eingebunden."
+    // en step 4 (wrap-thread): Cut the butts at an angle and bind them down for a tapered underbody.
+    step 4 "Schneide die Enden schräg ab und binde sie zu einem verjüngten Unterkörper fest."
+    // en step 5 (tie-in tail): A bunch of fibres, tips level.
+    step 5 "Ein Büschel Fibern, Spitzen gleich lang."
+    // en step 6 (dub body): Sparse and tapered, leaving room behind the wings for the hackle.
+    step 6 "Spärlich und verjüngt, mit Platz hinter den Flügeln für die Hechel."
+    // en step 7 (tie-in hackle): Webby base stripped, tied in under the shank.
+    step 7 "Die flaumige Basis entfernt, unter dem Hakenschenkel eingebunden."
+    // en step 9 (wind hackle): Three or four turns behind the wings, three or four in front.
+    step 9 "Drei oder vier Windungen hinter den Flügeln, drei oder vier davor."
+}

@@ -1,0 +1,53 @@
+id gotcha
+status draft
+
+// en description: Bead-chain eyes near the eye, a frayed pearl Mylar tail, a pearl braid body, a golden tan craft fur wing with pearl flash on the hook-point side, and a pink thread nose.
+description "Kulkedjeögon nära öglan, en uppfransad stjärt av pärlemorfärgad mylar, en kropp av pärlemorfärgad flätad tinsel, en gyllene ljusbrun vinge av craft fur med pärlemorflash på krokspetsens sida, och en rosa trådnos."
+
+// en history: Jim McVay tied the first ones on the way to the Andros Island Bonefish Club: he cut fibres from the carpet of a taxi and tied a small bonefish fly with them, and each time a bonefish took it the guide said "Gotcha". Scott Heywood, who tells the story, names the guide Rupert Leadon and says Jim was travelling with his father Ted; Casey Smartt and Deneki tell it the same way. They disagree on the carpet's colour, tan in Smartt's telling and yellow in Heywood's. Heywood calls it really a variation on the Crazy Charlie, one with a pink nose and a subtle pink undertone, and, with the Crazy Charlie, the most recognised bonefish fly there is. This is Heywood's "Original Gotcha". David Klausmeyer counts it among his 101 favourite saltwater flies.
+history """
+    Jim McVay band de första på väg till Andros Island Bonefish Club: han klippte fibrer ur
+    mattan i en taxi och band en liten bonefishfluga av dem, och varje gång en bonefish tog den
+    sa guiden "Gotcha". Scott Heywood, som berättar historien, ger guidens namn som Rupert
+    Leadon och säger att Jim reste med sin far Ted; Casey Smartt och Deneki berättar den på
+    samma sätt. De är oense om mattans färg, ljusbrun hos Smartt och gul hos Heywood. Heywood
+    kallar den egentligen en variant av Crazy Charlie, en med rosa nos och en diskret rosa
+    underton, och tillsammans med Crazy Charlie den mest kända bonefishflugan som finns. Det här
+    är Heywoods "Original Gotcha". David Klausmeyer räknar den till sina 101 favoritflugor för
+    saltvatten.
+    """
+
+// en fishing: Cast ahead of cruising bonefish, let it sink and strip it short, so it flees like a shrimp. Choose the eyes for the depth: Heywood carries some with lead eyes for deeper water, most with bead chain, and some with none for tailing fish in the shallows. It rides point up, so it seldom catches the bottom; Smartt fishes it for redfish too. Tan with a pink thread is by far the most popular colour, Smartt finds.
+fishing """
+    Kasta framför kryssande bonefish, låt den sjunka och strippa den kort, så att den flyr som
+    en räka. Välj ögon efter djupet: Heywood har några med blyögon för djupare vatten, de flesta
+    med kulkedja och några utan ögon för fisk som tailar på grunt vatten. Den simmar med
+    krokspetsen uppåt och fastnar sällan i botten; Smartt fiskar den också efter redfish.
+    Ljusbrunt med rosa tråd är den överlägset populäraste färgen, finner Smartt.
+    """
+
+labels {
+    // en tail: Medium pearl Mylar tubing
+    tail "Medium pärlemorfärgad mylarslang"
+    // en body: Pearl Diamond Braid
+    body "Pärlemorfärgad Diamond Braid"
+    // en wing: Golden tan craft fur
+    wing "Gyllene ljusbrun craft fur"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, with figure-of-eight turns.
+    step 2 "Ovanpå, med åttor."
+    // en step 4 (tie-in tail): Or a few strands of Krystal Flash, for a sparser fly (Heywood).
+    step 4 "Eller några strån Krystal Flash, för en glesare fluga (Heywood)."
+    // en step 7 (wind body): Overlapping turns; figure-of-eight it round the eyes.
+    step 7 "Överlappande varv; åttor runt ögonen."
+    // en step 9 (wrap-thread): In front of the eyes; turn the hook over.
+    step 9 "Framför ögonen; vänd kroken."
+    // en step 10 (tie-in wing): A clump of craft fur, its underfur combed out.
+    step 10 "En tofs craft fur, underullen bortkammad."
+    // en step 11 (tie-in flash): Three strands folded over: six ends, over the wing.
+    step 11 "Tre strån vikta på mitten: sex ändar, över vingen."
+    // en step 12 (whip-finish): A tapered pink thread head, the nose; coat it.
+    step 12 "Ett avsmalnande huvud av rosa tråd, nosen; lacka det."
+}

@@ -631,6 +631,8 @@ const BUNDLE = {
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2, curve: 0.08, droop: 0 },
   // Rubber legs as tails and antennae: thick, soft strands that splay and sag.
   legs: { radius: 0.014, tip: 0.85, tipShade: 1, spread: 0.1, flare: 0.15, sideFlare: 0.8, lengthJitter: 0.1, curve: 0.2, droop: 0.3 },
+  // Tubing tied in as a tail, picked apart: fine metallic strands, kinked from the braid, uneven.
+  tubing: { radius: 0.004, tip: 1, tipShade: 1, spread: 0.16, flare: 0.03, sideFlare: 0.3, lengthJitter: 0.35, curve: 0.14, droop: 0.05 },
 } as const;
 
 /**

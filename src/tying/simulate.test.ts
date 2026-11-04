@@ -272,6 +272,35 @@ describe("a Zonker: a sleeve, a fur strip and the thread started again", () => {
   });
 });
 
+describe("a Gotcha's tail: a piece of tubing tied in and picked apart", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/gotcha.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("gotcha.kdl does not load");
+  const build = simulate(result.recipe);
+  const tail = build.steps.flatMap((s) => s.pieces).find((p) => p.material === "tail");
+
+  it("sticks out behind as a bunch of loose strands, not a sleeve", () => {
+    expect(tail).toMatchObject({ type: "bundle", look: "tubing", direction: "back" });
+    expect(build.steps.flatMap((s) => s.pieces).some((p) => p.type === "sleeve")).toBe(false);
+  });
+
+  it("says to pull out its core and pick it apart", () => {
+    expect(build.steps.find((s) => s.title.startsWith("Tie in: medium pearl mylar"))!.text).toMatch(/Pull out its core and pick it apart into loose strands/);
+  });
+});
+
+describe("sparkle yarn pulled over", () => {
+  const pieces = (id: string) => {
+    const result = loadRecipe(readFileSync(new URL(`../../patterns/${id}.kdl`, import.meta.url), "utf8"));
+    if (!result.ok) throw new Error(`${id}.kdl does not load`);
+    return simulate(result.recipe).steps.flatMap((s) => s.pieces).filter((p) => p.type === "cover");
+  };
+
+  it("is a translucent veil when loose, and a solid wing case when pulled tight", () => {
+    expect(pieces("deep-sparkle-pupa").every((p) => p.type === "cover" && p.veil)).toBe(true);
+    expect(pieces("black-martinez").some((p) => p.type === "cover" && p.veil)).toBe(false);
+  });
+});
+
 describe("a Bitch Creek: two chenilles woven with the thread cut", () => {
   const result = loadRecipe(readFileSync(new URL("../../patterns/bitch-creek.kdl", import.meta.url), "utf8"));
   if (!result.ok) throw new Error("bitch-creek.kdl does not load");

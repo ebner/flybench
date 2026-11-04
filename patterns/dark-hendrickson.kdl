@@ -1,0 +1,70 @@
+// Dark Hendrickson: Roy Steenrod's Catskill Hendrickson with a muskrat body, an upright divided wood duck wing and a dark dun hackle.
+
+id dark-hendrickson
+name "Dark Hendrickson"
+type dry
+imitates mayfly
+naturals mayfly-dun
+difficulty advanced
+species trout
+// Rocky River TU: the Hendrickson hatch, late March in the south to late May in the north.
+season april may
+description "A dark dun fibre tail, a slim grey muskrat body, an upright divided wing of lemon wood duck and a dark dun hackle."
+history """
+    The Hendrickson is Roy Steenrod's, of Liberty, New York: he tied it in 1916 on the Beaverkill
+    below Junction Pool and in 1918 named it after his friend A. E. Hendrickson. His fly had a
+    body of fawn fox fur, a wood duck wing and a sparse dun hackle. The Dark Hendrickson is the
+    same fly with a body of muskrat fur, where the Light Hendrickson has fox belly fur; John Kreft
+    could not find in his books who first tied the dark one, or which of the two came first. Ray
+    Bergman gives it with a dark blue-grey fur body, a wing of speckled mandarin duck and a dark
+    blue dun hackle.
+    """
+fishing """
+    For the Hendrickson hatch of Ephemerella subvaria in the eastern and midwestern United States,
+    whose reddish-brown males anglers call Red Quills or Dark Hendricksons. Fished dead drift,
+    mostly in riffles and the faster water where the duns hatch.
+    """
+sources {
+    "Fly Fisherman: Fly Fishing the Hendrickson Hatch (Paul Weamer)" url="https://www.flyfisherman.com/editorial/fly-fishing-the-hendrickson-hatch/151976"
+    "Rocky River TU: Hendrickson (Tom Adams and Alen Baker)" url="http://www.rockyrivertu.org/hendrickson.html"
+    "John Kreft: Dark Hendrickson" url="https://www.johnkreft.com/dark-hendrickson/"
+    "Hook & Hackle: Dry fly recipes" url="https://www.hookhack.com/html/dryflyrecipes.html"
+    "Fly Dressers' Guild: Dressings Database (Hendrickson, Dark, after Ray Bergman)" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.johnkreft.com/wp-content/uploads/Dark-Hendrickson.jpg" page="https://www.johnkreft.com/dark-hendrickson/" author="John Kreft" license="All rights reserved; reference only" note="Side view in the vise"
+    "https://www.flugor.se/bild_arkiv/big_1703.jpg" page="https://www.flugor.se/flugor/torrflugor/dark-hendrikson-1703" license="All rights reserved; reference only" note="Side view in the vise, a darker barred wing"
+    "https://cdn11.bigcommerce.com/s-8pfqkn26ea/images/stencil/1024x1024/products/5454/6046/Dark-Hendrickson-Dry__40580.1540056128.jpg" page="https://reelflies.com/dark-hendrickson-dry/" license="All rights reserved; reference only" note="Three-quarter side view, dark ginger hackle"
+}
+
+// Hook & Hackle: #12 to 18.
+hook dry-standard size=14
+thread grey size="8/0"
+
+materials {
+    wings wood-duck-flank count=40 label="Lemon wood duck flank fibres"
+    // Assumption: dark dun, a dark slate grey.
+    tail hackle-fibres color="#4a4c52" count=12 label="Dark blue dun cock hackle fibres"
+    body dubbing color=muskrat shaggy=0.15 label="Grey muskrat fur"
+    hackle cock-hackle color="#4a4c52" fibre=1.5 label="Dark dun cock hackle"
+}
+
+// No step-by-step for this fly was found; the steps are the Catskill order Coviello gives for
+// the Blue Dun, with a bunch of flank fibres for the wing.
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.75
+    // Read from the photos: 2 to 2.4 gapes above the shank, standing over the hackle.
+    tie-in wings length=2.2 angle=90 spread=22 note="A bunch of fibres, tips even, tied in tips forward."
+    wrap-thread to=0.0 note="Bind the butts down along the shank for a smooth underbody."
+    // Read from the photos: 2 to 2.5 gapes, a little longer than the shank.
+    tie-in tail length=2.2 note="A sparse bunch, tips level."
+    // Read from the photos: slim, a quarter to a third of the gape thick.
+    dub body to=0.68 turns=15 note="Slim and tapered, to just behind the wings."
+    tie-in hackle
+    wrap-thread to=0.92
+    wind hackle to=0.9 turns=6 note="Two or three turns behind the wings, two or three in front."
+    tie-off hackle
+    whip-finish
+}

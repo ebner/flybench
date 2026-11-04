@@ -1,0 +1,72 @@
+// Blue Dun: one of the oldest named flies, here as the Catskill dry with upright mallard quill wings over a muskrat body.
+
+id blue-dun
+name "Blue Dun"
+type dry
+imitates mayfly
+naturals mayfly-dun
+difficulty advanced
+species trout grayling
+// Assumption: the early-season mayflies it is tied for hatch from about April to June.
+season april may june
+description "A blue dun fibre tail, a slim muskrat body, upright divided mallard quill wings and a blue dun hackle."
+history """
+    One of the oldest named flies: the Fly Dressers' Guild's dressings database lists Blue Duns
+    from Charles Cotton (1676) and James Chetham (1681) onwards, through the Bowlkers, Ronalds,
+    Halford and Skues to Roger Fogg. No one tyer made it; the name stands for a dun imitation
+    with a grey body and grey wings. Most of the British dressings have a fur body on yellow or
+    primrose silk and a starling or snipe wing, and Tod's, Skues's and Fogg's a hen hackle: a wet
+    fly. In America it is tied as a Catskill dry, and Jerry Coviello counts it
+    among the original Catskill dry flies with mallard wing quill sections. Barry Ord Clarke ties
+    the body of grey thread rather than fur.
+    """
+fishing """
+    Fished dead drift for the early-season duns; Mario Capovía finds it works for Blue-Winged
+    Olives, Hendricksons, Blue Quills and Quill Gordons. Quill wings are fragile and lose their
+    shape after a fish or two.
+    """
+sources {
+    "Fly Fishers International: Managing Quill Wings (Jerry Coviello)" url="https://www.flyfishersinternational.org/Portals/0/LearningCenter/Presentations/FlyTying/FFI_11692_LC_Curriculum_Managing_Quill_Wings.pdf?ver=AsbfFsrFuzlkMNm8eyrdYA%3D%3D"
+    "Flydreamers: Blue Dun (Mario Capovía)" url="https://www.flydreamers.com/en/fly-tying/blue-dun-vl85"
+    "The Feather Bender: Quill Wing Blue Dun (Barry Ord Clarke)" url="https://thefeatherbender.com/quill-wing-blue-dun/"
+    "Hook & Hackle: Dry fly recipes" url="https://www.hookhack.com/html/dryflyrecipes.html"
+    "Fly Dressers' Guild: Dressings Database" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://i0.wp.com/thefeatherbender.com/wp-content/uploads/2020/07/IMG_8138-e1608840442649.jpg?resize=1300%2C768&ssl=1" page="https://thefeatherbender.com/quill-wing-blue-dun/" author="Barry Ord Clarke" license="All rights reserved; reference only" note="Side view in the vise, a thread body"
+    "https://www.flugor.se/bild_arkiv/big_1196.jpg" page="https://www.flugor.se/flugor/torrflugor/blue-dun-1196" license="All rights reserved; reference only" note="Side view in the vise, a pale slim body"
+    "https://www.fish4flies.com/img/flies/Large/826-2015-09-26%2015.29.15.jpg" page="https://www.fish4flies.com/Dry/Winged/Blue-Dun" license="All rights reserved; reference only" note="Side view, darker and a little blurred"
+}
+
+// Coviello: #12 to 18.
+hook dry-standard size=14
+thread grey size="8/0"
+
+materials {
+    wings duck-quill color=grey label="Mallard wing quill slips"
+    tail hackle-fibres color=blue-dun count=12 label="Blue dun cock hackle fibres"
+    body dubbing color=muskrat shaggy=0.15 label="Muskrat fur"
+    // Capovía: fibres one and a half gapes.
+    hackle cock-hackle color=blue-dun fibre=1.5 label="Blue dun cock hackle"
+}
+
+// Coviello's steps: the wings first, then the tail, the body and the hackle.
+steps {
+    attach-thread at=0.9
+    // Coviello: a quarter of the shank back from the eye.
+    wrap-thread to=0.75
+    // Coviello: as tall as the shank, each slip as wide as the gape; about two gapes in the photos.
+    tie-in wings length=2.0 angle=85 spread=24 width=0.8 note="Matched slips from a left and a right quill, back to back, tied in tips forward."
+    wrap-thread to=0.0 note="Cut the butts at an angle and bind them down for a tapered underbody."
+    // Coviello: as long as the shank (Capovía ties it twice as long).
+    tie-in tail length=2.0 note="A bunch of fibres, tips level."
+    // Read from the photos: slim, a quarter to a third of the gape thick (fewer turns than the default).
+    dub body to=0.68 turns=15 note="Sparse and tapered, leaving room behind the wings for the hackle."
+    tie-in hackle note="Webby base stripped, tied in under the shank."
+    wrap-thread to=0.92
+    // Coviello: three or four turns behind the wings and three or four in front.
+    wind hackle to=0.9 turns=7 note="Three or four turns behind the wings, three or four in front."
+    tie-off hackle
+    whip-finish
+}

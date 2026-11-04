@@ -1,0 +1,54 @@
+id red-spinner
+status draft
+
+// en description: A tail of brown cock fibres, a slim red thread body ribbed with small silver tinsel, a brown hen hackle and a starling quill wing.
+description "Ein Schwanz aus braunen Hahnenfibern, ein schlanker Körper aus rotem Bindefaden, mit schmalem Silbertinsel gerippt, eine braune Hennenhechel und ein Flügel aus Starflügelsegmenten."
+
+// en history: An old British fly for the spinners, the egg-laying females, of several upwinged flies; no one is named as its originator. The Fly Dressers' Guild's dressings database gives seven Red Spinners from the books, the oldest Alfred Ronalds's of 1836: a brown silk body ribbed with gold twist, red cock hackle and whisks and a wing of dyed grey mallard. Edmonds and Lee, in Brook and River Trouting (1916), give it wet and dry, the wet with red silk dubbed with maroon wool, four turns of gold wire and a wing of grizzled blue cock fibres. This is Davie McPhail's winged wet: a body of the red tying thread, a silver rib and a starling wing. The old dressings rib it with gold, and some tyers give it a pale cream tail rather than a brown one.
+history """
+    Eine alte britische Fliege für die Spinner, die eierlegenden Weibchen, mehrerer
+    Eintagsfliegen; niemand wird als ihr Urheber genannt. Die Datenbank der Fly Dressers' Guild
+    nennt sieben Red Spinner aus den Büchern, die älteste die von Alfred Ronalds aus dem Jahr
+    1836: ein Körper aus brauner Seide mit Goldfaden gerippt, rote Hahnenhechel und
+    Schwanzfibern und ein Flügel aus gefärbter grauer Stockente. Edmonds und Lee geben sie in
+    Brook and River Trouting (1916) nass und trocken, die nasse mit roter Seide, mit weinroter
+    Wolle gedubbt, vier Windungen Golddraht und einem Flügel aus Fibern einer gesprenkelten
+    blaugrauen Hahnenhechel. Dies ist Davie McPhails geflügelte Nassfliege: ein Körper aus dem
+    roten Bindefaden, eine Silberrippung und ein Starflügel. Die alten Bindeweisen rippen sie
+    mit Gold, und manche Binder geben ihr einen hellen cremefarbenen Schwanz statt eines
+    braunen.
+    """
+
+// en fishing: A wet fly for the red spinners on rivers. Edmonds and Lee fish their Red Spinners, wet or dry, from July to September, and find them often taken when all else fails, even in the quiet flats where the trout pick small flies off the surface all day.
+fishing """
+    Eine Nassfliege für die roten Spinner in Fließgewässern. Edmonds und Lee fischen ihre Red
+    Spinner, nass oder trocken, von Juli bis September, und finden, dass sie oft genommen
+    werden, wenn alles andere versagt, selbst auf den ruhigen Flachstrecken, wo die Forellen den
+    ganzen Tag kleine Fliegen von der Oberfläche nehmen.
+    """
+
+labels {
+    // en tail: Natural brown cock hackle fibres
+    tail "Naturbraune Hahnenhechelfibern"
+    // en rib: Small flat silver tinsel
+    rib "Schmales flaches Silbertinsel"
+    // en hackle: Natural brown hen hackle
+    hackle "Naturbraune Hennenhechel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of fibres, tips level.
+    step 3 "Ein kleines Büschel Fibern, Spitzen gleich lang."
+    // en step 5 (wrap-thread): Close, flat turns of the red thread make a slim, smooth body.
+    step 5 "Dichte, flache Windungen des roten Fadens ergeben einen schlanken, glatten Körper."
+    // en step 6 (wind rib): Open, evenly spaced turns.
+    step 6 "Offene, gleichmäßig verteilte Windungen."
+    // en step 8 (tie-in hackle): By its tip, shiny side forward.
+    step 8 "An der Spitze, glänzende Seite nach vorn."
+    // en step 10 (wind hackle): Two turns; stroke the fibres back and down.
+    step 10 "Zwei Windungen; streich die Fibern nach hinten und unten."
+    // en step 12 (tie-in wing): Matched slips from a left and a right starling quill, set low over the body.
+    step 12 "Passende Segmente von einer linken und einer rechten Starschwinge, flach über dem Körper."
+    // en step 13 (whip-finish): A small red head, varnished.
+    step 13 "Ein kleiner roter Kopf, lackiert."
+}
