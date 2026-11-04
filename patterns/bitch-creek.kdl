@@ -54,8 +54,10 @@ materials {
     back chenille color=black label="Fine black chenille"
     belly chenille color=orange label="Fine orange chenille"
     thorax chenille color=black label="Medium black chenille"
-    // Kreft: a brown cock or saddle hackle; fibres about 1.4 gapes in the photos.
-    hackle cock-hackle color=brown fibre=1.4
+    // Kreft: a brown cock or saddle hackle; fibres about 1.4 gapes in the photos, standing out
+    // from the chenille. The saddle: a dry-fly cock hackle round the thick thorax is far fuller
+    // than the photos.
+    hackle saddle-hackle color=brown fibre=1.4 sweep=7
     antennae rubber-legs color=white count=2 label="White round rubber legs (antennae)"
 }
 

@@ -53,8 +53,8 @@ materials {
     rib oval-tinsel color=gold label="Oval gold tinsel"
     body seals-fur color=claret label="Medium claret seal's fur"
     // Read from the photos: the body hackles about 1.3 gapes, swept well back.
-    hackle-claret cock-hackle color=claret fibre=1.3 sweep=55 label="Medium claret cock hackle"
-    hackle-black cock-hackle color=black fibre=1.3 sweep=55 label="Black cock hackle"
+    hackle-claret wet-fly-cock-hackle color=claret fibre=1.3 sweep=55 label="Medium claret cock hackle"
+    hackle-black wet-fly-cock-hackle color=black fibre=1.3 sweep=55 label="Black cock hackle"
     // Kingsmill Moore: blue jay or blue-dyed guinea fowl. Read from the photos: the fibres reach back past the hook point.
     collar guinea-fowl-hackle color=blue barred=#true fibre=1.8 sweep=50 label="Blue jay, or guinea fowl dyed blue"
 }

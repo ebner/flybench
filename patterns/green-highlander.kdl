@@ -63,7 +63,7 @@ materials {
     // Misiura: or green Hemingway's Peacock dubbing.
     body seals-fur color=green label="Green seal's fur"
     // Read from Misiura's photo: soft fibres under a gape long, swept back, mostly hidden under the throat.
-    hackle cock-hackle color=green fibre=0.8 sweep=65 label="Green cock hackle"
+    hackle wet-fly-cock-hackle color=green fibre=0.8 sweep=65 label="Green cock hackle"
     throat hackle-fibres color=yellow count=60 label="Yellow cock hackle"
     underwing golden-pheasant-tippet count=20
     wing bucktail color=green mix=orange count=60 label="Mixed green and orange bucktail"

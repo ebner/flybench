@@ -204,7 +204,7 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
     "hackle-tips", "mallard-breast", "teal-flank", "bronze-mallard", "duck-quill", "starling-quill", "turkey-quill", "cdc", "poly-yarn",
     "elk-hair", "deer-hair", "calf-tail", "squirrel-tail", "bucktail", "marabou", "golden-pheasant-tippet", "krystal-flash", "goose-biot",
   ],
-  hackle: ["cock-hackle", "hen-hackle", "saddle-hackle", "partridge-hackle", "snipe-hackle", "cdc", "hackle-fibres", "bucktail", "squirrel-tail"],
+  hackle: ["cock-hackle", "wet-fly-cock-hackle", "hen-hackle", "saddle-hackle", "partridge-hackle", "snipe-hackle", "cdc", "hackle-fibres", "bucktail", "squirrel-tail"],
   legs: ["silicone-legs", "pheasant-tail", "hackle-fibres", "moose-mane", "partridge-hackle", "saddle-hackle", "deer-hair"],
   antennae: ["hackle-fibres", "silicone-legs", "synthetic-hair", "goose-biot"],
   flash: ["krystal-flash"],

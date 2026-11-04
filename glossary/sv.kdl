@@ -38,6 +38,12 @@ materials {
         source "Fiske.se: Fjädrar & Nackar ('Tupphackel är ofta lite styvare')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
         source "Rackelhanen: Royalflugor ('Hackel: Brunt tupphackel')" url="https://www.rackelhane.se/swe/1649.htm"
     }
+    noun wet-fly-cock-hackle "tupphackel för våtflugor" gender=ett definite="tupphacklet för våtflugor" plural="tupphackel för våtflugor" plural-definite="tupphacklen för våtflugor" {
+        note "The softer, sparser cock hackle of wet flies, loch palmers and salmon flies, as against the dry-fly 'tupphackel'. Swedish dressings write just 'tupphackel'; no shop or dressing found with a word of its own ('våtflugehackel' not found written), so a descriptive phrase, each word as tyers use it. Shops sell the capes as 'Indisk tuppnacke' and 'Indisk tuppsadel' (rejected as the name: it says where the bird is from, not what the hackle is for)."
+        source "Artflies: Hackel ('Tupphackel använder till kroppshackel, struphackel och i vingen på laxflugor'; 'Hackel till torrflugor har för styva fibrer')" url="https://www.artflies.com/sec_svensk/page_material/material_hackel.htm"
+        source "Antispinn: Indian Rooster Neck ('ett prisvärt och mångsidigt tupphackel'; 'Passar torrflugor, våtflugor och nymfer')" url="https://www.antispinn.se/flugbindning/74-flugbindning/indian-rooster-neck"
+        source "Flugbindning.com: Indisk Tuppsadel ('Används mest till streamers och våtflugor men är även mycket bra till lax och havsörings- flugor')" url="https://flugbindning.com/indiska/519-indisk-tuppsadel.html"
+    }
     noun hen-hackle "hönshackel" gender=ett definite="hönshacklet" plural="hönshackel" plural-definite="hönshacklen" {
         source "Bojdaspon: Hackel nackar ('Hönshackel har mjukare och mer följsamma fibrer')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
         source "Fiske.se: Fjädrar & Nackar ('Hönshackel är betydligt mjukare')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"

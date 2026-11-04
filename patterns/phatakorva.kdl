@@ -62,7 +62,7 @@ materials {
     wing-rear fox-hair color="#8a2e14" label="Medium fiery brown soft hair"
     flash-rear krystal-flash color=copper count=10 label="Copper angel hair"
     // Read from Frödin's photo: the hackles reach about a third of the way along the wing.
-    hackle-rear cock-hackle color=orange fibre=2 sweep=55 label="Orange badger cock hackle"
+    hackle-rear wet-fly-cock-hackle color=orange fibre=2 sweep=55 label="Orange badger cock hackle"
     wing-front fox-hair color="#7a2812" label="Large fiery brown soft hair"
     flash-front krystal-flash color="#9a6a32" count=10 label="Bronze angel hair"
     hackle-front hen-hackle color=black fibre=2.4 sweep=60 label="Black soft hackle"

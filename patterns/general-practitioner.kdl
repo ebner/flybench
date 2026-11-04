@@ -61,14 +61,14 @@ materials {
     rib-rear oval-tinsel color=gold label="Fine oval gold tinsel"
     body seals-fur color="#f2581a" label="Hot orange seal's fur"
     // Rowley: fibres no longer than twice the gape; on the photos about one and a half, swept back.
-    hackle-rear cock-hackle color="#f2581a" fibre=1.4 sweep=50 label="Hot orange cock hackle"
+    hackle-rear wet-fly-cock-hackle color="#f2581a" fibre=1.4 sweep=50 label="Hot orange cock hackle"
     eyes golden-pheasant-tippet-feather
     shell-rear golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
     rib-middle oval-tinsel color=gold label="Fine oval gold tinsel"
-    hackle-middle cock-hackle color="#f2581a" fibre=1.5 sweep=50 label="Hot orange cock hackle"
+    hackle-middle wet-fly-cock-hackle color="#f2581a" fibre=1.5 sweep=50 label="Hot orange cock hackle"
     shell-middle golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
     rib-front oval-tinsel color=gold label="Fine oval gold tinsel"
-    hackle-front cock-hackle color="#f2581a" fibre=1.6 sweep=50 label="Hot orange cock hackle"
+    hackle-front wet-fly-cock-hackle color="#f2581a" fibre=1.6 sweep=50 label="Hot orange cock hackle"
     shell-front golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
 }
 

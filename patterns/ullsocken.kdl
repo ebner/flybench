@@ -40,11 +40,13 @@ thread black size="6/0"
 
 materials {
     butt wool color=red
-    rear cock-hackle color=brown fibre=1.4 sweep=45 label="Stiff brown cock hackle"
+    // Stiff, as the sources say, but a salmon-fly cock hackle: the photos show the body between
+    // the hackles' barbs, not a dry fly's dense collar.
+    rear wet-fly-cock-hackle color=brown fibre=1.4 sweep=45 label="Stiff brown cock hackle"
     body-rear wool color=black
-    middle cock-hackle color=brown fibre=1.6 sweep=45 label="Stiff brown cock hackle"
+    middle wet-fly-cock-hackle color=brown fibre=1.6 sweep=45 label="Stiff brown cock hackle"
     body-front wool color=black
-    front cock-hackle color=brown fibre=1.9 sweep=45 label="Stiff brown cock hackle, the longest"
+    front wet-fly-cock-hackle color=brown fibre=1.9 sweep=45 label="Stiff brown cock hackle, the longest"
 }
 
 steps {

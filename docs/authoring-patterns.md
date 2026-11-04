@@ -95,6 +95,10 @@ the order of existing recipes: a one-line `//` summary, catalog metadata, `sourc
   and a size from the middle of the usual range.
 - Use catalog kinds from `src/recipe/materials.ts`. If the material isn't there, add a
   catalog entry with the right archetype; never invent a per-recipe kind.
+- A dressing's "cock hackle" is one of two kinds: `cock-hackle` for dry flies (dense, stiff
+  collars and dry palmers) and `wet-fly-cock-hackle` for wet flies, loch palmers and salmon
+  flies, whose photos show the body through the hackle. Decide from the photos, and keep the
+  dressing's own words in a `label` where it has one.
 - Use `label` when the material shown is a stand-in (a mixed throat drawn as one colour)
   or when the name tyers use is more specific than the kind.
 

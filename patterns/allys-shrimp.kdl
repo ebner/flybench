@@ -59,7 +59,7 @@ materials {
     beard squirrel-tail color=grey label="Natural grey squirrel tail"
     underwing squirrel-tail color=grey label="Natural grey squirrel tail"
     overwing golden-pheasant-tippet count=24
-    collar cock-hackle color="#f2581a" fibre=2.2 sweep=75 label="Hot orange cock hackle, long and soft"
+    collar wet-fly-cock-hackle color="#f2581a" fibre=2.2 sweep=75 label="Hot orange cock hackle, long and soft"
 }
 
 steps {
