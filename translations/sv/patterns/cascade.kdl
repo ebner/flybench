@@ -1,0 +1,62 @@
+id cascade
+status draft
+
+// en description: An oval silver tag, a long tail of hot orange and yellow bucktail mixed with clear flash, a body of flat silver tinsel behind and black floss in front ribbed with oval silver, a black squirrel wing with silver flash, and long yellow and hot orange collar hackles.
+description "En tag av oval silvertinsel, en lång stjärt av bucktail i hot orange och gult blandat med klar flash, en kropp av platt silvertinsel bak och svart flossilke fram ribbad med oval silvertinsel, en vinge av svart ekorre med silverflash och långa hackelkragar i gult och hot orange."
+
+// en history: Alastair "Ally" Gowans, who tied Ally's Shrimp, set out to make a pretty fly from Krystal Hair, a big ball of the silver kind given him by a well-known French angler and a hank of the clear. He named it after the way the two colours of the tail cascade over the hook. The first fish came the April after he tied it, on the Tummel below the road bridge at Pitlochry: a springer of about 14 lb, beached by a friend. His first flies had a black hair wing on top and underneath; on his first trebles he left the underwing out, and later versions drop it. Gowans also tied the first variant, with gold for the silver half of the body. John Gray reckons that within little more than a decade it became probably the most used salmon fly in Britain.
+history """
+    Alastair ”Ally” Gowans, som band Ally's Shrimp, ville göra en vacker fluga av Krystal Hair:
+    ett stort nystan av den silverfärgade sorten, som han fått av en välkänd fransk fiskare, och
+    en härva av den klara. Han döpte den efter hur stjärtens två färger faller i en kaskad över
+    kroken. Den första fisken kom i april året efter att han bundit den, i Tummel nedanför
+    landsvägsbron i Pitlochry: en vårlax på omkring 14 pund som en vän landade. Hans första
+    flugor hade en vinge av svart hår både ovanpå och under; på sina första trekrokar utelämnade
+    han undervingen, och senare versioner saknar den. Gowans band också den första varianten,
+    med guld i stället för silver på kroppens bakre halva. John Gray menar att den inom lite
+    drygt ett decennium troligen blev den mest använda laxflugan i Storbritannien.
+    """
+
+// en fishing: Gowans fishes it in almost any conditions and at any time of year: tiny doubles and trebles of #12 and smaller in the lowest summer water, hooks up to #4 when the water is higher or colder, and tubes in high, cold water early in the spring and late in the autumn. Håkan Karsnäser finds it at its best in clear water and bright sunshine.
+fishing """
+    Gowans fiskar den i nästan alla förhållanden och under hela året: små dubbelkrokar och
+    trekrokar i storlek 12 och mindre i det lägsta sommarvattnet, krokar upp till storlek 4 när
+    vattnet är högre eller kallare, och tuber i högt och kallt vatten tidigt på våren och sent
+    på hösten. Håkan Karsnäser tycker att den är som bäst i klart vatten och starkt solsken.
+    """
+
+labels {
+    // en tail: Mixed hot orange and yellow bucktail
+    tail "Blandad bucktail i hot orange och gult"
+    // en tail-flash: Clear Krystal Hair
+    tail-flash "Klar Krystal Hair"
+    // en flash: Silver Krystal Hair
+    flash "Silverfärgad Krystal Hair"
+    // en front-collar: Hot orange cock hackle
+    front-collar "Tupphackel i hot orange"
+}
+
+notes {
+    // en step 2 (wrap-thread): A bed of thread to above the hook point.
+    step 2 "En bädd av tråd till en punkt ovanför krokspetsen."
+    // en step 5 (wind tag): Five or six close turns.
+    step 5 "Fem eller sex täta varv."
+    // en step 7 (tie-in tail): Mix the two colours well, and bind the butts along the shank.
+    step 7 "Blanda de två färgerna väl, och bind ner rotändarna längs krokskaftet."
+    // en step 9 (tie-in tail-flash): A few strands folded round the thread, on top of the tail.
+    step 9 "Några strån vikta runt tråden, ovanpå stjärten."
+    // en step 13 (wind rear): To the tail and back to just past the middle, in touching turns.
+    step 13 "Till stjärten och tillbaka till strax förbi mitten, i täta varv."
+    // en step 19 (wind rib): Four or five even turns over both halves.
+    step 19 "Fyra eller fem jämna varv över båda halvorna."
+    // en step 21 (tie-in wing): A small bunch, low over the body.
+    step 21 "En liten bunt, lågt över kroppen."
+    // en step 23 (tie-in flash): A few strands over the wing.
+    step 23 "Några strån över vingen."
+    // en step 26 (wind collar): Two or three turns, stroking the fibres back.
+    step 26 "Två eller tre varv; stryk fibrerna bakåt."
+    // en step 30 (wind front-collar): In front of the yellow, the fibres about as long.
+    step 30 "Framför det gula, med ungefär lika långa fibrer."
+    // en step 32 (whip-finish): Two or three coats of varnish.
+    step 32 "Två eller tre lager lack."
+}

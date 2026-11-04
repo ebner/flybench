@@ -1,0 +1,56 @@
+id garry-dog
+status draft
+
+// en description: An oval silver tag and golden yellow floss, a golden pheasant crest tail, a black floss body ribbed with oval silver, a blue guinea fowl beard and a wing of yellow bucktail over a few red hairs.
+description "Ein Tag aus ovalem Silbertinsel und goldgelbem Floss, ein Schwanz aus Goldfasan-Crest, ein Körper aus schwarzem Floss, gerippt mit ovalem Silbertinsel, ein Bart aus blauem Perlhuhn und ein Flügel aus gelbem Bucktail über ein paar roten Haaren."
+
+// en history: John Gray tells how the name came about in a Tweed tackle shop in the 1920s: a visiting minister gave hair from the tail of his golden retriever, Garry, to finish a fly being tied there; one of Gray's pages names the tyer as John Wright. Yellow bucktail or similar hair now takes the dog's place. Gray groups it with the Hairy Mary among the early hairwings.
+history """
+    John Gray erzählt, wie der Name in den 1920er Jahren in einem Angelgeschäft am Tweed
+    entstand: Ein Pfarrer, der zu Besuch war, gab Haare vom Schwanz seines Golden Retrievers
+    Garry, damit eine Fliege, die dort gerade gebunden wurde, fertig werden konnte; auf einer
+    von Grays Seiten heißt der Binder John Wright. Heute nimmt gelbes Bucktail oder ähnliches
+    Haar den Platz des Hundes ein. Gray zählt sie mit der Hairy Mary zu den frühen
+    Haarflügelfliegen.
+    """
+
+// en fishing: Gray rates it a fly for coloured water, above all in the autumn. Peter Gathercole ties it small, on 6 to 10 singles, doubles and trebles, for summer salmon as the river clears after a spate, and large, on long-shanked doubles, tubes and Waddingtons, for high, slightly coloured water in spring and autumn.
+fishing """
+    Gray hält sie für eine Fliege für trübes Wasser, vor allem im Herbst. Peter Gathercole
+    bindet sie klein, auf Einzel-, Doppel- und Drillingshaken der Größen 6 bis 10, für
+    Sommerlachse, wenn sich der Fluss nach einem Hochwasser klärt, und groß, auf langschenkligen
+    Doppelhaken, Tuben und Waddingtons, für hohes, leicht getrübtes Wasser im Frühjahr und
+    Herbst.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Feines ovales Silbertinsel"
+    // en yellow-tag: Golden yellow floss
+    yellow-tag "Goldgelbes Floss"
+    // en rib: Medium oval silver tinsel
+    rib "Mittleres ovales Silbertinsel"
+    // en beard: Dyed blue guinea fowl fibres
+    beard "Blau gefärbte Perlhuhnfibern"
+}
+
+notes {
+    // en step 2 (wrap-thread): To opposite the barb.
+    step 2 "Bis gegenüber dem Widerhaken."
+    // en step 9 (wind yellow-tag): In front of the tinsel.
+    step 9 "Vor dem Tinsel."
+    // en step 13 (tie-in body): Its waste end along the shank.
+    step 13 "Das lose Ende entlang des Hakenschenkels."
+    // en step 15 (wind body): Close turns right up to the thread: smooth and tapering.
+    step 15 "Dichte Windungen bis an den Faden: glatt und sich verjüngend."
+    // en step 17 (wind rib): Open, evenly spaced turns.
+    step 17 "Offene, gleichmäßig verteilte Windungen."
+    // en step 19 (tie-in beard): Tips level, under the shank.
+    step 19 "Spitzen bündig, unter dem Hakenschenkel."
+    // en step 20 (tie-in underwing): A few hairs, under the yellow.
+    step 20 "Ein paar Haare, unter dem gelben."
+    // en step 23 (trim wing): Cut the butts at an angle for a small head.
+    step 23 "Die Enden schräg abschneiden, für einen kleinen Kopf."
+    // en step 24 (whip-finish): A black head, varnished.
+    step 24 "Ein schwarzer Kopf, lackiert."
+}

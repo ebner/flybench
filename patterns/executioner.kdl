@@ -1,0 +1,89 @@
+// Executioner: a black, red and silver hairwing for salmon and sea trout, with jungle cock cheeks.
+
+id executioner
+name "Executioner"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon sea-trout
+// Assumption: the summer months, for a low-water fly fished on a floating line.
+season june july august september
+description "An oval silver tag, a golden pheasant crest tail, a red floss butt, a flat silver body ribbed with oval silver, a black throat, a black squirrel wing, jungle cock cheeks and a red head."
+history """
+    Who tied it first is not documented. Trout & Salmon calls it a classic that has stood
+    the test of time and a great alternative to a Stoat's Tail; Ally Gowans, who sells a version
+    of his own, says that touch of red can make the difference. Dressings differ over how much
+    of the body is red: Trout & Salmon and the Tay Salmon Fly blog give a short butt of
+    fluorescent red floss in front of the tail, Scott Jackson and Flies of Fancy a red rear
+    third or more. The jungle cock is sometimes left out, and some tie a red floss head over the
+    thread.
+    """
+fishing """
+    Trout & Salmon fishes it on a floating line in a range of sizes. Craig Fleming of Fulling Mill finds it
+    does well for salmon and sea trout in low water, deadly when the grilse are running, and
+    fishes it with a slow figure-of-eight retrieve so the body flashes. Ally Gowans counts it
+    among the showy silver-bodied flies for sea trout in coloured water.
+    """
+sources {
+    "Trout & Salmon: Executioner" url="https://troutandsalmon.com/fly-tying/executioner/"
+    "Tay Salmon Fly: Executioner salmon and sea trout fly" url="http://salmon-fly.blogspot.com/2015/01/executioner-salmon-sea-trout-fly.html"
+    "Scott Jackson: Tying a salmon fly, the Executioner (video)" url="https://www.youtube.com/watch?v=6AAJ19heA3M"
+    "Flies of Fancy: Executioner (Nikki Page)" url="https://fliesoffancy-nikkipage.blogspot.com/2012/03/executioner.html"
+    "Fulling Mill: The 6 best low water salmon flies (Craig Fleming)" url="https://blog.fullingmill.com/6-best-low-water-salmon-flies/"
+    "Let's Fly Fish: Hairwing salmon flies for sale (Alastair Gowans)" url="https://letsflyfish.com/flysalehair.htm"
+    "Let's Fly Fish: Sea trout flies (Alastair Gowans)" url="https://www.letsflyfish.com/seatrout.htm"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://troutandsalmon.com/app/uploads/sites/11/2025/01/8642_big.jpg" page="https://troutandsalmon.com/fly-tying/executioner/" license="All rights reserved; reference only" note="Double, side view: red butt and head, jungle cock"
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDVhJY8HsAK-1nXakqZre9NlC70GQcham7Z998J4MQiKhNgNMj9hviAuj1sz3OtSYEX6twhdBp0iM0SzzmofhpunAwD0X3bp4g8uO37Sun92TaG9njJJvVMwaP2dCL3lPS04fqoz17Y07E/s1600/exe.jpg" page="http://salmon-fly.blogspot.com/2015/01/executioner-salmon-sea-trout-fly.html" license="All rights reserved; reference only" note="Double on a fly box"
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2mbEcD6lEKqN1pzHMXMFEBaN6Y_Jn74AqOqjublugVI5iryxxbFtY3zyF3SnP_Z6HprrHL4dkzqu68YY5FcMBg9nHUlKHB_Lo10BGHz8EOT1fwT1NkKw53PSEjEpRzgHlKOyzUEV3iMo/s1600/Executioner.jpg" page="https://fliesoffancy-nikkipage.blogspot.com/2012/03/executioner.html" author="Nikki Page" license="All rights reserved; reference only" note="Spey hook, a long red rear body and a yellow tail"
+}
+
+// Trout & Salmon: a double, sizes 6 to 12.
+hook salmon-double size=8
+// Assumption: red thread for the red head, as Flies of Fancy ties it; Trout & Salmon winds red
+// floss over white thread.
+thread red size="8/0"
+
+materials {
+    tag oval-tinsel color=silver label="Fine oval silver tinsel"
+    tail golden-pheasant-crest count=10
+    butt silk-floss color=fluo-red label="Fluorescent red floss"
+    rib oval-tinsel color=silver label="Fine oval silver tinsel"
+    body flat-tinsel color=silver label="Flat or holographic silver tinsel"
+    throat hackle-fibres color=black count=40 label="Black cock hackle fibres"
+    wing squirrel-tail color=black
+    cheeks jungle-cock
+}
+
+// No source gives the steps; the order is the usual hairwing order, as on the Stoat's Tail.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0
+    tie-in tag
+    wrap-thread to=0.05
+    wind tag to=0.05 turns=4 note="A few close turns at the start of the bend."
+    tie-off tag
+    // Read from the photos: curving up to about the wing's tips.
+    tie-in tail length=1.6 angle=14 spread=8
+    tie-in butt note="Glo-Brite or another fluorescent floss."
+    wrap-thread to=0.15
+    wind butt to=0.15 turns=6 note="A short, neat butt."
+    tie-off butt
+    tie-in rib note="Or silver wire, as Trout & Salmon ties it."
+    tie-in body
+    wrap-thread to=0.82
+    wind body to=0.82 turns=18 note="Touching turns, never overlapping."
+    tie-off body
+    wind rib to=0.82 turns=5
+    tie-off rib
+    // Read from the photos: about to the hook point.
+    tie-in throat length=1.1 angle=24 side=under note="A bunch under the shank."
+    // Read from the photos: about a gape past the bend.
+    tie-in wing length=3.3 angle=7 spread=16 note="A small bunch, low over the body."
+    trim wing
+    // Read from the photos: short, the eyes showing just behind the head.
+    tie-in cheeks length=0.8 angle=12 spread=30 note="One each side, flat against the root of the wing."
+    whip-finish note="A neat red head, varnished."
+}

@@ -1,0 +1,54 @@
+id munro-killer
+status draft
+
+// en description: A fine gold tag, a black floss body ribbed with oval gold, an orange throat with a few blue guinea fowl fibres, and a long wing of yellow bucktail under black.
+description "En tag av fin guldtinsel, en kropp av svart flossilke ribbad med oval guldtinsel, ett orange skägg med några fibrer blå pärlhöna och en lång vinge av gul bucktail under svart."
+
+// en history: Named after the tackle shop of J.A.J. Munro in Aberlour on the Spey. John Gray says Munro ran it for many years and places the fly among the modern hairwings developed from the 1950s. Who tied it first is disputed. In a family account published by Fish & Fly, James Morrison says his father, John Milne Morrison, who owned the business, invented it with his friend the salmon-fishing writer John Ashley-Cooper: he took the body of a Thunder and Lightning and added a long hair wing. The family keeps two of the first flies.
+history """
+    Uppkallad efter J.A.J. Munros fiskeaffär i Aberlour vid Spey. John Gray säger att Munro drev
+    den i många år och räknar flugan till de moderna hårvingeflugor som tog form från
+    1950-talet. Vem som band den först är omstritt. I en familjeberättelse som Fish & Fly
+    publicerat säger James Morrison att hans far, John Milne Morrison, som ägde firman, skapade
+    den tillsammans med sin vän laxfiskeförfattaren John Ashley-Cooper: han tog kroppen från en
+    Thunder and Lightning och lade till en lång hårvinge. Familjen har kvar två av de första
+    flugorna.
+    """
+
+// en fishing: Peter Gathercole dresses the wing at least twice the length of the hook, which gives it far more action in the water and makes it work even in the slower parts of a river. Fish & Fly calls it a huge attraction to Spey salmon. It is tied on singles and doubles, and on tubes.
+fishing """
+    Peter Gathercole binder vingen minst dubbelt så lång som kroken, vilket ger den mycket mer
+    rörelse i vattnet och gör att den fungerar även i älvens lugnare partier. Fish & Fly kallar
+    den en stor lockelse för laxen i Spey. Den binds på enkelkrokar och dubbelkrokar, och på
+    tub.
+    """
+
+labels {
+    // en tag: Fine gold tinsel
+    tag "Fin guldtinsel"
+    // en throat: Orange cock hackle fibres
+    throat "Orange tupphackelfibrer"
+    // en blue-throat: Dyed blue guinea fowl fibres
+    blue-throat "Blåfärgade pärlhönsfibrer"
+}
+
+notes {
+    // en step 2 (wrap-thread): To where the two hooks divide.
+    step 2 "Till där de två krokarna delar sig."
+    // en step 5 (wind tag): Five or six turns.
+    step 5 "Fem eller sex varv."
+    // en step 10 (wind body): Down to the tag and back again: a double layer.
+    step 10 "Ner till taggen och tillbaka igen: ett dubbelt lager."
+    // en step 12 (wind rib): Five evenly spaced turns.
+    step 12 "Fem jämnt fördelade varv."
+    // en step 14 (tie-in throat): Swept back along and below the shank.
+    step 14 "Bakåtstruket längs och under skaftet."
+    // en step 15 (tie-in blue-throat): A few fibres in front of the orange.
+    step 15 "Några fibrer framför det orange."
+    // en step 16 (tie-in yellow): Lay the black on top of the yellow before tying them in, so they blend a little.
+    step 16 "Lägg det svarta ovanpå det gula innan du binder in dem, så att de blandas lite."
+    // en step 19 (trim black): Cut at an angle so the head tapers.
+    step 19 "Klipp snett så att huvudet smalnar av."
+    // en step 20 (whip-finish): A black head, varnished.
+    step 20 "Ett svart huvud, lackat."
+}

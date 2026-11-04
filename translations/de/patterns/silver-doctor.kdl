@@ -1,0 +1,54 @@
+id silver-doctor
+status draft
+
+// en description: An oval silver tag, a golden pheasant crest tail, a red wool butt, a flat silver body ribbed with oval silver, a silver-tipped squirrel wing, a pale blue hen hackle collar and a red head.
+description "Ein Tag aus ovalem Silbertinsel, ein Schwanz aus Goldfasan-Crest, ein Butt aus roter Wolle, ein Körper aus flachem Silbertinsel, gerippt mit ovalem Silbertinsel, ein Flügel aus silberspitzigem Eichhörnchen, ein Kragen aus hellblauer Hennenhechel und ein roter Kopf."
+
+// en history: Kelson, in The Salmon Fly (1895), gives it to Wright: James Wright of Sprouston on the Tweed, whom Francis Francis called a first-rate artist and to whom Kelson also gives the Black and Blue Doctors. Francis printed a dressing in 1867, calling it a good standard fly. The classic dressings differ: Francis gives a blue hackle, gallina at the shoulder and a wing mostly of pintail; Kelson ties a throat of blue hackle and gallina and a mixed wing of many feathers under a topping; Pryce-Tannatt, in How to Dress Salmon Flies (1914), follows the blue throat with widgeon. All have a silver body, scarlet wool butt and head and a topping in the tail. John Gray describes how the gaudy Victorian flies were simplified, first into low-water dressings and then, above all from the 1950s, into hairwings. This is Håkan Karsnäser's hairwing version, with the classic's silver, scarlet and blue.
+history """
+    Kelson schreibt sie in The Salmon Fly (1895) Wright zu: James Wright aus Sprouston am Tweed,
+    den Francis Francis einen erstklassigen Künstler nannte und dem Kelson auch die Black und
+    die Blue Doctor zuschreibt. Francis veröffentlichte 1867 eine Bindeanleitung und nannte sie
+    eine gute Standardfliege. Die klassischen Bindeanleitungen unterscheiden sich: Francis gibt
+    eine blaue Hechel, Perlhuhn an der Schulter und einen Flügel vor allem aus Spießente an;
+    Kelson bindet einen Bart aus blauer Hechel und Perlhuhn und einen gemischten Flügel aus
+    vielen Federn unter einem Topping; Pryce-Tannatt lässt in How to Dress Salmon Flies (1914)
+    auf den blauen Bart Pfeifente folgen. Alle haben einen Silberkörper, Butt und Kopf aus
+    scharlachroter Wolle und ein Topping im Schwanz. John Gray beschreibt, wie die prächtigen
+    viktorianischen Fliegen vereinfacht wurden, zuerst zu Niedrigwasser-Mustern und dann, vor
+    allem ab den 1950er Jahren, zu Haarflügelfliegen. Dies ist Håkan Karsnäsers Haarflügel-
+    Fassung, mit dem Silber, Scharlachrot und Blau des Klassikers.
+    """
+
+// en fishing: Karsnäser calls it an obvious fly for clear water and sunshine. Kelson rated it a great fly throughout the United Kingdom, and popular on Norwegian and Canadian rivers. Today's hairwing is fished on doubles, singles and tubes; the full dress is mostly tied for display.
+fishing """
+    Karsnäser nennt sie eine naheliegende Fliege für klares Wasser und Sonnenschein. Kelson
+    hielt sie für eine hervorragende Fliege im ganzen Vereinigten Königreich, beliebt auch an
+    norwegischen und kanadischen Flüssen. Die heutige Haarflügel-Fassung wird auf Doppel- und
+    Einzelhaken und Tuben gefischt; die voll gekleidete Fliege wird meist für die Vitrine
+    gebunden.
+    """
+
+labels {
+    // en butt: Red wool dubbing
+    butt "Rotes Wolldubbing"
+    // en wing: Silver-tipped squirrel tail
+    wing "Silberspitziger Eichhörnchenschwanz"
+    // en collar: Pale blue hen hackle
+    collar "Hellblaue Hennenhechel"
+}
+
+notes {
+    // en step 8 (dub butt): A few turns of sparse dubbing: a small round butt.
+    step 8 "Ein paar Windungen sparsames Dubbing: ein kleiner, runder Butt."
+    // en step 12 (wind body): Touching turns, never overlapping.
+    step 12 "Dichte Windungen, die sich nie überlappen."
+    // en step 16 (tie-in wing): A small, cleaned bunch.
+    step 16 "Ein kleines, gesäubertes Büschel."
+    // en step 18 (tie-in collar): The pale blue called Silver Doctor blue.
+    step 18 "Das helle Blau, das Silver-Doctor-Blau heißt."
+    // en step 20 (wind collar): Stroke the fibres back with each turn.
+    step 20 "Die Fibern bei jeder Windung nach hinten streichen."
+    // en step 22 (whip-finish): A neat red head, varnished.
+    step 22 "Ein sauberer roter Kopf, lackiert."
+}

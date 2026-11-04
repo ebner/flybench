@@ -209,6 +209,9 @@ const TAIL_ARCHETYPES: readonly Archetype[] = ["hair", "fibres", "biot"];
 /** Whether a part's material `index` is the tails of a body made on a needle, not the body. */
 export const isTails = (p: Part, index: number) => p.how === "extended" && p.tailLength !== undefined && index === 1;
 
+/** Whether a part's material shows colours mixed through it: a bunch (not tied across, nor wound on as well), spun or glued hair, or a needle body's tails. */
+export const blends = (p: Part, index: number) => (p.how === "bunch" && p.side !== "across" && p.windTo === undefined) || p.how === "spun" || p.how === "glued" || isTails(p, index);
+
 /**
  * The materials a part's material can be changed to: its role's (a body's tails a tail's that can
  * come out of a body), and in a mix only those tied the way the part is; its own always.
@@ -706,7 +709,11 @@ export function compile(fly: PartsFly): Compiled {
     spans.set(id, s ? [s[0], i] : [i, i]);
   });
   const materials = fly.parts.flatMap((p) =>
-    p.mats.map((m) => ({ id: m.id, kind: m.kind, ...(m.color && { color: m.color }), ...(m.label && { label: m.label }), ...m.props }) as Material),
+    p.mats.map((m, i) => {
+      // Colours mixed in show only in a bunch: tied another way, the blend is left out.
+      const { mix, ...props } = m.props ?? {};
+      return { id: m.id, kind: m.kind, ...(m.color && { color: m.color }), ...(m.label && { label: m.label }), ...props, ...(mix !== undefined && blends(p, i) && { mix }) } as Material;
+    }),
   );
   const recipe = { ...fly.meta, materials, steps } as Recipe;
   // The recipe's own form first (ids, sizes, colours), then the tying rules.

@@ -1,5 +1,5 @@
-import { MATERIALS, type Archetype } from "../recipe/materials";
-import { resolveColor, type Material, type Recipe, type Step } from "../recipe/schema";
+import { MATERIALS, type Archetype, type FeatherShape } from "../recipe/materials";
+import { mixColours, resolveColor, type Material, type Recipe, type Step } from "../recipe/schema";
 import { POSITION_TOLERANCE, TIPS_PAST_TURN } from "../recipe/validate";
 import { stepText, stepTitle, type StepContext } from "./describe";
 import { hookModel, threadDiameter, unitMm, type HookModel } from "./hook";
@@ -118,6 +118,8 @@ export interface BundlePiece extends PieceBase {
   fan?: number;
   /** Bands along each fibre (tippet bars, barred fibres). */
   marks?: FibreMarks;
+  /** A blended bunch: its fibres share these colours evenly, its own first. */
+  mix?: string[];
   /** Fibres broader than usual, as a multiple of the usual width. */
   fibreWidth?: number;
   /** Fibres with flue along them (peacock sword). */
@@ -135,7 +137,7 @@ export interface FeatherPiece extends PieceBase {
   length: number;
   angle: number;
   width: number;
-  shape: "breast" | "tip" | "slip";
+  shape: FeatherShape;
   /** Pairs: radians each feather is turned out from the top. */
   pair: number;
   side: Side;
@@ -565,7 +567,8 @@ const HAIR_SHEATH = 0.12;
 const GLUED_THICKNESS = 0.7;
 
 /** Feather width as a fraction of length, by shape. */
-const FEATHER_WIDTH = { breast: 0.5, tip: 0.28, slip: 0.32 };
+// Assumption: a jungle cock eye is about three tenths as wide as it is long.
+const FEATHER_WIDTH: Record<FeatherShape, number> = { breast: 0.5, tip: 0.28, slip: 0.32, eye: 0.3 };
 
 export function simulate(recipe: Recipe): Build {
   const hook = hookModel(recipe.hook);
@@ -1409,6 +1412,12 @@ export function simulate(recipe: Recipe): Build {
     });
     time += duration;
   });
+
+  // A blended bunch is blended wherever it shows: tail, wing, butts.
+  const mixed = new Map(recipe.materials.filter((m) => m.mix).map((m) => [m.id, mixColours(m).map(resolveColor)]));
+  if (mixed.size) {
+    for (const s of steps) for (const p of s.pieces) if (p.type === "bundle" && mixed.has(p.material)) p.mix = [p.color, ...mixed.get(p.material)!];
+  }
 
   return { recipe, hook, threadColor, threadRadius, steps, duration: time };
 }

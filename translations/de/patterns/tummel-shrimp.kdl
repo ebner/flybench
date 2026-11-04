@@ -1,0 +1,43 @@
+id tummel-shrimp
+status draft
+
+// en description: A long tail of orange, yellow and black bucktail mixed with a few strands of flash, a black floss body ribbed with oval gold, a black squirrel wing, and a collar of orange cock hackle behind blue guinea fowl.
+description "Ein langer Schwanz aus orangefarbenem, gelbem und schwarzem Bucktail, gemischt mit ein paar Strängen Flash, ein Körper aus schwarzem Floss, gerippt mit ovalem Goldtinsel, ein Flügel aus schwarzem Eichhörnchen und ein Kragen aus orangefarbener Hahnenhechel hinter blauem Perlhuhn."
+
+// en history: One of Alastair "Ally" Gowans' shrimp flies, with Ally's Shrimp and the Cascade, and named after the River Tummel, a big tributary of the Tay. Gowans says it came from the need for a reliable dark fly, and that it puts together the proven colours of the Willie Gunn and the Thunder and Lightning. Stevie Munn, who was first shown it by Gowans at the Scone Palace Game Fair, remembers it as loosely based on a Willie Gunn or a Munro Killer.
+history """
+    Eine von Alastair „Ally“ Gowans' Shrimpfliegen, neben Ally's Shrimp und der Cascade, benannt
+    nach dem River Tummel, einem großen Nebenfluss des Tay. Gowans sagt, sie sei aus dem Bedarf
+    an einer verlässlichen dunklen Fliege entstanden und vereine die bewährten Farben der Willie
+    Gunn und der Thunder and Lightning. Stevie Munn, dem Gowans sie zuerst auf der Scone Palace
+    Game Fair zeigte, erinnert sich an sie als lose an eine Willie Gunn oder eine Munro Killer
+    angelehnt.
+    """
+
+// en fishing: Gowans counts it among the flies he wants for late spring and summer, in low water; he told Stevie Munn it was a summer fly. Munn also fishes it for autumn salmon and for the dollaghan, the lake-run trout of Lough Neagh, when fish are not looking at brighter flies and want something more sombre. It is tied on small singles, doubles and trebles.
+fishing """
+    Gowans zählt sie zu den Fliegen, die er im späten Frühjahr und im Sommer bei niedrigem
+    Wasser haben will; Stevie Munn sagte er, sie sei eine Sommerfliege. Munn fischt sie auch auf
+    Herbstlachse und auf Dollaghan, die aus dem Lough Neagh aufsteigenden Forellen, wenn die
+    Fische hellere Fliegen nicht beachten und etwas Gedeckteres wollen. Sie wird auf kleine
+    Einzel-, Doppel- und Drillingshaken gebunden.
+    """
+
+notes {
+    // en step 3 (tie-in tail): Mix the three colours well, and bind the butts along the shank.
+    step 3 "Die drei Farben gut mischen und die Enden entlang des Hakenschenkels festbinden."
+    // en step 5 (tie-in tail-flash): Two or three strands on top.
+    step 5 "Zwei oder drei Stränge obenauf."
+    // en step 9 (wind body): Slim and even.
+    step 9 "Schlank und gleichmäßig."
+    // en step 11 (wind rib): Open, even turns.
+    step 11 "Offene, gleichmäßige Windungen."
+    // en step 13 (tie-in wing): A small bunch, low over the body; Munn also ties Arctic fox.
+    step 13 "Ein kleines Büschel, flach über dem Körper; Munn bindet auch Polarfuchs."
+    // en step 17 (wind collar): Stroke the fibres back with each turn.
+    step 17 "Die Fibern bei jeder Windung nach hinten streichen."
+    // en step 21 (wind front-collar): In front of the orange; soft and long, it sweeps back over it.
+    step 21 "Vor der orangefarbenen; weich und lang, legt sie sich nach hinten darüber."
+    // en step 23 (whip-finish): A small black head, varnished.
+    step 23 "Ein kleiner schwarzer Kopf, lackiert."
+}

@@ -1,6 +1,6 @@
 import { hookModel, modelLabel, ridesPointUp, trebleSize, unitMm } from "./hook";
 import { MATERIALS, type Archetype } from "../recipe/materials";
-import { NAMED_COLORS, type Material, type NamedColor, type Recipe, type Step } from "../recipe/schema";
+import { mixColours, NAMED_COLORS, type Material, type NamedColor, type Recipe, type Step } from "../recipe/schema";
 import type { MaterialKind } from "../recipe/materials";
 import { lang, type Lang } from "../i18n/lang";
 import { de } from "./describe-de";
@@ -61,10 +61,23 @@ export function partInColour(id: string, color: NamedColor): string {
   return writer().partInColour(id, color);
 }
 
+/**
+ * The colours a material is named by: its own, if named; for a blended bunch every colour, its own
+ * first, a shade of the material's own (its natural colour, or a hex colour) as `null`, said once.
+ */
+export function namedColours(m: Pick<Material, "color" | "mix">): (NamedColor | null)[] {
+  const named = (c: string | undefined) => (c !== undefined && c in NAMED_COLORS ? (c as NamedColor) : null);
+  if (!m.mix) return named(m.color) ? [named(m.color)!] : [];
+  const list = [m.color, ...mixColours(m)].map(named);
+  return list.filter((c, i) => list.indexOf(c) === i);
+}
+
 function englishMaterialName(m: Material): string {
   if (m.label) return m.label;
   const cat = MATERIALS[m.kind];
-  const color = m.color ? colorName(m.color) : "";
+  // A blended bunch names all its colours: "Orange, yellow and black bucktail", "Natural and white deer hair".
+  const colours = namedColours(m).map((c) => (c ? colorName(c) : "natural"));
+  const color = colours.length < 2 ? (colours[0] ?? "") : `${colours.slice(0, -1).join(", ")} and ${colours[colours.length - 1]}`;
   return capitalize(`${color} ${cat.name}`.trim());
 }
 

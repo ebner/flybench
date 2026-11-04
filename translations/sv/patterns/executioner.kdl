@@ -1,0 +1,59 @@
+id executioner
+status draft
+
+// en description: An oval silver tag, a golden pheasant crest tail, a red floss butt, a flat silver body ribbed with oval silver, a black throat, a black squirrel wing, jungle cock cheeks and a red head.
+description "En tag av oval silvertinsel, en stjärt av guldfasantopping, en butt av rött flossilke, en kropp av platt silvertinsel ribbad med oval silvertinsel, ett svart skägg, en vinge av svart ekorre, kinder av jungle cock och ett rött huvud."
+
+// en history: Who tied it first is not documented. Trout & Salmon calls it a classic that has stood the test of time and a great alternative to a Stoat's Tail; Ally Gowans, who sells a version of his own, says that touch of red can make the difference. Dressings differ over how much of the body is red: Trout & Salmon and the Tay Salmon Fly blog give a short butt of fluorescent red floss in front of the tail, Scott Jackson and Flies of Fancy a red rear third or more. The jungle cock is sometimes left out, and some tie a red floss head over the thread.
+history """
+    Vem som band den först finns inte dokumenterat. Trout & Salmon kallar den en klassiker som
+    har stått sig och ett utmärkt alternativ till en Stoat's Tail; Ally Gowans, som säljer en
+    egen version, säger att den där röda detaljen kan göra skillnaden. Bindningarna skiljer sig
+    i hur mycket av kroppen som är rött: Trout & Salmon och bloggen Tay Salmon Fly har en kort
+    butt av fluorescerande rött floss framför stjärten, Scott Jackson och Flies of Fancy en röd
+    bakre tredjedel eller mer. Jungle cock utelämnas ibland, och en del lindar ett huvud av rött
+    floss över tråden.
+    """
+
+// en fishing: Trout & Salmon fishes it on a floating line in a range of sizes. Craig Fleming of Fulling Mill finds it does well for salmon and sea trout in low water, deadly when the grilse are running, and fishes it with a slow figure-of-eight retrieve so the body flashes. Ally Gowans counts it among the showy silver-bodied flies for sea trout in coloured water.
+fishing """
+    Trout & Salmon fiskar den på flytlina i flera storlekar. Craig Fleming på Fulling Mill
+    tycker att den fungerar bra för lax och havsöring i lågt vatten, att den är dödande när
+    grilsen går upp, och fiskar den med ett långsamt indrag i åttor (”figure of eight”) så att kroppen blänker. Ally
+    Gowans räknar den till de iögonfallande flugorna med silverkropp för havsöring i färgat
+    vatten.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Fin oval silvertinsel"
+    // en butt: Fluorescent red floss
+    butt "Fluorescerande rött flossilke"
+    // en rib: Fine oval silver tinsel
+    rib "Fin oval silvertinsel"
+    // en body: Flat or holographic silver tinsel
+    body "Platt eller holografisk silvertinsel"
+    // en throat: Black cock hackle fibres
+    throat "Svarta tupphackelfibrer"
+}
+
+notes {
+    // en step 5 (wind tag): A few close turns at the start of the bend.
+    step 5 "Några täta varv där krokböjen börjar."
+    // en step 8 (tie-in butt): Glo-Brite or another fluorescent floss.
+    step 8 "Glo-Brite eller ett annat fluorescerande floss."
+    // en step 10 (wind butt): A short, neat butt.
+    step 10 "En kort, prydlig butt."
+    // en step 12 (tie-in rib): Or silver wire, as Trout & Salmon ties it.
+    step 12 "Eller silvertråd, som Trout & Salmon binder den."
+    // en step 15 (wind body): Touching turns, never overlapping.
+    step 15 "Täta varv som aldrig överlappar."
+    // en step 19 (tie-in throat): A bunch under the shank.
+    step 19 "En bunt under skaftet."
+    // en step 20 (tie-in wing): A small bunch, low over the body.
+    step 20 "En liten bunt, lågt över kroppen."
+    // en step 22 (tie-in cheeks): One each side, flat against the root of the wing.
+    step 22 "En på varje sida, platt mot vingens rot."
+    // en step 23 (whip-finish): A neat red head, varnished.
+    step 23 "Ett prydligt rött huvud, lackat."
+}

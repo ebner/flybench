@@ -1,0 +1,86 @@
+// Garry Dog: the yellow and red hairwing salmon fly named after a minister's retriever.
+
+id garry-dog
+name "Garry Dog"
+aliases "Garry" "Yellow Dog" "Minister's Dog"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon
+season march april may june july august september october
+origin region="River Tweed"
+description "An oval silver tag and golden yellow floss, a golden pheasant crest tail, a black floss body ribbed with oval silver, a blue guinea fowl beard and a wing of yellow bucktail over a few red hairs."
+history """
+    John Gray tells how the name came about in a Tweed tackle shop in the 1920s: a visiting
+    minister gave hair from the tail of his golden retriever, Garry, to finish a fly being tied
+    there; one of Gray's pages names the tyer as John Wright. Yellow bucktail or similar hair now
+    takes the dog's place. Gray groups it with the Hairy Mary among the early hairwings.
+    """
+fishing """
+    Gray rates it a fly for coloured water, above all in the autumn. Peter Gathercole ties it
+    small, on 6 to 10 singles, doubles and trebles, for summer salmon as the river clears after a
+    spate, and large, on long-shanked doubles, tubes and Waddingtons, for high, slightly coloured
+    water in spring and autumn.
+    """
+sources {
+    "Trout & Salmon Fishing: Salmon flies (John Gray)" url="https://trout-salmon-fishing.com/salmon-flies.htm"
+    "Salmon Flies: Grays of Kilsyth (John Gray)" url="https://www.salmon-flies.co.uk/"
+    "Grays of Kilsyth: Salmon fly tying, Garry (low water style)" url="http://www.graysofkilsyth.com/salmon-fly-tying.htm"
+    "The Fly-Tying Bible (Peter Gathercole, 2003): Garry" url="https://archive.org/details/the-fly-tying-bible-peter-gathercole"
+    "Fish4Flies: Garry Dog single" url="https://www.fish4flies.com/Salmon-Atlantic/Singles/Garry-Dog"
+    "GlobalFlyFisher: Anatomy of a Salmon Fly (Steve Schweitzer)" url="https://globalflyfisher.com/node/13548"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Original/2595-Garry%20Dog%20single%201020.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Singles/Garry-Dog" license="All rights reserved; reference only" note="Single, side view, long wing"
+    "http://www.graysofkilsyth.com/salmon-fly-garry.jpg" page="http://www.graysofkilsyth.com/salmon-fly-tying.htm" author="John Gray" license="All rights reserved; reference only" note="Low-water single: the dressing on the front of the shank"
+    "https://perfectflystore.com/wp-content/uploads/2021/03/garry_dog.jpg" page="https://perfectflystore.com/product/garry-dog/" license="All rights reserved; reference only" flip=#true note="Single in the vise"
+}
+
+// Gathercole: sizes 6 to 10, single, double or treble.
+hook salmon-up-eye size=8
+thread black size="8/0"
+
+materials {
+    tag oval-tinsel color=silver label="Fine oval silver tinsel"
+    yellow-tag silk-floss color=yellow label="Golden yellow floss"
+    tail golden-pheasant-crest count=10
+    rib oval-tinsel color=silver label="Medium oval silver tinsel"
+    body silk-floss color=black
+    beard hackle-fibres color=blue barred=#true count=40 label="Dyed blue guinea fowl fibres"
+    // Gathercole: a few red fibres; Fish4Flies: a third red.
+    underwing bucktail color=red count=60
+    // Gathercole: squirrel tail, softer, on small hooks.
+    wing bucktail color=yellow
+}
+
+// Gathercole's steps, The Fly-Tying Bible.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="To opposite the barb."
+    tie-in tag
+    wrap-thread to=0.04
+    wind tag to=0.04 turns=4
+    tie-off tag
+    tie-in yellow-tag
+    wrap-thread to=0.09
+    wind yellow-tag to=0.09 turns=4 note="In front of the tinsel."
+    tie-off yellow-tag
+    // Schweitzer: a crest tail is one and a half gapes long, curving up.
+    tie-in tail length=1.5 angle=12 spread=8
+    tie-in rib
+    tie-in body note="Its waste end along the shank."
+    wrap-thread to=0.84
+    wind body to=0.84 turns=12 note="Close turns right up to the thread: smooth and tapering."
+    tie-off body
+    wind rib to=0.84 turns=5 note="Open, evenly spaced turns."
+    tie-off rib
+    // Read from the photos: to about the hook point.
+    tie-in beard length=1.1 angle=22 side=under note="Tips level, under the shank."
+    tie-in underwing length=3.5 angle=8 spread=12 note="A few hairs, under the yellow."
+    trim underwing
+    // Gathercole: the wing's tip level with the tail's.
+    tie-in wing length=3.6 angle=11 spread=14
+    trim wing note="Cut the butts at an angle for a small head."
+    whip-finish note="A black head, varnished."
+}

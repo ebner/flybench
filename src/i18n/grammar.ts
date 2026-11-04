@@ -11,6 +11,22 @@ export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 /** A name inside a sentence: small in English and Swedish ("needs red wool"); German nouns keep their capital. */
 export const inSentence = (s: string) => (lang() === "de" ? s : s.charAt(0).toLowerCase() + s.slice(1));
 
+/** "a, b and c" with the language's "and". */
+const joinList = (xs: string[], and: string) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} ${and} ${xs[xs.length - 1]}`);
+
+/**
+ * Several colours as one adjective, each inflected as it would be alone: "orange, gul och svart",
+ * "orangefarbener, gelber und schwarzer" (a blended bunch).
+ */
+export function adjectiveList(list: Adjective[], and: string): Adjective {
+  if (list.length === 1) return list[0]!;
+  const form = (k: string) => joinList(list.map((a) => (a.invariable || a.compound ? a.text : (a.forms[k] ?? a.text))), and);
+  return {
+    ...list[0]!, text: joinList(list.map((a) => a.text), and), invariable: false, compound: false,
+    forms: { neuter: form("neuter"), plural: form("plural") }, parts: list, and,
+  };
+}
+
 // Swedish
 
 export type SvForm = "indefinite" | "definite" | "plural" | "plural-definite";
@@ -89,6 +105,7 @@ export function deNoun(n: Noun, c: Case = "nom", plural = false): string {
 
 /** An adjective with its ending: "rot" + "en" = "roten"; "dunkel" + "e" = "dunkle"; "rosa" stays. */
 export function deAdjective(a: Adjective, ending: string): string {
+  if (a.parts) return joinList(a.parts.map((p) => deAdjective(p, ending)), a.and ?? "und");
   if (a.invariable || !ending) return a.text;
   const stem = /el$/.test(a.text) && ending.startsWith("e") ? `${a.text.slice(0, -2)}l` : a.text;
   return stem.endsWith("e") && ending.startsWith("e") ? stem + ending.slice(1) : stem + ending;

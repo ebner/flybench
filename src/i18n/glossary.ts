@@ -54,6 +54,10 @@ export interface Adjective extends EntryBase {
   compound: boolean;
   /** sv: neuter, plural (also the definite form). de: none; endings follow the rules. */
   forms: Record<string, string>;
+  /** Several colours said as one (a blended bunch, see grammar.ts `adjectiveList`): each declined on its own. */
+  parts?: Adjective[];
+  /** The word joining the last of `parts` ("och", "und"). */
+  and?: string;
 }
 
 export interface Phrase extends EntryBase {

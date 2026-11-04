@@ -420,7 +420,7 @@ export const de: Messages = {
       turns: "Windungen", counter: "In Gegenrichtung gewunden", barred: "Gebändert wie Grizzly", side: "Wo", sides: { top: "Oben", under: "Unten", across: "Quer über den Schenkel" },
       forward: "Nach vorn zeigend", tip: "Farbe des Endes", collar: "Länge des Kragens", windTo: "Als Körper gewunden bis", fray: "Aufgezupfter Schwanz",
       fan: "Nach vorn und hinten gefächert", segments: "Segmente", tailLength: "Schwänze hinter dem Ende", tailSpread: "Schwänze gespreizt",
-      fold: "Als Kopf zurückgefaltet", taper: "Spitz zulaufend geschnitten", tuft: "Fell nur als Büschel am Ende",
+      fold: "Als Kopf zurückgefaltet", taper: "Spitz zulaufend geschnitten", tuft: "Fell nur als Büschel am Ende", mix: "Beigemischte Farben", mixAdd: "Eine Farbe beimischen", unmix: "wieder herausnehmen",
       flat: "Flach geschnitten", flats: { none: "Nein, in Form geschnitten", sides: "Oben und unten, die Seiten lang", top: "Nur unten", under: "Nur oben" },
       leave: "Stehen gelassen", shape: "Geschnitten zu", shapes: { round: "Einem runden Kopf", wedge: "Einem Keil, unten flach", cigar: "Einer Zigarre, an beiden Enden gerundet", cone: "Einem Kegel, vorn am dicksten", disc: "Einer flachen Scheibe, von oben rund" },
       keep: "Behaltene Fibern", keeps: { sides: "An den Seiten", top: "Oben und an den Seiten", under: "Unten und an den Seiten" }, none: "Wie gebunden",
@@ -533,6 +533,7 @@ export const de: Messages = {
         barred: "Gebändert wie Grizzly",
         mm: "Größe (mm)",
         tuft: "Fell nur als Büschel am Ende (× Bogenweite)",
+        mix: "Beigemischte Farben",
       },
       step: {
         material: "Material",

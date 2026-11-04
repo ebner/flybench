@@ -215,13 +215,13 @@ how it is drawn and which extra properties it takes:
 | floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
-| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, up to 200: legs tied across, a few hairs as a tail, or a sparse wing; without it a bunch is a clump that grows with its length) |
-| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred` |
+| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, up to 200: legs tied across, a few hairs as a tail, or a sparse wing; without it a bunch is a clump that grows with its length), `mix` |
+| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred`, `mix` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | `barred` |
 | cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
 | flash      | `krystal-flash`, `flashabou` | `count` |
-| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip) | `barred` |
+| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip), `jungle-cock` (eye) | `barred` |
 | foam       | `foam`, `scud-back` | `mm` (the sheet's thickness, as sold; drawn that thick pulled over) |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads), `split-shot` (crimped behind the eye, painted with eyes) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
@@ -233,6 +233,15 @@ The archetype decides how a material behaves and is drawn:
 
 - **dubbing** is spun onto the thread with `dub`, never tied in.
 - **beads** go on with `slide-bead` before the thread; **eyes** are tied in without a length.
+- **a blended bunch** (`mix="yellow black"` on hair or fibres): up to three more colours, named or
+  hex, mixed evenly through the bunch with its `color`, as a tail or wing of mixed bucktail is,
+  rather than laid in layers (for layers, tie in a bunch of each colour, one over the other). The
+  dressing names every colour (the material's own shade as "natural" when it has no named
+  colour), and the inventory needs each. It shows only in a bunch: tied in with a length (not
+  across), spun or glued, or as a needle body's tails; wound, pulled over or tied across it is
+  refused, and the builder leaves the blend out when a part is tied that way.
+- **jungle cock** eyes are small, round-ended feathers, dark with a row of cream enamel spots, each
+  with a buff tip; tied in as a pair with `spread` they sit as cheeks either side of a wing.
 - **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Tied in
   pointing forward (`forward=#true`), its butts lie back along the shank under the turns, cut
   square first, with nothing to trim. Hair can also be spun (`spin`) and trimmed into a head.
@@ -376,6 +385,8 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
   on the shank or past the bend, the thread goes only as far as the hair reaches, its tips
   still sticking out 0.15 gape behind the last turn (the hair is as long behind where it was
   tied in as it was in front).
+- Colours mixed into a material (`mix`) need it tied as a bunch: with a length and not across the
+  shank, spun or glued; never wound or pulled over.
 - Only hair is spun, only wire weights, only beads are slid on. Only hair, fibres and yarn are
   glued, forward from `from` to `to`, once.
 - `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), `glue` (a body

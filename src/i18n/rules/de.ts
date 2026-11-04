@@ -101,6 +101,7 @@ export const RULES_DE: RuleCatalog = {
   neverUsedAfterTieIn: (p) => `„${p.m}“ ist eingebunden, wird aber nie gewunden oder nach vorn geklappt.`,
   neverUsed: (p) => `„${p.m}“ steht in der Liste, wird aber nie verwendet.`,
   endWithWhipFinish: () => "Die Fliege muss mit einem Kopfknoten enden.",
+  mixOnlyBunch: (p) => `In „${p.m}“ sind Farben beigemischt, und die zeigen sich nur in einem Büschel: Binde es mit einer Länge ein (nicht quer über den Hakenschenkel), spinne es oder klebe es auf.`,
   sitsFloats: () => "Wie eine Fliege auf dem Wasser liegt, gilt nur für eine Fliege, die schwimmt.",
   tooMuchToDraw: () => "Ab diesem Schritt gibt es mehr Windungen, als die 3D-Ansicht zeichnen kann: Nimm weniger Windungen oder weniger Schritte.",
 };

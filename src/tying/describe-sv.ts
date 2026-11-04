@@ -1,14 +1,21 @@
 import { hasTerm, term, type Adjective, type Noun } from "../i18n/glossary";
-import { capitalize, svNoun, svPhrase } from "../i18n/grammar";
+import { adjectiveList, capitalize, svNoun, svPhrase } from "../i18n/grammar";
 import { isTube, NAMED_COLORS, type Material, type Recipe } from "../recipe/schema";
 import { hookModel } from "./hook";
-import { gapeFraction, usedInPlural, type Detail, type Length, type Mount, type Place, type Reach, type Said, type What, type Writer } from "./describe";
+import { gapeFraction, namedColours, usedInPlural, type Detail, type Length, type Mount, type Place, type Reach, type Said, type What, type Writer } from "./describe";
 
 /** Swedish: the texts generated from a recipe, with the glossary's words. A draft until reviewed. */
 
 const word = (id: string) => term("sv", "words", id, "noun");
 const material = (m: Material) => term("sv", "materials", m.kind, "noun");
 const colour = (c: string | undefined): Adjective | undefined => (c && c in NAMED_COLORS ? term("sv", "colours", c, "adjective") : undefined);
+/** A material's colour, or the colours of a blended bunch ("orange, gul och svart"). */
+/** A blended bunch's own shade, when it is the material's natural colour or a hex colour. */
+const NATURAL: Adjective = { kind: "adjective", id: "natural", text: "naturfärgad", invariable: false, compound: false, forms: { neuter: "naturfärgat", plural: "naturfärgade" }, notes: [], sources: [], line: 0 };
+const colours = (m: Material): Adjective | undefined => {
+  const list = namedColours(m).map((c) => (c ? colour(c)! : NATURAL));
+  return list.length ? adjectiveList(list, "och") : undefined;
+};
 /** "skaftets", "tubens": a definite noun's genitive. */
 const genitive = (definite: string) => (/[sxz]$/.test(definite) ? definite : `${definite}s`);
 const number = (n: number) => n.toLocaleString("sv-SE");
@@ -55,7 +62,7 @@ function writerFor(recipe: Recipe) {
     if (!m) return id;
     // A translated label says more than the glossary's name ("vita hackelstjälkar", not just
     // fibres): it follows in brackets, as it can't be inflected.
-    const phrase = svPhrase(material(m), colour(m.color), form, usedInPlural(m));
+    const phrase = svPhrase(material(m), colours(m), form, usedInPlural(m));
     return m.label ? `${phrase} (${m.label.charAt(0).toLowerCase()}${m.label.slice(1)})` : phrase;
   };
   /** What a pronoun for the material refers to: its noun, or several. */
@@ -333,7 +340,7 @@ const DETAIL = {
 
 export const sv: Writer = {
   // A label is the translation of the recipe's own (see i18n/prose.ts); otherwise the glossary's name.
-  materialName: (m) => m.label ?? capitalize(svPhrase(material(m), colour(m.color), "indefinite", usedInPlural(m))),
+  materialName: (m) => m.label ?? capitalize(svPhrase(material(m), colours(m), "indefinite", usedInPlural(m))),
   colourWord: (c) => (c ? term("sv", "colours", c, "adjective").text : "naturfärg"),
   // "Hackel rött": the colour agrees with the part's noun.
   partInColour: (id, c) => {
@@ -374,7 +381,7 @@ export const sv: Writer = {
   title: (op, m, id) => {
     const title = term("sv", "steps", op, "phrase").text;
     if (id === undefined) return title;
-    const name = m?.label ? m.label.charAt(0).toLowerCase() + m.label.slice(1) : m && svPhrase(material(m), colour(m.color), "indefinite", usedInPlural(m));
+    const name = m?.label ? m.label.charAt(0).toLowerCase() + m.label.slice(1) : m && svPhrase(material(m), colours(m), "indefinite", usedInPlural(m));
     return `${title}: ${name ?? id}`;
   },
 };

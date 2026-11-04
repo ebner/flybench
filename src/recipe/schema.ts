@@ -176,11 +176,16 @@ const Material = z
     mm: z.number().min(0.05).max(12).optional(),
     /** fur strips: the fur clipped off the hide but for a tuft this long (gapes) at its end (a Morrish Mouse's tail). */
     tuft: z.number().min(0).max(3).optional(),
+    /**
+     * hair, fibres: other colours mixed evenly through the bunch with `color`, separated by spaces
+     * ("yellow black"): a blended tail or wing, not one laid in layers.
+     */
+    mix: z.string().min(1).optional(),
   })
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];
     const allowed = ARCHETYPE_PROPS[cat.archetype];
-    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "barred", "mm", "tuft"] as const) {
+    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "barred", "mm", "tuft", "mix"] as const) {
       if (m[prop] !== undefined && !allowed.includes(prop)) {
         ctx.addIssue({ code: "custom", path: [prop], message: `"${prop}" does not apply to ${cat.name}` });
       }
@@ -194,7 +199,19 @@ const Material = z
     if (m.color === undefined && !("defaultColor" in cat)) {
       ctx.addIssue({ code: "custom", path: ["color"], message: `${cat.name} needs a colour` });
     }
+    if (m.mix !== undefined) {
+      const colours = mixColours(m);
+      if (colours.length > MAX_MIX || colours.some((c) => !Color.safeParse(c).success)) {
+        ctx.addIssue({ code: "custom", path: ["mix"], message: `expected up to ${MAX_MIX} colours mixed in, separated by spaces, like mix="yellow black"` });
+      }
+    }
   });
+
+/** Colours a bunch can have mixed into its own: more would not show. */
+const MAX_MIX = 3;
+
+/** The colours mixed into a bunch besides its own (`mix="yellow black"`). */
+export const mixColours = (m: { mix?: string }): string[] => (m.mix ? m.mix.trim().split(/\s+/) : []);
 
 /** A material of the recipe, by its id (a schema of its own, so the editors can tell it from other ids). */
 export const MaterialRef = Id.clone();

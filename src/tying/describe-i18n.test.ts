@@ -30,6 +30,34 @@ describe.each(["sv", "de"] as const)("generated texts in %s", (lang) => {
   });
 });
 
+describe("a blended bunch", () => {
+  const tummel = recipes.find((r) => r.id === "tummel-shrimp")!;
+  const tail = (lang: "en" | "sv" | "de") => {
+    setLang(lang);
+    return materialsList(tummel).find((m) => m.id === "tail")!.name;
+  };
+  it("is named by all its colours, each declined", () => {
+    expect(tail("en")).toBe("Orange, yellow and black bucktail");
+    expect(tail("sv")).toBe("Orange, gul och svart bucktail");
+    expect(tail("de")).toBe("Orangefarbenes, gelbes und schwarzes Bucktail");
+  });
+  it("names the material's own shade too, when it is its natural colour or a hex colour", () => {
+    const recipe = { ...tummel, materials: tummel.materials.map((m) => (m.id === "tail" ? { id: "tail", kind: "deer-hair", mix: "white" } : m)) } as Recipe;
+    const name = (lang: "en" | "sv" | "de") => {
+      setLang(lang);
+      return materialsList(recipe).find((m) => m.id === "tail")!.name;
+    };
+    expect(name("en")).toBe("Natural and white deer hair");
+    expect(name("sv")).toMatch(/^Naturfärgat och vitt /);
+    expect(name("de")).toMatch(/^Naturfarbenes und weißes /);
+  });
+  it("is drawn in all of them, wherever it shows", () => {
+    const bundles = simulate(tummel).steps.flatMap((s) => s.pieces).filter((p) => p.type === "bundle" && p.material === "tail");
+    expect(bundles.length).toBeGreaterThan(0);
+    for (const p of bundles) expect(p.type === "bundle" && p.mix).toEqual(["#e0731f", "#e8c21c", "#141414"]);
+  });
+});
+
 describe.each(["sv", "de"] as const)("an own fly's parts in %s", (lang) => {
   it("are named from the glossary's words, however many of a kind and however mixed", () => {
     const { materials: _m, steps: _s, ...meta } = blankFly("Mine");

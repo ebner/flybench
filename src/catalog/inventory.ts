@@ -1,5 +1,5 @@
 import { MATERIALS, type MaterialKind } from "../recipe/materials";
-import type { Material, Recipe } from "../recipe/schema";
+import { mixColours, type Material, type Recipe } from "../recipe/schema";
 import { kindName } from "../tying/describe";
 import { lang } from "../i18n/lang";
 
@@ -32,8 +32,11 @@ export const inventoryKey = (n: Need) => `${n.kind}:${n.color}`;
 export function needs(recipe: Recipe): Need[] {
   const seen = new Map<string, Need>();
   for (const m of recipe.materials) {
-    const n = { kind: m.kind, color: materialColor(m) };
-    seen.set(inventoryKey(n), n);
+    // A blended bunch needs each of its colours.
+    for (const color of [materialColor(m), ...mixColours(m)]) {
+      const n = { kind: m.kind, color };
+      seen.set(inventoryKey(n), n);
+    }
   }
   return [...seen.values()];
 }
@@ -44,6 +47,15 @@ export function match(n: Need, owned: Set<string>): Match {
   if (owned.has(inventoryKey(n))) return "have";
   for (const k of owned) if (k.startsWith(`${n.kind}:`)) return "substitute";
   return "missing";
+}
+
+const RANK: Record<Match, number> = { have: 0, substitute: 1, missing: 2 };
+
+/** How far a recipe's material is owned: a blended bunch only as well as its least-owned colour. */
+export function materialMatch(m: Material, owned: Set<string>): Match {
+  return [materialColor(m), ...mixColours(m)]
+    .map((color) => match({ kind: m.kind, color }, owned))
+    .reduce((worst, x) => (RANK[x] > RANK[worst] ? x : worst));
 }
 
 export interface Coverage {

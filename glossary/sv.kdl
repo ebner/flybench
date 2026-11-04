@@ -269,6 +269,11 @@ materials {
         source "Svenska Wikipedia: Flugbindning ('nacken eller sadeln till en tupp eller en höna')" url="https://sv.wikipedia.org/wiki/Flugbindning"
         source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
     }
+    noun jungle-cock "jungle cock" gender=en definite="jungle cocken" mass=#true {
+        note "Kept in English, as Swedish dressings and shops write it ('Cheeks: Jungle cock', 'syntetiska Jungle Cock'); the bird is 'grå djungelhöna', a word not used for the feather. Treated as a material, like bucktail; the definite form is an assumption."
+        source "Rackelhanen: Em Silver ('Cheeks: Jungle cock, Kungsfiskare')" url="https://www.rackelhane.se/swe/1029.htm"
+        source "Guideline: TD Bhatakorva ('vår skräddarsydda syntetiska Jungle Cock')" url="https://www.guidelineflyfish.com/se/td-bhatakorva-9-cm"
+    }
     noun foam "foam" gender=en definite="foamen" mass=#true {
         note "Swedish tyers say 'foam' ('Skal: Foam', 'foamremsan'). The gender wavers ('foamen', 'foamet'). Decided by the reviewer (2026-10-29): common gender, 'foamen'."
         source "Flugbindning.com: Foam & Popper ('Foam är användbart på många olika flugtyper')" url="https://flugbindning.com/400184-foam"

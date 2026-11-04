@@ -271,6 +271,10 @@ materials {
         source "AOS: Fliegenbindematerial (category \"Bälge & Sattelfedern\")" url="https://aos.cc/de/shop-fliegenfischen/fliegenbinden/fliegenbindematerial.html"
         source "Flyfishing Europe: Sattelhecheln Strung (\"wichtigen Bestandteil vieler Salzwasserstreamer\")" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
     }
+    noun jungle-cock "Dschungelhahn" gender=m mass=#true genitive="Dschungelhahns" {
+        note "German dressings name the material by the bird ('Flügel: Dschungelhahn', 'Zwei Dschungelhahnfedern'); 'Jungle Cock' is also kept in English by shops. Used as a material, like 'Bucktail'."
+        source "Der-FliegenBinder: Lachsfliege des Monats 8, Curry's Red Shrimp (\"Flügel: Dschungelhahn\", \"Zwei Dschungelhahnfedern\")" url="https://der-fliegenbinder.de/lachsfliege-des-monats-4"
+    }
     noun foam "Foam" gender=n mass=#true genitive="Foams" {
         note "Tyers write 'Foam', neuter (\"Nun wird das Foam zum Hakenöhr umgeklappt\"). 'Schaumstoff' is the German word and is just as clear. Decided by the reviewer (2026-10-29): 'Foam'."
         source "Fliegenfischer-Forum: der 3. Fly-Swap (Foam-Fliegen) (\"Körper: Foam schwarz\")" url="https://www.fliegenfischer-forum.de/monspez8.html"

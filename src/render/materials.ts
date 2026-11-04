@@ -26,7 +26,7 @@ export class Surfaces {
  * Feathers, fur and hair are never paper-white: a mass of fibres shades itself. Capping their
  * lightness keeps white wings, tails and posts visible against the light plates.
  */
-function natural(color: string): THREE.Color {
+export function natural(color: string): THREE.Color {
   const c = new THREE.Color(color);
   const hsl = { h: 0, s: 0, l: 0 };
   c.getHSL(hsl);

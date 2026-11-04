@@ -98,6 +98,7 @@ export const RULES_SV: RuleCatalog = {
   neverUsedAfterTieIn: (p) => `”${p.m}” är inbundet men lindas aldrig och dras aldrig över.`,
   neverUsed: (p) => `”${p.m}” finns i listan men används aldrig.`,
   endWithWhipFinish: () => "Flugan ska avslutas med en whipfinishknut.",
+  mixOnlyBunch: (p) => `”${p.m}” har färger inblandade, och de syns bara i en bunt: bind in det med en längd (inte tvärs över krokskaftet), spinn det eller limma fast det.`,
   sitsFloats: () => "Hur en fluga ligger på vattnet gäller bara en fluga som flyter.",
   tooMuchToDraw: () => "Från det här steget finns det fler varv än 3D-vyn kan rita: använd färre varv eller färre steg.",
 };

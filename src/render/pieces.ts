@@ -15,7 +15,7 @@ import {
   type SleevePiece,
   type WrapsPiece,
 } from "../tying/simulate";
-import type { Surfaces } from "./materials";
+import { natural, type Surfaces } from "./materials";
 import { mulberry32 } from "./random";
 import type { ShankSpace } from "./space";
 
@@ -101,6 +101,8 @@ export interface Fibre {
   radius: number;
   /** Multiplies the material colour, for natural variation. */
   shade?: number;
+  /** Multiplies the material colour too: a fibre of another colour in a blended bunch. */
+  tint?: THREE.Color;
   /** How far the tip curves off the straight line, as a fraction of the length. */
   bend?: number;
   /** Which way it curves; perpendicular to `dir`. */
@@ -120,7 +122,7 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
   const s = new THREE.Vector3();
   const c = new THREE.Color();
 
-  const addPart = (geometry: THREE.BufferGeometry, list: { u: number; base: THREE.Vector3; dir: THREE.Vector3; length: number; radius: number; shade: number }[], segment?: number) => {
+  const addPart = (geometry: THREE.BufferGeometry, list: { u: number; base: THREE.Vector3; dir: THREE.Vector3; length: number; radius: number; shade: number; tint?: THREE.Color }[], segment?: number) => {
     if (list.length === 0) {
       geometry.dispose();
       return;
@@ -130,7 +132,7 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
       q.setFromUnitVectors(Y_AXIS, f.dir);
       m.compose(f.base, q, s.set(f.radius, f.length, f.radius));
       mesh.setMatrixAt(i, m);
-      mesh.setColorAt(i, c.setScalar(f.shade));
+      mesh.setColorAt(i, f.tint ? c.copy(f.tint).multiplyScalar(f.shade) : c.setScalar(f.shade));
     });
     mesh.instanceMatrix.needsUpdate = true;
     mesh.frustumCulled = false;
@@ -160,7 +162,7 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
         const d = at(f, t1).sub(a);
         // A little overlap closes the gaps at the joints.
         const length = d.length() * 1.06;
-        return { u: f.u, base: a, dir: d.normalize(), length, radius: f.radius, shade: f.shade ?? 1 };
+        return { u: f.u, base: a, dir: d.normalize(), length, radius: f.radius, shade: f.shade ?? 1, tint: f.tint };
       }),
       k,
     );
@@ -205,6 +207,19 @@ const WOUND_FIBRES = {
 
 const BACK = new THREE.Vector3(-1, 0, 0);
 const ZERO = new THREE.Vector3();
+
+/**
+ * Colours for `n` fibres of a blended bunch: each colour as often as the others, shuffled through
+ * the bunch, so even a sparse one shows them all.
+ */
+export function spreadColours<T>(n: number, colours: readonly T[], rand: () => number): T[] {
+  const out = Array.from({ length: n }, (_, i) => colours[i % colours.length]!);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [out[i], out[j]] = [out[j]!, out[i]!];
+  }
+  return out;
+}
 
 function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
   const look = piece.look as keyof typeof WOUND_FIBRES;
@@ -646,6 +661,20 @@ function discReach(piece: BundlePiece, base: THREE.Vector3, dir: THREE.Vector3, 
   return Math.max(0.01, lo);
 }
 
+/** The surface colour a blended bunch is drawn on; each fibre's tint makes it its own colour. */
+const BLEND_BASE = "#ffffff";
+
+/** Tints that turn a blended bunch's white surface into each of its colours, as its look draws them. */
+function blendTints(look: BundlePiece["look"], colours: string[]): THREE.Color[] {
+  // (Flash and rubber are drawn in their own colour; fibres of fur and feather never paper-white.)
+  const shown = (c: string) => (look === "flash" || look === "legs" ? new THREE.Color(c) : natural(c));
+  const base = shown(BLEND_BASE);
+  return colours.map((c) => {
+    const t = shown(c);
+    return new THREE.Color(t.r / base.r, t.g / base.g, t.b / base.b);
+  });
+}
+
 function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const spec = BUNDLE[piece.look as keyof typeof BUNDLE] ?? BUNDLE.yarn;
   const rand = mulberry32((piece.seed ?? piece.id) * 104729 + 3);
@@ -798,6 +827,13 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       bend, bendDir: bend > 0 ? perpendicular(dir, toward, rand) : undefined,
     });
   }
+  // A blended bunch: each fibre one of its colours, drawn on a white surface so they can differ.
+  // (Its own generator, so blending a bunch doesn't move its fibres.)
+  const colours = piece.mix ? blendTints(piece.look, piece.mix) : undefined;
+  if (colours) {
+    const tints = spreadColours(list.length, colours, mulberry32((piece.seed ?? piece.id) * 7919 + 11));
+    list.forEach((f, i) => (f.tint = tints[i]));
+  }
   if (piece.look === "cdc" || piece.look === "marabou" || piece.flue) {
     // Barbules: short, fine fibres all along each barb, which give CDC and marabou their fluff
     // and peacock sword its herl-like flue.
@@ -816,7 +852,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         const fluff = piece.look === "marabou";
         list.push({
           u: f.u, base, dir, length: fluff ? 0.1 + 0.2 * rand() : piece.flue ? 0.08 + 0.1 * rand() : 0.05 + 0.06 * rand(),
-          radius: fluff ? 0.004 : piece.flue ? 0.0035 : 0.0018, shade: f.shade,
+          radius: fluff ? 0.004 : piece.flue ? 0.0035 : 0.0018, shade: f.shade, tint: f.tint,
         });
       }
     }
@@ -827,7 +863,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   const marks = piece.cut ? undefined : piece.marks;
   // Broad, flat barbs (tippet) keep most of their width to the tip.
   const tip = piece.cut ? 0.9 : piece.fibreWidth && piece.look === "fibres" ? Math.max(spec.tip, 0.7) : spec.tip;
-  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, piece.color, true), tip, tipShade, marks);
+  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks);
   return {
     object: fibres.object,
     setProgress(u) {
@@ -848,13 +884,36 @@ const FEATHER_OUTLINE: Record<FeatherPiece["shape"], (s: number) => number> = {
   tip: (s) => 0.5 * Math.pow(Math.sin(Math.PI * Math.min(1, 0.05 + s)), 0.9) * (1 - 0.25 * s),
   // A quill slip: an even strip with a rounded end.
   slip: (s) => 0.5 * (s < 0.82 ? 1 : Math.cos(((s - 0.82) / 0.18) * (Math.PI / 2))) * (0.75 + 0.25 * Math.min(1, s * 4)),
+  // A jungle cock eye: narrow at the stem, widening to a broad, round end.
+  eye: (s) => 0.5 * (s < 0.6 ? 0.45 + 0.55 * Math.sin((s / 0.6) * (Math.PI / 2)) : Math.sqrt(Math.max(0, 1 - ((s - 0.6) / 0.4) ** 2))),
 };
+
+// Assumption: a jungle cock eye's enamel spots, read from photos of the feathers: three cream
+// drops down the quill, growing towards the end, each with a buff tip, on a near-black feather.
+const EYE_SPOTS = [
+  { at: 0.3, half: 0.08, width: 0.42 },
+  { at: 0.54, half: 0.1, width: 0.55 },
+  { at: 0.81, half: 0.15, width: 0.7 },
+];
+const ENAMEL = new THREE.Color("#efe3c0");
+const ENAMEL_TIP = new THREE.Color("#c98d45");
+
+/** The colour of a jungle cock eye at s along it and t across it (-1 to 1), before shading. */
+function eyeColour(base: THREE.Color, s: number, t: number): THREE.Color {
+  for (const spot of EYE_SPOTS) {
+    const along = (s - spot.at) / spot.half;
+    // A drop, pointed towards the stem and round towards the end.
+    const across = Math.abs(t) / (spot.width * Math.sqrt(Math.max(0, 1 - along * along)) * (along < 0 ? 1 + along * 0.6 : 1));
+    if (Math.abs(along) <= 1 && across <= 1) return along > 0.55 ? ENAMEL_TIP : ENAMEL;
+  }
+  return base;
+}
 
 /** Barbs per gape along a feather, for its texture. */
 const BARBS_PER_GAPE = 14;
 
 /** How far a feather is folded round its spine: breast feathers make a roof, tips and slips are flat. */
-const FEATHER_FOLD: Record<FeatherPiece["shape"], number> = { breast: 1.6, tip: 0.2, slip: 0.25 };
+const FEATHER_FOLD: Record<FeatherPiece["shape"], number> = { breast: 1.6, tip: 0.2, slip: 0.25, eye: 0.15 };
 
 /** The vane is solid to this fraction of the feather's width; a fringe of barbs makes the edge. */
 const VANE = 0.82;
@@ -892,10 +951,22 @@ function featherForm(piece: FeatherPiece) {
   return { L, half, point, shade };
 }
 
+/** A feather drawn in more than one colour (a jungle cock eye) is drawn white, its colours in its vertices. */
+const painted = (piece: FeatherPiece) => piece.shape === "eye";
+
+/** What turns a painted feather's white surface into `color`, as feathers are drawn. */
+function paint(color: THREE.Color | string): THREE.Color {
+  const base = natural("#ffffff");
+  const c = natural(typeof color === "string" ? color : `#${color.getHexString()}`);
+  return new THREE.Color(c.r / base.r, c.g / base.g, c.b / base.b);
+}
+
 function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
   const form = featherForm(piece);
+  const base = painted(piece) ? new THREE.Color(piece.color) : null;
+  const tints = base && { base: paint(base), enamel: paint(ENAMEL), tip: paint(ENAMEL_TIP) };
   // Enough rows along the feather that bars and barbs don't alias into a checkerboard.
-  const segS = Math.min(320, Math.max(piece.barring > 0 ? 128 : 48, Math.round(form.L * BARBS_PER_GAPE * 3)));
+  const segS = Math.min(320, Math.max(piece.barring > 0 || painted(piece) ? 128 : 48, Math.round(form.L * BARBS_PER_GAPE * 3)));
   const segT = 24;
   const positions: number[] = [];
   const colors: number[] = [];
@@ -907,7 +978,11 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
       const p = form.point(s, t);
       positions.push(p.x, p.y, p.z);
       const shade = form.shade(s, t);
-      colors.push(shade, shade, shade);
+      if (base && tints) {
+        const c = eyeColour(base, s, t / VANE);
+        const tint = c === ENAMEL ? tints.enamel : c === ENAMEL_TIP ? tints.tip : tints.base;
+        colors.push(tint.r * shade, tint.g * shade, tint.b * shade);
+      } else colors.push(shade, shade, shade);
     }
   }
   for (let i = 0; i < segS; i++) {
@@ -931,6 +1006,7 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
  */
 function featherFringe(piece: FeatherPiece): Fibre[] {
   const form = featherForm(piece);
+  const tint = painted(piece) ? paint(piece.color) : undefined;
   const rand = mulberry32((piece.seed ?? piece.id) * 6151 + 7);
   const n = Math.round(form.L * FRINGE_PER_GAPE);
   const list: Fibre[] = [];
@@ -943,7 +1019,7 @@ function featherFringe(piece: FeatherPiece): Fibre[] {
       const base = form.point(s, from);
       const end = form.point(Math.min(1, s + (h * (0.5 + 0.5 * rand())) / form.L), side * (1 + 0.12 * rand()));
       const d = end.sub(base);
-      list.push({ u: 0, base, dir: d.clone().normalize(), length: d.length(), radius: 0.0045, shade: form.shade(s, from) * (0.85 + 0.25 * rand()) });
+      list.push({ u: 0, base, dir: d.clone().normalize(), length: d.length(), radius: 0.0045, shade: form.shade(s, from) * (0.85 + 0.25 * rand()), ...(tint && { tint }) });
     }
   }
   return list;
@@ -956,7 +1032,7 @@ function featherFringe(piece: FeatherPiece): Fibre[] {
  */
 function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const geometry = featherGeometry(piece);
-  const material = surfaces.get("feather", piece.color, true);
+  const material = surfaces.get("feather", painted(piece) ? "#ffffff" : piece.color, true);
   const fringe = fibreMesh(featherFringe(piece), material, 0.4);
   fringe.setProgress(1);
   const root = anchored(space, piece.x);
