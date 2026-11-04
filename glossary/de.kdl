@@ -275,6 +275,10 @@ materials {
         source "AOS: Fliegenbindematerial (category \"Bälge & Sattelfedern\")" url="https://aos.cc/de/shop-fliegenfischen/fliegenbinden/fliegenbindematerial.html"
         source "Flyfishing Europe: Sattelhecheln Strung (\"wichtigen Bestandteil vieler Salzwasserstreamer\")" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
     }
+    noun golden-pheasant-body "Körperfeder des Goldfasans" gender=f plural="Körperfedern des Goldfasans" dative-plural="Körperfedern des Goldfasans" {
+        note "The cock's small red body feathers. No German tying page naming them turned up; formed as 'Brustfeder der Stockentenhenne' (mallard-breast) from the bird, whose whole underside is red."
+        source "Wikipedia: Goldfasan (\"Die gesamte Unterseite ist intensiv dunkelrot\")" url="https://de.wikipedia.org/wiki/Goldfasan"
+    }
     noun jungle-cock "Dschungelhahn" gender=m mass=#true genitive="Dschungelhahns" {
         note "German dressings name the material by the bird ('Flügel: Dschungelhahn', 'Zwei Dschungelhahnfedern'); 'Jungle Cock' is also kept in English by shops. Used as a material, like 'Bucktail'."
         source "Der-FliegenBinder: Lachsfliege des Monats 8, Curry's Red Shrimp (\"Flügel: Dschungelhahn\", \"Zwei Dschungelhahnfedern\")" url="https://der-fliegenbinder.de/lachsfliege-des-monats-4"

@@ -1,0 +1,86 @@
+// Dusty Miller: the Victorian built-wing salmon fly, in John Gray's simplified needle tube, a long-tailed shrimp-style fly.
+
+id dusty-miller
+name "Dusty Miller"
+type salmon
+imitates attractor
+difficulty beginner
+species salmon
+description "A long tail of yellow and red bucktail over natural squirrel with pearl flash, a short fluorescent orange floss body, a sparse brown bucktail wing with orange flash, and orange and brown hackles in front."
+history """
+    One of the oldest standard salmon flies, Kelson called it (1895), crediting it to Jewhurst; J.
+    H. Hale (1892) gives it as Mr Murdoch's. The name was in use by 1867: Herbert Maxwell sent
+    Francis Francis a Dusty Miller for the Minnick in low, bright water, with an embossed silver
+    body, a dark olive hackle and a mixed wing. Mary Orvis Marbury (1892) says it is sometimes
+    called the Beryl. The dressings disagree on almost every part. Pryce-Tannatt (1914) counts it
+    among the built-wing flies, with the Jock Scott and the Butcher: embossed silver tinsel over two thirds of the body,
+    orange floss in front under a golden olive hackle, a speckled guinea fowl throat, and a wing
+    of white-tipped black turkey under married strands of swan, bustard, florican and golden
+    pheasant tail, with jungle cock cheeks, a topping and macaw horns. Kelson's has no body hackle and
+    gallina in the wing; Hale's body is embossed silver all the way. This is John Gray's needle
+    tube, the classic much simplified in the style of the long-tailed shrimp flies such as Ally
+    Gowans's Cascade.
+    """
+fishing """
+    Marbury's Dusty Miller is a large silver fly for later in the season, where the water is
+    rough and rapid, or deep; Maxwell's was for low, bright water.
+    """
+sources {
+    "Trout & Salmon Fishing: The Dusty Miller salmon needle tube fly (John Gray)" url="https://www.trout-salmon-fishing.com/dusty-miller-fly.htm"
+    "Internet Archive: The Salmon Fly (George M. Kelson, 1895)" url="https://archive.org/details/salmonflyhowtodr00kelsrich"
+    "Internet Archive: How to Dress Salmon Flies (T. E. Pryce-Tannatt, 1914)" url="https://archive.org/details/howtodresssalmon00prycrich"
+    "Internet Archive: How to Tie Salmon Flies (J. H. Hale, 1892)" url="https://archive.org/details/howtotiesalmonfl00hale"
+    "Internet Archive: A Book on Angling (Francis Francis, 1867)" url="https://archive.org/details/cu31924003429226"
+    "Internet Archive: Favorite Flies and Their Histories (Mary Orvis Marbury, 1892)" url="https://archive.org/details/favoritefliesthe00marb"
+    "Fly Anglers Online: Just Old Flies, Dusty Miller (Eric Austin; archived)" url="http://web.archive.org/web/20240511172723/https://www.flyanglersonline.com/features/oldflies/part320.php"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.trout-salmon-fishing.com/dusty-miller-10.jpg" page="https://www.trout-salmon-fishing.com/dusty-miller-fly.htm" author="John Gray" license="All rights reserved; reference only" note="Gray's needle tube, side view"
+}
+
+// Gray: a stainless needle tube 15 mm long, 1.8 mm across. Assumption: a #12 treble behind it.
+hook tube-needle length=15 treble=12
+thread black size="8/0"
+
+materials {
+    // Read from Gray's photo: the squirrel about 26 mm, the bucktail about 40 mm from where it is tied in.
+    tail-lower squirrel-tail count=40 label="Natural squirrel tail"
+    tail-yellow bucktail color=yellow count=40 label="Yellow bucktail"
+    tail-red bucktail color=red count=40 label="Red bucktail"
+    tail-flash krystal-flash color=pearl count=6 label="Pearl Krystal Flash"
+    body silk-floss color=orange label="Fluorescent orange floss"
+    wing bucktail color=brown count=25 label="Brown bucktail"
+    flash krystal-flash color=orange count=5 label="Orange Krystal Flash"
+    // Read from Gray's photo: the hackle fibres about 16 mm, the brown a little longer, swept well back.
+    hackle-orange cock-hackle color=orange fibre=2.2 sweep=58 label="Orange cock hackle"
+    hackle-brown cock-hackle color=brown fibre=2.6 sweep=58 label="Brown cock hackle"
+}
+
+steps {
+    attach-thread at=0.95
+    wrap-thread to=0.67 note="A bed of thread about a third of the way along the tube."
+    tie-in tail-lower length=3.6 angle=10 spread=40 side=under note="A sparse bunch."
+    trim tail-lower
+    tie-in tail-yellow length=5.6 angle=8 spread=40 note="Turn the vice through 180° first; a sparse bunch."
+    trim tail-yellow
+    tie-in tail-red length=5.6 angle=10 spread=40 note="A sparse bunch over the yellow."
+    trim tail-red
+    tie-in tail-flash length=5.8 angle=9 spread=30 note="A few strands, to taste."
+    tie-in body
+    wrap-thread to=0.82
+    wind body to=0.82 turns=6 note="A short body, back to the tail and forward again."
+    tie-off body
+    tie-in wing length=5.2 angle=14 spread=40 note="Sparse."
+    trim wing
+    tie-in flash length=5.2 angle=14 spread=30 note="A few strands with the wing."
+    tie-in hackle-orange
+    wrap-thread to=0.88
+    wind hackle-orange to=0.88 turns=3 note="Two or three turns."
+    tie-off hackle-orange
+    tie-in hackle-brown
+    wrap-thread to=0.94
+    wind hackle-brown to=0.94 turns=2 note="Two or three turns in front of the orange."
+    tie-off hackle-brown
+    whip-finish note="A neat head, two coats of Cellire No. 1 varnish."
+}

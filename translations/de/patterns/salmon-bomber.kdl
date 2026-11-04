@@ -1,0 +1,69 @@
+id salmon-bomber
+status draft
+
+// en description: A short white calf tail, a body of spun natural deer hair clipped to a cigar, mostly above the shank, a brown hackle palmered through it, and a white calf wing pointing forward and up over the eye.
+description "Ein kurzes Schwänzchen aus weißem Kalbsschwanz, ein Körper aus gesponnenem naturfarbenem Rehhaar, zu einer Zigarre geschnitten und meist über dem Hakenschenkel, eine braune Hechel hindurch gepalmert und ein Flügel aus weißem Kalbsschwanz, der nach vorn und oben über das Öhr zeigt."
+
+// en history: Bombers were developed in the 1960s for New Brunswick's Miramichi River and made popular by the Reverend Elmer Smith, Father Smith, a legendary figure on the river (Joseph Bates). Bates says he took the idea from a spun-hair mouse he saw a young boy catch fish with; Warren Duncan of Saint John told Fly Tyer the boy was catching sea-run brown trout on Maine's York River. Smith tied his first Bomber wet, its bulky body trimmed, with a single grizzly hackle dyed red tied in at the bend and palmered forward; he then dressed it dry, preferring spun deer hair trimmed and tapered towards the eye with two stiff hackles wound forward. Bates gives Duncan's dressing, the body clipped to a smooth cigar a third below the shank and two thirds above it to clear the barb, and the Brown, White (Peppermint) and Black Bombers; Fly Tyer calls Bombers the most widely used dry flies for Atlantic salmon, now tied in every colour. This is Davie McPhail's natural Bomber, white calf tail and wing and a brown hackle, as Bates's Brown Bomber is coloured. Duncan ties the tail of the body's deer hair, McPhail and Sheldon Seale of calf tail; Duncan's and Seale's wings point forward at about 45°, while Fly of the Month Club ties two upright tufts and a heavy collar hackle as well.
+history """
+    Bomber wurden in den 1960er Jahren für den Miramichi River in New Brunswick entwickelt und
+    von Reverend Elmer Smith, Father Smith, einer legendären Gestalt am Fluss, bekannt gemacht
+    (Joseph Bates). Laut Bates hatte er die Idee von einer gesponnenen Haarmaus, mit der er
+    einen kleinen Jungen Fische fangen sah; Warren Duncan aus Saint John erzählte Fly Tyer, der
+    Junge habe im York River in Maine Meerforellen gefangen. Smith band seinen ersten Bomber als
+    Nassfliege, den dicken Körper geschnitten, mit einer einzigen rot gefärbten Grizzlyhechel,
+    am Bogen eingebunden und nach vorn gepalmert; danach band er ihn trocken und zog
+    gesponnenes, zum Öhr hin verjüngt geschnittenes Rehhaar vor, mit zwei steifen Hecheln nach
+    vorn gewunden. Bates gibt Duncans Bindeweise, der Körper zu einer glatten Zigarre
+    geschnitten, ein Drittel unter dem Hakenschenkel und zwei Drittel darüber, damit der
+    Widerhaken frei bleibt, und den Brown, White (Peppermint) und Black Bomber; Fly Tyer nennt
+    Bomber die meistverwendeten Trockenfliegen für den Atlantischen Lachs, heute in allen Farben
+    gebunden. Dies ist Davie McPhails naturfarbener Bomber mit Schwänzchen und Flügel aus weißem
+    Kalbsschwanz und brauner Hechel, gefärbt wie Bates' Brown Bomber. Duncan bindet das
+    Schwänzchen aus dem Rehhaar des Körpers, McPhail und Sheldon Seale aus Kalbsschwanz; Duncans
+    und Seales Flügel zeigen in etwa 45° nach vorn, während Fly of the Month Club zwei aufrechte
+    Büschel und dazu einen dichten Hechelkragen bindet.
+    """
+
+// en fishing: Fished dry as a rule, and almost impossible to sink; also dragged across the surface with a fast skittering motion, or fished wet (Bates). In Canada it is usually fished upstream on a dead drift like a trout fly, on the Kola swung downstream, where the wake brings the fish up; salmon will often come to it two or three times before taking (Peter McLeod).
+fishing """
+    In der Regel trocken gefischt und fast nicht zu versenken; auch mit schnellen, hüpfenden
+    Zügen über die Oberfläche gezogen oder nass gefischt (Bates). In Kanada wird er meist
+    stromauf in freier Drift wie eine Forellenfliege gefischt, auf der Kola stromab, wo die
+    Bugwelle die Fische hochholt; Lachse kommen oft zwei- oder dreimal, bevor sie nehmen (Peter
+    McLeod).
+    """
+
+labels {
+    // en tail: White calf tail
+    tail "Weißer Kalbsschwanz"
+    // en wing: White calf tail
+    wing "Weißer Kalbsschwanz"
+    // en hackle: Brown cock saddle hackle
+    hackle "Braune Sattelhechel"
+    // en body: Natural deer hair
+    body "Naturfarbenes Rehhaar"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of calf tail, tips level.
+    step 3 "Ein kleines Büschel Kalbsschwanz, die Spitzen ausgeglichen."
+    // en step 4 (trim tail): Bind the butts down along the top of the shank.
+    step 4 "Binde die Haarenden oben am Hakenschenkel entlang ab."
+    // en step 6 (tie-in wing): A slightly larger bunch than the tail, tips over the eye; trim its butts to meet the tail's.
+    step 6 "Ein etwas größeres Büschel als das Schwänzchen, die Spitzen über dem Öhr; schneide die Haarenden so, dass sie auf die des Schwänzchens treffen."
+    // en step 7 (wrap-thread): Turns in front of the wing force it up to at least 45°.
+    step 7 "Windungen vor dem Flügel richten ihn auf mindestens 45° auf."
+    // en step 9 (tie-in hackle): By the butt, at the tail.
+    step 9 "Am Kielende, am Schwänzchen."
+    // en step 10 (spin body): Small bunches, each spun and packed back hard, up to the wing.
+    step 10 "Kleine Büschel, jedes gesponnen und fest nach hinten gedrückt, bis zum Flügel."
+    // en step 11 (whip-finish): Seale ties off here and takes the hook out of the vise to trim the body.
+    step 11 "Seale bindet hier ab und nimmt den Haken aus dem Bindestock, um den Körper zu schneiden."
+    // en step 12 (trim body): Narrow and smooth, tapering to the tail and a little to the head; don't cut the hackle.
+    step 12 "Schlank und glatt, zum Schwänzchen und etwas zum Kopf hin verjüngt; schneide die Hechel nicht ab."
+    // en step 14 (wind hackle): Open turns forward through the clipped hair.
+    step 14 "Offene Windungen nach vorn durch das geschnittene Haar."
+    // en step 16 (whip-finish): Cement the exposed thread.
+    step 16 "Lackiere den freiliegenden Faden."
+}

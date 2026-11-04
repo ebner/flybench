@@ -774,3 +774,77 @@ steps {
     expect(wraps("").strandRadius).toBeCloseTo(0.12);
   });
 });
+
+describe("two hackles palmered together (a Claret Bumble's)", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/bumble-claret.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("bumble-claret.kdl does not load");
+  const build = simulate(result.recipe);
+  const step = build.steps.find((s) => s.title.startsWith("Palmer"))!;
+
+  it("winds both in the same step, side by side", () => {
+    const wraps = step.pieces.filter((p): p is WrapsPiece => p.type === "wraps");
+    expect(wraps.map((w) => w.material).sort()).toEqual(["hackle-black", "hackle-claret"]);
+    const [a, b] = wraps;
+    expect(a!.turns).toBe(b!.turns);
+    expect(Math.abs(a!.x0 - b!.x0)).toBeGreaterThan(0);
+    expect(Math.abs(a!.x0 - b!.x0)).toBeLessThan(Math.abs(a!.x1 - a!.x0) / a!.turns);
+    expect(step.text).toMatch(/medium claret cock hackle and the black cock hackle together/);
+  });
+
+  it("leaves both tips for the rib, which says it traps them", () => {
+    expect(step.freeEnds.filter((e) => e.material.startsWith("hackle-"))).toHaveLength(2);
+    expect(build.steps[step.index + 1]!.text).toMatch(/through the medium claret cock hackle and the black cock hackle\. The first turn traps their tips/);
+  });
+});
+
+describe("a Bomber's body: spun hair clipped closer underneath, a hackle wound through it", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/salmon-bomber.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("salmon-bomber.kdl does not load");
+  const build = simulate(result.recipe);
+  const pieces = build.steps.flatMap((s) => s.pieces);
+
+  it("keeps the ratio of below to above on the trimmed hair", () => {
+    const cut = pieces.find((p) => p.type === "bundle" && p.material === "body" && p.cut);
+    expect(cut).toMatchObject({ trimShape: "cigar", length: 0.42 });
+    expect(cut?.type === "bundle" && cut.below).toBeCloseTo(0.2 / 0.42);
+  });
+
+  it("winds the hackle on the clipped body, higher on top than underneath", () => {
+    const hackle = pieces.find((p): p is WrapsPiece => p.type === "wraps" && p.material === "hackle")!;
+    const mid = (hackle.x0 + hackle.x1) / 2;
+    expect(hackle.base.radiusAt(mid)).toBeGreaterThan(0.4);
+    expect(hackle.base.underAt(mid)).toBeLessThan(hackle.base.radiusAt(mid) - 0.1);
+    expect(hackle.base.underAt(mid)).toBeGreaterThan(0.2);
+  });
+});
+
+describe("spun hair cut flat, then trimmed to a shape", () => {
+  it("lays what is wound over it no higher than the flat cut", () => {
+    const r = loadRecipe(`id t
+name "T"
+type salmon
+difficulty intermediate
+hook salmon-up-eye size=6
+thread black size="3/0"
+materials {
+    hackle saddle-hackle color=brown fibre=0.5
+    body deer-hair
+}
+steps {
+    attach-thread at=0.02
+    tie-in hackle
+    spin body to=0.85 length=0.9
+    trim body keep=sides leave=0.1
+    trim body leave=0.5 shape=cigar
+    wind hackle to=0.85 turns=7
+    tie-off hackle
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\\n"));
+    const hackle = simulate(r.recipe).steps.flatMap((s) => s.pieces).find((p): p is WrapsPiece => p.type === "wraps" && p.material === "hackle")!;
+    const mid = (hackle.x0 + hackle.x1) / 2;
+    expect(hackle.base.radiusAt(mid)).toBeLessThan(0.2);
+    expect(hackle.base.underAt(mid)).toBeLessThan(0.2);
+  });
+});

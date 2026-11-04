@@ -8,7 +8,7 @@ import { RULES_SV } from "./sv";
 
 beforeAll(() => loadGlossaries());
 
-const SAMPLE = { m: "hackle", post: "wing", kind: "cock-hackle", at: 0.25, thread: 0.4, to: 0.875, rear: true };
+const SAMPLE = { m: "hackle", with: "collar", post: "wing", kind: "cock-hackle", at: 0.25, thread: 0.4, to: 0.875, rear: true };
 
 describe.each([
   ["en", RULES_EN],

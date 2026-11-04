@@ -78,8 +78,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   let thread: number | null = null;
   let weighted = false;
   let finished = false;
-  /** A material that the next step has to tie off or secure. */
-  let pending: { material: string; rear: boolean } | null = null;
+  /** A material that the next step has to tie off or secure (and one wound together with it). */
+  let pending: { material: string; rear: boolean; with?: string } | null = null;
   /** Woven strands held at `at`, each still to be tied off there. */
   let woven: { at: number; left: string[] } | null = null;
   /**
@@ -111,6 +111,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       rule("unknownMaterial", { m: step.under }, [...path, "under"]);
       return;
     }
+    if (step.op === "wind" && step.with !== undefined && !archetypes.has(step.with)) {
+      rule("unknownMaterial", { m: step.with }, [...path, "with"]);
+      return;
+    }
     const archetype = "material" in step ? archetypes.get(step.material)! : null;
 
     // Woven strands held at the front: the thread attached there again, if it was cut, and both tied off.
@@ -131,8 +135,12 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     if (pending) {
       const p = pending;
       pending = null;
-      if (!p.rear && !(step.op === "tie-off" && step.material === p.material)) {
+      const tiedOff = step.op === "tie-off" && (step.material === p.material || step.material === p.with);
+      if (!p.rear && !tiedOff) {
         rule("tieOffNext", { m: p.material }, path);
+      } else if (!p.rear && p.with !== undefined && step.op === "tie-off") {
+        // Wound together: the other is tied off next.
+        pending = { material: step.material === p.material ? p.with : p.material, rear: false };
       } else if (p.rear) {
         const end = materials.get(p.material)!;
         // Wound forward from at or behind the palmered tip, and over it.
@@ -143,8 +151,11 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           step.to !== undefined &&
           step.to > end.at + POSITION_TOLERANCE;
         const laid = end.state === "laid-back";
-        if (securing) end.state = laid ? "done" : "secured";
-        else rule(laid ? "secureLaidBack" : "securePalmer", { m: p.material }, path);
+        if (securing) {
+          end.state = laid ? "done" : "secured";
+          // (Palmered together, both tips are held.)
+          if (p.with !== undefined) materials.get(p.with)!.state = "secured";
+        } else rule(laid ? "secureLaidBack" : "securePalmer", { m: p.material }, path);
       }
     }
 
@@ -346,6 +357,19 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("counterAlong", {}, [...path, "counter"]);
           break;
         }
+        if (step.with !== undefined && step.around !== undefined) {
+          rule("withAlong", {}, [...path, "with"]);
+          break;
+        }
+        // Wound together with another material in one pass: tied in at the same place, not yet used.
+        const other = step.with !== undefined ? materials.get(step.with) : undefined;
+        if (
+          step.with !== undefined &&
+          (step.with === step.material || !other || other.state !== "tied-in" || !WINDABLE.includes(archetypes.get(step.with)!) || Math.abs(other.at - m.at) > POSITION_TOLERANCE)
+        ) {
+          rule("windTogether", { m: step.material, with: step.with }, [...path, "with"]);
+          break;
+        }
         if (step.around !== undefined) {
           const post = materials.get(step.around);
           if (archetype !== "hackle") rule("hackleAroundPost", {}, [...path, "material"]);
@@ -367,10 +391,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         } else if (!rear && to < thread - POSITION_TOLERANCE) {
           rule("windToThread", { thread, to }, [...path, "to"]);
         }
-        m.state = rear ? "wound-rear" : "wound";
-        m.wound = true;
-        m.at = to;
-        pending = { material: step.material, rear };
+        for (const x of other ? [m, other] : [m]) Object.assign(x, { state: rear ? "wound-rear" : "wound", wound: true, at: to });
+        pending = { material: step.material, rear, ...(step.with !== undefined && { with: step.with }) };
         break;
       }
       case "pull-over": {
@@ -460,6 +482,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       }
       case "trim": {
         const m = materials.get(step.material);
+        // Cut closer underneath: spun hair (or butts spun round) trimmed to a rounded shape.
+        if (step.below !== undefined && (archetype !== "hair" || step.keep !== undefined || !["round", "cigar", "cone"].includes(step.shape ?? ""))) {
+          rule("belowOnly", {}, [...path, "below"]);
+        }
         if (step.keep !== undefined) {
           // Spun hair cut flat on top or underneath (or both), the sides left long, until it is
           // trimmed to a shape.
@@ -510,7 +536,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     }
   }
   const used = new Set(
-    recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : [], s.op === "weave" ? s.under : [], s.op === "tie-in" && s.tails ? s.tails : []].flat()),
+    recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : [], s.op === "weave" ? s.under : [], s.op === "tie-in" && s.tails ? s.tails : [], s.op === "wind" && s.with ? s.with : []].flat()),
   );
   recipe.materials.forEach((m, i) => {
     if (!used.has(m.id)) rule("neverUsed", { m: m.id }, ["materials", i, "id"]);
@@ -520,6 +546,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   // shank), spun or glued. Wound, pulled over or tied across, it would be drawn in one colour.
   const blended = new Set(recipe.materials.filter((m) => m.mix).map((m) => m.id));
   recipe.steps.forEach((s, i) => {
+    if (s.op === "wind" && s.with !== undefined && blended.has(s.with)) {
+      blended.delete(s.with);
+      rule("mixOnlyBunch", { m: s.with }, ["steps", i, "with"]);
+    }
     if (!("material" in s) || !blended.has(s.material)) return;
     const unblended = s.op === "wind" || s.op === "pull-over" || (s.op === "tie-in" && (s.length === undefined || s.side === "across"));
     if (!unblended) return;

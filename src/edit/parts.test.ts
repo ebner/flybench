@@ -6,7 +6,7 @@ import { simulate } from "../tying/simulate";
 import { blankFly, PATTERN_FORM, recipeText } from "./own";
 import { mulberry32 } from "../render/random";
 import {
-  addMaterial, addPart, bareHook, blends, compile, isPost, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
+  addMaterial, addPart, bareHook, blends, compile, isPost, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, turnsHolder, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
 } from "./parts";
 
 describe("a blended bunch in the builder", () => {
@@ -209,14 +209,118 @@ describe("a fly built of parts", () => {
     expect(compile(setPart(para, binding.id, { to: -0.5 })).problems.map((p) => p.message)).toEqual([]);
   });
 
-  it("palmers a hackle over a body once a rib is there to hold it, one material at a time", () => {
+  it("palmers a hackle over a body once a rib is there to hold it, one material or two wound together", () => {
     let fly = addPart(startFrom(byId("adams"))!, "rib", "gold-wire").fly;
     const hackle = fly.parts.find((p) => p.role === "hackle")!;
-    expect(unavailable(fly, hackle, "palmered")).toBe("oneMaterial");
+    // Two hackles are wound back together in one pass, so the rib holds both tips.
+    expect(unavailable(fly, hackle, "palmered")).toBeNull();
+    const both = setHow(fly, hackle.id, "palmered");
+    const { recipe, problems } = compile(both);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    expect(recipe.steps.filter((s) => s.op === "wind" && s.with !== undefined)).toHaveLength(1);
+    expect(unavailable(fly, { ...hackle, mats: [...hackle.mats, { ...hackle.mats[0]!, id: "hackle-third" }] }, "palmered")).toBe("oneMaterial");
     fly = removeMaterial(fly, hackle.id, 1);
     expect(unavailable(fly, fly.parts.find((p) => p.id === hackle.id)!, "palmered")).toBeNull();
     fly = setHow(fly, hackle.id, "palmered");
     expect(compile(fly).problems.map((p) => p.message)).toEqual([]);
+  });
+
+  /** A dry fly's hackles, as a recipe read back into parts. */
+  const hackles = (materials: string, steps: string) => {
+    const r = loadRecipe(`id my-fly
+name "Mine"
+type dry
+difficulty beginner
+hook dry-standard size=14
+thread black size="8/0"
+materials {
+${materials}
+}
+steps {
+${steps}
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("; "));
+    return r.recipe;
+  };
+
+  it("winds a pair wound together by one count, whichever of the two is edited", () => {
+    const fly = partsOf(byId("bumble-claret"))!;
+    const pair = fly.parts.find((p) => p.how === "palmered")!;
+    expect(pair.mats).toHaveLength(2);
+    expect(turnsHolder(pair, 1)).toBe(0);
+    const edited = setMaterial(fly, pair.id, turnsHolder(pair, 1), { turns: 12 });
+    const wind = compile(edited).recipe.steps.find((s) => s.op === "wind" && s.with !== undefined);
+    expect(wind).toMatchObject({ turns: 12 });
+    // Wound one after the other, each keeps its own.
+    expect(turnsHolder({ how: "wound", mats: pair.mats }, 1)).toBe(1);
+  });
+
+  it("keeps a pair wound together apart from a hackle wound alone before it", () => {
+    const r = hackles(
+      "    hackle cock-hackle color=brown fibre=1.2\n    hackle-grizzly cock-hackle color=grizzly fibre=1.2\n    hackle-front cock-hackle color=black fibre=1.2",
+      `    attach-thread at=0.7
+    tie-in hackle
+    tie-in hackle-grizzly
+    tie-in hackle-front
+    wrap-thread to=0.8
+    wind hackle to=0.8 turns=3
+    tie-off hackle
+    wrap-thread to=0.9
+    wind hackle-grizzly to=0.9 turns=4 with=hackle-front
+    tie-off hackle-grizzly
+    tie-off hackle-front
+    whip-finish`,
+    );
+    const fly = partsOf(r)!;
+    expect(fly.parts.map((p) => [p.mats.length, Boolean(p.together)])).toEqual([[1, false], [2, true]]);
+    const { recipe, problems } = compile(fly);
+    expect(problems).toEqual([]);
+    expect(recipe.steps.filter((s) => s.op === "wind" && s.with !== undefined)).toHaveLength(1);
+    expect(pieces(recipe)).toEqual(pieces(r));
+  });
+
+  it("doesn't read two hackles palmered together but trimmed differently as one part", () => {
+    const fly = partsOf(byId("bumble-claret"))!;
+    const pair = fly.parts.find((p) => p.how === "palmered")!;
+    const { recipe } = compile(setPart(fly, pair.id, { trim: { keep: "top" } }));
+    let other = false;
+    const steps = recipe.steps.map((s) => (s.op === "trim" && s.keep && s.material === pair.mats[1]!.id && !other ? ((other = true), { ...s, keep: "under" as const }) : s));
+    expect(other).toBe(true);
+    // The part has one trim for both: the builder can't hold this fly rather than tie it another way.
+    expect(partsOf({ ...recipe, steps })).toBeNull();
+    expect(partsOf(recipe)).not.toBeNull();
+  });
+
+  it("keeps two hackles wound forward together as one part, and ties the same fly", () => {
+    const r = loadRecipe(`id my-fly
+name "Mine"
+type dry
+difficulty beginner
+hook dry-standard size=14
+thread black size="8/0"
+materials {
+    hackle cock-hackle color=brown fibre=1.2
+    hackle-grizzly cock-hackle color=grizzly fibre=1.2
+}
+steps {
+    attach-thread at=0.7
+    tie-in hackle
+    tie-in hackle-grizzly
+    wrap-thread to=0.9
+    wind hackle to=0.9 turns=5 with=hackle-grizzly
+    tie-off hackle
+    tie-off hackle-grizzly
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("; "));
+    const fly = partsOf(r.recipe)!;
+    expect(fly.parts).toHaveLength(1);
+    expect(fly.parts[0]).toMatchObject({ how: "wound", together: true });
+    const { recipe, problems } = compile(fly);
+    expect(problems).toEqual([]);
+    expect(pieces(recipe)).toEqual(pieces(r.recipe));
   });
 
   /** The fly as a saved recipe file, read back: what saving and sharing go through. */

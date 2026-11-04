@@ -1,0 +1,59 @@
+id bumble-claret
+status draft
+
+// en description: A tail of golden pheasant tippet, a claret seal's fur body ribbed with oval gold, claret and black cock hackles palmered together down it, and a long blue shoulder hackle of jay or dyed guinea fowl.
+description "Ein Schwänzchen aus Goldfasan-Tippet, ein Körper aus weinrotem Seehunddubbing mit ovalem Goldtinsel gerippt, weinrote und schwarze Hahnenhecheln gemeinsam darüber gepalmert und eine lange blaue Schulterhechel aus Eichelhäher oder gefärbtem Perlhuhn."
+
+// en history: T. C. Kingsmill Moore, an Irish judge, wrote of his Bumbles in A Man May Fish (1960), and the Claret is one of the best known of them. The Fly Dressers' Guild's dressings database gives his pattern, a sea-trout fly from Ireland: four strands of golden pheasant tippet, medium claret seal's fur ribbed with oval gold, black and medium claret cock hackles wound together, and blue jay or blue-dyed guinea fowl at the shoulder. Peter Gathercole's (1985) has a long-fibred claret cock hackle with a dyed blue cock hackle wound over it. Håkan Karsnäs ribs it with silver. Older English flies were called Claret Bumbles too (Halford's of 1886 among them): claret silk ribbed with peacock herl under a furnace or blue dun hackle, a different fly.
+history """
+    T. C. Kingsmill Moore, ein irischer Richter, schrieb in A Man May Fish (1960) über seine
+    Bumbles, und die Claret ist eine der bekanntesten davon. Die Bindedatenbank der Fly
+    Dressers' Guild gibt sein Muster, eine Meerforellenfliege aus Irland: vier Fibern Goldfasan-
+    Tippet, mittelweinrotes Seehunddubbing mit ovalem Goldtinsel gerippt, schwarze und
+    mittelweinrote Hahnenhecheln zusammen gewunden und Eichelhäher oder blau gefärbtes Perlhuhn
+    an der Schulter. Peter Gathercoles (1985) hat eine langfibrige weinrote Hahnenhechel, über
+    die eine blau gefärbte Hahnenhechel gewunden ist. Håkan Karsnäs rippt sie mit Silber. Ältere
+    englische Fliegen hießen ebenfalls Claret Bumble (darunter Halfords von 1886): weinrote
+    Seide mit Pfauenherl gerippt unter einer Furnace- oder Blue-Dun-Hechel, eine andere Fliege.
+    """
+
+// en fishing: A lough fly for the top or middle dropper of a team of wet flies, fished in the traditional Irish way. Fulling Mill find it best in a wave on dark days. For brown and rainbow trout, sea trout and salmon.
+fishing """
+    Eine Seefliege für den obersten oder mittleren Springer einer Nassfliegenserie, auf die
+    traditionelle irische Art gefischt. Fulling Mill finden sie bei Welle an dunklen Tagen am
+    besten. Für Bach- und Regenbogenforellen, Meerforellen und Lachse.
+    """
+
+labels {
+    // en tail: Golden pheasant tippet
+    tail "Goldfasan-Tippet"
+    // en rib: Oval gold tinsel
+    rib "Ovales Goldtinsel"
+    // en body: Medium claret seal's fur
+    body "Mittelweinrotes Seehunddubbing"
+    // en hackle-claret: Medium claret cock hackle
+    hackle-claret "Mittelweinrote Hahnenhechel"
+    // en hackle-black: Black cock hackle
+    hackle-black "Schwarze Hahnenhechel"
+    // en collar: Blue jay, or guinea fowl dyed blue
+    collar "Eichelhäher oder blau gefärbtes Perlhuhn"
+}
+
+notes {
+    // en step 3 (tie-in tail): Four strands of tippet, on top.
+    step 3 "Vier Fibern Tippet, oben auf."
+    // en step 5 (dub body): Seal's fur, picked out a little; leave room for the shoulder hackle.
+    step 5 "Seehunddubbing, etwas aufgeraut; lass Platz für die Schulterhechel."
+    // en step 6 (tie-in hackle-claret): By the stalks, the two hackles together, at the front of the body.
+    step 6 "An den Kielen, beide Hecheln zusammen, vorn am Körper."
+    // en step 9 (wind rib): Wiggled forward through the hackles, trapping no fibres.
+    step 9 "Mit leichtem Hin und Her durch die Hecheln nach vorn, ohne Fibern einzuklemmen."
+    // en step 11 (trim hackle-claret): Cut both hackle tips away at the tail.
+    step 11 "Schneide beide Hechelspitzen am Schwänzchen ab."
+    // en step 13 (tie-in collar): By the tip, the blue side facing forward.
+    step 13 "An der Spitze, die blaue Seite nach vorn."
+    // en step 15 (wind collar): Two or three turns, swept back over the body hackles.
+    step 15 "Zwei oder drei Windungen, über die Körperhecheln nach hinten gestrichen."
+    // en step 17 (whip-finish): A small black head.
+    step 17 "Ein kleiner schwarzer Kopf."
+}

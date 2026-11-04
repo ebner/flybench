@@ -1,0 +1,67 @@
+id salmon-bomber
+status draft
+
+// en description: A short white calf tail, a body of spun natural deer hair clipped to a cigar, mostly above the shank, a brown hackle palmered through it, and a white calf wing pointing forward and up over the eye.
+description "En kort stjärt av vit kalvsvans, en kropp av spunnet naturfärgat hjorthår klippt till en cigarr, mest ovanför krokskaftet, ett brunt hackel palmerat genom den och en vinge av vit kalvsvans som pekar framåt och uppåt över krokögat."
+
+// en history: Bombers were developed in the 1960s for New Brunswick's Miramichi River and made popular by the Reverend Elmer Smith, Father Smith, a legendary figure on the river (Joseph Bates). Bates says he took the idea from a spun-hair mouse he saw a young boy catch fish with; Warren Duncan of Saint John told Fly Tyer the boy was catching sea-run brown trout on Maine's York River. Smith tied his first Bomber wet, its bulky body trimmed, with a single grizzly hackle dyed red tied in at the bend and palmered forward; he then dressed it dry, preferring spun deer hair trimmed and tapered towards the eye with two stiff hackles wound forward. Bates gives Duncan's dressing, the body clipped to a smooth cigar a third below the shank and two thirds above it to clear the barb, and the Brown, White (Peppermint) and Black Bombers; Fly Tyer calls Bombers the most widely used dry flies for Atlantic salmon, now tied in every colour. This is Davie McPhail's natural Bomber, white calf tail and wing and a brown hackle, as Bates's Brown Bomber is coloured. Duncan ties the tail of the body's deer hair, McPhail and Sheldon Seale of calf tail; Duncan's and Seale's wings point forward at about 45°, while Fly of the Month Club ties two upright tufts and a heavy collar hackle as well.
+history """
+    Bombers utvecklades på 1960-talet för Miramichi River i New Brunswick och gjordes populära
+    av pastor Elmer Smith, Father Smith, en legendarisk gestalt vid floden (Joseph Bates). Bates
+    säger att han fick idén från en spunnen hårmus som han såg en ung pojke fånga fisk med;
+    Warren Duncan från Saint John berättade för Fly Tyer att pojken fångade havsvandrande öring
+    i York River i Maine. Smith band sin första Bomber som våtfluga, med den tjocka kroppen
+    klippt och ett enda rödfärgat grizzlyhackel inbundet vid krokböjen och palmerat framåt;
+    sedan band han den som torrfluga och föredrog spunnet hjorthår klippt och avsmalnande mot
+    krokögat, med två styva hackel lindade framåt. Bates ger Duncans bindning, där kroppen
+    klipps till en slät cigarr till en tredjedel under krokskaftet och två tredjedelar ovanför
+    för att gå fri från hullingen, och Brown, White (Peppermint) och Black Bomber; Fly Tyer
+    kallar Bombers de mest använda torrflugorna för atlantlax, numera bundna i alla färger. Den
+    här är Davie McPhails naturfärgade Bomber, med stjärt och vinge av vit kalvsvans och ett
+    brunt hackel, i samma färger som Bates Brown Bomber. Duncan binder stjärten av kroppens
+    hjorthår, McPhail och Sheldon Seale av kalvsvans; Duncans och Seales vingar pekar framåt i
+    ungefär 45°, medan Fly of the Month Club binder två upprätta tofsar och dessutom ett tätt
+    kragehackel.
+    """
+
+// en fishing: Fished dry as a rule, and almost impossible to sink; also dragged across the surface with a fast skittering motion, or fished wet (Bates). In Canada it is usually fished upstream on a dead drift like a trout fly, on the Kola swung downstream, where the wake brings the fish up; salmon will often come to it two or three times before taking (Peter McLeod).
+fishing """
+    Fiskas som regel torr och går nästan inte att sänka; den dras också över ytan med snabba,
+    skuttande ryck eller fiskas våt (Bates). I Kanada fiskas den oftast uppströms i fritt drag
+    som en öringfluga, på Kola nedströms, där svallvågen lockar upp fisken; laxen kommer ofta
+    två eller tre gånger innan den hugger (Peter McLeod).
+    """
+
+labels {
+    // en tail: White calf tail
+    tail "Vit kalvsvans"
+    // en wing: White calf tail
+    wing "Vit kalvsvans"
+    // en hackle: Brown cock saddle hackle
+    hackle "Brun tuppsadel"
+    // en body: Natural deer hair
+    body "Naturfärgat hjorthår"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of calf tail, tips level.
+    step 3 "En liten tofs kalvsvans, topparna jämnade."
+    // en step 4 (trim tail): Bind the butts down along the top of the shank.
+    step 4 "Bind ner rotändarna längs krokskaftets ovansida."
+    // en step 6 (tie-in wing): A slightly larger bunch than the tail, tips over the eye; trim its butts to meet the tail's.
+    step 6 "En något större tofs än stjärten, topparna över krokögat; klipp rotändarna så att de möter stjärtens."
+    // en step 7 (wrap-thread): Turns in front of the wing force it up to at least 45°.
+    step 7 "Varv framför vingen tvingar upp den till minst 45°."
+    // en step 9 (tie-in hackle): By the butt, at the tail.
+    step 9 "Med roten, vid stjärten."
+    // en step 10 (spin body): Small bunches, each spun and packed back hard, up to the wing.
+    step 10 "Små tofsar, var och en spunnen och hårt packad bakåt, fram till vingen."
+    // en step 11 (whip-finish): Seale ties off here and takes the hook out of the vise to trim the body.
+    step 11 "Seale fäster tråden här och tar ur kroken ur städet för att klippa kroppen."
+    // en step 12 (trim body): Narrow and smooth, tapering to the tail and a little to the head; don't cut the hackle.
+    step 12 "Smal och slät, avsmalnande mot stjärten och lite mot huvudet; klipp inte av hacklet."
+    // en step 14 (wind hackle): Open turns forward through the clipped hair.
+    step 14 "Glesa varv framåt genom det klippta håret."
+    // en step 16 (whip-finish): Cement the exposed thread.
+    step 16 "Lacka den synliga tråden."
+}
