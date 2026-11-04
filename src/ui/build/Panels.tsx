@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CLASSIC, kindsFor, PRESETS, rearLimit, unavailable, waysFor, waysOf, type How, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
+import { materialChoices, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
 import { DIFFICULTY_LABELS, SPECIES_LABELS, TYPE_LABELS } from "../../catalog/describe";
 import { match } from "../../catalog/inventory";
 import { swatchName, swatchRecipe } from "../../catalog/swatch";
@@ -42,16 +42,6 @@ function swatchOf(swatches: Record<string, string> | null, kind: MaterialKind, c
   return any ? swatches[any]! : null;
 }
 
-/** The value a preset scales, for this part: a length, a body's end, a hackle's fibres. */
-function presetOf(p: Part): { get: number | undefined; classic: number; set: (v: number) => Partial<Part> } | null {
-  const c = CLASSIC[p.role];
-  if (p.length !== undefined && c.length !== undefined) return { get: p.length, classic: c.length, set: (v) => ({ length: round2(v) }) };
-  if (p.role === "body" && p.to !== undefined) return { get: p.to, classic: c.to!, set: (v) => ({ to: round2(clamp(v, (p.at ?? p.from ?? 0) + 0.05, 1)) }) };
-  const fibre = p.mats[0]?.props?.fibre;
-  if (p.role === "hackle" && typeof fibre === "number")
-    return { get: fibre, classic: 1.5, set: (v) => ({ mats: p.mats.map((m, i) => (i === 0 ? { ...m, props: { ...m.props, fibre: round2(v) } } : m)) }) };
-  return null;
-}
 
 export function PartPanel({
   fly,
@@ -86,7 +76,7 @@ export function PartPanel({
   const m = part.mats[mat];
   // The ways every material in the part can be tied (a mix of cock hackle and CDC: not round a post).
   const ways = m ? waysOf(part) : [];
-  const preset = presetOf(part);
+  const preset = presetFor(part);
   const w = t.workbench;
   return (
     <section className="wb-panel" aria-label={w.role[part.role]}>
@@ -126,12 +116,11 @@ export function PartPanel({
             <>
               <h3 className="wb-heading">{w.material}</h3>
               <MaterialPicker
-                role={part.role}
+                kinds={materialChoices(part, mat)}
                 kind={m.kind}
                 color={m.color}
                 swatches={swatches}
                 owned={owned}
-                only={part.mats.length > 1 ? (k) => waysFor(part.role, k).includes(part.how) : undefined}
                 onPick={(kind) => onMaterial(mat, { kind })}
               />
               <h3 className="wb-heading">{w.colour}</h3>
@@ -207,24 +196,22 @@ export function PartPanel({
 }
 
 function MaterialPicker({
-  role,
+  kinds: choices,
   kind,
   color,
   swatches,
   owned,
-  only,
   onPick,
 }: {
-  role: Part["role"];
+  kinds: MaterialKind[];
   kind: MaterialKind;
   color?: string;
   swatches: Record<string, string> | null;
   owned: Set<string>;
-  only?: (kind: MaterialKind) => boolean;
   onPick: (kind: MaterialKind) => void;
 }) {
   // The visitor's own materials first, then the rest; a copied pattern's own material is kept in the list.
-  const kinds = [...new Set([kind, ...kindsFor(role).filter((k) => !only || only(k))])];
+  const kinds = [...choices];
   const has = (k: MaterialKind) => [...owned].some((o) => o.startsWith(`${k}:`));
   kinds.sort((a, b) => Number(has(b)) - Number(has(a)));
   return (
@@ -326,8 +313,10 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
   const f = t.workbench.field;
   const m = part.mats[mat];
   // A setting the part has keeps a value: emptying its field leaves it as it was.
-  const num = (key: "length" | "angle" | "spread" | "width" | "collar" | "windTo" | "fray", unit: string, step: number, lo: number, hi: number) =>
-    part[key] !== undefined && <Num key={key} label={f[key]} value={part[key]} unit={unit} step={step} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v, lo, hi) })} />;
+  const num = (key: "length" | "angle" | "spread" | "width" | "collar" | "windTo" | "fray" | "fan" | "segments" | "tailLength" | "tailSpread", unit: string, step: number, lo: number, hi: number) =>
+    part[key] !== undefined && (
+      <Num key={key} label={f[key]} value={part[key]} unit={unit} step={step} onChange={(v) => v !== undefined && onChange({ [key]: key === "segments" ? Math.round(clamp(v, lo, hi)) : clamp(v, lo, hi) })} />
+    );
   const shankNum = (key: "at" | "from" | "to", label: FieldKey) =>
     part[key] !== undefined && (
       <Num key={key} label={f[label] as string} value={Math.round(part[key]! * 100)} unit={t.workbench.unit.shank} step={5} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v / 100, rear, 1) })} />
@@ -345,6 +334,10 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
       {num("width", g, 0.05, 0.05, 3)}
       {num("collar", g, 0.1, 0, 4)}
       {num("fray", g, 0.1, 0.1, 3)}
+      {num("fan", deg, 5, 0, 120)}
+      {num("segments", "", 1, 2, 12)}
+      {num("tailLength", g, 0.1, 0.1, 10)}
+      {num("tailSpread", deg, 1, 0, 90)}
       {part.side !== undefined && (
         <label className="wb-field">
           <span>{f.side}</span>
@@ -370,7 +363,7 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
         <Num label={f.fibre} value={m.props.fibre} unit={g} step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, fibre: clamp(v, 0.2, 5) } })} />
       )}
       {m && typeof m.props?.count === "number" && (
-        <Num label={f.count} value={m.props.count} step={1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, count: Math.round(clamp(v, 1, 60)) } })} />
+        <Num label={f.count} value={m.props.count} step={1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, count: Math.round(clamp(v, 1, 200)) } })} />
       )}
       {m && ARCHETYPE_PROPS[MATERIALS[m.kind].archetype].includes("barred") && (() => {
         // A dyed grizzly is barred in whatever colour it is; a grizzly made plain is not. Only a

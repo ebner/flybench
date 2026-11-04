@@ -153,7 +153,15 @@ function writerFor(recipe: Recipe) {
         const tip = said.tip
           ? ` Färga änden ${tipColour ? tipColour.text : "mörkare"}${said.tip === "black" ? ` (bränn den med ${article(word("lighter"))} ${word("lighter").text})` : ""}.`
           : "";
-        return `Bind in ${mat(said.m)} så att ${p.subject} sticker ut ${length(said.length)} ${said.forward ? `framåt över ${def("eye")}` : "bakåt"} i ett stycke.${tip}`;
+        if (said.segments) {
+          const tails = said.tails
+            ? `bind in ${mat(said.tails.m)} vid spetsen så att ${pronoun(noun(said.tails.m)).subject} sticker ut ${length(said.tails.length)}, vik en remsa ${mat(said.m, "indefinite")} över ${pronoun(noun(said.tails.m)).object} med fibrerna mellan halvorna,`
+            : `vik en remsa ${mat(said.m, "indefinite")} över spetsen`;
+          const ends = said.ends ? ", med remsans två ändar pekande framåt för att dras över senare" : "";
+          return `Gör först ${def("body")} på en nål med ett tunt underlag av ${word("thread").text}: ${tails} och bind den i ${number(said.segments)} segment framåt, med några fasta ${svNoun(word("turn"), "plural")} tråd vid varje midja. Slå ett halvslag och dra av ${def("body")} från nålen. Bind fast ${pronoun(word("body")).object} ovanpå ${along} med det främre segmentet, så att ${pronoun(word("body")).subject} sticker ut ${length(said.length)} ${said.forward ? `framåt över ${def("eye")}` : "bakåt"}${ends}.${tip}`;
+        }
+        const tails = said.tails ? ` ${capitalize(mat(said.tails.m))} sticker ut ${length(said.tails.length)} förbi änden, där ${pronoun(noun(said.tails.m)).subject} bands in i förväg.` : "";
+        return `Bind in ${mat(said.m)} så att ${p.subject} sticker ut ${length(said.length)} ${said.forward ? `framåt över ${def("eye")}` : "bakåt"} i ett stycke.${tails}${tip}`;
       }
       case "tie-in-across":
         return `Bind ${count(said.strands, word("strand"))} ${mat(said.m, "indefinite")} tvärs över ${along} på mitten med ${eights}, så att ${length(said.length)} sticker ut på varje sida som ben.`;
@@ -162,7 +170,7 @@ function writerFor(recipe: Recipe) {
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
-        return `Bind in ${w.text} upprätt så att ${p.subject} står ${length(said.length)} upp, med ${svNoun(word("turn"), "plural")} framför som reser ${p.object}.${said.divide ? ` Dela ${p.object} i ett V med ${eights}.` : ""}`;
+        return `Bind in ${w.text} upprätt så att ${p.subject} står ${length(said.length)} upp, med ${svNoun(word("turn"), "plural")} framför som reser ${p.object}.${said.divide ? ` Dela ${p.object} i ett V med ${eights}.` : ""}${said.fan ? ` Låt ${p.object} breda ut sig som en solfjäder framåt och bakåt, smal från sida till sida.` : ""}`;
       }
       case "tie-in-wing-under": {
         const w = what(said.what);
@@ -191,6 +199,7 @@ function writerFor(recipe: Recipe) {
       case "wind":
         return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)}.`;
       case "pull-over":
+        if (said.around) return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida, en ände på var sida om ${mat(said.around)}, och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         if (said.wing) return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}; res sedan topparna framför inbindningen som en vinge på ungefär ${length(said.wing)} och dela den.`;
         if (said.under) return `${said.bubble ? "Vik" : "Dra"} ${mat(said.m)} framåt under ${def("body")}${said.bubble ? " som en lös bubbla" : ""} och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         if (said.bubble) return `Vik ${mat(said.m)} framåt över ${def("body")} som en lös bubbla och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;

@@ -36,7 +36,10 @@ export type How =
   | "spun"
   /** Tied in and folded over the body or thorax (shellbacks, wing cases), or laid back from the eye. */
   | "pulled"
-  /** Sticking out as one solid piece (an extended body or larva). */
+  /**
+   * Sticking out as one solid piece (an extended body or larva); made on a needle, in segments
+   * with its tails (the part's second material), and the rest of its strip perhaps pulled over.
+   */
   | "extended"
   /** Tubing slid over the body as a sleeve, tied down where it starts and later at its other end. */
   | "sleeve"
@@ -84,8 +87,14 @@ export interface Part {
   forward?: boolean;
   tip?: string;
   counter?: boolean;
-  /** A parachute's post: the part (an upright bunch) it is wound round. */
+  /** A parachute's post: the part (an upright bunch) it is wound round; or a strip pulled over is parted round. */
   post?: string;
+  /** An upright bunch fanned fore and aft over this many degrees (a Mohican's wing). */
+  fan?: number;
+  /** An extended body made on a needle: its segments, and its tails (its second material) past its end and splayed. */
+  segments?: number;
+  tailLength?: number;
+  tailSpread?: number;
   /** Spun hair: tips of the first clump left as a collar, gapes. */
   collar?: number;
   /** A bunch's fibres wound on afterwards as a body to here (a Pheasant Tail's tail). */
@@ -187,6 +196,23 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
 /** The materials that suit this part, as `ROLE_KINDS` lists them (and only those the catalog has). */
 export const kindsFor = (role: Role): MaterialKind[] => ROLE_KINDS[role].filter((k) => k in MATERIALS);
 
+/** What can come out of the end of a body made on a needle as its tails (as the rules allow). */
+const TAIL_ARCHETYPES: readonly Archetype[] = ["hair", "fibres", "biot"];
+
+/** Whether a part's material `index` is the tails of a body made on a needle, not the body. */
+export const isTails = (p: Part, index: number) => p.how === "extended" && p.tailLength !== undefined && index === 1;
+
+/**
+ * The materials a part's material can be changed to: its role's (a body's tails a tail's that can
+ * come out of a body), and in a mix only those tied the way the part is; its own always.
+ */
+export function materialChoices(part: Part, index: number): MaterialKind[] {
+  const own = part.mats[index]!.kind;
+  if (isTails(part, index)) return [...new Set([own, ...kindsFor("tail").filter((k) => TAIL_ARCHETYPES.includes(arch(k)))])];
+  const only = part.mats.length > 1 ? (k: MaterialKind) => waysFor(part.role, k).includes(part.how) : undefined;
+  return [...new Set([own, ...kindsFor(part.role).filter((k) => !only || only(k))])];
+}
+
 /** How a part of this role can be tied, with this material. */
 export function waysFor(role: Role, kind: MaterialKind): How[] {
   const a = arch(kind);
@@ -211,7 +237,8 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
     case "head":
       return a === "hair" ? ["spun"] : ["wound"];
     case "body":
-      return a === "hair" ? ["spun"] : a === "chenille" || a === "yarn" ? ["wound", "extended", "woven"] : ["wound"];
+      // (Foam can't be wound: as a body it sticks out in one piece.)
+      return a === "hair" ? ["spun"] : a === "chenille" || a === "yarn" ? ["wound", "extended", "woven"] : a === "foam" ? ["extended"] : ["wound"];
     default:
       return ["wound"];
   }
@@ -224,8 +251,10 @@ export function actionCount(p: Part): number {
   switch (p.how) {
     case "slide":
     case "weight":
-    case "extended":
       return 1;
+    case "extended":
+      // (The rest of its strip pulled over, a Mohican's, and trimmed.)
+      return 1 + (p.to !== undefined ? 1 : 0) + (p.trim ? 1 : 0);
     case "bunch":
       return 1 + (p.windTo !== undefined ? 1 : 0) + (p.trim ? 1 : 0);
     case "wound":
@@ -280,6 +309,8 @@ export function phaseOf(p: Part, action: number): number {
       // A sleeve goes on over whatever is wound or dubbed under it.
       if (p.how === "sleeve") return 40.8 + action * 0.1;
       if (p.how === "woven") return [35, 40][action]!;
+      // An extended body's strip is pulled over last, after the thorax and hackle.
+      if (p.how === "extended") return [35, 65, 65.5][action]!;
       return p.how === "dubbed" || p.how === "spun" || p.how === "thread" ? 40 + action * 0.1 : [35, 40, 40.5][action]!;
     case "thorax":
       return 50 + action * 0.1;
@@ -426,7 +457,12 @@ export function compile(fly: PartsFly): Compiled {
     actions.splice(actions.indexOf(a) + 1, 0, rib!);
   }
 
-  for (const { part: p, index: i, restart } of actions) {
+  for (const [ai, { part: p, index: i, restart }] of actions.entries()) {
+    /** The thread taken first to where the next action's winding forward ends, when that winding holds what this one leaves (a palmered tip, a strip laid back). */
+    const toHolder = () => {
+      const holder = actions[ai + 1];
+      if (holder?.part?.how === "wound" && holder.index === 1) to(holder.part.to ?? 1, holder.part.id);
+    };
     if (restart) {
       // Finished here (where the thread is) and started again later; nothing to finish before the thread.
       if (thread !== null) {
@@ -461,6 +497,7 @@ export function compile(fly: PartsFly): Compiled {
       ...(p.width !== undefined && { width: p.width }),
       ...(p.side !== undefined && { side: p.side }),
       ...(p.forward && { forward: true }),
+      ...(p.fan !== undefined && p.length !== undefined && { fan: p.fan }),
     };
     // A bunch's trim is of hair butts: of the hair in a mix only.
     const trim = () =>
@@ -474,9 +511,22 @@ export function compile(fly: PartsFly): Compiled {
       case "weight":
         push({ op: "weight", material: m0.id, from: round(p.from ?? 0.3), to: round(p.to ?? 0.75), ...n }, p.id);
         break;
-      case "extended":
-        tieIns(p.at ?? 0, { ...bunch, extended: true, ...(p.tip && { tip: p.tip }) });
+      case "extended": {
+        // Made on a needle, its second material is its tails, in it: only the body is tied in.
+        const tails = p.tailLength !== undefined ? p.mats[1] : undefined;
+        if (i === 0 && tails) {
+          to(p.at ?? 0, p.id);
+          push({
+            op: "tie-in", material: m0.id, ...bunch, extended: true, ...(p.tip && { tip: p.tip }), ...(p.segments !== undefined && { segments: p.segments }),
+            tails: tails.id, "tail-length": p.tailLength!, ...(p.tailSpread !== undefined && { "tail-spread": p.tailSpread }), ...n,
+          } as Step, p.id);
+        } else if (i === 0) tieIns(p.at ?? 0, { ...bunch, extended: true, ...(p.tip && { tip: p.tip }), ...(p.segments !== undefined && { segments: p.segments }) });
+        else if (i === 1 && p.to !== undefined) {
+          to(p.to, p.id);
+          push({ op: "pull-over", material: m0.id, to: round(p.to), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...n }, p.id);
+        } else push({ op: "trim", material: m0.id, ...p.trim, ...n } as Step, p.id);
         break;
+      }
       case "bunch":
         if (i === 0) tieIns(p.at ?? 0, bunch);
         else if (i === 1 && p.windTo !== undefined) {
@@ -506,7 +556,12 @@ export function compile(fly: PartsFly): Compiled {
         break;
       case "palmered":
         if (i === 0) tieIns(p.at ?? 0.75);
-        else if (i === 1) p.mats.forEach((m, k) => push({ op: "wind", material: m.id, to: round(p.to ?? 0.05), turns: turnsOf(p, m), ...(k === 0 ? n : {}) }, p.id));
+        else if (i === 1) {
+          // Nothing may come between it and the winding forward that holds its tip: the thread
+          // goes first to where that winding ends.
+          toHolder();
+          p.mats.forEach((m, k) => push({ op: "wind", material: m.id, to: round(p.to ?? 0.05), turns: turnsOf(p, m), ...(k === 0 ? n : {}) }, p.id));
+        }
         else if (i === 2) p.mats.forEach((m, k) => push({ op: "trim", material: m.id, ...(k === 0 ? n : {}) } as Step, p.id));
         else p.mats.forEach((m, k) => push({ op: "trim", material: m.id, keep: p.trim!.keep!, ...(k === 0 ? n : {}) } as Step, p.id));
         break;
@@ -562,7 +617,8 @@ export function compile(fly: PartsFly): Compiled {
           // Laid back from the eye, the next winding holds it, or the thread ties it down there;
           // folded forward, the thread ties it down.
           if (end > (p.at ?? 0) || p.tiedBack) to(end, p.id);
-          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.tipWing !== undefined && { wing: p.tipWing }), ...(k === 0 ? n : {}) }, p.id));
+          else toHolder();
+          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.tipWing !== undefined && { wing: p.tipWing }), ...(k === 0 ? n : {}) }, p.id));
         } else trim();
         break;
     }
@@ -592,6 +648,14 @@ function postMaterial(fly: PartsFly, post: string | undefined): string {
 }
 
 // ——— Reading a recipe back into parts ———
+
+/** A recipe's material as a part's, its own settings kept. */
+function materialOf(m: Material): PartMaterial {
+  const mat: PartMaterial = { id: m.id, kind: m.kind, ...(m.color && { color: m.color }), ...(m.label && { label: m.label }) };
+  const { id: _id, kind: _kind, color: _color, label: _label, ...props } = m as Material & Record<string, unknown>;
+  if (Object.keys(props).length) mat.props = props as PartMaterial["props"];
+  return mat;
+}
 
 /** A part's role from its id's words and how it is tied, for an id the builder didn't write. */
 function roleOf(id: string, how: How, kind: MaterialKind, step: Step | undefined): Role {
@@ -730,9 +794,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     const m = kinds.get(id);
     if (!m) return null;
     const ops = g.map((x) => x.s.op).join(" ");
-    const mat: PartMaterial = { id, kind: m.kind, ...(m.color && { color: m.color }), ...(m.label && { label: m.label }) };
-    const { id: _id, kind: _kind, color: _color, label: _label, ...props } = m as Material & Record<string, unknown>;
-    if (Object.keys(props).length) mat.props = props as PartMaterial["props"];
+    const mat = materialOf(m);
     const notes: Record<number, string> = {};
     const mistakes: Record<number, string> = {};
     // A tie-off's note under its winding's action and a half (they are one action).
@@ -751,6 +813,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       ...(t.width !== undefined && { width: t.width }),
       ...(t.side !== undefined && { side: t.side }),
       ...(t.forward && { forward: true }),
+      ...(t.fan !== undefined && { fan: t.fan }),
     });
     const trimOf = (s: Step) => {
       const t = s as Extract<Step, { op: "trim" }>;
@@ -787,14 +850,25 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     } else if (ops === "spin" || ops === "spin trim") {
       const sp = g[0]!.s as Extract<Step, { op: "spin" }>;
       part = { id, how: "spun", mats: [mat], from: at, to: sp.to, ...(sp.collar !== undefined && { collar: sp.collar }), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
-    } else if (tieIn && tieIn.extended && ops === "tie-in") {
-      part = { id, how: "extended", mats: [mat], at, ...bunchOf(tieIn), ...(tieIn.tip && { tip: tieIn.tip }), keys: [g[0]!.i] };
+    } else if (tieIn && tieIn.extended && /^tie-in( pull-over( trim)?)?$/.test(ops)) {
+      // Made on a needle: its tails, in it, are its second material.
+      const tm = tieIn.tails !== undefined ? kinds.get(tieIn.tails) : undefined;
+      if (tieIn.tails !== undefined && !tm) return null;
+      const tails: PartMaterial[] = tm ? [materialOf(tm)] : [];
+      const po = g[1]?.s as Extract<Step, { op: "pull-over" }> | undefined;
+      part = {
+        id, how: "extended", mats: [mat, ...tails], at, ...bunchOf(tieIn), ...(tieIn.tip && { tip: tieIn.tip }),
+        ...(tieIn.segments !== undefined && { segments: tieIn.segments }),
+        ...(tieIn["tail-length"] !== undefined && { tailLength: tieIn["tail-length"] }), ...(tieIn["tail-spread"] !== undefined && { tailSpread: tieIn["tail-spread"] }),
+        ...(po && { to: po.to, ...(po.around !== undefined && { post: po.around }), ...(po.bubble !== undefined && { bubble: po.bubble }) }), ...(g[2] && { trim: trimOf(g[2].s) }),
+        keys: g.map((x) => x.i),
+      };
     } else if (tieIn && (ops === "tie-in" || ops === "tie-in trim")) {
       part = { id, how: "bunch", mats: [mat], at, ...bunchOf(tieIn), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && /^tie-in pull-over( trim)?$/.test(ops)) {
       const po = g[1]!.s as Extract<Step, { op: "pull-over" }>;
       const tiedBack = po.to < (at ?? 0) - POSITION_TOLERANCE && g[1]!.thread != null && Math.abs(g[1]!.thread - po.to) <= POSITION_TOLERANCE;
-      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.bubble !== undefined && { bubble: po.bubble }), ...(po.wing !== undefined && { tipWing: po.wing }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
+      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.around !== undefined && { post: po.around }), ...(po.bubble !== undefined && { bubble: po.bubble }), ...(po.wing !== undefined && { tipWing: po.wing }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && /^tie-in wind tie-off( trim)?$/.test(ops)) {
       const w = g[1]!.s as Extract<Step, { op: "wind" }>;
       mat.turns = w.turns;
@@ -845,7 +919,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
 function sameWay(a: Part, b: Part, steps: Step[]): boolean {
   if (a.role !== b.role || a.how !== b.how || a.mats.length >= 3) return false;
   if (!["bunch", "wound", "parachute"].includes(a.how)) return false;
-  const geom = (p: Part) => JSON.stringify([p.at, p.to, p.length, p.angle, p.spread, p.width, p.side, p.forward, p.post, p.counter, p.trim, p.windTo]);
+  const geom = (p: Part) => JSON.stringify([p.at, p.to, p.length, p.angle, p.spread, p.width, p.side, p.forward, p.post, p.counter, p.trim, p.windTo, p.fan]);
   if (geom(a) !== geom(b)) return false;
   // The tie-ins next to each other, and each later action right after the other's.
   const lastA = a.keys.length;
@@ -880,6 +954,19 @@ const POSITIONS = ["front", "rear", "middle", "upper", "lower"] as const;
 /** Proportions a part can be set to at a tap: short, classic and long, as multiples of the classic. */
 export const PRESETS = { short: 0.75, classic: 1, long: 1.3 } as const;
 export type Preset = keyof typeof PRESETS;
+
+/** The value a preset scales, for this part: a length, a body's end, a hackle's fibres. */
+export function presetFor(p: Part): { get: number | undefined; classic: number; set: (v: number) => Partial<Part> } | null {
+  const c = CLASSIC[p.role];
+  const r2 = (v: number) => Math.round(v * 100) / 100;
+  if (p.length !== undefined && c.length !== undefined) return { get: p.length, classic: c.length, set: (v) => ({ length: r2(v) }) };
+  // (An extended body's `to` is where the rest of its strip is pulled over to, not its end.)
+  if (p.role === "body" && p.to !== undefined && p.how !== "extended") return { get: p.to, classic: c.to!, set: (v) => ({ to: r2(Math.min(1, Math.max((p.at ?? p.from ?? 0) + 0.05, v))) }) };
+  const fibre = p.mats[0]?.props?.fibre;
+  if (p.role === "hackle" && typeof fibre === "number")
+    return { get: fibre, classic: 1.5, set: (v) => ({ mats: p.mats.map((m, i) => (i === 0 ? { ...m, props: { ...m.props, fibre: r2(v) } } : m)) }) };
+  return null;
+}
 
 /**
  * Classic proportions for a new part, in gapes and shank fractions.
@@ -952,10 +1039,13 @@ export function fromRecipe(recipe: Recipe): PartsFly | null {
 /** Why a part can't be tied this way on this fly, or null when it can. */
 export function unavailable(fly: PartsFly, part: Part, how: How): "needsRib" | "needsPost" | "oneMaterial" | "twoMaterials" | null {
   // A top strand and a belly's.
-  if (how === "woven") return part.mats.length === 2 ? null : "twoMaterials";
+  // (A needle body's tails are not a strand of it.)
+  if (how === "woven") return bodyMats(part).length === 2 ? null : "twoMaterials";
   if (how === "palmered") {
     // Each material wound back is held by the next winding: only one can be.
     if (part.mats.length > 1) return "oneMaterial";
+    // (One rib holds one palmered tip: not a second hackle's too.)
+    if (fly.parts.some((p) => p.id !== part.id && p.how === "palmered")) return "oneMaterial";
     // Its tip is held by a winding forward over it: a rib (or a body wound after it).
     const holds = fly.parts.some((p) => p.id !== part.id && p.role === "rib" && p.how === "wound");
     return holds ? null : "needsRib";
@@ -985,7 +1075,7 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
   const [bodyFrom, bodyTo] = body && body.how !== "extended" ? extentOf(body) : [0, 0.7];
   const c = CLASSIC[part.role];
   const next: Omit<Part, "keys"> & { keys?: number[] } = { ...part, how };
-  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray"] as const) delete next[k];
+  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread"] as const) delete next[k];
   switch (how) {
     case "bunch":
       if (part.mats.some((m) => arch(m.kind) === "eyes")) Object.assign(next, { at: c.at ?? 0.85 });
@@ -1041,9 +1131,71 @@ export function addPart(fly: PartsFly, role: Role, kind: MaterialKind, color?: s
 
 /** The fly with one part tied another way. */
 export function setHow(fly: PartsFly, id: string, how: How): PartsFly {
+  const before = fly.parts.find((p) => p.id === id);
+  // Already tied so: as it is.
+  if (before?.how === how) return fly;
+  // A body made on a needle tied another way: its tails, which were in it, become a tail tied in
+  // where it was, reaching as far.
+  if (before && before.how === "extended" && before.tailLength !== undefined && how !== "extended" && before.mats[1]) {
+    const { tailLength, tailSpread, segments: _s, ...rest } = before;
+    const tails = before.mats[1];
+    const body = { ...rest, mats: before.mats.filter((_, i) => i !== 1) } as Part;
+    const tail: Omit<Part, "keys"> = {
+      id: partId({ ...fly, parts: fly.parts.map((p) => (p.id === id ? body : p)) }, "tail"), role: "tail", how: "bunch", mats: [tails], at: before.at ?? 0,
+      length: Math.round(((before.length ?? 0) + tailLength) * 100) / 100, angle: before.angle ?? 0, ...(tailSpread !== undefined && { spread: tailSpread }),
+      ...(arch(tails.kind) === "hair" && { trim: {} }),
+    };
+    const moved = { ...fly, parts: fly.parts.map((p) => (p.id === id ? body : p)) };
+    const base = renumbered(moved);
+    fly = { ...base, parts: [...base.parts, { ...tail, keys: keysFor(base, tail) } as Part] };
+  }
   const base = renumbered(fly);
   // The parts that go with it follow (a palmered hackle's rib ends where it is tied in).
-  return constrained({ ...base, parts: base.parts.map((p) => (p.id === id ? withHow(base, p, how) : p)) });
+  return tidied(constrained({ ...base, parts: base.parts.map((p) => (p.id === id ? withHow(base, p, how) : p)) }));
+}
+
+/**
+ * The materials a part is made of, without a body's tails: a body made on a needle carries its
+ * tails as its second material, tied in with it, not as a material of the body.
+ */
+export const bodyMats = (p: Part): PartMaterial[] => (p.how === "extended" && p.tailLength !== undefined ? p.mats.slice(0, 1) : p.mats);
+
+/**
+ * Settings left over that no longer apply: a fan on a bunch that isn't upright (or is of
+ * feathers), a strip parted round a post that is gone or no longer stands upright.
+ */
+function tidied(fly: PartsFly): PartsFly {
+  let changed = false;
+  // Behind the bend the thread binds only hair folded back: without it, its passes stop at the bend.
+  const folded = fly.parts.some((p) => p.how === "pulled" && p.tiedBack && p.mats.every((m) => arch(m.kind) === "hair"));
+  const onShank = (x: number | undefined) => (x === undefined ? x : Math.max(0, x));
+  const parts = fly.parts.map((p) => {
+    let next = p;
+    if (!folded && p.how === "thread" && [p.from, p.to, ...(p.passes ?? []).flatMap((x) => [x.from, x.to])].some((x) => x !== undefined && x < 0)) {
+      next = { ...next, from: onShank(p.from), to: onShank(p.to), ...(p.passes && { passes: p.passes.map((x) => ({ ...x, from: Math.max(0, x.from), to: Math.max(0, x.to) })) }) };
+    }
+    // Feathers are tied in pointing back.
+    if (next.forward && p.mats.some((m) => arch(m.kind) === "feather")) {
+      const { forward: _f, ...rest } = next;
+      next = rest as Part;
+    }
+    if (p.fan !== undefined && (p.how !== "bunch" || p.length === undefined || (p.angle ?? 0) < UPRIGHT || p.mats.some((m) => arch(m.kind) === "feather"))) {
+      const { fan: _f, ...rest } = next;
+      next = rest as Part;
+    }
+    if ((p.how === "pulled" || p.how === "extended") && p.post !== undefined) {
+      const post = fly.parts.find((x) => x.id === p.post);
+      // Upright, and passed on the strip's way forward.
+      const between = post?.at !== undefined && p.to !== undefined && post.at > (p.at ?? 0) + POSITION_TOLERANCE && post.at < p.to - POSITION_TOLERANCE;
+      if (!post || !isPost(post) || !between) {
+        const { post: _p, ...rest } = next;
+        next = rest as Part;
+      }
+    }
+    if (next !== p) changed = true;
+    return next;
+  });
+  return changed ? { ...fly, parts } : fly;
 }
 
 // ——— Editing ———
@@ -1083,7 +1235,8 @@ export function setPart(fly: PartsFly, id: string, patch: Partial<Part>): PartsF
     const base = renumbered(next);
     next = { ...base, parts: base.parts.map((p) => (p.id === id ? { ...p, keys: keysFor(base, p) } : p)) };
   }
-  return next;
+  // (A wing laid down no longer fans, nor parts a strip round it.)
+  return tidied(next);
 }
 
 /**
@@ -1149,7 +1302,8 @@ export function removePart(fly: PartsFly, id: string): PartsFly {
   for (const p of next.parts) if (p.how === "parachute" && p.post === id) next = setHow(next, p.id, "wound");
   // A palmered hackle with no rib left to hold it is wound forward as a collar instead.
   for (const p of next.parts) if (p.how === "palmered" && unavailable(next, p, "palmered")) next = setHow(next, p.id, "wound");
-  return next;
+  // (A strip parted round it is pulled straight over.)
+  return tidied(next);
 }
 
 /** A part with another material mixed in (up to three), ids naming each by its colour. */
@@ -1179,14 +1333,22 @@ export function removeMaterial(fly: PartsFly, id: string, index: number): PartsF
     ...fly,
     parts: fly.parts.map((p) => {
       if (p.id !== id || p.mats.length < 2) return p;
+      const tails = p.how === "extended" && p.tailLength !== undefined;
+      // (A body made on a needle is not left as only its tails.)
+      if (tails && index === 0) return p;
       const mats = p.mats.filter((_, i) => i !== index);
+      // Its tails taken out: a body without them.
+      if (tails && index === 1) {
+        const { tailLength: _l, tailSpread: _s, ...rest } = p;
+        return { ...rest, mats, trim: trimFor(p, mats) } as Part;
+      }
       return { ...p, mats, trim: trimFor(p, mats) };
     }),
   };
   // One strand left of a woven body: wound.
   const part = next.parts.find((p) => p.id === id);
   if (part?.how === "woven" && part.mats.length < 2) return setHow(next, id, "wound");
-  return rekeyed(next, id);
+  return tidied(rekeyed(next, id));
 }
 
 /**
@@ -1198,8 +1360,8 @@ function trimFor(p: Part, mats: PartMaterial[]): Part["trim"] {
   const any = (a: Archetype) => mats.some((m) => arch(m.kind) === a);
   switch (p.how) {
     case "bunch":
-      // (Hair tied in pointing forward has no butts to trim.)
-      return any("hair") && !p.forward ? (p.trim ?? {}) : undefined;
+      // (Hair tied in pointing forward, or across the shank as legs, has no butts to trim.)
+      return any("hair") && !p.forward && p.side !== "across" ? (p.trim ?? {}) : undefined;
     case "pulled":
       // (And the tips of hair folded back and tied down, a bullet head's.)
       return all("foam") || all("strip") || (all("hair") && p.tiedBack) ? p.trim : undefined;
@@ -1208,6 +1370,9 @@ function trimFor(p: Part, mats: PartMaterial[]): Part["trim"] {
       return p.trim?.keep && all("hackle") ? { keep: p.trim.keep } : p.how === "palmered" ? {} : undefined;
     case "spun":
       return p.trim;
+    case "extended":
+      // The rest of a foam strip pulled over, cut to a head (its tails aside).
+      return p.to !== undefined && bodyMats({ ...p, mats }).every((m) => arch(m.kind) === "foam") ? p.trim : undefined;
     default:
       return undefined;
   }
@@ -1244,7 +1409,8 @@ export function setMaterial(fly: PartsFly, id: string, index: number, patch: Par
     });
     const next: Part = { ...p, mats, trim: trimFor(p, mats) };
     // Settings only some materials take: a feather's width, strands tied across, fibres wound on.
-    if (!mats.some((m) => arch(m.kind) === "feather")) delete next.width;
+    // (An extended body's width is its thickness.)
+    if (!mats.some((m) => arch(m.kind) === "feather") && p.how !== "extended") delete next.width;
     if (next.side === "across" && !mats.every((m) => ACROSS_KINDS.includes(arch(m.kind)))) delete next.side;
     if (next.windTo !== undefined && !mats.every((m) => WINDABLE.includes(arch(m.kind)))) delete next.windTo;
     return next;
@@ -1258,12 +1424,13 @@ export function setMaterial(fly: PartsFly, id: string, index: number, patch: Par
   next = rekeyed(next, id);
   // A post that can no longer carry a parachute (hackle tips): its hackle is wound as a collar.
   for (const p of next.parts) if (p.how === "parachute" && p.post === id && !isPost(next.parts.find((x) => x.id === id)!)) next = setHow(next, p.id, "wound");
-  return next;
+  return tidied(next);
 }
 
 /** The ways a part can be tied with every material in it. */
 export function waysOf(part: Part): How[] {
-  return waysFor(part.role, part.mats[0]!.kind).filter((w) => part.mats.every((m) => waysFor(part.role, m.kind).includes(w)));
+  const mats = bodyMats(part);
+  return waysFor(part.role, mats[0]!.kind).filter((w) => mats.every((m) => waysFor(part.role, m.kind).includes(w)));
 }
 
 /** The fly styles to start from, each a pattern of that style as parts, without its notes. */

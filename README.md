@@ -35,7 +35,8 @@ a post, dubbed, spun, pulled over, slid over the body as a sleeve, two strands w
 classic proportions. The chosen parts show in full and the rest faintly; "Watch it tied" plays
 every step. Flybench writes the tying order, the thread's moves and the tie-offs
 (`src/edit/parts.ts`), so the fly always ties; every pattern reads back into parts and ties the
-same fly (a Paradrake's hair body, bound with the thread past the bend, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
+same fly (a Paradrake's hair body, bound with the thread past the bend, and a Mohican Mayfly's
+foam body made on a needle, its tails in it and its strip pulled over round the wing, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
 log and the trip box, can be downloaded as a recipe file, and shared as a link that carries
 the whole fly after the `#`. The built site installs as an app and works offline after
 the first visit.

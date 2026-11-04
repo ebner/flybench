@@ -203,6 +203,17 @@ For an extended body, hold the hair back round the shank (and round a tail tied 
     mistakes: ["Too much tension, so the hair flares instead of lying smooth.", "Uneven turns past the bend, so the body comes out crooked or its segments uneven."],
   },
   {
+    id: "needle-body",
+    name: "Extended foam bodies made on a needle",
+    summary: "A strip of foam folded round a needle over the tails and bound into segments, then slid off and tied on the hook.",
+    how: `Clamp a needle in the vise and lay a sparse thread base on it, about a hook long. Tie the tail fibres in near its tip, their butts running forward along the needle.
+
+Cut a strip of thin closed-cell foam, tapered towards one end and notched there for the tails. Fold it over the tip of the needle with the tails between the halves, and bind the first segment with a few turns of light tension: enough to pinch the foam, not to cut it. Take the thread forward in a couple of open turns and bind the next segment, and so on.
+
+Half hitch the thread, cut it and slide the body off the needle. Tie it on top of the hook by its front segment, the ends of the foam and the tail butts lying forward. The ends can be pulled forward later over the thorax, one down each side of the wing, and tied down behind the eye as the head.`,
+    mistakes: ["Too much tension, so the thread cuts the foam.", "Foam that slips round the shank as it is tied down: hold it in place while you tighten."],
+  },
+  {
     id: "bead-head",
     name: "Bead heads",
     summary: "A metal bead slid onto the hook before the thread, for weight and flash.",
@@ -275,6 +286,8 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     const m = recipe.materials.find((m) => m.id === id);
     return m ? MATERIALS[m.kind].archetype : undefined;
   };
+  // A body made on a needle, and the rest of its strip pulled over later.
+  const needleBody = (id: string) => recipe.steps.some((s) => s.op === "tie-in" && s.material === id && s.segments !== undefined);
   // Hair folded back over itself from where it was tied in (a bullet head), and bound past the bend.
   const foldedBack = (id: string) => {
     if (archetype(id) !== "hair") return false;
@@ -297,7 +310,7 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     case "spin":
       return "spinning-hair";
     case "pull-over":
-      return foldedBack(step.material) ? "hair-body" : "wing-case";
+      return foldedBack(step.material) ? "hair-body" : needleBody(step.material) ? "needle-body" : "wing-case";
     case "sleeve":
       return "tubing-body";
     case "weave":
@@ -316,6 +329,7 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       const tieIn = recipe.steps.findIndex((s) => s.op === "tie-in" && s.material === step.material);
       if (archetype(step.material) === "hair" && tieIn >= 0) return stepTechnique(recipe, tieIn);
       // The excess of a strip pulled over the body: a wing case or foam back.
+      if (needleBody(step.material)) return "needle-body";
       if (recipe.steps.some((s) => s.op === "pull-over" && s.material === step.material)) return "wing-case";
       // A trimmed hackle (keep), or a palmered hackle's tip: part of how that hackle was wound.
       const wound = recipe.steps.findIndex((s) => s.op === "wind" && s.material === step.material);
@@ -325,6 +339,7 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       const a = archetype(step.material);
       if (a === "eyes") return "eyes";
       if (foldedBack(step.material)) return "hair-body";
+      if (step.segments !== undefined) return "needle-body";
       if (step.length === undefined) return "tie-in";
       // Under the shank of a point-up fly is its top: a wing there, not a beard.
       if (step.side === "under") return !ridesPointUp(recipe) ? "beard" : a === "hair" ? "hair-wing" : "tie-in";

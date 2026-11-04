@@ -59,3 +59,35 @@ describe("Swedish and German steps", () => {
     expect(simulate(adams).steps.map((s) => s.text)).toContain("Binde die braune Hahnenhechel mit ein paar festen Windungen ein.");
   });
 });
+
+describe.each(["sv", "de"] as const)("an extended body's tails in %s", (lang) => {
+  it("are said to be there, with or without segments", () => {
+    setLang(lang);
+    const result = loadRecipe(`id test
+name "Test"
+type nymph
+difficulty advanced
+hook nymph-2xl size=12
+thread black size="8/0"
+materials {
+    tail goose-biot color=brown
+    body chenille color=olive
+}
+steps {
+    attach-thread at=0.1
+    tie-in body length=1.5 extended=#true tails=tail tail-length=0.6
+    whip-finish
+}
+`);
+    if (!result.ok) throw new Error("does not load");
+    const text = simulate(result.recipe).steps[1]!.text;
+    expect(text).toMatch(lang === "sv" ? /förbi änden, där .* bands in i förväg\./ : /über das Ende hinaus, wo .* vorher eingebunden (wurde|wurden)\./);
+    expect(text).toMatch(/0,6/);
+    // A body made on a needle pointing forward is said to.
+    const made = loadRecipe(readFileSync(new URL("../../patterns/mohican-mayfly.kdl", import.meta.url), "utf8"));
+    if (!made.ok) throw new Error("does not load");
+    const tie = made.recipe.steps.findIndex((s) => s.op === "tie-in" && s.material === "body");
+    const forward = { ...made.recipe, steps: made.recipe.steps.map((s, i) => (i === tie ? { ...s, forward: true } : s)) } as Recipe;
+    expect(simulate(forward).steps[tie]!.text).toMatch(lang === "sv" ? /framåt över krokögat, med remsans/ : /nach vorn über das Öhr übersteht/);
+  });
+});

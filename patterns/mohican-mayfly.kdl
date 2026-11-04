@@ -1,0 +1,89 @@
+// Mohican Mayfly: Oliver Edwards's big mayfly dun, a segmented foam body made on a needle, a fanned deer hair wing and a parachute hackle.
+
+id mohican-mayfly
+name "Mohican Mayfly"
+type dry
+imitates mayfly
+naturals mayfly-dun
+difficulty advanced
+species trout
+season may june
+origin originator="Oliver Edwards"
+description "Moose mane tails out of a segmented body of tan foam made on a needle, a stacked deer hair wing standing as a fan, a hare's ear thorax under a parachute hackle of dark barred ginger, and the ends of the foam brought forward each side of the wing as a head."
+history """
+    Oliver Edwards, the English tyer and author of Flytyer's Masterclass, ties it in his Essential
+    Skills videos among his more demanding patterns. Thomas Züllich credits it with making the
+    extended foam body known: the body is made first on a needle, a strip of foam folded round
+    the tails and bound into segments, then slid off and tied on the hook by its front segment.
+    Edwards's own fly has a deer hair wing and an ordinary cock hackle, and he ties it on a
+    standard dry fly hook; others tie it on curved hooks, and Züllich ties a version with CDC.
+    """
+fishing """
+    A dry fly for the hatches of the big Ephemera mayflies. The foam floats it, and the long
+    segmented body and tails give the outline of the natural dun. Fish it on a dead drift to
+    trout rising to the hatch.
+    """
+sources {
+    "Sexyloops: fly tying school part 25, CDC Mohican Mayfly (Thomas Züllich)" url="https://mail.sexyloops.com/index.php/ps/sexyloops-fly-tying-school-part-25-cdc-mohican-mayfly"
+    "Sexyloops: CDC Mohican Mayfly (Thomas Züllich)" url="https://mail.sexyloops.com/index.php/ps/cdc-mohican-mayfly"
+    "JustGone.Fishing: Tying the Mohican Mayfly (Hans)" url="https://justgone.fishing/2022/05/20/tying-the-mohican-mayfly/"
+    "In the Riffle: Mohican Mayfly fly tying, Oliver Edwards pattern (video)" url="https://www.youtube.com/watch?v=UYig4fZjcMs"
+    "Troutfishing Germany: Mohican mayfly, CDC variation (Hannes N.)" url="http://troutfishing-germany.com/en/2020/05/mohican-mayfly-cdc-variation/"
+    "Global FlyFisher: Oliver Edwards, Essential Skills (Martin Joergensen)" url="https://globalflyfisher.com/node/39516"
+    "Fulling Mill: OE Mohican May, small male" url="https://www.fullingmill.co.uk/Products-UK/Tactical-River-Dry-Flies-UK/OE-Mohican-May-Small-Male-S14-UK"
+    "Fish4Flies: Mohican Mayfly" url="https://www.fish4flies.eu/Dry/Mayfly/Mohican-Mayfly"
+    "Fly Fishing & Fly Tying: Oliver Edwards" url="https://flyfishing-and-flytying.co.uk/oliver-edwards/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://mail.sexyloops.com/upload/images/tz/2f5c8d4cc26cb6bb9e46c0bda510ab3b.jpg" page="https://mail.sexyloops.com/index.php/ps/sexyloops-fly-tying-school-part-25-cdc-mohican-mayfly" author="Hans Weilenmann (tied by Thomas Züllich)" license="All rights reserved; reference only" note="Side view in the vise, on a curved hook: the fanned deer hair wing, foam head and segmented body"
+    "https://www.fullingmill.co.uk/core/media/media.nl?id=825063&c=3752701&h=aS64RO_0lf6SiBuRyacQo5sYtTQOTaOWBVeSdzC6jSaa4o9r" page="https://www.fullingmill.co.uk/Products-UK/Tactical-River-Dry-Flies-UK/OE-Mohican-May-Small-Male-S14-UK" license="All rights reserved; reference only" note="Fulling Mill's OE tie, side view on a curved hook"
+    "https://www.fish4flies.eu/img/flies/Original/4231-4231%20Mohican%20Mayfly.jpg" page="https://www.fish4flies.eu/Dry/Mayfly/Mohican-Mayfly" flip=#true license="All rights reserved; reference only" note="Side view; the body cocked up more than most"
+    "https://www.farlows.co.uk/media/amasty/blog/2020/05/2020-essential-mayfly-patterns-oliver-edwards-mohican-may-300x300.jpg" page="https://www.farlows.co.uk/blog/magical-mayflies-essential-mayfly-patterns" license="All rights reserved; reference only" note="Side view, small"
+}
+
+// Züllich: Edwards ties it on a standard dry fly hook in his video. In the Riffle a TMC 2488
+// #12–16, Fulling Mill a TMC 2499 #14, JustGone and Troutfishing Germany curved hooks #10.
+hook dry-standard size=12
+// In the Riffle: rusty dun UNI 8/0 (drawn as a greyish rust brown). JustGone ties it with cream Veevus 14/0.
+thread "#7a5a48" size="8/0"
+
+materials {
+    // In the Riffle and Alan Bithell: two or three moose mane fibres; JustGone brown bucktail.
+    tail moose-mane count=3 label="Moose mane fibres"
+    // In the Riffle: 1–2 mm tan foam; JustGone 1 mm tan; Troutfishing Germany 2 mm white, coloured with marker.
+    body foam color=tan mm=1.5 label="Tan closed-cell foam"
+    // JustGone: natural deer hair; In the Riffle dun or grey.
+    // Read from the photos: a sparse bunch, the hairs countable at its edges; about a hundred.
+    wing deer-hair count=100 label="Natural deer hair"
+    // In the Riffle: dark barred ginger; JustGone grizzly. Read from the photos: fibres about 1.3 gapes.
+    hackle cock-hackle color=ginger barred=#true fibre=1.3 label="Dark barred ginger cock hackle"
+    thorax hares-ear-dubbing
+}
+
+steps {
+    // JustGone's sequence, with Züllich's and Troutfishing Germany's details.
+    attach-thread at=0.8
+    wrap-thread to=0.2 note="A thread base back to above the hook point."
+    // JustGone: 4–5 segments; Troutfishing Germany 7–8, growing towards the front. Assumption:
+    // six. Read from the photos: the body sticks out about 1.9 gapes past the bend, about 0.4
+    // gape thick at the front; the tails another 3–3.7 gapes, splayed a little.
+    tie-in body length=2.3 angle=5 extended=#true segments=6 width=0.4 tails=tail tail-length=3.3 tail-spread=20 note="Cut the strip tapered, with a notch for the tails; bind the segments with light tension so the foam is pinched, not cut."
+    wrap-thread to=0.62 note="Over the tail butts, binding them down on top of the shank."
+    // JustGone: the wing as long as the body; Troutfishing Germany: rather too short than too long.
+    // Read from the photos: about 2.5 gapes tall, fanned out fore and aft over about 40°.
+    tie-in wing length=2.5 angle=85 fan=40 note="Stack it and tie it in on top, tips forward; stand it up and take a few turns round its base, as for a parachute post."
+    trim wing note="Cut the butts at a slant and bind them down."
+    tie-in hackle note="Shiny side towards you, its stem bound up the base of the wing."
+    wrap-thread to=0.25
+    dub thorax to=0.85 note="From the body forward round the wing, leaving room for the head."
+    // Assumption: five turns; the sources don't say.
+    wind hackle around=wing turns=5 note="Round the foam and the wing; stroke the fibres back."
+    tie-off hackle
+    // Troutfishing Germany: the foam pushes the parachute hackle into a triangle.
+    pull-over body to=0.85 around=wing note="It pushes the hackle into a triangle; the foam likes to slip, so hold it as you tighten."
+    // Read from the photos: a head of foam reaching to the eye, about a third of a gape long. Züllich folds the ends back over
+    // the tie-down instead and whips in the neck behind them.
+    trim body leave=0.3 note="Leave a short head; colour it darker with a marker if you like."
+    whip-finish note="In the neck behind the foam head, and a drop of varnish."
+}

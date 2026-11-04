@@ -1,0 +1,61 @@
+id mohican-mayfly
+status draft
+
+// en description: Moose mane tails out of a segmented body of tan foam made on a needle, a stacked deer hair wing standing as a fan, a hare's ear thorax under a parachute hackle of dark barred ginger, and the ends of the foam brought forward each side of the wing as a head.
+description "Schwänze aus Elchmähne aus einem segmentierten Körper aus hellbraunem Foam, auf einer Nadel gemacht, ein Flügel aus gestapeltem Rehhaar, der als Fächer steht, ein Thorax aus Hasenohr unter einer Parachute-Hechel in dunkel gebändertem Ginger, und die Enden des Foams beiderseits des Flügels als Kopf nach vorn gezogen."
+
+// en history: Oliver Edwards, the English tyer and author of Flytyer's Masterclass, ties it in his Essential Skills videos among his more demanding patterns. Thomas Züllich credits it with making the extended foam body known: the body is made first on a needle, a strip of foam folded round the tails and bound into segments, then slid off and tied on the hook by its front segment. Edwards's own fly has a deer hair wing and an ordinary cock hackle, and he ties it on a standard dry fly hook; others tie it on curved hooks, and Züllich ties a version with CDC.
+history """
+    Oliver Edwards, der englische Fliegenbinder und Autor von Flytyer's Masterclass, bindet sie
+    in seinen Essential-Skills-Videos unter seinen anspruchsvolleren Mustern. Thomas Züllich
+    schreibt ihr zu, den überstehenden Foamkörper bekannt gemacht zu haben: Der Körper wird
+    zuerst auf einer Nadel gemacht, ein Foamstreifen um die Schwänze gefaltet und zu Segmenten
+    abgebunden, dann abgezogen und mit dem vordersten Segment auf den Haken gebunden. Edwards'
+    eigene Fliege hat einen Flügel aus Rehhaar und eine gewöhnliche Hahnenhechel, und er bindet
+    sie auf einem normalen Trockenfliegenhaken; andere binden sie auf gebogenen Haken, und
+    Züllich bindet eine Version mit CDC.
+    """
+
+// en fishing: A dry fly for the hatches of the big Ephemera mayflies. The foam floats it, and the long segmented body and tails give the outline of the natural dun. Fish it on a dead drift to trout rising to the hatch.
+fishing """
+    Eine Trockenfliege für den Schlupf der großen Eintagsfliegen der Gattung Ephemera. Das Foam
+    hält sie oben, und der lange segmentierte Körper mit den Schwänzen gibt ihr den Umriss der
+    natürlichen Subimago. Fische sie in freier Drift auf Forellen, die während des Schlupfs
+    steigen.
+    """
+
+labels {
+    // en tail: Moose mane fibres
+    tail "Fasern aus Elchmähne"
+    // en body: Tan closed-cell foam
+    body "Hellbraunes geschlossenzelliges Foam"
+    // en wing: Natural deer hair
+    wing "Naturfarbenes Rehhaar"
+    // en hackle: Dark barred ginger cock hackle
+    hackle "Dunkel gebänderte Ginger-Hahnenhechel"
+}
+
+notes {
+    // en step 2 (wrap-thread): A thread base back to above the hook point.
+    step 2 "Eine Fadenunterlage zurück bis über die Hakenspitze."
+    // en step 3 (tie-in body): Cut the strip tapered, with a notch for the tails; bind the segments with light tension so the foam is pinched, not cut.
+    step 3 "Schneide den Streifen spitz zulaufend zu, mit einer Kerbe für die Schwänze; binde die Segmente mit leichter Spannung ab, sodass das Foam eingeschnürt, aber nicht durchgeschnitten wird."
+    // en step 4 (wrap-thread): Over the tail butts, binding them down on top of the shank.
+    step 4 "Über die Enden der Schwanzfasern, sodass sie oben auf dem Schenkel festgebunden werden."
+    // en step 5 (tie-in wing): Stack it and tie it in on top, tips forward; stand it up and take a few turns round its base, as for a parachute post.
+    step 5 "Staple es und binde es oben ein, die Spitzen nach vorn; richte es auf und lege ein paar Windungen um seine Basis, wie für einen Parachute-Post."
+    // en step 6 (trim wing): Cut the butts at a slant and bind them down.
+    step 6 "Schneide die Enden schräg ab und binde sie fest."
+    // en step 7 (tie-in hackle): Shiny side towards you, its stem bound up the base of the wing.
+    step 7 "Die glänzende Seite zu dir, der Kiel an der Basis des Flügels hinaufgebunden."
+    // en step 9 (dub thorax): From the body forward round the wing, leaving room for the head.
+    step 9 "Vom Körper nach vorn um den Flügel herum, mit Platz für den Kopf."
+    // en step 10 (wind hackle): Round the foam and the wing; stroke the fibres back.
+    step 10 "Um das Foam und den Flügel; streiche die Fibern nach hinten."
+    // en step 12 (pull-over body): It pushes the hackle into a triangle; the foam likes to slip, so hold it as you tighten.
+    step 12 "Es drückt die Hechel zu einem Dreieck; das Foam rutscht gern, also halte es beim Anziehen fest."
+    // en step 13 (trim body): Leave a short head; colour it darker with a marker if you like.
+    step 13 "Lass einen kurzen Kopf stehen; färbe ihn nach Belieben mit einem Filzstift dunkler."
+    // en step 14 (whip-finish): In the neck behind the foam head, and a drop of varnish.
+    step 14 "Im Nacken hinter dem Foamkopf, und ein Tropfen Lack."
+}

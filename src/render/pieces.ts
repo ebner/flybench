@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import {
+  extensionCentre,
   wrapAt,
   wrapPoint,
   type BeadPiece,
@@ -33,6 +34,7 @@ export interface PieceView {
 
 const X_AXIS = new THREE.Vector3(1, 0, 0);
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
+const Z_AXIS = new THREE.Vector3(0, 0, 1);
 
 class WrapsCurve extends THREE.Curve<THREE.Vector3> {
   constructor(
@@ -640,6 +642,15 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         .clone()
         .add(new THREE.Vector3(Math.cos(a) * fan, 0, Math.sin(a) * fan))
         .normalize();
+      if (piece.fan) {
+        // Fanned fore and aft, narrow across: each hair turned along the shank, the bunch's
+        // bases strung out a little along it as the hair is bound flat.
+        const along = rand() * 2 - 1;
+        dir.z *= 0.25;
+        dir.normalize().applyAxisAngle(Z_AXIS, -along * piece.fan / 2);
+        base.x = piece.x + along * piece.bundleRadius * 0.9;
+        base.z *= 0.45;
+      }
       if (piece.pair) {
         // Divided wings: half the hair leans out to each side.
         const side = i % 2 === 0 ? 1 : -1;
@@ -1053,24 +1064,36 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   /** A point on its top (or underside) at x, `t` from one edge (-1) to the other (1), in shank-local coordinates. */
   // All round the body (hair folded back round it), as thick underneath as on top.
   const domed = (t: number) => (piece.round ? 1 : 0.55 + 0.45 * Math.cos((t * Math.PI) / 2));
-  const surface = (out: THREE.Vector3, x: number, s: ReturnType<typeof section>, t: number, top: boolean) => {
-    const phi = t * piece.halfAngle;
+  // Parted round a post: two halves, each half as wide, turned out from the top most at the post
+  // and coming together again towards both ends.
+  const split = piece.split;
+  const halves = split ? [-1, 1] : [0];
+  /** How far round from the top a point `t` across (one half's, when parted) lies at x. */
+  const phiAt = (x: number, t: number, half: number) => {
+    if (!split) return t * piece.halfAngle;
+    const gap = split.angle * Math.exp(-(((x - split.x) / split.reach) ** 2) * 2.2);
+    return half * (gap + ((t + 1) / 2) * piece.halfAngle * 0.6);
+  };
+  const surface = (out: THREE.Vector3, x: number, s: ReturnType<typeof section>, t: number, top: boolean, half = 0) => {
+    const phi = phiAt(x, t, half);
     const dome = domed(t);
     const r = (top ? s.under + s.thick * dome : s.under + s.thick * 0.05) - flip * s.centre;
     return out.set(x, s.centre + flip * r * Math.cos(phi), r * Math.sin(phi));
   };
-  for (let i = 0; i <= segX; i++) {
-    const x = piece.x0 + ((xEnd - piece.x0) * i) / segX;
-    const s = section(x, i === segX);
-    for (let side = 0; side < 2; side++) {
-      for (let j = 0; j <= segT; j++) {
-        // Top surface from one edge to the other, then the underside back again.
-        const t = side === 0 ? -1 + (2 * j) / segT : 1 - (2 * j) / segT;
-        space.point(surface(v, x, s, t, side === 0));
-        positions.push(v.x, v.y, v.z);
-        const r = (side === 0 ? s.under + s.thick * domed(t) : s.under + s.thick * 0.05) - flip * s.centre;
-        const shade = feather ? featherShade(x, t * piece.halfAngle * r) : hair ? hairShade(x, t * piece.halfAngle * r) : 1;
-        colors.push(shade, shade, shade);
+  for (const half of halves) {
+    for (let i = 0; i <= segX; i++) {
+      const x = piece.x0 + ((xEnd - piece.x0) * i) / segX;
+      const s = section(x, i === segX);
+      for (let side = 0; side < 2; side++) {
+        for (let j = 0; j <= segT; j++) {
+          // Top surface from one edge to the other, then the underside back again.
+          const t = side === 0 ? -1 + (2 * j) / segT : 1 - (2 * j) / segT;
+          space.point(surface(v, x, s, t, side === 0, half));
+          positions.push(v.x, v.y, v.z);
+          const r = (side === 0 ? s.under + s.thick * domed(t) : s.under + s.thick * 0.05) - flip * s.centre;
+          const shade = feather ? featherShade(x, phiAt(x, t, half) * r) : hair ? hairShade(x, phiAt(x, t, half) * r) : 1;
+          colors.push(shade, shade, shade);
+        }
       }
     }
   }
@@ -1089,8 +1112,10 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
         // Under the thread at the tie-downs the fur is bound flat.
         if (s.pinch < 0.35) continue;
         const t = (rand() * 2 - 1) * 0.9;
-        const base = surface(new THREE.Vector3(), x, s, t, true);
-        const phi = t * piece.halfAngle;
+        // On either half of a strip parted round a post, standing out from it.
+        const half = split ? (rand() < 0.5 ? -1 : 1) : 0;
+        const base = surface(new THREE.Vector3(), x, s, t, true, half);
+        const phi = phiAt(x, t, half);
         const outward = new THREE.Vector3(0, flip * Math.cos(phi), Math.sin(phi));
         list.push(furFibre(rand, (x - piece.x0) / (xEnd - piece.x0), base, BACK, outward, piece.fur!));
       }
@@ -1099,13 +1124,17 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     if (xEnd > piece.x1) coat(piece.x1, xEnd, 13);
     fur = fibreMesh(placeFibres(list, space), surfaces.get("strip", piece.color, true), 0.3, 0.7);
   }
+  // Row by row, both halves of a parted strip, so it is drawn on from the back as one.
   for (let i = 0; i < segX; i++) {
-    for (let j = 0; j < ring; j++) {
-      const a = i * ring + j;
-      const a1 = i * ring + ((j + 1) % ring);
-      const b = a + ring;
-      const b1 = a1 + ring;
-      index.push(a, a1, b, b, a1, b1);
+    for (let h = 0; h < halves.length; h++) {
+      const o = h * (segX + 1) * ring;
+      for (let j = 0; j < ring; j++) {
+        const a = o + i * ring + j;
+        const a1 = o + i * ring + ((j + 1) % ring);
+        const b = a + ring;
+        const b1 = a1 + ring;
+        index.push(a, a1, b, b, a1, b1);
+      }
     }
   }
   const geometry = new THREE.BufferGeometry();
@@ -1130,7 +1159,7 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     object,
     setProgress(u) {
       object.visible = u > 0;
-      geometry.setDrawRange(0, Math.ceil(u * segX) * ring * 6);
+      geometry.setDrawRange(0, Math.ceil(u * segX) * ring * 6 * halves.length);
       fur?.setProgress(u);
     },
     dispose() {
@@ -1277,23 +1306,34 @@ function sleeveView(piece: SleevePiece, surfaces: Surfaces, space: ShankSpace): 
  */
 function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const flip = piece.side === "under" ? -1 : 1;
-  const segL = 48;
+  const n = piece.segments ?? 0;
+  const segL = n ? Math.max(48, n * 24) : 48;
   const segR = 16;
   const L = piece.length;
   const R = piece.thickness;
   // Centre line in shank-local coordinates: back (and up by angle) from the tie-in, sagging slightly.
   const towards = piece.forward ? 1 : -1;
-  // A flat strip (a fur strip's hide) lies on top of what it is tied to; a rope is bound along the
-  // shank, so its centre sits just above the hook wire.
   const flat = piece.width !== undefined;
-  const centre = (t: number) =>
-    new THREE.Vector3(
-      piece.x + towards * L * t * Math.cos(piece.angle),
-      flip * ((flat ? piece.radius + R : piece.radius * 0.4 + R * 0.55) + L * t * Math.sin(piece.angle) - 0.06 * L * t * t),
-      0,
-    );
-  // Full thickness, rounding off over the last part; the very start tucks under the wraps.
-  const radiusAt = (t: number) => R * Math.min(1, 0.6 + t * 8) * (t < 0.85 ? 1 : Math.sqrt(Math.max(0, 1 - ((t - 0.85) / 0.15) ** 2)) * 0.9 + 0.1);
+  const centre = (t: number) => {
+    const c = extensionCentre(piece, t);
+    return new THREE.Vector3(c.x, c.y, 0);
+  };
+  // A body made on a needle: round segments, each waist pinched by a few turns of thread.
+  // Assumption: the waists are pinched to about half the segments' thickness (photos of the Mohican).
+  const segment = (t: number) => {
+    if (!n) return { r: 1, band: false };
+    const s = (t * n) % 1;
+    const waist = Math.min(s, 1 - s);
+    return { r: 0.5 + 0.5 * Math.sin((Math.PI / 2) * Math.min(1, waist / 0.42)) ** 0.7, band: t > 0.02 && t < 0.98 && waist < 0.05 };
+  };
+  // Full thickness (tapering to the end if it does), rounding off over the last part; the very
+  // start tucks under the wraps.
+  const radiusAt = (t: number) => {
+    const end = n ? 1 - 0.5 / n : 0.85;
+    const rounded = t < end ? 1 : Math.sqrt(Math.max(0, 1 - ((t - end) / (1 - end)) ** 2)) * 0.9 + 0.1;
+    return R * (1 - (1 - (piece.taper ?? 1)) * t) * Math.min(1, 0.6 + t * 8) * (n ? (t < end ? segment(t).r : 1) : 1) * rounded;
+  };
+  const bands = piece.bands ? new THREE.Color(piece.bands) : null;
   // Assumption: a strip's end is cut to a point over its last fifth.
   const halfWidth = (t: number) => (piece.width ?? 0) / 2 * Math.max(0.12, Math.min(1, (1 - t) / 0.2));
   const body = new THREE.Color(piece.color);
@@ -1310,7 +1350,7 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
     const binormal = new THREE.Vector3().crossVectors(ahead, normal).normalize();
     const r = radiusAt(t);
     const mix = piece.tip ? THREE.MathUtils.smoothstep(t, 0.82, 0.9) : 0;
-    const color = body.clone().lerp(tip, mix);
+    const color = bands && segment(t).band ? bands : body.clone().lerp(tip, mix);
     for (let j = 0; j <= segR; j++) {
       const a = (j / segR) * Math.PI * 2;
       // Flat: as thick as it is up and down, as wide as the strip across.

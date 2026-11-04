@@ -245,11 +245,16 @@ export type Said =
   /** Spiralled forward again in open turns over a body bound so, crossing the first. */
   | { kind: "cross-forward"; to: Place; turns: number }
   | { kind: "tie-in-eyes"; m: string; under: boolean }
-  | { kind: "tie-in-extended"; m: string; length: Length; forward: boolean; tip?: string }
+  /**
+   * `segments`: made beforehand on a needle, bound into that many segments, with `tails` tied in at
+   * its tip first; `ends`: the two ends of its strip left pointing forward, to be pulled over later.
+   */
+  | { kind: "tie-in-extended"; m: string; length: Length; forward: boolean; tip?: string; segments?: number; tails?: { m: string; length: Length }; ends?: boolean }
   | { kind: "tie-in-across"; m: string; strands: number; length: Length }
   /** `round`: spread all round the shank (hair for a bullet head). */
   | { kind: "tie-in-forward"; m: string; length: Length; round?: boolean }
-  | { kind: "tie-in-upright"; what: What; length: Length; divide: boolean }
+  /** `fan`: fanned out fore and aft, flat across (a Mohican's wing). */
+  | { kind: "tie-in-upright"; what: What; length: Length; divide: boolean; fan?: boolean }
   | { kind: "tie-in-wing-under"; what: What; length: Length }
   | { kind: "tie-in-beard"; what: What; length: Length }
   | { kind: "tie-in-reach"; what: What; width?: Length; reach: Reach; length: Length; angle?: number; flare: boolean }
@@ -259,7 +264,8 @@ export type Said =
   | { kind: "palmer"; m: string; to: Place; turns: number; counter: boolean }
   | { kind: "wind-through"; m: string; to: Place; turns: number; counter: boolean; through: string }
   | { kind: "wind"; m: string; to: Place; turns: number; counter: boolean }
-  | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean; wing?: Length; under?: boolean }
+  /** `around`: parted round that upright post, one half down each side. */
+  | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean; wing?: Length; under?: boolean; around?: string }
   | { kind: "lay-back"; m: string; to: Place; tied?: boolean; round?: boolean; trailing?: boolean }
   | { kind: "spin"; m: string; to: Place }
   /** Tubing slid on as a sleeve from the thread (`from`) to `to`, tied down at the thread: its rear end (`rear`) or its front. */
@@ -313,11 +319,17 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       const under = step.side === "under";
       if (archetype === "eyes") return { kind: "tie-in-eyes", m: step.material, under };
       if (step.length && step.extended) {
-        return { kind: "tie-in-extended", m: step.material, length: len(step.length), forward: Boolean(step.forward), ...(step.tip ? { tip: step.tip } : {}) };
+        const pulled = recipe.steps.some((s) => s.op === "pull-over" && s.material === step.material);
+        return {
+          kind: "tie-in-extended", m: step.material, length: len(step.length), forward: Boolean(step.forward), ...(step.tip ? { tip: step.tip } : {}),
+          ...(step.segments !== undefined && { segments: step.segments }),
+          ...(step.tails !== undefined && step["tail-length"] !== undefined && { tails: { m: step.tails, length: len(step["tail-length"]) } }),
+          ...(pulled && { ends: true }),
+        };
       }
       if (step.length && step.side === "across") return { kind: "tie-in-across", m: step.material, strands: m?.count ?? 2, length: len(step.length) };
       if (step.length && step.forward) return { kind: "tie-in-forward", m: step.material, length: len(step.length), ...((step.spread ?? 0) >= 150 && { round: true }) };
-      if (step.length && (step.angle ?? 0) >= 60) return { kind: "tie-in-upright", what, length: len(step.length), divide: (step.spread ?? 0) > 0 };
+      if (step.length && (step.angle ?? 0) >= 60) return { kind: "tie-in-upright", what, length: len(step.length), divide: (step.spread ?? 0) > 0, ...(step.fan !== undefined && step.fan > 0 && { fan: true }) };
       // Under the shank is on top when the fly swims point-up: there it is the wing.
       if (step.length && under && ridesPointUp(recipe)) return { kind: "tie-in-wing-under", what, length: len(step.length) };
       if (step.length && under) return { kind: "tie-in-beard", what, length: len(step.length) };
@@ -351,7 +363,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
           ...((tieIn?.spread ?? 0) >= 150 && { round: true }), ...(ctx.trailing && { trailing: true }),
         };
       }
-      return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}), ...(ctx.under ? { under: true } : {}) };
+      return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}), ...(ctx.under ? { under: true } : {}), ...(step.around ? { around: step.around } : {}) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to) };
     case "sleeve":
@@ -499,14 +511,20 @@ function englishText(said: Said, recipe: Recipe): string {
       return `Tie the ${mat(said.m)} ${said.under ? "under" : "on top of"} the shank with figure-of-eight turns.`;
     case "tie-in-extended": {
       const tip = said.tip ? ` Colour the end ${colorName(said.tip) || "darker"}${said.tip === "black" ? " (singe it with a lighter)" : ""}.` : "";
-      return `Tie in the ${mat(said.m)} so it sticks out ${len(said.length)} ${said.forward ? "forward over the eye" : "behind"} as one piece.${tip}`;
+      if (said.segments) {
+        const tails = said.tails ? `tie the ${mat(said.tails.m)} in at its tip to stick out ${len(said.tails.length)}, fold a strip of the ${mat(said.m)} over them, the fibres between the halves,` : `fold a strip of the ${mat(said.m)} over its tip`;
+        const ends = said.ends ? ", its two ends pointing forward to be pulled over later" : "";
+        return `Make the body first, on a needle with a thin thread base: ${tails} and bind it into ${countText(said.segments, "segments")} working forward, a few firm turns of thread at each waist. Half hitch and slide it off the needle. Tie it on top of the shank by its front segment, so it sticks out ${len(said.length)} ${said.forward ? "forward over the eye" : "behind"}${ends}.${tip}`;
+      }
+      const tails = said.tails ? `, with the ${mat(said.tails.m)} tied in at its end beforehand sticking out ${len(said.tails.length)} past it` : "";
+      return `Tie in the ${mat(said.m)} so it sticks out ${len(said.length)} ${said.forward ? "forward over the eye" : "behind"} as one piece${tails}.${tip}`;
     }
     case "tie-in-across":
       return `Tie ${said.strands === 1 ? "a strand" : `${said.strands} strands`} of ${mat(said.m)} across the shank by the middle with figure-of-eight turns, so ${len(said.length)} sticks out on each side as legs.`;
     case "tie-in-forward":
       return `Tie in the ${mat(said.m)} pointing forward over the eye, ${len(said.length)} long.${said.round ? " Let it spread all round the shank as you tighten the turns." : ""}`;
     case "tie-in-upright":
-      return `Tie in ${what(said.what)} upright, ${len(said.length)} tall, with turns in front to stand it up.${said.divide ? " Divide them into a V with figure-of-eight turns." : ""}`;
+      return `Tie in ${what(said.what)} upright, ${len(said.length)} tall, with turns in front to stand it up.${said.divide ? " Divide them into a V with figure-of-eight turns." : ""}${said.fan ? " Let it fan out fore and aft, flat across the shank." : ""}`;
     case "tie-in-wing-under":
       return `Tie in ${what(said.what)} under the shank as the wing (on top when the fly swims point-up), reaching ${len(said.length)} back.`;
     case "tie-in-beard":
@@ -526,6 +544,7 @@ function englishText(said: Said, recipe: Recipe): string {
     case "wind":
       return `Wind the ${mat(said.m)} forward to ${at(said.to)} in ${countText(said.turns, "turns")}${counter(said.counter)}.`;
     case "pull-over":
+      if (said.around) return `Pull the ${mat(said.m)} forward over the top of the body, one end down each side of the ${mat(said.around)}, and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
       if (said.wing) return `Pull the ${mat(said.m)} forward over the top of the body and tie it down at ${at(said.to)}, then stand the tips up in front of the tie-down as a wing about ${len(said.wing)} tall and divide it.`;
       if (said.under) return `${said.bubble ? "Fold" : "Pull"} the ${mat(said.m)} forward under the belly${said.bubble ? " as a loose bubble" : ""} and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
       if (said.bubble) return `Fold the ${mat(said.m)} forward over the body as a loose bubble and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;

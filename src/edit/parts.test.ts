@@ -6,7 +6,7 @@ import { simulate } from "../tying/simulate";
 import { blankFly, recipeText } from "./own";
 import { mulberry32 } from "../render/random";
 import {
-  addMaterial, addPart, bareHook, compile, kindsFor, newPart, partsOf, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, type PartsFly,
+  addMaterial, addPart, bareHook, compile, kindsFor, materialChoices, newPart, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type PartsFly, type Preset,
 } from "./parts";
 
 const patterns: Recipe[] = readdirSync(new URL("../../patterns", import.meta.url))
@@ -401,5 +401,129 @@ describe("a fly built of parts", () => {
     // A third strand isn't woven in; one taken out leaves a wound body.
     expect(addMaterial(fly, added.part.id, "chenille", "red").parts.find((p) => p.id === added.part.id)!.mats).toHaveLength(2);
     expect(removeMaterial(fly, added.part.id, 1).parts.find((p) => p.id === added.part.id)!.how).toBe("wound");
+  });
+});
+
+describe("a body made on a needle, as parts (a Mohican Mayfly's)", () => {
+  const mohican = patterns.find((p) => p.id === "mohican-mayfly")!;
+  const fly = () => partsOf(mohican)!;
+  const body = (f: PartsFly) => f.parts.find((p) => p.mats[0]!.id === "body")!;
+  const clean = (f: PartsFly) => compile(f).problems.map((p) => p.message);
+
+  it("edits the body's foam and its tails, each on its own", () => {
+    let f = fly();
+    const id = body(f).id;
+    f = setMaterial(f, id, 0, { color: "white" });
+    expect(body(f).mats[0]).toMatchObject({ color: "white" });
+    f = setMaterial(f, id, 1, { props: { count: 2 } });
+    expect(body(f).mats[1]!.props).toMatchObject({ count: 2 });
+    // Its head trim and thickness are kept.
+    expect(body(f)).toMatchObject({ trim: { leave: 0.3 }, width: 0.4, tailLength: 3.3 });
+    expect(clean(f)).toEqual([]);
+  });
+
+  it("pulls the strip straight over when the wing it parts round is gone", () => {
+    const f = removePart(fly(), fly().parts.find((p) => p.mats[0]!.id === "wing")!.id);
+    expect(body(f).post).toBeUndefined();
+    expect(compile(f).recipe.steps.find((s) => s.op === "pull-over")).not.toHaveProperty("around");
+    expect(clean(f)).toEqual([]);
+  });
+
+  it("drops the fan, and the parting round it, when the wing is no longer an upright bunch of hair", () => {
+    const f0 = fly();
+    const wing = f0.parts.find((p) => p.mats[0]!.id === "wing")!;
+    const f = setMaterial(f0, wing.id, 0, { kind: "hackle-tips" });
+    expect(f.parts.find((p) => p.id === wing.id)!.fan).toBeUndefined();
+    expect(body(f).post).toBeUndefined();
+    expect(clean(f).filter((m) => /fan|parted/.test(m))).toEqual([]);
+    // (A parachute's post stays upright: without the hackle, it can be laid back.)
+    const bare = removePart(f0, f0.parts.find((p) => p.how === "parachute")!.id);
+    const laid = setPart(bare, wing.id, { angle: 30 });
+    expect(laid.parts.find((p) => p.id === wing.id)!.fan).toBeUndefined();
+    expect(body(laid).post).toBeUndefined();
+    expect(clean(laid)).toEqual([]);
+  });
+
+  it("keeps a bubble on the strip pulled over", () => {
+    const recipe = { ...mohican, steps: mohican.steps.map((s) => (s.op === "pull-over" ? { ...s, bubble: 0.2 } : s)) } as Recipe;
+    const again = compile(partsOf(recipe)!).recipe;
+    expect(again.steps.find((s) => s.op === "pull-over")).toMatchObject({ bubble: 0.2, around: "wing" });
+  });
+});
+
+describe("every choice the builder offers on a copied pattern ties", () => {
+  const ids = patterns.map((p) => p.id);
+  const problems = (f: PartsFly) => compile(f).problems.map((p) => p.message);
+  it.each(ids)("%s: each way to tie, preset and material", (id) => {
+    const fly = partsOf(patterns.find((p) => p.id === id)!)!;
+    const failures: string[] = [];
+    const check = (what: string, f: PartsFly) => {
+      const bad = problems(f);
+      if (bad.length) failures.push(`${what}: ${bad.join("; ")}`);
+    };
+    for (const part of fly.parts) {
+      // (A thread body has no material to choose.)
+      if (!part.mats.length) continue;
+      for (const how of waysOf(part)) if (!unavailable(fly, part, how)) check(`${part.id} tied ${how}`, setHow(fly, part.id, how));
+      const preset = presetFor(part);
+      if (preset) for (const k of Object.keys(PRESETS) as Preset[]) check(`${part.id} ${k}`, setPart(fly, part.id, preset.set(preset.classic * PRESETS[k])));
+      part.mats.forEach((_, i) => {
+        for (const kind of materialChoices(part, i)) check(`${part.id} material ${i} as ${kind}`, setMaterial(fly, part.id, i, { kind }));
+      });
+    }
+    expect(failures).toEqual([]);
+  });
+
+  // Two choices in a row: a material changed, then each way it can be tied.
+  it.each(ids)("%s: a material changed, then each way to tie", (id) => {
+    const fly = partsOf(patterns.find((p) => p.id === id)!)!;
+    const failures: string[] = [];
+    for (const part of fly.parts) {
+      part.mats.forEach((_, i) => {
+        for (const kind of materialChoices(part, i)) {
+          const changed = setMaterial(fly, part.id, i, { kind });
+          const now = changed.parts.find((p) => p.id === part.id);
+          if (!now?.mats.length) continue;
+          for (const how of waysOf(now)) {
+            if (unavailable(changed, now, how)) continue;
+            const bad = problems(setHow(changed, part.id, how));
+            if (bad.length) failures.push(`${part.id} material ${i} as ${kind}, tied ${how}: ${bad.join("; ")}`);
+          }
+        }
+      });
+    }
+    expect(failures).toEqual([]);
+  });
+});
+
+describe("a needle body's builder choices", () => {
+  const mohican = patterns.find((p) => p.id === "mohican-mayfly")!;
+  const fly = () => partsOf(mohican)!;
+  const body = (f: PartsFly) => f.parts.find((p) => p.mats[0]!.id === "body")!;
+
+  it("offers tail materials for its tails, and only ways the foam can be tied", () => {
+    const b = body(fly());
+    const tails = materialChoices(b, 1);
+    expect(tails).toEqual(expect.arrayContaining(["moose-mane", "goose-biot", "hackle-fibres"]));
+    expect(tails).not.toContain("chenille");
+    expect(waysOf(b)).toEqual(["extended"]);
+    // Of wool, it can be wound too, but not woven: its tails are no second strand.
+    const f = setMaterial(fly(), b.id, 0, { kind: "wool", color: "tan" });
+    expect(unavailable(f, body(f), "woven")).toBe("twoMaterials");
+  });
+
+  it("makes its tails a tail of their own when the body is wound instead", () => {
+    let f = fly();
+    f = setMaterial(f, body(f).id, 0, { kind: "wool", color: "tan" });
+    f = setHow(f, body(f).id, "wound");
+    expect(body(f).mats.map((m) => m.kind)).toEqual(["wool"]);
+    expect(f.parts.find((p) => p.role === "tail")).toMatchObject({ how: "bunch", mats: [{ kind: "moose-mane" }], length: expect.closeTo(2.3 + 3.3) });
+    expect(compile(f).problems.map((p) => p.message)).toEqual([]);
+  });
+
+  it("pulls the strip straight over when it no longer passes the wing", () => {
+    const f = setPart(fly(), body(fly()).id, { to: 0.5 });
+    expect(body(f).post).toBeUndefined();
+    expect(compile(f).problems.map((p) => p.message)).toEqual([]);
   });
 });

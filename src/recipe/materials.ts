@@ -210,7 +210,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   cdc: ["fibre", "sweep"],
   flash: ["count"],
   feather: ["barred"],
-  foam: [],
+  foam: ["mm"],
   bead: ["mm"],
   eyes: ["mm"],
   legs: ["count"],

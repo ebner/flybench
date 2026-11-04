@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { pieceProgress, simulate, stepAt, stepEnd, stepProgress, wrapAt, type WrapsPiece } from "./simulate";
+import { extensionCentre, pieceProgress, simulate, stepAt, stepEnd, stepProgress, wrapAt, type ExtensionPiece, type WrapsPiece } from "./simulate";
 
 function redTag() {
   const result = loadRecipe(readFileSync(new URL("../../patterns/red-tag.kdl", import.meta.url), "utf8"));
@@ -378,5 +378,109 @@ steps {
     const result = loadRecipe(text);
     if (!result.ok) throw new Error(result.errors.map((e) => e.message).join("\n"));
     expect(() => simulate(result.recipe)).not.toThrow();
+  });
+});
+
+describe("a Mohican Mayfly: a body made on a needle, its strip parted round the wing", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/mohican-mayfly.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("mohican-mayfly.kdl does not load");
+  const build = simulate(result.recipe);
+  const steps = result.recipe.steps;
+  const tie = steps.findIndex((s) => s.op === "tie-in" && s.material === "body");
+  const pull = steps.findIndex((s) => s.op === "pull-over");
+
+  it("ties on the body in segments, in the thread's colour, its tails out of its end", () => {
+    const pieces = build.steps[tie]!.pieces;
+    const body = pieces.find((p) => p.type === "extension")!;
+    expect(body).toMatchObject({ segments: 6, bands: build.threadColor, thickness: 0.2 });
+    const tails = pieces.find((p) => p.type === "bundle" && p.material === "tail")!;
+    const end = extensionCentre(body as ExtensionPiece, 1);
+    expect(tails.type === "bundle" && [tails.x, tails.length, tails.count]).toEqual([expect.closeTo(end.x), 3.3, 3]);
+    // The rest of the strip waits, folded back, to be pulled over.
+    expect(build.steps[tie]!.freeEnds.some((e) => e.material === "body")).toBe(true);
+    expect(build.steps[tie]!.text).toMatch(/^Make the body first, on a needle.*into 6 segments.*by its front segment, so it sticks out 2\.3× the gape behind/);
+    // Pointing forward, it says so.
+    const forward = { ...result.recipe, steps: result.recipe.steps.map((s, i) => (i === tie ? { ...s, forward: true } : s)) } as typeof result.recipe;
+    expect(simulate(forward).steps[tie]!.text).toMatch(/so it sticks out 2\.3× the gape forward over the eye/);
+  });
+
+  it("fans the wing fore and aft", () => {
+    const wing = steps.findIndex((s) => s.op === "tie-in" && s.material === "wing");
+    // A sparse bunch, counted.
+    expect(build.steps[wing]!.pieces.find((p) => p.type === "bundle" && p.material === "wing")).toMatchObject({ fan: expect.closeTo((40 * Math.PI) / 180), count: 100 });
+  });
+
+  it("parts the strip round the wing, one half down each side", () => {
+    const cover = build.steps[pull]!.pieces.find((p) => p.type === "cover")!;
+    const post = steps.findIndex((s) => s.op === "tie-in" && s.material === "wing");
+    const wingX = (build.steps[post]!.pieces.find((p) => p.type === "bundle" && p.material === "wing") as { x: number }).x;
+    expect(cover.type === "cover" && cover.split).toMatchObject({ x: expect.closeTo(wingX) });
+    expect(cover.type === "cover" && cover.split!.angle).toBeGreaterThan(0.4);
+    // Over the parachute hackle, not under it.
+    const wind = steps.findIndex((s) => s.op === "wind");
+    const hackle = build.steps[wind]!.pieces.find((p) => p.type === "wraps") as WrapsPiece;
+    expect(cover.type === "cover" && cover.base.radiusAt(wingX) + cover.lift).toBeGreaterThanOrEqual(hackle.post!.y0 - 1e-6);
+    expect(build.steps[pull]!.text).toMatch(/one end down each side of the natural deer hair/);
+  });
+});
+
+describe("tails tied in at the end of an extended body", () => {
+  const recipe = (forward: boolean) => {
+    const result = loadRecipe(`id test
+name "Test"
+type nymph
+difficulty advanced
+hook nymph-2xl size=12
+thread black size="8/0"
+materials {
+    tail goose-biot color=brown
+    body chenille color=olive
+}
+steps {
+    attach-thread at=${forward ? 0.9 : 0.1}
+    tie-in body length=1.5 extended=#true${forward ? " forward=#true" : ""} tails=tail tail-length=0.6
+    whip-finish
+}
+`);
+    if (!result.ok) throw new Error(result.errors.map((e) => e.message).join("\n"));
+    return result.recipe;
+  };
+
+  it("come out of its end the way it points, forward too", () => {
+    for (const forward of [false, true]) {
+      const pieces = simulate(recipe(forward)).steps[1]!.pieces;
+      const body = pieces.find((p) => p.type === "extension") as ExtensionPiece;
+      const tails = pieces.find((p) => p.type === "bundle" && p.material === "tail")!;
+      expect(tails).toMatchObject({ direction: forward ? "forward" : "back", x: expect.closeTo(extensionCentre(body, 1).x) });
+    }
+  });
+
+  it("start where a drooping body ends, below the shank's axis too", () => {
+    const result = loadRecipe(`id test
+name "Test"
+type nymph
+difficulty advanced
+hook nymph-2xl size=12
+thread black size="8/0"
+materials {
+    tail goose-biot color=brown
+    body chenille color=olive
+}
+steps {
+    attach-thread at=0.1
+    tie-in body length=1.5 angle=0 width=0.1 extended=#true tails=tail tail-length=0.6
+    whip-finish
+}
+`);
+    if (!result.ok) throw new Error("does not load");
+    const pieces = simulate(result.recipe).steps[1]!.pieces;
+    const end = extensionCentre(pieces.find((p) => p.type === "extension") as ExtensionPiece, 1);
+    expect(end.y).toBeLessThan(0);
+    const tails = pieces.find((p) => p.type === "bundle" && p.material === "tail")!;
+    expect(tails.type === "bundle" && [tails.centre, tails.angle < 0]).toEqual([expect.closeTo(end.y), true]);
+  });
+
+  it("are said to be there without segments", () => {
+    expect(simulate(recipe(false)).steps[1]!.text).toMatch(/as one piece, with the brown goose biot tied in at its end beforehand sticking out 0\.6× the gape past it\./);
   });
 });

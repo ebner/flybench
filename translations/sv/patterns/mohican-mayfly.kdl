@@ -1,0 +1,59 @@
+id mohican-mayfly
+status draft
+
+// en description: Moose mane tails out of a segmented body of tan foam made on a needle, a stacked deer hair wing standing as a fan, a hare's ear thorax under a parachute hackle of dark barred ginger, and the ends of the foam brought forward each side of the wing as a head.
+description "Stjärtspröt av älgman ur en segmenterad kropp av ljusbrun foam gjord på en nål, en vinge av staplat hjorthår som står som en solfjäder, en thorax av haröra under ett parachutehackel i mörkt tecknad ginger, och foamens ändar framdragna på var sida om vingen som huvud."
+
+// en history: Oliver Edwards, the English tyer and author of Flytyer's Masterclass, ties it in his Essential Skills videos among his more demanding patterns. Thomas Züllich credits it with making the extended foam body known: the body is made first on a needle, a strip of foam folded round the tails and bound into segments, then slid off and tied on the hook by its front segment. Edwards's own fly has a deer hair wing and an ordinary cock hackle, and he ties it on a standard dry fly hook; others tie it on curved hooks, and Züllich ties a version with CDC.
+history """
+    Oliver Edwards, den engelske flugbindaren och författaren till Flytyer's Masterclass, binder
+    den i sina Essential Skills-filmer bland sina mer krävande mönster. Thomas Züllich
+    tillskriver den äran av att ha gjort den förlängda foamkroppen känd: kroppen görs först på
+    en nål, en remsa foam som viks runt stjärtsprötet och binds i segment, dras sedan av och
+    binds fast på kroken med det främre segmentet. Edwards egen fluga har en vinge av hjorthår
+    och ett vanligt tupphackel, och han binder den på en vanlig torrflugekrok; andra binder den
+    på böjda krokar, och Züllich binder en version med CDC.
+    """
+
+// en fishing: A dry fly for the hatches of the big Ephemera mayflies. The foam floats it, and the long segmented body and tails give the outline of the natural dun. Fish it on a dead drift to trout rising to the hatch.
+fishing """
+    En torrfluga för kläckningarna av de stora dagsländorna i släktet Ephemera. Foamen håller
+    den flytande, och den långa segmenterade kroppen och stjärtsprötet ger den den naturliga
+    subimagons siluett. Fiska den i fri drift mot öring som vakar under kläckningen.
+    """
+
+labels {
+    // en tail: Moose mane fibres
+    tail "Fibrer av älgman"
+    // en body: Tan closed-cell foam
+    body "Ljusbrun foam med slutna celler"
+    // en wing: Natural deer hair
+    wing "Naturfärgat hjorthår"
+    // en hackle: Dark barred ginger cock hackle
+    hackle "Mörkt tecknat ginger tupphackel"
+}
+
+notes {
+    // en step 2 (wrap-thread): A thread base back to above the hook point.
+    step 2 "Ett underlag av tråd bakåt till ovanför krokspetsen."
+    // en step 3 (tie-in body): Cut the strip tapered, with a notch for the tails; bind the segments with light tension so the foam is pinched, not cut.
+    step 3 "Skär remsan avsmalnande, med ett hack för stjärtsprötet; bind segmenten med lätt spänning så att foamen nyps ihop men inte skärs av."
+    // en step 4 (wrap-thread): Over the tail butts, binding them down on top of the shank.
+    step 4 "Över stjärtfibrernas rotändar, så att de binds fast ovanpå skaftet."
+    // en step 5 (tie-in wing): Stack it and tie it in on top, tips forward; stand it up and take a few turns round its base, as for a parachute post.
+    step 5 "Stapla det och bind in det ovanpå med spetsarna framåt; res det och lägg några varv runt basen, som för en parachutepost."
+    // en step 6 (trim wing): Cut the butts at a slant and bind them down.
+    step 6 "Klipp rotändarna snett bakom vingen och bind ner dem."
+    // en step 7 (tie-in hackle): Shiny side towards you, its stem bound up the base of the wing.
+    step 7 "Med den blanka sidan mot dig, stjälken bunden upp längs vingens bas."
+    // en step 9 (dub thorax): From the body forward round the wing, leaving room for the head.
+    step 9 "Från kroppen framåt runt vingen, med plats kvar för huvudet."
+    // en step 10 (wind hackle): Round the foam and the wing; stroke the fibres back.
+    step 10 "Runt foamen och vingen; stryk fibrerna bakåt."
+    // en step 12 (pull-over body): It pushes the hackle into a triangle; the foam likes to slip, so hold it as you tighten.
+    step 12 "Den trycker hacklet till en triangel; foamen glider gärna, så håll den medan du drar åt."
+    // en step 13 (trim body): Leave a short head; colour it darker with a marker if you like.
+    step 13 "Lämna ett kort huvud; färga det mörkare med en märkpenna om du vill."
+    // en step 14 (whip-finish): In the neck behind the foam head, and a drop of varnish.
+    step 14 "I halsen bakom foamhuvudet, och en droppe lack."
+}
