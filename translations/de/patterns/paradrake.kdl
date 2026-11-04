@@ -1,0 +1,70 @@
+id paradrake
+status draft
+
+// en description: A moose body hair tail, an extended body of olive elk hair bound past the bend with crossing turns of olive thread, a bullet head of the same hair, a natural elk hair post and a parachute hackle of grizzly dyed olive.
+description "Ein Schwanz aus Elchkörperhaar, ein verlängerter Körper aus olivfarbenem Elchhaar, mit sich kreuzenden Windungen olivfarbenen Bindefadens bis hinter den Hakenbogen gebunden, ein Haarkopf aus demselben Haar, ein Post aus naturfarbenem Elchhaar und eine Parachute-Hechel aus oliv gefärbter Grizzly."
+
+// en history: Doug Swisher and Carl Richards developed the Paradrake in 1971 for the big mayfly drakes. In their fly the hair of the body was tied in with its butts just behind the eye and its tips over the bend, and bound down as an extended body; they used hen hackle for the posts of small flies and deer or elk hair on bigger ones such as the drakes. The bullet head is Mike Lawson's, of Henry's Fork Anglers in Idaho: the body hair tied in pointing forward over the eye and folded back over its butts to the post. Tyers differ over the post: natural elk, elk dyed olive, or deer hair.
+history """
+    Doug Swisher und Carl Richards entwickelten die Paradrake 1971 für die großen
+    Eintagsfliegen, die „Drakes“. Bei ihrer Fliege wurde das Haar des Körpers mit den Enden
+    knapp hinter dem Öhr und den Spitzen über dem Hakenbogen eingebunden und als verlängerter
+    Körper abgebunden; für den Post nahmen sie bei kleinen Fliegen Hennenhechel, bei größeren
+    wie den Drakes Hirsch- oder Elchhaar.
+
+    Der Haarkopf stammt von Mike Lawson von Henry's Fork Anglers in Idaho: Das Körperhaar wird
+    nach vorn über das Öhr zeigend eingebunden und über seine Enden nach hinten bis zum Post
+    geklappt. Beim Post sind sich die Binder uneins: naturfarbenes
+    Elchhaar, oliv gefärbtes Elchhaar oder Hirschhaar.
+    """
+
+// en fishing: A dry fly for the big drakes: the Western and Eastern Green Drakes, the Brown Drake and the Hex. The hair body floats it, and the long extended abdomen gives it the outline of the natural dun. Fish it on a dead drift to rising trout during the drake hatches; more turns of hackle float it better in faster water.
+fishing """
+    Eine Trockenfliege für die großen Eintagsfliegen: die Western und Eastern Green Drake, die
+    Brown Drake und Hexagenia. Der Haarkörper trägt sie, und der lange verlängerte Hinterleib
+    gibt ihr den Umriss der natürlichen Subimago. Fische sie in freier Drift auf steigende
+    Forellen während der Schlüpfe; mehr
+    Hechelwindungen lassen sie in schnellerem Wasser besser schwimmen.
+    """
+
+labels {
+    // en hackle: Grizzly cock hackle dyed olive
+    hackle "Grizzly-Hahnenhechel, oliv gefärbt"
+    // en tail: Moose body hair
+    tail "Elchkörperhaar"
+    // en body: Olive-dyed cow elk hair
+    body "Oliv gefärbtes Elchhaar (Cow Elk)"
+}
+
+notes {
+    // en step 1 (attach-thread): A third of the shank behind the eye: where the post goes.
+    step 1 "Ein Drittel des Schenkels hinter dem Öhr: dort kommt der Post hin."
+    // en step 2 (wrap-thread): A firm base for the hair to grip.
+    step 2 "Eine feste Unterlage, an der das Haar hält."
+    // en step 4 (tie-in post): Clean and stack the elk and tie it in on top, tips forward; wind a little thread up the base of the post.
+    step 4 "Das Elchhaar säubern, ausgleichen und oben einbinden, die Spitzen nach vorn; etwas Faden an der Basis des Posts hinaufwinden."
+    // en step 5 (trim post): Cut the butts at a slant behind the post and bind them down.
+    step 5 "Die Enden hinter dem Post schräg abschneiden und überbinden."
+    // en step 6 (tie-in hackle): By its bare stem against the front of the post, bound up the post and back down.
+    step 6 "Mit dem blanken Kiel an der Vorderseite des Posts, am Post hinauf und wieder herunter gebunden."
+    // en step 8 (tie-in tail): Stacked; they come out of the end of the body later.
+    step 8 "Ausgeglichen; sie kommen später am Ende des Körpers heraus."
+    // en step 9 (trim tail): Cut them to reach just behind the post and bind them down on top.
+    step 9 "So abschneiden, dass sie bis knapp hinter den Post reichen, und oben überbinden."
+    // en step 11 (tie-in body): A pencil-thick clump, stacked and its butts cut square, laid with the butts at the post: two loose turns, then tight ones forward to the eye.
+    step 11 "Ein bleistiftdickes Büschel, ausgeglichen und die Enden gerade geschnitten, mit den Enden am Post angelegt: zwei lockere Windungen, dann feste nach vorn bis zum Öhr."
+    // en step 12 (wrap-thread): Under the hair, which still points forward.
+    step 12 "Unter dem Haar, das noch nach vorn zeigt."
+    // en step 13 (pull-over body): Push it back over the eye with the hole of a half-hitch tool, up to the post; tie it down there with two tight turns, the hair streaming back on both sides of the post.
+    step 13 "Mit dem Loch eines Half-Hitch-Werkzeugs über das Öhr nach hinten bis zum Post schieben und dort mit zwei festen Windungen abbinden; das Haar liegt zu beiden Seiten des Posts nach hinten."
+    // en step 14 (wrap-thread): Groom the hair back round the tail first; at the end take a second turn in the same place.
+    step 14 "Das Haar zuerst um den Schwanz herum nach hinten streichen; am Ende eine zweite Windung an derselben Stelle."
+    // en step 16 (wind hackle): From the top of the post down; more turns for fast water.
+    step 16 "Von der Spitze des Posts nach unten; mehr Windungen für schnelles Wasser."
+    // en step 17 (tie-off hackle): In front of the post; lock it round the base of the post and trim.
+    step 17 "Vor dem Post; um die Basis des Posts sichern und abschneiden."
+    // en step 18 (whip-finish): Half hitches in front of the post, under the hackle.
+    step 18 "Halbe Schläge vor dem Post, unter der Hechel."
+    // en step 19 (trim body): Leave the moose tail; a drop of cement on the turns.
+    step 19 "Den Elchschwanz stehen lassen; ein Tropfen Lack auf die Windungen."
+}

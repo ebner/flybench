@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import type { Shape } from "../recipe/kdl";
-import { Color, GapeLength, MaterialRef, Position } from "../recipe/schema";
+import { Color, GapeLength, MaterialRef, Position, ThreadReach } from "../recipe/schema";
 import { ARG, NAME } from "./kdlEdit";
 
 /**
@@ -79,7 +79,8 @@ export function fieldOf(key: string, kdl: string, schema: z.ZodType): Field | nu
   const base = { key, kdl, optional, ...(dflt !== undefined && { default: dflt }) };
   if (inner === (Color as unknown as z.ZodType)) return { ...base, type: "color" };
   if (inner === (MaterialRef as unknown as z.ZodType)) return { ...base, type: "material" };
-  const measure = inner === (Position as unknown as z.ZodType) ? "shank" : inner === (GapeLength as unknown as z.ZodType) ? "gape" : undefined;
+  // (The thread can also reach behind the bend, over hair bound there: still measured along the shank.)
+  const measure = inner === (Position as unknown as z.ZodType) || inner === (ThreadReach as unknown as z.ZodType) ? "shank" : inner === (GapeLength as unknown as z.ZodType) ? "gape" : undefined;
   switch (d.type) {
     case "number": {
       const checks = ((d.checks as { _zod: { def: { check: string; value?: number; format?: string } } }[] | undefined) ?? []).map((c) => c._zod.def);

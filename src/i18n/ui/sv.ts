@@ -417,7 +417,7 @@ export const sv: Messages = {
     },
     field: {
       length: "Längd", angle: "Vinkel över skaftet", spread: "Spridning åt varje sida", width: "Bredd", at: "Inbunden vid", from: "Börjar vid", to: "Slutar vid",
-      turns: "Varv", counter: "Lindad åt andra hållet", side: "Var", sides: { top: "Ovanpå", under: "Under", across: "Tvärs över skaftet" },
+      turns: "Varv", counter: "Lindad åt andra hållet", barred: "Bandad som grizzly", side: "Var", sides: { top: "Ovanpå", under: "Under", across: "Tvärs över skaftet" },
       forward: "Pekar framåt", tip: "Färg på änden", collar: "Kragens längd", windTo: "Lindad som kropp till", fray: "Uppriven stjärt",
       leave: "Lämnas kvar", shape: "Klippt till", shapes: { round: "Ett runt huvud", wedge: "En kil, platt undertill", cigar: "En cigarr, rundad i båda ändar", cone: "En kon, tjockast framtill" },
       keep: "Fibrer kvar", keeps: { sides: "På sidorna", top: "Ovanpå och på sidorna", under: "Under och på sidorna" }, none: "Som bunden",
@@ -527,6 +527,7 @@ export const sv: Messages = {
         count: "Hur många",
         sweep: "Lutning bakåt (°)",
         shaggy: "Ruggighet (0 fin, 1 ruggig)",
+        barred: "Bandad som grizzly",
         mm: "Storlek (mm)",
       },
       step: {

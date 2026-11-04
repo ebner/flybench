@@ -1,0 +1,94 @@
+// Paradrake: the extended hair-body parachute for the big drakes, in Mike Lawson's bullet-head dressing (the Green Paradrake).
+
+id paradrake
+name "Paradrake"
+aliases "Green Paradrake"
+type dry
+imitates mayfly
+naturals mayfly-dun
+difficulty advanced
+species trout
+season june july
+origin originator="Doug Swisher and Carl Richards" year=1971
+description "A moose body hair tail, an extended body of olive elk hair bound past the bend with crossing turns of olive thread, a bullet head of the same hair, a natural elk hair post and a parachute hackle of grizzly dyed olive."
+history """
+    Doug Swisher and Carl Richards developed the Paradrake in 1971 for the big mayfly drakes.
+    In their fly the hair of the body was tied in with its butts just behind the eye and its
+    tips over the bend, and bound down as an extended body; they used hen hackle for the posts
+    of small flies and deer or elk hair on bigger ones such as the drakes.
+
+    The bullet head is Mike Lawson's, of Henry's Fork Anglers in Idaho: the body hair tied in
+    pointing forward over the eye and folded back over its butts to the post. Tyers differ over the post: natural elk, elk dyed olive, or deer hair.
+    """
+fishing """
+    A dry fly for the big drakes: the Western and Eastern Green Drakes, the Brown Drake and the
+    Hex. The hair body floats it, and the long extended abdomen gives it the outline of the
+    natural dun. Fish it on a dead drift to rising trout during the drake hatches; more turns of
+    hackle float it better in faster water.
+    """
+sources {
+    "Fly Fishing the Sierra: Paradrake, tremendous for the hair body" url="https://flyfishingthesierra.com/?p=20232"
+    "Fly of the Month Club: Green Paradrake" url="http://www.flyofthemonthclub.com/store/catalog.asp?item=323"
+    "Charlie Craven: Paradrake Fly Tying Instructions (video)" url="https://www.youtube.com/watch?v=0JWe3Tovsdg"
+    "Fly Anglers Online: Green Paradrake SBS (ScottP)" url="https://www.flyanglersonline.com/t/green-paradrake-sbs/50330"
+    "North 40 Fly Shop: Mike Lawson's Green Paradrake" url="https://north40.com/mike-lawsons-green-paradrake"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://flyfishingthesierra.com/wp-content/uploads/2023/12/greenparadrake.jpg" page="https://flyfishingthesierra.com/?p=20232" license="All rights reserved; reference only" note="Side view in the vise; spiral turns over the body, a white elk post"
+    "http://www.flyofthemonthclub.com/store/images/products/large/12009.jpg" page="http://www.flyofthemonthclub.com/store/catalog.asp?item=323" license="All rights reserved; reference only" note="Side view; crossed turns, the elk tips left as a short flared stub"
+    "https://north40.com/media/catalog/product/P/M/PM-1003956_umpqua_flies_a.jpg" page="https://north40.com/mike-lawsons-green-paradrake" license="All rights reserved; reference only" note="Three-quarter side view of Lawson's tie (Umpqua): bullet head, crossed black turns, long moose tails"
+    "http://www.flyofthemonthclub.com/store/images/products/large/12003.jpg" page="http://www.flyofthemonthclub.com/store/catalog.asp?item=319" license="All rights reserved; reference only" note="The Brown Paradrake, side view"
+}
+
+// Sierra and Fly of the Month Club: TMC 100 #10–12; ScottP a Mustad 94840 #10.
+hook dry-standard size=10
+// Sierra ties it with cream or olive Danville Mono 3/0, Fly of the Month Club with olive 6/0.
+thread olive size="6/0"
+
+materials {
+    // Sierra: natural elk; Fly of the Month Club dyes it olive, Craven uses deer hair.
+    post elk-hair
+    // Read from the photos: fibres about 1.4 gapes, a little oversized.
+    hackle cock-hackle color=olive barred=#true fibre=1.4 label="Grizzly cock hackle dyed olive"
+    // Assumption: six hairs; the sources say a few.
+    tail moose-mane count=6 label="Moose body hair"
+    body elk-hair color=olive label="Olive-dyed cow elk hair"
+}
+
+steps {
+    // Sierra's sequence (Lawson's bullet head). Assumption: the 15 lb mono core Sierra and Craven
+    // bind under the body is left out, as ScottP does: it is hidden once the body is bound.
+    attach-thread at=0.66 note="A third of the shank behind the eye: where the post goes."
+    wrap-thread to=0.0 note="A firm base for the hair to grip."
+    wrap-thread to=0.66
+    // Sierra: the post about a shank long; the photos show it nearer 1.7 gapes.
+    tie-in post length=1.7 angle=90 note="Clean and stack the elk and tie it in on top, tips forward; wind a little thread up the base of the post."
+    trim post note="Cut the butts at a slant behind the post and bind them down."
+    tie-in hackle note="By its bare stem against the front of the post, bound up the post and back down."
+    wrap-thread to=0.0
+    // Sierra: a few moose hairs two shank lengths long, butts just behind the post, so about
+    // 2.7 gapes stand past the bend; the photos show 1.5–2.2 past the end of the body, splayed a little.
+    tie-in tail length=3.0 angle=4 spread=20 note="Stacked; they come out of the end of the body later."
+    trim tail note="Cut them to reach just behind the post and bind them down on top."
+    wrap-thread to=0.95
+    // Sierra: a pencil-thick clump two shank lengths long, butts just in front of the post, so
+    // about 3.3 gapes reach forward past the turns behind the eye.
+    tie-in body length=3.3 forward=#true spread=180 note="A pencil-thick clump, stacked and its butts cut square, laid with the butts at the post: two loose turns, then tight ones forward to the eye."
+    wrap-thread to=0.7 note="Under the hair, which still points forward."
+    pull-over body to=0.7 note="Push it back over the eye with the hole of a half-hitch tool, up to the post; tie it down there with two tight turns, the hair streaming back on both sides of the post."
+    // Sierra: on past the bend about half a shank (1.0 gape); Fly of the Month Club a little
+    // more; the photos 1.2–1.4 gapes. The turns read from the photos: six or seven segments.
+    // The mistake: Sierra spirals the thread back "at even tension".
+    wrap-thread to=-0.6 turns=6 note="Groom the hair back round the tail first; at the end take a second turn in the same place." mistake="Uneven tension, so the segments come out uneven and the body bends."
+    // Fly of the Month Club and ScottP cross the turns into an X; Sierra spirals forward again,
+    // which crosses them too.
+    wrap-thread to=0.7 turns=6
+    // Assumption: six turns; Sierra leaves it to the tyer (more for fast water), ScottP takes
+    // about twelve turns of one saddle hackle.
+    wind hackle around=post turns=6 note="From the top of the post down; more turns for fast water."
+    tie-off hackle note="In front of the post; lock it round the base of the post and trim."
+    whip-finish note="Half hitches in front of the post, under the hackle."
+    // Read from the photos: a short flared stub of the tips.
+    trim body leave=0.2 note="Leave the moose tail; a drop of cement on the turns."
+}

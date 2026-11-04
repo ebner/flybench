@@ -170,6 +170,16 @@ Gör en whipfinishknut och klipp sedan huvudet till form med en vass sax eller e
 Bind ner den andra änden på samma sätt, klipp bort överskottet och limma varven. En uppriven ände blir en kort glitterstjärt: repa upp flätan med en nål.`,
     mistakes: ["Lösa varv: den hala flätan glider ur dem.", "En slang som är för vid för kroppen, så att den påsar sig i stället för att ligga tätt."],
   },
+  "hair-body": {
+    name: "Hårhuvuden och förlängda hårkroppar",
+    summary: "Hår som binds in pekande framåt över ögat, viks bakåt till ett slätt huvud och binds med bindtråden längs kroppen och vidare bakom krokböjen.",
+    how: `Jämna till en bunt hår och klipp rotändarna raka. Bind in den bakom ögat med spetsarna framåt över ögat: först två lösa varv, dra sedan åt så att håret fördelar sig jämnt runt krokskaftet.
+
+Skjut håret bakåt över ögat, med fingrarna eller hålet i ett halvslagsverktyg, tills det ligger slätt runt om, och bind ner det bakom huvudet med två eller tre hårda varv. Det är hårhuvudet.
+
+För en förlängd kropp håller du håret bakåt runt krokskaftet (och runt en stjärt inbunden vid krokböjen) och lindar bindtråden i spiral bakåt över det med jämn spänning, vidare bakom krokböjen runt bara håret, och sedan framåt igen så att varven korsar varandra. Klipp spetsarna strax bakom det sista varvet.`,
+    mistakes: ["För hård spänning, så att håret spretar i stället för att ligga slätt.", "Ojämna varv bakom krokböjen, så att kroppen blir sned eller segmenten ojämna."],
+  },
   "woven-body": {
     name: "Vävda kroppar",
     summary: "Två chenilletrådar som vävs längs skaftet, den ena färgen på ryggen och den andra på buken.",

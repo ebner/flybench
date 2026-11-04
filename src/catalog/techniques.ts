@@ -192,6 +192,17 @@ At each crossing take the dark strand over the top of the shank only, from one s
     mistakes: ["Pulling one strand harder than the other, so the line along the side wanders.", "Crossings left loose, so the body twists round the shank."],
   },
   {
+    id: "hair-body",
+    name: "Bullet heads and extended hair bodies",
+    summary: "Hair tied in pointing forward over the eye, folded back into a smooth head and bound with the thread along the body and on past the bend.",
+    how: `Stack a clump of hair and cut its butts square. Tie it in behind the eye with the tips pointing forward over the eye: two loose turns first, then tighten them so the hair spreads evenly round the shank.
+
+Push the hair back over the eye, with your fingers or the hole of a half-hitch tool, until it lies smooth all round, and tie it down behind the head with two or three tight turns: that is the bullet head.
+
+For an extended body, hold the hair back round the shank (and round a tail tied in at the bend) and spiral the thread back over it at even tension, on past the bend round nothing but the hair, then forward again so the turns cross. Trim the tips just behind the last turn.`,
+    mistakes: ["Too much tension, so the hair flares instead of lying smooth.", "Uneven turns past the bend, so the body comes out crooked or its segments uneven."],
+  },
+  {
     id: "bead-head",
     name: "Bead heads",
     summary: "A metal bead slid onto the hook before the thread, for weight and flash.",
@@ -264,11 +275,19 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     const m = recipe.materials.find((m) => m.id === id);
     return m ? MATERIALS[m.kind].archetype : undefined;
   };
+  // Hair folded back over itself from where it was tied in (a bullet head), and bound past the bend.
+  const foldedBack = (id: string) => {
+    if (archetype(id) !== "hair") return false;
+    const i = recipe.steps.findIndex((s) => s.op === "pull-over" && s.material === id);
+    const at = i >= 0 ? tieInPosition(recipe, i, id) : null;
+    return at !== null && (recipe.steps[i] as { to: number }).to < at;
+  };
   switch (step.op) {
     case "attach-thread":
       return "attach-thread";
     case "wrap-thread":
-      return "thread-base";
+      // Over hair past the bend, or back from there.
+      return step.to < 0 || threadAt(recipe, index) < 0 ? "hair-body" : "thread-base";
     case "slide-bead":
       return "bead-head";
     case "weight":
@@ -278,7 +297,7 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     case "spin":
       return "spinning-hair";
     case "pull-over":
-      return "wing-case";
+      return foldedBack(step.material) ? "hair-body" : "wing-case";
     case "sleeve":
       return "tubing-body";
     case "weave":
@@ -305,6 +324,7 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
     case "tie-in": {
       const a = archetype(step.material);
       if (a === "eyes") return "eyes";
+      if (foldedBack(step.material)) return "hair-body";
       if (step.length === undefined) return "tie-in";
       // Under the shank of a point-up fly is its top: a wing there, not a beard.
       if (step.side === "under") return !ridesPointUp(recipe) ? "beard" : a === "hair" ? "hair-wing" : "tie-in";

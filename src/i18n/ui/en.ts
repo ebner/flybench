@@ -422,7 +422,7 @@ export const en = {
     },
     field: {
       length: "Length", angle: "Angle above the shank", spread: "Spread to each side", width: "Width", at: "Tied in at", from: "Starts at", to: "Ends at",
-      turns: "Turns", counter: "Wound the other way round", side: "Where", sides: { top: "On top", under: "Underneath", across: "Across the shank" },
+      turns: "Turns", counter: "Wound the other way round", barred: "Barred like grizzly", side: "Where", sides: { top: "On top", under: "Underneath", across: "Across the shank" },
       forward: "Pointing forward", tip: "Colour of the end", collar: "Collar length", windTo: "Wound on as the body to", fray: "Frayed tail",
       leave: "Left standing", shape: "Clipped to", shapes: { round: "A round head", wedge: "A wedge, flat underneath", cigar: "A cigar, rounded at both ends", cone: "A cone, full at the front" },
       keep: "Fibres kept", keeps: { sides: "At the sides", top: "On top and at the sides", under: "Underneath and at the sides" }, none: "As tied",
@@ -532,6 +532,7 @@ export const en = {
         count: "How many",
         sweep: "Sweep back (°)",
         shaggy: "Roughness (0 fine, 1 shaggy)",
+        barred: "Barred like grizzly",
         mm: "Size (mm)",
       },
       step: {

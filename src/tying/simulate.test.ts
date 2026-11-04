@@ -300,3 +300,83 @@ describe("a Bitch Creek: two chenilles woven with the thread cut", () => {
     expect(build.steps[weave + 3]!.freeEnds.filter((e) => e.kind === "rest" && (e.material === "back" || e.material === "belly") && e.hideAfter === undefined)).toHaveLength(0);
   });
 });
+
+describe("a Paradrake: hair folded back into a bullet head and bound past the bend", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/paradrake.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("paradrake.kdl does not load");
+  const build = simulate(result.recipe);
+  const steps = result.recipe.steps;
+  const fold = steps.findIndex((s) => s.op === "pull-over");
+  const bind = steps.findIndex((s) => s.op === "wrap-thread" && s.to < 0);
+  const L = 2.0;
+
+  it("folds the hair tied in forward back all round the shank, its tips trailing behind the tie-down", () => {
+    const pieces = build.steps[fold]!.pieces;
+    const head = pieces.find((p) => p.type === "cover")!;
+    expect(head).toMatchObject({ round: true, halfAngle: Math.PI });
+    expect(head.type === "cover" && [head.x0, head.x1]).toEqual([expect.closeTo(0.7 * L), expect.closeTo(0.95 * L)]);
+    const tips = pieces.find((p) => p.type === "bundle" && p.material === "body")!;
+    // As long behind where it was tied in as it was in front: 3.3 gapes from 0.95 of the shank.
+    expect(tips.type === "bundle" && tips.x - tips.length).toBeCloseTo(0.95 * L - 3.3);
+    expect(build.steps[fold]!.text).toMatch(/^Fold the olive-dyed cow elk hair back all round the shank and tie it down at 70%.*Leave the tips trailing/);
+  });
+
+  it("binds the hair along the body and past the bend, the tail leaving it at its end", () => {
+    const pieces = build.steps[bind]!.pieces;
+    const sheath = pieces.find((p) => p.type === "cover" && p.material === "body")!;
+    expect(sheath.type === "cover" && [sheath.x0, sheath.x1]).toEqual([expect.closeTo(-0.6 * L), expect.closeTo(0.7 * L)]);
+    const thread = pieces.find((p) => p.type === "wraps") as WrapsPiece;
+    expect(thread.x1).toBeCloseTo(-0.6 * L);
+    // The thread past the bend lies on the hair, not on a bare wire, cinching it at the last turn.
+    expect(wrapAt(thread, 0.8).x).toBeLessThan(-0.5);
+    expect(wrapAt(thread, 0.8).radius).toBeGreaterThan(0.15);
+    expect(wrapAt(thread, 1).radius).toBeLessThan(wrapAt(thread, 0.8).radius);
+    const tail = pieces.find((p) => p.type === "bundle" && p.material === "tail")!;
+    expect(tail.type === "bundle" && [tail.x, tail.x - tail.length]).toEqual([expect.closeTo(-0.6 * L), expect.closeTo(-3.0)]);
+    expect(build.steps[bind]!.text).toMatch(/^Spiral the thread back over the olive-dyed cow elk hair in 6 open turns to 1\.2× the gape behind the start of the bend, binding it down along the body and on past the bend/);
+    expect(build.steps[bind + 1]!.text).toMatch(/^Spiral the thread forward again to 70% .* in 6 open turns, crossing the first ones\./);
+  });
+
+  it("trims the tips behind the last turn, leaving a stub", () => {
+    const last = build.steps.at(-1)!;
+    const stub = last.pieces.find((p) => p.type === "bundle" && p.material === "body")!;
+    expect(stub).toMatchObject({ cut: true, length: 0.2 });
+    expect(stub.type === "bundle" && stub.x).toBeCloseTo(-0.6 * L);
+    expect(last.text).toMatch(/^Cut the tips of the olive-dyed cow elk hair just behind the last turn over them, leaving a stub/);
+  });
+
+  it("winds the parachute above the hair body round the post", () => {
+    const wind = steps.findIndex((s) => s.op === "wind");
+    const hackle = build.steps[wind]!.pieces.find((p) => p.type === "wraps") as WrapsPiece;
+    const body = build.steps[bind]!.pieces.find((p) => p.type === "cover" && p.material === "body")!;
+    // A grizzly dyed olive: olive, with grizzly's bars.
+    expect(hackle).toMatchObject({ color: "#6b6b2a", barred: true });
+    expect(hackle.post!.y1).toBeGreaterThan(body.type === "cover" ? body.base.radiusAt(0.66 * L) + body.thickness * 0.5 : 0);
+  });
+});
+
+describe("hair folded back with nothing trailing", () => {
+  it("trims nothing rather than failing, when the tips end at the tie-down", () => {
+    const text = `id test
+name "Test"
+type dry
+difficulty advanced
+hook dry-standard size=10
+thread olive size="6/0"
+materials {
+    body elk-hair color=olive
+}
+steps {
+    attach-thread at=0.95
+    tie-in body length=0.5 forward=#true spread=180
+    wrap-thread to=0.7
+    pull-over body to=0.7
+    whip-finish
+    trim body
+}
+`;
+    const result = loadRecipe(text);
+    if (!result.ok) throw new Error(result.errors.map((e) => e.message).join("\n"));
+    expect(() => simulate(result.recipe)).not.toThrow();
+  });
+});

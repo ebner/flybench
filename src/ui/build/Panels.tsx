@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { CLASSIC, kindsFor, PRESETS, unavailable, waysFor, waysOf, type How, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
+import { CLASSIC, kindsFor, PRESETS, rearLimit, unavailable, waysFor, waysOf, type How, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
 import { DIFFICULTY_LABELS, SPECIES_LABELS, TYPE_LABELS } from "../../catalog/describe";
 import { match } from "../../catalog/inventory";
 import { swatchName, swatchRecipe } from "../../catalog/swatch";
-import { MATERIALS, type MaterialKind } from "../../recipe/materials";
+import { ARCHETYPE_PROPS, MATERIALS, type MaterialKind } from "../../recipe/materials";
 import { DIFFICULTIES, FLY_TYPES, HOOK_MODEL_IDS, isTube, NAMED_COLORS, SPECIES, THREAD_SIZES, TUBE_MODEL_IDS, type NamedColor, type Recipe } from "../../recipe/schema";
 import { FlyScene } from "../../render/FlyScene";
 import { colourWord, hookModelName, kindName } from "../../tying/describe";
-import { simulate } from "../../tying/simulate";
+import { barredColour, simulate } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
 import { floats } from "../../recipe/validate";
 
@@ -199,7 +199,7 @@ export function PartPanel({
       <details className="wb-more">
         <summary>{w.more}</summary>
         <div className="wb-fields">
-          <MoreFields part={part} mat={mat} onChange={onChange} onMaterial={onMaterial} />
+          <MoreFields part={part} mat={mat} rear={rearLimit(fly, part)} onChange={onChange} onMaterial={onMaterial} />
         </div>
       </details>
     </section>
@@ -322,7 +322,7 @@ function MaterialPreview({ kind, color }: { kind: MaterialKind; color: string })
 
 type FieldKey = keyof typeof t.workbench.field;
 
-function MoreFields({ part, mat, onChange, onMaterial }: { part: Part; mat: number; onChange: (patch: Partial<Part>) => void; onMaterial: (i: number, patch: Partial<PartMaterial>) => void }) {
+function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat: number; rear: number; onChange: (patch: Partial<Part>) => void; onMaterial: (i: number, patch: Partial<PartMaterial>) => void }) {
   const f = t.workbench.field;
   const m = part.mats[mat];
   // A setting the part has keeps a value: emptying its field leaves it as it was.
@@ -330,7 +330,7 @@ function MoreFields({ part, mat, onChange, onMaterial }: { part: Part; mat: numb
     part[key] !== undefined && <Num key={key} label={f[key]} value={part[key]} unit={unit} step={step} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v, lo, hi) })} />;
   const shankNum = (key: "at" | "from" | "to", label: FieldKey) =>
     part[key] !== undefined && (
-      <Num key={key} label={f[label] as string} value={Math.round(part[key]! * 100)} unit={t.workbench.unit.shank} step={5} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v / 100, 0, 1) })} />
+      <Num key={key} label={f[label] as string} value={Math.round(part[key]! * 100)} unit={t.workbench.unit.shank} step={5} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v / 100, rear, 1) })} />
     );
   const g = t.workbench.unit.gapes;
   const deg = t.workbench.unit.degrees;
@@ -372,6 +372,26 @@ function MoreFields({ part, mat, onChange, onMaterial }: { part: Part; mat: numb
       {m && typeof m.props?.count === "number" && (
         <Num label={f.count} value={m.props.count} step={1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, count: Math.round(clamp(v, 1, 60)) } })} />
       )}
+      {m && ARCHETYPE_PROPS[MATERIALS[m.kind].archetype].includes("barred") && (() => {
+        // A dyed grizzly is barred in whatever colour it is; a grizzly made plain is not. Only a
+        // setting that differs from the colour's own is kept.
+        const own = barredColour(m.color ?? (MATERIALS[m.kind] as { defaultColor?: string }).defaultColor);
+        const barred = typeof m.props?.barred === "boolean" ? m.props.barred : own;
+        return (
+          <label className="wb-check">
+            <input
+              type="checkbox"
+              checked={barred}
+              onChange={(e) => {
+                const { barred: _b, ...rest } = m.props ?? {};
+                const props = e.target.checked === own ? rest : { ...rest, barred: e.target.checked };
+                onMaterial(mat, { props: Object.keys(props).length ? props : undefined });
+              }}
+            />
+            {f.barred}
+          </label>
+        );
+      })()}
       {m && typeof m.props?.mm === "number" && (
         <Num label={f.mm} value={m.props.mm} unit="mm" step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, mm: round2(clamp(v, 0.5, 12)) } })} />
       )}

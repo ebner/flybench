@@ -182,6 +182,11 @@ Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `brown`, `r
 each fibre of a tail or beard; `tippet` fibres get their black bar and black tip.
 Or a quoted hex value: `"#c8102e"`.
 
+A dyed grizzly is a colour with `barred=#true` on the material (hackles, fibres, feathers,
+marabou): `hackle cock-hackle color=olive barred=#true fibre=1.4` is drawn olive with grizzly's
+bars. `barred=#false` draws a barred colour plain. The dressing names the material by its
+colour, so give it a `label` ("Grizzly cock hackle dyed olive").
+
 ## Materials
 
 Each material line is `<id> <kind> [properties]`. The id is the material's role in this
@@ -199,19 +204,19 @@ how it is drawn and which extra properties it takes:
 |------------|-------|------------------|
 | yarn       | `wool`, `poly-yarn`, `sparkle-yarn` (Antron; pulled over, a translucent veil) | |
 | herl       | `peacock-herl`, `ostrich-herl` | `strands` (1–6, default 3) |
-| hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle`, `guinea-fowl-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind) |
+| hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle`, `guinea-fowl-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind), `barred` |
 | dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur`, `fox-dubbing`, `dubbing` | `shaggy` (0–1: how rough, from fine and tight to picked out with long guard hairs; default from the kind) |
 | wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
 | floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | |
-| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, for legs tied across) |
-| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count` |
+| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs: legs tied across, or a few hairs as a tail; without it a bunch is a clump that grows with its length) |
+| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred` |
 | biot       | `goose-biot` | `count` (default 2) |
-| marabou    | `marabou` | |
+| marabou    | `marabou` | `barred` |
 | cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
 | flash      | `krystal-flash`, `flashabou` | `count` |
-| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip) | |
+| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip) | `barred` |
 | foam       | `foam`, `scud-back` | |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads), `split-shot` (crimped behind the eye, painted with eyes) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
@@ -223,8 +228,17 @@ The archetype decides how a material behaves and is drawn:
 
 - **dubbing** is spun onto the thread with `dub`, never tied in.
 - **beads** go on with `slide-bead` before the thread; **eyes** are tied in without a length.
-- **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Hair
-  can also be spun (`spin`) and trimmed into a head.
+- **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. Tied in
+  pointing forward (`forward=#true`), its butts lie back along the shank under the turns, cut
+  square first, with nothing to trim. Hair can also be spun (`spin`) and trimmed into a head.
+- **hair folded back** (a bullet head): tied in pointing forward over the eye, spread all round
+  (`spread=180`), and laid back with `pull-over … to=` behind where it is tied in, the thread
+  waiting there, it lies all round the shank from the tie-in to the tie-down, as a smooth head.
+  It is as long behind where it was tied in as it was in front, so its tips trail back from the
+  tie-down. Thread spiralled back over them (`wrap-thread` to a smaller position) binds them
+  along the body, and on past the bend (`to` below 0) round nothing but the hair, as an extended
+  body; bunches tied in pointing back along there (a tail) are bound inside it and leave it at
+  its end. `trim … leave=` then cuts the tips behind the last turn (a Paradrake).
 - **strips** (fur on the hide) tied in with a `length` stick out as a flat strip with the fur
   on top leaning back towards its end (a Zonker's or a Bunny Leech's tail); the rest of the strip
   can then be pulled over the back with `pull-over` and tied down in front, lying taut on top of
@@ -263,7 +277,7 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 | `slide-bead`    | `slide-bead <bead>`                               | Before the thread: slide a bead up to the eye. Wraps then stop behind it. |
 | `weight`        | `weight <wire> from=<pos> to=<pos>`               | Wrap weighting wire in touching turns (before or after the thread). |
 | `attach-thread` | `attach-thread at=<pos>`                          | Start the thread at `at`. |
-| `wrap-thread`   | `wrap-thread to=<pos> [turns=<n>]`                | Move the thread to `to`. Without `turns` it lays touching turns; with `turns` it makes that many open turns. |
+| `wrap-thread`   | `wrap-thread to=<pos> [turns=<n>]`                | Move the thread to `to`. Without `turns` it lays touching turns; with `turns` it makes that many open turns. Back over the tips of hair folded back, it binds them down as it goes; `to` below 0 (down to -1, a shank length behind the bend) takes it on past the bend over that hair, as an extended body (see above), and open turns forward again cross the first. |
 | `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>] [side=top\|under\|across] [forward=#true] [extended=#true] [tip=<colour>]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank; at 60° or more it stands upright (a wing post). `forward=#true` points it forward over the eye instead (antennae, feelers, a front-peeping larva). `side=across` ties strands across the shank as legs; `extended=#true` makes chenille, yarn or foam one solid piece (see above). `spread`: how far round the body a bunch fans out, in degrees either side of the top; for feathers, makes a pair. `width`: feather width (default by shape). `side=under`: under the shank (beards, throats, under-wings, eyes); without a length, a strip tied in underneath to be pulled over the belly (a sparkle pupa's lower sheath). Without `length`, a loose end hangs until the material is wound or pulled over; with `forward=#true` too, a strip waits sticking out over the eye, to be folded back with `pull-over` (a foam balloon). |
 | `dub`           | `dub <material> to=<pos> [turns=<n>]`             | Spin dubbing onto the thread and wrap it to `to`; the thread ends there. |
 | `wind`          | `wind <material> to=<pos> turns=<n> [counter=#true]` | Wind the material from its tie-in point to `to`. Forward: it ends at the thread. Rearward (palmering): it ends away from the thread and must be secured (see below). `counter=#true` winds it the opposite way round to what is under it (a counter-wound rib). |
@@ -273,7 +287,7 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>]`           | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. Trim it into a head with `trim … leave=`. |
 | `weave`         | `weave <top> under=<belly> to=<pos> [turns=<n>]`  | Weave two strands (chenille, yarn or floss) tied in together forward to `to`: `top` crosses back and forth over the top of the shank only, `under` over it and right round underneath, so one colour is the back and the other the belly, meeting along each side in a toothed line (a Bitch Creek's abdomen). `turns` counts the crossings (default one per strand width). The thread is cut for the weave (a `whip-finish` before it, then `attach-thread` at `to`) or parked at `to`; both strands are then tied off there with `tie-off`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess; or tie down a sleeve's other end, or a woven strand's. |
-| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge\|cigar\|cone] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it, `cigar` makes it fullest in the middle and rounded at both ends, for a body, `cone` slim at the tail and full at the front). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
+| `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge\|cigar\|cone] [keep=sides\|top\|under]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), the tips of hair folded back, behind its tie-down or the last turn over them (`leave` = a flared stub), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it, `cigar` makes it fullest in the middle and rounded at both ends, for a body, `cone` slim at the tail and full at the front). `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing). |
 | `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. Part-way through, followed by `attach-thread` elsewhere, it finishes what is tied so far there (a Zonker's rear, finished at the bend before the thread is started again behind the eye). |
 
 A `turns` is at most 100, a recipe has at most 150 steps and 40 materials: far beyond any
@@ -305,7 +319,14 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
 - A parachute hackle needs a post: a bunch tied in upright (`angle` of 60° or more), not a
   feather pair, an extended body, a fur strip or strands tied across.
 - `pull-over` needs the material tied in and unused, and, pulled forward, the thread at `to`;
-  laid back, the very next step winds another material forward from at or behind its end.
+  laid back, the very next step winds another material forward from at or behind its end, or
+  the thread waits at `to` and ties it down there.
+- The thread goes past the bend (`wrap-thread to` below 0) only over hair folded back and tied
+  down there, its tips not yet trimmed; there it only winds on or back (a trim may come
+  between), nothing is tied in, off or finished past the bend. Spiralled back over such hair,
+  on the shank or past the bend, the thread goes only as far as the hair reaches, its tips
+  still sticking out 0.15 gape behind the last turn (the hair is as long behind where it was
+  tied in as it was in front).
 - Only hair is spun, only wire weights, only beads are slid on.
 - `whip-finish` comes last; only `trim` may follow it (trimming heads and hackles), or `attach-thread` to
   carry on with the thread started again (with a `weave` in between, when the weave is done with
@@ -327,7 +348,8 @@ shared as links. Their ids start with `my-`, and their materials' ids are parts 
 already use, which the glossaries name in every language. The builder keeps a pattern's whip
 finish part-way (the thread brought to where it is finished, if it is moved first) and the
 thread started again (a Zonker's, a Bitch Creek's), a sleeve as a part slid over the body, and a
-woven body as one part of two strands, the top's first. A fly the builder can't show
+woven body as one part of two strands, the top's first, and a thread body's passes with their
+open turns, also behind the bend (a Paradrake's binding). A fly the builder can't show
 (an unknown material, colour, hook or step) is refused when it is opened from a link or a
 file.
 

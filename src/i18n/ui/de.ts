@@ -417,7 +417,7 @@ export const de: Messages = {
     },
     field: {
       length: "Länge", angle: "Winkel über dem Schenkel", spread: "Spreizung zu jeder Seite", width: "Breite", at: "Eingebunden bei", from: "Beginnt bei", to: "Endet bei",
-      turns: "Windungen", counter: "In Gegenrichtung gewunden", side: "Wo", sides: { top: "Oben", under: "Unten", across: "Quer über den Schenkel" },
+      turns: "Windungen", counter: "In Gegenrichtung gewunden", barred: "Gebändert wie Grizzly", side: "Wo", sides: { top: "Oben", under: "Unten", across: "Quer über den Schenkel" },
       forward: "Nach vorn zeigend", tip: "Farbe des Endes", collar: "Länge des Kragens", windTo: "Als Körper gewunden bis", fray: "Aufgezupfter Schwanz",
       leave: "Stehen gelassen", shape: "Geschnitten zu", shapes: { round: "Einem runden Kopf", wedge: "Einem Keil, unten flach", cigar: "Einer Zigarre, an beiden Enden gerundet", cone: "Einem Kegel, vorn am dicksten" },
       keep: "Behaltene Fibern", keeps: { sides: "An den Seiten", top: "Oben und an den Seiten", under: "Unten und an den Seiten" }, none: "Wie gebunden",
@@ -527,6 +527,7 @@ export const de: Messages = {
         count: "Wie viele",
         sweep: "Neigung nach hinten (°)",
         shaggy: "Struppigkeit (0 fein, 1 struppig)",
+        barred: "Gebändert wie Grizzly",
         mm: "Größe (mm)",
       },
       step: {
