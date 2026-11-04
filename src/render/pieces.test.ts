@@ -247,6 +247,14 @@ describe("a wound hackle's barbs", () => {
     expect(barbs(hen).count).toBeLessThan(barbs(cock).count * 0.8);
   });
 
+  it("gives a wet-fly cock hackle fewer barbs than a dry-fly one at the same turns", () => {
+    const dry = redTag((k) => k);
+    const wet = redTag((k) => k.replace("hackle cock-hackle", "hackle wet-fly-cock-hackle"));
+    expect(wet.turns).toBe(dry.turns);
+    expect(barbs(wet).count).toBeLessThan(barbs(dry).count * 0.5);
+    expect(barbs(wet).radius).toBeCloseTo(barbs(dry).radius, 6);
+  });
+
   it("comes from a catalog kind that says how many barbs grow along its stem", () => {
     const hackles = Object.entries(MATERIALS as Record<string, CatalogMaterial>).filter(([, m]) => m.archetype === "hackle");
     expect(hackles.length).toBeGreaterThan(5);

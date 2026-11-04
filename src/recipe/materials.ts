@@ -92,10 +92,18 @@ export const MATERIALS = {
   "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e" },
 
   // Hackles
-  // Assumption (all the barb densities): a cock hackle carries its barbs closest, a saddle hackle
-  // a little less close, a hen hackle fewer, and the soft game-bird feathers fewest, their barbs
-  // well apart (photos of collars, palmered bodies and spiders).
-  "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7, barbsPerMm: 14 },
+  // Assumption (all the barb densities): a dry-fly cock hackle carries its barbs closest, a saddle
+  // hackle less close, a hen hackle and a wet-fly cock hackle fewer, and the soft game-bird
+  // feathers fewest, their barbs well apart (photos of collars, palmered bodies and spiders).
+  // `cock-hackle` is the dry-fly hackle of a genetic cape or saddle: a collar of five to eight
+  // touching turns reads as nearly solid from the side.
+  "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7, barbsPerMm: 32 },
+  // The cock hackle that wet flies, loch palmers and salmon flies are dressed with: an Indian or
+  // Chinese cape, or a lower grade (shops sell them for wet and salmon flies; Murray's: Indian
+  // hackle has "slightly softer barbules than genetic hackle"; Artflies: salmon-fly tyers want the
+  // lower grades, softer and tapered, not dry-fly hackle). Assumption: its barbs stand further
+  // apart than on a dry-fly hackle, so a palmer shows the body through it.
+  "wet-fly-cock-hackle": { name: "wet fly cock hackle", archetype: "hackle", sweep: 40, barbsPerMm: 9 },
   "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35, barbsPerMm: 8 },
   "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 40, barbsPerMm: 10 },
   // Soft game-bird hackles sweep well back over the body (reference photos of spiders).

@@ -58,8 +58,8 @@ materials {
     front silk-floss color=black
     wing squirrel-tail color=black
     flash krystal-flash color=silver count=6 label="Silver Krystal Hair"
-    collar cock-hackle color=yellow fibre=2.2 sweep=58
-    front-collar cock-hackle color="#f2581a" fibre=2.1 sweep=58 label="Hot orange cock hackle"
+    collar wet-fly-cock-hackle color=yellow fibre=2.2 sweep=58
+    front-collar wet-fly-cock-hackle color="#f2581a" fibre=2.1 sweep=58 label="Hot orange cock hackle"
 }
 
 steps {

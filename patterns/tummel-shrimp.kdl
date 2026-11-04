@@ -50,7 +50,7 @@ materials {
     rib oval-tinsel color=gold
     body silk-floss color=black
     wing squirrel-tail color=black
-    collar cock-hackle color=orange fibre=1.8 sweep=58
+    collar wet-fly-cock-hackle color=orange fibre=1.8 sweep=58
     front-collar guinea-fowl-hackle color=blue barred=#true fibre=2.0 sweep=62
 }
 

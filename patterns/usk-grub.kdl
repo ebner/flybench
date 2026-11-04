@@ -57,11 +57,11 @@ materials {
     veil-upper hackle-tips color=orange label="Orange cock hackle point"
     veil-lower hackle-tips color=orange label="Orange cock hackle point"
     // Read from the photos: the white fibres reach a little past the hook point.
-    hackle-middle cock-hackle color=white fibre=1.6 sweep=40
+    hackle-middle wet-fly-cock-hackle color=white fibre=1.6 sweep=40
     rib-front oval-tinsel color=silver
     body-front seals-fur color=black
     // Read from the photos: the collar's fibres reach about the hook point.
-    collar cock-hackle color=furnace fibre=1.5 sweep=50
+    collar wet-fly-cock-hackle color=furnace fibre=1.5 sweep=50
     wing jungle-cock
 }
 

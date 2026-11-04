@@ -47,8 +47,8 @@ materials {
     tail hackle-tips color=grizzly label="Grizzly hackle tips"
     rib oval-tinsel color=silver
     body hares-ear-dubbing color="#8a8478" label="Grey hare's fur"
-    palmer cock-hackle color=grizzly fibre=1.2 sweep=40
-    front cock-hackle color=grizzly fibre=1.6 sweep=45 label="Grizzly cock hackle, longer"
+    palmer wet-fly-cock-hackle color=grizzly fibre=1.2 sweep=40
+    front wet-fly-cock-hackle color=grizzly fibre=1.6 sweep=45 label="Grizzly cock hackle, longer"
 }
 
 steps {

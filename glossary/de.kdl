@@ -44,6 +44,11 @@ materials {
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020 (\"Hechel: Hahnenhechel schwarz\")" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
         source "Fliegenfischer-Forum: Bindeanleitung Compara Zebra (\"Kopfhechel: Schwarze Hahnenhechel\")" url="https://fliegenfischer-forum.de/fliegen1/24021701.pdf"
     }
+    noun wet-fly-cock-hackle "Hahnenhechel für Nassfliegen" gender=f plural="Hahnenhecheln für Nassfliegen" {
+        note "The softer, sparser cock hackle of wet flies, loch palmers and salmon flies, as against the dry-fly 'Hahnenhechel'. German dressings write just 'Hahnenhechel'; no word of its own found written ('Nassfliegenhechel' only in a book's table of contents, which could not be opened), so a descriptive phrase. Shops ask whether a cape is for dry or for wet flies."
+        source "Andreas Sperl: Nassfliegen/Emerger/Flymph (\"Preisgünstiger und genau so fängig sind sogar noch die etwas steiferen Hahnenhecheln\", for wet flies)" url="https://andiflifi.jimdofree.com/fliegen-und-mehr/bindetipps/nassfliegen-emerger/"
+        source "Swissflies: Hecheln/Bälge (\"ob du eher Bälge für Trockenfliege oder für Nassfliegen suchst\")" url="https://swissflies.ch/hackles.php?l=de"
+    }
     noun hen-hackle "Hennenhechel" gender=f plural="Hennenhecheln" {
         source "Fliegenfischer-Forum: Fly-Swap No.35, Einsteigerfliegen (Black Pennell: \"Hechel: Hennenhechel/schwarz\")" url="https://www.fliegenfischer-forum.de/monspe87.html"
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Klassische Nassfliegen (\"Kragen: Hennenhechel, schwarz\")" url="https://www.fliegenfischer-forum.de/monspe48.html"

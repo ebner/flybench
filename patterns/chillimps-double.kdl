@@ -41,8 +41,8 @@ thread "#c8401a" size="6/0"
 materials {
     tail hackle-tips color="#c8401a" label="Orange hackle tips"
     rib oval-tinsel color=gold
-    palmer cock-hackle color="#c8401a" fibre=1.5 sweep=45 label="Orange cock hackle"
-    front cock-hackle color="#c8401a" fibre=1.9 sweep=50 label="Orange cock hackle, a little longer"
+    palmer wet-fly-cock-hackle color="#c8401a" fibre=1.5 sweep=45 label="Orange cock hackle"
+    front wet-fly-cock-hackle color="#c8401a" fibre=1.9 sweep=50 label="Orange cock hackle, a little longer"
 }
 
 steps {

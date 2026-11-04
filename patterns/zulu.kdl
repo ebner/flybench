@@ -46,7 +46,7 @@ thread black size="8/0"
 materials {
     tail wool color=red
     rib oval-tinsel color=silver label="Fine oval silver tinsel"
-    hackle cock-hackle color=black fibre=1.3 sweep=40
+    hackle wet-fly-cock-hackle color=black fibre=1.3 sweep=40
     body seals-fur color=black
 }
 

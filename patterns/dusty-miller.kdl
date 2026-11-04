@@ -53,8 +53,8 @@ materials {
     wing bucktail color=brown count=25 label="Brown bucktail"
     flash krystal-flash color=orange count=5 label="Orange Krystal Flash"
     // Read from Gray's photo: the hackle fibres about 16 mm, the brown a little longer, swept well back.
-    hackle-orange cock-hackle color=orange fibre=2.2 sweep=58 label="Orange cock hackle"
-    hackle-brown cock-hackle color=brown fibre=2.6 sweep=58 label="Brown cock hackle"
+    hackle-orange wet-fly-cock-hackle color=orange fibre=2.2 sweep=58 label="Orange cock hackle"
+    hackle-brown wet-fly-cock-hackle color=brown fibre=2.6 sweep=58 label="Brown cock hackle"
 }
 
 steps {

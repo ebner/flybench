@@ -67,7 +67,7 @@ materials {
     butt ostrich-herl color=black strands=2
     rib oval-tinsel color=gold
     // Read from Petti's photo: long, soft fibres swept well back.
-    hackle cock-hackle color=orange fibre=1.2 sweep=65 label="Orange cock hackle"
+    hackle wet-fly-cock-hackle color=orange fibre=1.2 sweep=65 label="Orange cock hackle"
     body silk-floss color=black
     throat hackle-fibres color=blue barred=#true count=40 label="Blue-dyed guinea fowl fibres"
     wing squirrel-tail color="#8b5e3c" label="Red fox squirrel or brown fitch tail"
