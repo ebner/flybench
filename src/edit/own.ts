@@ -400,6 +400,8 @@ export function newStep(op: Op, draft: Recipe, index: number, catalog: Recipe[])
         return byArchetype(["dubbing"]);
       case "spin":
         return byArchetype(["hair"]);
+      case "glue":
+        return byArchetype(["hair", "fibres", "yarn"]);
       case "tie-in":
         return draft.materials.find((m) => !["bead", "dubbing"].includes(MATERIALS[m.kind].archetype) && !used(m.id, ["tie-in", "slide-bead"]))?.id;
       case "wind":
@@ -414,7 +416,7 @@ export function newStep(op: Op, draft: Recipe, index: number, catalog: Recipe[])
       case "tie-off":
         return last(["wind"])?.material;
       case "trim":
-        return last(["tie-off", "spin", "pull-over", "tie-in"])?.material;
+        return last(["tie-off", "spin", "glue", "pull-over", "tie-in"])?.material;
       default:
         return undefined;
     }

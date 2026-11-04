@@ -190,6 +190,16 @@ Schneide einen Streifen dünnes geschlossenzelliges Foam zu, zu einem Ende hin s
 Mache einen halben Schlag, schneide den Faden ab und ziehe den Körper von der Nadel. Binde ihn mit dem vordersten Segment oben auf den Haken, die Enden des Foams und der Schwanzfibern nach vorn. Die Enden lassen sich später über den Thorax nach vorn ziehen, je eines auf jeder Seite des Flügels, und hinter dem Öhr als Kopf abbinden.`,
     mistakes: ["Zu viel Spannung, sodass der Faden das Foam durchschneidet.", "Foam, das beim Abbinden um den Hakenschenkel rutscht: halte es fest, während du anziehst."],
   },
+  "glued-body": {
+    name: "Aufgeklebte Faserkörper",
+    summary: "Faserstücke, nach dem Kopfknoten quer über den Hakenschenkel geklebt, oben und unten, und zu einer flachen Scheibe geschnitten: der Körper einer Krabbe.",
+    how: `Schließe zuerst den Faden ab: Der Körper hält nur durch den Kleber. Zupfe ein Stück der Fasern ab, drücke es zwischen den Fingern flach und schneide es so breit zu, wie der Körper werden soll.
+
+Gib mit der Hakenspitze nach unten eine Linie Kleber oben auf den Hakenschenkel und drücke das Stück hinein, die Fasern quer zum Schenkel, zur Hälfte auf jeder Seite. Leg ein zweites Stück darauf. Dreh den Haken um und klebe unten ein oder zwei Stücke auf; vorher eingebundene Beine setzt du in den nassen Kleber, so wie sie zeigen sollen. Dreh den Haken zurück und leg oben noch ein Stück auf, sodass oben mehr sitzt als unten.
+
+Lass den Kleber aushärten und schneide den Körper dann rund zu einer flachen Scheibe.`,
+    mistakes: ["Stücke längs statt quer zum Schenkel gelegt, sodass sie sich nicht zu einem runden Körper schneiden lassen.", "Schneiden, bevor der Kleber ausgehärtet ist, sodass sich die Stücke lösen."],
+  },
   "woven-body": {
     name: "Gewebte Körper",
     summary: "Zwei Chenillestränge, am Hakenschenkel entlang gewebt: eine Farbe auf dem Rücken, die andere am Bauch.",

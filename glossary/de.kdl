@@ -200,6 +200,10 @@ materials {
         note "The plain compound. The Grundlagen page names 'Fuchsschwanz' and 'Polarfuchs, ein feines Haar' among tying hairs."
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Fuchsschwanz\", \"Gefärbter Polarfuchs, ein feines Haar\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
+    noun craft-fur "Craft Fur" gender=n mass=#true genitive="Craft Fur" {
+        note "Product name kept in English, as German shops sell it. The gender is an assumption (like 'das Fell')."
+        source "Flyfishing Europe: Craft Fur (\"Im Flyfishing Europe Bindeset erhalten Sie 5 Matten Craft Fur\")" url="https://www.flyfishingeurope-shop.de/craft-fur.html"
+    }
     noun synthetic-hair "Kunsthaar" gender=n mass=#true {
         note "Rejected: 'Synthetikhaar', which shops also use. 'Kunsthaar' is the plain word."
         source "AOS: Hareline Neer Hair Kunsthaar (\"Weiche Kunsthaar-Fasern\")" url="https://www.aos.cc/de/hareline-neer-hair-kunsthaar.html"
@@ -343,6 +347,9 @@ colours {
         note "Tyers write 'fluo rot' after the noun (\"Glo Brite Floss Nr. 3 fluo rot\"), which can't be declined before a noun. 'leuchtrot' is the declinable standard word."
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Coq de Leon" url="https://www.fliegenfischer-forum.de/coqdeleon.html"
     }
+    adjective fluo-green "leuchtgrün" {
+        note "Formed as 'leuchtrot', the declinable word for a fluorescent colour."
+    }
     adjective brown "braun"
     adjective red-brown "rotbraun"
     adjective red-game "Red-Game" compound=#true {
@@ -469,6 +476,9 @@ parts {
     }
     noun belly "Bauch" gender=m plural="Bäuche" genitive="Bauchs"
     noun body "Körper" gender=m plural="Körper"
+    noun claws "Scheren" gender=f plural="Scheren" {
+        note "A crab's claws: the hackle tips splayed in a crab fly's tail. A plural part, as antennae."
+    }
     noun cheeks "Wangen" gender=f plural="Wangen" {
         note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
     }
@@ -768,6 +778,9 @@ steps {
     }
     phrase weave "Weben" {
         note "Weaving two strands of chenille into a two-coloured body (a Bitch Creek). The plain verb 'weben'; I found no German tying text on woven bodies, so this is my assumption."
+    }
+    phrase glue "Aufkleben" {
+        note "Glueing pads of fibre along the shank after the whip finish (a crab's body). The plain verb is my assumption."
     }
     phrase spin "Aufspinnen" {
         note "Spinning deer hair. The verb is my assumption; no page I could open used it for deer hair (one has 'Dubbing anspinnen')."

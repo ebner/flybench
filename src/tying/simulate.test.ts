@@ -617,3 +617,100 @@ steps {
     expect(c.base.radiusAt((c.x0 + c.x1) / 2)).toBeCloseTo(reach);
   });
 });
+
+describe("a crab's body glued on and its legs fanned", () => {
+  const loaded = loadRecipe(readFileSync(new URL("../../patterns/raghead-crab.kdl", import.meta.url), "utf8"));
+  if (!loaded.ok) throw new Error("raghead-crab.kdl does not load");
+  const build = simulate(loaded.recipe);
+  const pieces = build.steps.flatMap((s) => s.pieces);
+
+  it("glues the pads across the shank with no thread, after the whip finish", () => {
+    const glue = build.steps.find((s) => build.recipe.steps[s.index]!.op === "glue")!;
+    expect(glue.thread).toBeNull();
+    const pads = glue.pieces.find((p) => p.type === "bundle")!;
+    expect(pads).toMatchObject({ direction: "radial", across: true, angle: 0 });
+    expect(glue.text).toMatch(/glue/);
+  });
+
+  it("trims them to a disc as wide as they stand out and as thick as the cut", () => {
+    const disc = pieces.find((p) => p.type === "bundle" && p.trimShape === "disc");
+    expect(disc).toMatchObject({ cut: true, length: 0.65, flat: { top: 0.38, under: 0.38 } });
+    const trim = build.steps.at(-1)!;
+    expect(trim.text).toMatch(/disc/);
+    expect(trim.text).not.toMatch(/spun/);
+  });
+
+  it("fans the legs", () => {
+    const legs = pieces.find((p) => p.type === "legs")!;
+    expect(legs).toMatchObject({ count: 3 });
+    expect((legs as { fan?: number }).fan).toBeCloseTo((70 * Math.PI) / 180);
+  });
+});
+
+describe("glued pads cut flat, then covered", () => {
+  it("lays what is pulled over on the cut, not on the pads as glued", () => {
+    const r = loadRecipe(`id t
+name "T"
+type saltwater
+difficulty intermediate
+hook saltwater-straight size=4
+thread white size="3/0"
+materials {
+    body craft-fur color=tan
+    back foam color=black
+}
+steps {
+    attach-thread at=0.1
+    tie-in back
+    glue body from=0.15 to=0.75 length=0.65
+    trim body keep=sides leave=0.1
+    wrap-thread to=0.8
+    pull-over back to=0.8
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\\n"));
+    const build = simulate(r.recipe);
+    const cover = build.steps.flatMap((s) => s.pieces).find((p) => p.type === "cover")!;
+    if (cover.type !== "cover") throw new Error("no cover");
+    // The pads stood 0.45 above the shank as glued; cut to 0.1, the foam lies just over it.
+    expect(cover.base.radiusAt(1.1)).toBeLessThan(0.16);
+  });
+});
+
+describe("spun hair trimmed to a disc", () => {
+  const run = (leave: number) => {
+    const r = loadRecipe(`id t
+name "T"
+type saltwater
+difficulty intermediate
+hook saltwater-straight size=4
+thread white size="3/0"
+materials {
+    body deer-hair
+}
+steps {
+    attach-thread at=0.2
+    spin body to=0.8 length=0.2
+    trim body shape=disc leave=${leave}
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\\n"));
+    return simulate(r.recipe);
+  };
+
+  it("is no thicker than the hair stands, so what comes after lies on it", () => {
+    const build = run(1);
+    const disc = build.steps.flatMap((s) => s.pieces).find((p) => p.type === "bundle" && p.trimShape === "disc");
+    if (disc?.type !== "bundle") throw new Error("no disc");
+    expect(disc.flat!.top).toBeLessThan(0.35);
+    const head = build.steps.at(-1)!.pieces.find((p) => p.type === "wraps")!;
+    if (head.type !== "wraps") throw new Error("no head");
+    expect(head.base.radiusAt(1.2)).toBeLessThan(0.4);
+  });
+
+  it("says nothing of glue", () => {
+    expect(run(0.15).steps[2]!.text).not.toMatch(/glue/i);
+  });
+});

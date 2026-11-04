@@ -23,6 +23,9 @@ const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
 /** What can come out of the end of a body made on a needle, as its tails. */
 const TAILS: readonly Archetype[] = ["hair", "fibres", "biot"];
 
+/** What can be glued along the shank in pads (a crab's body). */
+const GLUED: readonly Archetype[] = ["hair", "fibres", "yarn"];
+
 /** Strands that can be woven as a two-coloured body. */
 const WOVEN: readonly Archetype[] = ["chenille", "yarn", "floss"];
 
@@ -46,6 +49,9 @@ const WOVEN: readonly Archetype[] = ["chenille", "yarn", "floss"];
  * waits or is attached again (weaving is done with the thread cut or parked), and both are tied
  * off there next.
  *
+ * Fibres glued along the shank (a crab's body) need no thread, so they can be glued on after the
+ * whip finish, and are trimmed to shape like spun hair.
+ *
  * Hair folded back and tied down by the thread (a bullet head) trails its tips behind the
  * tie-down; only over such hair can the thread go on past the bend, binding it into an extended
  * body, and there it only winds on or back (the tips may be trimmed meanwhile).
@@ -67,7 +73,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   // `hanging`: the step that tied it in without a length, so it waits to be wound or pulled over.
   const materials = new Map<
     string,
-    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number; spun?: boolean }
+    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number; spun?: boolean; glued?: boolean }
   >();
   let thread: number | null = null;
   let weighted = false;
@@ -92,8 +98,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   recipe.steps.forEach((step, i) => {
     const path = ["steps", i];
     // Trimming after the whip finish is common (heads, hackles), or the thread is started again.
-    // (Weaving is done with the thread cut, too.)
-    if (finished && step.op !== "trim" && step.op !== "attach-thread" && step.op !== "weave") {
+    // (Weaving is done with the thread cut, too, and gluing needs no thread.)
+    if (finished && step.op !== "trim" && step.op !== "attach-thread" && step.op !== "weave" && step.op !== "glue") {
       rule("afterWhipFinish", {}, path);
       return;
     }
@@ -160,10 +166,26 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       weighted = true;
       return;
     }
+    // Glued on, with no thread: before it is attached, too.
+    if (step.op === "glue") {
+      if (!GLUED.includes(archetype!)) rule("onlyGlued", { m: step.material }, [...path, "material"]);
+      else if (step.to <= step.from + POSITION_TOLERANCE) rule("glueForward", {}, [...path, "to"]);
+      else if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, [...path, "material"]);
+      else materials.set(step.material, { state: "done", at: step.from, butts: true, spun: true, glued: true });
+      return;
+    }
     if (step.op === "attach-thread") {
       if (thread !== null && !finished) rule("threadAttached", {}, path);
       thread = step.at;
       finished = false;
+      return;
+    }
+    // A body glued on before the thread is trimmed without it, too: to a disc, or cut flat.
+    const glued = step.op === "trim" ? materials.get(step.material) : undefined;
+    if (thread === null && step.op === "trim" && glued?.glued) {
+      if (step.keep === undefined && step.shape !== "disc") rule("gluedDisc", { m: step.material }, [...path, "shape"]);
+      if (step.keep === undefined && glued.spun) Object.assign(glued, { butts: false, spun: false });
+      else if (step.keep === undefined) rule("nothingToTrim", { m: step.material }, [...path, "material"]);
       return;
     }
     if (thread === null) {
@@ -239,7 +261,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("widthOnly", {}, [...path, "width"]);
         }
         if (step.taper && (step.width === undefined || !strip)) rule("taperOnly", {}, [...path, "taper"]);
-        if (step.fan !== undefined && (step.length === undefined || (step.angle ?? 0) < 60 || archetype === "feather")) {
+        // (Strands tied across fan out from leaning back to leaning forward: a crab's legs.)
+        const fans = step.side === "across" ? step.length !== undefined : step.length !== undefined && (step.angle ?? 0) >= 60 && archetype !== "feather";
+        if (step.fan !== undefined && !fans) {
           rule("fanOnly", {}, [...path, "fan"]);
         }
         // Without a length, side=under only for a strip pulled over the belly later.
@@ -437,12 +461,16 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.keep !== undefined) {
           // Spun hair cut flat on top or underneath (or both), the sides left long, until it is
           // trimmed to a shape.
-          if (archetype === "hair" && m?.spun) break;
+          if ((archetype === "hair" || m?.glued) && m?.spun) break;
           if (archetype !== "hackle" || m?.state !== "done" || !m.wound) rule("keepOnly", {}, [...path, "keep"]);
           else if (m.kept) rule("alreadyKept", { m: step.material }, [...path, "keep"]);
           else m.kept = true;
           break;
         }
+        // Pads laid across the shank can be clipped round into a disc or cut flat, not spun into a head.
+        if (m?.glued && m.spun && step.shape !== "disc") rule("gluedDisc", { m: step.material }, [...path, "shape"]);
+        // A disc keeps the width hair stands out round the shank: butts lying along it have none.
+        if (step.shape === "disc" && !m?.spun) rule("discOnly", {}, [...path, "shape"]);
         if (m?.state === "secured") {
           m.state = "done";
         } else if (m?.butts) {
@@ -452,10 +480,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         } else {
           rule("nothingToTrim", { m: step.material }, [...path, "material"]);
         }
-        if (step.leave !== undefined && archetype !== "hair" && archetype !== "foam" && archetype !== "strip") {
+        if (step.leave !== undefined && archetype !== "hair" && archetype !== "foam" && archetype !== "strip" && !m?.glued) {
           rule("leaveOnly", {}, [...path, "leave"]);
         }
-        if (step.shape !== undefined && archetype !== "hair") {
+        if (step.shape !== undefined && archetype !== "hair" && !m?.glued) {
           rule("shapeOnly", {}, [...path, "shape"]);
         }
         break;

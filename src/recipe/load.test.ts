@@ -359,6 +359,64 @@ materials {
   });
 });
 
+describe("a body glued on and legs fanned (a crab)", () => {
+  const head = `id t
+name "T"
+type saltwater
+difficulty intermediate
+hook saltwater-straight size=4
+thread white size="3/0"
+materials {
+    legs rubber-legs color=white count=3
+    body craft-fur color=tan
+    tinsel flat-tinsel
+}
+`;
+  const run = (steps: string) => loadRecipe(`${head}steps {\n${steps}\n}\n`);
+  const legs = "    attach-thread at=0.45\n    tie-in legs length=1.4 side=across fan=70\n    tie-in tinsel\n    wrap-thread to=0.8\n    wind tinsel to=0.8 turns=3\n    tie-off tinsel\n";
+
+  it("glues fibres on after the whip finish and trims them to a disc", () => {
+    const r = run(`${legs}    whip-finish\n    glue body from=0.1 to=0.75 length=0.65\n    trim body shape=disc leave=0.35`);
+    expect(r.ok).toBe(true);
+  });
+
+  it("glues only hair, fibres or yarn, forward along the shank, once", () => {
+    expect(errorsOf(run(`${legs}    whip-finish\n    glue legs from=0.1 to=0.75`)).join("\n")).toMatch(/only hair, synthetic fibres or yarn can be glued/);
+    expect(errorsOf(run(`${legs}    whip-finish\n    glue body from=0.7 to=0.2`)).join("\n")).toMatch(/glue it along the shank from `from` forward/);
+    expect(errorsOf(run(`${legs}    whip-finish\n    glue body from=0.1 to=0.7\n    glue body from=0.1 to=0.7`)).join("\n")).toMatch(/"body" is already on the hook/);
+  });
+
+  it("trims glued pads only to a disc, or flat", () => {
+    for (const trim of ["trim body shape=round leave=0.4", "trim body"]) {
+      expect(errorsOf(run(`${legs}    whip-finish\n    glue body from=0.1 to=0.75\n    ${trim}`)).join("\n")).toMatch(/glued on in pads: trim it to a disc/);
+    }
+    expect(run(`${legs}    whip-finish\n    glue body from=0.1 to=0.75\n    trim body keep=sides leave=0.3\n    trim body shape=disc leave=0.3`).ok).toBe(true);
+  });
+
+  it("glues a body on before the thread, too", () => {
+    expect(run(`    glue body from=0.1 to=0.75\n    trim body shape=disc\n${legs}    whip-finish`).ok).toBe(true);
+  });
+
+  it("trims only spun hair or glued fibres to a disc, not hair butts", () => {
+    const h = head.replace("    tinsel flat-tinsel\n", "    tinsel flat-tinsel\n    hair deer-hair\n");
+    const r = loadRecipe(`${h}steps {\n${legs}    tie-in hair length=2\n    trim hair shape=disc leave=0.1\n    whip-finish\n    glue body from=0.1 to=0.75\n    trim body shape=disc\n}\n`);
+    expect(errorsOf(r).join("\n")).toMatch(/only spun hair or glued fibres can be trimmed to a disc/);
+    const spun = loadRecipe(`${h}steps {\n${legs}    spin hair to=0.95\n    trim hair shape=disc leave=0.3\n    whip-finish\n    glue body from=0.1 to=0.75\n    trim body shape=disc\n}\n`);
+    expect(spun.ok).toBe(true);
+  });
+
+  it("cuts glued fibres flat with keep", () => {
+    expect(run(`${legs}    whip-finish\n    glue body from=0.1 to=0.75\n    trim body keep=sides leave=0.3`).ok).toBe(true);
+  });
+
+  it("fans strands tied across, but not a bunch lying back", () => {
+    // (The body is left unused here, so only the fan's rule is looked at.)
+    expect(errorsOf(run(`${legs}    whip-finish`)).join("\n")).not.toMatch(/fan only applies/);
+    const lying = legs.replace("side=across fan=70", "fan=70");
+    expect(errorsOf(run(`${lying}    whip-finish`)).join("\n")).toMatch(/fan only applies/);
+  });
+});
+
 describe("trimming a hackle with keep", () => {
   const head = `id t
 name "T"
@@ -392,7 +450,7 @@ describe("semantic validation", () => {
     ["wind nowhere", VALID_STEPS.replace("to=0.7 turns=8", "to=0.0 turns=8"), /wind it forward or back from there/],
     ["wind past the thread", VALID_STEPS.replace("to=0.7 turns=8", "to=0.9 turns=8"), /the thread is at 0.7/],
     ["tie off straight after winding", VALID_STEPS.replace("tie-off herl", "wrap-thread to=0.8\n tie-off herl"), /must be tied off before anything else/],
-    ["whip finish last", VALID_STEPS + "\n wrap-thread to=0.5", /nothing but trimming, or starting the thread again, can follow the whip finish/],
+    ["whip finish last", VALID_STEPS + "\n wrap-thread to=0.5", /nothing but trimming, gluing on, or starting the thread again, can follow the whip finish/],
     ["whip finish required", VALID_STEPS.replace("whip-finish", ""), /must end with a whip finish/],
     ["dubbing is not tied in", VALID_STEPS.replace("tie-in herl", "tie-in fur"), /dubbing is applied to the thread/],
     ["only dubbing is dubbed", PALMER_STEPS.replace("dub fur", "dub herl"), /only dubbing can be dubbed/],
@@ -573,7 +631,7 @@ materials {
     ["its other end is tied down", steps.replace("tie-off body\n", ""), /"body" is tied down at one end only/],
     ["the thread is attached once at a time", steps.replace("whip-finish turns=3\n", ""), /the thread is already attached/],
     ["a fur strip is no post", steps.replace("tie-in wing length=3.5", "tie-in wing length=3.5 angle=80\n    tie-in hackle\n    wind hackle around=wing turns=4\n    tie-off hackle"), /must be a bunch tied in upright/],
-    ["nothing but the thread again after a whip finish", steps.replace("attach-thread at=0.9", "tie-in fur"), /nothing but trimming, or starting the thread again/],
+    ["nothing but the thread again after a whip finish", steps.replace("attach-thread at=0.9", "tie-in fur"), /nothing but trimming, gluing on, or starting the thread again/],
   ];
   for (const [name, s, pattern] of cases) {
     it(name, () => {

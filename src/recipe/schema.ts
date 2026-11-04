@@ -15,6 +15,7 @@ export const NAMED_COLORS = {
   cream: "#e9dcc0",
   red: "#c8102e",
   "fluo-red": "#ff2a3d",
+  "fluo-green": "#6cf03c",
   brown: "#5e3214",
   "red-brown": "#6a2a12",
   "red-game": "#a8501f",
@@ -109,7 +110,7 @@ export const FLY_TYPES = [
 export const IMITATES = [
   "mayfly", "caddis", "stonefly", "chironomid", "damselfly", "terrestrial", "baitfish", "crustacean", "attractor",
 ] as const;
-export const SPECIES = ["trout", "grayling", "sea-trout", "salmon", "char", "bass", "panfish", "pike", "striped-bass", "bonefish"] as const;
+export const SPECIES = ["trout", "grayling", "sea-trout", "salmon", "char", "bass", "panfish", "pike", "striped-bass", "bonefish", "permit"] as const;
 export const DIFFICULTIES = ["beginner", "intermediate", "advanced"] as const;
 export const MONTHS = [
   "january", "february", "march", "april", "may", "june",
@@ -242,6 +243,8 @@ const Step = z.discriminatedUnion("op", [
     /**
      * Upright bunches: how far the hair fans out fore and aft along the shank, in degrees in all,
      * staying narrow across it (a Mohican's deer-hair wing), instead of standing as a round post.
+     * Strands tied across the shank: how far they fan out from leaning back to leaning forward,
+     * in degrees in all (a crab's legs).
      */
     fan: z.number().min(0).max(120).optional(),
     /**
@@ -325,6 +328,20 @@ const Step = z.discriminatedUnion("op", [
     note: Note,
     mistake: Note,
   }),
+  /**
+   * Glue pads of fibres (hair, synthetic fibres, yarn) along the shank from `from` to `to`, laid
+   * across it with their middles on it, on top and underneath, so they stand out to each side
+   * (a crab's body). No thread: it can come after the whip finish. Trimmed to shape later.
+   */
+  z.strictObject({
+    op: z.literal("glue"),
+    material: MaterialRef,
+    from: Position,
+    to: Position,
+    /** How far the fibres stand out to each side, in gapes (the pads cut that wide first). */
+    length: z.number().min(0.2).max(3).optional(),
+    note: Note, mistake: Note,
+  }),
   /** Spin hair round the shank in clumps from the thread forward to `to`; the thread ends there. */
   z.strictObject({
     op: z.literal("spin"),
@@ -354,9 +371,11 @@ const Step = z.discriminatedUnion("op", [
      * Spun hair or hair butts: trim into a round head (Muddler), a wedge, flat underneath
      * and rising towards the rear (G&H Sedge), a cigar, fullest in the middle and rounded at
      * both ends (a deer-hair pupa's body), or a cone, slim at the tail and full at the front
-     * (an Irresistible's body). Butts trimmed to a shape are spun round the shank.
+     * (an Irresistible's body), or a disc, round in plan as far as the hair or fibres stand out
+     * and flat on top and underneath, `leave` from the shank (a crab's body). Butts trimmed to a
+     * shape are spun round the shank.
      */
-    shape: z.enum(["round", "wedge", "cigar", "cone"]).optional(),
+    shape: z.enum(["round", "wedge", "cigar", "cone", "disc"]).optional(),
     /**
      * A wound hackle: "sides" cuts away the fibres on top and underneath (Superpuppan);
      * "top" cuts away only those underneath, so the fly sits low (Dyret). Spun hair: cut flat

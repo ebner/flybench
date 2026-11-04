@@ -34,6 +34,8 @@ export type How =
   | "dubbed"
   /** Spun round the shank and clipped (deer hair heads and bodies). */
   | "spun"
+  /** Pads glued along the shank after the whip finish and clipped (a crab's body). */
+  | "glued"
   /** Tied in and folded over the body or thorax (shellbacks, wing cases), or laid back from the eye. */
   | "pulled"
   /**
@@ -89,7 +91,7 @@ export interface Part {
   counter?: boolean;
   /** A parachute's post: the part (an upright bunch) it is wound round; or a strip pulled over is parted round. */
   post?: string;
-  /** An upright bunch fanned fore and aft over this many degrees (a Mohican's wing). */
+  /** An upright bunch, or strands tied across, fanned fore and aft over this many degrees (a Mohican's wing, a crab's legs). */
   fan?: number;
   /** An extended body made on a needle: its segments, and its tails (its second material) past its end and splayed. */
   segments?: number;
@@ -111,8 +113,8 @@ export interface Part {
   tiedBack?: boolean;
   /** A sleeve's rear end frayed into loose strands this long (gapes). */
   fray?: number;
-  /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep), spun hair cut flat (keep, leave). */
-  trim?: { leave?: number; shape?: "round" | "wedge" | "cigar" | "cone"; keep?: "sides" | "top" | "under" };
+  /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep), spun hair or glued fibres cut flat (keep, leave) or to a shape. */
+  trim?: { leave?: number; shape?: "round" | "wedge" | "cigar" | "cone" | "disc"; keep?: "sides" | "top" | "under" };
   /** The visitor's notes on its steps, by action (0 the first). */
   notes?: Record<number, string>;
   mistakes?: Record<number, string>;
@@ -182,6 +184,7 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
   body: [
     "dry-fly-dubbing", "dubbing", "hares-ear-dubbing", "seals-fur", "rabbit-dubbing", "peacock-herl", "silk-floss",
     "flat-tinsel", "oval-tinsel", "copper-wire", "gold-wire", "silver-wire", "chenille", "wool", "cdc", "deer-hair", "pheasant-tail", "mylar-tubing",
+    "craft-fur",
   ],
   thorax: ["peacock-herl", "dry-fly-dubbing", "dubbing", "hares-ear-dubbing", "seals-fur", "chenille"],
   back: ["foam", "scud-back", "turkey-quill", "pheasant-tail", "poly-yarn", "chenille", "rabbit-strip"],
@@ -241,8 +244,9 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
     case "head":
       return a === "hair" ? ["spun"] : ["wound"];
     case "body":
-      // (Foam can't be wound: as a body it sticks out in one piece.)
-      return a === "hair" ? ["spun"] : a === "chenille" || a === "yarn" ? ["wound", "extended", "woven"] : a === "foam" ? ["extended"] : ["wound"];
+      // (Foam can't be wound: as a body it sticks out in one piece. Hair, fibres and yarn can be
+      // glued on in pads, a crab's body.)
+      return a === "hair" ? ["spun", "glued"] : a === "chenille" ? ["wound", "extended", "woven"] : a === "yarn" ? ["wound", "extended", "woven", "glued"] : a === "foam" ? ["extended"] : a === "fibres" ? ["wound", "glued"] : ["wound"];
     default:
       return ["wound"];
   }
@@ -267,7 +271,7 @@ export function partRange(p: Pick<Part, "how">, key: NumberKey): NumberRange {
   switch (key) {
     // Spun hair: how far it stands out before it is trimmed.
     case "length":
-      return p.how === "spun" ? stepRange(0.2, 3, "spin", "length") : stepRange(0.1, 10, "tie-in", "length");
+      return p.how === "spun" ? stepRange(0.2, 3, "spin", "length") : p.how === "glued" ? stepRange(0.2, 3, "glue", "length") : stepRange(0.1, 10, "tie-in", "length");
     case "angle":
       return stepRange(0, 90, "tie-in", "angle");
     case "spread":
@@ -323,6 +327,7 @@ export function actionCount(p: Part): number {
     case "thread":
       return 1 + (p.passes?.length ?? 0);
     case "spun":
+    case "glued":
       return p.trim ? 2 : 1;
     case "pulled":
       return 2 + (p.trim ? 1 : 0);
@@ -368,6 +373,8 @@ export function phaseOf(p: Part, action: number): number {
       if (p.how === "woven") return [35, 40][action]!;
       // An extended body's strip is pulled over last, after the thorax and hackle.
       if (p.how === "extended") return [35, 65, 65.5][action]!;
+      // Glued on after the whip finish (see keysFor).
+      if (p.how === "glued") return 80 + action * 0.1;
       return p.how === "dubbed" || p.how === "spun" || p.how === "thread" ? 40 + action * 0.1 : [35, 40, 40.5][action]!;
     case "thorax":
       return 50 + action * 0.1;
@@ -409,6 +416,11 @@ export function renumbered(fly: PartsFly): PartsFly {
 export function keysFor(fly: PartsFly, part: Omit<Part, "keys">): number[] {
   const p = { ...part, keys: [] } as Part;
   const others = fly.parts.filter((x) => x.id !== p.id);
+  // Glued on with the thread finished: after the whip finish and everything else.
+  if (p.how === "glued") {
+    const last = Math.max(fly.finish.key, ...others.flatMap((o) => o.keys));
+    return Array.from({ length: actionCount(p) }, (_, i) => last + 5 * (i + 1));
+  }
   const keys: number[] = [];
   for (let i = 0; i < actionCount(p); i++) {
     const phase = phaseOf(p, i);
@@ -641,6 +653,13 @@ export function compile(fly: PartsFly): Compiled {
           thread = round(p.to ?? 0.7);
         } else trim();
         break;
+      case "glued":
+        if (i === 0) {
+          // No thread: glued on (usually after the whip finish), the thread staying where it is.
+          if (thread === null && !cut) to(attachAt, null);
+          p.mats.forEach((m, k) => push({ op: "glue", material: m.id, from: round(p.from ?? 0.1), to: round(p.to ?? 0.75), ...(p.length !== undefined && { length: p.length }), ...(k === 0 ? n : matNote(m, i)) }, p.id));
+        } else trim();
+        break;
       case "sleeve":
         if (i === 0) {
           to(p.at ?? 0, p.id);
@@ -727,7 +746,8 @@ function roleOf(id: string, how: How, kind: MaterialKind, step: Step | undefined
   // A hackle named for where it goes (a thorax hackle) is a hackle.
   if (a === "hackle" && !has("legs", "leg", "mouth")) return "hackle";
   if (has("tag", "hotspot")) return "tag";
-  if (has("tail", "tails")) return "tail";
+  // (A crab's claws are tied in at the bend with its tail.)
+  if (has("tail", "tails", "claws")) return "tail";
   if (has("butt")) return "butt";
   if (has("rib")) return "rib";
   if (has("thorax")) return "thorax";
@@ -907,6 +927,9 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     } else if (ops === "spin" || ops === "spin trim") {
       const sp = g[0]!.s as Extract<Step, { op: "spin" }>;
       part = { id, how: "spun", mats: [mat], from: at, to: sp.to, ...(sp.collar !== undefined && { collar: sp.collar }), ...(sp.length !== undefined && { length: sp.length }), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
+    } else if (ops === "glue" || ops === "glue trim") {
+      const gl = g[0]!.s as Extract<Step, { op: "glue" }>;
+      part = { id, how: "glued", mats: [mat], from: gl.from, to: gl.to, ...(gl.length !== undefined && { length: gl.length }), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && tieIn.extended && /^tie-in( pull-over( trim)?)?$/.test(ops)) {
       // Made on a needle: its tails, in it, are its second material.
       const tm = tieIn.tails !== undefined ? kinds.get(tieIn.tails) : undefined;
@@ -1160,6 +1183,11 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
       Object.assign(next, { from: c.from ?? c.at ?? 0, to: c.to ?? 0.7 });
       if (how === "spun") next.trim = { leave: 0.5, shape: "round" };
       break;
+    case "glued":
+      // Assumption: a crab's body, from behind the eyes to the bend, about 1.2 gapes across and
+      // 0.6 thick, trimmed round (Chicone's Raghead Crab: the size of a dime on a #2).
+      Object.assign(next, { from: 0.1, to: 0.75, length: 0.6, trim: { leave: 0.3, shape: "disc" } });
+      break;
     case "pulled":
       Object.assign(next, { at: c.at ?? 0, to: c.to ?? 0.88 });
       break;
@@ -1236,7 +1264,9 @@ function tidied(fly: PartsFly): PartsFly {
       const { forward: _f, ...rest } = next;
       next = rest as Part;
     }
-    if (p.fan !== undefined && (p.how !== "bunch" || p.length === undefined || (p.angle ?? 0) < UPRIGHT || p.mats.some((m) => arch(m.kind) === "feather"))) {
+    // (Strands tied across fan from leaning back to leaning forward.)
+    const fans = p.side === "across" || ((p.angle ?? 0) >= UPRIGHT && !p.mats.some((m) => arch(m.kind) === "feather"));
+    if (p.fan !== undefined && (p.how !== "bunch" || p.length === undefined || !fans)) {
       const { fan: _f, ...rest } = next;
       next = rest as Part;
     }
@@ -1323,7 +1353,7 @@ function constrained(fly: PartsFly): PartsFly {
     // (A thread body may run back and forth: its passes are left as they are. Dubbing may be
     // wound back from the eye, ending at the rear of a thorax.)
     const rearward = p.how === "dubbed" && start !== undefined && p.to !== undefined && p.to <= start - 0.05;
-    if (!rearward && (p.how === "wound" || p.how === "woven" || p.how === "dubbed" || p.how === "spun") && start !== undefined && p.to !== undefined && p.to < start + 0.05) {
+    if (!rearward && (p.how === "wound" || p.how === "woven" || p.how === "dubbed" || p.how === "spun" || p.how === "glued") && start !== undefined && p.to !== undefined && p.to < start + 0.05) {
       // At the eye, its start moves back instead.
       const key = p.at !== undefined ? "at" : "from";
       return start + 0.05 <= 1 ? { ...p, to: start + 0.05 } : { ...p, [key]: 0.95, to: 1 };
@@ -1438,6 +1468,9 @@ function trimFor(p: Part, mats: PartMaterial[]): Part["trim"] {
       return p.trim?.keep && all("hackle") ? { keep: p.trim.keep } : p.how === "palmered" ? {} : undefined;
     case "spun":
       return p.trim;
+    case "glued":
+      // Pads laid across the shank are clipped to a disc or cut flat, not to a head.
+      return p.trim && !p.trim.keep && p.trim.shape !== "disc" ? { leave: p.trim.leave ?? 0.3, shape: "disc" } : p.trim;
     case "extended":
       // The rest of a foam strip pulled over, cut to a head (its tails aside).
       return p.to !== undefined && bodyMats({ ...p, mats }).every((m) => arch(m.kind) === "foam") ? p.trim : undefined;

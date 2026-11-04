@@ -196,6 +196,10 @@ materials {
         note "'Täckhår' (guard hairs) against 'underull', as the shop describes the hare's mask; 'hår' is the same in singular and plural. 'Stickelhår' is also used; rejected as rarer. Some dressings just write 'Stjärt: Harmask'."
         source "Flugbindning.com: Harmask ('Du kan också välja ut längre täckhår till korta stjärtar på nymfer')" url="https://flugbindning.com/dubbing/1700038-harmask.html"
     }
+    noun craft-fur "Craft Fur" gender=en definite="Craft Furen" mass=#true {
+        note "Brand-like product name kept in English, as for Krystal Flash; Swedish tyers call any such fake fur 'fuskpäls'. The definite form is an assumption."
+        source "Flugfiske i Norden: Fuskpälsslända ('Fuskpälskrage från en gammal jacka, påminner om Craft Fur')" url="https://flugfiskeinorden.se/fuskpalsslanda/"
+    }
     noun synthetic-hair "syntethår" gender=ett definite="syntethåret" mass=#true {
         source "Bojdaspon: Polar Fiber ('Polar Fiber är ett mjukt syntethår')" url="https://www.bojdaspon.se/flugbindning/flash-fiber/fiber/polar-fiber-49384"
     }
@@ -336,6 +340,9 @@ colours {
     adjective red "röd" neuter="rött" plural="röda"
     adjective fluo-red "fluorescerande röd" neuter="fluorescerande rött" plural="fluorescerande röda" {
         note "Tyers often write 'fluo röd', 'Fl red' or 'Rosa fluo'. Decided by the reviewer (2026-10-29): the full word 'fluorescerande', which inflects cleanly."
+    }
+    adjective fluo-green "fluorescerande grön" neuter="fluorescerande grönt" plural="fluorescerande gröna" {
+        note "As fluo-red: the full word 'fluorescerande'."
     }
     adjective brown "brun" neuter="brunt" plural="bruna"
     adjective red-brown "rödbrun" neuter="rödbrunt" plural="rödbruna" {
@@ -488,6 +495,9 @@ parts {
         note "Chosen 'vingsäck', the word in Swedish nymph dressings. Rejected 'vingkåpa' and 'vingfodral' (not found in Swedish tying texts); 'vinganlag' also occurs. Caution: two recipes (peeping-caddis, peeping-caddis-edwards) use 'case' for the caddis larva's case, which in Swedish is 'hus' (husmask): those would be mislabelled 'Vingsäck'."
         source "Rackelhanen: Pheasant Tail Nymph ('Vingsäck: Fasanstjärtfibrer')" url="https://www.rackelhane.se/swe/1213.htm"
         source "Flugfiske i Norden: Rödingfluga PT Nymf-Variant ('Vik över vingsäcken, fäst och klipp')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
+    }
+    noun claws "klor" gender=en definite="klorna" plural="klor" plural-definite="klorna" {
+        note "A crab's claws (krabbklor): the hackle tips splayed in a crab fly's tail. A plural part, as antennae."
     }
     noun collar "krage" gender=en definite="kragen" plural="kragar" plural-definite="kragarna" {
         note "As in 'hackelkrage'."
@@ -762,6 +772,9 @@ steps {
         note "'Vik över' (fold over) is what nymph texts say of a wing case ('Vik över vingsäcken'); 'Dra över' fits foam backs and wing cases alike."
     }
     phrase spin "Spinn"
+    phrase glue "Limma på" {
+        note "Glueing pads of fibre along the shank after the whip finish (a crab's body). The plain verb; Swedish dressings say 'limma' ('en liten droppe med superlim')."
+    }
     phrase sleeve "Trä på slang" {
         note "Sliding braided tubing over the body as a sleeve, as 'trä på' a bead."
     }

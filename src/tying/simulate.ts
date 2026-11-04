@@ -103,10 +103,15 @@ export interface BundlePiece extends PieceBase {
   count: number;
   /** Trimmed: cut square, all the same length. */
   cut?: boolean;
-  /** Trimmed spun hair: a round head, a wedge flat underneath and deepest at the rear, a cigar or a cone. */
-  trimShape?: "round" | "wedge" | "cigar" | "cone";
+  /**
+   * Trimmed spun hair (or glued fibres): a round head, a wedge flat underneath and deepest at the
+   * rear, a cigar, a cone, or a disc, round in plan as far as `length` and flat top and bottom at `flat`.
+   */
+  trimShape?: "round" | "wedge" | "cigar" | "cone" | "disc";
   /** Spun hair cut flat on top or underneath (or both), this far from the shank's axis; the sides left long. */
   flat?: { top?: number; under?: number };
+  /** Radial: pads laid across the shank and glued, stacked on top and underneath, the fibres lying out to the sides. */
+  across?: boolean;
   /** Upright and divided: two tufts turned out to either side by this many radians. */
   pair?: number;
   /** Upright and fanned: the hair splays fore and aft over this many radians in all, narrow across (a Mohican's wing). */
@@ -271,6 +276,8 @@ export interface LegsPiece extends PieceBase {
   /** Legs on each side; they are spaced a little apart along the shank. */
   count: number;
   strandRadius: number;
+  /** Fanned: radians in all from the rear strand, leaning back most, to the front one, leaning forward most. */
+  fan?: number;
 }
 
 export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece | SleevePiece;
@@ -527,6 +534,7 @@ const DURATION = {
   sleeve: 3,
   perWeaveCrossing: 0.7,
   spin: 3.5,
+  glue: 4,
   perThreadTurn: 0.05,
   perMaterialTurn: 0.45,
   perDubbingTurn: 0.14,
@@ -551,6 +559,10 @@ const STRIP_HIDE = 0.03;
 // eighth of a gape thick all round (a Paradrake's body is about 0.4 gape across at the post,
 // tapering behind the bend, where there is no wire inside; read from the photos).
 const HAIR_SHEATH = 0.12;
+// Assumption: pads of fibre glued on top of the shank and underneath, layer on layer, stand about
+// seven tenths as thick as they stand out to the sides until they are trimmed (Chicone: two
+// pieces on top, one or two underneath, one more on top).
+const GLUED_THICKNESS = 0.7;
 
 /** Feather width as a fraction of length, by shape. */
 const FEATHER_WIDTH = { breast: 0.5, tip: 0.28, slip: 0.32 };
@@ -582,6 +594,8 @@ export function simulate(recipe: Recipe): Build {
   /** Untrimmed hair butts and spun hair, by material. */
   const butts = new Map<string, BundlePiece>();
   const spun = new Set<string>();
+  /** Fibres glued along the shank (a crab's body): trimmed like spun hair. */
+  const glued = new Set<string>();
   /** Wound pieces by material, so a hackle can be trimmed after winding. */
   const wound = new Map<string, WrapsPiece>();
   const covers = new Map<string, CoverPiece>();
@@ -839,6 +853,33 @@ export function simulate(recipe: Recipe): Build {
         duration = DURATION.spin;
         break;
       }
+      case "glue": {
+        const l = looks.get(step.material)!;
+        const from = step.from * span;
+        const to = Math.min(step.to * span, frontLimit);
+        // Assumption: glued pads stand out about 0.7 gape to each side unless the recipe says.
+        const length = step.length ?? 0.7;
+        const thick = length * GLUED_THICKNESS;
+        // Laid across the shank, the fibres stand straight out to the sides; stacked on top and
+        // underneath, they reach no further up or down than the pads are thick.
+        const body: BundlePiece = {
+          type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0.05, 1],
+          x: from, span: to - from, radius: profile.radiusAt(from), length, angle: 0, direction: "radial", side: "top",
+          spread: Math.PI, bundleRadius: l.strandRadius, count: Math.round(1800 * Math.max(0.3, to - from)), flat: { top: thick, under: thick }, across: true,
+        };
+        pieces.push(body);
+        butts.set(step.material, body);
+        spun.add(step.material);
+        glued.add(step.material);
+        const mid = (from + to) / 2;
+        const ends = Math.min(0.15, (to - from) / 4);
+        // How high the body was before the pads, so cuts can take off all they added.
+        flatBase.set(step.material, { top: profile.radiusAt(mid), under: profile.underAt(mid) });
+        profile = profile.withLayer(from, to, Math.max(0, thick - profile.radiusAt(mid)), ends, true, "top");
+        profile = profile.withLayer(from, to, Math.max(0, thick - profile.underAt(mid)), ends, true, "under");
+        duration = DURATION.glue;
+        break;
+      }
       case "tie-in": {
         const x = threadX!;
         const l = looks.get(step.material)!;
@@ -908,7 +949,7 @@ export function simulate(recipe: Recipe): Build {
             type: "legs", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.35],
             // Each strand tied across makes one leg on each side.
             x, radius, length: step.length, sweep: deg(step.angle ?? 0), count: kinds.get(step.material)!.count ?? 2,
-            strandRadius: l.look === "legs" ? l.strandRadius : 0.012,
+            strandRadius: l.look === "legs" ? l.strandRadius : 0.012, ...(step.fan !== undefined && { fan: deg(step.fan) }),
           });
         } else if (l.look === "eyes") {
           const kind = kinds.get(step.material)!.kind;
@@ -1178,6 +1219,7 @@ export function simulate(recipe: Recipe): Build {
           // Spun hair cut flat on top or underneath (or both), the sides left long; what is pulled
           // over it later lies on the flat top.
           ctx.flat = true;
+          if (glued.has(step.material)) ctx.glued = true;
           const b = butts.get(step.material)!;
           b.until = cutAt;
           // Assumption: cut about a third of a gape from the shank unless the recipe says.
@@ -1230,10 +1272,34 @@ export function simulate(recipe: Recipe): Build {
           ends = [...restingEnds(), ...(end && end.kind === "rest" ? [{ ...end, hideAfter: 0.5 }] : [])];
         } else if (spun.has(step.material)) {
           ctx.spun = true;
+          if (glued.has(step.material)) ctx.glued = true;
           spun.delete(step.material);
           const b = butts.get(step.material)!;
           butts.delete(step.material);
           b.until = cutAt;
+          if (step.shape === "disc") {
+            // Round in plan as far as the hair stands out, flat on top and underneath; never
+            // thicker than it already is.
+            // Assumption: cut about a third of a gape from the shank unless the recipe says.
+            const h = step.leave ?? 0.3;
+            // A cut further out than the hair reaches cuts nothing: the disc is only as thick as the hair stands.
+            const reach = b.radius + b.length * Math.cos(b.angle);
+            const flat = { top: Math.min(b.flat?.top ?? reach, h), under: Math.min(b.flat?.under ?? reach, h) };
+            pieces.push({
+              // (Glued pads are dense already; spun hair is packed tighter by the cut.)
+              ...b, id: nextId++, angle: Math.min(b.angle, deg(10)), count: b.count * (b.across ? 2 : 4), cut: true, flat,
+              trimShape: "disc", window: [0.5, 0.5001], until: undefined,
+            });
+            const x0 = b.x;
+            const x1 = b.x + (b.span ?? 0.1);
+            const mid = (x0 + x1) / 2;
+            const ends = Math.min(0.15, (x1 - x0) / 4);
+            // Never below what is under the hair.
+            const before = flatBase.get(step.material) ?? { top: profile.radiusAt(mid), under: profile.underAt(mid) };
+            profile = profile.withLayer(x0, x1, Math.max(before.top, flat.top) - profile.radiusAt(mid), ends, true, "top");
+            profile = profile.withLayer(x0, x1, Math.max(before.under, flat.under) - profile.underAt(mid), ends, true, "under");
+            break;
+          }
           // Assumption: a trimmed head is about 0.4 gape from the shank unless the recipe says otherwise.
           pieces.push({
             ...b, id: nextId++, length: step.leave ?? 0.4, angle: deg(10), count: b.count * 4, cut: true,

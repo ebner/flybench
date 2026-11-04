@@ -190,6 +190,16 @@ Skär en remsa tunn foam med slutna celler, avsmalnande mot ena änden och med e
 Slå ett halvslag, klipp tråden och dra av kroppen från nålen. Bind fast den ovanpå kroken med det främre segmentet, med foamens ändar och stjärtfibrernas rotändar liggande framåt. Ändarna kan senare dras framåt över thoraxen, en på var sida om vingen, och bindas ner bakom ögat som huvud.`,
     mistakes: ["För hård spänning, så att tråden skär av foamen.", "Foam som glider runt skaftet när det binds ner: håll det på plats medan du drar åt."],
   },
+  "glued-body": {
+    name: "Limmade fiberkroppar",
+    summary: "Bitar av fibrer som limmas tvärs över skaftet efter whipfinishknuten, ovanpå och undertill, och klipps till en platt skiva: en krabbas kropp.",
+    how: `Avsluta tråden först: kroppen hålls bara av limmet. Dra av en bit av fibrerna, platta till den mellan fingrarna och klipp den lika bred som kroppen ska bli.
+
+Med krokspetsen nedåt lägger du en sträng lim längs skaftets ovansida och trycker ner biten i den, med fibrerna tvärs över skaftet, hälften på varje sida. Lägg en andra bit ovanpå. Vänd kroken och limma en eller två bitar undertill, och sätt ben som bundits in tidigare i det våta limmet så som de ska peka. Vänd tillbaka kroken och lägg en bit till ovanpå, så att ovansidan bär mer än undersidan.
+
+Låt limmet härda och klipp sedan kroppen rund till en platt skiva.`,
+    mistakes: ["Bitar som läggs längs skaftet i stället för tvärs över, så att de inte går att klippa till en rund kropp.", "Att klippa innan limmet har härdat, så att bitarna lossnar."],
+  },
   "woven-body": {
     name: "Vävda kroppar",
     summary: "Två chenilletrådar som vävs längs skaftet, den ena färgen på ryggen och den andra på buken.",

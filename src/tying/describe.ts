@@ -231,6 +231,8 @@ export interface StepContext {
   crossing?: boolean;
   /** trim: the tips of hair folded back, behind its tie-down or last turn. */
   tips?: boolean;
+  /** trim: fibres glued along the shank rather than spun hair. */
+  glued?: boolean;
 }
 
 /** What a tie-in takes: a material, a bunch of it, or strands of herl. */
@@ -252,7 +254,8 @@ export type Said =
    * its tip first; `ends`: the two ends of its strip left pointing forward, to be pulled over later.
    */
   | { kind: "tie-in-extended"; m: string; length: Length; forward: boolean; tip?: string; segments?: number; tails?: { m: string; length: Length }; ends?: boolean }
-  | { kind: "tie-in-across"; m: string; strands: number; length: Length }
+  /** `angle`: leaning back that much; `fan`: fanned out over that much in all, the rear strand back and the front one forward. */
+  | { kind: "tie-in-across"; m: string; strands: number; length: Length; angle?: number; fan?: number }
   /** `round`: spread all round the shank (hair for a bullet head). */
   | { kind: "tie-in-forward"; m: string; length: Length; round?: boolean }
   /** `fan`: fanned out fore and aft, flat across (a Mohican's wing). */
@@ -273,6 +276,8 @@ export type Said =
   | { kind: "lay-back"; m: string; to: Place; tied?: boolean; round?: boolean; trailing?: boolean }
   /** `length`: each clump cut to length first, standing out that far. */
   | { kind: "spin"; m: string; to: Place; length?: Length }
+  /** Pads glued along the shank from `from` to `to`, laid across it, standing out `length` to each side. */
+  | { kind: "glue"; m: string; from: Place; to: Place; length?: Length }
   /** Tubing slid on as a sleeve from the thread (`from`) to `to`, tied down at the thread: its rear end (`rear`) or its front. */
   | { kind: "sleeve"; m: string; from: Place; to: Place; rear: boolean; fray?: Length }
   | { kind: "tie-off-sleeve"; m: string; end: "front" | "rear" }
@@ -281,9 +286,10 @@ export type Said =
   | { kind: "dub"; m: string; to: Place; rear: boolean }
   | { kind: "tie-off"; m: string }
   | { kind: "trim-keep"; m: string; keep: "top" | "under" | "sides" }
-  | { kind: "trim-spun"; m: string; leave: Length; cigar?: boolean; cone?: boolean }
+  /** `glued`: fibres glued on rather than spun hair; `disc`: round in plan, flat on top and underneath, `leave` from the shank. */
+  | { kind: "trim-spun"; m: string; leave: Length; cigar?: boolean; cone?: boolean; disc?: boolean; glued?: boolean }
   /** Spun hair cut flat, `leave` from the shank: on top and underneath ("sides" kept), underneath only ("top"), or on top only ("under"). */
-  | { kind: "trim-flat"; m: string; keep: "top" | "under" | "sides"; leave: Length }
+  | { kind: "trim-flat"; m: string; keep: "top" | "under" | "sides"; leave: Length; glued?: boolean }
   | { kind: "trim-tip"; m: string }
   | { kind: "trim-cover"; m: string; leave?: Length }
   | { kind: "trim-butts"; m: string; leave?: Length }
@@ -334,7 +340,12 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
           ...(pulled && { ends: true }),
         };
       }
-      if (step.length && step.side === "across") return { kind: "tie-in-across", m: step.material, strands: m?.count ?? 2, length: len(step.length) };
+      if (step.length && step.side === "across") {
+        return {
+          kind: "tie-in-across", m: step.material, strands: m?.count ?? 2, length: len(step.length),
+          ...(step.angle ? { angle: step.angle } : {}), ...(step.fan ? { fan: step.fan } : {}),
+        };
+      }
       if (step.length && step.forward) return { kind: "tie-in-forward", m: step.material, length: len(step.length), ...((step.spread ?? 0) >= 150 && { round: true }) };
       if (step.length && (step.angle ?? 0) >= 60) return { kind: "tie-in-upright", what, length: len(step.length), divide: (step.spread ?? 0) > 0, ...(step.fan !== undefined && step.fan > 0 && { fan: true }) };
       // Under the shank is on top when the fly swims point-up: there it is the wing.
@@ -373,6 +384,8 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}), ...(ctx.under ? { under: true } : {}), ...(step.around ? { around: step.around } : {}), ...(step.fold !== undefined && { fold: len(step.fold) }) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to), ...(step.length !== undefined && { length: len(step.length) }) };
+    case "glue":
+      return { kind: "glue", m: step.material, from: at(step.from), to: at(step.to), ...(step.length !== undefined && { length: len(step.length) }) };
     case "sleeve":
       return { kind: "sleeve", m: step.material, from: at(ctx.from ?? 0), to: at(step.to), rear: Boolean(ctx.rear), ...(step.fray ? { fray: len(step.fray) } : {}) };
     case "weave":
@@ -383,9 +396,15 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       if (ctx.sleeve) return { kind: "tie-off-sleeve", m: step.material, end: ctx.sleeve };
       return { kind: "tie-off", m: step.material };
     case "trim":
-      if (ctx.flat) return { kind: "trim-flat", m: step.material, keep: step.keep ?? "sides", leave: len(step.leave ?? 0.3) };
+      if (ctx.flat) return { kind: "trim-flat", m: step.material, keep: step.keep ?? "sides", leave: len(step.leave ?? 0.3), ...(ctx.glued && { glued: true }) };
       if (ctx.keep) return { kind: "trim-keep", m: step.material, keep: step.keep === "top" ? "top" : step.keep === "under" ? "under" : "sides" };
-      if (ctx.spun) return { kind: "trim-spun", m: step.material, leave: len(step.leave ?? 0.4), ...(step.shape === "cigar" ? { cigar: true } : {}), ...(step.shape === "cone" ? { cone: true } : {}) };
+      if (ctx.spun) {
+        return {
+          kind: "trim-spun", m: step.material, leave: len(step.leave ?? (step.shape === "disc" ? 0.3 : 0.4)),
+          ...(step.shape === "cigar" ? { cigar: true } : {}), ...(step.shape === "cone" ? { cone: true } : {}), ...(step.shape === "disc" ? { disc: true } : {}),
+          ...(ctx.glued && { glued: true }),
+        };
+      }
       if (ctx.tip) return { kind: "trim-tip", m: step.material };
       if (ctx.cover) return { kind: "trim-cover", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
       if (ctx.tips) return { kind: "trim-tips", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
@@ -527,8 +546,12 @@ function englishText(said: Said, recipe: Recipe): string {
       const tails = said.tails ? `, with the ${mat(said.tails.m)} tied in at its end beforehand sticking out ${len(said.tails.length)} past it` : "";
       return `Tie in the ${mat(said.m)} so it sticks out ${len(said.length)} ${said.forward ? "forward over the eye" : "behind"} as one piece${tails}.${tip}`;
     }
-    case "tie-in-across":
-      return `Tie ${said.strands === 1 ? "a strand" : `${said.strands} strands`} of ${mat(said.m)} across the shank by the middle with figure-of-eight turns, so ${len(said.length)} sticks out on each side as legs.`;
+    case "tie-in-across": {
+      const lean = said.fan
+        ? ` Fan them out over about ${said.fan}°, the rear ones leaning back and the front ones forward.`
+        : said.angle && said.angle >= 10 ? ` Let them lean back about ${said.angle}°.` : "";
+      return `Tie ${said.strands === 1 ? "a strand" : `${said.strands} strands`} of ${mat(said.m)} across the shank by the middle with figure-of-eight turns, so ${len(said.length)} sticks out on each side as legs.${lean}`;
+    }
     case "tie-in-forward":
       return `Tie in the ${mat(said.m)} pointing forward over the eye, ${len(said.length)} long.${said.round ? " Let it spread all round the shank as you tighten the turns." : ""}`;
     case "tie-in-upright":
@@ -574,6 +597,10 @@ function englishText(said: Said, recipe: Recipe): string {
       const cut = said.length ? ` Comb out the underfur and cut each clump to about ${len(said.length)} long first.` : "";
       return `Spin clumps of ${mat(said.m)} round ${body}, packing each one back against the last, up to ${at(said.to)}.${cut}`;
     }
+    case "glue": {
+      const cut = said.length ? ` Cut each pad about ${len(said.length)} long on each side of the shank.` : "";
+      return `Lay a bead of glue along the top of ${body} from ${at(said.from)} to ${at(said.to)} and press flattened pads of ${mat(said.m)} into it, their fibres across ${body}. Turn the hook over and do the same underneath, then add more on top.${cut}`;
+    }
     case "sleeve": {
       const fray = said.fray ? ` Pick the braid behind the rear tie-down apart into loose strands, about ${len(said.fray)} long.` : "";
       return `Slide the ${mat(said.m)} over the eye and along the body so it reaches from ${at(said.from)} to ${at(said.to)}, and tie its ${said.rear ? "rear" : "front"} end down at ${at(said.from)} with tight turns.${fray}`;
@@ -599,16 +626,17 @@ function englishText(said: Said, recipe: Recipe): string {
           ? `Clip the fibres of the ${mat(said.m)} on top close to the body, leaving a flat seat for the wing.`
           : `Cut away the fibres of the ${mat(said.m)} on top and underneath, leaving two flat rows sticking out at the sides.`;
     case "trim-spun":
+      if (said.disc) return `${said.glued ? "Once the glue has set, trim" : "Trim"} the ${said.glued ? "" : "spun "}${mat(said.m)} round into a flat disc, about ${len(said.leave)} thick on top and underneath, leaving it as wide as it is at the middle.`;
       if (said.cone) return `Trim the spun ${mat(said.m)} into a cone, slim at the tail and about ${len(said.leave)} thick on each side at the front, squared off there.`;
       return said.cigar
         ? `Trim the spun ${mat(said.m)} into a cigar about ${len(said.leave)} thick on each side, fullest in the middle and rounded at both ends.`
         : `Trim the spun ${mat(said.m)} to shape, leaving a head about ${len(said.leave)} thick on each side.`;
     case "trim-flat":
       return said.keep === "top"
-        ? `Trim the spun ${mat(said.m)} flat underneath, about ${len(said.leave)} below ${body}, leaving the rest long.`
+        ? `Trim the ${said.glued ? "" : "spun "}${mat(said.m)} flat underneath, about ${len(said.leave)} below ${body}, leaving the rest long.`
         : said.keep === "under"
-          ? `Trim the spun ${mat(said.m)} flat on top, about ${len(said.leave)} above ${body}, leaving the rest long.`
-          : `Trim the spun ${mat(said.m)} flat on top and underneath, about ${len(said.leave)} from ${body}, leaving the hair at the sides long.`;
+          ? `Trim the ${said.glued ? "" : "spun "}${mat(said.m)} flat on top, about ${len(said.leave)} above ${body}, leaving the rest long.`
+          : `Trim the ${said.glued ? "" : "spun "}${mat(said.m)} flat on top and underneath, about ${len(said.leave)} from ${body}, leaving ${said.glued ? "the fibres" : "the hair"} at the sides long.`;
     case "trim-tip":
       return `Trim the tip of the ${mat(said.m)} close to the body.`;
     case "trim-cover":
@@ -634,6 +662,7 @@ const OP_TITLES: Record<Step["op"], string> = {
   sleeve: "Slide on sleeve",
   weave: "Weave",
   spin: "Spin",
+  glue: "Glue on",
   "attach-thread": "Attach thread",
   "wrap-thread": "Wrap thread",
   "tie-in": "Tie in",

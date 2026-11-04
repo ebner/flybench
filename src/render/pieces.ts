@@ -618,6 +618,34 @@ const BUNDLE = {
   legs: { radius: 0.014, tip: 0.85, tipShade: 1, spread: 0.1, flare: 0.15, sideFlare: 0.8, lengthJitter: 0.1, curve: 0.2, droop: 0.3 },
 } as const;
 
+/**
+ * How far a fibre from `base` along `dir` reaches inside a disc trimmed from hair spanning the
+ * piece: a flat, round-edged shape as long as the hair spans, as wide as it stands out, and as
+ * thick as it is cut top and bottom (a crab's body). At most `length`.
+ */
+function discReach(piece: BundlePiece, base: THREE.Vector3, dir: THREE.Vector3, length: number): number {
+  const a = piece.span! / 2;
+  const mid = piece.x + a;
+  const c = piece.length;
+  const inside = (t: number) => {
+    const px = (base.x + dir.x * t - mid) / a;
+    const pz = (base.z + dir.z * t) / c;
+    const py = base.y + dir.y * t;
+    const h = py >= 0 ? (piece.flat?.top ?? c) : (piece.flat?.under ?? c);
+    return px * px + pz * pz + (py / h) ** 4 <= 1;
+  };
+  if (inside(length)) return length;
+  if (!inside(0)) return 0.01;
+  let lo = 0;
+  let hi = length;
+  for (let k = 0; k < 18; k++) {
+    const t = (lo + hi) / 2;
+    if (inside(t)) lo = t;
+    else hi = t;
+  }
+  return Math.max(0.01, lo);
+}
+
 function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const spec = BUNDLE[piece.look as keyof typeof BUNDLE] ?? BUNDLE.yarn;
   const rand = mulberry32((piece.seed ?? piece.id) * 104729 + 3);
@@ -633,6 +661,34 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   // An upright post roots in a small disc on top of the shank and fans out at the top.
   const upright = piece.direction === "back" && piece.angle >= Math.PI / 3;
   for (let i = 0; i < piece.count; i++) {
+    if (piece.across && piece.span) {
+      // Pads laid across the shank, stacked on top and underneath: each fibre half lies out to one
+      // side, askew and wavy as soft fibre lies, a few more near the outside of the stack, where
+      // they show. Trimmed to a disc, the stack thins towards its ends.
+      const side = i % 2 === 0 ? 1 : -1;
+      const top = piece.flat?.top ?? piece.length;
+      const under = piece.flat?.under ?? piece.length;
+      const up = rand() < top / (top + under);
+      const x = piece.x + rand() * piece.span;
+      const px = (x - piece.x) / piece.span * 2 - 1;
+      const thins = piece.cut && piece.trimShape === "disc" ? Math.pow(Math.max(0, 1 - px * px), 0.25) : 1;
+      const y = (up ? top : -under) * 0.97 * thins * Math.pow(rand(), 0.7);
+      // (Each starts a little past the middle, as a fibre crossing the shank does.)
+      const base = new THREE.Vector3(x, y, -side * 0.05 * rand());
+      const dir = new THREE.Vector3((rand() - 0.5) * 0.9, (rand() - 0.5) * 0.6, side).normalize();
+      const jitter = piece.cut ? 0 : spec.lengthJitter;
+      let length = piece.length * (1 - jitter / 2 + jitter * rand());
+      if (piece.cut && piece.trimShape === "disc") length = discReach(piece, base, dir, length);
+      // No fibre reaches past the cut on top or underneath (pads cut flat with keep).
+      if (dir.y > 0.001) length = Math.min(length, Math.max(0.01, (top - y) / dir.y));
+      if (dir.y < -0.001) length = Math.min(length, Math.max(0.01, (under + y) / -dir.y));
+      list.push({
+        // (Thickened, so the stack reads as the dense mat it is rather than a few strands.)
+        u: rand(), base, dir, length, radius: spec.radius * 1.6 * (piece.fibreWidth ?? 1),
+        shade: (0.85 + 0.3 * rand()) * (1 - 0.25 * (1 - Math.abs(y) / Math.max(0.01, up ? top : under))),
+      });
+      continue;
+    }
     if (upright) {
       const a = rand() * 2 * Math.PI;
       const d = Math.sqrt(rand()) * piece.bundleRadius * 0.7;
@@ -714,6 +770,9 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       } else if (piece.trimShape === "cigar") {
         // Fullest in the middle, rounded off at both ends.
         length *= 0.3 + 0.7 * Math.sqrt(Math.max(0, 1 - (2 * f - 1) ** 2));
+      } else if (piece.trimShape === "disc") {
+        // Round in plan, flat top and bottom.
+        length = discReach(piece, base, dir, length);
       } else {
         // A round head, shaped like a bullet: fullest at the back, tapering to the eye.
         length *= 1 - 0.75 * Math.pow(f, 1.2);
@@ -1471,8 +1530,10 @@ function legsView(piece: LegsPiece, surfaces: Surfaces, space: ShankSpace): Piec
   for (let i = 0; i < piece.count; i++) {
     // Strands a little apart along the shank, as when they are wrapped on one by one.
     const x = piece.x + (i - (piece.count - 1) / 2) * 0.09;
+    // Fanned: the rear strand leans back most, the front one forward.
+    const sweep = piece.sweep + (piece.fan && piece.count > 1 ? piece.fan * (0.5 - i / (piece.count - 1)) : 0);
     for (const side of [-1, 1]) {
-      const dir = new THREE.Vector3(-Math.sin(piece.sweep), -0.2, side * Math.cos(piece.sweep)).normalize();
+      const dir = new THREE.Vector3(-Math.sin(sweep), -0.2, side * Math.cos(sweep)).normalize();
       list.push({
         u: (i + rand()) / piece.count,
         base: new THREE.Vector3(x, piece.radius * 0.2, side * piece.radius * 0.8),

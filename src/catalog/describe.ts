@@ -58,15 +58,15 @@ export const IMITATES_LABELS = localized<Imitates>({
 export const SPECIES_LABELS = localized<Species>({
   en: {
     trout: "Trout", grayling: "Grayling", "sea-trout": "Sea trout", salmon: "Salmon", char: "Char", bass: "Bass", panfish: "Panfish",
-    pike: "Pike", "striped-bass": "Striped bass", bonefish: "Bonefish",
+    pike: "Pike", "striped-bass": "Striped bass", bonefish: "Bonefish", permit: "Permit",
   },
   sv: {
     trout: "Öring", grayling: "Harr", "sea-trout": "Havsöring", salmon: "Lax", char: "Röding", bass: "Svartabborre",
-    panfish: "Solabborre", pike: "Gädda", "striped-bass": "Strimmig havsabborre", bonefish: "Bonefish",
+    panfish: "Solabborre", pike: "Gädda", "striped-bass": "Strimmig havsabborre", bonefish: "Bonefish", permit: "Permit",
   },
   de: {
     trout: "Forelle", grayling: "Äsche", "sea-trout": "Meerforelle", salmon: "Lachs", char: "Saibling", bass: "Schwarzbarsch",
-    panfish: "Sonnenbarsch", pike: "Hecht", "striped-bass": "Felsenbarsch", bonefish: "Grätenfisch",
+    panfish: "Sonnenbarsch", pike: "Hecht", "striped-bass": "Felsenbarsch", bonefish: "Grätenfisch", permit: "Permit",
   },
 });
 

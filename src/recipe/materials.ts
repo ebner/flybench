@@ -139,6 +139,8 @@ export const MATERIALS = {
   "wood-duck-flank": { name: "wood duck flank", archetype: "fibres", defaultColor: "wood-duck" },
   "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear" },
   "synthetic-hair": { name: "synthetic hair", archetype: "fibres" },
+  // Fine synthetic fur on a backing, long fibres over a soft underfur (streamer wings, crab bodies).
+  "craft-fur": { name: "Craft Fur", archetype: "fibres" },
   "coq-de-leon": { name: "Coq de León fibres", archetype: "fibres", defaultColor: "pardo" },
 
   // Biots
