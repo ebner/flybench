@@ -87,6 +87,9 @@ export const MATERIALS = {
   "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65 },
   // Assumption: guinea-fowl body feathers are soft, between a hen hackle and partridge.
   "guinea-fowl-hackle": { name: "guinea fowl hackle", archetype: "hackle", defaultColor: "guinea", sweep: 45 },
+  // The golden pheasant cock's ruddy red flank feather, folded and wound as a hackle (an Usk
+  // Grub's tail). Assumption: soft, its long barbs sweeping back like a partridge hackle's.
+  "golden-pheasant-flank": { name: "golden pheasant flank feather", archetype: "hackle", defaultColor: "#a8401c", sweep: 60 },
 
   // Dubbing
   // Assumption: hare's mask and seal's fur are the roughest common dubbings, rabbit in between
@@ -171,6 +174,9 @@ export const MATERIALS = {
   "jungle-cock": { name: "jungle cock", archetype: "feather", defaultColor: "#26231f", shape: "eye" },
   // Assumption: the cock's small red body feathers, tied as a pair of cheeks like a hackle tip.
   "golden-pheasant-body": { name: "golden pheasant body feather", archetype: "feather", defaultColor: "red", shape: "tip" },
+  // A whole tippet feather from the golden pheasant's cape: a broad orange fan barred black near its
+  // end (a General Practitioner's eyes, cut into a V).
+  "golden-pheasant-tippet-feather": { name: "golden pheasant tippet feather", archetype: "feather", defaultColor: "tippet", shape: "breast" },
 
   // Foam
   foam: { name: "foam", archetype: "foam", defaultColor: "black", thickness: 0.09 },

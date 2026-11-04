@@ -1,0 +1,83 @@
+id general-practitioner
+status draft
+
+// en description: Long hot orange bucktail feelers under a golden pheasant body feather, a hot orange seal's fur body in three sections, each ribbed with fine oval gold and palmered with hot orange cock hackle, golden pheasant tippet eyes cut into a V, and a red golden pheasant body feather laid flat over each section as the shell.
+description "Långa antenner av bucktail i hot orange under en kroppsfjäder från guldfasan, en kropp av sälpäls i hot orange i tre sektioner, var och en ribbad med fin oval guldtinsel och palmerad med tupphackel i hot orange, ögon av en tippetfjäder från guldfasan klippt i ett V, och en röd kroppsfjäder från guldfasan lagd platt över varje sektion som skal."
+
+// en history: Colonel Esmond Drury devised it for the River Test about 1953, as an artificial prawn: prawns and shrimps were banned as bait on the water he fished. Fly Fishers International, the South Sound Fly Fishers and Trey Combs (as Steve Culton quotes him) give 1953; Phil Rowley says the early fifties. Paul Little writes that it was first called the G.P., after the golden pheasant feathers it is mostly made of, and renamed for the family doctor once it had proved so deadly. It went on to become a staple steelhead fly in British Columbia and the Pacific Northwest. Tyers dress it in many ways. The sections disagree: Fly Fishers International makes the rear one a quarter of the shank, the middle a half (the eyes at the quarter point) and the front a quarter, where Rowley ties it in thirds, as here, and Poul Jorgensen's simpler version in two halves without hackle. Fly Fishers International veils the feelers with two body feathers concave to concave, Rowley with one. Simpler versions are fished today too, Sean Dahlquist's with a single body palmered from the front.
+history """
+    Överste Esmond Drury konstruerade den för floden Test omkring 1953, som en konstgjord räka:
+    räkor och kräftdjur var förbjudna som bete i det vatten han fiskade. Fly Fishers
+    International, South Sound Fly Fishers och Trey Combs (som Steve Culton citerar honom) anger
+    1953; Phil Rowley säger början av femtiotalet. Paul Little skriver att den först kallades
+    G.P., efter guldfasanfjädrarna den till största delen består av, och döptes om efter
+    husläkaren när den visat sig så fångstrik. Den blev sedan en självklar steelheadfluga i
+    British Columbia och nordvästra USA. Bindare klär den på många sätt. Sektionerna skiljer
+    sig: Fly Fishers International gör den bakre till en fjärdedel av skaftet, den mittersta
+    till hälften (ögonen vid fjärdedelspunkten) och den främre till en fjärdedel, medan Rowley
+    binder den i tredjedelar, som här, och Poul Jorgensens enklare version i två halvor utan
+    hackel. Fly Fishers International täcker antennerna med två kroppsfjädrar med de konkava
+    sidorna mot varandra, Rowley med en. Enklare versioner fiskas också i dag, Sean Dahlquists
+    med en enda kropp palmerad bakåt från fronten.
+    """
+
+// en fishing: Swing it across and down like other salmon flies; Rowley fishes it on the swing for steelhead. Paul Little has found it his most successful prawn from September on, on the Cumbrian Derwent.
+fishing """
+    Svinga den nedströms och tvärs som andra laxflugor; Rowley fiskar den svingande efter
+    steelhead. Paul Little har haft den som sin mest fångstrika räka från september och framåt,
+    i Cumbrias Derwent.
+    """
+
+labels {
+    // en feelers: Hot orange bucktail
+    feelers "Bucktail i hot orange"
+    // en veil: Red golden pheasant body feather
+    veil "Röd kroppsfjäder från guldfasan"
+    // en rib-rear: Fine oval gold tinsel
+    rib-rear "Fin oval guldtinsel"
+    // en body: Hot orange seal's fur
+    body "Sälpäls i hot orange"
+    // en hackle-rear: Hot orange cock hackle
+    hackle-rear "Tupphackel i hot orange"
+    // en shell-rear: Red golden pheasant body feather
+    shell-rear "Röd kroppsfjäder från guldfasan"
+    // en rib-middle: Fine oval gold tinsel
+    rib-middle "Fin oval guldtinsel"
+    // en hackle-middle: Hot orange cock hackle
+    hackle-middle "Tupphackel i hot orange"
+    // en shell-middle: Red golden pheasant body feather
+    shell-middle "Röd kroppsfjäder från guldfasan"
+    // en rib-front: Fine oval gold tinsel
+    rib-front "Fin oval guldtinsel"
+    // en hackle-front: Hot orange cock hackle
+    hackle-front "Tupphackel i hot orange"
+    // en shell-front: Red golden pheasant body feather
+    shell-front "Röd kroppsfjäder från guldfasan"
+}
+
+notes {
+    // en step 2 (wrap-thread): A flat bed of thread to above the hook point.
+    step 2 "Ett plant underlag av tråd till ovanför krokspetsen."
+    // en step 3 (tie-in feelers): A sparse bunch, the butts bound along the shank.
+    step 3 "En gles bunt, med ändarna bundna längs skaftet."
+    // en step 5 (tie-in flash): Six or eight strands, cut to uneven lengths.
+    step 5 "Sex eller åtta strån, klippta i ojämna längder."
+    // en step 6 (tie-in veil): A small red feather, its stem flattened, concave side down.
+    step 6 "En liten röd fjäder med tillplattad stam, den konkava sidan nedåt."
+    // en step 7 (tie-in rib-rear): Under the shank.
+    step 7 "Under skaftet."
+    // en step 11 (wind rib-rear): Through the hackle, locking its stem.
+    step 11 "Genom hacklet, så att stammen låses."
+    // en step 14 (trim hackle-rear): Stroke the fibres down and back first.
+    step 14 "Stryk först fibrerna nedåt och bakåt."
+    // en step 15 (tie-in eyes): Cement the two points so they keep their shape.
+    step 15 "Lacka de två spetsarna så att de behåller formen."
+    // en step 16 (tie-in shell-rear): Two feathers one over the other, stems flattened, concave side down.
+    step 16 "Två fjädrar ovanpå varandra, med tillplattade stammar och den konkava sidan nedåt."
+    // en step 25 (tie-in shell-middle): Two more feathers, a little larger.
+    step 25 "Två fjädrar till, lite större."
+    // en step 34 (tie-in shell-front): The largest feather, over the whole back; it can be left out on small hooks.
+    step 34 "Den största fjädern, över hela ryggen; på små krokar kan den utelämnas."
+    // en step 35 (whip-finish): Varnish the head, then press the hackle up under the body and the feathers down onto it.
+    step 35 "Lacka huvudet och tryck sedan upp hacklet under kroppen och fjädrarna ner mot den."
+}

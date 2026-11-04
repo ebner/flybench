@@ -1,0 +1,110 @@
+// Phatakorva: Mikael Frödin's Temple Dog tube fly, a long fiery brown wing in sections over a short bronze body, with a copper cone.
+
+id phatakorva
+name "Phatakorva"
+aliases "Pahtakorva" "Phatagorva"
+type salmon
+imitates attractor
+difficulty advanced
+species salmon
+// Assumption: Heimburg fishes it from spring to autumn; the months of a Scandinavian salmon season.
+season may june july august september october
+origin originator="Mikael Frödin" region="Sweden"
+description "A short body of bronze holo braid and glitz dubbing, an orange craft fur underwing, a long wing of fiery brown soft hair in two sections with copper and bronze angel hair, the front section folded back, an orange badger hackle between them, a long black soft hackle in front, orange peacock herl over the top, jungle cock cheeks and a copper tungsten cone."
+history """
+    Mikael Frödin's best-known fly, as his own company calls it, spelt Pahtakorva and Phatakorva on
+    its pages. Daniel Heimburg traces it to the original Temple Dog of Håkan Norling, Frödin's
+    friend. Timo Kontio credits Norling with the Temple Dog style and Frödin with helping to make
+    it known: a wing of soft hair in sections, with hackle wound between them, tied flat round the
+    tube so that only its underside is left clear, the last section often tied in Norling's
+    reversed way, pointing forward and then folded back.
+
+    The dressing here follows the materials of Frödin's Classic Pahtakorva pack, his version close
+    to the original, which lists them without an order; the order is the Temple Dog's, as Martin
+    Joergensen, Stuart Foxall and Michael Müller give it. Other tyers vary it: Heimburg ties his on
+    a short brass tube with fox and tanuki and a black top to the wing, and Tellis Katsogiannos in
+    three sections of fiery brown fox with an orange badger hackle and a black hackle between them.
+    """
+fishing """
+    Frödin calls it a standard fly that works everywhere, perhaps best in tea-coloured rivers, its
+    medium profile a standard too when a river clears a little. Heimburg fishes it most when the
+    water is a little tea-coloured and the clouds are out, and finds it much fished on the Alta.
+    Tellis Katsogiannos took his biggest salmon on it, about 16 kg, in September on the Mörrum.
+    """
+sources {
+    "Frödin Flies: Classic Pahtakorva" url="http://web.archive.org/web/20260515174712/https://www.frodinflies.com/products/classic-pahtakorva"
+    "Frödin Flies: PM #21 Classic Pahtakorva, material pack" url="http://web.archive.org/web/20260519124413/https://www.frodinflies.com/products/pm-21-classic-pahtakorva"
+    "Frödin Flies: Pattern of the month #21, Classic Pahtakorva (film)" url="http://web.archive.org/web/20250523045921/https://www.frodinflies.com/blogs/film-archive/pattern-of-the-month-21-classic-pahtakorva"
+    "Laxflugor.nu: Pahtakorva laxfluga (Daniel Heimburg)" url="http://web.archive.org/web/20260616051919/https://laxflugor.nu/laxflugor/pahtakorva-laxfluga/"
+    "Tellis Flugfiske: Pahtakorva / Phatagorva (Tellis Katsogiannos)" url="https://tellis-flugfiske.se/2021/12/07/13-pahtakorva-phatagorva/"
+    "GlobalFlyFisher: Styles and patterns (Martin Joergensen)" url="https://globalflyfisher.com/node/14316"
+    "SwittersB: Mikael Frödin, FITS, Temple Dog wings and tube flies" url="https://swittersb.com/2009/01/01/mikael-frodin-fits-temple-dog-wings-tube-flies/"
+    "Fly Tying Archive: Håkan Norling (Timo Kontio)" url="https://flytyingarchive.com/?p=338"
+    "Deneki: Fly tying, Black 'n Silver Templedog tube (Stuart Foxall)" url="http://deneki.com/2021/08/fly-tying-black-n-silver-templedog-tube/"
+    "Fliegenfischer-Forum: Tubenfliegen (Michael Müller)" url="https://www.fliegenfischer-forum.de/tuben1.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.frodinflies.com/cdn/shop/products/classic_pahtakorva_4ff1d77c-59a3-47c9-aaf5-1f7c26735cbb_1024x1024.jpg?v=1658769849" page="https://www.frodinflies.com/products/classic-pahtakorva" author="Frödin Flies" license="All rights reserved; reference only" note="The originator's Classic, side view without a hook"
+    "https://www.superflies.com/wp-content/uploads/2020/04/TD-Phatagorva-Templedog-tungsten-conehead_jpg.webp" page="https://www.superflies.com/products/phatakorva-templedog-tungsten-conehead" license="All rights reserved; reference only" note="On a tube pin: the body's proportions"
+    "https://guideline-products-production.imgix.net/images/524_22bae50c16-103252-full.jpg?q=70&fit=clip&w=1920&fm=jpg&auto=compress,format" page="https://www.guidelineflyfish.com/en/td-bhatakorva-9-cm" license="All rights reserved; reference only" note="A commercial 9 cm Temple Dog version"
+}
+
+// Frödin: M FITS tubing for a fixed hook, flies of 6, 8 and 10 cm. Assumption: an 18 mm tube
+// for an 8 cm fly, its wing (read from Frödin's photo) four to five times the dressed tube.
+hook tube-plastic length=18 treble=10
+thread black size="8/0"
+
+materials {
+    body-rear flat-tinsel color="#9a6a32" label="Bronze holo braid"
+    body-front dubbing color="#8a5a2a" label="Bronze glitz dubbing"
+    underwing craft-fur color="#ff6a14" label="Fire fluo orange craft fur"
+    wing-rear fox-hair color="#8a2e14" label="Medium fiery brown soft hair"
+    flash-rear krystal-flash color=copper count=10 label="Copper angel hair"
+    // Read from Frödin's photo: the hackles reach about a third of the way along the wing.
+    hackle-rear cock-hackle color=orange fibre=2 sweep=55 label="Orange badger cock hackle"
+    wing-front fox-hair color="#7a2812" label="Large fiery brown soft hair"
+    flash-front krystal-flash color="#9a6a32" count=10 label="Bronze angel hair"
+    hackle-front hen-hackle color=black fibre=2.4 sweep=60 label="Black soft hackle"
+    topping peacock-herl color=orange strands=5 label="Orange-dyed peacock eye herl"
+    cheeks jungle-cock label="Synthetic jungle cock"
+    // Frödin: an XS copper tungsten half cone. Assumption: about 5 mm across at the back.
+    cone tungsten-cone color=copper mm=5
+}
+
+// Frödin's pack also has black-dyed pheasant rump; it is left out here, the black soft hackle
+// making the black collar the photo shows.
+steps {
+    attach-thread at=0.3
+    wrap-thread to=0.04
+    tie-in body-rear
+    wrap-thread to=0.28
+    wind body-rear to=0.28 turns=8
+    tie-off body-rear
+    dub body-front to=0.42
+    // Read from Frödin's photo: the orange shows under the front third of the wing.
+    tie-in underwing length=2.4 angle=4 spread=70 note="A small bunch, combed out."
+    // Frödin (SwittersB): the wing flat round the sides of the tube, only its underside clear.
+    tie-in wing-rear length=4.4 angle=3 spread=100 note="A small bunch with the underfur combed out, spread round the sides and top."
+    trim wing-rear
+    // Foxall: the flash a little longer than the hair, to taper the wing.
+    tie-in flash-rear length=4.8 angle=3 spread=60 note="A few strands either side."
+    tie-in hackle-rear
+    wrap-thread to=0.52
+    wind hackle-rear to=0.52 turns=3 note="Stroke the fibres back as you wind, so they lift the next section."
+    tie-off hackle-rear
+    wrap-thread to=0.62
+    // GlobalFlyFisher, Müller: the last section tied in pointing forward and folded back.
+    tie-in wing-front length=5.6 angle=6 spread=100 forward=#true note="A larger bunch, the butts cut square and bound along the tube."
+    pull-over wing-front to=0.62
+    tie-in flash-front length=6 angle=5 spread=40
+    tie-in hackle-front
+    wrap-thread to=0.78
+    wind hackle-front to=0.78 turns=3 note="A long, soft collar, stroked back."
+    tie-off hackle-front
+    tie-in topping length=5.2 angle=6 note="A few strands over the top of the wing."
+    // Read from Frödin's photo: about a fifth of the wing's length.
+    tie-in cheeks length=1.2 angle=12 spread=35
+    whip-finish note="Glue the head."
+    slide-bead cone
+}

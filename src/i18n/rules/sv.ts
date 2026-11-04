@@ -18,7 +18,8 @@ const kind = (k: MaterialKind) => inLang("sv", () => kindName(k));
 
 export const RULES_SV: RuleCatalog = {
   duplicateMaterial: (p) => `Materialet ”${p.m}” finns med mer än en gång.`,
-  afterWhipFinish: () => "Efter whipfinishknuten kan du bara klippa, limma fast, eller fästa tråden på nytt.",
+  afterWhipFinish: () => "Efter whipfinishknuten kan du bara klippa, limma fast, fästa tråden på nytt eller, på en tub, trä på en kon.",
+  headLast: () => "En kon som träs på tuben efter whipfinishknuten sätts på sist: efter den kan du bara klippa eller limma fast.",
   unknownMaterial: (p) => `Det finns inget material som heter ”${p.m}”.`,
   tieOffNext: (p) => `Du har just lindat ”${p.m}”. Fäst och klipp det innan du gör något annat.`,
   securePalmer: (p) => `Du lindade ”${p.m}” bakåt. Lås det genom att linda ett annat material framåt över dess spets.`,
@@ -64,6 +65,8 @@ export const RULES_SV: RuleCatalog = {
   forwardUpright: () => "Ett material som pekar framåt kan inte samtidigt stå upprätt.",
   extendedOnly: () => "Bara chenille, garn eller foam som binds in med en längd kan sticka ut i ett stycke.",
   tipOnly: () => "En färgad ände går bara att ge material som sticker ut i ett stycke.",
+  flatOnly: () => "Bara en enstaka fjäder som sticker ut från där den är inbunden kan läggas platt över ryggen.",
+  notchOnly: () => "Bara en fjäder som sticker ut från där den är inbunden kan få ett V klippt i spetsen, och inte djupare än fjädern är lång.",
   madeBodyOnly: () => "Segment och stjärtspröt hör bara till en kropp som sticker ut i ett stycke.",
   tailsOnly: (p) => `Bara hår, fibrer eller biots kan sticka ut ur kroppens ände som stjärtspröt, inte ”${p.m}”.`,
   tailsLength: () => "Stjärtspröt ur kroppen behöver en längd, och en längd eller spridning för stjärtspröt behöver stjärtspröt.",
@@ -81,7 +84,7 @@ export const RULES_SV: RuleCatalog = {
   threadElsewhere: (p) => `Bindtråden är vid ${at(p.thread)}. Flytta den till ${at(p.to)} innan du lindar dit.`,
   windToThread: (p) => `Bindtråden är vid ${at(p.thread)}. Linda fram till den, eller flytta först tillbaka tråden till ${at(p.to)}.`,
   tieInBeforePull: (p) => `”${p.m}” måste vara inbundet (och inte redan använt) innan det kan dras över.`,
-  pullForward: (p) => `Dra ”${p.m}” framåt från där det är inbundet, eller lägg det bakåt över kroppen.`,
+  pullForward: (p) => `Dra ”${p.m}” framåt från där det är inbundet, eller lägg det bakåt över kroppen. Bara hår som är inbundet pekande framåt kan vikas bakåt där det är inbundet.`,
   splitAroundPost: (p) => `”${p.m}” kan bara delas runt ”${p.post}” om den står upprätt på vägen framåt, mellan där ”${p.m}” är inbundet och där det binds ner.`,
   secureLaidBack: (p) => `Du lade ”${p.m}” bakåt över kroppen. Håll fast änden genom att linda ett annat material framåt över den.`,
   threadForPull: (p) => `Bindtråden är vid ${at(p.thread)}. Flytta den till ${at(p.to)} för att fästa materialet där.`,

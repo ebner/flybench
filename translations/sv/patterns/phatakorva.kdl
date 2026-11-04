@@ -1,0 +1,72 @@
+id phatakorva
+status draft
+
+// en description: A short body of bronze holo braid and glitz dubbing, an orange craft fur underwing, a long wing of fiery brown soft hair in two sections with copper and bronze angel hair, the front section folded back, an orange badger hackle between them, a long black soft hackle in front, orange peacock herl over the top, jungle cock cheeks and a copper tungsten cone.
+description "En kort kropp av brons holo braid och glitzdubbing, en undervinge av orange craft fur, en lång vinge av fiery brown soft hair i två sektioner med angel hair i koppar och brons, den främre sektionen tillbakavikt, ett orange badgerhackel mellan dem, ett långt svart mjukt hackel framtill, orangefärgat påfågelherl över toppen, kinder av jungle cock och en kon av koppartungsten."
+
+// en history: Mikael Frödin's best-known fly, as his own company calls it, spelt Pahtakorva and Phatakorva on its pages. Daniel Heimburg traces it to the original Temple Dog of Håkan Norling, Frödin's friend. Timo Kontio credits Norling with the Temple Dog style and Frödin with helping to make it known: a wing of soft hair in sections, with hackle wound between them, tied flat round the tube so that only its underside is left clear, the last section often tied in Norling's reversed way, pointing forward and then folded back. The dressing here follows the materials of Frödin's Classic Pahtakorva pack, his version close to the original, which lists them without an order; the order is the Temple Dog's, as Martin Joergensen, Stuart Foxall and Michael Müller give it. Other tyers vary it: Heimburg ties his on a short brass tube with fox and tanuki and a black top to the wing, and Tellis Katsogiannos in three sections of fiery brown fox with an orange badger hackle and a black hackle between them.
+history """
+    Mikael Frödins mest kända fluga, som hans eget företag kallar den, stavad Pahtakorva och
+    Phatakorva på dess sidor. Daniel Heimburg härleder den från Håkan Norlings ursprungliga
+    tempelhundfluga; Norling är Frödins vän. Timo Kontio tillskriver Norling tempelhundstilen
+    och Frödin att ha gjort den känd: en vinge av mjukt hår i sektioner, med hackel lindat
+    mellan dem, bunden platt runt tuben så att bara undersidan lämnas fri, den sista sektionen
+    ofta bunden på Norlings omvända sätt, pekande framåt och sedan tillbakavikt. Klädseln här
+    följer materialen i Frödins materialpaket Classic Pahtakorva, hans version nära originalet,
+    som listar dem utan ordning; ordningen är tempelhundflugans, som Martin Joergensen, Stuart
+    Foxall och Michael Müller beskriver den. Andra bindare varierar den: Heimburg binder sin på
+    en kort mässingstub med räv och tanuki och en svart topp på vingen, och Tellis Katsogiannos
+    i tre sektioner av fiery brown räv med ett orange badgerhackel och ett svart hackel emellan.
+    """
+
+// en fishing: Frödin calls it a standard fly that works everywhere, perhaps best in tea-coloured rivers, its medium profile a standard too when a river clears a little. Heimburg fishes it most when the water is a little tea-coloured and the clouds are out, and finds it much fished on the Alta. Tellis Katsogiannos took his biggest salmon on it, about 16 kg, in September on the Mörrum.
+fishing """
+    Frödin kallar den en standardfluga som fungerar överallt, kanske bäst i tefärgade älvar, och
+    dess medelbreda profil en standard också när älven klarnar lite. Heimburg fiskar den helst
+    när vattnet är lite tefärgat och molnen är framme, och ser den fiskas mycket i Alta. Tellis
+    Katsogiannos tog sin största lax på den, omkring 16 kg, i september i Mörrumsån.
+    """
+
+labels {
+    // en body-rear: Bronze holo braid
+    body-rear "Brons holo braid"
+    // en body-front: Bronze glitz dubbing
+    body-front "Glitzdubbing i brons"
+    // en underwing: Fire fluo orange craft fur
+    underwing "Craft fur i fire fluo orange"
+    // en wing-rear: Medium fiery brown soft hair
+    wing-rear "Medium fiery brown soft hair"
+    // en flash-rear: Copper angel hair
+    flash-rear "Angel hair i koppar"
+    // en hackle-rear: Orange badger cock hackle
+    hackle-rear "Orange badger tupphackel"
+    // en wing-front: Large fiery brown soft hair
+    wing-front "Large fiery brown soft hair"
+    // en flash-front: Bronze angel hair
+    flash-front "Angel hair i brons"
+    // en hackle-front: Black soft hackle
+    hackle-front "Svart mjukt hackel"
+    // en topping: Orange-dyed peacock eye herl
+    topping "Orangefärgat herl från påfågelöga"
+    // en cheeks: Synthetic jungle cock
+    cheeks "Syntetisk jungle cock"
+}
+
+notes {
+    // en step 8 (tie-in underwing): A small bunch, combed out.
+    step 8 "En liten bunt, utkammad."
+    // en step 9 (tie-in wing-rear): A small bunch with the underfur combed out, spread round the sides and top.
+    step 9 "En liten bunt med underullen utkammad, fördelad runt sidorna och ovansidan."
+    // en step 11 (tie-in flash-rear): A few strands either side.
+    step 11 "Några strån på var sida."
+    // en step 14 (wind hackle-rear): Stroke the fibres back as you wind, so they lift the next section.
+    step 14 "Stryk fibrerna bakåt medan du lindar, så att de lyfter nästa sektion."
+    // en step 17 (tie-in wing-front): A larger bunch, the butts cut square and bound along the tube.
+    step 17 "En större bunt, ändarna klippta raka och bundna längs tuben."
+    // en step 22 (wind hackle-front): A long, soft collar, stroked back.
+    step 22 "En lång, mjuk krage, struken bakåt."
+    // en step 24 (tie-in topping): A few strands over the top of the wing.
+    step 24 "Några strån över vingens ovansida."
+    // en step 26 (whip-finish): Glue the head.
+    step 26 "Limma huvudet."
+}

@@ -51,6 +51,10 @@ materials {
         note "Formed like 'rapphönshackel' from 'pärlhöns' (guinea fowl)."
         source "Wikipedia: Pärlhöns" url="https://sv.wikipedia.org/wiki/P%C3%A4rlh%C3%B6ns"
     }
+    noun golden-pheasant-flank "flankfjäder från guldfasan" gender=en definite="flankfjädern från guldfasan" plural="flankfjädrar från guldfasan" plural-definite="flankfjädrarna från guldfasan" {
+        note "The cock's ruddy red flank feather, wound as a hackle (an Usk Grub's tail). No Swedish page naming it turned up; formed like 'kroppsfjäder från guldfasan'. The shop counts body feathers among the materials for tails."
+        source "Flugbindning.com: Guldfasan ('Guldfasanens kroppsfjädrar ger färgstarka material till bland annat strupar, stjärtar')" url="https://flugbindning.com/400048-guldfasan"
+    }
     noun partridge-hackle "rapphönshackel" gender=ett definite="rapphönshacklet" plural="rapphönshackel" plural-definite="rapphönshacklen" {
         note "The bird is 'rapphöna'; shops sell 'Rapphöna nackfjäder' and speak of 'rapphönefjädrar' for 'glesa hackel'. Compound with -s ('rapphönshackel') chosen over 'rapphönehackel'; both occur. The dressings simply write 'Hackel: Rapphöna'."
         source "Flugbindning.com: Rapphöna ('Rapphönefjädrar är ett klassiskt flugbindningsmaterial för spiders', product 'Rapphöna nackfjäder')" url="https://flugbindning.com/400054-rapphona"
@@ -274,6 +278,10 @@ materials {
         source "Svenska Wikipedia: Flugbindning ('nacken eller sadeln till en tupp eller en höna')" url="https://sv.wikipedia.org/wiki/Flugbindning"
         source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
     }
+    noun golden-pheasant-tippet-feather "tippetfjäder från guldfasan" gender=en definite="tippetfjädern från guldfasan" plural="tippetfjädrar från guldfasan" plural-definite="tippetfjädrarna från guldfasan" {
+        note "A whole tippet feather (a General Practitioner's eyes). The shop speaks of 'tippetfjädrarna' from the cock's neck ruff; formed as a phrase like 'kroppsfjäder från guldfasan'."
+        source "Flugbindning.com: Guldfasan ('Tippetfjädrarna kommer från hannens halskrage')" url="https://flugbindning.com/400048-guldfasan"
+    }
     noun golden-pheasant-body "kroppsfjäder från guldfasan" gender=en definite="kroppsfjädern från guldfasan" plural="kroppsfjädrar från guldfasan" plural-definite="kroppsfjädrarna från guldfasan" {
         note "The cock's small red body feathers. The shop sells the skin as 'Guldfasan kroppsskinn'; a phrase like 'bröstfjäder från gräsandhona' (mallard-breast)."
         source "Flugbindning.com: search for 'guldfasan' (product 'Guldfasan kroppsskinn')" url="https://flugbindning.com/search?controller=search&s=guldfasan"
@@ -431,6 +439,9 @@ colours {
     adjective bronze-mallard "bronsbrun" neuter="bronsbrunt" plural="bronsbruna" {
         note "The bronze brown of bronze mallard; Flugbindning.com calls the feathers 'bronsbruna'."
     }
+    adjective furnace "furnace" compound=#true {
+        note "A red-brown hackle with a black centre. Kept in English, as Swedish tyers keep grizzly and badger; no Swedish page using the word turned up."
+    }
     adjective badger "badger" compound=#true {
         source "Bojdaspon: Hackel nackar (product 'Tupphackel – Badger')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
     }
@@ -498,6 +509,9 @@ parts {
     }
     noun sheath "hölje" gender=ett definite="höljet" plural="höljen" plural-definite="höljena" {
         note "The loose veil of sparkle yarn round a sparkle pupa's body."
+    }
+    noun veil "slöja" gender=en definite="slöjan" plural="slöjor" plural-definite="slöjorna" {
+        note "A veiling: feathers laid over part of the body or the tail (a General Practitioner's over its feelers, an Usk Grub's over the rear body). No Swedish tying page with the word turned up; 'slöja' is the plain word for a veil."
     }
     noun shell "skal" gender=ett definite="skalet" plural="skal" plural-definite="skalen" {
         note "A foam strip pulled over the top of the body (the Gurgler); 'rygg' is the wing case or back of a nymph."

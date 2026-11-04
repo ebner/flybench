@@ -343,6 +343,19 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
       {num("tailLength", g, 0.1)}
       {num("tailSpread", deg, 1)}
       {num("fold", g, 0.1)}
+      {num("notch", g, 0.05)}
+      {part.how === "bunch" && part.length !== undefined && part.spread === undefined && part.side !== "across" && part.mats.every((x) => MATERIALS[x.kind].archetype === "feather") && (
+        <label className="wb-check">
+          <input type="checkbox" checked={!!part.flat} onChange={(e) => onChange({ flat: e.target.checked || undefined })} />
+          {f.laid}
+        </label>
+      )}
+      {part.how === "slide" && part.last && (
+        <label className="wb-check">
+          <input type="checkbox" checked onChange={(e) => onChange({ last: e.target.checked || undefined })} />
+          {f.last}
+        </label>
+      )}
       {part.how === "pulled" && part.width !== undefined && part.length === undefined && (
         <label className="wb-check">
           <input type="checkbox" checked={!!part.taper} onChange={(e) => onChange({ taper: e.target.checked || undefined })} />

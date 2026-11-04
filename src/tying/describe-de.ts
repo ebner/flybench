@@ -140,12 +140,16 @@ function writerFor(recipe: Recipe) {
   const angle = (deg?: number) => (deg ? `, etwa ${deg}° von ${the(alongId, "dat")} nach oben angewinkelt` : "");
   const pick = (w?: Length) => (w ? `Wähle eine Feder, die etwa ${length(w)} breit ist. ` : "");
   const flare = (f: boolean, refers: Noun | "plural") => (f ? ` Lass ${pronoun(refers).acc} um die Seiten ${the("body", "gen")} abspreizen.` : "");
+  const flat = (f: boolean | undefined, refers: Noun | "plural", under = false) =>
+    f ? (under ? ` Lege ${pronoun(refers).acc} flach darunter, die Vorderseite nach unten, unter das, was dahinter eingebunden ist.` : ` Lege ${pronoun(refers).acc} flach obenauf, die Vorderseite nach oben, über das, was dahinter eingebunden ist.`) : "";
+  const notch = (w: What, n?: Length) => (n ? `Schneide ein V aus der Spitze ${mat(w.m, "gen")}, etwa ${length(n)} tief, sodass zwei Spitzen stehen bleiben. ` : "");
   const thread = the("thread", "acc");
   const excess = the("excess", "acc");
 
   return (said: Said): string => {
     switch (said.kind) {
       case "slide-bead":
+        if (said.last) return `Schiebe ${mat(said.m, "acc")} vor der Tube auf den Innenschlauch, dicht an ${the("head", "acc")}, und schmilz das Ende des Innenschlauchs zu einem Wulst, der ${pronoun(noun(said.m)).acc} dort hält.`;
         if (said.shot) return `Klemme ${mat(said.m, "acc")} direkt hinter ${the("eye", "dat")} auf den Schenkel und klebe ${pronoun(noun(said.m)).acc} fest; bemale ${pronoun(noun(said.m)).acc}, mit einem Auge auf jeder Seite.`;
         return said.mount === "tube"
           ? `Schiebe ${mat(said.m, "acc")} auf das vordere Ende ${the("tube", "gen")}.`
@@ -197,24 +201,24 @@ function writerFor(recipe: Recipe) {
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
-        return `Binde ${w.text} aufrecht ein, so dass ${p.nom} ${length(said.length)} hoch ${verb(w.refers, "steht", "stehen")}, und richte ${p.acc} mit ${many("turn", "dat")} davor auf.${said.divide ? ` Teile ${p.acc} mit ${eights} zu einem V.` : ""}${said.fan ? ` Lass ${p.acc} sich nach vorn und hinten auffächern, schmal von Seite zu Seite.` : ""}`;
+        return `${notch(said.what, said.notch)}Binde ${w.text} aufrecht ein, so dass ${p.nom} ${length(said.length)} hoch ${verb(w.refers, "steht", "stehen")}, und richte ${p.acc} mit ${many("turn", "dat")} davor auf.${said.divide ? ` Teile ${p.acc} mit ${eights} zu einem V.` : ""}${said.fan ? ` Lass ${p.acc} sich nach vorn und hinten auffächern, schmal von Seite zu Seite.` : ""}${said.flat ? ` Lass ${p.acc} flach liegen, die Vorderseite nach vorn, statt hochkant.` : ""}`;
       }
       case "tie-in-wing-under": {
         const w = what(said.what);
-        return `Binde ${w.text} unter ${the(alongId, "dat")} als Flügel ein (oben, wenn die Fliege mit der Hakenspitze nach oben schwimmt), so dass ${pronoun(w.refers).nom} ${length(said.length)} nach hinten ${verb(w.refers, "reicht", "reichen")}.`;
+        return `${notch(said.what, said.notch)}Binde ${w.text} unter ${the(alongId, "dat")} als Flügel ein (oben, wenn die Fliege mit der Hakenspitze nach oben schwimmt), so dass ${pronoun(w.refers).nom} ${length(said.length)} nach hinten ${verb(w.refers, "reicht", "reichen")}.${flat(said.flat, w.refers, true)}`;
       }
       case "tie-in-beard": {
         const w = what(said.what);
-        return `Binde ${w.text} unter ${the(alongId, "dat")} als Bart ein, so dass ${pronoun(w.refers).nom} ${length(said.length)} nach hinten ${verb(w.refers, "reicht", "reichen")}.`;
+        return `${notch(said.what, said.notch)}Binde ${w.text} unter ${the(alongId, "dat")} als Bart ein, so dass ${pronoun(w.refers).nom} ${length(said.length)} nach hinten ${verb(w.refers, "reicht", "reichen")}.${flat(said.flat, w.refers, true)}`;
       }
       case "tie-in-reach": {
         const w = what(said.what);
-        return `${pick(said.width)}Binde ${w.text} so ein, dass ${the("tip", "nom", true)} ${REACH[said.reach]} reichen (${length(said.length)} von der Einbindestelle)${angle(said.angle)}.${flare(said.flare, w.refers)}`;
+        return `${pick(said.width)}${notch(said.what, said.notch)}Binde ${w.text} so ein, dass ${the("tip", "nom", true)} ${REACH[said.reach]} reichen (${length(said.length)} von der Einbindestelle)${angle(said.angle)}.${flare(said.flare, w.refers)}${flat(said.flat, w.refers)}`;
       }
       case "tie-in-behind": {
         const w = what(said.what);
         const fray = said.fray ? ` Zieh den Kern heraus und zupfe ${pronoun(w.refers).acc} zu losen ${many("strand", "dat")} auf.` : "";
-        return `${pick(said.width)}Binde ${w.text} ein und lass ${length(said.length)} nach hinten überstehen${angle(said.angle)}.${flare(said.flare, w.refers)}${fray}`;
+        return `${pick(said.width)}${notch(said.what, said.notch)}Binde ${w.text} ein und lass ${length(said.length)} nach hinten überstehen${angle(said.angle)}.${flare(said.flare, w.refers)}${fray}${flat(said.flat, w.refers)}`;
       }
       case "tie-in":
         if (said.cut) {
@@ -242,6 +246,10 @@ function writerFor(recipe: Recipe) {
         if (said.under) return `${said.bubble ? "Klappe" : "Ziehe"} ${mat(said.m, "acc")} ${said.bubble ? "als lockere Blase " : ""}unter ${the("body", "dat")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         if (said.bubble) return `Klappe ${mat(said.m, "acc")} als lockere Blase über ${the("body", "acc")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
+      case "fold-back": {
+        const p = pronoun(noun(said.m));
+        return `Klappe ${mat(said.m, "acc")} über die Einbindestelle nach hinten und baue dicht davor einen kleinen Wall aus ${many("turn", "dat")}, sodass ${p.nom} von ${the("body", "dat")} ${verb(noun(said.m), "absteht", "abstehen")}.`;
+      }
       case "lay-back":
         if (said.tied && (said.round || said.trailing)) {
           const where = said.round ? `rund um ${the(alongId, "acc")}` : `über die Oberseite ${the("body", "gen")}`;

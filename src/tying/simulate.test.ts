@@ -848,3 +848,97 @@ steps {
     expect(hackle.base.underAt(mid)).toBeLessThan(0.2);
   });
 });
+
+describe("a General Practitioner: feathers laid flat over the back, tippet eyes cut into a V", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/general-practitioner.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("general-practitioner.kdl does not load");
+  const build = simulate(result.recipe);
+  const feathers = build.steps.flatMap((s) => s.pieces).filter((p) => p.type === "feather");
+
+  it("lays each feather flat, tied in further forward over the one behind it", () => {
+    expect(feathers.every((f) => f.type === "feather" && f.flat)).toBe(true);
+    const shells = feathers.filter((f) => f.material.startsWith("shell-"));
+    for (let k = 1; k < shells.length; k++) {
+      const [behind, front] = [shells[k - 1]!, shells[k]!] as Extract<typeof feathers[number], { type: "feather" }>[];
+      // Over the one behind at its tie-in point.
+      const over = front!.radius + (front!.x - behind!.x) * Math.tan(front!.angle);
+      expect(over).toBeGreaterThan(behind!.radius);
+    }
+  });
+
+  it("cuts the tippet's tip into a V and bars it black, and says so", () => {
+    const eyes = feathers.find((f) => f.material === "eyes");
+    expect(eyes).toMatchObject({ notch: 0.5, flat: true });
+    expect(eyes?.type === "feather" && eyes.marks?.length).toBeGreaterThan(0);
+    const step = build.steps.find((s) => s.pieces.includes(eyes!))!;
+    expect(step.text).toMatch(/Cut a V out of the tip of the golden pheasant tippet feather, about half the gape deep/);
+    expect(step.text).toMatch(/Lay it flat on top, face up/);
+  });
+});
+
+describe("a Temple Dog tube: the last section folded back where it is tied in, the cone pushed on last", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/phatakorva.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("phatakorva.kdl does not load");
+  const build = simulate(result.recipe);
+
+  it("folds the hair tied in pointing forward back over its tie-in, and says so", () => {
+    const fold = build.steps.find((s) => s.title.startsWith("Pull over"))!;
+    const hair = fold.pieces.find((p) => p.type === "bundle" && p.material === "wing-front");
+    expect(hair).toMatchObject({ direction: "back" });
+    expect(fold.text).toMatch(/back over where it is tied in and build a small wall of thread/);
+    const ahead = build.steps.flatMap((s) => s.pieces).find((p) => p.type === "bundle" && p.material === "wing-front" && p.direction === "forward");
+    expect(ahead?.until).toBe(fold.start);
+  });
+
+  it("pushes the cone onto the liner in front of the tube after the whip finish", () => {
+    const last = build.steps.at(-1)!;
+    const cone = last.pieces.find((p) => p.type === "bead")!;
+    expect(cone.type === "bead" && cone.x).toBeGreaterThan(build.hook.shankLength);
+    // (So it comes on from the front, over the liner, not round the bend through the dressing.)
+    expect(cone).toMatchObject({ front: true });
+    expect(last.text).toMatch(/onto the liner in front of the tube/);
+  });
+});
+
+describe("a furnace hackle", () => {
+  it("is drawn with its black centre", () => {
+    const result = loadRecipe(readFileSync(new URL("../../patterns/usk-grub.kdl", import.meta.url), "utf8"));
+    if (!result.ok) throw new Error("usk-grub.kdl does not load");
+    const collar = simulate(result.recipe).steps.flatMap((s) => s.pieces).find((p): p is WrapsPiece => p.type === "wraps" && p.material === "collar")!;
+    expect(collar.marks?.[0]).toMatchObject({ from: 0 });
+  });
+});
+
+describe("a feather laid flat or cut into a V, tied in however", () => {
+  const recipe = (tieIn: string) => {
+    const r = loadRecipe(`id t
+name "T"
+type wet
+difficulty intermediate
+hook wet-standard size=10
+thread black size="8/0"
+materials {
+    wing golden-pheasant-tippet-feather
+}
+steps {
+    attach-thread at=0.8
+    ${tieIn}
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\n"));
+    return simulate(r.recipe).steps[1]!.text;
+  };
+
+  it("says to cut the V and lay it flat under the shank, as a beard", () => {
+    const text = recipe("tie-in wing length=1 side=under notch=0.3 flat=#true");
+    expect(text).toMatch(/^Cut a V out of the tip of the golden pheasant tippet feather/);
+    expect(text).toMatch(/as a beard.*Lay it flat under the belly/);
+  });
+
+  it("says to cut the V on an upright feather, and that it lies flat", () => {
+    const text = recipe("tie-in wing length=1 angle=80 notch=0.3 flat=#true");
+    expect(text).toMatch(/^Cut a V out of the tip/);
+    expect(text).toMatch(/upright.*Let it lie flat/);
+  });
+});

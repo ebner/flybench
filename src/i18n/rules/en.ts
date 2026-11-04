@@ -17,7 +17,8 @@ const kind = (k: MaterialKind) => inLang("en", () => kindName(k));
 
 export const RULES_EN: RuleCatalog = {
   duplicateMaterial: (p) => `The material “${p.m}” is listed more than once.`,
-  afterWhipFinish: () => "After the whip finish you can only trim, glue on, or start the thread again.",
+  afterWhipFinish: () => "After the whip finish you can only trim, glue on, start the thread again or, on a tube, push on a cone.",
+  headLast: () => "A cone pushed onto the tube after the whip finish goes on last: after it you can only trim or glue on.",
   unknownMaterial: (p) => `There is no material called “${p.m}”.`,
   tieOffNext: (p) => `You have just wound “${p.m}”. Tie it off before anything else.`,
   securePalmer: (p) => `You wound “${p.m}” back towards the bend. Secure it by winding another material forward over its tip.`,
@@ -63,6 +64,8 @@ export const RULES_EN: RuleCatalog = {
   forwardUpright: () => "A material pointing forward can't also stand upright.",
   extendedOnly: () => "Only chenille, yarn or foam tied in with a length can stick out in one piece.",
   tipOnly: () => "Only material that sticks out in one piece can have a coloured end.",
+  flatOnly: () => "Only a single feather that sticks out from where it is tied in can be laid flat over the back.",
+  notchOnly: () => "Only a feather that sticks out from where it is tied in can have a V cut into its tip, and not deeper than it is long.",
   madeBodyOnly: () => "Segments and tails only go with a body that sticks out in one piece.",
   tailsOnly: (p) => `Only hair, fibres or biots can come out of the end of a body as tails, not “${p.m}”.`,
   tailsLength: () => "Tails coming out of the body need a length, and a tail length or spread needs tails.",
@@ -80,7 +83,7 @@ export const RULES_EN: RuleCatalog = {
   threadElsewhere: (p) => `The thread is at ${at(p.thread)}. Move it to ${at(p.to)} before you wind there.`,
   windToThread: (p) => `The thread is at ${at(p.thread)}. Wind forward to it, or first move the thread back to ${at(p.to)}.`,
   tieInBeforePull: (p) => `“${p.m}” must be tied in (and not yet used) before it is pulled over.`,
-  pullForward: (p) => `Pull “${p.m}” forward from where it is tied in, or lay it back over the body.`,
+  pullForward: (p) => `Pull “${p.m}” forward from where it is tied in, or lay it back over the body. Only hair tied in pointing forward can be folded back where it is tied in.`,
   splitAroundPost: (p) => `“${p.m}” can only be parted round “${p.post}” if that stands upright on its way forward, between where “${p.m}” is tied in and where it is tied down.`,
   secureLaidBack: (p) => `You laid “${p.m}” back over the body. Hold its end by winding another material forward over it.`,
   threadForPull: (p) => `The thread is at ${at(p.thread)}. Move it to ${at(p.to)} to tie the material down there.`,

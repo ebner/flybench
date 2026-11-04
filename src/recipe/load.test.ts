@@ -462,6 +462,10 @@ describe("semantic validation", () => {
     ["leave is for hair", PALMER_STEPS.replace("trim hackle", "trim hackle leave=0.1"), /leave only applies to hair butts/],
     ["spread is for bunches", VALID_STEPS.replace("tie-in herl", "tie-in herl spread=40"), /spread only applies/],
     ["width is for feathers", PALMER_STEPS.replace("angle=15", "angle=15 width=1"), /width only applies to feather wings/],
+    ["only feathers lie flat", PALMER_STEPS.replace("angle=15", "angle=15 flat=#true"), /flat only applies to a feather/],
+    ["only feathers are cut into a V", PALMER_STEPS.replace("angle=15", "angle=15 notch=0.3"), /notch only applies to a feather/],
+    ["a cone goes on after the whip finish only on a tube", VALID_STEPS + "\n slide-bead herl", /nothing but trimming, gluing on, or starting the thread again, can follow the whip finish/],
+    ["only hair tied in pointing forward folds back where it is tied in", PALMER_STEPS.replace("length=1.7 angle=15", "length=1.7 angle=15\n pull-over wing to=0.75"), /pull "wing" forward from where it is tied in, or lay it back/],
   ];
   for (const [name, steps, pattern] of cases) {
     it(name, () => {
@@ -1004,5 +1008,14 @@ materials {
   it("takes below only on spun hair trimmed to a rounded shape", () => {
     expect(errorsOf(load(STEPS.replace("shape=cigar", "shape=wedge"), BOMBER))).toEqual(expect.arrayContaining([expect.stringMatching(/below only applies/)]));
     expect(errorsOf(load(STEPS.replace("trim body leave=0.42 shape=cigar below=0.2", "trim body keep=top below=0.2"), BOMBER))).toEqual(expect.arrayContaining([expect.stringMatching(/below only applies/)]));
+  });
+});
+
+describe("a cone pushed onto a tube's liner after the whip finish", () => {
+  const text = readFileSync(new URL("phatakorva.kdl", patternsDir), "utf8");
+  it("is allowed on a tube, as the last thing", () => {
+    expect(loadRecipe(text).ok).toBe(true);
+    const after = loadRecipe(text.replace("    slide-bead cone\n", "    slide-bead cone\n    tie-in topping length=1\n"));
+    expect(after.ok ? [] : after.errors.map((e) => e.message).join("\n")).toMatch(/goes on last/);
   });
 });

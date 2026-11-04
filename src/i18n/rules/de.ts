@@ -21,7 +21,8 @@ const kind = (k: MaterialKind) => inLang("de", () => kindName(k));
 
 export const RULES_DE: RuleCatalog = {
   duplicateMaterial: (p) => `Das Material „${p.m}“ ist mehr als einmal angegeben.`,
-  afterWhipFinish: () => "Nach dem Kopfknoten kann nur noch geschnitten, aufgeklebt oder der Faden neu angelegt werden.",
+  afterWhipFinish: () => "Nach dem Kopfknoten kann nur noch geschnitten, aufgeklebt, der Faden neu angelegt oder, auf einer Tube, ein Konus aufgeschoben werden.",
+  headLast: () => "Ein Konus, der nach dem Kopfknoten auf die Tube geschoben wird, kommt zuletzt: danach kann nur noch geschnitten oder aufgeklebt werden.",
   unknownMaterial: (p) => `Es gibt kein Material namens „${p.m}“.`,
   tieOffNext: (p) => `„${p.m}“ wurde gerade gewunden und muss abgebunden werden, bevor es weitergeht.`,
   securePalmer: (p) => `„${p.m}“ wurde in offenen Windungen nach hinten gewunden. Sichere die Spitze, indem du ein anderes Material darüber nach vorn windest.`,
@@ -67,6 +68,8 @@ export const RULES_DE: RuleCatalog = {
   forwardUpright: () => "Ein Material, das nach vorn zeigt, kann nicht zugleich aufrecht stehen.",
   extendedOnly: () => "Nur Chenille, Garn oder Foam, mit einer Länge eingebunden, kann in einem Stück überstehen.",
   tipOnly: () => "Ein gefärbtes Ende gibt es nur bei Material, das in einem Stück übersteht.",
+  flatOnly: () => "Nur eine einzelne Feder, die von der Einbindestelle absteht, lässt sich flach über den Rücken legen.",
+  notchOnly: () => "Nur in die Spitze einer Feder, die von der Einbindestelle absteht, lässt sich ein V schneiden, und nicht tiefer, als die Feder lang ist.",
   madeBodyOnly: () => "Segmente und Schwanzfäden gehören nur zu einem Körper, der in einem Stück übersteht.",
   tailsOnly: (p) => `Nur Haar, Fibern oder Biots können als Schwanzfäden aus dem Ende eines Körpers kommen, nicht „${p.m}“.`,
   tailsLength: () => "Schwanzfäden aus dem Körper brauchen eine Länge, und eine Länge oder Spreizung der Schwanzfäden braucht Schwanzfäden.",
@@ -84,7 +87,7 @@ export const RULES_DE: RuleCatalog = {
   threadElsewhere: (p) => `Der Bindefaden ist bei ${at(p.thread)}. Führe ihn bis ${at(p.to)}, bevor du bis dorthin windest.`,
   windToThread: (p) => `Der Bindefaden ist bei ${at(p.thread)}. Winde bis zu ihm nach vorn, oder führe den Faden zuerst zurück bis ${at(p.to)}.`,
   tieInBeforePull: (p) => `„${p.m}“ muss eingebunden (und noch nicht verarbeitet) sein, bevor es nach vorn geklappt wird.`,
-  pullForward: (p) => `Klappe „${p.m}“ von der Einbindestelle aus nach vorn, oder lege es nach hinten über den Körper.`,
+  pullForward: (p) => `Klappe „${p.m}“ von der Einbindestelle aus nach vorn, oder lege es nach hinten über den Körper. Nur nach vorn eingebundenes Haar lässt sich an der Einbindestelle zurückklappen.`,
   splitAroundPost: (p) => `„${p.m}“ lässt sich nur um „${p.post}“ herum teilen, wenn dieses auf dem Weg nach vorn aufrecht steht, zwischen der Einbindestelle von „${p.m}“ und der Stelle, an der es abgebunden wird.`,
   secureLaidBack: (p) => `Du hast „${p.m}“ nach hinten über den Körper gelegt. Halte das Ende fest, indem du ein anderes Material darüber nach vorn windest.`,
   threadForPull: (p) => `Der Bindefaden ist bei ${at(p.thread)}. Führe ihn bis ${at(p.to)}, um das Material dort abzubinden.`,

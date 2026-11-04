@@ -73,11 +73,14 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   // `hanging`: the step that tied it in without a length, so it waits to be wound or pulled over.
   const materials = new Map<
     string,
-    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number; spun?: boolean; glued?: boolean }
+    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number; spun?: boolean; glued?: boolean; forward?: boolean }
   >();
   let thread: number | null = null;
   let weighted = false;
   let finished = false;
+  /** A bead or cone pushed onto a tube's liner after the whip finish: only trims may follow. */
+  let headLast = false;
+  const tube = hookModel(recipe.hook).tube?.kind === "tube";
   /** A material that the next step has to tie off or secure (and one wound together with it). */
   let pending: { material: string; rear: boolean; with?: string } | null = null;
   /** Woven strands held at `at`, each still to be tied off there. */
@@ -99,7 +102,13 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     const path = ["steps", i];
     // Trimming after the whip finish is common (heads, hackles), or the thread is started again.
     // (Weaving is done with the thread cut, too, and gluing needs no thread.)
-    if (finished && step.op !== "trim" && step.op !== "attach-thread" && step.op !== "weave" && step.op !== "glue") {
+    // (A body glued on needs no thread or front, so it may still be glued on.)
+    if (headLast && step.op !== "trim" && step.op !== "slide-bead" && step.op !== "glue") {
+      rule("headLast", {}, path);
+      return;
+    }
+    // On a tube, a cone or bead may be pushed onto the liner in front of it once the fly is finished.
+    if (finished && step.op !== "trim" && step.op !== "attach-thread" && step.op !== "weave" && step.op !== "glue" && !(step.op === "slide-bead" && tube)) {
       rule("afterWhipFinish", {}, path);
       return;
     }
@@ -162,7 +171,12 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     // Steps that can come before the thread.
     if (step.op === "slide-bead") {
       if (archetype !== "bead") rule("notABead", { m: step.material }, [...path, "material"]);
-      else if (thread !== null) rule("beadBeforeThread", {}, path);
+      else if (finished && tube) {
+        // Pushed onto the liner in front of the finished tube fly (and held by melting its end).
+        if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, path);
+        else materials.set(step.material, { state: "done", at: 1, butts: false });
+        headLast = true;
+      } else if (thread !== null) rule("beadBeforeThread", {}, path);
       // A bead can't pass over wire already on the shank.
       else if (weighted) rule("beadBeforeWeight", {}, path);
       else if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, path);
@@ -295,6 +309,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("extendedOnly", {}, [...path, "extended"]);
         }
         if (step.tip !== undefined && !step.extended) rule("tipOnly", {}, [...path, "tip"]);
+        // A feather laid flat over the back (not a pair, nor across), or cut into a V at its tip.
+        if (step.flat && (archetype !== "feather" || step.length === undefined || step.spread !== undefined || step.side === "across")) rule("flatOnly", {}, [...path, "flat"]);
+        if (step.notch !== undefined && (archetype !== "feather" || step.length === undefined || step.notch >= step.length)) rule("notchOnly", {}, [...path, "notch"]);
         // A body made beforehand on a needle: bound into segments, its tails tied in at its tip first.
         const made = (["segments", "tails", "tail-length", "tail-spread"] as const).find((k) => step[k] !== undefined);
         if (made && !step.extended) rule("madeBodyOnly", {}, [...path, made]);
@@ -321,6 +338,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
             // square first, as for a bullet head), with nothing to trim.
             butts: archetype === "hair" && step.side !== "across" && !step.forward,
             hanging: step.length === undefined ? i : undefined,
+            forward: Boolean(step.forward && step.length !== undefined),
             // Only an upright bunch makes a post a hackle can be wound round: not a feather
             // pair, an extended body, a fur strip (it sticks out as one piece) or strands tied across.
             post:
@@ -414,7 +432,13 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("foldOnly", {}, [...path, "fold"]);
         }
         if (Math.abs(step.to - m.at) <= POSITION_TOLERANCE) {
-          rule("pullForward", { m: step.material }, [...path, "to"]);
+          // Hair tied in pointing forward can be folded back over where it is tied in, held up by a
+          // wall of thread in front of it (a Temple Dog's last wing section); the thread is there.
+          if (archetype !== "hair" || !m.forward || step.bubble !== undefined || step.wing !== undefined || step.around !== undefined || step.fold !== undefined) {
+            rule("pullForward", { m: step.material }, [...path, "to"]);
+          } else if (Math.abs(step.to - thread) > POSITION_TOLERANCE) {
+            rule("threadForPull", { thread, to: step.to }, [...path, "to"]);
+          }
           m.state = "done";
         } else if (step.to < m.at && Math.abs(step.to - thread) <= POSITION_TOLERANCE) {
           // Folded back from where it is tied in and tied down there by the thread (a foam

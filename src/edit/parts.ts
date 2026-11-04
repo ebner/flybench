@@ -1,6 +1,6 @@
 import { MATERIALS, WINDABLE, type Archetype, type MaterialKind } from "../recipe/materials";
 import { sampleColour } from "../catalog/swatch";
-import { NAMED_COLORS, RecipeSchema, type Material, type Op, type Recipe, type Step } from "../recipe/schema";
+import { isTube, NAMED_COLORS, RecipeSchema, type Material, type Op, type Recipe, type Step } from "../recipe/schema";
 import { POSITION_TOLERANCE, validateSemantics } from "../recipe/validate";
 import type { RecipeError } from "../recipe/errors";
 
@@ -115,6 +115,12 @@ export interface Part {
   tiedBack?: boolean;
   /** A sleeve's rear end frayed into loose strands this long (gapes). */
   fray?: number;
+  /** A feather laid flat over the back, face up (a General Practitioner's shell). */
+  flat?: boolean;
+  /** A feather with a V this deep (gapes) cut out of its tip (a General Practitioner's eyes). */
+  notch?: number;
+  /** A cone or bead pushed onto a tube's liner after the whip finish, rather than before the thread. */
+  last?: boolean;
   /**
    * A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres
    * (keep), spun hair or glued fibres cut flat (keep, leave) or to a shape, perhaps cut closer
@@ -265,7 +271,7 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
 // ——— The builder's number fields ———
 
 /** A part's settings the builder edits as numbers. */
-export type NumberKey = "length" | "angle" | "spread" | "width" | "collar" | "fray" | "fan" | "segments" | "tailLength" | "tailSpread" | "fold";
+export type NumberKey = "length" | "angle" | "spread" | "width" | "collar" | "fray" | "fan" | "segments" | "tailLength" | "tailSpread" | "fold" | "notch";
 
 /** A number field's range, and the recipe value it is written as (a step's property, a material's, the hook's). */
 export interface NumberRange {
@@ -302,6 +308,8 @@ export function partRange(p: Pick<Part, "how">, key: NumberKey): NumberRange {
       return stepRange(0, 90, "tie-in", "tail-spread");
     case "fold":
       return stepRange(0.2, 2, "pull-over", "fold");
+    case "notch":
+      return stepRange(0.05, 3, "tie-in", "notch");
   }
 }
 
@@ -528,9 +536,10 @@ export function compile(fly: PartsFly): Compiled {
   const actions: Action[] = fly.parts.flatMap((part) => part.keys.slice(0, actionCount(part)).map((key, index) => ({ key, part, index })));
   actions.push({ key: fly.finish.key, part: null as unknown as Part, index: -1 });
   for (const r of fly.restarts ?? []) actions.push({ key: r.key, part: null as unknown as Part, index: -1, restart: r });
-  // Before the thread: beads, then weighting, whatever their keys.
+  // Before the thread: beads, then weighting, whatever their keys. (A cone pushed onto a tube's
+  // liner last keeps its place after the whip finish.)
   actions.sort((a, b) => {
-    const pre = (x: Action) => (x.part?.how === "slide" ? 0 : x.part?.how === "weight" ? 1 : 2);
+    const pre = (x: Action) => (x.part?.how === "slide" && !x.part.last ? 0 : x.part?.how === "weight" ? 1 : 2);
     return pre(a) - pre(b) || a.key - b.key;
   });
   // A palmered hackle's tip is held by the next winding: its rib's, wound right after it.
@@ -587,6 +596,8 @@ export function compile(fly: PartsFly): Compiled {
       ...(p.side !== undefined && { side: p.side }),
       ...(p.forward && { forward: true }),
       ...(p.fan !== undefined && p.length !== undefined && { fan: p.fan }),
+      ...(p.flat && p.length !== undefined && { flat: true }),
+      ...(p.notch !== undefined && p.length !== undefined && { notch: p.notch }),
     };
     // A bunch's trim is of hair butts: of the hair in a mix only.
     const trim = () =>
@@ -719,8 +730,9 @@ export function compile(fly: PartsFly): Compiled {
         else if (i === 1) {
           const end = p.to ?? 0.9;
           // Laid back from the eye, the next winding holds it, or the thread ties it down there;
-          // folded forward, the thread ties it down.
-          if (end > (p.at ?? 0) || p.tiedBack) to(end, p.id);
+          // folded forward, the thread ties it down; hair folded back where it is tied in is held
+          // by the thread there.
+          if (end > (p.at ?? 0) || p.tiedBack || Math.abs(end - (p.at ?? 0)) < POSITION_TOLERANCE) to(end, p.id);
           else toHolder();
           p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.tipWing !== undefined && { wing: p.tipWing }), ...(p.fold !== undefined && { fold: p.fold }), ...(k === 0 ? n : {}) }, p.id));
         } else trim();
@@ -819,6 +831,8 @@ export function partsOf(recipe: Recipe): PartsFly | null {
   const woundWith = new Set(steps.flatMap((s) => (s.op === "wind" && s.with !== undefined ? [s.with] : [])));
   /** Hair folded back and tied down, by id: where, while its tips trail behind (until trimmed). */
   const trailing = new Map<string, number>();
+  /** Cones pushed onto a tube's liner after the whip finish. */
+  const lastBeads = new Set<string>();
 
   for (let i = 0; i < steps.length; i++) {
     const s = steps[i]!;
@@ -883,6 +897,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       continue;
     }
     const id = s.material;
+    if (s.op === "slide-bead" && finish) lastBeads.add(id);
     if (!groups.has(id)) {
       groups.set(id, []);
       order.push(id);
@@ -925,6 +940,8 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       ...(t.side !== undefined && { side: t.side }),
       ...(t.forward && { forward: true }),
       ...(t.fan !== undefined && { fan: t.fan }),
+      ...(t.flat && { flat: true }),
+      ...(t.notch !== undefined && { notch: t.notch }),
     });
     const trimOf = (s: Step) => {
       const t = s as Extract<Step, { op: "trim" }>;
@@ -953,7 +970,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       });
       return other;
     };
-    if (ops === "slide-bead") part = { id, how: "slide", mats: [mat], keys: [g[0]!.i] };
+    if (ops === "slide-bead") part = { id, how: "slide", mats: [mat], keys: [g[0]!.i], ...(lastBeads.has(id) && { last: true }) };
     else if (ops === "tie-in weave tie-off") {
       // The belly's strand tied in and off right after the top's.
       const wv = g[1]!.s as Extract<Step, { op: "weave" }>;
@@ -1065,7 +1082,7 @@ function sameWay(a: Part, b: Part, steps: Step[]): boolean {
   // (A pair wound together in one pass is a part of its own: it can't take a third material.)
   if (a.together || b.together) return false;
   if (!["bunch", "wound", "parachute"].includes(a.how)) return false;
-  const geom = (p: Part) => JSON.stringify([p.at, p.to, p.length, p.angle, p.spread, p.width, p.side, p.forward, p.post, p.counter, p.trim, p.windTo, p.fan]);
+  const geom = (p: Part) => JSON.stringify([p.at, p.to, p.length, p.angle, p.spread, p.width, p.side, p.forward, p.post, p.counter, p.trim, p.windTo, p.fan, p.flat, p.notch]);
   if (geom(a) !== geom(b)) return false;
   // The tie-ins next to each other, and each later action right after the other's.
   const lastA = a.keys.length;
@@ -1221,7 +1238,7 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
   const [bodyFrom, bodyTo] = body && body.how !== "extended" ? extentOf(body) : [0, 0.7];
   const c = CLASSIC[part.role];
   const next: Omit<Part, "keys"> & { keys?: number[] } = { ...part, how };
-  for (const k of ["at", "from", "to", "turns", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread", "taper", "fold"] as const) delete next[k];
+  for (const k of ["at", "from", "to", "turns", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread", "taper", "fold", "flat", "notch", "last"] as const) delete next[k];
   switch (how) {
     case "bunch":
       if (part.mats.some((m) => arch(m.kind) === "eyes")) Object.assign(next, { at: c.at ?? 0.85 });
@@ -1355,6 +1372,27 @@ function tidied(fly: PartsFly): PartsFly {
         const { post: _p, ...rest } = next;
         next = rest as Part;
       }
+    }
+    // Laid flat, or cut into a V, only a feather on its own sticking out from where it is tied in.
+    const feathers = next.how === "bunch" && next.length !== undefined && next.mats.length > 0 && next.mats.every((m) => arch(m.kind) === "feather");
+    if (next.flat && (!feathers || next.spread !== undefined || next.side === "across")) {
+      const { flat: _f, ...rest } = next;
+      next = rest as Part;
+    }
+    if (next.notch !== undefined && (!feathers || next.notch >= (next.length ?? 0))) {
+      const { notch: _n, ...rest } = next;
+      next = rest as Part;
+    }
+    // Pushed on after the whip finish only onto a tube's liner.
+    if (next.last && (next.how !== "slide" || !isTube(fly.meta.hook.model) || fly.meta.hook.model === "waddington")) {
+      const { last: _l, ...rest } = next;
+      next = rest as Part;
+    }
+    // Folded back where it is tied in: only hair tied in pointing forward. Anything else is pulled
+    // forward over the body, or, tied in near the eye, laid back and tied down by the thread.
+    if (next.how === "pulled" && near(next.to, next.at ?? 0) && !(next.forward && next.length !== undefined && next.mats.every((m) => arch(m.kind) === "hair"))) {
+      const at = next.at ?? 0;
+      next = at < 0.8 ? { ...next, to: 0.88 } : { ...next, to: round(at - 0.2), tiedBack: true };
     }
     if (next !== p) changed = true;
     return next;

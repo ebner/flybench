@@ -482,7 +482,7 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   if (piece.fibreLength && piece.look in WOUND_FIBRES) {
     const spec = WOUND_FIBRES[piece.look as keyof typeof WOUND_FIBRES];
     const list = placeFibres(woundFibres(piece, mulberry32((piece.seed ?? piece.id) * 7919 + 1)), space);
-    fibres = fibreMesh(list, surfaces.get(piece.look, piece.color, true), spec.tip);
+    fibres = fibreMesh(list, surfaces.get(piece.look, piece.color, true), spec.tip, 1, piece.marks);
     group.add(fibres.object);
   }
 
@@ -631,6 +631,8 @@ const BUNDLE = {
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
   cdc: { radius: 0.003, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45, curve: 0.3, droop: 0.3 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2, curve: 0.08, droop: 0 },
+  // Herl tied in as strands (a topping): fine stems, their flue added below.
+  herl: { radius: 0.005, tip: 0.5, tipShade: 0.9, spread: 0.12, flare: 0.03, sideFlare: 0.2, lengthJitter: 0.15, curve: 0.1, droop: 0.3 },
   // Rubber legs as tails and antennae: thick, soft strands that splay and sag.
   legs: { radius: 0.014, tip: 0.85, tipShade: 1, spread: 0.1, flare: 0.15, sideFlare: 0.8, lengthJitter: 0.1, curve: 0.2, droop: 0.3 },
   // Tubing tied in as a tail, picked apart: fine metallic strands, kinked from the braid, uneven.
@@ -913,6 +915,9 @@ const BARBS_PER_GAPE = 14;
 
 /** How far a feather is folded round its spine: breast feathers make a roof, tips and slips are flat. */
 const FEATHER_FOLD: Record<FeatherPiece["shape"], number> = { breast: 1.6, tip: 0.2, slip: 0.25, eye: 0.15 };
+// Assumption: a feather laid flat over the back curves down over the body's sides about as far as
+// a breast feather's roof, a little less.
+const FLAT_FOLD = 1.1;
 
 /** The vane is solid to this fraction of the feather's width; a fringe of barbs makes the edge. */
 const VANE = 0.82;
@@ -923,10 +928,12 @@ const FRINGE_PER_GAPE = 24;
 function featherForm(piece: FeatherPiece) {
   const L = piece.length;
   const outline = FEATHER_OUTLINE[piece.shape];
-  const fold = FEATHER_FOLD[piece.shape];
-  // Hackle tips and quill slips curve gently down over the body; a slip's end is ragged.
-  const droop = piece.shape === "breast" ? 0 : 0.05;
-  const half = (s: number) => Math.max(outline(s) * piece.width, 1e-4);
+  const fold = piece.flat ? FLAT_FOLD : FEATHER_FOLD[piece.shape];
+  // Hackle tips and quill slips curve gently down over the body; a slip's end is ragged. (One laid
+  // flat lies on what is behind it.)
+  const droop = piece.shape === "breast" || piece.flat ? 0 : 0.05;
+  // A feather with a V cut out of its tip has been cut square across its broad end first.
+  const half = (s: number) => Math.max(outline(piece.notch ? Math.min(s, 0.7) : s) * piece.width, 1e-4);
   /** The point at s along the feather (0 = base, 1 = tip) and t across it (-1 to 1, 0 = quill). */
   const point = (s: number, t: number) => {
     const r = half(s) / fold;
@@ -945,9 +952,18 @@ function featherForm(piece: FeatherPiece) {
     const barbs = 1 - 0.14 * (0.5 + 0.5 * Math.sin(2 * Math.PI * BARBS_PER_GAPE * (s * L - Math.abs(t) * half(s) * 1.3)));
     const quill = 1 + 0.1 * Math.exp(-((t * 10) ** 2));
     const edge = 1 - 0.3 * Math.abs(t) ** 6;
-    return bars * barbs * quill * edge * (0.8 + 0.2 * s);
+    // Bands across it (a tippet's black bars) follow the barbs, reaching further out at the edges.
+    const along = s + Math.abs(t) * 0.12;
+    const band = piece.marks?.find((m) => along >= m.from && along <= m.to);
+    return bars * barbs * quill * edge * (0.8 + 0.2 * s) * (band ? band.shade : 1);
   };
-  return { L, half, point, shade };
+  /**
+   * How far from the quill the vane starts at s (as a fraction of `VANE`): 0 but where a V is cut
+   * out of the tip, there widening to the edge at the very tip, so two points are left.
+   */
+  const notchFrom = piece.notch ? 1 - Math.min(0.95, piece.notch / L) : 1;
+  const cut = (s: number) => (s <= notchFrom ? 0 : (s - notchFrom) / (1 - notchFrom));
+  return { L, half, point, shade, cut };
 }
 
 /** A feather drawn in more than one colour (a jungle cock eye) is drawn white, its colours in its vertices. */
@@ -965,7 +981,7 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
   const base = painted(piece) ? new THREE.Color(piece.color) : null;
   const tints = base && { base: paint(base), enamel: paint(ENAMEL), tip: paint(ENAMEL_TIP) };
   // Enough rows along the feather that bars and barbs don't alias into a checkerboard.
-  const segS = Math.min(320, Math.max(piece.barring > 0 || painted(piece) ? 128 : 48, Math.round(form.L * BARBS_PER_GAPE * 3)));
+  const segS = Math.min(320, Math.max(piece.barring > 0 || painted(piece) || piece.marks ? 128 : 48, Math.round(form.L * BARBS_PER_GAPE * 3)));
   const segT = 24;
   const positions: number[] = [];
   const colors: number[] = [];
@@ -973,7 +989,9 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
   for (let i = 0; i <= segS; i++) {
     const s = i / segS;
     for (let j = 0; j <= segT; j++) {
-      const t = ((j / segT) * 2 - 1) * VANE;
+      // With a V cut out of its tip, each half of the vane runs from the cut to its edge there.
+      const u = (j / segT) * 2 - 1;
+      const t = (piece.notch ? Math.sign(u || 1) * (form.cut(s) + (1 - form.cut(s)) * Math.abs(u)) : u) * VANE;
       const p = form.point(s, t);
       positions.push(p.x, p.y, p.z);
       const shade = form.shade(s, t);
@@ -986,6 +1004,8 @@ function featherGeometry(piece: FeatherPiece): THREE.BufferGeometry {
   }
   for (let i = 0; i < segS; i++) {
     for (let j = 0; j < segT; j++) {
+      // (Nothing across the V cut out of the tip.)
+      if (piece.notch && j === segT / 2 - 1 && form.cut((i + 1) / segS) > 0) continue;
       const a = i * (segT + 1) + j;
       const b = a + segT + 1;
       index.push(a, b, a + 1, b, b + 1, a + 1);
@@ -1052,7 +1072,8 @@ function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace)
     const edge = sign > 0 ? fringe.object.clone() : fringe.object;
     if (edge !== fringe.object) copies.push(edge);
     mesh.add(edge);
-    if (piece.shape !== "breast") mesh.rotation.x = Math.PI / 2;
+    // (Laid flat, any feather lies face up over the back, as a breast feather does.)
+    if (piece.shape !== "breast" && !piece.flat) mesh.rotation.x = Math.PI / 2;
     orient.add(mesh);
     turn.add(orient);
     root.add(turn);
@@ -1072,7 +1093,7 @@ function featherView(piece: FeatherPiece, surfaces: Surfaces, space: ShankSpace)
   };
 }
 
-/** A bead slides round the bend and up the shank to the eye. */
+/** A bead slides round the bend and up the shank to the eye (or, on a tube, on over the liner from in front). */
 function beadView(piece: BeadPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   // A cone head points its narrow end at the eye: a cylinder along +y turned onto +x.
   const geometry = piece.cone
@@ -1092,7 +1113,8 @@ function beadView(piece: BeadPiece, surfaces: Surfaces, space: ShankSpace): Piec
       }
     }
   }
-  const start = -0.3;
+  // Round the bend and up the shank; or, pushed onto a tube's liner last, on from in front of it.
+  const start = piece.front ? piece.x + 1.2 : -0.3;
   return {
     object: mesh,
     setProgress(u) {
