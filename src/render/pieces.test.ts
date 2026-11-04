@@ -32,3 +32,26 @@ describe("a strip parted round a post", () => {
     view.dispose();
   });
 });
+
+describe("a strip cut to a width, parted round a post", () => {
+  it("draws two halves turned out to either side, nothing over the post", () => {
+    const hook = hookModel({ model: "dry-standard", size: 12 });
+    const post = { x: 1.2, angle: 0.8, reach: 0.4 };
+    const piece: CoverPiece = {
+      type: "cover", id: 1, material: "back", look: "foam", color: "#202020", window: [0, 1],
+      x0: 0.4, x1: 1.8, base: Profile.bare(-0.3, 2.2, 0.05), thickness: 0.1, lift: 0, halfAngle: 1.4, dents: [], stub: 0, barring: 0, split: post, width: 0.8,
+    };
+    const view = pieceView(piece, new Surfaces(), new ShankSpace(hook));
+    const mesh = view.object as THREE.Mesh;
+    const pos = mesh.geometry.getAttribute("position");
+    const zs: number[] = [];
+    // (Shank-local x is near world x on a straight shank.)
+    for (let i = 0; i < pos.count; i++) if (Math.abs(pos.getX(i) - post.x) < 0.03) zs.push(pos.getZ(i));
+    expect(zs.length).toBeGreaterThan(0);
+    expect(zs.filter((z) => Math.abs(z) < 0.03)).toEqual([]);
+    expect(zs.some((z) => z > 0) && zs.some((z) => z < 0)).toBe(true);
+    // Each half as wide as half the strip.
+    expect(Math.max(...zs) - Math.min(...zs)).toBeGreaterThan(0.8);
+    view.dispose();
+  });
+});

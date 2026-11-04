@@ -240,7 +240,7 @@ Half hitch the thread, cut it and slide the body off the needle. Tie it on top o
     summary: "Clumps of hollow hair spun round the shank and clipped to a head.",
     how: `Hold a clump of deer hair over the shank, make two loose turns, then pull down hard while letting go: the hair flares and spins round the shank. Push it back tight with your fingers, add the next clump in front, and continue to the eye.
 
-Whip finish, then trim the head to shape with sharp scissors or a razor blade.`,
+Whip finish, then trim the head to shape with sharp scissors or a razor blade. For a body that rides flat on the water, such as a mouse's, cut it flat on top and underneath with a razor blade and leave the hair at the sides long.`,
     mistakes: ["Clumps too big to spin.", "Not packing the clumps, so the head is loose."],
   },
   {

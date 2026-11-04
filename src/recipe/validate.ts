@@ -67,7 +67,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   // `hanging`: the step that tied it in without a length, so it waits to be wound or pulled over.
   const materials = new Map<
     string,
-    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number }
+    { state: State; at: number; butts: boolean; post?: boolean; wound?: boolean; kept?: boolean; hanging?: number; spun?: boolean }
   >();
   let thread: number | null = null;
   let weighted = false;
@@ -204,7 +204,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (archetype !== "hair") rule("onlyHairSpun", { m: step.material }, [...path, "material"]);
         else if (step.to <= thread + POSITION_TOLERANCE) rule("spinForward", {}, [...path, "to"]);
         else if (materials.has(step.material)) rule("alreadyOnHook", { m: step.material }, [...path, "material"]);
-        else materials.set(step.material, { state: "done", at: thread, butts: true });
+        else materials.set(step.material, { state: "done", at: thread, butts: true, spun: true });
         thread = step.to;
         break;
       case "tie-in": {
@@ -233,9 +233,12 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.spread !== undefined && step.length === undefined) {
           rule("spreadOnly", {}, [...path, "spread"]);
         }
-        if (step.width !== undefined && archetype !== "feather" && !step.extended) {
+        // A strip to be pulled over (foam) is cut to a width, perhaps tapered to a point where it is tied in.
+        const strip = step.length === undefined && pulledOver && archetype !== "hair";
+        if (step.width !== undefined && archetype !== "feather" && !step.extended && !strip) {
           rule("widthOnly", {}, [...path, "width"]);
         }
+        if (step.taper && (step.width === undefined || !strip)) rule("taperOnly", {}, [...path, "taper"]);
         if (step.fan !== undefined && (step.length === undefined || (step.angle ?? 0) < 60 || archetype === "feather")) {
           rule("fanOnly", {}, [...path, "fan"]);
         }
@@ -358,6 +361,10 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
             rule("splitAroundPost", { m: step.material, post: step.around }, [...path, "around"]);
           }
         }
+        // Folded back over itself in front of the tie-down as a head: foam pulled forward.
+        if (step.fold !== undefined && (archetype !== "foam" || step.to <= m.at + POSITION_TOLERANCE || step.bubble !== undefined || step.around !== undefined)) {
+          rule("foldOnly", {}, [...path, "fold"]);
+        }
         if (Math.abs(step.to - m.at) <= POSITION_TOLERANCE) {
           rule("pullForward", { m: step.material }, [...path, "to"]);
           m.state = "done";
@@ -428,6 +435,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       case "trim": {
         const m = materials.get(step.material);
         if (step.keep !== undefined) {
+          // Spun hair cut flat on top or underneath (or both), the sides left long, until it is
+          // trimmed to a shape.
+          if (archetype === "hair" && m?.spun) break;
           if (archetype !== "hackle" || m?.state !== "done" || !m.wound) rule("keepOnly", {}, [...path, "keep"]);
           else if (m.kept) rule("alreadyKept", { m: step.material }, [...path, "keep"]);
           else m.kept = true;
@@ -437,6 +447,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           m.state = "done";
         } else if (m?.butts) {
           m.butts = false;
+          m.spun = false;
           trailing.delete(step.material);
         } else {
           rule("nothingToTrim", { m: step.material }, [...path, "material"]);

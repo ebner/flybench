@@ -18,6 +18,9 @@ export interface Field {
   type: FieldType;
   min?: number;
   max?: number;
+  /** The bound itself is not allowed (a length is positive: more than 0). */
+  exclusiveMin?: boolean;
+  exclusiveMax?: boolean;
   options?: string[];
   optional: boolean;
   default?: unknown;
@@ -83,11 +86,16 @@ export function fieldOf(key: string, kdl: string, schema: z.ZodType): Field | nu
   const measure = inner === (Position as unknown as z.ZodType) || inner === (ThreadReach as unknown as z.ZodType) ? "shank" : inner === (GapeLength as unknown as z.ZodType) ? "gape" : undefined;
   switch (d.type) {
     case "number": {
-      const checks = ((d.checks as { _zod: { def: { check: string; value?: number; format?: string } } }[] | undefined) ?? []).map((c) => c._zod.def);
-      const min = checks.find((c) => c.check === "greater_than")?.value;
-      const max = checks.find((c) => c.check === "less_than")?.value;
+      const checks = ((d.checks as { _zod: { def: { check: string; value?: number; format?: string; inclusive?: boolean } } }[] | undefined) ?? []).map((c) => c._zod.def);
+      const lower = checks.find((c) => c.check === "greater_than");
+      const upper = checks.find((c) => c.check === "less_than");
+      const min = lower?.value;
+      const max = upper?.value;
       const integer = checks.some((c) => c.format === "safeint");
-      return { ...base, type: integer ? "integer" : "number", ...(min !== undefined && { min }), ...(max !== undefined && { max }), ...(measure && { measure }) };
+      return {
+        ...base, type: integer ? "integer" : "number", ...(min !== undefined && { min }), ...(max !== undefined && { max }),
+        ...(lower && lower.inclusive === false && { exclusiveMin: true }), ...(upper && upper.inclusive === false && { exclusiveMax: true }), ...(measure && { measure }),
+      };
     }
     case "boolean":
       return { ...base, type: "boolean" };

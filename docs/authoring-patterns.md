@@ -130,6 +130,7 @@ shank length in gapes (`src/tying/hook.ts`):
 | `salmon-double`, `salmon-treble` | 2.6 |
 | `jig` | 1.9 |
 | `saltwater-straight` | 2.4 |
+| `bass-bug` | 1.95 (its own, wider gape: 10.4 mm on a #10) |
 
 So a tail "one shank long" on a dry fly is `length=2.0`; a wing "to the end of the tail"
 is the tail length plus the distance from the bend to the wing's tie-in point. Hackle

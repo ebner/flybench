@@ -36,7 +36,8 @@ classic proportions. The chosen parts show in full and the rest faintly; "Watch 
 every step. Flybench writes the tying order, the thread's moves and the tie-offs
 (`src/edit/parts.ts`), so the fly always ties; every pattern reads back into parts and ties the
 same fly (a Paradrake's hair body, bound with the thread past the bend, and a Mohican Mayfly's
-foam body made on a needle, its tails in it and its strip pulled over round the wing, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
+foam body made on a needle, its tails in it and its strip pulled over round the wing, and a
+Morrish Mouse's flat-cut deer hair under a tapered foam back folded into a head, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
 log and the trip box, can be downloaded as a recipe file, and shared as a link that carries
 the whole fly after the `#`. The built site installs as an app and works offline after
 the first visit.

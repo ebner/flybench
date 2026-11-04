@@ -159,7 +159,7 @@ Ganze Federn werden am Kiel eingebunden; streife vorher den Flaum am Ansatz ab.`
     summary: "Büschel hohler Haare, um den Hakenschenkel gesponnen und zu einem Kopf geschnitten.",
     how: `Halte ein Büschel Rehhaar über den Hakenschenkel, mache zwei lockere Windungen und ziehe dann kräftig nach unten, während du loslässt: Das Haar spreizt sich und dreht sich um den Schenkel. Schiebe es mit den Fingern fest nach hinten, setze das nächste Büschel davor und mache so weiter bis zum Öhr.
 
-Mache den Kopfknoten und schneide den Kopf dann mit einer scharfen Schere oder einer Rasierklinge in Form.`,
+Mache den Kopfknoten und schneide den Kopf dann mit einer scharfen Schere oder einer Rasierklinge in Form. Für einen Körper, der flach auf dem Wasser liegen soll, etwa bei einer Maus, schneide das Haar oben und unten mit einer Rasierklinge flach und lass es an den Seiten lang.`,
     mistakes: ["Zu große Büschel, die sich nicht aufspinnen lassen.", "Die Büschel nicht dicht zusammenschieben, sodass der Kopf locker bleibt."],
   },
   "tubing-body": {

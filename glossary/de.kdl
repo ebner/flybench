@@ -737,6 +737,10 @@ hooks {
     phrase saltwater-straight "Salzwasserhaken, gerades Öhr" {
         source "AOS Blog: Alles was der Fliegenbinder über Haken wissen muss (\"SE (straight eye): gerades Hakenöhr\")" url="https://www.aos.cc/de/blog/post/fliegenbinden-alles-ueber-haken"
     }
+    phrase bass-bug "Bass-Bug-Haken, großer Bogen, gerades Öhr" {
+        note "Rudi Heger sells the TMC 8089 as 'Spezialhaken für \"Bass Bugs\"' with 'ein gerades Öhr' and 'ein extra großer Hakenbogen'."
+        source "Rudi Heger: TMC 8089 (\"Bass Bug, straight eye, feiner Draht, großer Bogen\")" url="https://rudiheger.eu/tmc-8089.html"
+    }
     phrase tube-plastic "Kunststofftube"
     phrase tube-aluminium "Aluminiumtube"
     phrase tube-copper "Kupfertube"

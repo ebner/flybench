@@ -214,7 +214,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   bead: ["mm"],
   eyes: ["mm"],
   legs: ["count"],
-  strip: ["fibre", "mm"],
+  strip: ["fibre", "mm", "tuft"],
   tubing: [],
 };
 

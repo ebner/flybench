@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { materialChoices, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
+import { MATERIAL_RANGES, materialChoices, partRange, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type NumberKey, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
 import { DIFFICULTY_LABELS, SPECIES_LABELS, TYPE_LABELS } from "../../catalog/describe";
 import { match } from "../../catalog/inventory";
 import { swatchName, swatchRecipe } from "../../catalog/swatch";
@@ -313,10 +313,14 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
   const f = t.workbench.field;
   const m = part.mats[mat];
   // A setting the part has keeps a value: emptying its field leaves it as it was.
-  const num = (key: "length" | "angle" | "spread" | "width" | "collar" | "windTo" | "fray" | "fan" | "segments" | "tailLength" | "tailSpread", unit: string, step: number, lo: number, hi: number) =>
-    part[key] !== undefined && (
+  // (Each within what the recipe allows for the value it is written as: partRange.)
+  const num = (key: NumberKey, unit: string, step: number) => {
+    const { lo, hi } = partRange(part, key);
+    return part[key] !== undefined && (
       <Num key={key} label={f[key]} value={part[key]} unit={unit} step={step} onChange={(v) => v !== undefined && onChange({ [key]: key === "segments" ? Math.round(clamp(v, lo, hi)) : clamp(v, lo, hi) })} />
     );
+  };
+  const range = (key: keyof typeof MATERIAL_RANGES) => [MATERIAL_RANGES[key].lo, MATERIAL_RANGES[key].hi] as const;
   const shankNum = (key: "at" | "from" | "to", label: FieldKey) =>
     part[key] !== undefined && (
       <Num key={key} label={f[label] as string} value={Math.round(part[key]! * 100)} unit={t.workbench.unit.shank} step={5} onChange={(v) => v !== undefined && onChange({ [key]: clamp(v / 100, rear, 1) })} />
@@ -328,16 +332,23 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
       {shankNum("at", "at")}
       {shankNum("from", "from")}
       {shankNum("to", "to")}
-      {num("length", g, 0.1, 0.1, 10)}
-      {num("angle", deg, 1, 0, 90)}
-      {num("spread", deg, 1, 0, 180)}
-      {num("width", g, 0.05, 0.05, 3)}
-      {num("collar", g, 0.1, 0, 4)}
-      {num("fray", g, 0.1, 0.1, 3)}
-      {num("fan", deg, 5, 0, 120)}
-      {num("segments", "", 1, 2, 12)}
-      {num("tailLength", g, 0.1, 0.1, 10)}
-      {num("tailSpread", deg, 1, 0, 90)}
+      {num("length", g, 0.1)}
+      {num("angle", deg, 1)}
+      {num("spread", deg, 1)}
+      {num("width", g, 0.05)}
+      {num("collar", g, 0.1)}
+      {num("fray", g, 0.1)}
+      {num("fan", deg, 5)}
+      {num("segments", "", 1)}
+      {num("tailLength", g, 0.1)}
+      {num("tailSpread", deg, 1)}
+      {num("fold", g, 0.1)}
+      {part.how === "pulled" && part.width !== undefined && part.length === undefined && (
+        <label className="wb-check">
+          <input type="checkbox" checked={!!part.taper} onChange={(e) => onChange({ taper: e.target.checked || undefined })} />
+          {f.taper}
+        </label>
+      )}
       {part.side !== undefined && (
         <label className="wb-field">
           <span>{f.side}</span>
@@ -351,7 +362,7 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
         </label>
       )}
       {(part.how === "wound" || part.how === "parachute" || part.how === "palmered") && m && (
-        <Num label={f.turns} value={m.turns} placeholder={t.workbench.autoTurns} step={1} onChange={(v) => onMaterial(mat, { turns: v === undefined ? undefined : Math.round(clamp(v, 1, 100)) })} />
+        <Num label={f.turns} value={m.turns} placeholder={t.workbench.autoTurns} step={1} onChange={(v) => onMaterial(mat, { turns: v === undefined ? undefined : Math.round(clamp(v, ...range("turns"))) })} />
       )}
       {part.how === "wound" && part.role === "rib" && (
         <label className="wb-check">
@@ -360,10 +371,10 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
         </label>
       )}
       {m && typeof m.props?.fibre === "number" && (
-        <Num label={f.fibre} value={m.props.fibre} unit={g} step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, fibre: clamp(v, 0.2, 5) } })} />
+        <Num label={f.fibre} value={m.props.fibre} unit={g} step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, fibre: clamp(v, ...range("fibre")) } })} />
       )}
       {m && typeof m.props?.count === "number" && (
-        <Num label={f.count} value={m.props.count} step={1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, count: Math.round(clamp(v, 1, 200)) } })} />
+        <Num label={f.count} value={m.props.count} step={1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, count: Math.round(clamp(v, ...range("count"))) } })} />
       )}
       {m && ARCHETYPE_PROPS[MATERIALS[m.kind].archetype].includes("barred") && (() => {
         // A dyed grizzly is barred in whatever colour it is; a grizzly made plain is not. Only a
@@ -385,8 +396,11 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
           </label>
         );
       })()}
+      {m && typeof m.props?.tuft === "number" && (
+        <Num label={f.tuft} value={m.props.tuft} unit={g} step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, tuft: round2(clamp(v, ...range("tuft"))) } })} />
+      )}
       {m && typeof m.props?.mm === "number" && (
-        <Num label={f.mm} value={m.props.mm} unit="mm" step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, mm: round2(clamp(v, 0.5, 12)) } })} />
+        <Num label={f.mm} value={m.props.mm} unit="mm" step={0.1} onChange={(v) => v !== undefined && onMaterial(mat, { props: { ...m.props, mm: round2(clamp(v, ...range("mm"))) } })} />
       )}
       {part.trim?.shape !== undefined && (
         <label className="wb-field">
@@ -395,6 +409,25 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
             {(["round", "wedge", "cigar", "cone"] as const).map((s) => (
               <option key={s} value={s}>
                 {f.shapes[s]}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      {part.how === "spun" && part.trim !== undefined && (
+        <label className="wb-field">
+          <span>{f.flat}</span>
+          <select
+            value={part.trim.keep ?? ""}
+            onChange={(e) =>
+              // Cut flat, the sides left long; or clipped all round to a shape.
+              onChange({ trim: e.target.value ? { keep: e.target.value as "sides" | "top" | "under", leave: part.trim?.leave ?? 0.3 } : { leave: part.trim?.leave ?? 0.5, shape: "round" } })
+            }
+          >
+            <option value="">{f.flats.none}</option>
+            {(["sides", "top", "under"] as const).map((k) => (
+              <option key={k} value={k}>
+                {f.flats[k]}
               </option>
             ))}
           </select>
@@ -503,7 +536,7 @@ export function HookPanel({ hook, pictures, onChange }: { hook: Recipe["hook"]; 
       <div className="wb-fields">
         {isTube(hook.model) ? (
           <>
-            <Num label={w.tubeLength} value={hook.length} unit="mm" step={1} onChange={(v) => v !== undefined && onChange({ ...hook, length: Math.round(clamp(v, 8, 90)) })} />
+            <Num label={w.tubeLength} value={hook.length} unit="mm" step={1} onChange={(v) => v !== undefined && onChange({ ...hook, length: Math.round(clamp(v, MATERIAL_RANGES.tubeLength.lo, MATERIAL_RANGES.tubeLength.hi)) })} />
             <label className="wb-field">
               <span>{w.treble}</span>
               <select value={hook.treble ?? 12} onChange={(e) => onChange({ ...hook, treble: Number(e.target.value) })}>

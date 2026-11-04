@@ -1,0 +1,51 @@
+id morrish-mouse
+status draft
+
+// en description: A dark brown rabbit strip, its hide clipped bare but for a tuft at the end, as the tail; a body of natural deer hair spun and clipped flat on top and underneath, the sides left long; and a black foam back tapered from the tail and folded over itself in front as the head.
+description "Ein dunkelbrauner Kaninchenstreifen als Schwanz, das Leder bis auf ein Büschel am Ende kahl geschnitten; ein Körper aus naturfarbenem Rehhaar, aufgesponnen und oben und unten flach geschnitten, die Seiten lang gelassen; und ein Rücken aus schwarzem Foam, vom Schwanz an spitz zulaufend und vorn als Kopf über sich selbst gefaltet."
+
+// en history: It is named after its creator, Ken Morrish, who wrote on the Fly Water Travel site that he had heard the big rainbows of the Kamchatka Peninsula in far eastern Russia love mice. Most mouse flies, he wrote, are cute but not practical to fish for very long; his is "a three-step fly with a back, a tail and a big profile of minimal mass that swims forever", and it can be cast on a light rod, a 5-weight. Tyers differ in the details: the dressing Orvis gives with In the Riffle's video has a dark brown tail and the deer hair trimmed top and bottom, while Stuart Foxall's step-by-step for Deneki Outdoors ties it with a black tail, trims the belly last and folds the end of the foam back over itself into a bigger head, cutting ears into the fold.
+history """
+    Sie ist nach ihrem Erfinder Ken Morrish benannt, der auf der Website von Fly Water Travel
+    schrieb, er habe gehört, dass die großen Regenbogenforellen der Halbinsel Kamtschatka im
+    äußersten Osten Russlands Mäuse lieben. Die meisten Mausfliegen, schrieb er, seien niedlich,
+    aber nicht praktisch, um lange damit zu fischen; seine sei „eine Fliege in drei Schritten,
+    mit einem Rücken, einem Schwanz und einem großen Profil mit minimaler Masse, die ewig
+    schwimmt“, und sie lässt sich mit einer leichten Rute, einer Klasse 5, werfen. In den
+    Einzelheiten unterscheiden sich die Binder: Das Rezept, das Orvis zum Video von In the
+    Riffle angibt, hat einen dunkelbraunen Schwanz und oben und unten geschnittenes Rehhaar,
+    während Stuart Foxalls Schritt-für-Schritt-Anleitung für Deneki Outdoors sie mit schwarzem
+    Schwanz bindet, den Bauch zuletzt schneidet und das Ende des Foams zu einem größeren Kopf
+    über sich selbst zurückfaltet, mit Ohren in die Falte geschnitten.
+    """
+
+// en fishing: A mouse for big rainbows, skated across the surface so it wakes like a mouse swimming over. Trimmed deer hair and closed-cell foam take up little water, so it keeps floating however long it is fished.
+fishing """
+    Eine Maus für große Regenbogenforellen, quer über die Oberfläche gezogen, so dass sie eine
+    Bugwelle zieht wie eine schwimmende Maus. Geschnittenes Rehhaar und geschlossenzelliges
+    Foam nehmen kaum Wasser auf, so dass sie schwimmt, wie lange man sie auch fischt.
+    """
+
+labels {
+    // en tail: Dark brown rabbit zonker strip, clipped but for a tuft
+    tail "Dunkelbrauner Kaninchen-Zonkerstreifen, bis auf ein Büschel geschoren"
+    // en back: Black closed-cell foam
+    back "Schwarzes geschlossenzelliges Foam"
+    // en body: Natural deer body hair
+    body "Naturfarbenes Rehhaar"
+}
+
+notes {
+    // en step 3 (tie-in tail): Clip the fur off the hide first, all but a small tuft at the end, and tie it in flat on top of the shank.
+    step 3 "Schneide zuerst das Fell vom Leder, bis auf ein kleines Büschel am Ende, und binde den Streifen flach oben auf den Hakenschenkel."
+    // en step 4 (tie-in back): Leave the rest lying back over the tail while you spin the hair.
+    step 4 "Lass den Rest nach hinten über dem Schwanz liegen, während du das Haar aufspinnst."
+    // en step 5 (spin body): Small, pencil-thick bunches; Foxall ties the last one with its tips pointing forward, as a face.
+    step 5 "Kleine, bleistiftdicke Büschel; Foxall bindet das letzte mit den Spitzen nach vorn ein, als Gesicht."
+    // en step 6 (trim body): A flat seat on top for the foam and a flat belly, so it sits well in the water; Foxall trims the belly last.
+    step 6 "Oben eine flache Auflage für das Foam und unten ein flacher Bauch, damit sie gut im Wasser liegt; Foxall schneidet den Bauch zuletzt."
+    // en step 7 (pull-over back): Firm, but not so tight that the thread cuts the foam.
+    step 7 "Fest, aber nicht so fest, dass der Faden das Foam zerschneidet."
+    // en step 8 (whip-finish): Under the head.
+    step 8 "Unter dem Kopf."
+}

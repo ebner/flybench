@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { rearLimit, type Compiled, type Part, type PartsFly } from "../../edit/parts";
+import { MATERIAL_RANGES, partRange, rearLimit, type Compiled, type Part, type PartsFly } from "../../edit/parts";
 import { FlyScene } from "../../render/FlyScene";
 import { stepAt, stepEnd, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
@@ -70,9 +70,14 @@ function dragged(p: Part, what: Handle["what"], x: number, y: number, L: number,
     const r = rootOf(p, L);
     const dx = p.forward ? x - r.x : r.x - x;
     const dy = (p.side === "under" ? -1 : 1) * (y - r.y);
-    return { length: round2(clamp(Math.hypot(dx, dy), 0.2, 8)), angle: Math.round(clamp((Math.atan2(dy, dx) * 180) / Math.PI, 0, 90)) };
+    const length = partRange(p, "length");
+    const angle = partRange(p, "angle");
+    return {
+      length: round2(clamp(Math.hypot(dx, dy), Math.max(0.2, length.lo), Math.min(8, length.hi))),
+      angle: Math.round(clamp((Math.atan2(dy, dx) * 180) / Math.PI, angle.lo, angle.hi)),
+    };
   }
-  if (what === "fibre") return { mats: p.mats.map((m, i) => (i === 0 ? { ...m, props: { ...m.props, fibre: round2(clamp(-y, 0.3, 4)) } } : m)) };
+  if (what === "fibre") return { mats: p.mats.map((m, i) => (i === 0 ? { ...m, props: { ...m.props, fibre: round2(clamp(-y, Math.max(0.3, MATERIAL_RANGES.fibre.lo), Math.min(4, MATERIAL_RANGES.fibre.hi))) } } : m)) };
   const u = Math.round(clamp(x / L, rear, 1) * 40) / 40;
   if (what === "from") return { [startKey(p)]: u } as Partial<Part>;
   return { to: u };

@@ -1,0 +1,49 @@
+id morrish-mouse
+status draft
+
+// en description: A dark brown rabbit strip, its hide clipped bare but for a tuft at the end, as the tail; a body of natural deer hair spun and clipped flat on top and underneath, the sides left long; and a black foam back tapered from the tail and folded over itself in front as the head.
+description "En mörkbrun kaninremsa, vars skinn är klippt kalt utom en tofs i änden, som stjärt; en kropp av naturfärgat hjorthår som spunnits och klippts plant upptill och undertill med sidorna långa; och en rygg av svart foam, avsmalnande från stjärten och vikt över sig själv framtill som huvud."
+
+// en history: It is named after its creator, Ken Morrish, who wrote on the Fly Water Travel site that he had heard the big rainbows of the Kamchatka Peninsula in far eastern Russia love mice. Most mouse flies, he wrote, are cute but not practical to fish for very long; his is "a three-step fly with a back, a tail and a big profile of minimal mass that swims forever", and it can be cast on a light rod, a 5-weight. Tyers differ in the details: the dressing Orvis gives with In the Riffle's video has a dark brown tail and the deer hair trimmed top and bottom, while Stuart Foxall's step-by-step for Deneki Outdoors ties it with a black tail, trims the belly last and folds the end of the foam back over itself into a bigger head, cutting ears into the fold.
+history """
+    Den har fått namn efter sin upphovsman, Ken Morrish, som skrev på Fly Water Travels
+    webbplats att han hört att de stora regnbågarna på Kamtjatkahalvön i östligaste Ryssland
+    älskar möss. De flesta musflugor, skrev han, är söta men inte praktiska att fiska med
+    särskilt länge; hans är ”en fluga i tre steg, med en rygg, en stjärt och en stor profil av
+    minimal massa som simmar för evigt”, och den går att kasta med ett lätt spö, en klass 5.
+    Bindarna skiljer sig åt i detaljerna: bindningen som Orvis anger till In the Riffles video
+    har en mörkbrun stjärt och hjorthåret klippt upptill och undertill, medan Stuart Foxalls
+    steg-för-steg för Deneki Outdoors binder den med svart stjärt, klipper buken sist och viker
+    foamens ände tillbaka över sig själv till ett större huvud, med öron inskurna i vecket.
+    """
+
+// en fishing: A mouse for big rainbows, skated across the surface so it wakes like a mouse swimming over. Trimmed deer hair and closed-cell foam take up little water, so it keeps floating however long it is fished.
+fishing """
+    En mus för stora regnbågar, som dras tvärs över ytan så att den drar ett kölvatten efter sig,
+    som en mus som simmar över. Klippt hjorthår och foam suger upp lite vatten, så den
+    flyter hur länge den än fiskas.
+    """
+
+labels {
+    // en tail: Dark brown rabbit zonker strip, clipped but for a tuft
+    tail "Mörkbrun zonkerremsa av kanin, klippt utom en tofs"
+    // en back: Black closed-cell foam
+    back "Svart foam med slutna celler"
+    // en body: Natural deer body hair
+    body "Naturfärgat hjorthår"
+}
+
+notes {
+    // en step 3 (tie-in tail): Clip the fur off the hide first, all but a small tuft at the end, and tie it in flat on top of the shank.
+    step 3 "Klipp först bort pälsen från skinnet, allt utom en liten tofs i änden, och bind in remsan plant ovanpå krokskaftet."
+    // en step 4 (tie-in back): Leave the rest lying back over the tail while you spin the hair.
+    step 4 "Låt resten ligga bakåt över stjärten medan du spinner håret."
+    // en step 5 (spin body): Small, pencil-thick bunches; Foxall ties the last one with its tips pointing forward, as a face.
+    step 5 "Små buntar, tjocka som en blyertspenna; Foxall binder den sista med topparna pekande framåt, som ett ansikte."
+    // en step 6 (trim body): A flat seat on top for the foam and a flat belly, so it sits well in the water; Foxall trims the belly last.
+    step 6 "En plan bädd upptill för foamen och en plan buk, så att den ligger bra i vattnet; Foxall klipper buken sist."
+    // en step 7 (pull-over back): Firm, but not so tight that the thread cuts the foam.
+    step 7 "Fast, men inte så hårt att tråden skär av foamen."
+    // en step 8 (whip-finish): Under the head.
+    step 8 "Under huvudet."
+}

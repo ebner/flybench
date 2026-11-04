@@ -1,6 +1,6 @@
 import { MATERIALS, WINDABLE, type Archetype, type MaterialKind } from "../recipe/materials";
 import { sampleColour } from "../catalog/swatch";
-import { NAMED_COLORS, RecipeSchema, type Material, type Recipe, type Step } from "../recipe/schema";
+import { NAMED_COLORS, RecipeSchema, type Material, type Op, type Recipe, type Step } from "../recipe/schema";
 import { POSITION_TOLERANCE, validateSemantics } from "../recipe/validate";
 import type { RecipeError } from "../recipe/errors";
 
@@ -101,13 +101,17 @@ export interface Part {
   windTo?: number;
   /** Pulled over loose: gapes of air under its middle (a CDC pupa's bubble). */
   bubble?: number;
+  /** A strip pulled over, cut to its `width` tapered to a point where it is tied in (a Morrish Mouse's foam). */
+  taper?: boolean;
+  /** Foam pulled forward, its end folded back over itself as a head this long (gapes). */
+  fold?: number;
   /** Hair pulled over, its tips standing up in front as a wing this long (a Humpy). */
   tipWing?: number;
   /** Laid back from the eye and tied down there by the thread (a foam balloon), not held by the next winding. */
   tiedBack?: boolean;
   /** A sleeve's rear end frayed into loose strands this long (gapes). */
   fray?: number;
-  /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep). */
+  /** A trim after it is tied: hair butts (leave, shape), a foam back's head, a wound hackle's fibres (keep), spun hair cut flat (keep, leave). */
   trim?: { leave?: number; shape?: "round" | "wedge" | "cigar" | "cone"; keep?: "sides" | "top" | "under" };
   /** The visitor's notes on its steps, by action (0 the first). */
   notes?: Record<number, string>;
@@ -243,6 +247,59 @@ export function waysFor(role: Role, kind: MaterialKind): How[] {
       return ["wound"];
   }
 }
+
+// ——— The builder's number fields ———
+
+/** A part's settings the builder edits as numbers. */
+export type NumberKey = "length" | "angle" | "spread" | "width" | "collar" | "fray" | "fan" | "segments" | "tailLength" | "tailSpread" | "fold";
+
+/** A number field's range, and the recipe value it is written as (a step's property, a material's, the hook's). */
+export interface NumberRange {
+  lo: number;
+  hi: number;
+  writes: { to: "step"; op: Op; prop: string } | { to: "material"; prop: string } | { to: "hook"; prop: string };
+}
+
+const stepRange = (lo: number, hi: number, op: Op, prop: string): NumberRange => ({ lo, hi, writes: { to: "step", op, prop } });
+
+/** The range of a part's number setting in the builder: within what the recipe allows for the value it is written as (tested). */
+export function partRange(p: Pick<Part, "how">, key: NumberKey): NumberRange {
+  switch (key) {
+    // Spun hair: how far it stands out before it is trimmed.
+    case "length":
+      return p.how === "spun" ? stepRange(0.2, 3, "spin", "length") : stepRange(0.1, 10, "tie-in", "length");
+    case "angle":
+      return stepRange(0, 90, "tie-in", "angle");
+    case "spread":
+      return stepRange(0, 180, "tie-in", "spread");
+    case "width":
+      return stepRange(0.05, 3, "tie-in", "width");
+    case "collar":
+      return stepRange(0.1, 4, "spin", "collar");
+    case "fray":
+      return stepRange(0.1, 3, "sleeve", "fray");
+    case "fan":
+      return stepRange(0, 120, "tie-in", "fan");
+    case "segments":
+      return stepRange(2, 12, "tie-in", "segments");
+    case "tailLength":
+      return stepRange(0.1, 10, "tie-in", "tail-length");
+    case "tailSpread":
+      return stepRange(0, 90, "tie-in", "tail-spread");
+    case "fold":
+      return stepRange(0.2, 2, "pull-over", "fold");
+  }
+}
+
+/** The ranges of a material's number settings, its turns and the hook's length in the builder (tested against the recipe's). */
+export const MATERIAL_RANGES = {
+  fibre: { lo: 0.2, hi: 5, writes: { to: "material", prop: "fibre" } },
+  count: { lo: 1, hi: 200, writes: { to: "material", prop: "count" } },
+  mm: { lo: 0.5, hi: 12, writes: { to: "material", prop: "mm" } },
+  tuft: { lo: 0, hi: 3, writes: { to: "material", prop: "tuft" } },
+  turns: stepRange(1, 100, "wind", "turns"),
+  tubeLength: { lo: 8, hi: 90, writes: { to: "hook", prop: "length" } },
+} as const satisfies Record<string, NumberRange>;
 
 // ——— The order things are tied in ———
 
@@ -523,7 +580,7 @@ export function compile(fly: PartsFly): Compiled {
         } else if (i === 0) tieIns(p.at ?? 0, { ...bunch, extended: true, ...(p.tip && { tip: p.tip }), ...(p.segments !== undefined && { segments: p.segments }) });
         else if (i === 1 && p.to !== undefined) {
           to(p.to, p.id);
-          push({ op: "pull-over", material: m0.id, to: round(p.to), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...n }, p.id);
+          push({ op: "pull-over", material: m0.id, to: round(p.to), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.fold !== undefined && { fold: p.fold }), ...n }, p.id);
         } else push({ op: "trim", material: m0.id, ...p.trim, ...n } as Step, p.id);
         break;
       }
@@ -580,7 +637,7 @@ export function compile(fly: PartsFly): Compiled {
       case "spun":
         if (i === 0) {
           to(p.from ?? 0, p.id);
-          push({ op: "spin", material: m0.id, to: round(p.to ?? 0.7), ...(p.collar !== undefined && { collar: p.collar }), ...n }, p.id);
+          push({ op: "spin", material: m0.id, to: round(p.to ?? 0.7), ...(p.collar !== undefined && { collar: p.collar }), ...(p.length !== undefined && { length: p.length }), ...n }, p.id);
           thread = round(p.to ?? 0.7);
         } else trim();
         break;
@@ -611,14 +668,14 @@ export function compile(fly: PartsFly): Compiled {
         break;
       }
       case "pulled":
-        if (i === 0) tieIns(p.at ?? 0, bunch);
+        if (i === 0) tieIns(p.at ?? 0, { ...bunch, ...(p.taper && p.width !== undefined && { taper: true }) });
         else if (i === 1) {
           const end = p.to ?? 0.9;
           // Laid back from the eye, the next winding holds it, or the thread ties it down there;
           // folded forward, the thread ties it down.
           if (end > (p.at ?? 0) || p.tiedBack) to(end, p.id);
           else toHolder();
-          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.tipWing !== undefined && { wing: p.tipWing }), ...(k === 0 ? n : {}) }, p.id));
+          p.mats.forEach((m, k) => push({ op: "pull-over", material: m.id, to: round(end), ...(p.post !== undefined && { around: postMaterial(fly, p.post) }), ...(p.bubble !== undefined && { bubble: p.bubble }), ...(p.tipWing !== undefined && { wing: p.tipWing }), ...(p.fold !== undefined && { fold: p.fold }), ...(k === 0 ? n : {}) }, p.id));
         } else trim();
         break;
     }
@@ -849,7 +906,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       part = { id, how: "dubbed", mats: [mat], from: passes[0]!.from, to: passes[0]!.to, passes: passes.slice(1), keys: g.map((x) => x.i) };
     } else if (ops === "spin" || ops === "spin trim") {
       const sp = g[0]!.s as Extract<Step, { op: "spin" }>;
-      part = { id, how: "spun", mats: [mat], from: at, to: sp.to, ...(sp.collar !== undefined && { collar: sp.collar }), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
+      part = { id, how: "spun", mats: [mat], from: at, to: sp.to, ...(sp.collar !== undefined && { collar: sp.collar }), ...(sp.length !== undefined && { length: sp.length }), ...(g[1] && { trim: trimOf(g[1].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && tieIn.extended && /^tie-in( pull-over( trim)?)?$/.test(ops)) {
       // Made on a needle: its tails, in it, are its second material.
       const tm = tieIn.tails !== undefined ? kinds.get(tieIn.tails) : undefined;
@@ -860,7 +917,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
         id, how: "extended", mats: [mat, ...tails], at, ...bunchOf(tieIn), ...(tieIn.tip && { tip: tieIn.tip }),
         ...(tieIn.segments !== undefined && { segments: tieIn.segments }),
         ...(tieIn["tail-length"] !== undefined && { tailLength: tieIn["tail-length"] }), ...(tieIn["tail-spread"] !== undefined && { tailSpread: tieIn["tail-spread"] }),
-        ...(po && { to: po.to, ...(po.around !== undefined && { post: po.around }), ...(po.bubble !== undefined && { bubble: po.bubble }) }), ...(g[2] && { trim: trimOf(g[2].s) }),
+        ...(po && { to: po.to, ...(po.around !== undefined && { post: po.around }), ...(po.bubble !== undefined && { bubble: po.bubble }), ...(po.fold !== undefined && { fold: po.fold }) }), ...(g[2] && { trim: trimOf(g[2].s) }),
         keys: g.map((x) => x.i),
       };
     } else if (tieIn && (ops === "tie-in" || ops === "tie-in trim")) {
@@ -868,7 +925,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     } else if (tieIn && /^tie-in pull-over( trim)?$/.test(ops)) {
       const po = g[1]!.s as Extract<Step, { op: "pull-over" }>;
       const tiedBack = po.to < (at ?? 0) - POSITION_TOLERANCE && g[1]!.thread != null && Math.abs(g[1]!.thread - po.to) <= POSITION_TOLERANCE;
-      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.around !== undefined && { post: po.around }), ...(po.bubble !== undefined && { bubble: po.bubble }), ...(po.wing !== undefined && { tipWing: po.wing }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
+      part = { id, how: "pulled", mats: [mat], at, to: po.to, ...(po.around !== undefined && { post: po.around }), ...(po.bubble !== undefined && { bubble: po.bubble }), ...(po.wing !== undefined && { tipWing: po.wing }), ...(po.fold !== undefined && { fold: po.fold }), ...(tieIn.taper && { taper: true }), ...(tiedBack && { tiedBack }), ...bunchOf(tieIn), ...(g[2] && { trim: trimOf(g[2].s) }), keys: g.map((x) => x.i) };
     } else if (tieIn && /^tie-in wind tie-off( trim)?$/.test(ops)) {
       const w = g[1]!.s as Extract<Step, { op: "wind" }>;
       mat.turns = w.turns;
@@ -1075,7 +1132,7 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
   const [bodyFrom, bodyTo] = body && body.how !== "extended" ? extentOf(body) : [0, 0.7];
   const c = CLASSIC[part.role];
   const next: Omit<Part, "keys"> & { keys?: number[] } = { ...part, how };
-  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread"] as const) delete next[k];
+  for (const k of ["at", "from", "to", "length", "angle", "spread", "width", "side", "forward", "post", "collar", "windTo", "trim", "passes", "tip", "counter", "fray", "fan", "segments", "tailLength", "tailSpread", "taper", "fold"] as const) delete next[k];
   switch (how) {
     case "bunch":
       if (part.mats.some((m) => arch(m.kind) === "eyes")) Object.assign(next, { at: c.at ?? 0.85 });
@@ -1181,6 +1238,17 @@ function tidied(fly: PartsFly): PartsFly {
     }
     if (p.fan !== undefined && (p.how !== "bunch" || p.length === undefined || (p.angle ?? 0) < UPRIGHT || p.mats.some((m) => arch(m.kind) === "feather"))) {
       const { fan: _f, ...rest } = next;
+      next = rest as Part;
+    }
+    // Cut tapered only to a width; folded back as a head only of foam pulled forward, straight over.
+    if (next.taper && (next.how !== "pulled" || next.width === undefined || next.length !== undefined)) {
+      const { taper: _t, ...rest } = next;
+      next = rest as Part;
+    }
+    // (The rest of an extended foam body's strip, pulled over, can be folded too; its tails aside.)
+    const folds = next.how === "pulled" || (next.how === "extended" && next.to !== undefined);
+    if (next.fold !== undefined && (!folds || !bodyMats(next).every((m) => arch(m.kind) === "foam") || (next.to ?? 0.9) <= (next.at ?? 0) + POSITION_TOLERANCE || next.bubble !== undefined || next.post !== undefined)) {
+      const { fold: _f, ...rest } = next;
       next = rest as Part;
     }
     if ((p.how === "pulled" || p.how === "extended") && p.post !== undefined) {
@@ -1410,7 +1478,9 @@ export function setMaterial(fly: PartsFly, id: string, index: number, patch: Par
     const next: Part = { ...p, mats, trim: trimFor(p, mats) };
     // Settings only some materials take: a feather's width, strands tied across, fibres wound on.
     // (An extended body's width is its thickness.)
-    if (!mats.some((m) => arch(m.kind) === "feather") && p.how !== "extended") delete next.width;
+    // (A strip pulled over keeps the width it is cut to, unless it is hair.)
+    const cutStrip = p.how === "pulled" && p.length === undefined && mats.every((m) => arch(m.kind) !== "hair");
+    if (!mats.some((m) => arch(m.kind) === "feather") && p.how !== "extended" && !cutStrip) delete next.width;
     if (next.side === "across" && !mats.every((m) => ACROSS_KINDS.includes(arch(m.kind)))) delete next.side;
     if (next.windTo !== undefined && !mats.every((m) => WINDABLE.includes(arch(m.kind)))) delete next.windTo;
     return next;
