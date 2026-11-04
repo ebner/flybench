@@ -81,8 +81,9 @@ steps {
     wrap-thread to=0.9
     wind thorax to=0.9 turns=6
     tie-off thorax
-    // Kreft: three or four turns through the thorax.
-    wind hackle to=0.9 turns=4 note="Through the chenille, one turn behind it."
+    // Kreft: three or four turns through the thorax. Read from the photos: three, the hackle
+    // sparse enough to show the chenille.
+    wind hackle to=0.9 turns=3 note="Through the chenille, one turn behind it."
     tie-off hackle
     // Read from the photos: the antennae a little longer than the tails, splayed.
     tie-in antennae length=2.6 forward=#true spread=25 angle=10

@@ -12,6 +12,7 @@ materials {
         source "Kings Meadow: Red Tag Wet Fly ('röd ull för svansen')" url="https://www.kingsmeadow.se/product/red-tag-wet-fly/"
     }
     noun sparkle-yarn "antrongarn" gender=ett definite="antrongarnet" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "LaFontaine's 'sparkle yarn' is Antron; shops sell it as 'Antrongarn'."
         source "Flugbindning.com: Garn & Yarn (products 'Antrongarn Wapsi', 'Textreme Antrongarn')" url="https://flugbindning.com/130-garn-yarn"
     }
@@ -21,6 +22,7 @@ materials {
         source "Min Bas Flugask ('Vinge: Grå Tiemco Polygarn')" url="http://flugbindningflugfiske.blogspot.com/2024/12/min-bas-flugask.html"
     }
     noun ostrich-herl "strutsherl" gender=ett definite="strutsherlet" plural="strutsherl" plural-definite="strutsherlen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Formed like 'påfågelherl'. Swedish dressings often write just 'struts' ('Butt: Struts, svart')."
         source "Rackelhanen: Em Silver ('Butt: Struts, svart')" url="https://www.rackelhane.se/swe/1029.htm"
     }
@@ -48,10 +50,12 @@ materials {
         source "laxflugor.nu: Flugbindningsmaterial ('leta efter en sadel (inte nacke)')" url="https://laxflugor.nu/flugbindningsmaterial-guide-till-flugbindning/"
     }
     noun guinea-fowl-hackle "pärlhönshackel" gender=ett definite="pärlhönshacklet" plural="pärlhönshackel" plural-definite="pärlhönshacklen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Formed like 'rapphönshackel' from 'pärlhöns' (guinea fowl)."
         source "Wikipedia: Pärlhöns" url="https://sv.wikipedia.org/wiki/P%C3%A4rlh%C3%B6ns"
     }
     noun golden-pheasant-flank "flankfjäder från guldfasan" gender=en definite="flankfjädern från guldfasan" plural="flankfjädrar från guldfasan" plural-definite="flankfjädrarna från guldfasan" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The cock's ruddy red flank feather, wound as a hackle (an Usk Grub's tail). No Swedish page naming it turned up; formed like 'kroppsfjäder från guldfasan'. The shop counts body feathers among the materials for tails."
         source "Flugbindning.com: Guldfasan ('Guldfasanens kroppsfjädrar ger färgstarka material till bland annat strupar, stjärtar')" url="https://flugbindning.com/400048-guldfasan"
     }
@@ -77,6 +81,7 @@ materials {
         source "Flugbindning.com: Dubbing (product 'Kanindubbing')" url="https://flugbindning.com/30-dubbing"
     }
     noun fox-dubbing "rävdubbing" gender=en definite="rävdubbingen" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Fox body fur used as dubbing; formed like 'kanindubbing'. Kärki writes only 'rävhår' for both the tail and the body of his Gråräven; 'rävdubbing' keeps the two materials apart (fox-hair is 'rävhår')."
         source "Flugbindning.com: Gråräv kroppshår ('kan användas både som vingar eller som dubbing')" url="https://flugbindning.com/ravhar/900006-grey-fox.html"
         source "Flugfiske i Norden: Gimåpuppan ('en egen dubbing av rävhår')" url="https://flugfiskeinorden.se/gimapuppan/"
@@ -178,11 +183,13 @@ materials {
         source "Flugfiske i Norden: John Atherton ('långa raka tupphackel-fibrer till stjärten')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
     }
     noun peacock-sword "påfågelsvärd" gender=ett definite="påfågelsvärdet" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "The sword feather's fibres; shops sell 'Påfågelsvärd', Möllervärn writes '6–8 strålar påfågelsvärd'."
         source "Flugbindning.com: Påfågel ('Svärdfjädrar, Peacock Swords … till stjärtar och vingdetaljer')" url="https://flugbindning.com/400052-pafagel"
         source "Rackelhanen: March Brown (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
     }
     noun wood-duck-flank "brudandsflank" gender=en definite="brudandsflanken" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Wood duck flank fibres; shops keep 'Wood Duck' and write 'flankfjädrar' from 'brudand'. 'Brudandsflank' is my compound of the two."
         source "Flugbindning.com: Mandarinand & Wood Duck ('brudand', 'flankfjädrar')" url="https://flugbindning.com/400053-mandarinand"
     }
@@ -201,6 +208,7 @@ materials {
         source "Flugbindning.com: Harmask ('Du kan också välja ut längre täckhår till korta stjärtar på nymfer')" url="https://flugbindning.com/dubbing/1700038-harmask.html"
     }
     noun craft-fur "Craft Fur" gender=en definite="Craft Furen" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Brand-like product name kept in English, as for Krystal Flash; Swedish tyers call any such fake fur 'fuskpäls'. The definite form is an assumption."
         source "Flugfiske i Norden: Fuskpälsslända ('Fuskpälskrage från en gammal jacka, påminner om Craft Fur')" url="https://flugfiskeinorden.se/fuskpalsslanda/"
     }
@@ -208,6 +216,7 @@ materials {
         source "Bojdaspon: Polar Fiber ('Polar Fiber är ett mjukt syntethår')" url="https://www.bojdaspon.se/flugbindning/flash-fiber/fiber/polar-fiber-49384"
     }
     noun fox-hair "rävhår" gender=ett definite="rävhåret" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         source "Flugbindning.com: Rävhår (the shop's category for fox hair)" url="https://flugbindning.com/400252-ravhar"
         source "Svenskt Fiske: Tre flugor för fjällfisket ('grått- och svart rävhår', John Kärki)" url="https://svensktfiske.se/tre-flugor-for-fjallfisket/"
     }
@@ -246,6 +255,7 @@ materials {
         source "Flugbindning.com: Krickand ('Mest använda är sidfjädrarna, Teal Flank', product 'Krickand sidfjädrar (teal)')" url="https://flugbindning.com/400050-krickand-teal"
     }
     noun bronze-mallard "skulderfjäder från gräsand" gender=en definite="skulderfjädern från gräsand" plural="skulderfjädrar från gräsand" plural-definite="skulderfjädrarna från gräsand" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The drake's bronze-brown shoulder feathers. The shop sells them as 'Gräsand Bronze Skulderfjäder' and calls the material 'Bronze Mallard'; a phrase like 'sidfjäder från krickand' (teal-flank). Tyers also keep 'Bronze Mallard'."
         source "Flugbindning.com: Gräsand (product 'Gräsand Bronze Skulderfjäder'; 'Bronze Mallard är de bronsbruna, mörkt tecknade fjädrar som ofta säljs som skulderfjädrar')" url="https://flugbindning.com/400049-grasand"
         source "Fiskeflugor.se: Bronze Mallard ('används till mängder av flugor allt från nymfer, streamers till laxflugor')" url="https://fiskeflugor.se/bronze-mallard-p-1917.html"
@@ -264,6 +274,7 @@ materials {
         source "Flugbindning.com: Övriga fjädrar ('Stare och rörhöna är exempel på material som förekommer i traditionell våtfluge- och spiderbindning')" url="https://flugbindning.com/400099-ovriga-fjadrar"
     }
     noun hen-pheasant-quill "sektioner av fasanhönsvingpenna" gender=en definite="sektionerna av fasanhönsvingpenna" plural="sektioner av fasanhönsvingpenna" plural-definite="sektionerna av fasanhönsvingpenna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Plural, as duck-quill. Shops sell 'Fasanhöna Vingpennor'; Möllervärn writes 'fasanhönans vinge'."
         source "Flugbindning.com: Fasanhöna Vingpennor ('för våtflugevingar, March Brown')" url="https://flugbindning.com/fasan/400008-fasanhona-vingpennor-5056304604593.html"
         source "Rackelhanen: March Brown (Anders Möllervärn)" url="http://www.rackelhane.se/swe/1460.htm"
@@ -279,14 +290,17 @@ materials {
         source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
     }
     noun golden-pheasant-tippet-feather "tippetfjäder från guldfasan" gender=en definite="tippetfjädern från guldfasan" plural="tippetfjädrar från guldfasan" plural-definite="tippetfjädrarna från guldfasan" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A whole tippet feather (a General Practitioner's eyes). The shop speaks of 'tippetfjädrarna' from the cock's neck ruff; formed as a phrase like 'kroppsfjäder från guldfasan'."
         source "Flugbindning.com: Guldfasan ('Tippetfjädrarna kommer från hannens halskrage')" url="https://flugbindning.com/400048-guldfasan"
     }
     noun golden-pheasant-body "kroppsfjäder från guldfasan" gender=en definite="kroppsfjädern från guldfasan" plural="kroppsfjädrar från guldfasan" plural-definite="kroppsfjädrarna från guldfasan" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The cock's small red body feathers. The shop sells the skin as 'Guldfasan kroppsskinn'; a phrase like 'bröstfjäder från gräsandhona' (mallard-breast)."
         source "Flugbindning.com: search for 'guldfasan' (product 'Guldfasan kroppsskinn')" url="https://flugbindning.com/search?controller=search&s=guldfasan"
     }
     noun jungle-cock "jungle cock" gender=en definite="jungle cocken" mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Kept in English, as Swedish dressings and shops write it ('Cheeks: Jungle cock', 'syntetiska Jungle Cock'); the bird is 'grå djungelhöna', a word not used for the feather. Treated as a material, like bucktail; the definite form is an assumption."
         source "Rackelhanen: Em Silver ('Cheeks: Jungle cock, Kungsfiskare')" url="https://www.rackelhane.se/swe/1029.htm"
         source "Guideline: TD Bhatakorva ('vår skräddarsydda syntetiska Jungle Cock')" url="https://www.guidelineflyfish.com/se/td-bhatakorva-9-cm"
@@ -301,15 +315,18 @@ materials {
         source "Antispinn: Sow-Scud Back 1/8 Wapsi ('Sow-Scud Back är framför allt känt som ryggsköldsmaterial till scuds, märlor och olika nymfer')" url="https://www.antispinn.se/flugbindning/syntetiskt-material-kropp-vinge-ben/sow-scud-back-18-wapsi"
     }
     noun rabbit-strip "zonkerremsa" gender=en definite="zonkerremsan" plural="zonkerremsor" plural-definite="zonkerremsorna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A strip of rabbit fur on the hide (a zonker strip). Some write 'kaninstrips', but the post found with it was Norwegian."
         source "Fiskesnack: Flugbindningsmatrial (yoxler: 'kropp av mylarslang och en zonkerremsa ovanpå')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/12461-flugbindningsmatrial"
     }
     noun mylar-tubing "mylarslang" gender=en definite="mylarslangen" plural="mylarslangar" plural-definite="mylarslangarna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Braided Mylar tubing slid over a body (the Zonker)."
         source "Fiskesnack: Flugbindningsmatrial ('kropp av mylarslang')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/12461-flugbindningsmatrial"
         source "Fiskesnack: Favorit Zonker ('Kroppen ska vara av mylarslang som glittrar')" url="https://www.fiskesnack.com/forum/g%C3%B6r-det-sj%C3%A4lv/flugbindning/10964-favorit-zonker"
     }
     noun split-shot "hagel" gender=ett definite="haglet" plural="hagel" plural-definite="haglen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A split shot crimped on as a head (the Dog Nobbler); anglers' shops sell 'kluvna hagel'."
         source "Sportfish Tackle: IFISH Kluvna hagel Blyfri" url="https://www.sportfishtackle.dk/dk/artiklar/ifish-kluvna-hagel-blyfri.html"
     }
@@ -364,6 +381,7 @@ colours {
         note "Tyers often write 'fluo röd', 'Fl red' or 'Rosa fluo'. Decided by the reviewer (2026-10-29): the full word 'fluorescerande', which inflects cleanly."
     }
     adjective fluo-green "fluorescerande grön" neuter="fluorescerande grönt" plural="fluorescerande gröna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "As fluo-red: the full word 'fluorescerande'."
     }
     adjective brown "brun" neuter="brunt" plural="bruna"
@@ -382,6 +400,7 @@ colours {
         source "Rackelhanen: Uppströmsnymf ('Olive, brun eller tanfärgad flyrite')" url="https://www.rackelhane.se/swe/1280.htm"
     }
     adjective guinea "pärlhöna" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Guinea fowl, the bird's speckled feathers. The family is 'pärlhöns'; the joining form goes before the noun ('pärlhönshackel')."
         source "Wikipedia: Pärlhöns" url="https://sv.wikipedia.org/wiki/P%C3%A4rlh%C3%B6ns"
     }
@@ -434,12 +453,18 @@ colours {
         note "The barred black and white of teal flank, not the blue-green colour 'teal'."
     }
     adjective turkey "kalkon" compound=#true
-    adjective hen-pheasant "fasanhöna" compound=#true
-    adjective wood-duck "brudand" compound=#true
+    adjective hen-pheasant "fasanhöna" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
+    }
+    adjective wood-duck "brudand" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
+    }
     adjective bronze-mallard "bronsbrun" neuter="bronsbrunt" plural="bronsbruna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The bronze brown of bronze mallard; Flugbindning.com calls the feathers 'bronsbruna'."
     }
     adjective furnace "furnace" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "A red-brown hackle with a black centre. Kept in English, as Swedish tyers keep grizzly and badger; no Swedish page using the word turned up."
     }
     adjective badger "badger" compound=#true {
@@ -505,18 +530,23 @@ parts {
     }
     noun body "kropp" gender=en definite="kroppen" plural="kroppar" plural-definite="kropparna"
     noun cheeks "kinder" gender=en definite="kinderna" plural="kinder" plural-definite="kinderna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
     }
     noun sheath "hölje" gender=ett definite="höljet" plural="höljen" plural-definite="höljena" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The loose veil of sparkle yarn round a sparkle pupa's body."
     }
     noun veil "slöja" gender=en definite="slöjan" plural="slöjor" plural-definite="slöjorna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A veiling: feathers laid over part of the body or the tail (a General Practitioner's over its feelers, an Usk Grub's over the rear body). No Swedish tying page with the word turned up; 'slöja' is the plain word for a veil."
     }
     noun shell "skal" gender=ett definite="skalet" plural="skal" plural-definite="skalen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A foam strip pulled over the top of the body (the Gurgler); 'rygg' is the wing case or back of a nymph."
     }
     noun underbody "underkropp" gender=en definite="underkroppen" plural="underkroppar" plural-definite="underkropparna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "What a body is built up on (floss under the Black & Peacock Spider's herl)."
     }
     noun butt "butt" gender=en definite="butten" plural="buttar" plural-definite="buttarna" {
@@ -528,6 +558,7 @@ parts {
         source "Flugfiske i Norden: Rödingfluga PT Nymf-Variant ('Vik över vingsäcken, fäst och klipp')" url="https://flugfiskeinorden.se/rodingfluga-black-orange-pt-nymf-variant/"
     }
     noun claws "klor" gender=en definite="klorna" plural="klor" plural-definite="klorna" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A crab's claws (krabbklor): the hackle tips splayed in a crab fly's tail. A plural part, as antennae."
     }
     noun collar "krage" gender=en definite="kragen" plural="kragar" plural-definite="kragarna" {
@@ -779,6 +810,7 @@ hooks {
     }
     phrase saltwater-straight "Saltvattenskrok, rakt öga"
     phrase bass-bug "Bassbuggkrok, brett krokgap, rakt öga" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Assumption: no Swedish shop text for the TMC 8089 found; 'bassbugg' after the English 'bass bug', 'brett krokgap' for its wide gape."
     }
     phrase tube-plastic "Plasttub"
@@ -804,12 +836,15 @@ steps {
     }
     phrase spin "Spinn"
     phrase glue "Limma på" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Glueing pads of fibre along the shank after the whip finish (a crab's body). The plain verb; Swedish dressings say 'limma' ('en liten droppe med superlim')."
     }
     phrase sleeve "Trä på slang" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Sliding braided tubing over the body as a sleeve, as 'trä på' a bead."
     }
     phrase weave "Väv" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Weaving two strands of chenille into a two-coloured body (a Bitch Creek). The plain verb 'väva'; I found no Swedish tying text on woven bodies, so this is my assumption."
     }
     phrase attach-thread "Fäst tråden" {
