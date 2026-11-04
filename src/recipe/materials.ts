@@ -92,9 +92,10 @@ export const MATERIALS = {
   "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e" },
 
   // Hackles
-  // Assumption (all the barb densities): a dry-fly cock hackle carries its barbs closest, a saddle
-  // hackle less close, a hen hackle and a wet-fly cock hackle fewer, and the soft game-bird
-  // feathers fewest, their barbs well apart (photos of collars, palmered bodies and spiders).
+  // Assumption (all the barb densities, set against photos of collars, palmered bodies and
+  // spiders): a dry-fly cock hackle carries its barbs closest, a hen hackle's soft, webby barbs
+  // next, a saddle and a wet-fly cock hackle fewer, and the soft game-bird feathers (partridge,
+  // snipe, guinea fowl, golden pheasant flank) fewest.
   // `cock-hackle` is the dry-fly hackle of a genetic cape or saddle: a collar of five to eight
   // touching turns reads as nearly solid from the side.
   "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7, barbsPerMm: 32 },
@@ -104,16 +105,16 @@ export const MATERIALS = {
   // lower grades, softer and tapered, not dry-fly hackle). Assumption: its barbs stand further
   // apart than on a dry-fly hackle, so a palmer shows the body through it.
   "wet-fly-cock-hackle": { name: "wet fly cock hackle", archetype: "hackle", sweep: 40, barbsPerMm: 9 },
-  "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35, barbsPerMm: 8 },
+  "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35, barbsPerMm: 14 },
   "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 40, barbsPerMm: 10 },
   // Soft game-bird hackles sweep well back over the body (reference photos of spiders).
-  "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 65, barbsPerMm: 4.5 },
-  "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65, barbsPerMm: 5 },
+  "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 65, barbsPerMm: 9 },
+  "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65, barbsPerMm: 9 },
   // Assumption: guinea-fowl body feathers are soft, between a hen hackle and partridge.
-  "guinea-fowl-hackle": { name: "guinea fowl hackle", archetype: "hackle", defaultColor: "guinea", sweep: 45, barbsPerMm: 6 },
+  "guinea-fowl-hackle": { name: "guinea fowl hackle", archetype: "hackle", defaultColor: "guinea", sweep: 45, barbsPerMm: 9 },
   // The golden pheasant cock's ruddy red flank feather, folded and wound as a hackle (an Usk
   // Grub's tail). Assumption: soft, its long barbs sweeping back like a partridge hackle's.
-  "golden-pheasant-flank": { name: "golden pheasant flank feather", archetype: "hackle", defaultColor: "#a8401c", sweep: 60, barbsPerMm: 6 },
+  "golden-pheasant-flank": { name: "golden pheasant flank feather", archetype: "hackle", defaultColor: "#a8401c", sweep: 60, barbsPerMm: 9 },
 
   // Dubbing
   // Assumption: hare's mask and seal's fur are the roughest common dubbings, rabbit in between
