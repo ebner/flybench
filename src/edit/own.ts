@@ -478,7 +478,8 @@ export function renameMaterial(draft: Recipe, from: string, to: string): Recipe 
       const next = { ...s } as Record<string, unknown>;
       if ("material" in s) next.material = swap(s.material);
       if ("around" in s && s.around) next.around = swap(s.around);
-      if ("under" in s && s.under) next.under = swap(s.under);
+      if ("under" in s && typeof s.under === "string") next.under = swap(s.under);
+      if ("with" in s && s.with) next.with = swap(s.with);
       return next as Step;
     }),
   };

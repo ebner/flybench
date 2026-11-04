@@ -274,6 +274,10 @@ materials {
         source "Svenska Wikipedia: Flugbindning ('nacken eller sadeln till en tupp eller en höna')" url="https://sv.wikipedia.org/wiki/Flugbindning"
         source "Fiske.se: Fjädrar & Nackar (product 'Indisk tuppsadel - Svart')" url="https://www.fiske.se/fj%C3%A4drar-och-nackar"
     }
+    noun golden-pheasant-body "kroppsfjäder från guldfasan" gender=en definite="kroppsfjädern från guldfasan" plural="kroppsfjädrar från guldfasan" plural-definite="kroppsfjädrarna från guldfasan" {
+        note "The cock's small red body feathers. The shop sells the skin as 'Guldfasan kroppsskinn'; a phrase like 'bröstfjäder från gräsandhona' (mallard-breast)."
+        source "Flugbindning.com: search for 'guldfasan' (product 'Guldfasan kroppsskinn')" url="https://flugbindning.com/search?controller=search&s=guldfasan"
+    }
     noun jungle-cock "jungle cock" gender=en definite="jungle cocken" mass=#true {
         note "Kept in English, as Swedish dressings and shops write it ('Cheeks: Jungle cock', 'syntetiska Jungle Cock'); the bird is 'grå djungelhöna', a word not used for the feather. Treated as a material, like bucktail; the definite form is an assumption."
         source "Rackelhanen: Em Silver ('Cheeks: Jungle cock, Kungsfiskare')" url="https://www.rackelhane.se/swe/1029.htm"

@@ -1,0 +1,84 @@
+// Bomber: Father Elmer Smith's Miramichi salmon dry fly, a spun deer-hair cigar with a hackle palmered through it, in Davie McPhail's colours.
+
+id salmon-bomber
+name "Bomber"
+type salmon
+imitates attractor
+// Bates: fished dry as a rule, also skated or wet.
+fishes surface
+difficulty intermediate
+species salmon
+origin originator="Rev. Elmer J. Smith" region="Miramichi River, New Brunswick, Canada"
+description "A short white calf tail, a body of spun natural deer hair clipped to a cigar, mostly above the shank, a brown hackle palmered through it, and a white calf wing pointing forward and up over the eye."
+history """
+    Bombers were developed in the 1960s for New Brunswick's Miramichi River and made popular by
+    the Reverend Elmer Smith, Father Smith, a legendary figure on the river (Joseph Bates). Bates
+    says he took the idea from a spun-hair mouse he saw a young boy catch fish with; Warren Duncan
+    of Saint John told Fly Tyer the boy was catching sea-run brown trout on Maine's York River.
+    Smith tied his first Bomber wet, its bulky body trimmed, with a single grizzly hackle dyed red
+    tied in at the bend and palmered forward; he then dressed it dry, preferring spun deer hair
+    trimmed and tapered towards the eye with two stiff hackles wound forward. Bates gives Duncan's
+    dressing, the body clipped to a smooth cigar a third below the shank and two thirds above it
+    to clear the barb, and the Brown, White (Peppermint) and Black Bombers; Fly Tyer calls Bombers
+    the most widely used dry flies for Atlantic salmon, now tied in every colour. This is Davie
+    McPhail's natural Bomber, white calf tail and wing and a brown hackle, as Bates's Brown Bomber
+    is coloured. Duncan ties the tail of the body's deer hair, McPhail and Sheldon Seale of calf
+    tail; Duncan's and Seale's wings point forward at about 45°, while Fly of the Month Club ties
+    two upright tufts and a heavy collar hackle as well.
+    """
+fishing """
+    Fished dry as a rule, and almost impossible to sink; also dragged across the surface with a
+    fast skittering motion, or fished wet (Bates). In Canada it is usually fished upstream on a
+    dead drift like a trout fly, on the Kola swung downstream, where the wake brings the fish up;
+    salmon will often come to it two or three times before taking (Peter McLeod).
+    """
+sources {
+    "Fly Anglers Online: Just Old Flies, Bombers (Deanna Birkholm, from Joseph Bates's Fishing Atlantic Salmon; archived)" url="http://web.archive.org/web/20181229110846/http://flyanglersonline.com:80/features/oldflies/part183.php"
+    "Fly Tyer: The Bomber (Davie McPhail; archived)" url="http://web.archive.org/web/20240221052602/https://www.flytyer.com/the-bomber/"
+    "GlobalFlyFisher: Bomber salmon dry fly (video, Davie McPhail)" url="https://globalflyfisher.com/video/bomber-salmon-dry-fly"
+    "Fly Anglers Online: The Hair Loop Bomber (Sheldon Seale, Our Man in Canada #258)" url="https://www.flyanglersonline.com/t/the-hair-loop-bomber-faols-our-man-in-canada-258/2862"
+    "Fulling Mill: Surface fishing for Atlantic salmon (Peter McLeod)" url="https://blog.fullingmill.com/surface-fishing-atlantic-salmon/"
+    "Fly of the Month Club: Bomber" url="http://www.flyofthemonthclub.com/store/catalog.asp?item=1395"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "http://web.archive.org/web/20181229110846im_/http://flyanglersonline.com/features/oldflies/bomber.jpg" page="http://web.archive.org/web/20181229110846/http://flyanglersonline.com:80/features/oldflies/part183.php" license="All rights reserved; reference only" note="Bates's White Bomber, side view, the wing forward"
+    "https://www.flyanglersonline.com/uploads/default/original/2X/c/c213c818837b57ff2e8ccb6aab52cca8ee69553a.jpeg" page="https://www.flyanglersonline.com/t/the-hair-loop-bomber-faols-our-man-in-canada-258/2862" author="Sheldon Seale" license="All rights reserved; reference only" note="Side view in the vise, the wing at 45°"
+    "http://www.flyofthemonthclub.com/store/images/products/large/Bomber500.jpg" page="http://www.flyofthemonthclub.com/store/catalog.asp?item=1395" license="All rights reserved; reference only" note="Side view, a green Bomber with upright wings"
+}
+
+// McPhail: a Partridge CS42 #6, a long up-eyed salmon dry hook.
+hook salmon-up-eye size=6
+// Assumption: a strong 3/0 thread to spin the hair (Seale: at least 3/0 for his hair loops); McPhail's is black.
+thread black size="3/0"
+
+materials {
+    tail calf-tail color=white count=140 label="White calf tail"
+    wing calf-tail color=white count=160 label="White calf tail"
+    // McPhail: natural or dyed brown cock; Seale a saddle hackle.
+    hackle saddle-hackle color=brown fibre=0.55 sweep=15 label="Brown cock saddle hackle"
+    body deer-hair label="Natural deer hair"
+}
+
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.02
+    // Read from the photos: about 1.4 gapes. Duncan: "a fairly large and rather short bunch".
+    tie-in tail length=1.4 angle=5 spread=50 note="A small bunch of calf tail, tips level."
+    trim tail note="Bind the butts down along the top of the shank."
+    wrap-thread to=0.88
+    // Read from the photos: the wing about 1.5 gapes; Duncan and Seale: forward at 45°.
+    tie-in wing length=1.5 angle=45 forward=#true note="A slightly larger bunch than the tail, tips over the eye; trim its butts to meet the tail's."
+    wrap-thread to=0.95 note="Turns in front of the wing force it up to at least 45°."
+    wrap-thread to=0.02
+    tie-in hackle note="By the butt, at the tail."
+    spin body to=0.85 length=0.9 note="Small bunches, each spun and packed back hard, up to the wing."
+    whip-finish turns=3 note="Seale ties off here and takes the hook out of the vise to trim the body."
+    // Duncan: about a third below the shank and two thirds above; the depth read from the photos, about 0.8 gape in all, from the roots of the hair round the shank.
+    trim body leave=0.42 shape=cigar below=0.2 note="Narrow and smooth, tapering to the tail and a little to the head; don't cut the hackle."
+    attach-thread at=0.85
+    // Read from the photos: six to eight open turns.
+    wind hackle to=0.85 turns=7 note="Open turns forward through the clipped hair."
+    tie-off hackle
+    whip-finish note="Cement the exposed thread."
+}

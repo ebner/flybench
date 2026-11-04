@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import {
+  belowReach,
   extensionCentre,
+  shapeFactor,
   wrapAt,
   wrapPoint,
   type BeadPiece,
@@ -790,23 +792,18 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
     let length = piece.length * (1 - jitter / 2 + jitter * rand());
     if (radialHair && piece.cut && piece.span) {
       const f = (x - piece.x) / piece.span;
-      if (piece.trimShape === "wedge") {
-        // Deepest at the back, low at the front, and cut flat underneath close to the hook.
-        length *= 0.3 + 0.7 * (1 - f);
-        if (dir.y < -0.05) length = Math.min(length, 0.1 / -dir.y);
-        if (Math.abs(dir.z) > 0.6) length *= 0.75;
-      } else if (piece.trimShape === "cone") {
-        // Slim at the tail, swelling to full towards the front, squared off there.
-        length *= 0.4 + 0.6 * Math.sqrt(Math.min(1, f / 0.92));
-      } else if (piece.trimShape === "cigar") {
-        // Fullest in the middle, rounded off at both ends.
-        length *= 0.3 + 0.7 * Math.sqrt(Math.max(0, 1 - (2 * f - 1) ** 2));
-      } else if (piece.trimShape === "disc") {
+      if (piece.trimShape === "disc") {
         // Round in plan, flat top and bottom.
         length = discReach(piece, base, dir, length);
       } else {
-        // A round head, shaped like a bullet: fullest at the back, tapering to the eye.
-        length *= 1 - 0.75 * Math.pow(f, 1.2);
+        length *= shapeFactor(piece.trimShape ?? "round", f);
+        if (piece.trimShape === "wedge") {
+          // Cut flat underneath close to the hook.
+          if (dir.y < -0.05) length = Math.min(length, 0.1 / -dir.y);
+          if (Math.abs(dir.z) > 0.6) length *= 0.75;
+        }
+        // Cut closer underneath: round about a line above the shank.
+        if (piece.below !== undefined) length *= belowReach(outward.y, outward.z, piece.below);
       }
     }
     // Cut flat on top or underneath: no hair reaches past the cut; the sides keep their length.

@@ -39,7 +39,9 @@ same fly (a Paradrake's hair body, bound with the thread past the bend, and a Mo
 foam body made on a needle, its tails in it and its strip pulled over round the wing, and a
 Morrish Mouse's flat-cut deer hair under a tapered foam back folded into a head, and a Raghead
 Crab's fibre body glued on after the whip finish and clipped into a disc over fanned legs, and a
-Gotcha's tail of Mylar tubing picked apart into strands, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
+Gotcha's tail of Mylar tubing picked apart into strands, a Claret Bumble's two hackles palmered
+together in one pass, and a Bomber's deer-hair cigar clipped closer underneath with its hackle
+wound through it, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
 log and the trip box, can be downloaded as a recipe file, and shared as a link that carries
 the whole fly after the `#`. The built site installs as an app and works offline after
 the first visit.

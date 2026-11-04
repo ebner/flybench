@@ -920,3 +920,89 @@ materials {
     expect(errs(STEPS, MOUSE.replace("back foam color=black mm=2", "back poly-yarn"))).toEqual(expect.arrayContaining([expect.stringMatching(/fold only applies to foam/)]));
   });
 });
+
+describe("two materials wound together", () => {
+  const PALMER = `
+id test
+name "Test"
+type wet
+difficulty intermediate
+hook wet-standard size=10
+thread black size="8/0"
+materials {
+    rib oval-tinsel color=gold
+    body seals-fur color=claret
+    claret cock-hackle color=claret fibre=1.3
+    black cock-hackle color=black fibre=1.3
+}
+`;
+  const STEPS = `
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    tie-in rib
+    dub body to=0.82
+    tie-in claret
+    tie-in black
+    wind claret to=0.05 turns=5 with=black
+    wind rib to=0.82 turns=6
+    tie-off rib
+    trim claret
+    trim black
+    whip-finish
+`;
+  const errs = (steps: string) => errorsOf(load(steps, PALMER));
+
+  it("palmers two hackles back in one pass, the rib holding both tips", () => {
+    expect(recipeOf(load(STEPS, PALMER)).steps[6]).toMatchObject({ op: "wind", with: "black" });
+  });
+
+  it("leaves both tips to trim", () => {
+    expect(errs(STEPS.replace("    trim black\n", ""))).toEqual(expect.arrayContaining([expect.stringMatching(/the tip of "black" is still hanging/)]));
+  });
+
+  it("winds together only a material tied in at the same place and not yet used", () => {
+    expect(errs(STEPS.replace("    tie-in black\n", "").replace("dub body to=0.82", "tie-in black\n    dub body to=0.82"))).toEqual(
+      expect.arrayContaining([expect.stringMatching(/"black" is wound together with "claret"/)]),
+    );
+    expect(errs(STEPS.replace("with=black", "with=claret"))).toEqual(expect.arrayContaining([expect.stringMatching(/"claret" is wound together with "claret"/)]));
+    expect(errs(STEPS.replace("with=black", "with=nothing"))).toEqual(expect.arrayContaining([expect.stringMatching(/unknown material "nothing"/)]));
+  });
+
+  it("ties off both after winding them forward together", () => {
+    const forward = STEPS.replace("    wind claret to=0.05 turns=5 with=black\n    wind rib to=0.82 turns=6\n    tie-off rib\n    trim claret\n    trim black\n", "    wind rib to=0.82 turns=6\n    tie-off rib\n    wrap-thread to=0.9\n    wind claret to=0.9 turns=5 with=black\n    tie-off black\n    tie-off claret\n");
+    expect(recipeOf(load(forward, PALMER)).steps).toHaveLength(13);
+    expect(errs(forward.replace("    tie-off claret\n", ""))).toEqual(expect.arrayContaining([expect.stringMatching(/"claret" was just wound and must be tied off/)]));
+  });
+});
+
+describe("spun hair trimmed closer underneath", () => {
+  const BOMBER = `
+id test
+name "Test"
+type salmon
+difficulty intermediate
+hook salmon-up-eye size=6
+thread black size="3/0"
+materials {
+    hackle saddle-hackle color=brown fibre=0.5
+    body deer-hair
+}
+`;
+  const STEPS = `
+    attach-thread at=0.02
+    tie-in hackle
+    spin body to=0.85 length=0.9
+    trim body leave=0.42 shape=cigar below=0.2
+    wind hackle to=0.85 turns=7
+    tie-off hackle
+    whip-finish
+`;
+  it("loads", () => {
+    expect(recipeOf(load(STEPS, BOMBER)).steps[3]).toMatchObject({ shape: "cigar", below: 0.2 });
+  });
+
+  it("takes below only on spun hair trimmed to a rounded shape", () => {
+    expect(errorsOf(load(STEPS.replace("shape=cigar", "shape=wedge"), BOMBER))).toEqual(expect.arrayContaining([expect.stringMatching(/below only applies/)]));
+    expect(errorsOf(load(STEPS.replace("trim body leave=0.42 shape=cigar below=0.2", "trim body keep=top below=0.2"), BOMBER))).toEqual(expect.arrayContaining([expect.stringMatching(/below only applies/)]));
+  });
+});

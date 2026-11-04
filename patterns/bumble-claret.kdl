@@ -1,0 +1,82 @@
+// Claret Bumble: T. C. Kingsmill Moore's Irish lough fly, two hackles palmered together over a claret seal's fur body under a blue jay shoulder.
+
+id bumble-claret
+name "Claret Bumble"
+// flugor.se and Fulling Mill sell it as the Bumble Claret.
+aliases "Bumble Claret"
+type wet
+imitates attractor
+difficulty intermediate
+species trout sea-trout salmon
+origin originator="T. C. Kingsmill Moore" region="Ireland"
+description "A tail of golden pheasant tippet, a claret seal's fur body ribbed with oval gold, claret and black cock hackles palmered together down it, and a long blue shoulder hackle of jay or dyed guinea fowl."
+history """
+    T. C. Kingsmill Moore, an Irish judge, wrote of his Bumbles in A Man May Fish (1960), and the
+    Claret is one of the best known of them. The Fly Dressers' Guild's dressings database gives his pattern, a sea-trout fly from Ireland:
+    four strands of golden pheasant tippet, medium claret seal's fur ribbed with oval gold, black
+    and medium claret cock hackles wound together, and blue jay or blue-dyed guinea fowl at the
+    shoulder. Peter Gathercole's (1985) has a long-fibred claret cock hackle with a dyed blue cock
+    hackle wound over it. Håkan Karsnäs ribs it with silver. Older English flies were called Claret Bumbles too
+    (Halford's of 1886 among them): claret silk ribbed with peacock herl under a furnace or blue
+    dun hackle, a different fly.
+    """
+fishing """
+    A lough fly for the top or middle dropper of a team of wet flies, fished in the traditional
+    Irish way. Fulling Mill find it best in a wave on dark days. For brown and rainbow trout, sea
+    trout and salmon.
+    """
+sources {
+    "Fly Dressers' Guild: Dressings Database" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+    "GlobalFlyFisher: Claret Bumble (video, Håkan Karsnäs for Ahrex)" url="https://globalflyfisher.com/video/claret-bumble-0"
+    "Irish Fly Fair: Frankie McPhillips" url="https://www.irishflyfair.com/frankie_mcphillips.html"
+    "Fulling Mill: Bumble Claret" url="https://www.fullingmill.co.uk/Products-UK/Wet-UK/Bumble-Claret-S10-UK"
+    "Fish4Flies: Claret Bumble" url="https://www.fish4flies.com/Wet/Bumble/Claret-Bumble"
+    "The Essential Fly: Bumble flies" url="https://www.theessentialfly.com/bumble-flies/"
+    "Fish and Fly: A Man May Fish, reviewed by Terry Lawton (archived)" url="https://web.archive.org/web/20100113140208/http://www.fishandfly.co.uk/bookrevs/manmay.html"
+    "Wikipedia: Theodore Conyngham Kingsmill Moore" url="https://en.wikipedia.org/wiki/Theodore_Conyngham_Kingsmill_Moore"
+    "flugor.se: Bumble Claret" url="https://www.flugor.se/flugor/klassiska-flugor/bumble-claret-3398"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/852-6401.jpg" page="https://www.fish4flies.com/Wet/Bumble/Claret-Bumble" license="All rights reserved; reference only" note="Side view, jay at the shoulder"
+    "https://www.flugor.se/bild_arkiv/big_3398.jpg" page="https://www.flugor.se/flugor/klassiska-flugor/bumble-claret-3398" license="All rights reserved; reference only" note="Side view in the vise, blue guinea fowl at the shoulder"
+    "https://i.ytimg.com/vi/ryA5Tnjw_3c/maxresdefault.jpg" page="https://globalflyfisher.com/video/claret-bumble-0" author="Håkan Karsnäs" license="All rights reserved; reference only" flip=#true note="Three-quarter view, silver rib"
+}
+
+// Fish4Flies: #8 to 12; Fulling Mill and flugor.se a #10.
+hook wet-standard size=10
+thread black size="8/0"
+
+materials {
+    // Read from the photos: about 1.3 gapes.
+    tail golden-pheasant-tippet count=4 label="Golden pheasant tippet"
+    rib oval-tinsel color=gold label="Oval gold tinsel"
+    body seals-fur color=claret label="Medium claret seal's fur"
+    // Read from the photos: the body hackles about 1.3 gapes, swept well back.
+    hackle-claret cock-hackle color=claret fibre=1.3 sweep=55 label="Medium claret cock hackle"
+    hackle-black cock-hackle color=black fibre=1.3 sweep=55 label="Black cock hackle"
+    // Kingsmill Moore: blue jay or blue-dyed guinea fowl. Read from the photos: the fibres reach back past the hook point.
+    collar guinea-fowl-hackle color=blue barred=#true fibre=1.8 sweep=50 label="Blue jay, or guinea fowl dyed blue"
+}
+
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    tie-in tail length=1.3 spread=20 note="Four strands of tippet, on top."
+    tie-in rib
+    dub body to=0.82 note="Seal's fur, picked out a little; leave room for the shoulder hackle."
+    // Assumption: tied in at the front by their stalks and wound back to the tail, as palmered loch flies are; no source I read gives the order.
+    tie-in hackle-claret note="By the stalks, the two hackles together, at the front of the body."
+    tie-in hackle-black
+    // Read from the photos: five or six turns.
+    wind hackle-claret to=0.05 turns=5 with=hackle-black
+    wind rib to=0.82 turns=6 note="Wiggled forward through the hackles, trapping no fibres."
+    tie-off rib
+    trim hackle-claret note="Cut both hackle tips away at the tail."
+    trim hackle-black
+    tie-in collar note="By the tip, the blue side facing forward."
+    wrap-thread to=0.92
+    wind collar to=0.92 turns=2 note="Two or three turns, swept back over the body hackles."
+    tie-off collar
+    whip-finish note="A small black head."
+}

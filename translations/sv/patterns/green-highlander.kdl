@@ -1,0 +1,82 @@
+id green-highlander
+status draft
+
+// en description: An oval silver tag and yellow floss tip, a golden pheasant crest tail, a black ostrich butt, a body of yellow floss and green seal's fur ribbed with oval silver under a green hackle, a yellow throat, and a wing of tippet, mixed green and orange bucktail and red squirrel, with red golden pheasant cheeks.
+description "En tag av oval silvertinsel och en spets av gult flossilke, en stjärt av guldfasantopping, en butt av svart strutsherl, en kropp av gult flossilke och grönt sälhår ribbad med oval silvertinsel under ett grönt hackel, ett gult skägg och en vinge av tippet, blandad grön och orange bucktail och rödekorre, med kinder av röd guldfasan."
+
+// en history: The Highlander came first: Francis Francis (1867) lists it among the Ness flies he had from Snowie of Inverness, and calls it the best fly for the Carron. It already had the yellow rear and green front: gold floss nearly half up the body, then dirty olive-green mohair, ribbed with silver under a pea-green hackle, blue jay at the shoulder and a mixed wing with jungle cock and a topping. Kelson (1895) gives the Green Highlander and credits it to Grant: two turns of yellow silk and green seal's fur, a green hackle from the yellow, a yellow throat and a mixed wing under a topping. Pryce-Tannatt (1914) gives the dressing most classic tyers follow: the first quarter golden yellow floss, the rest bright green floss, a grass-green hackle, a lemon throat, and a wing of tippet and married swan, florican, peacock wing and golden pheasant tail with teal, summer duck and brown mallard, jungle cock, Indian crow and a topping. Today it is mostly tied with a hair wing, and the hairwings differ in the wing. This is Jim Misiura's: a tippet underwing, mixed green and orange bucktail, red squirrel over and red golden pheasant cheeks. Fly of the Month Club's has tippets, then yellow, orange and green bucktail, with a sparse brown bucktail over; Håkan Karsnäs's tube winds yellow, orange and warm brown fox in turn with the green and yellow hackles; and Ívar of Ívar's Fly Workshop says a grey or brown wing of squirrel, or even fox, is more common today.
+history """
+    Highlander kom först: Francis Francis (1867) räknar den bland Nessflugorna han fick av
+    Snowie i Inverness och kallar den den bästa flugan för Carron. Den hade redan den gula
+    bakdelen och den gröna framdelen: guldfärgat flossilke nästan halvvägs upp på kroppen, sedan
+    smutsigt olivgrön mohair, ribbad med silver under ett ärtgrönt hackel, nötskrika vid axeln
+    och en blandad vinge med jungle cock och en topping. Kelson (1895) ger Green Highlander och
+    tillskriver den Grant: två varv gult silke och grönt sälhår, ett grönt hackel från det gula,
+    ett gult skägg och en blandad vinge under en topping. Pryce-Tannatt (1914) ger den bindning
+    som de flesta klassiska bindare följer: den första fjärdedelen guldgult flossilke, resten
+    klargrönt flossilke, ett gräsgrönt hackel, ett citrongult skägg och en vinge av tippet och
+    gifta fibrer av svan, florican, påfågelvinge och guldfasanstjärt med kricka, brudand och
+    brun gräsand, jungle cock, indisk kråka och en topping. I dag binds den mest med hårvinge,
+    och hårvingeflugorna skiljer sig i vingen. Den här är Jim Misiuras: en undervinge av tippet,
+    blandad grön och orange bucktail, rödekorre överst och kinder av röd guldfasan. Fly of the
+    Month Clubs har tippet, sedan gul, orange och grön bucktail, med en gles brun bucktail
+    överst; Håkan Karsnäs tub varvar gul, orange och varmt brun räv med de gröna och gula
+    hacklen; och Ívar på Ívar's Fly Workshop säger att en grå eller brun vinge av ekorre, eller
+    till och med räv, är vanligare i dag.
+    """
+
+// en fishing: A fly for clear water, where it is still much used (Casper Hansen); Perfect Fly Store fishes it in low, clear water.
+fishing """
+    En fluga för klart vatten, där den fortfarande används mycket (Casper Hansen); Perfect Fly
+    Store fiskar den i lågt, klart vatten.
+    """
+
+labels {
+    // en tag: Oval silver tinsel
+    tag "Oval silvertinsel"
+    // en yellow-tag: Yellow floss
+    yellow-tag "Gult flossilke"
+    // en body-rear: Yellow floss
+    body-rear "Gult flossilke"
+    // en body: Green seal's fur
+    body "Grönt sälhår"
+    // en hackle: Green cock hackle
+    hackle "Grönt tupphackel"
+    // en throat: Yellow cock hackle
+    throat "Gult tupphackel"
+    // en wing: Mixed green and orange bucktail
+    wing "Blandad grön och orange bucktail"
+    // en overwing: Red squirrel tail
+    overwing "Rödekorrsvans"
+    // en cheeks: Red golden pheasant neck feathers
+    cheeks "Röda halsfjädrar från guldfasan"
+}
+
+notes {
+    // en step 2 (wrap-thread): To opposite the barb.
+    step 2 "Till mitt för hullingen."
+    // en step 14 (wind butt): Three turns, the flue stroked back.
+    step 14 "Tre varv, med flunet strukit bakåt."
+    // en step 19 (wind body-rear): Smooth, close turns.
+    step 19 "Släta, täta varv."
+    // en step 21 (tie-in hackle): By its tip, at the front of the yellow.
+    step 21 "Med spetsen, framtill på det gula."
+    // en step 22 (dub body): Seal's fur, fairly slim.
+    step 22 "Sälhår, ganska smalt."
+    // en step 23 (wind hackle): Open turns over the seal's fur.
+    step 23 "Glesa varv över sälhåret."
+    // en step 25 (wind rib): Five turns, close in front of the hackle stalk.
+    step 25 "Fem varv, tätt framför hackelstjälken."
+    // en step 28 (tie-in underwing): A small bunch of tippet strands.
+    step 28 "En liten tofs tippetfibrer."
+    // en step 29 (tie-in wing): The two colours mixed.
+    step 29 "De två färgerna blandade."
+    // en step 31 (tie-in overwing): Sparse, over the bucktail.
+    step 31 "Gles, över bucktailen."
+    // en step 32 (trim overwing): Cut at an angle for a small head.
+    step 32 "Klipp snett för ett litet huvud."
+    // en step 33 (tie-in cheeks): One each side of the wing's root.
+    step 33 "En på var sida om vingens rot."
+    // en step 34 (whip-finish): A black head, varnished.
+    step 34 "Ett svart huvud, lackat."
+}

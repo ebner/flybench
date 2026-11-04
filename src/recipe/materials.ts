@@ -169,6 +169,8 @@ export const MATERIALS = {
   // The neck feathers ("eyes", "nails") of the grey jungle fowl: small, stiff and round-ended,
   // dark with a row of cream enamel spots down the middle; a pair as cheeks beside a wing.
   "jungle-cock": { name: "jungle cock", archetype: "feather", defaultColor: "#26231f", shape: "eye" },
+  // Assumption: the cock's small red body feathers, tied as a pair of cheeks like a hackle tip.
+  "golden-pheasant-body": { name: "golden pheasant body feather", archetype: "feather", defaultColor: "red", shape: "tip" },
 
   // Foam
   foam: { name: "foam", archetype: "foam", defaultColor: "black", thickness: 0.09 },

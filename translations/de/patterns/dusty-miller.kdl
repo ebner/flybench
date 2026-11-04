@@ -1,0 +1,75 @@
+id dusty-miller
+status draft
+
+// en description: A long tail of yellow and red bucktail over natural squirrel with pearl flash, a short fluorescent orange floss body, a sparse brown bucktail wing with orange flash, and orange and brown hackles in front.
+description "Ein langes Schwänzchen aus gelbem und rotem Bucktail über naturfarbenem Eichhörnchen mit perlmuttfarbenem Glitzer, ein kurzer Körper aus fluoreszierend orangefarbenem Floss, ein lichter Flügel aus braunem Bucktail mit orangefarbenem Glitzer und vorn orangefarbene und braune Hecheln."
+
+// en history: One of the oldest standard salmon flies, Kelson called it (1895), crediting it to Jewhurst; J. H. Hale (1892) gives it as Mr Murdoch's. The name was in use by 1867: Herbert Maxwell sent Francis Francis a Dusty Miller for the Minnick in low, bright water, with an embossed silver body, a dark olive hackle and a mixed wing. Mary Orvis Marbury (1892) says it is sometimes called the Beryl. The dressings disagree on almost every part. Pryce-Tannatt (1914) counts it among the built-wing flies, with the Jock Scott and the Butcher: embossed silver tinsel over two thirds of the body, orange floss in front under a golden olive hackle, a speckled guinea fowl throat, and a wing of white-tipped black turkey under married strands of swan, bustard, florican and golden pheasant tail, with jungle cock cheeks, a topping and macaw horns. Kelson's has no body hackle and gallina in the wing; Hale's body is embossed silver all the way. This is John Gray's needle tube, the classic much simplified in the style of the long-tailed shrimp flies such as Ally Gowans's Cascade.
+history """
+    Eines der ältesten Standardmuster für Lachs nannte sie Kelson (1895) und schrieb sie
+    Jewhurst zu; J. H. Hale (1892) gibt sie als die von Mr Murdoch. Der Name war 1867 in
+    Gebrauch: Herbert Maxwell schickte Francis Francis eine Dusty Miller für den Minnick bei
+    niedrigem, klarem Wasser, mit einem Körper aus geprägtem Silber, einer dunkelolivfarbenen
+    Hechel und einem gemischten Flügel. Mary Orvis Marbury (1892) sagt, sie heiße manchmal the
+    Beryl. Die Bindeweisen unterscheiden sich in fast jedem Teil. Pryce-Tannatt (1914) zählt sie
+    zu den Fliegen mit gebautem Flügel, mit der Jock Scott und der Butcher: geprägtes
+    Silbertinsel über zwei Drittel des Körpers, vorn orangefarbenes Floss unter einer
+    goldolivfarbenen Hechel, ein Bart aus gesprenkeltem Perlhuhn und ein Flügel aus weiß
+    gespitztem schwarzem Truthahn unter vermählten Fibern von Schwan, Trappe, Florican und
+    Goldfasanenschwanz, mit Wangen aus Dschungelhahn, einem Topping und Hörnern vom Ara. Kelsons
+    hat keine Körperhechel und Perlhuhn im Flügel; Hales Körper ist ganz aus geprägtem Silber.
+    Dies ist John Grays Nadeltube, der Klassiker stark vereinfacht im Stil der langschwänzigen
+    Shrimpfliegen wie Ally Gowans' Cascade.
+    """
+
+// en fishing: Marbury's Dusty Miller is a large silver fly for later in the season, where the water is rough and rapid, or deep; Maxwell's was for low, bright water.
+fishing """
+    Marburys Dusty Miller ist eine große Silberfliege für später in der Saison, wo das Wasser
+    rau und reißend oder tief ist; Maxwells war für niedriges, klares Wasser.
+    """
+
+labels {
+    // en tail-lower: Natural squirrel tail
+    tail-lower "Naturfarbener Eichhörnchenschwanz"
+    // en tail-yellow: Yellow bucktail
+    tail-yellow "Gelber Bucktail"
+    // en tail-red: Red bucktail
+    tail-red "Roter Bucktail"
+    // en tail-flash: Pearl Krystal Flash
+    tail-flash "Perlmuttfarbenes Krystal Flash"
+    // en body: Fluorescent orange floss
+    body "Fluoreszierend orangefarbenes Floss"
+    // en wing: Brown bucktail
+    wing "Brauner Bucktail"
+    // en flash: Orange Krystal Flash
+    flash "Orangefarbenes Krystal Flash"
+    // en hackle-orange: Orange cock hackle
+    hackle-orange "Orangefarbene Hahnenhechel"
+    // en hackle-brown: Brown cock hackle
+    hackle-brown "Braune Hahnenhechel"
+}
+
+notes {
+    // en step 2 (wrap-thread): A bed of thread about a third of the way along the tube.
+    step 2 "Ein Fadenbett etwa ein Drittel der Tubenlänge."
+    // en step 3 (tie-in tail-lower): A sparse bunch.
+    step 3 "Ein lichtes Büschel."
+    // en step 5 (tie-in tail-yellow): Turn the vice through 180° first; a sparse bunch.
+    step 5 "Dreh vorher den Bindestock um 180°; ein lichtes Büschel."
+    // en step 7 (tie-in tail-red): A sparse bunch over the yellow.
+    step 7 "Ein lichtes Büschel über dem gelben."
+    // en step 9 (tie-in tail-flash): A few strands, to taste.
+    step 9 "Ein paar Fasern, nach Geschmack."
+    // en step 12 (wind body): A short body, back to the tail and forward again.
+    step 12 "Ein kurzer Körper, zurück zum Schwänzchen und wieder nach vorn."
+    // en step 14 (tie-in wing): Sparse.
+    step 14 "Licht."
+    // en step 16 (tie-in flash): A few strands with the wing.
+    step 16 "Ein paar Fasern mit dem Flügel."
+    // en step 19 (wind hackle-orange): Two or three turns.
+    step 19 "Zwei oder drei Windungen."
+    // en step 23 (wind hackle-brown): Two or three turns in front of the orange.
+    step 23 "Zwei oder drei Windungen vor der orangefarbenen."
+    // en step 25 (whip-finish): A neat head, two coats of Cellire No. 1 varnish.
+    step 25 "Ein sauberer Kopf, zwei Schichten Cellire-Nr.-1-Lack."
+}

@@ -177,7 +177,7 @@ function writerFor(recipe: Recipe) {
         return `Bind ${count(said.strands, word("strand"))} ${mat(said.m, "indefinite")} tvärs över ${along} på mitten med ${eights}, så att ${length(said.length)} sticker ut på varje sida som ben.${lean}`;
       }
       case "tie-in-forward":
-        return `Bind in ${mat(said.m)} så att ${pronoun(noun(said.m)).subject} pekar framåt över ${def("eye")} och sticker ut ${length(said.length)}.${said.round ? ` Låt ${pronoun(noun(said.m)).object} fördela sig runt hela ${along} när du drar åt.` : ""}`;
+        return `Bind in ${mat(said.m)} så att ${pronoun(noun(said.m)).subject} pekar framåt över ${def("eye")} och sticker ut ${length(said.length)}${angle(said.angle)}.${said.round ? ` Låt ${pronoun(noun(said.m)).object} fördela sig runt hela ${along} när du drar åt.` : ""}`;
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
@@ -209,10 +209,15 @@ function writerFor(recipe: Recipe) {
       case "wind-around":
         return `Linda ${mat(said.m)} runt ${def("base")} av ${mat(said.around)} i ${turns(said.turns)}, vart och ett under det förra.`;
       case "palmer":
+        if (said.with) return `Håll ${mat(said.m)} och ${mat(said.with)} tillsammans, sida vid sida, och linda dem bakåt ${place(said.to).to} som en i ${turns(said.turns, true)}${counter(said.counter)}.`;
         return `Linda ${mat(said.m)} bakåt ${place(said.to).to} i ${turns(said.turns, true)}${counter(said.counter)}.`;
-      case "wind-through":
-        return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)} genom ${mat(said.through)}${counter(said.counter)}. Det första varvet låser dess ${svNoun(word("tip"), "indefinite")}.`;
+      case "wind-through": {
+        const what = said.with ? `${mat(said.m)} och ${mat(said.with)} tillsammans` : mat(said.m);
+        if (said.also) return `Linda ${what} framåt ${place(said.to).to} i ${turns(said.turns)} genom ${mat(said.through)} och ${mat(said.also)}${counter(said.counter)}. Det första varvet låser deras ${svNoun(word("tip"), "plural")}.`;
+        return `Linda ${what} framåt ${place(said.to).to} i ${turns(said.turns)} genom ${mat(said.through)}${counter(said.counter)}. Det första varvet låser dess ${svNoun(word("tip"), "indefinite")}.`;
+      }
       case "wind":
+        if (said.with) return `Håll ${mat(said.m)} och ${mat(said.with)} tillsammans, sida vid sida, och linda dem framåt ${place(said.to).to} som en i ${turns(said.turns)}${counter(said.counter)}.`;
         return `Linda ${mat(said.m)} framåt ${place(said.to).to} i ${turns(said.turns)}${counter(said.counter)}.`;
       case "pull-over":
         if (said.fold) return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at} med fasta ${svNoun(word("turn"), "plural")}; vik sedan änden bakåt över sig själv till ${article(word("head"))} ${word("head").text} på ungefär ${length(said.fold)} framför ${def("tie-down")} och bind ner den igen där.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
@@ -266,11 +271,15 @@ function writerFor(recipe: Recipe) {
             ? `Klipp ${fibres} på ${mat(said.m)} ovanpå tätt intill ${def("body")}, så att det blir en plan bädd för vingen.`
             : `Klipp bort ${fibres} på ${mat(said.m)} upptill och undertill, så att två plana ${svNoun(word("row"), "plural")} sticker ut åt ${svNoun(word("side"), "plural-definite")}.`;
       }
-      case "trim-spun":
+      case "trim-spun": {
+        // Cut closer underneath: so far above the shank and so far below it.
+        const reach = said.under ? `ungefär ${length(said.leave)} över ${along} och ${length(said.under)} under ${along}` : undefined;
         if (said.disc) return `${said.glued ? "När limmet har torkat, klipp" : "Klipp"} ${mat(said.m)} runt till en platt skiva, ungefär ${length(said.leave)} tjock ovanpå och undertill och lika bred som på mitten.`;
-        if (said.cone) return `Klipp ${mat(said.m)} till en kon, smal vid stjärten och ungefär ${length(said.leave)} tjock på varje sida framtill, rakt avskuren där.`;
-        if (said.cigar) return `Klipp ${mat(said.m)} till en cigarr, ungefär ${length(said.leave)} tjock på varje sida, tjockast på mitten och rundad i båda ändar.`;
+        if (said.cone) return `Klipp ${mat(said.m)} till en kon, smal vid stjärten och ${reach ? `framtill ${reach}` : `ungefär ${length(said.leave)} tjock på varje sida framtill`}, rakt avskuren där.`;
+        if (said.cigar) return `Klipp ${mat(said.m)} till en cigarr, ${reach ?? `ungefär ${length(said.leave)} tjock på varje sida`}, tjockast på mitten och rundad i båda ändar.`;
+        if (reach) return `Klipp ${mat(said.m)} till form, så att ${article(word("head"))} ${word("head").text} blir kvar, ${reach}.`;
         return `Klipp ${mat(said.m)} till form, så att ${article(word("head"))} ${word("head").text} på ungefär ${length(said.leave)} blir kvar på varje sida.`;
+      }
       case "trim-flat":
         return said.keep === "top"
           ? `Klipp ${mat(said.m)} plant undertill, ungefär ${length(said.leave)} under ${along}, och låt resten vara långt.`

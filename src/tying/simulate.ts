@@ -110,6 +110,11 @@ export interface BundlePiece extends PieceBase {
   trimShape?: "round" | "wedge" | "cigar" | "cone" | "disc";
   /** Spun hair cut flat on top or underneath (or both), this far from the shank's axis; the sides left long. */
   flat?: { top?: number; under?: number };
+  /**
+   * Trimmed to a shape cut closer underneath: how far it reaches below the shank as a fraction of
+   * how far above, round about a line above the shank (see `belowReach`).
+   */
+  below?: number;
   /** Radial: pads laid across the shank and glued, stacked on top and underneath, the fibres lying out to the sides. */
   across?: boolean;
   /** Upright and divided: two tufts turned out to either side by this many radians. */
@@ -569,6 +574,55 @@ const HAIR_SHEATH = 0.12;
 // pieces on top, one or two underneath, one more on top).
 const GLUED_THICKNESS = 0.7;
 
+/**
+ * How long the fibres of spun hair trimmed to a shape are at `f` along it (0 its rear, 1 its
+ * front), as a fraction of the length left at its fullest.
+ */
+export function shapeFactor(shape: "round" | "wedge" | "cigar" | "cone", f: number): number {
+  switch (shape) {
+    // Deepest at the back, low at the front.
+    case "wedge":
+      return 0.3 + 0.7 * (1 - f);
+    // Slim at the tail, swelling to full towards the front, squared off there.
+    case "cone":
+      return 0.4 + 0.6 * Math.sqrt(Math.min(1, f / 0.92));
+    // Fullest in the middle, rounded off at both ends.
+    case "cigar":
+      return 0.3 + 0.7 * Math.sqrt(Math.max(0, 1 - (2 * f - 1) ** 2));
+    // A round head, shaped like a bullet: fullest at the back, tapering to the eye.
+    case "round":
+      return 1 - 0.75 * Math.pow(f, 1.2);
+  }
+}
+
+/**
+ * A shape cut closer underneath, reaching `below` (a fraction) as far down as up: round about a
+ * line above the shank, so in the direction (up, across) from the shank's axis it reaches this
+ * fraction of what it reaches straight up.
+ */
+export function belowReach(up: number, across: number, below: number): number {
+  const c = (1 - below) / 2;
+  const r = (1 + below) / 2;
+  return c * up + Math.sqrt(Math.max(0, r * r - c * c * across * across));
+}
+
+/** The profile over spun hair trimmed to a shape, from its roots at `root`: what is wound over it later lies on it. */
+function trimmedBody(
+  profile: Profile, x0: number, x1: number, root: number, leave: number, shape: "round" | "wedge" | "cigar" | "cone", below: number | undefined,
+  flat: BundlePiece["flat"],
+): Profile {
+  // (Cut fibres lean back a little, as drawn.)
+  const lean = Math.cos(deg(10));
+  return profile.raisedTo(x0, x1, (x) => {
+    const l = leave * shapeFactor(shape, (x - x0) / Math.max(0.01, x1 - x0)) * lean;
+    // A wedge is cut flat underneath close to the hook, as drawn; and no hair reaches past where
+    // it was cut flat before.
+    const top = root + l;
+    const under = root + (shape === "wedge" ? Math.min(l, 0.1) : l * (below ?? 1));
+    return { top: Math.min(top, flat?.top ?? Infinity), under: Math.min(under, flat?.under ?? Infinity) };
+  });
+}
+
 /** Feather width as a fraction of length, by shape. */
 // Assumption: a jungle cock eye is about three tenths as wide as it is long.
 const FEATHER_WIDTH: Record<FeatherShape, number> = { breast: 0.5, tip: 0.28, slip: 0.32, eye: 0.3 };
@@ -623,8 +677,8 @@ export function simulate(recipe: Recipe): Build {
    * thread turns spiralled back over it bind it along the body (to `bound`) as a `sheath`.
    */
   const trailing = new Map<string, { x: number; tipX: number; tips: BundlePiece; halfAngle: number; round: boolean; thickness: number; bound?: number; sheath?: CoverPiece }>();
-  /** A palmered material whose tip the next forward wind secures. */
-  let palmered: string | null = null;
+  /** A palmered material (or two palmered together) whose tip the next forward wind secures. */
+  let palmered: string[] | null = null;
   const palmeredTips = new Set<string>();
   /** The rear edge of a bead at the eye: wraps stop short of it. */
   let frontLimit = 0.97 * L;
@@ -1038,20 +1092,37 @@ export function simulate(recipe: Recipe): Build {
           const to = Math.min(step.to! * span, frontLimit);
           ctx.rear = step.to! < tiedAtPosition.get(step.material)!;
           if (!ctx.rear && palmered) {
-            ctx.through = palmered;
+            ctx.through = palmered[0];
+            if (palmered[1]) ctx.throughAlso = palmered[1];
             palmered = null;
           }
           piece = { ...materialWraps(step.material, l, from, to, step.turns), counter: step.counter };
+          const base = profile;
           const coverage = (step.turns * 2 * l.strandRadius) / Math.max(Math.abs(to - from), 0.01);
           profile = profile.withLayer(from, to, l.layerThickness(coverage));
+          // Wound together in the same pass, the other lies beside it, a stem's width behind each
+          // turn (never more than half the gap between turns).
+          if (step.with) {
+            const lw = looks.get(step.with)!;
+            const dir = Math.sign(to - from) || 1;
+            const off = Math.min(Math.abs(to - from) / step.turns / 2, (l.strandRadius + lw.strandRadius) * 1.2) * dir;
+            const other: WrapsPiece = { ...materialWraps(step.with, lw, from - off, to - off, step.turns), base, counter: step.counter };
+            const c = (step.turns * 2 * lw.strandRadius) / Math.max(Math.abs(to - from), 0.01);
+            profile = profile.withLayer(from, to, lw.layerThickness(c));
+            pieces.push(other);
+            wound.set(step.with, other);
+            if (other.fibreLength) fluffy.push({ x0: other.x0, x1: other.x1, height: Math.min(0.1, other.fibreLength * 0.4) });
+          }
           if (ctx.rear) {
             // The tip stays at the bend, held until another material is wound over it.
-            palmered = step.material;
-            palmeredTips.add(step.material);
-            freeEnds.set(step.material, {
-              ...freeEnd(step.material, l), length: l.freeLength * 0.4, kind: "rest", x: to,
-              radius: profile.radiusAt(to), direction: "back-down",
-            });
+            palmered = [step.material, ...(step.with ? [step.with] : [])];
+            for (const id of palmered) {
+              palmeredTips.add(id);
+              freeEnds.set(id, {
+                ...freeEnd(id, looks.get(id)!), length: looks.get(id)!.freeLength * 0.4, kind: "rest", x: to,
+                radius: profile.radiusAt(to), direction: "back-down",
+              });
+            }
           }
         }
         pieces.push(piece);
@@ -1077,7 +1148,13 @@ export function simulate(recipe: Recipe): Build {
           fluffy.push({ x0: piece.x0, x1: piece.x1, height: Math.min(0.1, piece.fibreLength * 0.4) });
         }
         if (!ctx.rear) freeEnds.delete(step.material);
-        ends = [...restingEnds().filter((e) => e.material !== step.material), { ...freeEnd(step.material, l), kind: "follow", piece: piece.id }];
+        const together = step.with && !step.around ? (pieces.find((p) => p.material === step.with) as WrapsPiece | undefined) : undefined;
+        if (together && !ctx.rear) freeEnds.delete(step.with!);
+        ends = [
+          ...restingEnds().filter((e) => e.material !== step.material && e.material !== step.with),
+          { ...freeEnd(step.material, l), kind: "follow", piece: piece.id },
+          ...(together ? [{ ...freeEnd(step.with!, looks.get(step.with!)!), kind: "follow" as const, piece: together.id }] : []),
+        ];
         duration = Math.max(2, step.turns * DURATION.perMaterialTurn);
         break;
       }
@@ -1309,10 +1386,14 @@ export function simulate(recipe: Recipe): Build {
             break;
           }
           // Assumption: a trimmed head is about 0.4 gape from the shank unless the recipe says otherwise.
+          const leave = step.leave ?? 0.4;
+          const below = step.below !== undefined ? step.below / Math.max(0.01, leave) : undefined;
+          const shape = step.shape ?? "round";
           pieces.push({
-            ...b, id: nextId++, length: step.leave ?? 0.4, angle: deg(10), count: b.count * 4, cut: true,
-            trimShape: step.shape ?? "round", window: [0.5, 0.5001], until: undefined,
+            ...b, id: nextId++, length: leave, angle: deg(10), count: b.count * 4, cut: true,
+            trimShape: shape, ...(below !== undefined && { below }), window: [0.5, 0.5001], until: undefined,
           });
+          profile = trimmedBody(profile, b.x, b.x + (b.span ?? 0.1), b.radius, leave, shape, below, b.flat);
         } else {
           // Hair butts, or the tips of hair folded back, behind its tie-down or its last turn.
           if (trailing.delete(step.material)) ctx.tips = true;
@@ -1326,10 +1407,13 @@ export function simulate(recipe: Recipe): Build {
             // Butts spun round the shank by the tight turns, then trimmed into a head.
             ctx.spun = true;
             const span = Math.max(0.1, frontLimit - b.x);
+            const leave = step.leave ?? 0.4;
+            const below = step.below !== undefined ? step.below / Math.max(0.01, leave) : undefined;
             pieces.push({
-              ...b, id: nextId++, direction: "radial", span, spread: Math.PI, length: step.leave ?? 0.4, angle: deg(10),
-              count: Math.round(1800 * span), cut: true, trimShape: step.shape, window: [0.5, 0.5001], until: undefined,
+              ...b, id: nextId++, direction: "radial", span, spread: Math.PI, length: leave, angle: deg(10),
+              count: Math.round(1800 * span), cut: true, trimShape: step.shape, ...(below !== undefined && { below }), window: [0.5, 0.5001], until: undefined,
             });
+            if (step.shape !== "disc") profile = trimmedBody(profile, b.x, b.x + span, b.radius, leave, step.shape, below, b.flat);
           } else if (step.leave) {
             pieces.push({ ...b, id: nextId++, length: step.leave, cut: true, window: [0.5, 0.5001], until: undefined });
           }

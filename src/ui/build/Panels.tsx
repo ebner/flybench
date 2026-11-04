@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { blends, MATERIAL_RANGES, materialChoices, partRange, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type NumberKey, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
+import { blends, turnsHolder, MATERIAL_RANGES, materialChoices, partRange, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type NumberKey, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
 import { DIFFICULTY_LABELS, SPECIES_LABELS, TYPE_LABELS } from "../../catalog/describe";
 import { match } from "../../catalog/inventory";
 import { swatchName, swatchRecipe } from "../../catalog/swatch";
@@ -362,7 +362,8 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
         </label>
       )}
       {(part.how === "wound" || part.how === "parachute" || part.how === "palmered") && m && (
-        <Num label={f.turns} value={m.turns} placeholder={t.workbench.autoTurns} step={1} onChange={(v) => onMaterial(mat, { turns: v === undefined ? undefined : Math.round(clamp(v, ...range("turns"))) })} />
+        // (A pair wound together in one pass has one count: the first material's.)
+        <Num label={f.turns} value={part.mats[turnsHolder(part, mat)]!.turns} placeholder={t.workbench.autoTurns} step={1} onChange={(v) => onMaterial(turnsHolder(part, mat), { turns: v === undefined ? undefined : Math.round(clamp(v, ...range("turns"))) })} />
       )}
       {part.how === "wound" && part.role === "rib" && (
         <label className="wb-check">
@@ -441,7 +442,15 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
       {part.trim?.shape !== undefined && (
         <label className="wb-field">
           <span>{f.shape}</span>
-          <select value={part.trim.shape} onChange={(e) => onChange({ trim: { ...part.trim, shape: e.target.value as NonNullable<NonNullable<Part["trim"]>["shape"]> } })}>
+          <select
+            value={part.trim.shape}
+            onChange={(e) => {
+              const shape = e.target.value as NonNullable<NonNullable<Part["trim"]>["shape"]>;
+              // (Only a rounded shape is cut closer underneath: not a wedge or a disc.)
+              const { below, ...rest } = part.trim ?? {};
+              onChange({ trim: { ...rest, shape, ...(below !== undefined && shape !== "wedge" && shape !== "disc" && { below }) } });
+            }}
+          >
             {/* (Pads glued across the shank are clipped to a disc only; hair butts, which lie along it, never to a disc.) */}
             {(part.how === "glued" ? (["disc"] as const) : part.how === "spun" ? (["round", "wedge", "cigar", "cone", "disc"] as const) : (["round", "wedge", "cigar", "cone"] as const)).map((s) => (
               <option key={s} value={s}>

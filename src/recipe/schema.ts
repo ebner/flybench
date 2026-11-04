@@ -300,6 +300,11 @@ const Step = z.discriminatedUnion("op", [
     turns: Turns,
     /** Wound the opposite way round to the material under it (a counter-wound rib). */
     counter: z.boolean().optional(),
+    /**
+     * Wound together with this material in the same pass, the two held side by side as one (a
+     * Claret Bumble's two hackles palmered together); it was tied in at the same place.
+     */
+    with: MaterialRef.optional(),
     note: Note, mistake: Note,
   }),
   /** Fold a material tied in at the rear forward over the top of the body and tie it down at the thread. */
@@ -402,6 +407,12 @@ const Step = z.discriminatedUnion("op", [
      * body); "top" flat underneath only, "under" flat on top only.
      */
     keep: z.enum(["sides", "top", "under"]).optional(),
+    /**
+     * Spun hair trimmed round, to a cigar or a cone: cut closer underneath, reaching this far
+     * below the shank (gapes) against `leave` above it and less at the sides, so the shape is round
+     * about a line above the shank (a Bomber's body, a third below and two thirds above).
+     */
+    below: z.number().min(0).max(2).optional(),
     note: Note, mistake: Note,
   }),
   z.strictObject({

@@ -1,0 +1,73 @@
+id dusty-miller
+status draft
+
+// en description: A long tail of yellow and red bucktail over natural squirrel with pearl flash, a short fluorescent orange floss body, a sparse brown bucktail wing with orange flash, and orange and brown hackles in front.
+description "En lång stjärt av gul och röd bucktail över naturfärgad ekorre med pärlemorglitter, en kort kropp av fluorescerande orange flossilke, en gles vinge av brun bucktail med orange glitter och orange och bruna hackel framtill."
+
+// en history: One of the oldest standard salmon flies, Kelson called it (1895), crediting it to Jewhurst; J. H. Hale (1892) gives it as Mr Murdoch's. The name was in use by 1867: Herbert Maxwell sent Francis Francis a Dusty Miller for the Minnick in low, bright water, with an embossed silver body, a dark olive hackle and a mixed wing. Mary Orvis Marbury (1892) says it is sometimes called the Beryl. The dressings disagree on almost every part. Pryce-Tannatt (1914) counts it among the built-wing flies, with the Jock Scott and the Butcher: embossed silver tinsel over two thirds of the body, orange floss in front under a golden olive hackle, a speckled guinea fowl throat, and a wing of white-tipped black turkey under married strands of swan, bustard, florican and golden pheasant tail, with jungle cock cheeks, a topping and macaw horns. Kelson's has no body hackle and gallina in the wing; Hale's body is embossed silver all the way. This is John Gray's needle tube, the classic much simplified in the style of the long-tailed shrimp flies such as Ally Gowans's Cascade.
+history """
+    En av de äldsta standardflugorna för lax, kallade Kelson den (1895), och tillskrev den
+    Jewhurst; J. H. Hale (1892) ger den som Mr Murdochs. Namnet var i bruk 1867: Herbert Maxwell
+    skickade Francis Francis en Dusty Miller för Minnick i lågt, klart vatten, med en kropp av
+    präglat silver, ett mörkt olivfärgat hackel och en blandad vinge. Mary Orvis Marbury (1892)
+    säger att den ibland kallas the Beryl. Bindningarna skiljer sig åt i nästan varje del.
+    Pryce-Tannatt (1914) räknar den till flugorna med byggd vinge, med Jock Scott och Butcher:
+    präglad silvertinsel över två tredjedelar av kroppen, orange flossilke framtill under ett
+    guldolivfärgat hackel, ett skägg av prickig pärlhöna och en vinge av vitspetsad svart kalkon
+    under gifta fibrer av svan, trapp, florican och guldfasanstjärt, med kinder av jungle cock,
+    en topping och horn av ara. Kelsons har inget kroppshackel och pärlhöna i vingen; Hales
+    kropp är präglat silver hela vägen. Den här är John Grays nåltub, klassikern kraftigt
+    förenklad i stil med de långstjärtade räkflugorna, som Ally Gowans Cascade.
+    """
+
+// en fishing: Marbury's Dusty Miller is a large silver fly for later in the season, where the water is rough and rapid, or deep; Maxwell's was for low, bright water.
+fishing """
+    Marburys Dusty Miller är en stor silverfluga för senare på säsongen, där vattnet är strömt
+    och forsande eller djupt; Maxwells var för lågt, klart vatten.
+    """
+
+labels {
+    // en tail-lower: Natural squirrel tail
+    tail-lower "Naturfärgad ekorrsvans"
+    // en tail-yellow: Yellow bucktail
+    tail-yellow "Gul bucktail"
+    // en tail-red: Red bucktail
+    tail-red "Röd bucktail"
+    // en tail-flash: Pearl Krystal Flash
+    tail-flash "Pärlemorfärgad Krystal Flash"
+    // en body: Fluorescent orange floss
+    body "Fluorescerande orange flossilke"
+    // en wing: Brown bucktail
+    wing "Brun bucktail"
+    // en flash: Orange Krystal Flash
+    flash "Orange Krystal Flash"
+    // en hackle-orange: Orange cock hackle
+    hackle-orange "Orange tupphackel"
+    // en hackle-brown: Brown cock hackle
+    hackle-brown "Brunt tupphackel"
+}
+
+notes {
+    // en step 2 (wrap-thread): A bed of thread about a third of the way along the tube.
+    step 2 "En bädd av tråd ungefär en tredjedel av tubens längd."
+    // en step 3 (tie-in tail-lower): A sparse bunch.
+    step 3 "En gles tofs."
+    // en step 5 (tie-in tail-yellow): Turn the vice through 180° first; a sparse bunch.
+    step 5 "Vrid först städet 180°; en gles tofs."
+    // en step 7 (tie-in tail-red): A sparse bunch over the yellow.
+    step 7 "En gles tofs över den gula."
+    // en step 9 (tie-in tail-flash): A few strands, to taste.
+    step 9 "Några fibrer, efter smak."
+    // en step 12 (wind body): A short body, back to the tail and forward again.
+    step 12 "En kort kropp, bakåt till stjärten och fram igen."
+    // en step 14 (tie-in wing): Sparse.
+    step 14 "Gles."
+    // en step 16 (tie-in flash): A few strands with the wing.
+    step 16 "Några fibrer med vingen."
+    // en step 19 (wind hackle-orange): Two or three turns.
+    step 19 "Två eller tre varv."
+    // en step 23 (wind hackle-brown): Two or three turns in front of the orange.
+    step 23 "Två eller tre varv framför det orange."
+    // en step 25 (whip-finish): A neat head, two coats of Cellire No. 1 varnish.
+    step 25 "Ett prydligt huvud, två lager Cellire nr 1-lack."
+}

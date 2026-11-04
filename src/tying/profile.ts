@@ -66,6 +66,28 @@ export class Profile {
   }
 
   /**
+   * Returns a new profile raised over [a, b] to reach at least `reach(x)` from the axis on top and
+   * underneath (a body of spun hair trimmed to shape), fading in and out over `fade` of the range
+   * at its ends, so what is wound on just past them starts on the shank.
+   */
+  raisedTo(a: number, b: number, reach: (x: number) => { top: number; under: number }, fade = 0.1): Profile {
+    const up = new Float32Array(this.up);
+    const down = new Float32Array(this.down);
+    for (let i = 0; i < Profile.BINS; i++) {
+      const x = this.x0 + ((this.x1 - this.x0) * i) / (Profile.BINS - 1);
+      if (x <= a || x >= b) continue;
+      const f = (x - a) / (b - a);
+      const e = Math.min(1, f / fade, (1 - f) / fade);
+      const w = e * e * (3 - 2 * e);
+      const { top, under } = reach(x);
+      const r = this.r[i]!;
+      if (top > r + up[i]!) up[i] = up[i]! + (top - r - up[i]!) * w;
+      if (under > r + down[i]!) down[i] = down[i]! + (under - r - down[i]!) * w;
+    }
+    return new Profile(this.x0, this.x1, this.r, up, down);
+  }
+
+  /**
    * Returns a new profile with a layer of `thickness` over [a, b], tapering over `taper` at both
    * ends: just outside the range, or, with `within`, inside it (a dubbed noodle thins at its ends).
    * `where`: all the way round, or only on top or underneath.

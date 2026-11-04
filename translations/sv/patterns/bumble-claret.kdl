@@ -1,0 +1,59 @@
+id bumble-claret
+status draft
+
+// en description: A tail of golden pheasant tippet, a claret seal's fur body ribbed with oval gold, claret and black cock hackles palmered together down it, and a long blue shoulder hackle of jay or dyed guinea fowl.
+description "En stjärt av guldfasantippet, en kropp av vinrött sälhår ribbad med oval guldtinsel, vinröda och svarta tupphackel palmerade tillsammans över den och ett långt blått axelhackel av nötskrika eller färgad pärlhöna."
+
+// en history: T. C. Kingsmill Moore, an Irish judge, wrote of his Bumbles in A Man May Fish (1960), and the Claret is one of the best known of them. The Fly Dressers' Guild's dressings database gives his pattern, a sea-trout fly from Ireland: four strands of golden pheasant tippet, medium claret seal's fur ribbed with oval gold, black and medium claret cock hackles wound together, and blue jay or blue-dyed guinea fowl at the shoulder. Peter Gathercole's (1985) has a long-fibred claret cock hackle with a dyed blue cock hackle wound over it. Håkan Karsnäs ribs it with silver. Older English flies were called Claret Bumbles too (Halford's of 1886 among them): claret silk ribbed with peacock herl under a furnace or blue dun hackle, a different fly.
+history """
+    T. C. Kingsmill Moore, en irländsk domare, skrev om sina Bumbles i A Man May Fish (1960),
+    och Claret är en av de mest kända av dem. Fly Dressers' Guilds databas över bindningar ger
+    hans mönster, en havsöringsfluga från Irland: fyra fibrer guldfasantippet, mellanvinrött
+    sälhår ribbat med oval guldtinsel, svarta och mellanvinröda tupphackel lindade tillsammans,
+    och nötskrika eller blåfärgad pärlhöna vid axeln. Peter Gathercoles (1985) har ett
+    långfibrigt vinrött tupphackel med ett blåfärgat tupphackel lindat över. Håkan Karsnäs
+    ribbar den med silver. Äldre engelska flugor kallades också Claret Bumble (Halfords från
+    1886 bland dem): vinrött silke ribbat med påfågelherl under ett furnace- eller blue dun-
+    hackel, en annan fluga.
+    """
+
+// en fishing: A lough fly for the top or middle dropper of a team of wet flies, fished in the traditional Irish way. Fulling Mill find it best in a wave on dark days. For brown and rainbow trout, sea trout and salmon.
+fishing """
+    En sjöfluga för den översta eller mellersta droppern i ett lag av våtflugor, fiskad på det
+    traditionella irländska sättet. Fulling Mill tycker att den är bäst i vågor under mörka
+    dagar. För öring och regnbåge, havsöring och lax.
+    """
+
+labels {
+    // en tail: Golden pheasant tippet
+    tail "Guldfasantippet"
+    // en rib: Oval gold tinsel
+    rib "Oval guldtinsel"
+    // en body: Medium claret seal's fur
+    body "Mellanvinrött sälhår"
+    // en hackle-claret: Medium claret cock hackle
+    hackle-claret "Mellanvinrött tupphackel"
+    // en hackle-black: Black cock hackle
+    hackle-black "Svart tupphackel"
+    // en collar: Blue jay, or guinea fowl dyed blue
+    collar "Nötskrika, eller blåfärgad pärlhöna"
+}
+
+notes {
+    // en step 3 (tie-in tail): Four strands of tippet, on top.
+    step 3 "Fyra fibrer tippet, ovanpå."
+    // en step 5 (dub body): Seal's fur, picked out a little; leave room for the shoulder hackle.
+    step 5 "Sälhår, lite uppruggat; lämna plats för axelhacklet."
+    // en step 6 (tie-in hackle-claret): By the stalks, the two hackles together, at the front of the body.
+    step 6 "Med stjälkarna, båda hacklen tillsammans, framtill på kroppen."
+    // en step 9 (wind rib): Wiggled forward through the hackles, trapping no fibres.
+    step 9 "Vicka fram den genom hacklen så att inga fibrer fastnar."
+    // en step 11 (trim hackle-claret): Cut both hackle tips away at the tail.
+    step 11 "Klipp bort båda hackelspetsarna vid stjärten."
+    // en step 13 (tie-in collar): By the tip, the blue side facing forward.
+    step 13 "Med spetsen, den blå sidan framåt."
+    // en step 15 (wind collar): Two or three turns, swept back over the body hackles.
+    step 15 "Två eller tre varv, strukna bakåt över kroppshacklen."
+    // en step 17 (whip-finish): A small black head.
+    step 17 "Ett litet svart huvud."
+}
