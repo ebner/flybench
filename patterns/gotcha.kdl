@@ -75,8 +75,7 @@ steps {
     tie-off body
     wrap-thread to=0.92 note="In front of the eyes; turn the hook over."
     // Deneki: the wing as long as the tail; the photos show it reaching the tail's tips or past.
-    // Read from the photos: soft craft fur bends in towards the body, so it leaves the tie-in steeper.
-    tie-in wing length=4.4 angle=10 spread=25 side=under note="A clump of craft fur, its underfur combed out."
+    tie-in wing length=4.4 angle=6 spread=25 side=under note="A clump of craft fur, its underfur combed out."
     // Heywood: pearl Krystal Flash over the wing.
     tie-in flash length=4.2 angle=7 spread=20 side=under note="Three strands folded over: six ends, over the wing."
     whip-finish note="A tapered pink thread head, the nose; coat it."

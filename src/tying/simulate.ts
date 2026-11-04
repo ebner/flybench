@@ -136,7 +136,7 @@ export interface BundlePiece extends PieceBase {
   /**
    * A bunch of hair tied in with a length (not spun, glued or upright): how stiff the hair is,
    * 0 (soft) to 1 (stiff). It leaves the tie-in as one tight bundle and fans out towards its
-   * tips; soft hair bends towards the body and its tips are uneven.
+   * tips; soft hair fans wider, its tips fine, wavy and uneven; stiff hair stays orderly.
    */
   stiffness?: number;
 }

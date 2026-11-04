@@ -116,8 +116,8 @@ requests from this machine; the built site doesn't include it.
 
 Or write a new `patterns/<id>.kdl` by hand and it gets picked up automatically. Materials come
 from the catalog in `src/recipe/materials.ts`; add new ones there. An entry also says how its
-material is drawn (a hair's stiffness, for one: soft hair bends down over the body, its tips
-uneven; stiff hair stays straight and flares at the tie-in; a hackle's barbs per mm of stem, so a
+material is drawn (a hair's stiffness, for one: soft hair fans out wide and wispy, its tips
+fine, wavy and uneven; stiff hair stays straight and orderly and flares at the tie-in; a hackle's barbs per mm of stem, so a
 turn carries as many barbs as the stem it takes, round a bare shank or a thick body). The test suite
 loads every pattern file, so `pnpm test` reports recipe errors with line numbers.
 Problems in pattern files also show in a banner in the dev server. Then run
