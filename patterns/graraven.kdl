@@ -52,8 +52,8 @@ steps {
     attach-thread at=0.9
     wrap-thread to=0.0
     // Read from Kärki's photo: about one and a half times the body, dense at the root and cocked
-    // up a little.
-    tie-in tail length=3.0 angle=12 spread=25 note="A generous bunch on top, the underfur combed out."
+    // up a little: its lowest hairs about 8° up, the rest fanning up from them.
+    tie-in tail length=3.0 angle=8 spread=25 note="A generous bunch on top, the underfur combed out."
     trim tail note="Cut the butts at an angle and bind them down, for an even underbody."
     dub body to=0.97 note="Fur and guard hairs together, rough and thin."
     // Read from Kärki's photo: slim at the tail, fuller over the front half.

@@ -59,6 +59,7 @@ function placeFibres(fibres: Fibre[], space: ShankSpace): Fibre[] {
     space.direction(x, f.dir);
     if (f.bendDir) space.direction(x, f.bendDir);
     if (f.billow) space.direction(x, f.billow);
+    if (f.wave) space.direction(x, f.wave);
   }
   return fibres;
 }
@@ -116,10 +117,18 @@ export interface Fibre {
    * (hairs in a bunch lying over one another).
    */
   billow?: THREE.Vector3;
+  /**
+   * How far it waves to either side of its line near the tip, as a fraction of the length and
+   * which way, and where along it the wave starts (`wavePhase`, radians): a soft hair's kinks.
+   */
+  wave?: THREE.Vector3;
+  wavePhase?: number;
 }
 
 /** How far a billowing fibre is off its line at t (most at two thirds of the way, 1). */
 const BILLOW_AT = (t: number) => 6.75 * t * t * (1 - t);
+/** How far a waving fibre is off its line at t: a wave and a half along it, growing towards the tip, never more than t². */
+const WAVE_AT = (t: number, phase: number) => t * t * Math.sin(3 * Math.PI * t + phase);
 
 /** A curved fibre is drawn as this many straight pieces along a parabola. */
 const BEND_SEGMENTS = 3;
@@ -157,19 +166,21 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
     parts.push({ mesh, us: list.map((f) => f.u) });
   };
 
-  const curves = (f: Fibre) => (f.bend && f.bendDir) || f.billow;
+  const curves = (f: Fibre) => (f.bend && f.bendDir) || f.billow || f.wave;
   const straight = fibres.filter((f) => !curves(f));
   addPart(
     fibreGeometry(tipRatio, tipShade, 0, 1, marks),
     straight.map((f) => ({ ...f, shade: f.shade ?? 1 })),
   );
 
-  // A curved fibre follows base + dir·L·t + bendDir·bend·L·t² + billow·L·b(t), from t = 0 to 1.
+  // A curved fibre follows base + dir·L·t + bendDir·bend·L·t² + billow·L·b(t) + wave·L·w(t),
+  // from t = 0 to 1.
   const curved = fibres.filter(curves);
   const at = (f: Fibre, t: number) => {
     const p = f.base.clone().addScaledVector(f.dir, f.length * t);
     if (f.bend && f.bendDir) p.addScaledVector(f.bendDir, f.bend * f.length * t * t);
     if (f.billow) p.addScaledVector(f.billow, f.length * BILLOW_AT(t));
+    if (f.wave) p.addScaledVector(f.wave, f.length * WAVE_AT(t, f.wavePhase ?? 0));
     return p;
   };
   for (let k = 0; k < segments; k++) {
@@ -703,12 +714,28 @@ const BUNDLE = {
 
 type BundleLook = (typeof BUNDLE)[keyof typeof BUNDLE];
 
-// Assumption: the tips of the softest hair (stiffness 0) bend about an eighth of its length towards
-// the body, so a soft wing lies down over it; stiff hair hardly bends.
-const SOFT_BEND = 0.12;
-// Assumption: soft hair is seldom stacked, so its tips spread over up to about half its length
-// more than stacked hair's (squirrel and fox against elk and deer).
-const SOFT_RAGGED = 0.5;
+// Assumption (read from photos of hairwings): a bunch tied on top of a body is a wedge from the
+// side, its lowest hairs running out along the tie-in's line and the rest lying over them, so its
+// tips fan up away from the body by up to about an eighth of its length (more for soft hair), as
+// well as sideways, most of the hairs keeping low. They part from the tie-in on, about seven
+// tenths of the fan starting there, so the wedge's edges run nearly straight from the head.
+const FAN_UP = 0.12;
+const FAN_ROOT = 0.7;
+// Assumption: the softest hair (stiffness 0) fans about twice as wide, and less orderly, as the
+// stiffest would; softness never bends a wing down, it only makes it wispier.
+const SOFT_FAN = 1;
+// Assumption: a wing tied all round a tube lies close round it, each hair held in by those beside
+// it, so it fans out away from the tube only about a third as far (read from photos of tube flies).
+const ROUND_FAN = 0.35;
+// Assumption: soft hair is kinked and wavy towards its tips, the softest by up to about a tenth of
+// its length either way; stiff hair is straight.
+const SOFT_WAVE = 0.1;
+// Assumption: soft hair is seldom stacked, so its tips spread over up to about four fifths of its
+// length more than stacked hair's (squirrel and fox against elk and deer).
+const SOFT_RAGGED = 0.8;
+// Assumption: soft hair tapers to finer tips, the softest to about a quarter as thick as stiff
+// hair's.
+const SOFT_FINE = 0.75;
 // Assumption: hairs lying over one another make a bunch deepest about two thirds of the way
 // along, by up to about a fourteenth of its length; it narrows again towards the tips (read from
 // photos of hairwings).
@@ -716,16 +743,23 @@ const BILLOW = 0.07;
 // Assumption: hair stiffer than this flares at the tie-in, the stiffest fanning straight from it.
 const FLARES = 0.6;
 
+/** How fine a bunch of flowing hair's tips are, as a fraction of its width at the root. */
+function flowingTip(spec: BundleLook, stiffness: number): number {
+  return spec.tip * (1 - SOFT_FINE * (1 - stiffness));
+}
+
 /**
  * One hair of a bunch tied in with a length, given its stiffness: the bunch leaves the tie-in as
  * a tight bundle, its hairs parallel at the tie-in's angle, fuller in its middle as they lie
- * over one another, and fans out towards the tips, sideways as far as `spread` and `sideFlare`
- * put them, up a little less. Soft hair bends towards the body along its length, but not into
- * it over the shank; its tips are uneven.
+ * over one another, and fans out towards the tips, away from the body and sideways as far as
+ * `spread` and `sideFlare` put them. No hair falls below the tie-in's line: the body under it
+ * holds it up. Soft hair fans wider, its tips wavy and uneven; stiff hair stays straight and
+ * orderly, and flares at the tie-in.
  */
-function flowingFibre(piece: BundlePiece, spec: BundleLook, along: THREE.Vector3, shankLength: number, rand: () => number): Fibre {
+function flowingFibre(piece: BundlePiece, spec: BundleLook, along: THREE.Vector3, rand: () => number): Fibre {
   const flip = piece.side === "under" ? -1 : 1;
   const soft = 1 - piece.stiffness!;
+  const wispy = 1 + SOFT_FAN * soft;
   // Tied in all round (a tube's wing), it is a cone at the tie-in's angle.
   const round = piece.spread > Math.PI / 2;
   const theta = (rand() * 2 - 1) * piece.spread;
@@ -736,63 +770,43 @@ function flowingFibre(piece: BundlePiece, spec: BundleLook, along: THREE.Vector3
   const dir = round
     ? new THREE.Vector3(piece.direction === "forward" ? 1 : -1, 0, 0).multiplyScalar(Math.cos(piece.angle)).addScaledVector(outward, Math.sin(piece.angle))
     : along.clone();
-  dir.add(new THREE.Vector3(0, (rand() - 0.5) * 0.02, (rand() - 0.5) * 0.02)).normalize();
+  // Away from the body, and round it.
+  const away = perpendicular(dir, outward, rand);
+  const around = new THREE.Vector3().crossVectors(dir, away).normalize();
+  dir.addScaledVector(around, (rand() - 0.5) * 0.02).normalize();
   const jitter = spec.lengthJitter + SOFT_RAGGED * Math.pow(soft, 1.5);
   // Hairs arching over the others are the shorter ones, so the bunch narrows to its longest tips.
+  // (Uneven tips fall short of the bunch's length more than they pass it.)
   const arch = rand();
-  const length = piece.length * (1 - jitter / 2 + jitter * rand()) * (1.1 - 0.2 * arch);
-  // Where the tip moves off that line, as a fraction of the length: the fan…
+  const length = piece.length * (1 + jitter / 4 - jitter * rand()) * (1.1 - 0.2 * arch);
+  // A soft hair's kinks, which way and where they fall.
+  const waviness = SOFT_WAVE * soft * (0.3 + 0.7 * rand());
+  const wave = perpendicular(dir, new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5), rand).multiplyScalar(waviness);
+  const wavePhase = rand() * 2 * Math.PI;
+  // Where the tip moves off the tie-in's line, as a fraction of the length: up away from the body
+  // (never below the line, not even where it waves), and to the sides.
   const splay = 0.6 + 0.6 * rand();
-  const fan = round
-    ? outward.clone().multiplyScalar(Math.sin(piece.angle) * 0.6 * (rand() - 0.5))
-    : outward.clone().multiplyScalar(spec.flare * splay * (0.25 + 0.75 * piece.stiffness!)).add(new THREE.Vector3(0, 0, spec.sideFlare * Math.sin(theta) * splay));
-  // (Soft hair lies together; stiff hair fans up as well as out.)
-  fan.add(new THREE.Vector3(0, (rand() - 0.5) * spec.spread * (0.5 + 0.5 * piece.stiffness!), (rand() - 0.5) * spec.spread));
-  // …a little waviness, and the bend towards the body.
-  fan.addScaledVector(perpendicular(dir, new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5), rand), spec.curve * 0.5 * (0.4 + 0.6 * rand()));
+  const fan = away.clone().multiplyScalar(waviness + FAN_UP * wispy * (round ? ROUND_FAN : 1) * Math.pow(rand(), 2));
+  if (!round) fan.add(new THREE.Vector3(0, 0, spec.sideFlare * Math.sin(theta) * splay * wispy));
+  fan.addScaledVector(around, (rand() - 0.5) * spec.spread * wispy);
   fan.addScaledVector(dir, -fan.dot(dir));
-  // Hair stiffer than bucktail (hollow deer and elk hair) flares where the thread presses on it:
-  // that much of its fan starts at the tie-in.
+  // Part of the fan starts at the tie-in; hair stiffer than bucktail (hollow deer and elk hair)
+  // flares where the thread presses on it, so more of its fan does, the stiffest all of it.
   const flared = Math.max(0, (piece.stiffness! - FLARES) / (1 - FLARES));
-  if (flared > 0) {
-    dir.addScaledVector(fan, flared).normalize();
-    fan.multiplyScalar(1 - flared).addScaledVector(dir, -fan.dot(dir));
-  }
-  const droop = perpendicular(dir, outward.clone().negate(), rand).multiplyScalar(soft * SOFT_BEND * (0.85 + 0.3 * rand()));
+  const fromRoot = FAN_ROOT + (1 - FAN_ROOT) * flared;
+  dir.addScaledVector(fan, fromRoot).normalize();
+  fan.multiplyScalar(1 - fromRoot).addScaledVector(dir, -fan.dot(dir));
+  wave.addScaledVector(dir, -wave.dot(dir));
   const billow = perpendicular(dir, outward, rand).multiplyScalar(BILLOW * arch);
-  // Over the shank, hair bending towards the body comes to rest on it.
-  const floor = piece.radius - centre - 0.01;
-  const p = new THREE.Vector3();
-  const clear = (k: number) => {
-    for (let i = 1; i <= 10; i++) {
-      const t = i / 10;
-      p.copy(base).addScaledVector(dir, length * t).addScaledVector(fan, length * t * t).addScaledVector(droop, k * length * t * t)
-        .addScaledVector(billow, length * BILLOW_AT(t));
-      if (p.x < 0 || p.x > shankLength) continue;
-      if (Math.hypot(p.y - centre * flip, p.z) < floor) return false;
-    }
-    return true;
-  };
-  let k = 1;
-  if (!clear(1)) {
-    let lo = 0;
-    let hi = 1;
-    for (let i = 0; i < 8; i++) {
-      const mid = (lo + hi) / 2;
-      if (clear(mid)) lo = mid;
-      else hi = mid;
-    }
-    k = lo;
-  }
-  const off = fan.addScaledVector(droop, k);
-  const bend = off.length();
+  const bend = fan.length();
   return {
     u: rand(), base, dir, length,
     radius: spec.radius * (piece.fibreWidth ?? 1),
     // Fibres deep in a bunch are shaded by the rest, so a mass of white hair still has depth.
     shade: (0.85 + 0.3 * rand()) * (1 - 0.32 * Math.pow(rand(), 0.6)),
     billow,
-    ...(bend > 1e-4 && { bend, bendDir: off.divideScalar(bend) }),
+    ...(bend > 1e-4 && { bend, bendDir: fan.divideScalar(bend) }),
+    ...(waviness > 1e-4 && { wave, wavePhase }),
   };
 }
 
@@ -856,7 +870,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   const flowing = piece.stiffness !== undefined && !upright && !radialHair && !piece.cut && !piece.across && piece.span === undefined;
   for (let i = 0; i < piece.count; i++) {
     if (flowing) {
-      list.push(flowingFibre(piece, spec, along, space.hook.shankLength, rand));
+      list.push(flowingFibre(piece, spec, along, rand));
       continue;
     }
     if (piece.across && piece.span) {
@@ -1026,9 +1040,9 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   // Trimmed fibres have lost their marked tips.
   const marks = piece.cut ? undefined : piece.marks;
   // Broad, flat barbs (tippet) keep most of their width to the tip.
-  const tip = piece.cut ? 0.9 : piece.fibreWidth && piece.look === "fibres" ? Math.max(spec.tip, 0.7) : spec.tip;
-  // (Flowing hair is long and curved: drawn in more pieces.)
-  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 6 : undefined);
+  const tip = piece.cut ? 0.9 : piece.fibreWidth && piece.look === "fibres" ? Math.max(spec.tip, 0.7) : flowing ? flowingTip(spec, piece.stiffness!) : spec.tip;
+  // (Flowing hair is long, curved and wavy: drawn in more pieces.)
+  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 12 : undefined);
   return {
     object: fibres.object,
     setProgress(u) {

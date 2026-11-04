@@ -245,16 +245,17 @@ The archetype decides how a material behaves and is drawn:
 - **jungle cock** eyes are small, round-ended feathers, dark with a row of cream enamel spots, each
   with a buff tip; tied in as a pair with `spread` they sit as cheeks either side of a wing.
 - **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. The clump
-  leaves the tie-in as one tight bundle at `angle`, its hairs lying over one another so it is
-  fullest about two thirds of the way along, and fans out towards the tips: `spread` says how
-  far round the body its roots lie and, as before, how far its tips fan out (they now get there
-  gradually, not in a straight fan from the tie-in). How it bends comes from the material's
-  stiffness in the catalog (also on `craft-fur`, `synthetic-hair` and `hares-mask-guard-hairs`):
-  soft hair (squirrel, fox, craft fur) bends down towards the body along its length, lying on it
-  over the shank, and its tips are uneven, as unstacked hair's are; stiff hair (elk, deer, moose)
-  stays nearly straight, its tips level, and flares at the tie-in. A soft wing therefore wants a
-  steeper `angle` than a stiff one to end at the same height. Spun, glued, trimmed and upright
-  hair, and hair tied across, are drawn as before. Tied in
+  leaves the tie-in as one tight bundle and opens into a wedge: `angle` is the line its lowest
+  hairs run out along (the body under them holds them there; no hair falls below it), and the
+  rest lie over them and fan up away from the body towards the tips, fullest about two thirds of
+  the way along. `spread` says how far round the body its roots lie and how far its tips fan out
+  to the sides. A wing tied all round a tube lies close round it. How orderly the hair is comes
+  from the material's stiffness in the catalog (also on `craft-fur`, `synthetic-hair` and
+  `hares-mask-guard-hairs`): soft hair (squirrel, fox, craft fur) fans out wider and less
+  orderly, its tips fine, wavy and uneven, as unstacked hair's are; stiff hair (elk, deer, moose)
+  stays straight and orderly, its tips level, and flares at the tie-in. Softness doesn't bend a
+  wing down: a wing lies low over the body because it is tied in low. Spun, glued, trimmed and
+  upright hair, and hair tied across, are drawn as before. Tied in
   pointing forward (`forward=#true`), its butts lie back along the shank under the turns, cut
   square first, with nothing to trim. Hair can also be spun (`spin`) and trimmed into a head.
 - **hair folded back** (a bullet head): tied in pointing forward over the eye, spread all round

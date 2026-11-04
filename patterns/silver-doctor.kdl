@@ -74,8 +74,9 @@ steps {
     tie-off body
     wind rib to=0.82 turns=5
     tie-off rib
-    // Read from Karsnäser's photo: about to the tip of the tail.
-    tie-in wing length=3.7 angle=11 spread=16 note="A small, cleaned bunch."
+    // Read from Karsnäser's photo: about to the tip of the tail, its lowest hairs along the collar
+    // and body, the rest fanning up from them.
+    tie-in wing length=3.7 angle=7 spread=16 note="A small, cleaned bunch."
     trim wing
     tie-in collar note="The pale blue called Silver Doctor blue."
     wrap-thread to=0.88

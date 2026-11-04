@@ -86,8 +86,7 @@ steps {
     wind rib to=0.82 turns=5 note="Four or five even turns over both halves."
     tie-off rib
     // Karsnäser: the wing as long as the shank; Gray's photo a little longer.
-    // Read from the photos: soft squirrel bends down over the body, so it leaves the head a little steeper.
-    tie-in wing length=2.8 angle=11 spread=16 note="A small bunch, low over the body."
+    tie-in wing length=2.8 angle=7 spread=16 note="A small bunch, low over the body."
     trim wing
     tie-in flash length=3.0 angle=8 spread=12 note="A few strands over the wing."
     tie-in collar

@@ -58,7 +58,8 @@ steps {
     wrap-thread to=0.75
     wind body to=0.75 turns=18 note="Touching turns."
     tie-off body
-    tie-in underwing length=4.0 angle=8 spread=25 note="A sparse, cleaned bunch, about a shank long."
+    // Read from the photos: the squirrel shows only a little above the turkey.
+    tie-in underwing length=4.0 angle=6 spread=25 note="A sparse, cleaned bunch, about a shank long."
     trim underwing note="Trim the butts short, so the deer hair can be spun over them."
     tie-in wing length=4.3 angle=5 spread=16 width=0.75 note="One slip each side, concave in, the tips reaching the end of the tail."
     // Craven: collar tips reach about mid-wing.

@@ -72,9 +72,10 @@ export interface CatalogMaterial {
   widthMm?: number;
   /**
    * Hair and hair-like fibres tied in as a bunch with a length: how stiff each hair is, from 0
-   * (soft, bending towards the body along its length, its tips uneven as unstacked hair's are) to
-   * 1 (stiff and straight, its tips level as stacked hair's are). Without it, a bunch is drawn
-   * as straight fibres fanning from the tie-in.
+   * (soft and wispy: a wide, unruly fan of fine, wavy tips, uneven as unstacked hair's are) to
+   * 1 (stiff: straight, orderly hairs, their tips level as stacked hair's are, flaring at the
+   * tie-in). Softness never bends a bunch down. Without it, a bunch is drawn as straight fibres
+   * fanning from the tie-in.
    */
   stiffness?: number;
 }
@@ -139,7 +140,7 @@ export const MATERIALS = {
   // Hair
   // Assumption (all the stiffness values): moose mane and elk are the stiffest, then deer, calf
   // tail (kinky, it stays put), bucktail (stiff at the butt, finer and softer towards the tip),
-  // squirrel tail (soft, it lies over the body), fox and craft fur the softest of all.
+  // squirrel tail (soft and wispy), fox and craft fur the softest of all.
   "elk-hair": { name: "elk hair", archetype: "hair", defaultColor: "elk", stiffness: 0.85 },
   "deer-hair": { name: "deer hair", archetype: "hair", defaultColor: "deer", stiffness: 0.8 },
   "calf-tail": { name: "calf tail", archetype: "hair", defaultColor: "white", stiffness: 0.7 },

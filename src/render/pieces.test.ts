@@ -143,31 +143,45 @@ describe("a hair wing tied in with a length", () => {
   const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
   const width = (ps: THREE.Vector3[]) => Math.max(...ps.map((p) => p.z)) - Math.min(...ps.map((p) => p.z));
 
-  it("bends soft hair down towards the body more than stiff hair at the same angle", () => {
+  /** How far a bunch's tips spread up and down, without the few strays at either edge. */
+  const depth = (ps: THREE.Vector3[]) => {
+    const ys = ps.map((p) => p.y).sort((a, b) => a - b);
+    return ys[Math.floor(ys.length * 0.95)]! - ys[Math.floor(ys.length * 0.05)]!;
+  };
+
+  it("fans soft hair wider at the tips than stiff hair, up and sideways", () => {
     const soft = ends(wing(0.2));
     const stiff = ends(wing(0.9));
     expect(soft.tips.length).toBe(400);
-    expect(mean(soft.tips.map((p) => p.y))).toBeLessThan(mean(stiff.tips.map((p) => p.y)) - 0.15);
+    expect(depth(soft.tips)).toBeGreaterThan(1.2 * depth(stiff.tips));
+    expect(width(soft.tips)).toBeGreaterThan(1.2 * width(stiff.tips));
+  });
+
+  it("never lets a hair sink below a straight line from its root at the tie-in angle", () => {
+    for (const stiffness of [0, 0.35, 0.9]) {
+      const view = pieceView({ ...wing(stiffness), angle: 0.1 }, new Surfaces(), new ShankSpace(hook));
+      const m = new THREE.Matrix4();
+      const p = new THREE.Vector3();
+      // The line leaves the top of the bunch's lowest root, at the tie-in's angle.
+      const below = (q: THREE.Vector3) => q.y - (0.1 + (2.2 - q.x) * Math.tan(0.1));
+      view.object.traverse((o) => {
+        if (!(o instanceof THREE.InstancedMesh)) return;
+        for (let i = 0; i < o.count; i++) {
+          p.set(0, 1, 0).applyMatrix4(o.getMatrixAt(i, m));
+          expect(below(p)).toBeGreaterThan(-0.03);
+        }
+      });
+      view.dispose();
+    }
   });
 
   it("leaves the tie-in as a tight bundle and fans out towards the tips", () => {
-    const { roots, tips } = ends(wing(0.5));
-    expect(width(roots)).toBeLessThan(0.12);
-    expect(width(tips)).toBeGreaterThan(3 * width(roots));
-  });
-
-  it("keeps soft hair over the shank out of the body", () => {
-    const view = pieceView({ ...wing(0), angle: 0 }, new Surfaces(), new ShankSpace(hook));
-    const m = new THREE.Matrix4();
-    const p = new THREE.Vector3();
-    view.object.traverse((o) => {
-      if (!(o instanceof THREE.InstancedMesh)) return;
-      for (let i = 0; i < o.count; i++) {
-        p.set(0, 1, 0).applyMatrix4(o.getMatrixAt(i, m));
-        if (p.x > 0.05 && p.x < 2.1) expect(Math.hypot(p.y, p.z)).toBeGreaterThan(0.075);
-      }
-    });
-    view.dispose();
+    for (const stiffness of [0.2, 0.9]) {
+      const { roots, tips } = ends(wing(stiffness));
+      expect(width(roots)).toBeLessThan(0.12);
+      expect(width(tips)).toBeGreaterThan(3 * width(roots));
+      expect(depth(tips)).toBeGreaterThan(2 * depth(roots));
+    }
   });
 
   it("gives soft, unstacked hair more uneven tips than stiff, stacked hair", () => {
