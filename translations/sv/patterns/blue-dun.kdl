@@ -1,0 +1,51 @@
+id blue-dun
+status draft
+
+// en description: A blue dun fibre tail, a slim muskrat body, upright divided mallard quill wings and a blue dun hackle.
+description "En stjärt av blågrå fibrer, en smal kropp av bisam, upprätta delade vingar av gräsandspenna och ett blågrått hackel."
+
+// en history: One of the oldest named flies: the Fly Dressers' Guild's dressings database lists Blue Duns from Charles Cotton (1676) and James Chetham (1681) onwards, through the Bowlkers, Ronalds, Halford and Skues to Roger Fogg. No one tyer made it; the name stands for a dun imitation with a grey body and grey wings. Most of the British dressings have a fur body on yellow or primrose silk and a starling or snipe wing, and Tod's, Skues's and Fogg's a hen hackle: a wet fly. In America it is tied as a Catskill dry, and Jerry Coviello counts it among the original Catskill dry flies with mallard wing quill sections. Barry Ord Clarke ties the body of grey thread rather than fur.
+history """
+    En av de äldsta flugorna med namn: Fly Dressers' Guilds databas över bindningar har Blue Dun
+    från Charles Cotton (1676) och James Chetham (1681) och framåt, via bröderna Bowlker,
+    Ronalds, Halford och Skues till Roger Fogg. Ingen enskild bindare skapade den; namnet står
+    för en imitation av en dagsländesubimago med grå kropp och grå vingar. De flesta brittiska
+    bindningarna har en pälskropp på gult eller primulagult silke och en vinge av stare eller
+    beckasin, och Tods, Skues och Foggs ett hönshackel: en våtfluga. I Amerika binds den som en
+    torrfluga i Catskillstil, och Jerry Coviello räknar den till de ursprungliga torrflugorna
+    från Catskills med vingar av sektioner från gräsandens vingpennor. Barry Ord Clarke binder
+    kroppen av grå tråd i stället för päls.
+    """
+
+// en fishing: Fished dead drift for the early-season duns; Mario Capovía finds it works for Blue-Winged Olives, Hendricksons, Blue Quills and Quill Gordons. Quill wings are fragile and lose their shape after a fish or two.
+fishing """
+    Fiskas i fri drift för vårens tidiga dagsländor; Mario Capovía finner att den fungerar för
+    Blue-Winged Olive, Hendrickson, Blue Quill och Quill Gordon. Vingar av pennsektioner är
+    ömtåliga och tappar formen efter en fisk eller två.
+    """
+
+labels {
+    // en wings: Mallard wing quill slips
+    wings "Sektioner av gräsandens vingpennor"
+    // en tail: Blue dun cock hackle fibres
+    tail "Blågrå tuppfibrer"
+    // en body: Muskrat fur
+    body "Bisampäls"
+    // en hackle: Blue dun cock hackle
+    hackle "Blågrått tupphackel"
+}
+
+notes {
+    // en step 3 (tie-in wings): Matched slips from a left and a right quill, back to back, tied in tips forward.
+    step 3 "En vänster- och en högersektion som matchar varandra, rygg mot rygg, inbundna med topparna framåt."
+    // en step 4 (wrap-thread): Cut the butts at an angle and bind them down for a tapered underbody.
+    step 4 "Klipp rotändarna snett och bind ner dem till en avsmalnande underkropp."
+    // en step 5 (tie-in tail): A bunch of fibres, tips level.
+    step 5 "En knippe fibrer, topparna jämna."
+    // en step 6 (dub body): Sparse and tapered, leaving room behind the wings for the hackle.
+    step 6 "Glest och avsmalnande, med plats bakom vingarna för hacklet."
+    // en step 7 (tie-in hackle): Webby base stripped, tied in under the shank.
+    step 7 "Den fluffiga basen avskalad, inbundet under krokskaftet."
+    // en step 9 (wind hackle): Three or four turns behind the wings, three or four in front.
+    step 9 "Tre eller fyra varv bakom vingarna, tre eller fyra framför."
+}

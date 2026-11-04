@@ -238,7 +238,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("beadSlides", {}, [...path, "material"]);
           break;
         }
-        if (archetype === "tubing") {
+        // Tubing is slid on as a sleeve; only a piece tied in with a length, as a frayed tail, is tied in.
+        if (archetype === "tubing" && step.length === undefined) {
           rule("tubingSleeve", {}, [...path, "material"]);
           break;
         }
@@ -303,7 +304,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           materials.set(step.material, {
             // Eyes, extended bodies and legs across the shank are finished once tied in; the rest
             // of a strip whose extended part is made (a Mohican's foam) may wait to be pulled over.
-            state: archetype === "eyes" || (step.extended && !pulledOver) || step.side === "across" ? "done" : "tied-in",
+            state: archetype === "eyes" || archetype === "tubing" || (step.extended && !pulledOver) || step.side === "across" ? "done" : "tied-in",
             at: thread,
             // Tied in pointing forward, the butts lie back along the shank under the turns (cut
             // square first, as for a bullet head), with nothing to trim.
@@ -316,6 +317,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
               (step.angle ?? 0) >= 60 &&
               archetype !== "feather" &&
               archetype !== "strip" &&
+              archetype !== "tubing" &&
               !step.extended &&
               step.side !== "across",
           });

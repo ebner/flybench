@@ -1,0 +1,49 @@
+id diving-caddis
+status draft
+
+// en description: A shaggy body of green sparkle yarn, an underwing of brown partridge fibres, an overwing of clear Antron filaments and a single turn of ginger cock hackle.
+description "En lurvig kropp av grönt sparkle yarn, en undervinge av bruna rapphönsfibrer, en övervinge av klara Antronfibrer och ett enda varv ingefärsfärgat tupphackel."
+
+// en history: Gary LaFontaine published it in Caddisflies (1981), the book that made his name, for the female caddis that swims or dives under the water to lay her eggs, carrying a bright bubble of air. Both her brightness and her action, he wrote, make a wet fly imitation necessary, and the pure Antron filaments of its overwing, hanging free over the back, reflect more light. He was adamant that the collar be kept sparse, a single turn of stiff rooster hackle, whose fibres stand out from the body and add vibrancy to the moving fly. The book gives four primary colour versions and eleven secondary ones; John Kreft names ginger, bright green, amber and grey bodies. Sadil gives grouse, partridge or hen for the underwing, and Kreft winds one and a half or two turns of hackle.
+history """
+    Gary LaFontaine publicerade den i Caddisflies (1981), boken som gjorde honom känd, för
+    nattsländehonan som simmar eller dyker ner under vattnet för att lägga sina ägg, med en
+    blank luftbubbla omkring sig. Både hennes glans och hennes rörelser, skrev han, gör en
+    våtflugeimitation nödvändig, och övervingens rena Antronfibrer, som hänger fritt över
+    ryggen, reflekterar mer ljus. Han var bestämd med att kragen ska hållas gles, ett enda varv
+    styvt tupphackel, vars fibrer står ut från kroppen och ger liv åt flugan när den rör sig.
+    Boken ger fyra huvudfärger och elva andra; John Kreft nämner kroppar i ingefära, klargrönt,
+    bärnsten och grått. Sadil ger orre, rapphöna eller höna till undervingen, och Kreft lindar
+    ett och ett halvt eller två varv hackel.
+    """
+
+// en fishing: Fished just under the surface when the caddis come back to lay their eggs, usually from late afternoon into the evening. Steve Culton fishes it as the middle fly of a team of three: on a mended swing, dangled, sometimes dead drift. Scott Sadil finds it fools as many trout as any fly he uses in caddis-rich waters.
+fishing """
+    Fiskas strax under ytan när nattsländorna kommer tillbaka för att lägga ägg, oftast från sen
+    eftermiddag in på kvällen. Steve Culton fiskar den som mittflugan i ett tackel med tre
+    flugor: på ett svep med mendning, hängande i strömmen, ibland i fri drift. Scott Sadil finner att
+    den lurar lika många öringar som någon annan fluga han använder i vatten rika på
+    nattsländor.
+    """
+
+labels {
+    // en body: Bright green sparkle yarn dubbing
+    body "Klargrön sparkle yarn-dubbing"
+    // en underwing: Brown partridge fibres
+    underwing "Bruna rapphönsfibrer"
+    // en overwing: Clear Antron filaments
+    overwing "Klara Antronfibrer"
+    // en hackle: Ginger cock hackle
+    hackle "Ingefärsfärgat tupphackel"
+}
+
+notes {
+    // en step 3 (dub body): Sparkle yarn chopped fine; shaggy and a little fat (Kreft touch-dubs it on waxed thread).
+    step 3 "Sparkle yarn finhackat; lurvigt och lite fylligt (Kreft touch-dubbar det på vaxad tråd)."
+    // en step 4 (tie-in underwing): A bunch of fibres flat over the body.
+    step 4 "En knippe fibrer platt över kroppen."
+    // en step 5 (tie-in overwing): Twenty to thirty filaments, hanging free over the back.
+    step 5 "Tjugo till trettio fibrer som hänger fritt över ryggen."
+    // en step 8 (wind hackle): One turn only; force the fibres back with a few thread turns.
+    step 8 "Bara ett varv; tvinga fibrerna bakåt med några trådvarv."
+}

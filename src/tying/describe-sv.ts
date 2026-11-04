@@ -197,7 +197,8 @@ function writerFor(recipe: Recipe) {
       }
       case "tie-in-behind": {
         const w = what(said.what);
-        return `${pick(said.width)}Bind in ${w.text} och låt ${length(said.length)} sticka ut bakåt${angle(said.angle)}.${flare(said.flare, w.refers)}`;
+        const fray = said.fray ? ` Dra ut kärnan och repa upp ${pronoun(w.refers).object} till lösa ${svNoun(word("strand"), "plural")}.` : "";
+        return `${pick(said.width)}Bind in ${w.text} och låt ${length(said.length)} sticka ut bakåt${angle(said.angle)}.${flare(said.flare, w.refers)}${fray}`;
       }
       case "tie-in":
         if (said.cut) {

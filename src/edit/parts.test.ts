@@ -6,7 +6,7 @@ import { simulate } from "../tying/simulate";
 import { blankFly, PATTERN_FORM, recipeText } from "./own";
 import { mulberry32 } from "../render/random";
 import {
-  addMaterial, addPart, bareHook, blends, compile, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
+  addMaterial, addPart, bareHook, blends, compile, isPost, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
 } from "./parts";
 
 describe("a blended bunch in the builder", () => {
@@ -27,6 +27,14 @@ describe("a blended bunch in the builder", () => {
     const mixed = { ...fly, parts: fly.parts.map((p) => (p === tail ? { ...p, mats: p.mats.map((m, i) => (i === 0 ? { ...m, mix: "white" } : m)) } : p)) };
     const out = compile(mixed);
     expect(out.problems.filter((e) => e.rule === "mixOnlyBunch")).toEqual([]);
+  });
+});
+
+describe("a tubing tail stood upright", () => {
+  it("is no post for a parachute, as the rules say", () => {
+    const fly = partsOf(patterns.find((r) => r.id === "gotcha")!)!;
+    const tail = fly.parts.find((p) => p.mats.some((m) => m.kind === "mylar-tubing"))!;
+    expect(isPost({ ...tail, angle: 80 })).toBe(false);
   });
 });
 

@@ -1,0 +1,76 @@
+// Diving Caddis: Gary LaFontaine's wet fly for the egg-laying caddis from Caddisflies (1981), a sparkle yarn body under a partridge and clear Antron wing, with one turn of cock hackle.
+
+id diving-caddis
+name "Diving Caddis"
+aliases "LaFontaine Diving Caddis"
+type wet
+imitates caddis
+naturals caddis-adult
+difficulty intermediate
+species trout grayling
+// Assumption: the caddis season.
+season may june july august september
+origin originator="Gary LaFontaine"
+description "A shaggy body of green sparkle yarn, an underwing of brown partridge fibres, an overwing of clear Antron filaments and a single turn of ginger cock hackle."
+history """
+    Gary LaFontaine published it in Caddisflies (1981), the book that made his name, for the
+    female caddis that swims or dives under the water to lay her eggs, carrying a bright bubble of
+    air. Both her brightness and her action, he wrote, make a wet fly imitation necessary, and the
+    pure Antron filaments of its overwing, hanging free over the back, reflect more light. He was
+    adamant that the collar be kept sparse, a single turn of stiff rooster hackle, whose fibres
+    stand out from the body and add vibrancy to the moving fly. The book gives four primary colour
+    versions and eleven secondary ones; John Kreft names ginger, bright green, amber and grey
+    bodies. Sadil gives grouse, partridge or hen for the underwing, and Kreft winds one and a half
+    or two turns of hackle.
+    """
+fishing """
+    Fished just under the surface when the caddis come back to lay their eggs, usually from late
+    afternoon into the evening. Steve Culton fishes it as the middle fly of a team of three: on a
+    mended swing, dangled, sometimes dead drift. Scott Sadil finds it fools as many trout as any
+    fly he uses in caddis-rich waters.
+    """
+sources {
+    "Wikipedia: Gary LaFontaine" url="https://en.wikipedia.org/wiki/Gary_LaFontaine"
+    "Current Seams: LaFontaine's Diving Caddis wet fly (Steve Culton, 2023)" url="https://currentseams.com/2023/06/14/in-just-one-month-lafontaines-diving-caddis-wet-fly-is-already-paying-huge-dividends/"
+    "Big Sky Journal: Lesson 13, Diving Caddis (Scott Sadil)" url="https://bigskyjournal.com/lesson-13-diving-cadis/"
+    "John Kreft: Diving Caddis" url="https://www.johnkreft.com/caddis-fly-patterns/diving-caddis/"
+    "Fly Dressers' Guild: Dressings Database (Caddis, Diving)" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.johnkreft.com/wp-content/uploads/2015/10/LaFontaine-Diving-Caddis.jpg" page="https://www.johnkreft.com/caddis-fly-patterns/diving-caddis/" author="John Kreft" license="All rights reserved; reference only" note="Side view in the vise, green body, ginger hackle"
+    "https://bigskyjournal.com/wp-content/uploads/uploads/LaFontaine-Fly-comp_web.jpg" page="https://bigskyjournal.com/lesson-13-diving-cadis/" author="Denny Waln" license="All rights reserved; reference only" note="The finished fly above four steps, a tan body"
+    "https://www.flugor.se/bild_arkiv/big_2341.jpg" page="https://www.flugor.se/flugor/torrflugor/diving-caddis-2341" license="All rights reserved; reference only" note="Side view in the vise, a dubbed collar"
+}
+
+// LaFontaine: Mustad 7957-B, a standard wet-fly hook; Culton ties his #14.
+hook wet-standard size=14
+// Assumption: brown, as on Kreft's fly; Kreft gives 8/0 matching the body.
+thread brown size="8/0"
+
+materials {
+    // Assumption: the bright green version, coloured as on Kreft's fly.
+    body dubbing color="#7a8048" shaggy=0.5 label="Bright green sparkle yarn dubbing"
+    underwing hackle-fibres color=partridge count=60 label="Brown partridge fibres"
+    overwing sparkle-yarn color=clear label="Clear Antron filaments"
+    // Read from the photos: the fibres about one and a half gapes.
+    // Assumption: a deep ginger, as on Kreft's fly.
+    hackle cock-hackle color="#a85a2a" fibre=1.5 sweep=35 label="Ginger cock hackle"
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Kreft: to about two thirds of the shank.
+    // Read from the photos: about a third of the gape thick.
+    dub body to=0.68 turns=16 note="Sparkle yarn chopped fine; shaggy and a little fat (Kreft touch-dubs it on waxed thread)."
+    // Kreft: the tips to about the bend.
+    tie-in underwing length=1.5 angle=13 spread=35 note="A bunch of fibres flat over the body."
+    // FDG: 20 to 30 filaments; read from the photos, a little longer than the underwing.
+    tie-in overwing length=1.8 angle=20 spread=15 note="Twenty to thirty filaments, hanging free over the back."
+    tie-in hackle
+    wrap-thread to=0.73
+    wind hackle to=0.73 turns=1 note="One turn only; force the fibres back with a few thread turns."
+    tie-off hackle
+    whip-finish
+}

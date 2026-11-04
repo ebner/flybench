@@ -1,0 +1,49 @@
+id diving-caddis
+status draft
+
+// en description: A shaggy body of green sparkle yarn, an underwing of brown partridge fibres, an overwing of clear Antron filaments and a single turn of ginger cock hackle.
+description "Ein struppiger Körper aus grünem Sparkle Yarn, ein Unterflügel aus braunen Rebhuhnfibern, ein Oberflügel aus klaren Antronfasern und eine einzige Windung ingwerfarbener Hahnenhechel."
+
+// en history: Gary LaFontaine published it in Caddisflies (1981), the book that made his name, for the female caddis that swims or dives under the water to lay her eggs, carrying a bright bubble of air. Both her brightness and her action, he wrote, make a wet fly imitation necessary, and the pure Antron filaments of its overwing, hanging free over the back, reflect more light. He was adamant that the collar be kept sparse, a single turn of stiff rooster hackle, whose fibres stand out from the body and add vibrancy to the moving fly. The book gives four primary colour versions and eleven secondary ones; John Kreft names ginger, bright green, amber and grey bodies. Sadil gives grouse, partridge or hen for the underwing, and Kreft winds one and a half or two turns of hackle.
+history """
+    Gary LaFontaine veröffentlichte sie in Caddisflies (1981), dem Buch, das ihn bekannt machte,
+    für das Köcherfliegenweibchen, das zur Eiablage unter Wasser schwimmt oder taucht und dabei
+    eine glänzende Luftblase trägt. Ihr Glanz und ihre Bewegung, schrieb er, machen eine
+    Nassfliegenimitation nötig, und die reinen Antronfasern des Oberflügels, die frei über dem
+    Rücken hängen, werfen mehr Licht zurück. Er bestand darauf, den Kragen spärlich zu halten,
+    eine einzige Windung steifer Hahnenhechel, deren Fibern vom Körper abstehen und der bewegten
+    Fliege Leben geben. Das Buch nennt vier Hauptfarben und elf weitere; John Kreft nennt Körper
+    in Ingwer, Hellgrün, Bernstein und Grau. Sadil gibt Moorhuhn, Rebhuhn oder Henne für den
+    Unterflügel, und Kreft wickelt eineinhalb oder zwei Windungen Hechel.
+    """
+
+// en fishing: Fished just under the surface when the caddis come back to lay their eggs, usually from late afternoon into the evening. Steve Culton fishes it as the middle fly of a team of three: on a mended swing, dangled, sometimes dead drift. Scott Sadil finds it fools as many trout as any fly he uses in caddis-rich waters.
+fishing """
+    Dicht unter der Oberfläche gefischt, wenn die Köcherfliegen zur Eiablage zurückkommen, meist
+    vom späten Nachmittag bis in den Abend. Steve Culton fischt sie als mittlere Fliege eines
+    Gespanns von dreien: im gemendeten Schwung, in der Strömung hängend, manchmal frei treibend.
+    Scott Sadil findet, dass sie in köcherfliegenreichen Gewässern so viele Forellen täuscht wie
+    jede andere Fliege, die er fischt.
+    """
+
+labels {
+    // en body: Bright green sparkle yarn dubbing
+    body "Hellgrünes Sparkle-Yarn-Dubbing"
+    // en underwing: Brown partridge fibres
+    underwing "Braune Rebhuhnfibern"
+    // en overwing: Clear Antron filaments
+    overwing "Klare Antronfasern"
+    // en hackle: Ginger cock hackle
+    hackle "Ingwerfarbene Hahnenhechel"
+}
+
+notes {
+    // en step 3 (dub body): Sparkle yarn chopped fine; shaggy and a little fat (Kreft touch-dubs it on waxed thread).
+    step 3 "Sparkle Yarn fein gehackt; struppig und etwas füllig (Kreft dubbt es mit der Touch-Methode auf gewachsten Faden)."
+    // en step 4 (tie-in underwing): A bunch of fibres flat over the body.
+    step 4 "Ein Büschel Fibern flach über dem Körper."
+    // en step 5 (tie-in overwing): Twenty to thirty filaments, hanging free over the back.
+    step 5 "Zwanzig bis dreißig Fasern, frei über dem Rücken hängend."
+    // en step 8 (wind hackle): One turn only; force the fibres back with a few thread turns.
+    step 8 "Nur eine Windung; drück die Fibern mit ein paar Fadenwindungen nach hinten."
+}

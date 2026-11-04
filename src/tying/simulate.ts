@@ -1131,7 +1131,9 @@ export function simulate(recipe: Recipe): Build {
           ...(strip ? { fur: l.fibreLength } : {}),
           ...(step.bubble ? { bubble: step.bubble } : {}),
           ...(underneath.has(step.material) ? { side: "under" as const } : {}),
-          ...(l.veil ? { veil: true } : {}),
+          // Pulled over loosely, sparse sparkle yarn is a veil the body shows through; pulled tight,
+          // a strand of it lies as a solid wing case (a Black Martinez's).
+          ...(l.veil && step.bubble ? { veil: true } : {}),
           ...(split ? { split } : {}),
           // A strip trimmed later sticks out over the eye until then.
           dents: [], stub: fold ?? (trimmedLater && !back ? untrimmed : 0),

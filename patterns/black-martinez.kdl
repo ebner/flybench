@@ -1,0 +1,78 @@
+// Black Martinez: Don Martinez's nymph of the 1930s, a black body under a lime wing case with a soft grizzly hackle, in Barry Ord Clarke's dressing.
+
+id black-martinez
+name "Black Martinez"
+type nymph
+imitates stonefly mayfly
+naturals stonefly-nymph mayfly-nymph-crawling
+difficulty beginner
+species trout
+// Assumption: fished all through the open season, on lakes and rivers.
+season april may june july august september october
+origin originator="Don Martinez"
+description "A guinea fowl tail, a black dubbed abdomen ribbed with copper wire, a black chenille thorax under a lime Antron wing case and a soft grizzly hen hackle."
+history """
+    Don Martinez, a professional tyer who kept a summer fly shop in West Yellowstone, Montana,
+    from 1932 to 1943, tied it in the 1930s; Barry Ord Clarke dates it to the early 1930s and
+    notes that it looks like a modern nymph. This is his dressing: a guinea fowl tail, a black
+    dubbed abdomen with a copper rib, a lime Antron wing case over a black chenille thorax and a
+    grizzly hen hackle.
+    """
+fishing """
+    A generic nymph, Ord Clarke calls it. Viking Lars finds the large sizes good stonefly nymph
+    imitations and the small ones like mayfly nymphs, and sees it as a lake fly: at Hökensås in
+    Sweden it took most of his trout over three days, cast to rising fish or fished blind over
+    shallow and deep water. Keep it sparse, he advises.
+    """
+sources {
+    "The Feather Bender: The Black Martinez (Barry Ord Clarke)" url="https://thefeatherbender.com/the-black-martinez/"
+    "GlobalFlyFisher: Black Martinez (video, Barry Ord Clarke)" url="https://www.globalflyfisher.com/video/black-martinez"
+    "Sexyloops: Black Martinez (Viking Lars)" url="https://www.sexyloops.com/index.php/ps/black-martinez"
+    "MidCurrent: Tying Tuesday, Top to Bottom (Phil Monahan)" url="https://midcurrent.com/2025/09/02/tying-tuesday-top-to-bottom/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://i0.wp.com/thefeatherbender.com/wp-content/uploads/2020/07/IMG_4296-e1609367146474.jpg?resize=1300%2C768&ssl=1" page="https://thefeatherbender.com/the-black-martinez/" author="Barry Ord Clarke" license="All rights reserved; reference only" note="Side view in the vise, lime wing case, grizzly hen hackle"
+    "https://www.flugor.se/bild_arkiv/big_2590.jpg" page="https://www.flugor.se/flugor/nymfer/black-martinez-2590" license="All rights reserved; reference only" note="Side view in the vise, a long speckled hackle"
+}
+
+// Ord Clarke: Mustad R74, #8 to 12.
+hook nymph-2xl size=10
+thread black size="6/0"
+
+materials {
+    tail hackle-fibres color=guinea count=12 label="Guinea fowl fibres"
+    rib copper-wire
+    abdomen dubbing color=black shaggy=0.25 label="Black nymph dubbing"
+    // Assumption: lime green, as in Ord Clarke's photo.
+    case sparkle-yarn color="#b3dc4a" label="Lime Antron yarn"
+    // Assumption: fine rayon chenille, about 2 mm thick.
+    thorax chenille color=black mm=2 label="Black rayon chenille"
+    // Read from the photos: long, soft fibres sweeping back over the thorax.
+    hackle hen-hackle color=grizzly fibre=1.6 sweep=45 label="Grizzly hen hackle"
+}
+
+// Ord Clarke gives the materials, not the steps; the order is the usual one for a nymph with a
+// wing case, the hackle in front of it as his photo shows.
+steps {
+    attach-thread at=0.9
+    wrap-thread to=0.0
+    // Read from the photos: about half the shank.
+    tie-in tail length=1.3 angle=6 spread=20 note="A small bunch of fibres, tips level."
+    tie-in rib
+    // Read from the photos: a little under half the shank.
+    dub abdomen to=0.45 turns=12 note="Slim at the tail, thickening forward."
+    wind rib to=0.45 turns=4 note="Four or five open turns."
+    tie-off rib
+    tie-in case note="On top, lying back over the abdomen."
+    tie-in thorax
+    wrap-thread to=0.86
+    wind thorax to=0.86 turns=6 note="A fat thorax."
+    tie-off thorax
+    pull-over case to=0.86 note="Snug over the top of the thorax."
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.9 turns=2 note="Two turns; stroke the fibres back."
+    tie-off hackle
+    whip-finish
+}

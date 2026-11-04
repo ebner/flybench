@@ -1,0 +1,52 @@
+id black-martinez
+status draft
+
+// en description: A guinea fowl tail, a black dubbed abdomen ribbed with copper wire, a black chenille thorax under a lime Antron wing case and a soft grizzly hen hackle.
+description "En stjärt av pärlhöna, en svart dubbad bakkropp ribbad med koppartråd, en svart chenillethorax under en limegrön vingbox av Antron och ett mjukt grizzly hönshackel."
+
+// en history: Don Martinez, a professional tyer who kept a summer fly shop in West Yellowstone, Montana, from 1932 to 1943, tied it in the 1930s; Barry Ord Clarke dates it to the early 1930s and notes that it looks like a modern nymph. This is his dressing: a guinea fowl tail, a black dubbed abdomen with a copper rib, a lime Antron wing case over a black chenille thorax and a grizzly hen hackle.
+history """
+    Don Martinez, en yrkesbindare som hade en sommarflugbutik i West Yellowstone i Montana från
+    1932 till 1943, band den på 1930-talet; Barry Ord Clarke daterar den till början av
+    1930-talet och noterar att den ser ut som en modern nymf. Det här är hans bindning: en
+    stjärt av pärlhöna, en svart dubbad bakkropp med kopparribb, en limegrön vingbox av Antron
+    över en svart chenillethorax och ett grizzly hönshackel.
+    """
+
+// en fishing: A generic nymph, Ord Clarke calls it. Viking Lars finds the large sizes good stonefly nymph imitations and the small ones like mayfly nymphs, and sees it as a lake fly: at Hökensås in Sweden it took most of his trout over three days, cast to rising fish or fished blind over shallow and deep water. Keep it sparse, he advises.
+fishing """
+    En allroundnymf, kallar Ord Clarke den. Viking Lars finner de stora storlekarna bra som
+    bäcksländenymfer och de små lika dagsländenymfer, och ser den som en sjöfluga: vid Hökensås
+    tog den det mesta av hans öring under tre dagar, kastad till vakande fisk eller fiskad blint
+    över grunt och djupt vatten. Bind den gles, råder han.
+    """
+
+labels {
+    // en tail: Guinea fowl fibres
+    tail "Fibrer av pärlhöna"
+    // en abdomen: Black nymph dubbing
+    abdomen "Svart nymfdubbing"
+    // en case: Lime Antron yarn
+    case "Limegrönt Antrongarn"
+    // en thorax: Black rayon chenille
+    thorax "Svart rayonchenille"
+    // en hackle: Grizzly hen hackle
+    hackle "Grizzly hönshackel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of fibres, tips level.
+    step 3 "En liten knippe fibrer, topparna jämna."
+    // en step 5 (dub abdomen): Slim at the tail, thickening forward.
+    step 5 "Smal vid stjärten, tjockare framåt."
+    // en step 6 (wind rib): Four or five open turns.
+    step 6 "Fyra eller fem glesa varv."
+    // en step 8 (tie-in case): On top, lying back over the abdomen.
+    step 8 "Ovanpå, liggande bakåt över bakkroppen."
+    // en step 11 (wind thorax): A fat thorax.
+    step 11 "En fyllig thorax."
+    // en step 13 (pull-over case): Snug over the top of the thorax.
+    step 13 "Tätt över ovansidan av thoraxen."
+    // en step 16 (wind hackle): Two turns; stroke the fibres back.
+    step 16 "Två varv; stryk fibrerna bakåt."
+}

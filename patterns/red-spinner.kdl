@@ -1,0 +1,70 @@
+// Red Spinner: the old British wet fly for the red spinners, in Davie McPhail's dressing: a red thread body ribbed with silver under a starling wing.
+
+id red-spinner
+name "Red Spinner"
+type wet
+imitates mayfly
+naturals mayfly-spinner
+difficulty intermediate
+species trout grayling
+// Edmonds & Lee (1916): July, August and September.
+season july august september
+description "A tail of brown cock fibres, a slim red thread body ribbed with small silver tinsel, a brown hen hackle and a starling quill wing."
+history """
+    An old British fly for the spinners, the egg-laying females, of several upwinged flies; no one
+    is named as its originator. The Fly Dressers' Guild's dressings database gives seven Red
+    Spinners from the books, the oldest Alfred Ronalds's of 1836: a brown silk body ribbed with
+    gold twist, red cock hackle and whisks and a wing of dyed grey mallard. Edmonds and Lee, in
+    Brook and River Trouting (1916), give it wet and dry, the wet with red silk dubbed with maroon
+    wool, four turns of gold wire and a wing of grizzled blue cock fibres. This is Davie McPhail's
+    winged wet: a body of the red tying thread, a silver rib and a starling wing. The old dressings
+    rib it with gold, and some tyers give it a pale cream tail rather than a brown one.
+    """
+fishing """
+    A wet fly for the red spinners on rivers. Edmonds and Lee fish their Red Spinners, wet or dry,
+    from July to September, and find them often taken when all else fails, even in the quiet flats
+    where the trout pick small flies off the surface all day.
+    """
+sources {
+    "GlobalFlyFisher: Red Spinner (video, Davie McPhail)" url="https://globalflyfisher.com/video/red-spinner"
+    "Fly Dressers' Guild: Dressings Database" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+    "Internet Archive: Brook and River Trouting (Edmonds & Lee, 1916)" url="https://archive.org/details/brookrivertrouti00edmorich"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://i.ytimg.com/vi/qfwUL40ajEE/hqdefault.jpg" page="https://globalflyfisher.com/video/red-spinner" author="Davie McPhail" license="All rights reserved; reference only" note="Side view in the vise, the wing curving up" flip=#true
+    "https://www.fish4flies.com/img/flies/Large/3851-Red%20Spinner%20Winged%20Wet%206127.jpg" page="https://www.fish4flies.com/Wet/Winged/Red-Spinner-Winged-Wet" license="All rights reserved; reference only" note="Side view, a pale tail and a hen beard"
+    "https://www.flugor.se/bild_arkiv/big_4473.jpg" page="https://www.flugor.se/flugor/oring-dubbelkrok/red-spinner-winged-4473" license="All rights reserved; reference only" note="On a small double, a pale tail and beard"
+}
+
+// McPhail: a #12; the sources' wet flies are #12 to 16.
+hook wet-standard size=12
+thread red size="8/0"
+
+materials {
+    tail hackle-fibres color=brown count=10 label="Natural brown cock hackle fibres"
+    rib flat-tinsel color=silver label="Small flat silver tinsel"
+    // Read from McPhail's fly: long, soft fibres reaching past the hook point.
+    hackle hen-hackle color=brown fibre=1.3 sweep=60 label="Natural brown hen hackle"
+    // Assumption: the pale grey of a starling's wing quill, as in the photos.
+    wing starling-quill color="#8e8b84"
+}
+
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Read from the photos: 1.4 to 2.4 gapes, McPhail's the longest.
+    tie-in tail length=1.8 angle=6 spread=10 note="A small bunch of fibres, tips level."
+    tie-in rib
+    wrap-thread to=0.84 note="Close, flat turns of the red thread make a slim, smooth body."
+    // Read from the photos: five turns.
+    wind rib to=0.84 turns=5 note="Open, evenly spaced turns."
+    tie-off rib
+    tie-in hackle note="By its tip, shiny side forward."
+    wrap-thread to=0.88
+    wind hackle to=0.88 turns=2 note="Two turns; stroke the fibres back and down."
+    tie-off hackle
+    // Read from the photos: low, the tips well past the bend.
+    tie-in wing length=2.6 angle=18 spread=10 width=0.55 note="Matched slips from a left and a right starling quill, set low over the body."
+    whip-finish note="A small red head, varnished."
+}

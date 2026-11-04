@@ -213,7 +213,8 @@ function writerFor(recipe: Recipe) {
       }
       case "tie-in-behind": {
         const w = what(said.what);
-        return `${pick(said.width)}Binde ${w.text} ein und lass ${length(said.length)} nach hinten überstehen${angle(said.angle)}.${flare(said.flare, w.refers)}`;
+        const fray = said.fray ? ` Zieh den Kern heraus und zupfe ${pronoun(w.refers).acc} zu losen ${many("strand", "dat")} auf.` : "";
+        return `${pick(said.width)}Binde ${w.text} ein und lass ${length(said.length)} nach hinten überstehen${angle(said.angle)}.${flare(said.flare, w.refers)}${fray}`;
       }
       case "tie-in":
         if (said.cut) {

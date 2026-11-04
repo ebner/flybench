@@ -1,0 +1,54 @@
+id gotcha
+status draft
+
+// en description: Bead-chain eyes near the eye, a frayed pearl Mylar tail, a pearl braid body, a golden tan craft fur wing with pearl flash on the hook-point side, and a pink thread nose.
+description "Kettenaugen nahe dem Öhr, ein aufgezupfter Schwanz aus perlmuttfarbenem Mylar, ein Körper aus perlmuttfarbenem Flechttinsel, ein goldbrauner Flügel aus Craft Fur mit Perlmutt-Flash auf der Seite der Hakenspitze und eine rosa Fadennase."
+
+// en history: Jim McVay tied the first ones on the way to the Andros Island Bonefish Club: he cut fibres from the carpet of a taxi and tied a small bonefish fly with them, and each time a bonefish took it the guide said "Gotcha". Scott Heywood, who tells the story, names the guide Rupert Leadon and says Jim was travelling with his father Ted; Casey Smartt and Deneki tell it the same way. They disagree on the carpet's colour, tan in Smartt's telling and yellow in Heywood's. Heywood calls it really a variation on the Crazy Charlie, one with a pink nose and a subtle pink undertone, and, with the Crazy Charlie, the most recognised bonefish fly there is. This is Heywood's "Original Gotcha". David Klausmeyer counts it among his 101 favourite saltwater flies.
+history """
+    Jim McVay band die ersten auf dem Weg zum Andros Island Bonefish Club: er schnitt Fasern aus
+    dem Teppich eines Taxis und band daraus eine kleine Bonefish-Fliege, und jedes Mal, wenn ein
+    Bonefish sie nahm, rief der Guide "Gotcha". Scott Heywood, der die Geschichte erzählt, nennt
+    den Guide Rupert Leadon und sagt, dass Jim mit seinem Vater Ted reiste; Casey Smartt und
+    Deneki erzählen sie genauso. Sie sind uneins über die Farbe des Teppichs, hellbraun bei
+    Smartt und gelb bei Heywood. Heywood nennt sie eigentlich eine Variante der Crazy Charlie,
+    eine mit rosa Nase und einem zarten rosa Unterton, und mit der Crazy Charlie die bekannteste
+    Bonefish-Fliege überhaupt. Dies ist Heywoods "Original Gotcha". David Klausmeyer zählt sie
+    zu seinen 101 liebsten Salzwasserfliegen.
+    """
+
+// en fishing: Cast ahead of cruising bonefish, let it sink and strip it short, so it flees like a shrimp. Choose the eyes for the depth: Heywood carries some with lead eyes for deeper water, most with bead chain, and some with none for tailing fish in the shallows. It rides point up, so it seldom catches the bottom; Smartt fishes it for redfish too. Tan with a pink thread is by far the most popular colour, Smartt finds.
+fishing """
+    Wirf vor ziehende Bonefish, lass sie sinken und strippe sie kurz, so dass sie wie eine
+    Garnele flieht. Wähle die Augen nach der Tiefe: Heywood hat einige mit Bleiaugen für
+    tieferes Wasser, die meisten mit Kettenaugen und einige ohne Augen für tailende Fische im
+    Flachen. Sie läuft mit der Hakenspitze nach oben und hängt deshalb selten am Grund; Smartt
+    fischt sie auch auf Redfish. Hellbraun mit rosa Faden ist bei weitem die beliebteste Farbe,
+    findet Smartt.
+    """
+
+labels {
+    // en tail: Medium pearl Mylar tubing
+    tail "Mittlerer perlmuttfarbener Mylarschlauch"
+    // en body: Pearl Diamond Braid
+    body "Perlmuttfarbenes Diamond Braid"
+    // en wing: Golden tan craft fur
+    wing "Goldbraunes Craft Fur"
+}
+
+notes {
+    // en step 2 (tie-in eyes): On top, with figure-of-eight turns.
+    step 2 "Obenauf, mit Achterwicklungen."
+    // en step 4 (tie-in tail): Or a few strands of Krystal Flash, for a sparser fly (Heywood).
+    step 4 "Oder ein paar Stränge Krystal Flash, für eine spärlichere Fliege (Heywood)."
+    // en step 7 (wind body): Overlapping turns; figure-of-eight it round the eyes.
+    step 7 "Überlappende Windungen; mit Achterwicklungen um die Augen."
+    // en step 9 (wrap-thread): In front of the eyes; turn the hook over.
+    step 9 "Vor den Augen; dreh den Haken um."
+    // en step 10 (tie-in wing): A clump of craft fur, its underfur combed out.
+    step 10 "Ein Büschel Craft Fur, die Unterwolle ausgekämmt."
+    // en step 11 (tie-in flash): Three strands folded over: six ends, over the wing.
+    step 11 "Drei Stränge in der Mitte gefaltet: sechs Enden, über dem Flügel."
+    // en step 12 (whip-finish): A tapered pink thread head, the nose; coat it.
+    step 12 "Ein verjüngter Kopf aus rosa Faden, die Nase; lackieren."
+}

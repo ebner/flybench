@@ -1,0 +1,49 @@
+id dark-hendrickson
+status draft
+
+// en description: A dark dun fibre tail, a slim grey muskrat body, an upright divided wing of lemon wood duck and a dark dun hackle.
+description "Ein Schwanz aus dunkel blaugrauen Fibern, ein schlanker Körper aus grauem Bisam, ein aufrechter, geteilter Flügel aus zitronengelber Brautente und eine dunkel blaugraue Hechel."
+
+// en history: The Hendrickson is Roy Steenrod's, of Liberty, New York: he tied it in 1916 on the Beaverkill below Junction Pool and in 1918 named it after his friend A. E. Hendrickson. His fly had a body of fawn fox fur, a wood duck wing and a sparse dun hackle. The Dark Hendrickson is the same fly with a body of muskrat fur, where the Light Hendrickson has fox belly fur; John Kreft could not find in his books who first tied the dark one, or which of the two came first. Ray Bergman gives it with a dark blue-grey fur body, a wing of speckled mandarin duck and a dark blue dun hackle.
+history """
+    Die Hendrickson stammt von Roy Steenrod aus Liberty im Staat New York: er band sie 1916 am
+    Beaverkill unterhalb des Junction Pool und benannte sie 1918 nach seinem Freund A. E.
+    Hendrickson. Seine Fliege hatte einen Körper aus hellem Fuchsfell, einen Flügel aus
+    Brautente und eine spärliche blaugraue Hechel. Die Dark Hendrickson ist dieselbe Fliege mit
+    einem Körper aus Bisamfell, wo die Light Hendrickson Bauchfell vom Fuchs hat; John Kreft
+    konnte in seinen Büchern nicht finden, wer die dunkle zuerst band oder welche der beiden
+    zuerst da war. Ray Bergman gibt sie mit einem Körper aus dunkel blaugrauem Fell, einem
+    Flügel aus gesprenkelter Mandarinente und einer dunkel blaugrauen Hechel.
+    """
+
+// en fishing: For the Hendrickson hatch of Ephemerella subvaria in the eastern and midwestern United States, whose reddish-brown males anglers call Red Quills or Dark Hendricksons. Fished dead drift, mostly in riffles and the faster water where the duns hatch.
+fishing """
+    Für den Schlupf der Hendrickson, Ephemerella subvaria, im Osten und Mittleren Westen der
+    USA, deren rotbraune Männchen die Angler Red Quill oder Dark Hendrickson nennen. Frei
+    treibend gefischt, meist in Rauschen und im schnelleren Wasser, wo die Subimagines
+    schlüpfen.
+    """
+
+labels {
+    // en wings: Lemon wood duck flank fibres
+    wings "Fibern der zitronengelben Brautenten-Flankenfeder"
+    // en tail: Dark blue dun cock hackle fibres
+    tail "Dunkel blaugraue Hahnenhechelfibern"
+    // en body: Grey muskrat fur
+    body "Graues Bisamfell"
+    // en hackle: Dark dun cock hackle
+    hackle "Dunkel blaugraue Hahnenhechel"
+}
+
+notes {
+    // en step 3 (tie-in wings): A bunch of fibres, tips even, tied in tips forward.
+    step 3 "Ein Büschel Fibern, Spitzen gleich lang, mit den Spitzen nach vorn eingebunden."
+    // en step 4 (wrap-thread): Bind the butts down along the shank for a smooth underbody.
+    step 4 "Binde die Enden am Hakenschenkel entlang für einen glatten Unterkörper fest."
+    // en step 5 (tie-in tail): A sparse bunch, tips level.
+    step 5 "Ein spärliches Büschel, Spitzen gleich lang."
+    // en step 6 (dub body): Slim and tapered, to just behind the wings.
+    step 6 "Schlank und verjüngt, bis kurz hinter die Flügel."
+    // en step 9 (wind hackle): Two or three turns behind the wings, two or three in front.
+    step 9 "Zwei oder drei Windungen hinter den Flügeln, zwei oder drei davor."
+}

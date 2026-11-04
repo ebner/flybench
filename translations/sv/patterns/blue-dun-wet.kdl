@@ -1,0 +1,43 @@
+id blue-dun-wet
+status draft
+
+// en description: A sparse mole fur body on waxed primrose silk, a medium blue dun hen hackle and a starling quill wing.
+description "En gles kropp av mullvadspäls på vaxat primulagult silke, ett mellanblågrått hönshackel och en vinge av starvingpenna."
+
+// en history: The British Blue Dun, as the books give it from the nineteenth century on: a fur body dubbed on yellow or primrose silk, a starling or snipe wing and a blue dun hackle. Halford dubs mole or water-rat on yellow silk under a snipe or light starling wing, with a pale blue dun hackle and tail; Skues gives water-rat on primrose or yellow silk, a snipe wing and a medium blue dun hen hackle; Ogden a very upright dark starling wing. This is Roger Fogg's: mole fur, or mole mixed with blue-grey seal's fur, dubbed sparsely on waxed primrose silk, a starling wing and a medium blue hen hackle. Skues also dressed John Younger's Tweed Blue Dun as a hackled fly with guinea fowl whisks and a dark blue hen hackle of not more than two turns.
+history """
+    Den brittiska Blue Dun som böckerna ger den från 1800-talet och framåt: en pälskropp dubbad
+    på gult eller primulagult silke, en vinge av stare eller beckasin och ett blågrått hackel.
+    Halford dubbar mullvad eller vattensork på gult silke under en vinge av beckasin eller ljus
+    stare, med blågrått hackel och stjärt; Skues ger vattensork på primulagult eller gult silke,
+    en beckasinvinge och ett mellanblågrått hönshackel; Ogden en mycket upprätt mörk starvinge.
+    Det här är Roger Foggs: mullvadspäls, eller mullvad blandad med blågrå sälpäls, glest dubbad
+    på vaxat primulagult silke, en starvinge och ett mellanblått hönshackel. Skues band också
+    John Youngers Blue Dun från Tweed som en hackelfluga med stjärtspröt av pärlhöna och ett
+    mörkt blått hönshackel på högst två varv.
+    """
+
+// en fishing: A wet fly for the olives of spring on rivers. Roger Woolley calls it an imitation of the large early Olive Dun, and John Younger's Tweed list gives it for April and May.
+fishing """
+    En våtfluga för vårens olivfärgade dagsländor i strömmande vatten. Roger Woolley kallar den
+    en imitation av den stora tidiga Olive Dun, och John Youngers lista från Tweed ger den för
+    april och maj.
+    """
+
+labels {
+    // en body: Mole fur
+    body "Mullvadspäls"
+    // en hackle: Medium blue dun hen hackle
+    hackle "Mellanblågrått hönshackel"
+}
+
+notes {
+    // en step 3 (dub body): A little fur, thinly on the waxed silk, so its colour shows through.
+    step 3 "Lite päls, tunt på det vaxade silket, så att dess färg lyser igenom."
+    // en step 4 (tie-in hackle): By its tip, shiny side forward.
+    step 4 "I spetsen, blanka sidan framåt."
+    // en step 6 (wind hackle): Two turns; stroke the fibres back and down.
+    step 6 "Två varv; stryk fibrerna bakåt och nedåt."
+    // en step 8 (tie-in wing): Matched slips from a left and a right starling quill, set low over the body.
+    step 8 "En vänster- och en högersektion av starvingpenna som matchar varandra, lågt över kroppen."
+}

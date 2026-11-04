@@ -1,0 +1,47 @@
+id dark-hendrickson
+status draft
+
+// en description: A dark dun fibre tail, a slim grey muskrat body, an upright divided wing of lemon wood duck and a dark dun hackle.
+description "En stjärt av mörkt blågrå fibrer, en smal kropp av grå bisam, en upprätt delad vinge av citrongul brudand och ett mörkt blågrått hackel."
+
+// en history: The Hendrickson is Roy Steenrod's, of Liberty, New York: he tied it in 1916 on the Beaverkill below Junction Pool and in 1918 named it after his friend A. E. Hendrickson. His fly had a body of fawn fox fur, a wood duck wing and a sparse dun hackle. The Dark Hendrickson is the same fly with a body of muskrat fur, where the Light Hendrickson has fox belly fur; John Kreft could not find in his books who first tied the dark one, or which of the two came first. Ray Bergman gives it with a dark blue-grey fur body, a wing of speckled mandarin duck and a dark blue dun hackle.
+history """
+    Hendrickson är Roy Steenrods, från Liberty i New York: han band den 1916 vid Beaverkill
+    nedanför Junction Pool och döpte den 1918 efter sin vän A. E. Hendrickson. Hans fluga hade
+    en kropp av ljust rävpäls, en vinge av brudand och ett glest blågrått hackel. Dark
+    Hendrickson är samma fluga med en kropp av bisampäls, där Light Hendrickson har päls från
+    rävens buk; John Kreft kunde inte hitta i sina böcker vem som först band den mörka, eller
+    vilken av de två som kom först. Ray Bergman ger den med en kropp av mörkt blågrå päls, en
+    vinge av spräcklig mandarinand och ett mörkt blågrått hackel.
+    """
+
+// en fishing: For the Hendrickson hatch of Ephemerella subvaria in the eastern and midwestern United States, whose reddish-brown males anglers call Red Quills or Dark Hendricksons. Fished dead drift, mostly in riffles and the faster water where the duns hatch.
+fishing """
+    För Hendricksonkläckningen av Ephemerella subvaria i östra USA och Mellanvästern, vars
+    rödbruna hanar fiskarna kallar Red Quill eller Dark Hendrickson. Fiskas i fri drift, mest i
+    strömsträckor och det snabbare vattnet där subimagon kläcks.
+    """
+
+labels {
+    // en wings: Lemon wood duck flank fibres
+    wings "Fibrer av citrongul brudandsflankfjäder"
+    // en tail: Dark blue dun cock hackle fibres
+    tail "Mörkt blågrå tuppfibrer"
+    // en body: Grey muskrat fur
+    body "Grå bisampäls"
+    // en hackle: Dark dun cock hackle
+    hackle "Mörkt blågrått tupphackel"
+}
+
+notes {
+    // en step 3 (tie-in wings): A bunch of fibres, tips even, tied in tips forward.
+    step 3 "En knippe fibrer, topparna jämna, inbunden med topparna framåt."
+    // en step 4 (wrap-thread): Bind the butts down along the shank for a smooth underbody.
+    step 4 "Bind ner rotändarna längs krokskaftet för en slät underkropp."
+    // en step 5 (tie-in tail): A sparse bunch, tips level.
+    step 5 "En gles knippe, topparna jämna."
+    // en step 6 (dub body): Slim and tapered, to just behind the wings.
+    step 6 "Smal och avsmalnande, fram till strax bakom vingarna."
+    // en step 9 (wind hackle): Two or three turns behind the wings, two or three in front.
+    step 9 "Två eller tre varv bakom vingarna, två eller tre framför."
+}

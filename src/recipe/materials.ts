@@ -53,7 +53,7 @@ export interface CatalogMaterial {
   fibreWidth?: number;
   /** Fibres with flue along them, fluffy like herl (peacock sword). */
   flue?: boolean;
-  /** Pulled over, a sparse translucent veil the body shows through (sparkle yarn). */
+  /** Pulled over loosely (`bubble`), a sparse translucent veil the body shows through (sparkle yarn). */
   veil?: boolean;
   /** Dubbing: how rough it is, from 0 (fine, tight) to 1 (long, spiky guard hairs). Default 0.4. */
   shaggy?: number;
