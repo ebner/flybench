@@ -54,6 +54,10 @@ materials {
     noun guinea-fowl-hackle "Perlhuhnhechel" gender=f plural="Perlhuhnhecheln" {
         source "Der-FliegenBinder: Die „Arthofer“ (\"Die Hechel war stets eine Perlhuhnhechel\", Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
     }
+    noun golden-pheasant-flank "Flankenfeder des Goldfasans" gender=f plural="Flankenfedern des Goldfasans" dative-plural="Flankenfedern des Goldfasans" {
+        note "The cock's ruddy red flank feather, wound as a hackle (an Usk Grub's tail). No German tying page naming it turned up; formed like 'Körperfeder des Goldfasans', with 'Flanke' as in 'Flanken' of a streamer dressing."
+        source "Fliegenfischer-Forum: Lachsfliegen (Mickey Finn: \"Flanken Goldfasan Tippet\")" url="https://www.fliegenfischer-forum.de/lachs.htm"
+    }
     noun partridge-hackle "Rebhuhnhechel" gender=f plural="Rebhuhnhecheln" {
         source "Fliegenfischer-Forum: 10 Bestseller-Nymphen (\"Hechel: braune Rebhuhnhechel\")" url="https://www.fliegenfischer-forum.de/monspe22.html"
         source "Der-FliegenBinder: Weiche Federn, Ingo Karwath (\"Rebhuhnhechel an der Spitze eingebunden\")" url="https://der-fliegenbinder.de/16174-2"
@@ -275,6 +279,10 @@ materials {
         source "AOS: Fliegenbindematerial (category \"Bälge & Sattelfedern\")" url="https://aos.cc/de/shop-fliegenfischen/fliegenbinden/fliegenbindematerial.html"
         source "Flyfishing Europe: Sattelhecheln Strung (\"wichtigen Bestandteil vieler Salzwasserstreamer\")" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
     }
+    noun golden-pheasant-tippet-feather "Goldfasantippetfeder" gender=f plural="Goldfasantippetfedern" {
+        note "A whole tippet feather, as German General Practitioner dressings use it, cut into a V."
+        source "Fliegenfischer-Forum: Lachsfliegen (Irish General Practitioner: \"Goldfasantippetfeder die V-förmig ausgeschnitten ist\")" url="https://www.fliegenfischer-forum.de/lachs.htm"
+    }
     noun golden-pheasant-body "Körperfeder des Goldfasans" gender=f plural="Körperfedern des Goldfasans" dative-plural="Körperfedern des Goldfasans" {
         note "The cock's small red body feathers. No German tying page naming them turned up; formed as 'Brustfeder der Stockentenhenne' (mallard-breast) from the bird, whose whole underside is red."
         source "Wikipedia: Goldfasan (\"Die gesamte Unterseite ist intensiv dunkelrot\")" url="https://de.wikipedia.org/wiki/Goldfasan"
@@ -427,6 +435,9 @@ colours {
     adjective bronze-mallard "bronzebraun" {
         note "Assumption: the plain colour word for the bronze brown of bronze mallard; no tying page using it was found."
     }
+    adjective furnace "Furnace" compound=#true {
+        note "A red-brown hackle with a black centre. Kept in English, like 'Badger'; no German page using the word turned up."
+    }
     adjective badger "Badger" compound=#true {
         note "Hackle shade name, kept in English (\"Hechel: Badger\")."
         source "Der-FliegenBinder: Lachsfliege des Monats 8" url="https://der-fliegenbinder.de/lachsfliege-des-monats-4"
@@ -499,6 +510,9 @@ parts {
     }
     noun sheath "Hülle" gender=f plural="Hüllen" {
         note "The loose veil of sparkle yarn round a sparkle pupa's body."
+    }
+    noun veil "Schleier" gender=m plural="Schleier" {
+        note "A veiling: feathers laid over part of the body or the tail (a General Practitioner's over its feelers, an Usk Grub's over the rear body). No German tying page with the word turned up; 'Schleier' is the plain word for a veil."
     }
     noun shell "Schale" gender=f plural="Schalen" {
         note "A foam strip pulled over the top of the body (the Gurgler)."

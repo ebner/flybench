@@ -1,0 +1,57 @@
+id usk-grub
+status draft
+
+// en description: An oval silver tag, a long tail of a golden pheasant flank feather wound as a hackle, a body of orange and amber seal's fur behind and black seal's fur in front, each half ribbed with oval silver, orange hackle points veiling the rear half, a white middle hackle, a furnace collar and a pair of jungle cock feathers back to back.
+description "En tag av oval silvertinsel, en lång stjärt av en flankfjäder från guldfasan lindad som hackel, en kropp av orange och bärnstensfärgad sälpäls bak och svart sälpäls fram, varje halva ribbad med oval silvertinsel, orange hackelspetsar som slöja över den bakre halvan, ett vitt mitthackel, en furnacekrage och ett par jungle cock-fjädrar rygg mot rygg."
+
+// en history: A shrimp fly made for the River Usk; no source names who first tied it, or when. Selectafly's Usk Grubs copy those of Sweets, the tackle shop in Usk town, tied first by Molly Sweet and later by Jean Williams, who ran the shop until the end of 2022. In Trout and Salmon it is one of the three salmon flies recommended for the Glanusk water on the Usk, with the Shrimp Fly and the Silver Stoat. The dressing here is the Gwent Angling Society's, the one full written dressing; the shops' flies follow its layout. The club gives the original's veiling as Indian crow, for which it ties orange hackle points; some tyers put in a turn of hackle instead. It warns against a delta wing of jungle cock, which makes it almost a Bann Special. Kelson's Usk grubs, such as the Gallantine, were palmered Victorian grubs, not this fly.
+history """
+    En räkfluga gjord för floden Usk; ingen källa anger vem som band den först, eller när.
+    Selectaflys Usk Grubs är kopior av dem från Sweets, fiskeaffären i staden Usk, bundna först
+    av Molly Sweet och senare av Jean Williams, som drev affären till slutet av 2022. I Trout
+    and Salmon är den en av de tre laxflugor som rekommenderas för Glanusks vatten i Usk,
+    tillsammans med Shrimp Fly och Silver Stoat. Klädseln här är Gwent Angling Societys, den
+    enda fullständiga skrivna klädseln; affärernas flugor följer dess uppbyggnad. Klubben anger
+    att originalets slöja var Indian crow, som den ersätter med orange hackelspetsar; en del
+    bindare lägger i stället ett varv hackel. Den varnar för en deltavinge av jungle cock, som
+    gör den nästan till en Bann Special. Kelsons Usk-grubs, som Gallantine, var palmerade
+    viktorianska grubs, inte den här flugan.
+    """
+
+// en fishing: A salmon and sewin fly of the Usk and the other Welsh rivers, tied on doubles, trebles and singles.
+fishing """
+    En lax- och havsöringsfluga för Usk och de andra floderna i Wales, bunden på dubbelkrokar,
+    trekrokar och enkelkrokar.
+    """
+
+labels {
+    // en body-rear: Orange and amber seal's fur, mixed two to one
+    body-rear "Orange och bärnstensfärgad sälpäls, blandad två till en"
+    // en veil-upper: Orange cock hackle point
+    veil-upper "Orange spets av tupphackel"
+    // en veil-lower: Orange cock hackle point
+    veil-lower "Orange spets av tupphackel"
+}
+
+notes {
+    // en step 3 (tie-in tag): On a double, to the side of the shank.
+    step 3 "På en dubbelkrok, vid sidan av skaftet."
+    // en step 5 (wind tag): Four or five turns down into the bend and back.
+    step 5 "Fyra eller fem varv ner i böjen och tillbaka."
+    // en step 7 (tie-in tail): Fold the fibres to one side and tie it in by the tip, tight against the tag.
+    step 7 "Stryk fibrerna åt ena sidan och bind in den med spetsen, tätt mot tagen."
+    // en step 9 (wind tail): Touching turns, so the fibres flare.
+    step 9 "Täta varv, så att fibrerna spretar ut."
+    // en step 15 (tie-in veil-upper): A small hackle point over the rear half.
+    step 15 "En liten hackelspets över den bakre halvan."
+    // en step 16 (tie-in veil-lower): A second point under the rear half, a veil like the first.
+    step 16 "En andra spets under den bakre halvan, en slöja som den första."
+    // en step 19 (wind hackle-middle): Doubled, one turn.
+    step 19 "Dubbelvikt, ett varv."
+    // en step 27 (wind collar): Doubled, the fibres stroked back.
+    step 27 "Dubbelvikt, med fibrerna strukna bakåt."
+    // en step 29 (tie-in wing): A matched pair, one from each side of the cape, back to back; pinch and loop so they sit upright and don't twist.
+    step 29 "Ett matchat par, ett från var sida av skinnet, rygg mot rygg; nyp och gör en ögla så att de sitter upprätt och inte vrider sig."
+    // en step 30 (whip-finish): Varnish the head.
+    step 30 "Lacka huvudet."
+}

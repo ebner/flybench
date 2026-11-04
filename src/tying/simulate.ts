@@ -69,6 +69,8 @@ export interface WrapsPiece extends PieceBase {
   post?: { x: number; y0: number; y1: number; radius: number };
   /** Trimmed hackle: only the fibres at the sides are left, those on top and at the sides, or those underneath and at the sides. */
   keep?: "sides" | "top" | "under";
+  /** Hackle: bands along each barb, from its root (a furnace or badger hackle's black centre). */
+  marks?: FibreMarks;
   /** Where wing cases, backs or sleeves were pulled over these wraps, pressing down the fibres on
    *  top: each from–to, and how far round each side of the top it reaches (radians). */
   covered?: [number, number, number][];
@@ -148,6 +150,12 @@ export interface FeatherPiece extends PieceBase {
   side: Side;
   /** 0 = plain, 1 = strongly barred (grizzly, teal, mallard). */
   barring: number;
+  /** Laid flat over the back (or under the belly), face up, rather than on edge. */
+  flat?: boolean;
+  /** A V cut out of the tip this deep (gapes), leaving two points. */
+  notch?: number;
+  /** Bands across the feather, following its barbs, from base (0) to tip (1): a tippet's black bars. */
+  marks?: FibreMarks;
 }
 
 export interface BeadPiece extends PieceBase {
@@ -159,6 +167,8 @@ export interface BeadPiece extends PieceBase {
   cone?: number;
   /** A split shot with an eye painted on each side. */
   painted?: boolean;
+  /** Pushed on from the front, onto a tube's liner after the whip finish, rather than round the bend. */
+  front?: boolean;
 }
 
 export interface EyesPiece extends PieceBase {
@@ -398,6 +408,8 @@ interface MaterialLook {
   sheet?: number;
   /** A fur strip clipped but for a tuft this long at its end (gapes). */
   tuft?: number;
+  /** Hackle: its barbs dark from the root (a furnace or badger hackle's black centre). */
+  centre?: FibreMarks;
 }
 
 const deg = (d: number) => (d * Math.PI) / 180;
@@ -419,6 +431,12 @@ const TIPPET_MARKS: FibreMarks = [
   { from: 0.9, to: 1, shade: 0.08 },
 ];
 
+// Assumption: the black centre of a furnace, badger or coch hackle reaches about two fifths of the
+// way out along each barb, fading into the colour at its edge.
+const DARK_CENTRE: Record<string, FibreMarks> = Object.fromEntries(
+  ["furnace", "badger", "coch"].map((c) => [c, [{ from: 0, to: 0.32, shade: 0.1 }, { from: 0.32, to: 0.42, shade: 0.45 }]]),
+);
+
 /** Dark bars across a barred fibre, more of them and darker the stronger the barring. */
 function barMarks(barring: number): FibreMarks {
   const bars = 5;
@@ -436,7 +454,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
   // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
   const barring = m.barred === undefined ? BARRED[colorName] ?? 0 : m.barred ? BARRED.grizzly! : 0;
   const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy };
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
@@ -444,8 +462,9 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "herl": {
       const r = 0.018 * Math.sqrt(m.strands ?? 3);
       return {
-        // Assumption: long flue gives the plump body seen in reference photos.
-        ...base, strandRadius: r, fibreLength: 0.22, freeLength: 2.2,
+        // Assumption: long flue gives the plump body seen in reference photos. Tied in with a
+        // length, its strands stick out with their flue (an orange peacock herl topping).
+        ...base, strandRadius: r, fibreLength: 0.22, freeLength: 2.2, count: m.strands ?? 3, flue: true,
         tieInThickness: r, layerThickness: (c) => 2 * r * Math.min(c, 1.5),
       };
     }
@@ -623,6 +642,9 @@ function trimmedBody(
   });
 }
 
+// Assumption: a feather laid flat on another lies about a fiftieth of a gape over it.
+const FEATHER_GAP = 0.02;
+
 /** Feather width as a fraction of length, by shape. */
 // Assumption: a jungle cock eye is about three tenths as wide as it is long.
 const FEATHER_WIDTH: Record<FeatherShape, number> = { breast: 0.5, tip: 0.28, slip: 0.32, eye: 0.3 };
@@ -668,6 +690,10 @@ export function simulate(recipe: Recipe): Build {
   const posts = new Map<string, { x: number; baseY: number; height: number; radius: number; hackle?: number }>();
   /** How a bunch was tied in: its length and how far round it was spread (radians), for folding it back later. */
   const bunches = new Map<string, { length: number; spread: number }>();
+  /** Bunches tied in pointing forward, to be folded back over where they are tied in (a Temple Dog's last section). */
+  const forwardBunches = new Map<string, BundlePiece>();
+  /** Feathers laid flat over the back (or belly) so far: one tied in further forward lies over them. */
+  const roofs: { x: number; y: number; length: number; angle: number; side: Side }[] = [];
   /** Spun hair cut flat: how high the body was there before the first cut, on top and underneath. */
   const flatBase = new Map<string, { top: number; under: number }>();
   /** Strips cut to a width (perhaps tapered) before they are tied in, to be pulled over. */
@@ -748,6 +774,7 @@ export function simulate(recipe: Recipe): Build {
     // Wound CDC lies on the body as its stem; the barbs stand out from it.
     path: "travel", x0, x1, width: 0, turns, strandRadius: l.look === "cdc" ? CDC_STEM : l.strandRadius, base: profile,
     fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band, shaggy: l.shaggy,
+    ...(l.look === "hackle" && l.centre && { marks: l.centre }),
   });
 
   recipe.steps.forEach((step, index) => {
@@ -763,11 +790,16 @@ export function simulate(recipe: Recipe): Build {
         // Assumption: a cone head is a little longer than it is wide, narrowing to under half its width.
         const cone = (MATERIALS[kinds.get(step.material)!.kind] as { cone?: boolean }).cone ? l.strandRadius * 2.3 : undefined;
         const half = cone ? cone / 2 : l.strandRadius * 0.95;
-        const x = L - (cone ? cone * 0.45 : l.strandRadius * 0.9);
+        // Pushed onto a tube's liner after the whip finish, it sits in front of the tube, against the head.
+        const last = steps.some((s) => recipe.steps[s.index]!.op === "whip-finish");
+        if (last) ctx.last = true;
+        const x = last ? L + half : L - (cone ? cone * 0.45 : l.strandRadius * 0.9);
         const shot = (MATERIALS[kinds.get(step.material)!.kind] as { shot?: boolean }).shot;
-        pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius, cone, ...(shot ? { painted: true } : {}) });
-        frontLimit = Math.min(frontLimit, x - half);
-        span = Math.min(span, frontLimit / 0.97);
+        pieces.push({ type: "bead", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 1], x, radius: l.strandRadius, cone, ...(shot ? { painted: true } : {}), ...(last && { front: true }) });
+        if (!last) {
+          frontLimit = Math.min(frontLimit, x - half);
+          span = Math.min(span, frontLimit / 0.97);
+        }
         duration = DURATION.bead;
         break;
       }
@@ -1019,21 +1051,42 @@ export function simulate(recipe: Recipe): Build {
           });
         } else if (step.length && l.look === "feather") {
           const shape = (MATERIALS[kinds.get(step.material)!.kind] as { shape?: FeatherPiece["shape"] }).shape ?? "breast";
+          // Laid flat over the back, it lies on what is there behind it, the feathers laid there
+          // before included, raised just enough to clear them (like roof tiles), at its own angle.
+          let lift = 0;
+          if (step.flat) {
+            const under = side === "under";
+            for (let k = 1; k <= 24; k++) {
+              const d = (step.length * k) / 24;
+              const xq = x - d;
+              const below = Math.max(
+                (under ? profile.underAt(xq) : profile.radiusAt(xq)) + FEATHER_GAP / 2,
+                ...roofs.filter((r) => r.side === side && xq <= r.x && xq >= r.x - r.length * Math.cos(r.angle)).map((r) => r.y + (r.x - xq) * Math.tan(r.angle) + FEATHER_GAP),
+              );
+              lift = Math.max(lift, below - (radius + d * Math.tan(angle)));
+            }
+            roofs.push({ x, y: radius + lift, length: step.length, angle, side });
+          }
           pieces.push({
             type: "feather", id: nextId++, material: step.material, look: l.look, color: l.color,
-            window: [0, 0.35], x, radius, length: step.length, angle,
+            window: [0, 0.35], x, radius: radius + lift, length: step.length, angle,
             width: step.width ?? step.length * FEATHER_WIDTH[shape], shape,
             pair: step.spread !== undefined ? deg(step.spread) : 0, side, barring: l.barring,
+            ...(step.flat && { flat: true }), ...(step.notch !== undefined && { notch: step.notch }),
+            // A tippet feather's black bars cross it, as they cross each of its fibres.
+            ...(l.marks && !l.barred && { marks: l.marks }),
           });
         } else if (step.length) {
-          pieces.push({
+          const bundle: BundlePiece = {
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
             window: [0, 0.35], x, radius, centre, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             // A long hair wing is a bigger clump: it stays dense as it fans out.
             bundleRadius: l.strandRadius, count: l.look === "hair" && !l.counted ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
             pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
             ...(upright && step.fan !== undefined ? { fan: deg(step.fan) } : {}),
-          });
+          };
+          pieces.push(bundle);
+          if (step.forward) forwardBunches.set(step.material, bundle);
           if (upright) {
             posts.set(step.material, { x, baseY: radius, height: step.length, radius: l.strandRadius * 0.45 });
           }
@@ -1162,6 +1215,27 @@ export function simulate(recipe: Recipe): Build {
         const l = looks.get(step.material)!;
         const tied = tiedAt.get(step.material)!;
         const end = Math.min(step.to * span, frontLimit);
+        // Hair tied in pointing forward, folded back over where it is tied in and held up by a wall
+        // of thread turns in front of it (a Temple Dog's last section): it lies back at the angle it
+        // stood forward, all of it now behind the tie-in, doubled over its roots.
+        const ahead = forwardBunches.get(step.material);
+        if (ahead && Math.abs(step.to - tiedAtPosition.get(step.material)!) <= POSITION_TOLERANCE) {
+          ctx.inPlace = true;
+          forwardBunches.delete(step.material);
+          ahead.until = time;
+          const x = threadX!;
+          pieces.push({ ...ahead, id: nextId++, seed: ahead.seed ?? ahead.id, x, radius: profile.radiusAt(x), direction: "back", window: [0, 0.6], until: undefined });
+          // Assumption: the fold and the wall of thread in front of it stand about a tenth of a gape
+          // proud of the body, all round as far as the hair was spread.
+          const round = allRound(ahead.spread);
+          profile = profile.withLayer(x - 3 * pitch, x + 3 * pitch, 0.1 * round, 0.05, true);
+          if (round < 1) profile = profile.withLayer(x - 3 * pitch, x + 3 * pitch, 0.1 * (1 - round), 0.05, true, ahead.side);
+          const wraps = inPlace(x, 12, [0.6, 1]);
+          pieces.push(wraps);
+          thread = { kind: "follow", piece: wraps.id };
+          duration = DURATION.pullOver;
+          break;
+        }
         // Pulled forward and tied down at the thread, or laid back from where it is tied in (a
         // shellback tied in at the eye), its end held by the next winding, or tied down there by
         // the thread when it is waiting there (a foam balloon folded back over the thorax).

@@ -54,6 +54,8 @@ export const NAMED_COLORS = {
   // Bronze mallard: the drake's shoulder feathers, bronze brown, finely marked darker.
   "bronze-mallard": "#6e4a2c",
   badger: "#d9cdb4",
+  // Furnace: a red-brown hackle with a black centre (drawn with it, as badger and coch are).
+  furnace: "#94521f",
   "blue-dun": "#6e7480",
   purple: "#4b2a6b",
   orange: "#e0731f",
@@ -288,6 +290,14 @@ const Step = z.discriminatedUnion("op", [
     "tail-length": GapeLength.optional(),
     /** How far they splay apart, in degrees to each side. */
     "tail-spread": z.number().min(0).max(90).optional(),
+    /**
+     * Feathers: laid flat over the back (or under the belly), face up and curving down over the
+     * sides, rather than standing on edge; each one tied in further forward lies over those
+     * behind it like a roof tile (a General Practitioner's shell).
+     */
+    flat: z.boolean().optional(),
+    /** Feathers: a V cut out of the tip, this deep (gapes), leaving two points (a General Practitioner's eyes). */
+    notch: z.number().min(0.05).max(3).optional(),
     note: Note, mistake: Note,
   }),
   z.strictObject({

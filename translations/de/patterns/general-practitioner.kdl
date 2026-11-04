@@ -1,0 +1,84 @@
+id general-practitioner
+status draft
+
+// en description: Long hot orange bucktail feelers under a golden pheasant body feather, a hot orange seal's fur body in three sections, each ribbed with fine oval gold and palmered with hot orange cock hackle, golden pheasant tippet eyes cut into a V, and a red golden pheasant body feather laid flat over each section as the shell.
+description "Lange Fühler aus Bucktail in Hot Orange unter einer Körperfeder des Goldfasans, ein Körper aus Seehundhaar in Hot Orange in drei Abschnitten, jeder mit feinem ovalem Goldlametta gerippt und mit Hahnenhechel in Hot Orange gepalmert, Augen aus einer V-förmig eingeschnittenen Goldfasantippetfeder und über jedem Abschnitt eine flach aufgelegte rote Körperfeder des Goldfasans als Schale."
+
+// en history: Colonel Esmond Drury devised it for the River Test about 1953, as an artificial prawn: prawns and shrimps were banned as bait on the water he fished. Fly Fishers International, the South Sound Fly Fishers and Trey Combs (as Steve Culton quotes him) give 1953; Phil Rowley says the early fifties. Paul Little writes that it was first called the G.P., after the golden pheasant feathers it is mostly made of, and renamed for the family doctor once it had proved so deadly. It went on to become a staple steelhead fly in British Columbia and the Pacific Northwest. Tyers dress it in many ways. The sections disagree: Fly Fishers International makes the rear one a quarter of the shank, the middle a half (the eyes at the quarter point) and the front a quarter, where Rowley ties it in thirds, as here, and Poul Jorgensen's simpler version in two halves without hackle. Fly Fishers International veils the feelers with two body feathers concave to concave, Rowley with one. Simpler versions are fished today too, Sean Dahlquist's with a single body palmered from the front.
+history """
+    Oberst Esmond Drury entwarf sie um 1953 für den Test als künstliche Garnele: Garnelen und
+    Krabben waren an seinem Gewässer als Köder verboten. Fly Fishers International, die South
+    Sound Fly Fishers und Trey Combs (nach Steve Culton) nennen 1953; Phil Rowley sagt Anfang
+    der fünfziger Jahre. Paul Little schreibt, sie habe zuerst G.P. geheißen, nach den
+    Goldfasanfedern, aus denen sie größtenteils besteht, und sei nach dem Hausarzt umbenannt
+    worden, als sie sich als so fängig erwiesen hatte. Später wurde sie zu einer festen
+    Steelheadfliege in British Columbia und im Nordwesten der USA. Gebunden wird sie auf viele
+    Arten. Die Abschnitte unterscheiden sich: Fly Fishers International macht den hinteren zu
+    einem Viertel des Schenkels, den mittleren zur Hälfte (die Augen am Viertelpunkt) und den
+    vorderen zu einem Viertel, während Rowley sie in Dritteln bindet, wie hier, und Poul
+    Jorgensens einfachere Fassung in zwei Hälften ohne Hechel. Fly Fishers International deckt
+    die Fühler mit zwei Körperfedern ab, die hohlen Seiten zueinander, Rowley mit einer. Auch
+    einfachere Fassungen werden heute gefischt, die von Sean Dahlquist mit einem einzigen, von
+    vorn nach hinten gepalmerten Körper.
+    """
+
+// en fishing: Swing it across and down like other salmon flies; Rowley fishes it on the swing for steelhead. Paul Little has found it his most successful prawn from September on, on the Cumbrian Derwent.
+fishing """
+    Fische sie wie andere Lachsfliegen quer und stromab im Schwung; Rowley fischt sie so auf
+    Steelhead. Paul Little hat sie von September an als seine fängigste Garnele erlebt, am
+    Derwent in Cumbria.
+    """
+
+labels {
+    // en feelers: Hot orange bucktail
+    feelers "Bucktail in Hot Orange"
+    // en veil: Red golden pheasant body feather
+    veil "Rote Körperfeder des Goldfasans"
+    // en rib-rear: Fine oval gold tinsel
+    rib-rear "Feines ovales Goldlametta"
+    // en body: Hot orange seal's fur
+    body "Seehundhaar in Hot Orange"
+    // en hackle-rear: Hot orange cock hackle
+    hackle-rear "Hahnenhechel in Hot Orange"
+    // en shell-rear: Red golden pheasant body feather
+    shell-rear "Rote Körperfeder des Goldfasans"
+    // en rib-middle: Fine oval gold tinsel
+    rib-middle "Feines ovales Goldlametta"
+    // en hackle-middle: Hot orange cock hackle
+    hackle-middle "Hahnenhechel in Hot Orange"
+    // en shell-middle: Red golden pheasant body feather
+    shell-middle "Rote Körperfeder des Goldfasans"
+    // en rib-front: Fine oval gold tinsel
+    rib-front "Feines ovales Goldlametta"
+    // en hackle-front: Hot orange cock hackle
+    hackle-front "Hahnenhechel in Hot Orange"
+    // en shell-front: Red golden pheasant body feather
+    shell-front "Rote Körperfeder des Goldfasans"
+}
+
+notes {
+    // en step 2 (wrap-thread): A flat bed of thread to above the hook point.
+    step 2 "Eine flache Fadenunterlage bis über die Hakenspitze."
+    // en step 3 (tie-in feelers): A sparse bunch, the butts bound along the shank.
+    step 3 "Ein spärliches Büschel, die Enden entlang des Schenkels festgebunden."
+    // en step 5 (tie-in flash): Six or eight strands, cut to uneven lengths.
+    step 5 "Sechs oder acht Fasern, ungleich lang geschnitten."
+    // en step 6 (tie-in veil): A small red feather, its stem flattened, concave side down.
+    step 6 "Eine kleine rote Feder, den Kiel flachgedrückt, die hohle Seite nach unten."
+    // en step 7 (tie-in rib-rear): Under the shank.
+    step 7 "Unter dem Schenkel."
+    // en step 11 (wind rib-rear): Through the hackle, locking its stem.
+    step 11 "Durch die Hechel, sodass ihr Kiel festgelegt wird."
+    // en step 14 (trim hackle-rear): Stroke the fibres down and back first.
+    step 14 "Streiche die Fibern zuerst nach unten und hinten."
+    // en step 15 (tie-in eyes): Cement the two points so they keep their shape.
+    step 15 "Lackiere die beiden Spitzen, damit sie ihre Form behalten."
+    // en step 16 (tie-in shell-rear): Two feathers one over the other, stems flattened, concave side down.
+    step 16 "Zwei Federn übereinander, die Kiele flachgedrückt, die hohle Seite nach unten."
+    // en step 25 (tie-in shell-middle): Two more feathers, a little larger.
+    step 25 "Zwei weitere Federn, etwas größer."
+    // en step 34 (tie-in shell-front): The largest feather, over the whole back; it can be left out on small hooks.
+    step 34 "Die größte Feder, über den ganzen Rücken; auf kleinen Haken kann sie wegfallen."
+    // en step 35 (whip-finish): Varnish the head, then press the hackle up under the body and the feathers down onto it.
+    step 35 "Lackiere den Kopf und drücke dann die Hechel unter den Körper und die Federn auf ihn."
+}

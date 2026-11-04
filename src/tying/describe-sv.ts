@@ -127,12 +127,16 @@ function writerFor(recipe: Recipe) {
   const angle = (a?: number) => (a ? `, i ungefär ${a}° vinkel upp från ${along}` : "");
   const pick = (w?: Length) => (w ? `Välj en fjäder som är ungefär ${length(w)} bred. ` : "");
   const flare = (f: boolean, refers: Noun | "plural") => (f ? ` Låt ${pronoun(refers).object} spreta ut runt ${genitive(def("body"))} sidor.` : "");
+  const flat = (f: boolean | undefined, refers: Noun | "plural", under = false) =>
+    f ? (under ? ` Lägg ${pronoun(refers).object} platt under, med framsidan nedåt, under det som är inbundet bakom.` : ` Lägg ${pronoun(refers).object} platt ovanpå, med framsidan upp, över det som är inbundet bakom.`) : "";
+  const notch = (w: What, n?: Length) => (n ? `Klipp ut ett V ur spetsen på ${mat(w.m)}, ungefär ${length(n)} djupt, så att två spetsar blir kvar. ` : "");
   const thread = def("thread");
   const excess = def("excess");
 
   return (said: Said): string => {
     switch (said.kind) {
       case "slide-bead":
+        if (said.last) return `Trä ${mat(said.m)} på innerslangen framför tuben, tätt mot ${def("head")}, och smält änden av innerslangen till en krage som håller ${pronoun(noun(said.m)).object} där.`;
         if (said.shot) return `Kläm fast ${mat(said.m)} på skaftet strax bakom ${def("eye")} och limma den; måla den, med ett öga på varje sida.`;
         return said.mount === "tube"
           ? `Trä ${mat(said.m)} på ${genitive(def("tube"))} främre ände.`
@@ -181,24 +185,24 @@ function writerFor(recipe: Recipe) {
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
-        return `Bind in ${w.text} upprätt så att ${p.subject} står ${length(said.length)} upp, med ${svNoun(word("turn"), "plural")} framför som reser ${p.object}.${said.divide ? ` Dela ${p.object} i ett V med ${eights}.` : ""}${said.fan ? ` Låt ${p.object} breda ut sig som en solfjäder framåt och bakåt, smal från sida till sida.` : ""}`;
+        return `${notch(said.what, said.notch)}Bind in ${w.text} upprätt så att ${p.subject} står ${length(said.length)} upp, med ${svNoun(word("turn"), "plural")} framför som reser ${p.object}.${said.divide ? ` Dela ${p.object} i ett V med ${eights}.` : ""}${said.fan ? ` Låt ${p.object} breda ut sig som en solfjäder framåt och bakåt, smal från sida till sida.` : ""}${said.flat ? ` Låt ${p.object} ligga platt, med framsidan framåt, i stället för på högkant.` : ""}`;
       }
       case "tie-in-wing-under": {
         const w = what(said.what);
-        return `Bind in ${w.text} under ${along} som vinge (överst när flugan simmar med krokspetsen uppåt), så att ${pronoun(w.refers).subject} når ${length(said.length)} bakåt.`;
+        return `${notch(said.what, said.notch)}Bind in ${w.text} under ${along} som vinge (överst när flugan simmar med krokspetsen uppåt), så att ${pronoun(w.refers).subject} når ${length(said.length)} bakåt.${flat(said.flat, w.refers, true)}`;
       }
       case "tie-in-beard": {
         const w = what(said.what);
-        return `Bind in ${w.text} under ${along} som skägg, så att ${pronoun(w.refers).subject} når ${length(said.length)} bakåt.`;
+        return `${notch(said.what, said.notch)}Bind in ${w.text} under ${along} som skägg, så att ${pronoun(w.refers).subject} når ${length(said.length)} bakåt.${flat(said.flat, w.refers, true)}`;
       }
       case "tie-in-reach": {
         const w = what(said.what);
-        return `${pick(said.width)}Bind in ${w.text} så att ${svNoun(word("tip"), "plural-definite")} når ${REACH[said.reach]} (${length(said.length)} från inbindningspunkten)${angle(said.angle)}.${flare(said.flare, w.refers)}`;
+        return `${pick(said.width)}${notch(said.what, said.notch)}Bind in ${w.text} så att ${svNoun(word("tip"), "plural-definite")} når ${REACH[said.reach]} (${length(said.length)} från inbindningspunkten)${angle(said.angle)}.${flare(said.flare, w.refers)}${flat(said.flat, w.refers)}`;
       }
       case "tie-in-behind": {
         const w = what(said.what);
         const fray = said.fray ? ` Dra ut kärnan och repa upp ${pronoun(w.refers).object} till lösa ${svNoun(word("strand"), "plural")}.` : "";
-        return `${pick(said.width)}Bind in ${w.text} och låt ${length(said.length)} sticka ut bakåt${angle(said.angle)}.${flare(said.flare, w.refers)}${fray}`;
+        return `${pick(said.width)}${notch(said.what, said.notch)}Bind in ${w.text} och låt ${length(said.length)} sticka ut bakåt${angle(said.angle)}.${flare(said.flare, w.refers)}${fray}${flat(said.flat, w.refers)}`;
       }
       case "tie-in":
         if (said.cut) {
@@ -226,6 +230,10 @@ function writerFor(recipe: Recipe) {
         if (said.under) return `${said.bubble ? "Vik" : "Dra"} ${mat(said.m)} framåt under ${def("body")}${said.bubble ? " som en lös bubbla" : ""} och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         if (said.bubble) return `Vik ${mat(said.m)} framåt över ${def("body")} som en lös bubbla och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
+      case "fold-back": {
+        const p = pronoun(noun(said.m));
+        return `Vik ${mat(said.m)} bakåt över inbindningspunkten och bygg en liten vall av ${svNoun(word("turn"), "plural")} tråd tätt framför ${p.object}, så att ${p.subject} reser sig från ${def("body")}.`;
+      }
       case "lay-back":
         if (said.tied && (said.round || said.trailing)) {
           const where = said.round ? `runt hela ${along}` : `över ${genitive(def("body"))} ovansida`;

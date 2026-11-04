@@ -698,7 +698,7 @@ describe("the builder's number fields", () => {
     expect(r.lo).toBeLessThanOrEqual(r.hi);
   };
   const HOWS: How[] = ["slide", "weight", "bunch", "wound", "palmered", "parachute", "dubbed", "spun", "glued", "pulled", "extended", "sleeve", "woven", "thread"];
-  const KEYS: NumberKey[] = ["length", "angle", "spread", "width", "collar", "fray", "fan", "segments", "tailLength", "tailSpread", "fold"];
+  const KEYS: NumberKey[] = ["length", "angle", "spread", "width", "collar", "fray", "fan", "segments", "tailLength", "tailSpread", "fold", "notch"];
 
   it("stay within what the recipe allows for the value each is written as", () => {
     for (const how of HOWS) for (const key of KEYS) within(`${how} ${key}`, partRange({ how }, key));
@@ -763,5 +763,38 @@ describe("a body glued on (a crab)", () => {
     const ops = glued.recipe.steps.map((s) => s.op);
     expect(ops.indexOf("glue")).toBeGreaterThan(ops.indexOf("whip-finish"));
     expect(glued.recipe.steps.at(-1)).toMatchObject({ op: "trim", shape: "disc" });
+  });
+});
+
+describe("feathers tied in one after the other", () => {
+  const recipe = (second: string) => {
+    const r = loadRecipe(`id t
+name "T"
+type salmon
+difficulty intermediate
+hook salmon-up-eye size=6
+thread black size="8/0"
+materials {
+    shell-rear golden-pheasant-body
+    shell-front golden-pheasant-body
+}
+steps {
+    attach-thread at=0.5
+    tie-in shell-rear length=1.5 flat=#true
+    tie-in shell-front length=1.5 ${second}
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\n"));
+    return r.recipe;
+  };
+
+  it.each([["one laid flat, the other on edge", ""], ["one cut into a V", "flat=#true notch=0.4"]])("stay two parts when %s, and tie the same fly", (_name, second) => {
+    const r = recipe(second);
+    const fly = partsOf(r)!;
+    expect(fly.parts.filter((p) => p.mats.some((m) => m.id.startsWith("shell-")))).toHaveLength(2);
+    const { recipe: again, problems } = compile(fly);
+    expect(problems).toEqual([]);
+    expect(pieces(again)).toEqual(pieces(r));
   });
 });

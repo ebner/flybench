@@ -1,0 +1,103 @@
+// Usk Grub: the Welsh grub-style shrimp fly from the Usk, a wound golden pheasant tail and a body in two halves.
+
+id usk-grub
+name "Usk Grub"
+type salmon
+imitates crustacean
+naturals prawn
+difficulty advanced
+species salmon sea-trout
+// Assumption: the months of the Welsh salmon and sewin season; no source gives one.
+season may june july august september october
+origin region="River Usk, Wales"
+description "An oval silver tag, a long tail of a golden pheasant flank feather wound as a hackle, a body of orange and amber seal's fur behind and black seal's fur in front, each half ribbed with oval silver, orange hackle points veiling the rear half, a white middle hackle, a furnace collar and a pair of jungle cock feathers back to back."
+history """
+    A shrimp fly made for the River Usk; no source names who first tied it, or when. Selectafly's
+    Usk Grubs copy those of Sweets, the tackle shop in Usk town, tied first by Molly Sweet and later
+    by Jean Williams, who ran the shop until the end of 2022. In Trout and Salmon it is one of the
+    three salmon flies recommended for the Glanusk water on the Usk, with the Shrimp Fly and the
+    Silver Stoat.
+
+    The dressing here is the Gwent Angling Society's, the one full written dressing; the shops'
+    flies follow its layout. The club gives the original's veiling as Indian crow, for which it
+    ties orange hackle points; some tyers put in a turn of hackle instead. It warns against a
+    delta wing of jungle cock, which makes it almost a Bann Special. Kelson's Usk grubs, such as
+    the Gallantine, were palmered Victorian grubs, not this fly.
+    """
+fishing """
+    A salmon and sewin fly of the Usk and the other Welsh rivers, tied on doubles, trebles and
+    singles.
+    """
+sources {
+    "Gwent Angling Society: The Usk Grub" url="https://gwentanglingsociety.co.uk/2013/01/06/the-usk-grub/"
+    "Selectafly: Usk Grub" url="https://www.selectafly.com/usk-grub-19682-p.asp"
+    "Fish4Flies: Usk Grub double" url="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Usk-Grub"
+    "Glanusk Estate: Pampered on the Usk (Wynn Davies, Trout and Salmon, July 2009)" url="https://www.glanuskestate.com/wp-content/uploads/2013/03/TSUSK.pdf"
+    "Kelson: The Salmon Fly (1895)" url="https://archive.org/details/salmonflyhowtodr00kelsrich"
+    "Flugor.se: Usk Grub" url="https://www.flugor.se/flugor/laxflugor-dubbel/usk-grub-1742"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://files.ekmcdn.com/selectafly/images/usk-grub-19682-p.jpg?v=6e03f094-e748-46ee-abf1-0a831bc12504" page="https://www.selectafly.com/usk-grub-19682-p.asp" license="All rights reserved; reference only" note="Sweets' pattern, side view on a double"
+    "https://www.fish4flies.com/img/flies/Large/1434-1434Usk%20Grub.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Usk-Grub" license="All rights reserved; reference only" flip=#true note="Double, jungle cock wing and long tail; red head"
+    "https://www.flugor.se/bild_arkiv/big_1742.jpg" page="https://www.flugor.se/flugor/laxflugor-dubbel/usk-grub-1742" license="All rights reserved; reference only" note="In the vise; no jungle cock, red head"
+}
+
+// The Gwent Angling Society ties it on doubles ("mine's a double"), trebles or singles;
+// Fish4Flies sells #8-10 doubles. Assumption: a #8 double.
+hook salmon-double size=8
+thread black size="8/0"
+
+materials {
+    tag oval-tinsel color=silver
+    // Read from the photos: the tail reaches about a shank and a third behind the bend.
+    tail golden-pheasant-flank fibre=3.2 sweep=74
+    rib-rear oval-tinsel color=silver
+    body-rear seals-fur color="#e8781e" label="Orange and amber seal's fur, mixed two to one"
+    veil-upper hackle-tips color=orange label="Orange cock hackle point"
+    veil-lower hackle-tips color=orange label="Orange cock hackle point"
+    // Read from the photos: the white fibres reach a little past the hook point.
+    hackle-middle cock-hackle color=white fibre=1.6 sweep=40
+    rib-front oval-tinsel color=silver
+    body-front seals-fur color=black
+    // Read from the photos: the collar's fibres reach about the hook point.
+    collar cock-hackle color=furnace fibre=1.5 sweep=50
+    wing jungle-cock
+}
+
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0
+    // Gwent: four or five turns; on a double, taken between the points and back over the turns.
+    tie-in tag note="On a double, to the side of the shank."
+    wrap-thread to=0.06
+    wind tag to=0.06 turns=5 note="Four or five turns down into the bend and back."
+    tie-off tag
+    tie-in tail note="Fold the fibres to one side and tie it in by the tip, tight against the tag."
+    wrap-thread to=0.1
+    wind tail to=0.1 turns=3 note="Touching turns, so the fibres flare."
+    tie-off tail
+    tie-in rib-rear
+    // Gwent: the rear half to the middle of the shank, three turns of rib.
+    dub body-rear to=0.5
+    wind rib-rear to=0.5 turns=3
+    tie-off rib-rear
+    // Gwent: one over and one under the rear body, not reaching past the tag.
+    tie-in veil-upper length=1.1 angle=6 note="A small hackle point over the rear half."
+    tie-in veil-lower length=1.1 angle=6 side=under note="A second point under the rear half, a veil like the first."
+    tie-in hackle-middle
+    wrap-thread to=0.53
+    wind hackle-middle to=0.53 turns=1 note="Doubled, one turn."
+    tie-off hackle-middle
+    tie-in rib-front
+    dub body-front to=0.82
+    wind rib-front to=0.82 turns=3
+    tie-off rib-front
+    tie-in collar
+    wrap-thread to=0.86
+    wind collar to=0.86 turns=2 note="Doubled, the fibres stroked back."
+    tie-off collar
+    // Gwent: back to back, just reaching over the middle hackle, about half the body.
+    tie-in wing length=1.1 angle=18 spread=5 note="A matched pair, one from each side of the cape, back to back; pinch and loop so they sit upright and don't twist."
+    whip-finish note="Varnish the head."
+}

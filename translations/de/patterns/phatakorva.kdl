@@ -1,0 +1,75 @@
+id phatakorva
+status draft
+
+// en description: A short body of bronze holo braid and glitz dubbing, an orange craft fur underwing, a long wing of fiery brown soft hair in two sections with copper and bronze angel hair, the front section folded back, an orange badger hackle between them, a long black soft hackle in front, orange peacock herl over the top, jungle cock cheeks and a copper tungsten cone.
+description "Ein kurzer Körper aus bronzefarbenem Holo Braid und Glitzerdubbing, ein Unterflügel aus orangem Craft Fur, ein langer Flügel aus Fiery-Brown-Soft-Hair in zwei Abschnitten mit kupfer- und bronzefarbenem Angel Hair, der vordere Abschnitt zurückgeklappt, dazwischen eine orange Badger-Hechel, vorn eine lange schwarze weiche Hechel, orange gefärbte Pfauenfiber über dem Flügel, Wangen aus Dschungelhahn und ein Kupfer-Tungstenkonus."
+
+// en history: Mikael Frödin's best-known fly, as his own company calls it, spelt Pahtakorva and Phatakorva on its pages. Daniel Heimburg traces it to the original Temple Dog of Håkan Norling, Frödin's friend. Timo Kontio credits Norling with the Temple Dog style and Frödin with helping to make it known: a wing of soft hair in sections, with hackle wound between them, tied flat round the tube so that only its underside is left clear, the last section often tied in Norling's reversed way, pointing forward and then folded back. The dressing here follows the materials of Frödin's Classic Pahtakorva pack, his version close to the original, which lists them without an order; the order is the Temple Dog's, as Martin Joergensen, Stuart Foxall and Michael Müller give it. Other tyers vary it: Heimburg ties his on a short brass tube with fox and tanuki and a black top to the wing, and Tellis Katsogiannos in three sections of fiery brown fox with an orange badger hackle and a black hackle between them.
+history """
+    Mikael Frödins bekannteste Fliege, wie seine eigene Firma sie nennt, auf deren Seiten
+    Pahtakorva und Phatakorva geschrieben. Daniel Heimburg führt sie auf die ursprüngliche
+    Temple Dog von Håkan Norling zurück, Frödins Freund. Timo Kontio schreibt Norling den
+    Temple-Dog-Stil zu und Frödin, ihn bekannt gemacht zu haben: ein Flügel aus weichem Haar in
+    Abschnitten, mit dazwischen gewundener Hechel, flach rund um die Tube gebunden, sodass nur
+    die Unterseite frei bleibt, der letzte Abschnitt oft auf Norlings umgekehrte Art nach vorn
+    eingebunden und dann zurückgeklappt. Das Dressing hier folgt den Materialien von Frödins
+    Materialpaket Classic Pahtakorva, seiner Fassung nah am Original, das sie ohne Reihenfolge
+    aufführt; die Reihenfolge ist die der Temple Dog, wie Martin Joergensen, Stuart Foxall und
+    Michael Müller sie beschreiben. Andere Binder wandeln sie ab: Heimburg bindet seine auf
+    einer kurzen Messingtube mit Fuchs und Tanuki und einer schwarzen Oberseite des Flügels,
+    Tellis Katsogiannos in drei Abschnitten aus Fiery-Brown-Fuchs mit einer orangen Badger-
+    Hechel und einer schwarzen Hechel dazwischen.
+    """
+
+// en fishing: Frödin calls it a standard fly that works everywhere, perhaps best in tea-coloured rivers, its medium profile a standard too when a river clears a little. Heimburg fishes it most when the water is a little tea-coloured and the clouds are out, and finds it much fished on the Alta. Tellis Katsogiannos took his biggest salmon on it, about 16 kg, in September on the Mörrum.
+fishing """
+    Frödin nennt sie eine Standardfliege, die überall fängt, vielleicht am besten in teefarbenen
+    Flüssen, und ihr mittelbreites Profil einen Standard auch dann, wenn ein Fluss etwas
+    aufklart. Heimburg fischt sie am liebsten, wenn das Wasser etwas teefarben ist und Wolken
+    aufziehen, und sieht sie viel am Alta gefischt. Tellis Katsogiannos fing mit ihr seinen
+    größten Lachs, etwa 16 kg, im September im Mörrum.
+    """
+
+labels {
+    // en body-rear: Bronze holo braid
+    body-rear "Bronzefarbenes Holo Braid"
+    // en body-front: Bronze glitz dubbing
+    body-front "Bronzefarbenes Glitzerdubbing"
+    // en underwing: Fire fluo orange craft fur
+    underwing "Craft Fur in Fire Fluo Orange"
+    // en wing-rear: Medium fiery brown soft hair
+    wing-rear "Medium Fiery Brown Soft Hair"
+    // en flash-rear: Copper angel hair
+    flash-rear "Kupferfarbenes Angel Hair"
+    // en hackle-rear: Orange badger cock hackle
+    hackle-rear "Orange Badger-Hahnenhechel"
+    // en wing-front: Large fiery brown soft hair
+    wing-front "Large Fiery Brown Soft Hair"
+    // en flash-front: Bronze angel hair
+    flash-front "Bronzefarbenes Angel Hair"
+    // en hackle-front: Black soft hackle
+    hackle-front "Schwarze weiche Hechel"
+    // en topping: Orange-dyed peacock eye herl
+    topping "Orange gefärbte Fiber vom Pfauenauge"
+    // en cheeks: Synthetic jungle cock
+    cheeks "Synthetischer Dschungelhahn"
+}
+
+notes {
+    // en step 8 (tie-in underwing): A small bunch, combed out.
+    step 8 "Ein kleines Büschel, ausgekämmt."
+    // en step 9 (tie-in wing-rear): A small bunch with the underfur combed out, spread round the sides and top.
+    step 9 "Ein kleines Büschel, die Unterwolle ausgekämmt, rund um die Seiten und die Oberseite verteilt."
+    // en step 11 (tie-in flash-rear): A few strands either side.
+    step 11 "Ein paar Fasern auf jeder Seite."
+    // en step 14 (wind hackle-rear): Stroke the fibres back as you wind, so they lift the next section.
+    step 14 "Streiche die Fibern beim Winden nach hinten, damit sie den nächsten Abschnitt anheben."
+    // en step 17 (tie-in wing-front): A larger bunch, the butts cut square and bound along the tube.
+    step 17 "Ein größeres Büschel, die Enden gerade abgeschnitten und entlang der Tube festgebunden."
+    // en step 22 (wind hackle-front): A long, soft collar, stroked back.
+    step 22 "Ein langer, weicher Kragen, nach hinten gestrichen."
+    // en step 24 (tie-in topping): A few strands over the top of the wing.
+    step 24 "Ein paar Fibern über der Oberseite des Flügels."
+    // en step 26 (whip-finish): Glue the head.
+    step 26 "Klebe den Kopf."
+}

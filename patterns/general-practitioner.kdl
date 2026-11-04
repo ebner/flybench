@@ -1,0 +1,121 @@
+// General Practitioner: Esmond Drury's prawn, a body in three sections under a shell of golden pheasant body feathers, with tippet eyes.
+
+id general-practitioner
+name "General Practitioner"
+type salmon
+imitates crustacean
+naturals prawn
+difficulty advanced
+species salmon
+// Assumption: the months of a British salmon season's summer and autumn; Paul Little fishes it
+// from September on.
+season june july august september october
+origin originator="Esmond Drury" year=1953 region="River Test, England"
+description "Long hot orange bucktail feelers under a golden pheasant body feather, a hot orange seal's fur body in three sections, each ribbed with fine oval gold and palmered with hot orange cock hackle, golden pheasant tippet eyes cut into a V, and a red golden pheasant body feather laid flat over each section as the shell."
+history """
+    Colonel Esmond Drury devised it for the River Test about 1953, as an artificial prawn: prawns
+    and shrimps were banned as bait on the water he fished. Fly Fishers International, the South
+    Sound Fly Fishers and Trey Combs (as Steve Culton quotes him) give 1953; Phil Rowley says the
+    early fifties. Paul Little writes that it was first called the G.P., after the golden pheasant
+    feathers it is mostly made of, and renamed for the family doctor once it had proved so deadly.
+    It went on to become a staple steelhead fly in British Columbia and the Pacific Northwest.
+
+    Tyers dress it in many ways. The sections disagree: Fly Fishers International makes the rear
+    one a quarter of the shank, the middle a half (the eyes at the quarter point) and the front a
+    quarter, where Rowley ties it in thirds, as here, and Poul Jorgensen's simpler version in two
+    halves without hackle. Fly Fishers International veils the feelers with two body feathers
+    concave to concave, Rowley with one. Simpler versions are fished today too, Sean Dahlquist's
+    with a single body palmered from the front.
+    """
+fishing """
+    Swing it across and down like other salmon flies; Rowley fishes it on the swing for
+    steelhead. Paul Little has found it his most successful prawn from September on, on the
+    Cumbrian Derwent.
+    """
+sources {
+    "Fly Fishers International: Fly of the Month, General Practitioner" url="https://www.flyfishersinternational.org/Fly-Tying-Group/Fly-of-the-Month/General-Practitioner"
+    "BC Outdoors: Fly tying the General Practitioner (Phil Rowley)" url="https://www.bcoutdoorsmagazine.com/fly-tying-general-practitioner/"
+    "GlobalFlyFisher: Poul Jorgensen's General Practitioner (Preben Torp Jacobsen)" url="https://globalflyfisher.com/node/13782"
+    "Wild Steelheaders United: The General Practitioner (Sean Dahlquist)" url="https://www.wildsteelheaders.org/the-general-practitioner/"
+    "Current Seams: R.L.'s Black General Practitioner (Steve Culton)" url="https://currentseams.com/2019/05/20/r-l-s-black-general-practitioner/"
+    "South Sound Fly Fishers: Fly of the Month, November 2011, General Practitioner" url="https://southsoundflyfishers.org/2011/11/12/fly-of-the-month-november-2011-general-practitioner/"
+    "Fishing Megastore blog: Fly tying focus, the General Practitioner (Paul Little)" url="https://blog.fishingmegastore.com/2025/09/fly-tying-focus-paul-little-general.html"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.bcoutdoorsmagazine.com/wp-content/uploads/2018/01/42791_max.jpg" page="https://www.bcoutdoorsmagazine.com/fly-tying-general-practitioner/" author="Phil Rowley" license="All rights reserved; reference only" note="The three-section dressing followed here, eyes and shell"
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZ9IakCnyHR0Yoo8S7Hxl9RZkcMmA26j-ogcPx8d5k20toL3Nzyi-5LSt_qsxPw7uWckN_N3fetQyAJ85hnM_grdoYkEfWKUmm4xrxnrOfw25QhMSyvRDPZbeS8R3q_grVmM007PMQ0QUp6h6-QeKQ2W7f6DRVMcunucc9T9r-K6AHL351TkYUnf8r9pY/w1280/gp-prawn-side.jpg" page="https://blog.fishingmegastore.com/2025/09/fly-tying-focus-paul-little-general.html" author="Paul Little" license="All rights reserved; reference only" note="Simplified, on a long-shank treble: the shell's length"
+    "https://www.fish4flies.com/img/flies/Original/2627-2627.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Doubles/General-Practitioner" license="All rights reserved; reference only" flip=#true note="On a double, tippet eyes clearly visible, very long feelers"
+}
+
+// Fly Fishers International: a low-water or Bartleet salmon hook, #1-2; Rowley #1/0-8.
+// Assumption: a #4 single from the middle of the range.
+hook salmon-up-eye size=4
+thread orange size="8/0"
+
+materials {
+    // Rowley: sparse, a shank long; read from his photo, about 40 hairs.
+    feelers bucktail color="#f2581a" count=40 label="Hot orange bucktail"
+    flash krystal-flash color=pearl count=6
+    veil golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
+    rib-rear oval-tinsel color=gold label="Fine oval gold tinsel"
+    body seals-fur color="#f2581a" label="Hot orange seal's fur"
+    // Rowley: fibres no longer than twice the gape; on the photos about one and a half, swept back.
+    hackle-rear cock-hackle color="#f2581a" fibre=1.4 sweep=50 label="Hot orange cock hackle"
+    eyes golden-pheasant-tippet-feather
+    shell-rear golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
+    rib-middle oval-tinsel color=gold label="Fine oval gold tinsel"
+    hackle-middle cock-hackle color="#f2581a" fibre=1.5 sweep=50 label="Hot orange cock hackle"
+    shell-middle golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
+    rib-front oval-tinsel color=gold label="Fine oval gold tinsel"
+    hackle-front cock-hackle color="#f2581a" fibre=1.6 sweep=50 label="Hot orange cock hackle"
+    shell-front golden-pheasant-body color="#c0381a" label="Red golden pheasant body feather"
+}
+
+// The sequence is Rowley's: each section dubbed, its hackle tied in at the front and palmered
+// back, locked by its rib wound forward, then the feathers for it laid flat on top. Each section
+// has a rib of its own: Fly Fishers International ties the rib off at every section, and
+// Rowley carries the rest of it on under the shank to the next.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="A flat bed of thread to above the hook point."
+    // Fly Fishers International: about a shank beyond the bend (2.7 gapes on this hook).
+    tie-in feelers length=2.7 angle=4 spread=18 note="A sparse bunch, the butts bound along the shank."
+    trim feelers
+    // Rowley: a few strands of flash, stagger cut.
+    tie-in flash length=3.0 angle=5 spread=12 note="Six or eight strands, cut to uneven lengths."
+    // Rowley: the veil's tips about halfway along the feelers.
+    tie-in veil length=1.35 width=0.9 flat=#true note="A small red feather, its stem flattened, concave side down."
+    tie-in rib-rear note="Under the shank."
+    dub body to=0.33
+    tie-in hackle-rear
+    wind hackle-rear to=0.03 turns=3
+    wind rib-rear to=0.33 turns=3 note="Through the hackle, locking its stem."
+    tie-off rib-rear
+    trim hackle-rear
+    trim hackle-rear keep=under note="Stroke the fibres down and back first."
+    // Rowley: the black tips level with the veil's.
+    tie-in eyes length=2.25 width=1.0 notch=0.5 flat=#true note="Cement the two points so they keep their shape."
+    // Rowley: two feathers, convex side up, their tips about half the length of the feelers.
+    tie-in shell-rear length=2.2 width=1.0 flat=#true note="Two feathers one over the other, stems flattened, concave side down."
+    tie-in rib-middle
+    dub body to=0.66
+    tie-in hackle-middle
+    wind hackle-middle to=0.36 turns=3
+    wind rib-middle to=0.66 turns=3
+    tie-off rib-middle
+    trim hackle-middle
+    trim hackle-middle keep=under
+    // Read from Rowley's photo: each shell feather reaches back over the one behind.
+    tie-in shell-middle length=2.6 width=1.1 flat=#true note="Two more feathers, a little larger."
+    tie-in rib-front
+    dub body to=0.88
+    tie-in hackle-front
+    wind hackle-front to=0.69 turns=3
+    wind rib-front to=0.88 turns=3
+    tie-off rib-front
+    trim hackle-front
+    trim hackle-front keep=under
+    tie-in shell-front length=3.0 width=1.2 flat=#true note="The largest feather, over the whole back; it can be left out on small hooks."
+    whip-finish note="Varnish the head, then press the hackle up under the body and the feathers down onto it."
+}

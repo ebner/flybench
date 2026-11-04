@@ -41,7 +41,9 @@ Morrish Mouse's flat-cut deer hair under a tapered foam back folded into a head,
 Crab's fibre body glued on after the whip finish and clipped into a disc over fanned legs, and a
 Gotcha's tail of Mylar tubing picked apart into strands, a Claret Bumble's two hackles palmered
 together in one pass, and a Bomber's deer-hair cigar clipped closer underneath with its hackle
-wound through it, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
+wound through it, a General Practitioner's shell of feathers laid flat over the back and its
+tippet eyes cut into a V, and a Temple Dog's last wing section folded back where it is tied in,
+with its cone pushed onto the tube after the whip finish, too). The fly being built is kept in the browser until it is saved. Own flies are saved in the browser, appear in the gallery, the fly box, the tying
 log and the trip box, can be downloaded as a recipe file, and shared as a link that carries
 the whole fly after the `#`. The built site installs as an app and works offline after
 the first visit.

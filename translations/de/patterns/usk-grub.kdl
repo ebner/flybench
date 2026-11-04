@@ -1,0 +1,58 @@
+id usk-grub
+status draft
+
+// en description: An oval silver tag, a long tail of a golden pheasant flank feather wound as a hackle, a body of orange and amber seal's fur behind and black seal's fur in front, each half ribbed with oval silver, orange hackle points veiling the rear half, a white middle hackle, a furnace collar and a pair of jungle cock feathers back to back.
+description "Ein Tag aus ovalem Silberlametta, ein langer Schwanz aus einer als Hechel gewundenen Flankenfeder des Goldfasans, ein Körper hinten aus orangem und bernsteinfarbenem, vorn aus schwarzem Seehundhaar, jede Hälfte mit ovalem Silberlametta gerippt, orange Hechelspitzen als Schleier über der hinteren Hälfte, eine weiße Mittelhechel, ein Furnace-Kragen und ein Paar Dschungelhahnfedern Rücken an Rücken."
+
+// en history: A shrimp fly made for the River Usk; no source names who first tied it, or when. Selectafly's Usk Grubs copy those of Sweets, the tackle shop in Usk town, tied first by Molly Sweet and later by Jean Williams, who ran the shop until the end of 2022. In Trout and Salmon it is one of the three salmon flies recommended for the Glanusk water on the Usk, with the Shrimp Fly and the Silver Stoat. The dressing here is the Gwent Angling Society's, the one full written dressing; the shops' flies follow its layout. The club gives the original's veiling as Indian crow, for which it ties orange hackle points; some tyers put in a turn of hackle instead. It warns against a delta wing of jungle cock, which makes it almost a Bann Special. Kelson's Usk grubs, such as the Gallantine, were palmered Victorian grubs, not this fly.
+history """
+    Eine Garnelenfliege für den Usk; keine Quelle nennt, wer sie zuerst gebunden hat oder wann.
+    Selectaflys Usk Grubs sind Kopien derer von Sweets, dem Angelgeschäft in der Stadt Usk,
+    zuerst gebunden von Molly Sweet und später von Jean Williams, die das Geschäft bis Ende 2022
+    führte. In Trout and Salmon ist sie eine der drei Lachsfliegen, die für das Glanusk-Wasser
+    am Usk empfohlen werden, mit der Shrimp Fly und der Silver Stoat. Das Dressing hier ist das
+    der Gwent Angling Society, das einzige vollständig aufgeschriebene; die Fliegen der
+    Geschäfte folgen seinem Aufbau. Der Verein gibt den Schleier des Originals als Indian Crow
+    an, an dessen Stelle er orange Hechelspitzen bindet; manche Binder setzen stattdessen eine
+    Windung Hechel. Er warnt vor einem Deltaflügel aus Dschungelhahn, der sie fast zu einer Bann
+    Special macht. Kelsons Usk-Grubs wie die Gallantine waren gepalmerte viktorianische Grubs,
+    nicht diese Fliege.
+    """
+
+// en fishing: A salmon and sewin fly of the Usk and the other Welsh rivers, tied on doubles, trebles and singles.
+fishing """
+    Eine Lachs- und Meerforellenfliege für den Usk und die anderen Flüsse in Wales, gebunden auf
+    Zwillings-, Drillings- und Einzelhaken.
+    """
+
+labels {
+    // en body-rear: Orange and amber seal's fur, mixed two to one
+    body-rear "Orange und bernsteinfarbenes Seehundhaar, zwei zu eins gemischt"
+    // en veil-upper: Orange cock hackle point
+    veil-upper "Orange Hahnenhechelspitze"
+    // en veil-lower: Orange cock hackle point
+    veil-lower "Orange Hahnenhechelspitze"
+}
+
+notes {
+    // en step 3 (tie-in tag): On a double, to the side of the shank.
+    step 3 "Auf einem Zwillingshaken seitlich am Schenkel."
+    // en step 5 (wind tag): Four or five turns down into the bend and back.
+    step 5 "Vier oder fünf Windungen hinunter in den Bogen und zurück."
+    // en step 7 (tie-in tail): Fold the fibres to one side and tie it in by the tip, tight against the tag.
+    step 7 "Streiche die Fibern zur Seite und binde sie mit der Spitze ein, dicht am Tag."
+    // en step 9 (wind tail): Touching turns, so the fibres flare.
+    step 9 "Dichte Windungen, sodass die Fibern abspreizen."
+    // en step 15 (tie-in veil-upper): A small hackle point over the rear half.
+    step 15 "Eine kleine Hechelspitze über der hinteren Hälfte."
+    // en step 16 (tie-in veil-lower): A second point under the rear half, a veil like the first.
+    step 16 "Eine zweite Spitze unter der hinteren Hälfte, ein Schleier wie die erste."
+    // en step 19 (wind hackle-middle): Doubled, one turn.
+    step 19 "Gefaltet, eine Windung."
+    // en step 27 (wind collar): Doubled, the fibres stroked back.
+    step 27 "Gefaltet, die Fibern nach hinten gestrichen."
+    // en step 29 (tie-in wing): A matched pair, one from each side of the cape, back to back; pinch and loop so they sit upright and don't twist.
+    step 29 "Ein passendes Paar, je eine von jeder Seite des Balgs, Rücken an Rücken; mit einer lockeren Schlinge festhalten, damit sie aufrecht sitzen und sich nicht verdrehen."
+    // en step 30 (whip-finish): Varnish the head.
+    step 30 "Lackiere den Kopf."
+}

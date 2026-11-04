@@ -181,10 +181,12 @@ pictures every point-up fly point up, as they are usually photographed.
 Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `fluo-green`, `brown`, `red-brown`,
 `red-game`, `ginger`, `tan`, `grizzly`, `olive`, `grey`, `dun`, `yellow`, `green`, `gold`, `silver`,
 `copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
-`lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
+`lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`, `furnace`,
 `blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`, `pardo`, `bronze-mallard`. Barred colours
 (`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`, `bronze-mallard`) are drawn with bars, also across
-each fibre of a tail or beard; `tippet` fibres get their black bar and black tip.
+each fibre of a tail or beard; `tippet` fibres get their black bar and black tip, and so does a
+whole tippet feather across it. Wound hackles in `badger`, `furnace` or `coch` are drawn with
+their black centre.
 Or a quoted hex value: `"#c8102e"`.
 
 A dyed grizzly is a colour with `barred=#true` on the material (hackles, fibres, feathers,
@@ -208,8 +210,8 @@ how it is drawn and which extra properties it takes:
 | Archetype  | Kinds | Extra properties |
 |------------|-------|------------------|
 | yarn       | `wool`, `poly-yarn`, `sparkle-yarn` (Antron; pulled over loosely with `bubble`, a translucent veil; pulled tight, a solid wing case) | |
-| herl       | `peacock-herl`, `ostrich-herl` | `strands` (1–6, default 3) |
-| hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle`, `guinea-fowl-hackle` | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind), `barred` |
+| herl       | `peacock-herl`, `ostrich-herl` | `strands` (1–6, default 3; tied in with a length, that many strands stick out, with their flue: a topping) |
+| hackle     | `cock-hackle`, `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle`, `guinea-fowl-hackle`, `golden-pheasant-flank` (folded and wound, an Usk Grub's tail) | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind), `barred` |
 | dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur`, `fox-dubbing`, `dubbing` | `shaggy` (0–1: how rough, from fine and tight to picked out with long guard hairs; default from the kind) |
 | wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
 | floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
@@ -221,7 +223,7 @@ how it is drawn and which extra properties it takes:
 | marabou    | `marabou` | `barred` |
 | cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
 | flash      | `krystal-flash`, `flashabou` | `count` |
-| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers`, `golden-pheasant-body` (the cock's small red body feathers, as cheeks) (tip), `teal-flank` (tied folded, like a slip), `bronze-mallard`, `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip), `jungle-cock` (eye) | `barred` |
+| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers`, `golden-pheasant-body` (the cock's small red body feathers, as cheeks) (tip), `golden-pheasant-tippet-feather` (a whole tippet feather, barred black near its end) (breast), `teal-flank` (tied folded, like a slip), `bronze-mallard`, `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip), `jungle-cock` (eye) | `barred` |
 | foam       | `foam`, `scud-back` | `mm` (the sheet's thickness, as sold; drawn that thick pulled over) |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads), `split-shot` (crimped behind the eye, painted with eyes) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |
@@ -316,6 +318,20 @@ The archetype decides how a material behaves and is drawn:
 - **feather** wings: breast feathers lie over the body like a roof; hackle tips and quill
   slips stand on edge. With `spread`, they are a pair turned out to either side (an
   upright divided wing at `angle=90`, or slips along the sides of a wet fly).
+- **a feather laid flat** (`flat=#true`, a single feather tied in with a length): any feather lies
+  face up over the back (or under the belly, with `side=under`), curving down over the sides,
+  rather than on edge, at its `angle`; one tied in further forward is raised just enough to lie
+  over those laid flat behind it, like roof tiles (a General Practitioner's shell). `notch=<gapes>`
+  cuts a V that deep out of a feather's tip first, leaving two points (its tippet eyes); a
+  notched feather is cut square across its broad end, so the points stand at its edges.
+- **hair folded back where it is tied in** (a Temple Dog's last wing section): tied in pointing
+  forward with a length (`forward=#true`), then `pull-over … to=` the place it was tied in, the
+  thread there: it lies back at the angle it stood forward, doubled over its roots, held up by a
+  small wall of thread turns in front of it.
+- **a cone pushed on last** (a tube fly): on a tube, `slide-bead` may come after the final whip
+  finish, the cone pushed onto the liner in front of the tube and held by melting the liner's
+  end. It sits in front of the tube rather than taking room on it; after it only trims (or a body
+  glued on) may follow.
 - Windable materials (yarn, herl, hackle, cdc, wire, floss, tinsel, chenille, fibres) can be
   tied in without a length and then wound, or pulled over (`pull-over`).
 
@@ -331,15 +347,15 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 
 | Step            | Form                                              | Meaning |
 |-----------------|---------------------------------------------------|---------|
-| `slide-bead`    | `slide-bead <bead>`                               | Before the thread: slide a bead up to the eye. Wraps then stop behind it. |
+| `slide-bead`    | `slide-bead <bead>`                               | Before the thread: slide a bead up to the eye. Wraps then stop behind it. On a tube, also after the whip finish: pushed onto the liner in front of the tube (see above). |
 | `weight`        | `weight <wire> from=<pos> to=<pos>`               | Wrap weighting wire in touching turns (before or after the thread). |
 | `attach-thread` | `attach-thread at=<pos>`                          | Start the thread at `at`. |
 | `wrap-thread`   | `wrap-thread to=<pos> [turns=<n>]`                | Move the thread to `to`. Without `turns` it lays touching turns; with `turns` it makes that many open turns. Back over the tips of hair folded back, it binds them down as it goes; `to` below 0 (down to -1, a shank length behind the bend) takes it on past the bend over that hair, as an extended body (see above), and open turns forward again cross the first. |
-| `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>] [taper=#true] [fan=<deg>] [side=top\|under\|across] [forward=#true] [extended=#true] [tip=<colour>] [segments=<n>] [tails=<material> tail-length=<gapes> [tail-spread=<deg>]]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank; at 60° or more it stands upright (a wing post). `forward=#true` points it forward over the eye instead (antennae, feelers, a front-peeping larva), sloping up at `angle` (a Bomber's wing at 45°). `side=across` ties strands across the shank as legs; `extended=#true` makes chenille, yarn or foam one solid piece (see above). `spread`: how far round the body a bunch fans out, in degrees either side of the top; for feathers, makes a pair. `width`: feather width (default by shape), an extended body's thickness at the front, or how wide a strip to be pulled over is cut (`taper=#true`: to a point at the end tied in; see above). `fan`: an upright bunch, or strands tied across, fanned fore and aft over that many degrees in all. `segments`, `tails`, `tail-length`, `tail-spread`: an extended body made on a needle (see above). `side=under`: under the shank (beards, throats, under-wings, eyes); without a length, a strip tied in underneath to be pulled over the belly (a sparkle pupa's lower sheath). Without `length`, a loose end hangs until the material is wound or pulled over; with `forward=#true` too, a strip waits sticking out over the eye, to be folded back with `pull-over` (a foam balloon). |
+| `tie-in`        | `tie-in <material> [length=<gapes>] [angle=<deg>] [spread=<deg>] [width=<gapes>] [taper=#true] [fan=<deg>] [side=top\|under\|across] [forward=#true] [extended=#true] [tip=<colour>] [segments=<n>] [tails=<material> tail-length=<gapes> [tail-spread=<deg>]] [flat=#true] [notch=<gapes>]` | Tie the material in at the thread. With `length`, it sticks out rearward by that much (tag, tail, wing), `angle` degrees above the shank; at 60° or more it stands upright (a wing post). `forward=#true` points it forward over the eye instead (antennae, feelers, a front-peeping larva), sloping up at `angle` (a Bomber's wing at 45°). `side=across` ties strands across the shank as legs; `extended=#true` makes chenille, yarn or foam one solid piece (see above). `spread`: how far round the body a bunch fans out, in degrees either side of the top; for feathers, makes a pair. `width`: feather width (default by shape), an extended body's thickness at the front, or how wide a strip to be pulled over is cut (`taper=#true`: to a point at the end tied in; see above). `fan`: an upright bunch, or strands tied across, fanned fore and aft over that many degrees in all. `segments`, `tails`, `tail-length`, `tail-spread`: an extended body made on a needle (see above). `flat`: a feather laid flat over the back; `notch`: a V cut out of a feather's tip (see above). `side=under`: under the shank (beards, throats, under-wings, eyes); without a length, a strip tied in underneath to be pulled over the belly (a sparkle pupa's lower sheath). Without `length`, a loose end hangs until the material is wound or pulled over; with `forward=#true` too, a strip waits sticking out over the eye, to be folded back with `pull-over` (a foam balloon). |
 | `dub`           | `dub <material> to=<pos> [turns=<n>]`             | Spin dubbing onto the thread and wrap it to `to`; the thread ends there. `turns` sets how many turns it takes: fewer than the default (about touching) for a slim body, the silk showing through a sparse one. |
 | `wind`          | `wind <material> to=<pos> turns=<n> [counter=#true] [with=<material>]` | Wind the material from its tie-in point to `to`. Forward: it ends at the thread. Rearward (palmering): it ends away from the thread and must be secured (see below). `counter=#true` winds it the opposite way round to what is under it (a counter-wound rib). `with` winds a second material together with it in the same pass, side by side (see above). |
 | `wind` (parachute) | `wind <hackle> around=<post> turns=<n>`        | Wind a hackle horizontally round the base of an upright post; tie it off next. |
-| `pull-over`     | `pull-over <material> to=<pos> [bubble=<gapes>] [wing=<gapes>] [around=<post>] [fold=<gapes>]` | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. `bubble` leaves it loose, arching that many gapes over the middle of what it covers (a CDC pupa's bubble). `wing` stands the tips of hair pulled forward up in front of the tie-down as a divided wing that long (a Humpy's hump and wings from one bunch). A fur strip tied in with a `length` keeps that much behind as its tail while the rest is pulled over (a Zonker); so does the strip of a body made on a needle, its ends pulled over. `around` parts it round an upright post it passes, one half down each side (a Mohican's foam either side of the wing). `fold`: foam pulled forward, its end folded back over itself in front of the tie-down as a head that long, and tied down again there (a Morrish Mouse's head); a later `trim` cuts what is left of the end at the tie-down. With `to` behind where it is tied in, lay it back instead (a shellback tied in at the eye and taken back to the bend): its end is held by the next step, a winding forward over it, as a palmered tip is; or, when the thread is waiting at `to`, the thread ties it down there (a foam balloon folded back over the thorax). |
+| `pull-over`     | `pull-over <material> to=<pos> [bubble=<gapes>] [wing=<gapes>] [around=<post>] [fold=<gapes>]` | Fold a material tied in at the rear forward over the top of the body (wing case, foam back, shellback) and tie it down at the thread, which must be at `to`. `bubble` leaves it loose, arching that many gapes over the middle of what it covers (a CDC pupa's bubble). `wing` stands the tips of hair pulled forward up in front of the tie-down as a divided wing that long (a Humpy's hump and wings from one bunch). A fur strip tied in with a `length` keeps that much behind as its tail while the rest is pulled over (a Zonker); so does the strip of a body made on a needle, its ends pulled over. `around` parts it round an upright post it passes, one half down each side (a Mohican's foam either side of the wing). `fold`: foam pulled forward, its end folded back over itself in front of the tie-down as a head that long, and tied down again there (a Morrish Mouse's head); a later `trim` cuts what is left of the end at the tie-down. With `to` where hair tied in pointing forward was tied in, fold it back there, held by a wall of thread (see above). With `to` behind where it is tied in, lay it back instead (a shellback tied in at the eye and taken back to the bend): its end is held by the next step, a winding forward over it, as a palmered tip is; or, when the thread is waiting at `to`, the thread ties it down there (a foam balloon folded back over the thorax). |
 | `sleeve`        | `sleeve <tubing> to=<pos> [fray=<gapes>]`         | Slide braided tubing over the eye and along the body, so it reaches from the thread to `to`, and tie it down at the thread; its other end is tied down later with `tie-off <tubing>`, with the thread there. `fray` picks its rear end apart into loose strands that long, a short flash tail (a Zonker's). |
 | `glue`          | `glue <material> from=<pos> to=<pos> [length=<gapes>]` | Glue pads of hair, synthetic fibres or yarn along the shank from `from` to `to`, laid across it, on top and underneath, standing out `length` (default 0.7) to each side. No thread is needed or moved, so it may follow the whip finish. Trim it to shape with `trim` (`shape=disc` for a crab). |
 | `spin`          | `spin <hair> to=<pos> [collar=<gapes>] [length=<gapes>]` | Spin clumps of hair round the shank from the thread forward to `to`; the thread ends there. `collar` leaves the tips of the first clump trailing back. `length`: how far the hair stands out, each clump cut to length first (default 0.7). Trim it into a head with `trim … leave=`, or cut it flat with `trim … keep=`. |
@@ -356,7 +372,8 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
 ### Tying rules (semantic validation)
 
 - Beads go on before the thread and before any weighting; nothing else but weighting, or a body
-  glued on and trimmed, may come before `attach-thread`. The thread is attached again only after a whip finish.
+  glued on and trimmed, may come before `attach-thread`. On a tube a cone or bead may instead be
+  pushed on after the final whip finish, and then only trims (or gluing on) follow it. The thread is attached again only after a whip finish.
 - Only tubing is slid on with `sleeve`, and tubing is tied in only with a `length`, as a frayed
   tail; a sleeve reaches from the thread to another place, and its other end is tied down
   (`tie-off`) where the thread is.
@@ -383,6 +400,10 @@ lays them (touching turns included); the patterns lay at most 115 and 664.
   glued fibres until they are trimmed to a shape; `shape` to spun hair, glued fibres and hair butts.
   Glued fibres are trimmed only to `shape=disc` or with `keep`; a disc is trimmed only from spun
   hair or glued fibres, not hair butts.
+- `flat` only applies to a feather tied in with a length, on its own (no `spread`) and not across;
+  `notch` to a feather tied in with a length, less deep than it is long.
+- `pull-over` to where it was tied in only folds back hair tied in pointing forward with a length,
+  without `bubble`, `wing`, `around` or `fold`, the thread there.
 - `width` on a tie-in without a length only applies to a strip pulled over later (not hair), and
   `taper` only to such a strip given a width. `fold` only applies to foam pulled forward, without
   `bubble` or `around`.
@@ -431,8 +452,9 @@ woven body as one part of two strands, the top's first, a body made on a needle 
 part of its strip and its tails, the strip's ends perhaps pulled over (round a post) and
 trimmed, spun hair cut flat (`keep`), a body glued on after the whip finish and clipped, a strip pulled over cut to a width and taper and folded
 as a head, two hackles palmered (or wound forward) together, spun hair clipped closer underneath, a thread body's passes with their
-open turns, also behind the bend (a Paradrake's binding), a dubbed body's turns, and a piece of tubing
-tied in as a frayed tail. A fly the builder can't show
+open turns, also behind the bend (a Paradrake's binding), a dubbed body's turns, a piece of tubing
+tied in as a frayed tail, feathers laid flat over the back or cut into a V, hair folded back where
+it is tied in, and a cone pushed onto a tube after the whip finish. A fly the builder can't show
 (an unknown material, colour, hook or step) is refused when it is opened from a link or a
 file.
 
