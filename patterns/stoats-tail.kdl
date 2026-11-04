@@ -65,8 +65,9 @@ steps {
     wind rib to=0.84 turns=5 note="Evenly spaced open turns."
     tie-off rib
     tie-in throat length=1.0 angle=30 side=under note="A little shorter than the wing; reaching about the hook point."
-    // Gray's photo: the wing reaches about the tip of the tail.
-    tie-in wing length=3.7 angle=8 spread=20 note="A small, cleaned bunch, low over the body."
+    // Gray's photo: the wing reaches about the tip of the tail. Read from the photos: soft hair
+    // bends down over the body, so it leaves the head steeper.
+    tie-in wing length=3.7 angle=13 spread=20 note="A small, cleaned bunch, low over the body."
     trim wing note="Butts cut at a taper for a small head."
     whip-finish note="Two or three coats of black varnish."
 }

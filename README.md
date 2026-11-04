@@ -115,7 +115,9 @@ length, or in the realistic river), with the reference photos to compare. Save w
 requests from this machine; the built site doesn't include it.
 
 Or write a new `patterns/<id>.kdl` by hand and it gets picked up automatically. Materials come
-from the catalog in `src/recipe/materials.ts`; add new ones there. The test suite
+from the catalog in `src/recipe/materials.ts`; add new ones there. An entry also says how its
+material is drawn (a hair's stiffness, for one: soft hair bends down over the body, its tips
+uneven; stiff hair stays straight and flares at the tie-in). The test suite
 loads every pattern file, so `pnpm test` reports recipe errors with line numbers.
 Problems in pattern files also show in a banner in the dev server. Then run
 `pnpm render:catalog` and `pnpm render:water` and commit the images they write to

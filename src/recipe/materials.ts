@@ -65,6 +65,13 @@ export interface CatalogMaterial {
   furMm?: number;
   /** Fur strips: how wide the strip is cut, in mm (a recipe's `mm` overrides it). */
   widthMm?: number;
+  /**
+   * Hair and hair-like fibres tied in as a bunch with a length: how stiff each hair is, from 0
+   * (soft, bending towards the body along its length, its tips uneven as unstacked hair's are) to
+   * 1 (stiff and straight, its tips level as stacked hair's are). Without it, a bunch is drawn
+   * as straight fibres fanning from the tie-in.
+   */
+  stiffness?: number;
 }
 
 export const MATERIALS = {
@@ -122,15 +129,18 @@ export const MATERIALS = {
   chenille: { name: "chenille", archetype: "chenille" },
 
   // Hair
-  "elk-hair": { name: "elk hair", archetype: "hair", defaultColor: "elk" },
-  "deer-hair": { name: "deer hair", archetype: "hair", defaultColor: "deer" },
-  "calf-tail": { name: "calf tail", archetype: "hair", defaultColor: "white" },
+  // Assumption (all the stiffness values): moose mane and elk are the stiffest, then deer, calf
+  // tail (kinky, it stays put), bucktail (stiff at the butt, finer and softer towards the tip),
+  // squirrel tail (soft, it lies over the body), fox and craft fur the softest of all.
+  "elk-hair": { name: "elk hair", archetype: "hair", defaultColor: "elk", stiffness: 0.85 },
+  "deer-hair": { name: "deer hair", archetype: "hair", defaultColor: "deer", stiffness: 0.8 },
+  "calf-tail": { name: "calf tail", archetype: "hair", defaultColor: "white", stiffness: 0.7 },
   // Assumption: bucktail is coarse, about one and a half times as thick as elk or deer hair.
-  bucktail: { name: "bucktail", archetype: "hair", fibreWidth: 1.5 },
-  "squirrel-tail": { name: "squirrel tail", archetype: "hair", defaultColor: "squirrel" },
-  "moose-mane": { name: "moose mane", archetype: "hair", defaultColor: "moose" },
+  bucktail: { name: "bucktail", archetype: "hair", fibreWidth: 1.5, stiffness: 0.6 },
+  "squirrel-tail": { name: "squirrel tail", archetype: "hair", defaultColor: "squirrel", stiffness: 0.35 },
+  "moose-mane": { name: "moose mane", archetype: "hair", defaultColor: "moose", stiffness: 0.95 },
   // Assumption: fox guard hair is about half as thick as elk or deer hair.
-  "fox-hair": { name: "fox hair", archetype: "hair", fibreWidth: 0.5 },
+  "fox-hair": { name: "fox hair", archetype: "hair", fibreWidth: 0.5, stiffness: 0.2 },
 
   // Fibres
   "pheasant-tail": { name: "pheasant tail fibres", archetype: "fibres", defaultColor: "pheasant-tail" },
@@ -141,10 +151,12 @@ export const MATERIALS = {
   // The bronze-green, fluffy fibres of the peacock's sword feather (tails, wings).
   "peacock-sword": { name: "peacock sword", archetype: "fibres", defaultColor: "#4c5a24", flue: true },
   "wood-duck-flank": { name: "wood duck flank", archetype: "fibres", defaultColor: "wood-duck" },
-  "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear" },
-  "synthetic-hair": { name: "synthetic hair", archetype: "fibres" },
+  // Assumption: hare's mask guard hairs and synthetic hair (Ultra Hair) are fairly stiff; craft fur
+  // is as soft as fox.
+  "hares-mask-guard-hairs": { name: "hare's mask guard hairs", archetype: "fibres", defaultColor: "hares-ear", stiffness: 0.7 },
+  "synthetic-hair": { name: "synthetic hair", archetype: "fibres", stiffness: 0.7 },
   // Fine synthetic fur on a backing, long fibres over a soft underfur (streamer wings, crab bodies).
-  "craft-fur": { name: "Craft Fur", archetype: "fibres" },
+  "craft-fur": { name: "Craft Fur", archetype: "fibres", stiffness: 0.15 },
   "coq-de-leon": { name: "Coq de León fibres", archetype: "fibres", defaultColor: "pardo" },
 
   // Biots
