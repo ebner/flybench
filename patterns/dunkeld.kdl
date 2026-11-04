@@ -1,0 +1,78 @@
+// Dunkeld: the trout and sea-trout wet fly reduced from the Victorian Tay salmon fly, gold and orange under bronze mallard.
+
+id dunkeld
+name "Dunkeld"
+type wet
+imitates attractor
+difficulty intermediate
+species trout sea-trout
+// Assumption: the trout season on British lochs and reservoirs; Fulling Mill fishes it through the summer.
+season april may june july august september
+description "A golden pheasant crest tail, a flat gold tinsel body ribbed with oval gold, an orange beard, a bronze mallard wing and jungle cock cheeks."
+history """
+    The salmon fly came first. Kelson, in The Salmon Fly (1895), calls it an old standard pattern
+    that had undergone considerable change, with an orange hackle palmered over a gold tinsel body
+    (formerly embossed tinsel, which he preferred), a jay throat and a wing of peacock wing and
+    mallard strips under a topping, and believes it was invented by W. J. Davidson.
+    Pryce-Tannatt's dressing, in How to Dress Salmon Flies (1914), differs in the details: a tag of
+    silver and light orange floss rather than gold twist and orange silk, a silver rib rather than
+    gold, and a mixed wing of married strands under brown mallard. The trout fly keeps the gold
+    body, the orange and the mallard: Barry Ord Clarke calls it the trout version of the Tay salmon
+    fly, and Fulling Mill and Fish4Flies sell it as a fly that began as a salmon fly. Who first tied
+    it small for trout is not recorded. Some tie the orange hackle palmered.
+    """
+fishing """
+    A bright attractor on the point or the middle dropper of a loch or reservoir wet-fly cast.
+    Fulling Mill finds it very effective on a sunk line through the daphnia blooms of summer, and
+    an excellent sea-trout fly on rivers and lochs in peaty water, as Ord Clarke does.
+    """
+sources {
+    "The Salmon Fly (George M. Kelson, 1895)" url="https://archive.org/details/salmonflyhowtodr00kelsrich"
+    "How to Dress Salmon Flies (T. E. Pryce-Tannatt, 1914)" url="https://archive.org/details/howtodresssalmon00prycrich"
+    "GlobalFlyFisher: Dunkeld (video, Barry Ord Clarke)" url="https://globalflyfisher.com/video/dunkeld"
+    "Fish4Flies: Dunkeld" url="https://www.fish4flies.com/Wet/Winged/Dunkeld"
+    "Fulling Mill: Dunkeld" url="https://www.fullingmill.co.uk/Products-UK/Wet-UK/Dunkeld-S8-UK"
+    "Troutflies.co.uk: Dunkeld" url="https://www.troutflies.co.uk/dunkeld-fishing-fly"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/T2926Dunkeld.jpg" page="https://www.fish4flies.com/Wet/Winged/Dunkeld" license="All rights reserved; reference only" note="Side view in the vise, the wing set high"
+    "https://www.fullingmill.co.uk/core/media/media.nl?id=2646&c=3752701&h=7pH6dLJJvgUQrYTd5nP9cKKEIUKH35w34qSmsjjY18-3RSLs" page="https://www.fullingmill.co.uk/Products-UK/Wet-UK/Dunkeld-S8-UK" license="All rights reserved; reference only" note="Side view on white"
+    "https://www.flugor.se/bild_arkiv/big_2803.jpg" page="https://www.flugor.se/flugor/laxflugor-enkel/dunkeld-2803" license="All rights reserved; reference only" note="A simplified salmon Dunkeld on a single, with a topping"
+}
+
+// Fulling Mill: sizes 8 to 12; Fish4Flies: 12 and 14.
+hook wet-standard size=10
+thread black size="8/0"
+
+materials {
+    tail golden-pheasant-crest count=8
+    rib oval-tinsel color=gold label="Fine oval gold tinsel"
+    body flat-tinsel color=gold
+    beard hackle-fibres color=orange count=50 label="Orange cock hackle fibres"
+    wing bronze-mallard
+    cheeks jungle-cock
+}
+
+// Fish4Flies' dressing (tied by Mandy Shelvey); no source gives the steps, so the order is the
+// usual winged-wet order, as on the Butcher.
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Read from the photos: about one and a half gapes, curving up.
+    tie-in tail length=1.5 angle=14 spread=6
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.84
+    wind body to=0.84 turns=14 note="Down and back again for a smooth double layer."
+    tie-off body
+    wind rib to=0.84 turns=5
+    tie-off rib
+    // Read from the photos: to the hook point or a little past it.
+    tie-in beard length=1.4 angle=32 spread=40 side=under note="A bunch under the shank."
+    // Read from the photos: low, the tips well past the bend.
+    tie-in wing length=2.9 angle=16 spread=12 width=0.5 note="Matched slips from a left and a right feather, or the fibres folded, set low over the body."
+    // Read from the photos: short, about a third of the wing.
+    tie-in cheeks length=0.7 angle=12 spread=30 note="One each side, flat against the wing."
+    whip-finish note="A black head, varnished."
+}

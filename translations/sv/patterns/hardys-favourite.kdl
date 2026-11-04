@@ -1,0 +1,55 @@
+id hardys-favourite
+status draft
+
+// en description: A golden pheasant tippet tail, a peacock herl body ribbed with red floss, a brown partridge hackle and a wing of mottled turkey slips.
+description "En stjärt av guldfasantippet, en kropp av påfågelherl ribbad med rött flossilke, ett hackel av brun rapphöna och en vinge av sektioner av spräcklig kalkon."
+
+// en history: Fly Anorak and the Fly Dressers' Guild's dressings database both name J. J. Hardy as its origin. Two dressings go by the name, one the other turned inside out. The oldest dated one in the Guild's database, from W. Earl Hodgson in 1904, has a peacock herl body ribbed with red silk, a dark partridge hackle and a woodcock wing; J. Edson Leonard, in Flies (1950), gives a claret floss body ribbed with bronze peacock herl. Fly Anorak finds that most tyings today reverse them, the body of herl and the rib of floss, which he says makes a more durable fly. The wing is a mottled brown quill: woodcock for Hodgson, turkey for Helen Shaw (as Bob Petti ties her dressing) and for Fly Anorak, speckled hen for Davie McPhail. Shaw and Leonard give a brown hackle where the others have partridge. This is McPhail's dressing, with a turkey wing.
+history """
+    Fly Anorak och Fly Dressers' Guilds databas anger båda J. J. Hardy som upphov. Två bindningar går under namnet, den ena den andra vänd ut och in. Den
+    äldsta daterade i Guildens databas, från W. Earl Hodgson 1904, har en kropp av påfågelherl
+    ribbad med rött silke, ett mörkt rapphönshackel och en vinge av morkulla; J. Edson Leonard
+    ger i Flies (1950) en kropp av vinrött flossilke ribbad med bronsfärgad påfågelherl. Fly
+    Anorak finner att de flesta bindningar i dag vänder på dem, kroppen av herl och ribben av
+    flossilke, vilket enligt honom gör flugan hållbarare. Vingen är en spräcklig brun vingpenna:
+    morkulla hos Hodgson, kalkon hos Helen Shaw (så som Bob Petti binder hennes bindning) och
+    hos Fly Anorak, spräcklig höna hos Davie McPhail. Shaw och Leonard har ett brunt hackel där
+    de andra har rapphöna. Den här är McPhails bindning, med en vinge av kalkon.
+    """
+
+// en fishing: A fancy fly for river trout, and a point fly in a team on Scottish lochs and stillwaters, fished across and down or pulled. Fish4Flies rates it best in May and June, and fishes it wet or dry.
+fishing """
+    En fancyfluga för öring i strömmande vatten, och en uddfluga i ett tackel på skotska sjöar
+    och dammar, fiskad tvärs och nedströms eller indragen. Fish4Flies tycker att den är bäst i
+    maj och juni och fiskar den våt eller torr.
+    """
+
+labels {
+    // en body: Bronze peacock herl
+    body "Bronsfärgad påfågelherl"
+    // en hackle: Brown partridge
+    hackle "Brun rapphöna"
+    // en wing: Mottled turkey or speckled hen quill slips
+    wing "Sektioner av spräcklig kalkon eller spräcklig höna"
+}
+
+notes {
+    // en step 3 (tie-in tail): A few tippet fibres, the black bars level.
+    step 3 "Några tippetfibrer, med de svarta banden i jämnhöjd."
+    // en step 4 (tie-in rib): A single strand; twisted, it makes a neater rib.
+    step 4 "En enkel tråd; tvinnad blir ribben jämnare."
+    // en step 5 (tie-in body): By their tips.
+    step 5 "I spetsarna."
+    // en step 7 (wind body): Twist the herls with the thread first, for strength.
+    step 7 "Tvinna herlen med tråden först, för styrkans skull."
+    // en step 9 (wind rib): Open, even turns.
+    step 9 "Glesa, jämna varv."
+    // en step 11 (tie-in hackle): By its tip.
+    step 11 "I spetsen."
+    // en step 13 (wind hackle): Two turns; stroke the fibres back and down.
+    step 13 "Två varv; stryk fibrerna bakåt och nedåt."
+    // en step 15 (tie-in wing): Matched left and right slips, concave sides together, set on top with a pinch and loop.
+    step 15 "Matchade vänster- och högersektioner, de konkava sidorna mot varandra, satta ovanpå med pinch and loop."
+    // en step 16 (whip-finish): A small black head, varnished.
+    step 16 "Ett litet svart huvud, lackat."
+}

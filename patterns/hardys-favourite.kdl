@@ -1,0 +1,77 @@
+// Hardy's Favourite: a peacock herl body ribbed with red floss, a partridge hackle and a mottled quill wing.
+
+id hardys-favourite
+name "Hardy's Favourite"
+aliases "Hardy's Favorite"
+type wet
+imitates attractor
+difficulty intermediate
+species trout
+// Assumption: the trout season; Fish4Flies rates it best in May and June.
+season april may june july august september
+origin originator="J. J. Hardy"
+description "A golden pheasant tippet tail, a peacock herl body ribbed with red floss, a brown partridge hackle and a wing of mottled turkey slips."
+history """
+    Fly Anorak and the Fly Dressers' Guild's dressings database both name J. J. Hardy as its
+    origin. Two dressings go by the name, one the other turned inside
+    out. The oldest dated one in the Guild's database, from W. Earl Hodgson in 1904, has a peacock
+    herl body ribbed with red silk, a dark partridge hackle and a woodcock wing; J. Edson Leonard,
+    in Flies (1950), gives a claret floss body ribbed with bronze peacock herl. Fly Anorak finds
+    that most tyings today reverse them, the body of herl and the rib of floss, which he says makes
+    a more durable fly. The wing is a mottled brown quill: woodcock for Hodgson, turkey for Helen
+    Shaw (as Bob Petti ties her dressing) and for Fly Anorak, speckled hen for Davie McPhail. Shaw
+    and Leonard give a brown hackle where the others have partridge. This is McPhail's dressing,
+    with a turkey wing.
+    """
+fishing """
+    A fancy fly for river trout, and a point fly in a team on Scottish lochs and stillwaters,
+    fished across and down or pulled. Fish4Flies rates it best in May and June, and fishes it wet
+    or dry.
+    """
+sources {
+    "Fly Dressers' Guild: Dressings database (items 01385, 01386, 01387)" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+    "GlobalFlyFisher: Hardy's Favorite variation, wet fly (video, Fly Anorak; J. Edson Leonard's dressing)" url="https://globalflyfisher.com/video/hardys-favorite-variation-wet-fly"
+    "GlobalFlyFisher: Classic wet flies (Bob Petti; Helen Shaw's dressing)" url="https://globalflyfisher.com/patterns/classic-wet-flies"
+    "MidCurrent: How to tie a Hardy's Favourite wet fly (video, Davie McPhail)" url="https://midcurrent.com/videos/how-to-tie-a-hardys-favourite-wet-fly"
+    "Fishing Megastore blog: Tying a Hardy's Favourite with Davie McPhail" url="https://blog.fishingmegastore.com/2019/01/tying-hardys-favourite-with-davie.html"
+    "Fish4Flies: Hardy's Favourite" url="https://www.fish4flies.com/Dry/Winged/Hardys-Favourite"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/old_images/patterns/bergman/hardys_favorite.jpg" page="https://globalflyfisher.com/patterns/classic-wet-flies" author="Bob Petti" license="All rights reserved; reference only" note="Shaw's dressing, side view in the vise"
+    "https://midcurrent.com/wp-content/uploads/2019/01/hardys_favourite.jpg" page="https://midcurrent.com/videos/how-to-tie-a-hardys-favourite-wet-fly" author="Davie McPhail" license="All rights reserved; reference only" flip=#true note="McPhail's fly in the vise"
+}
+
+// McPhail: a Fulling Mill All Purpose Medium #12.
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    tail golden-pheasant-tippet count=6
+    rib silk-floss color=red
+    body peacock-herl strands=3 label="Bronze peacock herl"
+    hackle partridge-hackle fibre=1.3 sweep=55 label="Brown partridge"
+    wing turkey-quill label="Mottled turkey or speckled hen quill slips"
+}
+
+// McPhail's materials in the usual winged-wet order: hackle, then wing.
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Read from the photos: two thirds of the shank or more.
+    tie-in tail length=1.4 angle=8 spread=10 note="A few tippet fibres, the black bars level."
+    tie-in rib note="A single strand; twisted, it makes a neater rib."
+    tie-in body note="By their tips."
+    wrap-thread to=0.8
+    wind body to=0.8 turns=8 note="Twist the herls with the thread first, for strength."
+    tie-off body
+    wind rib to=0.8 turns=5 note="Open, even turns."
+    tie-off rib
+    tie-in hackle note="By its tip."
+    wrap-thread to=0.86
+    wind hackle to=0.86 turns=2 note="Two turns; stroke the fibres back and down."
+    tie-off hackle
+    // Read from the photos: low over the body, the tips just past the bend.
+    tie-in wing length=2.4 angle=14 spread=12 width=0.5 note="Matched left and right slips, concave sides together, set on top with a pinch and loop."
+    whip-finish note="A small black head, varnished."
+}

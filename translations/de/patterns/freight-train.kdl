@@ -1,0 +1,62 @@
+id freight-train
+status draft
+
+// en description: A purple tail, a body of fluorescent orange and red floss or wool behind black chenille ribbed with fine oval silver, a purple collar hackle and a white calf tail wing.
+description "Ein violetter Schwanz, ein Körper aus fluoreszierendem orangefarbenem und rotem Floss oder Wollgarn hinter schwarzer Chenille, gerippt mit feinem ovalem Silbertinsel, eine violette Kragenhechel und ein Flügel aus weißem Kalbsschwanz."
+
+// en history: Randall Kaufmann tied it for the summer steelhead of the Deschutes in Oregon, where a railway follows the river for many miles. In his own account, which Trey Combs quotes in Steelhead Fly Fishing (1991), a freight train rounded the bend one evening as he fished a riffle, and the pull of a heavy steelhead jolted him back to the river; the fish ran upstream much like a freight train, and he had a name for the fly. It was the first of his railroad series, with the Coal Car, the Flat Car and the Signal Light. Dressings differ: most tie the front of the body in black chenille, John Kreft in purple; the rear is fluorescent wool or, in the Rogue Flyfishers' dressing, floss, as two quarters of the body or two thirds; and the Fly of the Month Club adds pearl Krystal Flash to the wing.
+history """
+    Randall Kaufmann band sie für die Sommer-Steelheads des Deschutes in Oregon, wo eine
+    Eisenbahn dem Fluss viele Meilen weit folgt. In seinem eigenen Bericht, den Trey Combs in
+    Steelhead Fly Fishing (1991) zitiert, kam eines Abends ein Güterzug um die Kurve, während er
+    eine Rausche befischte, und der Zug eines schweren Steelheads holte ihn an den Fluss zurück;
+    der Fisch schoss flussauf wie ein Güterzug, und er hatte einen Namen für die Fliege. Sie war
+    die erste seiner Eisenbahnserie, mit Coal Car, Flat Car und Signal Light. Die
+    Bindeanleitungen unterscheiden sich: die meisten binden den vorderen Teil des Körpers aus
+    schwarzer Chenille, John Kreft aus violetter; der hintere Teil ist fluoreszierendes Wollgarn
+    oder, in der Bindeanleitung der Rogue Flyfishers, Floss, als zwei Viertel des Körpers oder
+    zwei Drittel; und der Fly of the Month Club gibt dem Flügel Pearl Krystal Flash dazu.
+    """
+
+// en fishing: A summer steelhead fly, swung down and across on the Deschutes and the other rivers of the Northwest. The Fly of the Month Club also fishes it for Pacific salmon and on the Great Lakes runs.
+fishing """
+    Eine Sommerfliege für Steelheads, quer und stromab geschwungen am Deschutes und an den
+    anderen Flüssen des amerikanischen Nordwestens. Der Fly of the Month Club fischt sie auch
+    auf Pazifiklachse und bei den Laichzügen an den Großen Seen.
+    """
+
+labels {
+    // en tail: Purple hackle fibres
+    tail "Violette Hechelfibern"
+    // en rib: Fine oval silver tinsel
+    rib "Feines ovales Silbertinsel"
+    // en rear: Fluorescent orange floss or wool
+    rear "Fluoreszierendes orangefarbenes Floss oder Wollgarn"
+    // en middle: Fluorescent red floss or wool
+    middle "Fluoreszierendes rotes Floss oder Wollgarn"
+    // en front: Fine black chenille
+    front "Feine schwarze Chenille"
+    // en collar: Soft purple hackle
+    collar "Weiche violette Hechel"
+}
+
+notes {
+    // en step 2 (wrap-thread): A thread base back to above the hook point.
+    step 2 "Eine Fadenunterlage zurück bis über die Hakenspitze."
+    // en step 3 (tie-in tail): A small bunch of barbs.
+    step 3 "Ein kleines Büschel Fibern."
+    // en step 7 (wind rear): Close, even turns.
+    step 7 "Dichte, gleichmäßige Windungen."
+    // en step 15 (wind front): Close turns.
+    step 15 "Dichte Windungen."
+    // en step 17 (wind rib): Five even turns over all three sections.
+    step 17 "Fünf gleichmäßige Windungen über alle drei Abschnitte."
+    // en step 19 (tie-in collar): By its tip.
+    step 19 "An der Spitze."
+    // en step 21 (wind collar): Three or four turns, then wind the thread back over the bases to sweep the fibres back.
+    step 21 "Drei oder vier Windungen, dann den Faden über die Fibernwurzeln zurückwinden, damit die Fibern nach hinten liegen."
+    // en step 23 (tie-in wing): A sparse bunch of calf tail.
+    step 23 "Ein spärliches Büschel Kalbsschwanz."
+    // en step 25 (whip-finish): A small black head.
+    step 25 "Ein kleiner schwarzer Kopf."
+}

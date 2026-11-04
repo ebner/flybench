@@ -402,7 +402,7 @@ const deg = (d: number) => (d * Math.PI) / 180;
 const UNTRIMMED = 0.8;
 
 /** Colours whose feathers and hackles are barred or mottled. */
-const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6, guinea: 0.9, "hen-pheasant": 0.5, "wood-duck": 0.6 };
+const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6, guinea: 0.9, "hen-pheasant": 0.5, "wood-duck": 0.6, "bronze-mallard": 0.75 };
 
 /** Whether a colour is drawn barred of itself (grizzly, teal…), without a material's `barred`. */
 export const barredColour = (color: string | undefined): boolean => color !== undefined && color in BARRED;
@@ -468,12 +468,15 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
       const r = cat.oval ? 0.02 : 0.024;
       return { ...base, strandRadius: r, band: !cat.oval, tieInThickness: 0.012, layerThickness: (c) => 0.02 * Math.min(c, 1) };
     }
-    case "chenille":
+    case "chenille": {
+      // Assumption: medium chenille makes a body about half the gape thick; chenille given its
+      // diameter as sold (`mm`) is that thick, its turns lying as deep for their width.
+      const r = m.mm !== undefined ? mm(m.mm) / 2 : 0.12;
       return {
-        // Assumption: medium chenille makes a body about half the gape thick.
-        ...base, strandRadius: 0.12, fibreLength: 0.08,
-        tieInThickness: 0.05, layerThickness: (c) => 0.22 * Math.min(c, 1.2),
+        ...base, strandRadius: r, fibreLength: 0.08 * (r / 0.12),
+        tieInThickness: 0.05 * (r / 0.12), layerThickness: (c) => 0.22 * (r / 0.12) * Math.min(c, 1.2),
       };
+    }
     case "hair":
       // A recipe that counts the hairs (a few moose hairs as a tail) gets that many.
       return { ...base, strandRadius: 0.08, count: m.count ?? 320, counted: m.count !== undefined, tieInThickness: 0.03, layerThickness: () => 0.03 };

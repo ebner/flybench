@@ -1,0 +1,91 @@
+// Blue Charm: the Dee's summer fly, black and blue with a silver rib, in Bob Petti's hairwing dressing.
+
+id blue-charm
+name "Blue Charm"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon sea-trout
+// Kelson: "a good summer fly".
+season june july august september
+origin originator="W. Brown" region="River Dee, Scotland"
+description "A fine oval silver tag and yellow floss tip, a golden pheasant crest tail, a black floss body ribbed with oval silver, a deep blue throat and a grey squirrel wing."
+history """
+    Kelson, in The Salmon Fly (1895), gives it to W. Brown: a good summer fly used chiefly on the
+    Dee and dressed on small doubles. His dressing has a claret silk body and a wing of mallard
+    strips with teal above and a topping. Pryce-Tannatt, in How to Dress Salmon Flies (1914), ties
+    the body of black floss over a tag of silver and golden yellow floss and a black herl butt,
+    with a deep blue throat and a wing of mottled turkey strips, narrow teal along their upper
+    edge and a topping over; later tyers, Poul Jorgensen among them, follow his dressing. John
+    Gray counts it among the Dee flies whose popularity spread far beyond the river, and among the
+    older patterns to which the low-water style of dressing was applied. Today it is mostly
+    fished as a hairwing; this is Bob Petti's, with a grey squirrel wing and no butt.
+    """
+fishing """
+    A summer and low-water fly for a floating line, fished small in clear water and bright
+    weather, as Kelson, Gray and the shops that sell it describe it. Kelson's were small doubles;
+    today's hairwing is tied on singles, doubles and trebles.
+    """
+sources {
+    "The Salmon Fly (George M. Kelson, 1895)" url="https://archive.org/details/salmonflyhowtodr00kelsrich"
+    "How to Dress Salmon Flies (T. E. Pryce-Tannatt, 1914)" url="https://archive.org/details/howtodresssalmon00prycrich"
+    "GlobalFlyFisher: Hair winged salmon flies (Bob Petti)" url="https://globalflyfisher.com/patterns/hair-winged-salmon-flies"
+    "John Kreft: Blue Charm (Poul Jorgensen's dressing)" url="https://www.johnkreft.com/blue-charm/"
+    "GlobalFlyFisher: Blue Charm (video, Håkan Karsnäser for Ahrex)" url="https://globalflyfisher.com/video/blue-charm-1"
+    "Trout & Salmon Fishing: Salmon flies (John Gray)" url="https://trout-salmon-fishing.com/salmon-flies.htm"
+    "River Dee Trust: Fishing tackle" url="https://riverdee.org.uk/fishing-tackle/"
+    "Grays of Kilsyth: Salmon flies (John Gray)" url="http://www.graysofkilsyth.com/salmon_flies.htm"
+    "Fly of the Month Club: Blue Charm hairwing" url="http://www.flyofthemonthclub.com/store/catalog.asp?item=1259"
+    "Fish4Flies: Blue Charm double" url="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Blue-Charm"
+    "GlobalFlyFisher: Anatomy of a salmon fly (Steve Schweitzer)" url="https://globalflyfisher.com/node/13548"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/article_pictures/blue_charm.jpg" page="https://globalflyfisher.com/patterns/hair-winged-salmon-flies" author="Bob Petti" license="All rights reserved; reference only" note="Petti's hairwing on a single, side view, the wing posed high"
+    "https://www.fish4flies.com/img/flies/Original/2628-2628.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Blue-Charm" license="All rights reserved; reference only" flip=#true note="A hairwing on a double, the wing low and long"
+    "https://www.johnkreft.com/wp-content/uploads/2017/01/Blue-Charm.jpg" page="https://www.johnkreft.com/blue-charm/" author="John Kreft" license="All rights reserved; reference only" note="Jorgensen's feather-wing dressing, for the tag, tail and throat"
+}
+
+// Petti: a #4 heavy wire salmon hook like the TMC 7999.
+hook salmon-up-eye size=6
+thread black size="6/0"
+
+materials {
+    tag oval-tinsel color=silver label="Fine oval silver tinsel"
+    yellow-tag silk-floss color=yellow label="Yellow floss"
+    tail golden-pheasant-crest count=10
+    rib oval-tinsel color=silver
+    body silk-floss color=black
+    throat hackle-fibres color=blue count=50 label="Deep blue hackle fibres"
+    wing squirrel-tail color=grey label="Grey squirrel tail"
+}
+
+// Petti gives no steps; the order is the usual hairwing order (Gathercole's Garry Dog).
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="To opposite the barb."
+    tie-in tag
+    wrap-thread to=0.05
+    wind tag to=0.05 turns=4
+    tie-off tag
+    tie-in yellow-tag
+    // Read from Petti's photo: a long tip, about an eighth of the shank.
+    wrap-thread to=0.17
+    wind yellow-tag to=0.17 turns=6 note="In front of the tinsel, smooth and even."
+    tie-off yellow-tag
+    // Schweitzer: a crest tail is one and a half gapes long, curving up.
+    tie-in tail length=1.5 angle=24 spread=8
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.86
+    wind body to=0.86 turns=12 note="Close turns, slightly tapered."
+    tie-off body
+    wind rib to=0.86 turns=5 note="Five evenly spaced turns."
+    tie-off rib
+    // Read from the photos: long, to the hook point or past it.
+    tie-in throat length=1.7 angle=16 side=under note="A bunch under the shank."
+    // Petti: the wing normally to the middle or the end of the tail.
+    tie-in wing length=3.2 angle=13 spread=16 note="A slim, unstacked bunch, low over the body."
+    trim wing note="Cut at an angle for a small head."
+    whip-finish note="A black head, varnished."
+}

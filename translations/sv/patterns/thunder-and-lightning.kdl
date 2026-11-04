@@ -1,0 +1,73 @@
+id thunder-and-lightning
+status draft
+
+// en description: An oval gold tag and golden yellow floss tip, a golden pheasant crest tail veiled with red, a black ostrich herl butt, a black floss body ribbed with oval gold under a palmered orange hackle, a blue guinea fowl throat and a brown squirrel wing.
+description "En tag av oval guldtinsel och en spets av guldgult flossilke, en stjärt av guldfasantopping med en slöja av rött, en butt av svart strutsherl, en kropp av svart flossilke ribbad med oval guldtinsel under ett palmerat orange hackel, ett skägg av blå pärlhöna och en vinge av brun ekorre."
+
+// en history: Kelson, in The Salmon Fly (1895), gives it to Wright, James Wright of Sprouston on the Tweed, and calls it exceedingly popular; on the first rise of water after rain it was his own favourite. Francis Francis, in A Book on Angling (1867), had already listed it among the flies of the Moy in Ireland, and printed a letter praising one of Pat Hearns' flies at Ballina, called the Thunder and Lightning. Mary Orvis Marbury, in Favorite Flies and Their Histories (1892), says it was once known as the Great Storm fly, used when the water rose after a storm. The classic dressings agree on a body mostly of black floss with a gold rib, an orange hackle palmered over it, jay at the throat and a wing of brown mallard with a topping; Kelson and Pryce-Tannatt add jungle cock and macaw horns, and Pryce-Tannatt, in How to Dress Salmon Flies (1914), also gives an Irish version with a married wing. Lars Chr. Bentsen writes that the modern hairwings keep the colour scheme: a yellow tail, a black body, orange and blue hackles and a brown wing. This is Bob Petti's, with blue guinea fowl for the jay. Hairwings differ over the orange hackle, which some wind only at the throat.
+history """
+    Kelson ger den i The Salmon Fly (1895) till Wright, James Wright från Sprouston vid Tweed,
+    och kallar den ytterst populär; när vattnet steg efter regn var den hans egen favorit.
+    Francis Francis hade redan i A Book on Angling (1867) räknat den till flugorna för Moy på
+    Irland och tryckt ett brev som berömde en av Pat Hearns flugor i Ballina, kallad Thunder and
+    Lightning. Mary Orvis Marbury säger i Favorite Flies and Their Histories (1892) att den en
+    gång kallades Great Storm fly och användes när vattnet steg efter en storm. De klassiska
+    bindningarna är eniga om en kropp mest av svart flossilke med guldribb, ett orange hackel
+    palmerat över den, nötskrika i skägget och en vinge av brun gräsand med en topping; Kelson
+    och Pryce-Tannatt lägger till jungle cock och horn av ara, och Pryce-Tannatt ger i How to
+    Dress Salmon Flies (1914) också en irländsk version med gift vinge. Lars Chr. Bentsen
+    skriver att de moderna hårvingeflugorna behåller färgerna: en gul stjärt, en svart kropp,
+    orange och blå hackel och en brun vinge. Den här är Bob Pettis, med blå pärlhöna i stället
+    för nötskrika. Hårvingeflugorna skiljer sig i det orange hacklet, som en del bara lindar som
+    skägg.
+    """
+
+// en fishing: Kelson fished it in rising water after rain; Marbury writes that it had come to be thought best in low, clear water and in autumn. Bentsen fishes it in all water, perhaps most in slightly peaty water and late in the season, large early in the year and small in low water. It is swung across and down, on singles, doubles and tubes.
+fishing """
+    Kelson fiskade den i stigande vatten efter regn; Marbury skriver att den kommit att räknas
+    som bäst i lågt, klart vatten och på hösten. Bentsen fiskar den i alla vatten, kanske mest i
+    lätt humusfärgat vatten och sent på säsongen, stor tidigt på året och liten i lågvatten. Den
+    fiskas tvärs och nedströms, på enkelkrokar, dubbelkrokar och tuber.
+    """
+
+labels {
+    // en tag: Fine oval gold tinsel
+    tag "Fin oval guldtinsel"
+    // en yellow-tag: Golden yellow floss
+    yellow-tag "Guldgult flossilke"
+    // en tail-red: Indian crow substitute
+    tail-red "Ersättning för indisk kråka"
+    // en hackle: Orange cock hackle
+    hackle "Orange tupphackel"
+    // en throat: Blue-dyed guinea fowl fibres
+    throat "Blåfärgade pärlhönsfibrer"
+    // en wing: Red fox squirrel or brown fitch tail
+    wing "Svans av rävekorre eller brun iller"
+}
+
+notes {
+    // en step 2 (wrap-thread): To opposite the barb.
+    step 2 "Till mitt för hullingen."
+    // en step 9 (wind yellow-tag): In front of the tinsel.
+    step 9 "Framför tinseln."
+    // en step 12 (tie-in tail-red): A few fibres over the root of the crest.
+    step 12 "Några fibrer över toppingens rot."
+    // en step 15 (wind butt): Three turns, the flue stroked back.
+    step 15 "Tre varv, med fjunet struket bakåt."
+    // en step 18 (tie-in hackle): By its tip, the shiny side forward.
+    step 18 "I spetsen, med den blanka sidan framåt."
+    // en step 21 (wind body): Close turns, smooth and slightly tapered.
+    step 21 "Täta varv, släta och svagt avsmalnande."
+    // en step 23 (wind hackle): Open turns, close behind where the rib will lie.
+    step 23 "Glesa varv, tätt bakom där ribben ska ligga."
+    // en step 25 (wind rib): Five turns, just in front of the hackle stalk, so it protects it.
+    step 25 "Fem varv, precis framför hackelstammen, så att ribben skyddar den."
+    // en step 27 (tie-in throat): The jay of the classic dressings.
+    step 27 "Nötskrikan i de klassiska bindningarna."
+    // en step 28 (tie-in wing): A slim, unstacked bunch, low over the body.
+    step 28 "En smal, ostackad knippe, lågt över kroppen."
+    // en step 29 (trim wing): Cut at an angle for a small head.
+    step 29 "Klipp snett för ett litet huvud."
+    // en step 30 (whip-finish): A black head, varnished.
+    step 30 "Ett svart huvud, lackat."
+}

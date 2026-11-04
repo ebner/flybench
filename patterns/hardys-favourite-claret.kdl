@@ -1,0 +1,70 @@
+// Hardy's Favourite, the other dressing: a claret floss body ribbed with peacock herl.
+
+id hardys-favourite-claret
+name "Hardy's Favourite"
+variant-of hardys-favourite
+variant "Claret floss body"
+type wet
+imitates attractor
+difficulty intermediate
+species trout
+// Assumption: the trout season; Fish4Flies rates it best in May and June.
+season april may june july august september
+origin originator="J. J. Hardy"
+description "A golden pheasant tippet tail, a claret floss body ribbed with bronze peacock herl, a grey partridge hackle and a mottled brown quill wing."
+history """
+    The dressing turned the other way round: J. Edson Leonard, in Flies (1950), gives a claret
+    floss body ribbed with bronze peacock herl under a brown hackle and a pheasant wing, and a
+    dressing in the Fly Dressers' Guild's database has the same body with a grey partridge hackle
+    and a woodcock wing, as Fish4Flies sells it. Fly Anorak finds that most tyings today reverse
+    body and rib, the herl inside and the floss outside, which he says makes a more durable fly.
+    """
+fishing """
+    Fished as the herl-bodied dressing is: on the point of a team on lochs and stillwaters, or
+    across and down on rivers. Fish4Flies rates it best in May and June.
+    """
+sources {
+    "GlobalFlyFisher: Hardy's Favorite variation, wet fly (video, Fly Anorak; J. Edson Leonard's dressing)" url="https://globalflyfisher.com/video/hardys-favorite-variation-wet-fly"
+    "Fly Dressers' Guild: Dressings database (item 01386)" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+    "Fish4Flies: Hardy's Favourite" url="https://www.fish4flies.com/Dry/Winged/Hardys-Favourite"
+    "Flugor.se: Hardys Favorite" url="https://www.flugor.se/flugor/klassiska-flugor/hardys-favorite-3399"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.flugor.se/bild_arkiv/big_3399.jpg" page="https://www.flugor.se/flugor/klassiska-flugor/hardys-favorite-3399" license="All rights reserved; reference only" note="Side view in the vise, a dark hackle"
+    "https://www.fish4flies.com/img/flies/Large/T5300Hardy's%20Favourite.jpg" page="https://www.fish4flies.com/Dry/Winged/Hardys-Favourite" license="All rights reserved; reference only" flip=#true note="At an angle, the wings set up"
+}
+
+// Fish4Flies: sizes 10 to 14.
+hook wet-standard size=12
+thread black size="8/0"
+
+materials {
+    // Fish4Flies: three or four fibres.
+    tail golden-pheasant-tippet count=5
+    rib peacock-herl strands=1 label="Bronze peacock herl"
+    body silk-floss color=claret
+    hackle partridge-hackle color=grey barred=#true fibre=1.3 sweep=55 label="Grey partridge"
+    wing hen-pheasant-quill label="Woodcock or hen pheasant wing slips"
+}
+
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Read from the photos: two thirds of the shank or more.
+    tie-in tail length=1.4 angle=8 spread=10 note="A few tippet fibres, the black bars level."
+    tie-in rib note="A single herl, by its tip."
+    tie-in body
+    wrap-thread to=0.8
+    wind body to=0.8 turns=16 note="Close turns, smooth and slightly tapered."
+    tie-off body
+    wind rib to=0.8 turns=5 note="Open, even turns."
+    tie-off rib
+    tie-in hackle note="By its tip."
+    wrap-thread to=0.86
+    wind hackle to=0.86 turns=2 note="Two turns; stroke the fibres back and down."
+    tie-off hackle
+    // Read from the photos: low over the body, the tips just past the bend.
+    tie-in wing length=2.4 angle=14 spread=12 width=0.5 note="Matched left and right slips, concave sides together, set on top with a pinch and loop."
+    whip-finish note="A small black head, varnished."
+}

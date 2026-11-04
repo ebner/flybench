@@ -51,6 +51,8 @@ export const NAMED_COLORS = {
   "hen-pheasant": "#7d6044",
   // Wood duck flank: lemon brown, finely barred.
   "wood-duck": "#b08a52",
+  // Bronze mallard: the drake's shoulder feathers, bronze brown, finely marked darker.
+  "bronze-mallard": "#6e4a2c",
   badger: "#d9cdb4",
   "blue-dun": "#6e7480",
   purple: "#4b2a6b",

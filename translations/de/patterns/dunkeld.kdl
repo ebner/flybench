@@ -1,0 +1,49 @@
+id dunkeld
+status draft
+
+// en description: A golden pheasant crest tail, a flat gold tinsel body ribbed with oval gold, an orange beard, a bronze mallard wing and jungle cock cheeks.
+description "Ein Schwanz aus Goldfasan-Crest, ein Körper aus flachem Goldtinsel, gerippt mit ovalem Goldtinsel, ein orangefarbener Bart, ein Flügel aus Mallard-Bronzefedern und Wangen aus Dschungelhahn."
+
+// en history: The salmon fly came first. Kelson, in The Salmon Fly (1895), calls it an old standard pattern that had undergone considerable change, with an orange hackle palmered over a gold tinsel body (formerly embossed tinsel, which he preferred), a jay throat and a wing of peacock wing and mallard strips under a topping, and believes it was invented by W. J. Davidson. Pryce-Tannatt's dressing, in How to Dress Salmon Flies (1914), differs in the details: a tag of silver and light orange floss rather than gold twist and orange silk, a silver rib rather than gold, and a mixed wing of married strands under brown mallard. The trout fly keeps the gold body, the orange and the mallard: Barry Ord Clarke calls it the trout version of the Tay salmon fly, and Fulling Mill and Fish4Flies sell it as a fly that began as a salmon fly. Who first tied it small for trout is not recorded. Some tie the orange hackle palmered.
+history """
+    Die Lachsfliege war zuerst da. Kelson nennt sie in The Salmon Fly (1895) ein altes
+    Standardmuster, das sich stark verändert habe, mit einer orangefarbenen Hechel, palmend über
+    einen Körper aus Goldtinsel gewunden (früher geprägtes Tinsel, das er vorzog), einem Bart
+    aus Eichelhäher und einem Flügel aus Segmenten von Pfauenflügel und Stockente unter einem
+    Topping, und glaubt, W. J. Davidson habe sie erfunden. Pryce-Tannatts Bindeanleitung in How
+    to Dress Salmon Flies (1914) weicht in den Einzelheiten ab: ein Tag aus Silber und
+    hellorangem Floss statt Goldkordel und orangefarbener Seide, eine Silber- statt einer
+    Goldrippung und ein gemischter Flügel aus verheirateten Streifen unter brauner Stockente.
+    Die Forellenfliege behält den Goldkörper, das Orange und die Stockente: Barry Ord Clarke
+    nennt sie die Forellenfassung der Lachsfliege vom Tay, und Fulling Mill und Fish4Flies
+    verkaufen sie als eine Fliege, die als Lachsfliege begann. Wer sie zuerst klein für Forellen
+    band, ist nicht überliefert. Manche binden die orangefarbene Hechel palmend.
+    """
+
+// en fishing: A bright attractor on the point or the middle dropper of a loch or reservoir wet-fly cast. Fulling Mill finds it very effective on a sunk line through the daphnia blooms of summer, and an excellent sea-trout fly on rivers and lochs in peaty water, as Ord Clarke does.
+fishing """
+    Ein leuchtender Reizköder an der Spitze oder am mittleren Springer eines Nassfliegenvorfachs
+    an Seen und Stauseen. Fulling Mill findet sie an der sinkenden Schnur durch die
+    Daphnienblüte des Sommers sehr fängig und, wie Ord Clarke, als ausgezeichnete
+    Meerforellenfliege an Flüssen und Seen mit moorigem Wasser.
+    """
+
+labels {
+    // en rib: Fine oval gold tinsel
+    rib "Feines ovales Goldtinsel"
+    // en beard: Orange cock hackle fibres
+    beard "Orangefarbene Hahnenhechelfibern"
+}
+
+notes {
+    // en step 7 (wind body): Down and back again for a smooth double layer.
+    step 7 "Hinunter und wieder zurück für eine glatte, doppelte Lage."
+    // en step 11 (tie-in beard): A bunch under the shank.
+    step 11 "Ein Büschel unter dem Hakenschenkel."
+    // en step 12 (tie-in wing): Matched slips from a left and a right feather, or the fibres folded, set low over the body.
+    step 12 "Passende Segmente von einer linken und einer rechten Feder, oder die Fibern gefaltet, flach über dem Körper."
+    // en step 13 (tie-in cheeks): One each side, flat against the wing.
+    step 13 "Eine auf jeder Seite, flach am Flügel anliegend."
+    // en step 14 (whip-finish): A black head, varnished.
+    step 14 "Ein schwarzer Kopf, lackiert."
+}

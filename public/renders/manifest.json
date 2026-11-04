@@ -1,600 +1,642 @@
 {
   "adams": {
-    "hash": "f2fc6f8a4684be24",
+    "hash": "bb5f052f202c922b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "alexandra": {
-    "hash": "3fd785a14e53e6fd",
+    "hash": "8881595013bdced5",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "allys-shrimp": {
-    "hash": "597ff25bf0eef764",
+    "hash": "acb855812e9adec3",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "arthofer": {
-    "hash": "a71852f277e35d2c",
+    "hash": "273b43e6dff8d8c9",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "balloon-caddis": {
-    "hash": "807ca98edaf70fdd",
+    "hash": "390cd7961d2734ce",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "bitch-creek": {
-    "hash": "35cdb455b7afb537",
+    "hash": "02c40eb5a8e22fef",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "black-ant": {
-    "hash": "ebb4fcf297f54114",
+    "hash": "8d12fb8038ab9610",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "black-gnat": {
-    "hash": "91b48da364a800ea",
+    "hash": "b784d8368f2bc98f",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "black-peacock-spider": {
-    "hash": "8aa31d465d7788da",
+    "hash": "029414068ef78b62",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "black-pennell": {
-    "hash": "c77024c5da375b04",
+    "hash": "66ab3512f939c18f",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "bloody-mary": {
-    "hash": "d2e3025f70c0d367",
+    "hash": "6dfd9597460168bd",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "blue-charm": {
+    "hash": "3bf5a03e82cf0bed",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "brassie": {
-    "hash": "311da7eed5eaf73c",
+    "hash": "bef523d4927125c8",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "butcher": {
-    "hash": "1b5ecfe2ae52ad46",
+    "hash": "b5d72c1f2bcf972b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "cascade": {
-    "hash": "f4a4cc169f6a01fb",
+    "hash": "ae8c3c87bbd61963",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "cats-whisker": {
-    "hash": "7796878d7bad49fc",
+    "hash": "2f8f754779f05140",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "cdc-and-elk": {
-    "hash": "cfe39d6525760807",
+    "hash": "6174c3307b7e6acb",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "chillimps": {
-    "hash": "4898e3080b63ba50",
+    "hash": "93692b526a719c79",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "chillimps-double": {
-    "hash": "3d9cc4bd275d25fe",
+    "hash": "8e25f25d313bdc1a",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "cinnamon-and-gold": {
+    "hash": "efab231da205210c",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "clouser-minnow": {
-    "hash": "48551dfb2e631563",
+    "hash": "adb35e4b37dd27ad",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "coch-y-bonddu": {
-    "hash": "b137b0f83da4c36b",
+    "hash": "2eaec1a6774ed45b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "crazy-charlie": {
-    "hash": "953f3227ce6dc9ee",
+    "hash": "89407a739d2255cf",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "czech-nymph": {
-    "hash": "f22afabb02872ea9",
+    "hash": "2dbc63899a9bfd94",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "deep-sparkle-pupa": {
-    "hash": "e628b595ee949acd",
+    "hash": "b46ae2e36db1ac60",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "dog-nobbler": {
-    "hash": "6c77b39b64cc7bf7",
+    "hash": "a18d944d944d9a65",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "dunkeld": {
+    "hash": "e7369f7fef3ba075",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "dyret": {
-    "hash": "b7dc8956368924ae",
+    "hash": "330d2a077224b615",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "elk-hair-caddis": {
-    "hash": "6ac1b4c34e909e0e",
+    "hash": "a740e074ef0f9711",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "elk-hair-caddis-troth": {
-    "hash": "37899d2c393cabc2",
+    "hash": "a9d838ee0e574e74",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "europea-12": {
-    "hash": "7cfd6e0eade16384",
+    "hash": "bc090f9cc8b192b7",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "europea-12-tailed": {
-    "hash": "d85bb92518eaf6f6",
+    "hash": "68ed0c176114c4e7",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "executioner": {
-    "hash": "95d9e6f02492385e",
+    "hash": "d50436b1077e29bc",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "f-fly": {
-    "hash": "b13ce046ac10c214",
+    "hash": "99681a250b32dab9",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "foam-beetle": {
-    "hash": "07f8daafe370b8a9",
+    "hash": "7378b9de0529647a",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "freight-train": {
+    "hash": "81d0f24cd845fcb3",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "gammarus": {
-    "hash": "b5669d319ff62d2d",
+    "hash": "6ed0ed6a217a29da",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "garry-dog": {
-    "hash": "10d9f4b80a5aa096",
+    "hash": "9ab216c7d08e0a5a",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "gimapuppan": {
-    "hash": "62a0a850b6bf47e0",
+    "hash": "a830fa5bb0926415",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "goddard-caddis": {
-    "hash": "8f71175dfecc8f9d",
+    "hash": "46aac45cfcfc4a47",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "gold-ribbed-hares-ear-nymph": {
-    "hash": "1cd03b06f1e4610c",
+    "hash": "832dce570dbe84d3",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "graraven": {
-    "hash": "0a7472db72e353c4",
+    "hash": "80f1b1006d46529f",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "greenwells-glory": {
-    "hash": "586de930f33169c3",
+    "hash": "c0b086775059a95d",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "grey-duster": {
-    "hash": "3ac9d48e1f16baa9",
+    "hash": "623f61d36d02cd1d",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "grey-wulff": {
-    "hash": "4422445af5ef5827",
+    "hash": "45d44b8fb7cd24e7",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "griffiths-gnat": {
-    "hash": "c3cfc00d8758af6a",
+    "hash": "de7af28687a0269b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "gurgler": {
-    "hash": "02ebd463188b2453",
+    "hash": "7469e91de3833954",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "hardys-favourite": {
+    "hash": "34d2bd057642ab23",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "hardys-favourite-claret": {
+    "hash": "c9dfeb9c1127194f",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "hemingway-caddis": {
-    "hash": "a612f335ce2b6f4a",
+    "hash": "11542075aa1c447c",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "hjortharspuppan": {
-    "hash": "90828e342d2508a7",
+    "hash": "4adc1b392b1d3b86",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "humpy": {
-    "hash": "0d1511d4222f030b",
+    "hash": "086342256b64a5f1",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "irresistible": {
-    "hash": "651a04f8f9d48a84",
+    "hash": "7d620d0443c937af",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "klinkhamer-special": {
-    "hash": "e0d090ebaac8fdda",
+    "hash": "51d6eee460c192c2",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "kobberbassen": {
-    "hash": "4f3318bacc3643b7",
+    "hash": "d1df63dfb996cbec",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "leftys-deceiver": {
-    "hash": "33502e6a6a7db191",
+    "hash": "d6504f596e37e886",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "magnus": {
-    "hash": "28a893d06016634c",
+    "hash": "95da69f55990143d",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "marabou-muddler": {
-    "hash": "23297c582fec4648",
+    "hash": "760e8b27893186df",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "march-brown": {
-    "hash": "6ccf55b4ca2593ed",
+    "hash": "9b12d824a4f1064b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "march-brown-spider": {
-    "hash": "7afb1f679cc8c3b5",
+    "hash": "e5c010b76d468ed8",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "mickey-finn": {
-    "hash": "d8caf3cf55ef4266",
+    "hash": "45a9768a35d2da76",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "mohican-mayfly": {
-    "hash": "daf84d6cfc88332a",
+    "hash": "587a5d3d9eba9286",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "montana-nymph": {
-    "hash": "682c2487bd2b1777",
+    "hash": "0edcf01eba35c074",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "morrish-mouse": {
-    "hash": "84784c11269b1027",
+    "hash": "8c36cc33ff860550",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "muddler-minnow": {
-    "hash": "70f7980d1d68ba51",
+    "hash": "00a4948e766c92b4",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "munro-killer": {
-    "hash": "3aa6defb7094176f",
+    "hash": "8ee1ae73aefe7142",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "parachute-adams": {
-    "hash": "b05f52f3a13bea6e",
+    "hash": "9513628861f29f8b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "paradrake": {
-    "hash": "c5495f2b19350fa6",
+    "hash": "2c0b43abbb6a1550",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "partridge-and-orange": {
-    "hash": "f5ff27861756afc4",
+    "hash": "cf4b0ff76a439351",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "pats-rubber-legs": {
-    "hash": "be9f20e05f43e58d",
+    "hash": "67d3c0cf48da7306",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "pattegrisen": {
-    "hash": "9be2ac8a1b87165e",
+    "hash": "bbe644b32e752ccb",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "peeping-caddis": {
-    "hash": "c97b4a9332b089d6",
+    "hash": "031c719fd0987fdc",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "peeping-caddis-edwards": {
-    "hash": "28de1ba3b2fc8cf4",
+    "hash": "4b353f930341d8a7",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "pheasant-tail-nymph": {
-    "hash": "2d15bd49624d6998",
+    "hash": "7f8181d89c176393",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "pheasant-tail-nymph-american": {
-    "hash": "1e9065d7ba1fecbb",
+    "hash": "80ad9357c20008a8",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "prince-nymph": {
-    "hash": "982410b576d8ae40",
+    "hash": "8988b8f7d6f7813d",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "rackelhanen": {
-    "hash": "b2cacdbd383bf18b",
+    "hash": "226ac779e12d16ec",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "raghead-crab": {
-    "hash": "bd3695704c00f0ac",
+    "hash": "b789536f5a23d79b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "red-tag": {
-    "hash": "d47ee822a4f02580",
+    "hash": "aa3c21766d64c9bd",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "royal-coachman": {
-    "hash": "81fccf738383a52f",
+    "hash": "ccd9de0ba2ac41aa",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "royal-wulff": {
-    "hash": "3c13765fb9998e84",
+    "hash": "f789aacf44f9dba4",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "silver-doctor": {
-    "hash": "1c6f9c4bf4c5fd7f",
+    "hash": "eb7ecd04c27bdfbe",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "skomakaren": {
-    "hash": "4fab4dd537ca54e1",
+    "hash": "ed836a63c6070b2e",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "snipe-and-purple": {
-    "hash": "63db0ddd14619d22",
+    "hash": "57202b589708e229",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "soldier-palmer": {
-    "hash": "1e370e5734884698",
+    "hash": "b60d9c01c2602596",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "stimulator": {
-    "hash": "1a8655bb5b91d83a",
+    "hash": "de9e21ff0f16ed1d",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "stoats-tail": {
-    "hash": "d99f27327da58194",
+    "hash": "708a40a5aab4e8e7",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "streaking-caddis": {
-    "hash": "76b60cf22b193563",
+    "hash": "2bbc1fe1fbf38814",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "superpuppan": {
-    "hash": "780c18b03e93a89e",
+    "hash": "52ea970f94db2c52",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "teal-blue-and-silver": {
-    "hash": "0c548e1a38466a9b",
+    "hash": "da0de038fcab54b1",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "thread-frenchie": {
-    "hash": "732b1df8fc3677c6",
+    "hash": "d040e7305bae8859",
+    "frames": 24,
+    "width": 600,
+    "height": 400
+  },
+  "thunder-and-lightning": {
+    "hash": "9e832af423628a9a",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "tummel-shrimp": {
-    "hash": "c8891a9efbfb7834",
+    "hash": "9e5566ace317b6aa",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "ullsocken": {
-    "hash": "c65372dd40bcf3b3",
+    "hash": "4c6b4215bfc0c04b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "ullsocken-treble": {
-    "hash": "f9a9d7bab0fc4c26",
+    "hash": "23e6ca0979af9695",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "willie-gunn": {
-    "hash": "8b1366115649a159",
+    "hash": "7c4190532cedf7c7",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "willie-gunn-double": {
-    "hash": "f4118c504857a743",
+    "hash": "9bfa2553f9564574",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "willie-gunn-tube": {
-    "hash": "2a3ea4f918777ce1",
+    "hash": "cfdde24aca15a052",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "willie-gunn-waddington": {
-    "hash": "7f7d430b31521688",
+    "hash": "2903956a7970b0b4",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "woolly-bugger": {
-    "hash": "4cbd108d7525d8e1",
+    "hash": "468fd32b73189b48",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "woolly-bugger-conehead": {
-    "hash": "ebe4e778dbf676de",
+    "hash": "b3fba0243c9a0960",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "woolly-worm": {
-    "hash": "7953b7a75da539b7",
+    "hash": "ca9120dd3a2b7197",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "zebra-midge": {
-    "hash": "0e3579bf19a7e2e8",
+    "hash": "2f98808fddadaa0b",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "zonker": {
-    "hash": "0309ef8e4d7fd5a1",
+    "hash": "75604e3295a82926",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "zug-bug": {
-    "hash": "d44f2aaee00397e5",
+    "hash": "1d44fd86818c1bd4",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "zulu": {
-    "hash": "99c18d0624846710",
+    "hash": "22820f4259065e8e",
     "frames": 24,
     "width": 600,
     "height": 400
   },
   "zulu-blue": {
-    "hash": "90e461d49dc9066e",
+    "hash": "2a1b6e9939cb3903",
     "frames": 24,
     "width": 600,
     "height": 400

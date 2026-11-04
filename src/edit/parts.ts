@@ -189,7 +189,7 @@ export const ROLE_KINDS: Record<Role, readonly MaterialKind[]> = {
   thorax: ["peacock-herl", "dry-fly-dubbing", "dubbing", "hares-ear-dubbing", "seals-fur", "chenille"],
   back: ["foam", "scud-back", "turkey-quill", "pheasant-tail", "poly-yarn", "chenille", "rabbit-strip"],
   wing: [
-    "hackle-tips", "mallard-breast", "teal-flank", "duck-quill", "starling-quill", "turkey-quill", "cdc", "poly-yarn",
+    "hackle-tips", "mallard-breast", "teal-flank", "bronze-mallard", "duck-quill", "starling-quill", "turkey-quill", "cdc", "poly-yarn",
     "elk-hair", "deer-hair", "calf-tail", "squirrel-tail", "bucktail", "marabou", "golden-pheasant-tippet", "krystal-flash", "goose-biot",
   ],
   hackle: ["cock-hackle", "hen-hackle", "saddle-hackle", "partridge-hackle", "snipe-hackle", "cdc", "hackle-fibres", "bucktail", "squirrel-tail"],
