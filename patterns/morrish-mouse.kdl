@@ -1,0 +1,70 @@
+// Morrish Mouse: Ken Morrish's floating mouse, a bare rabbit hide tail, clipped deer hair and a foam back folded into a head.
+
+id morrish-mouse
+name "Morrish Mouse"
+type terrestrial
+imitates terrestrial
+difficulty intermediate
+species trout
+// Assumption: fished in summer, as mice are on Kamchatka and Alaskan rivers (Deneki's page is
+// about early summer); the sources give no months.
+season june july august september
+origin originator="Ken Morrish"
+description "A dark brown rabbit strip, its hide clipped bare but for a tuft at the end, as the tail; a body of natural deer hair spun and clipped flat on top and underneath, the sides left long; and a black foam back tapered from the tail and folded over itself in front as the head."
+history """
+    It is named after its creator, Ken Morrish, who wrote on the Fly Water Travel site that he
+    had heard the big rainbows of the Kamchatka Peninsula in far eastern Russia love mice. Most
+    mouse flies, he wrote, are cute but not practical to fish for very long; his is "a three-step
+    fly with a back, a tail and a big profile of minimal mass that swims forever", and it can be
+    cast on a light rod, a 5-weight. Tyers differ in the details: the dressing Orvis gives with In
+    the Riffle's video has a dark brown tail and the deer hair trimmed top and bottom, while Stuart
+    Foxall's step-by-step for Deneki Outdoors ties it with a black tail, trims the belly last and
+    folds the end of the foam back over itself into a bigger head, cutting ears into the fold.
+    """
+fishing """
+    A mouse for big rainbows, skated across the surface so it wakes like a mouse swimming over.
+    Trimmed deer hair and closed-cell foam take up little water, so it keeps floating however long
+    it is fished.
+    """
+sources {
+    "Orvis News: How to tie the Morrish Mouse (Phil Monahan, quoting Ken Morrish)" url="https://news.orvis.com/fly-fishing/video-how-to-tie-the-morrish-mouse"
+    "Deneki Outdoors: Morrish Mouse tying instructions (Stuart Foxall)" url="https://deneki.com/2017/06/morrish-mouse-tying-instructions/"
+    "Tiemco: TMC8089" url="https://www.tiemco.co.jp/Form/Product/ProductDetail.aspx?shop=0&pid=0218089&bid=flyfishing"
+    "flyhooks.org: Tiemco TMC8089 (measurements)" url="https://flyhooks.org/tiemco/tmc8089/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://deneki.wpengine.com/wp-content/uploads/2017/06/FullSizeRender_17.jpg" page="https://deneki.com/2017/06/morrish-mouse-tying-instructions/" author="Stuart Foxall" license="All rights reserved; reference only" note="Side view in the vise: the bare hide and tuft, the deer hair, the folded foam head"
+    "https://img.youtube.com/vi/LmLy7OHGRN0/maxresdefault.jpg" page="https://www.youtube.com/watch?v=LmLy7OHGRN0" author="Trident Fly Fishing" license="All rights reserved; reference only" note="Side view; the tail keeps its fur here, the head a block of foam over the eye"
+    "https://deneki.wpengine.com/wp-content/uploads/2017/06/FullSizeRender_18.jpg" page="https://deneki.com/2017/06/morrish-mouse-tying-instructions/" author="Stuart Foxall" license="All rights reserved; reference only" note="From above: the hair flared wide at the sides, the foam's taper and the head"
+}
+
+// Orvis: a bass-bug hook, the Tiemco 8089, size 10.
+hook bass-bug size=10
+// Orvis: black 6/0 or 140 denier; Deneki: not Kevlar, which cuts the foam and the hair.
+thread black size="6/0"
+
+materials {
+    // Orvis: dark brown, the fur trimmed off at the front; Deneki: a small tuft left at the end.
+    // Assumption: a standard 1/8" (3 mm) strip; the tuft about half a gape of hide, read from the photos.
+    tail rabbit-strip color=brown tuft=0.5 label="Dark brown rabbit zonker strip, clipped but for a tuft"
+    // Orvis and Deneki: 2 mm black closed-cell foam.
+    back foam color=black mm=2 label="Black closed-cell foam"
+    body deer-hair label="Natural deer body hair"
+}
+
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    // Read from the photos: the hide about 2.5 gapes past the bend, the tuft's hair a gape past it.
+    tie-in tail length=2.6 note="Clip the fur off the hide first, all but a small tuft at the end, and tie it in flat on top of the shank."
+    // Read from the photos: about as wide as the body at the head, a little over a gape.
+    tie-in back width=1.2 taper=#true note="Leave the rest lying back over the tail while you spin the hair."
+    // Read from the photos: the sides flare out about 1.2 gapes; Deneki ties the last bunch tips forward as a face.
+    spin body to=0.85 length=1.3 note="Small, pencil-thick bunches; Foxall ties the last one with its tips pointing forward, as a face."
+    // Read from the photos: the body about 0.7 gape deep.
+    trim body keep=sides leave=0.35 note="A flat seat on top for the foam and a flat belly, so it sits well in the water; Foxall trims the belly last."
+    // Read from the photos: the head about 0.8 gape long in front of the tie-down.
+    pull-over back to=0.85 fold=0.8 note="Firm, but not so tight that the thread cuts the foam."
+    whip-finish note="Under the head."
+}

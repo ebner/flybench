@@ -484,3 +484,136 @@ steps {
     expect(simulate(recipe(false)).steps[1]!.text).toMatch(/as one piece, with the brown goose biot tied in at its end beforehand sticking out 0\.6× the gape past it\./);
   });
 });
+
+describe("a mouse (the Morrish Mouse's techniques)", () => {
+  const result = loadRecipe(readFileSync(new URL("../../patterns/morrish-mouse.kdl", import.meta.url), "utf8"));
+  if (!result.ok) throw new Error("morrish-mouse.kdl does not load");
+  const build = simulate(result.recipe);
+  const pieces = build.steps.flatMap((s) => s.pieces);
+
+  it("measures a wide-gape hook by its own gape", () => {
+    // 2 mm foam on a #10 TMC 8089, whose gape is 10.4 mm.
+    const back = pieces.find((p) => p.type === "cover")!;
+    expect(back.type === "cover" && back.thickness).toBeCloseTo(2 / 10.4);
+  });
+
+  it("keeps a clipped strip's fur only as a tuft at its end", () => {
+    expect(pieces.find((p) => p.type === "extension")).toMatchObject({ tuft: 0.5, length: 2.6 });
+  });
+
+  it("cuts spun hair flat on top and underneath, its sides long, and lays the foam on the flat top", () => {
+    const cut = pieces.find((p) => p.type === "bundle" && p.material === "body" && p.flat);
+    expect(cut).toMatchObject({ flat: { top: 0.35, under: 0.35 }, length: 1.3 });
+    const back = pieces.find((p) => p.type === "cover")!;
+    if (back.type !== "cover") throw new Error();
+    expect(back.base.radiusAt((back.x0 + back.x1) / 2)).toBeCloseTo(0.35);
+    // Down at the tie-down, where the thread binds the foam to the shank.
+    expect(back.base.radiusAt(back.x1)).toBeLessThan(0.2);
+  });
+
+  it("pulls the foam over cut to a taper, its end folded back as a head", () => {
+    expect(pieces.find((p) => p.type === "cover")).toMatchObject({ width: 1.2, taper: "rear", fold: true, stub: 0.8 });
+    expect(build.steps[6]!.text).toMatch(/fold its end back over itself to make a head about 0\.8× the gape long/);
+  });
+});
+
+describe("strips cut to a width, and spun hair cut flat", () => {
+  const load = (materials: string, steps: string) => {
+    const r = loadRecipe(`id test
+name "Test"
+type terrestrial
+difficulty intermediate
+hook bass-bug size=10
+thread black size="6/0"
+materials {
+${materials}
+}
+steps {
+${steps}
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\n"));
+    return simulate(r.recipe);
+  };
+  const covers = (b: ReturnType<typeof simulate>) => b.steps.flatMap((s) => s.pieces).filter((p) => p.type === "cover");
+
+  it("cuts a feather slip pulled over to its width and taper too", () => {
+    const b = load("    case turkey-quill\n    body deer-hair", "    attach-thread at=0.85\n    wrap-thread to=0.0\n    tie-in case width=0.8 taper=#true\n    spin body to=0.85\n    pull-over case to=0.85\n    whip-finish");
+    expect(covers(b)[0]).toMatchObject({ width: 0.8, taper: "rear" });
+  });
+
+  it("puts the point of a strip laid back from the front at the front", () => {
+    const b = load(
+      "    balloon foam color=yellow\n    thorax dubbing color=brown",
+      "    attach-thread at=0.85\n    tie-in balloon forward=#true width=0.6 taper=#true\n    wrap-thread to=0.6\n    dub thorax to=0.85\n    wrap-thread to=0.6\n    pull-over balloon to=0.6\n    whip-finish",
+    );
+    const c = covers(b)[0]!;
+    expect(c).toMatchObject({ taper: "front" });
+    expect(c.type === "cover" && c.x1).toBeGreaterThan(c.type === "cover" ? c.x0 : 0);
+  });
+
+  it("lowers the body to a second, closer flat cut, so what is pulled over lies on the hair", () => {
+    const b = load(
+      "    back foam color=black mm=2\n    body deer-hair",
+      "    attach-thread at=0.85\n    wrap-thread to=0.0\n    tie-in back width=1.2\n    spin body to=0.85 length=1.3\n    trim body keep=sides leave=0.5\n    trim body keep=sides leave=0.2\n    pull-over back to=0.85\n    whip-finish",
+    );
+    const cuts = b.steps.flatMap((s) => s.pieces).filter((p) => p.type === "bundle" && p.flat);
+    expect(cuts.at(-1)).toMatchObject({ flat: { top: 0.2, under: 0.2 } });
+    const c = covers(b)[0]!;
+    if (c.type !== "cover") throw new Error();
+    expect(c.base.radiusAt((c.x0 + c.x1) / 2)).toBeCloseTo(0.2);
+    expect(c.base.underAt((c.x0 + c.x1) / 2)).toBeCloseTo(0.2);
+  });
+
+  it("never lets a later cut leave the hair longer than an earlier one did", () => {
+    const b = load(
+      "    back foam color=black mm=2\n    body deer-hair",
+      "    attach-thread at=0.85\n    wrap-thread to=0.0\n    tie-in back width=1.2\n    spin body to=0.85 length=1.3\n    trim body keep=sides leave=0.2\n    trim body keep=top leave=0.5\n    pull-over back to=0.85\n    whip-finish",
+    );
+    const cuts = b.steps.flatMap((s) => s.pieces).filter((p) => p.type === "bundle" && p.flat);
+    expect(cuts.at(-1)).toMatchObject({ flat: { top: 0.2, under: 0.2 } });
+    const c = covers(b)[0]!;
+    expect(c.type === "cover" && c.base.underAt((c.x0 + c.x1) / 2)).toBeCloseTo(0.2);
+  });
+
+  it("says a strip cut to a width and tied in underneath is tied in under the shank", () => {
+    const b = load(
+      "    belly foam color=black mm=2\n    body deer-hair",
+      "    attach-thread at=0.85\n    wrap-thread to=0.0\n    tie-in belly side=under width=1\n    spin body to=0.85\n    pull-over belly to=0.85\n    whip-finish",
+    );
+    expect(b.steps[2]!.text).toMatch(/tie it in under the shank with a few firm thread turns/);
+  });
+});
+
+describe("a flat cut further out than spun hair reaches", () => {
+  it("leaves the body as deep as the hair, so what is pulled over lies on it", () => {
+    const r = loadRecipe(`id test
+name "Test"
+type terrestrial
+difficulty intermediate
+hook bass-bug size=10
+thread black size="6/0"
+materials {
+    back foam color=black mm=2
+    body deer-hair
+}
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in back width=1.2
+    spin body to=0.85 length=0.2
+    trim body keep=sides leave=0.35
+    pull-over back to=0.85
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error("does not load");
+    const pieces = simulate(r.recipe).steps.flatMap((s) => s.pieces);
+    const hair = pieces.find((p) => p.type === "bundle" && p.flat)!;
+    const c = pieces.find((p) => p.type === "cover")!;
+    if (hair.type !== "bundle" || c.type !== "cover") throw new Error();
+    const reach = hair.radius + hair.length * Math.cos(hair.angle);
+    expect(reach).toBeLessThan(0.35);
+    expect(c.base.radiusAt((c.x0 + c.x1) / 2)).toBeCloseTo(reach);
+  });
+});

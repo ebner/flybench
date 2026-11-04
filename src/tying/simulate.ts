@@ -105,6 +105,8 @@ export interface BundlePiece extends PieceBase {
   cut?: boolean;
   /** Trimmed spun hair: a round head, a wedge flat underneath and deepest at the rear, a cigar or a cone. */
   trimShape?: "round" | "wedge" | "cigar" | "cone";
+  /** Spun hair cut flat on top or underneath (or both), this far from the shank's axis; the sides left long. */
+  flat?: { top?: number; under?: number };
   /** Upright and divided: two tufts turned out to either side by this many radians. */
   pair?: number;
   /** Upright and fanned: the hair splays fore and aft over this many radians in all, narrow across (a Mohican's wing). */
@@ -189,6 +191,12 @@ export interface CoverPiece extends PieceBase {
   split?: { x: number; angle: number; reach: number };
   /** 0 = plain, 1 = strongly barred or mottled (turkey). */
   barring: number;
+  /** Cut to a width (gapes): a flat strip lying over the body rather than wrapped round it by `halfAngle`. */
+  width?: number;
+  /** Cut tapered: to a point where it is tied in (its rear end, or its front when laid back), widening to `width` at the tie-down. */
+  taper?: "rear" | "front";
+  /** Its end folded back over itself in front of the tie-down, doubled as a head this long (`stub`). */
+  fold?: boolean;
 }
 
 /**
@@ -229,6 +237,8 @@ export interface ExtensionPiece extends PieceBase {
   width?: number;
   /** Fur on the strip's top face this long, leaning back towards its end. */
   fur?: number;
+  /** The fur clipped off but for a tuft over this much of the strip at its end (gapes). */
+  tuft?: number;
   /** Made on a needle and bound into this many segments, each waist pinched by turns of `bands`, the thread's colour. */
   segments?: number;
   bands?: string;
@@ -372,6 +382,8 @@ interface MaterialLook {
   shaggy?: number;
   /** Foam: the sheet's thickness (gapes), when the recipe gives it. */
   sheet?: number;
+  /** A fur strip clipped but for a tuft this long at its end (gapes). */
+  tuft?: number;
 }
 
 const deg = (d: number) => (d * Math.PI) / 180;
@@ -495,7 +507,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
       const strip = cat as { furMm?: number; widthMm?: number };
       return {
         ...base, strandRadius: mm(m.mm ?? strip.widthMm ?? 3) / 2, fibreLength: m.fibre ?? mm(strip.furMm ?? 18), freeLength: 2.5,
-        tieInThickness: 0.05, layerThickness: () => STRIP_HIDE,
+        tieInThickness: 0.05, layerThickness: () => STRIP_HIDE, ...(m.tuft !== undefined && { tuft: m.tuft }),
       };
     }
     case "tubing":
@@ -582,6 +594,10 @@ export function simulate(recipe: Recipe): Build {
   const posts = new Map<string, { x: number; baseY: number; height: number; radius: number; hackle?: number }>();
   /** How a bunch was tied in: its length and how far round it was spread (radians), for folding it back later. */
   const bunches = new Map<string, { length: number; spread: number }>();
+  /** Spun hair cut flat: how high the body was there before the first cut, on top and underneath. */
+  const flatBase = new Map<string, { top: number; under: number }>();
+  /** Strips cut to a width (perhaps tapered) before they are tied in, to be pulled over. */
+  const cuts = new Map<string, { width: number; taper: boolean }>();
   /**
    * Hair folded back and tied down at `x` (a bullet head), its tips trailing loose to `tipX`, until
    * thread turns spiralled back over it bind it along the body (to `bound`) as a `sheath`.
@@ -798,10 +814,11 @@ export function simulate(recipe: Recipe): Build {
         const from = threadX!;
         const to = Math.min(step.to * span, frontLimit);
         const radius = profile.radiusAt(from);
-        // Assumption: spun deer hair stands out about 0.7 gape before it is trimmed.
+        // Assumption: spun deer hair stands out about 0.7 gape before it is trimmed, unless the
+        // recipe says how long the clumps are cut.
         const head: BundlePiece = {
           type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0.1, 1],
-          x: from, span: to - from, radius, length: 0.7, angle: deg(35), direction: "radial", side: "top",
+          x: from, span: to - from, radius, length: step.length ?? 0.7, angle: deg(35), direction: "radial", side: "top",
           spread: Math.PI, bundleRadius: l.strandRadius, count: Math.round(420 * Math.max(0.3, to - from)),
         };
         pieces.push(head);
@@ -828,6 +845,8 @@ export function simulate(recipe: Recipe): Build {
         tiedAt.set(step.material, x);
         tiedAtPosition.set(step.material, threadAt);
         if (step.side === "under" && step.length === undefined) underneath.add(step.material);
+        // (A feather slip tied in without a length is pulled over, as the rules have it: cut to a width too.)
+        if (step.width !== undefined && step.length === undefined) cuts.set(step.material, { width: step.width, taper: Boolean(step.taper) });
         const side: Side = step.side === "under" ? "under" : "top";
         // On its side of what is already there; its bases spread round the circle turns lie on.
         const radius = side === "under" ? profile.underAt(x) : profile.radiusAt(x);
@@ -857,7 +876,7 @@ export function simulate(recipe: Recipe): Build {
             tip: step.tip === undefined ? undefined : resolveColor(step.tip), fuzz: l.look === "chenille" ? l.fibreLength : undefined,
             forward: step.forward,
             // A fur strip sticks out as its hide, the fur on top (a Zonker's or a Bunny Leech's tail).
-            ...(l.look === "strip" ? { width: l.strandRadius * 2, fur: l.fibreLength } : {}),
+            ...(l.look === "strip" ? { width: l.strandRadius * 2, fur: l.fibreLength, ...(l.tuft !== undefined && { tuft: l.tuft }) } : {}),
             // Assumption: a body made on a needle tapers to about two thirds of its front thickness
             // at its tip (read from photos of the Mohican Mayfly).
             ...(made ? { segments: step.segments, bands: threadColor, taper: 0.65 } : {}),
@@ -1050,6 +1069,9 @@ export function simulate(recipe: Recipe): Build {
         // What sticks out until it is cut is longer than what is left.
         const untrimmed = Math.max(UNTRIMMED, (laterTrim?.leave ?? 0) + 0.4);
         ctx.trimmedLater = trimmedLater;
+        const cut = cuts.get(step.material);
+        // Folded back over itself in front of the tie-down: a doubled head that long.
+        const fold = step.fold !== undefined && !back ? step.fold : undefined;
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           // A loose bubble wraps further round the sides of what it covers.
@@ -1065,8 +1087,11 @@ export function simulate(recipe: Recipe): Build {
           ...(l.veil ? { veil: true } : {}),
           ...(split ? { split } : {}),
           // A strip trimmed later sticks out over the eye until then.
-          dents: [], stub: trimmedLater && !back ? untrimmed : 0,
+          dents: [], stub: fold ?? (trimmedLater && !back ? untrimmed : 0),
           barring: l.barring,
+          // (Laid back, it is tied in at the front: its point is there.)
+          ...(cut && { width: cut.width, ...(cut.taper && { taper: back ? ("front" as const) : ("rear" as const) }) }),
+          ...(fold !== undefined && { fold: true }),
         };
         pieces.push(cover);
         covers.set(step.material, cover);
@@ -1149,7 +1174,37 @@ export function simulate(recipe: Recipe): Build {
       case "trim": {
         duration = DURATION.trim;
         const cutAt = time + duration * 0.5;
-        if (step.keep) {
+        if (step.keep && spun.has(step.material)) {
+          // Spun hair cut flat on top or underneath (or both), the sides left long; what is pulled
+          // over it later lies on the flat top.
+          ctx.flat = true;
+          const b = butts.get(step.material)!;
+          b.until = cutAt;
+          // Assumption: cut about a third of a gape from the shank unless the recipe says.
+          const h = step.leave ?? 0.3;
+          // A second cut only takes off more: never longer than the hair already is.
+          const top = Math.min(b.flat?.top ?? Infinity, h);
+          const under = Math.min(b.flat?.under ?? Infinity, h);
+          const flat = { ...b.flat, ...(step.keep !== "top" && { top }), ...(step.keep !== "under" && { under }) };
+          const cut: BundlePiece = { ...b, id: nextId++, seed: b.seed ?? b.id, flat, window: [0.5, 0.5001], until: undefined };
+          pieces.push(cut);
+          butts.set(step.material, cut);
+          const x0 = b.x;
+          const x1 = b.x + (b.span ?? 0.1);
+          const mid = (x0 + x1) / 2;
+          // Thinning out at its ends, where the thread ties down what is pulled over it.
+          const ends = Math.min(0.15, (x1 - x0) / 4);
+          // The body's top (or belly) brought to the cut: raised to it the first time, lowered to
+          // a closer one after; never below what is under the hair. (The layers have the same
+          // shape each time, so a later one takes back what an earlier one added.)
+          const before = flatBase.get(step.material) ?? { top: profile.radiusAt(mid), under: profile.underAt(mid) };
+          flatBase.set(step.material, before);
+          // A cut further out than the hair reaches cuts nothing: the body is only as deep as the
+          // hair, standing out from its roots and leaning back.
+          const reach = b.radius + b.length * Math.cos(b.angle);
+          if (step.keep !== "top") profile = profile.withLayer(x0, x1, Math.max(before.top, Math.min(top, reach)) - profile.radiusAt(mid), ends, true, "top");
+          if (step.keep !== "under") profile = profile.withLayer(x0, x1, Math.max(before.under, Math.min(under, reach)) - profile.underAt(mid), ends, true, "under");
+        } else if (step.keep) {
           // The same hackle, with only its side fibres left.
           const w = wound.get(step.material)!;
           w.until = cutAt;
@@ -1163,7 +1218,8 @@ export function simulate(recipe: Recipe): Build {
           ctx.cover = true;
           const c = covers.get(step.material)!;
           c.until = cutAt;
-          const trimmed: CoverPiece = { ...c, id: nextId++, seed: c.seed ?? c.id, stub: step.leave ?? 0, window: [0.5, 0.5001], until: undefined };
+          // (A head folded back over itself stays; what is cut is the end left at the tie-down.)
+          const trimmed: CoverPiece = { ...c, id: nextId++, seed: c.seed ?? c.id, stub: c.fold ? c.stub : (step.leave ?? 0), window: [0.5, 0.5001], until: undefined };
           pieces.push(trimmed);
           covers.set(step.material, trimmed);
         } else if (palmeredTips.has(step.material)) {

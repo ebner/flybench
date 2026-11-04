@@ -159,7 +159,7 @@ Hela fjädrar binds in i stjälken; skala först bort fjunet vid basen.`,
     summary: "Buntar av ihåligt hår som spinns runt krokskaftet och klipps till ett huvud.",
     how: `Håll en bunt hjorthår över krokskaftet, lägg två lösa varv och dra sedan hårt nedåt samtidigt som du släpper taget: håret spretar ut och spinner runt krokskaftet. Tryck det tätt bakåt med fingrarna, lägg nästa bunt framför och fortsätt fram till krokögat.
 
-Gör en whipfinishknut och klipp sedan huvudet till form med en vass sax eller ett rakblad.`,
+Gör en whipfinishknut och klipp sedan huvudet till form med en vass sax eller ett rakblad. För en kropp som ska ligga plant på vattnet, som en mus, klipps håret plant upptill och undertill med ett rakblad, och håret på sidorna får vara långt.`,
     mistakes: ["Buntar som är för stora för att spinna.", "Att inte packa buntarna, så att huvudet blir löst."],
   },
   "tubing-body": {

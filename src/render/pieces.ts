@@ -719,6 +719,11 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         length *= 1 - 0.75 * Math.pow(f, 1.2);
       }
     }
+    // Cut flat on top or underneath: no hair reaches past the cut; the sides keep their length.
+    if (radialHair && piece.flat) {
+      if (piece.flat.top !== undefined && dir.y > 0.02) length = Math.min(length, Math.max(0.01, (piece.flat.top - base.y) / dir.y));
+      if (piece.flat.under !== undefined && dir.y < -0.02) length = Math.min(length, Math.max(0.01, (piece.flat.under + base.y) / -dir.y));
+    }
     // Free fibres curve a little; spun, clipped and upright hair stays straight.
     const bend = radialHair || piece.cut ? 0 : spec.curve * (0.4 + 0.6 * rand());
     const toward = new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5)
@@ -1045,21 +1050,41 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   };
   // Pulled over the belly, the same shape mirrored below the ring's centre.
   const flip = piece.side === "under" ? -1 : 1;
+  // A strip cut to a width lies flat over the body, its edges dropping a little past the body's
+  // sides; cut tapered, it widens from a point where it is tied in to its width at the tie-down.
+  const flatStrip = piece.width !== undefined;
+  const halfWidth = (x: number, pinch: number) => {
+    // From the point, where it is tied in: its rear end, or its front when it was laid back.
+    const fromRear = Math.min(1, Math.max(0, (x - piece.x0) / Math.max(0.05, piece.x1 - piece.x0)));
+    const along = piece.taper === "front" ? 1 - fromRear : fromRear;
+    // Cinched by the thread at the tie-downs.
+    return ((piece.width ?? 0) / 2) * (piece.taper ? 0.12 + 0.88 * along : 1) * (0.35 + 0.65 * Math.min(1, pinch * 1.2));
+  };
   /** The strip's cross-section at x: how high its underside lies, how thick it is, how tightly it is pinched. */
   const section = (x: number, last = false) => {
     // Pinched down by the thread at the rear tie-in and at the tie-down; a trimmed stub
     // springs back up in front of the tie-down, and the far end is cut.
     let pinch = Math.min(smooth(x - piece.x0, 0, 0.14), smooth(piece.x1 - x, -0.02, 0.1));
-    if (x > piece.x1) pinch = Math.min(smooth(x - piece.x1, 0, 0.08) * 0.9, last ? 0 : 1);
+    if (x > piece.x1) pinch = Math.min(smooth(x - piece.x1, 0, 0.08) * 0.9, last && !piece.fold ? 0 : 1);
     let thick = piece.thickness * Math.max(0.12, pinch);
     // Rib turns press it in.
     for (const d of piece.dents) thick *= 1 - 0.45 * Math.exp(-(((x - d) / 0.025) ** 2));
     // A loose bubble arches up between its tie-downs, highest in the middle.
     const arch = piece.bubble ? piece.bubble * Math.sin(Math.PI * Math.min(1, Math.max(0, (x - piece.x0) / (piece.x1 - piece.x0)))) : 0;
-    const under = bodyRadius(Math.min(x, piece.x1), Math.min(1, pinch * 1.4)) + piece.lift * Math.max(0.15, Math.min(1, pinch * 1.4)) + arch;
+    let under = bodyRadius(Math.min(x, piece.x1), Math.min(1, pinch * 1.4)) + piece.lift * Math.max(0.15, Math.min(1, pinch * 1.4)) + arch;
+    if (piece.fold && x > piece.x1) {
+      // Folded back over itself: two layers (and a little air) in front of the tie-down, rounded
+      // where it turns back at the front.
+      const r = Math.min(piece.thickness * 1.2, (xEnd - piece.x1) / 2);
+      const e = Math.min(1, Math.max(0, (x - (xEnd - r)) / r));
+      const full = thick * 2.15;
+      thick = full * Math.max(0.04, Math.sqrt(1 - e * e));
+      // Level with where it is tied down, not sprung up off the body behind.
+      under = bodyRadius(piece.x1, 0) + piece.lift * 0.15 + (full - thick) / 2;
+    }
     // It drapes round the circle turns lie on there, raised over what is tied on top.
     const centre = piece.base.ringAt(Math.min(x, piece.x1)).centre;
-    return { under, thick, centre, pinch };
+    return { under, thick, centre, pinch, hw: halfWidth(x, pinch) };
   };
   /** A point on its top (or underside) at x, `t` from one edge (-1) to the other (1), in shank-local coordinates. */
   // All round the body (hair folded back round it), as thick underneath as on top.
@@ -1075,6 +1100,16 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     return half * (gap + ((t + 1) / 2) * piece.halfAngle * 0.6);
   };
   const surface = (out: THREE.Vector3, x: number, s: ReturnType<typeof section>, t: number, top: boolean, half = 0) => {
+    if (flatStrip) {
+      // Parted round a post, each half is half the width, turned out to its side most at the post.
+      const z = split
+        ? half * (split.angle * Math.exp(-(((x - split.x) / split.reach) ** 2) * 2.2) * s.under + ((t + 1) / 2) * s.hw)
+        : t * s.hw;
+      // Assumption: past the body's sides a cut strip of foam bends down about a third as far as it reaches out.
+      const drop = Math.max(0, Math.abs(z) - piece.base.sideAt(Math.min(x, piece.x1))) * 0.3;
+      const y = (top ? s.under + s.thick * (0.85 + 0.15 * Math.cos((t * Math.PI) / 2)) : s.under + s.thick * 0.05) - drop;
+      return out.set(x, flip * y, z);
+    }
     const phi = phiAt(x, t, half);
     const dome = domed(t);
     const r = (top ? s.under + s.thick * dome : s.under + s.thick * 0.05) - flip * s.centre;
@@ -1382,9 +1417,11 @@ function extensionView(piece: ExtensionPiece, surfaces: Surfaces, space: ShankSp
     // sides and below, so from the side the tail is a plume.
     const rand = mulberry32((piece.seed ?? piece.id) * 4127 + 3);
     const list: Fibre[] = [];
-    const n = Math.round(L * FUR_PER_GAPE);
+    // Clipped but for a tuft at its end: fur only on that last part of the strip.
+    const from = piece.tuft !== undefined ? Math.max(0.02, 1 - piece.tuft / Math.max(0.05, L)) : 0.02;
+    const n = Math.round(L * (piece.tuft !== undefined ? (0.98 - from) / 0.96 : 1) * FUR_PER_GAPE);
     for (let k = 0; k < n; k++) {
-      const t = 0.02 + 0.96 * rand();
+      const t = from + (0.98 - from) * rand();
       const c = centre(t);
       const ahead = centre(Math.min(1, t + 0.01)).sub(centre(Math.max(0, t - 0.01))).normalize();
       const up = Y_AXIS.clone().addScaledVector(ahead, -ahead.y).normalize();

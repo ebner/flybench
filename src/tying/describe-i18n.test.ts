@@ -91,3 +91,40 @@ steps {
     expect(simulate(forward).steps[tie]!.text).toMatch(lang === "sv" ? /framåt över krokögat, med remsans/ : /nach vorn über das Öhr übersteht/);
   });
 });
+
+describe("a strip cut to a width", () => {
+  const strip = (side: string) => {
+    const r = loadRecipe(`id test
+name "Test"
+type terrestrial
+difficulty intermediate
+hook bass-bug size=10
+thread black size="6/0"
+materials {
+    belly foam color=black mm=2
+    body deer-hair
+}
+steps {
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in belly ${side} width=1 taper=#true
+    spin body to=0.85
+    pull-over belly to=0.85
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error("does not load");
+    return simulate(r.recipe).steps[2]!.text;
+  };
+  it("is said to be tied in on its side of the shank, in every language", () => {
+    setLang("en");
+    expect(strip("side=under")).toMatch(/tie it in under the shank by the point/);
+    expect(strip("")).toMatch(/tie it in on top by the point/);
+    setLang("sv");
+    expect(strip("side=under")).toMatch(/bind in den med spetsen under krokskaftet/);
+    expect(strip("")).toMatch(/bind in den med spetsen ovanpå krokskaftet/);
+    setLang("de");
+    expect(strip("side=under")).toMatch(/mit der Spitze unter dem Hakenschenkel/);
+    expect(strip("")).toMatch(/mit der Spitze oben auf den Hakenschenkel/);
+  });
+});

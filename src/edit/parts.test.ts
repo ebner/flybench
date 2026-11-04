@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
 import type { Recipe } from "../recipe/schema";
 import { simulate } from "../tying/simulate";
-import { blankFly, recipeText } from "./own";
+import { blankFly, PATTERN_FORM, recipeText } from "./own";
 import { mulberry32 } from "../render/random";
 import {
-  addMaterial, addPart, bareHook, compile, kindsFor, materialChoices, newPart, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type PartsFly, type Preset,
+  addMaterial, addPart, bareHook, compile, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
 } from "./parts";
 
 const patterns: Recipe[] = readdirSync(new URL("../../patterns", import.meta.url))
@@ -525,5 +525,83 @@ describe("a needle body's builder choices", () => {
     const f = setPart(fly(), body(fly()).id, { to: 0.5 });
     expect(body(f).post).toBeUndefined();
     expect(compile(f).problems.map((p) => p.message)).toEqual([]);
+  });
+});
+
+describe("a Morrish Mouse's parts", () => {
+  const mouse = patterns.find((r) => r.id === "morrish-mouse")!;
+  const fly = partsOf(mouse)!;
+  const back = fly.parts.find((p) => p.role === "back")!;
+
+  it("keep the foam's cut, taper and fold, and the hair's flat cut and length", () => {
+    expect(back).toMatchObject({ how: "pulled", width: 1.2, taper: true, fold: 0.8 });
+    expect(fly.parts.find((p) => p.how === "spun")).toMatchObject({ length: 1.3, trim: { keep: "sides", leave: 0.35 } });
+  });
+
+  it("keep the cut when the foam's colour changes, and drop the fold when it is no longer foam", () => {
+    const tan = setMaterial(fly, back.id, 0, { color: "tan" });
+    expect(tan.parts.find((p) => p.id === back.id)).toMatchObject({ width: 1.2, taper: true, fold: 0.8 });
+    const yarn = setMaterial(fly, back.id, 0, { kind: "poly-yarn" });
+    const p = yarn.parts.find((x) => x.id === back.id)!;
+    expect(p.fold).toBeUndefined();
+    expect(compile(yarn).problems).toEqual([]);
+  });
+});
+
+describe("the builder's number fields", () => {
+  const form = PATTERN_FORM;
+  const stepField = (op: string, prop: string) => form.find((s) => s.node === "steps")!.items!.find((i) => i.name === op)?.fields.find((f) => f.key === prop);
+  const field = (w: NumberRange["writes"]) =>
+    w.to === "step"
+      ? stepField(w.op, w.prop)
+      : w.to === "material"
+        ? form.find((s) => s.node === "materials")!.items![0]!.fields.find((f) => f.key === w.prop)
+        : form.find((s) => s.key === "hook")!.fields.find((f) => f.key === w.prop);
+  const within = (name: string, r: NumberRange) => {
+    const f = field(r.writes);
+    expect(f, `${name}: ${JSON.stringify(r.writes)} is in the schema`).toBeDefined();
+    if (f!.min !== undefined) expect(f!.exclusiveMin ? r.lo > f!.min : r.lo >= f!.min, `${name}: ${r.lo} against the schema's ${f!.min}`).toBe(true);
+    if (f!.max !== undefined) expect(f!.exclusiveMax ? r.hi < f!.max : r.hi <= f!.max, `${name}: ${r.hi} against the schema's ${f!.max}`).toBe(true);
+    expect(r.lo).toBeLessThanOrEqual(r.hi);
+  };
+  const HOWS: How[] = ["slide", "weight", "bunch", "wound", "palmered", "parachute", "dubbed", "spun", "pulled", "extended", "sleeve", "woven", "thread"];
+  const KEYS: NumberKey[] = ["length", "angle", "spread", "width", "collar", "fray", "fan", "segments", "tailLength", "tailSpread", "fold"];
+
+  it("stay within what the recipe allows for the value each is written as", () => {
+    for (const how of HOWS) for (const key of KEYS) within(`${how} ${key}`, partRange({ how }, key));
+    for (const [name, r] of Object.entries(MATERIAL_RANGES)) within(name, r);
+  });
+
+  it("write a spun part's length as the spin's", () => {
+    expect(partRange({ how: "spun" }, "length").writes).toEqual({ to: "step", op: "spin", prop: "length" });
+  });
+});
+
+describe("an extended foam body's strip folded as a head", () => {
+  it("keeps the fold through the builder both ways", () => {
+    const r = loadRecipe(`id test
+name "Test"
+type dry
+difficulty advanced
+hook dry-standard size=12
+thread tan size="8/0"
+materials {
+    body foam color=tan mm=1.5
+}
+steps {
+    attach-thread at=0.8
+    wrap-thread to=0.2
+    tie-in body length=1 extended=#true
+    wrap-thread to=0.85
+    pull-over body to=0.85 fold=0.8
+    whip-finish
+}
+`);
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\\n"));
+    const fly = partsOf(r.recipe)!;
+    expect(fly.parts.find((p) => p.id === "body")).toMatchObject({ how: "extended", to: 0.85, fold: 0.8 });
+    const back = compile(fly);
+    expect(back.problems).toEqual([]);
+    expect(back.recipe.steps.find((s) => s.op === "pull-over")).toMatchObject({ fold: 0.8 });
   });
 });

@@ -205,6 +205,10 @@ function writerFor(recipe: Recipe) {
         return `${pick(said.width)}Binde ${w.text} ein und lass ${length(said.length)} nach hinten überstehen${angle(said.angle)}.${flare(said.flare, w.refers)}`;
       }
       case "tie-in":
+        if (said.cut) {
+          const shape = said.cut.taper ? ", an einem Ende spitz zulaufend" : "";
+          return `Schneide einen Streifen aus ${mat(said.what.m, "dat", "none")} zu, etwa ${length(said.cut.width)} breit${shape}, und binde ihn ${said.cut.taper ? "mit der Spitze " : ""}${said.cut.under ? `unter ${the(alongId, "dat")}` : `oben auf ${the(alongId, "acc")}`} mit ein paar festen ${many("turn", "dat")} ein.`;
+        }
         return `Binde ${what(said.what).text} mit ein paar festen ${many("turn", "dat")} ein.`;
       case "wind-around":
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} um ${the("base", "acc")} ${mat(said.around, "gen")}, jede unter die vorige.`;
@@ -215,6 +219,7 @@ function writerFor(recipe: Recipe) {
       case "wind":
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
+        if (said.fold) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} mit festen ${many("turn", "dat")} ab; falte dann das Ende über sich selbst zurück zu ${a("head", "dat")}, etwa ${length(said.fold)} lang vor ${the("tie-down", "dat")}, und binde es dort noch einmal ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         if (said.around) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn, je ein Ende auf jeder Seite ${mat(said.around, "gen")}, und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         if (said.wing) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab; richte dann die Spitzen vor der Abbindung als etwa ${length(said.wing)} hohen Flügel auf und teile ihn.`;
         if (said.under) return `${said.bubble ? "Klappe" : "Ziehe"} ${mat(said.m, "acc")} ${said.bubble ? "als lockere Blase " : ""}unter ${the("body", "dat")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
@@ -232,7 +237,8 @@ function writerFor(recipe: Recipe) {
       case "spin": {
         const clump = word("clump");
         const each = { m: "jeden gegen den vorigen", f: "jede gegen die vorige", n: "jedes gegen das vorige" }[clump.gender as Gender];
-        return `Spinne ${many("clump", "acc")} aus ${mat(said.m, "dat", "none")} um ${the(alongId, "acc")} und drücke ${each} zurück, ${place(said.to).to}.`;
+        const cut = said.length ? ` Kämme vorher die Unterwolle aus und schneide ${the("clump", "acc", true)} auf etwa ${length(said.length)} zu.` : "";
+        return `Spinne ${many("clump", "acc")} aus ${mat(said.m, "dat", "none")} um ${the(alongId, "acc")} und drücke ${each} zurück, ${place(said.to).to}.${cut}`;
       }
       case "sleeve": {
         const fray = said.fray ? ` Zupfe das Geflecht hinter der hinteren Abbindung zu losen ${many("strand", "dat")} auf, etwa ${length(said.fray)} lang.` : "";
@@ -266,6 +272,12 @@ function writerFor(recipe: Recipe) {
         if (said.cone) return `Schneide ${mat(said.m, "acc")} zu einem Kegel, am Schwanz schlank und vorn auf jeder Seite etwa ${length(said.leave)} dick, dort gerade abgeschnitten.`;
         if (said.cigar) return `Schneide ${mat(said.m, "acc")} zu einer Zigarre, auf jeder Seite etwa ${length(said.leave)} dick, in der Mitte am dicksten und an beiden Enden gerundet.`;
         return `Schneide ${mat(said.m, "acc")} in Form, so dass auf jeder Seite ${a("head", "nom")} bleibt, ${pronoun(word("head")).rel} etwa ${length(said.leave)} dick ist.`;
+      case "trim-flat":
+        return said.keep === "top"
+          ? `Schneide ${mat(said.m, "acc")} unten flach, etwa ${length(said.leave)} unter ${the(alongId, "dat")}, und lass den Rest lang.`
+          : said.keep === "under"
+            ? `Schneide ${mat(said.m, "acc")} oben flach, etwa ${length(said.leave)} über ${the(alongId, "dat")}, und lass den Rest lang.`
+            : `Schneide ${mat(said.m, "acc")} oben und unten flach, etwa ${length(said.leave)} von ${the(alongId, "dat")} entfernt, und lass ${the("hair", "acc")} an den Seiten lang.`;
       case "trim-tip":
         return `Schneide ${the("tip", "acc")} ${mat(said.m, "gen")} dicht an ${the("body", "dat")} ab.`;
       case "trim-cover":

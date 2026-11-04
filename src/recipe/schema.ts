@@ -94,6 +94,7 @@ const Note = z.string().min(1).optional();
 export const HOOK_MODEL_IDS = [
   "dry-standard", "dry-3xl-curved", "wet-standard", "nymph-2xl", "streamer-4xl",
   "emerger-curved", "scud-curved", "salmon-up-eye", "salmon-double", "salmon-treble", "jig", "saltwater-straight",
+  "bass-bug",
 ] as const;
 /** Tubes and Waddington shanks: dressed like a hook shank, with a treble hook behind. */
 export const TUBE_MODEL_IDS = ["tube-plastic", "tube-aluminium", "tube-copper", "tube-brass", "tube-needle", "waddington"] as const;
@@ -172,11 +173,13 @@ const Material = z
     barred: z.boolean().optional(),
     /** beads, eyes and wire: diameter in millimetres, as they are sold; fur strips: their width; foam: the sheet's thickness. */
     mm: z.number().min(0.05).max(12).optional(),
+    /** fur strips: the fur clipped off the hide but for a tuft this long (gapes) at its end (a Morrish Mouse's tail). */
+    tuft: z.number().min(0).max(3).optional(),
   })
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];
     const allowed = ARCHETYPE_PROPS[cat.archetype];
-    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "barred", "mm"] as const) {
+    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "barred", "mm", "tuft"] as const) {
       if (m[prop] !== undefined && !allowed.includes(prop)) {
         ctx.addIssue({ code: "custom", path: [prop], message: `"${prop}" does not apply to ${cat.name}` });
       }
@@ -229,8 +232,13 @@ const Step = z.discriminatedUnion("op", [
     angle: z.number().min(0).max(90).optional(),
     /** Bunches (tags, tails, hair wings): how far round the body they fan out, in degrees to each side of the top; 180 is all round (tube wings). */
     spread: z.number().min(0).max(180).optional(),
-    /** Feather wings: width of the feather, in gapes; an extended body: its thickness at the front. */
+    /**
+     * Feather wings: width of the feather, in gapes; an extended body: its thickness at the front;
+     * a strip to be pulled over (foam): how wide it is cut, lying flat over the body.
+     */
     width: GapeLength.optional(),
+    /** A strip to be pulled over, cut tapered: to a point at the end tied in, widening to its `width` where it is tied down. */
+    taper: z.boolean().optional(),
     /**
      * Upright bunches: how far the hair fans out fore and aft along the shank, in degrees in all,
      * staying narrow across it (a Mohican's deer-hair wing), instead of standing as a round post.
@@ -283,6 +291,8 @@ const Step = z.discriminatedUnion("op", [
     wing: z.number().min(0.3).max(4).optional(),
     /** Pulled forward past an upright post, parted round it: one half down each side (a Mohican's foam). */
     around: MaterialRef.optional(),
+    /** Foam pulled forward: its end folded back over itself in front of the tie-down as a head this long (gapes), and tied down again there. */
+    fold: z.number().min(0.2).max(2).optional(),
     note: Note,
     mistake: Note,
   }),
@@ -322,6 +332,8 @@ const Step = z.discriminatedUnion("op", [
     to: Position,
     /** Leave the tips of the first clump trailing back as a collar this long (gapes), as on a Muddler. */
     collar: GapeLength.optional(),
+    /** How far the hair stands out from the shank before it is trimmed, in gapes (each clump cut to length first). */
+    length: z.number().min(0.2).max(3).optional(),
     note: Note, mistake: Note,
   }),
   z.strictObject({
@@ -347,7 +359,9 @@ const Step = z.discriminatedUnion("op", [
     shape: z.enum(["round", "wedge", "cigar", "cone"]).optional(),
     /**
      * A wound hackle: "sides" cuts away the fibres on top and underneath (Superpuppan);
-     * "top" cuts away only those underneath, so the fly sits low (Dyret).
+     * "top" cuts away only those underneath, so the fly sits low (Dyret). Spun hair: cut flat
+     * on top and underneath, `leave` from the shank, the sides left long (a Morrish Mouse's
+     * body); "top" flat underneath only, "under" flat on top only.
      */
     keep: z.enum(["sides", "top", "under"]).optional(),
     note: Note, mistake: Note,

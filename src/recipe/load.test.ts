@@ -780,3 +780,57 @@ materials {
     );
   });
 });
+
+describe("a mouse: a clipped strip, flat-cut spun hair, a tapered foam back folded as a head", () => {
+  const MOUSE = `
+id test
+name "Test"
+type terrestrial
+difficulty intermediate
+hook bass-bug size=10
+thread black size="6/0"
+materials {
+    tail rabbit-strip color=brown tuft=0.5
+    back foam color=black mm=2
+    body deer-hair
+    rib gold-wire
+}
+`;
+  const STEPS = `
+    attach-thread at=0.85
+    wrap-thread to=0.0
+    tie-in tail length=2.6
+    tie-in back width=1.2 taper=#true
+    spin body to=0.85 length=1.3
+    trim body keep=sides leave=0.35
+    pull-over back to=0.85 fold=0.8
+    whip-finish
+`;
+  const errs = (steps: string, header = MOUSE) => errorsOf(load(steps, header));
+
+  it("loads", () => {
+    const r = recipeOf(load(STEPS, MOUSE));
+    expect(r.materials[0]).toMatchObject({ tuft: 0.5 });
+    expect(r.steps[3]).toMatchObject({ width: 1.2, taper: true });
+    expect(r.steps[6]).toMatchObject({ fold: 0.8 });
+  });
+
+  it("clips a tuft only of a fur strip", () => {
+    expect(errs(STEPS, MOUSE.replace("mm=2", "mm=2 tuft=1"))).toEqual(expect.arrayContaining([expect.stringMatching(/"tuft" does not apply to foam/)]));
+  });
+
+  it("cuts spun hair flat more than once, but not once it is trimmed to a shape", () => {
+    expect(recipeOf(load(STEPS.replace("trim body keep=sides leave=0.35", "trim body keep=under\n    trim body keep=top"), MOUSE)).steps).toHaveLength(9);
+    expect(errs(STEPS.replace("trim body keep=sides leave=0.35", "trim body shape=round\n    trim body keep=top"))).toEqual(expect.arrayContaining([expect.stringMatching(/keep only applies/)]));
+  });
+
+  it("cuts a strip to a width only to pull it over, and tapers it only with a width", () => {
+    expect(errs(STEPS.replace("tie-in tail length=2.6", "tie-in tail length=2.6 width=0.3"))).toEqual(expect.arrayContaining([expect.stringMatching(/width only applies/)]));
+    expect(errs(STEPS.replace("width=1.2 taper=#true", "taper=#true"))).toEqual(expect.arrayContaining([expect.stringMatching(/taper only applies/)]));
+  });
+
+  it("folds only foam pulled forward", () => {
+    expect(errs(STEPS.replace("pull-over back to=0.85 fold=0.8", "pull-over back to=0.85 fold=0.8 bubble=0.3"))).toEqual(expect.arrayContaining([expect.stringMatching(/fold only applies to foam/)]));
+    expect(errs(STEPS, MOUSE.replace("back foam color=black mm=2", "back poly-yarn"))).toEqual(expect.arrayContaining([expect.stringMatching(/fold only applies to foam/)]));
+  });
+});

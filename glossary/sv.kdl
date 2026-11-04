@@ -737,6 +737,9 @@ hooks {
         source "Antispinn: Wide Jig Sprite ('hullinglös jiggkrok')" url="https://www.antispinn.se/flugbindning/krok/hullinglos-krok/65-sprite/sprite-wide-jig-50-pack"
     }
     phrase saltwater-straight "Saltvattenskrok, rakt öga"
+    phrase bass-bug "Bassbuggkrok, brett krokgap, rakt öga" {
+        note "Assumption: no Swedish shop text for the TMC 8089 found; 'bassbugg' after the English 'bass bug', 'brett krokgap' for its wide gape."
+    }
     phrase tube-plastic "Plasttub"
     phrase tube-aluminium "Aluminiumtub"
     phrase tube-copper "Koppartub"

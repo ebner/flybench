@@ -29,6 +29,11 @@ export interface HookModel {
   tube?: { kind: "tube" | "waddington"; color: string; trebleScale: number };
   /** Typical model, for the materials list. */
   example: string;
+  /**
+   * The gape in mm by hook size, for a model whose gape is wider (or narrower) than a standard
+   * hook's of the same size; other sizes scale with the nearest one given.
+   */
+  gapeMm?: Partial<Record<number, number>>;
 }
 
 // Assumption: proportions in gapes estimated from common hook models (named in
@@ -95,6 +100,17 @@ export const HOOK_MODELS: Record<HookModelId, HookModel> = {
     shankLength: 2.4, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.21, eyeAngle: 0, pointLength: 0.9,
     example: "Gamakatsu SC15",
   },
+  // From flyhooks.org's measurements of the TMC 8089 (#10: length 28.57 mm, height 11.88 mm,
+  // throat 10.1 mm, eye 2.62 mm, wire 0.74 mm; #6: 36.06, 14.86, 11.74, 3.1 and 0.85 mm) and
+  // Tiemco's outline of it: the gape is the height less two wires, 10.4 mm on a #10 and 13.2 mm on
+  // a #6; the shank is set so the hook is as long overall (2.75 gapes), the point so the throat is.
+  "bass-bug": {
+    label: "Bass bug hook, wide gape, straight eye",
+    shankLength: 1.95, shankCurve: 0, wireRadius: 0.036, eyeRadius: 0.13, eyeAngle: 0, pointLength: 0.25,
+    example: "TMC 8089",
+    // Assumption: #8 between the two measured sizes, #12 and #2 carried on from them.
+    gapeMm: { 2: 16.9, 6: 13.2, 8: 11.8, 10: 10.4, 12: 9.2 },
+  },
 };
 
 // Assumption: approximate gape in mm per hook size for standard dry-fly hooks.
@@ -138,7 +154,18 @@ export function heavyTube(hook: Recipe["hook"]): boolean {
 
 /** Millimetres in one unit (one gape) of the recipe's hook or tube. */
 export function unitMm(hook: Recipe["hook"]): number {
-  return isTube(hook.model) ? 4 * TUBES[hook.model].diameter : gapeMm(hook.size ?? 12);
+  return isTube(hook.model) ? 4 * TUBES[hook.model].diameter : modelGapeMm(hook.model, hook.size ?? 12);
+}
+
+/** A hook model's gape in mm at a size: a standard hook's, or the model's own (a wide-gape hook's). */
+export function modelGapeMm(model: HookModelId, size: number): number {
+  const own = HOOK_MODELS[model].gapeMm;
+  if (!own) return gapeMm(size);
+  const given = own[size];
+  if (given !== undefined) return given;
+  // The nearest size given, and the standard hooks' ratio between the two sizes.
+  const nearest = Object.keys(own).map(Number).sort((a, b) => Math.abs(a - size) - Math.abs(b - size))[0]!;
+  return own[nearest]! * (gapeMm(size) / gapeMm(nearest));
 }
 
 /** The geometry the fly is tied on: a hook model, or a tube or Waddington built to its length. */
