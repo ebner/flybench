@@ -1,0 +1,60 @@
+id executioner
+status draft
+
+// en description: An oval silver tag, a golden pheasant crest tail, a red floss butt, a flat silver body ribbed with oval silver, a black throat, a black squirrel wing, jungle cock cheeks and a red head.
+description "Ein Tag aus ovalem Silbertinsel, ein Schwanz aus Goldfasan-Crest, ein Butt aus rotem Floss, ein Körper aus flachem Silbertinsel, gerippt mit ovalem Silbertinsel, ein schwarzer Bart, ein Flügel aus schwarzem Eichhörnchen, Wangen aus Dschungelhahn und ein roter Kopf."
+
+// en history: Who tied it first is not documented. Trout & Salmon calls it a classic that has stood the test of time and a great alternative to a Stoat's Tail; Ally Gowans, who sells a version of his own, says that touch of red can make the difference. Dressings differ over how much of the body is red: Trout & Salmon and the Tay Salmon Fly blog give a short butt of fluorescent red floss in front of the tail, Scott Jackson and Flies of Fancy a red rear third or more. The jungle cock is sometimes left out, and some tie a red floss head over the thread.
+history """
+    Wer sie zuerst gebunden hat, ist nicht belegt. Trout & Salmon nennt sie einen Klassiker, der
+    sich bewährt hat, und eine gute Alternative zur Stoat's Tail; Ally Gowans, der eine eigene
+    Fassung verkauft, sagt, dieser Hauch von Rot könne den Unterschied machen. Die
+    Bindeanleitungen unterscheiden sich darin, wie viel vom Körper rot ist: Trout & Salmon und
+    der Blog Tay Salmon Fly geben einen kurzen Butt aus fluoreszierendem rotem Floss vor dem
+    Schwanz an, Scott Jackson und Flies of Fancy ein rotes hinteres Drittel oder mehr. Der
+    Dschungelhahn wird manchmal weggelassen, und manche winden einen Kopf aus rotem Floss über
+    den Faden.
+    """
+
+// en fishing: Trout & Salmon fishes it on a floating line in a range of sizes. Craig Fleming of Fulling Mill finds it does well for salmon and sea trout in low water, deadly when the grilse are running, and fishes it with a slow figure-of-eight retrieve so the body flashes. Ally Gowans counts it among the showy silver-bodied flies for sea trout in coloured water.
+fishing """
+    Trout & Salmon fischt sie an der Schwimmschnur in verschiedenen Größen. Craig Fleming von
+    Fulling Mill findet, dass sie bei niedrigem Wasser auf Lachs und Meerforelle gut fängt und
+    tödlich ist, wenn die Grilse aufsteigen; er holt sie langsam in Achterschlingen ein („figure of eight“),
+    damit der Körper aufblitzt. Ally Gowans zählt sie zu den auffälligen Fliegen mit
+    Silberkörper für Meerforellen in trübem Wasser.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Feines ovales Silbertinsel"
+    // en butt: Fluorescent red floss
+    butt "Fluoreszierendes rotes Floss"
+    // en rib: Fine oval silver tinsel
+    rib "Feines ovales Silbertinsel"
+    // en body: Flat or holographic silver tinsel
+    body "Flaches oder holografisches Silbertinsel"
+    // en throat: Black cock hackle fibres
+    throat "Schwarze Hahnenhechelfibern"
+}
+
+notes {
+    // en step 5 (wind tag): A few close turns at the start of the bend.
+    step 5 "Ein paar dichte Windungen am Beginn des Hakenbogens."
+    // en step 8 (tie-in butt): Glo-Brite or another fluorescent floss.
+    step 8 "Glo-Brite oder ein anderes fluoreszierendes Floss."
+    // en step 10 (wind butt): A short, neat butt.
+    step 10 "Ein kurzer, sauberer Butt."
+    // en step 12 (tie-in rib): Or silver wire, as Trout & Salmon ties it.
+    step 12 "Oder Silberdraht, wie Trout & Salmon sie bindet."
+    // en step 15 (wind body): Touching turns, never overlapping.
+    step 15 "Dichte Windungen, die sich nie überlappen."
+    // en step 19 (tie-in throat): A bunch under the shank.
+    step 19 "Ein Büschel unter dem Hakenschenkel."
+    // en step 20 (tie-in wing): A small bunch, low over the body.
+    step 20 "Ein kleines Büschel, flach über dem Körper."
+    // en step 22 (tie-in cheeks): One each side, flat against the root of the wing.
+    step 22 "Eine an jeder Seite, flach an der Wurzel des Flügels."
+    // en step 23 (whip-finish): A neat red head, varnished.
+    step 23 "Ein sauberer roter Kopf, lackiert."
+}

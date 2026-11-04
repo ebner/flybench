@@ -1,0 +1,54 @@
+id garry-dog
+status draft
+
+// en description: An oval silver tag and golden yellow floss, a golden pheasant crest tail, a black floss body ribbed with oval silver, a blue guinea fowl beard and a wing of yellow bucktail over a few red hairs.
+description "En tag av oval silvertinsel och guldgult flossilke, en stjärt av guldfasantopping, en kropp av svart flossilke ribbad med oval silvertinsel, ett skägg av blå pärlhöna och en vinge av gul bucktail över några röda hår."
+
+// en history: John Gray tells how the name came about in a Tweed tackle shop in the 1920s: a visiting minister gave hair from the tail of his golden retriever, Garry, to finish a fly being tied there; one of Gray's pages names the tyer as John Wright. Yellow bucktail or similar hair now takes the dog's place. Gray groups it with the Hairy Mary among the early hairwings.
+history """
+    John Gray berättar hur namnet kom till i en fiskeaffär vid Tweed på 1920-talet: en präst på
+    besök gav hår från svansen på sin golden retriever, Garry, så att en fluga som band där
+    kunde göras färdig; på en av Grays sidor heter bindaren John Wright. I dag tar gul bucktail
+    eller liknande hår hundens plats. Gray räknar den, med Hairy Mary, till de tidiga
+    hårvingeflugorna.
+    """
+
+// en fishing: Gray rates it a fly for coloured water, above all in the autumn. Peter Gathercole ties it small, on 6 to 10 singles, doubles and trebles, for summer salmon as the river clears after a spate, and large, on long-shanked doubles, tubes and Waddingtons, for high, slightly coloured water in spring and autumn.
+fishing """
+    Gray håller den för en fluga för färgat vatten, framför allt på hösten. Peter Gathercole
+    binder den liten, på enkelkrokar, dubbelkrokar och trekrokar i storlek 6 till 10, för
+    sommarlax när älven klarnar efter ett flöde, och stor, på långskaftade dubbelkrokar, tuber
+    och Waddingtonskaft, för högt och lätt färgat vatten på våren och hösten.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Fin oval silvertinsel"
+    // en yellow-tag: Golden yellow floss
+    yellow-tag "Guldgult flossilke"
+    // en rib: Medium oval silver tinsel
+    rib "Medelgrov oval silvertinsel"
+    // en beard: Dyed blue guinea fowl fibres
+    beard "Blåfärgade pärlhönsfibrer"
+}
+
+notes {
+    // en step 2 (wrap-thread): To opposite the barb.
+    step 2 "Till mitt för hullingen."
+    // en step 9 (wind yellow-tag): In front of the tinsel.
+    step 9 "Framför tinseln."
+    // en step 13 (tie-in body): Its waste end along the shank.
+    step 13 "Med den lösa änden längs skaftet."
+    // en step 15 (wind body): Close turns right up to the thread: smooth and tapering.
+    step 15 "Täta varv ända fram till tråden: slät och avsmalnande."
+    // en step 17 (wind rib): Open, evenly spaced turns.
+    step 17 "Glesa, jämnt fördelade varv."
+    // en step 19 (tie-in beard): Tips level, under the shank.
+    step 19 "Spetsarna jämnade, under skaftet."
+    // en step 20 (tie-in underwing): A few hairs, under the yellow.
+    step 20 "Några hår, under det gula."
+    // en step 23 (trim wing): Cut the butts at an angle for a small head.
+    step 23 "Klipp rotändarna snett för ett litet huvud."
+    // en step 24 (whip-finish): A black head, varnished.
+    step 24 "Ett svart huvud, lackat."
+}

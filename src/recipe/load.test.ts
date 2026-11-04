@@ -775,6 +775,33 @@ describe("a dyed grizzly", () => {
   });
 });
 
+describe("a blended bunch", () => {
+  const steps = `
+    attach-thread at=0.8
+    wrap-thread to=0
+    tie-in tail length=2
+    trim tail
+    whip-finish
+`;
+  const h = (m: string) => `id test\nname "Test"\ntype salmon\ndifficulty beginner\nhook salmon-up-eye size=8\nthread black size="8/0"\nmaterials {\n    ${m}\n}\n`;
+  it("mixes named or hex colours into hair and fibres, and nothing else", () => {
+    expect(recipeOf(load(steps, h(`tail bucktail color=orange mix="yellow #101010"`)))?.materials[0]).toMatchObject({ mix: "yellow #101010" });
+    expect(errorsOf(load(steps, h(`tail bucktail color=orange mix="yellow mauve"`))).join("\n")).toMatch(/colours mixed in/);
+    expect(errorsOf(load(steps, h(`tail bucktail color=orange mix="red yellow black white"`))).join("\n")).toMatch(/up to 3/);
+    expect(errorsOf(load(steps, h(`tail marabou color=orange mix=yellow`))).join("\n")).toMatch(/"mix" does not apply to marabou/);
+  });
+  it("only in a bunch: not wound, pulled over or tied across, where it would show in one colour", () => {
+    const wound = `    attach-thread at=0.1\n    tie-in body\n    wrap-thread to=0.8\n    wind body to=0.8 turns=6\n    tie-off body\n    whip-finish`;
+    expect(errorsOf(load(wound, h(`body pheasant-tail mix=black`))).join("\n")).toMatch(/only show in a bunch/);
+    const pulled = `    attach-thread at=0.1\n    tie-in back\n    wrap-thread to=0.8\n    pull-over back to=0.8\n    whip-finish`;
+    expect(errorsOf(load(pulled, h(`back deer-hair mix=black`))).join("\n")).toMatch(/only show in a bunch/);
+    const across = `    attach-thread at=0.5\n    tie-in legs length=1 side=across\n    whip-finish`;
+    expect(errorsOf(load(across, h(`legs hackle-fibres color=red count=4 mix=black`))).join("\n")).toMatch(/only show in a bunch/);
+    const spun = `    attach-thread at=0.1\n    spin head to=0.8\n    trim head leave=0.3\n    whip-finish`;
+    expect(recipeOf(load(spun, h(`head deer-hair mix=black`)))?.materials[0]).toMatchObject({ mix: "black" });
+  });
+});
+
 describe("a body made on a needle (a Mohican Mayfly's)", () => {
   const MOHICAN = `
 id test

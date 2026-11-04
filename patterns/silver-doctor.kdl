@@ -1,0 +1,85 @@
+// Silver Doctor: the Victorian Tweed classic, here in Håkan Karsnäser's modern hairwing dressing.
+
+id silver-doctor
+name "Silver Doctor"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon
+origin originator="James Wright" region="Sprouston, Tweed"
+description "An oval silver tag, a golden pheasant crest tail, a red wool butt, a flat silver body ribbed with oval silver, a silver-tipped squirrel wing, a pale blue hen hackle collar and a red head."
+history """
+    Kelson, in The Salmon Fly (1895), gives it to Wright: James Wright of Sprouston on the Tweed,
+    whom Francis Francis called a first-rate artist and to whom Kelson also gives the Black and
+    Blue Doctors. Francis printed a dressing in 1867, calling it a good standard fly. The classic
+    dressings differ: Francis gives a blue hackle, gallina at the shoulder and a wing mostly of
+    pintail; Kelson ties a throat of blue hackle and gallina and a mixed
+    wing of many feathers under a topping; Pryce-Tannatt, in How to Dress Salmon Flies (1914),
+    follows the blue throat with widgeon. All have a silver body, scarlet wool butt and head and
+    a topping in the tail. John Gray describes how the gaudy Victorian flies were simplified,
+    first into low-water dressings and then, above all from the 1950s, into hairwings. This is
+    Håkan Karsnäser's hairwing version, with the classic's silver, scarlet and blue.
+    """
+fishing """
+    Karsnäser calls it an obvious fly for clear water and sunshine. Kelson rated it a great fly
+    throughout the United Kingdom, and popular on Norwegian and Canadian rivers. Today's hairwing
+    is fished on doubles, singles and tubes; the full dress is mostly tied for display.
+    """
+sources {
+    "The Salmon Fly (George M. Kelson, 1895)" url="https://archive.org/details/salmonflyhowtodr00kelsrich"
+    "How to Dress Salmon Flies (T. E. Pryce-Tannatt, 1914)" url="https://archive.org/details/howtodresssalmon00prycrich"
+    "A Book on Angling (Francis Francis, 1867)" url="https://archive.org/details/cu31924003429226"
+    "GlobalFlyFisher: Silver Doctor (video, Håkan Karsnäser for Ahrex)" url="https://globalflyfisher.com/video/silver-doctor"
+    "Trout & Salmon Fishing: Salmon flies (John Gray)" url="https://www.trout-salmon-fishing.com/salmon-flies.htm"
+    "Trout & Salmon Fishing: The salmon fly (John Gray)" url="https://www.trout-salmon-fishing.com/salmon-fly.htm"
+    "Fly Tying Archive: Silver Doctor, Kelson's pattern (Timo Kontio)" url="https://flytyingarchive.com/silver-doctor-this-is-kelsons-pattern-for-the/"
+    "Fish4Flies: Silver Doctor double" url="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Silver-Doctor"
+    "Wikipedia: Fully dressed flies" url="https://en.wikipedia.org/wiki/Fully_dressed_flies"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://img.youtube.com/vi/_vxR6Q2OU1A/maxresdefault.jpg" page="https://globalflyfisher.com/video/silver-doctor" author="Håkan Karsnäser" license="All rights reserved; reference only" flip=#true note="Karsnäser's hairwing on a double"
+    "https://www.fish4flies.com/img/flies/Large/2624-Silver_Doctor.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Silver-Doctor" license="All rights reserved; reference only" note="Another hairwing, on a double, with a mixed wing and a throat"
+}
+
+// Karsnäser: an Ahrex HR420 double.
+hook salmon-double size=6
+thread red size="8/0"
+
+materials {
+    tag oval-tinsel color=silver
+    tail golden-pheasant-crest count=12
+    butt dubbing color=red shaggy=0.4 label="Red wool dubbing"
+    rib oval-tinsel color=silver
+    body flat-tinsel color=silver
+    wing squirrel-tail color=grey label="Silver-tipped squirrel tail"
+    collar hen-hackle color="#45a8e6" fibre=1.8 sweep=68 label="Pale blue hen hackle"
+}
+
+// The order is the usual hairwing order; Karsnäser's photo shows the collar in front of the wing.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0
+    tie-in tag
+    wrap-thread to=0.05
+    wind tag to=0.05 turns=4
+    tie-off tag
+    // Read from Karsnäser's photo: long and curving up.
+    tie-in tail length=1.9 angle=18 spread=8
+    dub butt to=0.13 note="A few turns of sparse dubbing: a small round butt."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.82
+    wind body to=0.82 turns=18 note="Touching turns, never overlapping."
+    tie-off body
+    wind rib to=0.82 turns=5
+    tie-off rib
+    // Read from Karsnäser's photo: about to the tip of the tail.
+    tie-in wing length=3.7 angle=11 spread=16 note="A small, cleaned bunch."
+    trim wing
+    tie-in collar note="The pale blue called Silver Doctor blue."
+    wrap-thread to=0.88
+    wind collar to=0.88 turns=4 note="Stroke the fibres back with each turn."
+    tie-off collar
+    whip-finish note="A neat red head, varnished."
+}

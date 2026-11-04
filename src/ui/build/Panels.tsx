@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { MATERIAL_RANGES, materialChoices, partRange, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type NumberKey, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
+import { blends, MATERIAL_RANGES, materialChoices, partRange, presetFor, PRESETS, rearLimit, unavailable, waysOf, type How, type NumberKey, type Part, type PartMaterial, type PartsFly, type Preset } from "../../edit/parts";
 import { DIFFICULTY_LABELS, SPECIES_LABELS, TYPE_LABELS } from "../../catalog/describe";
 import { match } from "../../catalog/inventory";
 import { swatchName, swatchRecipe } from "../../catalog/swatch";
 import { ARCHETYPE_PROPS, MATERIALS, type MaterialKind } from "../../recipe/materials";
-import { DIFFICULTIES, FLY_TYPES, HOOK_MODEL_IDS, isTube, NAMED_COLORS, SPECIES, THREAD_SIZES, TUBE_MODEL_IDS, type NamedColor, type Recipe } from "../../recipe/schema";
+import { DIFFICULTIES, FLY_TYPES, HOOK_MODEL_IDS, isTube, mixColours, NAMED_COLORS, resolveColor, SPECIES, THREAD_SIZES, TUBE_MODEL_IDS, type NamedColor, type Recipe } from "../../recipe/schema";
 import { FlyScene } from "../../render/FlyScene";
 import { colourWord, hookModelName, kindName } from "../../tying/describe";
 import { barredColour, simulate } from "../../tying/simulate";
@@ -394,6 +394,42 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
             />
             {f.barred}
           </label>
+        );
+      })()}
+      {m && ARCHETYPE_PROPS[MATERIALS[m.kind].archetype].includes("mix") && blends(part, mat) && (() => {
+        // A blended bunch: other colours mixed evenly through it (up to three).
+        const mixed = mixColours({ mix: typeof m.props?.mix === "string" ? m.props.mix : undefined });
+        const set = (list: string[]) => {
+          const { mix: _x, ...rest } = m.props ?? {};
+          const props = list.length ? { ...rest, mix: list.join(" ") } : rest;
+          onMaterial(mat, { props: Object.keys(props).length ? props : undefined });
+        };
+        return (
+          <div className="wb-field">
+            <span>{f.mix}</span>
+            <div className="wb-mixed">
+              {mixed.map((c, i) => (
+                <button
+                  key={i}
+                  className="wb-colour"
+                  style={{ background: resolveColor(c) }}
+                  aria-label={`${colourWord(c, m.kind)}: ${f.unmix}`}
+                  title={`${colourWord(c, m.kind)}: ${f.unmix}`}
+                  onClick={() => set(mixed.filter((_, j) => j !== i))}
+                />
+              ))}
+              {mixed.length < 3 && (
+                <select value="" onChange={(e) => e.target.value && set([...mixed, e.target.value])}>
+                  <option value="">{f.mixAdd}</option>
+                  {(Object.keys(NAMED_COLORS) as NamedColor[]).map((c) => (
+                    <option key={c} value={c}>
+                      {colourWord(c, m.kind)}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+          </div>
         );
       })()}
       {m && typeof m.props?.tuft === "number" && (

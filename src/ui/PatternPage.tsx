@@ -10,7 +10,7 @@ import { fishing, fishingText } from "../tying/fishing";
 import { ridesPointUp } from "../tying/hook";
 import { simulate, stepAt, stepEnd, stepProgress, type Build } from "../tying/simulate";
 import { Paragraphs } from "./Paragraphs";
-import { match, materialColor } from "../catalog/inventory";
+import { materialColor, materialMatch } from "../catalog/inventory";
 import { href, replaceUrl } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
@@ -151,7 +151,7 @@ function PatternView({
   const ownership = (id: string) => {
     const m = recipe.materials.find((m) => m.id === id);
     if (!m || owned.values.size === 0) return null;
-    return match({ kind: m.kind, color: materialColor(m) }, owned.values);
+    return materialMatch(m, owned.values);
   };
   const [stopAt, setStopAt] = useState<number | null>(null);
   // Where a link opens: at its step's start, or without a step on the finished fly (play ties it

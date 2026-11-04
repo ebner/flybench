@@ -1,14 +1,21 @@
 import { hasTerm, term, type Adjective, type Noun } from "../i18n/glossary";
-import { capitalize, deAdjective, deContract, deNoun, dePhrase, type Case, type Gender } from "../i18n/grammar";
+import { adjectiveList, capitalize, deAdjective, deContract, deNoun, dePhrase, type Case, type Gender } from "../i18n/grammar";
 import { isTube, NAMED_COLORS, type Material, type Recipe } from "../recipe/schema";
 import { hookModel } from "./hook";
-import { gapeFraction, usedInPlural, type Detail, type Length, type Mount, type Place, type Reach, type Said, type What, type Writer } from "./describe";
+import { gapeFraction, namedColours, usedInPlural, type Detail, type Length, type Mount, type Place, type Reach, type Said, type What, type Writer } from "./describe";
 
 /** German: the texts generated from a recipe, with the glossary's words. A draft until reviewed. */
 
 const word = (id: string) => term("de", "words", id, "noun");
 const material = (m: Material) => term("de", "materials", m.kind, "noun");
 const colour = (c: string | undefined): Adjective | undefined => (c && c in NAMED_COLORS ? term("de", "colours", c, "adjective") : undefined);
+/** A material's colour, or the colours of a blended bunch ("orangefarbener, gelber und schwarzer"). */
+/** A blended bunch's own shade, when it is the material's natural colour or a hex colour. */
+const NATURAL: Adjective = { kind: "adjective", id: "natural", text: "naturfarben", invariable: false, compound: false, forms: {}, notes: [], sources: [], line: 0 };
+const colours = (m: Material): Adjective | undefined => {
+  const list = namedColours(m).map((c) => (c ? colour(c)! : NATURAL));
+  return list.length ? adjectiveList(list, "und") : undefined;
+};
 const number = (n: number) => n.toLocaleString("de-DE");
 /** An adjective the sentences use, declined like a colour. */
 const adjective = (text: string): Adjective => ({ kind: "adjective", id: text, text, invariable: false, compound: false, forms: {}, notes: [], sources: [], line: 0 });
@@ -69,7 +76,7 @@ function writerFor(recipe: Recipe) {
   const mat = (id: string, c: Case, article: "definite" | "none" = "definite") => {
     const m = find(id);
     if (!m) return id;
-    const phrase = dePhrase(material(m), { case: c, article, colour: colour(m.color), plural: usedInPlural(m) });
+    const phrase = dePhrase(material(m), { case: c, article, colour: colours(m), plural: usedInPlural(m) });
     // A translated label says more than the glossary's name ("Weiße Hechelstiele"): it follows
     // in quotation marks, as it can't be declined.
     return m.label ? `${phrase} („${m.label}“)` : phrase;
@@ -350,7 +357,7 @@ type Colour = Adjective | undefined;
 
 export const de: Writer = {
   // A label is the translation of the recipe's own (see i18n/prose.ts); otherwise the glossary's name.
-  materialName: (m) => m.label ?? capitalize(phrase(material(m), colour(m.color), usedInPlural(m))),
+  materialName: (m) => m.label ?? capitalize(phrase(material(m), colours(m), usedInPlural(m))),
   colourWord: (c) => (c ? term("de", "colours", c, "adjective").text : "naturfarben"),
   // After the noun the colour stays as it is: "Hechel rot".
   partInColour: (id, c) => `${id === "thread" ? word("thread").text : partName(id)} ${term("de", "colours", c, "adjective").text}`,
@@ -386,6 +393,6 @@ export const de: Writer = {
   title: (op, m, id) => {
     const title = term("de", "steps", op, "phrase").text;
     if (id === undefined) return title;
-    return `${title}: ${m ? (m.label ?? phrase(material(m), colour(m.color), usedInPlural(m))) : id}`;
+    return `${title}: ${m ? (m.label ?? phrase(material(m), colours(m), usedInPlural(m))) : id}`;
   },
 };

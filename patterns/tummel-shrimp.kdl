@@ -1,0 +1,85 @@
+// Tummel Shrimp: Alastair Gowans' dark shrimp fly, black with an orange and blue collar.
+
+id tummel-shrimp
+name "Tummel Shrimp"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon
+season may june july august september october
+origin originator="Alastair Gowans" region="Scotland"
+description "A long tail of orange, yellow and black bucktail mixed with a few strands of flash, a black floss body ribbed with oval gold, a black squirrel wing, and a collar of orange cock hackle behind blue guinea fowl."
+history """
+    One of Alastair "Ally" Gowans' shrimp flies, with Ally's Shrimp and the Cascade, and named
+    after the River Tummel, a big tributary of the Tay.
+    Gowans says it came from the need for a reliable dark fly, and that it puts together the
+    proven colours of the Willie Gunn and the Thunder and Lightning. Stevie Munn, who was first
+    shown it by Gowans at the Scone Palace Game Fair, remembers it as loosely based on a Willie
+    Gunn or a Munro Killer.
+    """
+fishing """
+    Gowans counts it among the flies he wants for late spring and summer, in low water; he told
+    Stevie Munn it was a summer fly. Munn also fishes it for autumn salmon and for the dollaghan,
+    the lake-run trout of Lough Neagh, when fish are not looking at brighter flies and want
+    something more sombre. It is tied on small singles, doubles and trebles.
+    """
+sources {
+    "Let's Fly Fish: Ally's Shrimp salmon flies for sale (Alastair Gowans)" url="https://letsflyfish.com/flysale.htm"
+    "Let's Fly Fish: Choosing salmon flies (Alastair Gowans)" url="https://www.letsflyfish.com/chooseflies.htm"
+    "Irish Angler, September 2010: Three for the backend (Stevie Munn)" url="https://anglingclassics.co.uk/Blast_From_the_Past/sept10.pdf"
+    "Seán Woods Fishing: Step by step tying the Tummel Shrimp (video)" url="https://www.youtube.com/watch?v=CZ04J1RW5dQ"
+    "Fish4Flies: Tummel Shrimp double" url="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Tummel-Shrimp"
+    "Flugor.se: Tummel Shrimp" url="https://www.flugor.se/flugor/laxflugor-dubbel/tummel-shrimp-2675"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Large/2629-IMG_20230615_204917.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Tummel-Shrimp" license="All rights reserved; reference only" flip=#true note="Double, side view"
+    "https://img.youtube.com/vi/CZ04J1RW5dQ/maxresdefault.jpg" page="https://www.youtube.com/watch?v=CZ04J1RW5dQ" author="Seán Woods" license="All rights reserved; reference only" note="Double, with a silver rib"
+    "https://www.flugor.se/bild_arkiv/big_2675.jpg" page="https://www.flugor.se/flugor/laxflugor-dubbel/tummel-shrimp-2675" license="All rights reserved; reference only" note="Double in the vise"
+}
+
+// Munn: sizes 8 to 14, single, treble or double.
+hook salmon-double size=10
+thread black size="8/0"
+
+materials {
+    // Read from the photos: a long, sparse tail.
+    tail bucktail color=orange mix="yellow black" count=70
+    tail-flash krystal-flash count=3
+    // Munn: gold; Woods ties silver wire or oval, as his photo shows.
+    rib oval-tinsel color=gold
+    body silk-floss color=black
+    wing squirrel-tail color=black
+    collar cock-hackle color=orange fibre=1.8 sweep=58
+    front-collar guinea-fowl-hackle color=blue barred=#true fibre=2.0 sweep=62
+}
+
+// No step-by-step source writes the order out; it is that of Ally's Shrimp and the Cascade, which
+// the photos match: the collar lies over the root of the wing.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0
+    // Read from the photos: one and a half to two shank lengths past the bend.
+    tie-in tail length=4.3 angle=4 spread=14 note="Mix the three colours well, and bind the butts along the shank."
+    trim tail
+    tie-in tail-flash length=4.4 angle=5 spread=10 note="Two or three strands on top."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.82
+    wind body to=0.82 turns=10 note="Slim and even."
+    tie-off body
+    wind rib to=0.82 turns=5 note="Open, even turns."
+    tie-off rib
+    // Read from the photos: one to two gapes past the bend.
+    tie-in wing length=3.5 angle=9 spread=16 note="A small bunch, low over the body; Munn also ties Arctic fox."
+    trim wing
+    tie-in collar
+    wrap-thread to=0.86
+    wind collar to=0.86 turns=3 note="Stroke the fibres back with each turn."
+    tie-off collar
+    tie-in front-collar
+    wrap-thread to=0.9
+    wind front-collar to=0.9 turns=3 note="In front of the orange; soft and long, it sweeps back over it."
+    tie-off front-collar
+    whip-finish note="A small black head, varnished."
+}

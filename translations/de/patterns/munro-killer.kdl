@@ -1,0 +1,55 @@
+id munro-killer
+status draft
+
+// en description: A fine gold tag, a black floss body ribbed with oval gold, an orange throat with a few blue guinea fowl fibres, and a long wing of yellow bucktail under black.
+description "Ein Tag aus feinem Goldtinsel, ein Körper aus schwarzem Floss, gerippt mit ovalem Goldtinsel, ein orangefarbener Bart mit ein paar blauen Perlhuhnfibern und ein langer Flügel aus gelbem Bucktail unter schwarzem."
+
+// en history: Named after the tackle shop of J.A.J. Munro in Aberlour on the Spey. John Gray says Munro ran it for many years and places the fly among the modern hairwings developed from the 1950s. Who tied it first is disputed. In a family account published by Fish & Fly, James Morrison says his father, John Milne Morrison, who owned the business, invented it with his friend the salmon-fishing writer John Ashley-Cooper: he took the body of a Thunder and Lightning and added a long hair wing. The family keeps two of the first flies.
+history """
+    Benannt nach dem Angelgeschäft von J.A.J. Munro in Aberlour am Spey. John Gray sagt, Munro
+    habe es viele Jahre geführt, und zählt die Fliege zu den modernen Haarflügelfliegen, die ab
+    den 1950er Jahren entstanden. Wer sie zuerst gebunden hat, ist umstritten. In einem
+    Familienbericht, den Fish & Fly veröffentlicht hat, sagt James Morrison, sein Vater John
+    Milne Morrison, dem das Geschäft gehörte, habe sie zusammen mit seinem Freund, dem
+    Lachsfischerei-Autor John Ashley-Cooper, erfunden: Er nahm den Körper einer Thunder and
+    Lightning und fügte einen langen Haarflügel hinzu. Die Familie bewahrt zwei der ersten
+    Fliegen auf.
+    """
+
+// en fishing: Peter Gathercole dresses the wing at least twice the length of the hook, which gives it far more action in the water and makes it work even in the slower parts of a river. Fish & Fly calls it a huge attraction to Spey salmon. It is tied on singles and doubles, and on tubes.
+fishing """
+    Peter Gathercole bindet den Flügel mindestens doppelt so lang wie den Haken; das gibt ihr
+    viel mehr Bewegung im Wasser, sodass sie auch in den langsameren Abschnitten eines Flusses
+    fängt. Fish & Fly nennt sie einen großen Reiz für die Lachse des Spey. Sie wird auf Einzel-
+    und Doppelhaken gebunden, und auf Tuben.
+    """
+
+labels {
+    // en tag: Fine gold tinsel
+    tag "Feines Goldtinsel"
+    // en throat: Orange cock hackle fibres
+    throat "Orangefarbene Hahnenhechelfibern"
+    // en blue-throat: Dyed blue guinea fowl fibres
+    blue-throat "Blau gefärbte Perlhuhnfibern"
+}
+
+notes {
+    // en step 2 (wrap-thread): To where the two hooks divide.
+    step 2 "Bis dahin, wo sich die beiden Haken teilen."
+    // en step 5 (wind tag): Five or six turns.
+    step 5 "Fünf oder sechs Windungen."
+    // en step 10 (wind body): Down to the tag and back again: a double layer.
+    step 10 "Hinunter zum Tag und wieder zurück: eine doppelte Lage."
+    // en step 12 (wind rib): Five evenly spaced turns.
+    step 12 "Fünf gleichmäßig verteilte Windungen."
+    // en step 14 (tie-in throat): Swept back along and below the shank.
+    step 14 "Entlang und unter dem Hakenschenkel nach hinten gestrichen."
+    // en step 15 (tie-in blue-throat): A few fibres in front of the orange.
+    step 15 "Ein paar Fibern vor den orangefarbenen."
+    // en step 16 (tie-in yellow): Lay the black on top of the yellow before tying them in, so they blend a little.
+    step 16 "Das Schwarze vor dem Einbinden auf das Gelbe legen, damit sie sich etwas mischen."
+    // en step 19 (trim black): Cut at an angle so the head tapers.
+    step 19 "Schräg abschneiden, damit der Kopf sich verjüngt."
+    // en step 20 (whip-finish): A black head, varnished.
+    step 20 "Ein schwarzer Kopf, lackiert."
+}

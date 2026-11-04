@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { bestCoverage, catalogNeeds, coverage, inventoryKey, match, missingKinds, needs, shoppingList } from "./inventory";
+import { bestCoverage, catalogNeeds, coverage, inventoryKey, match, materialMatch, missingKinds, needs, shoppingList } from "./inventory";
 
 const recipe = (() => {
   const r = loadRecipe(`
@@ -37,6 +37,18 @@ steps {
 describe("inventory", () => {
   it("lists what a recipe needs, with default colours", () => {
     expect(needs(recipe).map(inventoryKey)).toEqual(["wool:red", "peacock-herl:#26341a", "cock-hackle:brown"]);
+  });
+
+  it("needs each colour of a blended bunch", () => {
+    const blended = { ...recipe, materials: [{ id: "tail", kind: "bucktail", color: "orange", mix: "yellow black" }] } as typeof recipe;
+    expect(needs(blended).map(inventoryKey)).toEqual(["bucktail:orange", "bucktail:yellow", "bucktail:black"]);
+  });
+
+  it("owns a blended bunch only as well as its least-owned colour", () => {
+    const tail = { id: "tail", kind: "bucktail", color: "orange", mix: "yellow black" } as const;
+    expect(materialMatch(tail, new Set(["bucktail:orange"]))).toBe("substitute");
+    expect(materialMatch(tail, new Set(["bucktail:orange", "bucktail:yellow", "bucktail:black"]))).toBe("have");
+    expect(materialMatch(tail, new Set(["wool:red"]))).toBe("missing");
   });
 
   it("matches exactly, as a substitute in another colour, or not at all", () => {

@@ -4,7 +4,7 @@ import { loadRecipe } from "../recipe/load";
 import { RULES, type RuleKey } from "../recipe/rules";
 import { simulate } from "../tying/simulate";
 import { ARCHETYPE_PROPS, MATERIALS, type CatalogMaterial, type MaterialKind } from "../recipe/materials";
-import { Color, HOOK_MODEL_IDS, MAX_STEPS, RecipeSchema, THREAD_SIZES, TUBE_MODEL_IDS, type Material, type Op, type Recipe, type Step } from "../recipe/schema";
+import { Color, HOOK_MODEL_IDS, MAX_STEPS, mixColours, RecipeSchema, THREAD_SIZES, TUBE_MODEL_IDS, type Material, type Op, type Recipe, type Step } from "../recipe/schema";
 import { floats, validateSemantics } from "../recipe/validate";
 import { formSections, type Field } from "./schemaForm";
 import { writeKdl } from "./write";
@@ -249,7 +249,8 @@ function usable(d: Recipe, parts: ReadonlySet<string>): boolean {
     typeof d.thread === "object" && d.thread !== null &&
     colour(d.thread.color) && (THREAD_SIZES as readonly string[]).includes(d.thread.size) &&
     list(d.materials) && list(d.steps) &&
-    d.materials.every((m) => typeof m.id === "string" && parts.has(m.id) && Object.hasOwn(MATERIALS, m.kind) && colour(m.color)) &&
+    d.materials.every((m) => typeof m.id === "string" && parts.has(m.id) && Object.hasOwn(MATERIALS, m.kind) && colour(m.color) &&
+        (m.mix === undefined || (typeof m.mix === "string" && mixColours(m).every(colour)))) &&
     new Set(d.materials.map((m) => m.id)).size === d.materials.length &&
     // A step may name a material the fly no longer has (removed while building): the problems
     // say so, and name it as it is written.

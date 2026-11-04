@@ -1,0 +1,41 @@
+id tummel-shrimp
+status draft
+
+// en description: A long tail of orange, yellow and black bucktail mixed with a few strands of flash, a black floss body ribbed with oval gold, a black squirrel wing, and a collar of orange cock hackle behind blue guinea fowl.
+description "En lång stjärt av orange, gul och svart bucktail blandad med några strån flash, en kropp av svart flossilke ribbad med oval guldtinsel, en vinge av svart ekorre och en krage av orange tupphackel bakom blå pärlhöna."
+
+// en history: One of Alastair "Ally" Gowans' shrimp flies, with Ally's Shrimp and the Cascade, and named after the River Tummel, a big tributary of the Tay. Gowans says it came from the need for a reliable dark fly, and that it puts together the proven colours of the Willie Gunn and the Thunder and Lightning. Stevie Munn, who was first shown it by Gowans at the Scone Palace Game Fair, remembers it as loosely based on a Willie Gunn or a Munro Killer.
+history """
+    En av Alastair ”Ally” Gowans räkflugor, med Ally's Shrimp och Cascade, och uppkallad efter
+    floden Tummel, ett stort biflöde till Tay. Gowans säger att den kom till för att han behövde
+    en pålitlig mörk fluga, och att den förenar de beprövade färgerna från Willie Gunn och
+    Thunder and Lightning. Stevie Munn, som först fick se den av Gowans på Scone Palace Game
+    Fair, minns den som löst byggd på en Willie Gunn eller en Munro Killer.
+    """
+
+// en fishing: Gowans counts it among the flies he wants for late spring and summer, in low water; he told Stevie Munn it was a summer fly. Munn also fishes it for autumn salmon and for the dollaghan, the lake-run trout of Lough Neagh, when fish are not looking at brighter flies and want something more sombre. It is tied on small singles, doubles and trebles.
+fishing """
+    Gowans räknar den till de flugor han vill ha under senvåren och sommaren, i lågt vatten; han
+    sa till Stevie Munn att det var en sommarfluga. Munn fiskar den också efter höstlax och
+    efter dollaghan, öringen som vandrar upp från Lough Neagh, när fisken inte tittar på ljusare
+    flugor utan vill ha något mörkare. Den binds på små enkelkrokar, dubbelkrokar och trekrokar.
+    """
+
+notes {
+    // en step 3 (tie-in tail): Mix the three colours well, and bind the butts along the shank.
+    step 3 "Blanda de tre färgerna väl, och bind ner rotändarna längs krokskaftet."
+    // en step 5 (tie-in tail-flash): Two or three strands on top.
+    step 5 "Två eller tre strån ovanpå."
+    // en step 9 (wind body): Slim and even.
+    step 9 "Smal och jämn."
+    // en step 11 (wind rib): Open, even turns.
+    step 11 "Glesa, jämna varv."
+    // en step 13 (tie-in wing): A small bunch, low over the body; Munn also ties Arctic fox.
+    step 13 "En liten bunt, lågt över kroppen; Munn binder också med fjällräv."
+    // en step 17 (wind collar): Stroke the fibres back with each turn.
+    step 17 "Stryk fibrerna bakåt för varje varv."
+    // en step 21 (wind front-collar): In front of the orange; soft and long, it sweeps back over it.
+    step 21 "Framför det orange; mjukt och långt, det sveper bakåt över det."
+    // en step 23 (whip-finish): A small black head, varnished.
+    step 23 "Ett litet svart huvud, lackat."
+}

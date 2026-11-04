@@ -1,0 +1,82 @@
+// Munro Killer: the Spey hairwing, black floss with an orange and blue throat and a long yellow and black wing.
+
+id munro-killer
+name "Munro Killer"
+aliases "Munro's Killer"
+type salmon
+imitates attractor
+difficulty beginner
+species salmon
+origin region="Aberlour, Speyside, Scotland"
+description "A fine gold tag, a black floss body ribbed with oval gold, an orange throat with a few blue guinea fowl fibres, and a long wing of yellow bucktail under black."
+history """
+    Named after the tackle shop of J.A.J. Munro in Aberlour on the Spey. John Gray says Munro ran
+    it for many years and places the fly among the modern hairwings developed from the 1950s.
+    Who tied it first is disputed. In a family account published by Fish & Fly, James Morrison
+    says his father, John Milne Morrison, who owned the business, invented it with his friend
+    the salmon-fishing writer John Ashley-Cooper: he took the body of a Thunder and Lightning and
+    added a long hair wing. The family keeps two of the first flies.
+    """
+fishing """
+    Peter Gathercole dresses the wing at least twice the length of the hook, which gives it far
+    more action in the water and makes it work even in the slower parts of a river. Fish & Fly
+    calls it a huge attraction to Spey salmon. It is tied on singles and doubles, and on tubes.
+    """
+sources {
+    "Trout & Salmon Fishing: Salmon flies (John Gray)" url="https://trout-salmon-fishing.com/salmon-flies.htm"
+    "Fish & Fly: The origin of the Munro Killer salmon fly (James Morrison)" url="https://www.fishandfly.com/the-origin-of-the-munro-killer-salmon-fly/"
+    "The Fly-Tying Bible (Peter Gathercole, 2003): Munro Killer" url="https://archive.org/details/the-fly-tying-bible-peter-gathercole"
+    "Fish4Flies: Munro Killer single" url="https://www.fish4flies.com/Salmon-Atlantic/Singles/Munro-Killer"
+    "Fish4Flies: Munro Killer double" url="https://www.fish4flies.com/Salmon-Atlantic/Doubles/Munro-Killer"
+    "Grays of Kilsyth: Salmon fly tying, Munro's Killer tube" url="http://www.graysofkilsyth.com/salmon-fly-tying.htm"
+    "Grays of Kilsyth: Salmon flies (John Gray)" url="http://www.graysofkilsyth.com/salmon_flies.htm"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish4flies.com/img/flies/Original/2597-Munro%20Killer%201050.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Singles/Munro-Killer" license="All rights reserved; reference only" note="Single, side view"
+    "https://www.fishandfly.com/wp-content/uploads/2018/04/munro-killer-22904-p-1024x683.jpg" page="https://www.fishandfly.com/the-origin-of-the-munro-killer-salmon-fly/" license="Courtesy selectafly.com; reference only" note="Single, side view"
+    "https://www.fishandfly.com/wp-content/uploads/2018/04/Munro_Killer_original-copy-882x1024.jpg" page="https://www.fishandfly.com/the-origin-of-the-munro-killer-salmon-fly/" license="All rights reserved; reference only" note="Two of the original flies, small doubles, from above at an angle"
+}
+
+// Gathercole: sizes 4 to 8, single or double; the original flies are small doubles.
+hook salmon-double size=8
+thread black size="8/0"
+
+materials {
+    tag oval-tinsel color=gold label="Fine gold tinsel"
+    rib oval-tinsel color=gold
+    body silk-floss color=black
+    // Gathercole winds an orange cock hackle three turns and sweeps the fibres back and down with
+    // the thread; Fish4Flies ties a beard of the fibres, which looks the same.
+    throat hackle-fibres color=orange count=70 label="Orange cock hackle fibres"
+    blue-throat hackle-fibres color=blue barred=#true count=16 label="Dyed blue guinea fowl fibres"
+    yellow bucktail color=yellow
+    black bucktail color=black
+}
+
+// Gathercole winds the floss from the eye down to the tag and back, and the tag over the floss
+// in between; the usual order, tag first, makes the same fly.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="To where the two hooks divide."
+    tie-in tag
+    wrap-thread to=0.05
+    wind tag to=0.05 turns=5 note="Five or six turns."
+    tie-off tag
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.84
+    wind body to=0.84 turns=12 note="Down to the tag and back again: a double layer."
+    tie-off body
+    wind rib to=0.84 turns=5 note="Five evenly spaced turns."
+    tie-off rib
+    // Read from the photos: to the hook point or past it.
+    tie-in throat length=1.6 angle=16 side=under note="Swept back along and below the shank."
+    tie-in blue-throat length=1.4 angle=12 side=under note="A few fibres in front of the orange."
+    // Gathercole: twice the length of the hook; the photos show about one and a half.
+    tie-in yellow length=4.6 angle=2 spread=14 note="Lay the black on top of the yellow before tying them in, so they blend a little."
+    trim yellow
+    tie-in black length=4.8 angle=4 spread=16
+    trim black note="Cut at an angle so the head tapers."
+    whip-finish note="A black head, varnished."
+}

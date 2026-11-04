@@ -18,7 +18,7 @@
  *   marabou   marabou (tails, wings)
  *   cdc       cul de canard (wings)
  *   flash     Krystal Flash, Flashabou
- *   feather   whole feathers or slips as wings (shape: breast, tip, slip)
+ *   feather   whole feathers or slips as wings (shape: breast, tip, slip), jungle cock eyes
  *   foam      closed-cell foam (backs, wing cases)
  *   bead      beads and cone heads slid onto the hook
  *   eyes      dumbbell and bead-chain eyes
@@ -33,7 +33,8 @@ export const ARCHETYPES = [
 ] as const;
 export type Archetype = (typeof ARCHETYPES)[number];
 
-export type FeatherShape = "breast" | "tip" | "slip";
+/** breast: a roof over the body; tip: a hackle tip; slip: a quill slip; eye: a jungle cock eye. */
+export type FeatherShape = "breast" | "tip" | "slip" | "eye";
 
 export interface CatalogMaterial {
   name: string;
@@ -162,6 +163,9 @@ export const MATERIALS = {
   "turkey-quill": { name: "turkey quill slip", archetype: "feather", defaultColor: "turkey", shape: "slip" },
   "hen-pheasant-quill": { name: "hen pheasant quill slips", archetype: "feather", defaultColor: "hen-pheasant", shape: "slip" },
   "saddle-feathers": { name: "saddle hackle feathers", archetype: "feather", shape: "tip" },
+  // The neck feathers ("eyes", "nails") of the grey jungle fowl: small, stiff and round-ended,
+  // dark with a row of cream enamel spots down the middle; a pair as cheeks beside a wing.
+  "jungle-cock": { name: "jungle cock", archetype: "feather", defaultColor: "#26231f", shape: "eye" },
 
   // Foam
   foam: { name: "foam", archetype: "foam", defaultColor: "black", thickness: 0.09 },
@@ -205,8 +209,8 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   floss: ["size"],
   tinsel: [],
   chenille: [],
-  hair: ["count"],
-  fibres: ["count", "barred"],
+  hair: ["count", "mix"],
+  fibres: ["count", "barred", "mix"],
   biot: ["count"],
   marabou: ["barred"],
   cdc: ["fibre", "sweep"],

@@ -420,7 +420,7 @@ export const sv: Messages = {
       turns: "Varv", counter: "Lindad åt andra hållet", barred: "Bandad som grizzly", side: "Var", sides: { top: "Ovanpå", under: "Under", across: "Tvärs över skaftet" },
       forward: "Pekar framåt", tip: "Färg på änden", collar: "Kragens längd", windTo: "Lindad som kropp till", fray: "Uppriven stjärt",
       fan: "Solfjäder fram och bak", segments: "Segment", tailLength: "Stjärtspröt bakom änden", tailSpread: "Stjärtsprötens spridning",
-      fold: "Tillbakavikt som huvud", taper: "Skuren avsmalnande till en spets", tuft: "Pälsen kvar som en tofs i änden",
+      fold: "Tillbakavikt som huvud", taper: "Skuren avsmalnande till en spets", tuft: "Pälsen kvar som en tofs i änden", mix: "Färger inblandade", mixAdd: "Blanda in en färg", unmix: "ta bort den",
       flat: "Klippt plant", flats: { none: "Nej, formklippt", sides: "Upptill och undertill, sidorna långa", top: "Bara undertill", under: "Bara upptill" },
       leave: "Lämnas kvar", shape: "Klippt till", shapes: { round: "Ett runt huvud", wedge: "En kil, platt undertill", cigar: "En cigarr, rundad i båda ändar", cone: "En kon, tjockast framtill", disc: "En platt skiva, rund sedd ovanifrån" },
       keep: "Fibrer kvar", keeps: { sides: "På sidorna", top: "Ovanpå och på sidorna", under: "Under och på sidorna" }, none: "Som bunden",
@@ -533,6 +533,7 @@ export const sv: Messages = {
         barred: "Bandad som grizzly",
         mm: "Storlek (mm)",
         tuft: "Pälsen kvar som en tofs i änden (× krokgap)",
+        mix: "Färger inblandade",
       },
       step: {
         material: "Material",

@@ -3256,6 +3256,14 @@ select {
   gap: 0.5rem;
 }
 
+/* The colours mixed through a bunch, each taken out again with a click. */
+.wb-mixed {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .wb-species {
   display: flex;
   flex-wrap: wrap;

@@ -1,0 +1,102 @@
+// Cascade: Alastair Gowans' shrimp fly, orange and yellow cascading over a silver and black body.
+
+id cascade
+name "Cascade"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon sea-trout
+// Assumption: the months of a Scottish salmon season; Gowans fishes it "at any time of year".
+season february march april may june july august september october
+origin originator="Alastair Gowans" region="Scotland"
+description "An oval silver tag, a long tail of hot orange and yellow bucktail mixed with clear flash, a body of flat silver tinsel behind and black floss in front ribbed with oval silver, a black squirrel wing with silver flash, and long yellow and hot orange collar hackles."
+history """
+    Alastair "Ally" Gowans, who tied Ally's Shrimp, set out to make a pretty fly from Krystal
+    Hair, a big ball of the silver kind given him by a well-known French angler and a hank of the
+    clear. He named it after the way the two colours of the tail cascade over the hook. The first
+    fish came the April after he tied it, on the Tummel below the road bridge at Pitlochry: a
+    springer of about 14 lb, beached by a friend. His first flies had a black hair wing on top and
+    underneath; on his first trebles he left the underwing out, and later versions drop it.
+    Gowans also tied the first variant, with gold for the silver half of the body. John Gray
+    reckons that within little more than a decade it became probably the most used salmon fly in
+    Britain.
+    """
+fishing """
+    Gowans fishes it in almost any conditions and at any time of year: tiny doubles and trebles
+    of #12 and smaller in the lowest summer water, hooks up to #4 when the water is higher or
+    colder, and tubes in high, cold water early in the spring and late in the autumn. Håkan
+    Karsnäser finds it at its best in clear water and bright sunshine.
+    """
+sources {
+    "Let's Fly Fish: The Cascade salmon fly (Alastair Gowans)" url="https://letsflyfish.com/cascade_salmon_fly.htm"
+    "Trout & Salmon Fishing: Cascade step by step (John Gray)" url="https://www.trout-salmon-fishing.com/cascade-step-by-step.htm"
+    "Trout & Salmon Fishing: Cascade tube flies (John Gray)" url="https://www.trout-salmon-fishing.com/cascade-tube-flies.htm"
+    "Ahrex: The evolution of salmon flies, appearance and styling (Håkan Karsnäser)" url="https://ahrexhooks.com/2026/02/06/the-evolution-of-salmon-flies-appearance-and-styling/"
+    "Fish4Flies: Cascade, Ken Sawada double" url="https://www.fish4flies.com/Salmon-Atlantic/Ken-Sawada-Doubles/Cascade"
+    "GlobalFlyFisher: Cascade (video, Casper Hansen)" url="https://globalflyfisher.com/video/cascade-1"
+    "Flugor.se: Cascade Shrimp" url="https://www.flugor.se/flugor/laxflugor-dubbel/cascade-shrimp-1754"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.trout-salmon-fishing.com/cascade-sbs-5s.jpg" page="https://www.trout-salmon-fishing.com/cascade-step-by-step.htm" author="John Gray" license="All rights reserved; reference only" note="Single hook, side view"
+    "https://ahrexhooks.com/wp-content/uploads/2026/02/Cascade-by-Hakan-Karsnaser-12-1024x661.jpg" page="https://ahrexhooks.com/2026/02/06/the-evolution-of-salmon-flies-appearance-and-styling/" author="Håkan Karsnäser" license="All rights reserved; reference only" note="Double in the vise"
+    "https://www.fish4flies.com/img/flies/Large/3245-3245%20Cascade.jpg" page="https://www.fish4flies.com/Salmon-Atlantic/Ken-Sawada-Doubles/Cascade" license="All rights reserved; reference only" flip=#true note="Double, long wing and flash"
+}
+
+// Assumption: a double, as most of the photos and shops show; Gowans ties it on singles,
+// doubles, trebles and tubes alike.
+hook salmon-double size=8
+thread black size="8/0"
+
+materials {
+    tag oval-tinsel color=silver
+    // Read from the photos: a sparse, wispy tail.
+    tail bucktail color="#f2581a" mix=yellow count=70 label="Mixed hot orange and yellow bucktail"
+    tail-flash krystal-flash color=clear count=6 label="Clear Krystal Hair"
+    rib oval-tinsel color=silver
+    rear flat-tinsel color=silver
+    front silk-floss color=black
+    wing squirrel-tail color=black
+    flash krystal-flash color=silver count=6 label="Silver Krystal Hair"
+    collar cock-hackle color=yellow fibre=2.2 sweep=58
+    front-collar cock-hackle color="#f2581a" fibre=2.1 sweep=58 label="Hot orange cock hackle"
+}
+
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="A bed of thread to above the hook point."
+    tie-in tag
+    wrap-thread to=0.06
+    wind tag to=0.06 turns=5 note="Five or six close turns."
+    tie-off tag
+    // Karsnäser: one to one and a half shanks long; Gray's photo about a shank and a third.
+    tie-in tail length=3.4 angle=4 spread=14 note="Mix the two colours well, and bind the butts along the shank."
+    trim tail
+    // Gray's photo: the flash a little longer than the hair.
+    tie-in tail-flash length=3.7 angle=5 spread=12 note="A few strands folded round the thread, on top of the tail."
+    tie-in rib
+    tie-in rear
+    wrap-thread to=0.48
+    wind rear to=0.48 turns=10 note="To the tail and back to just past the middle, in touching turns."
+    tie-off rear
+    tie-in front
+    wrap-thread to=0.82
+    wind front to=0.82 turns=8
+    tie-off front
+    wind rib to=0.82 turns=5 note="Four or five even turns over both halves."
+    tie-off rib
+    // Karsnäser: the wing as long as the shank; Gray's photo a little longer.
+    tie-in wing length=2.8 angle=7 spread=16 note="A small bunch, low over the body."
+    trim wing
+    tie-in flash length=3.0 angle=8 spread=12 note="A few strands over the wing."
+    tie-in collar
+    wrap-thread to=0.86
+    // Karsnäser: the fibres reach the bend.
+    wind collar to=0.86 turns=3 note="Two or three turns, stroking the fibres back."
+    tie-off collar
+    tie-in front-collar
+    wrap-thread to=0.9
+    wind front-collar to=0.9 turns=3 note="In front of the yellow, the fibres about as long."
+    tie-off front-collar
+    whip-finish note="Two or three coats of varnish."
+}

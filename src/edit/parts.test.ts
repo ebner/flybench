@@ -6,8 +6,29 @@ import { simulate } from "../tying/simulate";
 import { blankFly, PATTERN_FORM, recipeText } from "./own";
 import { mulberry32 } from "../render/random";
 import {
-  addMaterial, addPart, bareHook, compile, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
+  addMaterial, addPart, bareHook, blends, compile, kindsFor, MATERIAL_RANGES, materialChoices, newPart, partRange, partsOf, presetFor, PRESETS, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, waysOf, type How, type NumberKey, type NumberRange, type PartsFly, type Preset,
 } from "./parts";
+
+describe("a blended bunch in the builder", () => {
+  it("keeps its colours only while it is tied as a bunch", () => {
+    const tummel = patterns.find((r) => r.id === "tummel-shrimp")!;
+    const fly = partsOf(tummel)!;
+    expect(compile(fly).recipe.materials.find((m) => m.id === "tail")?.mix).toBe("yellow black");
+    const across = { ...fly, parts: fly.parts.map((p) => (p.id === "tail" ? { ...p, side: "across" as const } : p)) };
+    const out = compile(across);
+    expect(out.recipe.materials.find((m) => m.id === "tail")?.mix).toBeUndefined();
+    expect(out.problems.filter((e) => e.rule === "mixOnlyBunch")).toEqual([]);
+  });
+
+  it("is not offered on a tail wound on as the body as well (a Pheasant Tail's)", () => {
+    const fly = partsOf(patterns.find((r) => r.id === "pheasant-tail-nymph")!)!;
+    const tail = fly.parts.find((p) => p.windTo !== undefined)!;
+    expect(blends(tail, 0)).toBe(false);
+    const mixed = { ...fly, parts: fly.parts.map((p) => (p === tail ? { ...p, mats: p.mats.map((m, i) => (i === 0 ? { ...m, mix: "white" } : m)) } : p)) };
+    const out = compile(mixed);
+    expect(out.problems.filter((e) => e.rule === "mixOnlyBunch")).toEqual([]);
+  });
+});
 
 const patterns: Recipe[] = readdirSync(new URL("../../patterns", import.meta.url))
   .filter((f) => f.endsWith(".kdl"))

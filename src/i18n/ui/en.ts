@@ -425,7 +425,7 @@ export const en = {
       turns: "Turns", counter: "Wound the other way round", barred: "Barred like grizzly", side: "Where", sides: { top: "On top", under: "Underneath", across: "Across the shank" },
       forward: "Pointing forward", tip: "Colour of the end", collar: "Collar length", windTo: "Wound on as the body to", fray: "Frayed tail",
       fan: "Fanned fore and aft", segments: "Segments", tailLength: "Tails past its end", tailSpread: "Tails splayed",
-      fold: "Folded back as a head", taper: "Cut tapered to a point", tuft: "Fur left as a tuft at the end",
+      fold: "Folded back as a head", taper: "Cut tapered to a point", tuft: "Fur left as a tuft at the end", mix: "Colours mixed through it", mixAdd: "Mix in a colour", unmix: "take it out",
       flat: "Cut flat", flats: { none: "No, clipped to a shape", sides: "On top and underneath, the sides long", top: "Underneath only", under: "On top only" },
       leave: "Left standing", shape: "Clipped to", shapes: { round: "A round head", wedge: "A wedge, flat underneath", cigar: "A cigar, rounded at both ends", cone: "A cone, full at the front", disc: "A flat disc, round from above" },
       keep: "Fibres kept", keeps: { sides: "At the sides", top: "On top and at the sides", under: "Underneath and at the sides" }, none: "As tied",
@@ -538,6 +538,7 @@ export const en = {
         barred: "Barred like grizzly",
         mm: "Size (mm)",
         tuft: "Fur left as a tuft at the end (× gape)",
+        mix: "Colours mixed in",
       },
       step: {
         material: "Material",

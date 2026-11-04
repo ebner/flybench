@@ -4,7 +4,8 @@ import { hookModel } from "../tying/hook";
 import { Profile } from "../tying/profile";
 import type { BundlePiece, CoverPiece } from "../tying/simulate";
 import { Surfaces } from "./materials";
-import { pieceView } from "./pieces";
+import { pieceView, spreadColours } from "./pieces";
+import { mulberry32 } from "./random";
 import { ShankSpace } from "./space";
 
 describe("a strip parted round a post", () => {
@@ -103,5 +104,13 @@ describe("glued pads and discs", () => {
     expect(Math.abs(front.max.z - rear.max.z)).toBeLessThan(0.12);
     expect(front.max.z).toBeGreaterThan(0.3);
     view.dispose();
+  });
+});
+
+describe("a blended bunch's colours", () => {
+  it("are spread evenly, so a sparse bunch shows each of them", () => {
+    for (let seed = 1; seed < 50; seed++) expect(new Set(spreadColours(2, ["red", "white"], mulberry32(seed))).size).toBe(2);
+    const many = spreadColours(10, ["a", "b", "c"], mulberry32(7));
+    expect(["a", "b", "c"].map((c) => many.filter((x) => x === c).length).sort()).toEqual([3, 3, 4]);
   });
 });

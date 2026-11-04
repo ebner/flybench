@@ -514,6 +514,17 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     if (!used.has(m.id)) rule("neverUsed", { m: m.id }, ["materials", i, "id"]);
   });
   if (!finished) rule("endWithWhipFinish", {}, ["steps"]);
+  // A blend of colours shows only in a bunch of free fibres: tied in with a length (not across the
+  // shank), spun or glued. Wound, pulled over or tied across, it would be drawn in one colour.
+  const blended = new Set(recipe.materials.filter((m) => m.mix).map((m) => m.id));
+  recipe.steps.forEach((s, i) => {
+    if (!("material" in s) || !blended.has(s.material)) return;
+    const unblended = s.op === "wind" || s.op === "pull-over" || (s.op === "tie-in" && (s.length === undefined || s.side === "across"));
+    if (!unblended) return;
+    // (Said once, where it is first tied another way.)
+    blended.delete(s.material);
+    rule("mixOnlyBunch", { m: s.material }, ["steps", i, "material"]);
+  });
   if (recipe.sits && !floats(recipe)) rule("sitsFloats", {}, ["sits"]);
   return errors;
 }

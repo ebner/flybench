@@ -1,0 +1,52 @@
+id silver-doctor
+status draft
+
+// en description: An oval silver tag, a golden pheasant crest tail, a red wool butt, a flat silver body ribbed with oval silver, a silver-tipped squirrel wing, a pale blue hen hackle collar and a red head.
+description "En tag av oval silvertinsel, en stjärt av guldfasantopping, en butt av röd ull, en kropp av platt silvertinsel ribbad med oval silvertinsel, en vinge av silverspetsad ekorre, en krage av ljusblått hönshackel och ett rött huvud."
+
+// en history: Kelson, in The Salmon Fly (1895), gives it to Wright: James Wright of Sprouston on the Tweed, whom Francis Francis called a first-rate artist and to whom Kelson also gives the Black and Blue Doctors. Francis printed a dressing in 1867, calling it a good standard fly. The classic dressings differ: Francis gives a blue hackle, gallina at the shoulder and a wing mostly of pintail; Kelson ties a throat of blue hackle and gallina and a mixed wing of many feathers under a topping; Pryce-Tannatt, in How to Dress Salmon Flies (1914), follows the blue throat with widgeon. All have a silver body, scarlet wool butt and head and a topping in the tail. John Gray describes how the gaudy Victorian flies were simplified, first into low-water dressings and then, above all from the 1950s, into hairwings. This is Håkan Karsnäser's hairwing version, with the classic's silver, scarlet and blue.
+history """
+    Kelson tillskriver den i The Salmon Fly (1895) Wright: James Wright från Sprouston vid
+    Tweed, som Francis Francis kallade en förstklassig konstnär och som Kelson också tillskriver
+    Black Doctor och Blue Doctor. Francis tryckte en bindning 1867 och kallade den en bra
+    standardfluga. De klassiska bindningarna skiljer sig åt: Francis har ett blått hackel,
+    pärlhöna vid skuldran och en vinge mest av stjärtand; Kelson binder ett skägg av blått
+    hackel och pärlhöna och en blandad vinge av många fjädrar under en topping; Pryce-Tannatt
+    låter i How to Dress Salmon Flies (1914) det blå skägget följas av bläsand. Alla har
+    silverkropp, butt och huvud av scharlakansröd ull och en topping i stjärten. John Gray
+    beskriver hur de färggranna viktorianska flugorna förenklades, först till
+    lågvattenbindningar och sedan, framför allt från 1950-talet, till hårvingeflugor. Detta är
+    Håkan Karsnäsers hårvingeversion, med klassikerns silver, scharlakansrött och blått.
+    """
+
+// en fishing: Karsnäser calls it an obvious fly for clear water and sunshine. Kelson rated it a great fly throughout the United Kingdom, and popular on Norwegian and Canadian rivers. Today's hairwing is fished on doubles, singles and tubes; the full dress is mostly tied for display.
+fishing """
+    Karsnäser kallar den en självklar fluga för klart vatten och solsken. Kelson höll den för en
+    utmärkt fluga i hela Storbritannien, och omtyckt i norska och kanadensiska älvar. Dagens
+    hårvingeversion fiskas på dubbelkrok, enkelkrok och tub; den fullklädda flugan binds mest
+    för att visas upp.
+    """
+
+labels {
+    // en butt: Red wool dubbing
+    butt "Röd ulldubbing"
+    // en wing: Silver-tipped squirrel tail
+    wing "Silverspetsad ekorrsvans"
+    // en collar: Pale blue hen hackle
+    collar "Ljusblått hönshackel"
+}
+
+notes {
+    // en step 8 (dub butt): A few turns of sparse dubbing: a small round butt.
+    step 8 "Några varv gles dubbing: en liten rund butt."
+    // en step 12 (wind body): Touching turns, never overlapping.
+    step 12 "Täta varv som aldrig överlappar."
+    // en step 16 (tie-in wing): A small, cleaned bunch.
+    step 16 "En liten, rensad bunt."
+    // en step 18 (tie-in collar): The pale blue called Silver Doctor blue.
+    step 18 "Den ljusblå färg som kallas Silver Doctor-blå."
+    // en step 20 (wind collar): Stroke the fibres back with each turn.
+    step 20 "Stryk fibrerna bakåt för varje varv."
+    // en step 22 (whip-finish): A neat red head, varnished.
+    step 22 "Ett prydligt rött huvud, lackat."
+}
