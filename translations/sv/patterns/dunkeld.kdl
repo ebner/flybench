@@ -1,0 +1,48 @@
+id dunkeld
+status draft
+
+// en description: A golden pheasant crest tail, a flat gold tinsel body ribbed with oval gold, an orange beard, a bronze mallard wing and jungle cock cheeks.
+description "En stjärt av guldfasantopping, en kropp av platt guldtinsel ribbad med oval guldtinsel, ett orange skägg, en vinge av skulderfjäder från gräsand och kinder av jungle cock."
+
+// en history: The salmon fly came first. Kelson, in The Salmon Fly (1895), calls it an old standard pattern that had undergone considerable change, with an orange hackle palmered over a gold tinsel body (formerly embossed tinsel, which he preferred), a jay throat and a wing of peacock wing and mallard strips under a topping, and believes it was invented by W. J. Davidson. Pryce-Tannatt's dressing, in How to Dress Salmon Flies (1914), differs in the details: a tag of silver and light orange floss rather than gold twist and orange silk, a silver rib rather than gold, and a mixed wing of married strands under brown mallard. The trout fly keeps the gold body, the orange and the mallard: Barry Ord Clarke calls it the trout version of the Tay salmon fly, and Fulling Mill and Fish4Flies sell it as a fly that began as a salmon fly. Who first tied it small for trout is not recorded. Some tie the orange hackle palmered.
+history """
+    Laxflugan kom först. Kelson kallar den i The Salmon Fly (1895) ett gammalt standardmönster
+    som genomgått stora förändringar, med ett orange hackel palmerat över en kropp av guldtinsel
+    (förr präglad tinsel, som han föredrog), ett skägg av nötskrika och en vinge av sektioner av
+    påfågelvinge och gräsand under en topping, och tror att den uppfanns av W. J. Davidson.
+    Pryce-Tannatts bindning i How to Dress Salmon Flies (1914) skiljer sig i detaljerna: en tag
+    av silver och ljusorange flossilke i stället för guldtråd och orange silke, en silverribb i
+    stället för guld, och en blandad vinge av gifta remsor under brun gräsand. Öringflugan
+    behåller guldkroppen, det orange och gräsanden: Barry Ord Clarke kallar den öringversionen
+    av laxflugan från Tay, och Fulling Mill och Fish4Flies säljer den som en fluga som började
+    som laxfluga. Vem som först band den liten för öring är inte känt. En del binder det orange
+    hacklet palmerat.
+    """
+
+// en fishing: A bright attractor on the point or the middle dropper of a loch or reservoir wet-fly cast. Fulling Mill finds it very effective on a sunk line through the daphnia blooms of summer, and an excellent sea-trout fly on rivers and lochs in peaty water, as Ord Clarke does.
+fishing """
+    En lysande attraktor på udden eller mellersta hängaren i ett våtflugetackel på sjöar och
+    reservoarer. Fulling Mill tycker att den är mycket effektiv på sjunklina genom sommarens
+    daphniablomningar, och en utmärkt havsöringsfluga i älvar och sjöar med humusfärgat vatten,
+    liksom Ord Clarke.
+    """
+
+labels {
+    // en rib: Fine oval gold tinsel
+    rib "Fin oval guldtinsel"
+    // en beard: Orange cock hackle fibres
+    beard "Orange tupphackelfibrer"
+}
+
+notes {
+    // en step 7 (wind body): Down and back again for a smooth double layer.
+    step 7 "Ner och tillbaka igen för ett slätt, dubbelt lager."
+    // en step 11 (tie-in beard): A bunch under the shank.
+    step 11 "En knippe under skaftet."
+    // en step 12 (tie-in wing): Matched slips from a left and a right feather, or the fibres folded, set low over the body.
+    step 12 "Matchade sektioner från en vänster och en höger fjäder, eller fibrerna vikta, lågt över kroppen."
+    // en step 13 (tie-in cheeks): One each side, flat against the wing.
+    step 13 "En på varje sida, platt mot vingen."
+    // en step 14 (whip-finish): A black head, varnished.
+    step 14 "Ett svart huvud, lackat."
+}

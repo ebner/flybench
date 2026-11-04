@@ -244,6 +244,10 @@ materials {
         source "AOS: Veniard Teal Duck Flank Krickente Federn (\"Die wunderschön gezeichneten Flankenfedern der Krickente\")" url="https://www.aos.cc/de/veniard-teal-duck-flank-krickente-federn.html"
         source "Der-FliegenBinder: Weiche Federn (\"Krickentenfeder (teal)\")" url="https://der-fliegenbinder.de/16174-2"
     }
+    noun bronze-mallard "Mallard-Bronzefeder" gender=f plural="Mallard-Bronzefedern" {
+        note "The mallard drake's bronze-brown shoulder feathers. The shop sells them as 'Mallard Bronze Federn'; tyers keep 'Mallard' (see mallard-breast). Written as one hyphenated compound so it declines. Usually a pair (left and right)."
+        source "Besten Kunstköder: Veniard Mallard Bronze Federn (\"Grundmaterial zur Herstellung der ganzen Mallard & … Fliegen Serie, wo die Flügel aus Strahlen dieser Feder hergestellt sind\")" url="https://www.besten-kunstkoder.de/de4/veniard-mallard-bronze-federn/s/29261"
+    }
     noun hackle-tips "Hechelspitze" gender=f plural="Hechelspitzen" {
         note "Nearly always plural (a pair of wings)."
         source "Fliegenfischer-Forum: Alte Klassiker (\"Flügel: braune Hechelspitzen\")" url="https://www.fliegenfischer-forum.de/klassike.html"
@@ -416,6 +420,9 @@ colours {
     adjective turkey "Truthahn" compound=#true
     adjective hen-pheasant "Fasanenhennen" compound=#true
     adjective wood-duck "Brautenten" compound=#true
+    adjective bronze-mallard "bronzebraun" {
+        note "Assumption: the plain colour word for the bronze brown of bronze mallard; no tying page using it was found."
+    }
     adjective badger "Badger" compound=#true {
         note "Hackle shade name, kept in English (\"Hechel: Badger\")."
         source "Der-FliegenBinder: Lachsfliege des Monats 8" url="https://der-fliegenbinder.de/lachsfliege-des-monats-4"

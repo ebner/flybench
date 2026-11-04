@@ -163,6 +163,9 @@ export const MATERIALS = {
   "turkey-quill": { name: "turkey quill slip", archetype: "feather", defaultColor: "turkey", shape: "slip" },
   "hen-pheasant-quill": { name: "hen pheasant quill slips", archetype: "feather", defaultColor: "hen-pheasant", shape: "slip" },
   "saddle-feathers": { name: "saddle hackle feathers", archetype: "feather", shape: "tip" },
+  // The mallard drake's bronze-brown shoulder feathers: slips or folded fibres as a low roof of a
+  // wing (a Mallard and Claret's, a Dunkeld's, the strips over a classic salmon fly's wing).
+  "bronze-mallard": { name: "bronze mallard", archetype: "feather", defaultColor: "bronze-mallard", shape: "slip" },
   // The neck feathers ("eyes", "nails") of the grey jungle fowl: small, stiff and round-ended,
   // dark with a row of cream enamel spots down the middle; a pair as cheeks beside a wing.
   "jungle-cock": { name: "jungle cock", archetype: "feather", defaultColor: "#26231f", shape: "eye" },
@@ -208,7 +211,7 @@ export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   wire: ["mm"],
   floss: ["size"],
   tinsel: [],
-  chenille: [],
+  chenille: ["mm"],
   hair: ["count", "mix"],
   fibres: ["count", "barred", "mix"],
   biot: ["count"],

@@ -1,0 +1,114 @@
+// Thunder and Lightning: the black, orange and blue spate fly, in Bob Petti's hairwing dressing.
+
+id thunder-and-lightning
+name "Thunder and Lightning"
+aliases "Thunder & Lightning" "Great Storm Fly"
+type salmon
+imitates attractor
+difficulty intermediate
+species salmon
+// Assumption: the months of a Scottish salmon season; Bentsen finds it best late in the season.
+season march april may june july august september october
+description "An oval gold tag and golden yellow floss tip, a golden pheasant crest tail veiled with red, a black ostrich herl butt, a black floss body ribbed with oval gold under a palmered orange hackle, a blue guinea fowl throat and a brown squirrel wing."
+history """
+    Kelson, in The Salmon Fly (1895), gives it to Wright, James Wright of Sprouston on the Tweed,
+    and calls it exceedingly popular; on the first rise of water after rain it was his own
+    favourite. Francis Francis, in A Book on Angling (1867), had already listed it among the flies
+    of the Moy in Ireland, and printed a letter praising one of Pat Hearns' flies at Ballina,
+    called the Thunder and Lightning. Mary Orvis Marbury, in Favorite Flies and Their Histories
+    (1892), says it was once known as the Great Storm fly, used when the water rose after a storm.
+    The classic dressings agree on a body mostly of black floss with a gold rib, an orange hackle
+    palmered over it, jay at the throat and a wing of brown mallard with a topping; Kelson and
+    Pryce-Tannatt add jungle cock and macaw horns, and Pryce-Tannatt, in How to Dress Salmon Flies (1914), also gives an Irish
+    version with a married wing. Lars Chr. Bentsen writes that the modern hairwings keep the
+    colour scheme: a yellow tail, a black body, orange and blue hackles and a brown wing. This is
+    Bob Petti's, with blue guinea fowl for the jay. Hairwings differ over the orange hackle, which
+    some wind only at the throat.
+    """
+fishing """
+    Kelson fished it in rising water after rain; Marbury writes that it had come to be thought best
+    in low, clear water and in autumn. Bentsen fishes it in all water, perhaps most in slightly
+    peaty water and late in the season, large early in the year and small in low water. It is
+    swung across and down, on singles, doubles and tubes.
+    """
+sources {
+    "The Salmon Fly (George M. Kelson, 1895)" url="https://archive.org/details/salmonflyhowtodr00kelsrich"
+    "A Book on Angling (Francis Francis, 1867)" url="https://archive.org/details/cu31924003429226"
+    "How to Dress Salmon Flies (T. E. Pryce-Tannatt, 1914)" url="https://archive.org/details/howtodresssalmon00prycrich"
+    "Fly Anglers Online: Old Flies, Thunder and Lightning (Deanna Birkholm, quoting Marbury and Kelson)" url="http://web.archive.org/web/2016/http://www.flyanglersonline.com/features/oldflies/part128.php"
+    "Ahrex: Thunder and Lightning (Lars Chr. Bentsen)" url="https://ahrexhooks.com/2023/08/18/thunder-and-lightning/"
+    "GlobalFlyFisher: Hair winged salmon flies (Bob Petti)" url="https://globalflyfisher.com/patterns/hair-winged-salmon-flies"
+    "Fly of the Month Club: Thunder and Lightning hairwing" url="http://www.flyofthemonthclub.com/store/catalog.asp?item=1431"
+    "GlobalFlyFisher: Thunder and Lightning (video, Mark Molloy)" url="https://globalflyfisher.com/video/thunder-lightning-0"
+    "GlobalFlyFisher: Thunder and Lightning variant (video, Lars Chr. Bentsen)" url="https://globalflyfisher.com/video/thunder-lightning-var"
+    "Sexyloops: Thunder and Lightning (Viking Lars)" url="https://www.sexyloops.com/index.php/ps/thunder-lightning"
+    "Trey Combs: Thunder and Lightning" url="https://www.treycombsflyfishing.com/blog/thunder-and-lightning"
+    "GlobalFlyFisher: Anatomy of a salmon fly (Steve Schweitzer)" url="https://globalflyfisher.com/node/13548"
+    "Grays of Kilsyth: Salmon flies (John Gray)" url="http://www.graysofkilsyth.com/salmon_flies.htm"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://globalflyfisher.com/sites/default/files/article_pictures/thunder_and_lightning.jpg" page="https://globalflyfisher.com/patterns/hair-winged-salmon-flies" author="Bob Petti" license="All rights reserved; reference only" note="Petti's hairwing, a little from the front"
+    "http://www.flyofthemonthclub.com/store/images/products/large/TL500.jpg" page="http://www.flyofthemonthclub.com/store/catalog.asp?item=1431" license="All rights reserved; reference only" note="Another hairwing, palmered, side view"
+    "https://ahrexhooks.com/wp-content/uploads/2023/08/Tunder-Lightning-by-Hakan-Karsnaser-01-kopier-1024x920.jpg" page="https://ahrexhooks.com/2023/08/18/thunder-and-lightning/" author="Håkan Karsnäser" license="All rights reserved; reference only" note="The classic mallard wing, for the tag, tail, butt and body"
+}
+
+// Petti: a #4 heavy wire salmon hook like the TMC 7999.
+hook salmon-up-eye size=6
+thread black size="6/0"
+
+materials {
+    // Petti's list says oval silver, but his fly has gold, as Kelson's gold twist and the Fly of the
+    // Month Club's flat gold.
+    tag oval-tinsel color=gold label="Fine oval gold tinsel"
+    yellow-tag silk-floss color=yellow label="Golden yellow floss"
+    tail golden-pheasant-crest count=10
+    tail-red hackle-fibres color="#e8451c" count=10 label="Indian crow substitute"
+    butt ostrich-herl color=black strands=2
+    rib oval-tinsel color=gold
+    // Read from Petti's photo: long, soft fibres swept well back.
+    hackle cock-hackle color=orange fibre=1.2 sweep=65 label="Orange cock hackle"
+    body silk-floss color=black
+    throat hackle-fibres color=blue barred=#true count=40 label="Blue-dyed guinea fowl fibres"
+    wing squirrel-tail color="#8b5e3c" label="Red fox squirrel or brown fitch tail"
+}
+
+// Petti gives no steps; the order is the usual hairwing order (Gathercole's Garry Dog), with
+// Kelson's layout of the palmered hackle.
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="To opposite the barb."
+    tie-in tag
+    wrap-thread to=0.05
+    wind tag to=0.05 turns=4
+    tie-off tag
+    tie-in yellow-tag
+    // Read from Petti's photo: a long tip.
+    wrap-thread to=0.16
+    wind yellow-tag to=0.16 turns=6 note="In front of the tinsel."
+    tie-off yellow-tag
+    // Schweitzer: one and a half gapes, curving up; the veiling about half as long.
+    tie-in tail length=1.5 angle=20 spread=8
+    tie-in tail-red length=0.9 angle=16 spread=10 note="A few fibres over the root of the crest."
+    tie-in butt
+    wrap-thread to=0.21
+    wind butt to=0.21 turns=3 note="Three turns, the flue stroked back."
+    tie-off butt
+    tie-in rib
+    tie-in hackle note="By its tip, the shiny side forward."
+    tie-in body
+    wrap-thread to=0.85
+    wind body to=0.85 turns=12 note="Close turns, smooth and slightly tapered."
+    tie-off body
+    // Kelson: the hackle from the second turn of the tinsel.
+    wind hackle to=0.85 turns=4 note="Open turns, close behind where the rib will lie."
+    tie-off hackle
+    wind rib to=0.85 turns=5 note="Five turns, just in front of the hackle stalk, so it protects it."
+    tie-off rib
+    // Read from Petti's photo: to the hook point.
+    tie-in throat length=1.4 angle=18 side=under note="The jay of the classic dressings."
+    // Petti: the wing normally to the middle or the end of the tail; his own runs to its tip.
+    tie-in wing length=3.4 angle=13 spread=16 note="A slim, unstacked bunch, low over the body."
+    trim wing note="Cut at an angle for a small head."
+    whip-finish note="A black head, varnished."
+}

@@ -241,6 +241,11 @@ materials {
         note "Teal is 'krickand'; shops write 'Krickand sidfjädrar (teal)' and also keep 'Teal Flank'. 'Flankfjäder' is also used; 'sidfjäder' chosen."
         source "Flugbindning.com: Krickand ('Mest använda är sidfjädrarna, Teal Flank', product 'Krickand sidfjädrar (teal)')" url="https://flugbindning.com/400050-krickand-teal"
     }
+    noun bronze-mallard "skulderfjäder från gräsand" gender=en definite="skulderfjädern från gräsand" plural="skulderfjädrar från gräsand" plural-definite="skulderfjädrarna från gräsand" {
+        note "The drake's bronze-brown shoulder feathers. The shop sells them as 'Gräsand Bronze Skulderfjäder' and calls the material 'Bronze Mallard'; a phrase like 'sidfjäder från krickand' (teal-flank). Tyers also keep 'Bronze Mallard'."
+        source "Flugbindning.com: Gräsand (product 'Gräsand Bronze Skulderfjäder'; 'Bronze Mallard är de bronsbruna, mörkt tecknade fjädrar som ofta säljs som skulderfjädrar')" url="https://flugbindning.com/400049-grasand"
+        source "Fiskeflugor.se: Bronze Mallard ('används till mängder av flugor allt från nymfer, streamers till laxflugor')" url="https://fiskeflugor.se/bronze-mallard-p-1917.html"
+    }
     noun hackle-tips "hackelspetsar" gender=en definite="hackelspetsarna" plural="hackelspetsar" plural-definite="hackelspetsarna" {
         note "Plural, as pheasant-tail."
         source "Flugfiske i Norden: John Atherton ('Vingar: Hackelspetsar, ljus dun')" url="https://flugfiskeinorden.se/john-atherton-impressionistiska-catskill-flugor/"
@@ -419,6 +424,9 @@ colours {
     adjective turkey "kalkon" compound=#true
     adjective hen-pheasant "fasanhöna" compound=#true
     adjective wood-duck "brudand" compound=#true
+    adjective bronze-mallard "bronsbrun" neuter="bronsbrunt" plural="bronsbruna" {
+        note "The bronze brown of bronze mallard; Flugbindning.com calls the feathers 'bronsbruna'."
+    }
     adjective badger "badger" compound=#true {
         source "Bojdaspon: Hackel nackar (product 'Tupphackel – Badger')" url="https://www.bojdaspon.se/flugbindning/hackel-nackar"
     }

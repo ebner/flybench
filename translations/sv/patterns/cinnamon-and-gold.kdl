@@ -1,0 +1,50 @@
+id cinnamon-and-gold
+status draft
+
+// en description: A golden pheasant tippet tail, a flat gold tinsel body ribbed with gold wire, a brown hen beard and a wing of cinnamon quill slips.
+description "En stjärt av guldfasantippet, en kropp av platt guldtinsel ribbad med guldtråd, ett brunt skägg av hönshackel och en vinge av kanelbruna vingpennesektioner."
+
+// en history: Who first tied it is not recorded. The oldest dated dressing in the Fly Dressers' Guild's dressings database is J. Bernard's of 1932: a tippet tail, a gold body, a black or orange hackle and a wing of cinnamon hen or partridge tail. The tail, the gold body and the cinnamon wing are common to all the dressings; the hackle is not. Davie McPhail ties it natural red or brown hen, Alan Bithell's for Fish4Flies is cinnamon hen. The Guild lists a whole series of Cinnamon flies with the same wing and other bodies. This is McPhail's dressing.
+history """
+    Vem som först band den är inte känt. Den äldsta daterade bindningen i Fly Dressers' Guilds
+    databas är J. Bernards från 1932: en stjärt av tippet, en guldkropp, ett svart eller orange
+    hackel och en vinge av kanelfärgad höna eller rapphönsstjärt. Stjärten, guldkroppen och den
+    kanelfärgade vingen är gemensamma för alla bindningar; hacklet är det inte. Davie McPhail
+    binder den med naturfärgad röd eller brun höna, Alan Bithells för Fish4Flies har kanelfärgad
+    höna. Guilden listar en hel serie Cinnamon-flugor med samma vinge och andra kroppar. Den här
+    är McPhails bindning.
+    """
+
+// en fishing: Fished on the point of a wet-fly cast, on stillwaters and lochs or across and down on rivers, for trout and sea trout. The Fishing Megastore's write-up of McPhail's fly calls it a good imitation of a small sedge or a dung fly; Fish4Flies fishes it when pale sedges are hatching.
+fishing """
+    Fiskas som udde i ett våtflugetackel, i sjöar och dammar eller tvärs och nedströms i
+    strömmande vatten, efter öring och havsöring. Fishing Megastores text om McPhails fluga
+    kallar den en bra imitation av en liten nattslända eller en dyngfluga; Fish4Flies fiskar den
+    när ljusa nattsländor kläcks.
+    """
+
+labels {
+    // en rib: Fine gold wire
+    rib "Fin guldtråd"
+    // en body: Gold Mylar tinsel
+    body "Guldfärgad mylartinsel"
+    // en beard: Natural red or brown hen hackle fibres
+    beard "Fibrer av naturfärgat rött eller brunt hönshackel"
+    // en wing: Cinnamon or fiery brown duck quill slips
+    wing "Sektioner av kanelbrun eller eldbrun andvingpenna"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of tippet fibres, the black bars level.
+    step 3 "En liten knippe tippetfibrer, med de svarta banden i jämnhöjd."
+    // en step 7 (wind body): Down to the bend and back for a smooth double layer.
+    step 7 "Ner till böjen och tillbaka för ett slätt, dubbelt lager."
+    // en step 9 (wind rib): Open, even turns.
+    step 9 "Glesa, jämna varv."
+    // en step 11 (tie-in beard): Or a few turns of the hackle, pulled down.
+    step 11 "Eller några varv av hacklet, nerdragna."
+    // en step 12 (tie-in wing): Matched left and right slips, concave sides together, set on top with a pinch and loop.
+    step 12 "Matchade vänster- och högersektioner, de konkava sidorna mot varandra, satta ovanpå med pinch and loop."
+    // en step 13 (whip-finish): A small head, varnished.
+    step 13 "Ett litet huvud, lackat."
+}

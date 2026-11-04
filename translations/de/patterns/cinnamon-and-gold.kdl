@@ -1,0 +1,51 @@
+id cinnamon-and-gold
+status draft
+
+// en description: A golden pheasant tippet tail, a flat gold tinsel body ribbed with gold wire, a brown hen beard and a wing of cinnamon quill slips.
+description "Ein Schwanz aus Goldfasan-Tippet, ein Körper aus flachem Goldtinsel, gerippt mit Golddraht, ein brauner Bart aus Hennenhechel und ein Flügel aus zimtfarbenen Flügelsegmenten."
+
+// en history: Who first tied it is not recorded. The oldest dated dressing in the Fly Dressers' Guild's dressings database is J. Bernard's of 1932: a tippet tail, a gold body, a black or orange hackle and a wing of cinnamon hen or partridge tail. The tail, the gold body and the cinnamon wing are common to all the dressings; the hackle is not. Davie McPhail ties it natural red or brown hen, Alan Bithell's for Fish4Flies is cinnamon hen. The Guild lists a whole series of Cinnamon flies with the same wing and other bodies. This is McPhail's dressing.
+history """
+    Wer sie zuerst gebunden hat, ist nicht überliefert. Die älteste datierte Bindeanleitung in
+    der Datenbank der Fly Dressers' Guild ist die von J. Bernard aus dem Jahr 1932: ein Schwanz
+    aus Tippet, ein Goldkörper, eine schwarze oder orangefarbene Hechel und ein Flügel aus
+    zimtfarbener Henne oder Rebhuhnschwanz. Der Schwanz, der Goldkörper und der zimtfarbene
+    Flügel sind allen Bindeanleitungen gemeinsam, die Hechel nicht. Davie McPhail bindet sie mit
+    naturroter oder brauner Henne, Alan Bithell für Fish4Flies mit zimtfarbener Henne. Die Guild
+    führt eine ganze Reihe von Cinnamon-Fliegen mit demselben Flügel und anderen Körpern. Dies
+    ist McPhails Bindeanleitung.
+    """
+
+// en fishing: Fished on the point of a wet-fly cast, on stillwaters and lochs or across and down on rivers, for trout and sea trout. The Fishing Megastore's write-up of McPhail's fly calls it a good imitation of a small sedge or a dung fly; Fish4Flies fishes it when pale sedges are hatching.
+fishing """
+    An der Spitze eines Nassfliegenvorfachs gefischt, an Stillgewässern und Seen oder quer und
+    stromab an Flüssen, auf Forelle und Meerforelle. Der Text des Fishing Megastore zu McPhails
+    Fliege nennt sie eine gute Imitation einer kleinen Köcherfliege oder einer Dungfliege;
+    Fish4Flies fischt sie, wenn helle Köcherfliegen schlüpfen.
+    """
+
+labels {
+    // en rib: Fine gold wire
+    rib "Feiner Golddraht"
+    // en body: Gold Mylar tinsel
+    body "Goldenes Mylartinsel"
+    // en beard: Natural red or brown hen hackle fibres
+    beard "Naturrote oder braune Hennenhechelfibern"
+    // en wing: Cinnamon or fiery brown duck quill slips
+    wing "Zimtfarbene oder feuerbraune Entenflügelsegmente"
+}
+
+notes {
+    // en step 3 (tie-in tail): A small bunch of tippet fibres, the black bars level.
+    step 3 "Ein kleines Büschel Tippetfibern, die schwarzen Bänder auf gleicher Höhe."
+    // en step 7 (wind body): Down to the bend and back for a smooth double layer.
+    step 7 "Hinunter zum Bogen und zurück für eine glatte, doppelte Lage."
+    // en step 9 (wind rib): Open, even turns.
+    step 9 "Offene, gleichmäßige Windungen."
+    // en step 11 (tie-in beard): Or a few turns of the hackle, pulled down.
+    step 11 "Oder ein paar Windungen der Hechel, nach unten gezogen."
+    // en step 12 (tie-in wing): Matched left and right slips, concave sides together, set on top with a pinch and loop.
+    step 12 "Ein linkes und ein rechtes Segment, die hohlen Seiten zueinander, mit Pinch and Loop oben aufgesetzt."
+    // en step 13 (whip-finish): A small head, varnished.
+    step 13 "Ein kleiner Kopf, lackiert."
+}

@@ -1,0 +1,90 @@
+// Freight Train: Randall Kaufmann's Deschutes summer steelhead fly, orange, red and black under purple and white.
+
+id freight-train
+name "Freight Train"
+type salmon
+imitates attractor
+difficulty beginner
+// Steelhead are sea-run rainbow trout.
+species trout
+// Assumption: the summer and autumn months of a summer steelhead run.
+season july august september october november
+origin originator="Randall Kaufmann" region="Deschutes River, Oregon"
+description "A purple tail, a body of fluorescent orange and red floss or wool behind black chenille ribbed with fine oval silver, a purple collar hackle and a white calf tail wing."
+history """
+    Randall Kaufmann tied it for the summer steelhead of the Deschutes in Oregon, where a railway
+    follows the river for many miles. In his own account, which Trey Combs quotes in Steelhead Fly
+    Fishing (1991), a freight train rounded the bend one evening as he fished a riffle, and the
+    pull of a heavy steelhead jolted him back to the river; the fish ran upstream much like a
+    freight train, and he had a name for the fly. It was the first of his railroad series, with
+    the Coal Car, the Flat Car and the Signal Light. Dressings differ: most tie the front of the
+    body in black chenille, John Kreft in purple; the rear is fluorescent wool or, in the Rogue
+    Flyfishers' dressing, floss, as two quarters of the body or two thirds; and the Fly of the
+    Month Club adds pearl Krystal Flash to the wing.
+    """
+fishing """
+    A summer steelhead fly, swung down and across on the Deschutes and the other rivers of the
+    Northwest. The Fly of the Month Club also fishes it for Pacific salmon and on the Great Lakes
+    runs.
+    """
+sources {
+    "Rogue Flyfishers: On the Fly, Pattern of the Month, Freight Train (November 2004)" url="https://rogueflyfishers.org/?p=204"
+    "John Kreft: Freight Train" url="https://www.johnkreft.com/freight-train/"
+    "John Kreft: Freight Train (steelhead fly patterns)" url="https://www.johnkreft.com/steelhead-fly-patterns/freight-train/"
+    "Fly of the Month Club: Freight Train" url="http://www.flyofthemonthclub.com/store/catalog.asp?item=1861"
+    "JT's Flybox: Freight Train (quoting Trey Combs, Steelhead Fly Fishing, 1991)" url="https://jtsflybox.wordpress.com/2017/04/19/freight-train/"
+    "Savage Flies: Freight Train (from John Shewey's Classic Steelhead Flies; video)" url="https://www.youtube.com/watch?v=p-cMN4dlNaQ"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.johnkreft.com/wp-content/uploads/2015/08/Freight-Train.jpg" page="https://www.johnkreft.com/freight-train/" author="John Kreft" license="All rights reserved; reference only" note="Black chenille front, white calf wing, side view"
+    "https://www.johnkreft.com/wp-content/uploads/2018/06/Freight-Train.jpg" page="https://www.johnkreft.com/steelhead-fly-patterns/freight-train/" author="John Kreft" license="All rights reserved; reference only" note="Kreft's purple chenille front"
+    "https://rogueflyfishers.org/wp-content/uploads/2026/03/Frtrain-1.jpg" page="https://rogueflyfishers.org/?p=204" license="All rights reserved; reference only" note="The Krystal Flash wing, for the tail, body and collar"
+}
+
+// Fly of the Month Club: a TMC 7999, sizes 2 to 6; Rogue Flyfishers: 8 to 2.
+hook salmon-up-eye size=6
+thread black size="6/0"
+
+materials {
+    tail hackle-fibres color=purple count=24 label="Purple hackle fibres"
+    rib oval-tinsel color=silver label="Fine oval silver tinsel"
+    // Rogue Flyfishers: floss; Kreft and the Fly of the Month Club: wool, as slim on their flies.
+    rear silk-floss color="#ff6a1a" label="Fluorescent orange floss or wool"
+    middle silk-floss color=fluo-red label="Fluorescent red floss or wool"
+    // Read from Kreft's photo: fine chenille, the body barely thicker than the floss behind it.
+    front chenille color=black mm=1.2 label="Fine black chenille"
+    collar hen-hackle color=purple fibre=1.8 sweep=58 label="Soft purple hackle"
+    wing calf-tail color=white
+}
+
+// Rogue Flyfishers' steps; the section lengths are theirs (a quarter, a quarter, a half).
+steps {
+    attach-thread at=0.86
+    wrap-thread to=0.0 note="A thread base back to above the hook point."
+    // Rogue: half the body long; the photos show more, about a gape and a half.
+    tie-in tail length=1.5 angle=8 spread=12 note="A small bunch of barbs."
+    tie-in rib
+    tie-in rear
+    wrap-thread to=0.21
+    wind rear to=0.21 turns=10 note="Close, even turns."
+    tie-off rear
+    tie-in middle
+    wrap-thread to=0.42
+    wind middle to=0.42 turns=10
+    tie-off middle
+    tie-in front
+    wrap-thread to=0.84
+    wind front to=0.84 turns=12 note="Close turns."
+    tie-off front
+    wind rib to=0.84 turns=5 note="Five even turns over all three sections."
+    tie-off rib
+    tie-in collar note="By its tip."
+    wrap-thread to=0.88
+    wind collar to=0.88 turns=3 note="Three or four turns, then wind the thread back over the bases to sweep the fibres back."
+    tie-off collar
+    // Read from Kreft's photo: to about the end of the tail.
+    tie-in wing length=3.0 angle=12 spread=18 note="A sparse bunch of calf tail."
+    trim wing
+    whip-finish note="A small black head."
+}

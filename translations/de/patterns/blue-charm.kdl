@@ -1,0 +1,59 @@
+id blue-charm
+status draft
+
+// en description: A fine oval silver tag and yellow floss tip, a golden pheasant crest tail, a black floss body ribbed with oval silver, a deep blue throat and a grey squirrel wing.
+description "Ein Tag aus feinem ovalem Silbertinsel und eine Spitze aus gelbem Floss, ein Schwanz aus Goldfasan-Crest, ein Körper aus schwarzem Floss, gerippt mit ovalem Silbertinsel, ein tiefblauer Bart und ein Flügel aus grauem Eichhörnchen."
+
+// en history: Kelson, in The Salmon Fly (1895), gives it to W. Brown: a good summer fly used chiefly on the Dee and dressed on small doubles. His dressing has a claret silk body and a wing of mallard strips with teal above and a topping. Pryce-Tannatt, in How to Dress Salmon Flies (1914), ties the body of black floss over a tag of silver and golden yellow floss and a black herl butt, with a deep blue throat and a wing of mottled turkey strips, narrow teal along their upper edge and a topping over; later tyers, Poul Jorgensen among them, follow his dressing. John Gray counts it among the Dee flies whose popularity spread far beyond the river, and among the older patterns to which the low-water style of dressing was applied. Today it is mostly fished as a hairwing; this is Bob Petti's, with a grey squirrel wing and no butt.
+history """
+    Kelson schreibt sie in The Salmon Fly (1895) W. Brown zu: eine gute Sommerfliege, die vor
+    allem am Dee gefischt und auf kleine Doppelhaken gebunden wird. Seine Bindeanleitung hat
+    einen Körper aus weinroter Seide und einen Flügel aus Stockentensegmenten mit Krickente
+    darüber und einem Topping. Pryce-Tannatt bindet in How to Dress Salmon Flies (1914) den
+    Körper aus schwarzem Floss hinter einem Tag aus Silber und goldgelbem Floss und einem Butt
+    aus schwarzer Herl, mit einem tiefblauen Bart und einem Flügel aus Segmenten gesprenkelten
+    Truthahns, schmalen Streifen Krickente an der Oberkante und einem Topping darüber; spätere
+    Binder, unter ihnen Poul Jorgensen, folgen seiner Bindeanleitung. John Gray zählt sie zu den
+    Fliegen vom Dee, deren Beliebtheit sich weit über den Fluss hinaus verbreitete, und zu den
+    älteren Mustern, auf die der Niedrigwasserstil übertragen wurde. Heute wird sie meist als
+    Haarflügelfliege gefischt; dies ist die von Bob Petti, mit einem Flügel aus grauem
+    Eichhörnchen und ohne Butt.
+    """
+
+// en fishing: A summer and low-water fly for a floating line, fished small in clear water and bright weather, as Kelson, Gray and the shops that sell it describe it. Kelson's were small doubles; today's hairwing is tied on singles, doubles and trebles.
+fishing """
+    Eine Sommer- und Niedrigwasserfliege für die Schwimmschnur, klein gefischt in klarem Wasser
+    und bei hellem Wetter, wie Kelson, Gray und die Geschäfte, die sie verkaufen, sie
+    beschreiben. Kelsons waren kleine Doppelhaken; die heutige Haarflügelfliege wird auf
+    Einzel-, Doppel- und Drillingshaken gebunden.
+    """
+
+labels {
+    // en tag: Fine oval silver tinsel
+    tag "Feines ovales Silbertinsel"
+    // en yellow-tag: Yellow floss
+    yellow-tag "Gelbes Floss"
+    // en throat: Deep blue hackle fibres
+    throat "Tiefblaue Hechelfibern"
+    // en wing: Grey squirrel tail
+    wing "Grauer Eichhörnchenschwanz"
+}
+
+notes {
+    // en step 2 (wrap-thread): To opposite the barb.
+    step 2 "Bis gegenüber dem Widerhaken."
+    // en step 9 (wind yellow-tag): In front of the tinsel, smooth and even.
+    step 9 "Vor dem Tinsel, glatt und gleichmäßig."
+    // en step 15 (wind body): Close turns, slightly tapered.
+    step 15 "Dichte Windungen, leicht verjüngt."
+    // en step 17 (wind rib): Five evenly spaced turns.
+    step 17 "Fünf gleichmäßig verteilte Windungen."
+    // en step 19 (tie-in throat): A bunch under the shank.
+    step 19 "Ein Büschel unter dem Hakenschenkel."
+    // en step 20 (tie-in wing): A slim, unstacked bunch, low over the body.
+    step 20 "Ein schlankes, nicht ausgerichtetes Büschel, flach über dem Körper."
+    // en step 21 (trim wing): Cut at an angle for a small head.
+    step 21 "Schräg abschneiden für einen kleinen Kopf."
+    // en step 22 (whip-finish): A black head, varnished.
+    step 22 "Ein schwarzer Kopf, lackiert."
+}

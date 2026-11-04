@@ -1,0 +1,62 @@
+id freight-train
+status draft
+
+// en description: A purple tail, a body of fluorescent orange and red floss or wool behind black chenille ribbed with fine oval silver, a purple collar hackle and a white calf tail wing.
+description "En lila stjärt, en kropp av fluorescerande orange och rött flossilke eller ullgarn bakom svart chenille ribbad med fin oval silvertinsel, ett lila hackel som krage och en vinge av vit kalvsvans."
+
+// en history: Randall Kaufmann tied it for the summer steelhead of the Deschutes in Oregon, where a railway follows the river for many miles. In his own account, which Trey Combs quotes in Steelhead Fly Fishing (1991), a freight train rounded the bend one evening as he fished a riffle, and the pull of a heavy steelhead jolted him back to the river; the fish ran upstream much like a freight train, and he had a name for the fly. It was the first of his railroad series, with the Coal Car, the Flat Car and the Signal Light. Dressings differ: most tie the front of the body in black chenille, John Kreft in purple; the rear is fluorescent wool or, in the Rogue Flyfishers' dressing, floss, as two quarters of the body or two thirds; and the Fly of the Month Club adds pearl Krystal Flash to the wing.
+history """
+    Randall Kaufmann band den för sommarsteelheaden i Deschutes i Oregon, där en järnväg följer
+    floden i många mil. Enligt hans egen berättelse, som Trey Combs citerar i Steelhead Fly
+    Fishing (1991), kom ett godståg runt kröken en kväll när han fiskade en strömsträcka, och
+    draget från en tung steelhead ryckte honom tillbaka till floden; fisken rusade uppströms
+    ungefär som ett godståg, och han hade ett namn på flugan. Den var den första i hans
+    järnvägsserie, med Coal Car, Flat Car och Signal Light. Bindningarna skiljer sig: de flesta
+    binder kroppens främre del av svart chenille, John Kreft av lila; den bakre delen är
+    fluorescerande ullgarn eller, i Rogue Flyfishers bindning, flossilke, som två fjärdedelar av
+    kroppen eller två tredjedelar; och Fly of the Month Club lägger till pearl Krystal Flash i
+    vingen.
+    """
+
+// en fishing: A summer steelhead fly, swung down and across on the Deschutes and the other rivers of the Northwest. The Fly of the Month Club also fishes it for Pacific salmon and on the Great Lakes runs.
+fishing """
+    En sommarfluga för steelhead, fiskad nedströms och tvärs i Deschutes och de andra floderna i
+    nordvästra USA. Fly of the Month Club fiskar den också efter stillahavslax och vid Stora
+    sjöarnas lekvandringar.
+    """
+
+labels {
+    // en tail: Purple hackle fibres
+    tail "Lila hackelfibrer"
+    // en rib: Fine oval silver tinsel
+    rib "Fin oval silvertinsel"
+    // en rear: Fluorescent orange floss or wool
+    rear "Fluorescerande orange flossilke eller ullgarn"
+    // en middle: Fluorescent red floss or wool
+    middle "Fluorescerande rött flossilke eller ullgarn"
+    // en front: Fine black chenille
+    front "Fin svart chenille"
+    // en collar: Soft purple hackle
+    collar "Mjukt lila hackel"
+}
+
+notes {
+    // en step 2 (wrap-thread): A thread base back to above the hook point.
+    step 2 "En trådbädd bakåt till ovanför krokspetsen."
+    // en step 3 (tie-in tail): A small bunch of barbs.
+    step 3 "En liten knippe fibrer."
+    // en step 7 (wind rear): Close, even turns.
+    step 7 "Täta, jämna varv."
+    // en step 15 (wind front): Close turns.
+    step 15 "Täta varv."
+    // en step 17 (wind rib): Five even turns over all three sections.
+    step 17 "Fem jämna varv över alla tre delarna."
+    // en step 19 (tie-in collar): By its tip.
+    step 19 "I spetsen."
+    // en step 21 (wind collar): Three or four turns, then wind the thread back over the bases to sweep the fibres back.
+    step 21 "Tre eller fyra varv, linda sedan tråden bakåt över fibrernas rötter så att de lägger sig bakåt."
+    // en step 23 (tie-in wing): A sparse bunch of calf tail.
+    step 23 "En gles knippe kalvsvans."
+    // en step 25 (whip-finish): A small black head.
+    step 25 "Ett litet svart huvud."
+}

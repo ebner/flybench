@@ -714,3 +714,34 @@ steps {
     expect(run(0.15).steps[2]!.text).not.toMatch(/glue/i);
   });
 });
+
+describe("chenille given its diameter", () => {
+  const wraps = (mm: string) => {
+    const result = loadRecipe(`id test
+name "Test"
+type wet
+difficulty beginner
+hook salmon-up-eye size=6
+thread black size="6/0"
+materials {
+    body chenille color=black${mm}
+}
+steps {
+    attach-thread at=0.0
+    tie-in body
+    wrap-thread to=0.8
+    wind body to=0.8 turns=10
+    tie-off body
+    whip-finish
+}
+`);
+    if (!result.ok) throw new Error(result.errors.map((e) => e.message).join("\n"));
+    return simulate(result.recipe).steps[3]!.pieces.find((p) => p.type === "wraps" && p.material === "body") as WrapsPiece;
+  };
+
+  it("is wound that thick, and medium chenille without one", () => {
+    // A #6's gape is 8.6 mm.
+    expect(wraps(" mm=1.2").strandRadius).toBeCloseTo(0.6 / 8.6);
+    expect(wraps("").strandRadius).toBeCloseTo(0.12);
+  });
+});

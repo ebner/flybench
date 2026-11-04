@@ -1,0 +1,58 @@
+id hardys-favourite
+status draft
+
+// en description: A golden pheasant tippet tail, a peacock herl body ribbed with red floss, a brown partridge hackle and a wing of mottled turkey slips.
+description "Ein Schwanz aus Goldfasan-Tippet, ein Körper aus Pfauenherl, gerippt mit rotem Floss, eine Hechel aus braunem Rebhuhn und ein Flügel aus Segmenten gesprenkelten Truthahns."
+
+// en history: Fly Anorak and the Fly Dressers' Guild's dressings database both name J. J. Hardy as its origin. Two dressings go by the name, one the other turned inside out. The oldest dated one in the Guild's database, from W. Earl Hodgson in 1904, has a peacock herl body ribbed with red silk, a dark partridge hackle and a woodcock wing; J. Edson Leonard, in Flies (1950), gives a claret floss body ribbed with bronze peacock herl. Fly Anorak finds that most tyings today reverse them, the body of herl and the rib of floss, which he says makes a more durable fly. The wing is a mottled brown quill: woodcock for Hodgson, turkey for Helen Shaw (as Bob Petti ties her dressing) and for Fly Anorak, speckled hen for Davie McPhail. Shaw and Leonard give a brown hackle where the others have partridge. This is McPhail's dressing, with a turkey wing.
+history """
+    Fly Anorak und die Datenbank der Fly Dressers' Guild nennen beide J. J. Hardy als Urheber.
+    Zwei Bindeanleitungen tragen den Namen, die eine
+    die umgekehrte andere. Die älteste datierte in der Datenbank der Guild, von W. Earl Hodgson
+    aus dem Jahr 1904, hat einen Körper aus Pfauenherl, gerippt mit roter Seide, eine dunkle
+    Rebhuhnhechel und einen Flügel aus Waldschnepfe; J. Edson Leonard gibt in Flies (1950) einen
+    Körper aus weinrotem Floss, gerippt mit bronzefarbener Pfauenherl. Fly Anorak findet, dass
+    die meisten heutigen Bindungen sie umkehren, den Körper aus Herl und die Rippung aus Floss,
+    was die Fliege, wie er sagt, haltbarer macht. Der Flügel ist eine gesprenkelte braune
+    Schwungfeder: Waldschnepfe bei Hodgson, Truthahn bei Helen Shaw (wie Bob Petti ihre
+    Bindeanleitung bindet) und bei Fly Anorak, gesprenkelte Henne bei Davie McPhail. Shaw und
+    Leonard geben eine braune Hechel an, wo die anderen Rebhuhn haben. Dies ist McPhails
+    Bindeanleitung, mit einem Flügel aus Truthahn.
+    """
+
+// en fishing: A fancy fly for river trout, and a point fly in a team on Scottish lochs and stillwaters, fished across and down or pulled. Fish4Flies rates it best in May and June, and fishes it wet or dry.
+fishing """
+    Eine Fancy-Fliege für Forellen im Fluss und eine Spitzenfliege in einem Vorfach auf
+    schottischen Seen und Stillgewässern, quer und stromab gefischt oder eingezogen. Fish4Flies
+    hält sie im Mai und Juni für am besten und fischt sie nass oder trocken.
+    """
+
+labels {
+    // en body: Bronze peacock herl
+    body "Bronzefarbene Pfauenherl"
+    // en hackle: Brown partridge
+    hackle "Braunes Rebhuhn"
+    // en wing: Mottled turkey or speckled hen quill slips
+    wing "Segmente gesprenkelten Truthahns oder gesprenkelter Henne"
+}
+
+notes {
+    // en step 3 (tie-in tail): A few tippet fibres, the black bars level.
+    step 3 "Ein paar Tippetfibern, die schwarzen Bänder auf gleicher Höhe."
+    // en step 4 (tie-in rib): A single strand; twisted, it makes a neater rib.
+    step 4 "Ein einzelner Strang; gedreht ergibt er eine sauberere Rippung."
+    // en step 5 (tie-in body): By their tips.
+    step 5 "An den Spitzen."
+    // en step 7 (wind body): Twist the herls with the thread first, for strength.
+    step 7 "Die Herl zuerst mit dem Faden verdrillen, für mehr Haltbarkeit."
+    // en step 9 (wind rib): Open, even turns.
+    step 9 "Offene, gleichmäßige Windungen."
+    // en step 11 (tie-in hackle): By its tip.
+    step 11 "An der Spitze."
+    // en step 13 (wind hackle): Two turns; stroke the fibres back and down.
+    step 13 "Zwei Windungen; die Fibern nach hinten und unten streichen."
+    // en step 15 (tie-in wing): Matched left and right slips, concave sides together, set on top with a pinch and loop.
+    step 15 "Ein linkes und ein rechtes Segment, die hohlen Seiten zueinander, mit Pinch and Loop oben aufgesetzt."
+    // en step 16 (whip-finish): A small black head, varnished.
+    step 16 "Ein kleiner schwarzer Kopf, lackiert."
+}

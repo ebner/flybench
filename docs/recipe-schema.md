@@ -182,8 +182,8 @@ Either a named colour: `black`, `white`, `cream`, `red`, `fluo-red`, `fluo-green
 `red-game`, `ginger`, `tan`, `grizzly`, `olive`, `grey`, `dun`, `yellow`, `green`, `gold`, `silver`,
 `copper`, `bleached`, `elk`, `hares-ear`, `mallard`, `pheasant-tail`, `partridge`, `snipe`,
 `lead`, `deer`, `squirrel`, `moose`, `tippet`, `crest`, `pearl`, `teal`, `turkey`, `badger`,
-`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`, `pardo`. Barred colours
-(`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`) are drawn with bars, also across
+`blue-dun`, `purple`, `orange`, `pink`, `claret`, `chartreuse`, `coch`, `muskrat`, `clear`, `blue-black`, `blue`, `pardo`, `bronze-mallard`. Barred colours
+(`grizzly`, `teal`, `partridge`, `mallard`, `snipe`, `turkey`, `bronze-mallard`) are drawn with bars, also across
 each fibre of a tail or beard; `tippet` fibres get their black bar and black tip.
 Or a quoted hex value: `"#c8102e"`.
 
@@ -214,14 +214,14 @@ how it is drawn and which extra properties it takes:
 | wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
 | floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
-| chenille   | `chenille` | |
+| chenille   | `chenille` | `mm` (diameter as sold; default medium chenille, about a body half the gape thick) |
 | hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, up to 200: legs tied across, a few hairs as a tail, or a sparse wing; without it a bunch is a clump that grows with its length), `mix` |
 | fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred`, `mix` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | `barred` |
 | cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
 | flash      | `krystal-flash`, `flashabou` | `count` |
-| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip), `jungle-cock` (eye) | `barred` |
+| feather    | `mallard-breast` (breast), `hackle-tips`, `saddle-feathers` (tip), `teal-flank` (tied folded, like a slip), `bronze-mallard`, `duck-quill`, `starling-quill`, `turkey-quill`, `hen-pheasant-quill` (slip), `jungle-cock` (eye) | `barred` |
 | foam       | `foam`, `scud-back` | `mm` (the sheet's thickness, as sold; drawn that thick pulled over) |
 | bead       | `brass-bead`, `tungsten-bead`, `brass-cone`, `tungsten-cone` (cone heads), `split-shot` (crimped behind the eye, painted with eyes) | `mm` (required; a cone's width at the back) |
 | eyes       | `dumbbell-eyes`, `bead-chain-eyes`, `mono-eyes` | `mm` (required) |

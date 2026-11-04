@@ -1,0 +1,51 @@
+id hardys-favourite-claret
+status draft
+
+// en description: A golden pheasant tippet tail, a claret floss body ribbed with bronze peacock herl, a grey partridge hackle and a mottled brown quill wing.
+description "Ein Schwanz aus Goldfasan-Tippet, ein Körper aus weinrotem Floss, gerippt mit bronzefarbener Pfauenherl, eine Hechel aus grauem Rebhuhn und ein Flügel aus gesprenkelter brauner Schwungfeder."
+
+// en history: The dressing turned the other way round: J. Edson Leonard, in Flies (1950), gives a claret floss body ribbed with bronze peacock herl under a brown hackle and a pheasant wing, and a dressing in the Fly Dressers' Guild's database has the same body with a grey partridge hackle and a woodcock wing, as Fish4Flies sells it. Fly Anorak finds that most tyings today reverse body and rib, the herl inside and the floss outside, which he says makes a more durable fly.
+history """
+    Die Bindeanleitung andersherum: J. Edson Leonard gibt in Flies (1950) einen Körper aus
+    weinrotem Floss, gerippt mit bronzefarbener Pfauenherl, unter einer braunen Hechel und einem
+    Fasanenflügel, und eine Bindeanleitung in der Datenbank der Fly Dressers' Guild hat
+    denselben Körper mit einer Hechel aus grauem Rebhuhn und einem Flügel aus Waldschnepfe, so
+    wie Fish4Flies sie verkauft. Fly Anorak findet, dass die meisten heutigen Bindungen Körper
+    und Rippung umkehren, die Herl innen und das Floss außen, was die Fliege, wie er sagt,
+    haltbarer macht.
+    """
+
+// en fishing: Fished as the herl-bodied dressing is: on the point of a team on lochs and stillwaters, or across and down on rivers. Fish4Flies rates it best in May and June.
+fishing """
+    Gefischt wie die Bindeanleitung mit Herlkörper: an der Spitze eines Vorfachs auf Seen und
+    Stillgewässern oder quer und stromab im Fluss. Fish4Flies hält sie im Mai und Juni für am
+    besten.
+    """
+
+labels {
+    // en rib: Bronze peacock herl
+    rib "Bronzefarbene Pfauenherl"
+    // en hackle: Grey partridge
+    hackle "Graues Rebhuhn"
+    // en wing: Woodcock or hen pheasant wing slips
+    wing "Segmente von Waldschnepfen- oder Fasanenhennenflügel"
+}
+
+notes {
+    // en step 3 (tie-in tail): A few tippet fibres, the black bars level.
+    step 3 "Ein paar Tippetfibern, die schwarzen Bänder auf gleicher Höhe."
+    // en step 4 (tie-in rib): A single herl, by its tip.
+    step 4 "Eine einzelne Herl, an der Spitze."
+    // en step 7 (wind body): Close turns, smooth and slightly tapered.
+    step 7 "Dichte Windungen, glatt und leicht verjüngt."
+    // en step 9 (wind rib): Open, even turns.
+    step 9 "Offene, gleichmäßige Windungen."
+    // en step 11 (tie-in hackle): By its tip.
+    step 11 "An der Spitze."
+    // en step 13 (wind hackle): Two turns; stroke the fibres back and down.
+    step 13 "Zwei Windungen; die Fibern nach hinten und unten streichen."
+    // en step 15 (tie-in wing): Matched left and right slips, concave sides together, set on top with a pinch and loop.
+    step 15 "Ein linkes und ein rechtes Segment, die hohlen Seiten zueinander, mit Pinch and Loop oben aufgesetzt."
+    // en step 16 (whip-finish): A small black head, varnished.
+    step 16 "Ein kleiner schwarzer Kopf, lackiert."
+}

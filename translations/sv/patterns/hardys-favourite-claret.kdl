@@ -1,0 +1,49 @@
+id hardys-favourite-claret
+status draft
+
+// en description: A golden pheasant tippet tail, a claret floss body ribbed with bronze peacock herl, a grey partridge hackle and a mottled brown quill wing.
+description "En stjärt av guldfasantippet, en kropp av vinrött flossilke ribbad med bronsfärgad påfågelherl, ett hackel av grå rapphöna och en vinge av spräcklig brun vingpenna."
+
+// en history: The dressing turned the other way round: J. Edson Leonard, in Flies (1950), gives a claret floss body ribbed with bronze peacock herl under a brown hackle and a pheasant wing, and a dressing in the Fly Dressers' Guild's database has the same body with a grey partridge hackle and a woodcock wing, as Fish4Flies sells it. Fly Anorak finds that most tyings today reverse body and rib, the herl inside and the floss outside, which he says makes a more durable fly.
+history """
+    Bindningen vänd åt andra hållet: J. Edson Leonard ger i Flies (1950) en kropp av vinrött
+    flossilke ribbad med bronsfärgad påfågelherl under ett brunt hackel och en fasanvinge, och
+    en bindning i Fly Dressers' Guilds databas har samma kropp med ett hackel av grå rapphöna
+    och en vinge av morkulla, så som Fish4Flies säljer den. Fly Anorak finner att de flesta
+    bindningar i dag vänder på kropp och ribb, herlen innerst och flossilket utanpå, vilket
+    enligt honom gör flugan hållbarare.
+    """
+
+// en fishing: Fished as the herl-bodied dressing is: on the point of a team on lochs and stillwaters, or across and down on rivers. Fish4Flies rates it best in May and June.
+fishing """
+    Fiskas som bindningen med herlkropp: som udde i ett tackel på sjöar och dammar, eller tvärs
+    och nedströms i strömmande vatten. Fish4Flies tycker att den är bäst i maj och juni.
+    """
+
+labels {
+    // en rib: Bronze peacock herl
+    rib "Bronsfärgad påfågelherl"
+    // en hackle: Grey partridge
+    hackle "Grå rapphöna"
+    // en wing: Woodcock or hen pheasant wing slips
+    wing "Sektioner av morkulle- eller fasanhönsvinge"
+}
+
+notes {
+    // en step 3 (tie-in tail): A few tippet fibres, the black bars level.
+    step 3 "Några tippetfibrer, med de svarta banden i jämnhöjd."
+    // en step 4 (tie-in rib): A single herl, by its tip.
+    step 4 "En enda herl, i spetsen."
+    // en step 7 (wind body): Close turns, smooth and slightly tapered.
+    step 7 "Täta varv, släta och svagt avsmalnande."
+    // en step 9 (wind rib): Open, even turns.
+    step 9 "Glesa, jämna varv."
+    // en step 11 (tie-in hackle): By its tip.
+    step 11 "I spetsen."
+    // en step 13 (wind hackle): Two turns; stroke the fibres back and down.
+    step 13 "Två varv; stryk fibrerna bakåt och nedåt."
+    // en step 15 (tie-in wing): Matched left and right slips, concave sides together, set on top with a pinch and loop.
+    step 15 "Matchade vänster- och högersektioner, de konkava sidorna mot varandra, satta ovanpå med pinch and loop."
+    // en step 16 (whip-finish): A small black head, varnished.
+    step 16 "Ett litet svart huvud, lackat."
+}

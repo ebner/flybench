@@ -1,0 +1,72 @@
+// Cinnamon and Gold: a traditional winged wet fly, a tippet tail and a gold body under cinnamon quill.
+
+id cinnamon-and-gold
+name "Cinnamon and Gold"
+aliases "Cinnamon & Gold"
+type wet
+imitates caddis
+difficulty intermediate
+species trout sea-trout
+// Assumption: the months pale sedges hatch on British lochs and rivers.
+season may june july august september
+description "A golden pheasant tippet tail, a flat gold tinsel body ribbed with gold wire, a brown hen beard and a wing of cinnamon quill slips."
+history """
+    Who first tied it is not recorded. The oldest dated dressing in the Fly Dressers' Guild's
+    dressings database is J. Bernard's of 1932: a tippet tail, a gold body, a black or orange
+    hackle and a wing of cinnamon hen or partridge tail. The tail, the gold body and the cinnamon
+    wing are common to all the dressings; the hackle is not. Davie McPhail ties it natural red or
+    brown hen, Alan Bithell's for Fish4Flies is cinnamon hen. The Guild lists a whole series of
+    Cinnamon flies with the same wing and other bodies. This is McPhail's dressing.
+    """
+fishing """
+    Fished on the point of a wet-fly cast, on stillwaters and lochs or across and down on rivers,
+    for trout and sea trout. The Fishing Megastore's write-up of McPhail's fly calls it a good
+    imitation of a small sedge or a dung fly; Fish4Flies fishes it when pale sedges are hatching.
+    """
+sources {
+    "GlobalFlyFisher: Cinnamon and Gold, traditional wet fly (video, Davie McPhail)" url="https://globalflyfisher.com/video/cinnamon-gold-traditional-wet-fly"
+    "Fishing Megastore blog: Tying a Cinnamon and Gold traditional wet fly (Davie McPhail)" url="https://blog.fishingmegastore.com/2012/04/tying-cinnamon-gold-traditional-wet-fly.html"
+    "Fly Dressers' Guild: Dressings database (items 00356, 00357)" url="https://flydressersguild.org/wp-content/uploads/Dressings-Database.pdf"
+    "Fish4Flies: Cinnamon and Gold (wet)" url="https://www.fish4flies.com/Wet/Winged/Cinnamon-and-Gold"
+    "Fish4Flies: Cinnamon and Gold (Alan Bithell)" url="https://www.fish4flies.com/Nymphs/Caddis-and-Larva-and-Pupa/Cinnamon-and-Gold"
+    "Fish and Fishing Flies: Cinnamon and Gold traditional wet fly" url="https://www.fish-fishingflies.co.uk/product/cinnamon-gold-traditional-wet-fly/"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://www.fish-fishingflies.co.uk/wp-content/uploads/2017/07/cinamon-and-gold-wet-eye-right.jpg" page="https://www.fish-fishingflies.co.uk/product/cinnamon-gold-traditional-wet-fly/" license="All rights reserved; reference only" note="Side view on white"
+    "https://www.fish4flies.com/img/flies/Large/4057-4057.jpg" page="https://www.fish4flies.com/Wet/Winged/Cinnamon-and-Gold" license="All rights reserved; reference only" flip=#true note="Side view, a darker fiery brown wing"
+    "https://www.flugor.se/bild_arkiv/big_4467.jpg" page="https://www.flugor.se/flugor/oring-dubbelkrok/cinnamon-and-gold-4467" license="All rights reserved; reference only" note="On a small double, side view"
+    "https://i.ytimg.com/vi/j6HXW0Wgh2A/hqdefault.jpg" page="https://globalflyfisher.com/video/cinnamon-gold-traditional-wet-fly" author="Davie McPhail" license="All rights reserved; reference only" flip=#true note="McPhail's fly in the vise, small in the frame"
+}
+
+// McPhail: a Kamasan B175 #12.
+hook wet-standard size=12
+thread brown size="8/0"
+
+materials {
+    tail golden-pheasant-tippet count=8
+    rib gold-wire label="Fine gold wire"
+    body flat-tinsel color=gold label="Gold Mylar tinsel"
+    beard hackle-fibres color="#7d3b1c" count=30 label="Natural red or brown hen hackle fibres"
+    wing duck-quill color="#a5612e" label="Cinnamon or fiery brown duck quill slips"
+}
+
+// McPhail's materials in the usual winged-wet order.
+steps {
+    attach-thread at=0.88
+    wrap-thread to=0.0
+    // Read from the photos: three quarters of a shank or more.
+    tie-in tail length=1.6 angle=8 spread=10 note="A small bunch of tippet fibres, the black bars level."
+    tie-in rib
+    tie-in body
+    wrap-thread to=0.84
+    wind body to=0.84 turns=14 note="Down to the bend and back for a smooth double layer."
+    tie-off body
+    wind rib to=0.84 turns=5 note="Open, even turns."
+    tie-off rib
+    // Read from the photos: to about the hook point.
+    tie-in beard length=1.2 angle=30 side=under note="Or a few turns of the hackle, pulled down."
+    // Read from the photos: low, the tips past the bend, over the tail.
+    tie-in wing length=2.7 angle=15 spread=12 width=0.45 note="Matched left and right slips, concave sides together, set on top with a pinch and loop."
+    whip-finish note="A small head, varnished."
+}
