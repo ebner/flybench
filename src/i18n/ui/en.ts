@@ -389,7 +389,7 @@ export const en = {
     tiedAs: "Tied as",
     way: {
       slide: "Slid on", weight: "Weighting wire", bunch: "A bunch", wound: "Wound on", palmered: "Palmered over the body",
-      parachute: "Round the post", dubbed: "Dubbed", spun: "Spun and clipped", pulled: "Pulled over", extended: "Sticking out", sleeve: "Slid over the body", woven: "Woven", thread: "The thread only",
+      parachute: "Round the post", dubbed: "Dubbed", spun: "Spun and clipped", glued: "Glued on and clipped", pulled: "Pulled over", extended: "Sticking out", sleeve: "Slid over the body", woven: "Woven", thread: "The thread only",
     },
     unavailable: { needsRib: "Needs a rib to hold it", needsPost: "Needs an upright wing as its post", oneMaterial: "Only one material can be wound back over the body", twoMaterials: "Needs two materials: one for the top, one for the belly" },
     proportions: "Proportions",
@@ -427,7 +427,7 @@ export const en = {
       fan: "Fanned fore and aft", segments: "Segments", tailLength: "Tails past its end", tailSpread: "Tails splayed",
       fold: "Folded back as a head", taper: "Cut tapered to a point", tuft: "Fur left as a tuft at the end",
       flat: "Cut flat", flats: { none: "No, clipped to a shape", sides: "On top and underneath, the sides long", top: "Underneath only", under: "On top only" },
-      leave: "Left standing", shape: "Clipped to", shapes: { round: "A round head", wedge: "A wedge, flat underneath", cigar: "A cigar, rounded at both ends", cone: "A cone, full at the front" },
+      leave: "Left standing", shape: "Clipped to", shapes: { round: "A round head", wedge: "A wedge, flat underneath", cigar: "A cigar, rounded at both ends", cone: "A cone, full at the front", disc: "A flat disc, round from above" },
       keep: "Fibres kept", keeps: { sides: "At the sides", top: "On top and at the sides", under: "Underneath and at the sides" }, none: "As tied",
       label: "Your own name for it", note: "Your note on how to tie it", fibre: "Fibre length", count: "How many", mm: "Size",
     },
@@ -576,7 +576,7 @@ export const en = {
     },
     options: {
       side: { top: "On top", under: "Underneath", across: "Across the shank" },
-      shape: { round: "Round", wedge: "Wedge", cigar: "Cigar", cone: "Cone" },
+      shape: { round: "Round", wedge: "Wedge", cigar: "Cigar", cone: "Cone", disc: "Disc" },
       keep: { sides: "The sides", top: "The top", under: "The underside" },
     },
   },

@@ -384,7 +384,7 @@ export const de: Messages = {
     tiedAs: "Gebunden als",
     way: {
       slide: "Aufgefädelt", weight: "Bleidraht", bunch: "Ein Büschel", wound: "Gewunden", palmered: "Über den Körper gewunden",
-      parachute: "Um den Post", dubbed: "Gedubbt", spun: "Gesponnen und geschnitten", pulled: "Darübergelegt", extended: "Abstehend", sleeve: "Über den Körper gezogen", woven: "Gewebt", thread: "Nur der Faden",
+      parachute: "Um den Post", dubbed: "Gedubbt", spun: "Gesponnen und geschnitten", glued: "Aufgeklebt und geschnitten", pulled: "Darübergelegt", extended: "Abstehend", sleeve: "Über den Körper gezogen", woven: "Gewebt", thread: "Nur der Faden",
     },
     unavailable: { needsRib: "Braucht eine Rippung, die sie hält", needsPost: "Braucht einen aufrechten Flügel als Post", oneMaterial: "Nur ein Material lässt sich über den Körper zurückwinden", twoMaterials: "Braucht zwei Materialien: eins für oben, eins für den Bauch" },
     proportions: "Proportionen",
@@ -422,7 +422,7 @@ export const de: Messages = {
       fan: "Nach vorn und hinten gefächert", segments: "Segmente", tailLength: "Schwänze hinter dem Ende", tailSpread: "Schwänze gespreizt",
       fold: "Als Kopf zurückgefaltet", taper: "Spitz zulaufend geschnitten", tuft: "Fell nur als Büschel am Ende",
       flat: "Flach geschnitten", flats: { none: "Nein, in Form geschnitten", sides: "Oben und unten, die Seiten lang", top: "Nur unten", under: "Nur oben" },
-      leave: "Stehen gelassen", shape: "Geschnitten zu", shapes: { round: "Einem runden Kopf", wedge: "Einem Keil, unten flach", cigar: "Einer Zigarre, an beiden Enden gerundet", cone: "Einem Kegel, vorn am dicksten" },
+      leave: "Stehen gelassen", shape: "Geschnitten zu", shapes: { round: "Einem runden Kopf", wedge: "Einem Keil, unten flach", cigar: "Einer Zigarre, an beiden Enden gerundet", cone: "Einem Kegel, vorn am dicksten", disc: "Einer flachen Scheibe, von oben rund" },
       keep: "Behaltene Fibern", keeps: { sides: "An den Seiten", top: "Oben und an den Seiten", under: "Unten und an den Seiten" }, none: "Wie gebunden",
       label: "Dein eigener Name dafür", note: "Deine Notiz, wie man es bindet", fibre: "Fiberlänge", count: "Wie viele", mm: "Größe",
     },
@@ -571,7 +571,7 @@ export const de: Messages = {
     },
     options: {
       side: { top: "Oben", under: "Unten", across: "Quer über den Hakenschenkel" },
-      shape: { round: "Rund", wedge: "Keil", cigar: "Zigarre", cone: "Kegel" },
+      shape: { round: "Rund", wedge: "Keil", cigar: "Zigarre", cone: "Kegel", disc: "Scheibe" },
       keep: { sides: "Die Seiten", top: "Die Oberseite", under: "Die Unterseite" },
     },
   },

@@ -192,6 +192,17 @@ At each crossing take the dark strand over the top of the shank only, from one s
     mistakes: ["Pulling one strand harder than the other, so the line along the side wanders.", "Crossings left loose, so the body twists round the shank."],
   },
   {
+    id: "glued-body",
+    name: "Glued fibre bodies",
+    summary: "Pads of fibre glued across the shank after the whip finish, on top and underneath, and trimmed into a flat disc: a crab's body.",
+    how: `Finish the thread first: the body is held by glue alone. Pull off a pad of the fibres, flatten it between your fingers and cut it as wide as the body is to be.
+
+With the hook point down, lay a bead of glue along the top of the shank and press the pad into it, its fibres across the shank, half on each side. Add a second pad on top. Turn the hook over and glue one or two pads underneath, setting legs tied in earlier in the wet glue where they should point. Turn the hook back and add one more pad on top, so the top carries more than the underside.
+
+Let the glue set, then trim the body round into a flat disc.`,
+    mistakes: ["Pads laid along the shank instead of across it, so they can't be trimmed into a round body.", "Trimming before the glue has set, so the pads pull loose."],
+  },
+  {
     id: "hair-body",
     name: "Bullet heads and extended hair bodies",
     summary: "Hair tied in pointing forward over the eye, folded back into a smooth head and bound with the thread along the body and on past the bend.",
@@ -309,6 +320,8 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       return "dubbing";
     case "spin":
       return "spinning-hair";
+    case "glue":
+      return "glued-body";
     case "pull-over":
       return foldedBack(step.material) ? "hair-body" : needleBody(step.material) ? "needle-body" : "wing-case";
     case "sleeve":
@@ -323,6 +336,7 @@ export function stepTechnique(recipe: Recipe, index: number): string | null {
       return recipe.steps.some((s) => s.op === "sleeve" && s.material === step.material) ? "tubing-body" : "tie-off";
     case "trim": {
       // Spun hair, or hair butts flared round the shank and trimmed to a shape (a head).
+      if (recipe.steps.some((s) => s.op === "glue" && s.material === step.material)) return "glued-body";
       const spun = recipe.steps.some((s) => s.op === "spin" && s.material === step.material);
       if (spun || step.shape !== undefined) return "spinning-hair";
       // Hair butts: part of tying in that hair, as a tail or a wing.

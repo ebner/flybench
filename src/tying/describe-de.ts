@@ -179,8 +179,12 @@ function writerFor(recipe: Recipe) {
         const tails = said.tails && t ? ` ${capitalize(mat(said.tails.m, "nom"))} ${verb(t, "steht", "stehen")} ${length(said.tails.length)} über das Ende hinaus, wo ${pronoun(t).nom} vorher eingebunden ${verb(t, "wurde", "wurden")}.` : "";
         return `Binde ${mat(said.m, "acc")} so ein, dass ${p.nom} ${length(said.length)} ${said.forward ? `nach vorn über ${the("eye", "acc")}` : "nach hinten"} in einem Stück ${verb(refers, "übersteht", "überstehen")}.${tails}${tip}`;
       }
-      case "tie-in-across":
-        return `Binde ${what({ kind: "strands", n: said.strands, m: said.m }).text} mittig mit ${eights} quer über ${the(alongId, "acc")}, so dass auf jeder Seite ${length(said.length)} als Beine ${lengthPlural(said.length) ? "überstehen" : "übersteht"}.`;
+      case "tie-in-across": {
+        const lean = said.fan
+          ? ` Fächere sie über etwa ${said.fan}° auf, die hinteren nach hinten und die vorderen nach vorn geneigt.`
+          : said.angle && said.angle >= 10 ? ` Lass sie etwa ${said.angle}° nach hinten geneigt stehen.` : "";
+        return `Binde ${what({ kind: "strands", n: said.strands, m: said.m }).text} mittig mit ${eights} quer über ${the(alongId, "acc")}, so dass auf jeder Seite ${length(said.length)} als Beine ${lengthPlural(said.length) ? "überstehen" : "übersteht"}.${lean}`;
+      }
       case "tie-in-forward":
         return `Binde ${mat(said.m, "acc")} so ein, dass ${pronoun(noun(said.m)).nom} nach vorn über ${the("eye", "acc")} ${verb(noun(said.m), "zeigt und", "zeigen und")} ${length(said.length)} ${verb(noun(said.m), "übersteht", "überstehen")}.${said.round ? ` Lass ${pronoun(noun(said.m)).acc} sich beim Festziehen rund um ${the(alongId, "acc")} verteilen.` : ""}`;
       case "tie-in-upright": {
@@ -240,6 +244,10 @@ function writerFor(recipe: Recipe) {
         const cut = said.length ? ` Kämme vorher die Unterwolle aus und schneide ${the("clump", "acc", true)} auf etwa ${length(said.length)} zu.` : "";
         return `Spinne ${many("clump", "acc")} aus ${mat(said.m, "dat", "none")} um ${the(alongId, "acc")} und drücke ${each} zurück, ${place(said.to).to}.${cut}`;
       }
+      case "glue": {
+        const cut = said.length ? ` Schneide die Stücke so zu, dass sie auf jeder Seite etwa ${length(said.length)} überstehen.` : "";
+        return `Gib ${place(said.from).from} ${place(said.to).to} eine Linie Kleber oben auf ${the(alongId, "acc")} und drücke flach gedrückte Stücke aus ${mat(said.m, "dat", "none")} hinein, die Fasern quer zu ${the(alongId, "dat")}. Dreh den Haken um und mach unten dasselbe, dann leg oben noch mehr auf.${cut}`;
+      }
       case "sleeve": {
         const fray = said.fray ? ` Zupfe das Geflecht hinter der hinteren Abbindung zu losen ${many("strand", "dat")} auf, etwa ${length(said.fray)} lang.` : "";
         return `Ziehe ${mat(said.m, "acc")} über ${the("eye", "acc")} und am Körper entlang, so dass ${pronoun(noun(said.m)).nom} ${place(said.from).from} ${place(said.to).to} ${verb(noun(said.m), "reicht", "reichen")}, und binde das ${said.rear ? "hintere" : "vordere"} Ende ${place(said.from).at} mit festen ${many("turn", "dat")} ab.${fray}`;
@@ -269,6 +277,7 @@ function writerFor(recipe: Recipe) {
             : `Schneide ${fibres} ${mat(said.m, "gen")} oben und unten weg, so dass zwei flache ${many("row", "nom")} seitlich abstehen.`;
       }
       case "trim-spun":
+        if (said.disc) return `${said.glued ? "Wenn der Kleber fest ist, schneide" : "Schneide"} ${mat(said.m, "acc")} rund zu einer flachen Scheibe, oben und unten etwa ${length(said.leave)} dick und in der Mitte so breit wie zuvor.`;
         if (said.cone) return `Schneide ${mat(said.m, "acc")} zu einem Kegel, am Schwanz schlank und vorn auf jeder Seite etwa ${length(said.leave)} dick, dort gerade abgeschnitten.`;
         if (said.cigar) return `Schneide ${mat(said.m, "acc")} zu einer Zigarre, auf jeder Seite etwa ${length(said.leave)} dick, in der Mitte am dicksten und an beiden Enden gerundet.`;
         return `Schneide ${mat(said.m, "acc")} in Form, so dass auf jeder Seite ${a("head", "nom")} bleibt, ${pronoun(word("head")).rel} etwa ${length(said.leave)} dick ist.`;
@@ -277,7 +286,7 @@ function writerFor(recipe: Recipe) {
           ? `Schneide ${mat(said.m, "acc")} unten flach, etwa ${length(said.leave)} unter ${the(alongId, "dat")}, und lass den Rest lang.`
           : said.keep === "under"
             ? `Schneide ${mat(said.m, "acc")} oben flach, etwa ${length(said.leave)} über ${the(alongId, "dat")}, und lass den Rest lang.`
-            : `Schneide ${mat(said.m, "acc")} oben und unten flach, etwa ${length(said.leave)} von ${the(alongId, "dat")} entfernt, und lass ${the("hair", "acc")} an den Seiten lang.`;
+            : `Schneide ${mat(said.m, "acc")} oben und unten flach, etwa ${length(said.leave)} von ${the(alongId, "dat")} entfernt, und lass ${said.glued ? the("fibre", "acc", true) : the("hair", "acc")} an den Seiten lang.`;
       case "trim-tip":
         return `Schneide ${the("tip", "acc")} ${mat(said.m, "gen")} dicht an ${the("body", "dat")} ab.`;
       case "trim-cover":

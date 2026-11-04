@@ -1,0 +1,47 @@
+id raghead-crab
+status draft
+
+// en description: A tan marabou tail with two ginger hackle tips splayed as claws, six white rubber legs, a flat round body of tan Craft Fur, a green floss head and nickel barbell eyes.
+description "Ein Schwanz aus hellbraunem Marabou mit zwei als Scheren gespreizten Ginger-Hechelspitzen, sechs weiße Gummibeine, ein flacher runder Körper aus hellbraunem Craft Fur, ein grüner Floss-Kopf und vernickelte Bleiaugen."
+
+// en history: Jan Isley, a fly-fishing guide from Key West, made it for permit in the Yucatán. Drew Chicone dates it to 1980, on a trip to the Ascension Bay Bonefish Club. It is a crab in the style of the Merkin: heavy eyes on top of the shank turn it point up, so it settles on the bottom claws up, as a crab defends itself. The commercial dressing has a body of Craft Fur trimmed round. Chicone glues McFly Foam on in layers instead, and says it has also been tied with Scotch-Brite pads, felt or furry foam.
+history """
+    Jan Isley, ein Fliegenfischerguide aus Key West, band sie für Permits in Yucatán. Drew
+    Chicone datiert sie auf 1980, auf eine Reise zum Ascension Bay Bonefish Club. Sie ist eine
+    Krabbe im Stil der Merkin: Schwere Augen oben auf dem Hakenschenkel drehen sie mit der
+    Hakenspitze nach oben, sodass sie sich mit den Scheren nach oben auf den Grund legt, wie
+    eine Krabbe, die sich verteidigt. Die kommerzielle Bindeweise hat einen rund geschnittenen
+    Körper aus Craft Fur. Chicone klebt stattdessen McFly Foam in Lagen auf und schreibt, dass
+    sie auch mit Scotch-Brite-Pads, Filz oder Furry Foam gebunden wurde.
+    """
+
+// en fishing: A permit fly. Cast it well ahead of tailing or cruising fish, let it sink to the bottom, and give it a slight strip. In the smaller sizes it takes bonefish too, fished with strips and pauses.
+fishing """
+    Eine Permitfliege. Wirf sie weit vor Fische, die tailen oder ziehen, lass sie auf den Grund
+    sinken und gib ihr einen leichten Zug. In den kleineren Größen nimmt sie auch Bonefish, mit
+    Zügen und Pausen gefischt.
+    """
+
+labels {
+    // en eyes: Nickel-plated barbell eyes
+    eyes "Vernickelte Bleiaugen"
+}
+
+notes {
+    // en step 1 (attach-thread): Single-strand floss, as thread.
+    step 1 "Einfädiges Floss als Bindefaden."
+    // en step 2 (tie-in eyes): Then a few turns round the base between the eyes, and a drop of glue.
+    step 2 "Dann ein paar Windungen um die Basis zwischen den Augen und ein Tropfen Kleber."
+    // en step 4 (tie-in tail): A tuft of marabou.
+    step 4 "Ein Büschel Marabou."
+    // en step 5 (tie-in claws): Two hackle tips, one each side, splayed out from the marabou.
+    step 5 "Zwei Hechelspitzen, eine auf jeder Seite, vom Marabou weg gespreizt."
+    // en step 7 (tie-in legs): One piece of three strands folded at its middle: six legs. Part them with a bodkin.
+    step 7 "Ein Stück mit drei Strängen, in der Mitte gefaltet: sechs Beine. Trenne sie mit einer Nadel."
+    // en step 9 (whip-finish): A neat green band behind the eyes, which shows as the head.
+    step 9 "Ein sauberes grünes Band hinter den Augen, das als Kopf sichtbar ist."
+    // en step 10 (glue body): Set the legs in the wet glue underneath, the rear pair a little back and the front pair forward.
+    step 10 "Setze die Beine unten in den nassen Kleber, das hintere Paar etwas nach hinten und das vordere nach vorn."
+    // en step 11 (trim body): Round in outline, with a rounded rump.
+    step 11 "Im Umriss rund, mit einem gerundeten Hinterteil."
+}

@@ -384,7 +384,7 @@ export const sv: Messages = {
     tiedAs: "Bunden som",
     way: {
       slide: "Påträdd", weight: "Vikttråd", bunch: "En tofs", wound: "Lindad", palmered: "Lindad över kroppen",
-      parachute: "Runt posten", dubbed: "Dubbad", spun: "Spunnen och klippt", pulled: "Dragen över", extended: "Utstickande", sleeve: "Trädd över kroppen", woven: "Vävd", thread: "Bara tråden",
+      parachute: "Runt posten", dubbed: "Dubbad", spun: "Spunnen och klippt", glued: "Fastlimmad och klippt", pulled: "Dragen över", extended: "Utstickande", sleeve: "Trädd över kroppen", woven: "Vävd", thread: "Bara tråden",
     },
     unavailable: { needsRib: "Behöver en ribbning som håller den", needsPost: "Behöver en upprätt vinge som post", oneMaterial: "Bara ett material kan lindas bakåt över kroppen", twoMaterials: "Behöver två material: ett för ovansidan, ett för buken" },
     proportions: "Proportioner",
@@ -422,7 +422,7 @@ export const sv: Messages = {
       fan: "Solfjäder fram och bak", segments: "Segment", tailLength: "Stjärtspröt bakom änden", tailSpread: "Stjärtsprötens spridning",
       fold: "Tillbakavikt som huvud", taper: "Skuren avsmalnande till en spets", tuft: "Pälsen kvar som en tofs i änden",
       flat: "Klippt plant", flats: { none: "Nej, formklippt", sides: "Upptill och undertill, sidorna långa", top: "Bara undertill", under: "Bara upptill" },
-      leave: "Lämnas kvar", shape: "Klippt till", shapes: { round: "Ett runt huvud", wedge: "En kil, platt undertill", cigar: "En cigarr, rundad i båda ändar", cone: "En kon, tjockast framtill" },
+      leave: "Lämnas kvar", shape: "Klippt till", shapes: { round: "Ett runt huvud", wedge: "En kil, platt undertill", cigar: "En cigarr, rundad i båda ändar", cone: "En kon, tjockast framtill", disc: "En platt skiva, rund sedd ovanifrån" },
       keep: "Fibrer kvar", keeps: { sides: "På sidorna", top: "Ovanpå och på sidorna", under: "Under och på sidorna" }, none: "Som bunden",
       label: "Ditt eget namn på den", note: "Din anteckning om hur den binds", fibre: "Fiberlängd", count: "Hur många", mm: "Storlek",
     },
@@ -571,7 +571,7 @@ export const sv: Messages = {
     },
     options: {
       side: { top: "Ovanpå", under: "Under", across: "Tvärs över krokskaftet" },
-      shape: { round: "Rund", wedge: "Kil", cigar: "Cigarr", cone: "Kon" },
+      shape: { round: "Rund", wedge: "Kil", cigar: "Cigarr", cone: "Kon", disc: "Skiva" },
       keep: { sides: "Sidorna", top: "Ovansidan", under: "Undersidan" },
     },
   },

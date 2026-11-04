@@ -21,7 +21,7 @@ const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v
 const round2 = (v: number) => Math.round(v * 100) / 100;
 
 /** Where a part starts along the shank, and which of its settings says so. */
-export const startKey = (p: Part): "at" | "from" => (p.how === "dubbed" || p.how === "spun" || p.how === "thread" || p.how === "weight" ? "from" : "at");
+export const startKey = (p: Part): "at" | "from" => (p.how === "dubbed" || p.how === "spun" || p.how === "glued" || p.how === "thread" || p.how === "weight" ? "from" : "at");
 
 /** The root of a bunch: on top of the shank, or under it. */
 const rootOf = (p: Part, L: number) => ({ x: (p.at ?? 0) * L, y: p.side === "under" ? -0.1 : 0.1 });
@@ -44,7 +44,7 @@ function handlesOf(p: Part): Handle[] {
       },
     });
   }
-  const span = ["wound", "dubbed", "spun", "thread", "pulled", "palmered", "weight", "sleeve", "woven"].includes(p.how);
+  const span = ["wound", "dubbed", "spun", "glued", "thread", "pulled", "palmered", "weight", "sleeve", "woven"].includes(p.how);
   if (span) {
     const k = startKey(p);
     out.push({ key: `${p.id}:from`, part: p.id, what: "from", label: h.from, at: (L) => ({ x: (p[k] ?? 0) * L, y: -0.18 }) });

@@ -564,7 +564,7 @@ describe("the builder's number fields", () => {
     if (f!.max !== undefined) expect(f!.exclusiveMax ? r.hi < f!.max : r.hi <= f!.max, `${name}: ${r.hi} against the schema's ${f!.max}`).toBe(true);
     expect(r.lo).toBeLessThanOrEqual(r.hi);
   };
-  const HOWS: How[] = ["slide", "weight", "bunch", "wound", "palmered", "parachute", "dubbed", "spun", "pulled", "extended", "sleeve", "woven", "thread"];
+  const HOWS: How[] = ["slide", "weight", "bunch", "wound", "palmered", "parachute", "dubbed", "spun", "glued", "pulled", "extended", "sleeve", "woven", "thread"];
   const KEYS: NumberKey[] = ["length", "angle", "spread", "width", "collar", "fray", "fan", "segments", "tailLength", "tailSpread", "fold"];
 
   it("stay within what the recipe allows for the value each is written as", () => {
@@ -603,5 +603,32 @@ steps {
     const back = compile(fly);
     expect(back.problems).toEqual([]);
     expect(back.recipe.steps.find((s) => s.op === "pull-over")).toMatchObject({ fold: 0.8 });
+  });
+});
+
+describe("a body glued on (a crab)", () => {
+  const recipe = (id: string) => {
+    const r = loadRecipe(readFileSync(new URL(`../../patterns/${id}.kdl`, import.meta.url), "utf8"));
+    if (!r.ok) throw new Error(id);
+    return r.recipe;
+  };
+
+  it("reads the Raghead Crab's glued body and fanned legs back as parts", () => {
+    const fly = partsOf(recipe("raghead-crab"))!;
+    expect(fly.parts.find((p) => p.id === "body")).toMatchObject({ how: "glued", from: 0.1, to: 0.75, length: 0.65, trim: { shape: "disc", leave: 0.38 } });
+    expect(fly.parts.find((p) => p.id === "legs")).toMatchObject({ how: "bunch", side: "across", fan: 70 });
+    expect(compile(fly).problems).toEqual([]);
+  });
+
+  it("glues a body on after the whip finish when a part is tied that way", () => {
+    const herl = partsOf(recipe("red-tag"))!;
+    const body = herl.parts.find((p) => p.role === "body")!;
+    const fly = setMaterial(herl, body.id, 0, { kind: "craft-fur", color: "tan" });
+    expect(waysOf(fly.parts.find((p) => p.id === body.id)!)).toContain("glued");
+    const glued = compile(setHow(fly, body.id, "glued"));
+    expect(glued.problems).toEqual([]);
+    const ops = glued.recipe.steps.map((s) => s.op);
+    expect(ops.indexOf("glue")).toBeGreaterThan(ops.indexOf("whip-finish"));
+    expect(glued.recipe.steps.at(-1)).toMatchObject({ op: "trim", shape: "disc" });
   });
 });

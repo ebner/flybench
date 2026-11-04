@@ -405,8 +405,9 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
       {part.trim?.shape !== undefined && (
         <label className="wb-field">
           <span>{f.shape}</span>
-          <select value={part.trim.shape} onChange={(e) => onChange({ trim: { ...part.trim, shape: e.target.value as "round" | "wedge" | "cigar" | "cone" } })}>
-            {(["round", "wedge", "cigar", "cone"] as const).map((s) => (
+          <select value={part.trim.shape} onChange={(e) => onChange({ trim: { ...part.trim, shape: e.target.value as NonNullable<NonNullable<Part["trim"]>["shape"]> } })}>
+            {/* (Pads glued across the shank are clipped to a disc only; hair butts, which lie along it, never to a disc.) */}
+            {(part.how === "glued" ? (["disc"] as const) : part.how === "spun" ? (["round", "wedge", "cigar", "cone", "disc"] as const) : (["round", "wedge", "cigar", "cone"] as const)).map((s) => (
               <option key={s} value={s}>
                 {f.shapes[s]}
               </option>
@@ -414,14 +415,15 @@ function MoreFields({ part, mat, rear, onChange, onMaterial }: { part: Part; mat
           </select>
         </label>
       )}
-      {part.how === "spun" && part.trim !== undefined && (
+      {(part.how === "spun" || part.how === "glued") && part.trim !== undefined && (
         <label className="wb-field">
           <span>{f.flat}</span>
           <select
             value={part.trim.keep ?? ""}
             onChange={(e) =>
               // Cut flat, the sides left long; or clipped all round to a shape.
-              onChange({ trim: e.target.value ? { keep: e.target.value as "sides" | "top" | "under", leave: part.trim?.leave ?? 0.3 } : { leave: part.trim?.leave ?? 0.5, shape: "round" } })
+              // (Glued fibres are clipped to a disc, a crab's body.)
+              onChange({ trim: e.target.value ? { keep: e.target.value as "sides" | "top" | "under", leave: part.trim?.leave ?? 0.3 } : part.how === "glued" ? { leave: part.trim?.leave ?? 0.3, shape: "disc" } : { leave: part.trim?.leave ?? 0.5, shape: "round" } })
             }
           >
             <option value="">{f.flats.none}</option>

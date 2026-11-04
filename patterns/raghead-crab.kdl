@@ -1,0 +1,82 @@
+// Raghead Crab: Jan Isley's permit crab from the Yucatán, a body of fibres glued on and trimmed round, rubber legs and barbell eyes; it rides hook point up.
+
+id raghead-crab
+name "Raghead Crab"
+aliases "Rag Head Crab" "Isley's Raghead Crab"
+type saltwater
+imitates crustacean
+difficulty intermediate
+rides point-up
+species permit bonefish
+origin originator="Jan Isley" year=1980 region="Ascension Bay, Yucatán, Mexico"
+description "A tan marabou tail with two ginger hackle tips splayed as claws, six white rubber legs, a flat round body of tan Craft Fur, a green floss head and nickel barbell eyes."
+history """
+    Jan Isley, a fly-fishing guide from Key West, made it for permit in the Yucatán. Drew
+    Chicone dates it to 1980, on a trip to the Ascension Bay Bonefish Club. It is a crab in the
+    style of the Merkin: heavy eyes on top of the shank turn it point up, so it settles on the
+    bottom claws up, as a crab defends itself. The commercial dressing has a body of Craft Fur
+    trimmed round. Chicone glues McFly Foam on in layers instead, and says it has also been tied
+    with Scotch-Brite pads, felt or furry foam.
+    """
+fishing """
+    A permit fly. Cast it well ahead of tailing or cruising fish, let it sink to the bottom, and
+    give it a slight strip. In the smaller sizes it takes bonefish too, fished with strips and
+    pauses.
+    """
+sources {
+    "The Fly Shop: Isley's Raghead Crab" url="https://catalog.theflyshop.com/products/the-raghead-crab-isleys"
+    "Salty Fly Tying Chronicle No. 101: the Raghead Crab (Drew Chicone, 2021)" url="https://us5.campaign-archive.com/?u=c9d97a6df733b82bdadf7a356&id=b252406eff"
+    "Salty Fly Tying: The Rag Head Crab (Drew Chicone)" url="https://blog.saltyflytying.com/the-rag-head-crab/"
+    "Post-Bulletin: Key West fly angler Jan Isley is back on the flats (Susan Cocking, 2008)" url="https://www.postbulletin.com/news/key-west-fly-angler-jan-isley-is-back-on-the-flats"
+    "Florida Keys Outfitters: Rag Head Crab" url="https://www.floridakeysoutfitters.com/rag-head-crab.html"
+    "Fly of the Month Club: Rag Head Crab" url="http://www.flyofthemonthclub.com/store/catalog.asp?item=1108"
+    "North 40: Jan Isley's Rag Head Crab" url="https://north40.com/rag-head-crab-fly"
+}
+// Photos for checking proportions while authoring (pnpm refcheck); never published.
+references {
+    "https://north40.com/media/catalog/product/P/M/PM-1004182_flies_a.jpg" page="https://north40.com/rag-head-crab-fly" license="All rights reserved; reference only" flip=#true note="Umpqua tie, side view, point up as fished"
+    "https://catalog.theflyshop.com/cdn/shop/files/275F_TheRagheadCrab_Tan.png?v=1769531203&width=1500" page="https://catalog.theflyshop.com/products/the-raghead-crab-isleys" license="All rights reserved; reference only" note="Top view, eye at the upper left"
+    "https://blog.saltyflytying.com/wp-content/uploads/2019/11/commercially-tied-rag-head-crab.jpg" page="https://blog.saltyflytying.com/the-rag-head-crab/" license="All rights reserved; reference only" note="Commercial tie, top view, eye right"
+    "https://mcusercontent.com/c9d97a6df733b82bdadf7a356/images/a7bafaba-c7fe-4d43-80ee-f9d9076a8fab.jpeg" page="https://us5.campaign-archive.com/?u=c9d97a6df733b82bdadf7a356&id=b252406eff" author="Drew Chicone" license="All rights reserved; reference only" note="Chicone's McFly Foam version, three-quarter front view, point up"
+}
+
+// The commercial (Umpqua) dressing as The Fly Shop and Fly of the Month Club list it, tied in
+// Chicone's order: eyes, tail, legs, the thread finished, then the body glued on.
+// The Fly Shop and Fly of the Month Club: TMC 811S #2-6.
+hook saltwater-straight size=4
+// The Fly Shop: neon hot green single-strand floss; Chicone: chartreuse 210 denier flat waxed nylon.
+thread fluo-green size="3/0"
+
+materials {
+    // Assumption: Chicone's medium 5/32" (4 mm) eyes; the shops sell several weights.
+    eyes dumbbell-eyes color=silver mm=4 label="Nickel-plated barbell eyes"
+    tail marabou color=tan
+    claws hackle-tips color=ginger
+    // The Fly Shop lists sand and black flake Sili Legs, Fly of the Month Club tan; Chicone and
+    // every photo have white round rubber.
+    legs rubber-legs color=white count=3
+    body craft-fur color=tan
+}
+
+steps {
+    attach-thread at=0.9 note="Single-strand floss, as thread."
+    // Chicone: on top, about an eye's width behind the hook eye, with a drop of glue.
+    tie-in eyes note="Then a few turns round the base between the eyes, and a drop of glue."
+    wrap-thread to=0.0
+    // Read from the photos: the tail reaches about 2.4 gapes past the bend (Chicone ties it a
+    // hook length past, about three gapes).
+    tie-in tail length=2.4 spread=35 note="A tuft of marabou."
+    tie-in claws length=2.6 angle=4 spread=22 note="Two hackle tips, one each side, splayed out from the marabou."
+    wrap-thread to=0.45
+    // Chicone: one 2.5" piece of three strands folded at its middle; the rear pair angled back,
+    // the front pair forward. Read from the photos: the legs reach about 1.4 gapes from the
+    // shank, fanned some 70°.
+    tie-in legs length=1.4 side=across fan=70 note="One piece of three strands folded at its middle: six legs. Part them with a bodkin."
+    wrap-thread to=0.8
+    whip-finish note="A neat green band behind the eyes, which shows as the head."
+    // Read from the photos and Chicone (the size of a dime on a #2): about 1.55 gapes long and
+    // 1.3 across, from behind the eyes to the bend.
+    glue body from=0.1 to=0.75 length=0.65 note="Set the legs in the wet glue underneath, the rear pair a little back and the front pair forward."
+    // Read from the side view: about 0.75 gape thick.
+    trim body shape=disc leave=0.38 note="Round in outline, with a rounded rump."
+}
