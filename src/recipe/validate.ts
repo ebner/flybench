@@ -20,6 +20,9 @@ const ACROSS: readonly Archetype[] = ["legs", "hair", "fibres", "biot", "flash"]
 /** Materials that can stick out as one solid piece. */
 const EXTENDABLE: readonly Archetype[] = ["chenille", "yarn", "foam"];
 
+/** What can come out of the end of a body made on a needle, as its tails. */
+const TAILS: readonly Archetype[] = ["hair", "fibres", "biot"];
+
 /** Strands that can be woven as a two-coloured body. */
 const WOVEN: readonly Archetype[] = ["chenille", "yarn", "floss"];
 
@@ -83,6 +86,8 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   // short of the eye, so this is the stricter measure.)
   const shank = hookModel(recipe.hook).shankLength;
   const lengths = new Map<string, number>();
+  /** Where each material was tied in (an upright post's place, for a strip parted round it). */
+  const postAt = new Map<string, number>();
 
   recipe.steps.forEach((step, i) => {
     const path = ["steps", i];
@@ -228,8 +233,11 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (step.spread !== undefined && step.length === undefined) {
           rule("spreadOnly", {}, [...path, "spread"]);
         }
-        if (step.width !== undefined && archetype !== "feather") {
+        if (step.width !== undefined && archetype !== "feather" && !step.extended) {
           rule("widthOnly", {}, [...path, "width"]);
+        }
+        if (step.fan !== undefined && (step.length === undefined || (step.angle ?? 0) < 60 || archetype === "feather")) {
+          rule("fanOnly", {}, [...path, "fan"]);
         }
         // Without a length, side=under only for a strip pulled over the belly later.
         const pulledLater = recipe.steps.slice(i + 1).some((s) => s.op === "pull-over" && s.material === step.material);
@@ -248,12 +256,27 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("extendedOnly", {}, [...path, "extended"]);
         }
         if (step.tip !== undefined && !step.extended) rule("tipOnly", {}, [...path, "tip"]);
+        // A body made beforehand on a needle: bound into segments, its tails tied in at its tip first.
+        const made = (["segments", "tails", "tail-length", "tail-spread"] as const).find((k) => step[k] !== undefined);
+        if (made && !step.extended) rule("madeBodyOnly", {}, [...path, made]);
+        else if (step.tails !== undefined) {
+          const tails = archetypes.get(step.tails);
+          if (!tails) rule("unknownMaterial", { m: step.tails }, [...path, "tails"]);
+          else if (!TAILS.includes(tails)) rule("tailsOnly", { m: step.tails }, [...path, "tails"]);
+          else if (materials.has(step.tails) || step.tails === step.material) rule("alreadyTiedIn", { m: step.tails }, [...path, "tails"]);
+          else materials.set(step.tails, { state: "done", at: thread, butts: false });
+        }
+        if (step.extended && (step.tails === undefined ? step["tail-length"] !== undefined || step["tail-spread"] !== undefined : step["tail-length"] === undefined)) {
+          rule("tailsLength", {}, [...path, step.tails === undefined ? "tail-length" : "tails"]);
+        }
         if (step.length !== undefined) lengths.set(step.material, step.length);
+        if (!postAt.has(step.material)) postAt.set(step.material, thread);
         if (materials.has(step.material)) rule("alreadyTiedIn", { m: step.material }, [...path, "material"]);
         else {
           materials.set(step.material, {
-            // Eyes, extended bodies and legs across the shank are finished once tied in.
-            state: archetype === "eyes" || step.extended || step.side === "across" ? "done" : "tied-in",
+            // Eyes, extended bodies and legs across the shank are finished once tied in; the rest
+            // of a strip whose extended part is made (a Mohican's foam) may wait to be pulled over.
+            state: archetype === "eyes" || (step.extended && !pulledOver) || step.side === "across" ? "done" : "tied-in",
             at: thread,
             // Tied in pointing forward, the butts lie back along the shank under the turns (cut
             // square first, as for a bullet head), with nothing to trim.
@@ -326,6 +349,14 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
         if (!m || m.state !== "tied-in") {
           rule("tieInBeforePull", { m: step.material }, [...path, "material"]);
           break;
+        }
+        if (step.around !== undefined) {
+          // Parted round an upright post it passes on its way forward.
+          const post = materials.get(step.around);
+          const at = postAt.get(step.around);
+          if (!post?.post || at === undefined || step.to <= m.at + POSITION_TOLERANCE || at <= m.at + POSITION_TOLERANCE || at >= step.to - POSITION_TOLERANCE) {
+            rule("splitAroundPost", { m: step.material, post: step.around }, [...path, "around"]);
+          }
         }
         if (Math.abs(step.to - m.at) <= POSITION_TOLERANCE) {
           rule("pullForward", { m: step.material }, [...path, "to"]);
@@ -438,7 +469,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
     }
   }
   const used = new Set(
-    recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : [], s.op === "weave" ? s.under : []].flat()),
+    recipe.steps.flatMap((s) => ["material" in s ? s.material : [], "around" in s && s.around ? s.around : [], s.op === "weave" ? s.under : [], s.op === "tie-in" && s.tails ? s.tails : []].flat()),
   );
   recipe.materials.forEach((m, i) => {
     if (!used.has(m.id)) rule("neverUsed", { m: m.id }, ["materials", i, "id"]);

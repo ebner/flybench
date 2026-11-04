@@ -167,7 +167,17 @@ function writerFor(recipe: Recipe) {
         const tip = said.tip
           ? ` Färbe das Ende ${tipColour ? deAdjective(tipColour, "") : "dunkler"}${said.tip === "black" ? ` (mit ${a("lighter", "dat")} ansengen)` : ""}.`
           : "";
-        return `Binde ${mat(said.m, "acc")} so ein, dass ${p.nom} ${length(said.length)} ${said.forward ? `nach vorn über ${the("eye", "acc")}` : "nach hinten"} in einem Stück ${verb(refers, "übersteht", "überstehen")}.${tip}`;
+        if (said.segments) {
+          const t = said.tails ? noun(said.tails.m) : null;
+          const tails = said.tails && t
+            ? `Binde ${mat(said.tails.m, "acc")} an ihrer Spitze ein, so dass ${pronoun(t).nom} ${length(said.tails.length)} ${verb(t, "übersteht", "überstehen")}, lege einen Streifen aus ${mat(said.m, "dat", "none")} darüber, die Fibern zwischen den Hälften,`
+            : `Lege einen Streifen aus ${mat(said.m, "dat", "none")} über ihre Spitze`;
+          const ends = said.ends ? ", die beiden Enden des Streifens nach vorn, um sie später nach vorn zu ziehen" : "";
+          return `Mache zuerst ${the("body", "acc")} auf einer Nadel mit einer dünnen Fadenunterlage: ${tails} und binde ihn nach vorn arbeitend in ${number(said.segments)} Segmente ab, mit ein paar festen ${many("turn", "dat")} an jeder Taille. Mache einen halben Schlag und ziehe ${the("body", "acc")} von der Nadel. Binde ${pronoun(word("body")).acc} mit dem vordersten Segment oben auf ${the(alongId, "acc")}, so dass ${pronoun(word("body")).nom} ${length(said.length)} ${said.forward ? `nach vorn über ${the("eye", "acc")}` : "nach hinten"} übersteht${ends}.${tip}`;
+        }
+        const t = said.tails ? noun(said.tails.m) : null;
+        const tails = said.tails && t ? ` ${capitalize(mat(said.tails.m, "nom"))} ${verb(t, "steht", "stehen")} ${length(said.tails.length)} über das Ende hinaus, wo ${pronoun(t).nom} vorher eingebunden ${verb(t, "wurde", "wurden")}.` : "";
+        return `Binde ${mat(said.m, "acc")} so ein, dass ${p.nom} ${length(said.length)} ${said.forward ? `nach vorn über ${the("eye", "acc")}` : "nach hinten"} in einem Stück ${verb(refers, "übersteht", "überstehen")}.${tails}${tip}`;
       }
       case "tie-in-across":
         return `Binde ${what({ kind: "strands", n: said.strands, m: said.m }).text} mittig mit ${eights} quer über ${the(alongId, "acc")}, so dass auf jeder Seite ${length(said.length)} als Beine ${lengthPlural(said.length) ? "überstehen" : "übersteht"}.`;
@@ -176,7 +186,7 @@ function writerFor(recipe: Recipe) {
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
-        return `Binde ${w.text} aufrecht ein, so dass ${p.nom} ${length(said.length)} hoch ${verb(w.refers, "steht", "stehen")}, und richte ${p.acc} mit ${many("turn", "dat")} davor auf.${said.divide ? ` Teile ${p.acc} mit ${eights} zu einem V.` : ""}`;
+        return `Binde ${w.text} aufrecht ein, so dass ${p.nom} ${length(said.length)} hoch ${verb(w.refers, "steht", "stehen")}, und richte ${p.acc} mit ${many("turn", "dat")} davor auf.${said.divide ? ` Teile ${p.acc} mit ${eights} zu einem V.` : ""}${said.fan ? ` Lass ${p.acc} sich nach vorn und hinten auffächern, schmal von Seite zu Seite.` : ""}`;
       }
       case "tie-in-wing-under": {
         const w = what(said.what);
@@ -205,6 +215,7 @@ function writerFor(recipe: Recipe) {
       case "wind":
         return `Winde ${mat(said.m, "acc")} in ${turns(said.turns)} nach vorn ${place(said.to).to}${counter(said.counter)}.`;
       case "pull-over":
+        if (said.around) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn, je ein Ende auf jeder Seite ${mat(said.around, "gen")}, und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         if (said.wing) return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab; richte dann die Spitzen vor der Abbindung als etwa ${length(said.wing)} hohen Flügel auf und teile ihn.`;
         if (said.under) return `${said.bubble ? "Klappe" : "Ziehe"} ${mat(said.m, "acc")} ${said.bubble ? "als lockere Blase " : ""}unter ${the("body", "dat")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         if (said.bubble) return `Klappe ${mat(said.m, "acc")} als lockere Blase über ${the("body", "acc")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;

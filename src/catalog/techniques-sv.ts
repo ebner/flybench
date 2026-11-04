@@ -180,6 +180,16 @@ Skjut håret bakåt över ögat, med fingrarna eller hålet i ett halvslagsverkt
 För en förlängd kropp håller du håret bakåt runt krokskaftet (och runt en stjärt inbunden vid krokböjen) och lindar bindtråden i spiral bakåt över det med jämn spänning, vidare bakom krokböjen runt bara håret, och sedan framåt igen så att varven korsar varandra. Klipp spetsarna strax bakom det sista varvet.`,
     mistakes: ["För hård spänning, så att håret spretar i stället för att ligga slätt.", "Ojämna varv bakom krokböjen, så att kroppen blir sned eller segmenten ojämna."],
   },
+  "needle-body": {
+    name: "Förlängda foamkroppar gjorda på en nål",
+    summary: "En remsa foam som viks runt en nål över stjärtsprötet och binds i segment, dras av och binds fast på kroken.",
+    how: `Spänn fast en nål i städet och lägg ett glest underlag av bindtråd på den, ungefär en kroklängd. Bind in stjärtfibrerna nära spetsen, med rotändarna liggande framåt längs nålen.
+
+Skär en remsa tunn foam med slutna celler, avsmalnande mot ena änden och med ett hack där för stjärtsprötet. Vik den över nålens spets med stjärtsprötet mellan halvorna, och bind det första segmentet med några varv lätt spänning: så att foamen nyps ihop men inte skärs av. För tråden framåt med ett par glesa varv och bind nästa segment, och så vidare.
+
+Slå ett halvslag, klipp tråden och dra av kroppen från nålen. Bind fast den ovanpå kroken med det främre segmentet, med foamens ändar och stjärtfibrernas rotändar liggande framåt. Ändarna kan senare dras framåt över thoraxen, en på var sida om vingen, och bindas ner bakom ögat som huvud.`,
+    mistakes: ["För hård spänning, så att tråden skär av foamen.", "Foam som glider runt skaftet när det binds ner: håll det på plats medan du drar åt."],
+  },
   "woven-body": {
     name: "Vävda kroppar",
     summary: "Två chenilletrådar som vävs längs skaftet, den ena färgen på ryggen och den andra på buken.",

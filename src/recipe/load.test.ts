@@ -716,3 +716,67 @@ describe("a dyed grizzly", () => {
     expect(errorsOf(load(steps, h("hackle chenille color=olive barred=#true"))).join("\n")).toMatch(/"barred" does not apply to chenille/);
   });
 });
+
+describe("a body made on a needle (a Mohican Mayfly's)", () => {
+  const MOHICAN = `
+id test
+name "Test"
+type dry
+difficulty advanced
+hook dry-standard size=12
+thread tan size="8/0"
+materials {
+    tail moose-mane count=3
+    body foam color=tan mm=1.5
+    wing deer-hair
+    hackle cock-hackle color=ginger fibre=1.3
+    thorax hares-ear-dubbing
+    rib gold-wire
+}
+`;
+  const STEPS = `
+    attach-thread at=0.8
+    wrap-thread to=0.2
+    tie-in body length=2.3 extended=#true segments=6 width=0.4 tails=tail tail-length=3.3 tail-spread=20
+    wrap-thread to=0.62
+    tie-in wing length=2.5 angle=85 fan=50
+    trim wing
+    tie-in hackle
+    wrap-thread to=0.25
+    dub thorax to=0.85
+    wind hackle around=wing turns=5
+    tie-off hackle
+    pull-over body to=0.85 around=wing
+    trim body leave=0.15
+    whip-finish
+`;
+  const errs = (steps: string) => errorsOf(load(steps, MOHICAN));
+
+  it("loads: the tails are used by the body they come out of, the rest of the strip pulled over round the wing", () => {
+    expect(recipeOf(load(STEPS, MOHICAN)).steps[2]).toMatchObject({ segments: 6, tails: "tail", "tail-length": 3.3 });
+  });
+
+  it("makes segments and tails only of an extended body", () => {
+    expect(errs(STEPS.replace("extended=#true ", "").replace(" width=0.4", ""))).toEqual(expect.arrayContaining([expect.stringMatching(/segments and tails only apply to an extended body/)]));
+  });
+
+  it("takes tails of hair, fibres or biots only, each with its length", () => {
+    expect(errs(STEPS.replace("tails=tail", "tails=rib").replace("tie-in wing", "tie-in tail length=1\n    tie-in wing"))).toEqual(expect.arrayContaining([expect.stringMatching(/only hair, fibres or biots come out of a body's end/)]));
+    expect(errs(STEPS.replace(" tail-length=3.3", ""))).toEqual(expect.arrayContaining([expect.stringMatching(/tails need a tail-length/)]));
+  });
+
+  it("doesn't tie the tails in again", () => {
+    expect(errs(STEPS.replace("tie-in wing", "tie-in tail length=1\n    tie-in wing"))).toEqual(expect.arrayContaining([expect.stringMatching(/"tail" is already tied in/)]));
+  });
+
+  it("parts a strip only round an upright post it passes", () => {
+    expect(errs(STEPS.replace("pull-over body to=0.85 around=wing", "pull-over body to=0.85 around=tail"))).toEqual(expect.arrayContaining([expect.stringMatching(/can only be parted round "tail"/)]));
+    expect(errs(STEPS.replace("dub thorax to=0.85", "dub thorax to=0.5").replace("pull-over body to=0.85", "pull-over body to=0.5"))).toEqual(expect.arrayContaining([expect.stringMatching(/can only be parted round "wing"/)]));
+  });
+
+  it("fans out only an upright bunch", () => {
+    expect(errs(STEPS.replace("angle=85 fan=50", "angle=30 fan=50").replace("wind hackle around=wing turns=5", "wind hackle to=0.85 turns=5").replace(" around=wing\n", "\n"))).toEqual(
+      expect.arrayContaining([expect.stringMatching(/fan only applies to a bunch tied in upright/)]),
+    );
+  });
+});

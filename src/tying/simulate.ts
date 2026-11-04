@@ -107,6 +107,8 @@ export interface BundlePiece extends PieceBase {
   trimShape?: "round" | "wedge" | "cigar" | "cone";
   /** Upright and divided: two tufts turned out to either side by this many radians. */
   pair?: number;
+  /** Upright and fanned: the hair splays fore and aft over this many radians in all, narrow across (a Mohican's wing). */
+  fan?: number;
   /** Bands along each fibre (tippet bars, barred fibres). */
   marks?: FibreMarks;
   /** Fibres broader than usual, as a multiple of the usual width. */
@@ -180,6 +182,11 @@ export interface CoverPiece extends PieceBase {
   fur?: number;
   /** All round the body, as thick underneath as on top: hair spread round the shank and folded back (a bullet head), or bound along it. */
   round?: boolean;
+  /**
+   * Parted round an upright post at `x`: two halves, one down each side, turned out from the top
+   * by up to `angle` radians there and coming together again towards both ends (a Mohican's foam).
+   */
+  split?: { x: number; angle: number; reach: number };
   /** 0 = plain, 1 = strongly barred or mottled (turkey). */
   barring: number;
 }
@@ -222,6 +229,24 @@ export interface ExtensionPiece extends PieceBase {
   width?: number;
   /** Fur on the strip's top face this long, leaning back towards its end. */
   fur?: number;
+  /** Made on a needle and bound into this many segments, each waist pinched by turns of `bands`, the thread's colour. */
+  segments?: number;
+  bands?: string;
+  /** Its radius at the end, as a fraction of `thickness` at the tie-in (a body tapering to its tip). */
+  taper?: number;
+}
+
+/** A point on an extended body's centre line, `t` from the tie-in (0) to its end (1), shank-local. */
+export function extensionCentre(p: Pick<ExtensionPiece, "x" | "radius" | "length" | "angle" | "side" | "thickness" | "forward" | "width">, t: number): { x: number; y: number } {
+  const flip = p.side === "under" ? -1 : 1;
+  const towards = p.forward ? 1 : -1;
+  // A flat strip (a fur strip's hide) lies on top of what it is tied to; a rope is bound along the
+  // shank, so its centre sits just above the hook wire. It sags a little along its length.
+  const base = p.width !== undefined ? p.radius + p.thickness : p.radius * 0.4 + p.thickness * 0.55;
+  return {
+    x: p.x + towards * p.length * t * Math.cos(p.angle),
+    y: flip * (base + p.length * t * Math.sin(p.angle) - 0.06 * p.length * t * t),
+  };
 }
 
 /** Strands tied across the shank at their middles, sticking out on both sides: legs. */
@@ -345,6 +370,8 @@ interface MaterialLook {
   flue?: boolean;
   veil?: boolean;
   shaggy?: number;
+  /** Foam: the sheet's thickness (gapes), when the recipe gives it. */
+  sheet?: number;
 }
 
 const deg = (d: number) => (d * Math.PI) / 180;
@@ -452,7 +479,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "feather":
       return { ...base, strandRadius: 0.012, tieInThickness: 0.02, layerThickness: () => 0.02 };
     case "foam":
-      return { ...base, strandRadius: 0.05, tieInThickness: 0.06, layerThickness: () => 0.1 };
+      // A sheet's thickness as sold, when the recipe gives it.
+      return { ...base, strandRadius: 0.05, tieInThickness: 0.06, layerThickness: () => 0.1, ...(m.mm !== undefined && { sheet: mm(m.mm) }) };
     case "bead":
     case "eyes":
       return { ...base, strandRadius: mm(m.mm ?? 3) / 2, tieInThickness: 0, layerThickness: () => 0 };
@@ -550,7 +578,8 @@ export function simulate(recipe: Recipe): Build {
   /** Strips tied in underneath, to be pulled over the belly rather than the back. */
   const underneath = new Set<string>();
   /** Upright posts, for parachute hackles. */
-  const posts = new Map<string, { x: number; baseY: number; height: number; radius: number }>();
+  /** `hackle`: how high above the shank's axis the top of a parachute wound round it is. */
+  const posts = new Map<string, { x: number; baseY: number; height: number; radius: number; hackle?: number }>();
   /** How a bunch was tied in: its length and how far round it was spread (radians), for folding it back later. */
   const bunches = new Map<string, { length: number; spread: number }>();
   /**
@@ -817,17 +846,41 @@ export function simulate(recipe: Recipe): Build {
         if ((step.extended || l.look === "strip") && step.length) {
           const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
           // Assumption: chenille keeps its own thickness; yarn is twisted into a rope; foam is a cut cylinder.
-          const thickness = l.look === "strip" ? STRIP_HIDE / 2 : l.look === "chenille" ? l.strandRadius * 0.85 : l.look === "foam" ? Math.max(0.08, cat.thickness ?? 0.09) : 0.11;
-          pieces.push({
+          const made = step.segments !== undefined;
+          // A recipe's width is the body's thickness at the front.
+          const thickness = step.width !== undefined && l.look !== "strip"
+            ? step.width / 2
+            : l.look === "strip" ? STRIP_HIDE / 2 : l.look === "chenille" ? l.strandRadius * 0.85 : l.look === "foam" ? Math.max(0.08, cat.thickness ?? 0.09) : 0.11;
+          const ext: ExtensionPiece = {
             type: "extension", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.35],
             x, radius, length: step.length, angle, side, thickness,
             tip: step.tip === undefined ? undefined : resolveColor(step.tip), fuzz: l.look === "chenille" ? l.fibreLength : undefined,
             forward: step.forward,
             // A fur strip sticks out as its hide, the fur on top (a Zonker's or a Bunny Leech's tail).
             ...(l.look === "strip" ? { width: l.strandRadius * 2, fur: l.fibreLength } : {}),
-          });
+            // Assumption: a body made on a needle tapers to about two thirds of its front thickness
+            // at its tip (read from photos of the Mohican Mayfly).
+            ...(made ? { segments: step.segments, bands: threadColor, taper: 0.65 } : {}),
+          };
+          pieces.push(ext);
+          // Tails tied in at its tip beforehand come out of its end, carrying on its line (forward
+          // too, out of a body pointing forward over the eye).
+          if (step.tails !== undefined && step["tail-length"] !== undefined) {
+            const tl = looks.get(step.tails)!;
+            const end = extensionCentre(ext, 1);
+            const before = extensionCentre(ext, 0.95);
+            // On its side's terms (up from the top, down from underneath), signed: a body drooping
+            // below the shank's axis keeps its tails there, sloping on down.
+            const flip = side === "under" ? -1 : 1;
+            const slope = Math.atan2(flip * (end.y - before.y), Math.abs(end.x - before.x));
+            pieces.push({
+              type: "bundle", id: nextId++, material: step.tails, look: tl.look, color: tl.color, window: [0, 0.35],
+              x: end.x, radius: flip * end.y + 0.02, centre: flip * end.y, length: step["tail-length"], angle: slope, direction: step.forward ? "forward" : "back", side,
+              spread: deg(step["tail-spread"] ?? 20), bundleRadius: tl.strandRadius, count: tl.count, marks: tl.marks, fibreWidth: tl.fibreWidth, flue: tl.flue,
+            });
+          }
           // The rest of the strip waits, folded back over the tail, to be pulled over the body.
-          if (l.look === "strip" && nextUse(step.material, index) === "pull-over") {
+          if ((l.look === "strip" || step.extended) && nextUse(step.material, index) === "pull-over") {
             freeEnds.set(step.material, { ...freeEnd(step.material, l), kind: "rest", x, radius, direction: "back-flat" });
             ends = restingEnds();
           }
@@ -859,6 +912,7 @@ export function simulate(recipe: Recipe): Build {
             // A long hair wing is a bigger clump: it stays dense as it fans out.
             bundleRadius: l.strandRadius, count: l.look === "hair" && !l.counted ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
             pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
+            ...(upright && step.fan !== undefined ? { fan: deg(step.fan) } : {}),
           });
           if (upright) {
             posts.set(step.material, { x, baseY: radius, height: step.length, radius: l.strandRadius * 0.45 });
@@ -913,6 +967,7 @@ export function simulate(recipe: Recipe): Build {
             path: "post", sweep: deg(4),
             post: { x: post.x, y0: y1 + stack, y1, radius: post.radius },
           };
+          post.hackle = Math.max(post.hackle ?? 0, y1 + stack);
         } else {
           const to = Math.min(step.to! * span, frontLimit);
           ctx.rear = step.to! < tiedAtPosition.get(step.material)!;
@@ -979,24 +1034,36 @@ export function simulate(recipe: Recipe): Build {
         // Hair spread all round the shank is folded over all round it (a bullet head).
         const bunch = bunches.get(step.material);
         const round = l.look === "hair" && bunch !== undefined && allRound(bunch.spread) >= 1;
-        const thickness = strip ? STRIP_HIDE : round ? HAIR_SHEATH : cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
+        const thickness = strip ? STRIP_HIDE : round ? HAIR_SHEATH : l.sheet ?? cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
         // A fur strip reaches round the body as far as its width does.
         const stripAngle = strip ? Math.min(1.6, Math.max(0.35, l.strandRadius / Math.max(0.05, profile.radiusAt((from + to) / 2)))) : 0;
         const laterTrim = recipe.steps.slice(index + 1).find((s) => s.op === "trim" && s.material === step.material) as Extract<Step, { op: "trim" }> | undefined;
         const trimmedLater = laterTrim !== undefined;
+        // Parted round a post: the halves go down its sides, far enough round the body to clear it.
+        const post = step.around !== undefined && !back ? posts.get(step.around) : undefined;
+        // Assumption: each half is turned out by about half again the post's width round the body,
+        // and comes back together over about a third of a gape either side of the post (read
+        // from photos of the Mohican Mayfly from above).
+        const split = post
+          ? { x: post.x, angle: Math.min(deg(75), Math.max(deg(30), (2.2 * post.radius + 0.06) / Math.max(0.05, profile.radiusAt(post.x)))), reach: Math.max(0.3, Math.min(post.x - from, to - post.x)) }
+          : undefined;
         // What sticks out until it is cut is longer than what is left.
         const untrimmed = Math.max(UNTRIMMED, (laterTrim?.leave ?? 0) + 0.4);
         ctx.trimmedLater = trimmedLater;
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           // A loose bubble wraps further round the sides of what it covers.
-          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to),
+          // Pulled forward over a parachute, it lies on the hackle's turns round the post (a Mohican's
+          // foam over its hackle), as it does over squashed fluff.
+          x0: from, x1: to, base: profile, thickness,
+          lift: Math.max(fluffUnder(from, to), ...[...posts.values()].filter((p) => p.hackle !== undefined && p.x > from && p.x < to && !back).map((p) => p.hackle! - profile.radiusAt(p.x))),
           halfAngle: strip ? stripAngle : round ? Math.PI : deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
           ...(round && { round: true }),
           ...(strip ? { fur: l.fibreLength } : {}),
           ...(step.bubble ? { bubble: step.bubble } : {}),
           ...(underneath.has(step.material) ? { side: "under" as const } : {}),
           ...(l.veil ? { veil: true } : {}),
+          ...(split ? { split } : {}),
           // A strip trimmed later sticks out over the eye until then.
           dents: [], stub: trimmedLater && !back ? untrimmed : 0,
           barring: l.barring,

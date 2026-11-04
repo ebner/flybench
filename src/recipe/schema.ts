@@ -159,8 +159,8 @@ const Material = z
     fibre: GapeLength.optional(),
     /** floss: thread size. */
     size: z.enum(THREAD_SIZES).optional(),
-    /** fibres, biots, flash: number of fibres or strands in the bunch. */
-    count: z.number().int().min(1).max(60).optional(),
+    /** fibres, biots, flash: number of fibres or strands in the bunch; hair: hairs, up to a sparse wing's. */
+    count: z.number().int().min(1).max(200).optional(),
     /** hackle, CDC: how far the fibres lean back when wound, in degrees (overrides the catalog). */
     sweep: z.number().min(0).max(80).optional(),
     /** dubbing: how rough, from 0 (fine and tight) to 1 (picked out, long guard hairs); overrides the catalog. */
@@ -170,7 +170,7 @@ const Material = z
      * olive), or plain (#false) though the colour is a barred one.
      */
     barred: z.boolean().optional(),
-    /** beads, eyes and wire: diameter in millimetres, as they are sold; fur strips: their width. */
+    /** beads, eyes and wire: diameter in millimetres, as they are sold; fur strips: their width; foam: the sheet's thickness. */
     mm: z.number().min(0.05).max(12).optional(),
   })
   .superRefine((m, ctx) => {
@@ -229,8 +229,13 @@ const Step = z.discriminatedUnion("op", [
     angle: z.number().min(0).max(90).optional(),
     /** Bunches (tags, tails, hair wings): how far round the body they fan out, in degrees to each side of the top; 180 is all round (tube wings). */
     spread: z.number().min(0).max(180).optional(),
-    /** Feather wings: width of the feather, in gapes. */
+    /** Feather wings: width of the feather, in gapes; an extended body: its thickness at the front. */
     width: GapeLength.optional(),
+    /**
+     * Upright bunches: how far the hair fans out fore and aft along the shank, in degrees in all,
+     * staying narrow across it (a Mohican's deer-hair wing), instead of standing as a round post.
+     */
+    fan: z.number().min(0).max(120).optional(),
     /**
      * On top of the shank (default), underneath it (beards, throats, under-wings), or across it,
      * tied at the middle so the ends stick out on both sides (legs).
@@ -242,6 +247,17 @@ const Step = z.discriminatedUnion("op", [
     extended: z.boolean().optional(),
     /** Extended bodies: the colour of the very end (a larva's head burnt black). */
     tip: Color.optional(),
+    /**
+     * Extended bodies made beforehand on a needle: bound into this many segments, the thread
+     * pinching a waist between each (a Mohican's foam body).
+     */
+    segments: z.number().int().min(2).max(12).optional(),
+    /** Extended bodies made on a needle: fibres tied in at its tip first, coming out of its end. */
+    tails: MaterialRef.optional(),
+    /** How far those tails stick out past the end of the body, in gapes. */
+    "tail-length": GapeLength.optional(),
+    /** How far they splay apart, in degrees to each side. */
+    "tail-spread": z.number().min(0).max(90).optional(),
     note: Note, mistake: Note,
   }),
   z.strictObject({
@@ -265,6 +281,8 @@ const Step = z.discriminatedUnion("op", [
     bubble: z.number().min(0).max(1).optional(),
     /** Hair pulled forward: the tips past the tie-down stand up as a divided wing this long (a Humpy). */
     wing: z.number().min(0.3).max(4).optional(),
+    /** Pulled forward past an upright post, parted round it: one half down each side (a Mohican's foam). */
+    around: MaterialRef.optional(),
     note: Note,
     mistake: Note,
   }),

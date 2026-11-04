@@ -180,6 +180,16 @@ Schiebe das Haar mit den Fingern oder dem Loch eines Half-Hitch-Werkzeugs nach h
 Für einen verlängerten Körper hältst du das Haar um den Hakenschenkel (und um einen am Hakenbogen eingebundenen Schwanz) nach hinten und führst den Bindefaden mit gleichmäßiger Spannung spiralförmig darüber zurück, weiter hinter den Hakenbogen nur um das Haar herum, und dann wieder nach vorn, sodass sich die Windungen kreuzen. Schneide die Spitzen knapp hinter der letzten Windung ab.`,
     mistakes: ["Zu viel Spannung, sodass das Haar absteht, statt glatt zu liegen.", "Ungleichmäßige Windungen hinter dem Hakenbogen, sodass der Körper schief wird oder die Segmente ungleich."],
   },
+  "needle-body": {
+    name: "Überstehende Foamkörper, auf einer Nadel gemacht",
+    summary: "Ein Foamstreifen, um eine Nadel über die Schwanzfibern gefaltet und zu Segmenten abgebunden, dann abgezogen und auf den Haken gebunden.",
+    how: `Spanne eine Nadel in den Bindestock und lege darauf eine dünne Fadenunterlage, etwa eine Hakenlänge lang. Binde die Schwanzfibern nahe der Spitze ein, die Enden nach vorn an der Nadel entlang.
+
+Schneide einen Streifen dünnes geschlossenzelliges Foam zu, zu einem Ende hin schmaler und dort für die Schwanzfibern eingekerbt. Falte ihn über die Spitze der Nadel, die Schwanzfibern zwischen den Hälften, und binde das erste Segment mit ein paar Windungen leichter Spannung ab: so, dass das Foam eingeschnürt, aber nicht durchgeschnitten wird. Führe den Faden mit ein paar offenen Windungen nach vorn und binde das nächste Segment ab, und so weiter.
+
+Mache einen halben Schlag, schneide den Faden ab und ziehe den Körper von der Nadel. Binde ihn mit dem vordersten Segment oben auf den Haken, die Enden des Foams und der Schwanzfibern nach vorn. Die Enden lassen sich später über den Thorax nach vorn ziehen, je eines auf jeder Seite des Flügels, und hinter dem Öhr als Kopf abbinden.`,
+    mistakes: ["Zu viel Spannung, sodass der Faden das Foam durchschneidet.", "Foam, das beim Abbinden um den Hakenschenkel rutscht: halte es fest, während du anziehst."],
+  },
   "woven-body": {
     name: "Gewebte Körper",
     summary: "Zwei Chenillestränge, am Hakenschenkel entlang gewebt: eine Farbe auf dem Rücken, die andere am Bauch.",
