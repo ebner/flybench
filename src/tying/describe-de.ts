@@ -104,6 +104,11 @@ function writerFor(recipe: Recipe) {
       const at = `${number((p as { percent: number }).percent)} % der Länge ${along}`;
       return { at: `bei ${at}`, to: `bis ${at}`, from: `von ${at}` };
     },
+    "past-rear": (p) => {
+      const l = length((p as { length: Length }).length);
+      const [dat, acc] = mount === "hook" ? [`dem Beginn ${the("bend", "gen")}`, `den Beginn ${the("bend", "gen")}`] : [`dem hinteren Ende ${along}`, `das hintere Ende ${along}`];
+      return { at: `${l} hinter ${dat}`, to: `bis ${l} hinter ${acc}`, from: `von ${l} hinter ${dat}` };
+    },
   };
   const place = (p: Place) => PLACE[p.kind](p);
   const REACH: Record<Reach, string> = {
@@ -142,6 +147,13 @@ function writerFor(recipe: Recipe) {
         return `Wickle ${mat(said.m, "acc")} in dichten ${many("turn", "dat")} ${place(said.from).from} ${place(said.to).to}.`;
       case "attach-thread":
         return `Lege ${thread} ${place(said.at).at}${said.again ? " erneut" : ""} mit ein paar ${many("turn", "dat")} an und schneide ${the("tag-end", "acc")} ab.`;
+      case "bind-back": {
+        const how = said.turns ? `Führe ${thread} in ${turns(said.turns, true)} über ${mat(said.m, "acc")} zurück` : `Führe ${thread} über ${mat(said.m, "acc")} zurück`;
+        const past = said.past ? ` und weiter hinter ${the("bend", "dat")}, nur um ${the("hair", "acc")} herum,` : "";
+        return `${how} ${place(said.to).to}, sodass ${pronoun(noun(said.m)).nom} entlang ${the("body", "gen")}${past} festgebunden ${verb(noun(said.m), "wird", "werden")}. Halte ${the("hair", "acc")} dabei mit der anderen Hand nach hinten und die Spannung gleichmäßig.`;
+      }
+      case "cross-forward":
+        return `Führe ${thread} in ${turns(said.turns, true)} wieder nach vorn ${place(said.to).to}, sodass sie die ersten ${many("turn", "acc")} kreuzen.`;
       case "wrap-thread":
         return said.turns
           ? `Führe ${thread} in ${turns(said.turns, true)} ${place(said.to).to}.`
@@ -160,7 +172,7 @@ function writerFor(recipe: Recipe) {
       case "tie-in-across":
         return `Binde ${what({ kind: "strands", n: said.strands, m: said.m }).text} mittig mit ${eights} quer über ${the(alongId, "acc")}, so dass auf jeder Seite ${length(said.length)} als Beine ${lengthPlural(said.length) ? "überstehen" : "übersteht"}.`;
       case "tie-in-forward":
-        return `Binde ${mat(said.m, "acc")} so ein, dass ${pronoun(noun(said.m)).nom} nach vorn über ${the("eye", "acc")} ${verb(noun(said.m), "zeigt und", "zeigen und")} ${length(said.length)} ${verb(noun(said.m), "übersteht", "überstehen")}.`;
+        return `Binde ${mat(said.m, "acc")} so ein, dass ${pronoun(noun(said.m)).nom} nach vorn über ${the("eye", "acc")} ${verb(noun(said.m), "zeigt und", "zeigen und")} ${length(said.length)} ${verb(noun(said.m), "übersteht", "überstehen")}.${said.round ? ` Lass ${pronoun(noun(said.m)).acc} sich beim Festziehen rund um ${the(alongId, "acc")} verteilen.` : ""}`;
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
@@ -198,6 +210,12 @@ function writerFor(recipe: Recipe) {
         if (said.bubble) return `Klappe ${mat(said.m, "acc")} als lockere Blase über ${the("body", "acc")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
         return `Ziehe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach vorn und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.${said.trimmedLater ? "" : ` Schneide ${excess} ab.`}`;
       case "lay-back":
+        if (said.tied && (said.round || said.trailing)) {
+          const where = said.round ? `rund um ${the(alongId, "acc")}` : `über die Oberseite ${the("body", "gen")}`;
+          const head = said.round ? `, sodass davor ${a("head", "nom", "glatt")} bleibt` : "";
+          const tips = said.trailing ? ` Lass ${the("tip", "acc", true)} nach hinten entlang ${the("body", "gen")} liegen.` : "";
+          return `Klappe ${mat(said.m, "acc")} ${where} nach hinten und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} mit festen ${many("turn", "dat")} ab${head}.${tips}`;
+        }
         if (said.tied) return `Klappe ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach hinten und binde ${pronoun(noun(said.m)).acc} ${place(said.to).at} ab.`;
         return `Lege ${mat(said.m, "acc")} über die Oberseite ${the("body", "gen")} nach hinten ${place(said.to).to}. Die nächsten Windungen halten ${pronoun(noun(said.m)).acc} dort fest.`;
       case "spin": {
@@ -243,6 +261,12 @@ function writerFor(recipe: Recipe) {
         return said.leave
           ? `Schneide ${excess} ab, lass aber über ${the("eye", "dat")} ${a("stub", "acc")} als Kopf stehen, ${pronoun(word("stub")).rel} ${length(said.leave)} lang ist.`
           : `Schneide ${excess} bündig an ${the("tie-down", "dat")} ab.`;
+      case "trim-tips": {
+        const last = dePhrase(word("turn"), { case: "dat", article: "definite", colour: adjective("letzt") });
+        return said.leave
+          ? `Schneide ${the("tip", "acc", true)} ${mat(said.m, "gen")} knapp hinter ${last} darüber ab und lass ${a("stub", "acc")} stehen, ${pronoun(word("stub")).rel} etwa ${length(said.leave)} lang ist.`
+          : `Schneide ${the("tip", "acc", true)} ${mat(said.m, "gen")} dicht hinter ${last} darüber ab.`;
+      }
       case "trim-butts":
         return said.leave
           ? `Schneide ${the("butt", "acc", true)} ${mat(said.m, "gen")} ab und lass ${a("head", "acc", "kurz")} stehen, ${pronoun(word("head")).rel} ${length(said.leave)} lang ist.`

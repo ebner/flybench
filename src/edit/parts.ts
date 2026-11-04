@@ -72,8 +72,10 @@ export interface Part {
   /** Where a winding, dubbing, spinning or pull ends, or the weighting runs from–to. */
   from?: number;
   to?: number;
-  /** Dubbing or thread passes after the first, each from–to. */
-  passes?: { from: number; to: number }[];
+  /** Dubbing or thread passes after the first, each from–to (a thread pass in open turns, how many). */
+  passes?: { from: number; to: number; turns?: number }[];
+  /** A thread body's first pass in open turns: how many (spiralled over hair bound past the bend). */
+  turns?: number;
   length?: number;
   angle?: number;
   spread?: number;
@@ -140,6 +142,8 @@ const arch = (kind: MaterialKind): Archetype => MATERIALS[kind].archetype;
 /** Strands that can be tied across the shank (as validate.ts allows). */
 const ACROSS_KINDS: readonly Archetype[] = ["legs", "hair", "fibres", "biot", "flash"];
 const round = (x: number) => Math.round(Math.min(1, Math.max(0, x)) * 1000) / 1000;
+/** The thread's moves can also reach behind the bend, over hair bound there. */
+const reach = (x: number) => Math.round(Math.min(1, Math.max(-1, x)) * 1000) / 1000;
 
 // ——— What a part can be tied of ———
 
@@ -378,7 +382,7 @@ export function compile(fly: PartsFly): Compiled {
   /** The thread cut after a whip finish part-way, to be attached again. */
   let cut = false;
   const to = (x: number, part: string | null) => {
-    const at = round(x);
+    const at = reach(x);
     if (thread === null) {
       cut = false;
       push({ op: "attach-thread", at: round(attachAt), ...attachNote }, null);
@@ -508,12 +512,12 @@ export function compile(fly: PartsFly): Compiled {
         break;
       case "dubbed":
       case "thread": {
-        const pass = i === 0 ? { from: p.from ?? 0, to: p.to ?? 0.7 } : p.passes![i - 1]!;
+        const pass = i === 0 ? { from: p.from ?? 0, to: p.to ?? 0.7, turns: p.turns } : p.passes![i - 1]!;
         to(pass.from, p.id);
         if (p.how === "dubbed") push({ op: "dub", material: m0.id, to: round(pass.to), ...n }, p.id);
         else if (Math.abs((thread ?? 0) - pass.to) >= POSITION_TOLERANCE) {
-          push({ op: "wrap-thread", to: round(pass.to), ...n }, p.id);
-          thread = round(pass.to);
+          push({ op: "wrap-thread", to: reach(pass.to), ...(pass.turns !== undefined && { turns: pass.turns }), ...n }, p.id);
+          thread = reach(pass.to);
         }
         if (p.how === "dubbed") thread = round(pass.to);
         break;
@@ -638,6 +642,8 @@ export function partsOf(recipe: Recipe): PartsFly | null {
   const threadParts: Part[] = [];
   /** Strands woven round the belly, by id: read with the strand woven over the top, as one part. */
   const wovenUnder = new Set(steps.flatMap((s) => (s.op === "weave" ? [s.under] : [])));
+  /** Hair folded back and tied down, by id: where, while its tips trail behind (until trimmed). */
+  const trailing = new Map<string, number>();
 
   for (let i = 0; i < steps.length; i++) {
     const s = steps[i]!;
@@ -672,19 +678,24 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       // Two or more moves in a row, with nothing tied between: the thread laid as a body.
       let j = i;
       while (steps[j + 1]?.op === "wrap-thread") j++;
-      if (j > i && thread !== null) {
+      // A move on its own that binds hair trailing behind its tie-down, or comes back from past the
+      // bend, is an action of its own too: as a move to the next action it would be lost.
+      const binds = (from: number, to: number) =>
+        from < -POSITION_TOLERANCE || to < -POSITION_TOLERANCE || (to < from && [...trailing.values()].some((at) => to < at - POSITION_TOLERANCE));
+      if (thread !== null && (j > i || binds(thread, s.to))) {
         const run = steps.slice(i, j + 1) as Extract<Step, { op: "wrap-thread" }>[];
-        const passes: { from: number; to: number }[] = [];
+        const passes: { from: number; to: number; turns?: number }[] = [];
         let at: number = thread;
         for (const w of run) {
-          passes.push({ from: at, to: w.to });
+          passes.push({ from: at, to: w.to, ...(w.turns !== undefined && { turns: w.turns }) });
           at = w.to;
         }
         const id = `thread-body-${threadParts.length}`;
         const notes = Object.fromEntries(run.flatMap((w, k) => (w.note ? [[k, w.note]] : [])));
         const mistakes = Object.fromEntries(run.flatMap((w, k) => (w.mistake ? [[k, w.mistake]] : [])));
         threadParts.push({
-          id, role: "body", how: "thread", mats: [], from: passes[0]!.from, to: passes[0]!.to, passes: passes.slice(1), keys: run.map((_, k) => i + k),
+          id, role: "body", how: "thread", mats: [], from: passes[0]!.from, to: passes[0]!.to, ...(passes[0]!.turns !== undefined && { turns: passes[0]!.turns }),
+          passes: passes.slice(1), keys: run.map((_, k) => i + k),
           ...(Object.keys(notes).length && { notes }), ...(Object.keys(mistakes).length && { mistakes }),
         });
         thread = at;
@@ -703,6 +714,10 @@ export function partsOf(recipe: Recipe): PartsFly | null {
     }
     groups.get(id)!.push({ i, s, thread, ...(pendingMove && { threadNote: pendingMove }) });
     pendingMove = undefined;
+    const tiedAt = groups.get(id)![0]!.thread;
+    const kind = kinds.get(id)?.kind;
+    if (s.op === "pull-over" && kind && arch(kind) === "hair" && thread !== null && tiedAt !== null && s.to < tiedAt - POSITION_TOLERANCE && Math.abs(thread - s.to) <= POSITION_TOLERANCE) trailing.set(id, s.to);
+    if (s.op === "trim") trailing.delete(id);
     if (s.op === "dub" || s.op === "spin") thread = s.to;
   }
   if (attach === null && steps.some((s) => s.op !== "slide-bead" && s.op !== "weight")) return null;
@@ -949,6 +964,16 @@ export function unavailable(fly: PartsFly, part: Part, how: How): "needsRib" | "
   return null;
 }
 
+/**
+ * How far back along the shank a part's positions may go: behind the bend (to -1, a shank length)
+ * for the thread's moves on a fly with hair folded back, which the thread binds there (a
+ * Paradrake's extended body); otherwise the bend.
+ */
+export function rearLimit(fly: PartsFly, part: Part): number {
+  const folded = fly.parts.some((p) => p.how === "pulled" && p.tiedBack && p.mats.every((m) => arch(m.kind) === "hair"));
+  return part.how === "thread" && folded ? -1 : 0;
+}
+
 /** An upright bunch a parachute hackle can be wound round. */
 export const isPost = (p: Part) =>
   p.how === "bunch" && (p.angle ?? 0) >= UPRIGHT && p.side !== "across" && p.mats.every((m) => arch(m.kind) !== "feather" && arch(m.kind) !== "strip");
@@ -967,7 +992,8 @@ export function withHow(fly: PartsFly, part: Part, how: How): Part {
       else if (part.role === "hackle") Object.assign(next, { at: 0.85, length: 1, angle: 30, side: "under" });
       else if (part.role === "tag") Object.assign(next, { at: 0, length: 0.5, spread: 40 });
       else Object.assign(next, { at: c.at ?? 0, length: c.length ?? 1, angle: c.angle ?? 0, spread: c.spread ?? 15, ...(c.side && { side: c.side }), ...(c.forward && { forward: true }) });
-      if (part.mats.some((m) => arch(m.kind) === "hair")) next.trim = {};
+      // Hair butts to trim, unless it points forward: its butts then lie back under the turns.
+      if (part.mats.some((m) => arch(m.kind) === "hair") && !next.forward) next.trim = {};
       break;
     case "wound":
       Object.assign(next, { at: c.at ?? c.from ?? 0, to: c.to ?? 0.7 });
@@ -1067,6 +1093,11 @@ export function setPart(fly: PartsFly, id: string, patch: Partial<Part>): PartsF
 function constrained(fly: PartsFly): PartsFly {
   const ribs = fly.parts.filter((p) => p.role === "rib" && p.how === "wound");
   const parts = fly.parts.map((p) => {
+    // Hair turned to point forward has no butts left to trim.
+    if (p.how === "bunch" && p.forward && p.trim && p.mats.some((m) => arch(m.kind) === "hair")) {
+      const { trim: _t, ...rest } = p;
+      return rest as Part;
+    }
     const start = p.at ?? p.from;
     // (A thread body may run back and forth: its passes are left as they are. Dubbing may be
     // wound back from the eye, ending at the rear of a thorax.)
@@ -1167,9 +1198,11 @@ function trimFor(p: Part, mats: PartMaterial[]): Part["trim"] {
   const any = (a: Archetype) => mats.some((m) => arch(m.kind) === a);
   switch (p.how) {
     case "bunch":
-      return any("hair") ? (p.trim ?? {}) : undefined;
+      // (Hair tied in pointing forward has no butts to trim.)
+      return any("hair") && !p.forward ? (p.trim ?? {}) : undefined;
     case "pulled":
-      return all("foam") || all("strip") ? p.trim : undefined;
+      // (And the tips of hair folded back and tied down, a bullet head's.)
+      return all("foam") || all("strip") || (all("hair") && p.tiedBack) ? p.trim : undefined;
     case "wound":
     case "palmered":
       return p.trim?.keep && all("hackle") ? { keep: p.trim.keep } : p.how === "palmered" ? {} : undefined;

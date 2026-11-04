@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Compiled, Part, PartsFly } from "../../edit/parts";
+import { rearLimit, type Compiled, type Part, type PartsFly } from "../../edit/parts";
 import { FlyScene } from "../../render/FlyScene";
 import { stepAt, stepEnd, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
@@ -64,7 +64,8 @@ function handlesOf(p: Part): Handle[] {
 }
 
 /** The part's new settings for a handle dragged to (x, y) on the shank's plane. */
-function dragged(p: Part, what: Handle["what"], x: number, y: number, L: number): Partial<Part> {
+/** `rear`: how far back along the shank its positions may go (behind the bend, for a thread binding hair there). */
+function dragged(p: Part, what: Handle["what"], x: number, y: number, L: number, rear = 0): Partial<Part> {
   if (what === "tip") {
     const r = rootOf(p, L);
     const dx = p.forward ? x - r.x : r.x - x;
@@ -72,7 +73,7 @@ function dragged(p: Part, what: Handle["what"], x: number, y: number, L: number)
     return { length: round2(clamp(Math.hypot(dx, dy), 0.2, 8)), angle: Math.round(clamp((Math.atan2(dy, dx) * 180) / Math.PI, 0, 90)) };
   }
   if (what === "fibre") return { mats: p.mats.map((m, i) => (i === 0 ? { ...m, props: { ...m.props, fibre: round2(clamp(-y, 0.3, 4)) } } : m)) };
-  const u = Math.round(clamp(x / L, 0, 1) * 40) / 40;
+  const u = Math.round(clamp(x / L, rear, 1) * 40) / 40;
   if (what === "from") return { [startKey(p)]: u } as Partial<Part>;
   return { to: u };
 }
@@ -197,7 +198,7 @@ export function Stage({
       if (!s || !box || !p) return;
       const at = s.shankPointAt(ev.clientX - box.left, ev.clientY - box.top);
       if (!at) return;
-      onDrag(h.part, dragged(p, h.what, at.x, at.y, shank.current), first);
+      onDrag(h.part, dragged(p, h.what, at.x, at.y, shank.current, rearLimit(fly, p)), first);
       first = false;
     };
     const up = () => {
@@ -219,7 +220,7 @@ export function Stage({
     if (!step) return;
     e.preventDefault();
     const now = h.at(shank.current);
-    onDrag(h.part, dragged(p, h.what, now.x + step[0]! * 0.05, now.y + step[1]! * 0.05, shank.current), true);
+    onDrag(h.part, dragged(p, h.what, now.x + step[0]! * 0.05, now.y + step[1]! * 0.05, shank.current, rearLimit(fly, p)), true);
   };
 
   const current = build && build.steps.length ? stepAt(build, player.time) : -1;

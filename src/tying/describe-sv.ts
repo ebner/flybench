@@ -88,6 +88,10 @@ function writerFor(recipe: Recipe) {
       const at = `${number((p as { percent: number }).percent)} % av ${genitive(along)} längd`;
       return { at: `vid ${at}`, to: `till ${at}`, from: `från ${at}` };
     },
+    "past-rear": (p) => {
+      const at = `${length((p as { length: Length }).length)} bakom ${mount === "hook" ? `${genitive(def("bend"))} början` : `${genitive(along)} bakre ände`}`;
+      return { at, to: `till ${at}`, from: `från ${at}` };
+    },
   };
   const place = (p: Place) => PLACE[p.kind](p);
   const REACH: Record<Reach, string> = {
@@ -134,6 +138,13 @@ function writerFor(recipe: Recipe) {
         return said.turns
           ? `Linda ${thread} ${place(said.to).to} i ${turns(said.turns, true)}.`
           : `Linda ${thread} ${place(said.to).to} i täta ${svNoun(word("turn"), "plural")}.`;
+      case "bind-back": {
+        const how = said.turns ? `Linda ${thread} i ${turns(said.turns, true)} bakåt över ${mat(said.m)}` : `Linda ${thread} bakåt över ${mat(said.m)}`;
+        const past = said.past ? ` och vidare bakom ${def("bend")}, runt bara ${def("hair")}` : "";
+        return `${how} ${place(said.to).to}, så att ${pronoun(noun(said.m)).subject} binds fast längs ${def("body")}${past}. Håll ${def("hair")} bakåt med andra handen medan du lindar, och håll jämn spänning.`;
+      }
+      case "cross-forward":
+        return `Linda ${thread} framåt igen ${place(said.to).to} i ${turns(said.turns, true)}, så att de korsar de första ${svNoun(word("turn"), "plural-definite")}.`;
       case "tie-in-eyes":
         return `Bind fast ${mat(said.m)} ${said.under ? "under" : "ovanpå"} ${along} med ${eights}.`;
       case "tie-in-extended": {
@@ -147,7 +158,7 @@ function writerFor(recipe: Recipe) {
       case "tie-in-across":
         return `Bind ${count(said.strands, word("strand"))} ${mat(said.m, "indefinite")} tvärs över ${along} på mitten med ${eights}, så att ${length(said.length)} sticker ut på varje sida som ben.`;
       case "tie-in-forward":
-        return `Bind in ${mat(said.m)} så att ${pronoun(noun(said.m)).subject} pekar framåt över ${def("eye")} och sticker ut ${length(said.length)}.`;
+        return `Bind in ${mat(said.m)} så att ${pronoun(noun(said.m)).subject} pekar framåt över ${def("eye")} och sticker ut ${length(said.length)}.${said.round ? ` Låt ${pronoun(noun(said.m)).object} fördela sig runt hela ${along} när du drar åt.` : ""}`;
       case "tie-in-upright": {
         const w = what(said.what);
         const p = pronoun(w.refers);
@@ -185,6 +196,12 @@ function writerFor(recipe: Recipe) {
         if (said.bubble) return `Vik ${mat(said.m)} framåt över ${def("body")} som en lös bubbla och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
         return `Dra ${mat(said.m)} framåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.${said.trimmedLater ? "" : ` Klipp bort ${excess}.`}`;
       case "lay-back":
+        if (said.tied && (said.round || said.trailing)) {
+          const where = said.round ? `runt hela ${along}` : `över ${genitive(def("body"))} ovansida`;
+          const head = said.round ? `, så att ${article(word("head"))} slätt, runt ${word("head").text} blir kvar framför ${def("tie-down")}` : "";
+          const tips = said.trailing ? ` Låt ${svNoun(word("tip"), "plural-definite")} ligga kvar bakåt längs ${def("body")}.` : "";
+          return `Vik ${mat(said.m)} bakåt ${where} och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at} med hårda ${svNoun(word("turn"), "plural")}${head}.${tips}`;
+        }
         if (said.tied) return `Vik ${mat(said.m)} bakåt över ${genitive(def("body"))} ovansida och bind ner ${pronoun(noun(said.m)).object} ${place(said.to).at}.`;
         return `Lägg ${mat(said.m)} bakåt över ${genitive(def("body"))} ovansida ${place(said.to).to}. Nästa lindning håller ${pronoun(noun(said.m)).object} där.`;
       case "spin":
@@ -227,6 +244,12 @@ function writerFor(recipe: Recipe) {
         return said.leave
           ? `Klipp bort ${excess} av ${mat(said.m, "indefinite")} men lämna ${article(word("stub"))} ${word("stub").text} på ${length(said.leave)} över ${def("eye")} som ${word("head").text}.`
           : `Klipp bort ${excess} av ${mat(said.m, "indefinite")} jäms med ${def("tie-down")}.`;
+      case "trim-tips": {
+        const last = `${word("turn").gender === "ett" ? "det" : "den"} sista ${def("turn")}`;
+        return said.leave
+          ? `Klipp ${svNoun(word("tip"), "plural-definite")} på ${mat(said.m)} strax bakom ${last} över dem, och lämna ${article(word("stub"))} ${word("stub").text} på ungefär ${length(said.leave)}.`
+          : `Klipp ${svNoun(word("tip"), "plural-definite")} på ${mat(said.m)} tätt bakom ${last} över dem.`;
+      }
       case "trim-butts":
         return said.leave
           ? `Klipp ${svNoun(word("butt"), "plural-definite")} på ${mat(said.m)} och lämna ${article(word("head"))} kort ${word("head").text} på ${length(said.leave)}.`

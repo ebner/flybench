@@ -1010,6 +1010,11 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     // Like a feather wing's base shade: a slip lying on top catches the light full on.
     return 0.75 * barbs * mottle;
   };
+  // Hair folded or bound over the body shows its hairs lying along it, light and dark.
+  const hair = piece.look === "hair";
+  const hairShade = (x: number, across: number) =>
+    0.86 + 0.07 * Math.sin(across * 190 + 1.5 * Math.sin(x * 9)) + 0.05 * Math.sin(across * 83 + 3 * x + 2.1);
+  const shaded = feather || hair;
   // A strip is stiff enough to bridge the bumps of tie-ins under it: it lies on a smoothed body.
   const reach = piece.look === "foam" ? 0.22 : 0.12;
   /** Where it is tied down it is pressed onto the lowest body nearby; between the ties it bridges the bumps. */
@@ -1046,9 +1051,11 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     return { under, thick, centre, pinch };
   };
   /** A point on its top (or underside) at x, `t` from one edge (-1) to the other (1), in shank-local coordinates. */
+  // All round the body (hair folded back round it), as thick underneath as on top.
+  const domed = (t: number) => (piece.round ? 1 : 0.55 + 0.45 * Math.cos((t * Math.PI) / 2));
   const surface = (out: THREE.Vector3, x: number, s: ReturnType<typeof section>, t: number, top: boolean) => {
     const phi = t * piece.halfAngle;
-    const dome = 0.55 + 0.45 * Math.cos((t * Math.PI) / 2);
+    const dome = domed(t);
     const r = (top ? s.under + s.thick * dome : s.under + s.thick * 0.05) - flip * s.centre;
     return out.set(x, s.centre + flip * r * Math.cos(phi), r * Math.sin(phi));
   };
@@ -1061,8 +1068,8 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
         const t = side === 0 ? -1 + (2 * j) / segT : 1 - (2 * j) / segT;
         space.point(surface(v, x, s, t, side === 0));
         positions.push(v.x, v.y, v.z);
-        const r = (side === 0 ? s.under + s.thick * (0.55 + 0.45 * Math.cos((t * Math.PI) / 2)) : s.under + s.thick * 0.05) - flip * s.centre;
-        const shade = feather ? featherShade(x, t * piece.halfAngle * r) : 1;
+        const r = (side === 0 ? s.under + s.thick * domed(t) : s.under + s.thick * 0.05) - flip * s.centre;
+        const shade = feather ? featherShade(x, t * piece.halfAngle * r) : hair ? hairShade(x, t * piece.halfAngle * r) : 1;
         colors.push(shade, shade, shade);
       }
     }
@@ -1103,12 +1110,12 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   }
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-  if (feather) geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+  if (shaded) geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
   geometry.setIndex(index);
   geometry.computeVertexNormals();
   // A CDC bubble is matte down, not a smooth slip.
   const look = piece.look === "foam" ? "foam" : feather ? "feather" : piece.look === "cdc" || piece.look === "marabou" ? "cdc" : "fibres";
-  const material = surfaces.get(look, piece.color, feather).clone();
+  const material = surfaces.get(look, piece.color, shaded).clone();
   material.side = THREE.DoubleSide;
   if (piece.veil) {
     // Sparse sparkle yarn: the body shows through, the fibres glint.

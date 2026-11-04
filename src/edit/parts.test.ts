@@ -6,7 +6,7 @@ import { simulate } from "../tying/simulate";
 import { blankFly, recipeText } from "./own";
 import { mulberry32 } from "../render/random";
 import {
-  addMaterial, addPart, bareHook, compile, kindsFor, newPart, partsOf, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, type PartsFly,
+  addMaterial, addPart, bareHook, compile, kindsFor, newPart, partsOf, rearLimit, removeMaterial, removePart, ROLES, setHow, setMaterial, setPart, startFrom, STYLES, unavailable, waysFor, type PartsFly,
 } from "./parts";
 
 const patterns: Recipe[] = readdirSync(new URL("../../patterns", import.meta.url))
@@ -141,6 +141,43 @@ describe("a fly built of parts", () => {
       }
       expect(compile(fly).problems.map((p) => p.message), id).toEqual([]);
     }
+  });
+
+  it("keeps a binding past the bend as its own action, whatever comes between its passes", () => {
+    // The Paradrake with its tips trimmed between the pass back past the bend and the pass forward.
+    const para = byId("paradrake");
+    const back = para.steps.findIndex((s) => s.op === "wrap-thread" && s.to < 0);
+    const trim = para.steps.at(-1)!;
+    const steps = [...para.steps.slice(0, back + 1), trim, ...para.steps.slice(back + 1, -1)];
+    const variant: Recipe = { ...para, steps };
+    const fly = partsOf(variant)!;
+    const { recipe: again, problems } = compile(fly);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    expect(again.steps.map((s) => s.op)).toEqual(variant.steps.map((s) => s.op));
+    expect(pieces(again)).toEqual(pieces(variant));
+  });
+
+  it("drops no trim on hair tied in pointing forward: its butts lie under the turns", () => {
+    let fly = startFrom(byId("adams"))!;
+    const { fly: added, part } = addPart(fly, "wing", "elk-hair");
+    fly = setPart(added, part.id, { angle: 10, forward: true });
+    expect(fly.parts.find((p) => p.id === part.id)!.trim).toBeUndefined();
+    fly = setMaterial(fly, part.id, 0, { color: "black" });
+    expect(fly.parts.find((p) => p.id === part.id)!.trim).toBeUndefined();
+    const { recipe, problems } = compile(fly);
+    expect(problems.map((p) => p.message)).toEqual([]);
+    expect(() => simulate(recipe)).not.toThrow();
+  });
+
+  it("lets the thread go behind the bend only to bind hair folded back there", () => {
+    const para = startFrom(byId("paradrake"))!;
+    const binding = para.parts.find((p) => p.how === "thread" && (p.to ?? 0) < 0)!;
+    expect(rearLimit(para, binding)).toBe(-1);
+    expect(rearLimit(para, para.parts.find((p) => p.role === "tail")!)).toBe(0);
+    const adams = startFrom(byId("parachute-adams"))!;
+    expect(adams.parts.filter((p) => rearLimit(adams, p) < 0)).toEqual([]);
+    // Moved within the hair's reach, it still ties.
+    expect(compile(setPart(para, binding.id, { to: -0.5 })).problems.map((p) => p.message)).toEqual([]);
   });
 
   it("palmers a hackle over a body once a rib is there to hold it, one material at a time", () => {

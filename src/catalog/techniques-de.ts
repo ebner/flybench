@@ -170,6 +170,16 @@ Mache den Kopfknoten und schneide den Kopf dann mit einer scharfen Schere oder e
 Binde das andere Ende genauso ab, schneide den Rest ab und klebe die Windungen. Ein aufgezupftes Ende ergibt einen kurzen Glitzerschwanz: zupfe das Geflecht mit einer Nadel auf.`,
     mistakes: ["Lockere Windungen: das glatte Geflecht rutscht darunter heraus.", "Ein zu weiter Schlauch, der Falten wirft, statt straff anzuliegen."],
   },
+  "hair-body": {
+    name: "Haarköpfe und verlängerte Haarkörper",
+    summary: "Haar, das nach vorn über das Öhr zeigend eingebunden, zu einem glatten Kopf nach hinten geklappt und mit dem Bindefaden entlang des Körpers und weiter hinter den Hakenbogen gebunden wird.",
+    how: `Gleiche ein Büschel Haar aus und schneide die Enden gerade ab. Binde es hinter dem Öhr ein, die Spitzen nach vorn über das Öhr: zuerst zwei lockere Windungen, dann ziehe sie an, sodass sich das Haar gleichmäßig um den Hakenschenkel verteilt.
+
+Schiebe das Haar mit den Fingern oder dem Loch eines Half-Hitch-Werkzeugs nach hinten über das Öhr, bis es rundum glatt liegt, und binde es hinter dem Kopf mit zwei, drei festen Windungen ab: das ist der Haarkopf.
+
+Für einen verlängerten Körper hältst du das Haar um den Hakenschenkel (und um einen am Hakenbogen eingebundenen Schwanz) nach hinten und führst den Bindefaden mit gleichmäßiger Spannung spiralförmig darüber zurück, weiter hinter den Hakenbogen nur um das Haar herum, und dann wieder nach vorn, sodass sich die Windungen kreuzen. Schneide die Spitzen knapp hinter der letzten Windung ab.`,
+    mistakes: ["Zu viel Spannung, sodass das Haar absteht, statt glatt zu liegen.", "Ungleichmäßige Windungen hinter dem Hakenbogen, sodass der Körper schief wird oder die Segmente ungleich."],
+  },
   "woven-body": {
     name: "Gewebte Körper",
     summary: "Zwei Chenillestränge, am Hakenschenkel entlang gewebt: eine Farbe auf dem Rücken, die andere am Bauch.",

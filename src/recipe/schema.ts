@@ -79,6 +79,12 @@ const Id = z
 /** Fraction of the shank, 0 = start of the bend, 1 = just behind the eye. */
 export const Position = z.number().min(0).max(1);
 
+/**
+ * Where the thread can go: along the shank, or behind the bend, as far back as another shank
+ * length, binding hair laid back there into an extended body (a Paradrake's).
+ */
+export const ThreadReach = z.number().min(-1).max(1);
+
 /** Multiple of the hook gape. */
 // Long saltwater wings and Deceiver tails run to two or three shank lengths.
 export const GapeLength = z.number().positive().max(10);
@@ -159,13 +165,18 @@ const Material = z
     sweep: z.number().min(0).max(80).optional(),
     /** dubbing: how rough, from 0 (fine and tight) to 1 (picked out, long guard hairs); overrides the catalog. */
     shaggy: z.number().min(0).max(1).optional(),
+    /**
+     * hackle, fibres, feathers, marabou: barred like grizzly whatever the colour (a grizzly dyed
+     * olive), or plain (#false) though the colour is a barred one.
+     */
+    barred: z.boolean().optional(),
     /** beads, eyes and wire: diameter in millimetres, as they are sold; fur strips: their width. */
     mm: z.number().min(0.05).max(12).optional(),
   })
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];
     const allowed = ARCHETYPE_PROPS[cat.archetype];
-    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "mm"] as const) {
+    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "barred", "mm"] as const) {
       if (m[prop] !== undefined && !allowed.includes(prop)) {
         ctx.addIssue({ code: "custom", path: [prop], message: `"${prop}" does not apply to ${cat.name}` });
       }
@@ -203,7 +214,8 @@ const Step = z.discriminatedUnion("op", [
   z.strictObject({ op: z.literal("attach-thread"), at: Position, note: Note, mistake: Note }),
   z.strictObject({
     op: z.literal("wrap-thread"),
-    to: Position,
+    /** Below 0: past the bend, over hair laid back there. */
+    to: ThreadReach,
     /** Omitted: touching turns. */
     turns: Turns.optional(),
     note: Note, mistake: Note,

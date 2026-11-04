@@ -648,3 +648,71 @@ materials {
     });
   }
 });
+
+describe("hair folded back and bound past the bend", () => {
+  const header = `
+id test
+name "Test"
+type dry
+difficulty advanced
+hook dry-standard size=10
+thread olive size="6/0"
+materials {
+    tail moose-mane
+    body elk-hair color=olive
+    rib copper-wire
+}
+`;
+  // A Paradrake's body: tied in forward behind the eye, folded back into a bullet head, bound back
+  // past the bend and forward again, the tips trimmed after the whip finish.
+  const paradrake = `
+    attach-thread at=0.0
+    tie-in tail length=3.0
+    trim tail
+    wrap-thread to=0.95
+    tie-in body length=3.3 forward=#true spread=180
+    wrap-thread to=0.7
+    pull-over body to=0.7
+    wrap-thread to=-0.6 turns=6
+    wrap-thread to=0.7 turns=6
+    whip-finish
+    trim body leave=0.2
+`;
+  const run = (s: string) => load(s, header);
+
+  it("accepts the thread past the bend over the hair, and the tips trimmed", () => {
+    expect(recipeOf(run(paradrake)).steps.find((s) => s.op === "wrap-thread" && s.to < 0)).toMatchObject({ to: -0.6, turns: 6 });
+  });
+
+  const cases: [string, string, RegExp][] = [
+    ["only over hair laid back there", paradrake.replace("    pull-over body to=0.7\n", "    tie-in rib\n    wind rib to=0.95 turns=3\n    tie-off rib\n").replace("tie-in body length=3.3 forward=#true spread=180", "tie-in body length=1"), /past the bend the thread can only bind hair laid back there/],
+    ["nothing tied past the bend", paradrake.replace("    wrap-thread to=0.7 turns=6\n", "    tie-in rib\n    wrap-thread to=0.7 turns=6\n"), /the thread is past the bend, round nothing but hair/],
+    ["nor finished there", paradrake.replace("    wrap-thread to=0.7 turns=6\n", ""), /the thread is past the bend, round nothing but hair/],
+    ["the tips trimmed once", paradrake + "    trim body\n", /there is nothing of "body" to trim/],
+    // Tied in at 0.95 of a 2-gape shank, 2 gapes long: the tips end 0.1 gape behind the bend.
+    ["only as far as the hair reaches", paradrake.replace("length=3.3", "length=2.0"), /the tips of "body" reach back only far enough for the thread to bind them to 0.03/],
+    ["on the shank too", paradrake.replace("length=3.3", "length=1.0").replace("to=-0.6", "to=0.2"), /the tips of "body" reach back only far enough for the thread to bind them to 0.53/],
+    ["no further than a shank behind the bend", paradrake.replace("to=-0.6", "to=-1.2"), /too small|greater than or equal to -1|>=-1/],
+  ];
+  for (const [name, s, pattern] of cases) {
+    it(name, () => {
+      expect(errorsOf(run(s)).join("\n")).toMatch(pattern);
+    });
+  }
+});
+
+describe("a dyed grizzly", () => {
+  const steps = `
+    attach-thread at=0.8
+    tie-in hackle
+    wrap-thread to=0.9
+    wind hackle to=0.9 turns=4
+    tie-off hackle
+    whip-finish
+`;
+  it("bars a hackle of any colour, and only materials that can be barred", () => {
+    const h = (m: string) => `id test\nname "Test"\ntype dry\ndifficulty beginner\nhook dry-standard size=14\nthread black size="8/0"\nmaterials {\n    ${m}\n}\n`;
+    expect(recipeOf(load(steps, h("hackle cock-hackle color=olive barred=#true fibre=1")))?.materials[0]).toMatchObject({ barred: true });
+    expect(errorsOf(load(steps, h("hackle chenille color=olive barred=#true"))).join("\n")).toMatch(/"barred" does not apply to chenille/);
+  });
+});

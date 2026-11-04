@@ -1,6 +1,6 @@
 import { MATERIALS, type Archetype } from "../recipe/materials";
 import { resolveColor, type Material, type Recipe, type Step } from "../recipe/schema";
-import { POSITION_TOLERANCE } from "../recipe/validate";
+import { POSITION_TOLERANCE, TIPS_PAST_TURN } from "../recipe/validate";
 import { stepText, stepTitle, type StepContext } from "./describe";
 import { hookModel, threadDiameter, unitMm, type HookModel } from "./hook";
 import { Profile } from "./profile";
@@ -178,6 +178,8 @@ export interface CoverPiece extends PieceBase {
   veil?: boolean;
   /** A fur strip's hide: the fur on top this long (gapes), leaning back. */
   fur?: number;
+  /** All round the body, as thick underneath as on top: hair spread round the shank and folded back (a bullet head), or bound along it. */
+  round?: boolean;
   /** 0 = plain, 1 = strongly barred or mottled (turkey). */
   barring: number;
 }
@@ -331,6 +333,8 @@ interface MaterialLook {
   freeLength: number;
   /** Fibres in a bundle (tags, tails, wings). */
   count: number;
+  /** The recipe gives the count: drawn as given, not as a clump that grows with its length. */
+  counted?: boolean;
   sweep?: number;
   barred?: boolean;
   /** 0 = plain, 1 = strongly barred. */
@@ -351,6 +355,9 @@ const UNTRIMMED = 0.8;
 
 /** Colours whose feathers and hackles are barred or mottled. */
 const BARRED: Record<string, number> = { grizzly: 1, teal: 1, partridge: 0.8, mallard: 0.6, snipe: 0.5, turkey: 0.6, guinea: 0.9, "hen-pheasant": 0.5, "wood-duck": 0.6 };
+
+/** Whether a colour is drawn barred of itself (grizzly, teal…), without a material's `barred`. */
+export const barredColour = (color: string | undefined): boolean => color !== undefined && color in BARRED;
 
 // Assumption: a golden pheasant tippet fibre is orange with a black bar about three quarters
 // of the way out and a black tip.
@@ -373,7 +380,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
   const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
-  const barring = BARRED[colorName] ?? 0;
+  // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
+  const barring = m.barred === undefined ? BARRED[colorName] ?? 0 : m.barred ? BARRED.grizzly! : 0;
   const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
   const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy };
   const mm = (v: number) => v / unitMm(recipe.hook);
@@ -419,7 +427,8 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
         tieInThickness: 0.05, layerThickness: (c) => 0.22 * Math.min(c, 1.2),
       };
     case "hair":
-      return { ...base, strandRadius: 0.08, count: 320, tieInThickness: 0.03, layerThickness: () => 0.03 };
+      // A recipe that counts the hairs (a few moose hairs as a tail) gets that many.
+      return { ...base, strandRadius: 0.08, count: m.count ?? 320, counted: m.count !== undefined, tieInThickness: 0.03, layerThickness: () => 0.03 };
     case "fibres":
       return {
         // Wound fibres lie side by side as a flat band, about one fibre width each, with a short fringe of flue.
@@ -498,6 +507,10 @@ const allRound = (spread: number) => Math.min(1, Math.max(0, (spread - deg(60)) 
 const CDC_STEM = 0.012;
 // Assumption: a rabbit hide is about 0.3 mm thick, a thirtieth of a #4's gape.
 const STRIP_HIDE = 0.03;
+// Assumption: a pencil-thick clump of hair spread round the shank and folded back lies about an
+// eighth of a gape thick all round (a Paradrake's body is about 0.4 gape across at the post,
+// tapering behind the bend, where there is no wire inside; read from the photos).
+const HAIR_SHEATH = 0.12;
 
 /** Feather width as a fraction of length, by shape. */
 const FEATHER_WIDTH = { breast: 0.5, tip: 0.28, slip: 0.32 };
@@ -511,8 +524,10 @@ export function simulate(recipe: Recipe): Build {
   const pitch = td * 1.3;
   const threadColor = resolveColor(recipe.thread.color);
 
-  // A double's shank is two wires side by side, so the dressing sits on a wider base.
-  let profile = Profile.bare(-0.3, L + 0.2, hook.points === 2 ? hook.wireRadius * 1.8 : hook.wireRadius);
+  // A double's shank is two wires side by side, so the dressing sits on a wider base. Behind the
+  // bend there is only what the thread binds there (hair laid back past it): room for that.
+  const rearmost = Math.min(0, ...recipe.steps.map((s) => (s.op === "wrap-thread" ? s.to * L : 0)));
+  let profile = Profile.bare(Math.min(-0.3, rearmost - 0.3), L + 0.2, hook.points === 2 ? hook.wireRadius * 1.8 : hook.wireRadius);
   let threadX: number | null = null;
   // The thread's recipe position: near the eye, positions a little apart share one x
   // (frontLimit), so which way a wind goes is decided here, as validation does.
@@ -536,6 +551,13 @@ export function simulate(recipe: Recipe): Build {
   const underneath = new Set<string>();
   /** Upright posts, for parachute hackles. */
   const posts = new Map<string, { x: number; baseY: number; height: number; radius: number }>();
+  /** How a bunch was tied in: its length and how far round it was spread (radians), for folding it back later. */
+  const bunches = new Map<string, { length: number; spread: number }>();
+  /**
+   * Hair folded back and tied down at `x` (a bullet head), its tips trailing loose to `tipX`, until
+   * thread turns spiralled back over it bind it along the body (to `bound`) as a `sheath`.
+   */
+  const trailing = new Map<string, { x: number; tipX: number; tips: BundlePiece; halfAngle: number; round: boolean; thickness: number; bound?: number; sheath?: CoverPiece }>();
   /** A palmered material whose tip the next forward wind secures. */
   let palmered: string | null = null;
   const palmeredTips = new Set<string>();
@@ -654,7 +676,63 @@ export function simulate(recipe: Recipe): Build {
       }
       case "wrap-thread": {
         const from = threadX!;
-        const to = Math.min(step.to * span, frontLimit);
+        let to = Math.min(step.to * span, frontLimit);
+        // Spiralled back over hair trailing from a tie-down, the turns bind it along the body (and
+        // on past the bend, round the hair alone) as far as they go; its tips stick out behind.
+        const binds = [...trailing].filter(([, t]) => to < from && to < (t.bound ?? t.x) - 1e-6);
+        for (const [, t] of binds) to = Math.max(to, t.tipX + TIPS_PAST_TURN);
+        for (const [id, t] of binds) {
+          const l = looks.get(id)!;
+          ctx.binds = id;
+          t.tips.until = time;
+          const old = t.sheath;
+          if (old) old.until = time;
+          const rear = to;
+          const front = t.bound ?? t.x;
+          // Behind the bend there is no wire, only the hair and what is bound inside it: it fills
+          // out towards the bend, so the body tapers from the shank to its end instead of stepping
+          // down at the bend.
+          let core = old?.base ?? profile;
+          const end = Math.min(0, front);
+          if (rear < end) {
+            const fill = Math.max(0, profile.radiusAt(Math.min(front, 0.15)) - profile.radiusAt(rear)) * 0.75;
+            for (let k = 0; k < 4; k++) {
+              const a = rear + ((end - rear) * k) / 4;
+              core = core.withLayer(a, end - 0.1, fill / 4, 0.1);
+              profile = profile.withLayer(a, end - 0.1, fill / 4, 0.1);
+            }
+          }
+          const sheath: CoverPiece = {
+            type: "cover", id: nextId++, material: id, look: l.look, color: l.color, window: [0, 0.0001],
+            ...(old && { seed: old.seed ?? old.id }),
+            x0: rear, x1: t.x, base: core, thickness: t.thickness, lift: 0, halfAngle: t.halfAngle, dents: [], stub: 0, ...(t.round && { round: true }), barring: l.barring,
+          };
+          pieces.push(sheath);
+          t.sheath = sheath;
+          t.bound = rear;
+          // Cinched by the last turn and at the tie-down, as the cover is drawn.
+          profile = profile.withLayer(rear, front, t.thickness, 0.12, true, t.round ? "round" : "top");
+          // Bunches tied in along there pointing back (a tail) are bound inside it now and leave
+          // it at its end.
+          for (const s of steps) {
+            for (const p of s.pieces) {
+              if (p.type !== "bundle" || p.material === id || p.direction !== "back" || p.until !== undefined || p.angle >= deg(30)) continue;
+              if (p.x < rear || p.x > front || p.x - p.length >= rear) continue;
+              p.until = time;
+              pieces.push({ ...p, id: nextId++, seed: p.seed ?? p.id, x: rear, radius: Math.max(0.02, p.radius * 0.5), centre: 0, length: p.length - (p.x - rear), window: [0, 0.0001], until: undefined });
+            }
+          }
+          // The tips flare out behind the last turn.
+          const tips: BundlePiece = {
+            ...t.tips, id: nextId++, seed: t.tips.seed ?? t.tips.id, x: rear, radius: profile.radiusAt(rear) * 0.5, centre: 0,
+            length: rear - t.tipX, angle: deg(16), window: [0.6, 0.6001], until: undefined,
+          };
+          pieces.push(tips);
+          t.tips = tips;
+          butts.set(id, tips);
+        }
+        // Open turns spiralled forward again over a bound body cross the first ones.
+        if (to > from && step.turns && [...trailing.values()].some((t) => t.bound !== undefined && from < t.x && to > t.bound)) ctx.crossing = true;
         const turns = step.turns ?? Math.max(1, Math.round(Math.abs(to - from) / pitch));
         const piece = threadWraps("travel", from, to, turns);
         const coverage = (turns * pitch) / Math.max(Math.abs(to - from), pitch);
@@ -731,6 +809,7 @@ export function simulate(recipe: Recipe): Build {
         // Upright posts are a gathered tuft; an upright wing with a spread is divided in two.
         const spread = deg(upright ? 22 : (step.spread ?? DEFAULT_SPREAD[l.look] ?? 30));
         const pair = upright && step.spread !== undefined ? deg(step.spread) : undefined;
+        if (step.length) bunches.set(step.material, { length: step.length, spread });
         if (step.length && !upright && !across && !step.forward) {
           ctx.tipX = x - step.length * Math.cos(angle);
           ctx.bendEnd = bendEndX(hook);
@@ -778,13 +857,15 @@ export function simulate(recipe: Recipe): Build {
             type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
             window: [0, 0.35], x, radius, centre, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             // A long hair wing is a bigger clump: it stays dense as it fans out.
-            bundleRadius: l.strandRadius, count: l.look === "hair" ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
+            bundleRadius: l.strandRadius, count: l.look === "hair" && !l.counted ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
             pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
           });
           if (upright) {
             posts.set(step.material, { x, baseY: radius, height: step.length, radius: l.strandRadius * 0.45 });
           }
-          if (l.look === "hair") {
+          // Tied in pointing forward, the butts lie back along the shank under the turns (cut square
+          // first, as for a bullet head).
+          if (l.look === "hair" && !step.forward) {
             const b: BundlePiece = {
               type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color,
               window: [0.2, 0.45], x: x + 0.12, radius, centre, length: BUTTS.length, angle: BUTTS.angle,
@@ -824,8 +905,9 @@ export function simulate(recipe: Recipe): Build {
         if (step.around) {
           const post = posts.get(step.around)!;
           const stack = step.turns * l.strandRadius * 2.4;
-          // Each turn goes under the last, so the wraps run down the post from the top of the stack.
-          const y1 = post.baseY + 0.05;
+          // Each turn goes under the last, so the wraps run down the post from the top of the stack,
+          // to just above what is wound on the shank there by now (a hair body).
+          const y1 = Math.max(post.baseY, profile.radiusAt(post.x)) + 0.05;
           piece = {
             ...materialWraps(step.material, l, post.x, post.x, step.turns),
             path: "post", sweep: deg(4),
@@ -894,7 +976,10 @@ export function simulate(recipe: Recipe): Build {
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
         const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
         const strip = l.look === "strip";
-        const thickness = strip ? STRIP_HIDE : cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
+        // Hair spread all round the shank is folded over all round it (a bullet head).
+        const bunch = bunches.get(step.material);
+        const round = l.look === "hair" && bunch !== undefined && allRound(bunch.spread) >= 1;
+        const thickness = strip ? STRIP_HIDE : round ? HAIR_SHEATH : cat.thickness ?? (l.look === "foam" ? 0.09 : 0.035);
         // A fur strip reaches round the body as far as its width does.
         const stripAngle = strip ? Math.min(1.6, Math.max(0.35, l.strandRadius / Math.max(0.05, profile.radiusAt((from + to) / 2)))) : 0;
         const laterTrim = recipe.steps.slice(index + 1).find((s) => s.op === "trim" && s.material === step.material) as Extract<Step, { op: "trim" }> | undefined;
@@ -905,7 +990,9 @@ export function simulate(recipe: Recipe): Build {
         const cover: CoverPiece = {
           type: "cover", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0, 0.6],
           // A loose bubble wraps further round the sides of what it covers.
-          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to), halfAngle: strip ? stripAngle : deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          x0: from, x1: to, base: profile, thickness, lift: fluffUnder(from, to),
+          halfAngle: strip ? stripAngle : round ? Math.PI : deg(step.bubble ? 100 : l.look === "foam" ? 80 : l.look === "feather" ? 50 : 65),
+          ...(round && { round: true }),
           ...(strip ? { fur: l.fibreLength } : {}),
           ...(step.bubble ? { bubble: step.bubble } : {}),
           ...(underneath.has(step.material) ? { side: "under" as const } : {}),
@@ -916,8 +1003,9 @@ export function simulate(recipe: Recipe): Build {
         };
         pieces.push(cover);
         covers.set(step.material, cover);
-        const coverSide = underneath.has(step.material) ? "under" : "top";
-        profile = profile.withLayer(from, to, thickness * 0.8, 0.03, false, coverSide);
+        const coverSide = underneath.has(step.material) ? "under" : round ? "round" : "top";
+        // (Folded all round, it is pinched by the turns at its tie-down, as it is drawn.)
+        profile = round ? profile.withLayer(from, to, thickness, 0.1, true, coverSide) : profile.withLayer(from, to, thickness * 0.8, 0.03, false, coverSide);
         // A loose bubble stands off the body in the middle only: nothing at its tie-downs.
         if (step.bubble) {
           const q = (to - from) / 4;
@@ -930,6 +1018,19 @@ export function simulate(recipe: Recipe): Build {
         ends = restingEnds();
         // A bunch tied in pointing back (a Humpy's hair) is folded over now: it no longer sticks out.
         for (const s of steps) for (const p of s.pieces) if (p.type === "bundle" && p.material === step.material && p.until === undefined) p.until = time;
+        // Hair folded back and tied down: as long behind where it was tied in as it was in front, its
+        // tips trail loose behind the tie-down (to be bound along the body, or trimmed).
+        if (tiedBack && l.look === "hair" && bunch && tied - bunch.length < end - TIPS_PAST_TURN) {
+          ctx.trailing = true;
+          const tips: BundlePiece = {
+            type: "bundle", id: nextId++, material: step.material, look: l.look, color: l.color, window: [0.6, 1],
+            x: end, radius: profile.radiusAt(end), length: end - (tied - bunch.length), angle: deg(8), direction: "back", side: "top",
+            spread: bunch.spread, bundleRadius: l.strandRadius, count: Math.round(l.count * (round ? 3 : 1.5)), marks: l.marks,
+          };
+          pieces.push(tips);
+          butts.set(step.material, tips);
+          trailing.set(step.material, { x: end, tipX: tied - bunch.length, tips, halfAngle: cover.halfAngle, round, thickness });
+        }
         // The tips that pass the tie-down stand up in front of it as a divided wing (a Humpy).
         if (step.wing && !back) {
           pieces.push({
@@ -989,7 +1090,7 @@ export function simulate(recipe: Recipe): Build {
           pieces.push(kept);
           wound.set(step.material, kept);
           ctx.keep = true;
-        } else if (covers.has(step.material)) {
+        } else if (covers.has(step.material) && !trailing.has(step.material)) {
           // The excess of a foam back, cut flush or left as a stub over the eye: the trimmed
           // back replaces the untrimmed one from the cut on.
           ctx.cover = true;
@@ -1016,7 +1117,12 @@ export function simulate(recipe: Recipe): Build {
             trimShape: step.shape ?? "round", window: [0.5, 0.5001], until: undefined,
           });
         } else {
-          const b = butts.get(step.material)!;
+          // Hair butts, or the tips of hair folded back, behind its tie-down or its last turn.
+          if (trailing.delete(step.material)) ctx.tips = true;
+          const b = butts.get(step.material);
+          // (Nothing left sticking out: hair folded back whose tips end at the tie-down, or an
+          // unfinished fly's trim of hair tied in pointing forward, its butts bound under.)
+          if (!b) break;
           butts.delete(step.material);
           b.until = cutAt;
           if (step.shape) {

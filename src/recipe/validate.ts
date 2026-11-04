@@ -2,9 +2,14 @@ import type { RecipeError } from "./errors";
 import { RULES, type RuleKey, type RuleParams } from "./rules";
 import { MATERIALS, WINDABLE, type Archetype } from "./materials";
 import type { Recipe } from "./schema";
+import { hookModel } from "../tying/hook";
 
 /** Positions closer than this are treated as the same spot on the shank. */
 export const POSITION_TOLERANCE = 0.02;
+
+// Assumption: the tips of hair bound back over the body stick out at least this far (gapes)
+// behind the last turn, flaring as the turn cinches them.
+export const TIPS_PAST_TURN = 0.15;
 
 /** Materials that only make sense sticking out from where they are tied in. */
 const NEEDS_LENGTH: readonly Archetype[] = ["hair", "feather", "biot", "marabou", "flash", "legs"];
@@ -37,6 +42,10 @@ const WOVEN: readonly Archetype[] = ["chenille", "yarn", "floss"];
  * Two strands woven forward (a Bitch Creek's abdomen) are held at the front, where the thread
  * waits or is attached again (weaving is done with the thread cut or parked), and both are tied
  * off there next.
+ *
+ * Hair folded back and tied down by the thread (a bullet head) trails its tips behind the
+ * tie-down; only over such hair can the thread go on past the bend, binding it into an extended
+ * body, and there it only winds on or back (the tips may be trimmed meanwhile).
  */
 export function validateSemantics(recipe: Recipe): RecipeError[] {
   const errors: RecipeError[] = [];
@@ -64,6 +73,16 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
   let pending: { material: string; rear: boolean } | null = null;
   /** Woven strands held at `at`, each still to be tied off there. */
   let woven: { at: number; left: string[] } | null = null;
+  /**
+   * Hair folded back and tied down, its tips trailing loose behind the tie-down until trimmed: where
+   * it is tied down and how far back the thread can bind it (shank fractions), its tips still
+   * sticking out behind the last turn.
+   */
+  const trailing = new Map<string, { at: number; reach: number }>();
+  // Lengths are in gapes, positions in shank fractions. (With a bead the positions run a little
+  // short of the eye, so this is the stricter measure.)
+  const shank = hookModel(recipe.hook).shankLength;
+  const lengths = new Map<string, number>();
 
   recipe.steps.forEach((step, i) => {
     const path = ["steps", i];
@@ -146,11 +165,26 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
       rule("threadFirst", {}, path);
       return;
     }
+    // Past the bend the thread is round nothing but hair: it can only wind on or back from there.
+    if (thread < -POSITION_TOLERANCE && step.op !== "wrap-thread" && step.op !== "trim") {
+      rule("threadPastBend", {}, path);
+      return;
+    }
 
 
     switch (step.op) {
       case "wrap-thread":
         if (Math.abs(step.to - thread) < POSITION_TOLERANCE) rule("threadThere", {}, [...path, "to"]);
+        else if (step.to < -POSITION_TOLERANCE && trailing.size === 0) rule("pastBendHair", {}, [...path, "to"]);
+        else if (step.to < thread) {
+          // Spiralled back over trailing hair, as far as the hair reaches.
+          for (const [m, t] of trailing) {
+            if (step.to < t.at - POSITION_TOLERANCE && step.to < t.reach - 0.005) {
+              rule("hairTooShort", { m, to: Math.ceil(t.reach * 100) / 100 }, [...path, "to"]);
+              break;
+            }
+          }
+        }
         thread = step.to;
         break;
       case "dub":
@@ -214,13 +248,16 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           rule("extendedOnly", {}, [...path, "extended"]);
         }
         if (step.tip !== undefined && !step.extended) rule("tipOnly", {}, [...path, "tip"]);
+        if (step.length !== undefined) lengths.set(step.material, step.length);
         if (materials.has(step.material)) rule("alreadyTiedIn", { m: step.material }, [...path, "material"]);
         else {
           materials.set(step.material, {
             // Eyes, extended bodies and legs across the shank are finished once tied in.
             state: archetype === "eyes" || step.extended || step.side === "across" ? "done" : "tied-in",
             at: thread,
-            butts: archetype === "hair" && step.side !== "across",
+            // Tied in pointing forward, the butts lie back along the shank under the turns (cut
+            // square first, as for a bullet head), with nothing to trim.
+            butts: archetype === "hair" && step.side !== "across" && !step.forward,
             hanging: step.length === undefined ? i : undefined,
             // Only an upright bunch makes a post a hackle can be wound round: not a feather
             // pair, an extended body, a fur strip (it sticks out as one piece) or strands tied across.
@@ -295,8 +332,12 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           m.state = "done";
         } else if (step.to < m.at && Math.abs(step.to - thread) <= POSITION_TOLERANCE) {
           // Folded back from where it is tied in and tied down there by the thread (a foam
-          // balloon over a thorax).
+          // balloon over a thorax). Hair's tips trail behind the tie-down (a bullet head).
           m.state = "done";
+          if (archetype === "hair" && m.hanging === undefined) {
+            // As long behind where it was tied in as it was in front.
+            trailing.set(step.material, { at: step.to, reach: (m.at * shank - (lengths.get(step.material) ?? 0) + TIPS_PAST_TURN) / shank });
+          }
         } else if (step.to < m.at) {
           // Laid back from where it is tied in (a shellback tied in at the eye): its end is held
           // by the next step, a winding forward over it, as a palmered tip is.
@@ -310,9 +351,9 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           }
           m.state = "done";
         }
-        // Foam and fur strips are cut after they are tied down (flush, or leaving a head); other
-        // strips are trimmed at once.
-        m.butts = archetype === "foam" || archetype === "strip";
+        // Foam and fur strips are cut after they are tied down (flush, or leaving a head), and the
+        // tips of hair folded back behind where it is bound; other strips are trimmed at once.
+        m.butts = archetype === "foam" || archetype === "strip" || trailing.has(step.material);
         break;
       }
       case "weave": {
@@ -365,6 +406,7 @@ export function validateSemantics(recipe: Recipe): RecipeError[] {
           m.state = "done";
         } else if (m?.butts) {
           m.butts = false;
+          trailing.delete(step.material);
         } else {
           rule("nothingToTrim", { m: step.material }, [...path, "material"]);
         }

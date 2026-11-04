@@ -141,7 +141,9 @@ export type Place =
   | { kind: "behind-head"; head: "bead" | "cone" }
   | { kind: "behind-tube-front" }
   | { kind: "halfway" }
-  | { kind: "percent"; percent: number };
+  | { kind: "percent"; percent: number }
+  /** Behind the start of the bend (or the rear end of a tube), this far: over hair bound past it. */
+  | { kind: "past-rear"; length: Length };
 
 /** `head`: the bead or cone the front positions are measured to, when there is one. */
 export function place(s: number, mount: Mount, head?: "bead" | "cone"): Place {
@@ -219,6 +221,14 @@ export interface StepContext {
   from?: number;
   /** weave: the thread is parked where the weave ends, rather than cut. */
   parked?: boolean;
+  /** pull-over laid back and tied down: the tips of the hair trail behind the tie-down. */
+  trailing?: boolean;
+  /** wrap-thread: spiralled back over this hair trailing behind its tie-down, binding it. */
+  binds?: string;
+  /** wrap-thread: open turns forward again over hair bound so, crossing the first. */
+  crossing?: boolean;
+  /** trim: the tips of hair folded back, behind its tie-down or last turn. */
+  tips?: boolean;
 }
 
 /** What a tie-in takes: a material, a bunch of it, or strands of herl. */
@@ -230,10 +240,15 @@ export type Said =
   | { kind: "weight"; m: string; from: Place; to: Place }
   | { kind: "attach-thread"; at: Place; again?: boolean }
   | { kind: "wrap-thread"; to: Place; turns?: number }
+  /** Spiralled back over hair trailing behind its tie-down (`m`), binding it along the body; `past`: on past the bend. */
+  | { kind: "bind-back"; m: string; to: Place; turns?: number; past: boolean }
+  /** Spiralled forward again in open turns over a body bound so, crossing the first. */
+  | { kind: "cross-forward"; to: Place; turns: number }
   | { kind: "tie-in-eyes"; m: string; under: boolean }
   | { kind: "tie-in-extended"; m: string; length: Length; forward: boolean; tip?: string }
   | { kind: "tie-in-across"; m: string; strands: number; length: Length }
-  | { kind: "tie-in-forward"; m: string; length: Length }
+  /** `round`: spread all round the shank (hair for a bullet head). */
+  | { kind: "tie-in-forward"; m: string; length: Length; round?: boolean }
   | { kind: "tie-in-upright"; what: What; length: Length; divide: boolean }
   | { kind: "tie-in-wing-under"; what: What; length: Length }
   | { kind: "tie-in-beard"; what: What; length: Length }
@@ -245,7 +260,7 @@ export type Said =
   | { kind: "wind-through"; m: string; to: Place; turns: number; counter: boolean; through: string }
   | { kind: "wind"; m: string; to: Place; turns: number; counter: boolean }
   | { kind: "pull-over"; m: string; to: Place; trimmedLater: boolean; bubble?: boolean; wing?: Length; under?: boolean }
-  | { kind: "lay-back"; m: string; to: Place; tied?: boolean }
+  | { kind: "lay-back"; m: string; to: Place; tied?: boolean; round?: boolean; trailing?: boolean }
   | { kind: "spin"; m: string; to: Place }
   /** Tubing slid on as a sleeve from the thread (`from`) to `to`, tied down at the thread: its rear end (`rear`) or its front. */
   | { kind: "sleeve"; m: string; from: Place; to: Place; rear: boolean; fray?: Length }
@@ -259,6 +274,7 @@ export type Said =
   | { kind: "trim-tip"; m: string }
   | { kind: "trim-cover"; m: string; leave?: Length }
   | { kind: "trim-butts"; m: string; leave?: Length }
+  | { kind: "trim-tips"; m: string; leave?: Length }
   | { kind: "whip-finish"; turns: number; midway?: boolean };
 
 /** The step analysed: what it says, in no language yet. */
@@ -268,9 +284,11 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
   const bead = recipe.steps.find((s) => s.op === "slide-bead");
   const headKind = bead && "material" in bead ? recipe.materials.find((m) => m.id === bead.material)?.kind : undefined;
   const head = headKind ? (headKind.endsWith("-cone") ? "cone" : "bead") : undefined;
-  const at = (s: number) => place(s, mount, head);
   // A tube has no gape: lengths on one are given in millimetres.
   const len = (n: number): Length => (mount === "hook" ? { kind: "gape", gapes: n } : { kind: "mm", mm: Math.round(n * unitMm(recipe.hook)) });
+  // Behind the bend, as far as hair bound past it reaches: how far, to a tenth of a gape.
+  const at = (s: number): Place =>
+    s < -0.02 ? { kind: "past-rear", length: len(Math.round(-s * hookModel(recipe.hook).shankLength * 10) / 10) } : place(s, mount, head);
   const find = (id: string) => recipe.materials.find((m) => m.id === id);
   switch (step.op) {
     case "slide-bead":
@@ -280,6 +298,8 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
     case "attach-thread":
       return { kind: "attach-thread", at: at(step.at), ...(ctx.again ? { again: true } : {}) };
     case "wrap-thread":
+      if (ctx.binds) return { kind: "bind-back", m: ctx.binds, to: at(step.to), ...(step.turns ? { turns: step.turns } : {}), past: step.to < -0.02 };
+      if (ctx.crossing && step.turns) return { kind: "cross-forward", to: at(step.to), turns: step.turns };
       return { kind: "wrap-thread", to: at(step.to), ...(step.turns ? { turns: step.turns } : {}) };
     case "tie-in": {
       const m = find(step.material);
@@ -296,7 +316,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
         return { kind: "tie-in-extended", m: step.material, length: len(step.length), forward: Boolean(step.forward), ...(step.tip ? { tip: step.tip } : {}) };
       }
       if (step.length && step.side === "across") return { kind: "tie-in-across", m: step.material, strands: m?.count ?? 2, length: len(step.length) };
-      if (step.length && step.forward) return { kind: "tie-in-forward", m: step.material, length: len(step.length) };
+      if (step.length && step.forward) return { kind: "tie-in-forward", m: step.material, length: len(step.length), ...((step.spread ?? 0) >= 150 && { round: true }) };
       if (step.length && (step.angle ?? 0) >= 60) return { kind: "tie-in-upright", what, length: len(step.length), divide: (step.spread ?? 0) > 0 };
       // Under the shank is on top when the fly swims point-up: there it is the wing.
       if (step.length && under && ridesPointUp(recipe)) return { kind: "tie-in-wing-under", what, length: len(step.length) };
@@ -324,7 +344,13 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       return { kind: "wind", m: step.material, to, turns: step.turns, counter };
     }
     case "pull-over":
-      if (ctx.rear) return { kind: "lay-back", m: step.material, to: at(step.to), ...(ctx.tiedBack ? { tied: true } : {}) };
+      if (ctx.rear) {
+        const tieIn = recipe.steps.find((s) => s.op === "tie-in" && s.material === step.material) as Extract<Step, { op: "tie-in" }> | undefined;
+        return {
+          kind: "lay-back", m: step.material, to: at(step.to), ...(ctx.tiedBack ? { tied: true } : {}),
+          ...((tieIn?.spread ?? 0) >= 150 && { round: true }), ...(ctx.trailing && { trailing: true }),
+        };
+      }
       return { kind: "pull-over", m: step.material, to: at(step.to), trimmedLater: Boolean(ctx.trimmedLater), ...(step.bubble ? { bubble: true } : {}), ...(step.wing ? { wing: len(step.wing) } : {}), ...(ctx.under ? { under: true } : {}) };
     case "spin":
       return { kind: "spin", m: step.material, to: at(step.to) };
@@ -342,6 +368,7 @@ export function analyse(recipe: Recipe, step: Step, ctx: StepContext = {}): Said
       if (ctx.spun) return { kind: "trim-spun", m: step.material, leave: len(step.leave ?? 0.4), ...(step.shape === "cigar" ? { cigar: true } : {}), ...(step.shape === "cone" ? { cone: true } : {}) };
       if (ctx.tip) return { kind: "trim-tip", m: step.material };
       if (ctx.cover) return { kind: "trim-cover", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
+      if (ctx.tips) return { kind: "trim-tips", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
       return { kind: "trim-butts", m: step.material, ...(step.leave ? { leave: len(step.leave) } : {}) };
     case "whip-finish":
       return { kind: "whip-finish", turns: step.turns, ...(ctx.midway ? { midway: true } : {}) };
@@ -410,6 +437,7 @@ const english: Writer = {
 function englishText(said: Said, recipe: Recipe): string {
   const mount: Mount = hookModel(recipe.hook).tube?.kind ?? "hook";
   const along = mount === "tube" ? "the tube" : "the shank";
+  const len = (l: Length) => (l.kind === "gape" ? gapeText(l.gapes) : `${l.mm} mm`);
   const at = (p: Place) => {
     switch (p.kind) {
       case "bend-start":
@@ -426,9 +454,10 @@ function englishText(said: Said, recipe: Recipe): string {
         return `halfway along ${along}`;
       case "percent":
         return `${p.percent}% of the way along ${along}`;
+      case "past-rear":
+        return `${len(p.length)} behind ${mount === "hook" ? "the start of the bend" : `the rear end of ${along}`}`;
     }
   };
-  const len = (l: Length) => (l.kind === "gape" ? gapeText(l.gapes) : `${l.mm} mm`);
   const body = along;
   const mat = (id: string) => {
     const m = recipe.materials.find((x) => x.id === id);
@@ -460,6 +489,12 @@ function englishText(said: Said, recipe: Recipe): string {
       return `Attach the thread${said.again ? " again" : ""} at ${at(said.at)} with a few turns and trim the tag end.`;
     case "wrap-thread":
       return said.turns ? `Wrap the thread to ${at(said.to)} in ${countText(said.turns, "open turns")}.` : `Wrap the thread to ${at(said.to)} in touching turns.`;
+    case "bind-back": {
+      const how = said.turns ? `Spiral the thread back over the ${mat(said.m)} in ${countText(said.turns, "open turns")}` : `Wrap the thread back over the ${mat(said.m)}`;
+      return `${how} to ${at(said.to)}, binding it down along the body${said.past ? " and on past the bend, round the hair alone" : ""}. Hold the hair back with the other hand as you go and keep the tension even.`;
+    }
+    case "cross-forward":
+      return `Spiral the thread forward again to ${at(said.to)} in ${countText(said.turns, "open turns")}, crossing the first ones.`;
     case "tie-in-eyes":
       return `Tie the ${mat(said.m)} ${said.under ? "under" : "on top of"} the shank with figure-of-eight turns.`;
     case "tie-in-extended": {
@@ -469,7 +504,7 @@ function englishText(said: Said, recipe: Recipe): string {
     case "tie-in-across":
       return `Tie ${said.strands === 1 ? "a strand" : `${said.strands} strands`} of ${mat(said.m)} across the shank by the middle with figure-of-eight turns, so ${len(said.length)} sticks out on each side as legs.`;
     case "tie-in-forward":
-      return `Tie in the ${mat(said.m)} pointing forward over the eye, ${len(said.length)} long.`;
+      return `Tie in the ${mat(said.m)} pointing forward over the eye, ${len(said.length)} long.${said.round ? " Let it spread all round the shank as you tighten the turns." : ""}`;
     case "tie-in-upright":
       return `Tie in ${what(said.what)} upright, ${len(said.length)} tall, with turns in front to stand it up.${said.divide ? " Divide them into a V with figure-of-eight turns." : ""}`;
     case "tie-in-wing-under":
@@ -496,6 +531,10 @@ function englishText(said: Said, recipe: Recipe): string {
       if (said.bubble) return `Fold the ${mat(said.m)} forward over the body as a loose bubble and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
       return `Pull the ${mat(said.m)} forward over the top of the body and tie it down at ${at(said.to)}.${said.trimmedLater ? "" : " Trim the excess."}`;
     case "lay-back":
+      if (said.tied && (said.round || said.trailing)) {
+        const head = said.round ? ", leaving a smooth, round head in front of the tie-down" : "";
+        return `Fold the ${mat(said.m)} back ${said.round ? "all round the shank" : "over the top of the body"} and tie it down at ${at(said.to)} with tight turns${head}.${said.trailing ? " Leave the tips trailing back along the body." : ""}`;
+      }
       return said.tied
         ? `Fold the ${mat(said.m)} back over the top of the body and tie it down at ${at(said.to)}.`
         : `Lay the ${mat(said.m)} back over the top of the body to ${at(said.to)}. The next winding holds it there.`;
@@ -538,6 +577,10 @@ function englishText(said: Said, recipe: Recipe): string {
         : `Trim the excess ${mat(said.m)} flush with the tie-down.`;
     case "trim-butts":
       return said.leave ? `Trim the butts of the ${mat(said.m)}, leaving a short head ${len(said.leave)} long.` : `Trim the butts of the ${mat(said.m)} flush.`;
+    case "trim-tips":
+      return said.leave
+        ? `Cut the tips of the ${mat(said.m)} just behind the last turn over them, leaving a stub about ${len(said.leave)} long.`
+        : `Cut the tips of the ${mat(said.m)} close behind the last turn over them.`;
     case "whip-finish":
       if (said.midway) return `Whip finish here with ${countText(said.turns, "turns")} and cut the thread.`;
       return `Form a small head, whip finish with ${countText(said.turns, "turns")} and cut the thread.`;
