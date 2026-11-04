@@ -214,7 +214,10 @@ function perpendicular(dir: THREE.Vector3, toward: THREE.Vector3, rand: () => nu
   return p.addScaledVector(dir, -p.dot(dir)).normalize();
 }
 
-/** Per-look fibre settings for wound materials. */
+/**
+ * Per-look fibre settings for wound materials. A hackle that knows its barbs (`WrapsPiece.barbs`)
+ * draws as many as its stem carries, at their own thickness, instead of `perTurn` and `radius`.
+ */
 const WOUND_FIBRES = {
   hackle: { perTurn: 110, radius: 0.006, tip: 0.25, wave: 0.04 },
   herl: { perTurn: 320, radius: 0.006, tip: 0.25, wave: 0.15 },
@@ -241,15 +244,56 @@ export function spreadColours<T>(n: number, colours: readonly T[], rand: () => n
   return out;
 }
 
+/**
+ * The stem of a wraps piece: how long it is (gapes) and the progress at which a fraction `s` of
+ * that length is wound, so fibres spread evenly along the stem whether a turn goes round a bare
+ * shank or a thick body.
+ */
+export function stemOf(piece: WrapsPiece): { length: number; at(s: number): number } {
+  const n = Math.max(32, Math.ceil(piece.turns * 24));
+  const run = [0];
+  let [ax, ay, az] = wrapPoint(piece, 0).point;
+  for (let i = 1; i <= n; i++) {
+    const [bx, by, bz] = wrapPoint(piece, i / n).point;
+    run.push(run[i - 1]! + Math.hypot(bx - ax, by - ay, bz - az));
+    [ax, ay, az] = [bx, by, bz];
+  }
+  const length = run[n]!;
+  return {
+    length,
+    at(s) {
+      const target = s * length;
+      let lo = 0;
+      let hi = n;
+      while (hi - lo > 1) {
+        const mid = (lo + hi) >> 1;
+        if (run[mid]! <= target) lo = mid;
+        else hi = mid;
+      }
+      const span = run[hi]! - run[lo]!;
+      return (lo + (span > 0 ? (target - run[lo]!) / span : 0)) / n;
+    },
+  };
+}
+
+/** How many fibres a wound piece draws: a hackle as many barbs as its stem carries. */
+function woundCount(piece: WrapsPiece, stem: ReturnType<typeof stemOf> | null): number {
+  if (stem && piece.barbs) return Math.round(stem.length * piece.barbs.perGape);
+  const look = piece.look as keyof typeof WOUND_FIBRES;
+  // Rough dubbing is more fur than strand: enough of it to hide the core.
+  return Math.round(piece.turns * WOUND_FIBRES[look].perTurn * (look === "dubbing" ? 1 + (piece.shaggy ?? 0.4) : 1));
+}
+
 function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
   const look = piece.look as keyof typeof WOUND_FIBRES;
   const spec = WOUND_FIBRES[look];
   const list: Fibre[] = [];
-  // Rough dubbing is more fur than strand: enough of it to hide the core.
-  const n = Math.round(piece.turns * spec.perTurn * (look === "dubbing" ? 1 + (piece.shaggy ?? 0.4) : 1));
+  const stem = look === "hackle" && piece.barbs ? stemOf(piece) : null;
+  const n = woundCount(piece, stem);
+  const radius = (stem && piece.barbs?.radius) || spec.radius;
   const onPost = piece.path === "post";
   for (let i = 0; i < n; i++) {
-    const u = (i + rand()) / n;
+    const u = stem ? stem.at((i + rand()) / n) : (i + rand()) / n;
     const at = wrapPoint(piece, u);
     const [px, py, pz] = at.point;
     let spin: number, sweep: number, length: number, shade: number;
@@ -335,7 +379,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     const inward = new THREE.Vector3(0, -py, -pz);
     const bend = lie ? 0.35 + 0.2 * rand() : (soft ? 0.12 + 0.25 * Math.min(1, (piece.sweep ?? 0.8) / 1.2) : spec.wave) * (0.5 + rand());
     const bendDir = bend > 0 ? perpendicular(dir, lie ? inward : soft ? BACK : ZERO, rand) : undefined;
-    if (!hidden) list.push({ u, base, dir, length, radius: spec.radius, shade, bend, bendDir });
+    if (!hidden) list.push({ u, base, dir, length, radius, shade, bend, bendDir });
   }
   return list;
 }

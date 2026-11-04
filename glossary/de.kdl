@@ -20,6 +20,7 @@ materials {
         source "Fliegenfischer-Forum: 10 Bestseller-Nymphen von Fabian Bastuck (\"Schwänzchen: Rote Wolle\")" url="https://www.fliegenfischer-forum.de/monspe22.html"
     }
     noun sparkle-yarn "Antronstrang" gender=m plural="Antronstränge" {
+        note "Approved by the reviewer (2026-11-04)."
         note "LaFontaine's 'sparkle yarn' is Antron; dressings write 'Antron Strang' or 'Antron Yarn', formed like 'Polystrang'."
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020 (\"Antron Strang rosa\", \"das Antron Yarn einbinden\")" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
     }
@@ -29,6 +30,7 @@ materials {
         source "AOS: Poly Yarn, Flügelmaterial" url="https://www.aos.cc/de/poly-yarn.html"
     }
     noun ostrich-herl "Straußengras" gender=n mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Formed like 'Pfauengras', as Karwath writes it for the Arthofer's body (\"Blei unter dem Straußengras\")."
         source "Der-FliegenBinder: Die „Arthofer“ (Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
     }
@@ -52,9 +54,11 @@ materials {
         source "Flyfishing Europe: Sattelhecheln Strung" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
     }
     noun guinea-fowl-hackle "Perlhuhnhechel" gender=f plural="Perlhuhnhecheln" {
+        note "Approved by the reviewer (2026-11-04)."
         source "Der-FliegenBinder: Die „Arthofer“ (\"Die Hechel war stets eine Perlhuhnhechel\", Ingo Karwath)" url="https://der-fliegenbinder.de/die-arthofer"
     }
     noun golden-pheasant-flank "Flankenfeder des Goldfasans" gender=f plural="Flankenfedern des Goldfasans" dative-plural="Flankenfedern des Goldfasans" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The cock's ruddy red flank feather, wound as a hackle (an Usk Grub's tail). No German tying page naming it turned up; formed like 'Körperfeder des Goldfasans', with 'Flanke' as in 'Flanken' of a streamer dressing."
         source "Fliegenfischer-Forum: Lachsfliegen (Mickey Finn: \"Flanken Goldfasan Tippet\")" url="https://www.fliegenfischer-forum.de/lachs.htm"
     }
@@ -76,6 +80,7 @@ materials {
         source "AOS: Super Fine Trockenfliegen Dubbing" url="https://www.aos.cc/de/super-fine-trockenfliegen-dubbing.html"
     }
     noun fox-dubbing "Fuchsdubbing" gender=n mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Fox body fur as dubbing, formed like 'Kaninchendubbing' and 'Seehunddubbing'. No German shop or text naming fox dubbing was found; the Grundlagen page lists fox among the furs tyers use. Kept apart from fox-hair ('Fuchshaar')."
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Fuchsschwanz\" among the natural hairs)" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
@@ -179,11 +184,13 @@ materials {
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Hechelfibern\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
     noun peacock-sword "Pfauenschwert" gender=n mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "The sword feather's fibres ('die Fibern vom Pfauenschwert'); shops sell 'Pfauenschwerter'."
         source "Rudi Heger: Pfauenschwerter (\"für die Herstellung der berühmten Alexandra Nassfliege\")" url="https://www.rudiheger.eu/pfauenschwerter.html"
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Klassische Nassfliegen (\"die Fibern vom Pfauenschwert\")" url="https://www.fliegenfischer-forum.de/monspe48.html"
     }
     noun wood-duck-flank "Brautentenflanke" gender=f mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "Wood duck (Aix sponsa) is 'Brautente'; tyers also keep 'Wood Duck'. 'Brautentenflanke' is formed like the mallard 'Flankenfedern'."
         source "Fliegenfischer-Forum: Wood Duck (\"Wood Duck (Aix Sponsa, Brautente)\")" url="https://www.fliegenfischer-forum.de/flyfishing/viewtopic.php?f=26227&t=265901"
     }
@@ -201,10 +208,12 @@ materials {
         source "Fliegenfischer-Forum: 10 Bestseller-Nymphen (\"Schwänzchen: Hasengranen\", \"Thorax: ... Hasengranen\")" url="https://www.fliegenfischer-forum.de/monspe22.html"
     }
     noun fox-hair "Fuchshaar" gender=n mass=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "The plain compound. The Grundlagen page names 'Fuchsschwanz' and 'Polarfuchs, ein feines Haar' among tying hairs."
         source "Fliegenfischer-Forum: Fliegenbinden Grundlagen, Teil 2 (\"Fuchsschwanz\", \"Gefärbter Polarfuchs, ein feines Haar\")" url="https://www.fliegenfischer-forum.de/fliegenbinden2.html"
     }
     noun craft-fur "Craft Fur" gender=n mass=#true genitive="Craft Fur" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Product name kept in English, as German shops sell it. The gender is an assumption (like 'das Fell')."
         source "Flyfishing Europe: Craft Fur (\"Im Flyfishing Europe Bindeset erhalten Sie 5 Matten Craft Fur\")" url="https://www.flyfishingeurope-shop.de/craft-fur.html"
     }
@@ -249,6 +258,7 @@ materials {
         source "Der-FliegenBinder: Weiche Federn (\"Krickentenfeder (teal)\")" url="https://der-fliegenbinder.de/16174-2"
     }
     noun bronze-mallard "Mallard-Bronzefeder" gender=f plural="Mallard-Bronzefedern" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The mallard drake's bronze-brown shoulder feathers. The shop sells them as 'Mallard Bronze Federn'; tyers keep 'Mallard' (see mallard-breast). Written as one hyphenated compound so it declines. Usually a pair (left and right)."
         source "Besten Kunstköder: Veniard Mallard Bronze Federn (\"Grundmaterial zur Herstellung der ganzen Mallard & … Fliegen Serie, wo die Flügel aus Strahlen dieser Feder hergestellt sind\")" url="https://www.besten-kunstkoder.de/de4/veniard-mallard-bronze-federn/s/29261"
     }
@@ -267,6 +277,7 @@ materials {
         source "Fliegenfischer-Forum: Fliegenbinde-Swap #18 und kleiner mit Flügel (\"Starenfedern\", \"Beide Segmente\")" url="https://www.fliegenfischer-forum.de/monsp137.html"
     }
     noun hen-pheasant-quill "Fasanenflügelsegment" gender=n plural="Fasanenflügelsegmente" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Built like duck-quill; the March Brown swap writes \"Schwinge: Fasanenfeder paarig\" for the hen pheasant quill."
         source "Fliegenfischer-Forum: Märzbraune (\"Schwinge: Fasanenfeder paarig\")" url="https://www.fliegenfischer-forum.de/monsp111.html"
     }
@@ -280,14 +291,17 @@ materials {
         source "Flyfishing Europe: Sattelhecheln Strung (\"wichtigen Bestandteil vieler Salzwasserstreamer\")" url="https://www.flyfishingeurope-shop.de/sattelhechel-strung.html"
     }
     noun golden-pheasant-tippet-feather "Goldfasantippetfeder" gender=f plural="Goldfasantippetfedern" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A whole tippet feather, as German General Practitioner dressings use it, cut into a V."
         source "Fliegenfischer-Forum: Lachsfliegen (Irish General Practitioner: \"Goldfasantippetfeder die V-förmig ausgeschnitten ist\")" url="https://www.fliegenfischer-forum.de/lachs.htm"
     }
     noun golden-pheasant-body "Körperfeder des Goldfasans" gender=f plural="Körperfedern des Goldfasans" dative-plural="Körperfedern des Goldfasans" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The cock's small red body feathers. No German tying page naming them turned up; formed as 'Brustfeder der Stockentenhenne' (mallard-breast) from the bird, whose whole underside is red."
         source "Wikipedia: Goldfasan (\"Die gesamte Unterseite ist intensiv dunkelrot\")" url="https://de.wikipedia.org/wiki/Goldfasan"
     }
     noun jungle-cock "Dschungelhahn" gender=m mass=#true genitive="Dschungelhahns" {
+        note "Approved by the reviewer (2026-11-04)."
         note "German dressings name the material by the bird ('Flügel: Dschungelhahn', 'Zwei Dschungelhahnfedern'); 'Jungle Cock' is also kept in English by shops. Used as a material, like 'Bucktail'."
         source "Der-FliegenBinder: Lachsfliege des Monats 8, Curry's Red Shrimp (\"Flügel: Dschungelhahn\", \"Zwei Dschungelhahnfedern\")" url="https://der-fliegenbinder.de/lachsfliege-des-monats-4"
     }
@@ -302,14 +316,17 @@ materials {
         source "Fliegenfischer-Forum: Fliegen-Swap No.38, Kleinkrebse (\"Rückenpanzer: Folie\")" url="https://www.fliegenfischer-forum.de/monspe92.html"
     }
     noun rabbit-strip "Zonkerstrip" gender=m plural="Zonkerstrips" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Tyers keep the English word ('Schwanz: Zonker Strip'); shops also write 'Kaninchenstreifen'. Masculine, as 'der Strip'."
         source "Barsch-Alarm: Step by Step – Zonker (\"Ein wenig vom Zonkerstrip als Schwänzchen einbinden\")" url="https://www.barsch-alarm.de/community/threads/step-by-step-%E2%80%93-zonker.34051/latest"
     }
     noun mylar-tubing "Mylarschlauch" gender=m plural="Mylarschläuche" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Braided Mylar tubing slid over a body (the Zonker)."
         source "Anglerboard: Myelar-Schlauch (\"Den Mylarschlauch kann man ganz einfach mit Daumen und Zeigefinger zusammenquetschen\")" url="https://www.anglerboard.de/threads/myelar-schlauch.49047/"
     }
     noun split-shot "Schrotblei" gender=n plural="Schrotbleie" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A split shot crimped on as a head (the Dog Nobbler); shops sell slit 'Bleischrot' as 'Schrotblei'."
         source "eBay: Balzer Schrotblei zum Angeln Sortiment (\"Geschlitztes Bleischrot\")" url="https://www.ebay.de/p/1704664988"
     }
@@ -368,6 +385,7 @@ colours {
         source "Fliegenfischer-Forum: Fliegenbinde-Swap Coq de Leon" url="https://www.fliegenfischer-forum.de/coqdeleon.html"
     }
     adjective fluo-green "leuchtgrün" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Formed as 'leuchtrot', the declinable word for a fluorescent colour."
     }
     adjective brown "braun"
@@ -413,7 +431,9 @@ colours {
     }
     adjective pheasant-tail "Fasanenstoß" compound=#true
     adjective partridge "Rebhuhn" compound=#true
-    adjective guinea "Perlhuhn" compound=#true
+    adjective guinea "Perlhuhn" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
+    }
     adjective snipe "Schnepfen" compound=#true {
         note "The joining form ('Schnepfen-'), as it goes before a noun."
     }
@@ -430,12 +450,18 @@ colours {
         note "The joining form ('Krickenten-'), as it goes before a noun."
     }
     adjective turkey "Truthahn" compound=#true
-    adjective hen-pheasant "Fasanenhennen" compound=#true
-    adjective wood-duck "Brautenten" compound=#true
+    adjective hen-pheasant "Fasanenhennen" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
+    }
+    adjective wood-duck "Brautenten" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
+    }
     adjective bronze-mallard "bronzebraun" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Assumption: the plain colour word for the bronze brown of bronze mallard; no tying page using it was found."
     }
     adjective furnace "Furnace" compound=#true {
+        note "Approved by the reviewer (2026-11-04)."
         note "A red-brown hackle with a black centre. Kept in English, like 'Badger'; no German page using the word turned up."
     }
     adjective badger "Badger" compound=#true {
@@ -503,21 +529,27 @@ parts {
     noun belly "Bauch" gender=m plural="Bäuche" genitive="Bauchs"
     noun body "Körper" gender=m plural="Körper"
     noun claws "Scheren" gender=f plural="Scheren" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A crab's claws: the hackle tips splayed in a crab fly's tail. A plural part, as antennae."
     }
     noun cheeks "Wangen" gender=f plural="Wangen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A plural part, as antennae: the slips along each side of a wing (Alexandra)."
     }
     noun sheath "Hülle" gender=f plural="Hüllen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "The loose veil of sparkle yarn round a sparkle pupa's body."
     }
     noun veil "Schleier" gender=m plural="Schleier" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A veiling: feathers laid over part of the body or the tail (a General Practitioner's over its feelers, an Usk Grub's over the rear body). No German tying page with the word turned up; 'Schleier' is the plain word for a veil."
     }
     noun shell "Schale" gender=f plural="Schalen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "A foam strip pulled over the top of the body (the Gurgler)."
     }
     noun underbody "Unterkörper" gender=m plural="Unterkörper" {
+        note "Approved by the reviewer (2026-11-04)."
         note "What a body is built up on (floss under the Black & Peacock Spider's herl)."
     }
     noun butt "Butt" gender=m plural="Butts" {
@@ -777,6 +809,7 @@ hooks {
         source "AOS Blog: Alles was der Fliegenbinder über Haken wissen muss (\"SE (straight eye): gerades Hakenöhr\")" url="https://www.aos.cc/de/blog/post/fliegenbinden-alles-ueber-haken"
     }
     phrase bass-bug "Bass-Bug-Haken, großer Bogen, gerades Öhr" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Rudi Heger sells the TMC 8089 as 'Spezialhaken für \"Bass Bugs\"' with 'ein gerades Öhr' and 'ein extra großer Hakenbogen'."
         source "Rudi Heger: TMC 8089 (\"Bass Bug, straight eye, feiner Draht, großer Bogen\")" url="https://rudiheger.eu/tmc-8089.html"
     }
@@ -803,12 +836,15 @@ steps {
         source "Fliegenfischer-Forum: Bindeanleitung 02 Maxima Stony (\"Die Körperabdeckung nach vorne klappen und fest einbinden.\")" url="https://www.fliegenfischer-forum.de/fliegen/pleninge.pdf"
     }
     phrase sleeve "Schlauch aufziehen" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Sliding braided tubing over the body as a sleeve. The verb is my assumption."
     }
     phrase weave "Weben" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Weaving two strands of chenille into a two-coloured body (a Bitch Creek). The plain verb 'weben'; I found no German tying text on woven bodies, so this is my assumption."
     }
     phrase glue "Aufkleben" {
+        note "Approved by the reviewer (2026-11-04)."
         note "Glueing pads of fibre along the shank after the whip finish (a crab's body). The plain verb is my assumption."
     }
     phrase spin "Aufspinnen" {

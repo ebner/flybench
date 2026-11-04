@@ -57,6 +57,8 @@ export interface WrapsPiece extends PieceBase {
   fibreLength?: number;
   /** Hackle: how far the barbs lean back from standing straight out, in radians. */
   sweep?: number;
+  /** Hackle: barbs along each gape of the stem (both sides together), and each barb's radius at its root, in gapes. */
+  barbs?: { perGape: number; radius: number };
   /** Fibres alternate light and dark (grizzly, partridge). */
   barred?: boolean;
   /** Dubbing: how rough, 0 (fine) to 1 (long guard hairs). */
@@ -401,6 +403,7 @@ interface MaterialLook {
   /** The recipe gives the count: drawn as given, not as a clump that grows with its length. */
   counted?: boolean;
   sweep?: number;
+  barbs?: { perGape: number; radius: number };
   barred?: boolean;
   /** 0 = plain, 1 = strongly barred. */
   barring: number;
@@ -453,9 +456,20 @@ function barMarks(barring: number): FibreMarks {
   });
 }
 
+// Assumption: a hackle barb is about 0.06 mm thick at its root, on any hook. Drawn at that
+// thickness, a small dry fly's barbs are thicker for its size than a big salmon fly's. This is the
+// one number to tune how full wound hackles look; it was set against photos of collars, palmered
+// bodies and spiders.
+const BARB_MM = 0.06;
+// Assumption: a hackle with no density in the catalog carries its barbs like a hen hackle.
+const BARBS_PER_MM = 8;
+// Assumption: a parachute hackle is wound round the post's base, which the tyer has built up with
+// thread to about a quarter of the gape thick (photos of the Parachute Adams and Klinkhamer).
+const POST_BASE = 0.12;
+
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
@@ -478,6 +492,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "hackle":
       return {
         ...base, strandRadius: 0.012, fibreLength: m.fibre, freeLength: 1.8, sweep: deg(m.sweep ?? cat.sweep ?? 7),
+        barbs: { perGape: (cat.barbsPerMm ?? BARBS_PER_MM) * unitMm(recipe.hook), radius: mm(BARB_MM) / 2 },
         tieInThickness: 0.024, layerThickness: () => 0.024,
       };
     case "dubbing":
@@ -781,6 +796,7 @@ export function simulate(recipe: Recipe): Build {
     // Wound CDC lies on the body as its stem; the barbs stand out from it.
     path: "travel", x0, x1, width: 0, turns, strandRadius: l.look === "cdc" ? CDC_STEM : l.strandRadius, base: profile,
     fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band, shaggy: l.shaggy,
+    ...(l.barbs && { barbs: l.barbs }),
     ...(l.look === "hackle" && l.centre && { marks: l.centre }),
   });
 
@@ -1147,7 +1163,8 @@ export function simulate(recipe: Recipe): Build {
           piece = {
             ...materialWraps(step.material, l, post.x, post.x, step.turns),
             path: "post", sweep: deg(4),
-            post: { x: post.x, y0: y1 + stack, y1, radius: post.radius },
+            // The hackle goes round the post's base, built up with thread to hold it.
+            post: { x: post.x, y0: y1 + stack, y1, radius: Math.max(post.radius, POST_BASE) },
           };
           post.hackle = Math.max(post.hackle ?? 0, y1 + stack);
         } else {

@@ -1,10 +1,13 @@
+import { readFileSync } from "node:fs";
 import * as THREE from "three";
 import { describe, expect, it } from "vitest";
+import { loadRecipe } from "../recipe/load";
+import { MATERIALS, type CatalogMaterial } from "../recipe/materials";
 import { hookModel } from "../tying/hook";
 import { Profile } from "../tying/profile";
-import type { BundlePiece, CoverPiece } from "../tying/simulate";
+import { simulate, type BundlePiece, type CoverPiece, type WrapsPiece } from "../tying/simulate";
 import { Surfaces } from "./materials";
-import { pieceView, spreadColours } from "./pieces";
+import { pieceView, spreadColours, stemOf } from "./pieces";
 import { mulberry32 } from "./random";
 import { ShankSpace } from "./space";
 
@@ -170,5 +173,79 @@ describe("a hair wing tied in with a length", () => {
   it("gives soft, unstacked hair more uneven tips than stiff, stacked hair", () => {
     const spreadX = (ps: THREE.Vector3[]) => Math.max(...ps.map((p) => p.x)) - Math.min(...ps.map((p) => p.x));
     expect(spreadX(ends(wing(0.2)).tips)).toBeGreaterThan(1.5 * spreadX(ends(wing(0.9)).tips));
+  });
+});
+
+describe("a wound hackle's barbs", () => {
+  const hook = hookModel({ model: "wet-standard", size: 12 });
+  /** How many barbs a piece draws, and how thick: each curved barb counted once, by its first piece. */
+  const barbs = (piece: WrapsPiece) => {
+    const view = pieceView(piece, new Surfaces(), new ShankSpace(hook));
+    view.setProgress(1);
+    let count = 0;
+    let radius = 0;
+    const m = new THREE.Matrix4();
+    const s = new THREE.Vector3();
+    view.object.traverse((o) => {
+      if (!(o instanceof THREE.InstancedMesh) || (o.userData.segment !== undefined && o.userData.segment !== 0)) return;
+      count += o.count;
+      if (o.count > 0) radius = s.setFromMatrixScale(o.getMatrixAt(0, m)).x;
+    });
+    view.dispose();
+    return { count, radius };
+  };
+  const palmer = (bodyRadius: number): WrapsPiece => ({
+    type: "wraps", id: 3, material: "hackle", look: "hackle", color: "#202020", window: [0, 1],
+    path: "travel", x0: 0.1, x1: 1.8, width: 0, turns: 5, strandRadius: 0.012, base: Profile.bare(-0.3, 2.2, bodyRadius),
+    fibreLength: 1.2, sweep: 0.5, barbs: { perGape: 70, radius: 0.005 },
+  });
+  /** The Red Tag with its hackle changed: another kind, or on another size of hook. */
+  const redTag = (edit: (kdl: string) => string) => {
+    const r = loadRecipe(edit(readFileSync(new URL("../../patterns/red-tag.kdl", import.meta.url), "utf8")));
+    if (!r.ok) throw new Error(r.errors.map((e) => e.message).join("\n"));
+    return simulate(r.recipe).steps.flatMap((s) => s.pieces).find((p): p is WrapsPiece => p.type === "wraps" && p.look === "hackle")!;
+  };
+
+  it("draws as many as the stem carries: more on a turn round a thick body than round a thin one", () => {
+    const thin = palmer(0.06);
+    const thick = palmer(0.25);
+    const a = barbs(thin);
+    const b = barbs(thick);
+    expect(a.count).toBe(Math.round(stemOf(thin).length * 70));
+    expect(b.count).toBe(Math.round(stemOf(thick).length * 70));
+    // Round a body four times as thick the stem is about three times as long.
+    expect(b.count / a.count).toBeGreaterThan(2.5);
+    expect(b.count / a.count).toBeCloseTo(stemOf(thick).length / stemOf(thin).length, 1);
+  });
+
+  it("draws thicker barbs, for its size, on a small hook than on a big one", () => {
+    const small = redTag((k) => k.replace("hook dry-standard size=14", "hook dry-standard size=20"));
+    const big = redTag((k) => k.replace("hook dry-standard size=14", "hook dry-standard size=8"));
+    expect(small.barbs!.radius).toBeGreaterThan(big.barbs!.radius * 2);
+    expect(barbs(small).radius).toBeCloseTo(small.barbs!.radius, 6);
+    // The same barbs along each mm of stem, so more along a gape of the bigger hook.
+    expect(big.barbs!.perGape).toBeGreaterThan(small.barbs!.perGape * 2);
+  });
+
+  it("gives a hen hackle fewer barbs than a cock hackle at the same turns", () => {
+    const cock = redTag((k) => k);
+    const hen = redTag((k) => k.replace("hackle cock-hackle", "hackle hen-hackle"));
+    expect(barbs(hen).count).toBeLessThan(barbs(cock).count * 0.8);
+  });
+
+  it("comes from a catalog kind that says how many barbs grow along its stem", () => {
+    const hackles = Object.entries(MATERIALS as Record<string, CatalogMaterial>).filter(([, m]) => m.archetype === "hackle");
+    expect(hackles.length).toBeGreaterThan(5);
+    for (const [kind, m] of hackles) expect(m.barbsPerMm, kind).toBeGreaterThan(0);
+  });
+
+  it("spreads its barbs evenly along the stem", () => {
+    const piece = palmer(0.25);
+    const stem = stemOf(piece);
+    expect(stem.at(0)).toBe(0);
+    expect(stem.at(1)).toBeCloseTo(1, 6);
+    // A body thinning towards the front: half the stem is wound before half the progress.
+    const tapered = { ...piece, base: Profile.bare(-0.3, 2.2, 0.06).withLayer(-0.3, 0.9, 0.3) };
+    expect(stemOf(tapered).at(0.5)).toBeLessThan(0.5);
   });
 });

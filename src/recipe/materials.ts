@@ -43,6 +43,11 @@ export interface CatalogMaterial {
   defaultColor?: string;
   /** Hackles: how far the fibres lean back from upright, in degrees, when wound. */
   sweep?: number;
+  /**
+   * Hackles: barbs along each mm of the stem, both sides together. A turn carries as many as the
+   * stem it takes, so a turn round a thick body carries more than one round a bare shank.
+   */
+  barbsPerMm?: number;
   /** Feathers: the outline of the wing. */
   shape?: FeatherShape;
   /** Tinsel: oval tinsel is round in section, flat tinsel is a ribbon. */
@@ -86,17 +91,20 @@ export const MATERIALS = {
   "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e" },
 
   // Hackles
-  "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7 },
-  "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35 },
-  "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 40 },
+  // Assumption (all the barb densities): a cock hackle carries its barbs closest, a saddle hackle
+  // a little less close, a hen hackle fewer, and the soft game-bird feathers fewest, their barbs
+  // well apart (photos of collars, palmered bodies and spiders).
+  "cock-hackle": { name: "cock hackle", archetype: "hackle", sweep: 7, barbsPerMm: 14 },
+  "hen-hackle": { name: "hen hackle", archetype: "hackle", sweep: 35, barbsPerMm: 8 },
+  "saddle-hackle": { name: "saddle hackle", archetype: "hackle", sweep: 40, barbsPerMm: 10 },
   // Soft game-bird hackles sweep well back over the body (reference photos of spiders).
-  "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 65 },
-  "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65 },
+  "partridge-hackle": { name: "partridge hackle", archetype: "hackle", defaultColor: "partridge", sweep: 65, barbsPerMm: 4.5 },
+  "snipe-hackle": { name: "snipe hackle", archetype: "hackle", defaultColor: "snipe", sweep: 65, barbsPerMm: 5 },
   // Assumption: guinea-fowl body feathers are soft, between a hen hackle and partridge.
-  "guinea-fowl-hackle": { name: "guinea fowl hackle", archetype: "hackle", defaultColor: "guinea", sweep: 45 },
+  "guinea-fowl-hackle": { name: "guinea fowl hackle", archetype: "hackle", defaultColor: "guinea", sweep: 45, barbsPerMm: 6 },
   // The golden pheasant cock's ruddy red flank feather, folded and wound as a hackle (an Usk
   // Grub's tail). Assumption: soft, its long barbs sweeping back like a partridge hackle's.
-  "golden-pheasant-flank": { name: "golden pheasant flank feather", archetype: "hackle", defaultColor: "#a8401c", sweep: 60 },
+  "golden-pheasant-flank": { name: "golden pheasant flank feather", archetype: "hackle", defaultColor: "#a8401c", sweep: 60, barbsPerMm: 6 },
 
   // Dubbing
   // Assumption: hare's mask and seal's fur are the roughest common dubbings, rabbit in between
