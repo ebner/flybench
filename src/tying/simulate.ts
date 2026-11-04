@@ -131,6 +131,12 @@ export interface BundlePiece extends PieceBase {
   fibreWidth?: number;
   /** Fibres with flue along them (peacock sword). */
   flue?: boolean;
+  /**
+   * A bunch of hair tied in with a length (not spun, glued or upright): how stiff the hair is,
+   * 0 (soft) to 1 (stiff). It leaves the tie-in as one tight bundle and fans out towards its
+   * tips; soft hair bends towards the body and its tips are uneven.
+   */
+  stiffness?: number;
 }
 
 /** Bands along a fibre, as fractions of its length from base to tip, drawn at `shade` of its colour. */
@@ -404,6 +410,7 @@ interface MaterialLook {
   flue?: boolean;
   veil?: boolean;
   shaggy?: number;
+  stiffness?: number;
   /** Foam: the sheet's thickness (gapes), when the recipe gives it. */
   sheet?: number;
   /** A fur strip clipped but for a tuft this long at its end (gapes). */
@@ -448,13 +455,13 @@ function barMarks(barring: number): FibreMarks {
 
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
   const barring = m.barred === undefined ? BARRED[colorName] ?? 0 : m.barred ? BARRED.grizzly! : 0;
   const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: cat.stiffness, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
@@ -1029,6 +1036,7 @@ export function simulate(recipe: Recipe): Build {
               type: "bundle", id: nextId++, material: step.tails, look: tl.look, color: tl.color, window: [0, 0.35],
               x: end.x, radius: flip * end.y + 0.02, centre: flip * end.y, length: step["tail-length"], angle: slope, direction: step.forward ? "forward" : "back", side,
               spread: deg(step["tail-spread"] ?? 20), bundleRadius: tl.strandRadius, count: tl.count, marks: tl.marks, fibreWidth: tl.fibreWidth, flue: tl.flue,
+              ...(tl.stiffness !== undefined && { stiffness: tl.stiffness }),
             });
           }
           // The rest of the strip waits, folded back over the tail, to be pulled over the body.
@@ -1084,6 +1092,7 @@ export function simulate(recipe: Recipe): Build {
             bundleRadius: l.strandRadius, count: l.look === "hair" && !l.counted ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
             pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
             ...(upright && step.fan !== undefined ? { fan: deg(step.fan) } : {}),
+            ...(!upright && l.stiffness !== undefined && { stiffness: l.stiffness }),
           };
           pieces.push(bundle);
           if (step.forward) forwardBunches.set(step.material, bundle);

@@ -109,9 +109,10 @@ steps {
     tie-in throat length=1.8 angle=22 side=under
     // Read from Misiura's photo: the wing reaching well past the tail, about four gapes.
     tie-in underwing length=2.4 angle=7 spread=14 note="A small bunch of tippet strands."
-    tie-in wing length=4.0 angle=8 spread=18 note="The two colours mixed."
+    // Read from the photos: the hair bends down over the body, so the wings leave the head steeper.
+    tie-in wing length=4.0 angle=10 spread=18 note="The two colours mixed."
     trim wing
-    tie-in overwing length=4.0 angle=9 spread=14 note="Sparse, over the bucktail."
+    tie-in overwing length=4.0 angle=12 spread=14 note="Sparse, over the bucktail."
     trim overwing note="Cut at an angle for a small head."
     tie-in cheeks length=0.9 angle=10 spread=30 note="One each side of the wing's root."
     whip-finish note="A black head, varnished."

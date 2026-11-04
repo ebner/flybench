@@ -80,8 +80,9 @@ steps {
     tie-off rib
     // Read from the photos: about to the hook point.
     tie-in throat length=1.1 angle=24 side=under note="A bunch under the shank."
-    // Read from the photos: about a gape past the bend.
-    tie-in wing length=3.3 angle=7 spread=16 note="A small bunch, low over the body."
+    // Read from the photos: about a gape past the bend; soft squirrel bends down over the body, so
+    // it leaves the head a little steeper.
+    tie-in wing length=3.3 angle=11 spread=16 note="A small bunch, low over the body."
     trim wing
     // Read from the photos: short, the eyes showing just behind the head.
     tie-in cheeks length=0.8 angle=12 spread=30 note="One each side, flat against the root of the wing."

@@ -85,7 +85,8 @@ steps {
     // Read from Frödin's photo: the orange shows under the front third of the wing.
     tie-in underwing length=2.4 angle=4 spread=70 note="A small bunch, combed out."
     // Frödin (SwittersB): the wing flat round the sides of the tube, only its underside clear.
-    tie-in wing-rear length=4.4 angle=3 spread=100 note="A small bunch with the underfur combed out, spread round the sides and top."
+    // Read from the photos: the soft fox bends in towards the tube, so it leaves the tie-in steeper.
+    tie-in wing-rear length=4.4 angle=6 spread=100 note="A small bunch with the underfur combed out, spread round the sides and top."
     trim wing-rear
     // Foxall: the flash a little longer than the hair, to taper the wing.
     tie-in flash-rear length=4.8 angle=3 spread=60 note="A few strands either side."
@@ -95,7 +96,8 @@ steps {
     tie-off hackle-rear
     wrap-thread to=0.62
     // GlobalFlyFisher, Müller: the last section tied in pointing forward and folded back.
-    tie-in wing-front length=5.6 angle=6 spread=100 forward=#true note="A larger bunch, the butts cut square and bound along the tube."
+    // Read from the photos: steeper, as the soft fox bends in towards the tube.
+    tie-in wing-front length=5.6 angle=10 spread=100 forward=#true note="A larger bunch, the butts cut square and bound along the tube."
     pull-over wing-front to=0.62
     tie-in flash-front length=6 angle=5 spread=40
     tie-in hackle-front
