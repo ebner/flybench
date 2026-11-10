@@ -17,6 +17,7 @@ import { MONTH_NAMES } from "../i18n/months";
 import { linkTo } from "./linkTo";
 import { ownEntry, useOwnFlies } from "./ownFlies";
 import { useFlyPictures } from "./pictures";
+import { useHydrated } from "./hydration";
 
 
 export function Gallery({ query }: { query: string }) {
@@ -29,6 +30,7 @@ export function Gallery({ query }: { query: string }) {
   }, [query]);
   useEffect(() => rememberGallery(filtersToQuery(filters)), [filters]);
   const renders = useRenders();
+  const hydrated = useHydrated();
   const owned = useStoredSet(INVENTORY_KEY);
   const language = lang();
   const found = useMemo(() => catalogSearch().search(filters), [filters, language]);
@@ -79,7 +81,8 @@ export function Gallery({ query }: { query: string }) {
             <a href={href.build()}>{t.build.nav}</a>
           </p>
         </div>
-        {renders && <FlyOfTheDay renders={renders} />}
+        {/* Which fly depends on the day: its place is kept in a page built ahead of time. */}
+        {hydrated ? <FlyOfTheDay renders={renders} /> : <div className="fly-of-the-day" aria-hidden="true"><div className="fly-of-the-day-image" /><p>&nbsp;</p></div>}
       </section>
 
       <YourFlies />

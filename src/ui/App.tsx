@@ -1,6 +1,7 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, use, useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
 import { useUpdated } from "./update";
 import { PageBoundary } from "./PageBoundary";
+import { HydrationBoundary } from "./hydration";
 import { siteTitle } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
 import { About, AUTHOR, REPO_URL } from "./About";
@@ -14,19 +15,54 @@ import { FlyBox, Materials } from "./Personal";
 
 // The pages with a 3D view bring three.js and the renderer: fetched when one is opened, so the
 // gallery and the reading pages don't wait for them.
-const PatternPage = lazy(() => import("./PatternPage").then((m) => ({ default: m.PatternPage })));
-const Build = lazy(() => import("./Build").then((m) => ({ default: m.Build })));
-const NaturalsIndex = lazy(() => import("./Naturals").then((m) => ({ default: m.NaturalsIndex })));
-const NaturalPage = lazy(() => import("./Naturals").then((m) => ({ default: m.NaturalPage })));
-const TechniquesIndex = lazy(() => import("./Techniques").then((m) => ({ default: m.TechniquesIndex })));
-const TechniquePage = lazy(() => import("./Techniques").then((m) => ({ default: m.TechniquePage })));
-import { href, restoresScroll, routeHrefIn, useRoute } from "./router";
+const PatternPage = onDemand(() => import("./PatternPage").then((m) => m.PatternPage));
+const Build = onDemand(() => import("./Build").then((m) => m.Build));
+const NaturalsIndex = onDemand(() => import("./Naturals").then((m) => m.NaturalsIndex));
+const NaturalPage = onDemand(() => import("./Naturals").then((m) => m.NaturalPage));
+const TechniquesIndex = onDemand(() => import("./Techniques").then((m) => m.TechniquesIndex));
+const TechniquePage = onDemand(() => import("./Techniques").then((m) => m.TechniquePage));
+const ON_DEMAND: Partial<Record<Route["page"], { preload: () => Promise<unknown> }>> = {
+  fly: PatternPage, build: Build, naturals: NaturalsIndex, natural: NaturalPage, techniques: TechniquesIndex, technique: TechniquePage,
+};
+
+/**
+ * A page whose code is fetched when it is first shown. Once fetched it draws at once, without
+ * suspending: a page built ahead of time is taken over whole only if its code is already here
+ * (see `preloadPage`); a page that suspended while being taken over would be drawn afresh.
+ */
+function onDemand<P extends object>(load: () => Promise<ComponentType<P>>): ((props: P) => ReactNode) & { preload: () => Promise<unknown> } {
+  let Page: ComponentType<P> | null = null;
+  let loading: Promise<ComponentType<P>> | null = null;
+  const preload = () => (loading ??= load().then((c) => (Page = c)));
+  return Object.assign(
+    (props: P) => {
+      const Loaded = Page ?? use(preload());
+      return <Loaded {...props} />;
+    },
+    { preload },
+  );
+}
+
+/** Fetches the code of the page at an address (relative to the base and the language), if it is fetched on demand. */
+export function preloadPage(relative: string): Promise<unknown> {
+  return ON_DEMAND[parseRoute(relative).page]?.preload() ?? Promise.resolve();
+}
+import { href, parseRoute, restoresScroll, routeHrefIn, useRoute, type Route } from "./router";
 import { useTheme } from "./theme";
 import { lang } from "../i18n/lang";
 import { isLoaded, loadLanguage } from "../i18n/load";
 import { DRAFT, t } from "../i18n/ui";
 
-export function App() {
+/** `prerendered`: drawn ahead of time, or taking over a page that was (see hydration.tsx). */
+export function App({ prerendered = false }: { prerendered?: boolean }) {
+  return (
+    <HydrationBoundary prerendered={prerendered}>
+      <Site />
+    </HydrationBoundary>
+  );
+}
+
+function Site() {
   const route = useRoute();
   const { choice, setChoice } = useTheme();
   // Switching to Swedish or German the first time fetches that language's words; the pages

@@ -28,6 +28,7 @@ import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
 import { linkTo } from "./linkTo";
 import { useRegion } from "./region";
+import { useHydrated } from "./hydration";
 import { REGION_KEY, useStoredSet } from "./storage";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
@@ -144,7 +145,8 @@ export function NaturalsIndex() {
   const pictures = useNaturalPictures();
   const stills = useNaturalStills();
   const [region, chooseRegion] = useRegion();
-  const month = new Date().getMonth();
+  // (Not known to a page built ahead of time: no month is marked until the app has taken it over.)
+  const month = useHydrated() ? new Date().getMonth() : -1;
   useEffect(() => {
     document.title = t.site.titled(t.naturals.title);
   }, [lang()]);

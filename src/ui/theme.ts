@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHydrated } from "./hydration";
 
 export type ThemeChoice = "system" | "light" | "dark";
 export type Theme = "light" | "dark";
@@ -22,8 +23,16 @@ function systemTheme(): Theme {
 
 /** The chosen theme (persisted per browser) and the theme in effect. */
 export function useTheme(): { choice: ThemeChoice; theme: Theme; setChoice: (c: ThemeChoice) => void } {
-  const [choice, setChoiceState] = useState(readChoice);
-  const [system, setSystem] = useState(systemTheme);
+  // A page built ahead of time doesn't know the visitor's theme: the page's own first script
+  // (index.html) has set it, and it is read here once the app has taken the page over.
+  const hydrated = useHydrated();
+  const [choice, setChoiceState] = useState<ThemeChoice>(() => (hydrated ? readChoice() : "system"));
+  const [system, setSystem] = useState<Theme>(() => (hydrated ? systemTheme() : "light"));
+  useEffect(() => {
+    if (!hydrated) return;
+    setChoiceState(readChoice());
+    setSystem(systemTheme());
+  }, [hydrated]);
 
   useEffect(() => {
     const media = matchMedia("(prefers-color-scheme: dark)");
@@ -34,10 +43,11 @@ export function useTheme(): { choice: ThemeChoice; theme: Theme; setChoice: (c: 
 
   const theme = choice === "system" ? system : choice;
   useEffect(() => {
+    if (!hydrated) return;
     document.documentElement.dataset.theme = theme;
     // The browser's own bars take the page's paper colour (as in index.html).
     document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute("content", PAPER[theme]);
-  }, [theme]);
+  }, [theme, hydrated]);
 
   const setChoice = (c: ThemeChoice) => {
     setChoiceState(c);

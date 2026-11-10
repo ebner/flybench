@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
-import { App } from "./ui/App";
+import { App, preloadPage } from "./ui/App";
 import { splitLang } from "./i18n/lang";
 import { loadLanguage } from "./i18n/load";
 import { watchForUpdates } from "./ui/update";
@@ -34,22 +34,24 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
 
 // A Swedish or German page first fetches its language's words; the prerendered page shows meanwhile.
 const base = import.meta.env.BASE_URL;
-const [first] = splitLang(location.pathname.startsWith(base) ? location.pathname.slice(base.length) : "");
-loadLanguage(first)
+const [first, relative] = splitLang(location.pathname.startsWith(base) ? location.pathname.slice(base.length) : "");
+// With the page's own code, where that is fetched on demand: the app takes a page over whole.
+Promise.all([loadLanguage(first), preloadPage(relative)])
   .catch(() => {
     // Offline and never fetched: the app still starts; the page shows what it can.
   })
   .finally(() => {
     const root = document.getElementById("root")!;
-    const app = (
-      <StrictMode>
-        <App />
-      </StrictMode>
-    );
     // A page built ahead of time as the app itself draws it (its root says for which address)
     // is taken over as it stands. Anything else is drawn afresh: a page not built that way yet,
     // an address with filters or a step in it, the front page standing in for another offline.
     const here = location.pathname.startsWith(base) ? location.pathname.slice(base.length) : null;
-    if (root.dataset.page !== undefined && root.dataset.page === here && !location.search && !location.hash.startsWith("#/")) hydrateRoot(root, app);
+    const prerendered = root.dataset.page !== undefined && root.dataset.page === here && !location.search && !location.hash.startsWith("#/");
+    const app = (
+      <StrictMode>
+        <App prerendered={prerendered} />
+      </StrictMode>
+    );
+    if (prerendered) hydrateRoot(root, app);
     else createRoot(root).render(app);
   });

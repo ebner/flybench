@@ -141,8 +141,20 @@ export function routeHref(route: Route): string {
   }
 }
 
+// Where there is no address bar (the pages built ahead of time): the page being drawn.
+let serverPath = "";
+/** The page to draw when there is no browser: its path under the base, with its language ("sv/about/"). */
+export function setServerPath(path: string): void {
+  serverPath = path;
+}
+
 /** The current address relative to the base and the language, as `parseRoute` reads it; sets the language. */
 function currentRelative(): string {
+  if (typeof location === "undefined") {
+    const [l, rest] = splitLang(serverPath);
+    setLang(l);
+    return rest;
+  }
   const path = location.pathname.startsWith(BASE) ? location.pathname.slice(BASE.length) : location.pathname;
   const [l, rest] = splitLang(path + location.search);
   setLang(l);
@@ -190,6 +202,7 @@ export function useRoute(): Route {
   const [route, setRoute] = useState(() => {
     // The language first (from the path), so an old hash link under /sv/ stays Swedish.
     const relative = currentRelative();
+    if (typeof location === "undefined") return parseRoute(relative);
     const legacy = legacyRoute(location.hash);
     if (legacy) history.replaceState(null, "", routeHref(legacy));
     return legacy ?? parseRoute(relative);

@@ -10,6 +10,8 @@
  */
 import { createHash } from "node:crypto";
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
+import { resolve } from "node:path";
 import { existsSync } from "node:fs";
 import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
@@ -147,12 +149,20 @@ const preloads = (page: { path: string; lang: Lang }) => {
   ].join("\n    ");
 };
 
-for (const page of pages) {
+// The app itself, built to draw without a browser (src/entry-server.tsx): the pages it draws
+// here are taken over in the browser as they stand. The others keep their plain text.
+const app: typeof import("../src/entry-server") = await import(pathToFileURL(resolve("dist-ssr/entry-server.js")).href);
+await app.loadLanguages();
+
+for (const listed of pages) {
+  const address = langPrefix(listed.lang) + listed.path;
+  const drawn = app.hydrated(listed.path);
+  const page = drawn ? { ...listed, body: await app.renderPage(address) } : listed;
   const id = rendered(page.image);
   const html = pageHtml(template, page, { url: SITE_URL, base: BASE, image: id ? `og/${id}.jpg` : "og/site.jpg", lang: page.lang }).replace(
     "</head>",
     () => `  ${preloads(page)}\n  </head>`,
-  );
+  ).replace('<div id="root">', () => (drawn ? `<div id="root" data-page="${address}">` : '<div id="root">'));
   const dir = `${DIST}/${langPrefix(page.lang)}${page.path}`;
   await mkdir(dir, { recursive: true });
   await writeFile(`${dir}index.html`, html);

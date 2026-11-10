@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useHydrated } from "./hydration";
 
 /**
  * Small persistent sets and lists in browser storage (fly box, inventory, tying log). Storage can be
@@ -19,6 +20,23 @@ export function readList(key: string): unknown[] {
   } catch {
     return memory.get(key) ?? [];
   }
+}
+
+/**
+ * A stored value's state: empty while a page built ahead of time is being taken over (it was
+ * drawn without the visitor's things), read from storage right after; read at once otherwise.
+ */
+function useStored<T>(read: () => T, empty: () => T): [T, (next: T | ((prev: T) => T)) => void] {
+  const hydrated = useHydrated();
+  const [value, setValue] = useState(() => (hydrated ? read() : empty()));
+  const late = useRef(!hydrated);
+  useEffect(() => {
+    if (!hydrated || !late.current) return;
+    late.current = false;
+    setValue(read());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated]);
+  return [value, setValue];
 }
 
 function read(key: string): string[] {
@@ -63,7 +81,7 @@ function useChanges(key: string, reread: () => void) {
  * `valid` (written by another version of the site, or by hand) are left out.
  */
 export function useStoredList<T>(key: string, valid: (v: unknown) => v is T): { items: T[]; save: (items: T[]) => void } {
-  const [items, setItems] = useState(() => readList(key).filter(valid));
+  const [items, setItems] = useStored<T[]>(() => readList(key).filter(valid), () => []);
   useChanges(key, useCallback(() => setItems(readList(key).filter(valid)), [key, valid]));
   const save = useCallback(
     (next: T[]) => {
@@ -81,7 +99,7 @@ export function useStoredSet(key: string): {
   toggle: (v: string) => void;
   set: (v: string, on: boolean) => void;
 } {
-  const [values, setValues] = useState(() => new Set(read(key)));
+  const [values, setValues] = useStored(() => new Set(read(key)), () => new Set<string>());
   useChanges(key, useCallback(() => setValues(new Set(read(key))), [key]));
 
   const set = useCallback(
