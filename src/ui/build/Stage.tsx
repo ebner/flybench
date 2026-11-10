@@ -5,6 +5,7 @@ import { stepAt, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
 import type { Player } from "../usePlayer";
 import { StepBar } from "../StepBar";
+import { shadowsCapable } from "../realistic";
 import { SPEEDS, TransportIcon } from "../transport";
 
 /** A handle on the fly: which part, what it sets, where it is on the shank's plane (gapes). */
@@ -135,7 +136,7 @@ export function Stage({
   useEffect(() => {
     let s: FlyScene;
     try {
-      s = new FlyScene(container.current!, { background: null, adaptive: true });
+      s = new FlyScene(container.current!, { background: null, adaptive: true, shadows: shadowsCapable() });
     } catch {
       setUnavailable(true);
       return;

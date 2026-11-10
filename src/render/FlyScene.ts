@@ -22,6 +22,12 @@ import { CLINGS, wetFly } from "./real/wet";
 import { bedShadows } from "./real/shadows";
 
 const Y_UP = new THREE.Vector3(0, 1, 0);
+// Assumption: at full strength a mass of hair or marabou shades itself dull and grey; at half,
+// wings and hackle still shade the body and bright wings stay bright (chosen by the reviewer
+// from a comparison, 2026-11-10).
+const SHADOW_STRENGTH = 0.5;
+/** Where the key light shines from: above, in front and a little to the eye's side. */
+const KEY_FROM = new THREE.Vector3(2, 4, 5).normalize();
 const Z_AXIS = new THREE.Vector3(0, 0, 1);
 // Assumption: a cut end takes about a quarter of its step to drop out of sight, some three gapes down.
 const CUT_FALLS = 0.25;
@@ -128,6 +134,13 @@ export interface FlySceneOptions {
    * less sharp until it is still again. Never for pictures (the build's renders, snapshots).
    */
   adaptive?: boolean;
+  /** Drawn at the screen's full pixel density, whatever it is (the build's pictures); a view on a page stops at 2. */
+  fullDensity?: boolean;
+  /**
+   * The key light casts soft shadows: wings and hackle on the body, the fly on itself. In an
+   * `adaptive` view they are dropped for good once frames come slowly.
+   */
+  shadows?: boolean;
 }
 
 /** Direction the thread (or a material end) leaves the shank when the wrap is at `angle`. */
@@ -145,6 +158,8 @@ export class FlyScene {
   private environment: THREE.WebGLRenderTarget;
   /** The studio lights; the realistic water is lit by its panorama alone. */
   private lights: THREE.Light[];
+  private key!: THREE.DirectionalLight;
+  private shadows = false;
   private scene = new THREE.Scene();
   private camera: THREE.PerspectiveCamera;
   private controls: OrbitControls;
@@ -269,10 +284,17 @@ export class FlyScene {
   ) {
     this.camera = new THREE.PerspectiveCamera(options.fov ?? 32, 1, 0.05, 500);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: options.background === null });
-    this.fullRatio = this.ratio = Math.min(window.devicePixelRatio, 2);
+    this.fullRatio = this.ratio = options.fullDensity ? window.devicePixelRatio : Math.min(window.devicePixelRatio, 2);
     this.adaptive = options.adaptive ?? false;
     this.renderer.setPixelRatio(this.ratio);
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    // Khronos' neutral curve, made for showing things in their true colours: bright, saturated
+    // materials (hot orange, chartreuse) keep their colour, where a film-like curve washes them out.
+    this.renderer.toneMapping = THREE.NeutralToneMapping;
+    if (options.shadows) {
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    }
+    this.shadows = !!options.shadows;
     container.appendChild(this.renderer.domElement);
 
     this.environment = this.makeEnvironment();
@@ -297,9 +319,21 @@ export class FlyScene {
     this.setBackground(options.background === undefined ? "#e8e5de" : options.background);
 
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
-    key.position.set(2, 4, 5);
+    key.position.copy(KEY_FROM);
     this.lights = [key, new THREE.HemisphereLight(0xffffff, 0x8a8070, 0.6)];
     this.scene.add(...this.lights);
+    this.key = key;
+    if (this.shadows) {
+      key.castShadow = true;
+      // Fine fibres: a large map, softened, and biased so they don't shade themselves in stripes.
+      const size = options.fullDensity ? 4096 : 2048;
+      key.shadow.mapSize.set(size, size);
+      key.shadow.radius = 3;
+      key.shadow.bias = -0.0004;
+      key.shadow.normalBias = 0.008;
+      key.shadow.intensity = SHADOW_STRENGTH;
+      this.scene.add(key.target);
+    }
     this.rig.matrixAutoUpdate = false;
     this.rig.add(this.fly);
     this.scene.add(this.rig);
@@ -468,6 +502,7 @@ export class FlyScene {
     this.setTime(build.duration);
     this.finished = this.visibleBounds();
     this.hookBounds = this.visibleBounds([this.hook!]);
+    if (this.shadows) this.aimShadows();
     this.followFresh = true;
     if (!keepCamera) this.resetCamera();
     this.setTime(time);
@@ -1150,6 +1185,23 @@ export class FlyScene {
     this.dirty = true;
   }
 
+  /** The key light's shadow fitted round the finished fly, and everything on the fly set to cast and take shadows. */
+  private aimShadows() {
+    const ball = this.finished.getBoundingSphere(new THREE.Sphere());
+    const r = Math.max(0.5, ball.radius);
+    this.key.target.position.copy(ball.center);
+    this.key.position.copy(ball.center).add(KEY_FROM.clone().multiplyScalar(4 * r));
+    const camera = this.key.shadow.camera;
+    camera.left = camera.bottom = -1.1 * r;
+    camera.right = camera.top = 1.1 * r;
+    camera.near = 0.5 * r;
+    camera.far = 8 * r;
+    camera.updateProjectionMatrix();
+    this.fly.traverse((o) => {
+      if (o instanceof THREE.Mesh) o.castShadow = o.receiveShadow = true;
+    });
+  }
+
   private makeEnvironment(): THREE.WebGLRenderTarget {
     const pmrem = new THREE.PMREMGenerator(this.renderer);
     const room = new RoomEnvironment();
@@ -1163,11 +1215,22 @@ export class FlyScene {
   /** While frames are drawn one after another: slow ones lower the sharpness a step. */
   private pace(dt: number) {
     this.stillFrames = 0;
-    if (!this.adaptive || this.water || this.ratio <= 1) return;
+    if (!this.adaptive || this.water || (this.ratio <= 1 && !this.shadows)) return;
     // Assumption: under about 35 frames a second for a third of a second reads as stutter.
     this.slowFrames = dt > 1 / 35 ? this.slowFrames + 1 : Math.max(0, this.slowFrames - 1);
     if (this.slowFrames < 12) return;
     this.slowFrames = 0;
+    // The shadows go first, and stay off: they cost a second drawing of the whole fly.
+    if (this.shadows) {
+      this.shadows = false;
+      this.key.castShadow = false;
+      this.renderer.shadowMap.enabled = false;
+      this.scene.traverse((o) => {
+        if (o instanceof THREE.Mesh) for (const m of [o.material].flat()) m.needsUpdate = true;
+      });
+      return;
+    }
+    if (this.ratio <= 1) return;
     this.ratio = Math.max(1, this.ratio * 0.75);
     this.renderer.setPixelRatio(this.ratio);
   }

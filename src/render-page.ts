@@ -60,7 +60,7 @@ if (waterView === "angler" || waterView === "below") {
   // A natural on its own (the Naturals pages' pictures).
   const transparent = params.get("transparent") === "1";
   if (transparent) document.documentElement.style.background = document.body.style.background = "transparent";
-  const scene = new FlyScene(document.getElementById("stage")!, { fov: Number(params.get("fov") ?? 8), background: transparent ? null : "#f4f1ea" });
+  const scene = new FlyScene(document.getElementById("stage")!, { fov: Number(params.get("fov") ?? 8), background: transparent ? null : "#f4f1ea", fullDensity: true });
   const grid = params.get("grid") === "1";
   scene.setNatural(natural, grid ? 10 : undefined);
   scene.setView(view, 0, fit);
@@ -79,6 +79,8 @@ if (waterView === "angler" || waterView === "below") {
   const scene = new FlyScene(document.getElementById("stage")!, {
     fov: Number(params.get("fov") ?? 8),
     background: transparent ? null : "#f4f1ea",
+    fullDensity: true,
+    shadows: true,
   });
   const build = simulate(pattern.recipe);
   scene.setBuild(build);

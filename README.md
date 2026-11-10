@@ -127,7 +127,13 @@ Problems in pattern files also show in a banner in the dev server. Then run
 `pnpm render:catalog` and `pnpm render:water` and commit the images they write to
 `public/renders/`; they only re-render patterns whose recipe or rendering code changed
 (`render:water` path traces, tens of seconds a picture, and fetches its 2k panorama and
-gravel from Poly Haven into `.cache/env/` the first time). The format is
+gravel from Poly Haven into `.cache/env/` the first time).
+A gallery picture is drawn three times its size each way and scaled down, as fibres are finer
+than a pixel: `card.webp` (600×400), `card@2x.webp` for screens with finer pixels, and
+`spin.webp`, sixteen frames of the fly turning at three quarters of the card's width, which a
+plate fetches when a mouse rests on it. The flies are lit by one lamp, which casts soft shadows
+(in a 3D view on a page, only while the device keeps up), with a neutral colour curve that keeps
+bright materials' colours. The format is
 described in [docs/recipe-schema.md](docs/recipe-schema.md), and the authoring procedure
 (research, proportions, checks) in [docs/authoring-patterns.md](docs/authoring-patterns.md).
 

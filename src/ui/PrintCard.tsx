@@ -54,7 +54,7 @@ export function PrintCard({ recipe, build, request, onPrinted }: { recipe: Recip
     document.body.appendChild(host);
     let scene: FlyScene | null = null;
     try {
-      scene = new FlyScene(host, { background: "#ffffff", fov: 20 });
+      scene = new FlyScene(host, { background: "#ffffff", fov: 20, shadows: true });
       scene.setBuild(build);
       scene.setView("default");
       const shots = build.steps.map((s) => {

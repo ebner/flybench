@@ -23,6 +23,11 @@ export interface RenderOptions {
   pose?: "tied" | "pictured";
   width?: number;
   height?: number;
+  /**
+   * Drawn this many times larger each way than `width` × `height` (the screenshot is that much
+   * bigger): for pictures scaled down afterwards, so fibres finer than a pixel come out smooth.
+   */
+  scale?: number;
 }
 
 /** All pattern ids, from the file names in patterns/. */
@@ -63,7 +68,7 @@ export class Renderer {
 
   /** Opens render.html for a fly and waits until the first frame is drawn. */
   async open(options: RenderOptions): Promise<Page> {
-    const page = await this.browser.newPage({ viewport: { width: options.width ?? 1400, height: options.height ?? 900 } });
+    const page = await this.browser.newPage({ viewport: { width: options.width ?? 1400, height: options.height ?? 900 }, deviceScaleFactor: options.scale ?? 1 });
     const query = new URLSearchParams({
       pattern: options.pattern,
       view: options.view,

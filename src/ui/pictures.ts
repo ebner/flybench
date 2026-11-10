@@ -31,7 +31,7 @@ export function useFlyPictures(flies: { key: string; recipe: Recipe }[]): Record
       document.body.appendChild(host);
       let scene: InstanceType<typeof FlyScene> | null = null;
       try {
-        scene = new FlyScene(host, { background: null, fov: 20 });
+        scene = new FlyScene(host, { background: null, fov: 20, shadows: true });
         for (const f of todo) {
           const build = simulate(f.recipe);
           scene.setBuild(build);

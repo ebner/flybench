@@ -357,7 +357,7 @@ function FeaturedFly({ id, name, info, urls }: { id: string; name: string; info:
     <a className="fly-of-the-day" href={href.fly(id)}>
       <div className={ready ? "fly-of-the-day-image spin-ready" : "fly-of-the-day-image"} style={{ "--spin": `url("${urls.spin}")`, "--frames": info.frames } as CSSProperties}>
         <div className="plate-spin" aria-hidden="true" />
-        <img src={urls.card} alt="" width={600} height={400} />
+        <img src={urls.card} srcSet={urls.cards} alt="" width={600} height={400} />
       </div>
       <p>
         {t.gallery.flyOfTheDay} <strong>{name}</strong>
@@ -417,7 +417,7 @@ export function Plate({
           ) : picture === null ? null : urls ? (
             <>
               <div className="plate-spin" aria-hidden="true" />
-              <img src={urls.card} alt="" loading="lazy" width={600} height={400} />
+              <img src={urls.card} srcSet={urls.cards} alt="" loading="lazy" width={600} height={400} />
             </>
           ) : (
             <span className="plate-missing">{t.gallery.notRendered}</span>

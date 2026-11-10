@@ -14,6 +14,19 @@ export function realisticCapable(): boolean {
   return !softwareRendering();
 }
 
+/**
+ * Whether the fly's 3D view starts with its shadows (a second drawing of the fly each frame).
+ * A view that then draws slowly drops them itself.
+ */
+export function shadowsCapable(): boolean {
+  if (typeof window === "undefined") return false;
+  const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
+  // Assumption: as for the realistic water, below 4 GB of memory or 4 cores the extra pass stutters.
+  if (nav.deviceMemory !== undefined && nav.deviceMemory < 4) return false;
+  if (nav.hardwareConcurrency !== undefined && nav.hardwareConcurrency < 4) return false;
+  return !softwareRendering();
+}
+
 let software: boolean | null = null;
 
 /** WebGL drawn on the processor (no usable graphics driver): a few frames a second at best. */

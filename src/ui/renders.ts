@@ -64,7 +64,9 @@ export function useHookPictures(): Record<string, string> | null {
 
 export function renderUrls(id: string, info: RenderInfo) {
   const base = `${import.meta.env.BASE_URL}renders/${encodeURIComponent(id)}`;
-  return { card: `${base}/card.webp?v=${info.hash}`, spin: `${base}/spin.webp?v=${info.hash}` };
+  const card = `${base}/card.webp?v=${info.hash}`;
+  // The card again at twice the size, for screens with finer pixels.
+  return { card, cards: `${card} 1x, ${base}/card@2x.webp?v=${info.hash} 2x`, spin: `${base}/spin.webp?v=${info.hash}` };
 }
 
 /** The realistic water's stills: what scripts/render-water.ts writes to public/renders/water/manifest.json. */

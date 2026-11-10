@@ -28,8 +28,15 @@ import { loadRecipe } from "../src/recipe/load";
 import type { Recipe } from "../src/recipe/schema";
 import { patternIds, Renderer } from "./lib/renderer";
 
-export const FRAMES = 24;
+// Assumption: sixteen frames turn smoothly enough at the plate's size, and three quarters of its
+// width is sharp enough while the fly is moving; the still card is drawn at full size, and again
+// twice as large for screens with finer pixels.
+export const FRAMES = 16;
 const FRAME = { width: 600, height: 400 };
+const SPIN = { width: 450, height: 300 };
+/** Everything is drawn this many times larger each way and scaled down: fibres are finer than a pixel. */
+const OVERSAMPLE = 3;
+const smaller = (png: Buffer, size: { width: number; height: number }) => sharp(png).resize(size.width, size.height, { kernel: "lanczos3" });
 const OUT = "public/renders";
 const MANIFEST = `${OUT}/manifest.json`;
 const SWATCHES = `${OUT}/materials`;
@@ -125,18 +132,20 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
       Array.from({ length: Math.min(CONCURRENCY, queue.length) }, async () => {
         for (let job = queue.shift(); job; job = queue.shift()) {
           const frames = await renderer.turntable(
-            { pattern: job.id, view: "default", transparent: true, fov: 20, pose: "pictured", ...FRAME },
+            { pattern: job.id, view: "default", transparent: true, fov: 20, pose: "pictured", ...FRAME, scale: OVERSAMPLE },
             FRAMES,
           );
           await mkdir(`${OUT}/${job.id}`, { recursive: true });
-          await sharp(frames[0]).webp({ quality: 85, alphaQuality: 90 }).toFile(`${OUT}/${job.id}/card.webp`);
-          // At the card's own size, so the fly stays as sharp while it turns (a strip under webp's 16383 px).
-          const tiles = await Promise.all(frames.map((f) => sharp(f).png().toBuffer()));
-          await sharp({ create: { width: FRAME.width * FRAMES, height: FRAME.height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-            .composite(tiles.map((input, i) => ({ input, left: i * FRAME.width, top: 0 })))
-            .webp({ quality: 80, alphaQuality: 85 })
+          await smaller(frames[0]!, FRAME).webp({ quality: 85, alphaQuality: 90 }).toFile(`${OUT}/${job.id}/card.webp`);
+          await smaller(frames[0]!, { width: FRAME.width * 2, height: FRAME.height * 2 }).webp({ quality: 80, alphaQuality: 90 }).toFile(`${OUT}/${job.id}/card@2x.webp`);
+          const tiles = await Promise.all(frames.map((f) => smaller(f, SPIN).png().toBuffer()));
+          await sharp({ create: { width: SPIN.width * FRAMES, height: SPIN.height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+            .composite(tiles.map((input, i) => ({ input, left: i * SPIN.width, top: 0 })))
+            // (Moving, it bears a lower quality than the still card.)
+            .webp({ quality: 60, alphaQuality: 75 })
             .toFile(`${OUT}/${job.id}/spin.webp`);
           manifest[job.id] = { hash: job.hash, frames: FRAMES, ...FRAME };
+          // (`width` and `height` are the card's; the turning picture is scaled to it by the page.)
           console.log(`${OUT}/${job.id}`);
         }
       }),
@@ -144,8 +153,8 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
     await mkdir(NATURALS_OUT, { recursive: true });
     for (const n of naturalTodo) {
       const out = `${NATURALS_OUT}/${n.id}.png`;
-      await renderer.render({ pattern: "", natural: n.id, view: "default", transparent: true, fov: 20, ...NATURAL_FRAME, out });
-      await sharp(out).webp({ quality: 85, alphaQuality: 90 }).toFile(`${NATURALS_OUT}/${n.id}.webp`);
+      await renderer.render({ pattern: "", natural: n.id, view: "default", transparent: true, fov: 20, ...NATURAL_FRAME, scale: OVERSAMPLE, out });
+      await smaller(await readFile(out), NATURAL_FRAME).webp({ quality: 85, alphaQuality: 90 }).toFile(`${NATURALS_OUT}/${n.id}.webp`);
       await unlink(out);
       naturalManifest[n.id] = n.hash;
       console.log(`${NATURALS_OUT}/${n.id}`);
@@ -153,8 +162,8 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
     await mkdir(HOOKS_OUT, { recursive: true });
     for (const h of hookTodo) {
       const out = `${HOOKS_OUT}/${h.model}.png`;
-      await renderer.render({ pattern: "", hook: h.model, view: "side", transparent: true, fov: 20, ...SWATCH, out });
-      await sharp(out).webp({ quality: 82, alphaQuality: 90 }).toFile(`${HOOKS_OUT}/${h.model}.webp`);
+      await renderer.render({ pattern: "", hook: h.model, view: "side", transparent: true, fov: 20, ...SWATCH, scale: OVERSAMPLE, out });
+      await smaller(await readFile(out), SWATCH).webp({ quality: 82, alphaQuality: 90 }).toFile(`${HOOKS_OUT}/${h.model}.webp`);
       await unlink(out);
       hookManifest[h.model] = h.hash;
       console.log(`${HOOKS_OUT}/${h.model}`);
@@ -165,8 +174,8 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
       Array.from({ length: Math.min(CONCURRENCY, swatchQueue.length) }, async () => {
         for (let s = swatchQueue.shift(); s; s = swatchQueue.shift()) {
           const out = `${SWATCHES}/${s.name}.png`;
-          await renderer.render({ pattern: "", swatch: `${s.kind}:${s.color}`, view: "default", transparent: true, fov: 20, ...SWATCH, out });
-          await sharp(out).webp({ quality: 82, alphaQuality: 90 }).toFile(`${SWATCHES}/${s.name}.webp`);
+          await renderer.render({ pattern: "", swatch: `${s.kind}:${s.color}`, view: "default", transparent: true, fov: 20, ...SWATCH, scale: OVERSAMPLE, out });
+          await smaller(await readFile(out), SWATCH).webp({ quality: 82, alphaQuality: 90 }).toFile(`${SWATCHES}/${s.name}.webp`);
           await unlink(out);
           swatchManifest[s.name] = s.hash;
           console.log(`${SWATCHES}/${s.name}`);

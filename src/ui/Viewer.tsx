@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FlyScene } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
 import { loadRealAssets, siteAssets, type RealAssets } from "../render/real/assets";
-import { realisticCapable } from "./realistic";
+import { realisticCapable, shadowsCapable } from "./realistic";
 import type { WaterStills } from "./renders";
 import { t } from "../i18n/ui";
 import type { Natural } from "../recipe/natural";
@@ -133,7 +133,7 @@ export function Viewer({
     // A transparent canvas over the page's paper, so the fly can cast a soft CSS shadow on it.
     let s: FlyScene;
     try {
-      s = new FlyScene(container.current!, { background: null, adaptive: true });
+      s = new FlyScene(container.current!, { background: null, adaptive: true, shadows: shadowsCapable() });
     } catch {
       setUnavailable(true);
       return;
