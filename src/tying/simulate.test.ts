@@ -955,3 +955,17 @@ describe("fibres by the hook's size", () => {
     expect(fineness({ model: "dry-standard", size: 22 })).toBe(0.7);
   });
 });
+
+describe("what a trim cuts off", () => {
+  it("leaves every other piece's number as it was, so the fly's fibres don't change with it", () => {
+    for (const file of ["elk-hair-caddis.kdl", "muddler-minnow.kdl", "mickey-finn.kdl"]) {
+      const loaded = loadRecipe(readFileSync(new URL(`../../patterns/${file}`, import.meta.url), "utf8"));
+      if (!loaded.ok) throw new Error(file);
+      const pieces = simulate(loaded.recipe).steps.flatMap((s) => s.pieces);
+      const others = pieces.filter((p) => p.type !== "trimmings").map((p) => p.id);
+      // Numbered in the order they are made, with no gaps where trimmings were made between them.
+      expect(others, file).toEqual(others.map((_, i) => others[0]! + i));
+      expect(pieces.filter((p) => p.type === "trimmings").every((p) => p.id >= 1_000_000), file).toBe(true);
+    }
+  });
+});

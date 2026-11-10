@@ -479,6 +479,8 @@ function barMarks(barring: number): FibreMarks {
   });
 }
 
+/** Where the numbers of trimmings pieces start, clear of the other pieces'. */
+const CLIPPINGS_IDS = 1_000_000;
 // Assumption: clippings take about half of the trim's time to drop out of sight, from the cut on.
 const CLIPPINGS_FALL: [number, number] = [0.5, 0.98];
 
@@ -736,6 +738,7 @@ export function simulate(recipe: Recipe): Build {
   // (frontLimit), so which way a wind goes is decided here, as validation does.
   let threadAt = 0;
   let nextId = 0;
+  let clippingsMade = 0;
   let time = 0;
   const looks = new Map(recipe.materials.map((m) => [m.id, materialLook(recipe, m)]));
   const kinds = new Map(recipe.materials.map((m) => [m.id, m]));
@@ -1453,7 +1456,9 @@ export function simulate(recipe: Recipe): Build {
         const cutAt = time + duration * 0.5;
         // What is cut off drops away from the cut on (see TrimmingsPiece).
         const clippings = (from: BundlePiece | WrapsPiece, to?: BundlePiece | WrapsPiece) =>
-          pieces.push({ type: "trimmings", id: nextId++, material: from.material, look: from.look, color: from.color, window: CLIPPINGS_FALL, from, ...(to && { to }) });
+          // (Numbered apart from the other pieces, whose numbers seed their fibres: a fly's
+          // bunches are the same with or without the clippings of a trim before them.)
+          pieces.push({ type: "trimmings", id: CLIPPINGS_IDS + clippingsMade++, material: from.material, look: from.look, color: from.color, window: CLIPPINGS_FALL, from, ...(to && { to }) });
         if (step.keep && spun.has(step.material)) {
           // Spun hair cut flat on top or underneath (or both), the sides left long; what is pulled
           // over it later lies on the flat top.
