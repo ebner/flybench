@@ -54,11 +54,13 @@ export function Trip({ query }: { query: string }) {
   // it, this month as that render is committed (before the browser paints again).
   const hydrated = useHydrated();
   const [trip, setTrip] = useState(() => readQuery(query, hydrated ? undefined : 0));
-  const late = useRef(!hydrated);
+  // (`settled`: the month is known. Until then the choices don't go into the address, where
+  // January would be read back as the visitor's choice.)
+  const [settled, setSettled] = useState(hydrated);
   useLayoutEffect(() => {
-    if (!late.current) return;
-    late.current = false;
+    if (settled) return;
     setTrip(readQuery(query));
+    setSettled(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // A linked trip's region is shown without changing the visitor's own; choosing one keeps it.
@@ -76,9 +78,10 @@ export function Trip({ query }: { query: string }) {
   // The choices go into the address; an address changed from outside (Back, a link) changes them.
   const written = useRef<string | null>(null);
   useEffect(() => {
+    if (!settled) return;
     written.current = writeQuery(trip, region);
     replaceUrl(href.trip(written.current));
-  }, [trip, region]);
+  }, [trip, region, settled]);
   useEffect(() => {
     if (written.current === null || query === written.current) return;
     // "Plan a trip" from the page itself keeps the choices.

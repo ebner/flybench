@@ -1707,6 +1707,25 @@ function furFibre(rand: () => number, u: number, base: THREE.Vector3, back: THRE
   };
 }
 
+/**
+ * How much of a fibre of the untrimmed piece is inside what a trim leaves (`to`): within its
+ * length, its shape (a head clipped round, to a wedge, a cigar or a cone; a disc) and the planes
+ * it is cut flat to, as the trimmed piece's own fibres are cut.
+ */
+function keptLength(to: BundlePiece, f: Fibre): number {
+  let kept = Math.min(f.length, to.length);
+  if (to.cut && to.span) {
+    if (to.trimShape === "disc") kept = discReach(to, f.base, f.dir, f.length);
+    else if (to.direction === "radial") {
+      kept = Math.min(f.length, to.length * shapeFactor(to.trimShape ?? "round", Math.min(1, Math.max(0, (f.base.x - to.x) / to.span))));
+      if (to.below !== undefined) kept *= belowReach(f.dir.y, f.dir.z, to.below);
+    }
+  }
+  if (to.flat?.top !== undefined && f.dir.y > 0.02) kept = Math.min(kept, Math.max(0, (to.flat.top - f.base.y) / f.dir.y));
+  if (to.flat?.under !== undefined && f.dir.y < -0.02) kept = Math.min(kept, Math.max(0, (to.flat.under + f.base.y) / -f.dir.y));
+  return Math.max(0, kept);
+}
+
 // Assumption: clippings drop about three and a half gapes, faster as they go, spreading a little.
 const CLIPPINGS_DROP = 3.5;
 /** No more clippings than this are drawn falling: a closely clipped head sheds thousands. */
@@ -1739,7 +1758,7 @@ function trimmingsView(piece: TrimmingsPiece, surfaces: Surfaces, space: ShankSp
     // The same fibres, shorter (a cut that keeps the piece's seed), or new ones in their place
     // (a head clipped to shape): then all that stood out further than what is left.
     const same = left !== null && to !== undefined && (to.seed ?? to.id) === (from.seed ?? from.id) && left.length === old.list.length;
-    old.list.forEach((f, i) => cutOff(f, same ? left![i]!.length : to?.type === "bundle" ? Math.min(f.length, to.length) : 0, tip));
+    old.list.forEach((f, i) => cutOff(f, same ? left![i]!.length : to?.type === "bundle" ? keptLength(to, f) : 0, tip));
   } else if (to?.type === "wraps" && from.fibreLength && from.look in WOUND_FIBRES) {
     tip = WOUND_FIBRES[from.look as keyof typeof WOUND_FIBRES].tip;
     const seed = (from.seed ?? from.id) * 7919 + 1;
