@@ -316,7 +316,17 @@ export interface LegsPiece extends PieceBase {
   fan?: number;
 }
 
-export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece | SleevePiece;
+/**
+ * What a trim cuts off, for the moment it falls away: the fibres of `from` that `to` (what is
+ * left in its place, if anything) no longer has, or has shorter.
+ */
+export interface TrimmingsPiece extends PieceBase {
+  type: "trimmings";
+  from: BundlePiece | WrapsPiece;
+  to?: BundlePiece | WrapsPiece;
+}
+
+export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece | SleevePiece | TrimmingsPiece;
 
 export type ThreadPose =
   | { kind: "rest"; x: number; radius: number }
@@ -468,6 +478,9 @@ function barMarks(barring: number): FibreMarks {
     return { from, to: from + 0.42 / bars, shade: 1 - 0.75 * barring };
   });
 }
+
+// Assumption: clippings take about half of the trim's time to drop out of sight, from the cut on.
+const CLIPPINGS_FALL: [number, number] = [0.5, 0.98];
 
 // Assumption: a hackle barb is about 0.06 mm thick at its root, on any hook. Drawn at that
 // thickness, a small dry fly's barbs are thicker for its size than a big salmon fly's. This is the
@@ -1438,6 +1451,9 @@ export function simulate(recipe: Recipe): Build {
       case "trim": {
         duration = DURATION.trim;
         const cutAt = time + duration * 0.5;
+        // What is cut off drops away from the cut on (see TrimmingsPiece).
+        const clippings = (from: BundlePiece | WrapsPiece, to?: BundlePiece | WrapsPiece) =>
+          pieces.push({ type: "trimmings", id: nextId++, material: from.material, look: from.look, color: from.color, window: CLIPPINGS_FALL, from, ...(to && { to }) });
         if (step.keep && spun.has(step.material)) {
           // Spun hair cut flat on top or underneath (or both), the sides left long; what is pulled
           // over it later lies on the flat top.
@@ -1453,6 +1469,7 @@ export function simulate(recipe: Recipe): Build {
           const flat = { ...b.flat, ...(step.keep !== "top" && { top }), ...(step.keep !== "under" && { under }) };
           const cut: BundlePiece = { ...b, id: nextId++, seed: b.seed ?? b.id, flat, window: [0.5, 0.5001], until: undefined };
           pieces.push(cut);
+          clippings(b, cut);
           butts.set(step.material, cut);
           const x0 = b.x;
           const x1 = b.x + (b.span ?? 0.1);
@@ -1475,6 +1492,7 @@ export function simulate(recipe: Recipe): Build {
           w.until = cutAt;
           const kept: WrapsPiece = { ...w, id: nextId++, seed: w.seed ?? w.id, keep: step.keep, window: [0.5, 0.5001], until: undefined };
           pieces.push(kept);
+          clippings(w, kept);
           wound.set(step.material, kept);
           ctx.keep = true;
         } else if (covers.has(step.material) && !trailing.has(step.material)) {
@@ -1508,11 +1526,13 @@ export function simulate(recipe: Recipe): Build {
             // A cut further out than the hair reaches cuts nothing: the disc is only as thick as the hair stands.
             const reach = b.radius + b.length * Math.cos(b.angle);
             const flat = { top: Math.min(b.flat?.top ?? reach, h), under: Math.min(b.flat?.under ?? reach, h) };
-            pieces.push({
+            const disc: BundlePiece = {
               // (Glued pads are dense already; spun hair is packed tighter by the cut.)
               ...b, id: nextId++, angle: Math.min(b.angle, deg(10)), count: b.count * (b.across ? 2 : 4), cut: true, flat,
               trimShape: "disc", window: [0.5, 0.5001], until: undefined,
-            });
+            };
+            pieces.push(disc);
+            clippings(b, disc);
             const x0 = b.x;
             const x1 = b.x + (b.span ?? 0.1);
             const mid = (x0 + x1) / 2;
@@ -1527,10 +1547,12 @@ export function simulate(recipe: Recipe): Build {
           const leave = step.leave ?? 0.4;
           const below = step.below !== undefined ? step.below / Math.max(0.01, leave) : undefined;
           const shape = step.shape ?? "round";
-          pieces.push({
+          const head: BundlePiece = {
             ...b, id: nextId++, length: leave, angle: deg(10), count: b.count * 4, cut: true,
             trimShape: shape, ...(below !== undefined && { below }), window: [0.5, 0.5001], until: undefined,
-          });
+          };
+          pieces.push(head);
+          clippings(b, head);
           profile = trimmedBody(profile, b.x, b.x + (b.span ?? 0.1), b.radius, leave, shape, below, b.flat);
         } else {
           // Hair butts, or the tips of hair folded back, behind its tie-down or its last turn.
@@ -1547,14 +1569,18 @@ export function simulate(recipe: Recipe): Build {
             const span = Math.max(0.1, frontLimit - b.x);
             const leave = step.leave ?? 0.4;
             const below = step.below !== undefined ? step.below / Math.max(0.01, leave) : undefined;
-            pieces.push({
+            const head: BundlePiece = {
               ...b, id: nextId++, direction: "radial", span, spread: Math.PI, length: leave, angle: deg(10),
               count: Math.round(1800 * span), cut: true, trimShape: step.shape, ...(below !== undefined && { below }), window: [0.5, 0.5001], until: undefined,
-            });
+            };
+            pieces.push(head);
+            clippings(b, head);
             if (step.shape !== "disc") profile = trimmedBody(profile, b.x, b.x + span, b.radius, leave, step.shape, below, b.flat);
           } else if (step.leave) {
-            pieces.push({ ...b, id: nextId++, length: step.leave, cut: true, window: [0.5, 0.5001], until: undefined });
-          }
+            const stubs: BundlePiece = { ...b, id: nextId++, length: step.leave, cut: true, window: [0.5, 0.5001], until: undefined };
+            pieces.push(stubs);
+            clippings(b, stubs);
+          } else clippings(b);
         }
         break;
       }

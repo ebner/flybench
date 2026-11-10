@@ -190,7 +190,11 @@ steps {
     const longButts = tieIn.pieces.find((p) => p.type === "bundle" && p.direction === "forward")!;
     expect(longButts.until).toBeGreaterThan(trim.start);
     expect(longButts.until).toBeLessThan(trim.start + trim.duration);
-    expect(trim.pieces).toEqual([expect.objectContaining({ type: "bundle", direction: "forward", length: 0.25 })]);
+    // The short head in their place, and what was cut off, which falls away from the cut on.
+    expect(trim.pieces).toEqual([
+      expect.objectContaining({ type: "bundle", direction: "forward", length: 0.25 }),
+      expect.objectContaining({ type: "trimmings", from: longButts, to: trim.pieces[0], window: [0.5, 0.98] }),
+    ]);
   });
 });
 

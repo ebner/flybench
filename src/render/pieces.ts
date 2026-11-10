@@ -16,6 +16,7 @@ import {
   type LegsPiece,
   type Piece,
   type SleevePiece,
+  type TrimmingsPiece,
   type WrapsPiece,
 } from "../tying/simulate";
 import { natural, type Surfaces } from "./materials";
@@ -150,6 +151,8 @@ export interface Fibre {
    */
   wave?: THREE.Vector3;
   wavePhase?: number;
+  /** Not drawn (cut away, or pressed flat under something): only for working out what a trim removes. */
+  hidden?: boolean;
 }
 
 /** How far a billowing fibre is off its line at t (most at two thirds of the way, 1). */
@@ -389,7 +392,8 @@ function woundCount(piece: WrapsPiece, stem: ReturnType<typeof stemOf>): number 
   return Math.round(stem.length * WOUND_FIBRES[look].perGape * (piece.fine ?? 1) * (look === "dubbing" ? 1 + (piece.shaggy ?? 0.4) : 1));
 }
 
-function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
+/** `all`: with the fibres a trim or a wing case hides, flagged `hidden` (what a trim cuts off). */
+function woundFibres(piece: WrapsPiece, rand: () => number, all = false): Fibre[] {
   const look = piece.look as keyof typeof WOUND_FIBRES;
   const spec = WOUND_FIBRES[look];
   const list: Fibre[] = [];
@@ -493,6 +497,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
     const bend = lie ? 0.35 + 0.2 * rand() : (soft ? 0.12 + 0.25 * Math.min(1, (piece.sweep ?? 0.8) / 1.2) : spec.wave) * (0.5 + rand());
     const bendDir = bend > 0 ? perpendicular(dir, lie ? inward : soft ? BACK : ZERO, rand) : undefined;
     if (!hidden) list.push({ u, base, dir, length, radius, shade, bend, bendDir });
+    else if (all) list.push({ u, base, dir, length, radius, shade, bend, bendDir, hidden: true });
   }
   return list;
 }
@@ -979,7 +984,11 @@ function blendTints(look: BundlePiece["look"], colours: string[]): THREE.Color[]
   });
 }
 
-function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+/**
+ * The fibres of a bunch, in shank-local coordinates (not yet placed on the shank), and how they
+ * are drawn. The same piece gives the same fibres each time.
+ */
+function bundleFibres(piece: BundlePiece) {
   const spec = BUNDLE[piece.look as keyof typeof BUNDLE] ?? BUNDLE.yarn;
   const rand = mulberry32((piece.seed ?? piece.id) * 104729 + 3);
   const forward = piece.direction === "forward";
@@ -1173,7 +1182,12 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   // Broad, flat barbs (tippet) keep most of their width to the tip.
   const tip = piece.cut ? 0.9 : piece.fibreWidth && piece.look === "fibres" ? Math.max(spec.tip, 0.7) : flowing ? flowingTip(spec, piece.stiffness!) : spec.tip;
   // (Flowing hair is long, curved and wavy: drawn in more pieces.)
-  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 12 : undefined, piece.cut || piece.across ? 1 : BUNCH_ROOT, BUNCH_GROWS);
+  return { list, tip, tipShade, marks, colours, segments: flowing ? 12 : undefined, rootShade: piece.cut || piece.across ? 1 : BUNCH_ROOT };
+}
+
+function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  const { list, tip, tipShade, marks, colours, segments, rootShade } = bundleFibres(piece);
+  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, segments, rootShade, BUNCH_GROWS);
   return {
     object: fibres.object,
     setProgress(u) {
@@ -1693,6 +1707,68 @@ function furFibre(rand: () => number, u: number, base: THREE.Vector3, back: THRE
   };
 }
 
+// Assumption: clippings drop about three and a half gapes, faster as they go, spreading a little.
+const CLIPPINGS_DROP = 3.5;
+/** No more clippings than this are drawn falling: a closely clipped head sheds thousands. */
+const CLIPPINGS_MOST = 2500;
+
+/**
+ * What a trim cuts off, falling away: the outer part of each fibre the trimmed piece has
+ * shorter, the whole of each it no longer has. There only while it falls.
+ */
+function trimmingsView(piece: TrimmingsPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+  const { from, to } = piece;
+  const waste: Fibre[] = [];
+  const cutOff = (f: Fibre, kept: number, tip: number) => {
+    if (f.length - kept < 0.03) return;
+    const t = kept / f.length;
+    const base = fibrePoint(f, t);
+    const dir = fibrePoint(f, Math.min(1, t + 0.05)).sub(fibrePoint(f, Math.max(0, t - 0.05))).normalize();
+    // (As thick as the fibre is where it is cut; straight, as short ends are.)
+    waste.push({ u: 0, base, dir, length: f.length - kept, radius: f.radius * (1 - (1 - tip) * t), shade: f.shade, tint: f.tint });
+  };
+  let tip = 0.25;
+  let tipShade = 1;
+  let colour = from.color;
+  if (from.type === "bundle") {
+    const old = bundleFibres(from);
+    tip = old.tip;
+    tipShade = old.tipShade;
+    if (old.colours) colour = BLEND_BASE;
+    const left = to?.type === "bundle" ? bundleFibres(to).list : null;
+    // The same fibres, shorter (a cut that keeps the piece's seed), or new ones in their place
+    // (a head clipped to shape): then all that stood out further than what is left.
+    const same = left !== null && to !== undefined && (to.seed ?? to.id) === (from.seed ?? from.id) && left.length === old.list.length;
+    old.list.forEach((f, i) => cutOff(f, same ? left![i]!.length : to?.type === "bundle" ? Math.min(f.length, to.length) : 0, tip));
+  } else if (to?.type === "wraps" && from.fibreLength && from.look in WOUND_FIBRES) {
+    tip = WOUND_FIBRES[from.look as keyof typeof WOUND_FIBRES].tip;
+    const seed = (from.seed ?? from.id) * 7919 + 1;
+    const old = woundFibres(from, mulberry32(seed), true);
+    const left = woundFibres(to, mulberry32(seed), true);
+    old.forEach((f, i) => !f.hidden && left[i]?.hidden && cutOff(f, 0, tip));
+  }
+  // Evenly thinned, if there are very many.
+  const every = Math.ceil(waste.length / CLIPPINGS_MOST);
+  const shown = every > 1 ? waste.filter((_, i) => i % every === 0) : waste;
+  const fibres = fibreMesh(placeFibres(shown, space), surfaces.get(from.look, colour, true, from.type === "wraps" ? from.finish : undefined), tip, tipShade, undefined, 1);
+  const object = fibres.object;
+  // They spread from their middle as they fall.
+  const middle = shown.reduce((sum, f) => sum.addScaledVector(f.base, 1 / shown.length), new THREE.Vector3());
+  return {
+    object,
+    setProgress(u) {
+      object.visible = u > 0 && u < 1 && shown.length > 0;
+      const spread = 1 + 0.35 * u;
+      object.scale.setScalar(spread);
+      object.position.copy(middle).multiplyScalar(1 - spread);
+      object.position.y -= CLIPPINGS_DROP * u * u;
+    },
+    dispose() {
+      fibres.dispose();
+    },
+  };
+}
+
 export function pieceView(piece: Piece, surfaces: Surfaces, space: ShankSpace): PieceView {
   switch (piece.type) {
     case "wraps":
@@ -1713,6 +1789,8 @@ export function pieceView(piece: Piece, surfaces: Surfaces, space: ShankSpace): 
       return arriving(legsView(piece, surfaces, space));
     case "sleeve":
       return sleeveView(piece, surfaces, space);
+    case "trimmings":
+      return trimmingsView(piece, surfaces, space);
   }
 }
 

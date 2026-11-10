@@ -81,6 +81,8 @@ reduced motion asked for; a link with `?step=N` opens that step); play turns it 
 from the bare hook. Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan;
 "View" shows the fly from the side, the front, above or behind. With the keyboard's focus on the
 3D view, the arrow keys turn the fly and + and − zoom.
+While a fly is tied, a bunch grows from its tie-in, eyes and legs are brought to the hook, and
+what a trim cuts off (hair butts, the clippings of a head, a hackle's barbs) drops away.
 Space plays and pauses while the focus is on the stage (elsewhere it scrolls the page, and in vise
 mode it always plays), ← and → step back and forward, Home goes back to step 1 (or hold the
 previous-step button). The fly builder's "watch it tied" has the same keys and speeds. In vise mode Page Down and Page Up do the same as → and ←, for a
