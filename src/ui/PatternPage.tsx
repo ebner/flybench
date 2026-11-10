@@ -111,7 +111,7 @@ function PatternView({
   // The gallery's picture stands in for the 3D view until it has drawn, where the page opens on
   // the finished fly as it is tied (not on another size or in other colours).
   const card = useRenders()[recipe.id];
-  const poster = card && linkedStep === undefined && linkedSize === undefined && !linkedColours ? (({ card: src, cards: srcSet }) => ({ src, srcSet }))(renderUrls(recipe.id, card)) : undefined;
+  const poster = card && linkedStep === undefined && linkedSize === undefined && !linkedColours ? (({ card: src, cards: srcSet }) => ({ src, srcSet, box: card.box }))(renderUrls(recipe.id, card)) : undefined;
   const setFollow = (on: boolean) => {
     setFollowState(on);
     try {

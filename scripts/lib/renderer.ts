@@ -115,16 +115,21 @@ export class Renderer {
     }
   }
 
-  /** Renders `frames` views turning once around the fly; returns PNG buffers. */
-  async turntable(options: RenderOptions, frames: number): Promise<Buffer[]> {
+  /**
+   * Renders `frames` views turning once around the fly: PNG buffers, and where the fly's bounds
+   * fall in the first of them (left, top, width, height as fractions of the picture).
+   */
+  async turntable(options: RenderOptions, frames: number): Promise<{ shots: Buffer[]; bounds: [number, number, number, number] }> {
     const page = await this.open({ ...options, fit: "sphere" });
     try {
       const shots: Buffer[] = [];
+      let bounds: [number, number, number, number] = [0, 0, 1, 1];
       for (let i = 0; i < frames; i++) {
         await page.evaluate((deg) => window.turnTo!(deg), (360 * i) / frames);
+        if (i === 0) bounds = await page.evaluate(() => window.flyBounds!());
         shots.push(await page.screenshot({ omitBackground: options.transparent }));
       }
-      return shots;
+      return { shots, bounds };
     } finally {
       await page.close();
     }

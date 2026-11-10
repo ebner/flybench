@@ -126,6 +126,9 @@ export function naturalFishing(n: Natural): Fishing {
   }
 }
 
+/** The vertical field of view of a 3D view on a page, in degrees (the default). */
+const VIEW_FOV = 32;
+
 export interface FlySceneOptions {
   /** Vertical field of view in degrees. A narrow one gives a nearly distortion-free view for measuring. */
   fov?: number;
@@ -286,7 +289,7 @@ export class FlyScene {
     private container: HTMLElement,
     options: FlySceneOptions = {},
   ) {
-    this.camera = new THREE.PerspectiveCamera(options.fov ?? 32, 1, 0.05, 500);
+    this.camera = new THREE.PerspectiveCamera(options.fov ?? VIEW_FOV, 1, 0.05, 500);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: options.background === null });
     this.fullRatio = this.ratio = options.fullDensity ? window.devicePixelRatio : Math.min(window.devicePixelRatio, 2);
     this.adaptive = options.adaptive ?? false;
@@ -350,7 +353,7 @@ export class FlyScene {
     this.controls.minDistance = 0.8;
     // Allow at least the distance a narrow field of view needs to frame the fly; framing a
     // long fly in a narrow viewport raises it (see allowDistance).
-    this.baseMaxDistance = 14 * Math.max(1, 32 / (options.fov ?? 32));
+    this.baseMaxDistance = 14 * Math.max(1, 32 / (options.fov ?? VIEW_FOV));
     this.controls.maxDistance = this.baseMaxDistance;
     this.controls.addEventListener("start", () => this.takeOver());
 
@@ -1200,6 +1203,44 @@ export class FlyScene {
       water: kit !== null && this.water?.view instanceof kit.RealWater ? this.water.view : null,
       target: this.controls.target.clone(),
     };
+  }
+
+  /**
+   * The box to lay a picture of the fly out by, so that it sits as a 3D view on a page will
+   * show the fly: left, top, width and height as fractions of the picture this camera takes.
+   * A view frames the fly by fitting its bounds from the same side at a wider angle
+   * (`resetCamera`, `fitDistance`): a corner nearer the eye needs more room there than in the
+   * picture, so each counts as further out by its nearness times the view's angle. Fitted to a
+   * view with the same margin, this box gives the fly the size the view gives it; both look at
+   * the middle of the bounds, so it is centred.
+   */
+  framedBounds(): [number, number, number, number] {
+    const target = this.controls.target;
+    const view = this.camera.position.clone().sub(target);
+    const distance = view.length();
+    view.normalize();
+    const right = new THREE.Vector3().crossVectors(Y_UP, view).normalize();
+    const up = new THREE.Vector3().crossVectors(view, right);
+    const tan = Math.tan(THREE.MathUtils.degToRad(VIEW_FOV / 2));
+    const b = this.finished;
+    let across = 0;
+    let high = 0;
+    for (const x of [b.min.x, b.max.x])
+      for (const y of [b.min.y, b.max.y])
+        for (const z of [b.min.z, b.max.z]) {
+          const c = new THREE.Vector3(x, y, z).sub(target);
+          const near = c.dot(view);
+          // (Across, the room a corner needs depends a little on the view's shape: taken for one
+          // a fifth wider than high, between a phone's and a desktop's.)
+          across = Math.max(across, Math.abs(c.dot(right)) + near * tan * 1.2);
+          high = Math.max(high, Math.abs(c.dot(up)) + near * tan);
+        }
+    // Half the picture's height at the fly, in gapes.
+    const half = distance * Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
+    const part = (v: number) => Math.round(v * 10000) / 10000;
+    const w = across / (half * this.camera.aspect);
+    const h = high / half;
+    return [part(0.5 - w / 2), part(0.5 - h / 2), part(w), part(h)];
   }
 
   /** Asks for a frame, after a change the scene can't know of (an overlay's size, say). */

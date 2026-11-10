@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { FlyScene } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
 import { loadRealAssets, siteAssets, type RealAssets } from "../render/real/assets";
@@ -39,7 +39,7 @@ export interface ViewerProps {
    * A picture of the fly as the view will first show it (its gallery card), in the view's place
    * until the 3D view has drawn: in a page built ahead of time, and where there is no WebGL.
    */
-  poster?: { src: string; srcSet?: string };
+  poster?: { src: string; srcSet?: string; box?: number[] };
 }
 
 /** The realistic water's panorama and gravel, loaded the first time it is shown. */
@@ -310,7 +310,17 @@ export function Viewer({
           if (dx > 24 && dx > 2 * Math.abs(e.touches[0]!.clientY - t.y)) setHint(true);
         }}
       />
-      {poster && <img className={shown ? "viewer-poster gone" : "viewer-poster"} src={poster.src} srcSet={poster.srcSet} alt="" />}
+      {poster && (
+        <img
+          className={["viewer-poster", poster.box ? "placed" : "", shown ? "gone" : ""].join(" ").trim()}
+          // Where the fly is in the picture: the picture is sized and placed so that the fly
+          // sits where the 3D view will frame it (styles.css).
+          style={poster.box && ({ "--bl": poster.box[0], "--bt": poster.box[1], "--bw": poster.box[2], "--bh": poster.box[3] } as CSSProperties)}
+          src={poster.src}
+          srcSet={poster.srcSet}
+          alt=""
+        />
+      )}
       {hint && !lost && <p className="viewer-hint">{t.viewer.hint}</p>}
       {lost && (
         <p className="viewer-hint" role="status">

@@ -36,6 +36,8 @@ const fit = params.get("fit") === "sphere" ? "sphere" : "box";
 declare global {
   interface Window {
     turnTo?: (degrees: number) => Promise<void>;
+    /** Where the fly's bounds fall in the picture (FlyScene.framedBounds). */
+    flyBounds?: () => [number, number, number, number];
     /** The path-traced picture as a PNG data address (water stills). */
     waterStill?: string;
   }
@@ -90,6 +92,7 @@ if (waterView === "angler" || waterView === "below") {
   if (swatch) scene.setFraming("dressing");
   scene.setGrid(params.get("grid") === "1");
   scene.setTime(build.duration);
+  window.flyBounds = () => scene.framedBounds();
   window.turnTo = async (degrees) => {
     scene.setView(view, degrees, fit);
     scene.renderNow();

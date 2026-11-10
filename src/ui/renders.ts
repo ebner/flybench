@@ -13,7 +13,7 @@ export type RenderInfo = {
   frames: number;
   width: number;
   height: number;
-  /** Where the fly is in its card: left, top, width and height, as fractions of the card. */
+  /** Where the fly's bounds (what a 3D view frames it by) fall in its card: left, top, width and height, as fractions of the card. */
   box?: number[];
 };
 type Manifest = Record<string, RenderInfo>;
