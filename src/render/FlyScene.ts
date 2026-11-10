@@ -8,7 +8,7 @@ import type { Natural } from "../recipe/natural";
 import { proportions } from "../tying/proportions";
 import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
-import { pieceView, type PieceView } from "./pieces";
+import { pieceView, smooth, type PieceView } from "./pieces";
 import { ShankSpace } from "./space";
 import { patchFogForWater, Water, waveHeight, type WaterLook } from "./water";
 import { CLUMPS, HOLDS_AIR, WET_SPREAD, type Fishing } from "../tying/fishing";
@@ -22,6 +22,10 @@ import { CLINGS, wetFly } from "./real/wet";
 import { bedShadows } from "./real/shadows";
 
 const Y_UP = new THREE.Vector3(0, 1, 0);
+const Z_AXIS = new THREE.Vector3(0, 0, 1);
+// Assumption: a cut end takes about a quarter of its step to drop out of sight, some three gapes down.
+const CUT_FALLS = 0.25;
+const CUT_DROP = 3;
 
 const REST_DIRECTIONS = {
   "back-down": new THREE.Vector3(-0.8, -1, 0.15).normalize(),
@@ -149,7 +153,8 @@ export class FlyScene {
   /** Holds the fly; moves it as the water carries it, without touching the fly's own transform. */
   private rig = new THREE.Group();
   private hook: THREE.Group | null = null;
-  private stepViews: { piece: PieceView; window: [number, number]; until?: number }[][] = [];
+  /** `eased`: moves that start and stop (all but winding, which the thread and the material's end follow turn by turn). */
+  private stepViews: { piece: PieceView; window: [number, number]; until?: number; eased: boolean }[][] = [];
   private wraps = new Map<number, WrapsPiece>();
   private bobbin: BobbinView | null = null;
   private looseEnds = new Map<string, LooseEndView>();
@@ -362,7 +367,7 @@ export class FlyScene {
           if (p.type === "wraps") this.wraps.set(p.id, p);
           const piece = pieceView(p, this.surfaces, this.space!);
           this.fly.add(piece.object);
-          return { piece, window: p.window, until: p.until };
+          return { piece, window: p.window, until: p.until, eased: p.type !== "wraps" };
         }),
       );
     }
@@ -1684,7 +1689,10 @@ export class FlyScene {
       return;
     }
     build.steps.forEach((step, i) => {
-      for (const view of this.stepViews[i]!) view.piece.setProgress(pieceProgress(step, view, t));
+      for (const view of this.stepViews[i]!) {
+        const u = pieceProgress(step, view, t);
+        view.piece.setProgress(view.eased ? smooth(u) : u);
+      }
     });
     if (this.focus) this.applyFocus();
 
@@ -1763,7 +1771,9 @@ export class FlyScene {
   private poseLooseEnds(ends: FreeEndPose[], p: number) {
     const shown = new Set<string>();
     for (const end of ends) {
-      if (end.kind === "rest" && end.hideAfter !== undefined && p >= end.hideAfter) continue;
+      // A cut end drops away rather than vanishing.
+      const falling = end.kind === "rest" && end.hideAfter !== undefined && p >= end.hideAfter ? (p - end.hideAfter) / CUT_FALLS : 0;
+      if (falling >= 1) continue;
       const key = `${end.material}:${end.length}`;
       let view = this.looseEnds.get(key);
       if (!view) {
@@ -1775,7 +1785,13 @@ export class FlyScene {
       if (end.kind === "rest") {
         const local = REST_DIRECTIONS[end.direction];
         const base = this.space!.point(new THREE.Vector3(end.x, local.y * end.radius, local.z * end.radius));
-        view.setPose(base, this.space!.direction(end.x, local.clone()), 1);
+        // (Down in the fly's own frame, as at the vise; faster as it goes, tipping over.)
+        const dir = this.space!.direction(end.x, local.clone());
+        if (falling > 0) {
+          base.y -= CUT_DROP * falling * falling;
+          dir.applyAxisAngle(Z_AXIS, -1.2 * falling * falling).normalize();
+        }
+        view.setPose(base, dir, 1);
       } else {
         const { point, leave, u } = this.followed(end.piece, p, end.far);
         view.setPose(point, leave, 1 - 0.6 * u);

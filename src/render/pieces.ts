@@ -176,16 +176,18 @@ function fibrePoint(f: Fibre, t: number): THREE.Vector3 {
  * Instanced fibres that appear in order of their `u`. Curved fibres are drawn in `segments`
  * straight pieces.
  */
-export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 0.25, tipShade = 1, marks?: FibreMarks, segments = BEND_SEGMENTS, rootShade = 1) {
+export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 0.25, tipShade = 1, marks?: FibreMarks, segments = BEND_SEGMENTS, rootShade = 1, grow = 0) {
   fibres.sort((a, b) => a.u - b.u);
   const object = new THREE.Group();
-  const parts: { mesh: THREE.InstancedMesh; us: number[] }[] = [];
+  type Placed = { u: number; base: THREE.Vector3; dir: THREE.Vector3; length: number; radius: number; shade: number; tint?: THREE.Color };
+  // `shown`: the progress the instances' lengths were last set for (they start full grown).
+  const parts: { mesh: THREE.InstancedMesh; us: number[]; list: Placed[]; segment?: number; shown: number }[] = [];
   const m = new THREE.Matrix4();
   const q = new THREE.Quaternion();
   const s = new THREE.Vector3();
   const c = new THREE.Color();
 
-  const addPart = (geometry: THREE.BufferGeometry, list: { u: number; base: THREE.Vector3; dir: THREE.Vector3; length: number; radius: number; shade: number; tint?: THREE.Color }[], segment?: number) => {
+  const addPart = (geometry: THREE.BufferGeometry, list: Placed[], segment?: number) => {
     if (list.length === 0) {
       geometry.dispose();
       return;
@@ -202,7 +204,19 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
     // A curved fibre's pieces share its index across the segment meshes (the wet view clumps them together).
     if (segment !== undefined) mesh.userData.segment = segment;
     object.add(mesh);
-    parts.push({ mesh, us: list.map((f) => f.u) });
+    // Growing fibres all start early enough to be full grown at the end.
+    parts.push({ mesh, us: list.map((f) => f.u * (1 - grow)), list, segment, shown: 1 });
+  };
+  /** The first index whose appearance is after `u`. */
+  const after = (us: number[], u: number) => {
+    let lo = 0;
+    let hi = us.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (us[mid]! <= u) lo = mid + 1;
+      else hi = mid;
+    }
+    return lo;
   };
 
   const curves = (f: Fibre) => (f.bend && f.bendDir) || f.billow || f.wave;
@@ -232,11 +246,29 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
 
   return {
     object,
+    /**
+     * Shows the fibres that have appeared by `u`. With `grow`, each grows out from its root over
+     * that much of the progress after it appears (a curved one piece by piece), as a bunch
+     * offered up to the hook comes into view from the tie-in outwards.
+     */
     setProgress(u: number) {
-      for (const { mesh, us } of parts) {
-        let n = 0;
-        while (n < us.length && us[n]! <= u) n++;
-        mesh.count = n;
+      for (const part of parts) {
+        const { mesh, us } = part;
+        mesh.count = after(us, u);
+        if (grow <= 0 || part.shown === u) continue;
+        // Only the fibres whose growth differs between the progress last shown and this one.
+        const from = after(us, Math.min(part.shown, u) - grow);
+        const to = after(us, Math.max(part.shown, u));
+        for (let i = from; i < to; i++) {
+          const f = part.list[i]!;
+          const g = smooth(Math.min(1, Math.max(0, (u - us[i]!) / grow)));
+          const along = part.segment === undefined ? g : Math.min(1, Math.max(0, g * segments - part.segment));
+          q.setFromUnitVectors(Y_AXIS, f.dir);
+          m.compose(f.base, q, along > 0 ? s.set(f.radius, f.length * along, f.radius) : s.set(0, 0, 0));
+          mesh.setMatrixAt(i, m);
+        }
+        if (to > from) mesh.instanceMatrix.needsUpdate = true;
+        part.shown = u;
       }
     },
     dispose() {
@@ -248,6 +280,30 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
     },
   };
 }
+
+/** Slow at both ends, for movements that start and stop. */
+export const smooth = (u: number) => u * u * (3 - 2 * u);
+
+// Assumption: a part put on the hook whole (eyes, legs, an extended body) is brought to it from
+// above and in front over the first six tenths of its step, then held while it is tied down.
+const ARRIVES_FROM = new THREE.Vector3(0, 0.9, 0.9);
+const ARRIVES_BY = 0.6;
+
+/** A part that comes to the hook whole, settling into its place. */
+function arriving(view: PieceView): PieceView {
+  const home = view.object.position.clone();
+  return {
+    ...view,
+    setProgress(u) {
+      view.setProgress(u);
+      view.object.position.copy(home).addScaledVector(ARRIVES_FROM, 1 - smooth(Math.min(1, u / ARRIVES_BY)));
+    },
+  };
+}
+
+// Assumption: a bunch comes into view from the tie-in outwards, each fibre over about a quarter
+// of the time the bunch takes.
+const BUNCH_GROWS = 0.25;
 
 /** A direction perpendicular to `dir`, leaning towards `toward` (random when that is parallel to `dir`). */
 function perpendicular(dir: THREE.Vector3, toward: THREE.Vector3, rand: () => number): THREE.Vector3 {
@@ -1113,7 +1169,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   // Broad, flat barbs (tippet) keep most of their width to the tip.
   const tip = piece.cut ? 0.9 : piece.fibreWidth && piece.look === "fibres" ? Math.max(spec.tip, 0.7) : flowing ? flowingTip(spec, piece.stiffness!) : spec.tip;
   // (Flowing hair is long, curved and wavy: drawn in more pieces.)
-  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 12 : undefined, piece.cut || piece.across ? 1 : BUNCH_ROOT);
+  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 12 : undefined, piece.cut || piece.across ? 1 : BUNCH_ROOT, BUNCH_GROWS);
   return {
     object: fibres.object,
     setProgress(u) {
@@ -1644,13 +1700,13 @@ export function pieceView(piece: Piece, surfaces: Surfaces, space: ShankSpace): 
     case "bead":
       return beadView(piece, surfaces, space);
     case "eyes":
-      return eyesView(piece, surfaces, space);
+      return arriving(eyesView(piece, surfaces, space));
     case "cover":
       return coverView(piece, surfaces, space);
     case "extension":
-      return extensionView(piece, surfaces, space);
+      return arriving(extensionView(piece, surfaces, space));
     case "legs":
-      return legsView(piece, surfaces, space);
+      return arriving(legsView(piece, surfaces, space));
     case "sleeve":
       return sleeveView(piece, surfaces, space);
   }
@@ -1898,8 +1954,9 @@ function legsView(piece: LegsPiece, surfaces: Surfaces, space: ShankSpace): Piec
   return {
     object: fibres.object,
     setProgress(u) {
+      // The strands come to the hook together.
       fibres.object.visible = u > 0;
-      fibres.setProgress(u);
+      fibres.setProgress(u > 0 ? 1 : 0);
     },
     dispose() {
       fibres.dispose();
