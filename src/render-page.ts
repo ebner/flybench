@@ -105,7 +105,7 @@ async function renderInWater(view: "angler" | "below") {
   const scene = new FlyScene(document.getElementById("stage")!, { fov: Number(params.get("fov") ?? (natural ? 20 : 32)), background: null });
   if (natural) {
     scene.setNatural(natural, naturalAlone(natural));
-    scene.setWater({ fishing: naturalFishing(natural), view, still: true, look: WATER_LOOKS.light, real, detailed: true });
+    await scene.setWater({ fishing: naturalFishing(natural), view, still: true, look: WATER_LOOKS.light, real, detailed: true });
   } else {
     if (!pattern) throw new Error(`unknown pattern "${id}"`);
     const build = simulate(pattern.recipe);
@@ -113,7 +113,7 @@ async function renderInWater(view: "angler" | "below") {
     scene.setTime(build.duration);
     // In the water a point-up fly is shown the way it swims.
     if (ridesPointUp(pattern.recipe)) scene.setTurnedOver(true);
-    scene.setWater({ fishing: fishing(pattern.recipe), view, still: true, look: WATER_LOOKS.light, real, detailed: true });
+    await scene.setWater({ fishing: fishing(pattern.recipe), view, still: true, look: WATER_LOOKS.light, real, detailed: true });
   }
   await nextFrame();
   // &live=1: the live view as it is, not traced (for comparing the two renderers).

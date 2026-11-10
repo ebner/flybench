@@ -10,16 +10,18 @@ import { BobbinView, LooseEndView } from "./loose";
 import { Surfaces } from "./materials";
 import { pieceView, smooth, type PieceView } from "./pieces";
 import { ShankSpace } from "./space";
-import { patchFogForWater, Water, waveHeight, type WaterLook } from "./water";
+import type { Water, WaterLook } from "./water";
 import { CLUMPS, HOLDS_AIR, WET_SPREAD, type Fishing } from "../tying/fishing";
 import { mulberry32 } from "./random";
 import type { RealAssets } from "./real/assets";
-import { RealWater } from "./real/RealWater";
-import { realMaterials } from "./real/upgrade";
-import { MAX_DIMPLES, rippleHeight, type Dimple } from "./real/waves";
-import { clinchKnot, tippetDimples, tippetGeometry, tippetMesh, tippetPath } from "./real/tippet";
-import { CLINGS, wetFly } from "./real/wet";
-import { bedShadows } from "./real/shadows";
+import type { RealWater } from "./real/RealWater";
+import type { Dimple } from "./real/waves";
+
+/**
+ * The water (drawn and realistic, the tippet, wetness, shadows on the bed): fetched the first
+ * time a scene puts its fly in the water, and kept for every scene after.
+ */
+let kit: typeof import("./waterKit") | null = null;
 
 const Y_UP = new THREE.Vector3(0, 1, 0);
 // Assumption: at full strength a mass of hair or marabou shades itself dull and grey; at half,
@@ -264,6 +266,8 @@ export class FlyScene {
   /** After each frame is drawn: for overlays that follow the fly (the builder's handles). */
   onDraw?: () => void;
   private disposed = false;
+  /** Counts the calls of setWater, so one answered late (its code just fetched) doesn't undo a later one. */
+  private waterAsked = 0;
   /** Something has changed that the next frame must show; frames are only drawn then. */
   private dirty = true;
   /** Out of sight (scrolled away): nothing is drawn until it is back. */
@@ -337,7 +341,6 @@ export class FlyScene {
     this.rig.matrixAutoUpdate = false;
     this.rig.add(this.fly);
     this.scene.add(this.rig);
-    patchFogForWater();
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
@@ -514,7 +517,26 @@ export class FlyScene {
    * film, just under or deep. In the realistic water a natural shown on its own can go in too,
    * placed by where it is found. null takes it back to the vise.
    */
-  setWater(setting: WaterSetting | null) {
+  /**
+   * Puts the fly in the water, or takes it out (null). The first time, the water's code is
+   * fetched first: the promise is done when the water is there. Later calls, and taking the fly
+   * out, happen at once.
+   */
+  setWater(setting: WaterSetting | null): Promise<void> {
+    const asked = ++this.waterAsked;
+    if (!setting || kit) {
+      this.applyWater(setting);
+      return Promise.resolve();
+    }
+    return import("./waterKit").then((loaded) => {
+      kit = loaded;
+      // Unless the scene has gone, or been asked for something else, meanwhile.
+      if (asked === this.waterAsked && !this.disposed) this.applyWater(setting);
+    });
+  }
+
+  private applyWater(setting: WaterSetting | null) {
+    if (setting) kit!.patchFogForWater();
     this.dirty = true;
     // Stilling the water or a new theme keeps the camera where the visitor put it.
     const before = this.water?.setting;
@@ -585,13 +607,13 @@ export class FlyScene {
         // A fished fly is wet all over, soaked where it is under the water. Wet fibres clump, so
         // a floating fly settles again on them before its contacts are worked out.
         const sunkFly = setting.fishing.depth === "below" || setting.fishing.depth === "deep";
-        wet = wetFly(
+        wet = kit!.wetFly(
           this.build.steps.flatMap((step, i) =>
             step.pieces.map((p, j) => {
               const object = this.stepViews[i]![j]!.piece.object;
               const box = new THREE.Box3().setFromObject(object);
               // Soaked where it is under: a body (not fibres) that is partly under carries water through.
-              const soaked = sunkFly || box.getCenter(new THREE.Vector3()).y < level || (box.min.y < level && !CLINGS.has(p.look));
+              const soaked = sunkFly || box.getCenter(new THREE.Vector3()).y < level || (box.min.y < level && !kit!.CLINGS.has(p.look));
               return { object, look: p.look, wet: soaked ? ("soaked" as const) : ("damp" as const), under: sunkFly || box.max.y < level };
             }),
           ),
@@ -694,16 +716,16 @@ export class FlyScene {
       const exit = this.build && !eye ? this.fly.getObjectByName("line-exit") : undefined;
       if (eye || exit) {
         const knot = eye
-          ? clinchKnot(eye)
+          ? kit!.clinchKnot(eye)
           : { object: new THREE.Group(), start: exit!.getWorldPosition(new THREE.Vector3()), direction: new THREE.Vector3(1, 0, 0).transformDirection(exit!.matrixWorld) };
         const floating = touches;
-        const path = tippetPath(knot.start, knot.direction, level, floating);
-        dimples.push(...tippetDimples(path, level, MAX_DIMPLES - dimples.length));
+        const path = kit!.tippetPath(knot.start, knot.direction, level, floating);
+        dimples.push(...kit!.tippetDimples(path, level, kit!.MAX_DIMPLES - dimples.length));
         this.fly.attach(knot.object);
         const toFly = this.fly.matrixWorld.clone().invert();
-        line = { knot: knot.object, start: knot.start.clone().applyMatrix4(toFly), direction: knot.direction.clone().transformDirection(toFly), mesh: tippetMesh(path), floating };
+        line = { knot: knot.object, start: knot.start.clone().applyMatrix4(toFly), direction: knot.direction.clone().transformDirection(toFly), mesh: kit!.tippetMesh(path), floating };
       }
-      view = new RealWater({ assets: real, level, centre: pivot, bed, dimples, skyRotation, sun, detailed: setting.detailed });
+      view = new kit!.RealWater({ assets: real, level, centre: pivot, bed, dimples, skyRotation, sun, detailed: setting.detailed });
       if (line) view.group.add(line.mesh);
       // In the sun the fly (and its tippet) shadow the stones, and the dents in the film show there;
       // through more than about 10 cm of water (20 gapes) they are lost in the light scattered on the way.
@@ -712,7 +734,7 @@ export class FlyScene {
         // sun's side: its own (a low evening sun) would throw them out of the picture.
         const high = Math.max(real.sunElevation, THREE.MathUtils.degToRad(65));
         const caster = new THREE.Vector3(Math.cos(high) * Math.sin(sunAzimuth), Math.sin(high), Math.cos(high) * Math.cos(sunAzimuth));
-        const shadows = bedShadows({ assets: real, casters: line ? [this.fly, line.mesh] : [this.fly], dimples, level, bed, centre: pivot, bedSegments: setting.detailed ? 360 : 240, sun: caster });
+        const shadows = kit!.bedShadows({ assets: real, casters: line ? [this.fly, line.mesh] : [this.fly], dimples, level, bed, centre: pivot, bedSegments: setting.detailed ? 360 : 240, sun: caster });
         if (shadows) view.group.add(shadows);
       }
       const environment = this.scene.environment;
@@ -731,7 +753,7 @@ export class FlyScene {
       this.camera.updateProjectionMatrix();
       for (const light of this.lights) light.visible = false;
       // Insects shed water: they keep their dry sheen.
-      const materials = realMaterials(this.fly);
+      const materials = kit!.realMaterials(this.fly);
       restore = () => {
         materials();
         wet();
@@ -749,7 +771,7 @@ export class FlyScene {
       // From below, what is under water is seen through it (from above the water's shader tints it).
       if (setting.view === "below") this.scene.fog = new THREE.Fog("#4a5648", level, 40);
     } else {
-      view = new Water({
+      view = new kit!.Water({
         level,
         centre: pivot,
         look: setting.look,
@@ -801,7 +823,7 @@ export class FlyScene {
     const view = w.view;
     const c = w.pivot;
     // On a tippet in the realistic water the fly is steadier than in the drawn water's tank.
-    const real = view instanceof RealWater;
+    const real = view instanceof kit!.RealWater;
     let lift = 0;
     let pitch = 0;
     let roll = 0;
@@ -809,7 +831,7 @@ export class FlyScene {
       // Resting on the stones.
     } else if (motion === "swim") {
       // Straightens and lifts on each pull, dips nose first in the pause after it.
-      const f = (t % Water.STRIP) / Water.STRIP;
+      const f = (t % kit!.Water.STRIP) / kit!.Water.STRIP;
       const pull = f < 0.3 ? Math.sin((f / 0.3) * Math.PI) : 0;
       const glide = f < 0.3 ? 0 : (f - 0.3) / 0.7;
       lift = 0.06 * pull - 0.08 * glide;
@@ -832,12 +854,12 @@ export class FlyScene {
       const side = Math.max(0.6, (w.bounds.max.z - w.bounds.min.z) / 2);
       if (!real) {
         // The drawn water's waves, as they were: the slope under the fly.
-        const height = (x: number, z: number) => waveHeight(x, z, t);
+        const height = (x: number, z: number) => kit!.waveHeight(x, z, t);
         lift = height(c.x, c.z);
         pitch = 6 * (height(c.x + 0.5, c.z) - height(c.x - 0.5, c.z));
         roll = 6 * (height(c.x, c.z + 0.5) - height(c.x, c.z - 0.5));
       } else {
-        const swell = (x: number, z: number) => rippleHeight(x, z, t);
+        const swell = (x: number, z: number) => kit!.rippleHeight(x, z, t);
         let sum = 0;
         for (const dx of [-half, 0, half]) for (const dz of [-side, 0, side]) sum += swell(c.x + dx, c.z + dz);
         lift = sum / 9;
@@ -864,7 +886,7 @@ export class FlyScene {
       const start = w.line.start.clone().applyMatrix4(this.fly.matrixWorld);
       const direction = w.line.direction.clone().transformDirection(this.fly.matrixWorld);
       const old = w.line.mesh.geometry;
-      w.line.mesh.geometry = tippetGeometry(tippetPath(start, direction, w.level, w.line.floating, (x, z) => rippleHeight(x, z, t)));
+      w.line.mesh.geometry = kit!.tippetGeometry(kit!.tippetPath(start, direction, w.level, w.line.floating, (x, z) => kit!.rippleHeight(x, z, t)));
       old.dispose();
     }
   }
@@ -1052,7 +1074,7 @@ export class FlyScene {
 
   /**
    * Where something dents the surface film, for the realistic water: the lowest points of
-   * whatever reaches through it (hackle tips, tails, an insect's feet), at most MAX_DIMPLES.
+   * whatever reaches through it (hackle tips, tails, an insect's feet), at most kit!.MAX_DIMPLES.
    */
   private contactDimples(level: number): Dimple[] {
     const cells = new Map<string, { x: number; z: number; y: number }>();
@@ -1080,7 +1102,7 @@ export class FlyScene {
     const all = [...cells.values()].sort((a, b) => a.y - b.y);
     // Assumption: the meniscus round a fibre tip or foot spreads about a millimetre (a fifth of a
     // gape on a #12), a fraction of the capillary length; deeper where it presses harder.
-    return all.slice(0, MAX_DIMPLES - 20).map((c) => ({ x: c.x, z: c.z, r: 0.18, d: Math.min(0.03, 0.012 + 0.1 * Math.max(0, level - c.y)) }));
+    return all.slice(0, kit!.MAX_DIMPLES - 20).map((c) => ({ x: c.x, z: c.z, r: 0.18, d: Math.min(0.03, 0.012 + 0.1 * Math.max(0, level - c.y)) }));
   }
 
   /** Where the fly dents the surface film: the fibres (hackle, tail, legs) that reach through it. */
@@ -1175,7 +1197,7 @@ export class FlyScene {
       renderer: this.renderer,
       scene: this.scene,
       camera: this.camera,
-      water: this.water?.view instanceof RealWater ? this.water.view : null,
+      water: kit !== null && this.water?.view instanceof kit.RealWater ? this.water.view : null,
       target: this.controls.target.clone(),
     };
   }
@@ -1250,7 +1272,7 @@ export class FlyScene {
   }
 
   private draw() {
-    if (this.water?.view instanceof RealWater) this.water.view.render(this.renderer, this.scene, this.camera);
+    if (kit !== null && this.water?.view instanceof kit.RealWater) this.water.view.render(this.renderer, this.scene, this.camera);
     else this.renderer.render(this.scene, this.camera);
   }
 
