@@ -55,7 +55,10 @@ const Icon = {
   more: <path d="M5 10.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm7 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm7 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Z" />,
 };
 
-const SPEEDS = [
+/** Smooth, unless the visitor asks for less motion. */
+const scrolling = (): ScrollBehavior => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+
+export const SPEEDS = [
   [0.5, "half"],
   [1, "normal"],
   [2, "double"],
@@ -199,7 +202,7 @@ function PatternView({
   const callout = inUseMaterial ? materialName(inUseMaterial) : current === 0 && recipeStep.op !== "attach-thread" ? null : t.pattern.thread;
   const showInDressing = () => {
     setFlash(inUse);
-    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: "center", behavior: "smooth" });
+    document.getElementById(`dressing-${inUse}`)?.scrollIntoView({ block: "center", behavior: scrolling() });
     setTimeout(() => setFlash(null), 1600);
   };
 
@@ -289,7 +292,7 @@ function PatternView({
     setCompare(next);
     // On a phone the stage is above the notes: bring it into view.
     const stage = document.querySelector(".stage");
-    if (next && stage && stage.getBoundingClientRect().bottom < 80) stage.scrollIntoView({ behavior: "smooth" });
+    if (next && stage && stage.getBoundingClientRect().bottom < 80) stage.scrollIntoView({ behavior: scrolling() });
   };
   const [printRequest, setPrintRequest] = useState(0);
   const [preparing, setPreparing] = useState(false);
@@ -324,6 +327,8 @@ function PatternView({
       if (e.key === "Escape" && vise) {
         toggleVise();
       } else if (e.key === " ") {
+        // Space scrolls the page, as everywhere, unless the stage has the focus.
+        if (!(t instanceof Element && t.closest(".stage")) && !vise) return;
         e.preventDefault();
         if (player.playing) player.pause();
         else play();
@@ -351,7 +356,7 @@ function PatternView({
   const origin = [recipe.origin?.originator, recipe.origin?.region, recipe.origin?.year].filter(Boolean).join(", ");
 
   return (
-    <div className={vise ? "pattern vise" : "pattern"}>
+    <main className={vise ? "pattern vise" : "pattern"}>
       <section className="stage" aria-label={t.pattern.stage}>
         <Viewer
           build={build}
@@ -387,7 +392,14 @@ function PatternView({
           ) : finished ? (
             <>
               <p className="now-index">{t.pattern.stepsCount(build.steps.length)}</p>
-              <h2>{t.pattern.finished}</h2>
+              {/* On a phone the stage fills the first screen: the fly's name goes here, as the
+                  heading itself is below with the notes. */}
+              <h2>
+                <span className="now-name" aria-hidden="true">
+                  {recipe.name}
+                </span>
+                <span className="now-finished">{t.pattern.finished}</span>
+              </h2>
               <p className="now-text">{t.pattern.finishedHint}</p>
             </>
           ) : (
@@ -497,8 +509,8 @@ function PatternView({
         </div>
       </section>
 
-      <aside className="notes">
-        <a className="back" href={href.gallery()}>
+      <div className="notes">
+        <a className="back" href={href.galleryBack()}>
           {t.pattern.allPatterns}
         </a>
         <h1>{recipe.name}</h1>
@@ -709,8 +721,8 @@ function PatternView({
             </ul>
           </section>
         )}
-      </aside>
-    </div>
+      </div>
+    </main>
   );
 }
 

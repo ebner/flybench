@@ -78,9 +78,12 @@ pnpm icons         # app icon PNGs from public/icons/*.svg
 
 A pattern's page opens on the finished fly, turning slowly until it is turned by hand (not with
 reduced motion asked for; a link with `?step=N` opens that step); play turns it back and ties it
-from the bare hook. Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan.
-Space plays and pauses, ← and → step back and forward, Home goes back to step 1 (or hold the
-previous-step button). In vise mode Page Down and Page Up do the same as → and ←, for a
+from the bare hook. Viewer controls: drag to orbit, scroll or pinch to zoom, right-drag to pan;
+"View" shows the fly from the side, the front, above or behind. With the keyboard's focus on the
+3D view, the arrow keys turn the fly and + and − zoom.
+Space plays and pauses while the focus is on the stage (elsewhere it scrolls the page, and in vise
+mode it always plays), ← and → step back and forward, Home goes back to step 1 (or hold the
+previous-step button). The fly builder's "watch it tied" has the same keys and speeds. In vise mode Page Down and Page Up do the same as → and ←, for a
 page-turner pedal or presentation clicker. The step bar under the view has a segment per step: tap one to go to
 it, drag along it to scrub; the step under the mouse (or the finger, scrubbing) is named over it. Click a step in the list to play just that step. On a touch screen
 one finger scrolls the page and two fingers turn and zoom the fly. "Proportions" shows the gape

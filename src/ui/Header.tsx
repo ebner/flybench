@@ -34,6 +34,11 @@ export function Header({ theme, onTheme, route }: { theme: ThemeChoice; onTheme:
   // On a phone the sections and the theme are behind a menu button.
   const [open, setOpen] = useState(false);
   const header = useRef<HTMLElement>(null);
+  const browsing = useRef(false);
+  const toLanguage = (l: string) => {
+    browsing.current = false;
+    if (l !== lang()) navigate(routeHrefIn(l as (typeof LANGS)[number], route));
+  };
   useEffect(() => setOpen(false), [page]);
   useEffect(() => {
     if (!open) return;
@@ -103,9 +108,20 @@ export function Header({ theme, onTheme, route }: { theme: ThemeChoice; onTheme:
       </div>
       <select
         className="language-switch"
-        value={lang()}
+        key={lang()}
+        defaultValue={lang()}
         aria-label={t.header.language}
-        onChange={(e) => navigate(routeHrefIn(e.target.value as (typeof LANGS)[number], route))}
+        // Arrow keys on the closed menu walk through the languages: only Enter, leaving the
+        // menu or a choice by pointer changes the page's language.
+        onKeyDown={(e) => {
+          browsing.current = e.key !== "Enter" && e.key !== " ";
+          if (e.key === "Enter") toLanguage(e.currentTarget.value);
+        }}
+        onPointerDown={() => (browsing.current = false)}
+        onBlur={(e) => toLanguage(e.currentTarget.value)}
+        onChange={(e) => {
+          if (!browsing.current) toLanguage(e.target.value);
+        }}
       >
         {LANGS.map((l) => (
           <option key={l} value={l} lang={l}>

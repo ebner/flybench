@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "./ui/App";
 import { splitLang } from "./i18n/lang";
 import { loadLanguage } from "./i18n/load";
+import { markUpdated } from "./ui/update";
 import "@fontsource/im-fell-english/400.css";
 import "@fontsource/im-fell-english/400-italic.css";
 import "@fontsource/spectral/400.css";
@@ -22,8 +23,11 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
       registration.active?.postMessage({ type: "cache", urls: list.getEntries().map((e) => e.name) });
     }).observe({ type: "resource", buffered: true });
   });
-  // A new deployment's worker taking over gets the whole list again.
+  // A new deployment's worker taking over gets the whole list again; a page that an earlier
+  // worker served is now out of date, and says so.
+  const served = navigator.serviceWorker.controller !== null;
   navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (served) markUpdated();
     const urls = performance.getEntriesByType("resource").map((e) => e.name);
     navigator.serviceWorker.controller?.postMessage({ type: "cache", urls });
   });

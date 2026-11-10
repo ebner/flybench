@@ -9,7 +9,7 @@
   --paper-raised: #f2f0e8;
   --ink: #2a2722;
   --ink-soft: #625c51;
-  --ink-faint: #8f887a;
+  --ink-faint: #6b6558;
   --rule: #cfcabd;
   --accent: #233e66;
   --accent-ink: #f2f0e8;
@@ -50,7 +50,7 @@
   --paper-raised: #163562;
   --ink: #eaf0f6;
   --ink-soft: #b3c4d9;
-  --ink-faint: #7f97b4;
+  --ink-faint: #97adc7;
   --rule: #2d4f7c;
   --accent: #efe3c2;
   --accent-ink: #102a4c;
@@ -657,7 +657,7 @@ select {
   top: var(--header);
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - var(--header));
+  height: calc(100dvh - var(--header) - var(--note, 0px));
   border-right: 1px solid var(--rule);
 }
 
@@ -740,6 +740,30 @@ select {
   background: var(--paper-raised);
   font-size: var(--step--1);
   cursor: pointer;
+}
+
+.viewer-tools select {
+  padding: 0.2rem 0.3rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  color: inherit;
+  font: inherit;
+  font-size: var(--step--1);
+  cursor: pointer;
+  /* As wide as its word, not as its longest choice, so the tools keep to one row. */
+  field-sizing: content;
+}
+
+@supports not (field-sizing: content) {
+  .viewer-tools select {
+    width: 5.5rem;
+  }
+}
+
+.viewer-canvas:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 .viewer-tools button[aria-pressed="true"] {
@@ -854,6 +878,10 @@ select {
 
 .now h2 {
   font-size: var(--step-2);
+}
+
+.now-name {
+  display: none;
 }
 
 .now-text {
@@ -1059,7 +1087,6 @@ select {
   border-radius: 3px;
   background: var(--paper-raised);
 }
-
 
 .notes {
   padding: 1.5rem var(--gutter) 4rem;
@@ -1343,7 +1370,7 @@ select {
   .stage {
     position: relative;
     top: auto;
-    height: calc(100dvh - var(--header));
+    height: calc(100dvh - var(--header) - var(--note, 0px));
     border-right: 0;
     border-bottom: 1px solid var(--rule);
     --now-height: 30%;
@@ -1355,6 +1382,20 @@ select {
 
   .now h2 {
     font-size: var(--step-1);
+  }
+
+  .now-name {
+    display: inline;
+  }
+
+  /* Still read out; the name takes its place for the eye. */
+  .now-finished {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .now-text {
@@ -1776,7 +1817,7 @@ select {
 }
 
 .pattern.vise .stage {
-  height: calc(100dvh - var(--header));
+  height: calc(100dvh - var(--header) - var(--note, 0px));
   border-right: 0;
   --now-height: 34%;
 }
@@ -2405,13 +2446,6 @@ select {
   --now-height: 24%;
 }
 
-.build-shown {
-  margin: 0.3rem 0 0;
-  font-size: var(--step--1);
-  font-style: italic;
-  color: var(--ink-soft);
-}
-
 .build-note {
   padding: 0.5rem 0.75rem;
   border-left: 3px solid var(--accent);
@@ -2427,17 +2461,8 @@ select {
   border-left-color: var(--danger);
 }
 
-.build-start {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.build-form select,
-.build-form input:not([type="checkbox"], [type="range"], [type="color"]),
-.build-form textarea {
+[type="range"],
+[type="color"]) {
   max-width: 100%;
   padding: 0.3rem 0.45rem;
   border: 1px solid var(--rule);
@@ -2448,164 +2473,12 @@ select {
   font-size: 0.95rem;
 }
 
-.build-form textarea {
-  width: 100%;
-  resize: vertical;
-}
-
 /* Label beside control, two columns wide; one column on a phone. */
-.build-fields {
-  display: grid;
-  grid-template-columns: minmax(6rem, auto) minmax(0, 1fr);
-  gap: 0.5rem 0.9rem;
-  align-items: center;
-  margin: 0.4rem 0;
-}
-
-.build-fields > label {
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-
-.build-control {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-width: 0;
-}
-
-.build-control > select,
-.build-control > input:not([type="checkbox"]) {
-  flex: 1;
-  min-width: 0;
-}
-
-.build-number input {
-  width: 6rem;
-}
-
-.build-number {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.build-shank,
-.build-colour {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 0;
-}
-
-.build-shank input {
-  flex: 1;
-  min-width: 0;
-}
-
-.build-shank output {
-  min-width: 9rem;
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
-
-.build-colour select {
-  flex: 1;
-  min-width: 0;
-}
-
-.build-colour input[type="color"] {
-  width: 2.2rem;
-  height: 2rem;
-  padding: 0;
-  border: 1px solid var(--rule);
-  background: none;
-}
-
-.build-leave {
-  padding: 0 0.3rem;
-  font-size: 1.2rem;
-  text-decoration: none;
-}
-
-.build-list {
-  margin: 0.5rem 0;
-  padding: 0;
-  list-style: none;
-}
-
-.build-list > li {
-  border-top: 1px solid var(--rule);
-}
-
-.build-list > li:last-child {
-  border-bottom: 1px solid var(--rule);
-}
-
-.build-list summary,
-.build-step-title {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 0;
-  border: 0;
-  background: none;
-  color: var(--ink);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.build-step-number {
-  color: var(--ink-faint);
-  font-size: var(--step--1);
-}
-
-.build-steps > li.active > .build-step-title {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.build-list > li.has-problem > .build-step-title,
-.build-list > li.has-problem summary {
-  color: var(--danger);
-}
-
-.build-item {
-  padding: 0 0 0.75rem 0.75rem;
-  border-left: 2px solid var(--accent-wash);
-}
-
-.build-item-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
-}
 
 .build-problems {
   margin: 0.3rem 0 0.5rem;
   padding-left: 1.1rem;
   font-size: 0.95rem;
-}
-
-.build-add,
-.build-more {
-  margin-top: 0.3rem;
-}
-
-.build-hint {
-  font-size: var(--step--1);
-  color: var(--ink-soft);
-}
-
-.build-todo {
-  margin-top: 1.5rem;
-}
-
-.build-todo ul {
-  padding-left: 1.1rem;
 }
 
 .build-actions {
@@ -2638,17 +2511,6 @@ select {
   }
 }
 
-@media (max-width: 30rem) {
-  .build-fields {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.2rem;
-  }
-
-  .build-fields > label {
-    margin-top: 0.4rem;
-  }
-}
-
 .pattern-actions .build-link-out {
   align-self: end;
   padding: 0.3rem 0;
@@ -2667,53 +2529,6 @@ select {
   padding-left: 1.1rem;
 }
 
-.build-choose {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.4rem;
-}
-
-.build-choose select {
-  flex: 1 1 12rem;
-  min-width: 0;
-}
-
-.build-choose .box-toggle {
-  margin-top: 0;
-}
-
-.build-choose .box-toggle:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.build-choose label {
-  flex: 1 1 100%;
-}
-
-.build-species {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1rem;
-  margin: 0.8rem 0 0;
-  padding: 0;
-  border: 0;
-}
-
-.build-species legend {
-  margin-bottom: 0.3rem;
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-
-.build-species label {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
 /* The fly builder made of parts (milestone 18): the fly on the paper with handles to drag, and
    beside it (below it on a phone) the parts and the chosen part's panel. */
 
@@ -2728,7 +2543,7 @@ select {
 .wb-stage {
   position: sticky;
   top: var(--header);
-  height: calc(100dvh - var(--header));
+  height: calc(100dvh - var(--header) - var(--note, 0px));
   border-right: 1px solid var(--rule);
   overflow: hidden;
 }
@@ -3280,11 +3095,25 @@ select {
 .wb-sheet-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 20;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: rgb(20 15 10 / 0.35);
+}
+
+.wb-sheet-backdrop[open] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(20 15 10 / 0.35);
+}
+
+.wb-sheet-backdrop::backdrop {
+  background: none;
 }
 
 .wb-sheet {
@@ -3425,12 +3254,19 @@ select {
     height: 6.75rem;
   }
 
-  .wb-sheet-backdrop {
+  .wb-sheet-backdrop[open] {
     align-items: flex-end;
   }
 
   .wb-sheet {
     width: 100%;
     border-radius: 0.8rem 0.8rem 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout span,
+  .dressing div.flash {
+    animation: none;
   }
 }

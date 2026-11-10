@@ -127,6 +127,8 @@ export function Build({ query }: { query: string }) {
     setOpened((n) => n + 1);
     typing.current = null;
     setSession({ fly, id, saved });
+    // A note is about the fly it came with (the caller sets the new fly's after this).
+    setNote(null);
     setPast([]);
     setFuture([]);
     setSelected([]);
@@ -238,6 +240,7 @@ export function Build({ query }: { query: string }) {
     typing.current = null;
     setStopAt(null);
     player.pause();
+    setNote(null);
     const next = fn(session.fly);
     if (!merge) setPast((p) => [...p.slice(-99), session.fly]);
     setFuture([]);
@@ -458,7 +461,7 @@ export function Build({ query }: { query: string }) {
   const w = t.workbench;
 
   return (
-    <div className="workbench">
+    <main className="workbench">
       <Stage
         build={build}
         compiled={compiled}
@@ -475,10 +478,10 @@ export function Build({ query }: { query: string }) {
         focused={focus !== null}
         tools={
           <>
-            <button onClick={undo} disabled={!past.length}>
+            <button onClick={undo} disabled={!past.length} title={w.undoKeys}>
               {w.undo}
             </button>
-            <button onClick={redo} disabled={!future.length}>
+            <button onClick={redo} disabled={!future.length} title={w.redoKeys}>
               {w.redo}
             </button>
             <button aria-pressed={guide} onClick={() => setGuide(!guide)}>
@@ -503,7 +506,7 @@ export function Build({ query }: { query: string }) {
         }
       />
 
-      <aside className="wb-side">
+      <div className="wb-side">
         {noteText && (
           <p className={note === "link" || note === "file" ? "build-note" : "build-note problem"} role="status">
             {noteText}
@@ -628,7 +631,7 @@ export function Build({ query }: { query: string }) {
             <input readOnly value={link.url} onFocus={(e) => e.target.select()} aria-label={t.build.share} />
           </p>
         )}
-      </aside>
+      </div>
 
       {palette && (
         <Sheet title={w.whichPart} onClose={() => setPalette(false)}>
@@ -645,7 +648,7 @@ export function Build({ query }: { query: string }) {
           </ul>
         </Sheet>
       )}
-    </div>
+    </main>
   );
 }
 
@@ -741,21 +744,30 @@ function Tile({
 }
 
 function Sheet({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) {
-  const box = useRef<HTMLDivElement>(null);
+  const box = useRef<HTMLDialogElement>(null);
+  // A modal dialog: the keyboard stays in the sheet, and goes back to where it was when it closes.
   useEffect(() => {
-    const key = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    addEventListener("keydown", key);
-    return () => removeEventListener("keydown", key);
-  }, [onClose]);
-  // The keyboard goes into the sheet, and back to where it was when the sheet closes.
-  useEffect(() => {
+    const dialog = box.current!;
     const before = document.activeElement as HTMLElement | null;
-    box.current?.querySelector<HTMLElement>("li button")?.focus();
-    return () => before?.focus();
+    dialog.showModal();
+    dialog.querySelector<HTMLElement>("li button")?.focus();
+    return () => {
+      dialog.close();
+      before?.focus();
+    };
   }, []);
   return (
-    <div className="wb-sheet-backdrop" onClick={onClose}>
-      <div ref={box} className="wb-sheet" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()}>
+    <dialog
+      ref={box}
+      className="wb-sheet-backdrop"
+      aria-label={title}
+      onClick={onClose}
+      onCancel={(e) => {
+        e.preventDefault();
+        onClose();
+      }}
+    >
+      <div className="wb-sheet" onClick={(e) => e.stopPropagation()}>
         <div className="wb-panel-head">
           <h2>{title}</h2>
           <button className="link" onClick={onClose}>
@@ -764,6 +776,6 @@ function Sheet({ title, onClose, children }: { title: string; onClose: () => voi
         </div>
         {children}
       </div>
-    </div>
+    </dialog>
   );
 }

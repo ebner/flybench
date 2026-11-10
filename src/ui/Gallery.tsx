@@ -8,7 +8,7 @@ import { DIFFICULTIES, FLY_TYPES, IMITATES, MONTHS, SPECIES } from "../recipe/sc
 import { bestCoverage, missingKinds, type Need } from "../catalog/inventory";
 import { renderUrls, useRenders, type RenderInfo } from "./renders";
 import { INVENTORY_KEY, useStoredSet } from "./storage";
-import { href, replaceUrl } from "./router";
+import { href, rememberGallery, replaceUrl } from "./router";
 import { t } from "../i18n/ui";
 import { kindName, needName } from "../tying/describe";
 import { inSentence } from "../i18n/grammar";
@@ -27,6 +27,7 @@ export function Gallery({ query }: { query: string }) {
     if (filtersToQuery(filters) !== query) setFiltersState(filtersFromQuery(query));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
+  useEffect(() => rememberGallery(filtersToQuery(filters)), [filters]);
   const renders = useRenders();
   const owned = useStoredSet(INVENTORY_KEY);
   const language = lang();

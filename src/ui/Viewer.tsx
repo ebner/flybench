@@ -278,6 +278,24 @@ export function Viewer({
       <div
         className="viewer-canvas"
         ref={container}
+        // Turned from the keyboard too: the page's own arrow keys (the steps) wait meanwhile.
+        tabIndex={unavailable || still ? undefined : 0}
+        role="application"
+        aria-label={t.viewer.canvas}
+        onKeyDown={(e) => {
+          const s = scene.current;
+          if (!s || e.altKey || e.ctrlKey || e.metaKey || e.target !== e.currentTarget) return;
+          const turn = 0.12;
+          if (e.key === "ArrowLeft") s.orbitBy(-turn, 0);
+          else if (e.key === "ArrowRight") s.orbitBy(turn, 0);
+          else if (e.key === "ArrowUp") s.orbitBy(0, -turn);
+          else if (e.key === "ArrowDown") s.orbitBy(0, turn);
+          else if (e.key === "+" || e.key === "=") s.zoomBy(0.87);
+          else if (e.key === "-") s.zoomBy(1.15);
+          else return;
+          e.preventDefault();
+          e.stopPropagation();
+        }}
         onTouchStart={(e) => (touch.current = e.touches.length === 1 ? { x: e.touches[0]!.clientX, y: e.touches[0]!.clientY } : null)}
         onTouchMove={(e) => {
           const t = touch.current;
@@ -354,6 +372,24 @@ export function Viewer({
             >
               {t.viewer.wholeFly}
             </button>
+            <select
+              className="viewer-view"
+              aria-label={t.viewer.view}
+              value=""
+              onChange={(e) => {
+                onFollowChange(false);
+                scene.current?.lookFrom(e.target.value as "side" | "front" | "top" | "behind");
+              }}
+            >
+              <option value="" hidden>
+                {t.viewer.view}
+              </option>
+              {(["side", "front", "top", "behind"] as const).map((v) => (
+                <option key={v} value={v}>
+                  {t.viewer.views[v]}
+                </option>
+              ))}
+            </select>
             {guide && (
               <button aria-pressed={proportions} onClick={() => setProportions(!proportions)} title={t.viewer.proportionsTitle}>
                 {t.viewer.proportions}

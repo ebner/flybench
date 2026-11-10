@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useUpdated } from "./update";
 import { siteTitle } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
 import { About, AUTHOR, REPO_URL } from "./About";
@@ -37,9 +38,30 @@ export function App() {
     );
   }, [language, attempt]);
 
+  // The stages fill the screen below the header: tell them how much the notes above them take.
+  const noteRef = useRef<HTMLDivElement>(null);
+  const updated = useUpdated();
+  useEffect(() => {
+    const note = noteRef.current!;
+    const root = document.documentElement;
+    const measure = () => root.style.setProperty("--note", `${note.offsetHeight}px`);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(note);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--note");
+    };
+  }, []);
+
+  const arrived = useRef(true);
   useEffect(() => {
     if (route.page === "gallery") document.title = siteTitle();
     if (!restoresScroll()) window.scrollTo(0, 0);
+    // Another page of the site: the keyboard and screen readers start at its content, as they
+    // would after a page load (not on arrival, where the browser has done so).
+    if (!arrived.current) document.getElementById("content")?.focus({ preventScroll: true });
+    arrived.current = false;
   }, [route.page, route.page === "fly" || route.page === "technique" || route.page === "natural" ? route.id : null, lang()]);
 
   return (
@@ -61,11 +83,21 @@ export function App() {
         {t.site.skip}
       </button>
       <Header theme={choice} onTheme={setChoice} route={route} />
-      {DRAFT[lang()] && (
-        <p className="draft-note" lang={lang()}>
-          {t.header.draft}
-        </p>
-      )}
+      <div ref={noteRef}>
+        {updated && (
+          <p className="draft-note" role="status">
+            {t.site.updated}{" "}
+            <button className="link" onClick={() => location.reload()}>
+              {t.site.reload}
+            </button>
+          </p>
+        )}
+        {DRAFT[lang()] && (
+          <p className="draft-note" lang={lang()}>
+            {t.header.draft}
+          </p>
+        )}
+      </div>
       <div id="content" tabIndex={-1}>
         {!ready && failed && (
           <main className="reading">

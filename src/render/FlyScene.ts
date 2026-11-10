@@ -43,6 +43,7 @@ const VIEWS = {
   side: new THREE.Vector3(0, 0, 1),
   top: new THREE.Vector3(0, 1, 0.02).normalize(),
   front: new THREE.Vector3(1, 0.05, 0).normalize(),
+  behind: new THREE.Vector3(-1, 0.05, 0).normalize(),
   "three-quarter": new THREE.Vector3(0.55, 0.35, 1).normalize(),
   /** In the water, from the side: just above the waterline, looking into a cut-away tank. */
   "water-side": new THREE.Vector3(0, 0.07, 1).normalize(),
@@ -277,17 +278,7 @@ export class FlyScene {
     // long fly in a narrow viewport raises it (see allowDistance).
     this.baseMaxDistance = 14 * Math.max(1, 32 / (options.fov ?? 32));
     this.controls.maxDistance = this.baseMaxDistance;
-    this.controls.addEventListener("start", () => {
-      this.userMoved = true;
-      this.handled = true;
-      this.turnSeconds = 0;
-      this.turningBack = false;
-      // Turning the fly in the water leaves following as it is, for back at the vise.
-      if (this.follow && !this.water) {
-        this.follow = false;
-        this.onFollowChange?.(false);
-      }
-    });
+    this.controls.addEventListener("start", () => this.takeOver());
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(container);
@@ -1162,6 +1153,45 @@ export class FlyScene {
     }
     // Stopped (to play the steps): back round to where it was, to watch them from that side.
     if (!turning && was) this.turningBack = this.turnedFrom !== null;
+  }
+
+  /** The user takes the camera: the slow turn and following stop. */
+  private takeOver() {
+    this.userMoved = true;
+    this.handled = true;
+    this.turnSeconds = 0;
+    this.turningBack = false;
+    // Turning the fly in the water leaves following as it is, for back at the vise.
+    if (this.follow && !this.water) {
+      this.follow = false;
+      this.onFollowChange?.(false);
+    }
+  }
+
+  /** Turns the camera round what it looks at, as dragging does (radians: round the vertical, and up or down). */
+  orbitBy(round: number, up: number) {
+    this.takeOver();
+    const at = new THREE.Spherical().setFromVector3(this.camera.position.clone().sub(this.controls.target));
+    at.theta += round;
+    at.phi = Math.min(Math.PI - 0.05, Math.max(0.05, at.phi - up));
+    this.camera.position.copy(this.controls.target).add(new THREE.Vector3().setFromSpherical(at));
+  }
+
+  /** Moves the camera closer (a factor under 1) or further away, within what the controls allow. */
+  zoomBy(factor: number) {
+    this.takeOver();
+    const offset = this.camera.position.clone().sub(this.controls.target);
+    offset.setLength(Math.min(this.controls.maxDistance, Math.max(this.controls.minDistance, offset.length() * factor)));
+    this.camera.position.copy(this.controls.target).add(offset);
+  }
+
+  /** The whole fly from one side, for a look; the view the camera goes back to stays as it was. */
+  lookFrom(view: ViewName) {
+    this.takeOver();
+    const kept = this.view;
+    this.view = view;
+    this.resetCamera();
+    this.view = kept;
   }
 
   private azimuth(): number {

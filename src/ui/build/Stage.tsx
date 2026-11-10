@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MATERIAL_RANGES, partRange, rearLimit, type Compiled, type Part, type PartsFly } from "../../edit/parts";
 import { FlyScene } from "../../render/FlyScene";
-import { stepAt, stepEnd, type Build as Built } from "../../tying/simulate";
+import { stepAt, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
 import type { Player } from "../usePlayer";
 import { StepBar } from "../StepBar";
-import { TransportIcon } from "../PatternPage";
+import { SPEEDS, TransportIcon } from "../PatternPage";
 
 /** A handle on the fly: which part, what it sets, where it is on the shank's plane (gapes). */
 interface Handle {
@@ -230,6 +230,29 @@ export function Stage({
 
   const current = build && build.steps.length ? stepAt(build, player.time) : -1;
   const step = current >= 0 ? build!.steps[current] : undefined;
+  const toggle = () => (player.playing ? player.pause() : build && player.time >= build.duration - 1e-3 ? player.playFrom(0) : player.play());
+  // Within the first second of a step, back goes to the one before; otherwise it replays this one.
+  const previous = () => step && player.playFrom(build!.steps[Math.max(0, player.time - step.start < 1 ? current - 1 : current)]!.start);
+  const next = () => build && current < build.steps.length - 1 && player.playFrom(build.steps[current + 1]!.start);
+
+  // The pattern page's keys, while the fly is being watched.
+  useEffect(() => {
+    if (!watching) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      const target = e.target as Element;
+      if (target.closest?.("input:not([type=range]), select, textarea, dialog")) return;
+      if (e.key === " " && target.closest?.("button, a, summary")) return;
+      if (e.key === " ") toggle();
+      else if (e.key === "ArrowRight") next();
+      else if (e.key === "ArrowLeft") previous();
+      else if (e.key === "Home") (player.pause(), player.seek(0));
+      else return;
+      e.preventDefault();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
 
   return (
     <section className={watching ? "wb-stage watching" : "wb-stage"} aria-label={t.pattern.stage}>
@@ -286,7 +309,7 @@ export function Stage({
               </button>
               <button
                 className="play"
-                onClick={() => (player.playing ? player.pause() : player.time >= build.duration - 1e-3 ? player.playFrom(0) : player.play())}
+                onClick={toggle}
                 aria-label={player.playing ? t.pattern.pause : t.pattern.play}
               >
                 <TransportIcon name={player.playing ? "pause" : "play"} />
@@ -294,13 +317,16 @@ export function Stage({
               <button onClick={() => step && player.playFrom(step.start)} aria-label={t.pattern.replay}>
                 <TransportIcon name="replay" />
               </button>
-              <button
-                onClick={() => current < build.steps.length - 1 && player.seek(stepEnd(build.steps[current]!))}
-                disabled={current >= build.steps.length - 1}
-                aria-label={t.pattern.next}
-              >
+              <button onClick={next} disabled={current >= build.steps.length - 1} aria-label={t.pattern.next}>
                 <TransportIcon name="next" />
               </button>
+              <select value={player.speed} onChange={(e) => player.setSpeed(Number(e.target.value))} aria-label={t.pattern.speed}>
+                {SPEEDS.map(([v, speed]) => (
+                  <option key={v} value={v}>
+                    {t.pattern.speeds[speed]}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>

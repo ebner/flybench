@@ -84,7 +84,15 @@ export function legacyRoute(hash: string): Route | null {
   return parseRoute(single ? `fly/${raw}` : raw);
 }
 
+// The gallery as the visitor last had it, for the way back from a pattern (this visit only).
+let galleryQuery = "";
+export function rememberGallery(query: string): void {
+  galleryQuery = query;
+}
+
 export const href = {
+  /** Back to the gallery with the search and filters it last had. */
+  galleryBack: () => href.gallery(galleryQuery),
   gallery: (query = "") => (query ? `${root()}?${query}` : root()),
   fly: (id: string, step?: number, size?: number, colours?: string) => {
     // The colours ("body:yellow,tail:red") are written as they are, readable in a shared link.
@@ -150,20 +158,9 @@ const NAVIGATE = "flybench:navigate";
 let restoring = false;
 export const restoresScroll = () => restoring;
 
-/**
- * Asked before the app leaves a page for another (a link, the language menu, Back): false keeps
- * the visitor where they are. The fly builder sets it while it has unsaved changes.
- */
-let leaveGuard: (() => boolean) | null = null;
-export function setLeaveGuard(guard: (() => boolean) | null) {
-  leaveGuard = guard;
-}
-/** The address the app shows (without a "#"), to go back to when Back is refused. */
-let shown = "";
 
 /** Goes to an address on this site without reloading the page. */
 export function navigate(url: string) {
-  if (leaveGuard && !leaveGuard()) return;
   history.pushState(null, "", url);
   window.dispatchEvent(new Event(NAVIGATE));
 }
@@ -199,19 +196,12 @@ export function useRoute(): Route {
   });
   useEffect(() => {
     const update = (e: Event) => {
-      // Back or Forward away from a page that asks first: stay, and put its address back.
-      if (e.type === "popstate" && leaveGuard && location.pathname + location.search !== shown && !leaveGuard()) {
-        history.pushState(null, "", shown);
-        return;
-      }
       restoring = e.type === "popstate";
       const relative = currentRelative();
       const legacy = legacyRoute(location.hash);
       if (legacy) history.replaceState(null, "", routeHref(legacy));
       setRoute(legacy ?? parseRoute(relative));
-      shown = location.pathname + location.search;
     };
-    shown = location.pathname + location.search;
     const onClick = (e: MouseEvent) => {
       const a = internalLink(e);
       if (!a) return;
