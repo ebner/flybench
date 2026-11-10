@@ -4,6 +4,25 @@
  * Dark theme: cyanotype (Prussian-blue ground, pale ink), after Anna Atkins' 1843 specimen plates.
  */
 
+/*
+ * Georgia (Windows, macOS, iOS) and Noto Serif (Android, much of Linux) at the widths of
+ * Spectral and IM Fell English: each face's size-adjust is the web font's average glyph width
+ * over the device font's, and its ascent and descent are the web font's, so lines sit at the same
+ * height too (the fonts' own metrics, as published in @capsizecss/metrics 4.4.0;
+ * checked against Noto Serif in a browser, within 0.6 of a point). A device with neither sets
+ * the text in its own serif, unsized, as before.
+ */
+@font-face { font-family: "Spectral over Georgia"; src: local("Georgia"); size-adjust: 100%; ascent-override: 105.9%; descent-override: 46.3%; line-gap-override: 0%; }
+@font-face { font-family: "Spectral over Georgia"; font-style: italic; src: local("Georgia Italic"), local("Georgia-Italic"); size-adjust: 90.2%; ascent-override: 117.4%; descent-override: 51.3%; line-gap-override: 0%; }
+@font-face { font-family: "Spectral over Georgia"; font-weight: 600; src: local("Georgia Bold"), local("Georgia-Bold"); size-adjust: 88.1%; ascent-override: 120.2%; descent-override: 52.5%; line-gap-override: 0%; }
+@font-face { font-family: "Spectral over Noto Serif"; src: local("Noto Serif"), local("Noto Serif Regular"), local("NotoSerif-Regular"); size-adjust: 92.7%; ascent-override: 114.2%; descent-override: 49.9%; line-gap-override: 0%; }
+@font-face { font-family: "Spectral over Noto Serif"; font-style: italic; src: local("Noto Serif Italic"), local("NotoSerif-Italic"); size-adjust: 87.4%; ascent-override: 121.1%; descent-override: 53%; line-gap-override: 0%; }
+@font-face { font-family: "Spectral over Noto Serif"; font-weight: 600; src: local("Noto Serif Bold"), local("NotoSerif-Bold"); size-adjust: 89.3%; ascent-override: 118.6%; descent-override: 51.9%; line-gap-override: 0%; }
+@font-face { font-family: "Fell over Georgia"; src: local("Georgia"); size-adjust: 93%; ascent-override: 97.4%; descent-override: 39.1%; line-gap-override: 0%; }
+@font-face { font-family: "Fell over Georgia"; font-style: italic; src: local("Georgia Italic"), local("Georgia-Italic"); size-adjust: 79.5%; ascent-override: 113.9%; descent-override: 45.7%; line-gap-override: 0%; }
+@font-face { font-family: "Fell over Noto Serif"; src: local("Noto Serif"), local("Noto Serif Regular"), local("NotoSerif-Regular"); size-adjust: 86.2%; ascent-override: 105%; descent-override: 42.2%; line-gap-override: 0%; }
+@font-face { font-family: "Fell over Noto Serif"; font-style: italic; src: local("Noto Serif Italic"), local("NotoSerif-Italic"); size-adjust: 77%; ascent-override: 117.5%; descent-override: 47.2%; line-gap-override: 0%; }
+
 :root {
   --paper: #e9e7dd;
   --paper-raised: #f2f0e8;
@@ -20,8 +39,10 @@
      Dark materials hide it; the dark theme doesn't need it. */
   --specimen-edge: rgb(60 50 40 / 0.5);
 
-  --display: "IM Fell English", "Iowan Old Style", Georgia, serif;
-  --text: "Spectral", Georgia, serif;
+  /* Until the two fonts have arrived, text is set in a serif the device has, sized to take the
+     same room (the faces below), so it doesn't reflow when they do. */
+  --display: "IM Fell English", "Fell over Georgia", "Fell over Noto Serif", Georgia, serif;
+  --text: "Spectral", "Spectral over Georgia", "Spectral over Noto Serif", Georgia, serif;
 
   /* Major third scale. */
   --step--1: 0.85rem;
