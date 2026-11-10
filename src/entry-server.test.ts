@@ -46,6 +46,16 @@ describe("the app drawn without a browser", () => {
     expect(natural).toContain('class="natural-poster"');
   });
 
+  it("draws the visitor's own pages without saying they are empty", async () => {
+    const box = await renderPage("box/");
+    expect(box).toContain("Your fly box");
+    expect(box).not.toContain("empty-results");
+    expect(await renderPage("log/")).not.toContain("Nothing logged");
+    expect(await renderPage("materials/")).toContain("Your materials");
+    expect(await renderPage("build/")).toContain("Build a fly");
+    expect(hydrated("trip/")).toBe(false);
+  });
+
   it("draws the same page the same way twice (what the browser takes over must not vary)", async () => {
     expect(await renderPage("learn/")).toBe(await renderPage("learn/"));
   });

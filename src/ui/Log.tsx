@@ -5,6 +5,7 @@ import { PATTERNS } from "../patterns";
 import { allRecipes, useOwnFlies } from "./ownFlies";
 import { href } from "./router";
 import { LOG_KEY, useStoredList } from "./storage";
+import { useHydrated } from "./hydration";
 import { BenchNav, storedNote } from "./Personal";
 import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
@@ -24,6 +25,7 @@ function dateText(date: string): string {
 }
 
 export function Log() {
+  const hydrated = useHydrated();
   const log = useLog();
   useEffect(() => {
     document.title = t.site.titled(t.log.title);
@@ -45,7 +47,8 @@ export function Log() {
       <h1>{t.log.heading}</h1>
       <p className="lede">{t.log.intro}</p>
       <p className="stored-note">{storedNote()}</p>
-      {log.items.length === 0 ? (
+      {/* (A page built ahead of time doesn't know yet whether the log is empty: it says nothing.) */}
+      {!hydrated ? null : log.items.length === 0 ? (
         <p>{t.log.empty(linkTo(href.learn()))}</p>
       ) : (
         <>

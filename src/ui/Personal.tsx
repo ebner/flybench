@@ -17,6 +17,7 @@ import { linkTo } from "./linkTo";
 import { coloursSpec, coloursText, parseBoxEntry, parseColours, recolor } from "../catalog/variation";
 import type { Recipe } from "../recipe/schema";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
+import { useHydrated } from "./hydration";
 import { useFlyPictures } from "./pictures";
 
 
@@ -58,6 +59,7 @@ function boxVariations(values: Set<string>) {
 }
 
 export function FlyBox() {
+  const hydrated = useHydrated();
   const box = useStoredSet(FLY_BOX_KEY);
   const renders = useRenders();
   useEffect(() => {
@@ -79,7 +81,8 @@ export function FlyBox() {
         <p>{t.box.intro}</p>
         <p className="stored-note">{storedNote()}</p>
       </section>
-      {saved.length === 0 && variations.length === 0 && yours.length === 0 ? (
+      {/* (A page built ahead of time doesn't know yet whether the box is empty: it says nothing.) */}
+      {!hydrated ? null : saved.length === 0 && variations.length === 0 && yours.length === 0 ? (
         <div className="empty-results">
           <p>{t.box.empty}</p>
           <p>{t.box.emptyHint(linkTo(href.gallery()))}</p>

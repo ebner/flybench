@@ -41,6 +41,7 @@ import { useOwnFlies } from "./ownFlies";
 import { storedNote } from "./Personal";
 import { href, replaceUrl } from "./router";
 import { DRAFT_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
+import { useHydrated } from "./hydration";
 import { usePlayer } from "./usePlayer";
 import { useHookPictures, useSwatches } from "./renders";
 
@@ -105,7 +106,15 @@ export function Build({ query }: { query: string }) {
   const swatches = useSwatches();
   const hookPictures = useHookPictures();
   const [session, setSession] = useState<Session | null>(null);
-  const [draft, setDraft] = useState<Session | null>(() => readDraft());
+  // (Stored: read once the app has the page, where the page was built ahead of time.)
+  const hydrated = useHydrated();
+  const [draft, setDraft] = useState<Session | null>(() => (hydrated ? readDraft() : null));
+  const lateDraft = useRef(!hydrated);
+  useEffect(() => {
+    if (!hydrated || !lateDraft.current) return;
+    lateDraft.current = false;
+    setDraft(readDraft());
+  }, [hydrated]);
   const [note, setNote] = useState<Note | null>(null);
   const [past, setPast] = useState<PartsFly[]>([]);
   const [future, setFuture] = useState<PartsFly[]>([]);

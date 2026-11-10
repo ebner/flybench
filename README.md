@@ -204,10 +204,15 @@ workflow fills in:
 - `SITE_URL`: the host's address, for canonical links, link-preview pictures and
   `sitemap.xml`. Without it the build leaves those out.
 
-After `vite build`, `scripts/prerender.ts` writes an HTML file for every page (each
-pattern, technique and section) with its own title, description and preview picture, and
-the page's text for search engines and readers without JavaScript. The app replaces that
-text when it starts. `404.html` covers any other address.
+After `vite build`, a second build (`vite build --ssr src/entry-server.tsx`) makes the app
+able to draw without a browser, and `scripts/prerender.ts` writes an HTML file for every page
+(each pattern, technique and section) with its own title, description and preview picture.
+The page in the file is the app's own HTML, whole without JavaScript, and the app takes it
+over in the browser as it stands (React hydration), so nothing jumps when its script arrives.
+What only the browser knows (the theme, the fly box, own flies, today's date) is filled in
+right after; a 3D view shows the fly's gallery picture until it has drawn. An address with
+filters or a step in it, and the trip box (which opens on this month), are drawn afresh by
+the app as before. `404.html` covers any other address.
 
 The patterns and naturals are read and validated when the site is built
 (`scripts/catalog-plugin.ts`), and the app gets them as data. Pages with a 3D view (a pattern,

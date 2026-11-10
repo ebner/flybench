@@ -72,7 +72,8 @@ src/studio/     the authoring studio (dev server only), on src/edit
 src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder in
                 Build.tsx and build/, about;
                 features.ts switches off features kept for later: the water views)
-scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures;
+scripts/        prerender.ts runs after the two vite builds: an HTML file per page (the app's own
+                HTML, from src/entry-server.tsx), preview pictures;
                 catalog-plugin.ts reads and checks patterns/ and naturals/ at build time and
                 hands them to the app as data (src/patterns.ts, src/naturals.ts)
 public/renders/ generated gallery images, material swatches (materials/) and water stills
@@ -87,6 +88,11 @@ public/env/     the realistic water's panorama and gravel (Poly Haven, CC0), ser
   sets `dirty` (overlays outside the scene call `invalidate()`).
 - Pages with a 3D view are lazy (`App.tsx`): don't import `src/render` or three.js from the
   gallery, the reading pages or anything they import.
+- Every page is also drawn at build time without a browser (`src/entry-server.tsx`) and taken
+  over in the browser as it stands. A component must render in Node, and its first render in
+  the browser must match: nothing from `localStorage`, `matchMedia`, `location` or the date
+  while rendering unless `useHydrated()` (src/ui/hydration.tsx) is true; such things come in
+  an effect or after it turns true. `src/entry-server.test.ts` draws each kind of page.
 - Use seeded randomness (`render/random.ts`) so fibres look the same on every render.
 
 ## Recipe conventions
