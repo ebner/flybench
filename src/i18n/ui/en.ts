@@ -15,6 +15,7 @@ export const en = {
     retry: "Try again",
     updated: "A new version of Flybench is here.",
     reload: "Reload",
+    pageFailed: "This page couldn't be loaded (are you offline?).",
     inEnglish: "Read it in English",
     skip: "Skip to content",
     titled: (title: string) => `${title}, Flybench`,

@@ -3,6 +3,7 @@ import { lang, LANG_NAMES, LANGS } from "../i18n/lang";
 import { t } from "../i18n/ui";
 import { href, navigate, routeHrefIn, type Route } from "./router";
 import type { ThemeChoice } from "./theme";
+import { languageMenu } from "./languageMenu";
 
 const THEME_NEXT: Record<ThemeChoice, ThemeChoice> = { system: "light", light: "dark", dark: "system" };
 
@@ -34,11 +35,10 @@ export function Header({ theme, onTheme, route }: { theme: ThemeChoice; onTheme:
   // On a phone the sections and the theme are behind a menu button.
   const [open, setOpen] = useState(false);
   const header = useRef<HTMLElement>(null);
-  const browsing = useRef(false);
-  const toLanguage = (l: string) => {
-    browsing.current = false;
-    if (l !== lang()) navigate(routeHrefIn(l as (typeof LANGS)[number], route));
-  };
+  // (See languageMenu.ts for when the page's language changes.)
+  const goTo = useRef((_: string) => {});
+  goTo.current = (l) => navigate(routeHrefIn(l as (typeof LANGS)[number], route));
+  const [menu] = useState(() => languageMenu(lang, (l) => goTo.current(l)));
   useEffect(() => setOpen(false), [page]);
   useEffect(() => {
     if (!open) return;
@@ -113,15 +113,10 @@ export function Header({ theme, onTheme, route }: { theme: ThemeChoice; onTheme:
         aria-label={t.header.language}
         // Arrow keys on the closed menu walk through the languages: only Enter, leaving the
         // menu or a choice by pointer changes the page's language.
-        onKeyDown={(e) => {
-          browsing.current = e.key !== "Enter" && e.key !== " ";
-          if (e.key === "Enter") toLanguage(e.currentTarget.value);
-        }}
-        onPointerDown={() => (browsing.current = false)}
-        onBlur={(e) => toLanguage(e.currentTarget.value)}
-        onChange={(e) => {
-          if (!browsing.current) toLanguage(e.target.value);
-        }}
+        onKeyDown={(e) => menu.key(e.key, e.currentTarget.value)}
+        onPointerDown={menu.pointer}
+        onBlur={(e) => menu.blur(e.currentTarget.value)}
+        onChange={(e) => menu.change(e.target.value)}
       >
         {LANGS.map((l) => (
           <option key={l} value={l} lang={l}>

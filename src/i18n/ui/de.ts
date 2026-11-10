@@ -10,6 +10,7 @@ export const de: Messages = {
     retry: "Erneut versuchen",
     updated: "Eine neue Version von Flybench ist da.",
     reload: "Neu laden",
+    pageFailed: "Die Seite konnte nicht geladen werden (bist du offline?).",
     inEnglish: "Auf Englisch lesen",
     skip: "Zum Inhalt springen",
     titled: (title: string) => `${title}, Flybench`,

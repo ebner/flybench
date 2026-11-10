@@ -155,6 +155,7 @@ export interface PartsFly {
 export interface Restart {
   key: number;
   turns: number;
+  varnish?: boolean;
   at: number;
   /** Where the thread is brought to be finished part-way, and the note on that move. */
   finishAt?: number;
@@ -566,7 +567,7 @@ export function compile(fly: PartsFly): Compiled {
       if (thread !== null) {
         threadNote = restart.move;
         if (restart.finishAt !== undefined) to(restart.finishAt, null);
-        push({ op: "whip-finish", turns: restart.turns, ...(restart.note && { note: restart.note }), ...(restart.mistake && { mistake: restart.mistake }) }, null);
+        push({ op: "whip-finish", turns: restart.turns, ...(restart.varnish !== undefined && { varnish: restart.varnish }), ...(restart.note && { note: restart.note }), ...(restart.mistake && { mistake: restart.mistake }) }, null);
         thread = null;
         cut = true;
       }
@@ -843,7 +844,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
         if (!finish) return null;
         const attachAgain = annotation(s);
         restarts.push({
-          key: finish.key, turns: finish.turns, at: s.at,
+          key: finish.key, turns: finish.turns, at: s.at, ...(finish.varnish !== undefined && { varnish: finish.varnish }),
           ...(finish.at !== undefined && { finishAt: finish.at }), ...(finish.move && { move: finish.move }),
           ...(finish.note && { note: finish.note }), ...(finish.mistake && { mistake: finish.mistake }), ...(attachAgain && { attach: attachAgain }),
         });
@@ -1666,8 +1667,11 @@ export function startFrom(recipe: Recipe, keepNotes = false): PartsFly | null {
   return {
     ...fly,
     parts: fly.parts.map(({ notes: _n, mistakes: _m, ...p }) => p as Part),
-    finish: { turns: fly.finish.turns, key: fly.finish.key },
-    ...(fly.restarts && { restarts: fly.restarts.map(({ key, turns, at, finishAt }) => ({ key, turns, at, ...(finishAt !== undefined && { finishAt }) })) }),
+    // (A varnished head is part of the dressing, not a note.)
+    finish: { turns: fly.finish.turns, key: fly.finish.key, ...(fly.finish.varnish !== undefined && { varnish: fly.finish.varnish }) },
+    ...(fly.restarts && {
+      restarts: fly.restarts.map(({ key, turns, at, finishAt, varnish }) => ({ key, turns, at, ...(varnish !== undefined && { varnish }), ...(finishAt !== undefined && { finishAt }) })),
+    }),
   };
 }
 

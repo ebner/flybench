@@ -798,3 +798,17 @@ steps {
     expect(pieces(again)).toEqual(pieces(r));
   });
 });
+
+describe("a varnished whip finish", () => {
+  const zonker = readFileSync(new URL("../../patterns/zonker.kdl", import.meta.url), "utf8");
+  it("stays varnished through the builder, part-way finishes too", () => {
+    // Every whip finish varnished, the one at the bend as well.
+    const loaded = loadRecipe(zonker.replace(/whip-finish(?! varnish)/g, "whip-finish varnish=#true"));
+    if (!loaded.ok) throw new Error(JSON.stringify(loaded.errors));
+    const before = loaded.recipe.steps.filter((s) => s.op === "whip-finish");
+    expect(before.length).toBeGreaterThan(1);
+    const fly = partsOf(loaded.recipe)!;
+    const after = compile(fly).recipe.steps.filter((s) => s.op === "whip-finish");
+    expect(after.map((s) => s.op === "whip-finish" && s.varnish)).toEqual(before.map(() => true));
+  });
+});

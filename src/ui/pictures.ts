@@ -19,7 +19,9 @@ export function useFlyPictures(flies: { key: string; recipe: Recipe }[]): Record
   );
   useEffect(() => {
     const todo = flies.filter((f) => !drawnBefore.has(cacheKey(f)));
-    const kept = () => Object.fromEntries(flies.flatMap((f) => (drawnBefore.has(cacheKey(f)) ? [[f.key, drawnBefore.get(cacheKey(f))!]] : [])));
+    // What this page shows, whatever the cache has had to let go of since.
+    const here = new Map<string, string>();
+    const kept = () => Object.fromEntries(flies.flatMap((f) => { const p = here.get(f.key) ?? drawnBefore.get(cacheKey(f)); return p ? [[f.key, p]] : []; }));
     if (todo.length === 0) return setPictures(kept());
     let live = true;
     // The renderer comes when there is something to draw; a fly at a time, so the page stays
@@ -40,7 +42,9 @@ export function useFlyPictures(flies: { key: string; recipe: Recipe }[]): Record
           scene.setTime(build.duration);
           scene.setView("default");
           if (drawnBefore.size >= MAX_KEPT) drawnBefore.delete(drawnBefore.keys().next().value!);
-          drawnBefore.set(cacheKey(f), scene.snapshot().toDataURL("image/png"));
+          const picture = scene.snapshot().toDataURL("image/png");
+          here.set(f.key, picture);
+          drawnBefore.set(cacheKey(f), picture);
           await new Promise((next) => setTimeout(next));
           if (!live) break;
         }

@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useUpdated } from "./update";
+import { PageBoundary } from "./PageBoundary";
 import { siteTitle } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
 import { About, AUTHOR, REPO_URL } from "./About";
@@ -116,6 +117,8 @@ export function App() {
           </main>
         )}
         {ready && (
+          // (Keyed by page, so going to another page tries afresh.)
+          <PageBoundary key={route.page}>
           <Suspense fallback={null}>
             {route.page === "gallery" && <Gallery query={route.query} />}
             {route.page === "fly" && <PatternPage id={route.id} step={route.step} size={route.size} colours={route.colours} />}
@@ -138,6 +141,7 @@ export function App() {
               </NotFound>
             )}
           </Suspense>
+          </PageBoundary>
         )}
       </div>
       <footer className="site-footer">

@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { App } from "./ui/App";
 import { splitLang } from "./i18n/lang";
 import { loadLanguage } from "./i18n/load";
-import { markUpdated } from "./ui/update";
+import { watchForUpdates } from "./ui/update";
 import "@fontsource/im-fell-english/400.css";
 import "@fontsource/im-fell-english/400-italic.css";
 import "@fontsource/spectral/400.css";
@@ -25,9 +25,8 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
   });
   // A new deployment's worker taking over gets the whole list again; a page that an earlier
   // worker served is now out of date, and says so.
-  const served = navigator.serviceWorker.controller !== null;
+  watchForUpdates(navigator.serviceWorker);
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (served) markUpdated();
     const urls = performance.getEntriesByType("resource").map((e) => e.name);
     navigator.serviceWorker.controller?.postMessage({ type: "cache", urls });
   });
@@ -40,10 +39,17 @@ loadLanguage(first)
   .catch(() => {
     // Offline and never fetched: the app still starts; the page shows what it can.
   })
-  .finally(() =>
-    createRoot(document.getElementById("root")!).render(
+  .finally(() => {
+    const root = document.getElementById("root")!;
+    const app = (
       <StrictMode>
         <App />
-      </StrictMode>,
-    ),
-  );
+      </StrictMode>
+    );
+    // A page built ahead of time as the app itself draws it (its root says for which address)
+    // is taken over as it stands. Anything else is drawn afresh: a page not built that way yet,
+    // an address with filters or a step in it, the front page standing in for another offline.
+    const here = location.pathname.startsWith(base) ? location.pathname.slice(base.length) : null;
+    if (root.dataset.page !== undefined && root.dataset.page === here && !location.search && !location.hash.startsWith("#/")) hydrateRoot(root, app);
+    else createRoot(root).render(app);
+  });

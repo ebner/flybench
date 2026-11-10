@@ -815,7 +815,9 @@ const BUNDLE = {
   // A biot is a stiff, broad barb: wide at the base, tapering to a point.
   biot: { radius: 0.028, tip: 0.85, tipShade: 0.85, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0, curve: 0.12, droop: -0.8 },
   // Marabou is a dense, soft plume: many fine barbs, each fluffy with barbules (added below).
-  marabou: { radius: 0.007, tip: 0.3, tipShade: 0.6, spread: 0.14, flare: 0.04, sideFlare: 0.15, lengthJitter: 0.45, curve: 0.3, droop: 0.5 },
+  // Assumption (from the reference photos of the Woolly Bugger and Cat's Whisker): dry, it stands
+  // out from the tie-in as a loose cloud, its barbs splaying and curling every way, not a sleek brush.
+  marabou: { radius: 0.007, tip: 0.3, tipShade: 0.6, spread: 0.3, flare: 0.1, sideFlare: 0.32, lengthJitter: 0.5, curve: 0.34, droop: 0.12 },
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
   cdc: { radius: 0.004, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45, curve: 0.3, droop: 0.3 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2, curve: 0.08, droop: 0 },
@@ -834,7 +836,7 @@ type BundleLook = (typeof BUNDLE)[keyof typeof BUNDLE];
 // CDC's are short and fine; a peacock sword fibre's flue makes it a broad, glittering frond.
 // Lengths in gapes, `lean` the angle off the barb (radians), `shorten` how much shorter at its tip.
 const FLUFF = {
-  marabou: { perBarb: 12, from: 0.03, length: [0.1, 0.26], radius: 0.0035, lean: [0.5, 1.2], shorten: 0.55 },
+  marabou: { perBarb: 12, from: 0.03, length: [0.14, 0.34], radius: 0.0035, lean: [0.6, 1.4], shorten: 0.5 },
   cdc: { perBarb: 10, from: 0.1, length: [0.05, 0.12], radius: 0.0026, lean: [0.5, 1.2], shorten: 0.4 },
   flue: { perBarb: 16, from: 0.2, length: [0.08, 0.18], radius: 0.0035, lean: [0.6, 1.3], shorten: 0 },
 } as const;
@@ -1131,6 +1133,8 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       radius: piece.look === "legs" ? piece.bundleRadius : ((radialHair && piece.cut ? spec.radius * 1.6 : spec.radius) * (piece.fibreWidth ?? 1)) / fine,
       shade: (0.85 + 0.3 * rand()) * (piece.cut ? 1 : 1 - 0.32 * Math.pow(rand(), 0.6)),
       bend, bendDir: bend > 0 ? perpendicular(dir, toward, rand) : undefined,
+      // Marabou's barbs are limp: each wavers its own way towards its tip.
+      ...(piece.look === "marabou" && { wave: perpendicular(dir, new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5), rand).multiplyScalar(0.05 + 0.07 * rand()), wavePhase: rand() * 2 * Math.PI }),
     });
   }
   // A blended bunch: each fibre one of its colours, drawn on a white surface so they can differ.

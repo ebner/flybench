@@ -10,6 +10,7 @@ export const sv: Messages = {
     retry: "Försök igen",
     updated: "En ny version av Flybench finns.",
     reload: "Ladda om",
+    pageFailed: "Sidan kunde inte laddas (är du offline?).",
     inEnglish: "Läs den på engelska",
     skip: "Hoppa till innehållet",
     titled: (title: string) => `${title}, Flybench`,
