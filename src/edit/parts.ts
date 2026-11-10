@@ -144,7 +144,7 @@ export interface PartsFly {
   attach: number;
   attachNote?: { note?: string; mistake?: string };
   /** The whip finish: its turns, its order key (trims may come after it), its note. */
-  finish: { turns: number; key: number; note?: string; mistake?: string; at?: number; move?: { note?: string; mistake?: string } };
+  finish: { turns: number; key: number; varnish?: boolean; note?: string; mistake?: string; at?: number; move?: { note?: string; mistake?: string } };
   /**
    * Whip finishes part-way, each at its order key, the thread then started again at `at` (a
    * Zonker's rear finished at the bend, its front tied with the thread started behind the eye).
@@ -578,7 +578,7 @@ export function compile(fly: PartsFly): Compiled {
       if (thread === null) to(attachAt, null);
       threadNote = fly.finish.move;
       if (fly.finish.at !== undefined) to(fly.finish.at, null);
-      push({ op: "whip-finish", turns: fly.finish.turns, ...(fly.finish.note && { note: fly.finish.note }), ...(fly.finish.mistake && { mistake: fly.finish.mistake }) }, null);
+      push({ op: "whip-finish", turns: fly.finish.turns, ...(fly.finish.varnish !== undefined && { varnish: fly.finish.varnish }), ...(fly.finish.note && { note: fly.finish.note }), ...(fly.finish.mistake && { mistake: fly.finish.mistake }) }, null);
       continue;
     }
     const n = note(p, i);
@@ -856,7 +856,7 @@ export function partsOf(recipe: Recipe): PartsFly | null {
       continue;
     }
     if (s.op === "whip-finish") {
-      finish = { turns: s.turns, key: i, ...(s.note && { note: s.note }), ...(s.mistake && { mistake: s.mistake }) };
+      finish = { turns: s.turns, key: i, ...(s.varnish !== undefined && { varnish: s.varnish }), ...(s.note && { note: s.note }), ...(s.mistake && { mistake: s.mistake }) };
       // The thread brought to where the head is finished (past a pair of eyes, through the butts).
       if (steps[i - 1]?.op === "wrap-thread" && thread !== null) finish.at = thread;
       if (pendingMove) finish.move = pendingMove;

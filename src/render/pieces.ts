@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import {
   belowReach,
   extensionCentre,
@@ -72,28 +73,54 @@ function anchored(space: ShankSpace, x: number): THREE.Group {
   return g;
 }
 
-/** Rows along a fibre with bands on it, so the band edges stay sharp. */
-const MARKED_ROWS = 48;
+
+// Assumption: a fibre is in the shade of its neighbours over about the first third of its
+// length, darkest at the root.
+const ROOT_REACH = 0.3;
+/** How dark the roots of wound fibres (hackle, herl, dubbing) and of bunches are, against 1. */
+const WOUND_ROOT = 0.5;
+const BUNCH_ROOT = 0.68;
 
 /**
  * Unit fibre along +Y from the origin: the stretch from t0 to t1 of a whole fibre that tapers
  * to `tipRatio` of its base width. Vertex colours shade it from white at the base to `tipShade`
  * at the tip, darkened where `marks` put a band.
  */
-function fibreGeometry(tipRatio: number, tipShade = 1, t0 = 0, t1 = 1, marks?: FibreMarks): THREE.BufferGeometry {
+function fibreGeometry(tipRatio: number, tipShade = 1, t0 = 0, t1 = 1, marks?: FibreMarks, rootShade = 1): THREE.BufferGeometry {
   const width = (t: number) => 1 - (1 - tipRatio) * t;
-  const rows = marks ? Math.max(2, Math.round(MARKED_ROWS * (t1 - t0))) : 2;
-  const g = new THREE.CylinderGeometry(width(t1), width(t0), 1, 5, rows, false).translate(0, 0.5, 0);
-  const pos = g.getAttribute("position");
-  const colors = new Float32Array(pos.count * 3);
-  for (let i = 0; i < pos.count; i++) {
-    const t = t0 + (t1 - t0) * pos.getY(i);
-    const band = marks?.find((m) => t >= m.from && t <= m.to);
-    const shade = (1 + (tipShade - 1) * t) * (band ? band.shade : 1);
-    colors.set([shade, shade, shade], i * 3);
+  // Darker at the root, where the fibres round it and what it grows from keep the light off.
+  const shadeAt = (t: number) => (1 + (tipShade - 1) * t) * (t < ROOT_REACH ? rootShade + (1 - rootShade) * (t / ROOT_REACH) : 1);
+  const root = rootShade < 1 ? [ROOT_REACH] : [];
+  // The shade runs evenly between a band's edges: one stretch of tube from each edge to the
+  // next draws it exactly, the edges sharp. Without marks, one stretch for the whole fibre.
+  const stops = [t0, ...[...root, ...(marks ?? []).flatMap((m) => [m.from, m.to])].filter((t) => t > t0 + 1e-4 && t < t1 - 1e-4), t1].sort((a, b) => a - b);
+  const stretches: THREE.BufferGeometry[] = [];
+  for (let k = 0; k + 1 < stops.length; k++) {
+    const a = stops[k]!;
+    const b = stops[k + 1]!;
+    if (b - a < 1e-5) continue;
+    // Closed at the fibre's two ends only.
+    const g = new THREE.CylinderGeometry(width(b), width(a), (b - a) / (t1 - t0), 5, 1, true).translate(0, ((a + b) / 2 - t0) / (t1 - t0), 0);
+    const mid = (a + b) / 2;
+    const band = marks?.find((m) => mid >= m.from && mid <= m.to)?.shade ?? 1;
+    const pos = g.getAttribute("position");
+    const colors = new Float32Array(pos.count * 3);
+    for (let i = 0; i < pos.count; i++) {
+      const shade = shadeAt(t0 + (t1 - t0) * pos.getY(i)) * band;
+      colors.set([shade, shade, shade], i * 3);
+    }
+    g.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    stretches.push(g);
   }
-  g.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-  return g;
+  for (const [t, y, facing] of [[t0, 0, -1], [t1, 1, 1]] as const) {
+    const cap = new THREE.CircleGeometry(width(t), 5).rotateX((-facing * Math.PI) / 2).translate(0, y, 0);
+    const shade = shadeAt(t) * (marks?.find((m) => t >= m.from && t <= m.to)?.shade ?? 1);
+    cap.setAttribute("color", new THREE.BufferAttribute(new Float32Array(cap.getAttribute("position").count * 3).fill(shade), 3));
+    stretches.push(cap);
+  }
+  const merged = mergeGeometries(stretches);
+  for (const g of stretches) g.dispose();
+  return merged;
 }
 
 export interface Fibre {
@@ -130,14 +157,26 @@ const BILLOW_AT = (t: number) => 6.75 * t * t * (1 - t);
 /** How far a waving fibre is off its line at t: a wave and a half along it, growing towards the tip, never more than t². */
 const WAVE_AT = (t: number, phase: number) => t * t * Math.sin(3 * Math.PI * t + phase);
 
-/** A curved fibre is drawn as this many straight pieces along a parabola. */
-const BEND_SEGMENTS = 3;
+/** A curved fibre is drawn as this many straight pieces along its curve: enough that no corner shows. */
+const BEND_SEGMENTS = 6;
+
+/**
+ * Where a fibre is at t along it (0 root, 1 tip): base + dir·L·t + bendDir·bend·L·t² +
+ * billow·L·b(t) + wave·L·w(t).
+ */
+function fibrePoint(f: Fibre, t: number): THREE.Vector3 {
+  const p = f.base.clone().addScaledVector(f.dir, f.length * t);
+  if (f.bend && f.bendDir) p.addScaledVector(f.bendDir, f.bend * f.length * t * t);
+  if (f.billow) p.addScaledVector(f.billow, f.length * BILLOW_AT(t));
+  if (f.wave) p.addScaledVector(f.wave, f.length * WAVE_AT(t, f.wavePhase ?? 0));
+  return p;
+}
 
 /**
  * Instanced fibres that appear in order of their `u`. Curved fibres are drawn in `segments`
  * straight pieces.
  */
-export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 0.25, tipShade = 1, marks?: FibreMarks, segments = BEND_SEGMENTS) {
+export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 0.25, tipShade = 1, marks?: FibreMarks, segments = BEND_SEGMENTS, rootShade = 1) {
   fibres.sort((a, b) => a.u - b.u);
   const object = new THREE.Group();
   const parts: { mesh: THREE.InstancedMesh; us: number[] }[] = [];
@@ -169,25 +208,17 @@ export function fibreMesh(fibres: Fibre[], material: THREE.Material, tipRatio = 
   const curves = (f: Fibre) => (f.bend && f.bendDir) || f.billow || f.wave;
   const straight = fibres.filter((f) => !curves(f));
   addPart(
-    fibreGeometry(tipRatio, tipShade, 0, 1, marks),
+    fibreGeometry(tipRatio, tipShade, 0, 1, marks, rootShade),
     straight.map((f) => ({ ...f, shade: f.shade ?? 1 })),
   );
 
-  // A curved fibre follows base + dir·L·t + bendDir·bend·L·t² + billow·L·b(t) + wave·L·w(t),
-  // from t = 0 to 1.
   const curved = fibres.filter(curves);
-  const at = (f: Fibre, t: number) => {
-    const p = f.base.clone().addScaledVector(f.dir, f.length * t);
-    if (f.bend && f.bendDir) p.addScaledVector(f.bendDir, f.bend * f.length * t * t);
-    if (f.billow) p.addScaledVector(f.billow, f.length * BILLOW_AT(t));
-    if (f.wave) p.addScaledVector(f.wave, f.length * WAVE_AT(t, f.wavePhase ?? 0));
-    return p;
-  };
+  const at = fibrePoint;
   for (let k = 0; k < segments; k++) {
     const t0 = k / segments;
     const t1 = (k + 1) / segments;
     addPart(
-      fibreGeometry(tipRatio, tipShade, t0, t1, marks),
+      fibreGeometry(tipRatio, tipShade, t0, t1, marks, rootShade),
       curved.map((f) => {
         const a = at(f, t0);
         const d = at(f, t1).sub(a);
@@ -226,17 +257,24 @@ function perpendicular(dir: THREE.Vector3, toward: THREE.Vector3, rand: () => nu
 }
 
 /**
- * Per-look fibre settings for wound materials. A hackle that knows its barbs (`WrapsPiece.barbs`)
- * draws as many as its stem carries, at their own thickness, instead of `perTurn` and `radius`.
+ * Per-look fibre settings for wound materials: how many fibres a gape of the wound strand
+ * carries and how thick each is, on a hook of the size the looks were set on (the piece's `fine`
+ * makes them more and finer on a bigger hook). Counted along the strand, a turn round a thick
+ * thorax has more than a turn round the bare shank, as it has more strand. A hackle that knows
+ * its barbs (`WrapsPiece.barbs`) draws as many as its stem carries, at their own thickness.
+ * Assumption: the numbers give what the fixed counts per turn gave on a body of ordinary
+ * thickness (about a quarter of the gape through), which were set against photos.
  */
 const WOUND_FIBRES = {
-  hackle: { perTurn: 110, radius: 0.006, tip: 0.25, wave: 0.04 },
-  herl: { perTurn: 320, radius: 0.006, tip: 0.25, wave: 0.15 },
-  dubbing: { perTurn: 260, radius: 0.005, tip: 0.3, wave: 0.35 },
-  chenille: { perTurn: 240, radius: 0.006, tip: 0.6, wave: 0 },
+  hackle: { perGape: 220, radius: 0.006, tip: 0.25, wave: 0.04 },
+  herl: { perGape: 460, radius: 0.006, tip: 0.25, wave: 0.15 },
+  dubbing: { perGape: 350, radius: 0.005, tip: 0.3, wave: 0.35 },
+  // Assumption: chenille is a pile of short, blunt fibres standing all round a thin core, dense
+  // enough to hide it and the turns (read from photos of chenille bodies).
+  chenille: { perGape: 1030, radius: 0.0075, tip: 0.9, wave: 0 },
   // Assumption: a CDC feather has few, wispy barbs: about 45 to a turn (photos of the CDC & Elk).
-  cdc: { perTurn: 45, radius: 0.003, tip: 0.3, wave: 0.2 },
-  fibres: { perTurn: 90, radius: 0.003, tip: 0.4, wave: 0 },
+  cdc: { perGape: 70, radius: 0.003, tip: 0.3, wave: 0.2 },
+  fibres: { perGape: 160, radius: 0.003, tip: 0.4, wave: 0 },
 } as const;
 
 const BACK = new THREE.Vector3(-1, 0, 0);
@@ -288,28 +326,30 @@ export function stemOf(piece: WrapsPiece): { length: number; at(s: number): numb
 }
 
 /** How many fibres a wound piece draws: a hackle as many barbs as its stem carries. */
-function woundCount(piece: WrapsPiece, stem: ReturnType<typeof stemOf> | null): number {
-  if (stem && piece.barbs) return Math.round(stem.length * piece.barbs.perGape);
+function woundCount(piece: WrapsPiece, stem: ReturnType<typeof stemOf>): number {
   const look = piece.look as keyof typeof WOUND_FIBRES;
+  if (look === "hackle" && piece.barbs) return Math.round(stem.length * piece.barbs.perGape);
   // Rough dubbing is more fur than strand: enough of it to hide the core.
-  return Math.round(piece.turns * WOUND_FIBRES[look].perTurn * (look === "dubbing" ? 1 + (piece.shaggy ?? 0.4) : 1));
+  return Math.round(stem.length * WOUND_FIBRES[look].perGape * (piece.fine ?? 1) * (look === "dubbing" ? 1 + (piece.shaggy ?? 0.4) : 1));
 }
 
 function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
   const look = piece.look as keyof typeof WOUND_FIBRES;
   const spec = WOUND_FIBRES[look];
   const list: Fibre[] = [];
-  const stem = look === "hackle" && piece.barbs ? stemOf(piece) : null;
+  const stem = stemOf(piece);
   const n = woundCount(piece, stem);
-  const radius = (stem && piece.barbs?.radius) || spec.radius;
+  const radius = (look === "hackle" && piece.barbs?.radius) || spec.radius / (piece.fine ?? 1);
   const onPost = piece.path === "post";
   for (let i = 0; i < n; i++) {
-    const u = stem ? stem.at((i + rand()) / n) : (i + rand()) / n;
+    const u = stem.at((i + rand()) / n);
     const at = wrapPoint(piece, u);
     const [px, py, pz] = at.point;
     let spin: number, sweep: number, length: number, shade: number;
     /** Lies along the wrapped strand rather than standing out from it (most dubbing fur). */
     let lie = false;
+    /** How far out along itself the fibre starts (chenille's pile, from its core). */
+    let lift = 0;
 
     // Angle round whatever is being wound on.
     const around = onPost ? Math.atan2(px - piece.post!.x, pz) : wrapAt(piece, u).angle;
@@ -320,7 +360,8 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       spin = around + (rand() - 0.5) * (palmered ? 1 : 0.5);
       sweep = (piece.sweep ?? 0.12) + (rand() - 0.5) * (palmered ? 0.6 : 0.25);
       length = piece.fibreLength! * (palmered ? 0.65 + 0.45 * rand() : 0.8 + 0.25 * rand());
-      shade = piece.barred ? (rand() < 0.5 ? 0.35 : 1.05) : 0.85 + 0.3 * rand();
+      // (A barred hackle's bars are drawn along each barb, see `marks`.)
+      shade = 0.85 + 0.3 * rand();
     } else if (look === "herl") {
       // Flue sticks out every which way, filling the gaps between turns.
       spin = around + (rand() - 0.5) * 2.4;
@@ -340,10 +381,15 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       length = piece.fibreLength! * (0.4 + 0.8 * rand());
       shade = 0.6 + 0.3 * rand();
     } else if (look === "chenille") {
-      spin = around + (rand() - 0.5) * 3;
-      sweep = (rand() - 0.5) * 1.6;
-      length = piece.fibreLength! * (0.7 + 0.5 * rand());
-      shade = 0.85 + 0.25 * rand();
+      // The pile stands all round the strand's core, out to the strand's width: straight out
+      // from the body, and forward and back into the grooves between the turns.
+      spin = around + (rand() - 0.5) * 0.2;
+      sweep = (rand() - 0.5) * 3.8;
+      lift = piece.strandRadius * 0.45;
+      // (Longer along the shank, where the pile of one turn meets the next and closes the groove.)
+      length = piece.strandRadius * (0.5 + 0.25 * rand()) * (1 + 0.6 * Math.abs(Math.sin(sweep)));
+      // Fibres down in the pile are shaded by those round them.
+      shade = 0.68 + 0.42 * rand();
     } else {
       // Dubbing: short, scruffy, mottled fibres and some long guard hairs. Rough fur (hare's
       // mask, seal's fur) is longer and spikier than fine dry-fly dubbing.
@@ -383,7 +429,7 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
       }
     }
     const inset = look === "dubbing" ? 0.9 : 1;
-    const base = new THREE.Vector3(px, py * inset, pz * inset);
+    const base = new THREE.Vector3(px, py * inset, pz * inset).addScaledVector(dir, lift);
     // Soft barbs curve back towards the bend; herl, dubbing and stiff hackle just wave a little.
     const soft = look === "cdc" || (look === "hackle" && (piece.sweep ?? 0) > 0.4);
     // Fur lying round the body curves to hug it.
@@ -401,6 +447,11 @@ function woundFibres(piece: WrapsPiece, rand: () => number): Fibre[] {
  */
 const BANDS: Partial<Record<WrapsPiece["look"], number>> = { thread: 1.4, floss: 3, tinsel: 2.6, fibres: 2.6 };
 
+/** The thickness a layer of flat tinsel adds to a body (simulate.ts), in gapes. */
+const TINSEL_LAYER = 0.02;
+// Assumption: flat tinsel is a thin metal strip, about a seventh as thick as it is wide.
+const TINSEL_THICK = 0.3;
+
 /** Thread always lies flat; other materials say so (silk floss, flat tinsel, wound fibres). */
 const isBand = (piece: WrapsPiece) => piece.look === "thread" || piece.band === true;
 
@@ -408,8 +459,12 @@ const isBand = (piece: WrapsPiece) => piece.look === "thread" || piece.band === 
  * A flat band following a wraps piece: an elliptical section, wide along the shank and
  * thin outwards from it, so touching turns close up into a smooth layer.
  */
-function bandGeometry(piece: WrapsPiece, space: ShankSpace, halfWidth: number, halfThickness: number, segments: number) {
-  const radial = 8;
+function bandGeometry(piece: WrapsPiece, space: ShankSpace, halfWidth: number, halfThickness: number, segments: number, flat = false) {
+  // A flat strip (tinsel) has a squared section with crisp edges, lying on what it is wound on.
+  const radial = flat ? 12 : 8;
+  const squared = (v: number) => (flat ? Math.sign(v) * Math.pow(Math.abs(v), 0.25) : v);
+  // Its outer face is where the next layer starts (the layer's thickness in simulate.ts).
+  const sunk = flat ? piece.strandRadius - Math.max(halfThickness, TINSEL_LAYER - halfThickness) : 0;
   const positions: number[] = [];
   const index: number[] = [];
   const v = new THREE.Vector3();
@@ -422,8 +477,8 @@ function bandGeometry(piece: WrapsPiece, space: ShankSpace, halfWidth: number, h
     const nz = pz / len;
     for (let j = 0; j <= radial; j++) {
       const t = (j / radial) * Math.PI * 2;
-      const out = halfThickness * Math.cos(t);
-      const along = halfWidth * Math.sin(t);
+      const out = halfThickness * squared(Math.cos(t)) - sunk;
+      const along = halfWidth * squared(Math.sin(t));
       space.point(v.set(px + along, py + ny * out, pz + nz * out));
       positions.push(v.x, v.y, v.z);
     }
@@ -526,36 +581,40 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   if (band) {
     const halfWidth = Math.min(piece.strandRadius * band, Math.max(piece.strandRadius, pitch * 0.55));
     // Wound fibres are one fibre thick however many lie side by side.
-    const halfThickness = piece.look === "fibres" ? 0.014 : piece.strandRadius * 0.6;
-    ({ geometry: tube, perSegment } = bandGeometry(piece, space, halfWidth, halfThickness, tubular));
+    const flat = piece.look === "tinsel";
+    const halfThickness = piece.look === "fibres" ? 0.014 : piece.strandRadius * (flat ? TINSEL_THICK : 0.6);
+    ({ geometry: tube, perSegment } = bandGeometry(piece, space, halfWidth, halfThickness, tubular, flat));
   } else {
-    const tubeRadius =
-      piece.look === "dubbing" || piece.look === "chenille" ? piece.strandRadius * 0.9 : piece.strandRadius;
+    // Chenille's core is thin; what shows between the pile's fibres is the pile further in.
+    const tubeRadius = piece.look === "chenille" ? piece.strandRadius * 0.62 : piece.look === "dubbing" ? piece.strandRadius * 0.9 : piece.strandRadius;
     tube = new THREE.TubeGeometry(new WrapsCurve(piece, space), tubular, tubeRadius, radial, false);
     perSegment = radial * 6;
   }
   // Dubbing is a felt of mottled fur, not a smooth strand of one colour.
-  const mottled = piece.look === "dubbing";
+  // Under chenille's pile it is darker still: the light doesn't reach down between the fibres.
+  const mottled = piece.look === "dubbing" || piece.look === "chenille";
   if (mottled) {
     const rand = mulberry32((piece.seed ?? piece.id) * 31 + 5);
     const count = tube.getAttribute("position").count;
     const colors = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) colors.fill(0.62 + 0.38 * rand(), i * 3, i * 3 + 3);
+    const [dark, range] = piece.look === "chenille" ? [0.5, 0.3] : [0.62, 0.38];
+    for (let i = 0; i < count; i++) colors.fill(dark + range * rand(), i * 3, i * 3 + 3);
     tube.setAttribute("color", new THREE.BufferAttribute(colors, 3));
   }
-  group.add(new THREE.Mesh(tube, surfaces.get(tubeLook, piece.color, mottled)));
+  group.add(new THREE.Mesh(tube, surfaces.get(piece.gloss ? "varnish" : tubeLook, piece.color, mottled, piece.finish)));
 
   // Thread lies flat and tight: on the bare shank or over what is bound under it (trimmed butts,
   // tie-in bumps), a core along that layer, so no air shows between the turns and the shank.
   // Not under open turns, where the shank or body shows between them.
   const core = piece.look === "thread" && piece.path !== "post" ? threadCore(piece, space) : null;
-  if (core) group.add(new THREE.Mesh(core.geometry, surfaces.get("thread", piece.color)));
+  if (core) group.add(new THREE.Mesh(core.geometry, surfaces.get(piece.gloss ? "varnish" : "thread", piece.color)));
 
   let fibres: ReturnType<typeof fibreMesh> | null = null;
   if (piece.fibreLength && piece.look in WOUND_FIBRES) {
     const spec = WOUND_FIBRES[piece.look as keyof typeof WOUND_FIBRES];
     const list = placeFibres(woundFibres(piece, mulberry32((piece.seed ?? piece.id) * 7919 + 1)), space);
-    fibres = fibreMesh(list, surfaces.get(piece.look, piece.color, true), spec.tip, 1, piece.marks);
+    // (Chenille's pile starts out from its core: its depth is shaded fibre by fibre instead.)
+    fibres = fibreMesh(list, surfaces.get(piece.look, piece.color, true, piece.finish), spec.tip, 1, piece.marks, undefined, piece.look === "chenille" ? 1 : WOUND_ROOT);
     group.add(fibres.object);
   }
 
@@ -594,7 +653,7 @@ function wovenView(piece: WrapsPiece, under: WrapsPiece, surfaces: Surfaces, spa
     if (!strand.fibreLength || !(strand.look in WOUND_FIBRES)) continue;
     const spec = WOUND_FIBRES[strand.look as keyof typeof WOUND_FIBRES];
     const list = woundFibres(strand, mulberry32((piece.seed ?? piece.id) * 7919 + salt)).filter((f) => onTop(f) === top);
-    const mesh = fibreMesh(placeFibres(list, space), surfaces.get(strand.look, strand.color, true), spec.tip);
+    const mesh = fibreMesh(placeFibres(list, space), surfaces.get(strand.look, strand.color, true), spec.tip, 1, undefined, undefined, strand.look === "chenille" ? 1 : WOUND_ROOT);
     group.add(mesh.object);
     meshes.push(mesh);
   }
@@ -699,10 +758,10 @@ const BUNDLE = {
   hair: { radius: 0.0095, tip: 0.35, tipShade: 0.5, spread: 0.08, flare: 0.08, sideFlare: 0.55, lengthJitter: 0.08, curve: 0.05, droop: 0.2 },
   // A biot is a stiff, broad barb: wide at the base, tapering to a point.
   biot: { radius: 0.028, tip: 0.85, tipShade: 0.85, spread: 0.02, flare: 0, sideFlare: 0.6, lengthJitter: 0, curve: 0.12, droop: -0.8 },
-  // Marabou is a dense, soft plume: many fine fibres, tapering out.
-  marabou: { radius: 0.016, tip: 0.3, tipShade: 0.6, spread: 0.14, flare: 0.04, sideFlare: 0.15, lengthJitter: 0.45, curve: 0.3, droop: 0.5 },
+  // Marabou is a dense, soft plume: many fine barbs, each fluffy with barbules (added below).
+  marabou: { radius: 0.007, tip: 0.3, tipShade: 0.6, spread: 0.14, flare: 0.04, sideFlare: 0.15, lengthJitter: 0.45, curve: 0.3, droop: 0.5 },
   // CDC is soft and fluffy: many fine, uneven barbs, each with tiny barbules (added below).
-  cdc: { radius: 0.003, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45, curve: 0.3, droop: 0.3 },
+  cdc: { radius: 0.004, tip: 0.3, tipShade: 0.85, spread: 0.5, flare: 0.12, sideFlare: 0.5, lengthJitter: 0.45, curve: 0.3, droop: 0.3 },
   flash: { radius: 0.0025, tip: 1, tipShade: 1, spread: 0.2, flare: 0.05, sideFlare: 0.3, lengthJitter: 0.2, curve: 0.08, droop: 0 },
   // Herl tied in as strands (a topping): fine stems, their flue added below.
   herl: { radius: 0.005, tip: 0.5, tipShade: 0.9, spread: 0.12, flare: 0.03, sideFlare: 0.2, lengthJitter: 0.15, curve: 0.1, droop: 0.3 },
@@ -713,6 +772,16 @@ const BUNDLE = {
 } as const;
 
 type BundleLook = (typeof BUNDLE)[keyof typeof BUNDLE];
+
+// Assumption (read from photos of the feathers): the barbules that make a plume fluffy. Marabou's
+// are long and soft enough to fill the plume out into a cloud, thinning to wisps at the tips;
+// CDC's are short and fine; a peacock sword fibre's flue makes it a broad, glittering frond.
+// Lengths in gapes, `lean` the angle off the barb (radians), `shorten` how much shorter at its tip.
+const FLUFF = {
+  marabou: { perBarb: 12, from: 0.03, length: [0.1, 0.26], radius: 0.0035, lean: [0.5, 1.2], shorten: 0.55 },
+  cdc: { perBarb: 10, from: 0.1, length: [0.05, 0.12], radius: 0.0026, lean: [0.5, 1.2], shorten: 0.4 },
+  flue: { perBarb: 16, from: 0.2, length: [0.08, 0.18], radius: 0.0035, lean: [0.6, 1.3], shorten: 0 },
+} as const;
 
 // Assumption (read from photos of hairwings): a bunch tied on top of a body is a wedge from the
 // side, its lowest hairs running out along the tie-in's line and the rest lying over them, so its
@@ -801,7 +870,7 @@ function flowingFibre(piece: BundlePiece, spec: BundleLook, along: THREE.Vector3
   const bend = fan.length();
   return {
     u: rand(), base, dir, length,
-    radius: spec.radius * (piece.fibreWidth ?? 1),
+    radius: (spec.radius * (piece.fibreWidth ?? 1)) / (piece.fine ?? 1),
     // Fibres deep in a bunch are shaded by the rest, so a mass of white hair still has depth.
     shade: (0.85 + 0.3 * rand()) * (1 - 0.32 * Math.pow(rand(), 0.6)),
     billow,
@@ -868,7 +937,10 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   const upright = piece.direction === "back" && piece.angle >= Math.PI / 3;
   // Hair of a known stiffness, tied in with a length, flows (see flowingFibre).
   const flowing = piece.stiffness !== undefined && !upright && !radialHair && !piece.cut && !piece.across && piece.span === undefined;
-  for (let i = 0; i < piece.count; i++) {
+  // A massed bunch on a bigger hook has more fibres, each finer for the hook's size.
+  const fine = piece.fine ?? 1;
+  const count = Math.round(piece.count * fine);
+  for (let i = 0; i < count; i++) {
     if (flowing) {
       list.push(flowingFibre(piece, spec, along, rand));
       continue;
@@ -896,7 +968,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       if (dir.y < -0.001) length = Math.min(length, Math.max(0.01, (under + y) / -dir.y));
       list.push({
         // (Thickened, so the stack reads as the dense mat it is rather than a few strands.)
-        u: rand(), base, dir, length, radius: spec.radius * 1.6 * (piece.fibreWidth ?? 1),
+        u: rand(), base, dir, length, radius: (spec.radius * 1.6 * (piece.fibreWidth ?? 1)) / fine,
         shade: (0.85 + 0.3 * rand()) * (1 - 0.25 * (1 - Math.abs(y) / Math.max(0.01, up ? top : under))),
       });
       continue;
@@ -925,14 +997,14 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
         dir.applyAxisAngle(X_AXIS, side * piece.pair);
         base.z += side * piece.bundleRadius * 0.25;
       }
-      list.push({ u: rand(), base, dir, length: piece.length * (1 - spec.lengthJitter / 2 + spec.lengthJitter * rand()), radius: spec.radius, shade: 0.85 + 0.3 * rand() });
+      list.push({ u: rand(), base, dir, length: piece.length * (1 - spec.lengthJitter / 2 + spec.lengthJitter * rand()), radius: spec.radius / fine, shade: 0.85 + 0.3 * rand() });
       continue;
     }
     // Bases spread over the top (or bottom), up to `spread` either side; spun hair all round.
     const theta = radialHair
       ? rand() * 2 * Math.PI
-      : evenlySpaced && piece.count > 1
-        ? -piece.spread + (2 * piece.spread * i) / (piece.count - 1)
+      : evenlySpaced && count > 1
+        ? -piece.spread + (2 * piece.spread * i) / (count - 1)
         : (rand() * 2 - 1) * piece.spread;
     // Round the circle through the top (or bottom) that is `centre` off the axis.
     const centre = piece.centre ?? 0;
@@ -1000,7 +1072,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
       // Clipped hair shows its thick cut ends.
       // Fibres deep in a bunch are shaded by the rest, so a mass of white hair still has depth.
       // Rubber and silicone strands keep their real thickness, as they do tied across.
-      radius: piece.look === "legs" ? piece.bundleRadius : (radialHair && piece.cut ? spec.radius * 1.6 : spec.radius) * (piece.fibreWidth ?? 1),
+      radius: piece.look === "legs" ? piece.bundleRadius : ((radialHair && piece.cut ? spec.radius * 1.6 : spec.radius) * (piece.fibreWidth ?? 1)) / fine,
       shade: (0.85 + 0.3 * rand()) * (piece.cut ? 1 : 1 - 0.32 * Math.pow(rand(), 0.6)),
       bend, bendDir: bend > 0 ? perpendicular(dir, toward, rand) : undefined,
     });
@@ -1014,23 +1086,22 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   }
   if (piece.look === "cdc" || piece.look === "marabou" || piece.flue) {
     // Barbules: short, fine fibres all along each barb, which give CDC and marabou their fluff
-    // and peacock sword its herl-like flue.
+    // and peacock sword its herl-like flue. They grow from the barb where it is (it curves),
+    // leaning towards its tip, and shorten towards it.
+    const fluff = FLUFF[piece.look === "marabou" ? "marabou" : piece.look === "cdc" ? "cdc" : "flue"];
     const barbs = list.slice();
-    const perBarb = piece.look === "cdc" ? 6 : piece.flue ? 16 : 4;
     for (const f of barbs) {
-      for (let k = 0; k < perBarb; k++) {
-        const t = 0.2 + 0.8 * rand();
-        const base = f.base.clone().addScaledVector(f.dir, f.length * t);
-        const dir = f.dir
-          .clone()
-          .add(new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5).multiplyScalar(1.6))
-          .normalize();
-        // Marabou's barbules are long and soft enough to fill the plume out into a cloud; a
-        // peacock sword fibre's flue makes it a broad, glittering frond.
-        const fluff = piece.look === "marabou";
+      for (let k = 0; k < fluff.perBarb; k++) {
+        const t = fluff.from + (1 - fluff.from) * rand();
+        const base = fibrePoint(f, t);
+        const tangent = fibrePoint(f, Math.min(1, t + 0.03)).sub(fibrePoint(f, Math.max(0, t - 0.03))).normalize();
+        const lean = fluff.lean[0] + (fluff.lean[1] - fluff.lean[0]) * rand();
+        const out = perpendicular(tangent, new THREE.Vector3(rand() - 0.5, rand() - 0.5, rand() - 0.5), rand);
+        const dir = tangent.multiplyScalar(Math.cos(lean)).addScaledVector(out, Math.sin(lean)).normalize();
         list.push({
-          u: f.u, base, dir, length: fluff ? 0.1 + 0.2 * rand() : piece.flue ? 0.08 + 0.1 * rand() : 0.05 + 0.06 * rand(),
-          radius: fluff ? 0.004 : piece.flue ? 0.0035 : 0.0018, shade: f.shade, tint: f.tint,
+          u: f.u, base, dir,
+          length: (fluff.length[0] + (fluff.length[1] - fluff.length[0]) * rand()) * (1 - fluff.shorten * t),
+          radius: fluff.radius / Math.sqrt(fine), shade: (f.shade ?? 1) * (0.9 + 0.2 * rand()), tint: f.tint,
         });
       }
     }
@@ -1042,7 +1113,7 @@ function bundleView(piece: BundlePiece, surfaces: Surfaces, space: ShankSpace): 
   // Broad, flat barbs (tippet) keep most of their width to the tip.
   const tip = piece.cut ? 0.9 : piece.fibreWidth && piece.look === "fibres" ? Math.max(spec.tip, 0.7) : flowing ? flowingTip(spec, piece.stiffness!) : spec.tip;
   // (Flowing hair is long, curved and wavy: drawn in more pieces.)
-  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 12 : undefined);
+  const fibres = fibreMesh(placeFibres(list, space), surfaces.get(piece.look, colours ? BLEND_BASE : piece.color, true), tip, tipShade, marks, flowing ? 12 : undefined, piece.cut || piece.across ? 1 : BUNCH_ROOT);
   return {
     object: fibres.object,
     setProgress(u) {

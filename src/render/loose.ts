@@ -72,7 +72,7 @@ export class LooseEndView {
       ? new THREE.BoxGeometry(0.03, len, end.strandRadius * 2).translate(0, len / 2, 0)
       : new THREE.CylinderGeometry(end.strandRadius * 0.6, end.strandRadius, len, 8).translate(0, len / 2, 0);
     this.geometries.push(stem);
-    this.object.add(new THREE.Mesh(stem, surfaces.get(end.look === "hackle" ? "stem" : end.look, end.color)));
+    this.object.add(new THREE.Mesh(stem, surfaces.get(end.look === "hackle" ? "stem" : end.look, end.color, false, end.finish)));
     if (strip && end.fibreLength) {
       const rand = mulberry32(end.material.length * 37 + 5);
       const fibres: Fibre[] = [];
@@ -110,7 +110,7 @@ export class LooseEndView {
           radius: hackle ? 0.0045 : 0.0035,
         });
       }
-      const mesh = fibreMesh(fibres, surfaces.get(end.look, end.color, true));
+      const mesh = fibreMesh(fibres, surfaces.get(end.look, end.color, true, end.finish));
       this.disposers.push(() => mesh.dispose());
       this.object.add(mesh.object);
     }

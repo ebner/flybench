@@ -97,5 +97,5 @@ steps {
     // Gwent: fibres reach from the eye to the bend.
     wind collar to=0.9 turns=3 note="Touching turns, stroking the fibres back each time."
     tie-off collar
-    whip-finish note="A small tapered head, varnished red."
+    whip-finish varnish=#true note="A small tapered head, varnished red."
 }

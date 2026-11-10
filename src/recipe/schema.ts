@@ -428,6 +428,8 @@ const Step = z.discriminatedUnion("op", [
   z.strictObject({
     op: z.literal("whip-finish"),
     turns: Turns.default(5),
+    /** The head is varnished (or cemented, lacquered): drawn glossy. */
+    varnish: z.boolean().optional(),
     note: Note, mistake: Note,
   }),
 ]);

@@ -80,5 +80,5 @@ steps {
     // Read from the photos: six to eight open turns.
     wind hackle to=0.85 turns=7 note="Open turns forward through the clipped hair."
     tie-off hackle
-    whip-finish note="Cement the exposed thread."
+    whip-finish varnish=#true note="Cement the exposed thread."
 }

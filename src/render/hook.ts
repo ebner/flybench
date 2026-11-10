@@ -17,11 +17,20 @@ const TREBLE: HookModel = {
   pointLength: 0.7, points: 3, example: "",
 };
 
+// Assumption: how the finishes look. Bronzed wire is a dark brown metal; a black (japanned)
+// hook is lacquered, glossy rather than metallic; black nickel a dark, bright metal; tin a pale grey one.
+const FINISH = {
+  bronze: { color: 0x3a2e22, metalness: 0.85, roughness: 0.32 },
+  black: { color: 0x101010, metalness: 0.35, roughness: 0.22 },
+  "black-nickel": { color: 0x242428, metalness: 0.9, roughness: 0.26 },
+  tin: { color: 0xb4b8bd, metalness: 0.9, roughness: 0.36 },
+} as const;
+
 export function buildHook(hook: HookModel): THREE.Group {
   if (hook.tube) return buildTube(hook);
   const group = new THREE.Group();
   const w = hook.wireRadius;
-  const metal = new THREE.MeshStandardMaterial({ color: 0x3a2e22, metalness: 0.85, roughness: 0.32 });
+  const metal = new THREE.MeshStandardMaterial(FINISH[hook.finish ?? "bronze"]);
   const tube = (points: THREE.Vector3[], segments: number) =>
     new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points, false, "centripetal"), segments, w, 12, false), metal);
 

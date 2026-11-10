@@ -66,5 +66,5 @@ steps {
     tie-off hackle
     // Read from the photos: low over the body, the tips just past the bend.
     tie-in wing length=2.4 angle=14 spread=12 width=0.5 note="Matched left and right slips, concave sides together, set on top with a pinch and loop."
-    whip-finish note="A small black head, varnished."
+    whip-finish varnish=#true note="A small black head, varnished."
 }

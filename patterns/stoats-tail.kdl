@@ -69,5 +69,5 @@ steps {
     // hairs lie close along the body, the rest fanning up from them.
     tie-in wing length=3.7 angle=5 spread=20 note="A small, cleaned bunch, low over the body."
     trim wing note="Butts cut at a taper for a small head."
-    whip-finish note="Two or three coats of black varnish."
+    whip-finish varnish=#true note="Two or three coats of black varnish."
 }

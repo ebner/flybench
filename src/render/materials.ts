@@ -6,11 +6,12 @@ export class Surfaces {
   private cache = new Map<string, THREE.Material>();
 
   /** `fibres`: for fibre meshes, which carry vertex colours (tip shading). */
-  get(look: Look | "stem" | "metal", color: string, fibres = false): THREE.Material {
-    const key = `${look}:${color}:${fibres}`;
+  /** `finish`: a kind's own finish, where it differs from its look's (matt ostrich herl, dull lead wire). */
+  get(look: Look | "stem" | "metal" | "varnish", color: string, fibres = false, finish?: "matt" | "dull"): THREE.Material {
+    const key = `${look}:${color}:${fibres}:${finish ?? ""}`;
     let m = this.cache.get(key);
     if (!m) {
-      m = create(look, color, fibres);
+      m = create(look, color, fibres, finish);
       this.cache.set(key, m);
     }
     return m;
@@ -33,12 +34,17 @@ export function natural(color: string): THREE.Color {
   return hsl.l > 0.74 ? c.setHSL(hsl.h, hsl.s, 0.74) : c;
 }
 
-function create(look: Look | "stem" | "metal", color: string, vertexColors: boolean): THREE.Material {
+function create(look: Look | "stem" | "metal" | "varnish", color: string, vertexColors: boolean, finish?: "matt" | "dull"): THREE.Material {
   const fibres = { vertexColors };
+  if (finish === "matt" && look === "herl") return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 1, ...fibres });
+  if (finish === "dull" && look === "wire") return new THREE.MeshStandardMaterial({ color, roughness: 0.62, metalness: 0.55, ...fibres });
   switch (look) {
     case "thread":
     case "floss":
       return new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0.05 });
+    case "varnish":
+      // Thread under head varnish: a hard, clear coat over the turns.
+      return new THREE.MeshPhysicalMaterial({ color, roughness: 0.45, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.08 });
     case "yarn":
       return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.95, ...fibres });
     case "herl":
@@ -53,7 +59,7 @@ function create(look: Look | "stem" | "metal", color: string, vertexColors: bool
         ...fibres,
       });
     case "hackle":
-      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.55, side: THREE.DoubleSide, ...fibres });
+      return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 0.55, ...fibres });
     case "dubbing":
       return new THREE.MeshStandardMaterial({ color: natural(color), roughness: 1, ...fibres });
     case "hair":

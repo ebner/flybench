@@ -114,5 +114,5 @@ steps {
     tie-in overwing length=4.0 angle=9 spread=14 note="Sparse, over the bucktail."
     trim overwing note="Cut at an angle for a small head."
     tie-in cheeks length=0.9 angle=10 spread=30 note="One each side of the wing's root."
-    whip-finish note="A black head, varnished."
+    whip-finish varnish=#true note="A black head, varnished."
 }

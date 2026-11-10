@@ -98,5 +98,5 @@ steps {
     wrap-thread to=0.9
     wind front-collar to=0.9 turns=3 note="In front of the yellow, the fibres about as long."
     tie-off front-collar
-    whip-finish note="Two or three coats of varnish."
+    whip-finish varnish=#true note="Two or three coats of varnish."
 }

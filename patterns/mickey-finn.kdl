@@ -66,5 +66,5 @@ steps {
     trim middle
     tie-in upper length=4.3 angle=9 spread=15
     trim upper
-    whip-finish note="A small, tapered head, varnished."
+    whip-finish varnish=#true note="A small, tapered head, varnished."
 }

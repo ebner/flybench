@@ -73,5 +73,5 @@ steps {
     // Read from the photos: the tips half a gape to a gape past the bend.
     tie-in wing length=2.6 angle=14 spread=30 note="Equal amounts from a left and a right sword, on top with a pinch and loop."
     tie-in cheeks length=1.9 angle=12 spread=14 width=0.15 note="A thin red slip along each side of the wing."
-    whip-finish note="A small black head, varnished."
+    whip-finish varnish=#true note="A small black head, varnished."
 }

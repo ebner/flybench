@@ -549,6 +549,7 @@ export const de: Messages = {
         to: "Bis",
         at: "Wo",
         turns: "Windungen",
+        varnish: "Kopf lackiert",
         length: "Länge",
         angle: "Winkel (°)",
         spread: "Spreizung (°)",

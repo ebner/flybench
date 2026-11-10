@@ -99,5 +99,5 @@ steps {
     tie-off collar
     // Gwent: back to back, just reaching over the middle hackle, about half the body.
     tie-in wing length=1.1 angle=18 spread=5 note="A matched pair, one from each side of the cape, back to back; pinch and loop so they sit upright and don't twist."
-    whip-finish note="Varnish the head."
+    whip-finish varnish=#true note="Varnish the head."
 }

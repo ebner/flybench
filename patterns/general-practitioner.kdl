@@ -117,5 +117,5 @@ steps {
     trim hackle-front
     trim hackle-front keep=under
     tie-in shell-front length=3.0 width=1.2 flat=#true note="The largest feather, over the whole back; it can be left out on small hooks."
-    whip-finish note="Varnish the head, then press the hackle up under the body and the feathers down onto it."
+    whip-finish varnish=#true note="Varnish the head, then press the hackle up under the body and the feathers down onto it."
 }

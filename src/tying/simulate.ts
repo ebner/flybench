@@ -59,6 +59,12 @@ export interface WrapsPiece extends PieceBase {
   sweep?: number;
   /** Hackle: barbs along each gape of the stem (both sides together), and each barb's radius at its root, in gapes. */
   barbs?: { perGape: number; radius: number };
+  /** Thread under a coat of varnish (a finished head): glossy. */
+  gloss?: boolean;
+  /** How much finer and more numerous its fuzz is than on the size the looks were set on (see `fineness`). */
+  fine?: number;
+  /** The material's own finish, where it differs from its look's (the catalog's `finish`). */
+  finish?: "matt" | "dull";
   /** Fibres alternate light and dark (grizzly, partridge). */
   barred?: boolean;
   /** Dubbing: how rough, 0 (fine) to 1 (long guard hairs). */
@@ -86,6 +92,11 @@ export interface WrapsPiece extends PieceBase {
 /** A bunch of fibres or hair sticking out from its tie-in point (tag, tail, wing, beard, butts, spun hair). */
 export interface BundlePiece extends PieceBase {
   type: "bundle";
+  /**
+   * A bunch that isn't counted out (hair, marabou, CDC, yarn): how much finer and more numerous
+   * its fibres are than on the size the looks were set on (see `fineness`).
+   */
+  fine?: number;
   x: number;
   /** Spun hair: the bases spread forward over this length. */
   span?: number;
@@ -318,6 +329,7 @@ export type FreeEndPose = {
   length: number;
   strandRadius: number;
   fibreLength?: number;
+  finish?: "matt" | "dull";
 } & (
   | { kind: "rest"; x: number; radius: number; direction: "back-down" | "back-up" | "back-flat" | "under-flat" | "forward-flat" | "out"; hideAfter?: number }
   /** `far`: the other strand of a weave, leaving the turns on the far side (mirrored), crossing the first. */
@@ -391,6 +403,7 @@ export function wrapPoint(p: WrapsPiece, u: number): { point: V3; leave: V3; x: 
 interface MaterialLook {
   look: Archetype;
   color: string;
+  finish?: "matt" | "dull";
   strandRadius: number;
   /** Thickness added under the tie-in wraps by the bound-down end. */
   tieInThickness: number;
@@ -467,15 +480,32 @@ const BARBS_PER_MM = 8;
 // thread to about a quarter of the gape thick (photos of the Parachute Adams and Klinkhamer).
 const POST_BASE = 0.12;
 
+// Assumption: the fibres' looks (how many, how thick for the hook) were set on flies of about
+// size 12 to 14, a gape of some 5 mm. A hair or a strand of fur is as thick on any hook, so a
+// bigger hook has that many more of them, each that much finer for its size, and a smaller hook
+// fewer and coarser. Kept within bounds: a tube fly is not drawn with three times the fibres.
+const FINE_REF_MM = 5;
+export function fineness(hook: Recipe["hook"]): number {
+  return Math.min(2, Math.max(0.7, unitMm(hook) / FINE_REF_MM));
+}
+/** Bunches that are a mass of fibres rather than a counted few. */
+const MASSED: readonly Archetype[] = ["hair", "marabou", "cdc", "yarn"];
+
+// Assumption: a barb about 6 mm long is `BARB_MM` thick at its root; a longer one (a salmon fly's
+// collar) is thicker, a shorter one finer, as the square root of its length, within bounds.
+function barbThickness(lengthMm: number | undefined): number {
+  return lengthMm === undefined ? 1 : Math.min(1.6, Math.max(0.8, Math.sqrt(lengthMm / 6)));
+}
+
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { finish?: "matt" | "dull"; sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
   const barring = m.barred === undefined ? BARRED[colorName] ?? 0 : m.barred ? BARRED.grizzly! : 0;
   const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: cat.stiffness, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: cat.stiffness, finish: cat.finish, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":
@@ -492,7 +522,10 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     case "hackle":
       return {
         ...base, strandRadius: 0.012, fibreLength: m.fibre, freeLength: 1.8, sweep: deg(m.sweep ?? cat.sweep ?? 7),
-        barbs: { perGape: (cat.barbsPerMm ?? BARBS_PER_MM) * unitMm(recipe.hook), radius: mm(BARB_MM) / 2 },
+        barbs: {
+          perGape: (cat.barbsPerMm ?? BARBS_PER_MM) * unitMm(recipe.hook),
+          radius: (mm(BARB_MM) / 2) * barbThickness(m.fibre === undefined ? undefined : m.fibre * unitMm(recipe.hook)),
+        },
         tieInThickness: 0.024, layerThickness: () => 0.024,
       };
     case "dubbing":
@@ -679,6 +712,7 @@ export function simulate(recipe: Recipe): Build {
   // Thread flattens when wrapped, so touching turns are wider than the diameter.
   const pitch = td * 1.3;
   const threadColor = resolveColor(recipe.thread.color);
+  const fine = fineness(recipe.hook);
 
   // A double's shank is two wires side by side, so the dressing sits on a wider base. Behind the
   // bend there is only what the thread binds there (hair laid back past it): room for that.
@@ -789,7 +823,7 @@ export function simulate(recipe: Recipe): Build {
   const restingEnds = () => [...freeEnds.values()];
   const freeEnd = (id: string, l: MaterialLook): Omit<FreeEndPose, "kind"> => ({
     material: id, look: l.look, color: l.color, length: l.freeLength,
-    strandRadius: l.strandRadius, fibreLength: l.fibreLength,
+    strandRadius: l.strandRadius, fibreLength: l.fibreLength, ...(l.finish && { finish: l.finish }),
   });
   const materialWraps = (id: string, l: MaterialLook, x0: number, x1: number, turns: number): WrapsPiece => ({
     type: "wraps", id: nextId++, material: id, look: l.look, color: l.color, window: [0, 1],
@@ -797,7 +831,11 @@ export function simulate(recipe: Recipe): Build {
     path: "travel", x0, x1, width: 0, turns, strandRadius: l.look === "cdc" ? CDC_STEM : l.strandRadius, base: profile,
     fibreLength: l.fibreLength, sweep: l.sweep, barred: l.barred, band: l.band, shaggy: l.shaggy,
     ...(l.barbs && { barbs: l.barbs }),
-    ...(l.look === "hackle" && l.centre && { marks: l.centre }),
+    ...(l.fibreLength && { fine }),
+    ...(l.finish && { finish: l.finish }),
+    // A barred or speckled feather's barbs carry its bars (grizzly, partridge); a furnace or
+    // badger hackle's are dark from the root.
+    ...(l.look === "hackle" && (l.centre ?? (l.barred ? l.marks : undefined)) && { marks: l.centre ?? l.marks }),
   });
 
   recipe.steps.forEach((step, index) => {
@@ -1581,6 +1619,7 @@ export function simulate(recipe: Recipe): Build {
         if (recipe.steps.slice(index + 1).some((s) => s.op === "attach-thread")) ctx.midway = true;
         // The head is built up in layers between the thread and the eye (or bead).
         const piece = inPlace(threadX!, 3 * step.turns, undefined, frontLimit);
+        if (step.varnish) piece.gloss = true;
         pieces.push(piece);
         thread = { kind: "follow", piece: piece.id, cut: true };
         threadX = null;
@@ -1601,6 +1640,10 @@ export function simulate(recipe: Recipe): Build {
     });
     time += duration;
   });
+
+  // Massed bunches have as many fibres as the hook's size makes room for.
+  const countedOut = new Set(recipe.materials.filter((m) => "count" in m && m.count !== undefined).map((m) => m.id));
+  for (const s of steps) for (const p of s.pieces) if (p.type === "bundle" && MASSED.includes(p.look as Archetype) && !countedOut.has(p.material)) p.fine = fine;
 
   // A blended bunch is blended wherever it shows: tail, wing, butts.
   const mixed = new Map(recipe.materials.filter((m) => m.mix).map((m) => [m.id, mixColours(m).map(resolveColor)]));

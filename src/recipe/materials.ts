@@ -78,6 +78,11 @@ export interface CatalogMaterial {
    * fanning from the tie-in.
    */
   stiffness?: number;
+  /**
+   * Where a kind looks unlike the rest of its archetype: "matt" for herl with no peacock sheen
+   * (ostrich), "dull" for metal that doesn't shine (lead-free wire).
+   */
+  finish?: "matt" | "dull";
 }
 
 export const MATERIALS = {
@@ -89,7 +94,8 @@ export const MATERIALS = {
 
   // Herls
   "peacock-herl": { name: "peacock herl", archetype: "herl", defaultColor: "#26341a" },
-  "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e" },
+  // Assumption: ostrich herl is matt and fluffy, without peacock herl's metallic sheen.
+  "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e", finish: "matt" },
 
   // Hackles
   // Assumption (all the barb densities, set against photos of collars, palmered bodies and
@@ -132,7 +138,8 @@ export const MATERIALS = {
   "gold-wire": { name: "gold wire", archetype: "wire", defaultColor: "gold" },
   "copper-wire": { name: "copper wire", archetype: "wire", defaultColor: "copper" },
   "silver-wire": { name: "silver wire", archetype: "wire", defaultColor: "silver" },
-  "lead-free-wire": { name: "lead-free wire", archetype: "wire", defaultColor: "lead" },
+  // Assumption: lead-free (tin or tungsten-loaded) wire is a dull grey, not bright like rib wire.
+  "lead-free-wire": { name: "lead-free wire", archetype: "wire", defaultColor: "lead", finish: "dull" },
 
   // Thread and floss
   "rib-thread": { name: "thread", archetype: "floss" },

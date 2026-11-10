@@ -78,5 +78,5 @@ steps {
     trim yellow
     tie-in black length=4.8 angle=4 spread=16
     trim black note="Cut at an angle so the head tapers."
-    whip-finish note="A black head, varnished."
+    whip-finish varnish=#true note="A black head, varnished."
 }

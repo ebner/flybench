@@ -68,5 +68,5 @@ steps {
     wrap-thread to=0.87
     wind front to=0.87 turns=3 note="A wet-fly collar behind the eyes."
     tie-off front
-    whip-finish note="Varnish the head red (the original had the eyes varnished too); tease out the fur."
+    whip-finish varnish=#true note="Varnish the head red (the original had the eyes varnished too); tease out the fur."
 }

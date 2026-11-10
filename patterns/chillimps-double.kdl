@@ -62,5 +62,5 @@ steps {
     wrap-thread to=0.9
     wind front to=0.9 turns=3 note="Stroke the fibres back."
     tie-off front
-    whip-finish note="A small, neat head; varnish it."
+    whip-finish varnish=#true note="A small, neat head; varnish it."
 }

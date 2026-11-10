@@ -82,5 +82,5 @@ steps {
     wrap-thread to=0.94
     wind hackle-brown to=0.94 turns=2 note="Two or three turns in front of the orange."
     tie-off hackle-brown
-    whip-finish note="A neat head, two coats of Cellire No. 1 varnish."
+    whip-finish varnish=#true note="A neat head, two coats of Cellire No. 1 varnish."
 }

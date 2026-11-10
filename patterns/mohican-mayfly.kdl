@@ -85,5 +85,5 @@ steps {
     // Read from the photos: a head of foam reaching to the eye, about a third of a gape long. Züllich folds the ends back over
     // the tie-down instead and whips in the neck behind them.
     trim body leave=0.3 note="Leave a short head; colour it darker with a marker if you like."
-    whip-finish note="In the neck behind the foam head, and a drop of varnish."
+    whip-finish varnish=#true note="In the neck behind the foam head, and a drop of varnish."
 }

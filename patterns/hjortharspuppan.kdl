@@ -58,5 +58,5 @@ steps {
     // Assumption: wound forward from the body; Dahlin whip-finishes the body, starts the thread
     // again behind the eye and winds the thorax back to the body.
     dub thorax to=0.92 note="Compact, about 5 to 6 cm of dubbed thread, as thick as the body."
-    whip-finish note="A small, distinct head; lacquer it."
+    whip-finish varnish=#true note="A small, distinct head; lacquer it."
 }

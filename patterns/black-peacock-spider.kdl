@@ -66,5 +66,5 @@ steps {
     wrap-thread to=0.88
     wind hackle to=0.88 turns=2 note="Two turns only, sweeping back over the body."
     tie-off hackle
-    whip-finish note="Clear varnish on the head."
+    whip-finish varnish=#true note="Clear varnish on the head."
 }

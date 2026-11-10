@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
-import { extensionCentre, pieceProgress, simulate, stepAt, stepEnd, stepProgress, wrapAt, type ExtensionPiece, type WrapsPiece } from "./simulate";
+import { extensionCentre, fineness, pieceProgress, simulate, stepAt, stepEnd, stepProgress, wrapAt, type ExtensionPiece, type WrapsPiece } from "./simulate";
 
 function redTag() {
   const result = loadRecipe(readFileSync(new URL("../../patterns/red-tag.kdl", import.meta.url), "utf8"));
@@ -940,5 +940,14 @@ steps {
     const text = recipe("tie-in wing length=1 angle=80 notch=0.3 flat=#true");
     expect(text).toMatch(/^Cut a V out of the tip/);
     expect(text).toMatch(/upright.*Let it lie flat/);
+  });
+});
+
+describe("fibres by the hook's size", () => {
+  it("are as the looks were set on a size 12 to 14, more and finer on a bigger hook, within bounds", () => {
+    expect(fineness({ model: "dry-standard", size: 12 })).toBeCloseTo(1.04, 2);
+    expect(fineness({ model: "dry-standard", size: 6 })).toBeCloseTo(1.72, 2);
+    expect(fineness({ model: "salmon-up-eye", size: 2 })).toBe(2);
+    expect(fineness({ model: "dry-standard", size: 22 })).toBe(0.7);
   });
 });

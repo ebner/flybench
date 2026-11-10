@@ -74,5 +74,5 @@ steps {
     tie-in wing length=2.9 angle=16 spread=12 width=0.5 note="Matched slips from a left and a right feather, or the fibres folded, set low over the body."
     // Read from the photos: short, about a third of the wing.
     tie-in cheeks length=0.7 angle=12 spread=30 note="One each side, flat against the wing."
-    whip-finish note="A black head, varnished."
+    whip-finish varnish=#true note="A black head, varnished."
 }

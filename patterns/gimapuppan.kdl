@@ -53,5 +53,5 @@ steps {
     // Read from the photo: the bubble stands about a third of a gape clear of the body.
     pull-over back to=0.68 bubble=0.3 note="Make it big first, then shrink it to size by pulling the ends, a dubbing needle inside it as a stop; lock it with hard turns."
     dub thorax to=0.92 note="Split the thread, put a little loose dubbing in, and twist 2 to 3 cm of it lightly, so it stays spiky."
-    whip-finish note="A drop of thin lacquer."
+    whip-finish varnish=#true note="A drop of thin lacquer."
 }

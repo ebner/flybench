@@ -68,5 +68,5 @@ steps {
     tie-in beard length=1.2 angle=30 side=under note="Or a few turns of the hackle, pulled down."
     // Read from the photos: low, the tips past the bend, over the tail.
     tie-in wing length=2.7 angle=15 spread=12 width=0.45 note="Matched left and right slips, concave sides together, set on top with a pinch and loop."
-    whip-finish note="A small head, varnished."
+    whip-finish varnish=#true note="A small head, varnished."
 }

@@ -74,5 +74,5 @@ steps {
     tie-in throat length=1.4 angle=15 side=under
     pull-over wing to=0.9 note="As tight as it goes, the hide flat along the top of the body."
     trim wing note="Cut it at an angle."
-    whip-finish note="Varnish the head."
+    whip-finish varnish=#true note="Varnish the head."
 }

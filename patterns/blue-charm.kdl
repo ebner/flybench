@@ -87,5 +87,5 @@ steps {
     // Petti: the wing normally to the middle or the end of the tail.
     tie-in wing length=3.2 angle=13 spread=16 note="A slim, unstacked bunch, low over the body."
     trim wing note="Cut at an angle for a small head."
-    whip-finish note="A black head, varnished."
+    whip-finish varnish=#true note="A black head, varnished."
 }

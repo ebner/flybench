@@ -81,5 +81,5 @@ steps {
     wrap-thread to=0.9
     wind front-collar to=0.9 turns=3 note="In front of the orange; soft and long, it sweeps back over it."
     tie-off front-collar
-    whip-finish note="A small black head, varnished."
+    whip-finish varnish=#true note="A small black head, varnished."
 }

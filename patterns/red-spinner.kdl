@@ -66,5 +66,5 @@ steps {
     tie-off hackle
     // Read from the photos: low, the tips well past the bend.
     tie-in wing length=2.6 angle=18 spread=10 width=0.55 note="Matched slips from a left and a right starling quill, set low over the body."
-    whip-finish note="A small red head, varnished."
+    whip-finish varnish=#true note="A small red head, varnished."
 }

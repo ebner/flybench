@@ -82,5 +82,5 @@ steps {
     // Gathercole: the wing's tip level with the tail's.
     tie-in wing length=3.6 angle=11 spread=14
     trim wing note="Cut the butts at an angle for a small head."
-    whip-finish note="A black head, varnished."
+    whip-finish varnish=#true note="A black head, varnished."
 }

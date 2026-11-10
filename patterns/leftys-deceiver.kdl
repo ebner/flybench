@@ -64,5 +64,5 @@ steps {
     trim lower
     tie-in upper length=3.0 angle=4 spread=60 note="Slightly larger and slightly longer, on top."
     trim upper note="Butts cut at an angle for a tapered head."
-    whip-finish note="A tapered head, cemented; add eyes if you like."
+    whip-finish varnish=#true note="A tapered head, cemented; add eyes if you like."
 }

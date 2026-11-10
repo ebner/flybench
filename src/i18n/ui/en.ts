@@ -554,6 +554,7 @@ export const en = {
         to: "To",
         at: "Where",
         turns: "Turns",
+        varnish: "Head varnished",
         length: "Length",
         angle: "Angle (°)",
         spread: "Spread (°)",

@@ -85,5 +85,5 @@ steps {
     trim wing
     // Read from the photos: short, the eyes showing just behind the head.
     tie-in cheeks length=0.8 angle=12 spread=30 note="One each side, flat against the root of the wing."
-    whip-finish note="A neat red head, varnished."
+    whip-finish varnish=#true note="A neat red head, varnished."
 }

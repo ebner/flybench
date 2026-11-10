@@ -242,6 +242,17 @@ The archetype decides how a material behaves and is drawn:
   colour), and the inventory needs each. It shows only in a bunch: tied in with a length (not
   across), spun or glued, or as a needle body's tails; wound, pulled over or tied across it is
   refused, and the builder leaves the blend out when a part is tied that way.
+- **how fibres are drawn**: wound fuzz (herl flue, dubbing, chenille pile, CDC barbs) is counted
+  along the wound strand, so a turn round a thick thorax carries more than one round the bare
+  shank; fuzz and massed bunches (hair, marabou, CDC, yarn, where the recipe gives no `count`) are
+  more numerous and finer on a bigger hook, as real fibres are the same on any hook
+  (`fineness` in `src/tying/simulate.ts`, set on a size 12 to 14). A hackle's barbs are thicker
+  the longer they are. A barred or speckled hackle (grizzly, partridge, `barred=#true`) carries
+  its bars along each barb. Fibres are shaded darker at their roots. Chenille is a pile round a
+  thin core; flat tinsel a thin flat strip; marabou and CDC barbs carry barbules along their
+  length. A kind can have its own finish in the catalog (`finish`: matt ostrich herl, dull
+  lead-free wire), and each hook model its wire's (`finish` in `src/tying/hook.ts`: black,
+  black nickel, tin; bronze otherwise).
 - **jungle cock** eyes are small, round-ended feathers, dark with a row of cream enamel spots, each
   with a buff tip; tied in as a pair with `spread` they sit as cheeks either side of a wing.
 - **hair** is tied in as a clump with `length`; its butts stick forward until trimmed. The clump
@@ -373,7 +384,7 @@ mistakes", before the general ones of the step's technique. Cite where it comes 
 | `weave`         | `weave <top> under=<belly> to=<pos> [turns=<n>]`  | Weave two strands (chenille, yarn or floss) tied in together forward to `to`: `top` crosses back and forth over the top of the shank only, `under` over it and right round underneath, so one colour is the back and the other the belly, meeting along each side in a toothed line (a Bitch Creek's abdomen). `turns` counts the crossings (default one per strand width). The thread is cut for the weave (a `whip-finish` before it, then `attach-thread` at `to`) or parked at `to`; both strands are then tied off there with `tie-off`. |
 | `tie-off`       | `tie-off <material>`                              | Secure a forward-wound material at the thread and trim the excess; or tie down a sleeve's other end, or a woven strand's. |
 | `trim`          | `trim <material> [leave=<gapes>] [shape=round\|wedge\|cigar\|cone\|disc] [keep=sides\|top\|under] [below=<gapes>]` | Cut off what sticks out: the tip of a palmered material, the butts of a hair clump (`leave` = length left standing; default flush), the tips of hair folded back, behind its tie-down or the last turn over them (`leave` = a flared stub), or spun hair into a head (`leave` = head thickness each side; `shape=wedge` leaves it flat underneath and deepest at the rear, `round` tapers it, `cigar` makes it fullest in the middle and rounded at both ends, for a body, `cone` slim at the tail and full at the front, `disc` round in plan as far as the hair or fibres stand out and flat top and bottom `leave` from the shank, for a crab). Glued fibres are trimmed to a `disc` or cut flat with `keep`. `keep` trims a wound hackle: `sides` cuts it top and bottom, `top` cuts it underneath, `under` clips the top (a flat seat for a wing); spun hair the same way, cut flat `leave` from the shank, the sides left long (see above). `below`: spun hair trimmed round, to a cigar or a cone cut closer underneath, that far below the shank (see above). |
-| `whip-finish`   | `whip-finish [turns=<n>]`                         | Build the head, whip finish (default 5 turns) and cut the thread. Part-way through, followed by `attach-thread` elsewhere, it finishes what is tied so far there (a Zonker's rear, finished at the bend before the thread is started again behind the eye). |
+| `whip-finish`   | `whip-finish [turns=<n>] [varnish=#true]`         | Build the head, whip finish (default 5 turns) and cut the thread. `varnish=#true` when the head is varnished, cemented or lacquered: it is drawn glossy (say how in the `note`). Part-way through, followed by `attach-thread` elsewhere, it finishes what is tied so far there (a Zonker's rear, finished at the bend before the thread is started again behind the eye). |
 
 A `turns` is at most 100, a recipe has at most 150 steps and 40 materials: far beyond any
 pattern, they bound the work of drawing a recipe that arrives in a link. The fly builder

@@ -235,7 +235,8 @@ describe("a wound hackle's barbs", () => {
   it("draws thicker barbs, for its size, on a small hook than on a big one", () => {
     const small = redTag((k) => k.replace("hook dry-standard size=14", "hook dry-standard size=20"));
     const big = redTag((k) => k.replace("hook dry-standard size=14", "hook dry-standard size=8"));
-    expect(small.barbs!.radius).toBeGreaterThan(big.barbs!.radius * 2);
+    // (Not by the whole ratio of the gapes: the big hook's barbs are longer in mm, so thicker.)
+    expect(small.barbs!.radius).toBeGreaterThan(big.barbs!.radius * 1.5);
     expect(barbs(small).radius).toBeCloseTo(small.barbs!.radius, 6);
     // The same barbs along each mm of stem, so more along a gape of the bigger hook.
     expect(big.barbs!.perGape).toBeGreaterThan(small.barbs!.perGape * 2);

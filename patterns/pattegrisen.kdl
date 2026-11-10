@@ -81,5 +81,5 @@ steps {
     pull-over back to=0.05 note="Back over the top to the bend, stretched; the rib's first turn holds it just behind the eyes."
     wind rib to=0.86 turns=8 note="Over the shellback, the turns closer together toward the eye."
     tie-off rib
-    whip-finish note="Brush out the underside, trim, and varnish the head and a little of the back."
+    whip-finish varnish=#true note="Brush out the underside, trim, and varnish the head and a little of the back."
 }

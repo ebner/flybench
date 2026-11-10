@@ -82,5 +82,5 @@ steps {
     wrap-thread to=0.88
     wind collar to=0.88 turns=4 note="Stroke the fibres back with each turn."
     tie-off collar
-    whip-finish note="A neat red head, varnished."
+    whip-finish varnish=#true note="A neat red head, varnished."
 }

@@ -549,6 +549,7 @@ export const sv: Messages = {
         to: "Till",
         at: "Var",
         turns: "Varv",
+        varnish: "Lackat huvud",
         length: "Längd",
         angle: "Vinkel (°)",
         spread: "Spridning (°)",

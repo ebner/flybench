@@ -30,6 +30,15 @@ export interface HookModel {
   /** Typical model, for the materials list. */
   example: string;
   /**
+   * The wire's finish, as the example hook is sold; bronze where not given. From the makers'
+   * and dealers' descriptions: Partridge 15BN Klinkhamer "black nickel" (adh-fishing.com);
+   * Partridge Bartleet CS10 "black" (acc.umu.se/~widmark/lwhookdl.html); Ahrex HR428 "black
+   * nickel" and HR490B "black" (ahrexhooks.com); Hanak H 450 BL "black nickel"
+   * (adh-fishing.com); Gamakatsu SC15 "tin plated" (driftoutfitters.com). The Tiemco hooks are
+   * sold as bronze (the TMC 3769 not checked).
+   */
+  finish?: "black" | "black-nickel" | "tin";
+  /**
    * The gape in mm by hook size, for a model whose gape is wider (or narrower) than a standard
    * hook's of the same size; other sizes scale with the nearest one given.
    */
@@ -67,7 +76,7 @@ export const HOOK_MODELS: Record<HookModelId, HookModel> = {
   "emerger-curved": {
     label: "Curved emerger hook",
     shankLength: 2.3, shankCurve: 45, wireRadius: 0.045, eyeRadius: 0.17, eyeAngle: 20, pointLength: 0.6,
-    example: "Partridge 15BN Klinkhamer",
+    example: "Partridge 15BN Klinkhamer", finish: "black-nickel",
   },
   "scud-curved": {
     label: "Curved scud and pupa hook",
@@ -77,28 +86,28 @@ export const HOOK_MODELS: Record<HookModelId, HookModel> = {
   "salmon-up-eye": {
     label: "Salmon hook, up eye",
     shankLength: 2.7, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.9,
-    example: "Partridge Bartleet",
+    example: "Partridge Bartleet", finish: "black",
   },
   "salmon-double": {
     label: "Salmon double, up eye",
     shankLength: 2.6, shankCurve: 0, wireRadius: 0.065, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.85, points: 2,
-    example: "Partridge Q / Ahrex HR428",
+    example: "Partridge Q / Ahrex HR428", finish: "black-nickel",
   },
   "salmon-treble": {
     label: "Long-shank treble, up eye",
     shankLength: 2.6, shankCurve: 0, wireRadius: 0.06, eyeRadius: 0.2, eyeAngle: -30, pointLength: 0.8, points: 3,
-    example: "Esmond Drury / Ahrex HR490",
+    example: "Esmond Drury / Ahrex HR490", finish: "black",
   },
   jig: {
     label: "Jig hook, 60° bent eye",
     shankLength: 1.9, shankCurve: 0, wireRadius: 0.05, eyeRadius: 0.17, eyeAngle: 0, pointLength: 0.8,
     jig: { length: 0.35, angle: 60 },
-    example: "Hanak 450 / Fulling Mill Jig Force",
+    example: "Hanak 450 / Fulling Mill Jig Force", finish: "black-nickel",
   },
   "saltwater-straight": {
     label: "Saltwater hook, straight eye",
     shankLength: 2.4, shankCurve: 0, wireRadius: 0.07, eyeRadius: 0.21, eyeAngle: 0, pointLength: 0.9,
-    example: "Gamakatsu SC15",
+    example: "Gamakatsu SC15", finish: "tin",
   },
   // From flyhooks.org's measurements of the TMC 8089 (#10: length 28.57 mm, height 11.88 mm,
   // throat 10.1 mm, eye 2.62 mm, wire 0.74 mm; #6: 36.06, 14.86, 11.74, 3.1 and 0.85 mm) and
