@@ -3,6 +3,7 @@ import { WATER_VIEWS } from "./features";
 // Part of the app, so the gallery's pictures are in the page from its first moment (the file
 // itself is also served, for the service worker).
 import rendered from "../../public/renders/manifest.json";
+import naturalsRendered from "../../public/renders/naturals/manifest.json";
 
 /** What scripts/render-catalog.ts writes to public/renders/manifest.json. */
 export type RenderInfo = { hash: string; frames: number; width: number; height: number };
@@ -30,20 +31,13 @@ export function useSwatches(): Record<string, string> | null {
   return m;
 }
 
-let naturalPictures: Promise<Record<string, string>> | null = null;
+const naturalPictures: Record<string, string> = Object.fromEntries(
+  Object.entries(naturalsRendered as Record<string, string>).map(([id, hash]) => [id, `${import.meta.env.BASE_URL}renders/naturals/${id}.webp?v=${hash}`]),
+);
 
-/** Pictures of the naturals by id (public/renders/naturals/), or null while loading. */
-export function useNaturalPictures(): Record<string, string> | null {
-  const [m, setM] = useState<Record<string, string> | null>(null);
-  useEffect(() => {
-    naturalPictures ??= fetch(`${import.meta.env.BASE_URL}renders/naturals/manifest.json`)
-      .then((r) => (r.ok ? r.json() : {}))
-      .catch(() => ({}));
-    naturalPictures.then((hashes: Record<string, string>) =>
-      setM(Object.fromEntries(Object.entries(hashes).map(([id, hash]) => [id, `${import.meta.env.BASE_URL}renders/naturals/${id}.webp?v=${hash}`]))),
-    );
-  }, []);
-  return m;
+/** Pictures of the naturals by id (public/renders/naturals/): part of the app, like the patterns'. */
+export function useNaturalPictures(): Record<string, string> {
+  return naturalPictures;
 }
 
 let hookPictures: Promise<Record<string, string>> | null = null;

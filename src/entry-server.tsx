@@ -13,7 +13,7 @@ import { setServerPath } from "./ui/router";
 
 /** Which pages are built this way so far; the others keep their plain text until the app draws them. */
 export function hydrated(path: string): boolean {
-  return ["", "about/", "learn/", "techniques/", "naturals/"].includes(path);
+  return ["", "about/", "learn/", "techniques/", "naturals/"].includes(path) || /^(fly|technique|natural)\/[^/]+\/$/.test(path);
 }
 
 /** Every language's words, which a page in that language needs before it is drawn. */

@@ -46,6 +46,9 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
   const container = useRef<HTMLDivElement>(null);
   const scene = useRef<FlyScene | null>(null);
   const [unavailable, setUnavailable] = useState(false);
+  // Its picture stands in for the 3D view until that has drawn, and where there is no WebGL.
+  const picture = useNaturalPictures()[natural.id];
+  const [shown, setShown] = useState(false);
   const [capable] = useState(realisticCapable);
   const stills = useWaterStills("naturals", natural.id);
   const [view, setView] = useState<"angler" | "below">(() => seenFrom(natural));
@@ -79,6 +82,7 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
     // At its real size against the gravel and ripples, as in the stills.
     s.setNatural(natural, naturalAlone(natural));
     s.setView("default");
+    s.onDraw = () => setShown(true);
     scene.current = s;
     return () => {
       s.dispose();
@@ -89,10 +93,17 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
     scene.current?.setWater(live ? { fishing: naturalFishing(natural), view, still: false, look: WATER_LOOKS.light, real: live } : null);
   }, [live, view, natural]);
   // Without WebGL the pictures still show, with nothing to explore.
-  if (unavailable && !still) return <p className="viewer-unavailable">{t.naturals.noWebgl}</p>;
+  if (unavailable && !still)
+    return (
+      <>
+        {picture && <img className="natural-poster still" src={picture} alt="" width={480} height={320} />}
+        <p className="viewer-unavailable">{t.naturals.noWebgl}</p>
+      </>
+    );
   return (
     <div className={still || live ? "natural-viewer in-water" : "natural-viewer"}>
       <div className="natural-canvas" ref={container} />
+      {picture && !shown && !still && <img className="natural-poster" src={picture} alt="" width={480} height={320} />}
       {still && (
         <figure className="water-still">
           <img src={still} alt={t.viewer.stillAlt(view)} onError={() => setBroken(still)} />

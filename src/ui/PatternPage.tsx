@@ -15,12 +15,13 @@ import { href, replaceUrl } from "./router";
 import { FLY_BOX_KEY, INVENTORY_KEY, useStoredSet } from "./storage";
 import { useWakeLock } from "./wakeLock";
 import { usePlayer } from "./usePlayer";
+import { useHydrated } from "./hydration";
 import { SPEEDS, TransportIcon } from "./transport";
 import { NotFound } from "./NotFound";
 import { naturalLengthFor } from "../catalog/naturals";
 import { findNatural } from "../naturals";
 import { PrintCard } from "./PrintCard";
-import { useNaturalPictures, useWaterStills } from "./renders";
+import { renderUrls, useNaturalPictures, useRenders, useWaterStills } from "./renders";
 import { WATER_VIEWS } from "./features";
 import { StepBar } from "./StepBar";
 import { Viewer } from "./Viewer";
@@ -101,7 +102,16 @@ function PatternView({
   const waterStills = useWaterStills("patterns", recipe.id);
   const stills = size === tiedSize && spec === "" ? (waterStills === undefined ? "loading" : waterStills) : null;
   const [inWater, setInWater] = useState(false);
-  const [follow, setFollowState] = useState(readFollow);
+  // (Stored: a page built ahead of time has it as it is by default until it is taken over.)
+  const hydrated = useHydrated();
+  const [follow, setFollowState] = useState(() => (hydrated ? readFollow() : true));
+  useEffect(() => {
+    if (hydrated) setFollowState(readFollow());
+  }, [hydrated]);
+  // The gallery's picture stands in for the 3D view until it has drawn, where the page opens on
+  // the finished fly as it is tied (not on another size or in other colours).
+  const card = useRenders()[recipe.id];
+  const poster = card && linkedStep === undefined && linkedSize === undefined && !linkedColours ? (({ card: src, cards: srcSet }) => ({ src, srcSet }))(renderUrls(recipe.id, card)) : undefined;
   const setFollow = (on: boolean) => {
     setFollowState(on);
     try {
@@ -346,6 +356,7 @@ function PatternView({
           pointUp={ridesPointUp(recipe)}
           guide
           turning={finished}
+          poster={poster}
           water={WATER_VIEWS ? fishingFor : undefined}
           waterOpen={inWater}
           onWater={(on) => {

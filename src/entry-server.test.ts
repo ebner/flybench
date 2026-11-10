@@ -29,6 +29,23 @@ describe("the app drawn without a browser", () => {
     }
   });
 
+  it("draws a pattern's page with its dressing, steps and the gallery picture in the 3D view's place", async () => {
+    const html = await renderPage("fly/adams/");
+    expect(html).toContain(">Adams</h1>");
+    expect(html).toContain('class="viewer-poster"');
+    expect(html).toContain("renders/adams/card.webp");
+    expect(html).toContain("Whip finish");
+    const sv = await renderPage("sv/fly/adams/");
+    expect(sv).toContain("Följ"); // the camera follows by default, in Swedish
+  });
+
+  it("draws a technique's and a natural's page", async () => {
+    expect(await renderPage("technique/whip-finish/")).toContain(">Whip finish</h1>");
+    const natural = await renderPage("natural/mayfly-dun/");
+    expect(natural).toContain(">Mayfly dun</h1>");
+    expect(natural).toContain('class="natural-poster"');
+  });
+
   it("draws the same page the same way twice (what the browser takes over must not vary)", async () => {
     expect(await renderPage("learn/")).toBe(await renderPage("learn/"));
   });

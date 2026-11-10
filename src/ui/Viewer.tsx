@@ -34,6 +34,11 @@ export interface ViewerProps {
   stills?: WaterStills | null | "loading";
   /** Turn the fly slowly, as on a turntable (the finished fly), until the visitor turns it. */
   turning?: boolean;
+  /**
+   * A picture of the fly as the view will first show it (its gallery card), in the view's place
+   * until the 3D view has drawn: in a page built ahead of time, and where there is no WebGL.
+   */
+  poster?: { src: string; srcSet?: string };
 }
 
 /** The realistic water's panorama and gravel, loaded the first time it is shown. */
@@ -71,7 +76,10 @@ export function Viewer({
   onWater,
   stills: stillsOrLoading = null,
   turning = false,
+  poster,
 }: ViewerProps) {
+  // Once the 3D view has drawn its first frame, the poster gives way to it.
+  const [shown, setShown] = useState(false);
   const stills = stillsOrLoading === "loading" ? null : stillsOrLoading;
   const [turned, setTurned] = useState(false);
   // The realistic water where the device can take it, else the drawn one.
@@ -140,6 +148,7 @@ export function Viewer({
     }
     s.onFollowChange = (on) => followChange.current(on);
     s.onContextLost = setLost;
+    s.onDraw = () => setShown(true);
     // Positioned directly each frame, without re-rendering React.
     s.onAnchor = (point, fly) => {
       const el = label.current;
@@ -276,6 +285,7 @@ export function Viewer({
   if (unavailable && !still) {
     return (
       <div className="viewer viewer-unavailable">
+        {poster && <img className="viewer-poster" src={poster.src} srcSet={poster.srcSet} alt="" />}
         <p>{t.viewer.noWebgl}</p>
       </div>
     );
@@ -312,6 +322,7 @@ export function Viewer({
           if (dx > 24 && dx > 2 * Math.abs(e.touches[0]!.clientY - t.y)) setHint(true);
         }}
       />
+      {poster && !shown && <img className="viewer-poster" src={poster.src} srcSet={poster.srcSet} alt="" />}
       {hint && !lost && <p className="viewer-hint">{t.viewer.hint}</p>}
       {lost && (
         <p className="viewer-hint" role="status">

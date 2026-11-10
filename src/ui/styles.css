@@ -674,6 +674,28 @@ select {
   touch-action: pan-y;
 }
 
+/* The fly's picture in the view's place until the 3D view has drawn (a page built ahead of time). */
+.viewer-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 3rem 2% 1rem;
+  box-sizing: border-box;
+  object-fit: contain;
+  /* The card leaves more room round the fly than the 3D view does: nearer its size there. */
+  transform: scale(1.2);
+  pointer-events: none;
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
+}
+
+.viewer-unavailable .viewer-poster {
+  position: static;
+  height: auto;
+  max-height: 60%;
+  padding: 0;
+}
+
 /* The fly casts a faint shadow on the paper behind it, as on the gallery plates. */
 .viewer-canvas canvas,
 .studio-canvas canvas {
@@ -2174,6 +2196,21 @@ select {
 .natural-canvas {
   position: absolute;
   inset: 0;
+}
+
+.natural-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.15rem 0.2rem var(--specimen-shadow));
+}
+
+.natural-poster.still {
+  position: static;
+  height: auto;
 }
 
 .natural-viewer canvas {

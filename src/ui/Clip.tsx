@@ -4,6 +4,7 @@ import { simulate, stepEnd } from "../tying/simulate";
 import { Viewer } from "./Viewer";
 import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
+import { useHydrated } from "./hydration";
 
 /**
  * One step of a pattern, played on a loop with the camera following the action:
@@ -14,7 +15,13 @@ export function Clip({ recipe, step }: { recipe: Recipe; step: number }) {
   const build = useMemo(() => simulate(recipe), [recipe, language]);
   const s = build.steps[step]!;
   const [time, setTime] = useState(s.start);
-  const [playing, setPlaying] = useState(!matchMedia("(prefers-reduced-motion: reduce)").matches);
+  // Plays by itself, unless less motion is asked for (known once the browser has the page).
+  const hydrated = useHydrated();
+  const calm = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [playing, setPlaying] = useState(() => hydrated && !calm());
+  useEffect(() => {
+    if (hydrated) setPlaying(!calm());
+  }, [hydrated]);
   const [follow, setFollow] = useState(true);
 
   useEffect(() => {
