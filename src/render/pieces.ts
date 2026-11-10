@@ -558,6 +558,42 @@ function bandGeometry(piece: WrapsPiece, space: ShankSpace, halfWidth: number, h
   return { geometry, perSegment: radial * 6 };
 }
 
+// Assumption: where barbs root, the body under them is about a third darker, fading out over
+// about a twelfth of a gape to either side of the stem.
+const CONTACT_SHADE = 0.34;
+const CONTACT_REACH = 0.085;
+
+/**
+ * The band of shade under a wound hackle: a flat strip along the stem's path, lying on what the
+ * hackle is wound over, darkest under the stem and clear at its edges.
+ */
+function contactShade(piece: WrapsPiece, space: ShankSpace, segments: number) {
+  const positions: number[] = [];
+  const colors: number[] = [];
+  const index: number[] = [];
+  const v = new THREE.Vector3();
+  for (let i = 0; i <= segments; i++) {
+    const [px, py, pz] = wrapPoint(piece, i / segments).point;
+    const len = Math.hypot(py, pz) || 1;
+    // Just clear of the surface the stem lies on.
+    const on = (len - piece.strandRadius + 0.004) / len;
+    for (const [dx, alpha] of [[-CONTACT_REACH, 0], [0, CONTACT_SHADE], [CONTACT_REACH, 0]] as const) {
+      space.point(v.set(px + dx, py * on, pz * on));
+      positions.push(v.x, v.y, v.z);
+      colors.push(0, 0, 0, alpha);
+    }
+  }
+  for (let i = 0; i < segments; i++) {
+    const a = i * 3;
+    index.push(a, a + 3, a + 1, a + 1, a + 3, a + 4, a + 1, a + 4, a + 2, a + 2, a + 4, a + 5);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 4));
+  geometry.setIndex(index);
+  return { geometry, perSegment: 12 };
+}
+
 // Assumption, read from photos of the Bitch Creek (Fish4Flies, John Kreft): the colours of a woven
 // body meet along the side, and at each crossing the top colour reaches about half of the way
 // down to the belly in a tooth that leans back.
@@ -670,6 +706,15 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
   const core = piece.look === "thread" && piece.path !== "post" ? threadCore(piece, space) : null;
   if (core) group.add(new THREE.Mesh(core.geometry, surfaces.get(piece.gloss ? "varnish" : "thread", piece.color)));
 
+  // Under a wound hackle the body is in the shade of its barbs: a soft dark band along the stem.
+  const shade = stemOnly && piece.path === "travel" && piece.fibreLength ? contactShade(piece, space, tubular) : null;
+  if (shade) {
+    const mesh = new THREE.Mesh(shade.geometry, surfaces.contactShade());
+    // (Itself it casts no shadow: see FlyScene.aimShadows.)
+    mesh.userData.shade = true;
+    group.add(mesh);
+  }
+
   let fibres: ReturnType<typeof fibreMesh> | null = null;
   if (piece.fibreLength && piece.look in WOUND_FIBRES) {
     const spec = WOUND_FIBRES[piece.look as keyof typeof WOUND_FIBRES];
@@ -684,11 +729,13 @@ function wrapsView(piece: WrapsPiece, surfaces: Surfaces, space: ShankSpace): Pi
     setProgress(u) {
       group.visible = u > 0;
       tube.setDrawRange(0, Math.floor(u * tubular) * perSegment);
+      shade?.geometry.setDrawRange(0, Math.floor(u * tubular) * shade.perSegment);
       core?.setProgress(u);
       fibres?.setProgress(u);
     },
     dispose() {
       tube.dispose();
+      shade?.geometry.dispose();
       core?.geometry.dispose();
       fibres?.dispose();
     },
@@ -1485,7 +1532,7 @@ function eyesView(piece: EyesPiece, surfaces: Surfaces, space: ShankSpace): Piec
 }
 
 /** A strip over the top of the body (wing case, foam back), drawn from the back forwards. */
-function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
+function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): PieceView & { showFrom(x: number): void } {
   // A closed strip: a domed top, an underside lying on the body, and thin side edges.
   const xEnd = piece.x1 + piece.stub;
   const segX = Math.max(48, Math.round((xEnd - piece.x0) * 90));
@@ -1676,6 +1723,13 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
       geometry.setDrawRange(0, Math.ceil(u * segX) * ring * 6 * halves.length);
       fur?.setProgress(u);
     },
+    /** Only the stretch in front of `x`, without its fur: the end a trim cuts off. */
+    showFrom(x) {
+      const per = ring * 6 * halves.length;
+      const first = Math.min(segX, Math.max(0, Math.floor(((x - piece.x0) / (xEnd - piece.x0)) * segX)));
+      geometry.setDrawRange(first * per, (segX - first) * per);
+      if (fur) fur.object.visible = false;
+    },
     dispose() {
       geometry.dispose();
       material.dispose();
@@ -1737,6 +1791,28 @@ const CLIPPINGS_MOST = 2500;
  */
 function trimmingsView(piece: TrimmingsPiece, surfaces: Surfaces, space: ShankSpace): PieceView {
   const { from, to } = piece;
+  if (from.type === "cover") {
+    // The end of a strip (a foam back) in front of where it is cut: the untrimmed strip, drawn
+    // from the cut on.
+    const strip = coverView(from, surfaces, space);
+    const cutAt = from.x1 + (to?.type === "cover" ? to.stub : 0);
+    const middle = space.point(new THREE.Vector3((cutAt + from.x1 + from.stub) / 2, 0, 0));
+    return {
+      object: strip.object,
+      setProgress(u) {
+        strip.setProgress(1);
+        strip.showFrom(cutAt);
+        strip.object.visible = u > 0 && u < 1;
+        // It tips over as it drops.
+        strip.object.position.set(0, 0, 0);
+        strip.object.rotation.set(0, 0, 0);
+        strip.object.position.sub(middle).applyAxisAngle(Z_AXIS, -1.4 * u * u).add(middle);
+        strip.object.rotation.z = -1.4 * u * u;
+        strip.object.position.y -= CLIPPINGS_DROP * u * u;
+      },
+      dispose: strip.dispose,
+    };
+  }
   const waste: Fibre[] = [];
   const cutOff = (f: Fibre, kept: number, tip: number) => {
     if (f.length - kept < 0.03) return;

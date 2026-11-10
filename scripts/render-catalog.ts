@@ -73,7 +73,7 @@ async function rendererHash(): Promise<string> {
   return hash.digest("hex");
 }
 
-type Manifest = Record<string, { hash: string; frames: number; width: number; height: number }>;
+type Manifest = Record<string, { hash: string; frames: number; width: number; height: number; box?: [number, number, number, number] }>;
 
 const manifest: Manifest = existsSync(MANIFEST) ? JSON.parse(await readFile(MANIFEST, "utf8")) : {};
 const codeHash = await rendererHash();
@@ -144,7 +144,15 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
             // (Moving, it bears a lower quality than the still card.)
             .webp({ quality: 60, alphaQuality: 75 })
             .toFile(`${OUT}/${job.id}/spin.webp`);
-          manifest[job.id] = { hash: job.hash, frames: FRAMES, ...FRAME };
+          // Where the fly is in its card (left, top, width and height as fractions of the card):
+          // a picture standing in for a 3D view is sized by it, to sit as the view will show the fly.
+          const { info } = await sharp(frames[0]!).trim({ threshold: 1 }).toBuffer({ resolveWithObject: true });
+          const whole = { width: FRAME.width * OVERSAMPLE, height: FRAME.height * OVERSAMPLE };
+          const part = (v: number, of: number) => Math.round((v / of) * 10000) / 10000;
+          const box: [number, number, number, number] = [
+            part(-(info.trimOffsetLeft ?? 0), whole.width), part(-(info.trimOffsetTop ?? 0), whole.height), part(info.width, whole.width), part(info.height, whole.height),
+          ];
+          manifest[job.id] = { hash: job.hash, frames: FRAMES, ...FRAME, box };
           // (`width` and `height` are the card's; the turning picture is scaled to it by the page.)
           console.log(`${OUT}/${job.id}`);
         }

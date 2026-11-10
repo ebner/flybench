@@ -1471,6 +1471,11 @@ select {
   .transport select {
     display: none;
   }
+
+  /* The builder's player has no "more" button: its speeds stay in the row, which has room. */
+  .wb-player .transport select {
+    display: inline-block;
+  }
 }
 
 /* Reading pages: techniques and the learning path */

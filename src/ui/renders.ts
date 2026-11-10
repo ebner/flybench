@@ -8,7 +8,14 @@ import swatchesRendered from "../../public/renders/materials/manifest.json";
 import hooksRendered from "../../public/renders/hooks/manifest.json";
 
 /** What scripts/render-catalog.ts writes to public/renders/manifest.json. */
-export type RenderInfo = { hash: string; frames: number; width: number; height: number };
+export type RenderInfo = {
+  hash: string;
+  frames: number;
+  width: number;
+  height: number;
+  /** Where the fly is in its card: left, top, width and height, as fractions of the card. */
+  box?: number[];
+};
 type Manifest = Record<string, RenderInfo>;
 
 /** The gallery images there are, by pattern. */

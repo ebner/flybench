@@ -318,12 +318,13 @@ export interface LegsPiece extends PieceBase {
 
 /**
  * What a trim cuts off, for the moment it falls away: the fibres of `from` that `to` (what is
- * left in its place, if anything) no longer has, or has shorter.
+ * left in its place, if anything) no longer has, or has shorter; of a strip (a foam back), the
+ * end in front of the cut.
  */
 export interface TrimmingsPiece extends PieceBase {
   type: "trimmings";
-  from: BundlePiece | WrapsPiece;
-  to?: BundlePiece | WrapsPiece;
+  from: BundlePiece | WrapsPiece | CoverPiece;
+  to?: BundlePiece | WrapsPiece | CoverPiece;
 }
 
 export type Piece = WrapsPiece | BundlePiece | FeatherPiece | BeadPiece | EyesPiece | CoverPiece | ExtensionPiece | LegsPiece | SleevePiece | TrimmingsPiece;
@@ -1455,7 +1456,7 @@ export function simulate(recipe: Recipe): Build {
         duration = DURATION.trim;
         const cutAt = time + duration * 0.5;
         // What is cut off drops away from the cut on (see TrimmingsPiece).
-        const clippings = (from: BundlePiece | WrapsPiece, to?: BundlePiece | WrapsPiece) =>
+        const clippings = (from: TrimmingsPiece["from"], to?: TrimmingsPiece["to"]) =>
           // (Numbered apart from the other pieces, whose numbers seed their fibres: a fly's
           // bunches are the same with or without the clippings of a trim before them.)
           pieces.push({ type: "trimmings", id: CLIPPINGS_IDS + clippingsMade++, material: from.material, look: from.look, color: from.color, window: CLIPPINGS_FALL, from, ...(to && { to }) });
@@ -1509,6 +1510,8 @@ export function simulate(recipe: Recipe): Build {
           // (A head folded back over itself stays; what is cut is the end left at the tie-down.)
           const trimmed: CoverPiece = { ...c, id: nextId++, seed: c.seed ?? c.id, stub: c.fold ? c.stub : (step.leave ?? 0), window: [0.5, 0.5001], until: undefined };
           pieces.push(trimmed);
+          // (A head folded back over itself keeps its end.)
+          if (!c.fold) clippings(c, trimmed);
           covers.set(step.material, trimmed);
         } else if (palmeredTips.has(step.material)) {
           ctx.tip = true;

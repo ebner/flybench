@@ -17,6 +17,19 @@ export class Surfaces {
     return m;
   }
 
+  /**
+   * The shade a wound hackle's barbs throw on what they are wound over: black, as dark as each
+   * vertex's alpha says, drawn over the body without hiding anything in front of it.
+   */
+  contactShade(): THREE.Material {
+    let m = this.cache.get("contact-shade");
+    if (!m) {
+      m = new THREE.MeshBasicMaterial({ color: 0x000000, vertexColors: true, transparent: true, depthWrite: false, side: THREE.DoubleSide });
+      this.cache.set("contact-shade", m);
+    }
+    return m;
+  }
+
   dispose() {
     for (const m of this.cache.values()) m.dispose();
     this.cache.clear();

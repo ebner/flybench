@@ -1220,7 +1220,8 @@ export class FlyScene {
     camera.far = 8 * r;
     camera.updateProjectionMatrix();
     this.fly.traverse((o) => {
-      if (o instanceof THREE.Mesh) o.castShadow = o.receiveShadow = true;
+      // (A band of shade drawn on the body is shade already.)
+      if (o instanceof THREE.Mesh && !o.userData.shade) o.castShadow = o.receiveShadow = true;
     });
   }
 
