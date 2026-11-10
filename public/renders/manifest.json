@@ -1,734 +1,1466 @@
 {
   "adams": {
-    "hash": "2d105df00423ea18",
+    "hash": "daf25d08314ac144",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1543,
+      0.0386,
+      0.6914,
+      0.9228
+    ]
   },
   "alexandra": {
-    "hash": "a2f4f334f306cb6f",
+    "hash": "5bb1f5c1ab663bb2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1075,
+      0.1183,
+      0.7849,
+      0.7633
+    ]
   },
   "allys-shrimp": {
-    "hash": "f3a66a56f1db611a",
+    "hash": "616fd56e17b93e07",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0285,
+      0.1775,
+      0.943,
+      0.645
+    ]
   },
   "arthofer": {
-    "hash": "a74b75eac69de9c5",
+    "hash": "0ced0f1981ddac85",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0275,
+      0.1636,
+      0.9449,
+      0.6728
+    ]
   },
   "balloon-caddis": {
-    "hash": "eda66c3101f5db31",
+    "hash": "ef68f43425bf2cb7",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0549,
+      0.0802,
+      0.8902,
+      0.8395
+    ]
   },
   "bitch-creek": {
-    "hash": "801bd38f0f7e51c3",
+    "hash": "793ef3ea88703245",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0594,
+      0.0692,
+      0.8813,
+      0.8616
+    ]
   },
   "black-ant": {
-    "hash": "2b9269b2ec8b22f7",
+    "hash": "341ad9fa5af99e7e",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0596,
+      0.051,
+      0.8809,
+      0.898
+    ]
   },
   "black-gnat": {
-    "hash": "6a6ad108100dd421",
+    "hash": "99c3f06baf570d37",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1529,
+      0.0501,
+      0.6943,
+      0.8998
+    ]
   },
   "black-martinez": {
-    "hash": "e19043a568a2f2fb",
+    "hash": "7781dafd46e9df75",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0808,
+      0.064,
+      0.8385,
+      0.8719
+    ]
   },
   "black-peacock-spider": {
-    "hash": "0ae9a72a0034780e",
+    "hash": "4071bbc7bef18ba3",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1402,
+      0.0474,
+      0.7196,
+      0.9053
+    ]
   },
   "black-pennell": {
-    "hash": "664955a1248b5a96",
+    "hash": "54fc4b9f97b28063",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0964,
+      0.0645,
+      0.8073,
+      0.871
+    ]
   },
   "bloody-mary": {
-    "hash": "d0fd3389769e06fd",
+    "hash": "ddda8c2a5f8b0f3b",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0808,
+      0.0835,
+      0.8384,
+      0.8329
+    ]
   },
   "blue-charm": {
-    "hash": "66b2ff3d7af2e85c",
+    "hash": "7db615cb23fa398f",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1175,
+      0.0709,
+      0.765,
+      0.8581
+    ]
   },
   "blue-dun": {
-    "hash": "3560ccd4c8aceff5",
+    "hash": "2c8afff1c2f56ca2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1487,
+      0.0442,
+      0.7026,
+      0.9116
+    ]
   },
   "blue-dun-wet": {
-    "hash": "36635a6fff752fae",
+    "hash": "df6c8515cc817931",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1372,
+      0.0678,
+      0.7256,
+      0.8643
+    ]
   },
   "brassie": {
-    "hash": "38aee5e706438e02",
+    "hash": "389c35dee5f325b2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0789,
+      0.1183,
+      0.8422,
+      0.7633
+    ]
   },
   "bumble-claret": {
-    "hash": "cab84af46dfb04ce",
+    "hash": "a877c3d6a47be55c",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.089,
+      0.0696,
+      0.8219,
+      0.8609
+    ]
   },
   "butcher": {
-    "hash": "37c787c130700460",
+    "hash": "642c5c72ab1c244a",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0934,
+      0.1531,
+      0.8133,
+      0.6938
+    ]
   },
   "cascade": {
-    "hash": "080490758c9bbb98",
+    "hash": "af279e46f01ad119",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0286,
+      0.1668,
+      0.9427,
+      0.6664
+    ]
   },
   "cats-whisker": {
-    "hash": "d577abc722e83dc4",
+    "hash": "ac29dd456e31a470",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.124,
+      0.0429,
+      0.7519,
+      0.9143
+    ]
   },
   "cdc-and-elk": {
-    "hash": "77734c70e476ef62",
+    "hash": "b660e5076e3a0790",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0959,
+      0.0434,
+      0.8082,
+      0.9133
+    ]
   },
   "chillimps": {
-    "hash": "6fdec8ce4b9aeb51",
+    "hash": "eee7858de31a7218",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0582,
+      0.0806,
+      0.8837,
+      0.8389
+    ]
   },
   "chillimps-double": {
-    "hash": "6469bb9fb4ce831b",
+    "hash": "04b3845dfd0cb3a8",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0659,
+      0.0701,
+      0.8681,
+      0.8598
+    ]
   },
   "cinnamon-and-gold": {
-    "hash": "65def3f6636fa4d1",
+    "hash": "9fe2591e78d18fc3",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0983,
+      0.1473,
+      0.8034,
+      0.7053
+    ]
   },
   "clouser-minnow": {
-    "hash": "eb2889202324ebd7",
+    "hash": "665ade6e5961a6fc",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0266,
+      0.1298,
+      0.9469,
+      0.7405
+    ]
   },
   "coch-y-bonddu": {
-    "hash": "7313f963bf39134f",
+    "hash": "5799b0b42a93408f",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.2106,
+      0.0211,
+      0.5789,
+      0.9578
+    ]
   },
   "crazy-charlie": {
-    "hash": "cd9d0fbee8bc2c81",
+    "hash": "16b2601630fa366d",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0249,
+      0.0923,
+      0.9502,
+      0.8154
+    ]
   },
   "czech-nymph": {
-    "hash": "e1bb0d2950b3eb12",
+    "hash": "37df849a3cfeebc6",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1521,
+      0.0887,
+      0.6958,
+      0.8227
+    ]
   },
   "dark-hendrickson": {
-    "hash": "802380c44acb3c2a",
+    "hash": "8e5f70cdb50d88b2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1635,
+      0.0471,
+      0.6731,
+      0.9057
+    ]
   },
   "dark-hendrickson-wet": {
-    "hash": "5c4553292e59995d",
+    "hash": "7a6871ad6e0acad2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0872,
+      0.0876,
+      0.8257,
+      0.8248
+    ]
   },
   "deep-sparkle-pupa": {
-    "hash": "5b2dc750cda814f2",
+    "hash": "d413519719f889ed",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0852,
+      0.1115,
+      0.8297,
+      0.7769
+    ]
   },
   "diving-caddis": {
-    "hash": "46cde5571087afd1",
+    "hash": "bace42f6d0ef65e3",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1512,
+      0.0369,
+      0.6976,
+      0.9262
+    ]
   },
   "dog-nobbler": {
-    "hash": "b9b7cbbe25972ce6",
+    "hash": "25d0829454cfdcea",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0297,
+      0.0782,
+      0.9406,
+      0.8435
+    ]
   },
   "dunkeld": {
-    "hash": "eb3073c74cba588d",
+    "hash": "29f30c61e8881c2f",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1161,
+      0.1345,
+      0.7679,
+      0.731
+    ]
   },
   "dusty-miller": {
-    "hash": "a8d60eb9e9bc7d6a",
+    "hash": "1f88d4a7e77f9ab5",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0438,
+      0.0342,
+      0.9124,
+      0.9316
+    ]
   },
   "dyret": {
-    "hash": "e28f9dba62e4e9ac",
+    "hash": "70dc50bbbc514d12",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1381,
+      0.0221,
+      0.7239,
+      0.9557
+    ]
   },
   "elk-hair-caddis": {
-    "hash": "d6bd19c6a9f589ba",
+    "hash": "0f28352ac6a3099a",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1471,
+      0.0251,
+      0.7058,
+      0.9497
+    ]
   },
   "elk-hair-caddis-troth": {
-    "hash": "082489be7d6c9ab1",
+    "hash": "417eb4c0d10df127",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.206,
+      0.0208,
+      0.588,
+      0.9585
+    ]
   },
   "europea-12": {
-    "hash": "120521d3e717228a",
+    "hash": "6f09e5c94e34dc31",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.174,
+      0.0332,
+      0.6519,
+      0.9335
+    ]
   },
   "europea-12-tailed": {
-    "hash": "61baca8d97ac05df",
+    "hash": "277efe0a8d739375",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1648,
+      0.0354,
+      0.6704,
+      0.9292
+    ]
   },
   "executioner": {
-    "hash": "7524656b9f98860a",
+    "hash": "8300ac0513ffb072",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0437,
+      0.0792,
+      0.9125,
+      0.8415
+    ]
   },
   "f-fly": {
-    "hash": "f24af28fee4321eb",
+    "hash": "aff529c56b7b11f2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1552,
+      0.0343,
+      0.6897,
+      0.9314
+    ]
   },
   "foam-beetle": {
-    "hash": "23d5c3f96197eedc",
+    "hash": "962a59b383dbbcb5",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0461,
+      0.0521,
+      0.9079,
+      0.8959
+    ]
   },
   "freight-train": {
-    "hash": "f4d29a4c4a7d0a9d",
+    "hash": "019d5c4a44cb262f",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0858,
+      0.0921,
+      0.8285,
+      0.8158
+    ]
   },
   "gammarus": {
-    "hash": "f2b668462568e6cc",
+    "hash": "d5491bdc269f4ba5",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1313,
+      0.1057,
+      0.7375,
+      0.7885
+    ]
   },
   "garry-dog": {
-    "hash": "9f455d25ef2f4535",
+    "hash": "9d21826b0c5b083b",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0993,
+      0.0954,
+      0.8014,
+      0.8092
+    ]
   },
   "general-practitioner": {
-    "hash": "ce861f7b8c88d887",
+    "hash": "be236dd5c522ecb4",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0264,
+      0.1668,
+      0.9471,
+      0.6664
+    ]
   },
   "gimapuppan": {
-    "hash": "ead1408886463cd5",
+    "hash": "1800f540735d0271",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0981,
+      0.1042,
+      0.8038,
+      0.7915
+    ]
   },
   "goddard-caddis": {
-    "hash": "339d39776fa8362d",
+    "hash": "cb7c26446f974597",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1369,
+      0.0442,
+      0.7262,
+      0.9116
+    ]
   },
   "gold-ribbed-hares-ear-nymph": {
-    "hash": "f10221c6d1518654",
+    "hash": "ac7ec998a62b0197",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.027,
+      0.1196,
+      0.946,
+      0.7608
+    ]
   },
   "gotcha": {
-    "hash": "3fa8f16acd5f80f8",
+    "hash": "e6db69e933009954",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0284,
+      0.1022,
+      0.9432,
+      0.7957
+    ]
   },
   "graraven": {
-    "hash": "74c1c7f6e031362d",
+    "hash": "4736f2ed3083ec2d",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0262,
+      0.0981,
+      0.9477,
+      0.8037
+    ]
   },
   "green-highlander": {
-    "hash": "a770f6ff688379ca",
+    "hash": "00696db8cbf204d4",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1,
+      0.0845,
+      0.8001,
+      0.8309
+    ]
   },
   "greenwells-glory": {
-    "hash": "e542c2e04ad6a256",
+    "hash": "2da81b2a25fe0b5f",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1569,
+      0.1023,
+      0.6862,
+      0.7953
+    ]
   },
   "grey-duster": {
-    "hash": "61f4c7183fb26c75",
+    "hash": "a283cfafacb3ca1a",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.2079,
+      0.0202,
+      0.5842,
+      0.9597
+    ]
   },
   "grey-wulff": {
-    "hash": "785ca1438757610a",
+    "hash": "6bdee7d4cc5ec5cd",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1628,
+      0.0427,
+      0.6744,
+      0.9147
+    ]
   },
   "griffiths-gnat": {
-    "hash": "612529bd4c0a1f00",
+    "hash": "40aab14306e00e94",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1374,
+      0.0481,
+      0.7252,
+      0.9039
+    ]
   },
   "gurgler": {
-    "hash": "b8cd2ee2cc68d79d",
+    "hash": "e8b224d5a4862a5a",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0251,
+      0.1538,
+      0.9498,
+      0.6924
+    ]
   },
   "hardys-favourite": {
-    "hash": "aca9d2b202653afb",
+    "hash": "f3f827707c1c0c9e",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0928,
+      0.0994,
+      0.8144,
+      0.8011
+    ]
   },
   "hardys-favourite-claret": {
-    "hash": "34e83c3ba74caa80",
+    "hash": "599f79b065aac290",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0956,
+      0.105,
+      0.8087,
+      0.7899
+    ]
   },
   "hemingway-caddis": {
-    "hash": "9844182d00f67353",
+    "hash": "0ab4280f990d90e3",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.197,
+      0.026,
+      0.6059,
+      0.9479
+    ]
   },
   "hjortharspuppan": {
-    "hash": "a1dcb60d9ba722e2",
+    "hash": "c3788548b0cd3b58",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0955,
+      0.1092,
+      0.8091,
+      0.7817
+    ]
   },
   "humpy": {
-    "hash": "e0d5f07e36714acc",
+    "hash": "406591b464f18600",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1686,
+      0.0397,
+      0.6627,
+      0.9206
+    ]
   },
   "irresistible": {
-    "hash": "d4161514ee2015d2",
+    "hash": "57854cb86c9613cc",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1634,
+      0.0371,
+      0.6732,
+      0.9257
+    ]
   },
   "klinkhamer-special": {
-    "hash": "bebd09941ecdc20d",
+    "hash": "d1a303ff6899cdf5",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0966,
+      0.0405,
+      0.8068,
+      0.919
+    ]
   },
   "kobberbassen": {
-    "hash": "befce3ac07de79b9",
+    "hash": "0664205e7250782c",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1037,
+      0.1145,
+      0.7927,
+      0.771
+    ]
   },
   "leftys-deceiver": {
-    "hash": "1e2069c8fbdc6fd7",
+    "hash": "c907945cb78301b2",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0259,
+      0.2063,
+      0.9483,
+      0.5874
+    ]
   },
   "magnus": {
-    "hash": "1a4253904c2d0773",
+    "hash": "643bcb7ec73fd4cb",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.046,
+      0.0805,
+      0.9079,
+      0.839
+    ]
   },
   "marabou-muddler": {
-    "hash": "eec40646bc887fc2",
+    "hash": "518f3b0eca01d1a3",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1051,
+      0.0383,
+      0.7898,
+      0.9234
+    ]
   },
   "march-brown": {
-    "hash": "aad407a256d73931",
+    "hash": "6acc80317d8076df",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1219,
+      0.1162,
+      0.7563,
+      0.7675
+    ]
   },
   "march-brown-spider": {
-    "hash": "822319344788bc7e",
+    "hash": "519d2a2fb57cea92",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1403,
+      0.041,
+      0.7194,
+      0.9179
+    ]
   },
   "mickey-finn": {
-    "hash": "a9e8d0f5903b7824",
+    "hash": "4d08f16b150341ab",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0671,
+      0.086,
+      0.8659,
+      0.8279
+    ]
   },
   "mohican-mayfly": {
-    "hash": "4cc9621e36891299",
+    "hash": "0a8165b37ab073c4",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0388,
+      0.1121,
+      0.9224,
+      0.7757
+    ]
   },
   "montana-nymph": {
-    "hash": "390f397c37569dc2",
+    "hash": "656ff7140ad738b0",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0261,
+      0.1183,
+      0.9479,
+      0.7635
+    ]
   },
   "morrish-mouse": {
-    "hash": "6796c61c4f7f3675",
+    "hash": "b068d696d6e3111e",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0255,
+      0.1812,
+      0.949,
+      0.6375
+    ]
   },
   "muddler-minnow": {
-    "hash": "f99830c6616800d7",
+    "hash": "74c55f539bfb5b7b",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0314,
+      0.083,
+      0.9373,
+      0.834
+    ]
   },
   "munro-killer": {
-    "hash": "989a3768f5de825e",
+    "hash": "761de521c682a5eb",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0252,
+      0.1188,
+      0.9496,
+      0.7624
+    ]
   },
   "parachute-adams": {
-    "hash": "e687ef7f392607c3",
+    "hash": "a1a98f3ae894dbf0",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0284,
+      0.0867,
+      0.9432,
+      0.8267
+    ]
   },
   "paradrake": {
-    "hash": "5e1e46d2144fb8ff",
+    "hash": "30eba36bc4911076",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0358,
+      0.0821,
+      0.9285,
+      0.8357
+    ]
   },
   "partridge-and-orange": {
-    "hash": "256a5b6a80736a51",
+    "hash": "c68382cd757687bd",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0835,
+      0.1044,
+      0.833,
+      0.7913
+    ]
   },
   "pats-rubber-legs": {
-    "hash": "26302fd667522170",
+    "hash": "4ebf9457ff06f581",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0309,
+      0.1534,
+      0.9383,
+      0.6933
+    ]
   },
   "pattegrisen": {
-    "hash": "6e9661672b795d7d",
+    "hash": "aad0cd777a863575",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0257,
+      0.0931,
+      0.9487,
+      0.8137
+    ]
   },
   "peeping-caddis": {
-    "hash": "6da88f0386cf1892",
+    "hash": "6f04c24b26a8bd99",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0943,
+      0.1119,
+      0.8113,
+      0.7761
+    ]
   },
   "peeping-caddis-edwards": {
-    "hash": "3632ab567b2120b2",
+    "hash": "dd74773e090556fb",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0374,
+      0.1295,
+      0.9252,
+      0.741
+    ]
   },
   "phatakorva": {
-    "hash": "6a89b9fc6f4d2a61",
+    "hash": "1c55a73642cde805",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0251,
+      0.1355,
+      0.9499,
+      0.729
+    ]
   },
   "pheasant-tail-nymph": {
-    "hash": "99c88570cdba9b56",
+    "hash": "9329382d68ef7048",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0321,
+      0.1651,
+      0.9359,
+      0.6697
+    ]
   },
   "pheasant-tail-nymph-american": {
-    "hash": "10d413dba16d0713",
+    "hash": "e186b06ecd4b59df",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0254,
+      0.1718,
+      0.9492,
+      0.6565
+    ]
   },
   "prince-nymph": {
-    "hash": "5cea62913a05cfab",
+    "hash": "226c3aea44a8203c",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0555,
+      0.0992,
+      0.8891,
+      0.8016
+    ]
   },
   "rackelhanen": {
-    "hash": "e0bf5c0dcd5f972d",
+    "hash": "a7ff064cfed75d35",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1168,
+      0.0789,
+      0.7664,
+      0.8422
+    ]
   },
   "raghead-crab": {
-    "hash": "a9e7abcb9e041f1a",
+    "hash": "579dc1c3142f33c3",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0356,
+      0.0797,
+      0.9288,
+      0.8406
+    ]
   },
   "red-spinner": {
-    "hash": "318a665146f08104",
+    "hash": "be793fa050c21d86",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0985,
+      0.1211,
+      0.8029,
+      0.7577
+    ]
   },
   "red-tag": {
-    "hash": "96cac2747ad74fd8",
+    "hash": "ec44dc7dc9257167",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.178,
+      0.03,
+      0.644,
+      0.9399
+    ]
   },
   "royal-coachman": {
-    "hash": "28fb87d721b2c1d9",
+    "hash": "ff5efd215f5f55ed",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1531,
+      0.0478,
+      0.6938,
+      0.9043
+    ]
   },
   "royal-wulff": {
-    "hash": "e72f6a6729e2240f",
+    "hash": "63254288b574bb01",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.175,
+      0.0367,
+      0.6501,
+      0.9266
+    ]
   },
   "salmon-bomber": {
-    "hash": "0de91e0566bf41da",
+    "hash": "b2937b89430d57c6",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0613,
+      0.0987,
+      0.8774,
+      0.8026
+    ]
   },
   "silver-doctor": {
-    "hash": "aa294b63269768eb",
+    "hash": "341d7b36abec85c4",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0755,
+      0.0744,
+      0.849,
+      0.8511
+    ]
   },
   "skomakaren": {
-    "hash": "65308cc198e7edc0",
+    "hash": "007b2cff3193e48f",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1844,
+      0.0492,
+      0.6311,
+      0.9016
+    ]
   },
   "snipe-and-purple": {
-    "hash": "1cb7aca00210cb02",
+    "hash": "316de360b18bd10d",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0774,
+      0.1099,
+      0.8451,
+      0.7802
+    ]
   },
   "soldier-palmer": {
-    "hash": "6c642bcf534dc40f",
+    "hash": "5c67ed662d62336e",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0967,
+      0.0604,
+      0.8065,
+      0.8792
+    ]
   },
   "stimulator": {
-    "hash": "a4e9018a25c75fa0",
+    "hash": "f1d54e847e5c940b",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0854,
+      0.0426,
+      0.8291,
+      0.9147
+    ]
   },
   "stoats-tail": {
-    "hash": "ced105533576cb87",
+    "hash": "e1e03432f85c6ef5",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0501,
+      0.0672,
+      0.8998,
+      0.8656
+    ]
   },
   "streaking-caddis": {
-    "hash": "8f766b7c4ffd4235",
+    "hash": "0cfe81eed28342f1",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1237,
+      0.0572,
+      0.7527,
+      0.8855
+    ]
   },
   "superpuppan": {
-    "hash": "2a895b869d4c585d",
+    "hash": "5636bc389c22f133",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0729,
+      0.0083,
+      0.8543,
+      0.9834
+    ]
   },
   "teal-blue-and-silver": {
-    "hash": "bf65c9905d985817",
+    "hash": "1bba3cf838b3c14c",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1254,
+      0.1456,
+      0.7492,
+      0.7087
+    ]
   },
   "thread-frenchie": {
-    "hash": "8088a0bfdeb8f701",
+    "hash": "2d6c6a14415dee16",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0532,
+      0.1427,
+      0.8935,
+      0.7145
+    ]
   },
   "thunder-and-lightning": {
-    "hash": "ed5605e39f4e9890",
+    "hash": "d167ad86a92bbdab",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1137,
+      0.07,
+      0.7727,
+      0.86
+    ]
   },
   "tummel-shrimp": {
-    "hash": "ca0be8b00ef1a1c6",
+    "hash": "b99d581c3c4aa27b",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0284,
+      0.1646,
+      0.9432,
+      0.6708
+    ]
   },
   "ullsocken": {
-    "hash": "af878ababd0ddc45",
+    "hash": "47ad901011190b8d",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.094,
+      0.0574,
+      0.812,
+      0.8853
+    ]
   },
   "ullsocken-treble": {
-    "hash": "e6e66c48f352c564",
+    "hash": "62f2eccd0e4dd20e",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0902,
+      0.0605,
+      0.8196,
+      0.879
+    ]
   },
   "usk-grub": {
-    "hash": "e4005ae3e4fdf931",
+    "hash": "f65679a1135d9997",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0276,
+      0.1527,
+      0.9448,
+      0.6945
+    ]
   },
   "willie-gunn": {
-    "hash": "812838efb658dbfa",
+    "hash": "3360d0f5e894b256",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0361,
+      0.1007,
+      0.9279,
+      0.7985
+    ]
   },
   "willie-gunn-double": {
-    "hash": "dc64ca9fbde1c8c6",
+    "hash": "0f0baf7eb66ff3fd",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0255,
+      0.1019,
+      0.9489,
+      0.7962
+    ]
   },
   "willie-gunn-tube": {
-    "hash": "8366e2851e8a8550",
+    "hash": "ac0dae3fc180c109",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0382,
+      0.0932,
+      0.9235,
+      0.8137
+    ]
   },
   "willie-gunn-waddington": {
-    "hash": "28c740ea90bbf89d",
+    "hash": "54f16ebb7e6919e1",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0258,
+      0.12,
+      0.9483,
+      0.7599
+    ]
   },
   "woolly-bugger": {
-    "hash": "06243b667b2690d4",
+    "hash": "9f93097d275152cd",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0255,
+      0.0898,
+      0.9491,
+      0.8204
+    ]
   },
   "woolly-bugger-conehead": {
-    "hash": "27692f12da79bf76",
+    "hash": "4972f8850924089d",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0257,
+      0.1156,
+      0.9486,
+      0.7689
+    ]
   },
   "woolly-worm": {
-    "hash": "e21749e3d660f7ac",
+    "hash": "344e3e8f8719b644",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1247,
+      0.0459,
+      0.7507,
+      0.9082
+    ]
   },
   "zebra-midge": {
-    "hash": "2401b35f5a75d04c",
+    "hash": "2bdb3dad4bffef93",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.1367,
+      0.1258,
+      0.7266,
+      0.7485
+    ]
   },
   "zonker": {
-    "hash": "07bc921d2d8e2465",
+    "hash": "bf5aa58c539eec30",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0275,
+      0.1782,
+      0.945,
+      0.6437
+    ]
   },
   "zug-bug": {
-    "hash": "4c18ae73c5d85a16",
+    "hash": "a7a10f28f10aadd5",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.0281,
+      0.1632,
+      0.9438,
+      0.6735
+    ]
   },
   "zulu": {
-    "hash": "8b4cac1fe5da1695",
+    "hash": "b8b391bf2c24134a",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.118,
+      0.0579,
+      0.764,
+      0.8841
+    ]
   },
   "zulu-blue": {
-    "hash": "8f4158bfc983eba9",
+    "hash": "0c985990070bb4f0",
     "frames": 16,
     "width": 600,
-    "height": 400
+    "height": 400,
+    "box": [
+      0.118,
+      0.0579,
+      0.764,
+      0.8841
+    ]
   }
 }

@@ -33,7 +33,8 @@ describe("the app drawn without a browser", () => {
   it("draws a pattern's page with its dressing, steps and the gallery picture in the 3D view's place", async () => {
     const html = await renderPage("fly/adams/");
     expect(html).toContain(">Adams</h1>");
-    expect(html).toContain('class="viewer-poster"');
+    // (Laid out by the fly's place in its card, where the card records it.)
+    expect(html).toMatch(/class="viewer-poster( placed)?"/);
     expect(html).toContain("renders/adams/card.webp");
     expect(html).toContain("Whip finish");
     const sv = await renderPage("sv/fly/adams/");
