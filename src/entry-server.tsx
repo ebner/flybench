@@ -11,12 +11,9 @@ import { setServerPath } from "./ui/router";
  * without drawing it again (see main.tsx). Built on its own by `vite build --ssr`.
  */
 
-/**
- * Which pages are built this way. Not the trip box, which opens on this month's flies: it
- * keeps its plain text until the app draws it.
- */
+/** Which pages are built this way: all the site's own (not a page for an address that isn't one). */
 export function hydrated(path: string): boolean {
-  return ["", "about/", "learn/", "techniques/", "naturals/", "box/", "materials/", "log/", "build/"].includes(path) || /^(fly|technique|natural)\/[^/]+\/$/.test(path);
+  return ["", "about/", "learn/", "techniques/", "naturals/", "box/", "materials/", "log/", "build/", "trip/"].includes(path) || /^(fly|technique|natural)\/[^/]+\/$/.test(path);
 }
 
 /** Every language's words, which a page in that language needs before it is drawn. */

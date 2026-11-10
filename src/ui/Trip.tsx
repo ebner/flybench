@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useLayoutEffect } from "react";
 import { SPECIES_LABELS } from "../catalog/describe";
 import { coverage, missingKinds } from "../catalog/inventory";
 import { REGION_LABELS } from "../catalog/naturals";
@@ -13,6 +13,7 @@ import { SPECIES } from "../recipe/schema";
 import { MONTH_NAMES } from "../i18n/months";
 import type { Region } from "../catalog/naturals";
 import { useRegion } from "./region";
+import { useHydrated } from "./hydration";
 import { BenchNav } from "./Personal";
 import { renderUrls, useRenders } from "./renders";
 import { href, replaceUrl } from "./router";
@@ -30,7 +31,7 @@ const BOX_SIZE = 12;
  * The trip as the address has it: ?region=british-isles&month=6&water=river&species=trout
  * (month 1-based). A shared link names its region; without one, the visitor's own is used.
  */
-function readQuery(query: string): { region?: Region; month: number; water: Water; species: Species } {
+function readQuery(query: string, thisMonth = new Date().getMonth()): { region?: Region; month: number; water: Water; species: Species } {
   const q = new URLSearchParams(query);
   const region = q.get("region");
   const month = Number(q.get("month"));
@@ -38,7 +39,7 @@ function readQuery(query: string): { region?: Region; month: number; water: Wate
   const species = q.get("species");
   return {
     ...(REGIONS.includes(region as Region) ? { region: region as Region } : {}),
-    month: Number.isInteger(month) && month >= 1 && month <= 12 ? month - 1 : new Date().getMonth(),
+    month: Number.isInteger(month) && month >= 1 && month <= 12 ? month - 1 : thisMonth,
     water: WATERS.includes(water as Water) ? (water as Water) : "river",
     species: SPECIES.includes(species as Species) ? (species as Species) : "trout",
   };
@@ -49,7 +50,17 @@ const writeQuery = (t: ReturnType<typeof readQuery>, region: Region | null) =>
 
 export function Trip({ query }: { query: string }) {
   const [stored, storeRegion] = useRegion();
-  const [trip, setTrip] = useState(() => readQuery(query));
+  // A page built ahead of time doesn't know the month: January for the render that has to match
+  // it, this month as that render is committed (before the browser paints again).
+  const hydrated = useHydrated();
+  const [trip, setTrip] = useState(() => readQuery(query, hydrated ? undefined : 0));
+  const late = useRef(!hydrated);
+  useLayoutEffect(() => {
+    if (!late.current) return;
+    late.current = false;
+    setTrip(readQuery(query));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // A linked trip's region is shown without changing the visitor's own; choosing one keeps it.
   const region = trip.region ?? stored;
   const chooseRegion = (r: Region) => {

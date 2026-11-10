@@ -6,6 +6,7 @@ import { t } from "../../i18n/ui";
 import type { Player } from "../usePlayer";
 import { StepBar } from "../StepBar";
 import { shadowsCapable } from "../realistic";
+import { turnKeys } from "../turnKeys";
 import { SPEEDS, TransportIcon } from "../transport";
 
 /** A handle on the fly: which part, what it sets, where it is on the shank's plane (gapes). */
@@ -266,6 +267,11 @@ export function Stage({
       <div
         className="wb-canvas"
         ref={container}
+        // Turned from the keyboard too, as on a pattern's page (the dots keep their own arrow keys).
+        tabIndex={unavailable ? undefined : 0}
+        role="application"
+        aria-label={t.viewer.canvas}
+        onKeyDown={(e) => turnKeys(scene.current, e)}
         onPointerDown={(e) => (tap.current = { x: e.clientX, y: e.clientY })}
         onPointerUp={(e) => {
           // A tap, not a turn of the fly: choose the part under it (with Shift, add it).

@@ -3,6 +3,7 @@ import { FlyScene } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
 import { loadRealAssets, siteAssets, type RealAssets } from "../render/real/assets";
 import { realisticCapable, shadowsCapable } from "./realistic";
+import { turnKeys } from "./turnKeys";
 import type { WaterStills } from "./renders";
 import { t } from "../i18n/ui";
 import type { Natural } from "../recipe/natural";
@@ -300,20 +301,7 @@ export function Viewer({
         tabIndex={unavailable || still ? undefined : 0}
         role="application"
         aria-label={t.viewer.canvas}
-        onKeyDown={(e) => {
-          const s = scene.current;
-          if (!s || e.altKey || e.ctrlKey || e.metaKey || e.target !== e.currentTarget) return;
-          const turn = 0.12;
-          if (e.key === "ArrowLeft") s.orbitBy(-turn, 0);
-          else if (e.key === "ArrowRight") s.orbitBy(turn, 0);
-          else if (e.key === "ArrowUp") s.orbitBy(0, -turn);
-          else if (e.key === "ArrowDown") s.orbitBy(0, turn);
-          else if (e.key === "+" || e.key === "=") s.zoomBy(0.87);
-          else if (e.key === "-") s.zoomBy(1.15);
-          else return;
-          e.preventDefault();
-          e.stopPropagation();
-        }}
+        onKeyDown={(e) => turnKeys(scene.current, e)}
         onTouchStart={(e) => (touch.current = e.touches.length === 1 ? { x: e.touches[0]!.clientX, y: e.touches[0]!.clientY } : null)}
         onTouchMove={(e) => {
           const t = touch.current;
@@ -322,7 +310,7 @@ export function Viewer({
           if (dx > 24 && dx > 2 * Math.abs(e.touches[0]!.clientY - t.y)) setHint(true);
         }}
       />
-      {poster && !shown && <img className="viewer-poster" src={poster.src} srcSet={poster.srcSet} alt="" />}
+      {poster && <img className={shown ? "viewer-poster gone" : "viewer-poster"} src={poster.src} srcSet={poster.srcSet} alt="" />}
       {hint && !lost && <p className="viewer-hint">{t.viewer.hint}</p>}
       {lost && (
         <p className="viewer-hint" role="status">

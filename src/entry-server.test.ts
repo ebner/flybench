@@ -54,7 +54,8 @@ describe("the app drawn without a browser", () => {
     expect(await renderPage("log/")).not.toContain("Nothing logged");
     expect(await renderPage("materials/")).toContain("Your materials");
     expect(await renderPage("build/")).toContain("Build a fly");
-    expect(hydrated("trip/")).toBe(false);
+    // The trip box doesn't know the month yet: January until the app has the page.
+    expect(await renderPage("trip/")).toMatch(/<option value="0" selected="">|selected="" value="0"/);
   });
 
   it("draws the same page the same way twice (what the browser takes over must not vary)", async () => {

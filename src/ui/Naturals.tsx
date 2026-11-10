@@ -103,7 +103,7 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
   return (
     <div className={still || live ? "natural-viewer in-water" : "natural-viewer"}>
       <div className="natural-canvas" ref={container} />
-      {picture && !shown && !still && <img className="natural-poster" src={picture} alt="" width={480} height={320} />}
+      {picture && !still && <img className={shown ? "natural-poster gone" : "natural-poster"} src={picture} alt="" width={480} height={320} />}
       {still && (
         <figure className="water-still">
           <img src={still} alt={t.viewer.stillAlt(view)} onError={() => setBroken(still)} />

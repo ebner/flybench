@@ -4,6 +4,8 @@ import { WATER_VIEWS } from "./features";
 // itself is also served, for the service worker).
 import rendered from "../../public/renders/manifest.json";
 import naturalsRendered from "../../public/renders/naturals/manifest.json";
+import swatchesRendered from "../../public/renders/materials/manifest.json";
+import hooksRendered from "../../public/renders/hooks/manifest.json";
 
 /** What scripts/render-catalog.ts writes to public/renders/manifest.json. */
 export type RenderInfo = { hash: string; frames: number; width: number; height: number };
@@ -14,21 +16,14 @@ export function useRenders(): Manifest {
   return rendered;
 }
 
-/** Material swatches: what scripts/render-catalog.ts writes to public/renders/materials/manifest.json. */
-let swatches: Promise<Record<string, string>> | null = null;
+const pictures = (folder: string, hashes: Record<string, string>): Record<string, string> =>
+  Object.fromEntries(Object.entries(hashes).map(([name, hash]) => [name, `${import.meta.env.BASE_URL}renders/${folder}/${name}.webp?v=${hash}`]));
 
-/** Swatch picture addresses by swatchName (src/catalog/swatch.ts), or null while loading. */
-export function useSwatches(): Record<string, string> | null {
-  const [m, setM] = useState<Record<string, string> | null>(null);
-  useEffect(() => {
-    swatches ??= fetch(`${import.meta.env.BASE_URL}renders/materials/manifest.json`)
-      .then((r) => (r.ok ? r.json() : {}))
-      .catch(() => ({}));
-    swatches.then((hashes: Record<string, string>) =>
-      setM(Object.fromEntries(Object.entries(hashes).map(([name, hash]) => [name, `${import.meta.env.BASE_URL}renders/materials/${name}.webp?v=${hash}`]))),
-    );
-  }, []);
-  return m;
+const swatches = pictures("materials", swatchesRendered);
+
+/** Swatch picture addresses by swatchName (src/catalog/swatch.ts): part of the app, so they are in the page from the start. */
+export function useSwatches(): Record<string, string> {
+  return swatches;
 }
 
 const naturalPictures: Record<string, string> = Object.fromEntries(
@@ -40,20 +35,11 @@ export function useNaturalPictures(): Record<string, string> {
   return naturalPictures;
 }
 
-let hookPictures: Promise<Record<string, string>> | null = null;
+const hookPictures = pictures("hooks", hooksRendered);
 
-/** Pictures of the bare hooks by model (public/renders/hooks/), for the builder, or null while loading. */
-export function useHookPictures(): Record<string, string> | null {
-  const [m, setM] = useState<Record<string, string> | null>(null);
-  useEffect(() => {
-    hookPictures ??= fetch(`${import.meta.env.BASE_URL}renders/hooks/manifest.json`)
-      .then((r) => (r.ok ? r.json() : {}))
-      .catch(() => ({}));
-    hookPictures.then((hashes: Record<string, string>) =>
-      setM(Object.fromEntries(Object.entries(hashes).map(([id, hash]) => [id, `${import.meta.env.BASE_URL}renders/hooks/${id}.webp?v=${hash}`]))),
-    );
-  }, []);
-  return m;
+/** Pictures of the bare hooks by model (public/renders/hooks/), for the builder. */
+export function useHookPictures(): Record<string, string> {
+  return hookPictures;
 }
 
 export function renderUrls(id: string, info: RenderInfo) {

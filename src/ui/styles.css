@@ -126,6 +126,12 @@ select {
   outline: none;
 }
 
+/* At least a screen of page, so the footer starts below it: what a page fills in after it has
+   loaded (the fly box, the log) doesn't push the footer about in view. */
+#content {
+  min-height: calc(100dvh - var(--header));
+}
+
 .link-button {
   border: 0;
   padding: 0;
@@ -689,6 +695,20 @@ select {
   filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
 }
 
+/* It gives way to the 3D view, which is not framed quite the same, in a short fade. */
+.viewer-poster.gone,
+.natural-poster.gone {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .viewer-poster,
+  .natural-poster {
+    transition: opacity 0.3s ease-out, visibility 0s 0.3s;
+  }
+}
+
 .viewer-unavailable .viewer-poster {
   position: static;
   height: auto;
@@ -783,6 +803,7 @@ select {
   }
 }
 
+.wb-canvas:focus-visible,
 .viewer-canvas:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -2px;
