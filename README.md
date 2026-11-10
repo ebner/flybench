@@ -169,7 +169,8 @@ public/logo.svg    the logo (also the header mark); favicon.svg is a simplified 
 render.html        dev-only page that scripts/ drive to render a finished fly
 scripts/           authoring tools: render, render-catalog, render-water, refcheck, the
                    dev-server plugin that lets the studio read and save patterns,
-                   the build plugin that leaves reference photos out, the app
+                   the catalog plugin that reads and checks the patterns and naturals for
+                   the app (and leaves reference photos out of the built site), the app
                    icons, and prerender (the HTML file and preview picture for each page)
 .github/workflows/ deployment to GitHub Pages
 ```
@@ -201,6 +202,14 @@ After `vite build`, `scripts/prerender.ts` writes an HTML file for every page (e
 pattern, technique and section) with its own title, description and preview picture, and
 the page's text for search engines and readers without JavaScript. The app replaces that
 text when it starts. `404.html` covers any other address.
+
+The patterns and naturals are read and validated when the site is built
+(`scripts/catalog-plugin.ts`), and the app gets them as data. Pages with a 3D view (a pattern,
+the builder, techniques, naturals) fetch three.js and the renderer when they are opened; each
+page's HTML preloads what it will ask for (that code, a Swedish or German page's words, the
+text fonts). A 3D view draws a frame only when something has changed, stops while it is
+scrolled out of sight, and comes back by itself when the browser has taken its WebGL context
+away.
 
 ## Licence
 

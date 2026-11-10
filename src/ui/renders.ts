@@ -1,26 +1,16 @@
 import { useEffect, useState } from "react";
 import { WATER_VIEWS } from "./features";
+// Part of the app, so the gallery's pictures are in the page from its first moment (the file
+// itself is also served, for the service worker).
+import rendered from "../../public/renders/manifest.json";
 
 /** What scripts/render-catalog.ts writes to public/renders/manifest.json. */
 export type RenderInfo = { hash: string; frames: number; width: number; height: number };
 type Manifest = Record<string, RenderInfo>;
 
-let manifest: Promise<Manifest> | null = null;
-
-function loadManifest(): Promise<Manifest> {
-  manifest ??= fetch(`${import.meta.env.BASE_URL}renders/manifest.json`)
-    .then((r) => (r.ok ? r.json() : {}))
-    .catch(() => ({}));
-  return manifest;
-}
-
-/** Gallery images for a pattern, or null while loading or when it has none yet. */
-export function useRenders(): Manifest | null {
-  const [m, setM] = useState<Manifest | null>(null);
-  useEffect(() => {
-    loadManifest().then(setM);
-  }, []);
-  return m;
+/** The gallery images there are, by pattern. */
+export function useRenders(): Manifest {
+  return rendered;
 }
 
 /** Material swatches: what scripts/render-catalog.ts writes to public/renders/materials/manifest.json. */

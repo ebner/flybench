@@ -27,6 +27,7 @@ import { href } from "./router";
 import { t } from "../i18n/ui";
 import { lang } from "../i18n/lang";
 import { linkTo } from "./linkTo";
+import { useRegion } from "./region";
 import { REGION_KEY, useStoredSet } from "./storage";
 
 const recipes = () => PATTERNS.map((p) => p.recipe);
@@ -121,16 +122,6 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
       )}
     </div>
   );
-}
-
-export function useRegion(): [Region | null, (r: Region) => void] {
-  const stored = useStoredSet(REGION_KEY);
-  const region = REGIONS.find((r) => stored.has(r)) ?? null;
-  const choose = (r: Region) => {
-    for (const v of stored.values) if (v !== r) stored.set(v, false);
-    stored.set(r, true);
-  };
-  return [region, choose];
 }
 
 function NaturalCard({ natural, picture, photo }: { natural: Natural; picture?: string; photo?: string }) {

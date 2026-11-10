@@ -2,16 +2,9 @@ import { lang, type Lang } from "./i18n/lang";
 import { inPageLanguage } from "./i18n/prose";
 import { partIds } from "./i18n/terms";
 import { CatalogSearch, catalogEntries } from "./catalog/search";
-import { NATURALS } from "./naturals";
-import { validateCatalog } from "./recipe/catalog";
-import { formatError } from "./recipe/errors";
-import { loadRecipe, locate } from "./recipe/load";
 import { NAMED_COLORS, type Recipe } from "./recipe/schema";
-
-const sources = import.meta.glob("../patterns/*.kdl", { query: "?raw", import: "default", eager: true }) as Record<
-  string,
-  string
->;
+// Read and checked when the site is built (scripts/catalog-plugin.ts).
+import catalog from "virtual:flybench/catalog";
 
 export interface Pattern {
   file: string;
@@ -19,22 +12,9 @@ export interface Pattern {
 }
 
 /** Problems with pattern files, as "file: message" lines. Patterns with errors are left out of the catalog. */
-export const PATTERN_ERRORS: string[] = [];
+export const PATTERN_ERRORS: string[] = catalog.patternErrors;
 
-const loaded: Pattern[] = [];
-const texts = new Map<string, string>();
-for (const [path, text] of Object.entries(sources)) {
-  const file = path.split("/").pop()!;
-  texts.set(file, text);
-  const result = loadRecipe(text);
-  if (result.ok) loaded.push({ file, recipe: result.recipe });
-  else PATTERN_ERRORS.push(...result.errors.map((e) => `${file}: ${formatError(e)}`));
-}
-PATTERN_ERRORS.push(
-  ...validateCatalog(loaded, new Set(NATURALS.map((n) => n.id))).map((e) => `${e.file}: ${formatError(locate(texts.get(e.file)!, { message: e.message, path: e.path }))}`),
-);
-
-export const PATTERNS: Pattern[] = loaded.sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
+export const PATTERNS: Pattern[] = [...catalog.patterns].sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
 
 /** The part ids the patterns use: the glossaries name them in every language, so own flies use these. */
 export const KNOWN_PARTS: readonly string[] = partIds(PATTERNS.map((p) => p.recipe));

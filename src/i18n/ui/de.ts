@@ -147,6 +147,7 @@ export const de: Messages = {
     reset: "Zurück zu den Farben des Musters",
   },
   viewer: {
+    interrupted: "Die 3D-Ansicht wurde unterbrochen. Sie kommt von selbst zurück; sonst lade die Seite neu.",
     view: "Ansicht",
     views: { side: "Von der Seite", front: "Von vorn", top: "Von oben", behind: "Von hinten" },
     canvas: "3D-Ansicht der Fliege: Die Pfeiltasten drehen sie, Plus und Minus zoomen",

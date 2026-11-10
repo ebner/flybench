@@ -12,7 +12,7 @@ import { REGIONS } from "../recipe/natural";
 import { SPECIES } from "../recipe/schema";
 import { MONTH_NAMES } from "../i18n/months";
 import type { Region } from "../catalog/naturals";
-import { useRegion } from "./Naturals";
+import { useRegion } from "./region";
 import { BenchNav } from "./Personal";
 import { renderUrls, useRenders } from "./renders";
 import { href, replaceUrl } from "./router";

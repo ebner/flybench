@@ -98,6 +98,8 @@ export function Viewer({
   const [stillWater, setStillWater] = useState(reducedMotion);
   // WebGL can be turned off (browser settings, policies, old graphics drivers).
   const [unavailable, setUnavailable] = useState(false);
+  // The browser has taken the 3D context away for now (a phone back from another app).
+  const [lost, setLost] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLButtonElement>(null);
   const leader = useRef<HTMLDivElement>(null);
@@ -131,12 +133,13 @@ export function Viewer({
     // A transparent canvas over the page's paper, so the fly can cast a soft CSS shadow on it.
     let s: FlyScene;
     try {
-      s = new FlyScene(container.current!, { background: null });
+      s = new FlyScene(container.current!, { background: null, adaptive: true });
     } catch {
       setUnavailable(true);
       return;
     }
     s.onFollowChange = (on) => followChange.current(on);
+    s.onContextLost = setLost;
     // Positioned directly each frame, without re-rendering React.
     s.onAnchor = (point, fly) => {
       const el = label.current;
@@ -194,6 +197,11 @@ export function Viewer({
   useEffect(() => {
     scene.current?.setFollow(follow);
   }, [follow]);
+
+  // The label is placed when a frame is drawn: another text is another size.
+  useEffect(() => {
+    scene.current?.invalidate();
+  }, [callout]);
 
   // Not for those who asked for less motion, nor in the water, which has its own camera, nor
   // with the proportion guide, which is measured square on from the side.
@@ -304,7 +312,12 @@ export function Viewer({
           if (dx > 24 && dx > 2 * Math.abs(e.touches[0]!.clientY - t.y)) setHint(true);
         }}
       />
-      {hint && <p className="viewer-hint">{t.viewer.hint}</p>}
+      {hint && !lost && <p className="viewer-hint">{t.viewer.hint}</p>}
+      {lost && (
+        <p className="viewer-hint" role="status">
+          {t.viewer.interrupted}
+        </p>
+      )}
       {still && (
         <figure className="water-still">
           <img src={still} alt={t.viewer.stillAlt(inWater === "below" ? "below" : "angler")} onError={() => setBroken(still)} />

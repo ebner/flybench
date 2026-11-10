@@ -119,6 +119,11 @@ export interface FlySceneOptions {
   fov?: number;
   /** Background colour; null for a transparent canvas. */
   background?: string | null;
+  /**
+   * For a view on a page: when frames come slowly while the fly moves, it is drawn a little
+   * less sharp until it is still again. Never for pictures (the build's renders, snapshots).
+   */
+  adaptive?: boolean;
 }
 
 /** Direction the thread (or a material end) leaves the shank when the wrap is at `angle`. */
@@ -238,6 +243,20 @@ export class FlyScene {
   private focusThread = false;
   /** After each frame is drawn: for overlays that follow the fly (the builder's handles). */
   onDraw?: () => void;
+  private disposed = false;
+  /** Something has changed that the next frame must show; frames are only drawn then. */
+  private dirty = true;
+  /** Out of sight (scrolled away): nothing is drawn until it is back. */
+  private offscreen = false;
+  private seen: IntersectionObserver | null = null;
+  /** The sharpness the screen asks for, and the one in use (lower while slow frames go by). */
+  private fullRatio = 1;
+  private ratio = 1;
+  private adaptive = false;
+  private slowFrames = 0;
+  private stillFrames = 0;
+  /** Called when the browser takes the WebGL context away (true) and when it gives it back. */
+  onContextLost?: (lost: boolean) => void;
 
   constructor(
     private container: HTMLElement,
@@ -245,18 +264,31 @@ export class FlyScene {
   ) {
     this.camera = new THREE.PerspectiveCamera(options.fov ?? 32, 1, 0.05, 500);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: options.background === null });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.fullRatio = this.ratio = Math.min(window.devicePixelRatio, 2);
+    this.adaptive = options.adaptive ?? false;
+    this.renderer.setPixelRatio(this.ratio);
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     container.appendChild(this.renderer.domElement);
 
-    const pmrem = new THREE.PMREMGenerator(this.renderer);
-    const room = new RoomEnvironment();
-    this.environment = pmrem.fromScene(room, 0.04);
-    this.scene.environment = this.environment.texture;
-    room.dispose();
+    this.environment = this.makeEnvironment();
     // Assumption: toned down so material colours read close to their swatches.
     this.scene.environmentIntensity = 0.75;
-    pmrem.dispose();
+    // The browser may take the context away (a phone back from another app, a GPU reset):
+    // three.js rebuilds what it uploaded when it comes back; the surroundings, drawn once
+    // into a texture, are made again here.
+    const canvas = this.renderer.domElement;
+    canvas.addEventListener("webglcontextlost", (e) => {
+      // Its own doing, when the scene is disposed of.
+      if (this.disposed) return;
+      e.preventDefault();
+      this.onContextLost?.(true);
+    });
+    canvas.addEventListener("webglcontextrestored", () => {
+      this.environment.dispose();
+      this.environment = this.makeEnvironment();
+      this.dirty = true;
+      this.onContextLost?.(false);
+    });
     this.setBackground(options.background === undefined ? "#e8e5de" : options.background);
 
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
@@ -283,6 +315,13 @@ export class FlyScene {
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(container);
     this.resize();
+    if (typeof IntersectionObserver === "function") {
+      this.seen = new IntersectionObserver(([entry]) => {
+        this.offscreen = !entry!.isIntersecting;
+        this.dirty = true;
+      });
+      this.seen.observe(container);
+    }
 
     const loop = (now: number) => {
       this.frame = requestAnimationFrame(loop);
@@ -293,7 +332,13 @@ export class FlyScene {
       if (this.water && !this.water.setting.still) this.setWaterTime(this.waterTime + dt);
       if (this.turnSeconds > 0) this.turnBy((2 * Math.PI * dt) / this.turnSeconds);
       if (this.turningBack) this.turnBack(dt);
-      this.controls.update();
+      // Whatever moved the camera (the hand, following, the slow turn), the controls notice.
+      const moved = this.controls.update();
+      const flowing = !!this.water && !this.water.setting.still;
+      if (this.offscreen) return;
+      if (!moved && !this.dirty && !flowing) return this.settle();
+      this.dirty = false;
+      this.pace(dt);
       this.draw();
       this.reportAnchor();
       this.onDraw?.();
@@ -303,6 +348,7 @@ export class FlyScene {
 
   /** Shows a fly; `keepCamera` leaves the view as it is (the builder, while a part is being dragged). */
   setBuild(build: Build, keepCamera = false) {
+    this.dirty = true;
     this.setFocus(null);
     this.clearFly();
     this.build = build;
@@ -334,6 +380,7 @@ export class FlyScene {
    * appearing with the step that ties it. `color` is the theme's ink for lines and labels.
    */
   setProportions(on: boolean, color?: string) {
+    this.dirty = true;
     // Already showing: a new colour (the theme changed) or a rebuild leaves the camera where it is.
     const redraw = on && this.guide !== null;
     if (color) this.guideColor = color;
@@ -394,6 +441,7 @@ export class FlyScene {
 
   /** Shows the fly upside down, turned about the shank, the way a point-up fly swims. */
   setTurnedOver(on: boolean) {
+    this.dirty = true;
     if (this.fly.rotation.x === (on ? Math.PI : 0)) return;
     this.fly.rotation.x = on ? Math.PI : 0;
     this.fly.updateMatrixWorld(true);
@@ -427,6 +475,7 @@ export class FlyScene {
    * placed by where it is found. null takes it back to the vise.
    */
   setWater(setting: WaterSetting | null) {
+    this.dirty = true;
     // Stilling the water or a new theme keeps the camera where the visitor put it.
     const before = this.water?.setting;
     const sameView = !!before && !!setting && before.view === setting.view && before.fishing === setting.fishing && !!before.real === !!setting.real;
@@ -703,6 +752,7 @@ export class FlyScene {
 
   /** The water and the fly in it at `t` seconds of water time. */
   setWaterTime(t: number) {
+    this.dirty = true;
     this.waterTime = t;
     const w = this.water;
     if (!w) return;
@@ -1060,11 +1110,13 @@ export class FlyScene {
   }
 
   setBackground(color: string | null) {
+    this.dirty = true;
     this.scene.background = color === null ? null : new THREE.Color(color);
   }
 
   /** Switches to a named view, turned `orbit` degrees around the vertical axis, framing the finished fly. */
   setView(view: ViewName, orbit = 0, fit: "box" | "sphere" = "box") {
+    this.dirty = true;
     this.view = view;
     this.orbit = orbit;
     this.fit = fit;
@@ -1086,6 +1138,42 @@ export class FlyScene {
       water: this.water?.view instanceof RealWater ? this.water.view : null,
       target: this.controls.target.clone(),
     };
+  }
+
+  /** Asks for a frame, after a change the scene can't know of (an overlay's size, say). */
+  invalidate() {
+    this.dirty = true;
+  }
+
+  private makeEnvironment(): THREE.WebGLRenderTarget {
+    const pmrem = new THREE.PMREMGenerator(this.renderer);
+    const room = new RoomEnvironment();
+    const environment = pmrem.fromScene(room, 0.04);
+    this.scene.environment = environment.texture;
+    room.dispose();
+    pmrem.dispose();
+    return environment;
+  }
+
+  /** While frames are drawn one after another: slow ones lower the sharpness a step. */
+  private pace(dt: number) {
+    this.stillFrames = 0;
+    if (!this.adaptive || this.water || this.ratio <= 1) return;
+    // Assumption: under about 35 frames a second for a third of a second reads as stutter.
+    this.slowFrames = dt > 1 / 35 ? this.slowFrames + 1 : Math.max(0, this.slowFrames - 1);
+    if (this.slowFrames < 12) return;
+    this.slowFrames = 0;
+    this.ratio = Math.max(1, this.ratio * 0.75);
+    this.renderer.setPixelRatio(this.ratio);
+  }
+
+  /** Nothing to draw: once the fly has been still for a moment, one frame at full sharpness. */
+  private settle() {
+    if (this.ratio >= this.fullRatio || ++this.stillFrames < 10) return;
+    this.ratio = this.fullRatio;
+    this.slowFrames = 0;
+    this.renderer.setPixelRatio(this.ratio);
+    this.dirty = true;
   }
 
   /** Draws a frame right away, for screenshots between animation frames. */
@@ -1116,6 +1204,7 @@ export class FlyScene {
    * every gape, labelled in gapes. x = 0 is the start of the bend, y = 0 the shank.
    */
   setGrid(on: boolean, color = "#2a4a6a", reframe = true) {
+    this.dirty = true;
     if (this.grid) {
       this.grid.traverse((o) => {
         if (o instanceof THREE.LineSegments || o instanceof THREE.Sprite) {
@@ -1284,6 +1373,7 @@ export class FlyScene {
    * whole fly). Kept until the next setBuild, which draws everything in full again.
    */
   setFocus(steps: ReadonlySet<number> | null, thread = false) {
+    this.dirty = true;
     this.focus = steps;
     this.focusThread = thread;
     this.applyFocus();
@@ -1426,6 +1516,7 @@ export class FlyScene {
   }
 
   setFraming(framing: "fly" | "dressing") {
+    this.dirty = true;
     this.framing = framing;
     this.resetCamera();
   }
@@ -1436,6 +1527,7 @@ export class FlyScene {
    * fly, it is shown on its own. null takes it away.
    */
   setNatural(n: Natural | null, length = 4, at: "beside" | "over" = "beside") {
+    this.dirty = true;
     // A natural in the water on its own comes out first, and the new one goes in.
     const water = this.water?.subject === "natural" ? this.water.setting : null;
     if (water) this.setWater(null);
@@ -1484,6 +1576,7 @@ export class FlyScene {
 
   /** Frames the finished fly from the current view, with a small margin. */
   resetCamera() {
+    this.dirty = true;
     if (this.water) {
       // The waterline in the picture too, when the fly is near it; in the realistic water some
       // of the river round it.
@@ -1580,6 +1673,7 @@ export class FlyScene {
   }
 
   setTime(t: number) {
+    this.dirty = true;
     const build = this.build;
     if (!build) return;
     this.time = t;
@@ -1711,6 +1805,7 @@ export class FlyScene {
   }
 
   private resize() {
+    this.dirty = true;
     const { clientWidth: w, clientHeight: h } = this.container;
     if (w === 0 || h === 0) return;
     this.renderer.setSize(w, h);
@@ -1720,10 +1815,12 @@ export class FlyScene {
   }
 
   dispose() {
+    this.disposed = true;
     // The faint copies and the pieces' own materials put back, so each is disposed once.
     this.setFocus(null);
     cancelAnimationFrame(this.frame);
     this.resizeObserver.disconnect();
+    this.seen?.disconnect();
     this.setNatural(null);
     this.clearFly();
     this.surfaces.dispose();

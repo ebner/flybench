@@ -2461,18 +2461,6 @@ select {
   border-left-color: var(--danger);
 }
 
-[type="range"],
-[type="color"]) {
-  max-width: 100%;
-  padding: 0.3rem 0.45rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  background: var(--paper-raised);
-  color: var(--ink);
-  font: inherit;
-  font-size: 0.95rem;
-}
-
 /* Label beside control, two columns wide; one column on a phone. */
 
 .build-problems {

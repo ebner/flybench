@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useUpdated } from "./update";
 import { siteTitle } from "../catalog/pages";
 import { PATTERN_ERRORS } from "../patterns";
@@ -8,12 +8,17 @@ import { Header } from "./Header";
 import { Learn } from "./Learn";
 import { Log } from "./Log";
 import { Trip } from "./Trip";
-import { Build } from "./Build";
-import { NaturalPage, NaturalsIndex } from "./Naturals";
 import { NotFound } from "./NotFound";
 import { FlyBox, Materials } from "./Personal";
-import { TechniquePage, TechniquesIndex } from "./Techniques";
-import { PatternPage } from "./PatternPage";
+
+// The pages with a 3D view bring three.js and the renderer: fetched when one is opened, so the
+// gallery and the reading pages don't wait for them.
+const PatternPage = lazy(() => import("./PatternPage").then((m) => ({ default: m.PatternPage })));
+const Build = lazy(() => import("./Build").then((m) => ({ default: m.Build })));
+const NaturalsIndex = lazy(() => import("./Naturals").then((m) => ({ default: m.NaturalsIndex })));
+const NaturalPage = lazy(() => import("./Naturals").then((m) => ({ default: m.NaturalPage })));
+const TechniquesIndex = lazy(() => import("./Techniques").then((m) => ({ default: m.TechniquesIndex })));
+const TechniquePage = lazy(() => import("./Techniques").then((m) => ({ default: m.TechniquePage })));
 import { href, restoresScroll, routeHrefIn, useRoute } from "./router";
 import { useTheme } from "./theme";
 import { lang } from "../i18n/lang";
@@ -111,7 +116,7 @@ export function App() {
           </main>
         )}
         {ready && (
-          <>
+          <Suspense fallback={null}>
             {route.page === "gallery" && <Gallery query={route.query} />}
             {route.page === "fly" && <PatternPage id={route.id} step={route.step} size={route.size} colours={route.colours} />}
             {route.page === "techniques" && <TechniquesIndex />}
@@ -132,7 +137,7 @@ export function App() {
                 </p>
               </NotFound>
             )}
-          </>
+          </Suspense>
         )}
       </div>
       <footer className="site-footer">

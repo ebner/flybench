@@ -397,9 +397,20 @@ export function Plate({
     ? ({ "--spin": `url("${urls.spin}")`, "--frames": render!.frames } as CSSProperties)
     : undefined;
   const [ready, load] = useSpin(urls?.spin);
+  // The turn is for a mouse resting on the plate (it only plays where there is one), not for one
+  // passing over it or a finger tapping it.
+  const resting = useRef(0);
+  useEffect(() => () => clearTimeout(resting.current), []);
   return (
     <li className="plate">
-      <a href={link ?? href.fly(open ?? r.id)} onPointerEnter={load} onFocus={load}>
+      <a
+        href={link ?? href.fly(open ?? r.id)}
+        onPointerEnter={(e) => {
+          if (e.pointerType === "mouse") resting.current = window.setTimeout(load, 150);
+        }}
+        onPointerLeave={() => clearTimeout(resting.current)}
+        onFocus={(e) => e.currentTarget.matches(":focus-visible") && load()}
+      >
         <div className={ready ? "plate-image spin-ready" : "plate-image"} style={style}>
           {picture ? (
             <img src={picture} alt="" width={600} height={400} />

@@ -5,7 +5,7 @@ import { stepAt, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
 import type { Player } from "../usePlayer";
 import { StepBar } from "../StepBar";
-import { SPEEDS, TransportIcon } from "../PatternPage";
+import { SPEEDS, TransportIcon } from "../transport";
 
 /** A handle on the fly: which part, what it sets, where it is on the shank's plane (gapes). */
 interface Handle {
@@ -135,7 +135,7 @@ export function Stage({
   useEffect(() => {
     let s: FlyScene;
     try {
-      s = new FlyScene(container.current!, { background: null });
+      s = new FlyScene(container.current!, { background: null, adaptive: true });
     } catch {
       setUnavailable(true);
       return;
@@ -158,6 +158,11 @@ export function Stage({
       scene.current = null;
     };
   }, []);
+
+  // The handles are placed when a frame is drawn: other handles need one.
+  useEffect(() => {
+    scene.current?.invalidate();
+  }, [handles]);
 
   // The fly as it is, in the view the visitor has it in; framed afresh for another fly or hook.
   const framed = useRef<string | null>(null);

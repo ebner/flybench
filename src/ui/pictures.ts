@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { FlyScene } from "../render/FlyScene";
 import type { Recipe } from "../recipe/schema";
 import { ridesPointUp } from "../tying/hook";
-import { simulate } from "../tying/simulate";
 
 /**
  * Pictures of flies in the visitor's colours, or of their own flies, drawn here in one offscreen
@@ -23,28 +21,39 @@ export function useFlyPictures(flies: { key: string; recipe: Recipe }[]): Record
     const todo = flies.filter((f) => !drawnBefore.has(cacheKey(f)));
     const kept = () => Object.fromEntries(flies.flatMap((f) => (drawnBefore.has(cacheKey(f)) ? [[f.key, drawnBefore.get(cacheKey(f))!]] : [])));
     if (todo.length === 0) return setPictures(kept());
-    const host = document.createElement("div");
-    host.style.cssText = "position:fixed;left:-10000px;top:0;width:600px;height:400px";
-    document.body.appendChild(host);
-    let scene: FlyScene | null = null;
-    try {
-      scene = new FlyScene(host, { background: null, fov: 20 });
-      for (const f of todo) {
-        const build = simulate(f.recipe);
-        scene.setBuild(build);
-        // As the gallery pictures them: point-up flies point up.
-        scene.setTurnedOver(ridesPointUp(f.recipe));
-        scene.setTime(build.duration);
-        scene.setView("default");
-        if (drawnBefore.size >= MAX_KEPT) drawnBefore.delete(drawnBefore.keys().next().value!);
-        drawnBefore.set(cacheKey(f), scene.snapshot().toDataURL("image/png"));
+    let live = true;
+    // The renderer comes when there is something to draw; a fly at a time, so the page stays
+    // responsive with a full fly box.
+    void Promise.all([import("../render/FlyScene"), import("../tying/simulate")]).then(async ([{ FlyScene }, { simulate }]) => {
+      if (!live) return;
+      const host = document.createElement("div");
+      host.style.cssText = "position:fixed;left:-10000px;top:0;width:600px;height:400px";
+      document.body.appendChild(host);
+      let scene: InstanceType<typeof FlyScene> | null = null;
+      try {
+        scene = new FlyScene(host, { background: null, fov: 20 });
+        for (const f of todo) {
+          const build = simulate(f.recipe);
+          scene.setBuild(build);
+          // As the gallery pictures them: point-up flies point up.
+          scene.setTurnedOver(ridesPointUp(f.recipe));
+          scene.setTime(build.duration);
+          scene.setView("default");
+          if (drawnBefore.size >= MAX_KEPT) drawnBefore.delete(drawnBefore.keys().next().value!);
+          drawnBefore.set(cacheKey(f), scene.snapshot().toDataURL("image/png"));
+          await new Promise((next) => setTimeout(next));
+          if (!live) break;
+        }
+      } catch {
+        // No WebGL: the plates go without pictures.
       }
-    } catch {
-      // No WebGL: the plates go without pictures.
-    }
-    scene?.dispose();
-    host.remove();
-    setPictures(kept());
+      scene?.dispose();
+      host.remove();
+      if (live) setPictures(kept());
+    });
+    return () => {
+      live = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keys]);
   return Object.fromEntries(flies.map((f) => [f.key, pictures[f.key] ?? null]));

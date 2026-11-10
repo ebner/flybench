@@ -9,11 +9,11 @@
  *              in previews, canonical links and the sitemap
  */
 import { createHash } from "node:crypto";
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import sharp from "sharp";
 import { pageHtml, sitePages, SITE_NAME } from "../src/catalog/pages";
-import { LANGS, langPrefix, setLang } from "../src/i18n/lang";
+import { LANGS, langPrefix, setLang, type Lang } from "../src/i18n/lang";
 import { loadGlossaries, loadTranslations } from "../src/i18n/files";
 
 // The Swedish and German step texts and dressings take their words from the glossaries, the
@@ -110,9 +110,49 @@ await writeFile(`${DIST}/og/site.jpg`, await siteImage(siteIds));
 const images = new Set(pages.map((p) => rendered(p.image)).filter((id): id is string => !!id));
 for (const id of images) await writeFile(`${DIST}/og/${id}.jpg`, await patternImage(id));
 
+// What a page fetches only once its script runs, asked for with the page instead: the text
+// fonts, a Swedish or German page's words, and the code of a page with a 3D view.
+type Chunk = { file: string; imports?: string[]; dynamicImports?: string[]; isEntry?: boolean };
+const chunks: Record<string, Chunk> = JSON.parse(await readFile(`${DIST}/.vite/manifest.json`, "utf8"));
+await rm(`${DIST}/.vite`, { recursive: true });
+const closure = (key: string, seen = new Set<string>()): Set<string> => {
+  if (seen.has(key)) return seen;
+  seen.add(key);
+  for (const k of chunks[key]?.imports ?? []) closure(k, seen);
+  return seen;
+};
+const entry = Object.keys(chunks).find((k) => chunks[k]!.isEntry && k.endsWith("index.html"));
+if (!entry) throw new Error("the build's manifest has no entry for index.html");
+const always = closure(entry);
+const scriptsOf = (source: string) => {
+  if (!chunks[source]) throw new Error(`the build's manifest has no ${source}`);
+  return [...closure(source)].filter((k) => !always.has(k)).map((k) => chunks[k]!.file);
+};
+const LAZY_PAGES: [prefix: RegExp, source: string][] = [
+  [/^fly\//, "src/ui/PatternPage.tsx"],
+  [/^build\//, "src/ui/Build.tsx"],
+  [/^naturals?\//, "src/ui/Naturals.tsx"],
+  [/^techniques?\//, "src/ui/Techniques.tsx"],
+];
+const fontFiles = (await readdir(`${DIST}/assets`)).filter((f) => /^(spectral-latin-400-normal|im-fell-english-latin-400-(normal|italic))-.*\.woff2$/.test(f));
+if (fontFiles.length !== 3) throw new Error(`expected the three text fonts in dist/assets, found ${fontFiles.join(", ") || "none"}`);
+const preloads = (page: { path: string; lang: Lang }) => {
+  const scripts = [
+    ...(page.lang === "en" ? [] : scriptsOf(`src/i18n/bundles/${page.lang}.ts`)),
+    ...LAZY_PAGES.filter(([prefix]) => prefix.test(page.path)).flatMap(([, source]) => scriptsOf(source)),
+  ];
+  return [
+    ...fontFiles.map((f) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${BASE}assets/${f}" />`),
+    ...[...new Set(scripts)].map((f) => `<link rel="modulepreload" crossorigin href="${BASE}${f}" />`),
+  ].join("\n    ");
+};
+
 for (const page of pages) {
   const id = rendered(page.image);
-  const html = pageHtml(template, page, { url: SITE_URL, base: BASE, image: id ? `og/${id}.jpg` : "og/site.jpg", lang: page.lang });
+  const html = pageHtml(template, page, { url: SITE_URL, base: BASE, image: id ? `og/${id}.jpg` : "og/site.jpg", lang: page.lang }).replace(
+    "</head>",
+    () => `  ${preloads(page)}\n  </head>`,
+  );
   const dir = `${DIST}/${langPrefix(page.lang)}${page.path}`;
   await mkdir(dir, { recursive: true });
   await writeFile(`${dir}index.html`, html);

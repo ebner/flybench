@@ -147,6 +147,7 @@ export const sv: Messages = {
     reset: "Tillbaka till mönstrets färger",
   },
   viewer: {
+    interrupted: "3D-vyn avbröts. Den kommer tillbaka av sig själv; ladda annars om sidan.",
     view: "Vy",
     views: { side: "Från sidan", front: "Framifrån", top: "Ovanifrån", behind: "Bakifrån" },
     canvas: "3D-vy av flugan: piltangenterna vrider den, plus och minus zoomar",

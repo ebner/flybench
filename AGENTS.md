@@ -72,7 +72,9 @@ src/studio/     the authoring studio (dev server only), on src/edit
 src/ui/         React UI (path routing under the base, theme, gallery, pattern page, fly builder in
                 Build.tsx and build/, about;
                 features.ts switches off features kept for later: the water views)
-scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures
+scripts/        prerender.ts runs after vite build: an HTML file per page, preview pictures;
+                catalog-plugin.ts reads and checks patterns/ and naturals/ at build time and
+                hands them to the app as data (src/patterns.ts, src/naturals.ts)
 public/renders/ generated gallery images, material swatches (materials/) and water stills
                 (water/), committed; regenerate after recipe/renderer changes
 public/env/     the realistic water's panorama and gravel (Poly Haven, CC0), served by the site
@@ -81,6 +83,10 @@ public/env/     the realistic water's panorama and gravel (Poly Haven, CC0), ser
 - `src/recipe`, `src/tying` and `src/edit` must not import three.js or React; they are unit-tested in Node.
 - The renderer derives everything from `simulate()` output. `FlyScene.setTime(t)` must show
   exactly the state at `t` with no accumulated state, so scrubbing and replay stay correct.
+- A `FlyScene` draws only when something changed: a public method that changes the picture
+  sets `dirty` (overlays outside the scene call `invalidate()`).
+- Pages with a 3D view are lazy (`App.tsx`): don't import `src/render` or three.js from the
+  gallery, the reading pages or anything they import.
 - Use seeded randomness (`render/random.ts`) so fibres look the same on every render.
 
 ## Recipe conventions
