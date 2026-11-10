@@ -9,7 +9,8 @@
  * Spectral and IM Fell English: each face's size-adjust is the web font's average glyph width
  * over the device font's, and its ascent and descent are the web font's, so lines sit at the same
  * height too (the fonts' own metrics, as published in @capsizecss/metrics 4.4.0;
- * checked against Noto Serif in a browser, within 0.6 of a point). A device with neither sets
+ * checked in a browser against Noto Serif and against Gelasio, which is drawn to Georgia's
+ * metrics: within 0.6 of a point). A device with neither sets
  * the text in its own serif, unsized, as before.
  */
 @font-face { font-family: "Spectral over Georgia"; src: local("Georgia"); size-adjust: 100%; ascent-override: 105.9%; descent-override: 46.3%; line-gap-override: 0%; }
@@ -693,6 +694,8 @@ select {
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  /* Its own size is what the fly's picture is fitted to (.viewer-poster.placed). */
+  container-type: size;
 }
 
 .viewer-canvas {
@@ -714,6 +717,23 @@ select {
   transform: scale(1.2);
   pointer-events: none;
   filter: drop-shadow(0 0 0.5px var(--specimen-edge)) drop-shadow(0 0.2rem 0.25rem var(--specimen-shadow));
+}
+
+/* Where the fly's place in its card is known, the card is sized and placed so that the fly fills
+   the view as the 3D view will frame it: fitted to the view's width or height, whichever is
+   tighter, with the 3D view's margin, and centred. (--bl, --bt, --bw, --bh: the fly's left,
+   top, width and height in the card, as fractions; the card is three wide to two high.) */
+.viewer-poster.placed {
+  --card: calc(min(100cqw / var(--bw), 150cqh / var(--bh)) / var(--poster-margin, 1.08));
+  inset: auto;
+  left: calc(50cqw - var(--card) * (var(--bl) + var(--bw) / 2));
+  top: calc(50cqh - var(--card) / 1.5 * (var(--bt) + var(--bh) / 2));
+  width: var(--card);
+  height: calc(var(--card) / 1.5);
+  max-width: none;
+  padding: 0;
+  object-fit: fill;
+  transform: none;
 }
 
 /* It gives way to the 3D view, which is not framed quite the same, in a short fade. */
