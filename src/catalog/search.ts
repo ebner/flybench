@@ -40,7 +40,7 @@ export function catalogEntries(recipes: Recipe[]): CatalogEntry[] {
       const materials = new Set([recipe, ...variants].flatMap((r) => r.materials.map((m) => m.kind)));
       return { recipe, variants, materials };
     })
-    .sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
+    .sort((a, b) => a.recipe.name.localeCompare(b.recipe.name, "en"));
 }
 
 export class CatalogSearch {

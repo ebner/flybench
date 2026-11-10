@@ -7,7 +7,7 @@ import { naturalInPageLanguage } from "./i18n/prose";
 /** Problems with natural files, as "file: message" lines. Naturals with errors are left out. */
 export const NATURAL_ERRORS: string[] = catalog.naturalErrors;
 
-export const NATURALS: Natural[] = [...catalog.naturals].sort((a, b) => a.name.localeCompare(b.name));
+export const NATURALS: Natural[] = [...catalog.naturals].sort((a, b) => a.name.localeCompare(b.name, "en"));
 
 /** The naturals with their names and descriptions in the page's language, by name. */
 export function localNaturals(): Natural[] {

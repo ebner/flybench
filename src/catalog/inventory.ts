@@ -125,6 +125,6 @@ export function shoppingList(recipes: Recipe[], owned: Set<string>): ShoppingIte
   }
   const rank = (i: ShoppingItem) => (i.status === "missing" ? 0 : 1);
   return [...items.values()].sort(
-    (a, b) => rank(a) - rank(b) || kindName(a.need.kind).localeCompare(kindName(b.need.kind), lang()) || a.need.color.localeCompare(b.need.color),
+    (a, b) => rank(a) - rank(b) || kindName(a.need.kind).localeCompare(kindName(b.need.kind), lang()) || a.need.color.localeCompare(b.need.color, "en"),
   );
 }

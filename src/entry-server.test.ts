@@ -1,3 +1,4 @@
+import { readdirSync, readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
 import { hydrated, loadLanguages, renderPage } from "./entry-server";
 import { PATTERNS } from "./patterns";
@@ -58,5 +59,32 @@ describe("the app drawn without a browser", () => {
 
   it("draws the same page the same way twice (what the browser takes over must not vary)", async () => {
     expect(await renderPage("learn/")).toBe(await renderPage("learn/"));
+  });
+});
+
+// A list drawn at build time and again in the browser must come in the same order in both: a
+// sort by name that follows the machine's own language (no locale given) differs between a build
+// in English and a Swedish browser (Gråräven and Greenwell's Glory change places).
+describe("sorting by name", () => {
+  it("always says in which language", () => {
+    const loose: string[] = [];
+    const walk = (dir: URL) => {
+      for (const e of readdirSync(dir, { withFileTypes: true })) {
+        const url = new URL(e.name + (e.isDirectory() ? "/" : ""), dir);
+        if (e.isDirectory()) walk(url);
+        else if (/\.tsx?$/.test(e.name) && !e.name.includes(".test.")) {
+          readFileSync(url, "utf8")
+            .split("\n")
+            .forEach((line, i) => {
+              // Dates and ids (plain ASCII) sort the same everywhere.
+              for (const call of line.matchAll(/\.localeCompare\(((?:[^()]|\([^()]*\))*)\)/g)) {
+                if (!/,/.test(call[1]!.replace(/\([^()]*\)/g, "")) && !/date|\.id\b/.test(call[0])) loose.push(`${url.pathname.split("/src/")[1]}:${i + 1}`);
+              }
+            });
+        }
+      }
+    };
+    walk(new URL("./", import.meta.url));
+    expect(loose).toEqual([]);
   });
 });

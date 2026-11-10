@@ -90,7 +90,7 @@ export function imitatedBy(recipes: Recipe[], id: string): Recipe[] {
   return mains
     .map((r) => ({ r, place: rank(r) }))
     .filter((x) => x.place >= 0)
-    .sort((a, b) => a.place - b.place || a.r.name.localeCompare(b.r.name))
+    .sort((a, b) => a.place - b.place || a.r.name.localeCompare(b.r.name, "en"))
     .map((x) => x.r);
 }
 

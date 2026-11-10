@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useHydrated } from "./hydration";
 
 /**
@@ -23,19 +23,22 @@ export function readList(key: string): unknown[] {
 }
 
 /**
- * A stored value's state: empty while a page built ahead of time is being taken over (it was
- * drawn without the visitor's things), read from storage right after; read at once otherwise.
+ * A stored value's state: read at once, except while a page built ahead of time is being taken
+ * over (it was drawn without the visitor's things). Then it is empty for the render that has to
+ * match the page and read as that render is committed: before the browser paints again, and
+ * before a click made meanwhile reaches the page, so nothing is written over what is stored.
  */
 function useStored<T>(read: () => T, empty: () => T): [T, (next: T | ((prev: T) => T)) => void] {
   const hydrated = useHydrated();
   const [value, setValue] = useState(() => (hydrated ? read() : empty()));
   const late = useRef(!hydrated);
-  useEffect(() => {
-    if (!hydrated || !late.current) return;
+  // (Not run where there is no browser.)
+  useLayoutEffect(() => {
+    if (!late.current) return;
     late.current = false;
     setValue(read());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hydrated]);
+  }, []);
   return [value, setValue];
 }
 
@@ -104,8 +107,9 @@ export function useStoredSet(key: string): {
 
   const set = useCallback(
     (v: string, on: boolean) => {
-      setValues((prev) => {
-        const next = new Set(prev);
+      // From what is stored now, not from what this page last showed: never less than is there.
+      setValues(() => {
+        const next = new Set(read(key));
         if (on) next.add(v);
         else next.delete(v);
         write(key, [...next]);
@@ -114,8 +118,8 @@ export function useStoredSet(key: string): {
     },
     [key],
   );
-  const toggle = useCallback((v: string) => setValues((prev) => {
-    const next = new Set(prev);
+  const toggle = useCallback((v: string) => setValues(() => {
+    const next = new Set(read(key));
     if (next.has(v)) next.delete(v);
     else next.add(v);
     write(key, [...next]);

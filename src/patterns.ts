@@ -14,7 +14,7 @@ export interface Pattern {
 /** Problems with pattern files, as "file: message" lines. Patterns with errors are left out of the catalog. */
 export const PATTERN_ERRORS: string[] = catalog.patternErrors;
 
-export const PATTERNS: Pattern[] = [...catalog.patterns].sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
+export const PATTERNS: Pattern[] = [...catalog.patterns].sort((a, b) => a.recipe.name.localeCompare(b.recipe.name, "en"));
 
 /** The part ids the patterns use: the glossaries name them in every language, so own flies use these. */
 export const KNOWN_PARTS: readonly string[] = partIds(PATTERNS.map((p) => p.recipe));

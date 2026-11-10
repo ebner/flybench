@@ -89,7 +89,7 @@ const fullName = (english: Recipe) => {
 export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] = []): Page[] {
   const link = (path: string, text: string) => `<a href="${escape(base + path)}">${escape(text)}</a>`;
   const flyPath = (id: string) => `fly/${encodeURIComponent(id)}/`;
-  const byName = [...recipes].sort((a, b) => fullName(a).localeCompare(fullName(b)));
+  const byName = [...recipes].sort((a, b) => fullName(a).localeCompare(fullName(b), "en"));
   // Patterns as the gallery counts them: a pattern's variants are versions of it.
   const patterns = recipes.filter((r) => !r.variantOf).length;
 
@@ -174,7 +174,7 @@ export function sitePages(recipes: Recipe[], base: string, naturals: Natural[] =
   });
 
   if (naturals.length) {
-    const sorted = naturals.map((n) => naturalInPageLanguage(n)).sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = naturals.map((n) => naturalInPageLanguage(n)).sort((a, b) => a.name.localeCompare(b.name, "en"));
     pages.push({
       path: "naturals/",
       title: t.site.titled(t.naturals.title),

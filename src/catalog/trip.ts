@@ -106,7 +106,7 @@ export function suggestBox(recipes: Recipe[], naturals: Natural[], trip: Trip): 
       (a, b) =>
         value(b) - value(a) ||
         DIFFICULTY_RANK[a.suggestion.recipe.difficulty] - DIFFICULTY_RANK[b.suggestion.recipe.difficulty] ||
-        a.suggestion.recipe.name.localeCompare(b.suggestion.recipe.name),
+        a.suggestion.recipe.name.localeCompare(b.suggestion.recipe.name, "en"),
     );
     const next = left.shift()!;
     const main = next.suggestion.matches[0]?.id ?? "";

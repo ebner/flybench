@@ -39,7 +39,7 @@ export function Log() {
   const flies = [...counts.values()].reduce((a, b) => a + b, 0);
   const tiedOnPath = p.path.filter((s) => s.tied).length;
   const nextOnPath = p.path.find((s) => !s.tied);
-  const practised = [...p.practised.keys()].flatMap((id) => technique(id) ?? []).sort((a, b) => a.name.localeCompare(b.name));
+  const practised = [...p.practised.keys()].flatMap((id) => technique(id) ?? []).sort((a, b) => a.name.localeCompare(b.name, lang()));
 
   return (
     <main className="reading log-page">
