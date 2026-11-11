@@ -5,7 +5,7 @@ import { stepAt, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
 import type { Player } from "../usePlayer";
 import { StepBar } from "../StepBar";
-import { startScene } from "../Viewer";
+import { startScene, webglBlocked } from "../Viewer";
 import { turnKeys } from "../turnKeys";
 import { SPEEDS, TransportIcon } from "../transport";
 
@@ -258,7 +258,7 @@ export function Stage({
 
   return (
     <section className={watching ? "wb-stage watching" : "wb-stage"} aria-label={t.pattern.stage}>
-      {unavailable && <p className="viewer-unavailable">{t.viewer.noWebgl}</p>}
+      {unavailable && <p className="viewer-unavailable">{webglBlocked() ? t.viewer.webglBlocked : t.viewer.noWebgl}</p>}
       <div
         className="wb-canvas"
         ref={container}

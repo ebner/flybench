@@ -148,6 +148,7 @@ export const sv: Messages = {
     reset: "Tillbaka till mönstrets färger",
   },
   viewer: {
+    webglBlocked: "Webbläsaren har stängt av 3D-grafiken för den här webbplatsen efter ett grafikfel. Stäng webbläsaren helt och öppna den igen för att få tillbaka den. Stegen och receptet fungerar ändå.",
     interrupted: "3D-vyn avbröts. Den kommer tillbaka av sig själv; ladda annars om sidan.",
     view: "Vy",
     views: { side: "Från sidan", front: "Framifrån", top: "Ovanifrån", behind: "Bakifrån" },

@@ -134,7 +134,9 @@ A gallery picture is drawn three times its size each way and scaled down, as fib
 than a pixel: `card.webp` (600×400), `card@2x.webp` for screens with finer pixels, and
 `spin-16.webp` (named by its frames, so a page of another version never steps through a strip it wasn't made for), sixteen frames of the fly turning at three quarters of the card's width, which a
 plate fetches when a mouse rests on it. The flies are lit by one lamp, which casts soft shadows
-(in a 3D view on a page, only while the device keeps up), with a neutral colour curve that keeps
+(in a 3D view on a page, only while the device keeps up, and not on graphics that can't take
+them: the Pixel 10 family's PowerVR GPU loses its WebGL context drawing them; `?shadows=1` or
+`?shadows=0` in a page's address forces them on or off, for trying a device out), with a neutral colour curve that keeps
 bright materials' colours. The format is
 described in [docs/recipe-schema.md](docs/recipe-schema.md), and the authoring procedure
 (research, proportions, checks) in [docs/authoring-patterns.md](docs/authoring-patterns.md).

@@ -71,19 +71,24 @@ export function startScene(container: HTMLElement, options: FlySceneOptions = { 
   try {
     return new FlyScene(container, { ...options, shadows });
   } catch (first) {
+    let reason = first;
     if (shadows) {
       noteShadowTrouble();
       try {
         return new FlyScene(container, { ...options, shadows: false });
       } catch (e) {
-        console.error("Flybench: the 3D view could not start", e);
-        return null;
+        reason = e;
       }
     }
-    console.error("Flybench: the 3D view could not start", first);
+    console.error("Flybench: the 3D view could not start", reason);
+    blocked = /block|context loss|lost/i.test(String(reason));
     return null;
   }
 }
+
+/** The last 3D view couldn't start because the browser has blocked WebGL for the site after a graphics fault. */
+let blocked = false;
+export const webglBlocked = () => blocked;
 
 export function Viewer({
   build,
@@ -309,7 +314,7 @@ export function Viewer({
     return (
       <div className="viewer viewer-unavailable">
         {poster && <img className="viewer-poster" src={poster.src} srcSet={poster.srcSet} alt="" />}
-        <p>{t.viewer.noWebgl}</p>
+        <p>{webglBlocked() ? t.viewer.webglBlocked : t.viewer.noWebgl}</p>
       </div>
     );
   }

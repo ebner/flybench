@@ -18,21 +18,22 @@ export function realisticCapable(): boolean {
  * Whether the fly's 3D view starts with its shadows (a second drawing of the fly each frame).
  * A view that then draws slowly drops them itself.
  */
-export function shadowsCapable(): boolean {
-  if (typeof window === "undefined" || shadowTrouble) return false;
-  // Not on phones and tablets: after shadows came to the 3D view (2026-11-10) it stopped
-  // starting at all in Chrome on a Pixel 10 Pro, with "WebGL turned off", which is what Chrome
-  // says once a page has lost its graphics context too often. Shadows are the one heavy thing
-  // that view gained; until they are seen to work on such devices, those go without.
-  if (typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches) return false;
+export function shadowsCapable(): boolean | "force" {
+  if (typeof window === "undefined") return false;
+  // For trying a device out: ?shadows=1 in the address forces them on, ?shadows=0 off.
+  if (asked === "1") return "force";
+  if (asked === "0" || shadowTrouble) return false;
   const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
   // Assumption: as for the realistic water, below 4 GB of memory or 4 cores the extra pass stutters.
   if (nav.deviceMemory !== undefined && nav.deviceMemory < 4) return false;
   if (nav.hardwareConcurrency !== undefined && nav.hardwareConcurrency < 4) return false;
-  // (Whether WebGL is drawn in software the scene sees from its own context: no context is
-  // made here just to ask.)
+  // (Whether the graphics can take them, the scene sees from its own context: software
+  // drawing, or a GPU that loses its context drawing them. See FlyScene's `shadowsUnsafe`.)
   return true;
 }
+
+/** What the address said about shadows when the page was opened (the app rewrites addresses later). */
+const asked = typeof location === "undefined" ? null : new URLSearchParams(location.search).get("shadows");
 
 /** A 3D view with shadows lost its graphics context or couldn't start: no more shadows on this page. */
 let shadowTrouble = false;

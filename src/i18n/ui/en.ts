@@ -153,6 +153,7 @@ export const en = {
     reset: "Back to the pattern's colours",
   },
   viewer: {
+    webglBlocked: "The browser has switched 3D graphics off for this site after a graphics fault. Close the browser completely and open it again to bring them back. The steps and the dressing still work.",
     interrupted: "The 3D view was interrupted. It comes back by itself; if it doesn't, reload the page.",
     view: "View",
     views: { side: "From the side", front: "From the front", top: "From above", behind: "From behind" },

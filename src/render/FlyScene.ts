@@ -28,15 +28,28 @@ const Y_UP = new THREE.Vector3(0, 1, 0);
 // wings and hackle still shade the body and bright wings stay bright (chosen by the reviewer
 // from a comparison, 2026-11-10).
 const SHADOW_STRENGTH = 0.5;
-/** WebGL drawn on the processor: a few frames a second at best. */
-function drawnInSoftware(gl: WebGLRenderingContext | WebGL2RenderingContext): boolean {
+/**
+ * Graphics that shadows are not for, by the name the context gives its renderer:
+ * - WebGL drawn on the processor (no usable graphics driver): a few frames a second at best.
+ * - Imagination's PowerVR, the Pixel 10 family's GPU ("PowerVR D-Series DXT-48-1536"): drawing
+ *   with a shadow map loses the WebGL context there, and Chrome then blocks WebGL for the site
+ *   until it is restarted. Seen on this site (Chrome on a Pixel 10 Pro, 2026-11-11) and reported
+ *   by others with every three.js shadow type: github.com/laanlabs/openPlan3D/pull/137 (a depth
+ *   copy failing in ANGLE on this driver), github.com/mephistopheles4/stacks/issues/381 (lost
+ *   once more than about a dozen draws a frame sample the shadow map; a fly is 18 to 53).
+ *   Assumption: older PowerVR chips are left out too, unseen, as the same maker's drivers.
+ */
+export function shadowsUnsafe(gl: WebGLRenderingContext | WebGL2RenderingContext): boolean {
   try {
     const info = gl.getExtension("WEBGL_debug_renderer_info");
-    return /swiftshader|llvmpipe|softpipe|software/i.test(info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "");
+    return unsafeForShadows(info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "");
   } catch {
     return false;
   }
 }
+
+/** Whether a renderer's name is one shadows are not for (see `shadowsUnsafe`). */
+export const unsafeForShadows = (renderer: string): boolean => /swiftshader|llvmpipe|softpipe|software|powervr/i.test(renderer);
 
 /** Where the key light shines from: above, in front and a little to the eye's side. */
 const KEY_FROM = new THREE.Vector3(2, 4, 5).normalize();
@@ -153,9 +166,10 @@ export interface FlySceneOptions {
   fullDensity?: boolean;
   /**
    * The key light casts soft shadows: wings and hackle on the body, the fly on itself. In an
-   * `adaptive` view they are dropped for good once frames come slowly.
+   * `adaptive` view they are dropped for good once frames come slowly. Not where the graphics
+   * can't take them (`shadowsUnsafe`), unless forced ("force": for trying a device out).
    */
-  shadows?: boolean;
+  shadows?: boolean | "force";
 }
 
 /** Direction the thread (or a material end) leaves the shank when the wrap is at `angle`. */
@@ -304,7 +318,16 @@ export class FlyScene {
     options: FlySceneOptions = {},
   ) {
     this.camera = new THREE.PerspectiveCamera(options.fov ?? VIEW_FOV, 1, 0.05, 500);
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: options.background === null });
+    // On its own canvas, to hear why the browser refuses a context, if it does (Chrome blocks
+    // WebGL for a site after a graphics fault, until it is restarted).
+    const canvas = document.createElement("canvas");
+    let refused = "";
+    canvas.addEventListener("webglcontextcreationerror", (e) => (refused = (e as WebGLContextEvent).statusMessage || refused));
+    try {
+      this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: options.background === null });
+    } catch (e) {
+      throw new Error(refused || String(e), { cause: e });
+    }
     try {
       this.start(options);
     } catch (e) {
@@ -323,7 +346,7 @@ export class FlyScene {
     const container = this.container;
     // Shadows are a second drawing of the fly each frame: not where WebGL is drawn on the
     // processor (no usable graphics driver), which this context itself can tell.
-    if (options.shadows && drawnInSoftware(this.renderer.getContext())) options = { ...options, shadows: false };
+    if (options.shadows === true && shadowsUnsafe(this.renderer.getContext())) options = { ...options, shadows: false };
     this.fullRatio = this.ratio = options.fullDensity ? window.devicePixelRatio : Math.min(window.devicePixelRatio, 2);
     this.adaptive = options.adaptive ?? false;
     this.renderer.setPixelRatio(this.ratio);

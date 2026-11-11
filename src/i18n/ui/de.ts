@@ -148,6 +148,7 @@ export const de: Messages = {
     reset: "Zurück zu den Farben des Musters",
   },
   viewer: {
+    webglBlocked: "Der Browser hat die 3D-Grafik für diese Website nach einem Grafikfehler abgeschaltet. Schließe den Browser ganz und öffne ihn wieder, dann ist sie zurück. Schritte und Rezept funktionieren trotzdem.",
     interrupted: "Die 3D-Ansicht wurde unterbrochen. Sie kommt von selbst zurück; sonst lade die Seite neu.",
     view: "Ansicht",
     views: { side: "Von der Seite", front: "Von vorn", top: "Von oben", behind: "Von hinten" },
