@@ -43,9 +43,22 @@ export function needs(recipe: Recipe): Need[] {
 
 export type Match = "have" | "substitute" | "missing";
 
+/**
+ * Kinds that count as each other in the inventory: owning one is owning the other, colour for
+ * colour. The dry-fly and the wet-fly cock hackle are one feather to a tyer's box (the catalog
+ * tells them apart for how full they are drawn). Decided by the reviewer (2026-11-11).
+ */
+const SAME_TO_OWN: readonly (readonly MaterialKind[])[] = [["cock-hackle", "wet-fly-cock-hackle"]];
+
+/** A kind and the kinds that count as it when owned. */
+function ownedAs(kind: MaterialKind): readonly MaterialKind[] {
+  return SAME_TO_OWN.find((group) => group.includes(kind)) ?? [kind];
+}
+
 export function match(n: Need, owned: Set<string>): Match {
-  if (owned.has(inventoryKey(n))) return "have";
-  for (const k of owned) if (k.startsWith(`${n.kind}:`)) return "substitute";
+  const kinds = ownedAs(n.kind);
+  if (kinds.some((kind) => owned.has(inventoryKey({ kind, color: n.color })))) return "have";
+  for (const k of owned) if (kinds.some((kind) => k.startsWith(`${kind}:`))) return "substitute";
   return "missing";
 }
 
@@ -69,7 +82,7 @@ export interface Coverage {
  * colour of a kind stands in for the others (see `match`).
  */
 export function missingKinds(c: Coverage): number {
-  return new Set(c.missing.map((n) => n.kind)).size;
+  return new Set(c.missing.map((n) => ownedAs(n.kind)[0])).size;
 }
 
 /** The member of a pattern family closest to tieable: each variant is a complete recipe of its own. */

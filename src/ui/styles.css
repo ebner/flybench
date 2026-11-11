@@ -736,6 +736,15 @@ select {
   transform: none;
 }
 
+/* Turned over about the shank, as near as a picture can be: top to bottom. */
+.viewer-poster.turned {
+  transform: scaleY(-1);
+}
+
+.viewer-poster.turned:not(.placed) {
+  transform: scale(1.2, -1.2);
+}
+
 /* It gives way to the 3D view, which is not framed quite the same, in a short fade. */
 .viewer-poster.gone,
 .natural-poster.gone {

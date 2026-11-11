@@ -3,7 +3,7 @@ import type { Link, Messages } from "./en";
 
 const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 
-/** German. A draft until reviewed. */
+/** German. Reviewed 2026-11-11. */
 export const de: Messages = {
   site: {
     loadFailed: "Die Wörter dieser Seite konnten nicht geladen werden (bist du offline?).",
@@ -635,7 +635,7 @@ export const de: Messages = {
     ],
     whoHeading: "Wer es macht",
     who: (author: ReactNode, github: Link) => ["Flybench wird von ", author, " gemacht. Korrekturen und neue Muster sind auf ", github("GitHub"), " willkommen."],
-    translations: "Die schwedische und die deutsche Übersetzung sind Entwürfe, bis sie geprüft sind; wo ein Text noch nicht übersetzt ist, erscheint er auf Englisch.",
+    translations: "Die schwedische und die deutsche Übersetzung sind geprüft; wo ein Text noch nicht übersetzt ist, erscheint er auf Englisch.",
     licenceHeading: "Lizenz und Dank",
     photoscans: (polyHaven: Link) => [
       "Das Flusspanorama und der Kiesgrund im realistischen Wasser sind Fotoscans von ",

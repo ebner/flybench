@@ -639,7 +639,7 @@ export const en = {
     ],
     whoHeading: "Who makes it",
     who: (author: ReactNode, github: Link) => ["Flybench is made by ", author, ". Corrections and new patterns are welcome on ", github("GitHub"), "."],
-    translations: "The Swedish and German translations are drafts until reviewed; where a text has no translation yet, it is shown in English.",
+    translations: "The Swedish and German translations have been reviewed; where a text has no translation yet, it is shown in English.",
     licenceHeading: "Licence and credits",
     photoscans: (polyHaven: Link) => [
       "The river panorama and the gravel bed in the realistic water are photoscans from ",

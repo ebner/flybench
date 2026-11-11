@@ -10,4 +10,5 @@ export type { Link } from "./en";
 export const t = localized({ en, sv, de });
 
 /** Languages whose translation is a draft, not yet reviewed by a native speaker who ties flies. */
-export const DRAFT: Record<Lang, boolean> = { en: false, sv: true, de: true };
+// (Swedish and German: reviewed by the site's author, 2026-11-11.)
+export const DRAFT: Record<Lang, boolean> = { en: false, sv: false, de: false };

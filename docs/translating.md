@@ -11,9 +11,10 @@ Flybench is in English, Swedish and German. English is at the site's root, the o
 | Generated texts (step instructions, titles, the dressing) | written by `src/tying/describe-sv.ts` and `describe-de.ts` | Their words, with all their forms, come from the glossary: see [glossary.md](glossary.md). |
 | Prose people wrote (a pattern's description, history, how to fish it, labels, step notes and mistakes; naturals; techniques) | `translations/<lang>/patterns/<id>.kdl`, `translations/<lang>/naturals/<id>.kdl`, `src/catalog/techniques-sv.ts`, `-de.ts` | Below. |
 
-Every translation is a draft until a native speaker who ties flies has reviewed it: the
-glossary and prose files say `status draft`, and `src/i18n/ui/index.ts` marks a language as a
-draft (pages say so at the top). Where a text has no translation, the English one shows.
+A translation is a draft until a native speaker who ties flies has reviewed it: a new
+glossary or prose file says `status draft`, and `src/i18n/ui/index.ts` can mark a whole
+language as a draft (its pages then say so at the top). The Swedish and German translations
+were reviewed on 2026-11-11: their files say `status reviewed` and neither language is marked. Where a text has no translation, the English one shows.
 
 ## A pattern's prose
 

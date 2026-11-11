@@ -11,7 +11,7 @@
 // Bucktail, Coneheads). Where a loanword is what tyers write, it is used here.
 
 language de
-status draft
+status reviewed
 
 materials {
     noun wool "Wolle" gender=f mass=#true {

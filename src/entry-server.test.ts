@@ -35,6 +35,8 @@ describe("the app drawn without a browser", () => {
     expect(html).toContain(">Adams</h1>");
     // (Laid out by the fly's place in its card, where the card records it.)
     expect(html).toMatch(/class="viewer-poster( placed)?"/);
+    // A fly that swims point up is pictured so, and tied point down: its picture is turned over.
+    expect(await renderPage("fly/crazy-charlie/")).toMatch(/class="viewer-poster( placed)? turned"/);
     expect(html).toContain("renders/adams/card.webp");
     expect(html).toContain("Whip finish");
     const sv = await renderPage("sv/fly/adams/");

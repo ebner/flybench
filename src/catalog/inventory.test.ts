@@ -58,6 +58,16 @@ describe("inventory", () => {
     expect(match({ kind: "peacock-herl", color: "#26341a" }, owned)).toBe("missing");
   });
 
+  it("counts the dry-fly and the wet-fly cock hackle as each other, colour for colour", () => {
+    expect(match({ kind: "wet-fly-cock-hackle", color: "black" }, new Set(["cock-hackle:black"]))).toBe("have");
+    expect(match({ kind: "cock-hackle", color: "black" }, new Set(["wet-fly-cock-hackle:black"]))).toBe("have");
+    // Another colour of either stands in, as another colour of the same kind does.
+    expect(match({ kind: "wet-fly-cock-hackle", color: "black" }, new Set(["cock-hackle:brown"]))).toBe("substitute");
+    // Other hackles are their own feathers.
+    expect(match({ kind: "hen-hackle", color: "black" }, new Set(["cock-hackle:black"]))).toBe("missing");
+    expect(match({ kind: "cock-hackle", color: "black" }, new Set(["saddle-hackle:black"]))).toBe("missing");
+  });
+
   it("reports what is missing and what is substituted", () => {
     const c = coverage(recipe, new Set(["wool:red", "cock-hackle:grizzly"]));
     expect(c.missing.map(inventoryKey)).toEqual(["peacock-herl:#26341a"]);

@@ -1,6 +1,6 @@
 import type { TechniqueTexts } from "./techniques";
 
-/** The techniques in German: a draft until reviewed. */
+/** The techniques in German. Reviewed 2026-11-11. */
 export const TECHNIQUES_DE: TechniqueTexts = {
   "attach-thread": {
     name: "Faden anlegen",

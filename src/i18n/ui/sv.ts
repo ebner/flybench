@@ -3,7 +3,7 @@ import type { Link, Messages } from "./en";
 
 const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 
-/** Swedish. A draft until reviewed. */
+/** Swedish. Reviewed 2026-11-11. */
 export const sv: Messages = {
   site: {
     loadFailed: "Sidans ord kunde inte hämtas (är du utan uppkoppling?).",
@@ -635,7 +635,7 @@ export const sv: Messages = {
     ],
     whoHeading: "Vem gör det",
     who: (author: ReactNode, github: Link) => ["Flybench görs av ", author, ". Rättelser och nya mönster tas gärna emot på ", github("GitHub"), "."],
-    translations: "Den svenska och den tyska översättningen är utkast tills de granskats; där en text inte översatts än visas den på engelska.",
+    translations: "Den svenska och den tyska översättningen är granskade; där en text inte översatts än visas den på engelska.",
     licenceHeading: "Licens och tack",
     photoscans: (polyHaven: Link) => [
       "Älvpanoramat och grusbotten i det realistiska vattnet är fotoskanningar från ",

@@ -312,10 +312,15 @@ export function Viewer({
       />
       {poster && (
         <img
-          className={["viewer-poster", poster.box ? "placed" : "", shown ? "gone" : ""].join(" ").trim()}
+          // A fly that swims point up is pictured that way, and tied point down: its picture is
+          // turned over to stand in for the view at the vise.
+          className={["viewer-poster", poster.box ? "placed" : "", pointUp ? "turned" : "", shown ? "gone" : ""].filter(Boolean).join(" ")}
           // Where the fly is in the picture: the picture is sized and placed so that the fly
           // sits where the 3D view will frame it (styles.css).
-          style={poster.box && ({ "--bl": poster.box[0], "--bt": poster.box[1], "--bw": poster.box[2], "--bh": poster.box[3] } as CSSProperties)}
+          style={
+            poster.box &&
+            ({ "--bl": poster.box[0], "--bt": pointUp ? 1 - poster.box[1]! - poster.box[3]! : poster.box[1], "--bw": poster.box[2], "--bh": poster.box[3] } as CSSProperties)
+          }
           src={poster.src}
           srcSet={poster.srcSet}
           alt=""

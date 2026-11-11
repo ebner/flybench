@@ -2,7 +2,7 @@
 // Notes are in English, for the reviewer; sources are pages that were opened and read.
 language sv
 // "draft" until a native speaker who ties flies has reviewed it; then "reviewed".
-status draft
+status reviewed
 
 materials {
     noun wool "ullgarn" gender=ett definite="ullgarnet" mass=#true {

@@ -1,6 +1,6 @@
 import type { TechniqueTexts } from "./techniques";
 
-/** The techniques in Swedish: a draft until reviewed. */
+/** The techniques in Swedish. Reviewed 2026-11-11. */
 export const TECHNIQUES_SV: TechniqueTexts = {
   "attach-thread": {
     name: "Fästa tråden",
