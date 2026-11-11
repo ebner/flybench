@@ -92,3 +92,16 @@ describe("sorting by name", () => {
     expect(loose).toEqual([]);
   });
 });
+
+// A page kept by a visitor's browser from before a deployment is shown once more after it,
+// with the pictures as they are now: a turning picture of other frames than it expects must
+// not be what it gets (it would slide through it, not turn).
+describe("a turning picture", () => {
+  it("is named by its frames, in the page and on disk", async () => {
+    const html = await renderPage("");
+    const frames = [...new Set([...html.matchAll(/--frames:(\d+)/g)].map((m) => m[1]))];
+    expect(frames).toHaveLength(1);
+    expect(html).toContain(`renders/adams/spin-${frames[0]}.webp`);
+    expect(readdirSync(new URL("../public/renders/adams/", import.meta.url))).toContain(`spin-${frames[0]}.webp`);
+  });
+});

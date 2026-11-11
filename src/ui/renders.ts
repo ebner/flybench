@@ -49,11 +49,18 @@ export function useHookPictures(): Record<string, string> {
   return hookPictures;
 }
 
+/**
+ * A turning picture's file, named by its frames: a page of another version (one a visitor's
+ * browser kept for offline use, shown once more after a deployment) asks for its own and, if
+ * the frames have changed, gets none, where a strip of other frames would slide, not turn.
+ */
+export const spinFile = (frames: number) => `spin-${frames}.webp`;
+
 export function renderUrls(id: string, info: RenderInfo) {
   const base = `${import.meta.env.BASE_URL}renders/${encodeURIComponent(id)}`;
   const card = `${base}/card.webp?v=${info.hash}`;
   // The card again at twice the size, for screens with finer pixels.
-  return { card, cards: `${card} 1x, ${base}/card@2x.webp?v=${info.hash} 2x`, spin: `${base}/spin.webp?v=${info.hash}` };
+  return { card, cards: `${card} 1x, ${base}/card@2x.webp?v=${info.hash} 2x`, spin: `${base}/${spinFile(info.frames)}?v=${info.hash}` };
 }
 
 /** The realistic water's stills: what scripts/render-water.ts writes to public/renders/water/manifest.json. */

@@ -50,7 +50,7 @@ async function carryPictures() {
     const old = await caches.open(key);
     for (const request of await old.keys()) {
       const url = new URL(request.url);
-      const picture = url.pathname.match(/\/renders\/([^/]+)\/(?:card|card@2x|spin)\.webp$/);
+      const picture = url.pathname.match(/\/renders\/([^/]+)\/(?:card|card@2x|spin(?:-\d+)?)\.webp$/);
       if (!picture || manifest[decodeURIComponent(picture[1])]?.hash !== url.searchParams.get("v")) continue;
       const response = await old.match(request);
       if (response) await cache.put(request, response);

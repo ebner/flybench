@@ -1,7 +1,10 @@
 /**
  * Renders the gallery images for every pattern into public/renders/<id>/ (committed):
  *   card.webp   the finished fly on a transparent ground
- *   spin.webp   a turntable: FRAMES views in one row, played on hover
+ *   spin-<frames>.webp   a turntable: FRAMES views in one row, played on hover. Named by its
+ *               frames: a page from before a change of them (kept by a visitor's browser for
+ *               offline use) asks for the old name and gets nothing, not a strip it would
+ *               step through wrongly.
  * and a swatch for every material and colour the patterns use, for the Materials page:
  *   materials/<kind>--<colour>.webp, listed in materials/manifest.json
  * and a picture of every natural, for the Naturals pages:
@@ -34,6 +37,7 @@ import { patternIds, Renderer } from "./lib/renderer";
 export const FRAMES = 16;
 const FRAME = { width: 600, height: 400 };
 const SPIN = { width: 450, height: 300 };
+const SPIN_FILE = `spin-${FRAMES}.webp`;
 /** Everything is drawn this many times larger each way and scaled down: fibres are finer than a pixel. */
 const OVERSAMPLE = 3;
 const smaller = (png: Buffer, size: { width: number; height: number }) => sharp(png).resize(size.width, size.height, { kernel: "lanczos3" });
@@ -83,7 +87,7 @@ const ids = positionals.length > 0 ? positionals : all;
 const todo: { id: string; hash: string }[] = [];
 for (const id of ids) {
   const hash = createHash("sha256").update(codeHash).update(await readFile(`patterns/${id}.kdl`)).digest("hex").slice(0, 16);
-  if (values.force || manifest[id]?.hash !== hash || !existsSync(`${OUT}/${id}/spin.webp`)) todo.push({ id, hash });
+  if (values.force || manifest[id]?.hash !== hash || !existsSync(`${OUT}/${id}/${SPIN_FILE}`)) todo.push({ id, hash });
 }
 // Patterns that no longer exist.
 for (const id of Object.keys(manifest)) if (!all.includes(id)) delete manifest[id];
@@ -143,7 +147,9 @@ if (todo.length === 0 && swatchTodo.length === 0 && naturalTodo.length === 0 && 
             .composite(tiles.map((input, i) => ({ input, left: i * SPIN.width, top: 0 })))
             // (Moving, it bears a lower quality than the still card.)
             .webp({ quality: 60, alphaQuality: 75 })
-            .toFile(`${OUT}/${job.id}/spin.webp`);
+            .toFile(`${OUT}/${job.id}/${SPIN_FILE}`);
+          // (Turntables of another number of frames go.)
+          for (const f of await readdir(`${OUT}/${job.id}`)) if (/^spin.*\.webp$/.test(f) && f !== SPIN_FILE) await unlink(`${OUT}/${job.id}/${f}`);
           // (`box`: where the fly's bounds fall in its card, left, top, width and height as
           // fractions of it. A 3D view frames the fly by those bounds, so a picture standing in
           // for one is laid out by them, to sit as the view will show the fly.)
