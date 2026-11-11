@@ -182,7 +182,7 @@ scripts/           authoring tools: render, render-catalog, render-water, refche
                    the catalog plugin that reads and checks the patterns and naturals for
                    the app (and leaves reference photos out of the built site), the app
                    icons, and prerender (the HTML file and preview picture for each page)
-.github/workflows/ deployment to GitHub Pages
+.github/workflows/ deployment to GitHub Pages, tests for pull requests
 ```
 
 The scene is a pure function of time: `FlyScene.setTime(t)` shows exactly what
@@ -225,6 +225,16 @@ page's HTML preloads what it will ask for (that code, a Swedish or German page's
 text fonts). A 3D view draws a frame only when something has changed, stops while it is
 scrolled out of sight, and comes back by itself when the browser has taken its WebGL context
 away.
+
+## Repository
+
+Settings kept on GitHub (they are not in the repository, so a new copy of it needs them again):
+
+- Rulesets. `main`: no force pushes, no deletion, linear history, for everyone. Changes come
+  through a pull request that passes `test` (`.github/workflows/test.yml`); the repository
+  admin may push directly. Release tags `v*`: can't be deleted or moved, no bypass.
+- Code security: Dependabot alerts, secret scanning with push protection.
+- Pages and the `github-pages` environment as under Hosting.
 
 ## Licence
 
