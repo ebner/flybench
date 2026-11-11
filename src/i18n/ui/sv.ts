@@ -635,7 +635,7 @@ export const sv: Messages = {
     ],
     whoHeading: "Vem gör det",
     who: (author: ReactNode, github: Link) => ["Flybench görs av ", author, ". Rättelser och nya mönster tas gärna emot på ", github("GitHub"), "."],
-    translations: "Den svenska och den tyska översättningen är granskade; där en text inte översatts än visas den på engelska.",
+    translations: "Där en text inte översatts till svenska eller tyska än visas den på engelska.",
     licenceHeading: "Licens och tack",
     photoscans: (polyHaven: Link) => [
       "Älvpanoramat och grusbotten i det realistiska vattnet är fotoskanningar från ",
