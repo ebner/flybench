@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { FlyScene } from "../render/FlyScene";
+import { FlyScene, type FlySceneOptions } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
 import { loadRealAssets, siteAssets, type RealAssets } from "../render/real/assets";
-import { realisticCapable, shadowsCapable } from "./realistic";
+import { noteShadowTrouble, realisticCapable, shadowsCapable } from "./realistic";
 import { turnKeys } from "./turnKeys";
 import type { WaterStills } from "./renders";
 import { t } from "../i18n/ui";
@@ -62,6 +62,29 @@ export function useRealAssets(wanted: boolean): { assets: RealAssets | null; fai
 
 const reducedMotion = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/**
+ * The fly's 3D scene in a container, with shadows where the device takes them; without, if it
+ * can't start with them. Null where it can't start at all (no WebGL), the reason on the console.
+ */
+export function startScene(container: HTMLElement, options: FlySceneOptions = { background: null, adaptive: true }): FlyScene | null {
+  const shadows = shadowsCapable();
+  try {
+    return new FlyScene(container, { ...options, shadows });
+  } catch (first) {
+    if (shadows) {
+      noteShadowTrouble();
+      try {
+        return new FlyScene(container, { ...options, shadows: false });
+      } catch (e) {
+        console.error("Flybench: the 3D view could not start", e);
+        return null;
+      }
+    }
+    console.error("Flybench: the 3D view could not start", first);
+    return null;
+  }
+}
+
 export function Viewer({
   build,
   time,
@@ -83,8 +106,9 @@ export function Viewer({
   const [shown, setShown] = useState(false);
   const stills = stillsOrLoading === "loading" ? null : stillsOrLoading;
   const [turned, setTurned] = useState(false);
-  // The realistic water where the device can take it, else the drawn one.
-  const [capable] = useState(realisticCapable);
+  // The realistic water where the device can take it, else the drawn one. (Asked only where
+  // the water is offered: finding out makes a WebGL context of its own.)
+  const [capable] = useState(() => !!water && realisticCapable());
   // The finished fly in water: from above (realistic) or the side (drawn), or from below.
   // "angler" stands for the side view in the drawn water (see the water effect).
   const [waterView, setWaterView] = useState<"side" | "below" | "angler">("angler");
@@ -140,15 +164,13 @@ export function Viewer({
 
   useEffect(() => {
     // A transparent canvas over the page's paper, so the fly can cast a soft CSS shadow on it.
-    let s: FlyScene;
-    try {
-      s = new FlyScene(container.current!, { background: null, adaptive: true, shadows: shadowsCapable() });
-    } catch {
-      setUnavailable(true);
-      return;
-    }
+    const s = startScene(container.current!);
+    if (!s) return setUnavailable(true);
     s.onFollowChange = (on) => followChange.current(on);
-    s.onContextLost = setLost;
+    s.onContextLost = (gone) => {
+      if (gone && s.hasShadows) noteShadowTrouble();
+      setLost(gone);
+    };
     s.onDraw = () => setShown(true);
     // Positioned directly each frame, without re-rendering React.
     s.onAnchor = (point, fly) => {

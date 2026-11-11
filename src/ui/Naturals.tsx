@@ -19,6 +19,7 @@ import { MONTH_NAMES } from "../i18n/months";
 import { FlyScene, naturalAlone, naturalFishing } from "../render/FlyScene";
 import { WATER_LOOKS } from "../render/water";
 import { realisticCapable } from "./realistic";
+import { WATER_VIEWS } from "./features";
 import { useRealAssets } from "./Viewer";
 import { Plate } from "./Gallery";
 import { NotFound } from "./NotFound";
@@ -49,7 +50,8 @@ export function NaturalViewer({ natural }: { natural: Natural }) {
   // Its picture stands in for the 3D view until that has drawn, and where there is no WebGL.
   const picture = useNaturalPictures()[natural.id];
   const [shown, setShown] = useState(false);
-  const [capable] = useState(realisticCapable);
+  // (Asked only while the water views are on: finding out makes a WebGL context of its own.)
+  const [capable] = useState(() => WATER_VIEWS && realisticCapable());
   const stills = useWaterStills("naturals", natural.id);
   const [view, setView] = useState<"angler" | "below">(() => seenFrom(natural));
   const [explore, setExplore] = useState(false);

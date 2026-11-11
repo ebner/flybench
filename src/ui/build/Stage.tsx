@@ -5,7 +5,7 @@ import { stepAt, type Build as Built } from "../../tying/simulate";
 import { t } from "../../i18n/ui";
 import type { Player } from "../usePlayer";
 import { StepBar } from "../StepBar";
-import { shadowsCapable } from "../realistic";
+import { startScene } from "../Viewer";
 import { turnKeys } from "../turnKeys";
 import { SPEEDS, TransportIcon } from "../transport";
 
@@ -135,13 +135,8 @@ export function Stage({
   const tap = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    let s: FlyScene;
-    try {
-      s = new FlyScene(container.current!, { background: null, adaptive: true, shadows: shadowsCapable() });
-    } catch {
-      setUnavailable(true);
-      return;
-    }
+    const s = startScene(container.current!);
+    if (!s) return setUnavailable(true);
     s.setFollow(false);
     s.setView("side");
     s.onDraw = () => {

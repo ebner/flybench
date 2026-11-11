@@ -28,6 +28,16 @@ const Y_UP = new THREE.Vector3(0, 1, 0);
 // wings and hackle still shade the body and bright wings stay bright (chosen by the reviewer
 // from a comparison, 2026-11-10).
 const SHADOW_STRENGTH = 0.5;
+/** WebGL drawn on the processor: a few frames a second at best. */
+function drawnInSoftware(gl: WebGLRenderingContext | WebGL2RenderingContext): boolean {
+  try {
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    return /swiftshader|llvmpipe|softpipe|software/i.test(info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "");
+  } catch {
+    return false;
+  }
+}
+
 /** Where the key light shines from: above, in front and a little to the eye's side. */
 const KEY_FROM = new THREE.Vector3(2, 4, 5).normalize();
 const Z_AXIS = new THREE.Vector3(0, 0, 1);
@@ -160,14 +170,14 @@ function leaveDirection(angle: number, target = new THREE.Vector3()) {
  */
 export class FlyScene {
   private renderer: THREE.WebGLRenderer;
-  private environment: THREE.WebGLRenderTarget;
+  private environment!: THREE.WebGLRenderTarget;
   /** The studio lights; the realistic water is lit by its panorama alone. */
-  private lights: THREE.Light[];
+  private lights!: THREE.Light[];
   private key!: THREE.DirectionalLight;
   private shadows = false;
   private scene = new THREE.Scene();
   private camera: THREE.PerspectiveCamera;
-  private controls: OrbitControls;
+  private controls!: OrbitControls;
   private surfaces = new Surfaces();
   private fly = new THREE.Group();
   /** Holds the fly; moves it as the water carries it, without touching the fly's own transform. */
@@ -180,9 +190,9 @@ export class FlyScene {
   private looseEnds = new Map<string, LooseEndView>();
   private build: Build | null = null;
   private space: ShankSpace | null = null;
-  private resizeObserver: ResizeObserver;
+  private resizeObserver!: ResizeObserver;
   private frame = 0;
-  private baseMaxDistance: number;
+  private baseMaxDistance!: number;
   /** Bounds of the finished fly, which the default view frames. */
   private finished = new THREE.Box3();
   /** Once the user orbits or zooms, resizing no longer re-frames the fly. */
@@ -282,6 +292,10 @@ export class FlyScene {
   private adaptive = false;
   private slowFrames = 0;
   private stillFrames = 0;
+  /** Whether the key light casts shadows in this scene (now). */
+  get hasShadows(): boolean {
+    return this.shadows;
+  }
   /** Called when the browser takes the WebGL context away (true) and when it gives it back. */
   onContextLost?: (lost: boolean) => void;
 
@@ -291,6 +305,25 @@ export class FlyScene {
   ) {
     this.camera = new THREE.PerspectiveCamera(options.fov ?? VIEW_FOV, 1, 0.05, 500);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: options.background === null });
+    try {
+      this.start(options);
+    } catch (e) {
+      // Nothing left behind: a browser allows only a few WebGL contexts, and the page may try again.
+      cancelAnimationFrame(this.frame);
+      (this.resizeObserver as ResizeObserver | undefined)?.disconnect();
+      this.seen?.disconnect();
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+      this.renderer.domElement.remove();
+      throw e;
+    }
+  }
+
+  private start(options: FlySceneOptions) {
+    const container = this.container;
+    // Shadows are a second drawing of the fly each frame: not where WebGL is drawn on the
+    // processor (no usable graphics driver), which this context itself can tell.
+    if (options.shadows && drawnInSoftware(this.renderer.getContext())) options = { ...options, shadows: false };
     this.fullRatio = this.ratio = options.fullDensity ? window.devicePixelRatio : Math.min(window.devicePixelRatio, 2);
     this.adaptive = options.adaptive ?? false;
     this.renderer.setPixelRatio(this.ratio);
