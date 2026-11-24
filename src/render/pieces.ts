@@ -336,6 +336,9 @@ const WOUND_FIBRES = {
   fibres: { perGape: 160, radius: 0.003, tip: 0.4, wave: 0 },
 } as const;
 
+/** How many of herl's fibres long, soft flue has (see `woundCount`). */
+const SOFT_FLUE = 0.5;
+
 const BACK = new THREE.Vector3(-1, 0, 0);
 const ZERO = new THREE.Vector3();
 
@@ -388,6 +391,8 @@ export function stemOf(piece: WrapsPiece): { length: number; at(s: number): numb
 function woundCount(piece: WrapsPiece, stem: ReturnType<typeof stemOf>): number {
   const look = piece.look as keyof typeof WOUND_FIBRES;
   if (look === "hackle" && piece.barbs) return Math.round(stem.length * piece.barbs.perGape);
+  // Assumption: long, soft flue (ostrich) grows sparser along the strand than peacock's short flue.
+  if (look === "herl" && piece.sweep !== undefined) return Math.round(stem.length * WOUND_FIBRES.herl.perGape * SOFT_FLUE * (piece.fine ?? 1));
   // Rough dubbing is more fur than strand: enough of it to hide the core.
   return Math.round(stem.length * WOUND_FIBRES[look].perGape * (piece.fine ?? 1) * (look === "dubbing" ? 1 + (piece.shaggy ?? 0.4) : 1));
 }
@@ -422,6 +427,12 @@ function woundFibres(piece: WrapsPiece, rand: () => number, all = false): Fibre[
       length = piece.fibreLength! * (palmered ? 0.65 + 0.45 * rand() : 0.8 + 0.25 * rand());
       // (A barred hackle's bars are drawn along each barb, see `marks`.)
       shade = 0.85 + 0.3 * rand();
+    } else if (look === "herl" && piece.sweep !== undefined) {
+      // Long, soft flue (ostrich) lies back over the turns behind, uneven in length.
+      spin = around + (rand() - 0.5) * 1.6;
+      sweep = piece.sweep + (rand() - 0.5) * 1.4;
+      length = piece.fibreLength! * (0.3 + 0.75 * rand());
+      shade = 0.7 + 0.35 * rand();
     } else if (look === "herl") {
       // Flue sticks out every which way, filling the gaps between turns.
       spin = around + (rand() - 0.5) * 2.4;
@@ -468,13 +479,24 @@ function woundFibres(piece: WrapsPiece, rand: () => number, all = false): Fibre[
     // trimmed underneath keeps everything that doesn't point down. Under a wing case the
     // fibres on top are pressed flat out of sight. Hidden fibres still draw their random
     // numbers below, so the ones left stay exactly where they were before.
+    const covered = piece.covered?.some(([from, to, half]) => px > from && px < to && Math.sin(spin) > Math.cos(half + 0.2)) ?? false;
+    // A collar's barbs under a wing case are pressed back along the body beneath it, and those
+    // long enough come out from under its rear end (an Arthofer's guinea fowl); the case hides
+    // the rest. Other fibres under a case are pressed flat out of sight.
+    const pressedBack = covered && look === "hackle" && !onPost && Math.abs(piece.x1 - piece.x0) <= 0.3;
     const hidden =
       (piece.keep === "sides" && Math.abs(Math.sin(spin)) > 0.45) ||
       (piece.keep === "top" && Math.sin(spin) < -0.35) ||
       (piece.keep === "under" && Math.sin(spin) > 0.35) ||
-      (piece.covered?.some(([from, to, half]) => px > from && px < to && Math.sin(spin) > Math.cos(half + 0.2)) ?? false);
+      (covered && !pressedBack);
     let dir: THREE.Vector3;
-    if (onPost) {
+    if (pressedBack) {
+      // Assumption: they lie within about 4 to 9 degrees of the shank, so they stay under the case.
+      // (Varied by where the barb grows, not by a random number of its own: the barbs left
+      // standing keep the numbers they had before the case was pulled over.)
+      const rise = 0.07 + 0.08 * (0.5 + 0.5 * Math.sin(i * 12.9898));
+      dir = new THREE.Vector3(0, Math.sin(spin), Math.cos(spin)).multiplyScalar(Math.sin(rise)).addScaledVector(X_AXIS, -Math.cos(rise)).normalize();
+    } else if (onPost) {
       // Parachute: barbs stand out flat round the post, drooping a little.
       dir = new THREE.Vector3(Math.sin(spin), -Math.sin(sweep), Math.cos(spin)).normalize();
     } else {
@@ -491,11 +513,17 @@ function woundFibres(piece: WrapsPiece, rand: () => number, all = false): Fibre[
     const inset = look === "dubbing" ? 0.9 : 1;
     const base = new THREE.Vector3(px, py * inset, pz * inset).addScaledVector(dir, lift);
     // Soft barbs curve back towards the bend; herl, dubbing and stiff hackle just wave a little.
-    const soft = look === "cdc" || (look === "hackle" && (piece.sweep ?? 0) > 0.4);
+    const soft = look === "cdc" || ((look === "hackle" || look === "herl") && (piece.sweep ?? 0) > 0.4);
     // Fur lying round the body curves to hug it.
     const inward = new THREE.Vector3(0, -py, -pz);
-    const bend = lie ? 0.35 + 0.2 * rand() : (soft ? 0.12 + 0.25 * Math.min(1, (piece.sweep ?? 0.8) / 1.2) : spec.wave) * (0.5 + rand());
-    const bendDir = bend > 0 ? perpendicular(dir, lie ? inward : soft ? BACK : ZERO, rand) : undefined;
+    const bend = pressedBack
+      ? 0.06 + 0.1 * rand()
+      : lie
+        ? 0.35 + 0.2 * rand()
+        : (soft ? 0.12 + 0.25 * Math.min(1, (piece.sweep ?? 0.8) / 1.2) : spec.wave) * (0.5 + rand());
+    let bendDir = bend > 0 ? perpendicular(dir, lie ? inward : soft ? BACK : ZERO, rand) : undefined;
+    // Pressed back, they curve up off the body where they come out behind the case.
+    if (pressedBack) bendDir = perpendicular(dir, new THREE.Vector3(0, Math.sin(spin), Math.cos(spin)), rand);
     if (!hidden) list.push({ u, base, dir, length, radius, shade, bend, bendDir });
     else if (all) list.push({ u, base, dir, length, radius, shade, bend, bendDir, hidden: true });
   }
@@ -1531,13 +1559,22 @@ function eyesView(piece: EyesPiece, surfaces: Surfaces, space: ShankSpace): Piec
   };
 }
 
+/** Sides round each fibre of a slip pulled over as a wing case. */
+const TUBE_SIDES = 6;
+/** The most fibres of a slip drawn one by one. */
+const MAX_SLIP_FIBRES = 16;
+
 /** A strip over the top of the body (wing case, foam back), drawn from the back forwards. */
 function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): PieceView & { showFrom(x: number): void } {
   // A closed strip: a domed top, an underside lying on the body, and thin side edges.
   const xEnd = piece.x1 + piece.stub;
   const segX = Math.max(48, Math.round((xEnd - piece.x0) * 90));
+  // A slip of loose fibres (pheasant tail) is drawn as its fibres side by side where the strip
+  // would lie, each as two flat ribbons (the barb and its fringe of barbules) of `TUBE_SIDES` sides.
+  // (More than a slip's worth, a bunch of hair, are drawn as that many: as many as show.)
+  const strands = piece.look === "fibres" && !piece.width ? 2 * Math.min(MAX_SLIP_FIBRES, Math.max(2, piece.strands ?? 8)) : 0;
   const segT = 12;
-  const ring = 2 * (segT + 1);
+  const ring = strands ? strands * TUBE_SIDES : 2 * (segT + 1);
   const positions: number[] = [];
   const index: number[] = [];
   const colors: number[] = [];
@@ -1556,7 +1593,21 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   const hair = piece.look === "hair";
   const hairShade = (x: number, across: number) =>
     0.86 + 0.07 * Math.sin(across * 190 + 1.5 * Math.sin(x * 9)) + 0.05 * Math.sin(across * 83 + 3 * x + 2.1);
-  const shaded = feather || hair;
+  // Assumption: the fibres of a slip lie a little apart and wander across it, unevenly shaded,
+  // the outermost a little further down the sides; their cut ends are uneven (photos of
+  // pheasant-tail wing cases).
+  const strandRand = mulberry32((piece.seed ?? piece.id) * 7919 + 5);
+  const strandList = Array.from({ length: strands }, (_, k) => {
+    const edge = k === 0 || k === strands - 1 ? 1.05 : 1;
+    return {
+      t: (-1 + (2 * (k + 0.5 + (strandRand() - 0.5) * 0.15)) / strands) * edge,
+      wander: (0.04 + 0.08 * strandRand()) / strands,
+      phase: strandRand() * Math.PI * 2,
+      tone: 0.62 + 0.4 * strandRand(),
+      short: strandRand() * 0.04,
+    };
+  });
+  const shaded = feather || hair || strands > 0;
   // A strip is stiff enough to bridge the bumps of tie-ins under it: it lies on a smoothed body.
   const reach = piece.look === "foam" ? 0.22 : 0.12;
   /** Where it is tied down it is pressed onto the lowest body nearby; between the ties it bridges the bumps. */
@@ -1641,10 +1692,40 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     const r = (top ? s.under + s.thick * dome : s.under + s.thick * 0.05) - flip * s.centre;
     return out.set(x, s.centre + flip * r * Math.cos(phi), r * Math.sin(phi));
   };
+  const centreLine = new THREE.Vector3();
   for (const half of halves) {
     for (let i = 0; i <= segX; i++) {
       const x = piece.x0 + ((xEnd - piece.x0) * i) / segX;
       const s = section(x, i === segX);
+      for (const f of strandList) {
+        // Halfway up the strip, at this fibre's place across it.
+        const t = f.t + f.wander * Math.sin(x * 4 + f.phase);
+        const phi = phiAt(x, t, half);
+        const dome = domed(Math.max(-1, Math.min(1, t)));
+        const mid = s.under + (s.thick * dome) / 2 - flip * s.centre;
+        centreLine.set(x, s.centre + flip * mid * Math.cos(phi), mid * Math.sin(phi));
+        // Its share of the strip's width and its thickness, cut off unevenly at the front.
+        const end = Math.min(1, Math.max(0, (xEnd - f.short - x) / 0.02));
+        const across = Math.max(0.002, ((1.05 * piece.halfAngle * Math.max(mid, 0.01)) / strands) * (split ? 0.6 : 1)) * (0.15 + 0.85 * end);
+        const up = Math.max(0.0015, Math.min((s.thick * dome) / 2, across * 0.3)) * (0.15 + 0.85 * end);
+        for (let j = 0; j < TUBE_SIDES; j++) {
+          const a = (2 * Math.PI * j) / TUBE_SIDES;
+          const c = Math.cos(a) * across;
+          const h = Math.sin(a) * up;
+          // Across: round the body; up: away from it.
+          v.set(
+            centreLine.x,
+            centreLine.y - flip * Math.sin(phi) * c + flip * Math.cos(phi) * h,
+            centreLine.z + Math.cos(phi) * c + Math.sin(phi) * h,
+          );
+          space.point(v);
+          positions.push(v.x, v.y, v.z);
+          // Each fibre its own shade, darker underneath and in fine streaks along it.
+          const shade = f.tone * (Math.sin(a) < 0 ? 0.55 : 0.85) * (1 - 0.08 * (0.5 + 0.5 * Math.sin(x * 23 + f.phase * 3)));
+          colors.push(shade, shade, shade);
+        }
+      }
+      if (strands) continue;
       for (let side = 0; side < 2; side++) {
         for (let j = 0; j <= segT; j++) {
           // Top surface from one edge to the other, then the underside back again.
@@ -1690,8 +1771,10 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     for (let h = 0; h < halves.length; h++) {
       const o = h * (segX + 1) * ring;
       for (let j = 0; j < ring; j++) {
+        // (A slip's fibres: a tube each, round its own sides.)
+        const next = strands ? j - (j % TUBE_SIDES) + ((j + 1) % TUBE_SIDES) : (j + 1) % ring;
         const a = o + i * ring + j;
-        const a1 = o + i * ring + ((j + 1) % ring);
+        const a1 = o + i * ring + next;
         const b = a + ring;
         const b1 = a1 + ring;
         index.push(a, a1, b, b, a1, b1);

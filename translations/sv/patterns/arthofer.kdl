@@ -1,10 +1,10 @@
 id arthofer
 status reviewed
 
-// en description: A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both.
-description "En grå stjärt, en kropp av gråbeige strutsherl över bly, en thorax av koppartråd och ett klippt pärlhönshackel, med en vingkåpa av fasanstjärt vikt framåt över dem."
+// en description: A grey tail, a bushy grey-beige ostrich herl body over lead, a copper-wire thorax and a guinea-fowl hackle swept back under a dark pheasant-tail wing case folded forward over both.
+description "En grå stjärt, en buskig kropp av gråbeige strutsherl över bly, en thorax av koppartråd och ett pärlhönshackel strukit bakåt under en mörk vingkåpa av fasanstjärt vikt framåt över dem."
 
-// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying workshop in Fischamend, Lower Austria, where flies were apparently tied professionally. The Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but later saw an article, now mislaid, in which Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be anything from white-beige through grey to brown, and the colour of the wing case is free. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax.
+// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying workshop in Fischamend, Lower Austria, where flies were apparently tied professionally. The Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but later saw an article, now mislaid, in which Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be anything from white-beige through grey to brown, and the colour of the wing case is free. Karwath holds two things fixed: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax. In Swissflies' photo and others the hackle is left long.
 history """
     Alois Arthofer i Wien, född 1932, gjorde nymfen, enligt Swissflies och hans son, som skrev
     till Ingo Karwath 2024. Sonen minns att han följde med fadern till en flugbinderiverkstad i
@@ -14,8 +14,9 @@ history """
     att han inte hade något med uppfinnandet att göra. Den blev berömd efter Ritznymferna, på
     1960- och 70-talen, som en tung fluga i storlek 6 och 8. Detaljerna varierar: enligt Karwath
     kan strutsen vara allt från vitbeige via grå till brun, och vingkåpans färg är fri. Två
-    saker är desamma: hacklet "måste vara pärlhöna" och klipps till sist, och vingkåpan viks
-    framåt från 2–3 mm bakom thoraxen.
+    saker står fast för Karwath: hacklet "måste vara pärlhöna" och klipps till sist, och
+    vingkåpan viks framåt från 2–3 mm bakom thoraxen. På Swissflies foto och andra får hacklet
+    vara långt.
     """
 
 // en fishing: Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it so it swings in, and then work it like a streamer. The lead and copper take it down quickly.
@@ -32,8 +33,8 @@ labels {
     tail "Gråbeige fibrer"
     // en body: Grey-beige ostrich herl
     body "Gråbeige strutsherl"
-    // en case: Pheasant tail slip
-    case "Fasanstjärtsfibrer"
+    // en case: Dark pheasant tail slip
+    case "Mörka fasanstjärtsfibrer"
     // en hackle: Guinea fowl
     hackle "Pärlhöna"
 }
@@ -49,8 +50,8 @@ notes {
     step 13 "Varv intill varv, en tung, blank thorax."
     // en step 15 (tie-in hackle): Leave plenty of room in front for it.
     step 15 "Lämna gott om plats framför den."
-    // en step 19 (pull-over case): Fold it forward over the thorax and the hackle, tie it down and cut it.
-    step 19 "Vik den framåt över thoraxen och hacklet, bind ner den och klipp av den."
-    // en step 20 (whip-finish): A black head; then trim the hackle short.
-    step 20 "Ett svart huvud; klipp sedan hacklet kort."
+    // en step 19 (pull-over case): Stroke the hackle back, fold the case forward over the thorax and the hackle, tie it down and cut it. The hackle's barbs lie back along the thorax under it.
+    step 19 "Stryk hacklet bakåt, vik vingkåpan framåt över thoraxen och hacklet, bind ner den och klipp av den. Hacklets fibrer ligger bakåt längs thoraxen under den."
+    // en step 20 (whip-finish): A black head. Karwath then trims the hackle short; in other photos it is left long.
+    step 20 "Ett svart huvud. Karwath klipper sedan hacklet kort; på andra foton får det vara långt."
 }

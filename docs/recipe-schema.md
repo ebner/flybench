@@ -210,7 +210,7 @@ how it is drawn and which extra properties it takes:
 | Archetype  | Kinds | Extra properties |
 |------------|-------|------------------|
 | yarn       | `wool`, `poly-yarn`, `sparkle-yarn` (Antron; pulled over loosely with `bubble`, a translucent veil; pulled tight, a solid wing case) | |
-| herl       | `peacock-herl`, `ostrich-herl` | `strands` (1–6, default 3; tied in with a length, that many strands stick out, with their flue: a topping) |
+| herl       | `peacock-herl`, `ostrich-herl` | `strands` (1–6, default 3; tied in with a length, that many strands stick out, with their flue: a topping), `fibre` (the flue's length in gapes; by default peacock herl's is short, about a fifth of a gape, and ostrich herl's long and soft, 4.5 mm, lying back over the turns behind) |
 | hackle     | `cock-hackle` (the dry-fly hackle: a collar of a few touching turns is nearly solid), `wet-fly-cock-hackle` (the softer, sparser cock hackle of wet flies, loch palmers and salmon flies: a palmer shows the body through it), `hen-hackle`, `saddle-hackle`, `partridge-hackle`, `snipe-hackle`, `guinea-fowl-hackle`, `golden-pheasant-flank` (folded and wound, an Usk Grub's tail) | `fibre` (required, gapes), `sweep` (degrees the barbs lean back; default from the kind), `barred`. A wound hackle carries as many barbs as the stem it uses: the kind says how many grow on each mm of stem (the dry-fly cock hackle most, then saddle, the wet-fly cock hackle and hen, guinea fowl and golden pheasant, partridge and snipe fewest), so a turn round a thick body carries more than one round a bare shank, and more turns mean more barbs. Barbs are drawn at a real thickness in mm, thicker for its size on a small fly than on a big one. A parachute hackle goes round the post's base, built up with thread |
 | dubbing    | `hares-ear-dubbing`, `dry-fly-dubbing`, `rabbit-dubbing`, `seals-fur`, `fox-dubbing`, `dubbing` | `shaggy` (0–1: how rough, from fine and tight to picked out with long guard hairs; default from the kind) |
 | wire       | `gold-wire`, `copper-wire`, `silver-wire`, `lead-free-wire` | `mm` (diameter; default fine rib wire, or 0.38 for lead-free) |
@@ -250,7 +250,13 @@ The archetype decides how a material behaves and is drawn:
   the longer they are. A barred or speckled hackle (grizzly, partridge, `barred=#true`) carries
   its bars along each barb. Fibres are shaded darker at their roots. Chenille is a pile round a
   thin core; flat tinsel a thin flat strip; marabou and CDC barbs carry barbules along their
-  length. A kind can have its own finish in the catalog (`finish`: matt ostrich herl, dull
+  length. Natural guinea fowl is dark slate with light spots along each barb; dyed guinea fowl
+  (`barred=#true`) is barred. A wing case of loose fibres (pheasant tail) pulled over is drawn
+  as its fibres lying side by side (`count` of them), a slip of feather (turkey) as one strip
+  with its barbs shaded on it. A collar wound under a wing case has its barbs on top pressed
+  back along the body under the case, and those long enough come out from under its rear end;
+  a palmered hackle's or other fuzz under a case is pressed flat out of sight.
+  A kind can have its own finish in the catalog (`finish`: matt ostrich herl, dull
   lead-free wire), and each hook model its wire's (`finish` in `src/tying/hook.ts`: black,
   black nickel, tin; bronze otherwise).
 - **jungle cock** eyes are small, round-ended feathers, dark with a row of cream enamel spots, each

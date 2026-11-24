@@ -46,7 +46,8 @@ materials {
     sheath-lower sparkle-yarn color=cream label="Cream sparkle yarn, one sparse ply"
     body dubbing color=ginger shaggy=0.6 label="Ginger sparkle yarn and fur, chopped and blended"
     legs wood-duck-flank count=8 label="Lemon wood duck fibres"
-    head ostrich-herl color=brown strands=1
+    // Assumption: a short-flued herl for a small head, its flue about a quarter of the gape.
+    head ostrich-herl color=brown strands=1 fibre=0.25
 }
 
 steps {

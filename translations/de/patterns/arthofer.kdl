@@ -1,10 +1,10 @@
 id arthofer
 status reviewed
 
-// en description: A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both.
-description "Ein grauer Schwanz, ein Körper aus graubeigem Straußengras über Blei, ein Thorax aus Kupferdraht und eine gestutzte Perlhuhnhechel, mit einem Flügelköcher aus Fasanenstoß, der über beide nach vorn gefaltet ist."
+// en description: A grey tail, a bushy grey-beige ostrich herl body over lead, a copper-wire thorax and a guinea-fowl hackle swept back under a dark pheasant-tail wing case folded forward over both.
+description "Ein grauer Schwanz, ein buschiger Körper aus graubeigem Straußengras über Blei, ein Thorax aus Kupferdraht und eine Perlhuhnhechel, nach hinten gestrichen unter einem dunklen Flügelköcher aus Fasanenstoß, der über beide nach vorn gefaltet ist."
 
-// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying workshop in Fischamend, Lower Austria, where flies were apparently tied professionally. The Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but later saw an article, now mislaid, in which Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be anything from white-beige through grey to brown, and the colour of the wing case is free. Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax.
+// en history: Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying workshop in Fischamend, Lower Austria, where flies were apparently tied professionally. The Viennese dealer Norbert Eipeltauer sold it widely. Karwath had first thought Eipeltauer at least a co-founder, but later saw an article, now mislaid, in which Eipeltauer wrote that he had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be anything from white-beige through grey to brown, and the colour of the wing case is free. Karwath holds two things fixed: the hackle "must be guinea fowl", trimmed at the end, and the wing case is folded forward from 2 to 3 mm behind the thorax. In Swissflies' photo and others the hackle is left long.
 history """
     Alois Arthofer aus Wien, Jahrgang 1932, hat die Nymphe gebaut, nach Swissflies und nach
     seinem Sohn, der 2024 an Ingo Karwath schrieb. Der Sohn erinnert sich, dass er mit dem Vater
@@ -15,9 +15,9 @@ history """
     schrieb, er habe mit ihrer Erfindung nichts zu tun. Berühmt wurde sie nach den Ritz-Nymphen,
     in den 1960er und 70er Jahren, als schwere Fliege in den Größen 6 und 8. Die Einzelheiten
     variieren: Nach Karwath kann der Strauß alles von Weißbeige über Grau bis Braun sein, und
-    die Farbe des Flügelköchers ist frei. Zwei Dinge bleiben gleich: Die Hechel „muss Perlhuhn
-    sein“ und wird zuletzt gestutzt, und der Flügelköcher wird 2 bis 3 mm hinter dem Thorax nach
-    vorn gefaltet.
+    die Farbe des Flügelköchers ist frei. Zwei Dinge stehen für Karwath fest: Die Hechel „muss
+    Perlhuhn sein“ und wird zuletzt gestutzt, und der Flügelköcher wird 2 bis 3 mm hinter dem
+    Thorax nach vorn gefaltet. Auf dem Foto von Swissflies und auf anderen bleibt die Hechel lang.
     """
 
 // en fishing: Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it so it swings in, and then work it like a streamer. The lead and copper take it down quickly.
@@ -34,8 +34,8 @@ labels {
     tail "Graubeige Fibern"
     // en body: Grey-beige ostrich herl
     body "Graubeiges Straußengras"
-    // en case: Pheasant tail slip
-    case "Fasanenstoßfibern"
+    // en case: Dark pheasant tail slip
+    case "Dunkle Fasanenstoßfibern"
     // en hackle: Guinea fowl
     hackle "Perlhuhn"
 }
@@ -51,8 +51,8 @@ notes {
     step 13 "Windung an Windung, ein schwerer, glänzender Thorax."
     // en step 15 (tie-in hackle): Leave plenty of room in front for it.
     step 15 "Lass vorn schön viel Platz dafür."
-    // en step 19 (pull-over case): Fold it forward over the thorax and the hackle, tie it down and cut it.
-    step 19 "Falte ihn über Thorax und Hechel nach vorn, binde ihn ab und schneide ihn ab."
-    // en step 20 (whip-finish): A black head; then trim the hackle short.
-    step 20 "Ein schwarzer Kopf; dann die Hechel kurz stutzen."
+    // en step 19 (pull-over case): Stroke the hackle back, fold the case forward over the thorax and the hackle, tie it down and cut it. The hackle's barbs lie back along the thorax under it.
+    step 19 "Streich die Hechel nach hinten, falte den Flügelköcher über Thorax und Hechel nach vorn, binde ihn ab und schneide ihn ab. Die Fibern der Hechel liegen darunter nach hinten am Thorax entlang."
+    // en step 20 (whip-finish): A black head. Karwath then trims the hackle short; in other photos it is left long.
+    step 20 "Ein schwarzer Kopf. Karwath stutzt die Hechel danach kurz; auf anderen Fotos bleibt sie lang."
 }

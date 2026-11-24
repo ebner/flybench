@@ -10,7 +10,7 @@ difficulty intermediate
 species trout grayling
 season april may june july august september october
 origin originator="Alois Arthofer" region="Vienna, Austria"
-description "A grey tail, a grey-beige ostrich herl body over lead, a copper-wire thorax and a trimmed guinea-fowl hackle, with a pheasant-tail wing case folded forward over both."
+description "A grey tail, a bushy grey-beige ostrich herl body over lead, a copper-wire thorax and a guinea-fowl hackle swept back under a dark pheasant-tail wing case folded forward over both."
 history """
     Alois Arthofer of Vienna, born in 1932, made the nymph, according to Swissflies and to his
     son, who wrote to Ingo Karwath in 2024. The son remembers going with him to a fly-tying
@@ -20,8 +20,9 @@ history """
     had nothing to do with inventing it. It became famous after the Ritz nymphs, in the 1960s
     and 70s, as a heavy fly in sizes 6 and 8. The details vary: Karwath says the ostrich may be
     anything from white-beige through grey to brown, and the colour of the wing case is free.
-    Two things stay the same: the hackle "must be guinea fowl", trimmed at the end, and the wing
-    case is folded forward from 2 to 3 mm behind the thorax.
+    Karwath holds two things fixed: the hackle "must be guinea fowl", trimmed at the end, and the
+    wing case is folded forward from 2 to 3 mm behind the thorax. In Swissflies' photo and others
+    the hackle is left long.
     """
 fishing """
     Not fished upstream like the delicate nymphs before it but downstream: let it sink, stop it
@@ -47,17 +48,22 @@ materials {
     // Karwath's photos: grey fibres.
     tail hackle-fibres color="#b7aa98" count=30 label="Grey-beige fibres"
     body ostrich-herl strands=3 label="Grey-beige ostrich herl"
-    case pheasant-tail count=10 label="Pheasant tail slip"
+    // Karwath: the wing case's colour is free; his is natural pheasant tail. Swissflies' is black,
+    // and in most photos it is dark brown to black.
+    case pheasant-tail color="#2e241c" count=10 label="Dark pheasant tail slip"
     thorax copper-wire mm=0.4
-    hackle guinea-fowl-hackle fibre=1.0 label="Guinea fowl"
+    // Karwath trims the hackle short at the end; in Swissflies' photo and most others the barbs are
+    // left long, swept back along the thorax to the middle of the fly, the case holding them down.
+    hackle guinea-fowl-hackle fibre=1.4 sweep=65 label="Guinea fowl"
 }
 
 steps {
     weight weight from=0.2 to=0.78 note="Karwath: most Arthofer carry lead under the body; the copper is only the icing."
     attach-thread at=0.85
     wrap-thread to=0.0
-    // Read from Karwath's photo: a little more than a gape behind the bend.
-    tie-in tail length=1.2 spread=40
+    // Karwath's photo: a little more than a gape behind the bend; in other photos (Swissflies, shop
+    // flies) up to two gapes. Assumption: about one and a half.
+    tie-in tail length=1.6 spread=40
     tie-in body
     wrap-thread to=0.45
     wind body to=0.45 turns=10 note="Over the rear half."
@@ -72,6 +78,6 @@ steps {
     wrap-thread to=0.84
     wind hackle to=0.84 turns=3
     tie-off hackle
-    pull-over case to=0.84 note="Fold it forward over the thorax and the hackle, tie it down and cut it."
-    whip-finish note="A black head; then trim the hackle short."
+    pull-over case to=0.84 note="Stroke the hackle back, fold the case forward over the thorax and the hackle, tie it down and cut it. The hackle's barbs lie back along the thorax under it."
+    whip-finish note="A black head. Karwath then trims the hackle short; in other photos it is left long."
 }

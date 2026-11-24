@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { loadRecipe } from "../recipe/load";
+import { unitMm } from "./hook";
 import { extensionCentre, fineness, pieceProgress, simulate, stepAt, stepEnd, stepProgress, wrapAt, type ExtensionPiece, type WrapsPiece } from "./simulate";
 
 function redTag() {
@@ -967,5 +968,46 @@ describe("what a trim cuts off", () => {
       expect(others, file).toEqual(others.map((_, i) => others[0]! + i));
       expect(pieces.filter((p) => p.type === "trimmings").every((p) => p.id >= 1_000_000), file).toBe(true);
     }
+  });
+});
+
+describe("the Arthofer's materials", () => {
+  const text = readFileSync(new URL("../../patterns/arthofer.kdl", import.meta.url), "utf8");
+  const build = (kdl: string) => {
+    const loaded = loadRecipe(kdl);
+    if (!loaded.ok) throw new Error("arthofer.kdl does not load");
+    return simulate(loaded.recipe);
+  };
+  const last = (pieces: ReturnType<typeof simulate>["steps"][number]["pieces"][], material: string) =>
+    pieces.flat().filter((p) => p.material === material).at(-1);
+  const arthofer = build(text);
+  const pieces = arthofer.steps.map((s) => s.pieces);
+
+  it("gives ostrich herl its long flue, in mm, leaning back; peacock herl keeps its short flue", () => {
+    const body = last(pieces, "body") as WrapsPiece;
+    expect(body.fibreLength).toBeCloseTo(4.5 / unitMm(arthofer.recipe.hook));
+    expect(body.sweep).toBeCloseTo((40 * Math.PI) / 180);
+    const peacock = redTag().steps.flatMap((s) => s.pieces).find((p) => p.type === "wraps" && p.look === "herl") as WrapsPiece;
+    expect(peacock.fibreLength).toBe(0.22);
+    expect(peacock.sweep).toBeUndefined();
+  });
+
+  it("takes a herl's flue length from the recipe", () => {
+    const own = build(text.replace("body ostrich-herl strands=3", "body ostrich-herl strands=3 fibre=0.3"));
+    expect((last(own.steps.map((s) => s.pieces), "body") as WrapsPiece).fibreLength).toBe(0.3);
+  });
+
+  it("spots natural guinea fowl light on dark; a dyed one stays barred", () => {
+    const hackle = last(pieces, "hackle") as WrapsPiece;
+    expect(hackle.marks?.every((m) => m.shade > 1)).toBe(true);
+    const tummel = loadRecipe(readFileSync(new URL("../../patterns/tummel-shrimp.kdl", import.meta.url), "utf8"));
+    if (!tummel.ok) throw new Error("tummel-shrimp.kdl does not load");
+    const blue = simulate(tummel.recipe).steps.flatMap((s) => s.pieces).filter((p) => p.material === "front-collar" && p.type === "wraps").at(-1) as WrapsPiece;
+    expect(blue.marks?.every((m) => m.shade < 1)).toBe(true);
+  });
+
+  it("knows how many fibres lie side by side in a wing case of fibres", () => {
+    const cover = last(pieces, "case");
+    expect(cover?.type === "cover" && cover.strands).toBe(10);
   });
 });

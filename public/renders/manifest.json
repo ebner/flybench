@@ -36,15 +36,15 @@
     ]
   },
   "arthofer": {
-    "hash": "0ced0f1981ddac85",
+    "hash": "445efa9b71c5ee8d",
     "frames": 16,
     "width": 600,
     "height": 400,
     "box": [
-      0.0275,
-      0.1636,
-      0.9449,
-      0.6728
+      0.0276,
+      0.1393,
+      0.9448,
+      0.7214
     ]
   },
   "balloon-caddis": {
@@ -96,7 +96,7 @@
     ]
   },
   "black-martinez": {
-    "hash": "7781dafd46e9df75",
+    "hash": "069fa41b60c02ecc",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -360,7 +360,7 @@
     ]
   },
   "deep-sparkle-pupa": {
-    "hash": "d413519719f889ed",
+    "hash": "2c9d34a57db08d58",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -624,7 +624,7 @@
     ]
   },
   "green-highlander": {
-    "hash": "00696db8cbf204d4",
+    "hash": "fb0d231ba31fcec8",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -684,7 +684,7 @@
     ]
   },
   "gurgler": {
-    "hash": "e8b224d5a4862a5a",
+    "hash": "aec1fe1b31e546d9",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -864,7 +864,7 @@
     ]
   },
   "mohican-mayfly": {
-    "hash": "0a8165b37ab073c4",
+    "hash": "2388d0350a8074a1",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -876,7 +876,7 @@
     ]
   },
   "montana-nymph": {
-    "hash": "656ff7140ad738b0",
+    "hash": "4493e322f724b43a",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -972,7 +972,7 @@
     ]
   },
   "pattegrisen": {
-    "hash": "aad0cd777a863575",
+    "hash": "df54ef04b52a67af",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -1008,7 +1008,7 @@
     ]
   },
   "phatakorva": {
-    "hash": "1c55a73642cde805",
+    "hash": "bbca9aa91179d1c6",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -1020,7 +1020,7 @@
     ]
   },
   "pheasant-tail-nymph": {
-    "hash": "9329382d68ef7048",
+    "hash": "104a0343797859dc",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -1032,15 +1032,15 @@
     ]
   },
   "pheasant-tail-nymph-american": {
-    "hash": "e186b06ecd4b59df",
+    "hash": "84157740b02260ad",
     "frames": 16,
     "width": 600,
     "height": 400,
     "box": [
       0.0254,
-      0.1718,
+      0.1728,
       0.9492,
-      0.6565
+      0.6543
     ]
   },
   "prince-nymph": {
@@ -1260,7 +1260,7 @@
     ]
   },
   "thunder-and-lightning": {
-    "hash": "d167ad86a92bbdab",
+    "hash": "6ce63ebb2a766e7b",
     "frames": 16,
     "width": 600,
     "height": 400,

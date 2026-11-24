@@ -38,7 +38,7 @@ export const NAMED_COLORS = {
   partridge: "#8a7558",
   snipe: "#6f6a64",
   // Guinea fowl: slate grey with white spots, drawn speckled like grizzly.
-  guinea: "#8c8f97",
+  guinea: "#3e4048",
   lead: "#6b6e72",
   deer: "#6e5a48",
   squirrel: "#7e6e5e",
@@ -161,7 +161,7 @@ const Material = z
     label: z.string().min(1).optional(),
     /** herl: number of strands wound together. */
     strands: z.number().int().min(1).max(6).optional(),
-    /** hackle, CDC: fibre (barb) length in gapes; for wound CDC, the longest barbs (near the butt); fur strips: the fur's length. */
+    /** hackle, CDC: fibre (barb) length in gapes; herl: its flue's length; for wound CDC, the longest barbs (near the butt); fur strips: the fur's length. */
     fibre: GapeLength.optional(),
     /** floss: thread size. */
     size: z.enum(THREAD_SIZES).optional(),

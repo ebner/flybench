@@ -5,7 +5,7 @@
  * The archetype says how a material behaves and is drawn, and which recipe
  * properties it takes (see ARCHETYPE_PROPS):
  *   yarn      wool, poly yarn (tags, posts, bodies)
- *   herl      peacock herl
+ *   herl      peacock and ostrich herl
  *   hackle    cock, hen, saddle and game-bird hackles (wound; soft ones sweep back)
  *   dubbing   fur and synthetic dubbing (applied with `dub`, never tied in)
  *   wire      metal wire (ribs, wire bodies, weighting)
@@ -41,8 +41,10 @@ export interface CatalogMaterial {
   archetype: Archetype;
   /** Named or hex colour used when the recipe gives none. Without it, `color` is required. */
   defaultColor?: string;
-  /** Hackles: how far the fibres lean back from upright, in degrees, when wound. */
+  /** Hackles, herl: how far the fibres (a herl's flue) lean back from upright, in degrees, when wound. */
   sweep?: number;
+  /** Herl: how long its flue is, in mm (a recipe's `fibre` overrides it, in gapes). */
+  flueMm?: number;
   /**
    * Hackles: barbs along each mm of the stem, both sides together. A turn carries as many as the
    * stem it takes, so a turn round a thick body carries more than one round a bare shank.
@@ -94,8 +96,10 @@ export const MATERIALS = {
 
   // Herls
   "peacock-herl": { name: "peacock herl", archetype: "herl", defaultColor: "#26341a" },
-  // Assumption: ostrich herl is matt and fluffy, without peacock herl's metallic sheen.
-  "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e", finish: "matt" },
+  // Assumption: ostrich herl is matt and fluffy, without peacock herl's metallic sheen. Its flue
+  // is long and soft, about 4.5 mm, and lies back over the turns behind, hiding them: read from
+  // photos of Arthofer bodies, about 0.6 of a size 8 gape (Karwath's, Fliegentom's, shop flies).
+  "ostrich-herl": { name: "ostrich herl", archetype: "herl", defaultColor: "#9a8e7e", finish: "matt", flueMm: 4.5, sweep: 40 },
 
   // Hackles
   // Assumption (all the barb densities, set against photos of collars, palmered bodies and
@@ -250,7 +254,7 @@ export function catalogMaterial(kind: MaterialKind): CatalogMaterial {
 /** Recipe properties each archetype accepts besides id, kind, color and label. */
 export const ARCHETYPE_PROPS: Record<Archetype, readonly string[]> = {
   yarn: [],
-  herl: ["strands"],
+  herl: ["strands", "fibre"],
   hackle: ["fibre", "sweep", "barred"],
   dubbing: ["shaggy"],
   wire: ["mm"],

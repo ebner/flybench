@@ -272,3 +272,57 @@ describe("a wound hackle's barbs", () => {
     expect(stemOf(tapered).at(0.5)).toBeLessThan(0.5);
   });
 });
+
+describe("a collar under a wing case", () => {
+  it("lays its barbs on top back along the body under the case, instead of hiding them", () => {
+    const loaded = loadRecipe(readFileSync(new URL("../../patterns/arthofer.kdl", import.meta.url), "utf8"));
+    if (!loaded.ok) throw new Error("arthofer.kdl does not load");
+    const pieces = simulate(loaded.recipe).steps.flatMap((s) => s.pieces);
+    const hackle = pieces.filter((p): p is WrapsPiece => p.type === "wraps" && p.material === "hackle").at(-1)!;
+    expect(hackle.covered?.length).toBeGreaterThan(0);
+    const view = pieceView(hackle, new Surfaces(), new ShankSpace(hookModel(loaded.recipe.hook)));
+    view.setProgress(1);
+    const m = new THREE.Matrix4();
+    const dirs: THREE.Vector3[] = [];
+    view.object.traverse((o) => {
+      if (!(o instanceof THREE.InstancedMesh) || (o.userData.segment !== undefined && o.userData.segment !== 0)) return;
+      for (let i = 0; i < o.count; i++) {
+        o.getMatrixAt(i, m);
+        dirs.push(new THREE.Vector3().setFromMatrixColumn(m, 1).normalize());
+      }
+    });
+    // Barbs from the top of the turns, lying back nearly along the shank.
+    const pressed = dirs.filter((d) => d.x < -0.97);
+    expect(pressed.length).toBeGreaterThan(20);
+    view.dispose();
+  });
+
+  it("leaves the barbs it doesn't press where they were before the case came over", () => {
+    const loaded = loadRecipe(readFileSync(new URL("../../patterns/arthofer.kdl", import.meta.url), "utf8"));
+    if (!loaded.ok) throw new Error("arthofer.kdl does not load");
+    const pieces = simulate(loaded.recipe).steps.flatMap((s) => s.pieces);
+    const wound = pieces.filter((p): p is WrapsPiece => p.type === "wraps" && p.material === "hackle");
+    const before = wound.find((p) => !p.covered)!;
+    const after = wound.at(-1)!;
+    const space = new ShankSpace(hookModel(loaded.recipe.hook));
+    const barbs = (piece: WrapsPiece) => {
+      const view = pieceView(piece, new Surfaces(), space);
+      view.setProgress(1);
+      const m = new THREE.Matrix4();
+      const out: { key: string; back: number }[] = [];
+      view.object.traverse((o) => {
+        if (!(o instanceof THREE.InstancedMesh) || (o.userData.segment !== undefined && o.userData.segment !== 0)) return;
+        for (let i = 0; i < o.count; i++) {
+          o.getMatrixAt(i, m);
+          out.push({ key: m.elements.map((e) => e.toFixed(5)).join(","), back: -new THREE.Vector3().setFromMatrixColumn(m, 1).normalize().x });
+        }
+      });
+      view.dispose();
+      return out;
+    };
+    const was = new Set(barbs(before).map((b) => b.key));
+    const standing = barbs(after).filter((b) => b.back < 0.97);
+    expect(standing.length).toBeGreaterThan(50);
+    expect(standing.filter((b) => !was.has(b.key))).toEqual([]);
+  });
+});

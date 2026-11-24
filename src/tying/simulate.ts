@@ -238,6 +238,8 @@ export interface CoverPiece extends PieceBase {
   taper?: "rear" | "front";
   /** Its end folded back over itself in front of the tie-down, doubled as a head this long (`stub`). */
   fold?: boolean;
+  /** A slip of loose fibres (pheasant tail): how many lie side by side in it. */
+  strands?: number;
 }
 
 /**
@@ -465,6 +467,13 @@ const TIPPET_MARKS: FibreMarks = [
   { from: 0.9, to: 1, shade: 0.08 },
 ];
 
+// Assumption: a guinea fowl's body feather is dark slate with round white spots, which cross each
+// barb as short light marks, about six along it, lined up on neighbouring barbs.
+const GUINEA_MARKS: FibreMarks = Array.from({ length: 6 }, (_, i) => {
+  const from = 0.1 + (0.86 * i) / 6;
+  return { from, to: from + 0.045, shade: 3 };
+});
+
 // Assumption: the black centre of a furnace, badger or coch hackle reaches about two fifths of the
 // way out along each barb, fading into the colour at its edge.
 const DARK_CENTRE: Record<string, FibreMarks> = Object.fromEntries(
@@ -515,12 +524,12 @@ function barbThickness(lengthMm: number | undefined): number {
 
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { finish?: "matt" | "dull"; sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { finish?: "matt" | "dull"; sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number; flueMm?: number };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
   const barring = m.barred === undefined ? BARRED[colorName] ?? 0 : m.barred ? BARRED.grizzly! : 0;
-  const marks = colorName === "tippet" ? TIPPET_MARKS : barring > 0 ? barMarks(barring) : undefined;
+  const marks = colorName === "tippet" ? TIPPET_MARKS : colorName === "guinea" && m.barred === undefined ? GUINEA_MARKS : barring > 0 ? barMarks(barring) : undefined;
   const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: cat.stiffness, finish: cat.finish, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
@@ -531,7 +540,9 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
       return {
         // Assumption: long flue gives the plump body seen in reference photos. Tied in with a
         // length, its strands stick out with their flue (an orange peacock herl topping).
-        ...base, strandRadius: r, fibreLength: 0.22, freeLength: 2.2, count: m.strands ?? 3, flue: true,
+        // A kind with long, soft flue (ostrich) gives its length in mm and how far it leans back.
+        ...base, strandRadius: r, fibreLength: m.fibre ?? (cat.flueMm !== undefined ? mm(cat.flueMm) : 0.22), freeLength: 2.2, count: m.strands ?? 3, flue: true,
+        ...(cat.sweep !== undefined && { sweep: deg(cat.sweep) }),
         tieInThickness: r, layerThickness: (c) => 2 * r * Math.min(c, 1.5),
       };
     }
@@ -1373,6 +1384,7 @@ export function simulate(recipe: Recipe): Build {
           // (Laid back, it is tied in at the front: its point is there.)
           ...(cut && { width: cut.width, ...(cut.taper && { taper: back ? ("front" as const) : ("rear" as const) }) }),
           ...(fold !== undefined && { fold: true }),
+          ...(l.look === "fibres" && { strands: l.count }),
         };
         pieces.push(cover);
         covers.set(step.material, cover);
