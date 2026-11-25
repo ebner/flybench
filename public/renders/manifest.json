@@ -36,7 +36,7 @@
     ]
   },
   "arthofer": {
-    "hash": "445efa9b71c5ee8d",
+    "hash": "7bc505c8becde489",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -1020,7 +1020,7 @@
     ]
   },
   "pheasant-tail-nymph": {
-    "hash": "104a0343797859dc",
+    "hash": "da8534de415342ec",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -1032,7 +1032,7 @@
     ]
   },
   "pheasant-tail-nymph-american": {
-    "hash": "84157740b02260ad",
+    "hash": "2949dbadc6d3383e",
     "frames": 16,
     "width": 600,
     "height": 400,
@@ -1040,7 +1040,7 @@
       0.0254,
       0.1728,
       0.9492,
-      0.6543
+      0.6544
     ]
   },
   "prince-nymph": {

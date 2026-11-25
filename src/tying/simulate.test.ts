@@ -1010,4 +1010,11 @@ describe("the Arthofer's materials", () => {
     const cover = last(pieces, "case");
     expect(cover?.type === "cover" && cover.strands).toBe(10);
   });
+
+  it("bars a pheasant-tail wing case in gapes for its hook, its tips at the end tied down", () => {
+    const cover = last(pieces, "case");
+    if (cover?.type !== "cover") throw new Error("no wing case");
+    const gape = unitMm(arthofer.recipe.hook);
+    expect(cover.bars).toEqual({ every: 8 / gape, width: 1.5 / gape, tip: 6 / gape, from: cover.x1 });
+  });
 });

@@ -252,7 +252,9 @@ The archetype decides how a material behaves and is drawn:
   thin core; flat tinsel a thin flat strip; marabou and CDC barbs carry barbules along their
   length. Natural guinea fowl is dark slate with light spots along each barb; dyed guinea fowl
   (`barred=#true`) is barred. A wing case of loose fibres (pheasant tail) pulled over is drawn
-  as its fibres lying side by side (`count` of them), a slip of feather (turkey) as one strip
+  as its fibres lying side by side (`count` of them); pheasant tail's show the feather's dark bars
+  slanting across them, wherever the slip was cut, and their tips darken towards the end tied
+  down (`bars` in the catalog, in mm). A slip of feather (turkey) is drawn as one strip
   with its barbs shaded on it. A collar wound under a wing case has its barbs on top pressed
   back along the body under the case, and those long enough come out from under its rear end;
   a palmered hackle's or other fuzz under a case is pressed flat out of sight.

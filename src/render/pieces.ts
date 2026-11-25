@@ -1563,6 +1563,11 @@ function eyesView(piece: EyesPiece, surfaces: Surfaces, space: ShankSpace): Piec
 const TUBE_SIDES = 6;
 /** The most fibres of a slip drawn one by one. */
 const MAX_SLIP_FIBRES = 16;
+// Assumption: a pheasant tail's bars are near black against its copper, its tips dark brown, and
+// the bars cross a slip at about 50 degrees to its fibres.
+const SLIP_BAR_SHADE = 0.3;
+const SLIP_TIP_SHADE = 0.4;
+const SLIP_BAR_SLANT = 0.85;
 
 /** A strip over the top of the body (wing case, foam back), drawn from the back forwards. */
 function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): PieceView & { showFrom(x: number): void } {
@@ -1605,8 +1610,23 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
       phase: strandRand() * Math.PI * 2,
       tone: 0.62 + 0.4 * strandRand(),
       short: strandRand() * 0.04,
+      barShift: (strandRand() - 0.5) * 0.3,
     };
   });
+  // Where the bars fall depends on where on the feather the slip was cut: its own place, fixed.
+  const barPhase = strandRand() * (piece.bars?.every ?? 0);
+  /** A barred slip (pheasant tail) at x, `across` gapes from its middle: its bars and dark tips. */
+  const barShade = (x: number, across: number, shift: number) => {
+    const b = piece.bars;
+    if (!b) return 1;
+    const along = Math.abs(x - b.from);
+    const tip = SLIP_TIP_SHADE + (1 - SLIP_TIP_SHADE) * smooth(along, 0, b.tip);
+    // The bars cross the feather, so on a slip of its fibres they slant across it.
+    const p = (((along + barPhase + across * SLIP_BAR_SLANT + shift * b.width) % b.every) + b.every) % b.every;
+    const edge = b.width * 0.3;
+    const bar = smooth(p, 0, edge) * (1 - smooth(p, b.width - edge, b.width));
+    return tip * (1 - (1 - SLIP_BAR_SHADE) * bar);
+  };
   const shaded = feather || hair || strands > 0;
   // A strip is stiff enough to bridge the bumps of tie-ins under it: it lies on a smoothed body.
   const reach = piece.look === "foam" ? 0.22 : 0.12;
@@ -1721,7 +1741,8 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
           space.point(v);
           positions.push(v.x, v.y, v.z);
           // Each fibre its own shade, darker underneath and in fine streaks along it.
-          const shade = f.tone * (Math.sin(a) < 0 ? 0.55 : 0.85) * (1 - 0.08 * (0.5 + 0.5 * Math.sin(x * 23 + f.phase * 3)));
+          const shade =
+            f.tone * (Math.sin(a) < 0 ? 0.55 : 0.85) * (1 - 0.08 * (0.5 + 0.5 * Math.sin(x * 23 + f.phase * 3))) * barShade(x, t * piece.halfAngle * mid, f.barShift);
           colors.push(shade, shade, shade);
         }
       }

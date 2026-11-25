@@ -326,3 +326,35 @@ describe("a collar under a wing case", () => {
     expect(standing.filter((b) => !was.has(b.key))).toEqual([]);
   });
 });
+
+describe("a pheasant-tail wing case", () => {
+  it("is darker with its bars and tips than without them", () => {
+    const loaded = loadRecipe(readFileSync(new URL("../../patterns/pheasant-tail-nymph.kdl", import.meta.url), "utf8"));
+    if (!loaded.ok) throw new Error("pheasant-tail-nymph.kdl does not load");
+    const cover = simulate(loaded.recipe).steps.flatMap((s) => s.pieces).filter((p): p is CoverPiece => p.type === "cover").at(-1)!;
+    expect(cover.bars).toBeDefined();
+    const space = new ShankSpace(hookModel(loaded.recipe.hook));
+    /** Mean shade of the case's front and back fifths. */
+    const shades = (piece: CoverPiece) => {
+      const view = pieceView(piece, new Surfaces(), space);
+      const mesh = view.object as THREE.Mesh;
+      const pos = mesh.geometry.getAttribute("position");
+      const col = mesh.geometry.getAttribute("color");
+      const xs = Array.from({ length: pos.count }, (_, i) => pos.getX(i));
+      const [lo, hi] = [Math.min(...xs), Math.max(...xs)];
+      const mean = (keep: (x: number) => boolean) => {
+        const picked = xs.map((x, i) => [x, col.getX(i)] as const).filter(([x]) => keep(x));
+        return picked.reduce((a, [, c]) => a + c, 0) / picked.length;
+      };
+      const fifth = (hi - lo) / 5;
+      const out = { all: mean(() => true), back: mean((x) => x < lo + fifth), front: mean((x) => x > hi - fifth) };
+      view.dispose();
+      return out;
+    };
+    const barred = shades(cover);
+    const plain = shades({ ...cover, bars: undefined });
+    expect(barred.all).toBeLessThan(plain.all * 0.9);
+    // The tips, where it is tied down, are darkest.
+    expect(barred.front / plain.front).toBeLessThan(barred.back / plain.back);
+  });
+});

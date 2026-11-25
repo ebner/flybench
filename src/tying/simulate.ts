@@ -240,6 +240,11 @@ export interface CoverPiece extends PieceBase {
   fold?: boolean;
   /** A slip of loose fibres (pheasant tail): how many lie side by side in it. */
   strands?: number;
+  /**
+   * A slip's fibres barred (pheasant tail), in gapes: a dark bar every `every`, `width` wide, and
+   * the tips darkening over `tip` back from `from`, where they reach (the end tied down).
+   */
+  bars?: { every: number; width: number; tip: number; from: number };
 }
 
 /**
@@ -1338,7 +1343,8 @@ export function simulate(recipe: Recipe): Build {
         if (tiedBack) ctx.tiedBack = true;
         const [from, to] = back ? [end, tied] : [tied, end];
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
-        const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number };
+        const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number; bars?: { everyMm: number; widthMm: number; tipMm: number } };
+        const slipBars = l.look === "fibres" ? cat.bars : undefined;
         const strip = l.look === "strip";
         // Hair spread all round the shank is folded over all round it (a bullet head).
         const bunch = bunches.get(step.material);
@@ -1385,6 +1391,9 @@ export function simulate(recipe: Recipe): Build {
           ...(cut && { width: cut.width, ...(cut.taper && { taper: back ? ("front" as const) : ("rear" as const) }) }),
           ...(fold !== undefined && { fold: true }),
           ...(l.look === "fibres" && { strands: l.count }),
+          // Assumption: a slip is tied in lying back, tips towards the bend, and folded over, so its
+          // tips reach the end tied down (cut there, or split as legs).
+          ...(slipBars && { bars: { every: slipBars.everyMm / unitMm(recipe.hook), width: slipBars.widthMm / unitMm(recipe.hook), tip: slipBars.tipMm / unitMm(recipe.hook), from: end } }),
         };
         pieces.push(cover);
         covers.set(step.material, cover);
