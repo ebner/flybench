@@ -1011,6 +1011,21 @@ describe("the Arthofer's materials", () => {
     expect(cover?.type === "cover" && cover.strands).toBe(10);
   });
 
+  it("darkens a pheasant-tail tail towards its tips over their last 6 mm; a tail of other fibres keeps its colour", () => {
+    const ptn = loadRecipe(readFileSync(new URL("../../patterns/pheasant-tail-nymph.kdl", import.meta.url), "utf8"));
+    if (!ptn.ok) throw new Error("pheasant-tail-nymph.kdl does not load");
+    const tail = simulate(ptn.recipe).steps.flatMap((s) => s.pieces).find((p) => p.type === "bundle");
+    if (tail?.type !== "bundle" || !tail.marks) throw new Error("no marked tail");
+    // (On a small hook the tips are longer than the tail: at most its outer seven tenths darken.)
+    const reach = Math.min(0.7, 6 / unitMm(ptn.recipe.hook) / tail.length);
+    expect(tail.marks[0]!.from).toBeCloseTo(1 - reach);
+    expect(tail.marks.at(-1)!.to).toBe(1);
+    const shades = tail.marks.map((m) => m.shade);
+    expect(shades).toEqual([...shades].sort((a, b) => b - a));
+    const own = last(pieces, "tail");
+    expect(own?.type === "bundle" && own.marks).toBeUndefined();
+  });
+
   it("bars a pheasant-tail wing case in gapes for its hook, its tips at the end tied down", () => {
     const cover = last(pieces, "case");
     if (cover?.type !== "cover") throw new Error("no wing case");

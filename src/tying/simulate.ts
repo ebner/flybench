@@ -472,6 +472,26 @@ const TIPPET_MARKS: FibreMarks = [
   { from: 0.9, to: 1, shade: 0.08 },
 ];
 
+// Assumption: a pheasant tail fibre's tip is dark brown, about two fifths as light as the rest.
+export const FIBRE_TIP_SHADE = 0.4;
+
+/**
+ * The tips of fibres whose catalog kind darkens towards them (`bars`: pheasant tail), as marks
+ * along a bunch of them `length` gapes long: darker in steps towards the tip.
+ */
+function tipMarks(recipe: Recipe, kind: Material["kind"], length: number): FibreMarks | undefined {
+  const bars = (MATERIALS[kind] as { bars?: { tipMm: number } }).bars;
+  if (!bars) return undefined;
+  // Assumption: however short the bunch, its roots keep their own colour.
+  const f = Math.min(0.7, bars.tipMm / unitMm(recipe.hook) / length);
+  const steps = 4;
+  return Array.from({ length: steps }, (_, i) => ({
+    from: 1 - f + (f * i) / steps,
+    to: 1 - f + (f * (i + 1)) / steps,
+    shade: 1 - ((1 - FIBRE_TIP_SHADE) * (i + 1)) / steps,
+  }));
+}
+
 // Assumption: a guinea fowl's body feather is dark slate with round white spots, which cross each
 // barb as short light marks, about six along it, lined up on neighbouring barbs.
 const GUINEA_MARKS: FibreMarks = Array.from({ length: 6 }, (_, i) => {
@@ -1177,7 +1197,7 @@ export function simulate(recipe: Recipe): Build {
             window: [0, 0.35], x, radius, centre, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             // A long hair wing is a bigger clump: it stays dense as it fans out.
             bundleRadius: l.strandRadius, count: l.look === "hair" && !l.counted ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
-            pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
+            pair, marks: l.marks ?? tipMarks(recipe, kinds.get(step.material)!.kind, step.length), fibreWidth: l.fibreWidth, flue: l.flue,
             ...(upright && step.fan !== undefined ? { fan: deg(step.fan) } : {}),
             ...(!upright && l.stiffness !== undefined && { stiffness: l.stiffness }),
           };

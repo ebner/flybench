@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import {
+  FIBRE_TIP_SHADE,
   belowReach,
   extensionCentre,
   shapeFactor,
@@ -1563,10 +1564,9 @@ function eyesView(piece: EyesPiece, surfaces: Surfaces, space: ShankSpace): Piec
 const TUBE_SIDES = 6;
 /** The most fibres of a slip drawn one by one. */
 const MAX_SLIP_FIBRES = 16;
-// Assumption: a pheasant tail's bars are near black against its copper, its tips dark brown, and
-// the bars cross a slip at about 50 degrees to its fibres.
+// Assumption: a pheasant tail's bars are near black against its copper, and they cross a slip at
+// about 50 degrees to its fibres.
 const SLIP_BAR_SHADE = 0.3;
-const SLIP_TIP_SHADE = 0.4;
 const SLIP_BAR_SLANT = 0.85;
 
 /** A strip over the top of the body (wing case, foam back), drawn from the back forwards. */
@@ -1620,7 +1620,7 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
     const b = piece.bars;
     if (!b) return 1;
     const along = Math.abs(x - b.from);
-    const tip = SLIP_TIP_SHADE + (1 - SLIP_TIP_SHADE) * smooth(along, 0, b.tip);
+    const tip = FIBRE_TIP_SHADE + (1 - FIBRE_TIP_SHADE) * smooth(along, 0, b.tip);
     // The bars cross the feather, so on a slip of its fibres they slant across it.
     const p = (((along + barPhase + across * SLIP_BAR_SLANT + shift * b.width) % b.every) + b.every) % b.every;
     const edge = b.width * 0.3;

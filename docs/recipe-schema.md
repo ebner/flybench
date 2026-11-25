@@ -254,7 +254,8 @@ The archetype decides how a material behaves and is drawn:
   (`barred=#true`) is barred. A wing case of loose fibres (pheasant tail) pulled over is drawn
   as its fibres lying side by side (`count` of them); pheasant tail's show the feather's dark bars
   slanting across them, wherever the slip was cut, and their tips darken towards the end tied
-  down (`bars` in the catalog, in mm). A slip of feather (turkey) is drawn as one strip
+  down (`bars` in the catalog, in mm); a bunch of them tied in with a length (a Pheasant Tail
+  Nymph's tail) darkens towards its tips the same way. A slip of feather (turkey) is drawn as one strip
   with its barbs shaded on it. A collar wound under a wing case has its barbs on top pressed
   back along the body under the case, and those long enough come out from under its rear end;
   a palmered hackle's or other fuzz under a case is pressed flat out of sight.
