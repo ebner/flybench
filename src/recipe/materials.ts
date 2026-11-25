@@ -62,10 +62,12 @@ export interface CatalogMaterial {
   flue?: boolean;
   /**
    * Fibres: dark bars across the feather, one every `everyMm` along each fibre and `widthMm`
-   * wide, slanting across neighbouring fibres, and a tip darkening over its last `tipMm`
-   * (cock pheasant tail). A slip pulled over as a wing case shows them.
+   * wide, slanting across neighbouring fibres (cock pheasant tail). A slip pulled over as a wing
+   * case shows them.
    */
-  bars?: { everyMm: number; widthMm: number; tipMm: number };
+  bars?: { everyMm: number; widthMm: number };
+  /** Fibres: light round spots on a dark ground (golden pheasant tail), this many along each fibre. */
+  spots?: number;
   /** Pulled over loosely (`bubble`), a sparse translucent veil the body shows through (sparkle yarn). */
   veil?: boolean;
   /** Dubbing: how rough it is, from 0 (fine, tight) to 1 (long, spiky guard hairs). Default 0.4. */
@@ -178,9 +180,13 @@ export const MATERIALS = {
   "fox-hair": { name: "fox hair", archetype: "hair", fibreWidth: 0.5, stiffness: 0.2 },
 
   // Fibres
-  // Assumption: a cock pheasant's centre tail fibre crosses a narrow dark bar about every 8 mm
-  // and darkens over its last 6 mm or so to a fine dark tip (the bars run across the feather).
-  "pheasant-tail": { name: "pheasant tail fibres", archetype: "fibres", defaultColor: "pheasant-tail", bars: { everyMm: 8, widthMm: 1.5, tipMm: 6 } },
+  // The cock's tail is barred black (USGS: "golden with black barring"; Hareline: "black
+  // chevrons"). Assumption: a centre tail fibre crosses a narrow bar about every 8 mm.
+  "pheasant-tail": { name: "pheasant tail fibres", archetype: "fibres", defaultColor: "pheasant-tail", bars: { everyMm: 8, widthMm: 1.5 } },
+  // The golden pheasant cock's centre tail: "a fine pattern of brownish-beige, round spots on a
+  // black ground" (de.wikipedia, Goldfasan); "black spotted with cinnamon" (en.wikipedia).
+  // Assumption: about eight spots along a fibre.
+  "golden-pheasant-tail": { name: "golden pheasant tail fibres", archetype: "fibres", defaultColor: "#241a13", spots: 8 },
   "hackle-fibres": { name: "hackle fibres", archetype: "fibres" },
   // Assumption: tippet barbs are about two and a half times as broad as hackle fibres.
   "golden-pheasant-tippet": { name: "golden pheasant tippet", archetype: "fibres", defaultColor: "tippet", fibreWidth: 2.5 },

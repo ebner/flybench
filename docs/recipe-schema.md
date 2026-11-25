@@ -218,7 +218,7 @@ how it is drawn and which extra properties it takes:
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | `mm` (diameter as sold; default medium chenille, about a body half the gape thick) |
 | hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, up to 200: legs tied across, a few hairs as a tail, or a sparse wing; without it a bunch is a clump that grows with its length), `mix` |
-| fibres     | `pheasant-tail`, `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred`, `mix` |
+| fibres     | `pheasant-tail`, `golden-pheasant-tail` (black, spotted), `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred`, `mix` |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | `barred` |
 | cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
@@ -253,9 +253,9 @@ The archetype decides how a material behaves and is drawn:
   length. Natural guinea fowl is dark slate with light spots along each barb; dyed guinea fowl
   (`barred=#true`) is barred. A wing case of loose fibres (pheasant tail) pulled over is drawn
   as its fibres lying side by side (`count` of them); pheasant tail's show the feather's dark bars
-  slanting across them, wherever the slip was cut, and their tips darken towards the end tied
-  down (`bars` in the catalog, in mm); a bunch of them tied in with a length (a Pheasant Tail
-  Nymph's tail) darkens towards its tips the same way. A slip of feather (turkey) is drawn as one strip
+  slanting across them, wherever the slip was cut (`bars` in the catalog, in mm). Golden pheasant
+  tail fibres are black with light round spots along them (`spots` in the catalog). A slip of
+  feather (turkey) is drawn as one strip
   with its barbs shaded on it. A collar wound under a wing case has its barbs on top pressed
   back along the body under the case, and those long enough come out from under its rear end;
   a palmered hackle's or other fuzz under a case is pressed flat out of sight.

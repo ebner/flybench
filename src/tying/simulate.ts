@@ -241,10 +241,10 @@ export interface CoverPiece extends PieceBase {
   /** A slip of loose fibres (pheasant tail): how many lie side by side in it. */
   strands?: number;
   /**
-   * A slip's fibres barred (pheasant tail), in gapes: a dark bar every `every`, `width` wide, and
-   * the tips darkening over `tip` back from `from`, where they reach (the end tied down).
+   * A slip's fibres barred (pheasant tail), in gapes: a dark bar every `every`, `width` wide,
+   * counted from `from` (the end tied down).
    */
-  bars?: { every: number; width: number; tip: number; from: number };
+  bars?: { every: number; width: number; from: number };
 }
 
 /**
@@ -472,32 +472,20 @@ const TIPPET_MARKS: FibreMarks = [
   { from: 0.9, to: 1, shade: 0.08 },
 ];
 
-// Assumption: a pheasant tail fibre's tip is dark brown, about two fifths as light as the rest.
-export const FIBRE_TIP_SHADE = 0.4;
-
 /**
- * The tips of fibres whose catalog kind darkens towards them (`bars`: pheasant tail), as marks
- * along a bunch of them `length` gapes long: darker in steps towards the tip.
+ * Light round spots on a dark feather, `n` along each barb, lined up on neighbouring barbs.
+ * Assumption: each about as long as a twentieth of the barb, three times as light as the ground.
  */
-function tipMarks(recipe: Recipe, kind: Material["kind"], length: number): FibreMarks | undefined {
-  const bars = (MATERIALS[kind] as { bars?: { tipMm: number } }).bars;
-  if (!bars) return undefined;
-  // Assumption: however short the bunch, its roots keep their own colour.
-  const f = Math.min(0.7, bars.tipMm / unitMm(recipe.hook) / length);
-  const steps = 4;
-  return Array.from({ length: steps }, (_, i) => ({
-    from: 1 - f + (f * i) / steps,
-    to: 1 - f + (f * (i + 1)) / steps,
-    shade: 1 - ((1 - FIBRE_TIP_SHADE) * (i + 1)) / steps,
-  }));
+function spotMarks(n: number): FibreMarks {
+  return Array.from({ length: n }, (_, i) => {
+    const from = 0.1 + (0.86 * i) / n;
+    return { from, to: from + Math.min(0.045, 0.3 / n), shade: 3 };
+  });
 }
 
 // Assumption: a guinea fowl's body feather is dark slate with round white spots, which cross each
-// barb as short light marks, about six along it, lined up on neighbouring barbs.
-const GUINEA_MARKS: FibreMarks = Array.from({ length: 6 }, (_, i) => {
-  const from = 0.1 + (0.86 * i) / 6;
-  return { from, to: from + 0.045, shade: 3 };
-});
+// barb as short light marks, about six along it.
+const GUINEA_MARKS = spotMarks(6);
 
 // Assumption: the black centre of a furnace, badger or coch hackle reaches about two fifths of the
 // way out along each barb, fading into the colour at its edge.
@@ -549,12 +537,17 @@ function barbThickness(lengthMm: number | undefined): number {
 
 // Assumption: rough material dimensions in gapes for a size 12–14 fly.
 function materialLook(recipe: Recipe, m: Material): MaterialLook {
-  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { finish?: "matt" | "dull"; sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number; flueMm?: number };
+  const cat = MATERIALS[m.kind] as (typeof MATERIALS)[keyof typeof MATERIALS] & { finish?: "matt" | "dull"; sweep?: number; barbsPerMm?: number; oval?: boolean; fibreWidth?: number; shaggy?: number; flue?: boolean; veil?: boolean; stiffness?: number; flueMm?: number; spots?: number };
   const colorName = m.color ?? ("defaultColor" in cat ? cat.defaultColor : "grey");
   const color = resolveColor(colorName);
   // A dyed grizzly (`barred`) is barred in any colour; `barred=#false` makes a barred colour plain.
   const barring = m.barred === undefined ? BARRED[colorName] ?? 0 : m.barred ? BARRED.grizzly! : 0;
-  const marks = colorName === "tippet" ? TIPPET_MARKS : colorName === "guinea" && m.barred === undefined ? GUINEA_MARKS : barring > 0 ? barMarks(barring) : undefined;
+  const marks =
+    colorName === "tippet" ? TIPPET_MARKS
+    : colorName === "guinea" && m.barred === undefined ? GUINEA_MARKS
+    : cat.spots !== undefined && m.barred === undefined ? spotMarks(cat.spots)
+    : barring > 0 ? barMarks(barring)
+    : undefined;
   const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: cat.stiffness, finish: cat.finish, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
@@ -1197,7 +1190,7 @@ export function simulate(recipe: Recipe): Build {
             window: [0, 0.35], x, radius, centre, length: step.length, angle, direction: step.forward ? "forward" : "back", side, spread,
             // A long hair wing is a bigger clump: it stays dense as it fans out.
             bundleRadius: l.strandRadius, count: l.look === "hair" && !l.counted ? Math.round(l.count * Math.min(2.5, Math.max(1, step.length / 1.5))) : l.count,
-            pair, marks: l.marks ?? tipMarks(recipe, kinds.get(step.material)!.kind, step.length), fibreWidth: l.fibreWidth, flue: l.flue,
+            pair, marks: l.marks, fibreWidth: l.fibreWidth, flue: l.flue,
             ...(upright && step.fan !== undefined ? { fan: deg(step.fan) } : {}),
             ...(!upright && l.stiffness !== undefined && { stiffness: l.stiffness }),
           };
@@ -1363,7 +1356,7 @@ export function simulate(recipe: Recipe): Build {
         if (tiedBack) ctx.tiedBack = true;
         const [from, to] = back ? [end, tied] : [tied, end];
         // Assumption: foam backs are thick and cover half the body; wing cases are thin.
-        const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number; bars?: { everyMm: number; widthMm: number; tipMm: number } };
+        const cat = MATERIALS[kinds.get(step.material)!.kind] as { thickness?: number; bars?: { everyMm: number; widthMm: number } };
         const slipBars = l.look === "fibres" ? cat.bars : undefined;
         const strip = l.look === "strip";
         // Hair spread all round the shank is folded over all round it (a bullet head).
@@ -1411,9 +1404,7 @@ export function simulate(recipe: Recipe): Build {
           ...(cut && { width: cut.width, ...(cut.taper && { taper: back ? ("front" as const) : ("rear" as const) }) }),
           ...(fold !== undefined && { fold: true }),
           ...(l.look === "fibres" && { strands: l.count }),
-          // Assumption: a slip is tied in lying back, tips towards the bend, and folded over, so its
-          // tips reach the end tied down (cut there, or split as legs).
-          ...(slipBars && { bars: { every: slipBars.everyMm / unitMm(recipe.hook), width: slipBars.widthMm / unitMm(recipe.hook), tip: slipBars.tipMm / unitMm(recipe.hook), from: end } }),
+          ...(slipBars && { bars: { every: slipBars.everyMm / unitMm(recipe.hook), width: slipBars.widthMm / unitMm(recipe.hook), from: end } }),
         };
         pieces.push(cover);
         covers.set(step.material, cover);

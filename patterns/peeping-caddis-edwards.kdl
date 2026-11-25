@@ -38,7 +38,7 @@ materials {
     weight lead-free-wire label="Lead-free wire (Bell uses flat lead)"
     larva-case hares-ear-dubbing label="Hare's mask dubbing brush"
     // Fly Anglers Online gives golden pheasant centre tail for the legs; Fish4Flies lists peacock.
-    legs pheasant-tail count=8 label="Golden pheasant centre tail fibres (legs)"
+    legs golden-pheasant-tail count=8 label="Golden pheasant centre tail fibres (legs)"
     larva wool color=cream label="White or glow yarn (larva)"
 }
 

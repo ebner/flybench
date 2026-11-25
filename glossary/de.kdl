@@ -183,6 +183,10 @@ materials {
         source "Fliegenfischer-Forum: Stammtisch Fliegenswap 06.01.2020 (\"Schwanz: Fasanenstoß\")" url="https://fliegenfischer-forum.de/pdf/stswap01.pdf"
         source "Fliegenfischer-Forum: Alte Klassiker (\"Schwanz: 3-4 Fasanenstoßfederfibern\")" url="https://www.fliegenfischer-forum.de/klassike.html"
     }
+    noun golden-pheasant-tail "Goldfasanstoß" gender=m mass=#true {
+        note "Formed like 'Fasanenstoß' (pheasant-tail), the hunters' word for the tail, and used as it is ('acht Fibern Goldfasanstoß'). No German tying page naming the golden pheasant's tail turned up; Wikipedia describes its central tail feathers."
+        source "Wikipedia: Goldfasan (\"ein feines Muster aus braunbeigen, runden Flecken auf schwarzem Grund\")" url="https://de.wikipedia.org/wiki/Goldfasan"
+    }
     noun hackle-fibres "Hechelfiber" gender=f plural="Hechelfibern" {
         note "Nearly always plural in use: the plural is the form for the material name ('braune Hechelfibern'). 'Fiber/Fibern' is the tyers' spelling (also misspelled 'Fiebern'); 'Faser' is rarer."
         source "Fliegenfischer-Forum: Alte Klassiker (\"Schwanz: graue Hechelfibern\")" url="https://www.fliegenfischer-forum.de/klassike.html"

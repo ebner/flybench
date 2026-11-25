@@ -183,6 +183,10 @@ materials {
         source "Rackelhanen: Pheasant Tail Nymph ('Stjärt: Fasanstjärtfibrer', 'Kropp: Fasanstjärtfibrer')" url="https://www.rackelhane.se/swe/1213.htm"
         source "Flugfiske i Norden: Landinsekter ('Ben: knutna fasanstjärtsfibrer')" url="https://flugfiskeinorden.se/bindbeskrivning-landinsekter-nu/"
     }
+    noun golden-pheasant-tail "guldfasanstjärtfibrer" gender=en definite="guldfasanstjärtfibrerna" plural="guldfasanstjärtfibrer" plural-definite="guldfasanstjärtfibrerna" {
+        note "Plural, formed like 'fasanstjärtfibrer' (pheasant-tail). The shop speaks of the golden pheasant's 'stjärtfjädrar' and sells 'Guldfasan hel stjärt'; single fibres are used 'till nymfkroppar, stjärtar och ben'. No dressing naming the fibres turned up."
+        source "Flugbindning.com: Guldfasan ('De långa, brunmönstrade stjärtfjädrarna', 'Enskilda fibrer kan även användas till nymfkroppar, stjärtar och ben')" url="https://flugbindning.com/400048-guldfasan"
+    }
     noun hackle-fibres "hackelfibrer" gender=en definite="hackelfibrerna" plural="hackelfibrer" plural-definite="hackelfibrerna" {
         note "Plural, as pheasant-tail. 'Hackelfibrer' is the shops' and Allt om flugfiske's word; dressings write 'Stjärt: Tupphackel' or 'tupphackel-fibrer'."
         source "Allt om flugfiske: Så binder du in ett torrflugehackel ('Dra bort hackelfibrerna som inte ska användas')" url="https://www.alltomflugfiske.se/sa-binder-du-in-ett-torrflugehackel/"

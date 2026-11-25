@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import {
-  FIBRE_TIP_SHADE,
   belowReach,
   extensionCentre,
   shapeFactor,
@@ -1615,17 +1614,16 @@ function coverView(piece: CoverPiece, surfaces: Surfaces, space: ShankSpace): Pi
   });
   // Where the bars fall depends on where on the feather the slip was cut: its own place, fixed.
   const barPhase = strandRand() * (piece.bars?.every ?? 0);
-  /** A barred slip (pheasant tail) at x, `across` gapes from its middle: its bars and dark tips. */
+  /** A barred slip (pheasant tail) at x, `across` gapes from its middle: its bars. */
   const barShade = (x: number, across: number, shift: number) => {
     const b = piece.bars;
     if (!b) return 1;
     const along = Math.abs(x - b.from);
-    const tip = FIBRE_TIP_SHADE + (1 - FIBRE_TIP_SHADE) * smooth(along, 0, b.tip);
     // The bars cross the feather, so on a slip of its fibres they slant across it.
     const p = (((along + barPhase + across * SLIP_BAR_SLANT + shift * b.width) % b.every) + b.every) % b.every;
     const edge = b.width * 0.3;
     const bar = smooth(p, 0, edge) * (1 - smooth(p, b.width - edge, b.width));
-    return tip * (1 - (1 - SLIP_BAR_SHADE) * bar);
+    return 1 - (1 - SLIP_BAR_SHADE) * bar;
   };
   const shaded = feather || hair || strands > 0;
   // A strip is stiff enough to bridge the bumps of tie-ins under it: it lies on a smoothed body.

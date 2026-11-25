@@ -1011,25 +1011,24 @@ describe("the Arthofer's materials", () => {
     expect(cover?.type === "cover" && cover.strands).toBe(10);
   });
 
-  it("darkens a pheasant-tail tail towards its tips over their last 6 mm; a tail of other fibres keeps its colour", () => {
-    const ptn = loadRecipe(readFileSync(new URL("../../patterns/pheasant-tail-nymph.kdl", import.meta.url), "utf8"));
-    if (!ptn.ok) throw new Error("pheasant-tail-nymph.kdl does not load");
-    const tail = simulate(ptn.recipe).steps.flatMap((s) => s.pieces).find((p) => p.type === "bundle");
-    if (tail?.type !== "bundle" || !tail.marks) throw new Error("no marked tail");
-    // (On a small hook the tips are longer than the tail: at most its outer seven tenths darken.)
-    const reach = Math.min(0.7, 6 / unitMm(ptn.recipe.hook) / tail.length);
-    expect(tail.marks[0]!.from).toBeCloseTo(1 - reach);
-    expect(tail.marks.at(-1)!.to).toBe(1);
-    const shades = tail.marks.map((m) => m.shade);
-    expect(shades).toEqual([...shades].sort((a, b) => b - a));
-    const own = last(pieces, "tail");
-    expect(own?.type === "bundle" && own.marks).toBeUndefined();
+  it("leaves a pheasant-tail tail its own colour; spots golden pheasant tail light on dark", () => {
+    const load = (id: string) => {
+      const loaded = loadRecipe(readFileSync(new URL(`../../patterns/${id}.kdl`, import.meta.url), "utf8"));
+      if (!loaded.ok) throw new Error(`${id}.kdl does not load`);
+      return simulate(loaded.recipe).steps.flatMap((s) => s.pieces);
+    };
+    const tail = load("pheasant-tail-nymph").find((p) => p.type === "bundle");
+    expect(tail?.type === "bundle" && tail.marks).toBeUndefined();
+    const legs = load("peeping-caddis-edwards").find((p) => p.type === "bundle" && p.material === "legs");
+    if (legs?.type !== "bundle" || !legs.marks) throw new Error("no spotted legs");
+    expect(legs.marks).toHaveLength(8);
+    expect(legs.marks.every((m) => m.shade > 1)).toBe(true);
   });
 
-  it("bars a pheasant-tail wing case in gapes for its hook, its tips at the end tied down", () => {
+  it("bars a pheasant-tail wing case in gapes for its hook, from the end tied down", () => {
     const cover = last(pieces, "case");
     if (cover?.type !== "cover") throw new Error("no wing case");
     const gape = unitMm(arthofer.recipe.hook);
-    expect(cover.bars).toEqual({ every: 8 / gape, width: 1.5 / gape, tip: 6 / gape, from: cover.x1 });
+    expect(cover.bars).toEqual({ every: 8 / gape, width: 1.5 / gape, from: cover.x1 });
   });
 });
