@@ -540,6 +540,7 @@ export const sv: Messages = {
         count: "Hur många",
         sweep: "Lutning bakåt (°)",
         shaggy: "Ruggighet (0 fin, 1 ruggig)",
+        stiffness: "Styvhet (0 mjuk, 1 styv)",
         barred: "Bandad som grizzly",
         mm: "Storlek (mm)",
         tuft: "Pälsen kvar som en tofs i änden (× krokgap)",

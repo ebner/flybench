@@ -45,8 +45,9 @@ thread black size="6/0"
 
 materials {
     weight lead-free-wire label="Lead or lead-free wire"
-    // Karwath's photos: grey fibres.
-    tail hackle-fibres color="#b7aa98" count=30 label="Grey-beige fibres"
+    // Karwath's photos: grey fibres. No source names them; in his and the other photos they are
+    // soft, fine and wavy, a dense bunch with uneven tips.
+    tail hackle-fibres color="#b7aa98" count=120 stiffness=0.3 label="Grey-beige fibres"
     body ostrich-herl strands=3 label="Grey-beige ostrich herl"
     // Karwath: the wing case's colour is free; his is natural pheasant tail. Swissflies' is black,
     // and in most photos it is dark brown to black.

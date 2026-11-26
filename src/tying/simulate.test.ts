@@ -1025,6 +1025,18 @@ describe("the Arthofer's materials", () => {
     expect(legs.marks.every((m) => m.shade > 1)).toBe(true);
   });
 
+  it("takes a bunch's stiffness from the recipe over the catalog's", () => {
+    const tail = last(pieces, "tail");
+    expect(tail?.type === "bundle" && tail.stiffness).toBe(0.3);
+    const stiff = build(text.replace("stiffness=0.3 ", ""));
+    const plain = last(stiff.steps.map((s) => s.pieces), "tail");
+    expect(plain?.type === "bundle" && plain.stiffness).toBeUndefined();
+  });
+
+  it("refuses a stiffness on a material it doesn't apply to", () => {
+    expect(loadRecipe(text.replace("body ostrich-herl strands=3", "body ostrich-herl strands=3 stiffness=0.5")).ok).toBe(false);
+  });
+
   it("bars a pheasant-tail wing case in gapes for its hook, from the end tied down", () => {
     const cover = last(pieces, "case");
     if (cover?.type !== "cover") throw new Error("no wing case");

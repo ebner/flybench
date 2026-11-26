@@ -548,7 +548,7 @@ function materialLook(recipe: Recipe, m: Material): MaterialLook {
     : cat.spots !== undefined && m.barred === undefined ? spotMarks(cat.spots)
     : barring > 0 ? barMarks(barring)
     : undefined;
-  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: cat.stiffness, finish: cat.finish, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
+  const base = { look: cat.archetype, color, freeLength: 1.5, count: 80, barred: barring > 0, barring, marks, fibreWidth: cat.fibreWidth, flue: cat.flue, veil: cat.veil, shaggy: m.shaggy ?? cat.shaggy, stiffness: m.stiffness ?? cat.stiffness, finish: cat.finish, ...(DARK_CENTRE[colorName] && { centre: DARK_CENTRE[colorName] }) };
   const mm = (v: number) => v / unitMm(recipe.hook);
   switch (cat.archetype) {
     case "yarn":

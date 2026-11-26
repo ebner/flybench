@@ -540,6 +540,7 @@ export const de: Messages = {
         count: "Wie viele",
         sweep: "Neigung nach hinten (°)",
         shaggy: "Struppigkeit (0 fein, 1 struppig)",
+        stiffness: "Steifheit (0 weich, 1 steif)",
         barred: "Gebändert wie Grizzly",
         mm: "Größe (mm)",
         tuft: "Fell nur als Büschel am Ende (× Bogenweite)",

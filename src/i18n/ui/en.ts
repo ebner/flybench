@@ -545,6 +545,7 @@ export const en = {
         count: "How many",
         sweep: "Sweep back (°)",
         shaggy: "Roughness (0 fine, 1 shaggy)",
+        stiffness: "Stiffness (0 soft, 1 stiff)",
         barred: "Barred like grizzly",
         mm: "Size (mm)",
         tuft: "Fur left as a tuft at the end (× gape)",

@@ -217,8 +217,8 @@ how it is drawn and which extra properties it takes:
 | floss      | `rib-thread`, `silk-floss`, `monofilament` | `size` (thread size) |
 | tinsel     | `flat-tinsel`, `oval-tinsel` | |
 | chenille   | `chenille` | `mm` (diameter as sold; default medium chenille, about a body half the gape thick) |
-| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, up to 200: legs tied across, a few hairs as a tail, or a sparse wing; without it a bunch is a clump that grows with its length), `mix` |
-| fibres     | `pheasant-tail`, `golden-pheasant-tail` (black, spotted), `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred`, `mix` |
+| hair       | `elk-hair`, `deer-hair`, `calf-tail`, `bucktail`, `squirrel-tail`, `moose-mane`, `fox-hair` | `count` (hairs, up to 200: legs tied across, a few hairs as a tail, or a sparse wing; without it a bunch is a clump that grows with its length), `mix`, `stiffness` (0 soft to 1 stiff; overrides the catalog) |
+| fibres     | `pheasant-tail`, `golden-pheasant-tail` (black, spotted), `hackle-fibres`, `golden-pheasant-tippet`, `golden-pheasant-crest`, `hares-mask-guard-hairs`, `synthetic-hair`, `craft-fur`, `coq-de-leon`, `peacock-sword` (with flue), `wood-duck-flank` | `count`, `barred`, `mix`, `stiffness` (0 soft to 1 stiff, for a bunch tied in with a length; overrides the catalog) |
 | biot       | `goose-biot` | `count` (default 2) |
 | marabou    | `marabou` | `barred` |
 | cdc        | `cdc` | `fibre` (gapes: the longest barbs wound, near the butt; default 0.6), `sweep` (degrees they lean back; default 45). Can be wound: barbs lengthen from tip to butt |
@@ -271,7 +271,8 @@ The archetype decides how a material behaves and is drawn:
   the way along. `spread` says how far round the body its roots lie and how far its tips fan out
   to the sides. A wing tied all round a tube lies close round it. How orderly the hair is comes
   from the material's stiffness in the catalog (also on `craft-fur`, `synthetic-hair` and
-  `hares-mask-guard-hairs`): soft hair (squirrel, fox, craft fur) fans out wider and less
+  `hares-mask-guard-hairs`), or from the recipe's `stiffness` on the material (soft fibres for an
+  Arthofer's tail): soft hair (squirrel, fox, craft fur) fans out wider and less
   orderly, its tips fine, wavy and uneven, as unstacked hair's are; stiff hair (elk, deer, moose)
   stays straight and orderly, its tips level, and flares at the tie-in. Softness doesn't bend a
   wing down: a wing lies low over the body because it is tied in low. Spun, glued, trimmed and

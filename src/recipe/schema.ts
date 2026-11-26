@@ -171,6 +171,8 @@ const Material = z
     sweep: z.number().min(0).max(80).optional(),
     /** dubbing: how rough, from 0 (fine and tight) to 1 (picked out, long guard hairs); overrides the catalog. */
     shaggy: z.number().min(0).max(1).optional(),
+    /** hair, fibres tied in as a bunch: how stiff, from 0 (soft and wispy) to 1 (straight and orderly); overrides the catalog. */
+    stiffness: z.number().min(0).max(1).optional(),
     /**
      * hackle, fibres, feathers, marabou: barred like grizzly whatever the colour (a grizzly dyed
      * olive), or plain (#false) though the colour is a barred one.
@@ -189,7 +191,7 @@ const Material = z
   .superRefine((m, ctx) => {
     const cat = MATERIALS[m.kind];
     const allowed = ARCHETYPE_PROPS[cat.archetype];
-    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "barred", "mm", "tuft", "mix"] as const) {
+    for (const prop of ["strands", "fibre", "size", "count", "sweep", "shaggy", "stiffness", "barred", "mm", "tuft", "mix"] as const) {
       if (m[prop] !== undefined && !allowed.includes(prop)) {
         ctx.addIssue({ code: "custom", path: [prop], message: `"${prop}" does not apply to ${cat.name}` });
       }
